@@ -1,0 +1,22 @@
+/* Scroll Bar Master Styling Starts Here */
+/* All comments can be freely removed from the css */
+
+.scrollgeneric {line-height: 1px;font-size: 1px; position: absolute;top: 0; left: 0;}
+
+.vscrollerbase {width: 15px;}
+
+.vscrollerbar {width: 15px;}
+
+.vscrollerbar {background: url(../images/basebarcaps_verticalbarbody.png) -15px 0px repeat-y;}
+
+.vscrollerbar, .hscrollerbar {padding: 15px; z-index: 2;}
+
+.vscrollerbase {background:url(../images/basebarcaps_verticalbarbody.png) 0px 0px repeat-y;}
+
+.vscrollerbasebeg {background: url(../images/basebarcaps_verticalbarbody.png) -30px -30px no-repeat; width: 15px; height: 15px !important;}
+
+.vscrollerbaseend {background: url(../images/basebarcaps_verticalbarbody.png) -60px -30px no-repeat; height: 15px; width: 15px;}
+
+
+
+
