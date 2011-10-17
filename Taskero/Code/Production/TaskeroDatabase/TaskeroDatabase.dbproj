@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <PostUpgradeAddToSCC>;C:\Data\Projects\Fujifilm\Taskero\Code\Production\TaskeroDatabase\TaskeroDatabase.dbproj;C:\Data\Projects\Fujifilm\Taskero\Code\Production\TaskeroDatabase\Connections.txt;C:\Data\Projects\Fujifilm\Taskero\Code\Production\TaskeroDatabase\Scripts\Post-Deployment\Script.PostDeployment.sql;C:\Data\Projects\Fujifilm\Taskero\Code\Production\TaskeroDatabase\Scripts\Pre-Deployment\Script.PreDeployment.sql</PostUpgradeAddToSCC>
+    <PreviousProjectVersion>4.0</PreviousProjectVersion>
+    <UpgradedFromDBP>True</UpgradedFromDBP>
+    <Name>dbpProjectName</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.0</ProjectVersion>
+    <ProjectGuid>{67cbc824-a49e-4e9b-a947-360f3dfe65c3}</ProjectGuid>
+    <DSP>Microsoft.Data.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ShowWizard>False</ShowWizard>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <IncludeSchemaNameInFileName>False</IncludeSchemaNameInFileName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchema</DefaultFileStructure>
+    <DeployToDatabaseAddToServerExplorer>True</DeployToDatabaseAddToServerExplorer>
+    <DeployToScript>True</DeployToScript>
+    <CatalogPropertiesFile>Properties\Database.sqlsettings</CatalogPropertiesFile>
+    <LoadSqlClrTypes>True</LoadSqlClrTypes>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>.\sql\release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetConnectionString>
+    </TargetConnectionString>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <SuppressWarnings>
+    </SuppressWarnings>
+    <DeploymentConfigFile>Properties\Database.sqldeployment</DeploymentConfigFile>
+    <SqlCommandVariablesFile>Properties\Database.sqlcmdvars</SqlCommandVariablesFile>
+    <DeployToDatabase>False</DeployToDatabase>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>.\sql\debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TargetConnectionString>
+    </TargetConnectionString>
+    <TargetDatabase>
+    </TargetDatabase>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <SuppressWarnings>
+    </SuppressWarnings>
+    <DeploymentConfigFile>Properties\Database.sqldeployment</DeploymentConfigFile>
+    <SqlCommandVariablesFile>Properties\Database.sqlcmdvars</SqlCommandVariablesFile>
+    <DeployToDatabase>False</DeployToDatabase>
+  </PropertyGroup>
+  <!--Import the settings-->
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\TeamData\Microsoft.Data.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Pre-Deployment" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Data Generation Plans" />
+    <Folder Include="Schema Comparisons" />
+  </ItemGroup>
+  <ItemGroup>
+    <PropertiesFile Include="Properties\Database.sqlsettings">
+    </PropertiesFile>
+    <PropertiesFile Include="Properties\Database.sqldeployment">
+    </PropertiesFile>
+    <PropertiesFile Include="Properties\Database.sqlcmdvars">
+    </PropertiesFile>
+    <Build Include="Properties\Database.sqlpermissions">
+      <ModelBuilderType>Permissions</ModelBuilderType>
+    </Build>
+    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql">
+      <SubType>Code</SubType>
+    </PreDeploy>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql">
+      <SubType>Code</SubType>
+    </PostDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Schema Objects" />
+    <Folder Include="Schema Objects\Schemas" />
+    <Folder Include="Schema Objects\Schemas\dbo" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Defaults" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Functions" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Rules" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Data Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Types CLR" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types" />
+    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\XML Schema Collections" />
+    <Folder Include="Schema Objects\Schemas\dbo\Service Broker" />
+    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\Queues" />
+    <Folder Include="Schema Objects\Schemas\dbo\Synonyms" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Constraints" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Indexes" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Keys" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Triggers" />
+    <Folder Include="Schema Objects\Schemas\dbo\Tables\Statistics" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Indexes" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Triggers" />
+    <Folder Include="Schema Objects\Schemas\dbo\Views\Statistics" />
+    <Folder Include="Schema Objects\Database Level Objects" />
+    <Folder Include="Schema Objects\Database Level Objects\Assemblies" />
+    <Folder Include="Schema Objects\Database Level Objects\Database Triggers" />
+    <Folder Include="Schema Objects\Database Level Objects\Security" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Schemas" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Users" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Certificates" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Asymmetric Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Master Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Signatures" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Symmetric Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Database Encryption Keys" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Database Audit Specification" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Application Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Database Roles" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Broker Priorities" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Contracts" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Event Notifications" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Message Types" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Remote Service Binding" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Routes" />
+    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Services" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Stoplists" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Filegroups" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Files" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Catalogs" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions" />
+    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes" />
+    <Folder Include="Function" />
+    <Folder Include="Queries" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="Views" />
+    <Folder Include="Properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <NotInBuild Include="Connections.txt" />
+    <NotInBuild Include="Function\fnCalcDotGain.sql" />
+    <NotInBuild Include="Function\fnGetShortStringForColor.sql" />
+    <NotInBuild Include="Function\fnGetSubStrForColor.sql" />
+    <NotInBuild Include="Function\funGetAllBranchNameByUserID.sql" />
+    <NotInBuild Include="Function\funGetAllCompanyNameByUserID.sql" />
+    <NotInBuild Include="Queries\Query1.dtq" />
+    <NotInBuild Include="StoredProcedures\uspColorSpecificationAdherenceReport.sql" />
+    <NotInBuild Include="StoredProcedures\uspColorSpecificationAdherenceReport_Admin.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteBranch.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteCompanyBrand.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteDongle.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteMeasurementByGUIDs.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteTaskeroUserAndRelations.sql" />
+    <NotInBuild Include="StoredProcedures\uspDeleteTempRHDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllBranch.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllBranchWithCompanyName.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllCompanyByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDeviceByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDeviceType.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDongle.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDongleByCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllDongleByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllMeasurementType.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllReports.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllReportsOnTaskeroUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllReportType.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAllTaskeroUser.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAssignSupportUserOfBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAssignSupportUserOfDongleID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAveMaxMinDeviation.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetAveMaxStdDevOnGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetBranchByBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetBranchByCompanyID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetBranchOfCompanyByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetBranchOfCompanyByUserIDAndCompanyID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetBranchOnCompanyID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCheckCPVStatus.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCheckDuplicateCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCheckDuplicateDongleNumber.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCheckLogin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetColorCharDotGain.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetColorCPVMeasurement.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCompanyBrandingByCompanyID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCompanyBrandingData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCompanyByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCPMeasurementData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCPMeasurementGUIDByCPDeviceID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCPMeasurementGUIDByCPDeviceIDs.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCPMeasurementGUIDByCPDevicePrintTargetID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetCPPatchDataPlate.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDateByBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDateByCompanyID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviationByCPDeviceID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviationByCPDeviceID_Admin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviationByCPDevicePrintTargetID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviationByCPDevicePrintTargetID_Admin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviationByGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviceByDongleID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviceByDongleIDColors.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviceReportData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDeviceReportData_Admin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDistinctDeviceTypeByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDistinctMeasurementTypeByUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDongleByBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDongleByUserIDAndBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDongleListByBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLChartsdeColorsOnGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLChartsPatchDetailsOnCPPatchDataLabID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLColorChartsByGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLDetailsOnGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLDetailsPlateByGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLPressInformation.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendAveDeByMeasurementGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendAveDeByMeasurementGUID1.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendDetails.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendDotgain.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendDotgain1.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendInk.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendPrintContrast.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendPrintContrast1.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetDTLTrendTempRHForDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetJobReportData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetJobReportData_Admin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetJobReportDataOnGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPlateCPVMeasurement.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressChartZoneSelection.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressChartZoneSelectionColors.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressChartZoneSelectionColorsSheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressChartZoneSelectionSheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressColorChars.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressColorCharsSheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressDashboardZoneDeltaESummary.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobInformation.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobSheetSummary.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobSheetSummarySheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobSummary.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobZoneSummary.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressJobZoneSummarySheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressPatchTrendChartPerZoneNumber.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressPatchTrendChartPerZoneNumberSheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressTrend.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPressTrendSheet.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetPrintTargetByDeviceID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetProofAndPlateAdmin.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetProofAndPlateByTaskeroUserID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetReportByReportTypeID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetRetrievePassword.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetRetrievePermissionUserManagement.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetRoleManagementData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetRoles.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetSupportUserWithDongleByBranchID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTaskeroUser.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTaskeroUserAndDetails.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTaskeroUserDataByUserName.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTaskeroUserPassingRoleID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTempRHDeviceData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTempRHDeviceData1.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTempRHDeviceType.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTOP100CPMeasurements.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetTop1TempRHData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetUserBranchData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetUserByRoleID.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetUserDongleData.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetUserOfAssignedCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspGetUsersBrandingInfo.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertBranch.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertCompanyBrandingData.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertCPDeviceStatusResetNew.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertDongle.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertErrorLog.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertRolePermission.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertSQLErrorLog.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertTaskeroUser.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertTempRHDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertUserBranchData.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertUserCompanyData.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertUserDongleData.sql" />
+    <NotInBuild Include="StoredProcedures\uspInsertUserLog.sql" />
+    <NotInBuild Include="StoredProcedures\uspSelectDistinctDevices.sql" />
+    <NotInBuild Include="StoredProcedures\uspTaskeroUserDataByUsername.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateBranch.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateCompany.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateCompanyBrandingData.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateDongle.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateIsUsedFlagOnGUID.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateMyAccountTaskeroUser.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateTaskeroUser.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateTaskeroUserBrandings.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateTempRHDevice.sql" />
+    <NotInBuild Include="StoredProcedures\uspUpdateUserLogOut.sql" />
+    <NotInBuild Include="Views\DeltaEType.sql" />
+    <NotInBuild Include="Views\vsGetDeviceReportColorPlate.sql" />
+    <NotInBuild Include="Views\vwAllBlackPatches.sql" />
+    <NotInBuild Include="Views\vwAllBlackPrintContrast.sql" />
+    <NotInBuild Include="Views\vwAllCPMeasurement.sql" />
+    <NotInBuild Include="Views\vwAllCyanPatches.sql" />
+    <NotInBuild Include="Views\vwAllCyanPrintContrast.sql" />
+    <NotInBuild Include="Views\vwAlldePaperAvgMaxPrimary.sql" />
+    <NotInBuild Include="Views\vwAllGrayPatches.sql" />
+    <NotInBuild Include="Views\vwAllMagentaPatches.sql" />
+    <NotInBuild Include="Views\vwAllMagentaPrintContrast.sql" />
+    <NotInBuild Include="Views\vwAllPaperPatches.sql" />
+    <NotInBuild Include="Views\vwAllSubstratePatches.sql" />
+    <NotInBuild Include="Views\vwAllYellowPatches.sql" />
+    <NotInBuild Include="Views\vwAllYellowPrintContrast.sql" />
+    <NotInBuild Include="Views\vwColors.sql" />
+    <NotInBuild Include="Views\vwCPMeasrMentByUserID.sql" />
+    <NotInBuild Include="Views\vwDeltaEType.sql" />
+    <NotInBuild Include="Views\vwGetAllDevicesPerUsers.sql" />
+    <NotInBuild Include="Views\vwGetAllPerforamnceSummaySpecsForCPDevice.sql" />
+    <NotInBuild Include="Views\vwGetBranchByUserID.sql" />
+    <NotInBuild Include="Views\vwGetCompanyByUserID.sql" />
+    <NotInBuild Include="Views\vwGetDeviceReportColorPlate.sql" />
+    <NotInBuild Include="Views\vwGetDeviceReportPress.sql" />
+    <NotInBuild Include="Views\vwGetJobReportsColorPlate.sql" />
+    <NotInBuild Include="Views\vwGetJobReportsPress.sql" />
+    <NotInBuild Include="Views\vwGetLastStatusPerDevice.sql" />
+    <NotInBuild Include="Views\vwGetPerforamnceSummaySpecsForCompany.sql" />
+    <NotInBuild Include="Views\vwGetTopMeasurementGUIDPerDevice.sql" />
+    <NotInBuild Include="Views\vwSheetState.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <BuildContributorArgument Include="OutDir=$(OutDir)" />
+  </ItemGroup>
+</Project>
