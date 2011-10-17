@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VideoView.aspx.cs" Inherits="VideoView" %>
