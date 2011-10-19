@@ -1318,6 +1318,8 @@ public partial class SyncDetail : PageBase
             objCPSyncProjectSettingData.IlluminationMode = 1;
             objCPSyncProjectSettingData.ChartTypeID = Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue);
             objCPSyncProjectSettingData.InstrumentTypeID = Convert.ToInt32(ddlMeasurentDeviceType.SelectedValue);
+            string MeasurementSelectedText = ddlMeasurentDeviceType.SelectedItem.Text;
+            objCPSyncProjectSettingData.SerialNumber = MeasurementSelectedText.Substring(MeasurementSelectedText.IndexOf(" - ")+3).ToString();            
             objCPSyncProjectSettingData.uspInsertProjectSetting();
 
             Fuji.Common.Sessions.SetSessions("SelectedProjectUseMeasurementPlugin", Convert.ToBoolean(ChkUseMeasurementPlugin.Checked).ToString());
@@ -1913,15 +1915,42 @@ public partial class SyncDetail : PageBase
             LblError.Text = Exc.Message;
         }
     }
-    private void BindAlignmentChart(int InstrumentTypeID)
+    private void BindMeasurementDeviceType()
     {
         try
         {
+            ddlMeasurentDeviceType.Items.Clear();
+            //==========  Declaring Objects ==========//
+            CPSyncMeasurementDeviceData ObjCPSyncMeasurementDeviceData = new CPSyncMeasurementDeviceData();
+            DataTable DTCPSyncMeasurementDeviceData = new DataTable();
+            ObjCPSyncMeasurementDeviceData.PressID = Convert.ToInt16(Fuji.Common.Sessions.GetSession("SelectedPressID")); ;
+            DTCPSyncMeasurementDeviceData = ObjCPSyncMeasurementDeviceData.uspGetMeasurementDeviceTypeByPressID();
+
+            ddlMeasurentDeviceType.DataSource = DTCPSyncMeasurementDeviceData;
+            ddlMeasurentDeviceType.DataValueField = "DeviceTypeID";
+            ddlMeasurentDeviceType.DataTextField = "DeviceTypeName";
+            ddlMeasurentDeviceType.DataBind();
+
+        }
+        catch (Exception Ex)
+        {
+
+            LblError.Text = HandleException(Ex);
+        }
+
+
+    }
+    private void BindAlignmentChart(int InstrumentTypeID)
+    {
+        try
+        {           
+
             //==========  Declaring Objects ==========//
             DataTable DTAlignmentChart = new DataTable();
             CPSyncProjectSettingData ObjCPSyncProjectSettingData = new CPSyncProjectSettingData();
             ObjCPSyncProjectSettingData.InstrumentTypeID = InstrumentTypeID;
-            DTAlignmentChart = ObjCPSyncProjectSettingData.uspGetChartByInstrument();
+            DTAlignmentChart = ObjCPSyncProjectSettingData.uspGetChartByInstrument();           
+
 
             ddlMeasurentAlignmentChart.DataSource = DTAlignmentChart;
             ddlMeasurentAlignmentChart.DataValueField = "ReferenceChartTypeID";
@@ -1937,6 +1966,7 @@ public partial class SyncDetail : PageBase
         
 
     }
+
     #endregion
 
     #endregion
@@ -3996,18 +4026,25 @@ public partial class SyncDetail : PageBase
             DT_SyncProjectSetting = ObjSyncProjectSetting.uspGetProjectSetting();            
             //Fill Project Setting detail from database
 
+            BindMeasurementDeviceType();
+
             if (DT_SyncProjectSetting != null && DT_SyncProjectSetting.Rows.Count > 0)
             {
                 ChkUseMeasurementPlugin.Checked = Convert.ToBoolean(DT_SyncProjectSetting.Rows[0]["UsePlugin"].ToString());
                 ddlMeasurentIlluminant.SelectedValue = DT_SyncProjectSetting.Rows[0]["Illuminant"].ToString();
                 ddlMeasurentObserver.SelectedValue = DT_SyncProjectSetting.Rows[0]["Observer"].ToString();
                 ddlMeasurentDensityType.SelectedValue = DT_SyncProjectSetting.Rows[0]["DensityType"].ToString();
-                ddlMeasurentDeviceType.SelectedValue = DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString();
+                if (ddlMeasurentDeviceType.Items.Contains(new ListItem(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString(), DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString())))
+                    ddlMeasurentDeviceType.SelectedIndex = ddlMeasurentDeviceType.Items.IndexOf(ddlMeasurentDeviceType.Items.FindByText(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString()));                    
+                else
+                    ddlMeasurentDeviceType.Items.Insert(0, new ListItem(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString(), DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString()));
+                    
                 ddlMeasurentDeviceType_SelectedIndexChanged(null, null);
                 ddlMeasurentAlignmentChart.SelectedValue = DT_SyncProjectSetting.Rows[0]["ChartTypeID"].ToString();
             }
             else
             {
+                ChkUseMeasurementPlugin.Checked = false;
                 ddlMeasurentDeviceType_SelectedIndexChanged(null, null);
             }
             //if (ChkUseMeasurementPlugin.Checked)

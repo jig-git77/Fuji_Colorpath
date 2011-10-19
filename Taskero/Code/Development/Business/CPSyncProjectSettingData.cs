@@ -62,6 +62,8 @@ namespace Fuji.Business
             Cmd.Parameters.AddWithValue("@IlluminationMode", this.IlluminationMode);
             Cmd.Parameters.AddWithValue("@ChartTypeID", this.ChartTypeID);
             Cmd.Parameters.AddWithValue("@InstrumentTypeID", this.InstrumentTypeID);
+            Cmd.Parameters.AddWithValue("@SerialNumber", this.SerialNumber);
+
             (new Fuji.DataAccess.Database()).ExecuteNonQuery(Cmd);
         }
         #endregion

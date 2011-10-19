@@ -1,4 +1,4 @@
-﻿#region
+﻿#region 
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,12 +11,12 @@ using System.Data.SqlClient;
 namespace Fuji.Business
 {
     public class FilteringColumn : Telerik.WebControls.GridTemplateColumn
-    {
+    {  
         /// <summary>
         /// This Class is usefull for Bind Dynamic DropDown in Red Grid for Filter
         /// 
         /// </summary>
-
+        
         #region SetupFilterControls
 
         protected override void SetupFilterControls(System.Web.UI.WebControls.TableCell cell)
@@ -50,7 +50,7 @@ namespace Fuji.Business
                 SqlCommand Cmd = new SqlCommand();
                 Cmd.CommandType = CommandType.Text;
                 Cmd.CommandText = "SELECT JobStatusDesc AS Status,JobStatusDesc AS Status FROM Press.Jobstatus";
-                DDLFilter.DataSource = (new Fuji.DataAccess.Database()).GetDataTable(Cmd);
+                DDLFilter.DataSource = (new Fuji.DataAccess.Database()).GetDataTable(Cmd); 
 
                 //====  Assign Status ====//
                 //DDLFilter.Items.Add(DDLiShowAll);
@@ -76,7 +76,7 @@ namespace Fuji.Business
                 Cmd.CommandType = CommandType.Text;
                 Cmd.CommandText = " SELECT CPDeviceTypeID, CPDeviceTypeDesc FROM CPDeviceType";
 
-                DDLFilter.DataSource = (new Fuji.DataAccess.Database()).GetDataTable(Cmd);
+                DDLFilter.DataSource = (new Fuji.DataAccess.Database()).GetDataTable(Cmd); 
 
             }
             else if (this.UniqueName.ToString() == "DongleType")
@@ -131,10 +131,10 @@ namespace Fuji.Business
                 //========== Get DeviceType Data and assign to dropdownlist ===========//
                 DDLFilter.DataSource = (new CPDeviceTypeData().uspGetDistinctDeviceTypeByUserID(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID));
                 DDLFilter.Items.Insert(0, DDLiShowAll);
-            }
+            }            
             cell.Controls.Add(DDLFilter);
         }
-
+        
         #endregion
 
         #region ====  Set Current Filter Value To Control ====

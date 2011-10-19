@@ -18,7 +18,8 @@ namespace Fuji.Business
         private int _BranchID = 0;
         private string _SerialNumber = "";
         private int _DeviceTypeID = 0;
-        private bool _isActive = false; 
+        private bool _isActive = false;
+        private int _PressID = 0;
       
 
         public string TableName
@@ -57,6 +58,12 @@ namespace Fuji.Business
         {
             get { return _isActive; }
             set { _isActive = value; }
+        }
+
+        public int PressID
+        {
+            get { return _PressID; }
+            set { _PressID = value; }
         }
 
       

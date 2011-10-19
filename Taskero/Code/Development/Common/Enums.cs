@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Fuji.Common
 {
-    public class Enums
+    public class Enums 
     {
         public enum LanguageType
         {
@@ -30,7 +30,7 @@ namespace Fuji.Common
         }
 
         public enum enumYesNo
-        {
+        { 
             No = 0, Yes = 1
         }
 
@@ -45,7 +45,7 @@ namespace Fuji.Common
             Production = 2,
             Complete = 3
         }
-
+        
         public enum enumDeviceStatus
         {
             None = 0, Green = 1, Yellow = 2, Orange = 3, Red = 4
@@ -61,37 +61,24 @@ namespace Fuji.Common
         public enum enumReportType
         {
             BranchSummaryReport = 1
-            ,
-            DeviceReport = 2
-                ,
-            ShiftVariabilityReport = 3
-                ,
-            DeviceVariabilityReport = 4
-                ,
-            ColorDetailReport = 5
-                ,
-            PatchDetailReport = 6
-                ,
-            ProductivityReport = 7
-                ,
-            ReportPerformanceSummary = 8
-                ,
-            ReportTargetMeasurement = 9
-                ,
-            ReportJobRunCertificationProcess = 10
-                ,
-            ReportJobRunCertificationNonProcess = 11
-                ,
-            ReportPressMakeReady = 12
-                ,
-            ReportSingleMeasurement = 13
-                ,
-            CPSPrintStandardsReport = 14
-                , CPSPrintStandardsReportISO = 15
+            ,DeviceReport = 2
+            ,ShiftVariabilityReport = 3
+            ,DeviceVariabilityReport = 4
+            ,ColorDetailReport = 5
+            ,PatchDetailReport = 6
+            ,ProductivityReport = 7
+            ,ReportPerformanceSummary = 8
+            ,ReportTargetMeasurement = 9
+            ,ReportJobRunCertificationProcess = 10
+            ,ReportJobRunCertificationNonProcess = 11
+            ,ReportPressMakeReady = 12
+            ,ReportSingleMeasurement = 13
+            ,CPSPrintStandardsReport = 14
+            ,CPSPrintStandardsReportISO = 15
         }
 
         public enum enumDeviceType
-        {
+        { 
             None = 0, Color = 1, Plate = 2, Monitor = 3, WideFormat = 4, Press = 5
         }
 
@@ -109,7 +96,7 @@ namespace Fuji.Common
             ITX = 2,
             Sync = 3,
             EFI = 4,
-            CTW = 5,
+            CTW =5,
             ColorGATE = 6
         }
 
@@ -169,7 +156,7 @@ namespace Fuji.Common
         {
             G7 = 1,
             ISO = 2,
-
+           
         }
 
         public enum OutputType
@@ -177,9 +164,9 @@ namespace Fuji.Common
             Offset = 1,
             Screen = 2,
             Wideformat = 3
-        }
-
-
+        }    
+       
+        
         public enum PrintStandardType
         {
             GRACoL = 1,
@@ -188,10 +175,10 @@ namespace Fuji.Common
             PSO_12647_2 = 4
         }
 
-        public enum SyncMeasurementDeviceType
-        {
-            i1 = 1,
-            iSis = 3
-        }
+        //public enum SyncMeasurementDeviceType
+        //{
+        //    i1 = 1,
+        //    iSis = 3
+        //}
     }
 }

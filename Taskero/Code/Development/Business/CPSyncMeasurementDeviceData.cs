@@ -50,6 +50,18 @@ namespace Fuji.Business
         }
         #endregion      
 
+        #region Delete        
+        public void Delete()
+        {
+            SqlCommand Cmd = new SqlCommand();
+            Cmd.CommandType = CommandType.StoredProcedure;
+            Cmd.CommandText = "CPSync.uspDeleteSyncMeasurementDevice";
+            Cmd.Parameters.AddWithValue("@CPSyncMeasurementDeviceID", this.CPSyncMeasurementDeviceID);
+            (new Fuji.DataAccess.Database()).ExecuteNonQuery(Cmd);
+        }
+        
+        #endregion
+
         #region GetSyncMeasurementDevice
         /// <summary>
         /// Get Sync Measurement Device used by Sync Measurement Device
@@ -63,5 +75,34 @@ namespace Fuji.Business
             return (new DataAccess.Database()).GetDataTable(Cmd);
         }
         #endregion  
+
+        #region GetSyncMeasurementDeviceType
+        /// <summary>
+        /// Get Sync Measurement Device Type used by Sync Measurement Device Type
+        /// </summary>
+        public DataTable uspGetSyncMeasurementDeviceType()
+        {
+            //========== Execute Command ==========//
+            SqlCommand Cmd = new SqlCommand();
+            Cmd.CommandType = CommandType.StoredProcedure;
+            Cmd.CommandText = "CPSync.uspGetSyncMeasurementDeviceType";
+            return (new DataAccess.Database()).GetDataTable(Cmd);
+        }
+        #endregion  
+
+        #region GetMeasurementDeviceTypeByPressID
+        /// <summary>
+        /// Get Measurement Device Type By PressID
+        /// </summary>
+        public DataTable uspGetMeasurementDeviceTypeByPressID()
+        {
+            //========== Execute Command ==========//
+            SqlCommand Cmd = new SqlCommand();
+            Cmd.CommandText = "CPSync.uspGetMeasurementDeviceTypeByPressID";
+            Cmd.CommandType = CommandType.StoredProcedure;
+            Cmd.Parameters.AddWithValue("@PressID", this.PressID);
+            return (new DataAccess.Database()).GetDataTable(Cmd);
+        }
+        #endregion
     }
 }

@@ -148,7 +148,7 @@ public partial class SyncMeasurementDevice : PageBase
                 DT_SyncMeasurementDeviceList = (DataTable)Fuji.Common.Sessions.GetSession("SyncMeasurementDeviceData");
                 if (DT_SyncMeasurementDeviceList != null)
                 {
-                    DT_SyncMeasurementDeviceList.DefaultView.RowFilter = "SerialNumber = " + TXT_SerialNum.Text + " AND DeviceTypeID = " + Convert.ToInt16(Enum.Parse(typeof(Enums.SyncMeasurementDeviceType), DDL_DeviceType.SelectedValue)).ToString() + " AND CPSyncMeasurementDeviceID <> " + LTRL_CPSyncMeasurementDeviceID.Text.Trim();
+                    DT_SyncMeasurementDeviceList.DefaultView.RowFilter = "SerialNumber = " + TXT_SerialNum.Text + " AND DeviceTypeID = " + Convert.ToInt16(DDL_DeviceType.SelectedValue).ToString() + " AND CPSyncMeasurementDeviceID <> " + LTRL_CPSyncMeasurementDeviceID.Text.Trim();
                     if (DT_SyncMeasurementDeviceList.DefaultView.Count > 0)
                     {
                         //========== Show the new dongle insert message ===========//
@@ -172,7 +172,7 @@ public partial class SyncMeasurementDevice : PageBase
 
                 ObjSyncMeasurementDevice.CPDongleID = Convert.ToInt16(DDL_Dongle.SelectedValue.Trim());
                 ObjSyncMeasurementDevice.SerialNumber = TXT_SerialNum.Text.Trim();
-                ObjSyncMeasurementDevice.DeviceTypeID = Convert.ToInt16(Enum.Parse(typeof(Enums.SyncMeasurementDeviceType), DDL_DeviceType.SelectedValue));                
+                ObjSyncMeasurementDevice.DeviceTypeID = Convert.ToInt16(DDL_DeviceType.SelectedValue);                
                 ObjSyncMeasurementDevice.isActive= Convert.ToBoolean(CHK_IsActive.Checked);
                 ObjSyncMeasurementDevice.Insert();
 
@@ -185,7 +185,7 @@ public partial class SyncMeasurementDevice : PageBase
             {
                 ObjSyncMeasurementDevice.CPSyncMeasurementDeviceID = Convert.ToInt16(LTRL_CPSyncMeasurementDeviceID.Text.Trim());
                 ObjSyncMeasurementDevice.SerialNumber = TXT_SerialNum.Text.Trim();
-                ObjSyncMeasurementDevice.DeviceTypeID = Convert.ToInt16(Enum.Parse(typeof(Enums.SyncMeasurementDeviceType), DDL_DeviceType.SelectedValue));
+                ObjSyncMeasurementDevice.DeviceTypeID = Convert.ToInt16(DDL_DeviceType.SelectedValue);
                 ObjSyncMeasurementDevice.isActive = Convert.ToBoolean(CHK_IsActive.Checked);
 
                 ObjSyncMeasurementDevice.Update();
@@ -222,6 +222,8 @@ public partial class SyncMeasurementDevice : PageBase
             DDL_Company.Enabled = true;
             DDL_Branch.Enabled = true;
             DDL_Dongle.Enabled = true;
+            TXT_SerialNum.Enabled = true;
+            DDL_DeviceType.Enabled = true;
         }
         catch (Exception Exc)
         { LBL_Error.Text = HandleException(Exc); }
@@ -273,7 +275,7 @@ public partial class SyncMeasurementDevice : PageBase
                 DDL_Branch.SelectedValue = e.Item.Cells[3].Text.Trim();
                 DDL_Dongle.SelectedValue = e.Item.Cells[8].Text.Trim();
                 TXT_SerialNum.Text = e.Item.Cells[9].Text.Trim();
-                DDL_DeviceType.SelectedValue = Enum.GetName(typeof(Fuji.Common.Enums.SyncMeasurementDeviceType), Convert.ToInt16(e.Item.Cells[10].Text.Trim()));
+                DDL_DeviceType.SelectedValue = Convert.ToInt16(e.Item.Cells[10].Text.Trim()).ToString();
                 CHK_IsActive.Checked = Convert.ToBoolean(e.Item.Cells[12].Text.Trim());
                 BTN_AddSave.Text = "Save"; TBLFORM.Visible = true;
                 LTRL_SubTitle.Text = "Edit Sync Measurement Device";
@@ -284,8 +286,31 @@ public partial class SyncMeasurementDevice : PageBase
                 DDL_Company.Enabled = false;
                 DDL_Branch.Enabled = false;
                 DDL_Dongle.Enabled = false;
+                TXT_SerialNum.Enabled = false;
+                DDL_DeviceType.Enabled = false;
             }
-          
+            //========== If Command Name is Delete then comes to this end of code ===========//
+            if (e.CommandName == "Delete")
+            {
+                //==========  Declaring Objects ==========//
+                CPSyncMeasurementDeviceData ObjCPSyncMeasurementDevice = new CPSyncMeasurementDeviceData();
+
+                //========== Assign value to company object ===========//
+                ObjCPSyncMeasurementDevice.CPSyncMeasurementDeviceID = Convert.ToInt32(e.Item.Cells[2].Text.Trim());
+                ObjCPSyncMeasurementDevice.Delete();
+
+                //========== Show successful deletion message ===========//
+                LBL_Error.Text = "Measurement Device deleted successfully.";
+
+                //========== Fill Company DAta to session object of company ===========//
+                Fuji.Common.Sessions.SetSessions("SyncMeasurementDeviceData", null);
+
+                //========== Clear all filtering options , if any ===========//
+                BTN_Reset_Click(null, null);
+
+                //========== Bind the Dongle Data ===========//
+                BindSyncMeasurementDevice();
+            }
             if (e.CommandName == "SelectDate")
             {
                 TableCell cell = ((Telerik.WebControls.GridFilteringItem)e.Item)["LastModifiedDate"];//PNL_DATE_PICKER
@@ -538,6 +563,7 @@ public partial class SyncMeasurementDevice : PageBase
 
             //==========  Get Data Table and Bind ==========//
             DataTable DT_SyncMeasurementDevice = new DataTable();
+            
 
             if (Fuji.Common.Sessions.GetSession("SyncMeasurementDeviceData") == null)
             {
@@ -646,8 +672,31 @@ public partial class SyncMeasurementDevice : PageBase
     #region Bind Device Type
     private void FillDeviceType()
     {
-        DDL_DeviceType.DataSource = Enum.GetNames(typeof(Enums.SyncMeasurementDeviceType));
-        DDL_DeviceType.DataBind();
+        try
+        {
+            //========== Clear Items in DropDownList ===========//
+            DDL_DeviceType.Items.Clear();
+
+            //==========  Declaring Objects ==========//
+            CPSyncMeasurementDeviceData ObjCPSyncMeasurementDevice = new CPSyncMeasurementDeviceData();
+
+            //==========  Get Data Table and Fill ==========//        
+            DataTable DT_MeasurementDeviceType = new DataTable();
+            DT_MeasurementDeviceType = ObjCPSyncMeasurementDevice.uspGetSyncMeasurementDeviceType();
+            if (DT_MeasurementDeviceType != null && DT_MeasurementDeviceType.Rows.Count > 0)
+            {
+                DDL_DeviceType.DataSource = DT_MeasurementDeviceType;
+                DDL_DeviceType.DataValueField = "DeviceTypeID"; DDL_DeviceType.DataTextField = "DeviceTypeName";
+                DDL_DeviceType.DataBind();
+            }
+            else
+            { DDL_DeviceType.DataSource = null; DDL_DeviceType.DataBind(); }
+           
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
     }
     #endregion
 

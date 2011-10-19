@@ -139,7 +139,7 @@ namespace Fuji.Common
         {
             get
             {
-                if (System.Web.HttpContext.Current.Session["Css"] == null) { System.Web.HttpContext.Current.Session["Css"] = ""; }
+                if (System.Web.HttpContext.Current.Session["Css"] == null ) { System.Web.HttpContext.Current.Session["Css"] = ""; }
                 return System.Web.HttpContext.Current.Session["Css"].ToString();
             }
             set
@@ -326,15 +326,11 @@ namespace Fuji.Common
         public static bool View_Press_Data { get { if (System.Web.HttpContext.Current.Session["_View_Press_Data"] == null) { System.Web.HttpContext.Current.Session["_View_Press_Data"] = false; } return (bool)System.Web.HttpContext.Current.Session["_View_Press_Data"]; } set { System.Web.HttpContext.Current.Session["_View_Press_Data"] = value; } }
         public static bool View_Devices_Tab { get { if (System.Web.HttpContext.Current.Session["_View_Devices_Tab"] == null) { System.Web.HttpContext.Current.Session["_View_Devices_Tab"] = false; } return (bool)System.Web.HttpContext.Current.Session["_View_Devices_Tab"]; } set { System.Web.HttpContext.Current.Session["_View_Devices_Tab"] = value; } }
         public static bool Access_Branding { get { if (System.Web.HttpContext.Current.Session["_Access_Branding"] == null) { System.Web.HttpContext.Current.Session["_Access_Branding"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Access_Branding"]; } set { System.Web.HttpContext.Current.Session["_Access_Branding"] = value; } }
-        public static bool Access_Video { get { if (System.Web.HttpContext.Current.Session["_Access_Video"] == null) { System.Web.HttpContext.Current.Session["_Access_Video"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Access_Video"]; } set { System.Web.HttpContext.Current.Session["_Access_Video"] = value; } }
-        public static bool Access_VideoView { get { if (System.Web.HttpContext.Current.Session["_Access_VideoView"] == null) { System.Web.HttpContext.Current.Session["_Access_VideoView"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Access_VideoView"]; } set { System.Web.HttpContext.Current.Session["_Access_VideoView"] = value; } }
+        public static bool Access_Video {get { if (System.Web.HttpContext.Current.Session["_Access_Video"] == null) { System.Web.HttpContext.Current.Session["_Access_Video"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Access_Video"]; } set { System.Web.HttpContext.Current.Session["_Access_Video"] = value; } }
+        public static bool Access_VideoView{get{if (System.Web.HttpContext.Current.Session["_Access_VideoView"] == null){System.Web.HttpContext.Current.Session["_Access_VideoView"] = false;}return (bool)System.Web.HttpContext.Current.Session["_Access_VideoView"];}set{System.Web.HttpContext.Current.Session["_Access_VideoView"] = value;}}
         public static bool Access_SyncView
-        {
-            get
-            {
-                if (System.Web.HttpContext.Current.Session["_Access_SyncView"] == null) { System.Web.HttpContext.Current.Session["_Access_SyncView"] = false; }
-                return (bool)System.Web.HttpContext.Current.Session["_Access_SyncView"];
-            }
+        {   get{if (System.Web.HttpContext.Current.Session["_Access_SyncView"] == null){System.Web.HttpContext.Current.Session["_Access_SyncView"] = false;}
+                return (bool)System.Web.HttpContext.Current.Session["_Access_SyncView"];}
             set { System.Web.HttpContext.Current.Session["_Access_SyncView"] = value; }
         }
         #endregion
@@ -405,8 +401,8 @@ namespace Fuji.Common
             Sessions.LastName = DSet.Tables[0].Rows[0]["LastName"].ToString();
             Sessions.FirstName = DSet.Tables[0].Rows[0]["FirstName"].ToString();
             Sessions.Email = DSet.Tables[0].Rows[0]["Email"].ToString();
-            if (DSet.Tables[0].Rows[0]["AccessVideoView"] != null && Convert.ToInt32(DSet.Tables[0].Rows[0]["AccessVideoView"]) > 0)
-                Sessions.Access_VideoView = true;
+            if(DSet.Tables[0].Rows[0]["AccessVideoView"] != null && Convert.ToInt32(DSet.Tables[0].Rows[0]["AccessVideoView"]) > 0)
+                Sessions.Access_VideoView =  true;
             else
                 Sessions.Access_VideoView = false;
 
@@ -414,7 +410,7 @@ namespace Fuji.Common
                 Sessions.SiteLicenseAgreed = true;
             else
                 Sessions.SiteLicenseAgreed = false;
-
+            
             #endregion
 
             #region Table 1 : Role
@@ -456,7 +452,7 @@ namespace Fuji.Common
                 Sessions.Access_Branding = true;
                 Sessions.Access_Video = true;
                 Sessions.Access_SyncView = true;
-
+                
             }
             else //========== If not taskero Admin check and assign all rights ==========//
             {
@@ -497,8 +493,8 @@ namespace Fuji.Common
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 28"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.View_Press_Data = true; } else { Sessions.View_Press_Data = false; } //Permission : View Press Data
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 29"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.View_Devices_Tab = true; } else { Sessions.View_Devices_Tab = false; } //Permission : View Devices Tab
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 30"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Access_Branding = true; } else { Sessions.Access_Branding = false; } //Permission : Access Branding                
-                DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 31"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Access_Video = true; } else { Sessions.Access_Video = false; } //Permission : Access Video                
-
+                DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 31"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Access_Video = true; } else {Sessions.Access_Video = false; } //Permission : Access Video                
+                                
                 #endregion
             }
             #endregion
@@ -559,10 +555,10 @@ namespace Fuji.Common
             // === Check For Sync Permission for particular User === //
             // === By Chirag Shah(2 May, 2010) === //
             #region Table 8 : Check For Sync Permission for particular User : By Chirag Shah(2 May, 2010)
-            if (DSet.Tables[8] != null && DSet.Tables[8].Rows.Count > 0 && Convert.ToBoolean(DSet.Tables[8].Rows[0]["IsProcessorAllow"]))
-                Sessions.Access_SyncView = true;
-            else
-                Sessions.Access_SyncView = false;
+                if (DSet.Tables[8] != null && DSet.Tables[8].Rows.Count > 0 && Convert.ToBoolean(DSet.Tables[8].Rows[0]["IsProcessorAllow"]))
+                    Sessions.Access_SyncView = true;
+                else
+                    Sessions.Access_SyncView = false;
             #endregion
 
             #region Create a DataTable for Access Information
@@ -696,7 +692,7 @@ namespace Fuji.Common
             #endregion
 
             #region Check Brand
-            if (Fuji.Common.Sessions.Access_Branding == true)
+            if (Fuji.Common.Sessions.Access_Branding == true )
             {
                 ROW = TabAccess.NewRow();
                 ROW["ID"] = "H";
@@ -725,21 +721,21 @@ namespace Fuji.Common
 
             if (System.Web.HttpContext.Current.Session["Username"].ToString().ToUpper() == "MWINN" || System.Web.HttpContext.Current.Session["Username"].ToString().ToUpper() == "TASKEROWEBADMIN")
             {
-
+            
                 if (Fuji.Common.Sessions.RoleDesc == Enums.RoleType.TaskeroAdmin || Fuji.Common.Sessions.Access_SyncView == true)
                 {
                     ROW = TabAccess.NewRow();
                     ROW["ID"] = "L";
                     ROW["Desc"] = "Sync Device Management";
                     ROW["Page"] = "SyncManagement.aspx";
-                    ROW["Image"] = "Images/syncdevicemgt.png";
-                    ROW["SmallImage"] = "images/syncdevicemgt_small.png";
+                    ROW["Image"] = "Images/syncdevicemgt.png"; 
+                    ROW["SmallImage"] = "images/syncdevicemgt_small.png"; 
                     TabAccess.Rows.Add(ROW);
                 }
 
             }
             #endregion
-
+          
 
             #region Download Mangement
             ROW = TabAccess.NewRow();

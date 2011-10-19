@@ -150,8 +150,7 @@
                                                                                         <rad:GridBoundColumn DataField="PressManufacturer" UniqueName="PressManufacturer"
                                                                                             AllowFiltering="false" Visible="true" HeaderText="Device Manufacturer" ItemStyle-Width="40%"
                                                                                             HeaderStyle-Width="40%">
-                                                                                        </rad:GridBoundColumn>
-                                                                                       
+                                                                                        </rad:GridBoundColumn>                                                                                       
                                                                                     </Columns>
                                                                                 </MasterTableView>
                                                                             </rad:RadGrid>
@@ -2262,9 +2261,7 @@
                                                                                                                 <tr>
                                                                                                                     <td class="subtitle">Device Type :</td>
                                                                                                                     <td> 
-                                                                                                                        <asp:DropDownList ID="ddlMeasurentDeviceType" runat="server" CssClass="DROPDOWNLIST" AutoPostBack="true" OnSelectedIndexChanged="ddlMeasurentDeviceType_SelectedIndexChanged">
-                                                                                                                            <asp:ListItem Selected="True" Text="i1" Value="1"></asp:ListItem>
-                                                                                                                            <asp:ListItem Text="iSis" Value="3"></asp:ListItem>
+                                                                                                                        <asp:DropDownList ID="ddlMeasurentDeviceType" runat="server" CssClass="DROPDOWNLIST" AutoPostBack="true" OnSelectedIndexChanged="ddlMeasurentDeviceType_SelectedIndexChanged">                                                                                                                            
                                                                                                                         </asp:DropDownList>
                                                                                                                      </td>
                                                                                                                  </tr>

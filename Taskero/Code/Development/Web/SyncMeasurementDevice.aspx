@@ -102,15 +102,13 @@
                                                                                     </rad:GridBoundColumn>
                                                                                     <rad:GridBoundColumn DataField="DeviceTypeID" HeaderText="DeviceTypeID" 
                                                                                         Visible="false" UniqueName="DeviceTypeID">
-                                                                                    </rad:GridBoundColumn>                    
-                                                                                    <rad:GridTemplateColumn HeaderText="Device Type" AllowFiltering="false" ItemStyle-HorizontalAlign="Center"  
-                                                                                        HeaderStyle-Width="100px">
-                                                                                        <ItemTemplate>                                                                                        
-                                                                                            <%# Enum.GetName(typeof(Fuji.Common.Enums.SyncMeasurementDeviceType), DataBinder.Eval(Container.DataItem, "DeviceTypeID"))%>
-                                                                                        </ItemTemplate>
+                                                                                    </rad:GridBoundColumn>
+                                                                                    <rad:GridBoundColumn DataField="DeviceTypeName" HeaderText="Device Type" ItemStyle-Width="100px"
+                                                                                        HeaderStyle-Width="100px" AutoPostBackOnFilter="true" 
+                                                                                        CurrentFilterFunction="Contains">
                                                                                         <HeaderStyle Width="100px" />
-                                                                                        <ItemStyle HorizontalAlign="Center" />
-                                                                                    </rad:GridTemplateColumn>                                                                   
+                                                                                        <ItemStyle Width="100px" />
+                                                                                    </rad:GridBoundColumn>  
                                                                                     <rad:GridBoundColumn DataField="IsActive" HeaderText="IsUsed" ItemStyle-HorizontalAlign="Center">
                                                                                         <ItemStyle HorizontalAlign="Center" />
                                                                                          <HeaderStyle Width="40px" />
@@ -124,7 +122,16 @@
                                                                                         </ItemTemplate>
                                                                                         <HeaderStyle Width="40px" />
                                                                                         <ItemStyle HorizontalAlign="Center" />
-                                                                                    </rad:GridTemplateColumn>                                                                                   
+                                                                                    </rad:GridTemplateColumn>         
+                                                                                      <rad:GridTemplateColumn HeaderText="Delete" AllowFiltering="false" ItemStyle-HorizontalAlign="Center"
+                                                                                        HeaderStyle-Width="40px">
+                                                                                        <ItemTemplate>
+                                                                                            <asp:ImageButton ID="IMGBTN_Delete" runat="server" CommandName="Delete" ImageUrl="~/Images/Delete-Icon.gif"
+                                                                                                ToolTip="Delete"  />
+                                                                                        </ItemTemplate>
+                                                                                        <HeaderStyle Width="40px" />
+                                                                                        <ItemStyle HorizontalAlign="Center" />
+                                                                                    </rad:GridTemplateColumn>                                                                          
                                                                                 </Columns>
                                                                                 <EditFormSettings EditFormType="Template">
                                                                                 </EditFormSettings>
