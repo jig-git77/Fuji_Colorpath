@@ -80,5 +80,22 @@ namespace Fuji.Business
         }
        
         #endregion
+
+        #region uspGetPressOnDongleName
+        /// <summary>
+        /// Get Press list on Dongle Name - used for service proto-type
+        /// </summary>
+        /// <returns>returns the All Press Type data</returns>
+        public DataTable uspGetPressOnDongleName(string dongleName)
+        {
+            var cmd = new SqlCommand
+                          {
+                              CommandType = CommandType.StoredProcedure,
+                              CommandText = "Service.uspGetPressOnDongleName"
+                          };
+            cmd.Parameters.AddWithValue("@DongleName", dongleName);
+            return (new DataAccess.Database()).GetDataTable(cmd);
+        }
+        #endregion
     }
 }

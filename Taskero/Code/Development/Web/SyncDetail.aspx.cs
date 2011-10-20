@@ -978,6 +978,14 @@ public partial class SyncDetail : PageBase
                 if (ddlCertifiedProject.SelectedIndex == 0) { LblError.Text = "Select Existing Project."; return; }
                  
             }
+            if (ChkUseMeasurementPlugin.Checked)
+            {
+                if (ddlMeasurentDeviceType.SelectedValue == "")
+                {
+                    LblError.Text = "Plase select measurement device type.";
+                    return;
+                }
+            }
             if (Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString() == "-1")
             {
                 NewProject = true;
@@ -1011,7 +1019,9 @@ public partial class SyncDetail : PageBase
                 Fuji.Common.Sessions.SetSessions("SelectedProjectTypeID", DDLProjectType.SelectedValue);
                 Fuji.Common.Sessions.SetSessions("SelectedProjectClose", Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString());
                 Fuji.Common.Sessions.SetSessions("SelectedPressRunClose", Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString());
-                Fuji.Common.Sessions.SetSessions("SelectedChartTypeID", Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue));           
+                if(ddlMeasurentAlignmentChart.SelectedValue!="")
+                    Fuji.Common.Sessions.SetSessions("SelectedChartTypeID", Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue));                          
+                    
                 #endregion
             }
             else
@@ -1316,10 +1326,21 @@ public partial class SyncDetail : PageBase
             objCPSyncProjectSettingData.Illuminant = Convert.ToInt16(ddlMeasurentIlluminant.SelectedValue);
             objCPSyncProjectSettingData.DensityType = Convert.ToInt16(ddlMeasurentDensityType.SelectedValue);
             objCPSyncProjectSettingData.IlluminationMode = 1;
-            objCPSyncProjectSettingData.ChartTypeID = Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue);
-            objCPSyncProjectSettingData.InstrumentTypeID = Convert.ToInt32(ddlMeasurentDeviceType.SelectedValue);
-            string MeasurementSelectedText = ddlMeasurentDeviceType.SelectedItem.Text;
-            objCPSyncProjectSettingData.SerialNumber = MeasurementSelectedText.Substring(MeasurementSelectedText.IndexOf(" - ")+3).ToString();            
+            if (ddlMeasurentAlignmentChart.SelectedValue != "")
+                objCPSyncProjectSettingData.ChartTypeID = Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue);
+            else
+                objCPSyncProjectSettingData.ChartTypeID = null;
+            if (ddlMeasurentDeviceType.SelectedValue != "")
+            {
+                objCPSyncProjectSettingData.InstrumentTypeID = Convert.ToInt32(ddlMeasurentDeviceType.SelectedValue);
+                string MeasurementSelectedText = ddlMeasurentDeviceType.SelectedItem.Text;
+                objCPSyncProjectSettingData.SerialNumber = MeasurementSelectedText.Substring(MeasurementSelectedText.IndexOf(" - ") + 3).ToString();
+            }
+            else
+            {
+                objCPSyncProjectSettingData.InstrumentTypeID = null;
+                objCPSyncProjectSettingData.SerialNumber = "";
+            }
             objCPSyncProjectSettingData.uspInsertProjectSetting();
 
             Fuji.Common.Sessions.SetSessions("SelectedProjectUseMeasurementPlugin", Convert.ToBoolean(ChkUseMeasurementPlugin.Checked).ToString());
@@ -1908,7 +1929,8 @@ public partial class SyncDetail : PageBase
     {
         try
         {
-            BindAlignmentChart(Convert.ToInt16(ddlMeasurentDeviceType.SelectedValue));
+            if(ddlMeasurentDeviceType.SelectedValue!="")
+                BindAlignmentChart(Convert.ToInt16(ddlMeasurentDeviceType.SelectedValue));
         }
         catch (Exception Exc)
         {

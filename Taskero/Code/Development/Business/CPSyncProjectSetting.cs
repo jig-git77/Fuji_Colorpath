@@ -19,8 +19,8 @@ namespace Fuji.Business
         private int _Illuminant = 0;
         private int _DensityType = 0;
         private int _IlluminationMode = 0;
-        private int _ChartTypeID = 0;
-        private int _InstrumentTypeID = 0;
+        private int? _ChartTypeID = 0;
+        private int? _InstrumentTypeID = 0;
         private string _SerialNumber = string.Empty;
 
         #endregion
@@ -32,8 +32,8 @@ namespace Fuji.Business
         public int Illuminant { get { return _Illuminant; } set { _Illuminant = value; } }
         public int DensityType { get { return _DensityType; } set { _DensityType = value; } }
         public int IlluminationMode { get { return _IlluminationMode; } set { _IlluminationMode = value; } }
-        public int ChartTypeID { get { return _ChartTypeID; } set { _ChartTypeID = value; } }
-        public int InstrumentTypeID { get { return _InstrumentTypeID; } set { _InstrumentTypeID = value; } }
+        public int? ChartTypeID { get { return _ChartTypeID; } set { _ChartTypeID = value; } }
+        public int? InstrumentTypeID { get { return _InstrumentTypeID; } set { _InstrumentTypeID = value; } }
         public string SerialNumber { get { return _SerialNumber; } set { _SerialNumber = value; } }
         #endregion
     }

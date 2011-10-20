@@ -60,8 +60,16 @@ namespace Fuji.Business
             Cmd.Parameters.AddWithValue("@Illuminant", this.Illuminant);
             Cmd.Parameters.AddWithValue("@DensityType", this.DensityType);
             Cmd.Parameters.AddWithValue("@IlluminationMode", this.IlluminationMode);
-            Cmd.Parameters.AddWithValue("@ChartTypeID", this.ChartTypeID);
-            Cmd.Parameters.AddWithValue("@InstrumentTypeID", this.InstrumentTypeID);
+            if(this.ChartTypeID != null)
+                Cmd.Parameters.AddWithValue("@ChartTypeID", this.ChartTypeID);
+            else
+                Cmd.Parameters.AddWithValue("@ChartTypeID", DBNull.Value);
+            
+            if(this.InstrumentTypeID !=null)
+                Cmd.Parameters.AddWithValue("@InstrumentTypeID", this.InstrumentTypeID);
+            else
+                Cmd.Parameters.AddWithValue("@InstrumentTypeID", DBNull.Value);
+
             Cmd.Parameters.AddWithValue("@SerialNumber", this.SerialNumber);
 
             (new Fuji.DataAccess.Database()).ExecuteNonQuery(Cmd);
