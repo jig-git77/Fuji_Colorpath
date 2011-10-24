@@ -229,9 +229,6 @@ function SetChartResult(objChart) {
     //clear the Measured patch array
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
 
-    alert(g_Chart["ColorBase"]);
-
-    
    //ListDevices();
     
     //jQuery('#ListDevices').css('visibility', 'visible');
