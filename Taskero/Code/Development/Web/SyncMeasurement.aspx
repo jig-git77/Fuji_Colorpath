@@ -1,103 +1,97 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SyncMeasurement.aspx.cs" Inherits="SyncMeasurement" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SyncMeasurement.aspx.cs"
+    Inherits="SyncMeasurement" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ Register Assembly="RadGrid.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
     <link href="CSS/Default.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         if (typeof jQuery == 'undefined') {
             document.write(unescape("%3Cscript src='/JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-         }
+        }
     </script>
-    <script type="text/javascript" src="JS/wz_jsgraphics.js"></script>
+    <script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
     <script src="jQuery/json2.js" type="text/javascript"></script>
     <script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
     <script src="jQuery/jquery-blockUI.js" type="text/javascript"></script>
     <script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="JS/xychartread_isis.js"></script>
-    <script src="jQuery/WebComm.js" type="text/javascript"></script>
-   
-<style>
-	.my_rectangle {
-		width: 25px;
-		height: 25px;
-		background: pink;   				
-	}
-	.tooltipclass{	
-		background: #fbfacd;   
-		border-width: 1px;
-		border-style: solid;
-		border-color: #000; 
-	}
-	
-	.pluginImageTooltipClass{	
-		background: #fbfacd;   
-		border-width: 1px;
-		border-style: solid;
-		border-color: #000; 
-		font-family:Tahoma; 
-		font-size:11px;
-	}
-	
-
-	
-	
-	
-	#modalBackground
-{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
-    background-color:#333333;
-    display: none;
-    opacity: 0.40;
-    filter: alpha(opacity=40);
-}
-#modalWindow
-{
-    position: fixed;
-    left: 0;
-    top: 0;
-
-    z-index: 10;
-    background-color: white;
-    display: none;
-    width: 40em;
-    height: 10em;
-    border: 1px solid blue;
-}
-</style>
+    <script src="JS/chartread.js" type="text/javascript"></script>
+    <script src="JS/i1read.js" type="text/javascript"></script>
+    <script src="JS/isisread.js" type="text/javascript"></script>
+    <script src="JS/WebComm.js" type="text/javascript"></script>
+    <style>
+        .my_rectangle
+        {
+            width: 25px;
+            height: 25px;
+            background: pink;
+        }
+        .tooltipclass
+        {
+            background: #fbfacd;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000;
+        }
+        
+        .pluginImageTooltipClass
+        {
+            background: #fbfacd;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000;
+            font-family: Tahoma;
+            font-size: 11px;
+        }
+        #modalBackground
+        {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+            background-color: #333333;
+            display: none;
+            opacity: 0.40;
+            filter: alpha(opacity=40);
+        }
+        #modalWindow
+        {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            background-color: white;
+            display: none;
+            width: 40em;
+            height: 10em;
+            border: 1px solid blue;
+        }
+    </style>
 </head>
 <body onload="ControlVisiblity()">
     <form id="form1" runat="server">
-     <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <table border="0" width="100%" cellpadding="0" cellspacing="0">
         <tr>
             <td>
-            
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                     <tr>
-                        
-                        <td>                            
-                            <%--<p><span ID="ApagoCMVersion" style="font-size:12px; color:#000; padding-left:5px; font-family:tahoma,Arial, Helvetica, sans-serif; text-align:left;"></p>
-                            <p><span  style="font-size:12px; color:#000; padding-left:5px; font-family:tahoma,Arial, Helvetica, sans-serif; text-align:left;">SDK:</span><SPAN ID="SDKVersion" style="font-size:12px; color:#000; font-family:tahoma,Arial, Helvetica, sans-serif; text-align:left;"></SPAN></p>--%>
-
+                        <td>
+                            <iframe id="modalIframe" style="display: none;" src="javascript:false;" frameborder="0"
+                                scrolling="no"></iframe>
+                            <div id="modalWindow">
+                                Eh?</div>
+                            <div id="modalBackground">
+                            </div>
                         </td>
-                        </tr>
-                         <tr><td><iframe id="modalIframe" style="display: none;" src="javascript:false;" frameborder="0" scrolling="no"></iframe>
-                            <div id="modalWindow">Eh?</div>
-                            <div id="modalBackground"></div>
-                            </td>
-                        </tr>
-                    
+                    </tr>
                     <tr>
-                        
                         <td class="green-title">
                             &nbsp; Measurement Information &nbsp;&nbsp;
                         </td>
@@ -111,61 +105,67 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    
-                                    <td class="FORM-TEXT-BLACK" style="width:20%;">
+                                    <td class="FORM-TEXT-BLACK" style="width: 20%;">
                                         Measurement Name :
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="TxtMeasurementName" runat="server" Width="150px" MaxLength="90" CssClass="TEXTBOX"></asp:TextBox>
+                                        <asp:TextBox ID="TxtMeasurementName" runat="server" Width="150px" MaxLength="90"
+                                            CssClass="TEXTBOX"></asp:TextBox>
                                     </td>
-                                    <td align="center"><input id="btnCalibrate" type="button" value="Calibrate" class="BUTTON" onclick="javascript:calibrateDevice(g_ScannerList[0])" style="display:none"/></td>
-                                    <td align="center"><input id="btnMeasureChart" type="button" value="Measure Chart" class="BUTTON" style="display:none"  /></td>
-                                    <td align="center"><input id="btnUploadData" type="button" value="Upload Data" class="BUTTON" style="display:none"/></td>
-                                     <td style="width:20px; padding-right:2px;" >
-                                        <div id="DivIngLogo" style="width:20px">
-                                            <img id="ImgLoad" src="Images/Red-Lamp.gif"/>
+                                    <td align="center">
+                                        <input id="btnCalibrate" type="button" value="Calibrate" class="BUTTON" onclick="javascript:calibrateDevice(g_ScannerList[0])"
+                                            style="display: none" />
+                                    </td>
+                                    <td align="center">
+                                        <input id="btnMeasureChart" type="button" value="Measure Chart" class="BUTTON" style="display: none" />
+                                    </td>
+                                    <td align="center">
+                                        <input id="btnUploadData" type="button" value="Upload Data" class="BUTTON" style="display: none" />
+                                    </td>
+                                    <td style="width: 20px; padding-right: 2px;">
+                                        <div id="DivIngLogo" style="width: 20px">
+                                            <img id="ImgLoad" src="Images/Red-Lamp.gif"></img>
                                         </div>
                                     </td>
                                 </tr>
-                            </table>                            
+                            </table>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                           <!--
-                            <div id="DivMain"  style="height:350px;width:700px; overflow:auto"></div>
-	                        <div id="original_rectangle" class="my_rectangle" style="display:none"></div>-->
-                            <DIV ID="Canvas" style="position:relative;height:350px;width:630px;overflow:auto;top:50px;left:100px;"></DIV>
+                            <div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: auto;
+                                top: 50px; left: 100px;">
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td align="left">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click"  />
-                             <table style="width: 98%; border: 1PX SOLID #C1C1C1" cellspacing="0" cellpadding="0" border="0">
-                                <tr>
-                                   
-                                    <td style="width: 50%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
-                                        Measurement Name
-                                    </td>
-                                    <td style="width: 40%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
-                                        Upload Date Time
-                                    </td>
-                                     <td style="width: 10%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
-                                        Delete
-                                    </td>
-                                </tr>
-                               
-                             </table>
-                             <rad:RadGrid ID="RG_SyncMeasurement" runat="server" AutoGenerateColumns="false" AllowPaging="false"
-                                AllowSorting="true" AllowFilteringByColumn="false" Width="100%" Skin="Green" OnItemCommand="RG_SyncMeasurement_ItemCommand" >
-                                <ItemStyle HorizontalAlign="Left" Wrap="false" />
-                                <ClientSettings>
+                                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />
+                                    <table style="width: 98%; border: 1PX SOLID #C1C1C1" cellspacing="0" cellpadding="0"
+                                        border="0">
+                                        <tr>
+                                            <td style="width: 50%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
+                                                Measurement Name
+                                            </td>
+                                            <td style="width: 40%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
+                                                Upload Date Time
+                                            </td>
+                                            <td style="width: 10%; border-right: 1PX SOLID #C1C1C1;" class="BGRIDTITLE" align="center">
+                                                Delete
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <rad:radgrid id="RG_SyncMeasurement" runat="server" autogeneratecolumns="false" allowpaging="false"
+                                        allowsorting="true" allowfilteringbycolumn="false" width="100%" skin="Green"
+                                        onitemcommand="RG_SyncMeasurement_ItemCommand">
+                                        <itemstyle horizontalalign="Left" wrap="false" />
+                                        <clientsettings>
                                     <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
-                                <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /></ClientSettings>
-                                <PagerStyle Position="Top" />
-                                <MasterTableView>
+                                <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /></clientsettings>
+                                        <pagerstyle position="Top" />
+                                        <mastertableview>
                                     <Columns>
                                         <rad:GridBoundColumn DataField="MeasurementID" HeaderText="MeasurementID" Visible="false"></rad:GridBoundColumn>                                       
                                         <rad:GridTemplateColumn DataField="MeasurementName" HeaderText="MeasurementName"
@@ -189,9 +189,9 @@
                                           </ItemTemplate>
                                         </rad:GridTemplateColumn>
                                     </Columns>
-                                </MasterTableView>
-                             </rad:RadGrid>
-                             </ContentTemplate>
+                                </mastertableview>
+                                    </rad:radgrid>
+                                </ContentTemplate>
                             </asp:UpdatePanel>
                             <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
                                 DisplayAfter="0">
@@ -204,18 +204,9 @@
                         </td>
                     </tr>
                 </table>
-            </td>        
+            </td>
         </tr>
     </table>
-    <div id="ListDevices" style="visibility: hidden;">  
-    <HR>
-        <DL>
-            <SPAN ID="ScannerList"><DT>empty</DT></SPAN></p>
-        </DL>
-    </HR>
-    <!-- From here down is the modal dialog javascript -->
-    
-</div>
     <p>
         <asp:HiddenField ID="hiddenPressRunID" runat="server" />
         <asp:HiddenField ID="hiddenProjectTypeID" runat="server" />
@@ -223,65 +214,48 @@
         <asp:HiddenField ID="hdChartTypeID" runat="server" />
     </p>
     <!-- modal content -->
-		<div id='confirm'>
-			<div class='header'><span></span></div>
-			<div class='message'></div>
-			<div class='buttons'>
-				<div class='no simplemodal-close'>OK</div>
-			</div>
-		</div>
- </form> 
-  <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0"></object>
+    <div id='confirm'>
+        <div class='header'>
+            <span></span>
+        </div>
+        <div class='message'>
+        </div>
+        <div class='buttons'>
+            <div class='no simplemodal-close'>
+                OK</div>
+        </div>
+    </div>
+    </form>
+    <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
+    </object>
 </body>
-
 <script language="javascript" type="text/javascript">
-    
     function ControlVisiblity() {
-
         load();   //first you have to load the plugin
-
         GetReferenceChart((jQuery('#hdProjectID').val()));
-
         ListDevices();
-
-        //jQuery('#lblMessage').html("Please calibrate");
-        //jQuery('#btnCalibrate').css('display', '');
-        //jQuery('#btnMeasureChart').css('visibility', 'hidden');
-        //jQuery('#btnUploadData').css('visibility', 'hidden');       
     }
-
-    
-
     jQuery(document).ready(function () {
-
-
         jQuery('#btnMeasureChart').click(function () {
-
             var MeasurementName = jQuery("#TxtMeasurementName").val();
             if (jQuery.trim(MeasurementName).length < 4) {
-                //do something 
-                //jQuery.modal("<div><h1>SimpleModal</h1></div>");
-                confirm("Please enter measurement name that is at least three characters long.", "Error");                 
+                confirm("Please enter measurement name that is at least three characters long.", "Error");
                 return false;
             }
             scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
         });
-
-
         jQuery('#btnUploadData').click(function () {
             upload();
             document.getElementById('<%= btnBindGrid.ClientID %>').click();
         });
     });
 
-
-    function confirm(message,type) {
+    function confirm(message, type) {
         jQuery('#confirm').modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
             position: ["20%", ],
             overlayId: 'confirm-overlay',
             containerId: 'confirm-container',
-
             onShow: function (dialog) {
                 var modal = this;
                 jQuery('.message', dialog.data[0]).append(message);
@@ -289,59 +263,48 @@
             }
         });
     }
-</script>
-<script language="javascript" type="text/javascript">
-function saveMeasurement() {
+    function saveMeasurement() {
+        /****passing date and time from JavaScript to WCF serialization issue  http://stackoverflow.com/questions/4474352/send-jquery-json-to-wcf-rest-using-date ***/
+        var dt = new Date();
+        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
+        var MeasurementDateTime = dt1.toMSJSON();
+        var PressRunID = jQuery("input[id$=hiddenPressRunID]").val();
+        var ProjectTypeID = jQuery("input[id$=hiddenProjectTypeID]").val();
+        var ChartTypeID = jQuery("input[id$=hdChartTypeID]").val();
+        var MsmtName = jQuery("#TxtMeasurementName").val();
+        var obj = { objMeasurement: { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, PressRunID: PressRunID, ChartTypeID: ChartTypeID, ProjectTypeID: ProjectTypeID, MeasuredPatches: MeasuredPatches} };
 
-
-
-    /****passing date and time from JavaScript to WCF serialization issue  http://stackoverflow.com/questions/4474352/send-jquery-json-to-wcf-rest-using-date ***/
-    var dt = new Date();
-    var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
-    var MeasurementDateTime = dt1.toMSJSON();
-
-    var PressRunID = jQuery("input[id$=hiddenPressRunID]").val();  //document.getElementById('hiddenPressRunID').value;
-    var ProjectTypeID = jQuery("input[id$=hiddenProjectTypeID]").val();
-    var ChartTypeID = jQuery("input[id$=hdChartTypeID]").val();
-    var MsmtName = jQuery("#TxtMeasurementName").val();
-    var obj = { objMeasurement: { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, PressRunID: PressRunID, ChartTypeID: ChartTypeID, ProjectTypeID: ProjectTypeID, MeasuredPatches: MeasuredPatches} };
-
-    //Make ajax request...
-    jQuery.ajax({
-        type: "POST", //for complex object POST is preferred
-        contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-        url: "Services/PluginService.svc/SaveMeasurement",
-        processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-        dataType: "json",  ////this only applies to response from the server and (not request send to server)
-        data: JSON.stringify(obj),
-        dataFilter: function (data, type) {
-            // convert from "\/Date(nnnn)\/" to "new Date(nnnn)"
-            return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
-        },
-        //If the call succeeds
-        success:
+        //Make ajax request...
+        jQuery.ajax({
+            type: "POST", //for complex object POST is preferred
+            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
+            url: "Services/PluginService.svc/SaveMeasurement",
+            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
+            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            data: JSON.stringify(obj),
+            dataFilter: function (data, type) {
+                return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
+            },
+            //If the call succeeds
+            success:
         function (response) {   //the response param passed to the success callback contains the returned json
-            //alert('measurement added successfully');
             document.getElementById('<%= btnBindGrid.ClientID %>').click();
             jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 
         },
-        //If the call fails
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //alert(XMLHttpRequest.responseText);
-            var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-            confirm("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");    
-            //jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, 20000);
-        }
-    });
+            //If the call fails
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //alert(XMLHttpRequest.responseText);
+                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                confirm("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                //jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, 20000);
+            }
+        });
 
-    /**clear the array **/
-     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
-    ListDevices();
-
-    jQuery('#btnUploadData').css('display', 'none');
-
-}
-
+        /**clear the array **/
+        if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
+        ListDevices();
+        jQuery('#btnUploadData').css('display', 'none');
+    }
 </script>
 </html>

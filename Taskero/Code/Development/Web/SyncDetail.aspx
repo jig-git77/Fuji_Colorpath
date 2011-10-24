@@ -7,25 +7,13 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 <%@ Register Src="Common/GenerateSyncReport.ascx" TagName="GenerateSyncReport" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
-    <script src="flex/AC_OETags.js" language="javascript"></script>
-   <script type="text/javascript" src="JS/xychartread_isis.js"></script>
-
+   <script src="flex/AC_OETags.js" type="text/javascript"></script>
+   <%--<script src="JS/xychartread_isis.js" type="text/javascript"></script>--%>
     <script language="JavaScript" type="text/javascript">
-<!--
-        // -----------------------------------------------------------------------------
-        // Globals
-        // Major version of Flash required
         var requiredMajorVersion = 10;
-        // Minor version of Flash required
         var requiredMinorVersion = 0;
-        // Minor version of Flash required
         var requiredRevision = 0;
-        // -----------------------------------------------------------------------------
-// -->         
-       
     </script>
-
     <table width="940px" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr>
             <td>
@@ -2350,7 +2338,6 @@
                                                                     document.write(alternateContent);  // insert non-flash content
                                                                 }
                                                                 </script>
-
                                                                 <noscript>
                                                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="FileUploadApp" width="100%"
                                                                         height="610" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
@@ -2363,8 +2350,8 @@
                                                                             height="610" wmode="transparent" name="admin" align="middle" play="true" loop="false"
                                                                             quality="high" allowscriptaccess="sameDomain" type="application/x-shockwave-flash"
                                                                             pluginspage="http://www.adobe.com/go/getflashplayer"></embed>
-                                                                    </object>                                                                </noscript>
-
+                                                                    </object>
+                                                                </noscript>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -3031,26 +3018,22 @@
     <asp:Button runat="server" ID="hiddenTargetControlForModalPopup" Style="display: none" />
     <asp:Button runat="server" ID="btnBindPressGrid" Style="display: none" OnClick="btnBindPressGrid_Click" />
     <asp:Button runat="server" ID="btnBindPressRunGrid" Style="display: none" OnClick="btnBindPressRunGrid_Click" />
-    <asp:Button runat="server" ID="btnBindPrintTargetCondition" Style="display: none"
-        OnClick="btnBindPrintTargetCondition_Click" />
+    <asp:Button runat="server" ID="btnBindPrintTargetCondition" Style="display: none" OnClick="btnBindPrintTargetCondition_Click" />
     <asp:Button runat="server" ID="btnBindMeasurement" Style="display: none" OnClick="btnBindMeasurement_Click" />
     <asp:Button runat="server" ID="btnBindAnalyze" Style="display: none" OnClick="btnBindAnalyze_Click" />
     <asp:HiddenField ID="HDTrendDelta" runat="server" />
     <asp:HiddenField ID="HDCurrentMeasurement" runat="server" />
     <asp:HiddenField ID="HDClientDatatime" runat="server" />
-    <asp:Button ID="HDButCurrentMeasurement" runat="server" Text="Button" OnClick="HDButCurrentMeasurement_Click"
-        Style="display: none" />
+    <asp:Button ID="HDButCurrentMeasurement" runat="server" Text="Button" OnClick="HDButCurrentMeasurement_Click" Style="display: none" />
     <ajaxtoolkit:ModalPopupExtender runat="server" ID="programmaticModalPopup" BehaviorID="programmaticModalPopupBehavior"
         Y="225" TargetControlID="hiddenTargetControlForModalPopup" PopupControlID="programmaticPopup"
         BackgroundCssClass="modalBackground" DropShadow="false" PopupDragHandleControlID="programmaticPopupDragHandle">
     </ajaxtoolkit:ModalPopupExtender>
-    <asp:Panel runat="server" ID="programmaticPopup" Style="display: none; height: 250px;
-        background-color: Transparent; background: ">
+    <asp:Panel runat="server" ID="programmaticPopup" Style="display: none; height: 250px;background-color: Transparent; background: ">
         <a id="hideModalPopupViaClientButton" href="#" style="border: none; text-decoration: none;">
-            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;
-                top: 3px; text-align: right;" />
+            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;top: 3px; text-align: right;" />
         </a>
-        <iframe id="FrmPopup" src="" width="400px" height="250px" frameborder="0" marginwidth="0"
+        <iframe id="FrmPopup" src="" width="400px" height="250px" frameborder="0" marginwidth="0" 
             scrolling="no" marginheight="0" allowtransparency="true" style="background-color: transparent">
         </iframe>
     </asp:Panel>
@@ -3062,11 +3045,9 @@
     <asp:Panel runat="server" ID="programmaticGamutPopup" Style="display: none; height: 700px;
         background-color: Transparent;">
         <a id="hideGamutModalPopupViaClientButton" href="#" style="border: none; text-decoration: none;">
-            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;
-                top: 3px; text-align: right;" />
+            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;top: 3px; text-align: right;" />
         </a>
-        <iframe id="FrmChartPopup" src="" frameborder="0" marginwidth="0" scrolling="no"
-            marginheight="0" allowtransparency="true" style="background-color: transparent">
+        <iframe id="FrmChartPopup" src="" frameborder="0" marginwidth="0" scrolling="no" marginheight="0" allowtransparency="true" style="background-color: transparent">
         </iframe>
     </asp:Panel>
 
@@ -3103,15 +3084,8 @@
             document.getElementById("<%= btnBindAnalyze.ClientID%>").click();
         }
         function SetValueTrendDelta(obj) {
-
             var obj1 = document.getElementById('<%=HDTrendDelta.ClientID %>');
             obj1.value = obj;
-            //            if (str.indexOf('[' + obj + '],') != -1) {
-            //                obj1.value = str.replace('[' + obj + '],', '');
-            //            }
-            //            else {
-            //                obj1.value = str + '[' + obj + '],';
-            //            }
             document.getElementById('<%=HDButTrendDelta.ClientID %>').click();
         }
         function SetCurrentMeasurement(MID) {
@@ -3150,7 +3124,6 @@
             document.getElementById('<%= HDClientDatatime.ClientID %>').value = tzo.toString();
             return true;
         }
-
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode
             if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -3161,84 +3134,9 @@
         }
         function imposeMaxLength(Object, MaxLen) {                        
             if (Object.value.length <= MaxLen) {
-//                TxtNotes.innerHTML = MaxLen - Object.value.length;
-                //                return true;
                 return (Object.value.length  <= MaxLen);
             }
             return false;
         }
-
-      
-
-   /*
-        if (!window.console) console = {};
-        console.log = console.log || function () { };
-        console.warn = console.warn || function () { };
-        console.error = console.error || function () { };
-        console.info = console.info || function () { };
-
-        OSName = "Unknown OS";
-        if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-        if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-        if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-        if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-
-
-
-        if (/msie/i.test(navigator.userAgent)) //only override IE
-        {
-            document.nativeGetElementById = document.getElementById;
-            document.getElementById = function (id) {
-                var elem = document.nativeGetElementById(id);
-                if (elem) {
-                    //make sure that it is a valid match on id
-                    if (elem.id == id) {
-                        return elem;
-                    }
-                    else {
-                        //otherwise find the correct element
-                        for (var i = 1; i < document.all[id].length; i++) {
-                            if (document.all[id][i].id == id) {
-                                return document.all[id][i];
-                            }
-                        }
-                    }
-                }
-                return null;
-            };
-        }
-            //load();
-            function plugin0() {
-                return document.getElementById('plugin0');
-            }
-            plugin = plugin0;
-            function addEvent(obj, name, func) {
-                if (window.addEventListener) {
-                    obj.addEventListener(name, func, false);
-                } else {
-                    obj.attachEvent("on" + name, func);
-                }
-            }
-
-            function load() {
-                addEvent(plugin(), 'fired', function (x) {
-                    alert('onfired() from load(): ' + x)
-                });
-                // The following line turns on some debugging output in the plugin
-                console.log("Loading plugin version " + plugin().plugin_version);
-                console.log("GUI Version 1.7");
-                if (OSName == "Windows") {
-                    plugin().setDebug("C:/temp/FujiCM.log");
-                } else {
-                    plugin().setDebug("/tmp/isis.log");
-                }
-                var newHTML = '<B>Fuji Color Manager Plugin Version ' + plugin().plugin_version + '</B>';
-                document.getElementById('ApagoCMVersion').innerHTML = newHTML;
-                SDKVerHTML = plugin().sdk_version;
-                document.getElementById('SDKVersion').innerHTML = SDKVerHTML;
-            }
-        */
-       
     </script>
-
 </asp:Content>
