@@ -5090,7 +5090,7 @@ namespace Fuji.Common
             #region Page 1
             Enums.OutputType objOutputType = new Enums.OutputType();
             #region Report Front Information
-            
+
             StringBuilder SBstrProjectType = new StringBuilder();
             SBStr.Replace("###CURRENTDATE###", DateTime.Today.ToLongDateString());
             currentTable = DS_Common.Tables[0];
@@ -5281,11 +5281,6 @@ namespace Fuji.Common
 
                 }
                 #endregion
-
-
-
-
-
                 #region Note
                 currentTable.DefaultView.RowFilter = "PrintConditionTypeID = 18";
                 if (currentTable.DefaultView.Count > 0)
@@ -5293,50 +5288,33 @@ namespace Fuji.Common
                 #endregion
 
             }
-            else
-            {
-                SBStr.Replace("###GDSubstrateDesc###", "&nbsp;");
-                SBStr.Replace("###GDInk###", "&nbsp;");
-                SBStr.Replace("###Notes###", "&nbsp;");
+            SBStr.Replace("###GDSubstrateDesc###", "&nbsp;");
+            SBStr.Replace("###GDInk###", "&nbsp;");
+            SBStr.Replace("###Notes###", "&nbsp;");
 
-                if (SBstrProjectType.ToString().Trim() != string.Empty)
-                {
-                    switch (objOutputType)
-                    {
-
-                        case Enums.OutputType.Offset:
-                            #region Off Set
-                            SBstrProjectType.Replace("###OPDISO2846Ink", "&nbsp;");
-                            SBstrProjectType.Replace("###OPDInkOrder###", "&nbsp;");
-                            SBstrProjectType.Replace("###OPDFountainSolution###", "&nbsp;");
-                            SBstrProjectType.Replace("###OPDBlanket###", "&nbsp;");
-                            SBstrProjectType.Replace("###OPDScreening###", "&nbsp;");
-                            SBstrProjectType.Replace("###OPDBlanketAge###", "&nbsp;");
-                            #endregion
-                            break;
-                        case Enums.OutputType.Screen:
-                            #region Screen
-                            SBstrProjectType.Replace("###SPDStencil###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDCyan###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDMagenta###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDYellow###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDBlack###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDRip###", "&nbsp;");
-                            SBstrProjectType.Replace("###SPDCTSFilmDevice###", "&nbsp;");
-                            #endregion
-                            break;
-                        case Enums.OutputType.Wideformat:
-                            #region Wide Format
-                            SBstrProjectType.Replace("###WFRip###", "&nbsp;");
-                            SBstrProjectType.Replace("###WFPrintMode###", "&nbsp;");
-                            SBstrProjectType.Replace("###WFScreeningType###", "&nbsp;");
-                            SBstrProjectType.Replace("###WFUVLampSettings###", "&nbsp;");
-                            #endregion
-
-                            break;
-                    }
-                }
-            }
+            #region Off Set
+            SBstrProjectType.Replace("###OPDISO2846Ink", "&nbsp;");
+            SBstrProjectType.Replace("###OPDInkOrder###", "&nbsp;");
+            SBstrProjectType.Replace("###OPDFountainSolution###", "&nbsp;");
+            SBstrProjectType.Replace("###OPDBlanket###", "&nbsp;");
+            SBstrProjectType.Replace("###OPDScreening###", "&nbsp;");
+            SBstrProjectType.Replace("###OPDBlanketAge###", "&nbsp;");
+            #endregion
+            #region Screen
+            SBstrProjectType.Replace("###SPDStencil###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDCyan###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDMagenta###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDYellow###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDBlack###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDRip###", "&nbsp;");
+            SBstrProjectType.Replace("###SPDCTSFilmDevice###", "&nbsp;");
+            #endregion
+            #region Wide Format
+            SBstrProjectType.Replace("###WFRip###", "&nbsp;");
+            SBstrProjectType.Replace("###WFPrintMode###", "&nbsp;");
+            SBstrProjectType.Replace("###WFScreeningType###", "&nbsp;");
+            SBstrProjectType.Replace("###WFUVLampSettings###", "&nbsp;");
+            #endregion
 
             SBStr.Replace("###ProjectType###", SBstrProjectType.ToString());
 
@@ -5435,7 +5413,7 @@ namespace Fuji.Common
                 SBstrActual.Append("</tr>");
                 SBstrTarget.Append("</tr>");
 
-                SBStr.Replace("###DensityPathValues###", SBstrPatch.ToString() + SBstrActual.ToString() + SBstrTarget.ToString()+"</table>");
+                SBStr.Replace("###DensityPathValues###", SBstrPatch.ToString() + SBstrActual.ToString() + SBstrTarget.ToString() + "</table>");
             }
             else
             {
@@ -5458,7 +5436,7 @@ namespace Fuji.Common
             SBStr.Replace("###TVISpread###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_CPSPrintStandardsISO_Page3_ISOTVISpread.Jpeg"));
             #endregion
 
-            #region TVI Patch Value            
+            #region TVI Patch Value
             currentTable = DS_Common.Tables[9];
             StringBuilder SBstrTVIPatch = new StringBuilder();
             StringBuilder SBstrTVIPatchMax = new StringBuilder();
@@ -5489,7 +5467,7 @@ namespace Fuji.Common
             {
                 SBStr.Replace("###DBP###", "0px");
                 SBStr.Replace("###TVISpreadPathValues###", "<br/><br/><br/><br/>");
-            }            
+            }
             #endregion
 
             #endregion
@@ -5538,13 +5516,13 @@ namespace Fuji.Common
                 SBstrCyanPatchTarget.Append("</tr>");
                 SBstrCyanPatchThreshold.Append("</tr>");
 
-                SBStr.Replace("###CyanTVIPathValues###", SBstrCyanPatch.ToString() + SBstrCyanPatchActual.ToString() + SBstrCyanPatchTarget.ToString() + SBstrCyanPatchThreshold+ "</table>");
+                SBStr.Replace("###CyanTVIPathValues###", SBstrCyanPatch.ToString() + SBstrCyanPatchActual.ToString() + SBstrCyanPatchTarget.ToString() + SBstrCyanPatchThreshold + "</table>");
             }
             else
             {
                 SBStr.Replace("###DBP###", "0px");
                 SBStr.Replace("###CyanTVIPathValues###", "<br/><br/><br/><br/>");
-            }            
+            }
 
             #endregion
             #endregion
@@ -5742,7 +5720,7 @@ namespace Fuji.Common
             StringBuilder SBstrGrayBalanceB = new StringBuilder();
 
             SBstrGrayBalanceLABPatch.Append("<table width='100%' style='border-right: 1PX SOLID #C1C1C1;border-bottom: 1PX SOLID #C1C1C1;' border='0' align='center' cellpadding='0' cellspacing='0'>");
-            SBstrGrayBalanceLABPatch.Append("<tr class='row-1' style='BACKGROUND-COLOR:#333333;COLOR:#FFF;'><td class='row-content1' align='center'></td>");            
+            SBstrGrayBalanceLABPatch.Append("<tr class='row-1' style='BACKGROUND-COLOR:#333333;COLOR:#FFF;'><td class='row-content1' align='center'></td>");
             SBstrGrayBalanceLABPatch.Append("<td class='row-content1' align='center' colspan='3' style='border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;'><b>25% gray</b></td>");
             SBstrGrayBalanceLABPatch.Append("<td class='row-content1' align='center' colspan='3' style='border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;'><b>50% gray</b></td>");
             SBstrGrayBalanceLABPatch.Append("<td class='row-content1' align='center' colspan='3' style='border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;'><b>75% gray</b></td></tr>");
@@ -5856,7 +5834,7 @@ namespace Fuji.Common
                 SBstrTablePrimaryDensPrintTar.Append("</tr>");
 
                 SBstrTablePrimaryDensPrintTar.Append("<tr>");
-                SBstrTablePrimaryDensPrintTar.Append("<td class='BGRIDTITLE' align='center' style='border-left: 1PX SOLID #C1C1C1;font-size:9px;border-top: 1PX SOLID #C1C1C1;witdh:130px;'></td>");                
+                SBstrTablePrimaryDensPrintTar.Append("<td class='BGRIDTITLE' align='center' style='border-left: 1PX SOLID #C1C1C1;font-size:9px;border-top: 1PX SOLID #C1C1C1;witdh:130px;'></td>");
                 SBstrTablePrimaryDensPrintTar.Append("<td class='BGRIDTITLE' align='center' style='border-left: 1PX SOLID #C1C1C1;font-size:9px;border-top: 1PX SOLID #C1C1C1;border-right: 1PX SOLID #C1C1C1;witdh:15%;'>Density.</td>");
                 foreach (decimal colVal in colValues)
                 {
@@ -5876,7 +5854,7 @@ namespace Fuji.Common
                     else if (Convert.ToString(currentTable.Rows[i]["PatchTypeID"]) == Convert.ToInt16(Enums.CPSyncPatchType.Black).ToString()) //"4")
                         SBstrTablePrimaryDensPrintTar.Append("<td style='border-left: 1PX SOLID #C1C1C1;font-size:9px;border-top: 1PX SOLID #C1C1C1;BACKGROUND-COLOR:#C0C0C0;COLOR:#000;width:130px;'><b>Black</b></td>");
 
-                    
+
                     SBstrTablePrimaryDensPrintTar.Append("<td align='center' style='font-size:9px;border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;'>" + Fuji.Common.CommonFunctions.DecimalToString(Convert.ToString(currentTable.Rows[i]["Density"])) + "</td>");
 
                     foreach (decimal colVal in colValues)
@@ -6338,7 +6316,7 @@ namespace Fuji.Common
                     SBstrTableDetail.Append("<td style='width: 6%;font-size:9px;border-left: 1PX SOLID #C1C1C1;border-top: 1PX SOLID #C1C1C1;border-right: 1PX SOLID #C1C1C1;' >" + string.Format("{0:f2}", Convert.ToDecimal(currentTable.Rows[i]["CIELAB_b*"])) + "</td>");
                     SBstrTableDetail.Append("</tr>");
 
-                    
+
 
                     if ((i == (currentTable.Rows.Count - 1)) && (RecNo <= 42))
                     {
