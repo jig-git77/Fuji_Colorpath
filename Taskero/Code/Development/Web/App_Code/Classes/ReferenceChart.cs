@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Runtime.Serialization;
 using System.Data;
 using System.Data.SqlClient;
-using System.ServiceModel.Web;
-using Fuji.DataAccess;
-
+using System.Text;
+using System.Security.Cryptography;
+using System.Globalization;
 
 namespace MeasurementPlugInSvc
 {
     [DataContract]
     public class ReferenceChart
     {
-
-        //database id of the chart being measured
+        #region Properties
         private int _ChartTypeID = 0;
         [DataMember(Order = 1)]
         public int ChartTypeID
@@ -30,8 +28,6 @@ namespace MeasurementPlugInSvc
             get { return _ChartName; }
             set { _ChartName = value; }
         }
-
-
 
         private int _TotalPatch = 0;
         [DataMember(Order = 3)]
@@ -58,7 +54,6 @@ namespace MeasurementPlugInSvc
             set { _NumOfColumns = value; }
         }
 
-
         /// <summary>
         /// List of Reference Patch
         /// </summary>
@@ -79,7 +74,6 @@ namespace MeasurementPlugInSvc
             set { _DeviceSetting = value; }
         }
 
-
         private string _RowNames = String.Empty;
         [DataMember(Order = 8)]
         public string RowNames
@@ -88,7 +82,6 @@ namespace MeasurementPlugInSvc
             set { _RowNames = value; }
         }
 
-
         private ChartSetting _ChartSettings;
         [DataMember(EmitDefaultValue = false, Order = 9)]
         public ChartSetting ChartSettings
@@ -96,7 +89,6 @@ namespace MeasurementPlugInSvc
             get { return _ChartSettings; }
             set { _ChartSettings = value; }
         }
-
 
         private Int16 _InstrumentTypeID;
         [DataMember(Order = 10)]
@@ -114,89 +106,81 @@ namespace MeasurementPlugInSvc
             set { _ProjectID = value; }
         }
 
-        private string _MeasureDeviceSrNo = string.Empty;
+        private string _activationKey = string.Empty;
         [DataMember(Order = 12)]
-        public string MeasureDeviceSrNo
+        public string ActivationKey
         {
-            get { return _MeasureDeviceSrNo; }
-            set { _MeasureDeviceSrNo = value; }
+            get { return _activationKey; }
+            set { _activationKey = value; }
         }
-
-
+        #endregion
 
         public void GetChartData()
         {
-
-            //ReferenceChart SampleChart = new ReferenceChart();
-
             try
             {
-                SqlCommand Cmd = new SqlCommand();
-                Cmd.CommandType = CommandType.StoredProcedure;
-                Cmd.CommandText = "CPSync.uspGetReferenceChart";
+                var cmd = new SqlCommand
+                              {
+                                  CommandType = CommandType.StoredProcedure, 
+                                  CommandText = "CPSync.uspGetReferenceChart"
+                              };
+                cmd.Parameters.AddWithValue("@ProjectID", this._ProjectID);
 
-                //Cmd.Parameters.AddWithValue("@ChartTypeID", this._ChartTypeID);
-                Cmd.Parameters.AddWithValue("@ProjectID", this._ProjectID);
-
-                DataSet ds = (new Fuji.DataAccess.Database()).GetDataSet(Cmd);
+                var ds = (new Fuji.DataAccess.Database()).GetDataSet(cmd);
 
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-
                     this._ChartTypeID = Convert.ToInt32(ds.Tables[0].Rows[0]["ChartTypeID"]);
                     this._ChartName = Convert.ToString(ds.Tables[0].Rows[0]["ChartName"]);
                     this._TotalPatch = Convert.ToInt32(ds.Tables[0].Rows[0]["TotalPatches"]);
                     this._NumOfRows = Convert.ToInt32(ds.Tables[0].Rows[0]["NumOfRows"]);
                     this.NumOfColumns = Convert.ToInt32(ds.Tables[0].Rows[0]["NumOfCols"]);
                     this._InstrumentTypeID = Convert.ToInt16(ds.Tables[0].Rows[0]["InstrumentTypeID"]);
-                    this._MeasureDeviceSrNo = Convert.ToString(ds.Tables[0].Rows[0]["MeasureDeviceSrNo"]);
-
+                    var actKey = Convert.ToString(ds.Tables[0].Rows[0]["MeasureDeviceSrNo"]);
+                    //Apply security on device serial no.
+                    using (var md5Hash = MD5.Create())
+                    {
+                        this._activationKey = GetMd5Hash(md5Hash, DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + actKey);
+                    }
 
                     this._DeviceSetting = new DeviceSetting();
-
-
-                    //if (ds.Tables[0].Rows[0]["RowNames"] != DBNull.Value) this._RowNames = ds.Tables[0].Rows[0]["RowNames"].ToString();
-
-
                     if (ds.Tables[1].Rows.Count > 0)
                     {
                         for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
                         {
-                            ReferencePatch SamplePatch = new ReferencePatch();
-                            SamplePatch.SampleName = Convert.ToString(ds.Tables[1].Rows[i]["SampleName"]);
-                            SamplePatch.CMYK_C = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_C"]);
-                            SamplePatch.CMYK_M = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_M"]);
-                            SamplePatch.CMYK_Y = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_Y"]);
-                            SamplePatch.CMYK_K = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_K"]);
-                            SamplePatch.PatchTypeID = Convert.ToInt32(ds.Tables[1].Rows[i]["PatchTypeID"]);
-                            SamplePatch.HTMLColor = Convert.ToString(ds.Tables[1].Rows[i]["HTMLColor"]);
-                            // SamplePatch.TargetLAB = new CIELab(Convert.ToDouble(ds.Tables[1].Rows[i]["Target_LAB_L"]), Convert.ToDouble(ds.Tables[1].Rows[i]["Target_LAB_a"]), Convert.ToDouble(ds.Tables[1].Rows[i]["Target_LAB_b"]));
-
+                            var samplePatch = new ReferencePatch
+                                                  {
+                                                      SampleName = Convert.ToString(ds.Tables[1].Rows[i]["SampleName"]),
+                                                      CMYK_C = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_C"]),
+                                                      CMYK_M = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_M"]),
+                                                      CMYK_Y = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_Y"]),
+                                                      CMYK_K = Convert.ToDecimal(ds.Tables[1].Rows[i]["CMYK_K"]),
+                                                      PatchTypeID = Convert.ToInt32(ds.Tables[1].Rows[i]["PatchTypeID"]),
+                                                      HTMLColor = Convert.ToString(ds.Tables[1].Rows[i]["HTMLColor"])
+                                                  };
                             if (this._ReferencePatch == null) { this._ReferencePatch = new List<ReferencePatch> { }; };
-                            this._ReferencePatch.Add(SamplePatch);
-
-
-
+                            this._ReferencePatch.Add(samplePatch);
                         }
                     }
 
                     //If Isis or Techkon then load chart settings
                     if (this._InstrumentTypeID > 2)
                     {
-                        SqlCommand objCmd = new SqlCommand();
-                        objCmd.CommandType = CommandType.Text;
-                        objCmd.CommandText = "SELECT ChartSetting FROM CPSync.ChartSetting WHERE referencecharttypeid = @ChartTypeID";
+                        var objCmd = new SqlCommand
+                                         {
+                                             CommandType = CommandType.Text,
+                                             CommandText = "SELECT ChartSetting FROM CPSync.ChartSetting WHERE referencecharttypeid = @ChartTypeID"
+                                         };
 
                         objCmd.Parameters.AddWithValue("@ChartTypeID", this._ChartTypeID);
 
-                        System.Xml.XmlReader reader = (new Fuji.DataAccess.Database()).GetXmlReader(objCmd);
-                        DataSet objDS = new DataSet();
-                        ChartSetting objChartSetting = new ChartSetting();
+                        var reader = (new Fuji.DataAccess.Database()).GetXmlReader(objCmd);
+                        var objDS = new DataSet();
+                        var objChartSetting = new ChartSetting();
                         objDS.ReadXml(reader);
 
                         if (objDS.Tables.Count > 0)
                         {
-
                             if (objDS.Tables[0].Columns.Contains("ChartSizeX") == true) objChartSetting.ChartSizeX = Convert.ToDecimal(objDS.Tables[0].Rows[0]["ChartSizeX"]);
                             if (objDS.Tables[0].Columns.Contains("ChartSizeY") == true) objChartSetting.ChartSizeY = Convert.ToDecimal(objDS.Tables[0].Rows[0]["ChartSizeY"]);
                             if (objDS.Tables[0].Columns.Contains("BarSizeX") == true) objChartSetting.BarSizeX = Convert.ToDecimal(objDS.Tables[0].Rows[0]["BarSizeX"]);
@@ -209,22 +193,9 @@ namespace MeasurementPlugInSvc
                             if (objDS.Tables[0].Columns.Contains("DistToBar") == true) objChartSetting.DistToBar = Convert.ToDecimal(objDS.Tables[0].Rows[0]["DistToBar"]);
 
                         }
-
-                        if (objChartSetting != null) this._ChartSettings = objChartSetting;
-
-
+                        this._ChartSettings = objChartSetting;
                     }
-
-                    // if (ds.Tables.Count >2 && ds.Tables[2].Rows.Count > 0 )
-                    // {
-                    //     /* load chart setting xml from SQL server and setup properties */ 
-                    //      System.Xml.XmlReader reader  (ds.Tables[2].Rows[0]["ChartSetting"]
-
-
-                    //}  
-
                 }
-
             }
             catch (SqlException ex)
             {
@@ -234,12 +205,18 @@ namespace MeasurementPlugInSvc
             {
                 throw new Exception(ex.ToString());
             }
-
-
-
-
         }
 
+        static string GetMd5Hash(MD5 md5Hash, string input)
+        {
+            var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+            var sBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
     }
 
 }

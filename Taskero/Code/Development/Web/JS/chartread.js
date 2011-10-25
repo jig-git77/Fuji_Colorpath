@@ -55,7 +55,7 @@ if (/msie/i.test(navigator.userAgent)) //only override IE
 }
 
 console.log("Loading xychartread.js");
-
+var actKey = '';
 var g_ScannerList = new Object();
 var g_Chart = new Object();
 g_Chart["Result"] = new Array();
@@ -153,7 +153,6 @@ function DisplayLog() {
 }
 function presentScannerList(ScannerList) {
     //ScannerList is an array of scanners with properties.
-    alert('hi');
     if (ScannerList.length == 0) return;
     if (ScannerList[0]["State"] == "Deleted") {
         jQuery('#lblMessage').html("");
@@ -192,6 +191,8 @@ function ListDevices() {
 // Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
 // other values may be included and are passed through to the callback functions
 function scan(scanner, colorspace, chart) {
+    
+
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"].length > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -222,6 +223,7 @@ function scan(scanner, colorspace, chart) {
     // separated by semicolons, just like a CSS
     // I think you will want this on all strip scanners.  It is very reliable and really speeds things up for the user.			     
     scanner["Options"] = "AutoDirection";
+    scanner["ActivationKey"] = actKey;
     scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
 
     if (typeof chart["DeviceSettings"] == "object") {
