@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Collections.Generic;
 using System.Security;
+using System.Linq;
 #endregion
 
 #region Using Application
@@ -34,7 +35,7 @@ public partial class SyncDetail : PageBase
     public string pressrunid = "";
     public string pressrunclose = "";
     #endregion
-   
+
 
     #region PageLoad and Events
     /// <summary>
@@ -49,14 +50,14 @@ public partial class SyncDetail : PageBase
             //=========== Clear Error ==========//
             LblError.Text = "";
             //BtnGenerateReport.Attributes.Add("onclick", "return OpenGamutWindow('SyncCertifyPressRunPopup.aspx','750px','530px')");
-            
+
 
             appurl = WebSettings.ImageURL.ToString(); // Set flex variable
             uploadurl = WebSettings.ImageURL.ToString() + "Upload.axd"; // Set flex variable
             //txtScreeningDotSize.Attributes.Add("onkeypress", "return isNumberKey(event)"); 
 
-            
-             //=========== Default Settings ==========//
+
+            //=========== Default Settings ==========//
             if (IsPostBack == false)
             {
                 Fuji.Common.Sessions.SetSessions("SyncPressData", null); // Clear SyncPressData Session
@@ -101,13 +102,13 @@ public partial class SyncDetail : PageBase
             Fuji.Common.Sessions.SetSessions("SyncPressData", null);
             //========== Check Company Dropdownlist and its index and bind branch based on selected company ===========//
             if (ddlCompany.SelectedIndex != 0)
-            { 
+            {
                 BindBranchDropDown(Convert.ToInt32(ddlCompany.SelectedValue.Trim()));
-                
+
                 //set session variable for selected company    
-                Fuji.Common.Sessions.SetSessions("SyncCompanyID",ddlCompany.SelectedValue.Trim());    
-            
-             }
+                Fuji.Common.Sessions.SetSessions("SyncCompanyID", ddlCompany.SelectedValue.Trim());
+
+            }
             else
             { BindBranchDropDown(0); }
 
@@ -126,8 +127,8 @@ public partial class SyncDetail : PageBase
         try
         {
             Fuji.Common.Sessions.SetSessions("SyncPressData", null);
-            Fuji.Common.Sessions.SetSessions("SyncBranchID", ddlBranch.SelectedValue.Trim());  
-            BindSyncPress();  
+            Fuji.Common.Sessions.SetSessions("SyncBranchID", ddlBranch.SelectedValue.Trim());
+            BindSyncPress();
         }
         catch (Exception Exc)
         { LblError.Text = HandleException(Exc); }
@@ -216,7 +217,7 @@ public partial class SyncDetail : PageBase
 
                 string PressLeftManuData = "";
                 //====== Create Print Menu with javascript click function ============//
-                PressLeftManuData = "<table border='0' cellpadding='0' cellspacing='4' width='100%' class='SYNCTABLELEFTTABLE' style='cursor:pointer' onclick='CallPressBindGrid()'><tr><td>Select Device :</td></tr><tr><td>" + DT_SyncPress.Rows[0]["PressName"].ToString() + "</td></tr></table>";                
+                PressLeftManuData = "<table border='0' cellpadding='0' cellspacing='4' width='100%' class='SYNCTABLELEFTTABLE' style='cursor:pointer' onclick='CallPressBindGrid()'><tr><td>Select Device :</td></tr><tr><td>" + DT_SyncPress.Rows[0]["PressName"].ToString() + "</td></tr></table>";
                 obj.Insert(0, PressLeftManuData);
                 //====== Create Print Run Menu with out javascript click function ============//
                 obj.Insert(1, "<table border='0' cellpadding='0' cellspacing='7' width='100%'><tr><td align='center'><img src='Images/leftnavbottomarrow.gif' /></td></tr></table><table border='0' cellpadding='0' cellspacing='4' width='100%' class='SYNCTABLELEFTTABLE'><tr><td>Select Run :</td></tr><tr><td>NON SELECTED</td></tr></table>");
@@ -272,9 +273,9 @@ public partial class SyncDetail : PageBase
                 TrCompanyBranch.Visible = false; // other user can not be filter 
                 //======== Bind Press Grid =========//
                 BindSyncPress();
-            }              
+            }
 
-            
+
         }
         catch (Exception Exc)
         {
@@ -336,12 +337,12 @@ public partial class SyncDetail : PageBase
             //========== Check The Item is item or alternating item then comes to this end of code ===========//
             if (e.Item.ItemType == GridItemType.AlternatingItem || e.Item.ItemType == GridItemType.Item)
             {
-               
-                
+
+
                 DataRowView DR = (DataRowView)e.Item.DataItem;
                 if (!e.Item.OwnerID.Contains("Detail"))
                 {
-                    
+
                     ImageButton ibtnEdit = (ImageButton)e.Item.FindControl("ibtnEdit");
                     ibtnEdit.Attributes.Add("ProjectID", DR["ProjectID"].ToString());
                     ibtnEdit.Attributes.Add("ProjectClose", DR["ProjStatusID"].ToString());
@@ -351,7 +352,7 @@ public partial class SyncDetail : PageBase
                     ibtnDelete.Attributes.Add("ProjectClose", DR["ProjStatusID"].ToString());
                     //Delete confirmation added by CSS on 24th Feb 2011
                     ibtnDelete.Attributes.Add("OnClick", "javascript : if(confirm('" + Resources.Message.DeleteConfirmMessage_Text + "') == true) return true; else return false;");
-                    
+
 
                     Button BtnCreate = (Button)e.Item.FindControl("BtnCreate");
 
@@ -364,22 +365,22 @@ public partial class SyncDetail : PageBase
                     {
                         BtnCreate.Visible = false;
                     }
-                    
+
                     if (DR["ReTargProject"] != DBNull.Value)
                     {
-                        
-                     System.Web.UI.WebControls.Image imgReTargB = (System.Web.UI.WebControls.Image)e.Item.FindControl("imgReTarg");
-                    imgReTargB.AlternateText = DR["ReTargProject"].ToString();
-                    imgReTargB.ToolTip = DR["ReTargProject"].ToString();
-                    imgReTargB.Visible = true  ;  
+
+                        System.Web.UI.WebControls.Image imgReTargB = (System.Web.UI.WebControls.Image)e.Item.FindControl("imgReTarg");
+                        imgReTargB.AlternateText = DR["ReTargProject"].ToString();
+                        imgReTargB.ToolTip = DR["ReTargProject"].ToString();
+                        imgReTargB.Visible = true;
                     }
                 }
                 else
                 {
-                    
+
 
                     HiddenField HDParentLevel = (HiddenField)e.Item.OwnerTableView.ParentItem.FindControl("HDLevel");
-                   
+
 
                     LinkButton LbtnPressRunName = (LinkButton)e.Item.FindControl("LbtnPressRunName");
                     LbtnPressRunName.Attributes.Add("ProjectID", DR["ProjectID"].ToString());
@@ -387,8 +388,8 @@ public partial class SyncDetail : PageBase
                     LbtnPressRunName.Attributes.Add("PressRunClose", DR["Status"].ToString());
                     LbtnPressRunName.Attributes.Add("ProjectTypeID", DR["ProjectTypeID"].ToString());
                     LbtnPressRunName.Attributes.Add("ProjectUseMeasurementPlugin", Convert.ToBoolean(DR["UsePlugin"].ToString()).ToString());
-                    LbtnPressRunName.Attributes.Add("ChartTypeID", Convert.ToInt16(DR["ChartTypeID"].ToString()).ToString());    
-                    
+                    LbtnPressRunName.Attributes.Add("ChartTypeID", Convert.ToInt16(DR["ChartTypeID"].ToString()).ToString());
+
 
                     Button BtnCreate = (Button)e.Item.FindControl("BtnCreate");
 
@@ -402,12 +403,12 @@ public partial class SyncDetail : PageBase
                             BtnCreate.Attributes.Add("ChartTypeID", Convert.ToInt16(DR["ChartTypeID"].ToString()).ToString());
                         }
                         else
-                            BtnCreate.Visible = false;                        
+                            BtnCreate.Visible = false;
                     else
                         BtnCreate.Visible = false;
-                    
 
-                  
+
+
                 }
             }
         }
@@ -435,7 +436,7 @@ public partial class SyncDetail : PageBase
             btnPR.Attributes.Add("PressRunClose", "1");
             btnPR.Attributes.Add("ProjectTypeID", projTypeID);  //Added By Chirag 8th May 2011 gettin an error while creating next level press run
             btnPR.Attributes.Add("ProjectUseMeasurementPlugin", Convert.ToBoolean(UsePlugin).ToString());
-            btnPR.Attributes.Add("ChartTypeID", Convert.ToInt16(ChartTypeID).ToString());              
+            btnPR.Attributes.Add("ChartTypeID", Convert.ToInt16(ChartTypeID).ToString());
             LbtnPressRun_Click(btnPR, null);
         }
     }
@@ -451,7 +452,7 @@ public partial class SyncDetail : PageBase
                 //Added for When Item is Collapse Button Create is not appear
                 if (!e.Item.OwnerID.Contains("Detail") && e.Item.Expanded)
                 {
-                    
+
                     ImageButton ibtnEdit = (ImageButton)e.Item.FindControl("ibtnEdit");
                     Button BtnCreate = (Button)e.Item.FindControl("BtnCreate");
 
@@ -462,7 +463,7 @@ public partial class SyncDetail : PageBase
                     //}
                     //else
                     //{
-                        BtnCreate.Visible = false;
+                    BtnCreate.Visible = false;
                     //}
                 }
             }
@@ -544,7 +545,7 @@ public partial class SyncDetail : PageBase
                     DDL_RecordPage.SelectedIndexChanged += new EventHandler(DDlRecordPage_SelectedIndexChanged);
 
                     if (!IsPostBack)
-                    {   
+                    {
                         //====  Set Default Value  ====//
                         DDL_RecordPage.SelectedValue = "25";
                     }
@@ -557,7 +558,7 @@ public partial class SyncDetail : PageBase
                             DDL_RecordPage.Items.FindByValue(ViewState["RecordPerPage"].ToString()).Selected = true;
                         }
                     }
-                }                
+                }
             }
         }
         catch (Exception Ex)
@@ -586,25 +587,26 @@ public partial class SyncDetail : PageBase
                 TxtProjectName.Text = DT_SyncPressRun.Rows[0]["ProjectName"].ToString();
                 lblProjectHeader.Text = "Project Information";
                 TxtProjectName.Enabled = false;
+                ddlMeasurentDeviceType.Enabled = false;
 
                 DDLProjectType.SelectedValue = DT_SyncPressRun.Rows[0]["ProjectTypeID"].ToString();
                 DDLOutputType.SelectedValue = DT_SyncPressRun.Rows[0]["OutputTypeID"].ToString();
                 DDLProjectType.Enabled = false;
                 DDLOutputType.Enabled = false;
-                
+
                 VisiblePrintConditionDetail((Enums.OutputType)Enum.Parse(typeof(Enums.OutputType), DDLOutputType.SelectedValue.ToString()));
                 if (DDLProjectType.SelectedValue.ToString() == Convert.ToInt16(Enums.ProjectType.G7).ToString())
                 {
                     trG7.Visible = true;
-                    trISO.Visible = false;                 
+                    trISO.Visible = false;
                 }
                 else
                 {
                     trG7.Visible = false;
-                    trISO.Visible = true;                 
+                    trISO.Visible = true;
                 }
-              
-         
+
+
 
                 //============= Get meft menu from session =======================//
                 List<string> obj = (List<string>)Fuji.Common.Sessions.GetSession("SyncLeftMenu");
@@ -629,27 +631,27 @@ public partial class SyncDetail : PageBase
                 Fuji.Common.Sessions.SetSessions("SelectedProjectClose", ((ImageButton)(sender)).Attributes["ProjectClose"].ToString());
 
                 #region Print Target Bind
-                if ( DT_SyncPressRun.Rows[0]["ReTargetID"] != DBNull.Value)
+                if (DT_SyncPressRun.Rows[0]["ReTargetID"] != DBNull.Value)
                 {
                     certrun.Visible = true;
                     tdProjectTypeTitle.Visible = false;
                     tdProjectTypeDDL.Visible = false;
                     standardpt.Visible = false;
                     ddlCertifiedProject.Visible = true;
-                    FillCertifiedProjectDropDown(Convert.ToInt32(DT_SyncPressRun.Rows[0]["ReTargetID"]) );
+                    FillCertifiedProjectDropDown(Convert.ToInt32(DT_SyncPressRun.Rows[0]["ReTargetID"]));
                     chkDLP.Enabled = false;
-                    
+
                 }
                 else
                 {
-                    certrun.Visible = false;                    
+                    certrun.Visible = false;
                     tdProjectTypeTitle.Visible = true;
                     tdProjectTypeDDL.Visible = true;
                     standardpt.Visible = true;
                     ddlCertifiedProject.Visible = false;
                     FillSyncPrintStandardTypeDropDown(); // Fill drop down control.
                 }
-              
+
 
                 //==========  Declaring Objects ==========//
                 CPSyncPrintTargetData ObjSyncPrintTarget = new CPSyncPrintTargetData();
@@ -714,7 +716,7 @@ public partial class SyncDetail : PageBase
             Fuji.Common.Sessions.SetSessions("SelectedProjectTypeID", ((LinkButton)(sender)).Attributes["ProjectTypeID"].ToString());
             Fuji.Common.Sessions.SetSessions("SelectedProjectUseMeasurementPlugin", ((LinkButton)(sender)).Attributes["ProjectUseMeasurementPlugin"].ToString());
             Fuji.Common.Sessions.SetSessions("SelectedChartTypeID", ((LinkButton)(sender)).Attributes["ChartTypeID"].ToString());
-            
+
 
             pressrunid = Fuji.Common.Sessions.GetSession("SelectedPressRunID").ToString(); // Set flex variable 
             serialno = Fuji.Common.Sessions.GetSession("SelectedSerialNo").ToString();
@@ -811,7 +813,8 @@ public partial class SyncDetail : PageBase
         {
             TxtProjectName.Text = string.Empty;
             TxtProjectName.Enabled = true;
-            certrun.Visible = false;            
+            ddlMeasurentDeviceType.Enabled = true;
+            certrun.Visible = false;
             tdProjectTypeTitle.Visible = true;
             tdProjectTypeDDL.Visible = true;
 
@@ -876,7 +879,7 @@ public partial class SyncDetail : PageBase
             FillPrintCondition();
             #endregion
 
-            #region Measurement Setup 
+            #region Measurement Setup
             FillProjectSetting();
             #endregion
         }
@@ -890,13 +893,14 @@ public partial class SyncDetail : PageBase
         {
             TxtProjectName.Text = string.Empty;
             TxtProjectName.Enabled = true;
-            
+            ddlMeasurentDeviceType.Enabled = true;
+
             //DDLProjectType.Visible = false;
-            certrun.Visible = true;            
+            certrun.Visible = true;
             tdProjectTypeTitle.Visible = false;
             tdProjectTypeDDL.Visible = false;
             standardpt.Visible = false;
-            chkDLP.Enabled =false;
+            chkDLP.Enabled = false;
             lblProjectHeader.Text = "Add Project";
             Fuji.Common.Sessions.SetSessions("SelectedProjectID", ((Button)(sender)).Attributes["ProjectID"].ToString());
             //============= Get meft menu from session =======================//
@@ -936,8 +940,8 @@ public partial class SyncDetail : PageBase
             //}
             //else
             //{
-                //DdlStanderdsPreset_SelectedIndexChanged(null, null); // Call drop down selected index change event for deafult selection
-           // }
+            //DdlStanderdsPreset_SelectedIndexChanged(null, null); // Call drop down selected index change event for deafult selection
+            // }
             #endregion
 
             #region Visible False All Box in print target and print condition
@@ -976,7 +980,7 @@ public partial class SyncDetail : PageBase
             if (ddlCertifiedProject.Visible == true)
             {
                 if (ddlCertifiedProject.SelectedIndex == 0) { LblError.Text = "Select Existing Project."; return; }
-                 
+
             }
             if (ChkUseMeasurementPlugin.Checked)
             {
@@ -1007,21 +1011,21 @@ public partial class SyncDetail : PageBase
                 objCPSyncPressRun.OutputTypeID = Convert.ToInt32(DDLOutputType.SelectedValue);
                 if (certrun.Visible == true) objCPSyncPressRun.ReTargetID = Convert.ToInt32(ddlCertifiedProject.SelectedValue);
 
-                
+
                 //check project with the similar name already exists
                 System.Data.SqlClient.SqlDataReader DR = objCPSyncPressRun.CheckProjectName();
                 if (DR.HasRows == true) { LblError.Text = "Project with similar name already exists for this press. Change project name"; return; }
-                
-               
+
+
                 KeyValuePair<int, int> data = objCPSyncPressRun.uspInsertCPSyncProject();
                 Fuji.Common.Sessions.SetSessions("SelectedProjectID", data.Key);
                 Fuji.Common.Sessions.SetSessions("SelectedPressRunID", data.Value);
                 Fuji.Common.Sessions.SetSessions("SelectedProjectTypeID", DDLProjectType.SelectedValue);
                 Fuji.Common.Sessions.SetSessions("SelectedProjectClose", Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString());
                 Fuji.Common.Sessions.SetSessions("SelectedPressRunClose", Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString());
-                if(ddlMeasurentAlignmentChart.SelectedValue!="")
-                    Fuji.Common.Sessions.SetSessions("SelectedChartTypeID", Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue));                          
-                    
+                if (ddlMeasurentAlignmentChart.SelectedValue != "")
+                    Fuji.Common.Sessions.SetSessions("SelectedChartTypeID", Convert.ToInt16(ddlMeasurentAlignmentChart.SelectedValue));
+
                 #endregion
             }
             else
@@ -1036,7 +1040,7 @@ public partial class SyncDetail : PageBase
                 objCPSyncPressRun.ProjectID = Convert.ToInt16(Fuji.Common.Sessions.GetSession("SelectedProjectID"));
                 objCPSyncPressRun.UseDLP = Convert.ToBoolean(chkDLP.Checked);
                 objCPSyncPressRun.ProjectTypeID = Convert.ToInt16(DDLProjectType.SelectedValue);
-                objCPSyncPressRun.OutputTypeID  = Convert.ToInt16(DDLOutputType.SelectedValue);
+                objCPSyncPressRun.OutputTypeID = Convert.ToInt16(DDLOutputType.SelectedValue);
                 objCPSyncPressRun.uspUpdateProject();
             }
 
@@ -1124,7 +1128,7 @@ public partial class SyncDetail : PageBase
             else
             {
                 #region Create XML String Save Detail into database for ISO
-                StringBuilder SBPrintTarget = new StringBuilder("<PrintTarget>");                
+                StringBuilder SBPrintTarget = new StringBuilder("<PrintTarget>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.L).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOCyanTL.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.a).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOCyanTa.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.b).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOCyanTb.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
@@ -1152,11 +1156,11 @@ public partial class SyncDetail : PageBase
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Overprint_Blue).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.L).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOBlueTL.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Overprint_Blue).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.a).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOBlueTa.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Overprint_Blue).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.b).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOBlueTb.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
-                
+
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Triplet_Solid_Gray).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.L).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISO3CTL.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Triplet_Solid_Gray).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.a).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISO3CTa.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Triplet_Solid_Gray).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.b).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISO3CTb.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
-                
+
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Gray_25).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.L).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOGray25TL.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Gray_25).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.a).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOGray25Ta.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Gray_25).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.b).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOGray25Tb.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
@@ -1172,7 +1176,7 @@ public partial class SyncDetail : PageBase
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.L).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOAPPaperTL.Text) + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOTHPaperTL.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.a).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOAPPaperTa.Text) + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOTHPaperTa.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.b).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOAPPaperTb.Text) + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOTHPaperTb.Text) + "\"></PrintStandard>");
-                
+
 
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan_Quarter_Tone).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISO25CA.Text) + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISO25CT.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Magenta_Quarter_Tone).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISO25MA.Text) + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISO25MT.Text) + "\"></PrintStandard>");
@@ -1211,7 +1215,7 @@ public partial class SyncDetail : PageBase
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Yellow).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOYellowDT.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Black).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString() + "\"" + " " + "Target=\"" + Convert.ToString(TxtISOBalckDT.Text) + "\"" + " " + "ToleranceLimit=\"\"></PrintStandard>");
 
-                                
+
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaE).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOCyanTH.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Magenta).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaE).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOMagendaTH.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Yellow).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaE).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOYellowTH.Text) + "\"></PrintStandard>");
@@ -1228,11 +1232,11 @@ public partial class SyncDetail : PageBase
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaH).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOCyanHTH.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Magenta).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaH).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOMagendaHTH.Text) + "\"></PrintStandard>");
                 SBPrintTarget.Append("<PrintStandard" + " " + "PatchTypeID=\"" + Convert.ToInt16(Enums.CPSyncPatchType.Yellow).ToString() + "\"" + " " + "ColorCharID=\"" + Convert.ToInt16(Enums.CPSyncColorChar.DeltaH).ToString() + "\"" + " " + "Target=\"" + Convert.ToString("0") + "\"" + " " + "ToleranceLimit=\"" + Convert.ToString(TxtISOYellowHTH.Text) + "\"></PrintStandard>");
-                
+
 
                 SBPrintTarget.Append("</PrintTarget>");
 
-                
+
 
                 //==========  Declaring Objects ==========//
                 CPSyncPrintTargetData objCPSyncPrintTarget = new CPSyncPrintTargetData();
@@ -1306,12 +1310,12 @@ public partial class SyncDetail : PageBase
 
             SBPrintCondition.Append("</PrintCondition>");
 
-            if(SBPrintCondition.ToString().Trim() != string.Empty)
+            if (SBPrintCondition.ToString().Trim() != string.Empty)
             {
-                CPSyncPrintConditionData objCPSyncPrintCondition = new CPSyncPrintConditionData();            
+                CPSyncPrintConditionData objCPSyncPrintCondition = new CPSyncPrintConditionData();
                 objCPSyncPrintCondition.uspInsertCPSyncPrintCond(Convert.ToInt32(Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString()), SBPrintCondition);
             }
-            #endregion            
+            #endregion
 
             #endregion
 
@@ -1332,9 +1336,8 @@ public partial class SyncDetail : PageBase
                 objCPSyncProjectSettingData.ChartTypeID = null;
             if (ddlMeasurentDeviceType.SelectedValue != "")
             {
-                objCPSyncProjectSettingData.InstrumentTypeID = Convert.ToInt32(ddlMeasurentDeviceType.SelectedValue);
-                string MeasurementSelectedText = ddlMeasurentDeviceType.SelectedItem.Text;
-                objCPSyncProjectSettingData.SerialNumber = MeasurementSelectedText.Substring(MeasurementSelectedText.IndexOf(" - ") + 3).ToString();
+                objCPSyncProjectSettingData.InstrumentTypeID = Convert.ToInt32(ddlMeasurentDeviceType.SelectedValue.Split('-')[0].Trim());
+                objCPSyncProjectSettingData.SerialNumber = ddlMeasurentDeviceType.SelectedValue.Split('-')[1].Trim();
             }
             else
             {
@@ -1344,7 +1347,7 @@ public partial class SyncDetail : PageBase
             objCPSyncProjectSettingData.uspInsertProjectSetting();
 
             Fuji.Common.Sessions.SetSessions("SelectedProjectUseMeasurementPlugin", Convert.ToBoolean(ChkUseMeasurementPlugin.Checked).ToString());
-           
+
             #endregion
 
             projectid = Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString(); // Set flex variable 
@@ -1389,9 +1392,9 @@ public partial class SyncDetail : PageBase
                 //=========== Set list menu object in to session ===========================//
                 Fuji.Common.Sessions.SetSessions("SyncLeftMenu", obj);
                 #endregion
-                
+
                 btnBindMeasurement_Click(sender, e);
-                
+
             }
             else // Else back to press run page.
             {
@@ -1460,7 +1463,7 @@ public partial class SyncDetail : PageBase
                     #region Fill from database
                     for (int i = 0; i < DT_CPSyncPrintStandard.Rows.Count; i++)
                     {
-                        if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString()  && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.L).ToString())
+                        if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.L).ToString())
                             TxtPaperTL.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.a).ToString())
                             TxtPaperTa.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
@@ -1711,47 +1714,47 @@ public partial class SyncDetail : PageBase
                         TxtISO25CT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Magenta_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO25MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                        
+                            TxtISO25MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO25MT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Yellow_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO25YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                
+                            TxtISO25YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO25YT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Black_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO25KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                        
+                            TxtISO25KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO25KT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan_Half_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO50CA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO50CA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO50CT.Text = "4";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Magenta_Half_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO50MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString(); 
+                            TxtISO50MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO50MT.Text = "4";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Yellow_Half_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO50YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO50YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO50YT.Text = "4";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Black_Half_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO50KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO50KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO50KT.Text = "4";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan_Three_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO75CA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO75CA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO75CT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Magenta_Three_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO75MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO75MA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO75MT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Yellow_Three_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO75YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                
+                            TxtISO75YA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO75YT.Text = "3";
 
                         if (DT_CPSyncPrintStandard.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Black_Three_Quarter_Tone).ToString() && DT_CPSyncPrintStandard.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
-                            TxtISO75KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();                                                                                                                        
+                            TxtISO75KA.Text = DT_CPSyncPrintStandard.Rows[i]["Target"].ToString();
                         TxtISO75KT.Text = "3";
 
 
@@ -1797,10 +1800,10 @@ public partial class SyncDetail : PageBase
     {
         try
         {
-            if (ddlCertifiedProject.SelectedIndex != 0 )
+            if (ddlCertifiedProject.SelectedIndex != 0)
             {
-               //==========  Declaring Objects ==========//
-               CPSyncPrintTargetData ObjSyncPrintTarget = new CPSyncPrintTargetData();
+                //==========  Declaring Objects ==========//
+                CPSyncPrintTargetData ObjSyncPrintTarget = new CPSyncPrintTargetData();
 
                 //==========  Get Data Table and Bind ==========//
                 DataTable DT_SyncPrintTarget = new DataTable();
@@ -1814,7 +1817,7 @@ public partial class SyncDetail : PageBase
                 else
                 {
                     DdlStanderdsPreset_SelectedIndexChanged(null, null); // Call drop down selected index change event for deafult selection
-                }                
+                }
             }
             else
             {
@@ -1847,16 +1850,16 @@ public partial class SyncDetail : PageBase
             trG7.Visible = true;
             trISO.Visible = false;
             FillSyncPrintStandardTypeDropDown();
-            DdlStanderdsPreset_SelectedIndexChanged(null, null); 
+            DdlStanderdsPreset_SelectedIndexChanged(null, null);
         }
         else
         {
             trG7.Visible = false;
             trISO.Visible = true;
             FillSyncPrintStandardTypeDropDown();
-            DdlStanderdsPreset_SelectedIndexChanged(null, null); 
+            DdlStanderdsPreset_SelectedIndexChanged(null, null);
         }
-       
+
     }
 
     protected void DDLOutputType_SelectedIndexChanged(object sender, EventArgs e)
@@ -1864,7 +1867,7 @@ public partial class SyncDetail : PageBase
 
         //Visible panal as per project type
         VisiblePrintConditionDetail((Enums.OutputType)Enum.Parse(typeof(Enums.OutputType), DDLOutputType.SelectedValue.ToString()));
-        
+
     }
 
 
@@ -1929,8 +1932,8 @@ public partial class SyncDetail : PageBase
     {
         try
         {
-            if(ddlMeasurentDeviceType.SelectedValue!="")
-                BindAlignmentChart(Convert.ToInt16(ddlMeasurentDeviceType.SelectedValue));
+            if (ddlMeasurentDeviceType.SelectedValue != "")
+                BindAlignmentChart(Convert.ToInt16(ddlMeasurentDeviceType.SelectedValue.Split('-')[0].Trim()));
         }
         catch (Exception Exc)
         {
@@ -1965,13 +1968,13 @@ public partial class SyncDetail : PageBase
     private void BindAlignmentChart(int InstrumentTypeID)
     {
         try
-        {           
+        {
 
             //==========  Declaring Objects ==========//
             DataTable DTAlignmentChart = new DataTable();
             CPSyncProjectSettingData ObjCPSyncProjectSettingData = new CPSyncProjectSettingData();
             ObjCPSyncProjectSettingData.InstrumentTypeID = InstrumentTypeID;
-            DTAlignmentChart = ObjCPSyncProjectSettingData.uspGetChartByInstrument();           
+            DTAlignmentChart = ObjCPSyncProjectSettingData.uspGetChartByInstrument();
 
 
             ddlMeasurentAlignmentChart.DataSource = DTAlignmentChart;
@@ -1985,7 +1988,7 @@ public partial class SyncDetail : PageBase
 
             LblError.Text = HandleException(Ex);
         }
-        
+
 
     }
 
@@ -2020,7 +2023,7 @@ public partial class SyncDetail : PageBase
             {
                 TrPlugin.Visible = false;
                 TrFlexObject.Visible = true;
-            }            
+            }
 
             pressrunid = Fuji.Common.Sessions.GetSession("SelectedPressRunID").ToString(); // Set flex variable 
             serialno = Fuji.Common.Sessions.GetSession("SelectedSerialNo").ToString();
@@ -2057,7 +2060,7 @@ public partial class SyncDetail : PageBase
         ObjSyncMeasurement.PressRunID = Convert.ToInt32(pressrunid);
         DS = ObjSyncMeasurement.uspGetMeasurementByPressRunID();
         if (DS != null && DS.Tables.Count != 0 && DS.Tables[0].Rows.Count != 0)
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "BookMarkScript", "document.getElementById('" + BtnNextAnalyze1.ClientID +"').click();", true);             
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "BookMarkScript", "document.getElementById('" + BtnNextAnalyze1.ClientID + "').click();", true);
         else
             lblAnalyzeMsg.Text = "Please upload at least one measurement file.";
     }
@@ -2086,21 +2089,21 @@ public partial class SyncDetail : PageBase
             //=========== Set list menu object in to session ===========================//
             Fuji.Common.Sessions.SetSessions("SyncLeftMenu", obj);
 
-                 
+
             //changed by chirag on 15th Oct 2010, if it is fourth iteration do not show create curves button
             //the fourth iteration is only for verification 
-            DataTable DT_SyncPressRun = new DataTable();  
+            DataTable DT_SyncPressRun = new DataTable();
             int currInteration = -1;
             CPSyncPressRunData ObjSyncPressRun = new CPSyncPressRunData();
-            DT_SyncPressRun = ObjSyncPressRun.uspGetProjectStatus( Convert.ToInt16(Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString()));
+            DT_SyncPressRun = ObjSyncPressRun.uspGetProjectStatus(Convert.ToInt16(Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString()));
             if (DT_SyncPressRun != null && DT_SyncPressRun.Rows.Count > 0)
             {
                 currInteration = Convert.ToInt32(DT_SyncPressRun.Rows[0]["Iteration"]);
-			    if (currInteration == 4) this.BtnNextCreateCurves.Visible = false;
+                if (currInteration == 4) this.BtnNextCreateCurves.Visible = false;
             }
 
-           
-           
+
+
             //========= Visible Analyze step =======//
             TableVisibleTrueFalse(TblAnalyze);
 
@@ -2109,7 +2112,7 @@ public partial class SyncDetail : PageBase
             //======== Bind Trend Line Delta Chart =======//
             FillTrendLineDeltaEChart();
 
-           
+
 
         }
         catch (Exception Exc)
@@ -2148,7 +2151,7 @@ public partial class SyncDetail : PageBase
             //========= Visible Analyze step =======//
             TableVisibleTrueFalse(TblAnalyze);
 
-           
+
 
             HDCurrentMeasurement.Value = "";
 
@@ -2251,7 +2254,7 @@ public partial class SyncDetail : PageBase
                     //Create and save curve data
                     if (Fuji.Common.Sessions.GetSession("SelectedProjectTypeID").ToString() == Convert.ToInt16(Enums.ProjectType.G7).ToString())
                         status = objGetCurve.CreateCurve();
-                    else 
+                    else
                         status = objGetCurve.CreateISOCurve();
 
                     //Status should be “OK”; anything else we need to display error message.
@@ -2279,13 +2282,13 @@ public partial class SyncDetail : PageBase
                 Fuji.Common.Sessions.SetSessions("SyncLeftMenu", obj);
 
                 //========= Visible Analyze step =======//
-                TableVisibleTrueFalse(TblExportCurves);                
+                TableVisibleTrueFalse(TblExportCurves);
 
                 BindSyncMeasurementData();
                 BindSyncCurveDataAndChart(Convert.ToInt16(DdlCurveType.SelectedValue));
 
                 if (Fuji.Common.Sessions.GetSession("SelectedPressRunClose").ToString() == Convert.ToInt16(Enums.CPSyncPressRunStatus.Closed).ToString() || Fuji.Common.Sessions.GetSession("SelectedPressRunClose").ToString() == Convert.ToInt16(Enums.CPSyncPressRunStatus.Certify).ToString())
-                    BtnClosePrintRun.Visible= false;
+                    BtnClosePrintRun.Visible = false;
                 else
                     BtnClosePrintRun.Visible = true;
             }
@@ -2308,7 +2311,7 @@ public partial class SyncDetail : PageBase
         FRMGeneratePDFReport.Style.Add("display", "");
     }
 
-   
+
     #endregion
 
     #region Export Curves
@@ -2355,7 +2358,7 @@ public partial class SyncDetail : PageBase
     protected void Chk_CheckedChanged(object sender, EventArgs e)
     {
         try
-        {            
+        {
             BindSyncCurveDataAndChart(Convert.ToInt16(DdlCurveType.SelectedValue));
             UpdPaDeltaView.Update();
         }
@@ -2503,20 +2506,20 @@ public partial class SyncDetail : PageBase
                     System.IO.StreamWriter swM;
                     System.IO.StreamWriter swY;
                     System.IO.StreamWriter swK;
-                
+
                     //cyan
                     swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_C.txt");
-                    
+
                     //magenta
                     swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_M.txt");
-                
+
                     //yellow    
                     swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Y.txt");
-        
+
 
                     //black
                     swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_K.txt");
-           
+
 
                     for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
                     {
@@ -2525,7 +2528,7 @@ public partial class SyncDetail : PageBase
                         swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"]).ToString("0.00"));
                         swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"]).ToString("0.00"));
                     }
-                   
+
                     swC.Close();
                     swM.Close();
                     swY.Close();
@@ -2560,8 +2563,8 @@ public partial class SyncDetail : PageBase
                     #region Create Zip file and download file for nexus
 
                     //check if file exists and delete it
-                    if ( System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/")+ Sessions.UserID + "_Nexus.zip") == true )
-                        System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/")+ Sessions.UserID + "_Nexus.zip");
+                    if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Nexus.zip") == true)
+                        System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Nexus.zip");
 
                     System.IO.StreamWriter swC;
                     System.IO.StreamWriter swM;
@@ -2571,7 +2574,7 @@ public partial class SyncDetail : PageBase
                     swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Nexus_Mag.txt");
                     swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Nexus_Yel.txt");
                     swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_Nexus_Bla.txt");
-                   
+
 
                     for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
                     {
@@ -2580,7 +2583,7 @@ public partial class SyncDetail : PageBase
                         swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"]).ToString("0.0000"));
                         swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"]).ToString("0.0000"));
                     }
-                 
+
                     swC.Close();
                     swM.Close();
                     swY.Close();
@@ -2668,7 +2671,7 @@ public partial class SyncDetail : PageBase
 
                     Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurvesFile.txt", Sessions.UserID + "_CurvesFile.txt");
                     #endregion
-                    
+
                 }
 
             }
@@ -2705,7 +2708,7 @@ public partial class SyncDetail : PageBase
             if (Profile != null && Profile.Length > 0)
             {
                 Fuji.Common.CommonFunctions.DownloadFile(Profile, "Profile.icc");
-            }      
+            }
 
         }
         catch (Exception Exc)
@@ -2722,18 +2725,18 @@ public partial class SyncDetail : PageBase
     {
         try
         {
-           //Chirag To do
-           //first find which radio button is clicked 
+            //Chirag To do
+            //first find which radio button is clicked 
 
-           DataTable DT_CurveDelta = new DataTable(); 
-           if (rbtnDeltaPrev.Enabled = true && rbtnDeltaPrev.Checked == true)
-           {
-               DT_CurveDelta = (DataTable)Fuji.Common.Sessions.GetSession("DTDeltaPrev");
-           }
-           else { DT_CurveDelta = (DataTable)Fuji.Common.Sessions.GetSession("DTDeltaRef"); }
+            DataTable DT_CurveDelta = new DataTable();
+            if (rbtnDeltaPrev.Enabled = true && rbtnDeltaPrev.Checked == true)
+            {
+                DT_CurveDelta = (DataTable)Fuji.Common.Sessions.GetSession("DTDeltaPrev");
+            }
+            else { DT_CurveDelta = (DataTable)Fuji.Common.Sessions.GetSession("DTDeltaRef"); }
 
 
-           if (DT_CurveDelta != null)
+            if (DT_CurveDelta != null)
             {
                 if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile")))
                     Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile"));
@@ -2757,7 +2760,7 @@ public partial class SyncDetail : PageBase
             }
 
 
-               
+
         }
         catch (Exception Exc)
         {
@@ -2935,8 +2938,8 @@ public partial class SyncDetail : PageBase
                     MaxDeltaRef = MinDeltaRef;
                     MinDeltaRef = (MinDeltaRef * -1);
                 }
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Minimum = MinDeltaRef;         
-                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Maximum = MaxDeltaRef;         
+                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Minimum = MinDeltaRef;
+                CHRT_ExportCurveDeltaRef.ChartAreas["Default"].AxisY.Maximum = MaxDeltaRef;
                 #endregion
                 if (_CurveTypeID != 65)
                 {
@@ -3032,7 +3035,7 @@ public partial class SyncDetail : PageBase
         }
     }
     //Add Point with color
-    private void AddPointChartWithColor(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName,bool ShowMarker)
+    private void AddPointChartWithColor(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, bool ShowMarker)
     {
         try
         {
@@ -3048,7 +3051,8 @@ public partial class SyncDetail : PageBase
             }
             else
             {
-                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;            }
+                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+            }
         }
         catch (Exception Ex)
         {
@@ -3069,10 +3073,10 @@ public partial class SyncDetail : PageBase
             DataTable DT_SyncPress = new DataTable();
             if (Fuji.Common.Sessions.GetSession("SyncPressData") == null)
             {
-                if(Fuji.Common.Sessions.RoleID == 1) // If user is admin then he can be allow to do filter press
+                if (Fuji.Common.Sessions.RoleID == 1) // If user is admin then he can be allow to do filter press
                     DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID, Convert.ToInt32(Fuji.Common.Sessions.GetSession("SyncCompanyID")), Convert.ToInt32(Fuji.Common.Sessions.GetSession("SyncBranchID")));
                 else
-                    DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID, 0,0);
+                    DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID, 0, 0);
                 Fuji.Common.Sessions.SetSessions("SyncPressData", DT_SyncPress);
             }
 
@@ -3106,12 +3110,12 @@ public partial class SyncDetail : PageBase
 
             //==========  Get Data Table and Fill ==========//        
             DataTable DT_Company = new DataTable();
-            DT_Company = ObjSyncPress.uspGetCompanyListAndBranchList(0);  
-            
+            DT_Company = ObjSyncPress.uspGetCompanyListAndBranchList(0);
+
             //get distinct rows from datatable or datarow
             //http://blog.wolffmyren.com/2009/02/24/c-corner-how-to-get-distinct-rows-from-a-dataset-or-datatable/         
 
-            DT_Company =  DT_Company.DefaultView.ToTable(true, new String[] { "CompanyName", "CompanyID" });
+            DT_Company = DT_Company.DefaultView.ToTable(true, new String[] { "CompanyName", "CompanyID" });
             if (DT_Company != null && DT_Company.Rows.Count > 0)
             {
                 ddlCompany.DataSource = DT_Company;
@@ -3288,11 +3292,11 @@ public partial class SyncDetail : PageBase
             }
 
             ddlCertifiedProject.Items.Insert(0, new ListItem("--- Select Project ---", "0"));
-            
+
             if (ProjectID == 0) ddlCertifiedProject.SelectedIndex = 0;
             else
-            { 
-                ddlCertifiedProject.SelectedValue = ProjectID.ToString();    
+            {
+                ddlCertifiedProject.SelectedValue = ProjectID.ToString();
                 ddlCertifiedProject.Enabled = false;
             }
 
@@ -3718,9 +3722,9 @@ public partial class SyncDetail : PageBase
                     //============ Delta E Value =================//
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Gray_75).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DeltaE).ToString())
                         TxtISOGray75TH.Text = DT_SyncPrintTarget.Rows[i]["ToleranceLimit"].ToString();
-                    #endregion                    
+                    #endregion
 
-                    #region Fill Paper L,a and b 
+                    #region Fill Paper L,a and b
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Paper).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.L).ToString())
                     {
                         TxtISOAPPaperTL.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
@@ -3736,10 +3740,10 @@ public partial class SyncDetail : PageBase
                     {
                         TxtISOAPPaperTb.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
                         TxtISOTHPaperTb.Text = DT_SyncPrintTarget.Rows[i]["ToleranceLimit"].ToString();
-                    }                    
-                    #endregion             
+                    }
+                    #endregion
 
-                    #region Fill TVI 
+                    #region Fill TVI
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan_Quarter_Tone).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI).ToString())
                     {
                         TxtISO25CA.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
@@ -3812,8 +3816,8 @@ public partial class SyncDetail : PageBase
                         TxtISOMidTone.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
 
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan_Three_Quarter_Tone).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.DotGain_TVI_Spread).ToString())
-                        TxtISO3QuarterTone.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();                       
-                    
+                        TxtISO3QuarterTone.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
+
                     /*TxtISOQuarterTone.Text = "3";
                     TxtISOMidTone.Text = "5";
                     TxtISO3QuarterTone.Text = "3";*/
@@ -3821,20 +3825,20 @@ public partial class SyncDetail : PageBase
 
                     #region Fill Density Value
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString())
-                        TxtISOCyanDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();                        
+                        TxtISOCyanDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
 
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Magenta).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString())
                         TxtISOMagendaDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
-                        
+
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Yellow).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString())
-                        TxtISOYellowDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();                        
+                        TxtISOYellowDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
 
                     if (DT_SyncPrintTarget.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Black).ToString() && DT_SyncPrintTarget.Rows[i]["ColorCharID"].ToString() == Convert.ToInt16(Enums.CPSyncColorChar.Density).ToString())
-                        TxtISOBalckDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();                        
+                        TxtISOBalckDT.Text = DT_SyncPrintTarget.Rows[i]["Target"].ToString();
                     #endregion
 
-                    
-                }                
+
+                }
                 #endregion
             }
         }
@@ -3865,7 +3869,7 @@ public partial class SyncDetail : PageBase
                 #region General Data
                 DT_SyncPrintCondition.DefaultView.RowFilter = "PrintConditionTypeID = " + TxtGDSubstrateDesc.Attributes["PCTypeId"].ToString();
                 if (DT_SyncPrintCondition.DefaultView.Count > 0)
-                    TxtGDSubstrateDesc.Text = DT_SyncPrintCondition.DefaultView[0]["PrintCondition"].ToString();                
+                    TxtGDSubstrateDesc.Text = DT_SyncPrintCondition.DefaultView[0]["PrintCondition"].ToString();
 
                 DT_SyncPrintCondition.DefaultView.RowFilter = "PrintConditionTypeID = " + TxtGDInk.Attributes["PCTypeId"].ToString();
                 if (DT_SyncPrintCondition.DefaultView.Count > 0)
@@ -3873,7 +3877,7 @@ public partial class SyncDetail : PageBase
                 #endregion
 
                 #region Offsett Data
-                if (DDLOutputType.SelectedValue.ToString() == Convert.ToInt16(Enums.OutputType.Offset).ToString() )
+                if (DDLOutputType.SelectedValue.ToString() == Convert.ToInt16(Enums.OutputType.Offset).ToString())
                 {
                     DT_SyncPrintCondition.DefaultView.RowFilter = "PrintConditionTypeID = " + TxtOPDISO2846Ink.Attributes["PCTypeId"].ToString();
                     if (DT_SyncPrintCondition.DefaultView.Count > 0)
@@ -3881,7 +3885,7 @@ public partial class SyncDetail : PageBase
 
                     DT_SyncPrintCondition.DefaultView.RowFilter = "PrintConditionTypeID = " + DdlOPDInkOrder.Attributes["PCTypeId"].ToString();
                     if (DT_SyncPrintCondition.DefaultView.Count > 0)
-                        DdlOPDInkOrder.SelectedValue= DT_SyncPrintCondition.DefaultView[0]["PrintCondition"].ToString();
+                        DdlOPDInkOrder.SelectedValue = DT_SyncPrintCondition.DefaultView[0]["PrintCondition"].ToString();
 
                     DT_SyncPrintCondition.DefaultView.RowFilter = "PrintConditionTypeID = " + TxtOPDFountainSolution.Attributes["PCTypeId"].ToString();
                     if (DT_SyncPrintCondition.DefaultView.Count > 0)
@@ -3965,7 +3969,7 @@ public partial class SyncDetail : PageBase
             }
 
 
-            #region Old Code 
+            #region Old Code
             //DT_SyncPrintCondition = ObjSyncPrintCondition.uspGetPrintCondition(Convert.ToInt32(Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString()));
             //if (DT_SyncPrintCondition != null && DT_SyncPrintCondition.Rows.Count > 0)
             //{
@@ -3993,7 +3997,7 @@ public partial class SyncDetail : PageBase
 
             //    txtScreeningDotSize.Text = DT_SyncPrintCondition.Rows[0]["DotSize"].ToString();
             //    txtScreeningFamily.Text = DT_SyncPrintCondition.Rows[0]["DotShape"].ToString();
-               
+
             //}
             //else
             //{
@@ -4045,7 +4049,7 @@ public partial class SyncDetail : PageBase
             //==========  Get Data Table and Bind ==========//
             DataTable DT_SyncProjectSetting = new DataTable();
             ObjSyncProjectSetting.ProjectID = Convert.ToInt32(Fuji.Common.Sessions.GetSession("SelectedProjectID").ToString());
-            DT_SyncProjectSetting = ObjSyncProjectSetting.uspGetProjectSetting();            
+            DT_SyncProjectSetting = ObjSyncProjectSetting.uspGetProjectSetting();
             //Fill Project Setting detail from database
 
             BindMeasurementDeviceType();
@@ -4056,11 +4060,19 @@ public partial class SyncDetail : PageBase
                 ddlMeasurentIlluminant.SelectedValue = DT_SyncProjectSetting.Rows[0]["Illuminant"].ToString();
                 ddlMeasurentObserver.SelectedValue = DT_SyncProjectSetting.Rows[0]["Observer"].ToString();
                 ddlMeasurentDensityType.SelectedValue = DT_SyncProjectSetting.Rows[0]["DensityType"].ToString();
-                if (ddlMeasurentDeviceType.Items.Contains(new ListItem(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString(), DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString())))
-                    ddlMeasurentDeviceType.SelectedIndex = ddlMeasurentDeviceType.Items.IndexOf(ddlMeasurentDeviceType.Items.FindByText(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString()));                    
+
+                if (ddlMeasurentDeviceType.Items.FindByText(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString()) != null)
+                {
+                    ddlMeasurentDeviceType.SelectedIndex =
+                        ddlMeasurentDeviceType.Items.IndexOf(ddlMeasurentDeviceType.Items.FindByText(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString()));
+                }
                 else
-                    ddlMeasurentDeviceType.Items.Insert(0, new ListItem(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString(), DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString()));
-                    
+                {
+                    ddlMeasurentDeviceType.Items.Insert(0, new ListItem(DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString(),
+                                                                        DT_SyncProjectSetting.Rows[0]["InstrumentTypeID"].ToString() + " - " +
+                                                                        DT_SyncProjectSetting.Rows[0]["DeviceTypeName"].ToString().Split('-')[1].Trim()));
+                }
+
                 ddlMeasurentDeviceType_SelectedIndexChanged(null, null);
                 ddlMeasurentAlignmentChart.SelectedValue = DT_SyncProjectSetting.Rows[0]["ChartTypeID"].ToString();
             }
@@ -4081,7 +4093,7 @@ public partial class SyncDetail : PageBase
 
     }
 
-    
+
 
     /// <summary>
     /// Bind Trend Line DeltaE Chart
@@ -4179,7 +4191,7 @@ public partial class SyncDetail : PageBase
                 else
                     c.Image = "Images/checkbox_1.gif"; // False value check box image
 
-                if (Fuji.Common.Sessions.GetSession("SelectedPressRunClose").ToString() == Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString() )
+                if (Fuji.Common.Sessions.GetSession("SelectedPressRunClose").ToString() == Convert.ToInt16(Enums.CPSyncPressRunStatus.Open).ToString())
                     c.ImageMapAreaAttributes = "onclick=\"SetValueTrendDelta('" + DT.Rows[i]["MeasurementID"].ToString() + "');\""; // Bind javascript function 
 
                 CHRT_TrendLineDeltaE.ChartAreas["ChartArea1"].AxisX.CustomLabels.Add(c); // Add Custom Label
@@ -4193,18 +4205,18 @@ public partial class SyncDetail : PageBase
                 //        FRM1.Attributes.Add("src", "SyncDetailMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim() + "&PressRunID=" + Fuji.Common.Sessions.GetSession("SelectedPressRunID").ToString());
                 //    else if (Fuji.Common.Sessions.GetSession("SelectedProjectTypeID").ToString() == "2")
                 //        FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim() + "&PressRunID=" + Fuji.Common.Sessions.GetSession("SelectedPressRunID").ToString());
-                    
+
                 //}
                 //else
                 //{
-                    if (Fuji.Common.Sessions.GetSession("SelectedProjectTypeID").ToString() == Convert.ToInt16(Enums.ProjectType.G7).ToString())
-                        FRM1.Attributes.Add("src", "SyncDetailMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
-                    else 
-                        FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
-               // }
-               
+                if (Fuji.Common.Sessions.GetSession("SelectedProjectTypeID").ToString() == Convert.ToInt16(Enums.ProjectType.G7).ToString())
+                    FRM1.Attributes.Add("src", "SyncDetailMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
+                else
+                    FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
+                // }
+
                 FRM1.Style.Add("display", "");
-            }            
+            }
         }
         catch (Exception Ex)
         {
@@ -4320,7 +4332,7 @@ public partial class SyncDetail : PageBase
                 TrScreen.Visible = false;
                 TrWideFormat.Visible = true;
                 break;
-        }        
+        }
     }
     /// <summary>
     /// Clear all control in print condition detail 
@@ -4516,5 +4528,5 @@ public partial class SyncDetail : PageBase
 
 
 
-    
+
 }
