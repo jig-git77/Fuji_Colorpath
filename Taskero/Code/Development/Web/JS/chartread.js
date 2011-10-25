@@ -232,13 +232,19 @@ function scan(scanner, colorspace, chart) {
 
     if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
-        if (result != "OK") {
+        if (result == "ERROR: Activation Error") {
+            alert("Device is not valid");
+        }
+        else if (result != "OK") {
             alert("Scanning Device has been unplugged");
         }
     }
     else {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
-        if (result != "OK") {
+        if (result == "ERROR: Activation Error") {
+            alert("Device is not valid");
+        }
+        else if (result != "OK") {
             alert("Scanning Device has been unplugged");
         }
         // Display the original chart from the reference values.
