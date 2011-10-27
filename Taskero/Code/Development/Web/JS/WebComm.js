@@ -73,7 +73,7 @@ function SetChartResult(objChart) {
         g_Chart["Mode"] = objChart.DeviceSetting.Mode;
     }
 
-    if (objChart.InstrumentTypeID > 2 && objChart.ChartSettings != null) {
+    if (objChart.InstrumentTypeID > 1 && objChart.ChartSettings != null) {
         g_Chart["ChartType"] = "Native";
         g_Chart["ChartSizeX"] = objChart.ChartSettings["ChartSizeX"];
         g_Chart["ChartSizeY"] = objChart.ChartSettings["ChartSizeY"];

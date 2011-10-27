@@ -164,7 +164,7 @@ namespace MeasurementPlugInSvc
                     }
 
                     //If Isis or Techkon then load chart settings
-                    if (this._InstrumentTypeID > 2)
+                    if (this._InstrumentTypeID > 1)
                     {
                         var objCmd = new SqlCommand
                                          {
