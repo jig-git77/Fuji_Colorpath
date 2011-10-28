@@ -86,7 +86,7 @@
                                                         <td width="25" valign="top">
                                                             <img src="images/curve-bg-lefttop.png" alt="" border="0" />
                                                         </td>
-                                                        <td align="center" valign="top" class="login-bg-top" title="Taskero Universe">
+                                                        <td align="center" valign="top" class="login-bg-top" title="ColorPath">
                                                             <img src="images/colorpath_logo_login.jpg" alt="ColorPath" border="0" vspace="10" />
                                                         </td>
                                                         <td width="25" valign="top">

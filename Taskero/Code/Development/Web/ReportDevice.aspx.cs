@@ -853,6 +853,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 100 AND PPD.CMYK_M = 0   AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 0  ";
             Cmd.CommandText += "AND PMD.CPMeasurementGUID IN ( " + LTRL_CPMeasurementGUID.Text + " ) ";
+            Cmd.CommandText += "Group By PMD.CreatedDT ";
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Magenta =====*/
@@ -861,6 +862,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 100 AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 0 ";
             Cmd.CommandText += "AND PMD.CPMeasurementGUID IN ( " + LTRL_CPMeasurementGUID.Text + " ) ";
+            Cmd.CommandText += "Group By PMD.CreatedDT ";
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Yellow =====*/
@@ -869,6 +871,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 0 AND PPD.CMYK_Y = 100 AND PPD.CMYK_K = 0  ";
             Cmd.CommandText += "AND PMD.CPMeasurementGUID IN ( " + LTRL_CPMeasurementGUID.Text + " ) ";
+            Cmd.CommandText += "Group By PMD.CreatedDT ";
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Black =====*/
@@ -877,6 +880,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 0 AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 100  ";
             Cmd.CommandText += "AND PMD.CPMeasurementGUID IN ( " + LTRL_CPMeasurementGUID.Text + " ) ";
+            Cmd.CommandText += "Group By PMD.CreatedDT ";
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             Cmd.CommandType = CommandType.Text;

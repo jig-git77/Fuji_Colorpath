@@ -18,6 +18,7 @@
     <script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
     <script src="jQuery/jquery-blockUI.js" type="text/javascript"></script>
     <script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
+    <script src="JS/excanvas.js" type="text/javascript"></script>
     <script src="JS/chartread.js" type="text/javascript"></script>
     <script src="JS/i1read.js" type="text/javascript"></script>
     <script src="JS/isisread.js" type="text/javascript"></script>
@@ -133,7 +134,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: auto;
+                            <div id="Canvas" style="position:relative; height: 350px; width: 630px; overflow:visible;
                                 top: 50px; left: 100px;">
                             </div>
                         </td>
