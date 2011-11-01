@@ -66,24 +66,35 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CPSync.svc" />
+    <Content Include="Profile.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CLVectorDataSet.cs" />
-    <Compile Include="Classes\CrossXColor.cs" />
-    <Compile Include="Classes\CrossXColorPINVOKE.cs" />
-    <Compile Include="Classes\Curve.cs" />
-    <Compile Include="Classes\GenericListClass.cs" />
-    <Compile Include="Classes\Profile.cs" />
-    <Compile Include="Classes\TYPE_p_long.cs" />
-    <Compile Include="Classes\TYPE_p_p_void.cs" />
-    <Compile Include="Classes\TYPE_p_void.cs" />
+    <Compile Include="DataContracts\MessageSeverity.cs" />
+    <Compile Include="DataContracts\ResponseMessage.cs" />
+    <Compile Include="IProfile.cs" />
+    <Compile Include="Profile.svc.cs">
+      <DependentUpon>Profile.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Wrappers\CLVectorDataSet.cs" />
+    <Compile Include="Wrappers\CrossXColor.cs" />
+    <Compile Include="Wrappers\CrossXColorPINVOKE.cs" />
+    <Compile Include="Wrappers\Curve.cs" />
+    <Compile Include="Wrappers\GenericListClass.cs" />
+    <Compile Include="Wrappers\Profile.cs" />
+    <Compile Include="Wrappers\TYPE_p_long.cs" />
+    <Compile Include="Wrappers\TYPE_p_p_void.cs" />
+    <Compile Include="Wrappers\TYPE_p_void.cs" />
     <Compile Include="CPSync.svc.cs">
       <DependentUpon>CPSync.svc</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\DataAccess.cs" />
     <Compile Include="ICPSync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implementations\" />
+    <Folder Include="MessageContracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

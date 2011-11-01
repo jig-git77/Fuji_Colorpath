@@ -34,7 +34,7 @@ namespace ColorPathSync
             try
             {
 
-                objPf = objCurve.CreateISOCurve();
+                //objPf = objCurve.CreateISOCurve();
                 return objPf;
 
             }
