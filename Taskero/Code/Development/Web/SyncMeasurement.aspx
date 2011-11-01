@@ -69,8 +69,7 @@
             background-color: white;
             display: none;
             width: 40em;
-            height: 10em;
-            border: 1px solid blue;
+            height: 10em;            
         }
     </style>
 </head>
@@ -93,37 +92,34 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="green-title">
-                            &nbsp; Measurement Information &nbsp;&nbsp;
+                        <td class="green-title" style="padding-left: 5px;">
+                            Measurement Information &nbsp;&nbsp;
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 5px">
                             <table border="0" width="100%" cellpadding="0" cellspacing="2">
                                 <tr>
-                                    <td colspan="6" class="FORM-TEXT-BLACK">
-                                        <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="FORM-TEXT-BLACK" style="width: 20%;">
+                                    <td class="FORM-TEXT-BLACK" style="width: 20%; padding-left: 0px;">
                                         Measurement Name :
                                     </td>
-                                    <td>
+                                    <td style="width: 19%;">
                                         <asp:TextBox ID="TxtMeasurementName" runat="server" Width="150px" MaxLength="90"
                                             CssClass="TEXTBOX"></asp:TextBox>
                                     </td>
-                                    <td align="center">
+                                    <td style="width: 14%;" align="center">
                                         <input id="btnCalibrate" type="button" value="Calibrate" class="BUTTON" onclick="javascript:calibrateDevice(g_ScannerList[0])"
                                             style="display: none" />
+                                    </td>                                     
+                                    <td style="width: 18%;" align="center">
+                                        <input id="btnMeasureAndUploadChart" type="button" value="Measure Chart" class="BUTTON"
+                                            style="display: none" />
                                     </td>
-                                    <td align="center">
-                                        <input id="btnMeasureChart" type="button" value="Measure Chart" class="BUTTON" style="display: none" />
-                                    </td>
-                                    <td align="center">
+                                    <td style="width: 25%;" align="center">
                                         <input id="btnUploadData" type="button" value="Upload Data" class="BUTTON" style="display: none" />
+                                        <input id="btnCancelMeasurement" type="button" value="Cancel Measurement" class="BUTTON" style="display: none" />
                                     </td>
-                                    <td style="width: 20px; padding-right: 2px;">
+                                    <td style="width: 4%; padding-right: 2px;">
                                         <div id="DivIngLogo" style="width: 20px">
                                             <img id="ImgLoad" src="Images/Red-Lamp.gif"></img>
                                         </div>
@@ -133,10 +129,33 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <div id="Canvas" style="position:relative; height: 350px; width: 630px; overflow:visible;
-                                top: 50px; left: 100px;">
-                            </div>
+                        <td style="padding: 2px;">
+                            <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
+                                background-color: #6BB19C; color: Black;" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding: 2px 2px 2px 5px; font-weight: bold;">
+                                        <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning Device is Loading..."></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px;">
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="green-title" style="padding-left: 5px;">
+                                        Colorbar &nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;
+                                            top: 50px; left: 100px;">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <tr>
@@ -158,40 +177,48 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <rad:radgrid id="RG_SyncMeasurement" runat="server" autogeneratecolumns="false" allowpaging="false"
-                                        allowsorting="true" allowfilteringbycolumn="false" width="100%" skin="Green"
-                                        onitemcommand="RG_SyncMeasurement_ItemCommand">
-                                        <itemstyle horizontalalign="Left" wrap="false" />
-                                        <clientsettings>
-                                    <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
-                                <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /><Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" /></clientsettings>
-                                        <pagerstyle position="Top" />
-                                        <mastertableview>
-                                    <Columns>
-                                        <rad:GridBoundColumn DataField="MeasurementID" HeaderText="MeasurementID" Visible="false"></rad:GridBoundColumn>                                       
-                                        <rad:GridTemplateColumn DataField="MeasurementName" HeaderText="MeasurementName"
-                                            ItemStyle-Width="50%" HeaderStyle-Width="50%" AllowFiltering="false" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Lbl_Measurement" runat="server" Text='<%# OriginalFileNameReturn(Eval("MeasurementName").ToString()) %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </rad:GridTemplateColumn>
-                                        <rad:GridTemplateColumn DataField="UploadDateTime" DataType="System.DateTime" UniqueName="UploadDateTime"
-                                            AllowFiltering="false" Visible="true" HeaderText="Upload Date Time" ItemStyle-Width="40%"
-                                            HeaderStyle-Width="40%" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <%# DataBinder.Eval(Container.DataItem, "UploadDateTime").ToString().Replace(":000", " ") %>
-                                            </ItemTemplate>
-                                        </rad:GridTemplateColumn>
-                                         <rad:GridTemplateColumn  HeaderText="Delete" ItemStyle-Width="10%"
-                                            HeaderStyle-Width="10%" AllowFiltering="false" ItemStyle-HorizontalAlign="Center">
-                                           <ItemTemplate>
-                                                <asp:ImageButton ID="IMGBTN_Delete" runat="server" OnClientClick="return confirm('Are you sure want to delete ?');" CommandName="Delete" ImageUrl="~/Images/Delete-Icon.gif"
-                                                                                                ToolTip="Delete"  />
-                                          </ItemTemplate>
-                                        </rad:GridTemplateColumn>
-                                    </Columns>
-                                </mastertableview>
-                                    </rad:radgrid>
+                                    <rad:RadGrid ID="RG_SyncMeasurement" runat="server" AutoGenerateColumns="false" AllowPaging="false"
+                                        AllowSorting="true" AllowFilteringByColumn="false" Width="100%" Skin="Green"
+                                        OnItemCommand="RG_SyncMeasurement_ItemCommand">
+                                        <ItemStyle HorizontalAlign="Left" Wrap="false" />
+                                        <ClientSettings>
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="80" />
+                                        </ClientSettings>
+                                        <PagerStyle Position="Top" />
+                                        <MasterTableView>
+                                            <Columns>
+                                                <rad:GridBoundColumn DataField="MeasurementID" HeaderText="MeasurementID" Visible="false">
+                                                </rad:GridBoundColumn>
+                                                <rad:GridTemplateColumn DataField="MeasurementName" HeaderText="MeasurementName"
+                                                    ItemStyle-Width="50%" HeaderStyle-Width="50%" AllowFiltering="false" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Lbl_Measurement" runat="server" Text='<%# OriginalFileNameReturn(Eval("MeasurementName").ToString()) %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </rad:GridTemplateColumn>
+                                                <rad:GridTemplateColumn DataField="UploadDateTime" DataType="System.DateTime" UniqueName="UploadDateTime"
+                                                    AllowFiltering="false" Visible="true" HeaderText="Upload Date Time" ItemStyle-Width="40%"
+                                                    HeaderStyle-Width="40%" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <%# DataBinder.Eval(Container.DataItem, "UploadDateTime").ToString().Replace(":000", " ") %>
+                                                    </ItemTemplate>
+                                                </rad:GridTemplateColumn>
+                                                <rad:GridTemplateColumn HeaderText="Delete" ItemStyle-Width="10%" HeaderStyle-Width="10%"
+                                                    AllowFiltering="false" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <asp:ImageButton ID="IMGBTN_Delete" runat="server" OnClientClick="return confirm('Are you sure want to delete ?');"
+                                                            CommandName="Delete" ImageUrl="~/Images/Delete-Icon.gif" ToolTip="Delete" />
+                                                    </ItemTemplate>
+                                                </rad:GridTemplateColumn>
+                                            </Columns>
+                                        </MasterTableView>
+                                    </rad:RadGrid>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
@@ -237,18 +264,24 @@
         ListDevices();
     }
     jQuery(document).ready(function () {
-        jQuery('#btnMeasureChart').click(function () {
-            var MeasurementName = jQuery("#TxtMeasurementName").val();
-            if (jQuery.trim(MeasurementName).length < 4) {
-                confirm("Please enter measurement name that is at least three characters long.", "Error");
-                return false;
+        jQuery('#btnMeasureAndUploadChart').click(function () {
+            if (jQuery('#btnMeasureAndUploadChart').val() == 'Measure Chart') {
+                var MeasurementName = jQuery("#TxtMeasurementName").val();
+                if (jQuery.trim(MeasurementName).length < 4) {
+                    confirm("Please enter measurement name that is at least three characters long.", "Error");
+                    return false;
+                }
+                scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
-            scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
+            else if (jQuery('#btnMeasureAndUploadChart').val() == 'Upload Measurement') {
+                upload();
+                document.getElementById('<%= btnBindGrid.ClientID %>').click();
+            }
         });
-        jQuery('#btnUploadData').click(function () {
-            upload();
-            document.getElementById('<%= btnBindGrid.ClientID %>').click();
-        });
+        //        jQuery('#btnUploadData').click(function () {
+        //            upload();
+        //            document.getElementById('<%= btnBindGrid.ClientID %>').click();
+        //        });
     });
 
     function confirm(message, type) {
@@ -305,7 +338,8 @@
         /**clear the array **/
         if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
         ListDevices();
-        jQuery('#btnUploadData').css('display', 'none');
+        //jQuery('#btnUploadData').css('display', 'none');
+        jQuery('#btnMeasureAndUploadChart').val('Measure Chart');
     }
 </script>
 </html>

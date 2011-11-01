@@ -416,6 +416,7 @@ Border-bottom:1px solid #ccc}
 .SYNCTABLELEFTTABLE{width:100%;border:0px;background-color:#6BB19C;font-weight:BOLD;}
 .SUBSYNCTABLELEFTTABLE{width:100%;border:0px;background-color:#D4ECE9;}
 .FORM-TEXT-BLACK { font-weight:bold; font-family:Tahoma; font-size:11px; padding-left:10px; }
+
 .SYNCLINK { color:#333; text-decoration:none; }
 .SYNCLINK hover { color:#f4021e; text-decoration:none; }
 .TDBOX{border:1px solid #B4b4b4;}
@@ -456,3 +457,7 @@ Border-bottom:1px solid #ccc}
 #confirm-container a.modal-close:active,
 #confirm-container a.modal-close:visited {text-decoration:none; font-weight:bold; position:absolute; right:10px; top:2px; color:#fff;}
 #confirm-container a.modal-close:hover {color:#ccc;}
+
+
+
+	

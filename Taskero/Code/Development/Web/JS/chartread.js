@@ -152,21 +152,27 @@ function DisplayLog() {
     document.getElementById("Log").innerHTML = newHTML;
 }
 function presentScannerList(ScannerList) {
-    //ScannerList is an array of scanners with properties.
-    if (ScannerList.length == 0) return;
+    //ScannerList is an array of scanners with properties.    
+    if (ScannerList.length == 0)  return;
     if (ScannerList[0]["State"] == "Deleted") {
-        jQuery('#lblMessage').html("");
+
         jQuery('#btnCalibrate').css('display', 'none');
-        jQuery('#btnMeasureChart').css('display', 'none');
+        jQuery('#tblMessage').css('background-color', '#CC2A3A');
+        jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");
+        jQuery('#btnCalibrate').css('display', 'none');
+        jQuery('#btnMeasureAndUploadChart').css('display', 'none');
+        jQuery('#btnCancelMeasurement').css('display', 'none');
     }
-    else {
+    else {        
         g_ScannerList = ScannerList;
         if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
-            jQuery('#lblMessage').html("Please calibrate");
+            jQuery('#tblMessage').css('background-color', '#6BB19C');
+            jQuery('#lblMessage').html("Status : Please calibrate");
             jQuery('#btnCalibrate').css('display', '');
         }
         else {
-            jQuery('#btnMeasureChart').css('display', '');
+            jQuery('#btnMeasureAndUploadChart').css('display', '');
+            jQuery('#btnCancelMeasurement').css('display', '');
         }
     }
 }
@@ -175,7 +181,7 @@ function presentScannerList(ScannerList) {
 // only a success or fail.  The listed callback function is
 // called with the entire list once it is gathered.  
 function ListDevices() {
-    result = plugin().requestScannerList(presentScannerList);
+    result = plugin().requestScannerList(presentScannerList);    
     if (result != 'OK') {
         confirm("Failed to request scanner list: " + result, "Error");
     }
@@ -270,7 +276,7 @@ function scan(scanner, colorspace, chart) {
 // the server as a json string, then pops up the result.
 function upload() {
     saveMeasurement();
-    RemoveModalWindow();
+    //RemoveModalWindow();
 }
 
 // From here on down is the modal window code.
@@ -289,13 +295,23 @@ function OnQuery(question) {
     // Setup the clock to close the window with the appropriate question
     $('modalWindow').onclick = function () { OnModalWindowClick(question) };
     // Change the text in the window then display it
-    var newHTML = question['Prompt'];
-    g_Question = question;
-    newHTML += '<span style ="position:absolute;right:0;bottom:0">';
-    newHTML += '<A HREF="#" onclick="javascript:OnCancel()">';
+    var newHTML = '<div style="width:100%; height:140px; font: 16px/22px \'Trebuchet MS\', Verdana, Arial; text-align:left; background:#fff; border:2px solid #3A9977;">';
+    newHTML += '<div style="height:30px; line-height:30px; width:100%; background:#3A9977; color:#fff; font-weight:bold;"><span style="padding-left:8px;">Device Calibrateing</span></div>';
+    newHTML += '<div style="color:#333; height:60px; font-size:14px; margin:0; padding:2px 2px 2px 2px;">';
+    newHTML +=question['Prompt'];
+    newHTML += '</div><div style="line-height:26px; width:160px; float:right; padding:10px 8px 0;">';
+    newHTML += '<div style="float:right; margin-left:4px; width:70px; height:26px; color:#666; font-weight:bold; text-align:center; background:url(images/button.gif) repeat-x; border:1px solid #bbb; cursor:pointer;">';
+    newHTML += '<A HREF="#" onclick="javascript:OnCancel()" style="text-decoration:none;">';
     newHTML += 'CANCEL';
     newHTML += '</A>';
-    newHTML += '</span>';
+    newHTML += '</div></div></div>';    
+    //var newHTML = question['Prompt'];
+    g_Question = question;
+//    newHTML += '<span style ="position:absolute;right:0;bottom:0">';
+//    newHTML += '<A HREF="#" onclick="javascript:OnCancel()">';
+//    newHTML += 'CANCEL';
+//    newHTML += '</A>';
+//    newHTML += '</span>';
     document.getElementById('modalWindow').innerHTML = newHTML;
     $('modalWindow').style.display = $('modalBackground').style.display = 'block';
     // call once to center everything
@@ -319,7 +335,7 @@ function OnWindowResize() {
     var top = window.XMLHttpRequest == null ? document.documentElement.scrollTop : 0;
     var div = $('modalWindow');
     div.style.left = Math.max((left + (GetWindowWidth() - div.offsetWidth) / 2), 0) + 'px';
-    div.style.top = '50px';
+    div.style.top = '120px';
 }
 
 function OnModalWindowClick(question) {

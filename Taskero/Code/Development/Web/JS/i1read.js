@@ -45,8 +45,10 @@ function presentCalibrateDone(scanner, msg, final) {
         }
         else {
             confirm("Calibration Successful", "Calibration");
-            jQuery('#lblMessage').html("Calibration Successful");
-            jQuery('#btnMeasureChart').css('display', '');
+            jQuery('#tblMessage').css('background-color', '#6BB19C');
+            jQuery('#lblMessage').html("Status : Calibration Successful.");
+            jQuery('#btnMeasureAndUploadChart').css('display', '');
+            jQuery('#btnCancelMeasurement').css('display', '');
         }
     }
 }
@@ -55,7 +57,7 @@ function presentCalibrateDone(scanner, msg, final) {
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
     var myQuery = new Object();
-    myQuery["CALIBRATEINSTRUCTIONS"] = "<B><CENTER>Please place i1Pro in the calibration cradle<BR>and press press the i1 trigger<BR>or click anywhere in this window</CENTER></B>";
+    myQuery["CALIBRATEINSTRUCTIONS"] = "<B><CENTER>Please place i1Pro in the calibration cradle <br> and press press the i1 trigger<BR>or click anywhere in this window</CENTER></B>";
     myQuery["CALIBRATEACKNOWLEDGED"] = "<B><CENTER>Calibration In Progress</CENTER></B>";
 
     // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for
@@ -82,15 +84,20 @@ function presentStripDialogi1(scanner, chart, query) {
     // next strip in the sequence).
     //
     if (query["Request"] == "READACKNOWLEDGED") {
-        query["Prompt"] = "<B><CENTER>Strip read in progress</CENTER></B>";
+        //query["Prompt"] = "<B><CENTER>Strip read in progress</CENTER></B>";
+        query["Prompt"] = "<B>Strip read in progress.</B>";
     } else {
         if (scanner["Type"] == "iO") {
-            query["Prompt"] = "<B><CENTER>Please place the chart on the platten and click to continue.</CENTER></B>";
+            //query["Prompt"] = "<B><CENTER>Please place the chart on the platten and click to continue.</CENTER></B>";
+            query["Prompt"] = "<B>Please place the chart on the platten and click to continue.</B>";
         } else {
-            query["Prompt"] = "<B><CENTER>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</CENTER></B>";
+            //query["Prompt"] = "<B><CENTER>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</CENTER></B>";
+            query["Prompt"] = "<B>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</B>";
         }
-    }
-    presentQuery(query);
+    }    
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : " + query["Prompt"]);
+    //presentQuery(query);
 }
 //
 // The "Done" callback functions take three args.  The scanner, 
@@ -262,7 +269,9 @@ function presentScanDonei1(scanner, mychart, final) {
     }
 
     if (next == -1) {
-        jQuery('#btnUploadData').css('display', '');
+        //jQuery('#btnUploadData').css('display', '');
+        jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
+
         var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
         var x = 0;
         var y = 0;

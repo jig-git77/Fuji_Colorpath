@@ -82,7 +82,9 @@ function presentScanDoneiSis(scanner, mychart, final) {
     //
     // Add an upload button and canvas
     //
-    jQuery('#btnUploadData').css('display', '');
+
+    //jQuery('#btnUploadData').css('display', '');
+    jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
 
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
     var cursample = 0;
