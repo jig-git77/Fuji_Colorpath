@@ -73,6 +73,7 @@
     <Compile Include="Business\Common.cs" />
     <Compile Include="Business\CreateDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
+    <Compile Include="Business\OptimizeDeviceLinkProfileBusiness.cs" />
     <Compile Include="DataContracts\IccProfile.cs" />
     <Compile Include="DataContracts\MessageSeverity.cs" />
     <Compile Include="DataContracts\Parameter.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="MessageContracts\BaseResponse.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileResponse.cs" />
+    <Compile Include="MessageContracts\OptimizeDeviceLinkProfileRequest.cs" />
+    <Compile Include="MessageContracts\OptimizeDeviceLinkProfileResponse.cs" />
     <Compile Include="ServiceContracts\IProfiler.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateSourceProfileResponse.cs" />

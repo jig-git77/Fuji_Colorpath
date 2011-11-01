@@ -333,13 +333,9 @@ public class Curve
                     throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
                 }
 
-
                 // alloc a managed array and copy profile data to it 
-                byte[] profData = new byte[profSize];
+                var profData = new byte[profSize];
                 Marshal.Copy(pAddr, profData, 0, profSize);
-
-
-                //return in memory profile as byte array
                 return profData;
             }
             catch (Exception ex)
@@ -354,7 +350,6 @@ public class Curve
                     Marshal.FreeHGlobal(pAddr);
                 }
             }
-
         }
 
 

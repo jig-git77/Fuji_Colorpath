@@ -11,10 +11,14 @@ namespace ColorPathSync.ServiceImplementation
             return ProfilerBusiness.CreateSourceProfile(request);
         }
 
-
         public CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request)
         {
             return ProfilerBusiness.CreateDeviceLinkProfile(request);
+        }
+
+        public OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request)
+        {
+            return ProfilerBusiness.OptimizeDeviceLinkProfile(request);
         }
     }
 }

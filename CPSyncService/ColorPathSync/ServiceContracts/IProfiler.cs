@@ -16,5 +16,8 @@ namespace ColorPathSync.ServiceContracts
 
         [OperationContract]
         CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request);
+
+        [OperationContract]
+        OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(OptimizeDeviceLinkProfileRequest request);
     }
 }
