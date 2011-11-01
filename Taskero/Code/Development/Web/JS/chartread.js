@@ -152,7 +152,9 @@ function DisplayLog() {
     document.getElementById("Log").innerHTML = newHTML;
 }
 function presentScannerList(ScannerList) {
-    //ScannerList is an array of scanners with properties.    
+    //ScannerList is an array of scanners with properties.
+    alert(ScannerList.length);
+    g_ScannerList = ScannerList;
     if (ScannerList.length == 0)  return;
     if (ScannerList[0]["State"] == "Deleted") {
 
@@ -164,7 +166,6 @@ function presentScannerList(ScannerList) {
         jQuery('#btnCancelMeasurement').css('display', 'none');
     }
     else {        
-        g_ScannerList = ScannerList;
         if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
             jQuery('#tblMessage').css('background-color', '#6BB19C');
             jQuery('#lblMessage').html("Status : Please calibrate");
