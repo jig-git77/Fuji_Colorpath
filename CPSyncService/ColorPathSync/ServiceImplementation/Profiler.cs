@@ -1,6 +1,7 @@
 ﻿using ColorPathSync.MessageContracts;
+using ColorPathSync.ServiceContracts;
 
-namespace ColorPathSync
+namespace ColorPathSync.ServiceImplementation
 {
     public class Profiler : IProfiler
     {

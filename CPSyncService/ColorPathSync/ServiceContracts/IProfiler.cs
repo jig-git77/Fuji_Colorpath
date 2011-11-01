@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using ColorPathSync.MessageContracts;
 
-namespace ColorPathSync
+namespace ColorPathSync.ServiceContracts
 {
     [ServiceContract]
     public interface IProfiler

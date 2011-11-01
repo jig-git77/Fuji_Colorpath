@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ColorPathSync.Profile" CodeBehind="Profiler.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ColorPathSync.ServiceImplementation.Profiler" CodeBehind="ServiceImplementation/Profiler.cs" %>
