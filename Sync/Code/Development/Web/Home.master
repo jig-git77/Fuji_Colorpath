@@ -72,19 +72,12 @@
                                                                 <table border="0" cellspacing="0" cellpadding="0" class="top-menu">
                                                                     <tr>
                                                                         <td><a href="Home.aspx" title="Home">Home</a></td>
-                                                                         <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                        <td runat="server" id="TD_Processor"><a href="SyncDetail.aspx" title="Sync">Sync</a></td>
                                                                         <td width="5" runat="server"  id="TD_Processor_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                        <td><a href="TaskeroReports.aspx" title="Report">Report</a></td>
+                                                                        <td runat="server" id="TD_Processor"><a href="SyncDetail.aspx" title="Sync">Sync</a></td>
                                                                         <td width="5" runat="server" id="TD_Admin_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                       
                                                                         <td runat="server" id="TD_Admin"><a href="AdminMain.aspx" title="Admin">Admin</a></td>
-                                                                        <td width="5" runat="server" id="TD_Videos_Spacer"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                        <td runat="server" id="TD_Videos"><a href="CheckLicense.aspx" title="Videos">Videos</a></td>
                                                                         <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
                                                                         <td><a href="MyAccount.aspx" title="My Account">My Account</a></td>
-                                                                        <td width="5"><img src="images/spacer.gif" alt="FujiFilm" border="0" /></td>
-                                                                        <td><a href="Logout.aspx" title="Logout">Logout</a></td>
                                                                         <td>&nbsp;</td>
                                                                     </tr>
                                                                 </table>

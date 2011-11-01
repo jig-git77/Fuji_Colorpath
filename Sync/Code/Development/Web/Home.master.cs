@@ -88,11 +88,6 @@ public partial class Home1 : MasterBase
             else
             { TD_Admin.Visible = false; TD_Admin_Spacer.Visible = false; }
 
-            if (Fuji.Common.Sessions.Access_VideoView)
-            { TD_Videos.Visible = true; TD_Videos_Spacer.Visible = true; }
-            else
-            { TD_Videos.Visible = false; TD_Videos_Spacer.Visible = false; }
-
             // === Sync Tab Hide/Show Based on Permission === //
             if (Fuji.Common.Sessions.Access_SyncView)
             { TD_Processor.Visible = true; TD_Processor_Spacer.Visible = true; }

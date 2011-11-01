@@ -32,7 +32,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Web", "Web", "{6E165720-5C0
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1260"
+		VWDPort = "1261"
 		VWDDynamicPort = "false"
 	EndProjectSection
 EndProject
