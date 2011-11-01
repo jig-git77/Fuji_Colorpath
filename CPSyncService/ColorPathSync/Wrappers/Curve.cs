@@ -315,7 +315,7 @@ public class Curve
       
 
         //Convert in memory profile (unmanged C++ memory buffer) to a managed (.net) byte array
-        private byte[] GetDLP(ref TYPE_p_void prof)
+        internal static byte[] GetDLP(ref TYPE_p_void prof)
         {
             IntPtr pAddr = IntPtr.Zero;
             try

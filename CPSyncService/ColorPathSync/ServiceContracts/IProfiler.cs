@@ -13,5 +13,8 @@ namespace ColorPathSync.ServiceContracts
     {
         [OperationContract]
         CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
+
+        [OperationContract]
+        CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request);
     }
 }

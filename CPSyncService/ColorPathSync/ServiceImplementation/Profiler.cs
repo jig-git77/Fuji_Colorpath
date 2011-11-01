@@ -1,5 +1,6 @@
 ﻿using ColorPathSync.MessageContracts;
 using ColorPathSync.ServiceContracts;
+using ColorPathSync.Business;
 
 namespace ColorPathSync.ServiceImplementation
 {
@@ -8,6 +9,12 @@ namespace ColorPathSync.ServiceImplementation
         public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {
             return ProfilerBusiness.CreateSourceProfile(request);
+        }
+
+
+        public CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request)
+        {
+            return ProfilerBusiness.CreateDeviceLinkProfile(request);
         }
     }
 }
