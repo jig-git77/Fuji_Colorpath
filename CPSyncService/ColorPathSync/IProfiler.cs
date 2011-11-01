@@ -4,14 +4,14 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using ColorPathSync.MessageContracts;
 
 namespace ColorPathSync
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IProfile" in both code and config file together.
     [ServiceContract]
-    public interface IProfile
+    public interface IProfiler
     {
         [OperationContract]
-        void DoWork();
+        CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
     }
 }

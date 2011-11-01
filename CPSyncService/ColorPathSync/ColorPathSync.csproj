@@ -66,15 +66,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CPSync.svc" />
-    <Content Include="Profile.svc" />
+    <Content Include="Profiler.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CreateSourceProfileBusiness.cs" />
+    <Compile Include="DataContracts\IccProfile.cs" />
     <Compile Include="DataContracts\MessageSeverity.cs" />
-    <Compile Include="DataContracts\ResponseMessage.cs" />
-    <Compile Include="IProfile.cs" />
-    <Compile Include="Profile.svc.cs">
-      <DependentUpon>Profile.svc</DependentUpon>
+    <Compile Include="DataContracts\Parameter.cs" />
+    <Compile Include="MessageContracts\BaseResponse.cs" />
+    <Compile Include="IProfiler.cs" />
+    <Compile Include="MessageContracts\CreateSourceProfileRequest.cs" />
+    <Compile Include="MessageContracts\CreateSourceProfileResponse.cs" />
+    <Compile Include="Profiler.svc.cs">
+      <DependentUpon>Profiler.svc</DependentUpon>
     </Compile>
     <Compile Include="Wrappers\CLVectorDataSet.cs" />
     <Compile Include="Wrappers\CrossXColor.cs" />
@@ -94,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Implementations\" />
-    <Folder Include="MessageContracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
