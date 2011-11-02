@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f379f838-cf3a-4dcb-b857-a6dbcd3c35ee" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ColorPathSync/Profiler.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Profiler.xsd" MetadataType="Schema" ID="240d3a2e-22fd-4241-9b99-ad9b6ac07b4e" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd2" />
+    <MetadataFile FileName="Profiler.wsdl" MetadataType="Wsdl" ID="779ed717-fa52-42d1-aebb-351c49f1ac37" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?wsdl" />
+    <MetadataFile FileName="Profiler1.xsd" MetadataType="Schema" ID="7978a029-247a-4499-ba50-81c36a50f72c" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd4" />
+    <MetadataFile FileName="Profiler2.xsd" MetadataType="Schema" ID="4d0a9ecf-531b-490c-96e8-044947789e7c" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd3" />
+    <MetadataFile FileName="Profiler3.xsd" MetadataType="Schema" ID="bbe7ad53-fc04-4058-86b5-64c9822609d7" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd1" />
+    <MetadataFile FileName="Profiler4.xsd" MetadataType="Schema" ID="4508aaa1-8d6b-43b0-a918-3a223a8c2894" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd0" />
+    <MetadataFile FileName="Profiler.disco" MetadataType="Disco" ID="bf9f9685-cd89-4a31-bde8-4f7b6e6ab20b" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
