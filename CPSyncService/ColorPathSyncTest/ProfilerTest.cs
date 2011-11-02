@@ -78,6 +78,16 @@ namespace ColorPathSyncTest
 
         private static double[] GetPcsData()
         {
+            var pcs = new List<double>();
+            var line = string.Empty;
+            // Read the file and display it line by line.
+            var file = new System.IO.StreamReader("..\\DataFiles\\XYZValues.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                pcs.AddRange(line.Split('\t').Select(Convert.ToDouble).ToList());
+            }
+            file.Close();
+            return pcs.ToArray();
             return new double[]
                        {
                            9.09, 7.47, 3.38,
