@@ -166,7 +166,8 @@ function presentScannerList(ScannerList) {
         jQuery('#btnMeasureAndUploadChart').css('display', 'none');
         jQuery('#btnCancelMeasurement').css('display', 'none');
     }
-    else {        
+    else {
+        g_ScannerList = ScannerList;
         if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
             jQuery('#tblMessage').css('background-color', '#6BB19C');
             jQuery('#lblMessage').html("Status : Please calibrate.");
