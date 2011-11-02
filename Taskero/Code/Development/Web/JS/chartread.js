@@ -122,7 +122,8 @@ function addEvent(obj, name, func) {
 }
 
 function load() {
-    jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; Error in plugin. &nbsp;', className: "pluginImageTooltipClass", style: false });
+    //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; Error in plugin. &nbsp;', className: "pluginImageTooltipClass", style: false });
+    jQuery('#lblPluginMessage').html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
     });
@@ -133,10 +134,11 @@ function load() {
     } else {
         plugin().setDebug("/tmp/isis.log");
     }
-    var newHTML = '<B>Fuji Color Manager Plugin Version ' + plugin().plugin_version + '</B>';
-    document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
+    var newHTML = '<B>Fuji Color Manager Plugin Version ' + plugin().plugin_version + '</B>.';
+    jQuery('#lblPluginMessage').html(newHTML);
+    //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
-    jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
+    //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 
 function presentQuery(question) {
@@ -152,14 +154,13 @@ function DisplayLog() {
     document.getElementById("Log").innerHTML = newHTML;
 }
 function presentScannerList(ScannerList) {
-    //ScannerList is an array of scanners with properties.
-    alert(ScannerList.length);
-    g_ScannerList = ScannerList;
+    //ScannerList is an array of scanners with properties.    
+    jQuery('#lblPluginMessage').html("");
     if (ScannerList.length == 0)  return;
     if (ScannerList[0]["State"] == "Deleted") {
 
         jQuery('#btnCalibrate').css('display', 'none');
-        jQuery('#tblMessage').css('background-color', '#CC2A3A');
+        jQuery('#tblMessage').css('background-color', '#EF6E79');
         jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");
         jQuery('#btnCalibrate').css('display', 'none');
         jQuery('#btnMeasureAndUploadChart').css('display', 'none');
@@ -168,7 +169,7 @@ function presentScannerList(ScannerList) {
     else {        
         if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
             jQuery('#tblMessage').css('background-color', '#6BB19C');
-            jQuery('#lblMessage').html("Status : Please calibrate");
+            jQuery('#lblMessage').html("Status : Please calibrate.");
             jQuery('#btnCalibrate').css('display', '');
         }
         else {
@@ -240,19 +241,23 @@ function scan(scanner, colorspace, chart) {
     if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
         if (result == "ERROR: Activation Error") {
-            alert("Device is not valid");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : Device is not valid.");               
         }
         else if (result != "OK") {
-            alert("Scanning Device has been unplugged");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");               
         }
     }
     else {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
-            alert("Device is not valid");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : Device is not valid.");               
         }
         else if (result != "OK") {
-            alert("Scanning Device has been unplugged");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");               
         }
         // Display the original chart from the reference values.
         var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing

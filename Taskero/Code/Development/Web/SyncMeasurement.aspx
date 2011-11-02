@@ -103,27 +103,27 @@
                                     <td class="FORM-TEXT-BLACK" style="width: 20%; padding-left: 0px;">
                                         Measurement Name :
                                     </td>
-                                    <td style="width: 19%;">
+                                    <td style="width: 22%;" align="left">
                                         <asp:TextBox ID="TxtMeasurementName" runat="server" Width="150px" MaxLength="90"
                                             CssClass="TEXTBOX"></asp:TextBox>
                                     </td>
-                                    <td style="width: 14%;" align="center">
+                                    <td style="width: 31%;" align="left">
                                         <input id="btnCalibrate" type="button" value="Calibrate" class="BUTTON" onclick="javascript:calibrateDevice(g_ScannerList[0])"
                                             style="display: none" />
                                     </td>                                     
-                                    <td style="width: 18%;" align="center">
+                                    <td style="width: 16%;" align="right">
                                         <input id="btnMeasureAndUploadChart" type="button" value="Measure Chart" class="BUTTON"
-                                            style="display: none" />
+                                             style="display: none" />
                                     </td>
-                                    <td style="width: 25%;" align="center">
+                                    <td style="width: 8%;" align="right">
                                         <input id="btnUploadData" type="button" value="Upload Data" class="BUTTON" style="display: none" />
-                                        <input id="btnCancelMeasurement" type="button" value="Cancel Measurement" class="BUTTON" style="display: none" />
+                                        <input id="btnCancelMeasurement" type="button" value=" Cancel " class="BUTTON"  style="display: none" />
                                     </td>
-                                    <td style="width: 4%; padding-right: 2px;">
+                                   <%-- <td style="width: 4%; padding-right: 2px;">
                                         <div id="DivIngLogo" style="width: 20px">
                                             <img id="ImgLoad" src="Images/Red-Lamp.gif"></img>
                                         </div>
-                                    </td>
+                                    </td>--%>
                                 </tr>
                             </table>
                         </td>
@@ -134,7 +134,10 @@
                                 background-color: #6BB19C; color: Black;" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="padding: 2px 2px 2px 5px; font-weight: bold;">
-                                        <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning Device is Loading..."></asp:Label>
+                                        <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
+                                    </td>
+                                    <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right">
+                                        <asp:Label ID="lblPluginMessage" runat="server" Text="safdsdfsdf"></asp:Label>
                                     </td>
                                 </tr>
                             </table>
@@ -277,6 +280,11 @@
                 upload();
                 document.getElementById('<%= btnBindGrid.ClientID %>').click();
             }
+        });
+
+        jQuery('#btnCancelMeasurement').click(function () {
+            ListDevices();
+            jQuery('#btnMeasureAndUploadChart').val('Measure Chart');
         });
         //        jQuery('#btnUploadData').click(function () {
         //            upload();

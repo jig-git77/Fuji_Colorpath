@@ -12,7 +12,9 @@ function presentCalibrateDialog(scanner, myQuery) {
         RemoveModalWindow();
     }
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
-    presentQuery(myQuery);
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : " + myQuery["Prompt"]);
+    //presentQuery(myQuery);
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -41,10 +43,12 @@ function presentCalibrateDone(scanner, msg, final) {
         // This would be either "CANCELLED" or "ERROR: ..."
         // for CANCELLED, you might just want to do nothing.
         if (!(msg == "OK" || msg == "CANCELLED")) {
-            confirm(msg, "Error");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : " + msg);
+            //confirm(msg, "Error");
         }
         else {
-            confirm("Calibration Successful", "Calibration");
+            //confirm("Calibration Successful", "Calibration");
             jQuery('#tblMessage').css('background-color', '#6BB19C');
             jQuery('#lblMessage').html("Status : Calibration Successful.");
             jQuery('#btnMeasureAndUploadChart').css('display', '');
@@ -56,9 +60,9 @@ function presentCalibrateDone(scanner, msg, final) {
 //  a callback to present instructions to the user, and a callback
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
-    var myQuery = new Object();
-    myQuery["CALIBRATEINSTRUCTIONS"] = "<B><CENTER>Please place i1Pro in the calibration cradle <br> and press press the i1 trigger<BR>or click anywhere in this window</CENTER></B>";
-    myQuery["CALIBRATEACKNOWLEDGED"] = "<B><CENTER>Calibration In Progress</CENTER></B>";
+    var myQuery = new Object();    
+    myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press press the i1 trigger<BR>or click anywhere in this window.</B>";
+    myQuery["CALIBRATEACKNOWLEDGED"] = "<B>Calibration In Progress.</B>";
 
     // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for
     // "Point","Strip" or "Both".  
@@ -67,7 +71,8 @@ function calibrateDevice(scanner) {
     scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
     var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
     if (result != "OK") {
-        alert("Scanning Device has been unplugged");
+        jQuery('#tblMessage').css('background-color', '#EF6E79');
+        jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");        
     }
 }
 // This function presents the EyeOne calibrate query.  We do this
@@ -83,15 +88,12 @@ function presentStripDialogi1(scanner, chart, query) {
     // will present the options of which strip to read next (defaulting to the
     // next strip in the sequence).
     //
-    if (query["Request"] == "READACKNOWLEDGED") {
-        //query["Prompt"] = "<B><CENTER>Strip read in progress</CENTER></B>";
+    if (query["Request"] == "READACKNOWLEDGED") {        
         query["Prompt"] = "<B>Strip read in progress.</B>";
     } else {
-        if (scanner["Type"] == "iO") {
-            //query["Prompt"] = "<B><CENTER>Please place the chart on the platten and click to continue.</CENTER></B>";
+        if (scanner["Type"] == "iO") {            
             query["Prompt"] = "<B>Please place the chart on the platten and click to continue.</B>";
-        } else {
-            //query["Prompt"] = "<B><CENTER>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</CENTER></B>";
+        } else {            
             query["Prompt"] = "<B>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</B>";
         }
     }    
@@ -125,8 +127,7 @@ function presentScanDonei1(scanner, mychart, final) {
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            //alert(mychart["Result"]);
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {            
             confirm(mychart["Result"], "Error");
         }
         if (typeof final == "string") {
@@ -144,7 +145,8 @@ function presentScanDonei1(scanner, mychart, final) {
 
                 var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
                 if (result != "OK") {
-                    alert("Scanning Device has been unplugged");
+                    jQuery('#tblMessage').css('background-color', '#EF6E79');
+                    jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");                     
                 }
             }
         }
@@ -157,8 +159,8 @@ function presentScanDonei1(scanner, mychart, final) {
     var idx = mychart["NumberOfRows"];
 
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
-        if (results.length != mychart["NumberOfColumns"]) {
-            alert("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"]);
+        if (results.length != mychart["NumberOfColumns"]) {            
+            confirm("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
             if (typeof final == "string") {
                 eval(final);
             } else if (typeof final == "object") {
@@ -172,7 +174,8 @@ function presentScanDonei1(scanner, mychart, final) {
 
             var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
             if (result != "OK") {
-                alert("Scanning Device has been unplugged");
+                jQuery('#tblMessage').css('background-color', '#EF6E79');
+                jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");                 
             }
             return;
         }
@@ -183,8 +186,8 @@ function presentScanDonei1(scanner, mychart, final) {
         console.log("Looking for strip " + curstr);
         idx = mychart["RowNames"].indexOf(curstr);
 
-        if (idx < 0 || idx > mychart["NumberOfRows"]) {
-            alert("ERROR: Cannot determine current read column");
+        if (idx < 0 || idx > mychart["NumberOfRows"]) {            
+            confirm("ERROR: Cannot determine current read column", "Error");
             return;
         }
     }
@@ -264,12 +267,15 @@ function presentScanDonei1(scanner, mychart, final) {
 
         var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result != "OK") {
-            alert("Scanning Device has been unplugged");
+            jQuery('#tblMessage').css('background-color', '#EF6E79');
+            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");             
         }
     }
 
     if (next == -1) {
         //jQuery('#btnUploadData').css('display', '');
+        jQuery('#tblMessage').css('background-color', '#6BB19C');
+        jQuery('#lblMessage').html("Status : Measurement Complete.");
         jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
 
         var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
@@ -310,9 +316,11 @@ function presentProgressi1(scanner, mychart) {
     var width = mychart["NumberOfColumns"];
     var height = mychart["NumberOfRows"];
     var lines = samples / width;
-    prog["Prompt"] = "<CENTER>Reading progress " + samples + " samples</CENTER>";
+    prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
-    presentQuery(prog);
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
+    //presentQuery(prog);
 
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
     var cursample = 0;

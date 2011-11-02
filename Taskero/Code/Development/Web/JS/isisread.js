@@ -2,12 +2,14 @@
 // in javascript so the web app can change everything including
 // the language of the query.
 function presentChartDialogiSis(scanner, chart, query) {
-    if (query["Request"] == "READACKNOWLEDGED") {
-        query["Prompt"] = "<B><CENTER>Chart read in progress</CENTER></B>";
-    } else {
-        query["Prompt"] = "<B><CENTER>Please place the chart in the scanner<BR>and click in this window.</CENTER></B>";
+    if (query["Request"] == "READACKNOWLEDGED") {        
+        query["Prompt"] = "<B>Chart read in progress</B>";
+    } else {        
+        query["Prompt"] = "<B>Please place the chart in the scanner<BR>and click in this window.</B>";
     }
-    presentQuery(query);
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : " + query["Prompt"]);
+    //presentQuery(query);
 }
 function presentScanDoneiSis(scanner, mychart, final) {
     // make sure the popup window is gone
@@ -22,8 +24,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            alert(mychart["Result"]);
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {            
+            confirm(mychart["Result"], "Error");
         }
         if (typeof final == "string") {
             eval(final);
@@ -42,7 +44,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var width = mychart["NumberOfColumns"];
     var expected = mychart["NumberOfRows"] * width;
     if (results.length != expected) {
-        alert("Failed to read expected number of samples(" + expected + " != " + results.length + ")");
+        confirm("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");        
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {
@@ -84,6 +86,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
     //
 
     //jQuery('#btnUploadData').css('display', '');
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : Measurement Complete.");
     jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
 
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
@@ -121,9 +125,11 @@ function presentProgressiSis(scanner, mychart) {
     var width = mychart["NumberOfColumns"];
     var height = mychart["NumberOfRows"];
     var lines = samples / width;
-    prog["Prompt"] = "<CENTER>Reading progress " + samples + " samples</CENTER>";
+    prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
-    presentQuery(prog);
+    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
+    //presentQuery(prog);
 
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
     var cursample = 0;

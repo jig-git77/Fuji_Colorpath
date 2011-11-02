@@ -758,8 +758,8 @@ namespace Fuji.Common
                 ROW["ID"] = "N";
                 ROW["Desc"] = "Measurement Device";
                 ROW["Page"] = "SyncMeasurementDevice.aspx";
-                ROW["Image"] = "Images/syncdevicemgt.png";
-                ROW["SmallImage"] = "images/syncdevicemgt_small.png";
+                ROW["Image"] = "Images/syncmeasurementdevice.png";
+                ROW["SmallImage"] = "images/syncmeasurementdevice_small.png";
                 TabAccess.Rows.Add(ROW);
             }
             #endregion

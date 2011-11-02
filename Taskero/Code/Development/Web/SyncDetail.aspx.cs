@@ -1950,7 +1950,16 @@ public partial class SyncDetail : PageBase
             DataTable DTCPSyncMeasurementDeviceData = new DataTable();
             ObjCPSyncMeasurementDeviceData.PressID = Convert.ToInt16(Fuji.Common.Sessions.GetSession("SelectedPressID")); ;
             DTCPSyncMeasurementDeviceData = ObjCPSyncMeasurementDeviceData.uspGetMeasurementDeviceTypeByPressID();
-
+            if (DTCPSyncMeasurementDeviceData.Rows.Count > 0)
+            {
+                TabPanMeasurementSetup.HeaderText = "Measurement Setup";
+                TabPanMeasurementSetup.Visible = true;
+            }
+            else
+            {
+                TabPanMeasurementSetup.HeaderText = "";
+                TabPanMeasurementSetup.Visible = false;
+            }
             ddlMeasurentDeviceType.DataSource = DTCPSyncMeasurementDeviceData;
             ddlMeasurentDeviceType.DataValueField = "DeviceTypeID";
             ddlMeasurentDeviceType.DataTextField = "DeviceTypeName";
