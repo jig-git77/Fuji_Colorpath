@@ -66,4 +66,29 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="OptimizeDeviceLinkProfileResponse" nillable="true" type="tns:OptimizeDeviceLinkProfileResponse" />
+  <xs:complexType name="ExtractProfileValuesRequest">
+    <xs:sequence>
+      <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="C_X" nillable="true" type="q17:ArrayOfdouble" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="ExtractType" type="q18:ProfileExtractType" />
+      <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="K" nillable="true" type="q19:ArrayOfdouble" />
+      <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="M_Y" nillable="true" type="q20:ArrayOfdouble" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Options" nillable="true" type="q21:ArrayOfParameter" />
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Profile" nillable="true" type="q22:IccProfile" />
+      <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Y_Z" nillable="true" type="q23:ArrayOfdouble" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExtractProfileValuesRequest" nillable="true" type="tns:ExtractProfileValuesRequest" />
+  <xs:complexType name="ExtractProfileValuesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="C_X" nillable="true" type="q24:ArrayOfdouble" />
+          <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="K" nillable="true" type="q25:ArrayOfdouble" />
+          <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="M_Y" nillable="true" type="q26:ArrayOfdouble" />
+          <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Y_Z" nillable="true" type="q27:ArrayOfdouble" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExtractProfileValuesResponse" nillable="true" type="tns:ExtractProfileValuesResponse" />
 </xs:schema>

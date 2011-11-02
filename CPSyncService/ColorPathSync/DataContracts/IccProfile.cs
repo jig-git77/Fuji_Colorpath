@@ -6,6 +6,6 @@ namespace ColorPathSync.DataContracts
     public class IccProfile
     {
         [DataMember]
-        public byte[] Profile { get; set; }
+        public byte[] ProfileData { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace ColorPathSyncTest
     public class ProfilerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CreateSourceProfileTest()
         {
             using(var client = new Profiler.ProfilerClient())
             {
@@ -25,6 +25,40 @@ namespace ColorPathSyncTest
             }
         }
 
+        [TestMethod]
+        public void ExtractProfileValuesTest()
+        {
+            using (var client = new Profiler.ProfilerClient())
+            {
+                byte[] profile = client.CreateSourceProfile(new CreateSourceProfileRequest()
+                                                                {
+                                                                    DCSData = GetDcsData(),
+                                                                    PCSData = GetPcsData(),
+                                                                    Options = GetOptions()
+                                                                }).Profile.ProfileData;
+
+                var C_X = new double[] {9.09};
+                var M_Y = new double[] {7.47};
+                var Y_Z = new double[] {3.38};
+                var K = new double[] {1};
+                var response = client.ExtractProfileValues(new ExtractProfileValuesRequest()
+                                                               {
+                                                                   ExtractType = ProfileExtractType.Lab,
+                                                                   Profile = new IccProfile()
+                                                                                 {
+                                                                                     ProfileData = profile
+                                                                                 },
+                                                                   Options = GetOptions(),
+                                                                   C_X = C_X,
+                                                                   M_Y = M_Y,
+                                                                   Y_Z = Y_Z,
+                                                                   K = K
+                                                               });
+                Assert.IsTrue(response.Severity != MessageSeverity.Error);
+            }
+        }
+
+        #region Private Methods
         private static Parameter[] GetOptions()
         {
             return new Parameter[]
@@ -3290,5 +3324,6 @@ namespace ColorPathSyncTest
                        };
 
         }
+        #endregion
     }
 }

@@ -358,7 +358,7 @@ public class Curve
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        private void CopyProfileInMemory(byte[] profile, ref TYPE_p_void srcProf)
+        internal static void CopyProfileInMemory(byte[] profile, ref TYPE_p_void srcProf)
         {
             IntPtr pAddr = IntPtr.Zero;
             Int32 profSize = profile.Length;

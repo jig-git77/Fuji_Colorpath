@@ -73,6 +73,9 @@
     <None Include="Service References\Profiler\ColorPathSyncTest.Profiler.CreateSourceProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Profiler\ColorPathSyncTest.Profiler.ExtractProfileValuesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Profiler\ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

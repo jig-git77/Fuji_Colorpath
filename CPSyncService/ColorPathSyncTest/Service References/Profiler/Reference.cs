@@ -157,6 +157,7 @@ namespace ColorPathSyncTest.Profiler {
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorPathSyncTest.Profiler.CreateDeviceLinkProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorPathSyncTest.Profiler.ExtractProfileValuesResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorPathSyncTest.Profiler.CreateSourceProfileResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -263,6 +264,77 @@ namespace ColorPathSyncTest.Profiler {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractProfileValuesResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class ExtractProfileValuesResponse : ColorPathSyncTest.Profiler.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] C_XField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] KField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] M_YField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] Y_ZField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] C_X {
+            get {
+                return this.C_XField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.C_XField, value) != true)) {
+                    this.C_XField = value;
+                    this.RaisePropertyChanged("C_X");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] K {
+            get {
+                return this.KField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KField, value) != true)) {
+                    this.KField = value;
+                    this.RaisePropertyChanged("K");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] M_Y {
+            get {
+                return this.M_YField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.M_YField, value) != true)) {
+                    this.M_YField = value;
+                    this.RaisePropertyChanged("M_Y");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] Y_Z {
+            get {
+                return this.Y_ZField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Y_ZField, value) != true)) {
+                    this.Y_ZField = value;
+                    this.RaisePropertyChanged("Y_Z");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateSourceProfileResponse", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
     [System.SerializableAttribute()]
     public partial class CreateSourceProfileResponse : ColorPathSyncTest.Profiler.BaseResponse {
@@ -311,7 +383,7 @@ namespace ColorPathSyncTest.Profiler {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] ProfileField;
+        private byte[] ProfileDataField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -324,14 +396,14 @@ namespace ColorPathSyncTest.Profiler {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Profile {
+        public byte[] ProfileData {
             get {
-                return this.ProfileField;
+                return this.ProfileDataField;
             }
             set {
-                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
-                    this.ProfileField = value;
-                    this.RaisePropertyChanged("Profile");
+                if ((object.ReferenceEquals(this.ProfileDataField, value) != true)) {
+                    this.ProfileDataField = value;
+                    this.RaisePropertyChanged("ProfileData");
                 }
             }
         }
@@ -548,6 +620,161 @@ namespace ColorPathSyncTest.Profiler {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExtractProfileValuesRequest", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts")]
+    [System.SerializableAttribute()]
+    public partial class ExtractProfileValuesRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] C_XField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ColorPathSyncTest.Profiler.ProfileExtractType ExtractTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] KField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] M_YField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ColorPathSyncTest.Profiler.Parameter[] OptionsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ColorPathSyncTest.Profiler.IccProfile ProfileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] Y_ZField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] C_X {
+            get {
+                return this.C_XField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.C_XField, value) != true)) {
+                    this.C_XField = value;
+                    this.RaisePropertyChanged("C_X");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorPathSyncTest.Profiler.ProfileExtractType ExtractType {
+            get {
+                return this.ExtractTypeField;
+            }
+            set {
+                if ((this.ExtractTypeField.Equals(value) != true)) {
+                    this.ExtractTypeField = value;
+                    this.RaisePropertyChanged("ExtractType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] K {
+            get {
+                return this.KField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KField, value) != true)) {
+                    this.KField = value;
+                    this.RaisePropertyChanged("K");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] M_Y {
+            get {
+                return this.M_YField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.M_YField, value) != true)) {
+                    this.M_YField = value;
+                    this.RaisePropertyChanged("M_Y");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorPathSyncTest.Profiler.Parameter[] Options {
+            get {
+                return this.OptionsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OptionsField, value) != true)) {
+                    this.OptionsField = value;
+                    this.RaisePropertyChanged("Options");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorPathSyncTest.Profiler.IccProfile Profile {
+            get {
+                return this.ProfileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProfileField, value) != true)) {
+                    this.ProfileField = value;
+                    this.RaisePropertyChanged("Profile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] Y_Z {
+            get {
+                return this.Y_ZField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Y_ZField, value) != true)) {
+                    this.Y_ZField = value;
+                    this.RaisePropertyChanged("Y_Z");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProfileExtractType", Namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts")]
+    public enum ProfileExtractType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Xyz = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Lab = 2,
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Profiler.IProfiler")]
     public interface IProfiler {
@@ -560,6 +787,9 @@ namespace ColorPathSyncTest.Profiler {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/OptimizeDeviceLinkProfile", ReplyAction="http://tempuri.org/IProfiler/OptimizeDeviceLinkProfileResponse")]
         ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProfiler/ExtractProfileValues", ReplyAction="http://tempuri.org/IProfiler/ExtractProfileValuesResponse")]
+        ColorPathSyncTest.Profiler.ExtractProfileValuesResponse ExtractProfileValues(ColorPathSyncTest.Profiler.ExtractProfileValuesRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -599,6 +829,10 @@ namespace ColorPathSyncTest.Profiler {
         
         public ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileResponse OptimizeDeviceLinkProfile(ColorPathSyncTest.Profiler.OptimizeDeviceLinkProfileRequest request) {
             return base.Channel.OptimizeDeviceLinkProfile(request);
+        }
+        
+        public ColorPathSyncTest.Profiler.ExtractProfileValuesResponse ExtractProfileValues(ColorPathSyncTest.Profiler.ExtractProfileValuesRequest request) {
+            return base.Channel.ExtractProfileValues(request);
         }
     }
 }

@@ -24,8 +24,16 @@
   <xs:element name="MessageSeverity" nillable="true" type="tns:MessageSeverity" />
   <xs:complexType name="IccProfile">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Profile" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ProfileData" nillable="true" type="xs:base64Binary" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="IccProfile" nillable="true" type="tns:IccProfile" />
+  <xs:simpleType name="ProfileExtractType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Xyz" />
+      <xs:enumeration value="Lab" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProfileExtractType" nillable="true" type="tns:ProfileExtractType" />
 </xs:schema>

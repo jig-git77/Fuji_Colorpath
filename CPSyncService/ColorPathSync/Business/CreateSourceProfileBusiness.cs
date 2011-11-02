@@ -59,7 +59,7 @@ namespace ColorPathSync.Business
                     response.Severity = MessageSeverity.Error;
                     return response;
                 }
-                response.Profile.Profile = Curve.GetDLP(ref prof);
+                response.Profile.ProfileData = Curve.GetDLP(ref prof);
             }
             catch (Exception ex)
             {
