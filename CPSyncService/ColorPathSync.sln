@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPathSync", "ColorPathSync\ColorPathSync.csproj", "{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCPSync", "TestColorPathSync\TestCPSync\TestCPSync.csproj", "{9E3F8944-F332-4DAD-A52A-6338075AB28A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73} = {F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorPathSyncTest", "ColorPathSyncTest\ColorPathSyncTest.csproj", "{A69D28EB-987F-4918-ACFF-24CDD5DB6BEE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73} = {F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ColorPathSync\\ColorPathSync.csproj
+		SccProjectName1 = ColorPathSync
+		SccLocalPath1 = ColorPathSync
+		SccProjectUniqueName2 = ColorPathSyncTest\\ColorPathSyncTest.csproj
+		SccProjectName2 = ColorPathSyncTest
+		SccLocalPath2 = ColorPathSyncTest
+		SccProjectUniqueName3 = TestColorPathSync\\TestCPSync\\TestCPSync.csproj
+		SccProjectName3 = TestColorPathSync/TestCPSync
+		SccLocalPath3 = TestColorPathSync\\TestCPSync
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ColorPathSync\ColorPathSync.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E392F8-D01F-4AD2-BD4C-87DE354A1A73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E3F8944-F332-4DAD-A52A-6338075AB28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E3F8944-F332-4DAD-A52A-6338075AB28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E3F8944-F332-4DAD-A52A-6338075AB28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E3F8944-F332-4DAD-A52A-6338075AB28A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A69D28EB-987F-4918-ACFF-24CDD5DB6BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69D28EB-987F-4918-ACFF-24CDD5DB6BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69D28EB-987F-4918-ACFF-24CDD5DB6BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69D28EB-987F-4918-ACFF-24CDD5DB6BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
