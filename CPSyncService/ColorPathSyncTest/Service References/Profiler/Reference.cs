@@ -772,7 +772,7 @@ namespace ColorPathSyncTest.Profiler {
         Xyz = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Lab = 2,
+        CMYK = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

@@ -16,6 +16,6 @@ namespace ColorPathSync.DataContracts
         Xyz = 1,
 
         [EnumMember]
-        Lab = 2
+        CMYK = 2
     }
 }

@@ -16,7 +16,7 @@ namespace ColorPathSyncTest
         [TestMethod]
         public void CreateSourceProfileTest()
         {
-            using(var client = new Profiler.ProfilerClient())
+            using (var client = new Profiler.ProfilerClient())
             {
                 var response = client.CreateSourceProfile(new CreateSourceProfileRequest()
                                                {
@@ -40,13 +40,17 @@ namespace ColorPathSyncTest
                                                                     Options = GetOptions()
                                                                 }).Profile.ProfileData;
 
-                var C_X = new double[] {40};
-                var M_Y = new double[] {70};
-                var Y_Z = new double[] {70};
-                var K = new double[] {10};
+                var C_X = new double[] { 40 };
+                var M_Y = new double[] { 70 };
+                var Y_Z = new double[] { 70 };
+                var K = new double[] { 10 };
+                //var C_X = new double[] { 32.84 };
+                //var M_Y = new double[] { 17 };
+                //var Y_Z = new double[] { 15.44 };
+                //var K = new double[] { 0 };
                 var response = client.ExtractProfileValues(new ExtractProfileValuesRequest()
                                                                {
-                                                                   ExtractType = ProfileExtractType.Lab,
+                                                                   ExtractType = ProfileExtractType.Xyz,
                                                                    Profile = new IccProfile()
                                                                                  {
                                                                                      ProfileData = profile
@@ -91,7 +95,7 @@ namespace ColorPathSyncTest
             file.Close();
             return data.ToArray();
         }
-        
+
         #endregion
     }
 }

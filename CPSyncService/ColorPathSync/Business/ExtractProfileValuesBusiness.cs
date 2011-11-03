@@ -29,7 +29,7 @@ namespace ColorPathSync.Business
             TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
             TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
             TYPE_p_void trafo = null;
-            var renderingIntents = new int[] { CrossXColor.icPerceptual };
+            var renderingIntents = new int[] { CrossXColor.icAbsoluteColorimetric };
 
             try
             {
@@ -107,7 +107,9 @@ namespace ColorPathSync.Business
                     var k = new List<double>();
                     for (int i = 0; i < request.C_X.Length; i++)
                     {
-                        input[0] = input[1] = input[2] = (double) i;
+                        input[0] = request.C_X[i];
+                        input[1] = request.M_Y[i];
+                        input[2] = request.Y_Z[i];
                         // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
                         err = CrossXColor.CLDoTrafo(trafo, input, output);
                         if (err != 0)

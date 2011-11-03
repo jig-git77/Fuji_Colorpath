@@ -32,7 +32,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="None" />
       <xs:enumeration value="Xyz" />
-      <xs:enumeration value="Lab" />
+      <xs:enumeration value="CMYK" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ProfileExtractType" nillable="true" type="tns:ProfileExtractType" />

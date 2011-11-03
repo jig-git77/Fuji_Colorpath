@@ -44,8 +44,6 @@ namespace ColorPathSync.Business
                 }
 
                 var err = CrossXColor.CLNoErr;
-                //err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                //err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
                 request.Options.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
