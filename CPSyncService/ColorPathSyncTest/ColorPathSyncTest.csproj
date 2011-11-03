@@ -66,6 +66,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="DataFiles\CMYK_XYZ Values.xlsx" />
+    <None Include="DataFiles\gracol2006_320_gcrV4Z2.icc" />
     <None Include="DataFiles\options for profiler.rtf" />
     <None Include="Service References\Profiler\ColorPathSyncTest.Profiler.CreateDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

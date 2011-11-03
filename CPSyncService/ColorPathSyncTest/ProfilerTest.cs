@@ -19,11 +19,11 @@ namespace ColorPathSyncTest
             using (var client = new Profiler.ProfilerClient())
             {
                 var response = client.CreateSourceProfile(new CreateSourceProfileRequest()
-                                               {
-                                                   DCSData = ReadFile(DcsFile),
-                                                   PCSData = ReadFile(PcsFile),
-                                                   Options = GetOptions()
-                                               });
+                                                              {
+                                                                  DCSData = ReadFile(DcsFile),
+                                                                  PCSData = ReadFile(PcsFile),
+                                                                  Options = GetOptions(SetOptions.CreateSourceProfile)
+                                                              });
                 Assert.IsTrue(response.Severity != MessageSeverity.Error);
             }
         }
@@ -37,7 +37,7 @@ namespace ColorPathSyncTest
                                                                 {
                                                                     DCSData = ReadFile(DcsFile),
                                                                     PCSData = ReadFile(PcsFile),
-                                                                    Options = GetOptions()
+                                                                    Options = GetOptions(SetOptions.CreateSourceProfile)
                                                                 }).Profile.ProfileData;
 
                 var C_X = new double[] { 40 };
@@ -55,7 +55,6 @@ namespace ColorPathSyncTest
                                                                                  {
                                                                                      ProfileData = profile
                                                                                  },
-                                                                   Options = GetOptions(),
                                                                    C_X = C_X,
                                                                    M_Y = M_Y,
                                                                    Y_Z = Y_Z,
@@ -65,22 +64,94 @@ namespace ColorPathSyncTest
             }
         }
 
-        #region Private Methods
-        private static Parameter[] GetOptions()
+        [TestMethod]
+        public void CreateDeviceLinkProfileTest()
         {
-            return new Parameter[]
-                       {
-                           new Parameter() {Name = "ProfileType", Value = "Printer"},
-                           new Parameter() {Name = "ProfileSize", Value = "2"},
-                           new Parameter() {Name = "ProfileFormat", Value = "4"},
-                           new Parameter() {Name = "SaveProfilerInfo", Value = "1"},
-                           new Parameter() {Name = "GridA2B0", Value = "3"},
-                           new Parameter() {Name = "GridA2B2", Value = "3"},
-                           new Parameter() {Name = "GridB2A0", Value = "3"},
-                           new Parameter() {Name = "GridB2A1", Value = "3"},
-                           new Parameter() {Name = "GridB2A2", Value = "3"},
-                           new Parameter() {Name = "Description", Value = "Test Profiler WFC Service"}
-                       };
+            using (var client = new Profiler.ProfilerClient())
+            {
+                var srcProfile = client.CreateSourceProfile(new CreateSourceProfileRequest()
+                                                                {
+                                                                    DCSData = ReadFile(DcsFile),
+                                                                    PCSData = ReadFile(PcsFile),
+                                                                    Options = GetOptions(SetOptions.CreateSourceProfile)
+                                                                }).Profile.ProfileData;
+                var destProfile = srcProfile;
+                var response = client.CreateDeviceLinkProfile(new CreateDeviceLinkProfileRequest()
+                                                                  {
+                                                                      SourceProfile = new IccProfile()
+                                                                                          {
+                                                                                              ProfileData = srcProfile
+                                                                                          },
+                                                                      DestinationProfile = new IccProfile()
+                                                                                               {
+                                                                                                   ProfileData = destProfile
+                                                                                               },
+                                                                      Options = GetOptions(SetOptions.CreateDeviceLinkProfile)
+                                                                  });
+                Assert.IsTrue(response.Severity != MessageSeverity.Error);
+            }
+        }
+
+        #region Private Methods
+        private enum SetOptions
+        {
+            None = 0,
+            CreateSourceProfile = 1,
+            CreateDestinationProfile = 2,
+            CreateDeviceLinkProfile = 3,
+            OptimizeDeviceLinkProfile = 4
+        }
+
+        private static Parameter[] GetOptions(SetOptions options)
+        {
+            switch (options)
+            {
+                case SetOptions.None:
+                    break;
+                case SetOptions.CreateSourceProfile:
+                    return new Parameter[]
+                               {
+                                   new Parameter() {Name = "ProfileType", Value = "Printer"},
+                                   new Parameter() {Name = "ProfileSize", Value = "2"},
+                                   new Parameter() {Name = "ProfileFormat", Value = "4"},
+                                   new Parameter() {Name = "SaveProfilerInfo", Value = "1"},
+                                   new Parameter() {Name = "GridA2B0", Value = "3"},
+                                   new Parameter() {Name = "GridA2B2", Value = "3"},
+                                   new Parameter() {Name = "GridB2A0", Value = "3"},
+                                   new Parameter() {Name = "GridB2A1", Value = "3"},
+                                   new Parameter() {Name = "GridB2A2", Value = "3"},
+                                   new Parameter() {Name = "Description", Value = "Test Profiler WFC Service"}
+                               };
+                    break;
+                case SetOptions.CreateDestinationProfile:
+                    break;
+                case SetOptions.CreateDeviceLinkProfile:
+                    return new Parameter[]
+                               {
+                                   new Parameter() {Name = "ProfileType", Value = "DeviceLink"},
+                                   new Parameter() {Name = "ProfileSize", Value = "2"},
+                                   new Parameter() {Name = "Rendering", Value = "14"},
+                                   new Parameter() {Name = "PerceptualCompression2", Value = "16"},
+                                   new Parameter() {Name = "PerceptualCompressionMergeFactor", Value = "75"},
+                                   new Parameter() {Name = "DLType", Value = "6"},
+                                   new Parameter() {Name = "DLExceptions", Value = "65536"},
+                                   new Parameter() {Name = "DLOptimizeExceptions", Value = "524289"},
+                                   new Parameter() {Name = "DLExceptionRange", Value = "15"},
+                                   new Parameter() {Name = "DLOptimizeInkRange", Value = "0.2"},
+                                   new Parameter() {Name = "Description", Value = "7900/Xerox 1000 DLP Setting v1.0"},
+                                   new Parameter() {Name = "BlackGeneration", Value = "GCR2Smooth"},
+                                   new Parameter() {Name = "InkMax", Value = "79 79 77 95 BalanceCMY"},
+                                   new Parameter() {Name = "InkTotal", Value = "330"},
+                                   new Parameter() {Name = "BlackStart", Value = "10"},
+                                   new Parameter() {Name = "BlackWidth", Value = "100"}
+                               };
+                    break;
+                case SetOptions.OptimizeDeviceLinkProfile:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("options");
+            }
+            return new Parameter[] {};
         }
 
         private static double[] ReadFile(string filePath)
