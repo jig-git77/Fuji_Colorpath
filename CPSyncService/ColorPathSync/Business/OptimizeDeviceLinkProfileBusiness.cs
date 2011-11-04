@@ -79,9 +79,10 @@ namespace ColorPathSync.Business
                 Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
                 Curve.CopyProfileInMemory(request.DeviceLinkProfile.ProfileData, ref dlpProf);
 
-                err = CrossXColor.CLSetProfilerOption(profiler, "SrcProfile", "C:\\Data\\Projects1\\Fujifilm\\CPSyncService\\ColorPathSyncTest\\DataFiles\\gracol2006_320_gcrV4Z2.icc");
+                err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
+                //err = CrossXColor.CLSetProfilerOption(profiler, "SrcProfile", "C:\\Data\\Projects\\Fujifilm\\CPSyncService\\ColorPathSyncTest\\DataFiles\\gracol2006_320_gcrV4Z2.icc");
                 err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
-                err = CrossXColor.CLSetOptionProfile(profiler, "DLP", destProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "Src2DstProfile", dlpProf);
 
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, prof);
@@ -105,6 +106,7 @@ namespace ColorPathSync.Business
                 CrossXColor.CLFreeICCProfileRef(prof);
                 CrossXColor.CLFreeICCProfileRef(srcProf);
                 CrossXColor.CLFreeICCProfileRef(destProf);
+                CrossXColor.CLFreeICCProfileRef(dlpProf);
             }
             return response;
         }

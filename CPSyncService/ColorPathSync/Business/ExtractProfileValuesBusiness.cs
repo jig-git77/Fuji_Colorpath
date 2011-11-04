@@ -34,29 +34,7 @@ namespace ColorPathSync.Business
             try
             {
                 var err = CrossXColor.CLNoErr;
-                //request.Options.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
-                //err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
-                //err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
-                //byte[] profData = null;
-                //profData = request.Profile.ProfileData;
-
-                //copy byte array into unmangaed buffer (in memory profile)
                 Curve.CopyProfileInMemory(request.Profile.ProfileData, ref srcProf);
-
-                ////Set the source profile 
-                //CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
-
-                ////CrossXColor.CLSetProfilerData(profiler, arrDCS.Length / 4, DCSDataSet, PCSDataSet);
-
-                //// calc profile in memory
-                //err = CrossXColor.CLCalcProfile(profiler, prof);
-                //if (err != 0)
-                //{
-                //    throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
-                //}
-
-                // Use memory profile for calculation
-                // pulls the profile into a "trafo" or transformation
                 var profiles = new TYPE_p_void[1] { srcProf };
                 trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
                 if (trafo == null)
@@ -80,7 +58,6 @@ namespace ColorPathSync.Business
                         input[2] = request.Y_Z[i];
                         input[3] = request.K[i];
 
-                        //input[0] = input[1] = input[2] = input[3] = (double) i;
                         // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
                         err = CrossXColor.CLDoTrafo(trafo, input, output);
                         if (err != 0)

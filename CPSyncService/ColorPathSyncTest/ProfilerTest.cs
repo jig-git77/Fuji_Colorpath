@@ -92,6 +92,53 @@ namespace ColorPathSyncTest
             }
         }
 
+        [TestMethod]
+        public void OptimizeDeviceLinkProfileTest()
+        {
+            using (var client = new Profiler.ProfilerClient())
+            {
+                var destProfile = client.CreateSourceProfile(new CreateSourceProfileRequest()
+                                                                 {
+                                                                     DCSData = ReadFile(DcsFile),
+                                                                     PCSData = ReadFile(PcsFile),
+                                                                     Options = GetOptions(SetOptions.CreateSourceProfile)
+                                                                 }).Profile.ProfileData;
+
+                var dlp = client.CreateDeviceLinkProfile(new CreateDeviceLinkProfileRequest()
+                                                             {
+                                                                 SourceProfile = new IccProfile()
+                                                                                     {
+                                                                                         ProfileData = destProfile
+                                                                                     },
+                                                                 DestinationProfile = new IccProfile()
+                                                                                          {
+                                                                                              ProfileData = destProfile
+                                                                                          },
+                                                                 Options = GetOptions(SetOptions.CreateDeviceLinkProfile)
+                                                             }).DeviceLinkProfile.ProfileData;
+
+                var response = client.OptimizeDeviceLinkProfile(new OptimizeDeviceLinkProfileRequest()
+                                                                    {
+                                                                        SourceProfile = new IccProfile()
+                                                                                            {
+                                                                                                ProfileData = destProfile
+                                                                                            },
+                                                                        DestinationProfile = new IccProfile()
+                                                                                                 {
+                                                                                                     ProfileData = destProfile
+                                                                                                 },
+                                                                        DeviceLinkProfile = new IccProfile()
+                                                                                                {
+                                                                                                    ProfileData = dlp
+                                                                                                },
+                                                                        PCSData = ReadFile(PcsFile),
+                                                                        DCSData = ReadFile(DcsFile),
+                                                                        Options = GetOptions(SetOptions.OptimizeDeviceLinkProfile)
+                                                                    });
+                Assert.IsTrue(response.Severity != MessageSeverity.Error);
+            }
+        }
+
         #region Private Methods
         private enum SetOptions
         {
@@ -147,6 +194,20 @@ namespace ColorPathSyncTest
                                };
                     break;
                 case SetOptions.OptimizeDeviceLinkProfile:
+                    return new Parameter[]
+                               {
+                                   new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
+                                   new Parameter() {Name = "ProfileSize", Value = "2"},
+                                   new Parameter() {Name = "Rendering", Value = "3"},
+                                   new Parameter() {Name = "DLBypassBlack", Value = "100"},
+                                   new Parameter() {Name = "DLExceptions", Value = "129"},
+                                   new Parameter() {Name = "ProfileFormat", Value = "2"},
+                                   new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
+                                   new Parameter() {Name = "Flags", Value = "0"},
+                                   new Parameter() {Name = "Attributes0", Value = "0"},
+                                   new Parameter() {Name = "Attributes1", Value = "0"},
+                                   new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
+                               };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("options");
