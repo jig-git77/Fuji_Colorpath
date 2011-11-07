@@ -1,0 +1,34 @@
+﻿<Window x:Class="ColorPathSync4DTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TabControl Name="tcMain">
+            <TabItem Header="Create Source Profile">
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                            <RowDefinition Height="35"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"></ColumnDefinition>
+                            <ColumnDefinition Width="55*"></ColumnDefinition>
+                            <ColumnDefinition Width="15*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="3" Grid.Row="0" Grid.Column="0" Text="Upload PCS Data"></TextBlock>
+                        <TextBlock Margin="3" Grid.Row="1" Grid.Column="0" Text="Upload DCS Data"></TextBlock>
+                        <TextBox Margin="3" Grid.Row="0" Grid.Column="1" Name="txtPCSData"></TextBox>
+                        <TextBox Margin="3" Grid.Row="1" Grid.Column="1" Name="txtDCSData"></TextBox>
+                        <Button Margin="3" Grid.Row="0" Grid.Column="2" Content="Browse" Name="btnPCSData"></Button>
+                        <Button Margin="3" Grid.Row="1" Grid.Column="2" Content="Browse" Name="btnDCSData"></Button>
+                        <Button Margin="3" Grid.Row="2" Grid.Column="1" Content="Create Source Profile" Name="btnCreateSourceProfile" Click="btnCreateSourceProfile_Click"></Button>
+                        <Button Margin="3" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" Content="Download" Name="btnDownloadSourceProfile" Click="btnDownloadSourceProfile_Click"></Button>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

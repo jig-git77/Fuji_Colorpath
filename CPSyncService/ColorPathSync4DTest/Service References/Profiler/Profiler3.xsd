@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ColorPathSync.MessageContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" />
+  <xs:complexType name="CreateSourceProfileRequest">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DCSData" nillable="true" type="q1:ArrayOfdouble" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Options" nillable="true" type="q2:ArrayOfParameter" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PCSData" nillable="true" type="q3:ArrayOfdouble" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateSourceProfileRequest" nillable="true" type="tns:CreateSourceProfileRequest" />
+  <xs:complexType name="CreateSourceProfileResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Profile" nillable="true" type="q4:IccProfile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateSourceProfileResponse" nillable="true" type="tns:CreateSourceProfileResponse" />
+  <xs:complexType name="BaseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Severity" type="q5:MessageSeverity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseResponse" nillable="true" type="tns:BaseResponse" />
+  <xs:complexType name="CreateDeviceLinkProfileRequest">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DestinationProfile" nillable="true" type="q6:IccProfile" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Options" nillable="true" type="q7:ArrayOfParameter" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="SourceProfile" nillable="true" type="q8:IccProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDeviceLinkProfileRequest" nillable="true" type="tns:CreateDeviceLinkProfileRequest" />
+  <xs:complexType name="CreateDeviceLinkProfileResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DeviceLinkProfile" nillable="true" type="q9:IccProfile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateDeviceLinkProfileResponse" nillable="true" type="tns:CreateDeviceLinkProfileResponse" />
+  <xs:complexType name="OptimizeDeviceLinkProfileRequest">
+    <xs:sequence>
+      <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DCSData" nillable="true" type="q10:ArrayOfdouble" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DestinationProfile" nillable="true" type="q11:IccProfile" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="DeviceLinkProfile" nillable="true" type="q12:IccProfile" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Options" nillable="true" type="q13:ArrayOfParameter" />
+      <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PCSData" nillable="true" type="q14:ArrayOfdouble" />
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="SourceProfile" nillable="true" type="q15:IccProfile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OptimizeDeviceLinkProfileRequest" nillable="true" type="tns:OptimizeDeviceLinkProfileRequest" />
+  <xs:complexType name="OptimizeDeviceLinkProfileResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="OptimizedProfile" nillable="true" type="q16:IccProfile" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OptimizeDeviceLinkProfileResponse" nillable="true" type="tns:OptimizeDeviceLinkProfileResponse" />
+  <xs:complexType name="ExtractProfileValuesRequest">
+    <xs:sequence>
+      <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="C_X" nillable="true" type="q17:ArrayOfdouble" />
+      <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="ExtractType" type="q18:ProfileExtractType" />
+      <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="K" nillable="true" type="q19:ArrayOfdouble" />
+      <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="M_Y" nillable="true" type="q20:ArrayOfdouble" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Options" nillable="true" type="q21:ArrayOfParameter" />
+      <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" minOccurs="0" name="Profile" nillable="true" type="q22:IccProfile" />
+      <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Y_Z" nillable="true" type="q23:ArrayOfdouble" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExtractProfileValuesRequest" nillable="true" type="tns:ExtractProfileValuesRequest" />
+  <xs:complexType name="ExtractProfileValuesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="C_X" nillable="true" type="q24:ArrayOfdouble" />
+          <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="K" nillable="true" type="q25:ArrayOfdouble" />
+          <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="M_Y" nillable="true" type="q26:ArrayOfdouble" />
+          <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Y_Z" nillable="true" type="q27:ArrayOfdouble" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExtractProfileValuesResponse" nillable="true" type="tns:ExtractProfileValuesResponse" />
+</xs:schema>
