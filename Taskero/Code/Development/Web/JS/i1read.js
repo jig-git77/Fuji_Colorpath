@@ -61,7 +61,7 @@ function presentCalibrateDone(scanner, msg, final) {
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
     var myQuery = new Object();    
-    myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press press the i1 trigger<BR>or click anywhere in this window.</B>";
+    myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press press the i1 trigger.</B>";
     myQuery["CALIBRATEACKNOWLEDGED"] = "<B>Calibration In Progress.</B>";
 
     // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for

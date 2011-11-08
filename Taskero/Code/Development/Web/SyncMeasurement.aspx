@@ -131,12 +131,12 @@
                     <tr>
                         <td style="padding: 2px;">
                             <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
-                                background-color: #6BB19C; color: Black;" cellpadding="0" cellspacing="0">
+                                background-color: #6BB19C; color: Black; height:45px;" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <td style="padding: 2px 2px 2px 5px; font-weight: bold;">
+                                    <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
                                         <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
                                     </td>
-                                    <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right">
+                                    <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
                                         <asp:Label ID="lblPluginMessage" runat="server" Text="safdsdfsdf"></asp:Label>
                                     </td>
                                 </tr>
@@ -250,10 +250,10 @@
             <span></span>
         </div>
         <div class='message'>
-        </div>
-        <div class='buttons'>
-            <div class='no simplemodal-close'>
-                OK</div>
+        </div>        
+        <div class='buttons'>            
+            <div class='no simplemodal-close'>                
+                <input type="button" value="OK" id="btnCloseModelPopup" style="border:none; background-color:transparent; padding-top:4px" /></div>
         </div>
     </div>
     </form>
@@ -303,6 +303,9 @@
                 jQuery('.message', dialog.data[0]).append(message);
                 jQuery('.header', dialog.data[0]).append(type);
             }
+        });
+        jQuery('#btnCloseModelPopup').focus().click(function () {
+            
         });
     }
     function saveMeasurement() {
