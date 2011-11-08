@@ -107,7 +107,7 @@
                                         <asp:TextBox ID="TxtMeasurementName" runat="server" Width="150px" MaxLength="90"
                                             CssClass="TEXTBOX"></asp:TextBox>
                                     </td>
-                                    <td style="width: 31%;" align="left">
+                                    <td style="width: 23%;" align="left">
                                         <input id="btnCalibrate" type="button" value="Calibrate" class="BUTTON" onclick="javascript:calibrateDevice(g_ScannerList[0])"
                                             style="display: none" />
                                     </td>                                     
@@ -118,6 +118,9 @@
                                     <td style="width: 8%;" align="right">
                                         <input id="btnUploadData" type="button" value="Upload Data" class="BUTTON" style="display: none" />
                                         <input id="btnCancelMeasurement" type="button" value=" Cancel " class="BUTTON"  style="display: none" />
+                                    </td>
+                                    <td style="width: 8%;" align="right">
+                                        <input id="btnRefresh" type="button" value="Refresh" class="BUTTON" />
                                     </td>
                                    <%-- <td style="width: 4%; padding-right: 2px;">
                                         <div id="DivIngLogo" style="width: 20px">
@@ -137,7 +140,7 @@
                                         <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
                                     </td>
                                     <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
-                                        <asp:Label ID="lblPluginMessage" runat="server" Text="safdsdfsdf"></asp:Label>
+                                        <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
                                     </td>
                                 </tr>
                             </table>
@@ -261,7 +264,13 @@
     </object>
 </body>
 <script language="javascript" type="text/javascript">
+    var refreshTry = 0;
     function ControlVisiblity() {
+        refreshCanvas();
+        jQuery('#btnCalibrate').css('display', 'none');
+        jQuery('#btnMeasureAndUploadChart').val('Measure Chart');
+        jQuery('#btnMeasureAndUploadChart').css('display', 'none');
+        jQuery('#btnCancelMeasurement').css('display', 'none');
         load();   //first you have to load the plugin
         GetReferenceChart((jQuery('#hdProjectID').val()));
         ListDevices();
@@ -283,13 +292,18 @@
         });
 
         jQuery('#btnCancelMeasurement').click(function () {
-            ListDevices();
+            refreshCanvas();
             jQuery('#btnMeasureAndUploadChart').val('Measure Chart');
+            OnCancel();
+            ListDevices();
         });
-        //        jQuery('#btnUploadData').click(function () {
-        //            upload();
-        //            document.getElementById('<%= btnBindGrid.ClientID %>').click();
-        //        });
+        jQuery('#btnRefresh').click(function () {
+            refreshTry++;
+            ControlVisiblity();
+            if (refreshTry == 2) {
+                jQuery('#lblMessage').html(jQuery('#lblMessage').text() + '<br>Hint: Having problem with plugins? Try to close and re-open your browser!</br>');
+            }
+        });
     });
 
     function confirm(message, type) {
@@ -347,8 +361,10 @@
         });
 
         /**clear the array **/
-        if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
+        OnCancel();
+        //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
         ListDevices();
+        refreshCanvas();
         //jQuery('#btnUploadData').css('display', 'none');
         jQuery('#btnMeasureAndUploadChart').val('Measure Chart');
     }

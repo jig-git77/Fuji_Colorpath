@@ -9,11 +9,8 @@ function presentChartDialogiSis(scanner, chart, query) {
     }
     jQuery('#tblMessage').css('background-color', '#6BB19C');
     jQuery('#lblMessage').html("Status : " + query["Prompt"]);
-    //presentQuery(query);
 }
 function presentScanDoneiSis(scanner, mychart, final) {
-    // make sure the popup window is gone
-    RemoveModalWindow();
     // Before we finalize the request, get all the values from
     // the strip read and present them to the user.
     // This is a syncronous operation since the data is 
@@ -85,7 +82,6 @@ function presentScanDoneiSis(scanner, mychart, final) {
     // Add an upload button and canvas
     //
 
-    //jQuery('#btnUploadData').css('display', '');
     jQuery('#tblMessage').css('background-color', '#6BB19C');
     jQuery('#lblMessage').html("Status : Measurement Complete.");
     jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
@@ -129,8 +125,7 @@ function presentProgressiSis(scanner, mychart) {
     prog["Answers"] = "NONE";
     jQuery('#tblMessage').css('background-color', '#6BB19C');
     jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
-    //presentQuery(prog);
-
+    
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
     var cursample = 0;
     var x = 0;

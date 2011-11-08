@@ -8,13 +8,9 @@ function presentCalibrateDialog(scanner, myQuery) {
     //
     // Calibrate sets the Request to standard strings regardless of language and you can
     // index pre-supplied strings (CALIBRATEINSTRUCTIONS, CALIBRATEACKNOWLEDGED, CANCELLED) like this:
-    if (myQuery["Request"] == "CALIBRATEACKNOWLEDGED") {
-        RemoveModalWindow();
-    }
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
     jQuery('#tblMessage').css('background-color', '#6BB19C');
     jQuery('#lblMessage').html("Status : " + myQuery["Prompt"]);
-    //presentQuery(myQuery);
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -24,9 +20,6 @@ function presentCalibrateDialog(scanner, myQuery) {
 // is defined, all you have to do is eval it.
 //
 function presentCalibrateDone(scanner, msg, final) {
-    // make sure the popup window is gone
-    RemoveModalWindow();
-
     // We have to make one more call to the library.  The 
     // calibrate itself ran in a non-browser thread.  We need
     // the browser thread to join with the calibrate thread to
@@ -34,7 +27,6 @@ function presentCalibrateDone(scanner, msg, final) {
     // the library that the poll thread can be 
 
     if (typeof final != "undefined") {
-        //alert(final);
         eval(final);
     }
     //
@@ -45,10 +37,8 @@ function presentCalibrateDone(scanner, msg, final) {
         if (!(msg == "OK" || msg == "CANCELLED")) {
             jQuery('#tblMessage').css('background-color', '#EF6E79');
             jQuery('#lblMessage').html("Status : " + msg);
-            //confirm(msg, "Error");
         }
         else {
-            //confirm("Calibration Successful", "Calibration");
             jQuery('#tblMessage').css('background-color', '#6BB19C');
             jQuery('#lblMessage').html("Status : Calibration Successful.");
             jQuery('#btnMeasureAndUploadChart').css('display', '');
@@ -61,7 +51,7 @@ function presentCalibrateDone(scanner, msg, final) {
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
     var myQuery = new Object();    
-    myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press press the i1 trigger.</B>";
+    myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press the i1 trigger.</B>";
     myQuery["CALIBRATEACKNOWLEDGED"] = "<B>Calibration In Progress.</B>";
 
     // scanner calibration for i1 supports "Mode", and "SampleSource".  Mode allows you to calibrate for
@@ -99,7 +89,6 @@ function presentStripDialogi1(scanner, chart, query) {
     }    
     jQuery('#tblMessage').css('background-color', '#6BB19C');
     jQuery('#lblMessage').html("Status : " + query["Prompt"]);
-    //presentQuery(query);
 }
 //
 // The "Done" callback functions take three args.  The scanner, 
@@ -110,9 +99,6 @@ function presentStripDialogi1(scanner, chart, query) {
 // must be retriveved before the final call.
 //
 function presentScanDonei1(scanner, mychart, final) {
-
-    // make sure the popup window is gone
-    RemoveModalWindow();
 
     /* chirag put logic to return if lengh of measurepatch = total patches so far*/
     //if (mychart["Size"] == MeasuredPatches.length) return;
@@ -242,7 +228,7 @@ function presentScanDonei1(scanner, mychart, final) {
         var srgb = results[cursample]["sRGB"];
         var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
         jg.setColor(rgbx);
-        jg.fillRect(x * 20, y * 20, 20, 20);
+        jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
         x++;
         if (x >= mychart["NumberOfColumns"]) {
             x = 0;
@@ -330,7 +316,7 @@ function presentProgressi1(scanner, mychart) {
         var srgb = result[cursample]["sRGB"];
         var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
         jg.setColor(rgbx);
-        jg.fillRect(x * 20, y * 20, 20, 20);
+        jg.fillRect(x * 20, (y * 20) + 10, 20, 20);
         x++;
         if (x >= width) {
             x = 0;

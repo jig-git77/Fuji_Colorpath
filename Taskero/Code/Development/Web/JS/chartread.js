@@ -122,7 +122,6 @@ function addEvent(obj, name, func) {
 }
 
 function load() {
-    //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; Error in plugin. &nbsp;', className: "pluginImageTooltipClass", style: false });
     jQuery('#lblPluginMessage').html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
@@ -141,9 +140,6 @@ function load() {
     //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 
-function presentQuery(question) {
-    OnQuery(question);
-}
 function DisplayLog() {
     console.log("In DisplayLog");
     var log = plugin().getLog();
@@ -174,6 +170,8 @@ function presentScannerList(ScannerList) {
             jQuery('#btnCalibrate').css('display', '');
         }
         else {
+            jQuery('#tblMessage').css('background-color', '#6BB19C');
+            jQuery('#lblMessage').html("Status : Click on 'Measure Chart' button.");
             jQuery('#btnMeasureAndUploadChart').css('display', '');
             jQuery('#btnCancelMeasurement').css('display', '');
         }
@@ -200,8 +198,6 @@ function ListDevices() {
 // Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
 // other values may be included and are passed through to the callback functions
 function scan(scanner, colorspace, chart) {
-    
-
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"].length > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -243,7 +239,7 @@ function scan(scanner, colorspace, chart) {
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
         if (result == "ERROR: Activation Error") {
             jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Device is not valid.");               
+            jQuery('#lblMessage').html("Status : This is not valid license device.");
         }
         else if (result != "OK") {
             jQuery('#tblMessage').css('background-color', '#EF6E79');
@@ -254,11 +250,13 @@ function scan(scanner, colorspace, chart) {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
             jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Device is not valid.");               
+            jQuery('#lblMessage').html("Status : This is not valid license device.");
+            return;
         }
         else if (result != "OK") {
             jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");               
+            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");
+            return;
         }
         // Display the original chart from the reference values.
         var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
@@ -279,11 +277,13 @@ function scan(scanner, colorspace, chart) {
     }
 }
 
+function refreshCanvas() {
+    jQuery('#Canvas').empty();
+}
 // This function takes the current saved chart data and uploads it to
 // the server as a json string, then pops up the result.
 function upload() {
     saveMeasurement();
-    //RemoveModalWindow();
 }
 
 // From here on down is the modal window code.
@@ -292,80 +292,8 @@ function OnCancel() {
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     g_Question["Result"] = 'CANCEL';
     var cancelstat = plugin().queryDone(g_Question);
-    if (cancelstat == "Unhandled") {
-        // Remove the modal window ourselves
-        RemoveModalWindow();
-    }
 }
 
-function OnQuery(question) {
-    // Setup the clock to close the window with the appropriate question
-    $('modalWindow').onclick = function () { OnModalWindowClick(question) };
-    // Change the text in the window then display it
-    var newHTML = '<div style="width:100%; height:140px; font: 16px/22px \'Trebuchet MS\', Verdana, Arial; text-align:left; background:#fff; border:2px solid #3A9977;">';
-    newHTML += '<div style="height:30px; line-height:30px; width:100%; background:#3A9977; color:#fff; font-weight:bold;"><span style="padding-left:8px;">Device Calibrateing</span></div>';
-    newHTML += '<div style="color:#333; height:60px; font-size:14px; margin:0; padding:2px 2px 2px 2px;">';
-    newHTML +=question['Prompt'];
-    newHTML += '</div><div style="line-height:26px; width:160px; float:right; padding:10px 8px 0;">';
-    newHTML += '<div style="float:right; margin-left:4px; width:70px; height:26px; color:#666; font-weight:bold; text-align:center; background:url(images/button.gif) repeat-x; border:1px solid #bbb; cursor:pointer;">';
-    newHTML += '<A HREF="#" onclick="javascript:OnCancel()" style="text-decoration:none;">';
-    newHTML += 'CANCEL';
-    newHTML += '</A>';
-    newHTML += '</div></div></div>';    
-    //var newHTML = question['Prompt'];
-    g_Question = question;
-//    newHTML += '<span style ="position:absolute;right:0;bottom:0">';
-//    newHTML += '<A HREF="#" onclick="javascript:OnCancel()">';
-//    newHTML += 'CANCEL';
-//    newHTML += '</A>';
-//    newHTML += '</span>';
-    document.getElementById('modalWindow').innerHTML = newHTML;
-    $('modalWindow').style.display = $('modalBackground').style.display = 'block';
-    // call once to center everything
-    OnWindowResize();
-    if (window.attachEvent)
-        window.attachEvent('onresize', OnWindowResize);
-    else if (window.addEventListener)
-        window.addEventListener('resize', OnWindowResize, false);
-    else
-        window.onresize = OnWindowResize;
-    // we won't bother with using javascript in CSS to take care
-    //   keeping the window centered
-    if (document.all)
-        document.documentElement.onscroll = OnWindowResize;
-}
-
-function OnWindowResize() {
-    // we only need to move the dialog based on scroll position if
-    //   we're using a browser that doesn't support position: fixed, like < IE 7
-    var left = window.XMLHttpRequest == null ? document.documentElement.scrollLeft : 0;
-    var top = window.XMLHttpRequest == null ? document.documentElement.scrollTop : 0;
-    var div = $('modalWindow');
-    div.style.left = Math.max((left + (GetWindowWidth() - div.offsetWidth) / 2), 0) + 'px';
-    div.style.top = '120px';
-}
-
-function OnModalWindowClick(question) {
-    if (question["Answers"] == "NONE") {
-        // If you can't answer it here, then just return
-        return;
-    }
-    RemoveModalWindow()
-    // Notify the user that we are done
-    question["Result"] = "OK";
-    plugin().queryDone(question);
-}
-
-function RemoveModalWindow() {
-    $('modalWindow').style.display = $('modalBackground').style.display = 'none';
-
-    if (window.detachEvent)
-        window.detachEvent('onresize', OnWindowResize);
-    else if (window.removeEventListener)
-        window.removeEventListener('resize', OnWindowResize, false);
-    else
-        window.onresize = null;
-}
 
 /* These functions deal with IE's retardedness in not allowing divs to 
 * cover select elements by replacing the select elements with spans. */
