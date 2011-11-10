@@ -848,7 +848,7 @@ public partial class ReportDevice : PageBase
 
             Cmd.CommandText = "";
             /*===== Cyan =====*/
-            Cmd.CommandText += "SELECT ('Cyan') AS TableName , ISNULL(PPD.DE,0) as DE ,PMD.CreatedDT  ";
+            Cmd.CommandText += "SELECT ('Cyan') AS TableName , ISNULL(AVG(PPD.DE),0) as DE ,PMD.CreatedDT  ";
             Cmd.CommandText += "From CPPatchDataLab PPD ";
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 100 AND PPD.CMYK_M = 0   AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 0  ";
@@ -857,7 +857,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Magenta =====*/
-            Cmd.CommandText += "SELECT ('Magenta') AS TableName , ISNULL(PPD.DE,0) as DE ,PMD.CreatedDT  ";
+            Cmd.CommandText += "SELECT ('Magenta') AS TableName , ISNULL(AVG(PPD.DE),0) as DE ,PMD.CreatedDT  ";
             Cmd.CommandText += " From CPPatchDataLab PPD ";
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 100 AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 0 ";
@@ -866,7 +866,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Yellow =====*/
-            Cmd.CommandText += "SELECT ('Yellow') AS TableName , ISNULL(PPD.DE,0) as DE ,PMD.CreatedDT  ";
+            Cmd.CommandText += "SELECT ('Yellow') AS TableName , ISNULL(AVG(PPD.DE),0) as DE ,PMD.CreatedDT  ";
             Cmd.CommandText += " From CPPatchDataLab PPD ";
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 0 AND PPD.CMYK_Y = 100 AND PPD.CMYK_K = 0  ";
@@ -875,7 +875,7 @@ public partial class ReportDevice : PageBase
             Cmd.CommandText += "Order By PMD.CreatedDT ";
 
             /*===== Black =====*/
-            Cmd.CommandText += "SELECT ('Black') AS TableName  , ISNULL(PPD.DE,0) as DE ,PMD.CreatedDT  ";
+            Cmd.CommandText += "SELECT ('Black') AS TableName  , ISNULL(AVG(PPD.DE),0) as DE ,PMD.CreatedDT  ";
             Cmd.CommandText += " From CPPatchDataLab PPD ";
             Cmd.CommandText += "INNER JOIN CPMeasurement PMD ON PPD.MeasurementGUID = PMD.CPMeasurementGUID ";
             Cmd.CommandText += "WHERE PPD.CMYK_C = 0   AND PPD.CMYK_M = 0 AND PPD.CMYK_Y = 0 AND PPD.CMYK_K = 100  ";

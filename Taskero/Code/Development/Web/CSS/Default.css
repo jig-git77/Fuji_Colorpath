@@ -5,6 +5,7 @@ body { margin:0px; padding:0px; background-color:#fff; }
 table {font-size:11px; color:#333; font-family:tahoma,Arial, Helvetica, sans-serif; text-align:left; }
 .maintable { height:100%; }
 .subtitle{color:Black;font-weight:bold}
+
 /* Global Ends */
 
 /* Top Part Starts */
@@ -58,7 +59,10 @@ a:hover.green1-btn { text-decoration:none; color:#072d21; }
 /* Footer Starts */
 .footer { background:url(../images/footer-shadow1-bg.png) repeat-x top left #119c7a; height:60px; text-align:center; }
 .copyright { background:url(../images/footer-shadow2-bg.png) no-repeat center top; height:60px; line-height:60px; color:#fff; text-align:center; }
-
+img
+{
+    border:none;    
+}
 /* Footer Ends */
 
 .admin-home { height:210px; vertical-align:bottom; }
