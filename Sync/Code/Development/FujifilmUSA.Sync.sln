@@ -3,15 +3,40 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web", "FujifilmUSA.Sync.Web\FujifilmUSA.Sync.Web.csproj", "{0B100010-C5AC-48CA-91FD-0A449F82D2C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Common", "FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj", "{B791085B-2607-458F-B9AA-5DDC581589AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj", "{B3DEFE33-B211-45E8-8062-A7535A340754}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.DataAccess", "FujifilmUSA.Sync.Model\FujifilmUSA.Sync.DataAccess.csproj", "{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Presenter", "FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj", "{05EC147C-DCDC-4470-A7FD-7579E28735EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Business", "FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj", "{71A9790F-C074-413D-8E34-4C7321BD06E9}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FujifilmUSA.Sync.Web\\FujifilmUSA.Sync.Web.csproj
 		SccProjectName1 = FujifilmUSA.Sync.Web
 		SccLocalPath1 = FujifilmUSA.Sync.Web
+		SccProjectUniqueName2 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
+		SccProjectName2 = FujifilmUSA.Sync.Common
+		SccLocalPath2 = FujifilmUSA.Sync.Common
+		SccProjectUniqueName3 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
+		SccProjectName3 = FujifilmUSA.Sync.Entity
+		SccLocalPath3 = FujifilmUSA.Sync.Entity
+		SccProjectUniqueName4 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
+		SccProjectName4 = FujifilmUSA.Sync.Presenter
+		SccLocalPath4 = FujifilmUSA.Sync.Presenter
+		SccProjectUniqueName5 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
+		SccProjectName5 = FujifilmUSA.Sync.Business
+		SccLocalPath5 = FujifilmUSA.Sync.Business
+		SccProjectUniqueName6 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
+		SccProjectName6 = FujifilmUSA.Sync.Model
+		SccLocalPath6 = FujifilmUSA.Sync.Model
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +47,26 @@ Global
 		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B791085B-2607-458F-B9AA-5DDC581589AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B791085B-2607-458F-B9AA-5DDC581589AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B791085B-2607-458F-B9AA-5DDC581589AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B791085B-2607-458F-B9AA-5DDC581589AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3DEFE33-B211-45E8-8062-A7535A340754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DEFE33-B211-45E8-8062-A7535A340754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DEFE33-B211-45E8-8062-A7535A340754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DEFE33-B211-45E8-8062-A7535A340754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05EC147C-DCDC-4470-A7FD-7579E28735EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05EC147C-DCDC-4470-A7FD-7579E28735EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05EC147C-DCDC-4470-A7FD-7579E28735EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05EC147C-DCDC-4470-A7FD-7579E28735EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
