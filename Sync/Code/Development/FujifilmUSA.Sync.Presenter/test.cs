@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FujifilmUSA.Sync.Business;
+using FujifilmUSA.Sync.Business.Implementation;
+using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter
 {
     class test
     {
-        public void test1()
+        public TaskeroUser GetUser()
         {
-            Business.BusinessFactory bf = new Business.BusinessFactory();
-            var inst = bf.GetInstance().UserLogin("test", "test");
+            var taskeroUser = (ITaskeroUserBusiness) new BusinessFactory<TaskeroUserBusinessImpl>();
+            return taskeroUser.UserLogin("test", "test");
         }
     }
 }

@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    public interface ITaskeroUserBusiness
+    public interface ITaskeroUserBusiness : ITaskBase
     {
         TaskeroUser UserLogin(string UserName, string Password);
     }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace FujifilmUSA.Sync.Common
 {
-    public class CommonFunctions
+    public class Utilities
     {
         #region DownloadFile
         public static void DownlaodFile(string FolderPath, string FileName, string ShowOnDialogName)
@@ -151,5 +152,14 @@ namespace FujifilmUSA.Sync.Common
         }
         #endregion
 
+        /// <summary>
+        /// Read configuration value from AppSettings of the config file
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string ReadConfigValue(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
     }
 }

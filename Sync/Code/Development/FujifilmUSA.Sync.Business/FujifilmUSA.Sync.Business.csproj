@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Implementation\TaskeroUserBusinessImpl.cs" />
+    <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\ITaskeroUserBusiness.cs" />
     <Compile Include="Mock\TaskeroUserBusinessMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
