@@ -752,7 +752,7 @@ namespace Fuji.Common
             #endregion
 
             #region Check Sync Measurement Device
-            if (Fuji.Common.Sessions.RoleDesc == Enums.RoleType.TaskeroAdmin || Fuji.Common.Sessions.Access_SyncView == true)
+            if (Fuji.Common.Sessions.RoleDesc == Enums.RoleType.TaskeroAdmin && Fuji.Common.Sessions.Access_SyncView == true)
             {
                 ROW = TabAccess.NewRow();
                 ROW["ID"] = "N";
