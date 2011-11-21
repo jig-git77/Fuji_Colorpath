@@ -2,9 +2,9 @@
 using System.Configuration;
 using System.Data;
 
-namespace FujifilmUSA.Sync.Model
+namespace FujifilmUSA.Sync.DataAccess
 {
-    internal class DataAccessFactory
+    public class DataAccessFactory
     {
         #region Private Variables
         private static DataAccessFactory _instance;

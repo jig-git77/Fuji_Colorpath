@@ -13,9 +13,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Presenter"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Business", "FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj", "{71A9790F-C074-413D-8E34-4C7321BD06E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Business.Test", "FujifilmUSA.Sync.Business.Test\FujifilmUSA.Sync.Business.Test.csproj", "{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{363E3DDB-CFA6-4F40-B228-E23DAA632382}"
+	ProjectSection(SolutionItems) = preProject
+		FujifilmUSA.Sync.vsmdi = FujifilmUSA.Sync.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
 		SccLocalPath0 = .
@@ -37,6 +46,12 @@ Global
 		SccProjectUniqueName6 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
 		SccProjectName6 = FujifilmUSA.Sync.Model
 		SccLocalPath6 = FujifilmUSA.Sync.Model
+		SccProjectUniqueName7 = FujifilmUSA.Sync.Business.Test\\FujifilmUSA.Sync.Business.Test.csproj
+		SccProjectName7 = FujifilmUSA.Sync.Business.Test
+		SccLocalPath7 = FujifilmUSA.Sync.Business.Test
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FujifilmUSA.Sync.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +82,10 @@ Global
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

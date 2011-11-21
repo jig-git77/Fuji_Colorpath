@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IBusTaskeroUser Members
 
-        public TaskeroUser UserLogin(string UserName, string Password)
+        public TaskeroUser UserLogin(string UserName, string Password, string AllowedIP)
         {
             return new TaskeroUser();
         }

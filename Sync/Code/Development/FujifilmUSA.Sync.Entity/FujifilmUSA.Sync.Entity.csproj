@@ -51,6 +51,7 @@
     <Compile Include="Report.cs" />
     <Compile Include="ReportType.cs" />
     <Compile Include="Roles.cs" />
+    <Compile Include="SyncDevice.cs" />
     <Compile Include="TaskeroUser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

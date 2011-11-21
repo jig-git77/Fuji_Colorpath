@@ -45,7 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
+    <Compile Include="Implementation\BranchBusinessImpl.cs" />
+    <Compile Include="Implementation\CompanyBusinessImpl.cs" />
+    <Compile Include="Implementation\SyncDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\TaskeroUserBusinessImpl.cs" />
+    <Compile Include="Interface\IBranchBusiness.cs" />
+    <Compile Include="Interface\ICompanyBusiness.cs" />
+    <Compile Include="Interface\ISyncDeviceBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\ITaskeroUserBusiness.cs" />
     <Compile Include="Mock\TaskeroUserBusinessMock.cs" />

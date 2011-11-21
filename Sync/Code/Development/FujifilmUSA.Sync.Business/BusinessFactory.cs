@@ -12,9 +12,9 @@ namespace FujifilmUSA.Sync.Business
         where T : ITaskBase
     {
         public ITaskBase CreateObject()
-        {
+        {            
             string className = Utilities.ReadConfigValue(typeof (T).Name);
-            string assemblyName = Utilities.ReadConfigValue("AssemblyName");
+            //string assemblyName = Utilities.ReadConfigValue("AssemblyName");
 
             var task = (ITaskBase) Activator.CreateInstance(Type.GetType(className));
 
