@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Presenter
         }
         public void TaskeroUserLogin()
         {
-            ITaskeroUserBusiness task = (ITaskeroUserBusiness)new BusinessFactory<TaskeroUserBusinessImpl>();
+            ITaskeroUserBusiness task = (ITaskeroUserBusiness)new BusinessFactory<ITaskeroUserBusiness>().CreateObject();
             _ViewTaskeroUser.GetTaskeroUser = task.UserLogin(_ViewTaskeroUser.UserName, _ViewTaskeroUser.Password,_ViewTaskeroUser.AllowedIP);
         }
     }
