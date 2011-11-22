@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.DataAccess;
@@ -27,7 +25,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
 
                 //========== Create data table object comes form store procedure=================//
-                DataTable DTTaskeroUserDetail = new DataTable();
+                DataTable DTTaskeroUserDetail;
                 DataTable DTUserRole = new DataTable();
                 DataTable DTRolePermission = new DataTable();
                 DataTable DTUserPermission = new DataTable();

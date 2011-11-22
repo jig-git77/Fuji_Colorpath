@@ -16,27 +16,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public Dictionary<int, string> GetDestinationProfileList()
         {
-            try
+            var dstDestinationProfileList = new Dictionary<int, string>();
+            var dsDestinationProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDestinationProfileList]");
+            if (dsDestinationProfileList != null && dsDestinationProfileList.Tables.Count > 0)
             {
-                Dictionary<int, string> DstDestinationProfileList = new Dictionary<int, string>();
-                DataSet DSDestinationProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDestinationProfileList]");
-                if (DSDestinationProfileList != null && DSDestinationProfileList.Tables.Count > 0)
-                {
-                    DstDestinationProfileList = (from DestinationProfile in DSDestinationProfileList.Tables[0].AsEnumerable()
-                                            select new
-                                            {
-                                                Value = DsReader.ReadInt(DestinationProfile, "DestinationProfileID"),
-                                                Text = DsReader.ReadString(DestinationProfile, "DestinationProfileName")
-                                            }).ToDictionary(DestinationProfile => DestinationProfile.Value, DestinationProfile => DestinationProfile.Text);
-                }
-                return DstDestinationProfileList;
-
+                dstDestinationProfileList = (from destinationProfile in dsDestinationProfileList.Tables[0].AsEnumerable()
+                                             select new
+                                                        {
+                                                            Value = DsReader.ReadInt(destinationProfile, "DestinationProfileID"),
+                                                            Text = DsReader.ReadString(destinationProfile, "DestinationProfileName")
+                                                        }).ToDictionary(destinationProfile => destinationProfile.Value, destinationProfile => destinationProfile.Text);
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return dstDestinationProfileList;
         }
 
         #endregion
