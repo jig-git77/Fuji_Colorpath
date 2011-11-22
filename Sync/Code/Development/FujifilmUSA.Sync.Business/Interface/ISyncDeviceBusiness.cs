@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    interface ISyncDeviceBusiness
+    public interface ISyncDeviceBusiness : ITaskBase
     {
+        List<SyncDevice> GetSyncDeviceListByUserID(int TaskeroUserID, int RoleID, int CompanyID, int BranchID);
     }
 }

@@ -11,16 +11,17 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterBranch
     {
-         private readonly IViewBranch _ViewBranch;
+         
+         private readonly IViewSyncDevice _ViewSyncDevice;
 
-        public PresenterBranch(IViewBranch ViewBranch)
+         public PresenterBranch(IViewSyncDevice ViewSyncDevice)
         {
-            this._ViewBranch = ViewBranch;
+            this._ViewSyncDevice = ViewSyncDevice;
         }
         public void GetBranchList()
         {
-            IBranchBusiness task = (IBranchBusiness)new BusinessFactory<BranchBusinessImpl>();
-            _ViewBranch.GetBranchList = task.GetBranchList(_ViewBranch.CompanyId);
+            IBranchBusiness task = (IBranchBusiness)new BusinessFactory<IBranchBusiness>().CreateObject();
+            _ViewSyncDevice.GetBranchList = task.GetBranchList(_ViewSyncDevice.CompanyID);
         }
     }
 }
