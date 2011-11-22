@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         string UserName { get; set; }
         string Password { get; set; }
-        string AllowedIP { get; set; }
+        string AllowedIp { get; set; }
         TaskeroUser GetTaskeroUser { get; set; }         
     }
 }

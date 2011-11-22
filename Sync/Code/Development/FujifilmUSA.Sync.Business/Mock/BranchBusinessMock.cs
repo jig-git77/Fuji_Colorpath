@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 
 namespace FujifilmUSA.Sync.Business.Mock
@@ -10,7 +7,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IBranchBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int CompanyId)
+        public Dictionary<int, string> GetBranchList(int companyId)
         {
             return new Dictionary<int, string>();
         }

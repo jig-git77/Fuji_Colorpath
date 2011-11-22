@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IBranchBusiness : ITaskBase
     {
-        Dictionary<int, string> GetBranchList(int CompanyId);
+        Dictionary<int, string> GetBranchList(int companyId);
     }
 }

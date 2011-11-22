@@ -8,14 +8,14 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewSyncDevice
     {
-        int TaskeroUserID { get; set; }
-        int RoleID { get; set; }
-        int CompanyID { get; set; }
-        int BranchID { get; set; }
+        int TaskeroUserId { get; set; }
+        int RoleId { get; set; }
+        int CompanyId { get; set; }
+        int BranchId { get; set; }
 
         Dictionary<int, string> GetBranchList { get; set; }
         Dictionary<int, string> GetCompanyList { get; set; }
-        List<SyncDevice> GetSyncDeviceListByUserID { get; set; }
+        List<SyncDevice> GetSyncDeviceListByUserId { get; set; }
 
     }
 }

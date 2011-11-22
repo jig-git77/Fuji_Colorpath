@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
@@ -15,27 +13,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public Dictionary<int, string> GetCompanyList()
         {
-            try
+            var dstCompanyList = new Dictionary<int, string>(); 
+            var dsCompanyList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]", new object[] { 0 });
+            if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
             {
-                Dictionary<int, string> DstCompanyList = new Dictionary<int, string>(); 
-                DataSet DSCompanyList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]", new object[] { 0 });
-                if (DSCompanyList != null && DSCompanyList.Tables.Count > 0)
-                {
-                    DstCompanyList = (from Company in DSCompanyList.Tables[0].AsEnumerable() 
-                                      select new {
-                                          Value = DsReader.ReadInt(Company,"CompanyID"),
-                                          Text = DsReader.ReadString(Company,"CompanyName")
-                                      }).ToDictionary(Company => Company.Value, Company => Company.Text);
-                }
-                return DstCompanyList;
-                
+                dstCompanyList = (dsCompanyList.Tables[0].AsEnumerable().Select(
+                    company => new
+                                   {
+                                       Value = DsReader.ReadInt(company, "CompanyID"),
+                                       Text = DsReader.ReadString(company, "CompanyName")
+                                   })).ToDictionary(company => company.Value, company => company.Text);
             }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
+            return dstCompanyList;
         }
 
         #endregion

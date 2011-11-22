@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 
@@ -10,16 +6,16 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterSyncDevice
     {
-        private readonly IViewSyncDevice _ViewSyncDevice;
+        private readonly IViewSyncDevice _viewSyncDevice;
 
-        public PresenterSyncDevice(IViewSyncDevice ViewSyncDevice)
+        public PresenterSyncDevice(IViewSyncDevice viewSyncDevice)
         {
-            this._ViewSyncDevice = ViewSyncDevice;
+            this._viewSyncDevice = viewSyncDevice;
         }
-        public void GetSyncDeviceListByUserID()
+        public void GetSyncDeviceListByUserId()
         {
-            ISyncDeviceBusiness task = (ISyncDeviceBusiness)new BusinessFactory<ISyncDeviceBusiness>().CreateObject();
-            _ViewSyncDevice.GetSyncDeviceListByUserID = task.GetSyncDeviceListByUserID(_ViewSyncDevice.TaskeroUserID, _ViewSyncDevice.RoleID, _ViewSyncDevice.CompanyID, _ViewSyncDevice.BranchID);
+            var task = (ISyncDeviceBusiness)new BusinessFactory<ISyncDeviceBusiness>().CreateObject();
+            _viewSyncDevice.GetSyncDeviceListByUserId = task.GetSyncDeviceListByUserId(_viewSyncDevice.TaskeroUserId, _viewSyncDevice.RoleId, _viewSyncDevice.CompanyId, _viewSyncDevice.BranchId);
         }
     }
 }

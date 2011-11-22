@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 
@@ -10,16 +6,16 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterDestinationProfile
     {
-        private readonly IViewAddProject _ViewAddProject;
-        public PresenterDestinationProfile(IViewAddProject ViewAddProject)
+        private readonly IViewAddProject _viewAddProject;
+        public PresenterDestinationProfile(IViewAddProject viewAddProject)
         {
-            this._ViewAddProject = ViewAddProject;
+            this._viewAddProject = viewAddProject;
         }
 
         public void GetDestinationProfileList()
         {
-            IDestinationProfileBusiness task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            _ViewAddProject.GetDestinationProfileList = task.GetDestinationProfileList();
+            var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            _viewAddProject.GetDestinationProfileList = task.GetDestinationProfileList();
         }
     }
 }

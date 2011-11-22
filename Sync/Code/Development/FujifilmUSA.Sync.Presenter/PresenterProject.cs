@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 
@@ -10,17 +6,17 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterProject
     {
-        private readonly IViewProjectList _ViewProjectList;
+        private readonly IViewProjectList _viewProjectList;
 
-        public PresenterProject(IViewProjectList ViewProjectList)
+        public PresenterProject(IViewProjectList viewProjectList)
         {
-            _ViewProjectList = ViewProjectList;
+            _viewProjectList = viewProjectList;
         }
 
-        public void GetProjectListBySyncDeviceID()
+        public void GetProjectListBySyncDeviceId()
         {
-            IProjectBussiness task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _ViewProjectList.GetProjectListBySyncDeviceID = task.GetProjectListBySyncDeviceID(_ViewProjectList.SyncDeviceID);
+            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            _viewProjectList.GetProjectListBySyncDeviceId = task.GetProjectListBySyncDeviceId(_viewProjectList.SyncDeviceId);
         }
     }
 }

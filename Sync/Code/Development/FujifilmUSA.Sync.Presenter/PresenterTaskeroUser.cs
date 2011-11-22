@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
-using FujifilmUSA.Sync.Business.Mock;
-using FujifilmUSA.Sync.Business.Implementation;
 
 namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterTaskeroUser
     {
-        private readonly IViewTaskeroUser _ViewTaskeroUser;
+        private readonly IViewTaskeroUser _viewTaskeroUser;
 
-        public PresenterTaskeroUser(IViewTaskeroUser ViewTaskeroUser)
+        public PresenterTaskeroUser(IViewTaskeroUser viewTaskeroUser)
         {
-            this._ViewTaskeroUser = ViewTaskeroUser;
+            this._viewTaskeroUser = viewTaskeroUser;
         }
         public void TaskeroUserLogin()
         {
-            ITaskeroUserBusiness task = (ITaskeroUserBusiness)new BusinessFactory<ITaskeroUserBusiness>().CreateObject();
-            _ViewTaskeroUser.GetTaskeroUser = task.UserLogin(_ViewTaskeroUser.UserName, _ViewTaskeroUser.Password,_ViewTaskeroUser.AllowedIP);
+            var task = (ITaskeroUserBusiness)new BusinessFactory<ITaskeroUserBusiness>().CreateObject();
+            _viewTaskeroUser.GetTaskeroUser = task.UserLogin(_viewTaskeroUser.UserName, _viewTaskeroUser.Password,_viewTaskeroUser.AllowedIp);
         }
     }
 }

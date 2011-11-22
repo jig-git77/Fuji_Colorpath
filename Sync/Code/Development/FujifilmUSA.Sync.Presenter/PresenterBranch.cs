@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
-using FujifilmUSA.Sync.Business.Implementation;
+
 
 namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterBranch
     {
 
-        private readonly IViewSyncDevice _ViewSyncDevice;
+        private readonly IViewSyncDevice _viewSyncDevice;
 
-        public PresenterBranch(IViewSyncDevice ViewSyncDevice)
+        public PresenterBranch(IViewSyncDevice viewSyncDevice)
         {
-            this._ViewSyncDevice = ViewSyncDevice;
+            this._viewSyncDevice = viewSyncDevice;
         }
         public void GetBranchList()
         {
-            IBranchBusiness task = (IBranchBusiness)new BusinessFactory<IBranchBusiness>().CreateObject();
-            _ViewSyncDevice.GetBranchList = task.GetBranchList(_ViewSyncDevice.CompanyID);
+            var task = (IBranchBusiness)new BusinessFactory<IBranchBusiness>().CreateObject();
+            _viewSyncDevice.GetBranchList = task.GetBranchList(_viewSyncDevice.CompanyId);
         }
     }
 }

@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
-using FujifilmUSA.Sync.Business.Implementation;
+
 
 namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterCompany
     {
         
-        private readonly IViewSyncDevice _ViewSyncDevice;
+        private readonly IViewSyncDevice _viewSyncDevice;
 
-        public PresenterCompany(IViewSyncDevice ViewSyncDevice)
+        public PresenterCompany(IViewSyncDevice viewSyncDevice)
         {
-            this._ViewSyncDevice = ViewSyncDevice;
+            this._viewSyncDevice = viewSyncDevice;
         }
         public void GetCompanyList()
         {
-            ICompanyBusiness task = (ICompanyBusiness)new BusinessFactory<ICompanyBusiness>().CreateObject();
-            _ViewSyncDevice.GetCompanyList = task.GetCompanyList();
+            var task = (ICompanyBusiness)new BusinessFactory<ICompanyBusiness>().CreateObject();
+            _viewSyncDevice.GetCompanyList = task.GetCompanyList();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.DataAccess;
@@ -11,91 +11,73 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IBusTaskeroUser Members
 
-        public TaskeroUser UserLogin(string UserName, string Password, string AllowedIP)
+        public TaskeroUser UserLogin(string userName, string password, string allowedIp)
         {
-            try
+            //========== Create Entity object =================//
+            var objTaskeroUser = new TaskeroUser();
+            var objRole = new Roles();                
+
+            var objRolePermissionList = new List<Permission>();
+            var objUserPermissionList = new List<Permission>();
+
+
+
+            //========== Create data table object comes form store procedure=================//
+            DataTable dtTaskeroUserDetail;
+            DataTable dtUserRole;
+            DataTable dtRolePermission;
+            DataTable dtUserPermission;
+
+
+            //========== Get data from data access=================//
+            var dsTaskeroUserLogin = DataAccessFactory.Instance.GetResult("[CPV].[uspGetCheckLogin]", new object[] { userName, password, allowedIp });
+
+            if (dsTaskeroUserLogin != null && dsTaskeroUserLogin.Tables.Count > 0 && dsTaskeroUserLogin.Tables[0].Rows.Count >0)
             {
-                //========== Create Entity object =================//
-                TaskeroUser ObjTaskeroUser = new TaskeroUser();
-                Roles ObjRole = new Roles();                
+                //========== Store in to data table from dataset =================//
+                dtTaskeroUserDetail = dsTaskeroUserLogin.Tables[0];
+                dtUserRole = dsTaskeroUserLogin.Tables[1];
+                dtRolePermission = dsTaskeroUserLogin.Tables[2];
+                dtUserPermission = dsTaskeroUserLogin.Tables[3];
 
-                List<Permission> ObjRolePermissionList = new List<Permission>();
-                List<Permission> ObjUserPermissionList = new List<Permission>();
+                objTaskeroUser.TaskeroUserID = int.Parse(dtTaskeroUserDetail.Rows[0]["TaskeroUserID"].ToString());
+                objTaskeroUser.LoginID = dtTaskeroUserDetail.Rows[0]["LoginID"].ToString();
+                objTaskeroUser.LoginPass = dtTaskeroUserDetail.Rows[0]["LoginPass"].ToString();
+                objTaskeroUser.LastName = dtTaskeroUserDetail.Rows[0]["LastName"].ToString();
+                objTaskeroUser.FirstName = dtTaskeroUserDetail.Rows[0]["FirstName"].ToString();
+                objTaskeroUser.RoleID = int.Parse(dtTaskeroUserDetail.Rows[0]["RoleID"].ToString());
+                objTaskeroUser.AllowedIP = dtTaskeroUserDetail.Rows[0]["IPAccess"].ToString();
 
-
-
-                //========== Create data table object comes form store procedure=================//
-                DataTable DTTaskeroUserDetail;
-                DataTable DTUserRole = new DataTable();
-                DataTable DTRolePermission = new DataTable();
-                DataTable DTUserPermission = new DataTable();
-
-
-                //========== Get data from data access=================//
-                DataSet DSTaskeroUserLogin = DataAccessFactory.Instance.GetResult("[CPV].[uspGetCheckLogin]", new object[] { UserName, Password, AllowedIP });
-
-                if (DSTaskeroUserLogin != null && DSTaskeroUserLogin.Tables.Count > 0 && DSTaskeroUserLogin.Tables[0].Rows.Count >0)
+                if (dtUserRole.Rows.Count > 0)
                 {
-                    //========== Store in to data table from dataset =================//
-                    DTTaskeroUserDetail = DSTaskeroUserLogin.Tables[0];
-                    DTUserRole = DSTaskeroUserLogin.Tables[1];
-                    DTRolePermission = DSTaskeroUserLogin.Tables[2];
-                    DTUserPermission = DSTaskeroUserLogin.Tables[3];
-
-                    ObjTaskeroUser.TaskeroUserID = int.Parse(DTTaskeroUserDetail.Rows[0]["TaskeroUserID"].ToString());
-                    ObjTaskeroUser.LoginID = DTTaskeroUserDetail.Rows[0]["LoginID"].ToString();
-                    ObjTaskeroUser.LoginPass = DTTaskeroUserDetail.Rows[0]["LoginPass"].ToString();
-                    ObjTaskeroUser.LastName = DTTaskeroUserDetail.Rows[0]["LastName"].ToString();
-                    ObjTaskeroUser.FirstName = DTTaskeroUserDetail.Rows[0]["FirstName"].ToString();
-                    ObjTaskeroUser.RoleID = int.Parse(DTTaskeroUserDetail.Rows[0]["RoleID"].ToString());
-                    ObjTaskeroUser.AllowedIP = DTTaskeroUserDetail.Rows[0]["IPAccess"].ToString();
-
-                    if (DTUserRole.Rows.Count > 0)
+                    objRole.RoleID = int.Parse(dtUserRole.Rows[0]["RoleID"].ToString());
+                    objRole.RoleDesc = dtUserRole.Rows[0]["RoleDesc"].ToString();
+                    objRole.RoleLevel = int.Parse(dtUserRole.Rows[0]["RoleLevel"].ToString());
+                    if (dtRolePermission.Rows.Count > 0)
                     {
-                        ObjRole.RoleID = int.Parse(DTUserRole.Rows[0]["RoleID"].ToString());
-                        ObjRole.RoleDesc = DTUserRole.Rows[0]["RoleDesc"].ToString();
-                        ObjRole.RoleLevel = int.Parse(DTUserRole.Rows[0]["RoleLevel"].ToString());
-                        if (DTRolePermission.Rows.Count > 0)
-                        {
-                            foreach (DataRow dr in DTRolePermission.Rows)
-                            {
-                                Permission ObjPermission = new Permission();
-                                ObjPermission.PermissionID = int.Parse(dr["PermissionID"].ToString());
-                                ObjPermission.PermissionDesc = dr["PermissionDesc"].ToString();
-                                ObjRolePermissionList.Add(ObjPermission);                                
-                            }
-                            ObjRole.RolePermission = ObjRolePermissionList;
-                        }
-                        ObjTaskeroUser.UserRoles = ObjRole;
+                        objRolePermissionList.AddRange(from DataRow dr in dtRolePermission.Rows
+                                                       select new Permission {PermissionID = int.Parse(dr["PermissionID"].ToString()), PermissionDesc = dr["PermissionDesc"].ToString()});
+                        objRole.RolePermission = objRolePermissionList;
                     }
-
-                    if (DTUserPermission.Rows.Count > 0)
-                    {
-                        if (DTUserPermission.Rows.Count > 0)
-                        {
-                            foreach (DataRow dr in DTUserPermission.Rows)
-                            {
-                                Permission ObjPermission = new Permission();
-                                ObjPermission.PermissionID = int.Parse(dr["PermissionID"].ToString());
-                                ObjPermission.PermissionDesc = dr["PermissionDesc"].ToString();
-                                ObjUserPermissionList.Add(ObjPermission);                                
-                            }
-                            ObjTaskeroUser.UserPermission = ObjUserPermissionList;
-                        }                       
-                    }
-
+                    objTaskeroUser.UserRoles = objRole;
                 }
-                
 
-                //return new TaskeroUser();
+                if (dtUserPermission.Rows.Count > 0)
+                {
+                    if (dtUserPermission.Rows.Count > 0)
+                    {
+                        objUserPermissionList.AddRange(from DataRow dr in dtUserPermission.Rows
+                                                       select new Permission {PermissionID = int.Parse(dr["PermissionID"].ToString()), PermissionDesc = dr["PermissionDesc"].ToString()});
+                        objTaskeroUser.UserPermission = objUserPermissionList;
+                    }
+                }
 
-                return ObjTaskeroUser;
             }
-            catch (Exception)
-            {
                 
-                throw;
-            }            
+
+            //return new TaskeroUser();
+
+            return objTaskeroUser;
         }
 
         #endregion

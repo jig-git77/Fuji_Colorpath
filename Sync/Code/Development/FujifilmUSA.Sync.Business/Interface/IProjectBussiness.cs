@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IProjectBussiness : ITaskBase
     {
-        List<Project> GetProjectListBySyncDeviceID(int SyncDeviceID);
+        List<Project> GetProjectListBySyncDeviceId(int syncDeviceId);
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
@@ -13,29 +11,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IBranchBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int CompanyId)
+        public Dictionary<int, string> GetBranchList(int companyId)
         {
-            try
+            var dstBranchList = new Dictionary<int, string>();
+            var dsBranchList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]",
+                                                                        new object[] {companyId});
+            if (dsBranchList != null && dsBranchList.Tables.Count > 0)
             {
-                Dictionary<int, string> DstBranchList = new Dictionary<int, string>();
-                DataSet DSBranchList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]", new object[] { CompanyId });
-                if (DSBranchList != null && DSBranchList.Tables.Count > 0)
-                {
-                    DstBranchList = (from Branch in DSBranchList.Tables[0].AsEnumerable()
-                                      select new
-                                      {
-                                          Value = DsReader.ReadInt(Branch,"BranchID"),
-                                          Text = DsReader.ReadString(Branch,"BranchName")
-                                      }).ToDictionary(Branch => Branch.Value, Branch => Branch.Text);
-                }
-                return DstBranchList;
-
+                dstBranchList = (dsBranchList.Tables[0].AsEnumerable().Select(
+                    branch => new
+                                  {
+                                      Value = DsReader.ReadInt(branch, "BranchID"),
+                                      Text = DsReader.ReadString(branch, "BranchName")
+                                  })).ToDictionary(branch => branch.Value, branch => branch.Text);
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return dstBranchList;
         }
 
         #endregion

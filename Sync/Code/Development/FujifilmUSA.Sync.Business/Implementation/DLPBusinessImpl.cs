@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using System.Data;
@@ -16,33 +15,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<DLP> GetDLPList()
         {
-            try
-            {
-                List<DLP> ObjDLPList = new List<DLP>();
-                //========== Get data from data access=================//
-                DataSet DSDLPList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDLPList]");
+            var objDlpList = new List<DLP>();
+            //========== Get data from data access=================//
+            var dsdlpList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDLPList]");
 
-                if (DSDLPList != null && DSDLPList.Tables.Count > 0 && DSDLPList.Tables[0].Rows.Count > 0)
-                {
-                    ObjDLPList = DSDLPList.Tables[0].AsEnumerable().
+            if (dsdlpList != null && dsdlpList.Tables.Count > 0 && dsdlpList.Tables[0].Rows.Count > 0)
+            {
+                objDlpList = dsdlpList.Tables[0].AsEnumerable().
                     Select(x => new DLP()
-                    {
+                                    {
 
-                        DLPID = DsReader.ReadInt(x,"DLPID"),
-                        DLPName = DsReader.ReadString(x,"DLPName"),
-                        Profile = DsReader.ReadString(x,"Profile"),
-                        IsUse = DsReader.ReadBoolean(x,"IsUse"),
-                        DLPSourceProfile = new SourceProfile{ SourceProfileID = DsReader.ReadInt(x,"SourceProfileID"), SourceProfileName = DsReader.ReadString(x,"SourceProfileName")},
-                        DLPDestinationProfile = new DestinationProfile{ DestinationProfileID = DsReader.ReadInt(x,"DestinationProfileID"), DestinationProfileName = DsReader.ReadString(x,"DestinationProfileName")}                        
+                                        DLPID = DsReader.ReadInt(x,"DLPID"),
+                                        DLPName = DsReader.ReadString(x,"DLPName"),
+                                        Profile = DsReader.ReadString(x,"Profile"),
+                                        IsUse = DsReader.ReadBoolean(x,"IsUse"),
+                                        DLPSourceProfile = new SourceProfile{ SourceProfileID = DsReader.ReadInt(x,"SourceProfileID"), SourceProfileName = DsReader.ReadString(x,"SourceProfileName")},
+                                        DLPDestinationProfile = new DestinationProfile{ DestinationProfileID = DsReader.ReadInt(x,"DestinationProfileID"), DestinationProfileName = DsReader.ReadString(x,"DestinationProfileName")}                        
                         
-                    }).ToList();
-                }
-                return ObjDLPList;
+                                    }).ToList();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            return objDlpList;
         }
 
         #endregion

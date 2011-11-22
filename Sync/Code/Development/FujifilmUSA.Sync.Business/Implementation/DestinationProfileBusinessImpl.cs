@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
@@ -20,12 +18,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var dsDestinationProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDestinationProfileList]");
             if (dsDestinationProfileList != null && dsDestinationProfileList.Tables.Count > 0)
             {
-                dstDestinationProfileList = (from destinationProfile in dsDestinationProfileList.Tables[0].AsEnumerable()
-                                             select new
-                                                        {
-                                                            Value = DsReader.ReadInt(destinationProfile, "DestinationProfileID"),
-                                                            Text = DsReader.ReadString(destinationProfile, "DestinationProfileName")
-                                                        }).ToDictionary(destinationProfile => destinationProfile.Value, destinationProfile => destinationProfile.Text);
+                dstDestinationProfileList = (dsDestinationProfileList.Tables[0].AsEnumerable().Select(
+                    destinationProfile => new
+                                              {
+                                                  Value = DsReader.ReadInt(destinationProfile,"DestinationProfileID"),
+                                                  Text = DsReader.ReadString(destinationProfile,"DestinationProfileName")
+                                              })).ToDictionary(destinationProfile => destinationProfile.Value, destinationProfile => destinationProfile.Text);
             }
             return dstDestinationProfileList;
         }

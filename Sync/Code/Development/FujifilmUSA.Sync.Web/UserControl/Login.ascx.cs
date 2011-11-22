@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewTaskeroUser Members
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string AllowedIP { get; set; }                
+        public string AllowedIp { get; set; }                
         public Entity.TaskeroUser GetTaskeroUser { get; set; }
         #endregion
     }
