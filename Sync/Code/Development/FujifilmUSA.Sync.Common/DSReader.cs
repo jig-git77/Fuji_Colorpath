@@ -30,9 +30,9 @@ namespace FujifilmUSA.Sync.Common
 		/// <param name="objRow"></param>
 		/// <param name="columnName"></param>
 		/// <returns>int</returns>
-		public static object ReadBoolean(DataRow objRow, string columnName)
+        public static Boolean ReadBoolean(DataRow objRow, string columnName)
 		{
-			object bRetVal = false;
+			Boolean bRetVal = false;
 			try
 			{
 				
@@ -56,9 +56,9 @@ namespace FujifilmUSA.Sync.Common
 	    /// <param name="columnName"></param>
 	    /// <param name="version"></param>
 	    /// <returns>int</returns>
-	    public static object ReadBoolean(DataRow objRow, string columnName, DataRowVersion version)
+        public static Boolean ReadBoolean(DataRow objRow, string columnName, DataRowVersion version)
 		{
-			object bRetVal = null;
+            Boolean bRetVal = false;
 			try
 			{				
 				if (objRow[columnName, version].Equals(DBNull.Value))

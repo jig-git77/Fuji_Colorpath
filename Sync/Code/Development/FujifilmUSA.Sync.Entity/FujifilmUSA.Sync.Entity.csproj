@@ -45,12 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DestinationProfile.cs" />
+    <Compile Include="DLP.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Permission.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="ReportType.cs" />
     <Compile Include="Roles.cs" />
+    <Compile Include="SourceProfile.cs" />
     <Compile Include="SyncDevice.cs" />
     <Compile Include="TaskeroUser.cs" />
   </ItemGroup>

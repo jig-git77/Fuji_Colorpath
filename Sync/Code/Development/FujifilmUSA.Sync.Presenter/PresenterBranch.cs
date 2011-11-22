@@ -11,10 +11,10 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterBranch
     {
-         
-         private readonly IViewSyncDevice _ViewSyncDevice;
 
-         public PresenterBranch(IViewSyncDevice ViewSyncDevice)
+        private readonly IViewSyncDevice _ViewSyncDevice;
+
+        public PresenterBranch(IViewSyncDevice ViewSyncDevice)
         {
             this._ViewSyncDevice = ViewSyncDevice;
         }

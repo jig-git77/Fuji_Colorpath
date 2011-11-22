@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Entity
             None = 0, Color = 1, Plate = 2, Monitor = 3, WideFormat = 4, Press = 5
         }
 
-        public enum CPSyncPressRunStatus
+        public enum CPSyncRunStatus
         {
             Open = 1,
             Closed = 2,

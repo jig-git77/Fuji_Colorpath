@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -26,13 +27,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     ObjSyncDeviceList = DSSyncDeviceList.Tables[0].AsEnumerable().
                     Select(x => new SyncDevice()
                     {
-                        CPDongleID = int.Parse(x["CPDongleID"].ToString()),
-                        CPSerialNUM = x["CPSerialNUM"].ToString(),
-                        DeviceManufacturer = x["DeviceManufacturer"].ToString(),
-                        DeviceName = x["DeviceName"].ToString(),
-                        DeviceTypeID = int.Parse(x["DeviceTypeID"].ToString()),
-                        NumOfInkUnits = int.Parse(x["NumOfInkUnits"].ToString()),
-                        SyncDeviceID = int.Parse(x["SyncDeviceID"].ToString())
+                        CPDongleID = DsReader.ReadInt(x,"CPDongleID"),
+                        CPSerialNUM = DsReader.ReadString(x,"CPSerialNUM"),
+                        DeviceManufacturer = DsReader.ReadString(x,"DeviceManufacturer"),
+                        DeviceName = DsReader.ReadString(x,"DeviceName"),
+                        DeviceTypeID = DsReader.ReadInt(x, "DeviceTypeID"),
+                        NumOfInkUnits = DsReader.ReadInt(x,"NumOfInkUnits"),
+                        SyncDeviceID = DsReader.ReadInt(x,"SyncDeviceID")
                     }).ToList();
                 }
                 return ObjSyncDeviceList;

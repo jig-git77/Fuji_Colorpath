@@ -5,6 +5,7 @@ using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -23,8 +24,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     DstBranchList = (from Branch in DSBranchList.Tables[0].AsEnumerable()
                                       select new
                                       {
-                                          Value = int.Parse(Branch["BranchID"].ToString()),
-                                          Text = Branch["BranchName"].ToString()
+                                          Value = DsReader.ReadInt(Branch,"BranchID"),
+                                          Text = DsReader.ReadString(Branch,"BranchName")
                                       }).ToDictionary(Branch => Branch.Value, Branch => Branch.Text);
                 }
                 return DstBranchList;

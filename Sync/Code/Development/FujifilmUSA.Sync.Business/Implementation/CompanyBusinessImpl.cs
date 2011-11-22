@@ -5,6 +5,7 @@ using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -22,8 +23,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     DstCompanyList = (from Company in DSCompanyList.Tables[0].AsEnumerable() 
                                       select new {
-                                          Value = int.Parse(Company["CompanyID"].ToString()),
-                                          Text = Company["CompanyName"].ToString()
+                                          Value = DsReader.ReadInt(Company,"CompanyID"),
+                                          Text = DsReader.ReadString(Company,"CompanyName")
                                       }).ToDictionary(Company => Company.Value, Company => Company.Text);
                 }
                 return DstCompanyList;

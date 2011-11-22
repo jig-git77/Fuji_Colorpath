@@ -47,10 +47,16 @@
   <ItemGroup>
     <Compile Include="PresenterBranch.cs" />
     <Compile Include="PresenterCompany.cs" />
+    <Compile Include="PresenterDestinationProfile.cs" />
+    <Compile Include="PresenterDLP.cs" />
+    <Compile Include="PresenterProject.cs" />
+    <Compile Include="PresenterSourceProfile.cs" />
     <Compile Include="PresenterSyncDevice.cs" />
     <Compile Include="PresenterTaskeroUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test.cs" />
+    <Compile Include="ViewInterface\IViewAddProject.cs" />
+    <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewSyncDevice.cs" />
     <Compile Include="ViewInterface\IViewTaskeroUser.cs" />
   </ItemGroup>
