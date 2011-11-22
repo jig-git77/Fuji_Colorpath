@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Configuration;
 
 namespace FujifilmUSA.Sync.Common
@@ -160,6 +157,46 @@ namespace FujifilmUSA.Sync.Common
         public static string ReadConfigValue(string key)
         {
             return ConfigurationManager.AppSettings[key];
+        }
+
+        public static long DbValueToLong(object dbValue)
+        {
+            if (dbValue == DBNull.Value)
+                return 0;
+            else
+            {
+                try
+                {
+                    long value = Convert.ToInt64(dbValue);
+                    return value;
+                }
+                catch { }
+                return 0;
+            }
+        }
+
+        public static int DbValueToInt(object dbValue)
+        {
+            if (dbValue == DBNull.Value)
+                return 0;
+            else
+                return Convert.ToInt32(dbValue);
+        }
+
+        public static bool DbValueToBool(object dbValue)
+        {
+            if (dbValue == DBNull.Value)
+                return false;
+            else
+                return Convert.ToBoolean(dbValue);
+        }
+
+        public static string DbValueToString(object dbValue)
+        {
+            if (dbValue == DBNull.Value)
+                return "";
+            else
+                return Convert.ToString(dbValue);
         }
     }
 }
