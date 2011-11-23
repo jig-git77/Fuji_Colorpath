@@ -9,8 +9,10 @@ using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Login : System.Web.UI.UserControl, IViewTaskeroUser
+    public partial class Login : System.Web.UI.UserControl , IViewTaskeroUser
     {
+
+        
         #region "Declaration"
         private PresenterTaskeroUser _presentertaskerouser;        
         #endregion
@@ -36,5 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string AllowedIp { get; set; }                
         public Entity.TaskeroUser GetTaskeroUser { get; set; }
         #endregion
+
+      
     }
 }

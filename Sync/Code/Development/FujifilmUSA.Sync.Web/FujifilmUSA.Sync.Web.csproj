@@ -52,14 +52,88 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q2 2011\Live Demos\Bin\Telerik.Web.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddProduct.aspx" />
     <Content Include="CSS\Common.css" />
+    <Content Include="Images\body_bg.png" />
+    <Content Include="Images\close_icon.png" />
+    <Content Include="Images\color_palette.jpg" />
+    <Content Include="Images\color_palette_box_bg.png" />
+    <Content Include="Images\color_palette_box_bottom.png" />
+    <Content Include="Images\color_palette_box_head.png" />
+    <Content Include="Images\contant_box_bg.png" />
+    <Content Include="Images\contant_box_bottom.png" />
+    <Content Include="Images\contant_box_haed_bg.png" />
+    <Content Include="Images\contant_box_haed_bt_bg.png" />
+    <Content Include="Images\contant_box_haed_bt_left.png" />
+    <Content Include="Images\contant_box_haed_bt_left_hover.png" />
+    <Content Include="Images\contant_box_haed_bt_right.png" />
+    <Content Include="Images\contant_box_haed_bt_right_hover.png" />
+    <Content Include="Images\contant_box_top.png" />
+    <Content Include="Images\delete_icon.png" />
+    <Content Include="Images\edit_icon.png" />
+    <Content Include="Images\gray_bt_left.png" />
+    <Content Include="Images\gray_bt_right.png" />
+    <Content Include="Images\green_bt_left.png" />
+    <Content Include="Images\green_bt_left_hover.png" />
+    <Content Include="Images\green_bt_right.png" />
+    <Content Include="Images\green_bt_right_hover.png" />
+    <Content Include="Images\header_bg.png" />
+    <Content Include="Images\home_icon.png" />
+    <Content Include="Images\info_icon.png" />
+    <Content Include="Images\input_left.png" />
+    <Content Include="Images\input_right.png" />
+    <Content Include="Images\line.png" />
+    <Content Include="Images\login_box_top.png" />
+    <Content Include="Images\login_bt.png" />
+    <Content Include="Images\login_bt_hover.png" />
+    <Content Include="Images\login_input.png" />
+    <Content Include="Images\login_logo.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\menu_arrow.png" />
+    <Content Include="Images\new_project_icon.png" />
+    <Content Include="Images\page_box_bg.png" />
+    <Content Include="Images\page_box_bottom.png" />
+    <Content Include="Images\page_box_top.png" />
+    <Content Include="Images\powerby_logo.png" />
+    <Content Include="Images\print_icon.png" />
+    <Content Include="Images\product_list_bg.png" />
+    <Content Include="Images\product_list_table_head.png" />
+    <Content Include="Images\right_icon.png" />
+    <Content Include="Images\save_icon.png" />
+    <Content Include="Images\setting_icon.png" />
+    <Content Include="Images\setting_icon_hover.png" />
+    <Content Include="Images\sidebar_box_bg.png" />
+    <Content Include="Images\sidebar_box_bottom.png" />
+    <Content Include="Images\sidebar_box_top.png" />
+    <Content Include="Images\sidebar_menu_bg.png" />
+    <Content Include="Images\tab.png" />
+    <Content Include="Images\table_bullate.png" />
+    <Content Include="Images\tab_active.png" />
+    <Content Include="Images\tab_active_left.png" />
+    <Content Include="Images\tab_active_right.png" />
+    <Content Include="Images\tab_contant_bg.png" />
+    <Content Include="Images\tab_contant_bottom.png" />
+    <Content Include="Images\tab_contant_top.png" />
+    <Content Include="Images\tab_left.png" />
+    <Content Include="Images\tab_right.png" />
+    <Content Include="index.aspx" />
     <Content Include="Index.htm" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
+    <Content Include="ProductList.aspx" />
+    <Content Include="UserControl\AddProduct.ascx" />
+    <Content Include="UserControl\DeviceList.ascx" />
+    <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="UserControl\ProductList.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -70,6 +144,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -84,13 +172,48 @@
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="ProductList.aspx.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductList.aspx.designer.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\AddProduct.ascx.cs">
+      <DependentUpon>AddProduct.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProduct.ascx.designer.cs">
+      <DependentUpon>AddProduct.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DeviceList.ascx.cs">
+      <DependentUpon>DeviceList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DeviceList.ascx.designer.cs">
+      <DependentUpon>DeviceList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenu.ascx.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProductList.ascx.cs">
+      <DependentUpon>ProductList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProductList.ascx.designer.cs">
+      <DependentUpon>ProductList.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -108,11 +231,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Javascript\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MainMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\FujifilmSkin\Fujifilm.skin" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,0 +1,71 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceList.ascx.cs"
+    Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceList" %>
+<div class="contant_top">
+    &nbsp;</div>
+<div class="contant_middle">
+    <div class="head">
+        <h1>
+            Device List</h1>
+        <div class="clear">
+        </div>
+        <div class="ContainerClass">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td class="DeviceListFirstTD">
+                        <asp:Label ID="lblCompany" runat="server" Text="Company" CssClass="LabelTitle"></asp:Label>
+                        &nbsp; :
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cmbCompany" runat="server">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="DeviceListFirstTD">
+                        <asp:Label ID="lblBranch" runat="server" Text="Branch" CssClass="LabelTitle"></asp:Label>
+                        &nbsp :
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cmbBranch" runat="server">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="Hight30px">
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <telerik:RadListView ID="lvDeviceList" runat="server" ItemPlaceholderID="ListViewContainer"
+                            OnNeedDataSource="lvDeviceList_NeedDataSource">
+                            <LayoutTemplate>
+                                <asp:PlaceHolder runat="server" ID="ListViewContainer" />
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <div class="product_list">
+                                    <ul>
+                                        <li>
+                                            <div class="left">
+                                                <%# Eval("ID2")%>
+                                            </div>
+                                            <div class="right"><a href="#" class="gray_bt"><span>Select</span></a></div>
+                                            <div class="clear">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </ItemTemplate>
+                        </telerik:RadListView>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<div class="contant_bottom">
+    &nbsp;</div>
