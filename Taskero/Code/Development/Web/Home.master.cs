@@ -67,6 +67,7 @@ public partial class Home1 : MasterBase
                 Fuji.Common.Sessions.Add_Dongle == true ||
                 Fuji.Common.Sessions.Add_Support_User == true ||
                 Fuji.Common.Sessions.Add_Temp_RH_Device == true ||
+                //Fuji.Common.Sessions.Add_Measurement_Device == true ||
                 Fuji.Common.Sessions.Add_User == true ||
                 Fuji.Common.Sessions.Delete_Branch == true ||
                 Fuji.Common.Sessions.Delete_Company == true ||
@@ -74,12 +75,14 @@ public partial class Home1 : MasterBase
                 Fuji.Common.Sessions.Delete_Dongle == true ||
                 Fuji.Common.Sessions.Delete_Print_Target == true ||
                 Fuji.Common.Sessions.Delete_Temp_RH_Device == true ||
+                //Fuji.Common.Sessions.Delete_Measurement_Device == true ||
                 Fuji.Common.Sessions.Delete_User == true ||
                 Fuji.Common.Sessions.Remove_Support_User == true ||
                 Fuji.Common.Sessions.Update_Branch == true ||
                 Fuji.Common.Sessions.Update_Device == true ||
                 Fuji.Common.Sessions.Update_Dongle == true ||
                 Fuji.Common.Sessions.Update_Temp_RH_Device == true ||
+                //Fuji.Common.Sessions.Update_Measurement_Device == true ||
                 Fuji.Common.Sessions.Update_User == true ||
                 Fuji.Common.Sessions.Access_Video == true ||
                 Fuji.Common.Sessions.Access_SyncView == true

@@ -710,21 +710,22 @@ public partial class SyncMeasurementDevice : PageBase
     {
         try
         {
-            //========== Check Whether the logged in user has the permission to Add New Dongle, if not then hide Add new Dongle button ===========//
-            //if (Fuji.Common.Sessions.Add_Dongle == true)
-            //    BTN_AddDevice.Visible = true;
-            //else BTN_AddDevice.Visible = false;
-
-            //========== Check Whether the logged in user has the permission to Edit Dongle, if not then hide Edit Column from the Dongle list ===========//
-            //if (Fuji.Common.Sessions.Update_Dongle == true)
-            //    RG_SyncDevice.Columns[10].Visible = true;
-            //else RG_SyncDevice.Columns[10].Visible = false;
-
-            //========== Check Whether the logged in user has the permission to Delete Dongle, if not then hide Delete Column from the Dongle list ===========//
-            //if (Fuji.Common.Sessions.Delete_Dongle == true)
-            //    RG_Dongle.Columns[11].Visible = true;
-            //else 
-            //RG_SyncDevice.Columns[10].Visible = false;
+            ////========== Checking the Add Right for the Measurement Device ===========//
+            //if (Sessions.Add_Measurement_Device == false)
+            //    BTN_AddSycnMeasurementDevice.Visible = false;
+            //else
+            //    BTN_AddSycnMeasurementDevice.Visible = true;
+            ////========== Checking the Edit Right for the _Measurement Device===========//
+            //if (Sessions.Update_Measurement_Device == false)
+            //{ RG_SyncMeasurementDevice.Columns[11].Visible = false; }
+            //else
+            //{ RG_SyncMeasurementDevice.Columns[11].Visible = true; }
+            ////========== Checking the Delete Right for the _Measurement Device===========//
+            //if (Sessions.Delete_Measurement_Device == false)
+            //{ RG_SyncMeasurementDevice.Columns[12].Visible = false; }
+            //else
+            //{ RG_SyncMeasurementDevice.Columns[12].Visible = true; }
+            
 
 
         }

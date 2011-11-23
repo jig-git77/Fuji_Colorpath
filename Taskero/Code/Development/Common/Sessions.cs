@@ -337,6 +337,11 @@ namespace Fuji.Common
             }
             set { System.Web.HttpContext.Current.Session["_Access_SyncView"] = value; }
         }
+
+
+        //public static bool Add_Measurement_Device { get { if (System.Web.HttpContext.Current.Session["_Add_Measurement_Device"] == null) { System.Web.HttpContext.Current.Session["_Add_Measurement_Device"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Add_Measurement_Device"]; } set { System.Web.HttpContext.Current.Session["_Add_Measurement_Device"] = value; } }
+        //public static bool Update_Measurement_Device { get { if (System.Web.HttpContext.Current.Session["_Update_Measurement_Device"] == null) { System.Web.HttpContext.Current.Session["_Update_Measurement_Device"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Update_Measurement_Device"]; } set { System.Web.HttpContext.Current.Session["_Update_Measurement_Device"] = value; } }
+        //public static bool Delete_Measurement_Device { get { if (System.Web.HttpContext.Current.Session["_Delete_Measurement_Device"] == null) { System.Web.HttpContext.Current.Session["_Delete_Measurement_Device"] = false; } return (bool)System.Web.HttpContext.Current.Session["_Delete_Measurement_Device"]; } set { System.Web.HttpContext.Current.Session["_Delete_Measurement_Device"] = value; } }
         #endregion
 
         #region Language
@@ -443,6 +448,9 @@ namespace Fuji.Common
                 Sessions.Add_Temp_RH_Device = true;
                 Sessions.Update_Temp_RH_Device = true;
                 Sessions.Delete_Temp_RH_Device = true;
+                //Sessions.Add_Measurement_Device = true;
+                //Sessions.Update_Measurement_Device= true;
+                //Sessions.Delete_Measurement_Device = true;
                 Sessions.Add_User = true;
                 Sessions.Update_User = true;
                 Sessions.Delete_User = true;
@@ -498,6 +506,11 @@ namespace Fuji.Common
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 29"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.View_Devices_Tab = true; } else { Sessions.View_Devices_Tab = false; } //Permission : View Devices Tab
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 30"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Access_Branding = true; } else { Sessions.Access_Branding = false; } //Permission : Access Branding                
                 DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 31"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Access_Video = true; } else { Sessions.Access_Video = false; } //Permission : Access Video                
+
+                //DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 32"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Add_Measurement_Device = true; } else { Sessions.Add_Measurement_Device = false; } //Permission : Add Measurement Device
+                //DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 33"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Update_Measurement_Device = true; } else { Sessions.Update_Measurement_Device = false; } //Permission : Update Measurement Device
+                //DSet.Tables[TableID].DefaultView.RowFilter = "PermissionID = 34"; if (DSet.Tables[TableID].DefaultView.Count > 0) { Sessions.Delete_Measurement_Device = true; } else { Sessions.Delete_Temp_RH_Device = false; } //Permission : Delete Measurement Device
+                
 
                 #endregion
             }
@@ -752,7 +765,8 @@ namespace Fuji.Common
             #endregion
 
             #region Check Sync Measurement Device
-            if (Fuji.Common.Sessions.RoleDesc == Enums.RoleType.TaskeroAdmin && Fuji.Common.Sessions.Access_SyncView == true)
+            //if ((Fuji.Common.Sessions.Add_Temp_RH_Device == true) || Fuji.Common.Sessions.Update_Temp_RH_Device == true || Fuji.Common.Sessions.Delete_Temp_RH_Device == true)
+            if (Fuji.Common.Sessions.RoleDesc == Enums.RoleType.TaskeroAdmin)
             {
                 ROW = TabAccess.NewRow();
                 ROW["ID"] = "N";
@@ -805,6 +819,9 @@ namespace Fuji.Common
             Sessions.Add_Temp_RH_Device = false;
             Sessions.Update_Temp_RH_Device = false;
             Sessions.Delete_Temp_RH_Device = false;
+            //Sessions.Add_Measurement_Device = false;
+            //Sessions.Update_Measurement_Device= false;
+            //Sessions.Delete_Measurement_Device = false;
             Sessions.Add_User = false;
             Sessions.Update_User = false;
             Sessions.Delete_User = false;
@@ -815,6 +832,7 @@ namespace Fuji.Common
             Sessions.Remove_Support_User = false;
             Sessions.View_Press_Data = false;
             Sessions.View_Devices_Tab = false;
+
             #endregion
 
             #region Table 5 : Company ID
