@@ -12,6 +12,19 @@ namespace FujifilmUSA.Sync.Presenter
         {
             this._viewSyncDevice = viewSyncDevice;
         }
+
+        public void GetBranchList()
+        {
+            var task = (IBranchBusiness)new BusinessFactory<IBranchBusiness>().CreateObject();
+            _viewSyncDevice.GetBranchList = task.GetBranchList(_viewSyncDevice.CompanyId);
+        }
+
+        public void GetCompanyList()
+        {
+            var task = (ICompanyBusiness)new BusinessFactory<ICompanyBusiness>().CreateObject();
+            _viewSyncDevice.GetCompanyList = task.GetCompanyList();
+        }
+
         public void GetSyncDeviceListByUserId()
         {
             var task = (ISyncDeviceBusiness)new BusinessFactory<ISyncDeviceBusiness>().CreateObject();

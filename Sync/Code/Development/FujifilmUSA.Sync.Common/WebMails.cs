@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections;
 using System.Net;
 
@@ -10,28 +7,28 @@ namespace FujifilmUSA.Sync.Common
     public class WebMails
     {
         #region Send Error Email
-        public static void SendErrorEmail(Exception Exc)
+        public static void SendErrorEmail(Exception exc)
         {
             //========== Get The Template ==========//
-            string FilePath = System.Web.HttpContext.Current.Server.MapPath("MailTemplates/ErrorMessage.htm");
-            System.IO.StreamReader SR = new System.IO.StreamReader(FilePath);
+            var filePath = System.Web.HttpContext.Current.Server.MapPath("MailTemplates/ErrorMessage.htm");
+            var sr = new System.IO.StreamReader(filePath);
 
             //========== Replace With Variables ==========//
-            string HtmlBody = SR.ReadToEnd();
-            HtmlBody = HtmlBody.Replace("##URL##", System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
-            HtmlBody = HtmlBody.Replace("##MESSAGE##", Exc.Message);
-            HtmlBody = HtmlBody.Replace("##STACKTRACE##", Exc.StackTrace);
-            HtmlBody = HtmlBody.Replace("##IPADDRESS##", System.Web.HttpContext.Current.Request.UserHostAddress);
+            var htmlBody = sr.ReadToEnd();
+            htmlBody = htmlBody.Replace("##URL##", System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
+            htmlBody = htmlBody.Replace("##MESSAGE##", exc.Message);
+            htmlBody = htmlBody.Replace("##STACKTRACE##", exc.StackTrace);
+            htmlBody = htmlBody.Replace("##IPADDRESS##", System.Web.HttpContext.Current.Request.UserHostAddress);
             //HtmlBody = HtmlBody.Replace("##USERNAME##", Fuji.Common.Sessions.FirstName + " " + Fuji.Common.Sessions.LastName + "(" + Fuji.Common.Sessions.Username + ")");
 
             //========== Send Email ==========//
             if (FujifilmUSA.Sync.Common.WebSettings.Domain != null || FujifilmUSA.Sync.Common.WebSettings.Domain != "")
             {
-                SendEmail("", "", "", "", "website error from :- " + FujifilmUSA.Sync.Common.WebSettings.Domain + Exc.Message, HtmlBody, null);
+                SendEmail("", "", "", "", "website error from :- " + FujifilmUSA.Sync.Common.WebSettings.Domain + exc.Message, htmlBody, null);
             }
             else
             {
-                SendEmail("", "", "", "", "[Taskero WebSite Error :- " + Exc.Message, HtmlBody, null);
+                SendEmail("", "", "", "", "[Taskero WebSite Error :- " + exc.Message, htmlBody, null);
             }
         }
         #endregion
@@ -41,72 +38,68 @@ namespace FujifilmUSA.Sync.Common
         /// <summary>
         /// Used to send the email
         /// </summary>
-        /// <param name="To">Email Address of recipient</param>
-        /// <param name="From">Email Address of sender</param>
-        /// <param name="CC">Other Email Address of recipient</param>
-        /// <param name="BCC">Other Email Address of recipient</param>
-        /// <param name="Subject">Subject of the email</param>
-        /// <param name="Body">Email body</param>
-        /// <param name="EmailAttechment">Attachment with the email address</param>
-        public static void SendEmail(string To, string From, string CC, string BCC, string Subject, string Body, ArrayList EmailAttechment)
+        /// <param name="to">Email Address of recipient</param>
+        /// <param name="from">Email Address of sender</param>
+        /// <param name="cc">Other Email Address of recipient</param>
+        /// <param name="bcc">Other Email Address of recipient</param>
+        /// <param name="subject">Subject of the email</param>
+        /// <param name="body">Email body</param>
+        /// <param name="emailAttechment">Attachment with the email address</param>
+        public static void SendEmail(string to, string from, string cc, string bcc, string subject, string body, ArrayList emailAttechment)
         {
 
             System.Net.Mail.Attachment attachFile = null;
 
 
             //========== Find the config application path ==========//
-
-
-
-            System.Configuration.Configuration Config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(System.Web.HttpContext.Current.Request.ApplicationPath);
+            
+            System.Configuration.Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(System.Web.HttpContext.Current.Request.ApplicationPath);
 
             //========== Find the mail setting from the web config file ==========//
-            System.Net.Configuration.MailSettingsSectionGroup MailSettings = (System.Net.Configuration.MailSettingsSectionGroup)Config.GetSectionGroup("system.net/mailSettings");
+            var mailSettings = (System.Net.Configuration.MailSettingsSectionGroup)config.GetSectionGroup("system.net/mailSettings");
 
             //========== Obtain the Network Credentials from the mailSettings section ==========//
-            NetworkCredential Credential = new NetworkCredential(MailSettings.Smtp.Network.UserName, MailSettings.Smtp.Network.Password);
-
-            //========== Create the SMTP Client ==========//
-            System.Net.Mail.SmtpClient Client = new System.Net.Mail.SmtpClient();
-
-            //========== Assign the host address ==========//
-            Client.Host = MailSettings.Smtp.Network.Host;
-
-            //========== Assign the network credentials to the smtp client ==========//
-            Client.Credentials = Credential;
-
-            //========== Create the mail object ==========//
-            System.Net.Mail.MailMessage ObjEmail = new System.Net.Mail.MailMessage();
-
-            //========== Assign the values to the mail object ==========//
-            if (From == "") { ObjEmail.From = new System.Net.Mail.MailAddress(FujifilmUSA.Sync.Common.WebSettings.Email_FROM); } else { ObjEmail.From = new System.Net.Mail.MailAddress(From); }
-            if (To == "") { ObjEmail.To.Add(FujifilmUSA.Sync.Common.WebSettings.Email); } else { ObjEmail.To.Add(To); }
-            if (BCC.Length != 0)
-                ObjEmail.Bcc.Add(BCC);
-            if (CC.Length != 0)
-                ObjEmail.CC.Add(CC);
-            ObjEmail.Subject = Subject.Replace("\n", " ").Replace("\r", " ").Replace("\t", "");
-            ObjEmail.IsBodyHtml = true;
-            ObjEmail.Priority = System.Net.Mail.MailPriority.Normal;
-            ObjEmail.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
-            ObjEmail.Body = Body;
-
-            //========== Check the email attachment for the email ==========//
-            if (EmailAttechment != null && EmailAttechment.Count != 0)
+            if (mailSettings != null)
             {
-                for (int i = 0; i <= EmailAttechment.Count - 1; i++)
-                {
-                    attachFile = new System.Net.Mail.Attachment(EmailAttechment[i].ToString());
+                var credential = new NetworkCredential(mailSettings.Smtp.Network.UserName, mailSettings.Smtp.Network.Password);
 
-                    ObjEmail.Attachments.Add(attachFile);
+                //========== Create the SMTP Client ==========//
+                var client = new System.Net.Mail.SmtpClient {Host = mailSettings.Smtp.Network.Host, Credentials = credential};
+
+                //========== Create the mail object ==========//
+                var objEmail = new System.Net.Mail.MailMessage
+                                   {
+                                       From = from == "" ? new System.Net.Mail.MailAddress(FujifilmUSA.Sync.Common.WebSettings.Email_FROM) : new System.Net.Mail.MailAddress(from)
+                                   };
+
+                //========== Assign the values to the mail object ==========//
+                objEmail.To.Add(to == "" ? FujifilmUSA.Sync.Common.WebSettings.Email : to);
+                if (bcc.Length != 0)
+                    objEmail.Bcc.Add(bcc);
+                if (cc.Length != 0)
+                    objEmail.CC.Add(cc);
+                objEmail.Subject = subject.Replace("\n", " ").Replace("\r", " ").Replace("\t", "");
+                objEmail.IsBodyHtml = true;
+                objEmail.Priority = System.Net.Mail.MailPriority.Normal;
+                objEmail.DeliveryNotificationOptions = System.Net.Mail.DeliveryNotificationOptions.OnFailure;
+                objEmail.Body = body;
+
+                //========== Check the email attachment for the email ==========//
+                if (emailAttechment != null && emailAttechment.Count != 0)
+                {
+                    for (var i = 0; i <= emailAttechment.Count - 1; i++)
+                    {
+                        attachFile = new System.Net.Mail.Attachment(emailAttechment[i].ToString());
+
+                        objEmail.Attachments.Add(attachFile);
+                    }
                 }
+                client.Send(objEmail);
             }
-            Client.Send(ObjEmail);
 
             if (attachFile != null)
             {
                 attachFile.Dispose();
-                attachFile = null;
             }
 
         }
