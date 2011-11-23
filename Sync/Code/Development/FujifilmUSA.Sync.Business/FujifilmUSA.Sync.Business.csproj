@@ -49,7 +49,9 @@
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\DestinationProfileBusinessImpl.cs" />
     <Compile Include="Implementation\DLPBusinessImpl.cs" />
+    <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\ProjectBussinessImpl.cs" />
+    <Compile Include="Implementation\ReferenceChartTypeBusinessImpl.cs" />
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\SyncDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\TaskeroUserBusinessImpl.cs" />
@@ -57,7 +59,9 @@
     <Compile Include="Interface\ICompanyBusiness.cs" />
     <Compile Include="Interface\IDestinationProfileBusiness.cs" />
     <Compile Include="Interface\IDLPBusiness.cs" />
+    <Compile Include="Interface\IMeasurementDeviceBusiness.cs" />
     <Compile Include="Interface\IProjectBussiness.cs" />
+    <Compile Include="Interface\IReferenceChartTypeBusiness.cs" />
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ISyncDeviceBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
@@ -66,7 +70,9 @@
     <Compile Include="Mock\CompanyBusinessMock.cs" />
     <Compile Include="Mock\DestinationProfileBusinessMock.cs" />
     <Compile Include="Mock\DLPBusinessMock.cs" />
+    <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />
     <Compile Include="Mock\ProjectBussinessMock.cs" />
+    <Compile Include="Mock\ReferenceChartTypeBusinessMock.cs" />
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
     <Compile Include="Mock\SyncDeviceBusinessMock.cs" />
     <Compile Include="Mock\TaskeroUserBusinessMock.cs" />

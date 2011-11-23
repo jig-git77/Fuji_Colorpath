@@ -49,7 +49,9 @@
     <Compile Include="PresenterCompany.cs" />
     <Compile Include="PresenterDestinationProfile.cs" />
     <Compile Include="PresenterDLP.cs" />
+    <Compile Include="PresenterMeasurementDevice.cs" />
     <Compile Include="PresenterProject.cs" />
+    <Compile Include="PresenterReferenceChartType.cs" />
     <Compile Include="PresenterSourceProfile.cs" />
     <Compile Include="PresenterSyncDevice.cs" />
     <Compile Include="PresenterTaskeroUser.cs" />

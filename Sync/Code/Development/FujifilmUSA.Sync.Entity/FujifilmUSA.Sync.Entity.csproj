@@ -48,10 +48,13 @@
     <Compile Include="DestinationProfile.cs" />
     <Compile Include="DLP.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="MeasurementDevice.cs" />
+    <Compile Include="MeasurementDeviceType.cs" />
     <Compile Include="MeasurementSetting.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceChartType.cs" />
     <Compile Include="Report.cs" />
     <Compile Include="ReportType.cs" />
     <Compile Include="Roles.cs" />

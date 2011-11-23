@@ -11,5 +11,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> GetSourceProfileList { get; set; }
         Dictionary<int, string> GetDestinationProfileList { get; set; }
         List<DLP> GetDLPList { get; set; }
+        int SyncDeviceId { get; set; }
+        Dictionary<int, string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
+
+        int MeasurementDeviceId { get; set; }
+        Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId { get; set; }
     }
 }
