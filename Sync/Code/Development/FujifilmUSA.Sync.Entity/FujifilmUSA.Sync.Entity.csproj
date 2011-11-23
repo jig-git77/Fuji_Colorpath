@@ -48,6 +48,7 @@
     <Compile Include="DestinationProfile.cs" />
     <Compile Include="DLP.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="MeasurementSetting.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
