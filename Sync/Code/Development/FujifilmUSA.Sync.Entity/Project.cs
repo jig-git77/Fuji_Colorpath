@@ -7,17 +7,17 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class Project
     {
-        public int ProjectID { get; set; }
+        public int ProjectId { get; set; }
         public string ProjectName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int SyncDeviceID { get; set; }
+        public int SyncDeviceId { get; set; }
         public int ΔEType { get; set; }
-        public int DLPID { get; set; }
+        public int DLPId { get; set; }
         public Boolean IsUsed { get; set; }
         public Boolean UseDLP { get; set; }
-        public int ReTargetID { get; set; }
-        public int ProjectTypeID { get; set; }
-        public int OutputTypeID { get; set; }
+        public int ReTargetId { get; set; }
+        public int ProjectTypeId { get; set; }
+        public int OutputTypeId { get; set; }
         public Enums.CPSyncRunStatus ProjectStatus { get; set; }       
         
     }

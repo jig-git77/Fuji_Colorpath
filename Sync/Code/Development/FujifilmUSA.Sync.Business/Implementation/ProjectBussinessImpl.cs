@@ -23,16 +23,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 objProjectList = dsProjectList.Tables[0].AsEnumerable().
                     Select(x => new Project()
                                     {
-                                        ProjectID = DsReader.ReadInt(x,"ProjectID"),
+                                        ProjectId = DsReader.ReadInt(x,"ProjectID"),
                                         ProjectName = DsReader.ReadString(x,",ProjectName"),
                                         CreatedDate = DsReader.ReadDate(x,"CreatedDate"),
-                                        SyncDeviceID = DsReader.ReadInt(x,"SyncDeviceID"),
+                                        SyncDeviceId = DsReader.ReadInt(x,"SyncDeviceID"),
                                         ΔEType = DsReader.ReadInt(x,"ΔEType"),
-                                        DLPID = DsReader.ReadInt(x,"DLPID"),
+                                        DLPId = DsReader.ReadInt(x,"DLPID"),
                                         IsUsed = DsReader.ReadBoolean(x,"IsUsed"),
-                                        ReTargetID = DsReader.ReadInt(x,"ReTargetID"),
-                                        ProjectTypeID = DsReader.ReadInt(x,"ProjectTypeID"),
-                                        OutputTypeID = DsReader.ReadInt(x,"OutPutTypeID"),
+                                        ReTargetId = DsReader.ReadInt(x,"ReTargetID"),
+                                        ProjectTypeId = DsReader.ReadInt(x,"ProjectTypeID"),
+                                        OutputTypeId = DsReader.ReadInt(x,"OutPutTypeID"),
                                         ProjectStatus = (Enums.CPSyncRunStatus)DsReader.ReadInt(x,"ProjStatus")
                                     }).ToList();
             }

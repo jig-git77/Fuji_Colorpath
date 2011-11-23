@@ -7,20 +7,20 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class TaskeroUser
     {
-        public int TaskeroUserID { get; set; }
-        public string LoginID { get; set; }
+        public int TaskeroUserId { get; set; }
+        public string LoginId { get; set; }
         public string LoginPass { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }
         public Boolean ShowCPVData { get; set; }
         public Boolean IsActive { get; set; }
-        public int LastModified_UserID { get; set; }
+        public int LastModifiedUserId { get; set; }
         public DateTime LastModifiedDate { get; set; }
-        public int RoleID { get; set; }
+        public int RoleId { get; set; }
         public string Customer { get; set; }
-        public string AllowedIP { get; set; }
-        public int BrandID { get; set; }
+        public string AllowedIp { get; set; }
+        public int BrandId { get; set; }
         public Boolean EmailWhenYellow { get; set; }
         public Boolean EmailWhenRed { get; set; }
         public Boolean SiteLicenseAgreement { get; set; }

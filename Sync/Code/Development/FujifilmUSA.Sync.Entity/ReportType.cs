@@ -7,7 +7,7 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class ReportType
     {
-        public int ReportTypeID { get; set; }
+        public int ReportTypeId { get; set; }
         public string ReportTypeDesc { get; set; }
     }
 }

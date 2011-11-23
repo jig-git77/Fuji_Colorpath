@@ -25,12 +25,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     Select(x => new DLP()
                                     {
 
-                                        DLPID = DsReader.ReadInt(x,"DLPID"),
+                                        DLPId = DsReader.ReadInt(x,"DLPID"),
                                         DLPName = DsReader.ReadString(x,"DLPName"),
                                         Profile = DsReader.ReadString(x,"Profile"),
                                         IsUse = DsReader.ReadBoolean(x,"IsUse"),
-                                        DLPSourceProfile = new SourceProfile{ SourceProfileID = DsReader.ReadInt(x,"SourceProfileID"), SourceProfileName = DsReader.ReadString(x,"SourceProfileName")},
-                                        DLPDestinationProfile = new DestinationProfile{ DestinationProfileID = DsReader.ReadInt(x,"DestinationProfileID"), DestinationProfileName = DsReader.ReadString(x,"DestinationProfileName")}                        
+                                        DLPSourceProfile = new SourceProfile{ SourceProfileId = DsReader.ReadInt(x,"SourceProfileID"), SourceProfileName = DsReader.ReadString(x,"SourceProfileName")},
+                                        DLPDestinationProfile = new DestinationProfile{ DestinationProfileId = DsReader.ReadInt(x,"DestinationProfileID"), DestinationProfileName = DsReader.ReadString(x,"DestinationProfileName")}                        
                         
                                     }).ToList();
             }

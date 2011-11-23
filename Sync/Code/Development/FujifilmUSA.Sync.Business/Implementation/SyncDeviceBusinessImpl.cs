@@ -23,13 +23,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 objSyncDeviceList = dsSyncDeviceList.Tables[0].AsEnumerable().
                     Select(x => new SyncDevice()
                                     {
-                                        CPDongleID = DsReader.ReadInt(x,"CPDongleID"),
-                                        CPSerialNUM = DsReader.ReadString(x,"CPSerialNUM"),
+                                        CpDongleId = DsReader.ReadInt(x,"CPDongleID"),
+                                        CpSerialNum = DsReader.ReadString(x,"CPSerialNUM"),
                                         DeviceManufacturer = DsReader.ReadString(x,"DeviceManufacturer"),
                                         DeviceName = DsReader.ReadString(x,"DeviceName"),
-                                        DeviceTypeID = DsReader.ReadInt(x, "DeviceTypeID"),
+                                        DeviceTypeId = DsReader.ReadInt(x, "DeviceTypeID"),
                                         NumOfInkUnits = DsReader.ReadInt(x,"NumOfInkUnits"),
-                                        SyncDeviceID = DsReader.ReadInt(x,"SyncDeviceID")
+                                        SyncDeviceId = DsReader.ReadInt(x,"SyncDeviceID")
                                     }).ToList();
             }
             return objSyncDeviceList;

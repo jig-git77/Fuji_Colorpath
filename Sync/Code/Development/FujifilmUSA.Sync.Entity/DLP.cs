@@ -7,7 +7,7 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class DLP
     {
-        public int DLPID { get; set; }
+        public int DLPId { get; set; }
         public string DLPName { get; set; }
         public string Profile { get; set; }
         public Boolean IsUse { get; set; }
