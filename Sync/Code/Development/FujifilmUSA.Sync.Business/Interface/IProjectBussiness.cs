@@ -6,5 +6,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface IProjectBussiness : ITaskBase
     {
         List<Project> GetProjectListBySyncDeviceId(int syncDeviceId);
+        Project InsertProject(Project objProject);
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Configuration;
 using System.Data;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.DataAccess
 {
@@ -51,6 +52,21 @@ namespace FujifilmUSA.Sync.DataAccess
             return Database.ExecuteDataSet(command);
         }
 
+        public int ExecuteProcedure(string procName, object[] parameters)
+        {
+            var command = Database.GetStoredProcCommand(procName, parameters);
+            return command.ExecuteNonQuery();
+        }
+
+        public List<Parameters> ExecuteProcedure(string procName, List<Parameters> inParameters, List<Parameters> outParameters)
+        {
+            var command = Database.GetStoredProcCommand(procName);
+            inParameters.ForEach(x=> Database.AddInParameter(command, x.ParameterName, x.Type, x.Value));
+            outParameters.ForEach(x => Database.AddOutParameter(command, x.ParameterName, x.Type, x.Size));
+            var result = command.ExecuteNonQuery();
+            outParameters.ForEach(x => x.Value = Database.GetParameterValue(command, x.ParameterName));
+            return outParameters;
+        }
         #endregion
     }
 }

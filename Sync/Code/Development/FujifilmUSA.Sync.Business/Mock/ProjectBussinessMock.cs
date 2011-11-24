@@ -14,6 +14,14 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Project>();
         }
 
+        
+
+
+        public Project InsertProject(Project objProject)
+        {
+            return new Project();  
+        }
+
         #endregion
     }
 }
