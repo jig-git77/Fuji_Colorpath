@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
@@ -61,6 +62,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             //objProject.ProjectId = 
 
+            DataAccessFactory.Instance.ExecuteProcedureWithTransaction(new List<Action>()
+                                                                           {
+                                                                               () =>
+                                                                                   {
+                                                                                       DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertProject]", objInPeramater,
+                                                                                                                                   objOutPeramater);
+                                                                                   },
+                                                                               () =>
+                                                                                   {
+                                                                                       DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertProject]", objInPeramater,
+                                                                                                                                   objOutPeramater);
+                                                                                   }
+                                                                           });
             return objProject;
 
         }

@@ -2,6 +2,8 @@
 using System.Configuration;
 using System.Data;
 using System.Collections.Generic;
+using System;
+using System.Transactions;
 
 namespace FujifilmUSA.Sync.DataAccess
 {
@@ -50,6 +52,14 @@ namespace FujifilmUSA.Sync.DataAccess
         {
             var command = Database.GetStoredProcCommand(procName);
             return Database.ExecuteDataSet(command);
+        }
+
+        public void ExecuteProcedureWithTransaction(List<Action> actions)
+        {
+            using(var scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+            {
+                actions.ForEach(x => x());
+            }
         }
 
         public int ExecuteProcedure(string procName, object[] parameters)
