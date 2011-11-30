@@ -46,12 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DestinationProfile.cs" />
-    <Compile Include="DLP.cs" />
+    <Compile Include="DeviceLinkProfile.cs" />
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Measurement.cs" />
     <Compile Include="MeasurementDevice.cs" />
     <Compile Include="MeasurementDeviceType.cs" />
+    <Compile Include="MeasurementPatch.cs" />
     <Compile Include="MeasurementSetting.cs" />
     <Compile Include="Permission.cs" />
+    <Compile Include="ProfileData.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceChartType.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Roles.cs" />
     <Compile Include="SourceProfile.cs" />
     <Compile Include="SyncDevice.cs" />
+    <Compile Include="SyncRun.cs" />
     <Compile Include="TaskeroUser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

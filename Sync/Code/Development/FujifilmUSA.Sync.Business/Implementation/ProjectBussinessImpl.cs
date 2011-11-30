@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         CreatedDate = DsReader.ReadDate(x,"CreatedDate"),
                                         SyncDeviceId = DsReader.ReadInt(x,"SyncDeviceID"),
                                         ΔEType = DsReader.ReadInt(x,"ΔEType"),
-                                        DLPId = DsReader.ReadInt(x,"DLPID"),
+                                        DeviceLinkProfileId = DsReader.ReadInt(x,"DLPID"),
                                         IsUsed = DsReader.ReadBoolean(x,"IsUsed"),
                                         ReTargetId = DsReader.ReadInt(x,"ReTargetID"),
                                         ProjectTypeId = DsReader.ReadInt(x,"ProjectTypeID"),
@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             objInPeramater.Add(new Parameters() { ParameterName = "@ProjectName", Size = 0, Type = DbType.String, Value = objProject.ProjectName });
             objInPeramater.Add(new Parameters() { ParameterName = "@SyncDeviceID", Size = 0, Type = DbType.Int16, Value = objProject.SyncDeviceId });
             objInPeramater.Add(new Parameters() { ParameterName = "@ΔEType", Size = 0, Type = DbType.Int16, Value = objProject.ΔEType });
-            objInPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 0, Type = DbType.Int16, Value = objProject.DLPId });
+            objInPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 0, Type = DbType.Int16, Value = objProject.DeviceLinkProfileId });
             objInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objProject.IsUsed });
             objInPeramater.Add(new Parameters() { ParameterName = "@UseDLP", Size = 0, Type = DbType.Boolean, Value = objProject.UseDLP});
             objInPeramater.Add(new Parameters() { ParameterName = "@OutputTypeID", Size = 0, Type = DbType.Int16, Value = objProject.OutputTypeId });

@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Entity
         public DateTime CreatedDate { get; set; }
         public int SyncDeviceId { get; set; }
         public int ΔEType { get; set; }
-        public int DLPId { get; set; }
+        public int DeviceLinkProfileId { get; set; }
         public Boolean IsUsed { get; set; }
         public Boolean UseDLP { get; set; }
         public int ReTargetId { get; set; }

@@ -73,7 +73,7 @@ namespace FujifilmUSA.Sync.DataAccess
             var command = Database.GetStoredProcCommand(procName);
             inParameters.ForEach(x=> Database.AddInParameter(command, x.ParameterName, x.Type, x.Value));
             outParameters.ForEach(x => Database.AddOutParameter(command, x.ParameterName, x.Type, x.Size));
-            var result = command.ExecuteNonQuery();
+            command.ExecuteNonQuery();
             outParameters.ForEach(x => x.Value = Database.GetParameterValue(command, x.ParameterName));
             return outParameters;
         }

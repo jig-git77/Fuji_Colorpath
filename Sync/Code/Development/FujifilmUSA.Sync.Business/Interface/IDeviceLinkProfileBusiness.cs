@@ -3,8 +3,8 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    public interface IDLPBusiness : ITaskBase
+    public interface IDeviceLinkProfileBusiness : ITaskBase
     {
-        List<DLP> GetDLPList();
+        List<DeviceLinkProfile> GetDeviceLinkProfileList();
     }
 }
