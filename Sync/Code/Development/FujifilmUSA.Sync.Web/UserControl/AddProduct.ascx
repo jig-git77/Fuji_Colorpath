@@ -14,36 +14,36 @@
     <div class="product_list_table">
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
-                <td style="text-align: right; width: 90px;">
+                <td class="ProductListtd1">
                     <asp:Label ID="lblProjectName" runat="server" Text="Project Name" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td style="padding-left: 13px; width: 200px;">
+                <td class="ProductListtd1">
                     <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox>
                 </td>
-                <td style="text-align: right;">
+                <td class="float_right">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td style="padding-left: 13px; width: 200px; text-align: right;">
+                <td class="ProductListtd4">
                     <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">
                     </telerik:RadComboBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right; width: 90px;">
+                <td class="ProductListtd1">
                     <asp:Label ID="lblOutputType" runat="server" Text="Output Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td style="padding-left: 13px; width: 200px;">
+                <td class="ProductListtd2">
                     <telerik:RadComboBox ID="cmbOutputType" runat="server" SkinID="width200px">
                     </telerik:RadComboBox>
                 </td>
-                <td style="text-align: right;">
+                <td class="float_right">
                     &nbsp;
                 </td>
-                <td style="padding-left: 13px; width: 200px;">
+                <td class="ProductListtd3">
                     &nbsp;
                 </td>
             </tr>
@@ -81,8 +81,32 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            --Grid Comes Here--
+                                        <td colspan="4">
+                                        <div style="padding:10px 5px 5px 5px;">
+                                            <telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource"
+                                             EnableEmbeddedSkins="false" Skin="Fujifilm" SkinID="CommonGrid">
+                                                <MasterTableView>
+                                                    <Columns>
+                                                        <telerik:GridTemplateColumn>
+                                                            <ItemTemplate>
+                                                                <asp:Image ID="imgBullet" ImageUrl="~/Images/table_bullate.png" runat="server" />
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                        </telerik:GridTemplateColumn>
+                                                        <telerik:GridBoundColumn DataField="Source" HeaderText="Source" UniqueName="Source">
+                                                        </telerik:GridBoundColumn>
+                                                        <telerik:GridBoundColumn DataField="Paper" HeaderText="Paper" UniqueName="Paper">
+                                                        </telerik:GridBoundColumn>
+                                                        <telerik:GridBoundColumn DataField="PrintVariables" HeaderText="Print Variables"
+                                                            UniqueName="PrintVariables">
+                                                        </telerik:GridBoundColumn>
+                                                        <telerik:GridBoundColumn DataField="Separations" HeaderText="Separations" UniqueName="Separations">
+                                                        </telerik:GridBoundColumn>
+                                                    </Columns>
+                                                </MasterTableView>
+                                                <ClientSettings EnableRowHoverStyle="true" Selecting-AllowRowSelect="true"></ClientSettings>
+                                            </telerik:RadGrid>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>

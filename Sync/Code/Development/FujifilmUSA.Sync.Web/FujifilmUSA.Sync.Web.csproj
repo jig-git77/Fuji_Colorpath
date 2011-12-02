@@ -58,6 +58,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Delete.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Edit.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Filter.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\MoveDown.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\MoveUp.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingFirst.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingLast.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingNext.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingPrev.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Refresh.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\rgCommandRow.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\rgDrag.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SingleMinus.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SinglePlus.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SortAsc.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SortDesc.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\sprite.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Update.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
     <Content Include="CSS\Common.css" />
     <Content Include="Images\body_bg.png" />
     <Content Include="Images\close_icon.png" />

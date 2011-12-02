@@ -53,7 +53,23 @@
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-            List comes here
+            <telerik:RadGrid ID="grdRecentUploadList" runat="server" AutoGenerateColumns="false"
+                OnNeedDataSource="grdRecentUploadList_NeedDataSource" BorderStyle="None" Width="99.9%">
+                <MasterTableView>
+                    <Columns>
+                        <telerik:GridBoundColumn DataField="MeasurementName" UniqueName="MeasurementName"
+                            HeaderText="Measurement Name">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="UploadDateTime" UniqueName="UploadDateTime" HeaderText="Upload Date Time">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridTemplateColumn HeaderText="Delete">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="btnDelete" runat="server" CommandName="Delete" ImageUrl="~/Images/delete_icon.png" />
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+                    </Columns>
+                </MasterTableView>
+            </telerik:RadGrid>
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>

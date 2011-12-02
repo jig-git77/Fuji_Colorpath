@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -11,7 +12,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+        }
 
+        protected void grdRecentUploadList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            dynamic data = new[] {
+                new { MeasurementName = "123456", UploadDateTime = DateTime.Now},
+                 new { MeasurementName = "654231", UploadDateTime = DateTime.Now.AddMinutes(10)}
+                
+            };
+            grdRecentUploadList.DataSource = data;
         }
     }
 }

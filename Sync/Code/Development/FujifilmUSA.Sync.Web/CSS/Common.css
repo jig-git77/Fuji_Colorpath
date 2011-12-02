@@ -797,6 +797,7 @@ label
 .color_pallate .color_pallate_middle
 {
     background: url(../Images/color_palette_box_bg.png) repeat-y top left;
+    padding-left: 1px;
 }
 .color_pallate .color_pallate_middle .color_bar
 {
@@ -871,7 +872,11 @@ label
 }
 
 
-
+.RadPageViewBorder
+{
+    background-color: #ededed;
+    border: 1px solid #c3c3c3;
+}
 
 .RadTabStrip .rtsSelected, .RadTabStrip .rtsSelected:hover
 {
@@ -889,8 +894,28 @@ label
     border-color: #c3c3c3;
     color: Black;
 }
-.RadPageViewBorder
+.float_left
 {
-    background-color: #ededed;
-    border: 1px solid #c3c3c3;
+    float: left;
+}
+.float_right
+{
+    float: right;
+}
+
+.ProductListtd1
+{
+    text-align: right;
+    width: 90px;
+}
+.ProductListtd2
+{
+    padding-left: 13px;
+    width: 200px;
+}
+.ProductListtd4
+{
+    padding-left: 13px;
+    width: 200px;
+    text-align: right;
 }
