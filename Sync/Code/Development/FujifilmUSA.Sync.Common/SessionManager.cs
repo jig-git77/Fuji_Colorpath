@@ -36,5 +36,10 @@ namespace FujifilmUSA.Sync.Common
                 HttpContext.Current.Session[_currentUser] = value;
             }
         }
+
+        public static void CheckLogin()
+        {
+            if(SessionManager.Instance.CurrentUser==null) { HttpContext.Current.Response.Redirect("Login.aspx"); }
+        }
     }
 }

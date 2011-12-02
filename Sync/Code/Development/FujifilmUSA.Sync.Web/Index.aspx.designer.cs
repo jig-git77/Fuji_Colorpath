@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web {
     
     
-    public partial class index {
+    public partial class Index {
         
         /// <summary>
         /// DeviceList1 control.

@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class DeviceList {
         
         /// <summary>
+        /// trFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trFilter;
+        
+        /// <summary>
         /// lblCompany control.
         /// </summary>
         /// <remarks>
@@ -49,12 +58,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadComboBox cmbBranch;
         
         /// <summary>
-        /// lvDeviceList control.
+        /// rlvDeviceList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadListView lvDeviceList;
+        protected global::Telerik.Web.UI.RadListView rlvDeviceList;
     }
 }

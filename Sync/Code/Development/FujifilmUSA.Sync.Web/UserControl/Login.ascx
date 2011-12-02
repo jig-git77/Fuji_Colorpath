@@ -1,4 +1,16 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Login" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript">
+    function blurControl(obj, text) {
+        if (jQuery(obj).val() == '') {
+            jQuery(obj).val(text);
+        }
+    }
+    function focusControl(obj, text) {
+        if (jQuery(obj).val() == text)
+        { jQuery(obj).val(''); }
+    }
+</script>
 <div id="login_box">
     <div class="curve_top_login">
     </div>
@@ -6,12 +18,14 @@
         <div class="login_logo">
             <a href="#">
                 <asp:Image ID="imgCompanyLogo" runat="server" ImageUrl="~/Images/login_logo.png" /></a></div>
+        <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" />
         <div class="login_contant">
-            <input type="text" name="" value="Username" class="input" onblur="this.value==''?this.value='Username':this.value=this.value"
-                onfocus="this.value=='Username'?this.value='':this.value=this.value" />
-            <input type="password" name="" value="Password" class="input" onblur="this.value==''?this.value='Password':this.value=this.value"
-                onfocus="this.value=='Password'?this.value='':this.value=this.value" />
-            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" />
+            <asp:TextBox ID="txtUserName" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Username');"
+                onfocus="javascript:focusControl(this,'Username');" Text="Username"></asp:TextBox>
+            <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
+                onfocus="javascript:focusControl(this,'Password');" Text="Password" TextMode="Password"></asp:TextBox>
+            <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text="Remember me!" />
+            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" />
         </div>
         <div class="clear">
         </div>
@@ -19,3 +33,10 @@
     <div class="curve_bottom">
         &nbsp;</div>
 </div>
+<script language="javascript">
+    jQuery(document).ready(function () {
+        if (jQuery("[id*='txtPassword']").val() == '') {
+            jQuery("[id*='txtPassword']").val('Password');
+        }
+    });   
+</script>

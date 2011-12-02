@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -25,10 +26,63 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            UserName = "MWinn";
-            Password = "fuji";
-            _presentertaskerouser.TaskeroUserLogin();
+            if (SessionManager.Instance.CurrentUser!=null)
+                Response.Redirect("Index.aspx");
 
+            if (!IsPostBack)
+            {
+                if ((Request.Cookies["SyncFujiLogin"] == null || Request.Cookies["SyncFujiLogin"].Value == "") &&
+                    (Request.Cookies["SyncFujiPass"] == null || Request.Cookies["SyncFujiPass"].Value == ""))
+                {
+                    chkRememberMe.Checked = false;
+                }
+                else
+                {
+                    chkRememberMe.Checked = true;
+                    txtUserName.Text = Request.Cookies["SyncFujiLogin"].Value;
+                    txtPassword.Attributes.Add("value", Request.Cookies["SyncFujiPass"].Value);
+
+                }
+            }
+
+        }
+        protected void bntLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserName = txtUserName.Text.Trim() ;
+                Password = txtPassword.Text.Trim();
+                _presentertaskerouser.TaskeroUserLogin();
+                if (GetTaskeroUser != null && GetTaskeroUser.LoginId!=null)
+                {
+                    SessionManager.Instance.CurrentUser = GetTaskeroUser;
+                    if (chkRememberMe.Checked == true)
+                    {
+                        var objCookie = new HttpCookie("SyncFujiLogin") {Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20)};
+                        Response.SetCookie(objCookie);
+
+                        objCookie = new HttpCookie("SyncFujiPass") {Value = Password, Expires = System.DateTime.Now.AddDays(20)};
+                        Response.SetCookie(objCookie);
+                    }
+                    else
+                    {
+                        Response.Cookies["SyncFujiLogin"].Value = "";
+                        Response.Cookies["SyncFujiPass"].Value = "";
+                    }
+                    Response.Redirect("Index.aspx");
+                }
+                else
+                {
+                    ucStatusbar1.DisplayMessage("Invalid login entered.", false);    
+                }
+            }
+            catch (Exception ex)
+            {
+                ucStatusbar1.DisplayMessage(ex.Message,false);    
+                
+            }
+
+            
         }
         #endregion
 
@@ -38,6 +92,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string AllowedIp { get; set; }                
         public Entity.TaskeroUser GetTaskeroUser { get; set; }
         #endregion
+
+       
 
       
     }

@@ -9,56 +9,69 @@
         <div class="clear">
         </div>
         <div class="ContainerClass">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td class="DeviceListFirstTD">
-                        <asp:Label ID="lblCompany" runat="server" Text="Company" CssClass="LabelTitle"></asp:Label>
-                        &nbsp; :
-                    </td>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr id="trFilter" runat="server">
                     <td>
-                        <telerik:RadComboBox ID="cmbCompany" runat="server">
-                        </telerik:RadComboBox>
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                            <tr>
+                                <td class="DeviceListFirstTD">
+                                    <asp:Label ID="lblCompany" runat="server" Text="Company" CssClass="LabelTitle"></asp:Label>
+                                    &nbsp; :
+                                </td>
+                                <td>
+                                    <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
+                                    </telerik:RadComboBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="DeviceListFirstTD">
+                                    <asp:Label ID="lblBranch" runat="server" Text="Branch" CssClass="LabelTitle"></asp:Label>
+                                    &nbsp :
+                                </td>
+                                <td>
+                                    <telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true">
+                                    </telerik:RadComboBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="Hight30px">
+                                    <hr />
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>
-                    <td class="DeviceListFirstTD">
-                        <asp:Label ID="lblBranch" runat="server" Text="Branch" CssClass="LabelTitle"></asp:Label>
-                        &nbsp :
-                    </td>
                     <td>
-                        <telerik:RadComboBox ID="cmbBranch" runat="server">
-                        </telerik:RadComboBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="Hight30px">
-                        <hr />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <telerik:RadListView ID="lvDeviceList" runat="server" ItemPlaceholderID="ListViewContainer"
-                            OnNeedDataSource="lvDeviceList_NeedDataSource">
-                            <LayoutTemplate>
-                                <asp:PlaceHolder runat="server" ID="ListViewContainer" />
-                            </LayoutTemplate>
-                            <ItemTemplate>
-                                <div class="product_list">
-                                    <ul>
-                                        <li>
-                                            <div class="left">
-                                                <%# Eval("ID2")%>
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td colspan="2">
+                                    <telerik:RadListView ID="rlvDeviceList" runat="server" ItemPlaceholderID="ListViewContainer"
+                                        OnNeedDataSource="rlvDeviceList_NeedDataSource">
+                                        <LayoutTemplate>
+                                            <asp:PlaceHolder runat="server" ID="ListViewContainer" />
+                                        </LayoutTemplate>
+                                        <ItemTemplate>
+                                            <div class="product_list">
+                                                <ul>
+                                                    <li>
+                                                        <div class="left">
+                                                            <%# Eval("DeviceName")%>
+                                                        </div>
+                                                        <div class="right">
+                                                            <a href="#" class="gray_bt"><span>Select</span></a></div>
+                                                        <div class="clear">
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="right"><a href="#" class="gray_bt"><span>Select</span></a></div>
                                             <div class="clear">
                                             </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </ItemTemplate>
-                        </telerik:RadListView>
+                                        </ItemTemplate>
+                                    </telerik:RadListView>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
             </table>

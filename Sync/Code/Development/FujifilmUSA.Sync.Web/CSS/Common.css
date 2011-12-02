@@ -527,6 +527,17 @@ label
     margin-bottom: 45px;
     cursor: pointer;
 }
+#login_box .remember_me
+{    
+   
+    width: 356px;
+    height: 47px;    
+    display: block;    
+    font-size: 20px;
+    color: #83a99d;  
+    
+    
+}
 #login_box .login_bt:hover
 {
     background: url(../Images/login_bt_hover.png) no-repeat top left;

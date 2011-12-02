@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs"
     Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
+<%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 
 <%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
 <!DOCTYPE html>
@@ -19,7 +20,8 @@
   <!--Start PageWrapper-->
   <div class="curve_top">&nbsp;</div>
   <section id="pageWrapper"> 
-  	<div class="top_link"><a href="#">Your IP-Address: 122.182.14.98</a>    |    <a href="#">Logged in as: psylvester-Phil Sylvester</a>    |    <a href="#">Logout</a>    |    <a href="#">English</a></div>
+  	<div class="top_link"><a href="#">Your IP-Address:  <%=Request.UserHostAddress %></a>    |    <a href="#">Logged in as:  <%=SessionManager.Instance.CurrentUser.LoginId%>-<%=SessionManager.Instance.CurrentUser.FirstName %> <%=SessionManager.Instance.CurrentUser.LastName%></a>    |    
+        <asp:LinkButton ID="lbtnLogout" runat="server" onclick="lbtnLogout_Click">Logout</asp:LinkButton>    |    <a href="#">English</a></div>
     <!--Start Header-->
     <header>
       <section id="header">

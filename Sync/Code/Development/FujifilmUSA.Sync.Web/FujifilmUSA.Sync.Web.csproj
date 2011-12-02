@@ -121,10 +121,11 @@
     <Content Include="Images\tab_contant_top.png" />
     <Content Include="Images\tab_left.png" />
     <Content Include="Images\tab_right.png" />
-    <Content Include="index.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="Index.htm" />
     <Content Include="Information.aspx" />
     <Content Include="Javascript\html5.js" />
+    <Content Include="Javascript\jquery-1.7.1.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
     <Content Include="ProductList.aspx" />
@@ -134,6 +135,7 @@
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\ProductList.ascx" />
+    <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -154,12 +156,12 @@
     <Compile Include="AddProduct.aspx.designer.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Information.aspx.cs">
       <DependentUpon>Information.aspx</DependentUpon>
@@ -231,6 +233,13 @@
     </Compile>
     <Compile Include="UserControl\ProductList.ascx.designer.cs">
       <DependentUpon>ProductList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Statusbar.ascx.cs">
+      <DependentUpon>Statusbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Statusbar.ascx.designer.cs">
+      <DependentUpon>Statusbar.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
