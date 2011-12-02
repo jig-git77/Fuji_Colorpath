@@ -14,10 +14,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Project>();
         }
 
-        
 
 
-        public Project InsertProject(Project objProject)
+
+        public Project InsertProjectAndMeasurementSetting(Project objProject, MeasurementSetting objMeasurementSetting)
         {
             return new Project();  
         }

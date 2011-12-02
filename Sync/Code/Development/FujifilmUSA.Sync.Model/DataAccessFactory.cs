@@ -4,6 +4,7 @@ using System.Data;
 using System.Collections.Generic;
 using System;
 using System.Transactions;
+using System.Data.SqlClient;
 
 namespace FujifilmUSA.Sync.DataAccess
 {
@@ -56,27 +57,31 @@ namespace FujifilmUSA.Sync.DataAccess
 
         public void ExecuteProcedureWithTransaction(List<Action> actions)
         {
-            using(var scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+
+            using (var scope = new TransactionScope(TransactionScopeOption.RequiresNew))
             {
                 actions.ForEach(x => x());
+                scope.Complete();
             }
         }
 
         public int ExecuteProcedure(string procName, object[] parameters)
         {
+            
             var command = Database.GetStoredProcCommand(procName, parameters);
-            return command.ExecuteNonQuery();
+            return Database.ExecuteNonQuery(command);
         }
 
         public List<Parameters> ExecuteProcedure(string procName, List<Parameters> inParameters, List<Parameters> outParameters)
         {
             var command = Database.GetStoredProcCommand(procName);
-            inParameters.ForEach(x=> Database.AddInParameter(command, x.ParameterName, x.Type, x.Value));
+            inParameters.ForEach(x => Database.AddInParameter(command, x.ParameterName, x.Type, x.Value));
             outParameters.ForEach(x => Database.AddOutParameter(command, x.ParameterName, x.Type, x.Size));
-            command.ExecuteNonQuery();
+            Database.ExecuteNonQuery(command);
             outParameters.ForEach(x => x.Value = Database.GetParameterValue(command, x.ParameterName));
             return outParameters;
         }
+
         #endregion
     }
 }
