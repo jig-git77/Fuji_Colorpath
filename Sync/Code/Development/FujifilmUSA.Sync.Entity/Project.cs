@@ -17,8 +17,6 @@ namespace FujifilmUSA.Sync.Entity
         public int OutputTypeId { get; set; }
         public DateTime StartDate { get; set; }
         public int SyncRunId { get; set; }
-        public Enums.CPSyncRunStatus ProjectStatus { get; set; }       
-
-        
+        public ECPSyncRunStatus ProjectStatus { get; set; }       
     }
 }

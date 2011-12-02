@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Transactions;
 using System.Data.SqlClient;
+using System.Xml;
 
 namespace FujifilmUSA.Sync.DataAccess
 {
@@ -47,6 +48,12 @@ namespace FujifilmUSA.Sync.DataAccess
         {
             var command = Database.GetStoredProcCommand(procName, parameters);
             return Database.ExecuteDataSet(command);
+        }
+
+        public XmlReader GetXmlResult(string procName, object[] parameters)
+        {
+            var command = Database.GetStoredProcCommand(procName, parameters);
+            return Database.ExecuteXmlReader(command);
         }
 
         public DataSet GetResult(string procName)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -197,6 +199,20 @@ namespace FujifilmUSA.Sync.Common
                 return "";
             else
                 return Convert.ToString(dbValue);
+        }
+
+        public static string GetMd5Hash(string input)
+        {
+            var sBuilder = new StringBuilder();
+            using (var md5Hash = MD5.Create())
+            {
+                var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+            }
+            return sBuilder.ToString();
         }
     }
 }

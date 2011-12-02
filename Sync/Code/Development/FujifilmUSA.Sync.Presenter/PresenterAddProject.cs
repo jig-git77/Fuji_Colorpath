@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void GetReferenceChartTypeListByMeasurementDeviceId()
         {
-            var task = (IReferenceChartTypeBusiness)new BusinessFactory<IReferenceChartTypeBusiness>().CreateObject();
+            var task = (IReferenceChartBusiness)new BusinessFactory<IReferenceChartBusiness>().CreateObject();
             _viewAddProject.GetReferenceChartTypeListByMeasurementDeviceId = task.GetReferenceChartTypeListByMeasurementDeviceId(_viewAddProject.MeasurementDeviceId);
         }
 

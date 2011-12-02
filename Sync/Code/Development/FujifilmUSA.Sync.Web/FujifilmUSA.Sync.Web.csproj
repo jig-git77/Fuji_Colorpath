@@ -37,6 +37,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -151,6 +157,7 @@
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
     <Content Include="ProductList.aspx" />
+    <Content Include="Services\PluginDataService.svc" />
     <Content Include="UserControl\AddProduct.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\Information.ascx" />
@@ -214,6 +221,9 @@
       <DependentUpon>ProductList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PluginDataService.svc.cs">
+      <DependentUpon>PluginDataService.svc</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddProduct.ascx.cs">
       <DependentUpon>AddProduct.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -265,6 +275,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
+      <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>
+      <Name>FujifilmUSA.Sync.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>

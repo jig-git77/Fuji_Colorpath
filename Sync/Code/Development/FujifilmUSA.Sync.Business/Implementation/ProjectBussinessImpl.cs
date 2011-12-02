@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ReTargetId = DsReader.ReadInt(x,"ReTargetID"),
                                         ProjectTypeId = DsReader.ReadInt(x,"ProjectTypeID"),
                                         OutputTypeId = DsReader.ReadInt(x,"OutPutTypeID"),
-                                        ProjectStatus = (Enums.CPSyncRunStatus)DsReader.ReadInt(x,"ProjStatus")
+                                        ProjectStatus = (ECPSyncRunStatus)DsReader.ReadInt(x,"ProjStatus")
                                     }).ToList();
             }
             return objProjectList;
