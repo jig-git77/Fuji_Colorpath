@@ -17,3 +17,5 @@ Default skin template. The following skins are provided as examples only.
 </telerik:RadComboBox>
 <telerik:RadTextBox runat="server" Width="196px" SkinID="width196px">
 </telerik:RadTextBox>
+<telerik:RadTextBox runat="server" Width="250px" SkinID="width250px">
+</telerik:RadTextBox>

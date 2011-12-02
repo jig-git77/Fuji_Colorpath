@@ -848,3 +848,38 @@ label
 {
     font-size: 14px;
 }
+.InformationtxtDivWidth
+{
+    width: 500px;
+}
+.Information_divAnalyze
+{
+    float: right;
+    text-align: center;
+    margin-right: 5px;
+}
+
+
+
+
+.RadTabStrip .rtsSelected, .RadTabStrip .rtsSelected:hover
+{
+    background-color: #ededed !important;
+    border-bottom-color: #ededed !important;
+}
+.RadTabStrip .rtsLI .rtsLink
+{
+    background-color: #c3c3c3;
+    border-color: #c3c3c3;
+}
+.RadTabStrip .rtsLI .rtsLink:hover
+{
+    background-color: #c3c3c3;
+    border-color: #c3c3c3;
+    color: Black;
+}
+.RadPageViewBorder
+{
+    background-color: #ededed;
+    border: 1px solid #c3c3c3;
+}

@@ -123,11 +123,14 @@
     <Content Include="Images\tab_right.png" />
     <Content Include="index.aspx" />
     <Content Include="Index.htm" />
+    <Content Include="Information.aspx" />
+    <Content Include="Javascript\html5.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
     <Content Include="ProductList.aspx" />
     <Content Include="UserControl\AddProduct.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
+    <Content Include="UserControl\Information.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\ProductList.ascx" />
@@ -157,6 +160,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Information.aspx.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Information.aspx.designer.cs">
+      <DependentUpon>Information.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -194,6 +204,13 @@
     <Compile Include="UserControl\DeviceList.ascx.designer.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\Information.ascx.cs">
+      <DependentUpon>Information.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Information.ascx.designer.cs">
+      <DependentUpon>Information.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,9 +247,7 @@
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Javascript\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="MainMaster.Master" />
   </ItemGroup>

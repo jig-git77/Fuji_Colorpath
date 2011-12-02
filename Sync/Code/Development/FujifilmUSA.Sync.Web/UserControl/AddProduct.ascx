@@ -51,7 +51,7 @@
                 <td colspan="4">
                     <div style="margin-top: 10px;">
                         <telerik:RadTabStrip ID="RadTabStrip1" runat="server" MultiPageID="RadMultiPage1"
-                            SelectedIndex="0">
+                            SelectedIndex="0" Skin="Simple">
                             <Tabs>
                                 <telerik:RadTab Text="DLP" Value="DLP">
                                 </telerik:RadTab>
@@ -59,7 +59,7 @@
                                 </telerik:RadTab>
                             </Tabs>
                         </telerik:RadTabStrip>
-                        <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="0" BackColor="#ededed">
+                        <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="0" CssClass="RadPageViewBorder">
                             <telerik:RadPageView ID="RadPageView1" runat="server">
                                 <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
                                     <tr>
