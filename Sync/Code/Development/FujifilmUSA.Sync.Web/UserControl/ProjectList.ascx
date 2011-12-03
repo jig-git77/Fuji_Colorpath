@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProductList.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProductList" %>
 <div class="contant_top">
     &nbsp;</div>

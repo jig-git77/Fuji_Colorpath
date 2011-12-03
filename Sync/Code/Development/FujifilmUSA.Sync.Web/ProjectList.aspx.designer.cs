@@ -13,12 +13,12 @@ namespace FujifilmUSA.Sync.Web {
     public partial class ProductList {
         
         /// <summary>
-        /// ProductList1 control.
+        /// ucProjectList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ProductList ProductList1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ProductList ucProjectList;
     }
 }

@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddProduct.aspx" />
+    <Content Include="AddProject.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
@@ -156,14 +156,14 @@
     <Content Include="Javascript\jquery-1.7.1.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
-    <Content Include="ProductList.aspx" />
+    <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
-    <Content Include="UserControl\AddProduct.ascx" />
+    <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\Information.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
-    <Content Include="UserControl\ProductList.ascx" />
+    <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -178,12 +178,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddProduct.aspx.cs">
-      <DependentUpon>AddProduct.aspx</DependentUpon>
+    <Compile Include="AddProject.aspx.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AddProduct.aspx.designer.cs">
-      <DependentUpon>AddProduct.aspx</DependentUpon>
+    <Compile Include="AddProject.aspx.designer.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -213,23 +213,23 @@
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="ProductList.aspx.cs">
-      <DependentUpon>ProductList.aspx</DependentUpon>
+    <Compile Include="ProjectList.aspx.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProductList.aspx.designer.cs">
-      <DependentUpon>ProductList.aspx</DependentUpon>
+    <Compile Include="ProjectList.aspx.designer.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PluginDataService.svc.cs">
       <DependentUpon>PluginDataService.svc</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddProduct.ascx.cs">
-      <DependentUpon>AddProduct.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject.ascx.cs">
+      <DependentUpon>AddProject.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\AddProduct.ascx.designer.cs">
-      <DependentUpon>AddProduct.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject.ascx.designer.cs">
+      <DependentUpon>AddProject.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DeviceList.ascx.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>
@@ -259,12 +259,12 @@
     <Compile Include="UserControl\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\ProductList.ascx.cs">
-      <DependentUpon>ProductList.ascx</DependentUpon>
+    <Compile Include="UserControl\ProjectList.ascx.cs">
+      <DependentUpon>ProjectList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\ProductList.ascx.designer.cs">
-      <DependentUpon>ProductList.ascx</DependentUpon>
+    <Compile Include="UserControl\ProjectList.ascx.designer.cs">
+      <DependentUpon>ProjectList.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>

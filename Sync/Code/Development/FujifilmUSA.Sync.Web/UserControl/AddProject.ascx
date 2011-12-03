@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProduct.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddProduct" %>
 <div class="contant_top">
     &nbsp;</div>
@@ -14,11 +14,11 @@
     <div class="product_list_table">
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
-                <td class="ProductListtd1">
+                <td class="ProjectListtd1">
                     <asp:Label ID="lblProjectName" runat="server" Text="Project Name" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td class="ProductListtd1">
+                <td class="ProjectListtd2">
                     <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox>
                 </td>
@@ -26,24 +26,24 @@
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td class="ProductListtd4">
+                <td class="ProjectListtd4">
                     <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">
                     </telerik:RadComboBox>
                 </td>
             </tr>
             <tr>
-                <td class="ProductListtd1">
+                <td class="ProjectListtd1">
                     <asp:Label ID="lblOutputType" runat="server" Text="Output Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td class="ProductListtd2">
+                <td class="ProjectListtd2">
                     <telerik:RadComboBox ID="cmbOutputType" runat="server" SkinID="width200px">
                     </telerik:RadComboBox>
                 </td>
                 <td class="float_right">
                     &nbsp;
                 </td>
-                <td class="ProductListtd3">
+                <td class="ProjectListtd4">
                     &nbsp;
                 </td>
             </tr>
