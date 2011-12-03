@@ -47,7 +47,7 @@
                             <tr>
                                 <td colspan="2">
                                     <telerik:RadListView ID="rlvDeviceList" runat="server" ItemPlaceholderID="ListViewContainer"
-                                        OnNeedDataSource="rlvDeviceList_NeedDataSource">
+                                        OnNeedDataSource="rlvDeviceList_NeedDataSource"  OnItemCommand="rlvDeviceList_ItemCommand" >
                                         <LayoutTemplate>
                                             <asp:PlaceHolder runat="server" ID="ListViewContainer" />
                                         </LayoutTemplate>
@@ -59,7 +59,8 @@
                                                             <%# Eval("DeviceName")%>
                                                         </div>
                                                         <div class="right">
-                                                            <a href="#" class="gray_bt"><span>Select</span></a></div>
+                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" CommandName="SelectDevice"  ><span>Select</span></asp:LinkButton>
+                                                            </div>
                                                         <div class="clear">
                                                         </div>
                                                     </li>

@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     Select(x => new Project()
                                     {
                                         ProjectId = DsReader.ReadInt(x,"ProjectID"),
-                                        ProjectName = DsReader.ReadString(x,",ProjectName"),
+                                        ProjectName = DsReader.ReadString(x, "ProjectName"),
                                         CreatedDate = DsReader.ReadDate(x,"CreatedDate"),
                                         SyncDeviceId = DsReader.ReadInt(x,"SyncDeviceID"),
                                         ΔEType = DsReader.ReadInt(x,"ΔEType"),

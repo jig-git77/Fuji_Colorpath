@@ -7,6 +7,7 @@ namespace FujifilmUSA.Sync.Common
     {
         #region Private Variables
         private const string _currentUser = "SESSION_CURRENTUSER";
+        private const string _currentSyncDevice = "SESSION_CURRENTSYNCDEVICE";
         #endregion
 
         #region Singleton
@@ -34,6 +35,21 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_currentUser] = value;
+            }
+        }
+        public SyncDevice CurrentSyncDevice
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentSyncDevice] != null)
+                {
+                    return (SyncDevice)HttpContext.Current.Session[_currentSyncDevice];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentSyncDevice] = value;
             }
         }
 

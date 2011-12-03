@@ -6,7 +6,7 @@
     <div class="head">
         <h1>
             Project List</h1>
-        <a href="#" class="button"><span>
+        <a href="AddProject.aspx" class="button"><span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
             New Project</span></a></div>
     <div class="clear">

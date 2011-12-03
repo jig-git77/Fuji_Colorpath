@@ -23,6 +23,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
+            
+        }
+
+        protected void rlvDeviceList_ItemCommand(object sender, RadListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectDevice")
+            {
+                RadListViewDataItem item = e.ListViewItem as RadListViewDataItem;
+                
+                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
+                //Response.Redirect("ProjectList.aspx");
+            }
         }
 
       
@@ -66,8 +78,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbBranch.SelectedIndex != 0)
             {
-
-
                 this.TaskeroUserId = SessionManager.Instance.CurrentUser.TaskeroUserId;
                 this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
                 this.CompanyId = 0;
@@ -82,6 +92,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
         }
+
+      
+
         #endregion
 
         #region Method

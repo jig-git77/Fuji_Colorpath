@@ -1,33 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using Telerik.Web.UI;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProductList : System.Web.UI.UserControl
+    public partial class ProductList : System.Web.UI.UserControl, IViewProjectList
     {
+        #region "Declaration"
+        private PresenterProjectList _presenterprojectlist;
+        #endregion
+
+        #region "Page Events"
+
+        protected override void OnInit(EventArgs e)
+        {
+            _presenterprojectlist = new PresenterProjectList(this); 
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //if(!IsPostBack)
+            //{
+            //    BindProject();
+            //}
         }
 
         protected void grdProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            dynamic data = new[] {
-                new { ID = 1, ProjectName = "Test 1"},
-                 new { ID = 11, ProjectName = "Test 12"},
-                  new { ID = 1, ProjectName = "Test 1"},
-                 new { ID = 11, ProjectName = "Test 12"},
-                  new { ID = 1, ProjectName = "Test 1"},
-                 new { ID = 11, ProjectName = "Test 12"}
-                  
-               
-            };
-            grdProjectList.DataSource = data;
+            BindProject();
+            //this.SyncDeviceId = 1;
+            //_presenterprojectlist.GetProjectListBySyncDeviceId();
+            //grdProjectList.DataSource = GetProjectListBySyncDeviceId;
         }
+        #endregion
+
+        #region Method
+        private void BindProject()
+        {
+            if (SessionManager.Instance.CurrentSyncDevice != null)
+            {
+
+                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                _presenterprojectlist.GetProjectListBySyncDeviceId();
+                grdProjectList.DataSource = GetProjectListBySyncDeviceId;
+                //grdProjectList.DataBind();
+            }
+        }
+        #endregion
+
+        #region IViewProjectList Members
+        public int SyncDeviceId { get; set; }
+        public List<Project> GetProjectListBySyncDeviceId { get; set; }
+        #endregion
     }
 }
