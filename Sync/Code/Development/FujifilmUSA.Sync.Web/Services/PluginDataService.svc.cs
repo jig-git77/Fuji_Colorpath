@@ -15,24 +15,20 @@ namespace FujifilmUSA.Sync.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class PluginDataService
     {
-        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
-        // To create an operation that returns XML,
-        //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
-        //     and include the following line in the operation body:
-        //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
-        [WebGet]
+        [WebGet(UriTemplate = "GetReferenceChart/{projectId}")]
         [OperationContract]
-        public ReferenceChartData GetReferenceChart(int projectId)
+        public ReferenceChartData GetReferenceChart(string projectId)
         {
             var refChartData = ((IReferenceChartBusiness)new Business.BusinessFactory<IReferenceChartBusiness>().CreateObject());
-            return refChartData.GetReferenceChartData(projectId);
+            return refChartData.GetReferenceChartData(Convert.ToInt32(projectId));
         }
 
-        [WebGet]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
-        public string GetData()
+        public int SaveMeasurement(Measurement measurement)
         {
-            return "Hi Jay";
+            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            return refChartData.SaveMeasurement(measurement);
         }
     }
 }
