@@ -9,6 +9,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewProjectList
     {
         int SyncDeviceId { get; set; }
+        int ProjectId { get; set; }
         List<Project> GetProjectListBySyncDeviceId { get; set; }
+        int DeleteProject { get; set; }
     }
 }

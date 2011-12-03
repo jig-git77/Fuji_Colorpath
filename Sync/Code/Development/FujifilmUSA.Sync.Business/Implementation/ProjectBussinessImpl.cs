@@ -106,6 +106,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
+        public int DeleteProject(int projectId)
+        {
+            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteProject]",
+                                                               new object[]{ projectId });
+        }
+
         #endregion
     }
 }

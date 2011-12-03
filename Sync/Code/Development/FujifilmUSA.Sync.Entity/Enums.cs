@@ -236,4 +236,16 @@ namespace FujifilmUSA.Sync.Entity
         [StringValue("i1-iSis")]
         I1ISis = 2
     }
+
+    public enum EMeasurementIlluminant
+    {
+        D50 = 1,
+    }
+    public enum EMeasurementDensityType
+    {
+        StatusT = 1,
+    }
+
+
+
 }

@@ -14,11 +14,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IDeviceLinkProfileBusiness Members
 
-        public List<DeviceLinkProfile> GetDeviceLinkProfileList()
+        public List<DeviceLinkProfile> GetDeviceLinkProfileList(int sourceProfileId, int destinationProfileId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
             //========== Get data from data access=================//
-            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDLPList]");
+            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDLPList]", new object[] {sourceProfileId, destinationProfileId});
 
             if (dsDeviceLinkProfileList != null && dsDeviceLinkProfileList.Tables.Count > 0 && dsDeviceLinkProfileList.Tables[0].Rows.Count > 0)
             {
@@ -29,8 +29,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         DeviceLinkProfileName = DsReader.ReadString(x, "DLPName"),
                                         //Profile = DsReader.ReadString(x, "Profile"),
                                         IsUse = DsReader.ReadBoolean(x, "IsUse"),
-                                        SrcProfile = new SourceProfile { SourceProfileId = DsReader.ReadInt(x, "SourceProfileID"), SourceProfileName = DsReader.ReadString(x, "SourceProfileName") },
-                                        DestProfile = new DestinationProfile { DestinationProfileId = DsReader.ReadInt(x, "DestinationProfileID"), DestinationProfileName = DsReader.ReadString(x, "DestinationProfileName") }
+                                        SrcProfile =
+                                            new SourceProfile
+                                                {SourceProfileId = DsReader.ReadInt(x, "SourceProfileID"), SourceProfileName = DsReader.ReadString(x, "SourceProfileName")},
+                                        DestProfile =
+                                            new DestinationProfile
+                                                {
+                                                    DestinationProfileId = DsReader.ReadInt(x, "DestinationProfileID"),
+                                                    DestinationProfileName = DsReader.ReadString(x, "DestinationProfileName")
+                                                }
 
                                     }).ToList();
             }

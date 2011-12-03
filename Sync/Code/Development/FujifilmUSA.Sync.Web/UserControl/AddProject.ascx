@@ -27,7 +27,7 @@
                     :
                 </td>
                 <td class="ProjectListtd4">
-                    <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">
+                    <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">                      
                     </telerik:RadComboBox>
                 </td>
             </tr>
@@ -68,7 +68,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="RadComboBox1" runat="server" SkinID="width200px">
+                                            <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px">
                                             </telerik:RadComboBox>
                                         </td>
                                         <td>
@@ -76,7 +76,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="RadComboBox2" runat="server" SkinID="width200px">
+                                            <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px">
                                             </telerik:RadComboBox>
                                         </td>
                                     </tr>

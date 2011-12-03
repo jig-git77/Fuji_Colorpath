@@ -8,11 +8,13 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDeviceLinkProfileBusiness Members
 
-        public List<DeviceLinkProfile> GetDeviceLinkProfileList()
+        public List<DeviceLinkProfile> GetDeviceLinkProfileList(int sourceProfileId, int destinationProfileId)
         {
             return new List<DeviceLinkProfile>();
         }
 
         #endregion
     }
+
+
 }

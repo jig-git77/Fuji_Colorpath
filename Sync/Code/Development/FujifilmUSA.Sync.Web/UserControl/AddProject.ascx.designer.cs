@@ -112,13 +112,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// RadComboBox1 control.
+        /// cmbSourceProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadComboBox1;
+        protected global::Telerik.Web.UI.RadComboBox cmbSourceProfile;
         
         /// <summary>
         /// Label2 control.
@@ -130,13 +130,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// RadComboBox2 control.
+        /// cmbDestinationProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox RadComboBox2;
+        protected global::Telerik.Web.UI.RadComboBox cmbDestinationProfile;
         
         /// <summary>
         /// grdDLP control.
