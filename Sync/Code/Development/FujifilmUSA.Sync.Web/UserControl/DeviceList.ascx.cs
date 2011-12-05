@@ -26,18 +26,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             
         }
 
-        protected void rlvDeviceList_ItemCommand(object sender, RadListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectDevice")
-            {
-                RadListViewDataItem item = e.ListViewItem as RadListViewDataItem;
-                
-                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
-                //Response.Redirect("ProjectList.aspx");
-            }
-        }
-
-      
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -54,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     trFilter.Visible = false;
-                    BindDeviceList();
+                   // BindDeviceList(); // jayesh
                 }
                 
             }
@@ -70,30 +58,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbBranch.SelectedIndex != 0)
             {
-                BindDeviceList();
+                grbDeviceList.Rebind();
             }
         }
 
-        protected void rlvDeviceList_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
-        {
-            if (cmbBranch.SelectedIndex != 0)
-            {
-                this.TaskeroUserId = SessionManager.Instance.CurrentUser.TaskeroUserId;
-                this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
-                this.CompanyId = 0;
-                this.BranchId = 0;
-                if (SessionManager.Instance.CurrentUser.RoleId == 1)
-                {
-
-                    this.CompanyId = int.Parse(cmbCompany.SelectedValue);
-                    this.BranchId = int.Parse(cmbBranch.SelectedValue);
-                }
-                rlvDeviceList.DataSource = GetSyncDeviceListByUserId;
-            }
-
-        }
-
-      
 
         #endregion
 
@@ -115,19 +83,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindDeviceList()
         {
-            this.TaskeroUserId = SessionManager.Instance.CurrentUser.TaskeroUserId;
-            this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
-            this.CompanyId = 0;
-            this.BranchId = 0;
-            if (SessionManager.Instance.CurrentUser.RoleId == 1)
+            if (cmbCompany.SelectedIndex > 0 && cmbBranch.SelectedIndex > 0)
             {
-               
-                this.CompanyId = int.Parse(cmbCompany.SelectedValue);
-                this.BranchId= int.Parse(cmbBranch.SelectedValue);
+                this.TaskeroUserId = SessionManager.Instance.CurrentUser.TaskeroUserId;
+                this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
+                this.CompanyId = 0;
+                this.BranchId = 0;
+                if (SessionManager.Instance.CurrentUser.RoleId == 1)
+                {
+
+                    this.CompanyId = int.Parse(cmbCompany.SelectedValue);
+                    this.BranchId = int.Parse(cmbBranch.SelectedValue);
+                }
+                _presentersyncdevice.GetSyncDeviceListByUserId();
+                grbDeviceList.DataSource = GetSyncDeviceListByUserId;
             }
-            _presentersyncdevice.GetSyncDeviceListByUserId();
-            rlvDeviceList.DataSource = GetSyncDeviceListByUserId;
-            rlvDeviceList.DataBind();
+            //rlvDeviceList.DataBind();
         }
 
         #endregion
@@ -141,5 +112,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> GetCompanyList { get; set; }
         public List<SyncDevice> GetSyncDeviceListByUserId { get; set; }
         #endregion
+
+        protected void grbDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            BindDeviceList();
+        }
+
+        protected void grbDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectDevice")
+            {
+                GridDataItem item = e.Item as GridDataItem;
+
+                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
+                //Response.Redirect("ProjectList.aspx");
+            }
+        }
     }
 }

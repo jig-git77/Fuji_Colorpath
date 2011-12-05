@@ -19,7 +19,8 @@
                                     &nbsp; :
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
+                                    <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
+                                        OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
                                     </telerik:RadComboBox>
                                 </td>
                             </tr>
@@ -29,7 +30,8 @@
                                     &nbsp :
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true">
+                                    <telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
+                                        OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true">
                                     </telerik:RadComboBox>
                                 </td>
                             </tr>
@@ -46,30 +48,31 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td colspan="2">
-                                    <telerik:RadListView ID="rlvDeviceList" runat="server" ItemPlaceholderID="ListViewContainer"
-                                        OnNeedDataSource="rlvDeviceList_NeedDataSource"  OnItemCommand="rlvDeviceList_ItemCommand" >
-                                        <LayoutTemplate>
-                                            <asp:PlaceHolder runat="server" ID="ListViewContainer" />
-                                        </LayoutTemplate>
-                                        <ItemTemplate>
-                                            <div class="product_list">
-                                                <ul>
-                                                    <li>
-                                                        <div class="left">
-                                                            <%# Eval("DeviceName")%>
-                                                        </div>
-                                                        <div class="right">
-                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" CommandName="SelectDevice"  ><span>Select</span></asp:LinkButton>
+                                   
+                                    <telerik:RadGrid ID="grbDeviceList" runat="server" AutoGenerateColumns="false" 
+                                        onitemcommand="grbDeviceList_ItemCommand" 
+                                        onneeddatasource="grbDeviceList_NeedDataSource">
+                                        <MasterTableView>
+                                            <ItemTemplate>
+                                                <div class="product_list">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="left">
+                                                                <%# Eval("DeviceName")%>
                                                             </div>
-                                                        <div class="clear">
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="clear">
-                                            </div>
-                                        </ItemTemplate>
-                                    </telerik:RadListView>
+                                                            <div class="right">
+                                                                <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" CommandName="SelectDevice"><span>Select</span></asp:LinkButton>
+                                                            </div>
+                                                            <div class="clear">
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </ItemTemplate>
+                                        </MasterTableView>
+                                    </telerik:RadGrid>
                                 </td>
                             </tr>
                         </table>

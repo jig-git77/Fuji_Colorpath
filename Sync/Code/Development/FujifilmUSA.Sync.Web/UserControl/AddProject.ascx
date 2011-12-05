@@ -51,8 +51,12 @@
                 <td colspan="4">
                     <div style="margin-top: 10px;">
                         <telerik:RadTabStrip ID="RadTabStrip1" runat="server" MultiPageID="RadMultiPage1"
-                            SelectedIndex="0" Skin="Simple">
+                            SelectedIndex="0" Skin="Black">
                             <Tabs>
+                                <telerik:RadTab Text="DLP" Value="DLP">
+                                </telerik:RadTab>
+                                <telerik:RadTab Text="Measurement Setup" Value="Measurement Setup">
+                                </telerik:RadTab>
                                 <telerik:RadTab Text="DLP" Value="DLP">
                                 </telerik:RadTab>
                                 <telerik:RadTab Text="Measurement Setup" Value="Measurement Setup">
@@ -82,30 +86,31 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4">
-                                        <div style="padding:10px 5px 5px 5px;">
-                                            <telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource"
-                                             EnableEmbeddedSkins="false" Skin="Fujifilm" SkinID="CommonGrid">
-                                                <MasterTableView>
-                                                    <Columns>
-                                                        <telerik:GridTemplateColumn>
-                                                            <ItemTemplate>
-                                                                <asp:Image ID="imgBullet" ImageUrl="~/Images/table_bullate.png" runat="server" />
-                                                            </ItemTemplate>
-                                                            <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
-                                                        </telerik:GridTemplateColumn>
-                                                        <telerik:GridBoundColumn DataField="Source" HeaderText="Source" UniqueName="Source">
-                                                        </telerik:GridBoundColumn>
-                                                        <telerik:GridBoundColumn DataField="Paper" HeaderText="Paper" UniqueName="Paper">
-                                                        </telerik:GridBoundColumn>
-                                                        <telerik:GridBoundColumn DataField="PrintVariables" HeaderText="Print Variables"
-                                                            UniqueName="PrintVariables">
-                                                        </telerik:GridBoundColumn>
-                                                        <telerik:GridBoundColumn DataField="Separations" HeaderText="Separations" UniqueName="Separations">
-                                                        </telerik:GridBoundColumn>
-                                                    </Columns>
-                                                </MasterTableView>
-                                                <ClientSettings EnableRowHoverStyle="true" Selecting-AllowRowSelect="true"></ClientSettings>
-                                            </telerik:RadGrid>
+                                            <div style="padding: 10px 5px 5px 5px;">
+                                                <telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource"
+                                                    EnableEmbeddedSkins="false" Skin="Fujifilm" SkinID="CommonGrid">
+                                                    <MasterTableView>
+                                                        <Columns>
+                                                            <telerik:GridTemplateColumn>
+                                                                <ItemTemplate>
+                                                                    <asp:Image ID="imgBullet" ImageUrl="~/Images/table_bullate.png" runat="server" />
+                                                                </ItemTemplate>
+                                                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+                                                            </telerik:GridTemplateColumn>
+                                                            <telerik:GridBoundColumn DataField="Source" HeaderText="Source" UniqueName="Source">
+                                                            </telerik:GridBoundColumn>
+                                                            <telerik:GridBoundColumn DataField="Paper" HeaderText="Paper" UniqueName="Paper">
+                                                            </telerik:GridBoundColumn>
+                                                            <telerik:GridBoundColumn DataField="PrintVariables" HeaderText="Print Variables"
+                                                                UniqueName="PrintVariables">
+                                                            </telerik:GridBoundColumn>
+                                                            <telerik:GridBoundColumn DataField="Separations" HeaderText="Separations" UniqueName="Separations">
+                                                            </telerik:GridBoundColumn>
+                                                        </Columns>
+                                                    </MasterTableView>
+                                                    <ClientSettings EnableRowHoverStyle="true" Selecting-AllowRowSelect="true">
+                                                    </ClientSettings>
+                                                </telerik:RadGrid>
                                             </div>
                                         </td>
                                     </tr>
