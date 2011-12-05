@@ -878,6 +878,7 @@ label
     border: 1px solid #c3c3c3;
 }
 
+/*
 .RadTabStrip .rtsSelected, .RadTabStrip .rtsSelected:hover
 {
     background-color: #ededed !important;
@@ -894,6 +895,18 @@ label
     border-color: #c3c3c3;
     color: Black;
 }
+*/
+.RadTabStrip .rtsLevel1 .rtsLI .rtsAfter {
+    /*background-position: 0 -78px;*/
+    background-image:none !important;
+}
+
+.RadTabStrip .rtsLevel1 .rtsLink {
+    /*background-position: 0 -52px;*/
+    background-image:none !important;
+}
+
+
 .float_left
 {
     float: left;
