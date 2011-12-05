@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         List<Measurement> GetMeasurement(int syncRunId);
 
-        DeviceLinkProfile OptimizeDeviceLinkProfile(int measurementId, int syncRunId, int projectId);
+        DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId);
 
         int GetMasterSyncRunId(int syncRunId);
     }

@@ -73,13 +73,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return lstMeasurements;
         }
 
-        public DeviceLinkProfile OptimizeDeviceLinkProfile(int measurementId, int syncRunId, int projectId)
+        public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId)
         {
             var optimizeDlp = new DeviceLinkProfile();
             var request = new OptimizeDeviceLinkProfileRequest();
 
             //Load pcs and dcs Data
-            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync.uspGetPCSData", new object[] {measurementId});
+            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync.uspGetPCSData", new object[] {measurementIds});
             if (dsPcsDcsData.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)

@@ -18,7 +18,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public DeviceLinkProfile OptimizeDeviceLinkProfile(int measurementId, int syncRunId, int projectId)
+        public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId)
         {
             return new DeviceLinkProfile();
         }

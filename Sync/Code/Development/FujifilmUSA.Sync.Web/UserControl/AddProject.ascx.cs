@@ -23,11 +23,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             BindOutputType();
-            
-
+            BindSourceProfile();
+            BindDestinationProfile();
         }
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
+            
             BindDeviceLinkProfile();
             //dynamic data = new[] {
             //    new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"},
@@ -57,7 +58,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbSourceProfile.DataSource = GetSourceProfileList;
             cmbSourceProfile.DataBind();
             cmbSourceProfile.Items.Insert(0, new RadComboBoxItem("", "-- Select --"));
-
         }
         private void BindDestinationProfile()
         {
