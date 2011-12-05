@@ -23,13 +23,13 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] DCSDataField;
+        private System.Collections.Generic.List<double> DCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.Parameter[] OptionsField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] PCSDataField;
+        private System.Collections.Generic.List<double> PCSDataField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] DCSData {
+        public System.Collections.Generic.List<double> DCSData {
             get {
                 return this.DCSDataField;
             }
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.Parameter[] Options {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
             get {
                 return this.OptionsField;
             }
@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] PCSData {
+        public System.Collections.Generic.List<double> PCSData {
             get {
                 return this.PCSDataField;
             }
@@ -269,19 +269,19 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
     public partial class ExtractProfileValuesResponse : FujifilmUSA.Sync.Business.ProfilerService.BaseResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] C_XField;
+        private System.Collections.Generic.List<double> C_XField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] KField;
+        private System.Collections.Generic.List<double> KField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] M_YField;
+        private System.Collections.Generic.List<double> M_YField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] Y_ZField;
+        private System.Collections.Generic.List<double> Y_ZField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] C_X {
+        public System.Collections.Generic.List<double> C_X {
             get {
                 return this.C_XField;
             }
@@ -294,7 +294,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] K {
+        public System.Collections.Generic.List<double> K {
             get {
                 return this.KField;
             }
@@ -307,7 +307,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] M_Y {
+        public System.Collections.Generic.List<double> M_Y {
             get {
                 return this.M_YField;
             }
@@ -320,7 +320,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] Y_Z {
+        public System.Collections.Generic.List<double> Y_Z {
             get {
                 return this.Y_ZField;
             }
@@ -431,7 +431,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.Parameter[] OptionsField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
@@ -460,7 +460,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.Parameter[] Options {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
             get {
                 return this.OptionsField;
             }
@@ -505,7 +505,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] DCSDataField;
+        private System.Collections.Generic.List<double> DCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DestinationProfileField;
@@ -514,10 +514,10 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile DeviceLinkProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.Parameter[] OptionsField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] PCSDataField;
+        private System.Collections.Generic.List<double> PCSDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile SourceProfileField;
@@ -533,7 +533,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] DCSData {
+        public System.Collections.Generic.List<double> DCSData {
             get {
                 return this.DCSDataField;
             }
@@ -572,7 +572,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.Parameter[] Options {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
             get {
                 return this.OptionsField;
             }
@@ -585,7 +585,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] PCSData {
+        public System.Collections.Generic.List<double> PCSData {
             get {
                 return this.PCSDataField;
             }
@@ -630,25 +630,25 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] C_XField;
+        private System.Collections.Generic.List<double> C_XField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.ProfileExtractType ExtractTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] KField;
+        private System.Collections.Generic.List<double> KField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] M_YField;
+        private System.Collections.Generic.List<double> M_YField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private FujifilmUSA.Sync.Business.ProfilerService.Parameter[] OptionsField;
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private FujifilmUSA.Sync.Business.ProfilerService.IccProfile ProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private double[] Y_ZField;
+        private System.Collections.Generic.List<double> Y_ZField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -661,7 +661,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] C_X {
+        public System.Collections.Generic.List<double> C_X {
             get {
                 return this.C_XField;
             }
@@ -687,7 +687,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] K {
+        public System.Collections.Generic.List<double> K {
             get {
                 return this.KField;
             }
@@ -700,7 +700,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] M_Y {
+        public System.Collections.Generic.List<double> M_Y {
             get {
                 return this.M_YField;
             }
@@ -713,7 +713,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public FujifilmUSA.Sync.Business.ProfilerService.Parameter[] Options {
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> Options {
             get {
                 return this.OptionsField;
             }
@@ -739,7 +739,7 @@ namespace FujifilmUSA.Sync.Business.ProfilerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double[] Y_Z {
+        public System.Collections.Generic.List<double> Y_Z {
             get {
                 return this.Y_ZField;
             }

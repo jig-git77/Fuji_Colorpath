@@ -14,15 +14,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> GetBranchList(int companyId)
         {
             var dstBranchList = new Dictionary<int, string>();
-            var dsBranchList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]",
+            var dsBranchList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetCompanyList]",
                                                                         new object[] {companyId});
             if (dsBranchList != null && dsBranchList.Tables.Count > 0)
             {
                 dstBranchList = (dsBranchList.Tables[0].AsEnumerable().Select(
                     branch => new
                                   {
-                                      Value = DsReader.ReadInt(branch, "BranchID"),
-                                      Text = DsReader.ReadString(branch, "BranchName")
+                                      Value = DataReader.ReadInt(branch, "BranchID"),
+                                      Text = DataReader.ReadString(branch, "BranchName")
                                   })).ToDictionary(branch => branch.Value, branch => branch.Text);
             }
             return dstBranchList;

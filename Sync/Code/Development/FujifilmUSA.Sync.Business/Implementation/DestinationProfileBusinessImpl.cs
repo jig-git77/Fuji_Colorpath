@@ -15,14 +15,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> GetDestinationProfileList()
         {
             var dstDestinationProfileList = new Dictionary<int, string>();
-            var dsDestinationProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetDestinationProfileList]");
+            var dsDestinationProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]");
             if (dsDestinationProfileList != null && dsDestinationProfileList.Tables.Count > 0)
             {
                 dstDestinationProfileList = (dsDestinationProfileList.Tables[0].AsEnumerable().Select(
                     destinationProfile => new
                                               {
-                                                  Value = DsReader.ReadInt(destinationProfile,"DestinationProfileID"),
-                                                  Text = DsReader.ReadString(destinationProfile,"DestinationProfileName")
+                                                  Value = DataReader.ReadInt(destinationProfile,"DestinationProfileID"),
+                                                  Text = DataReader.ReadString(destinationProfile,"DestinationProfileName")
                                               })).ToDictionary(destinationProfile => destinationProfile.Value, destinationProfile => destinationProfile.Text);
             }
             return dstDestinationProfileList;

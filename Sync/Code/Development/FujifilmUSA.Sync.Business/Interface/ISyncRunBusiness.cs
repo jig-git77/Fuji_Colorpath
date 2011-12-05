@@ -11,5 +11,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         int SaveMeasurement(Measurement measurement);
 
         List<Measurement> GetMeasurement(int syncRunId);
+
+        DeviceLinkProfile OptimizeDeviceLinkProfile(int measurementId, int syncRunId, int projectId);
+
+        int GetMasterSyncRunId(int syncRunId);
     }
 }

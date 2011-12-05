@@ -17,15 +17,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId(int measurementDeviceId)
         {
             var dstReferenceChartTypeList = new Dictionary<int, string>();
-            var dsReferenceChartTypeList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetReferenceChartTypeByMeasurementDeviceID]", new object[] { measurementDeviceId });
+            var dsReferenceChartTypeList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChartTypeByMeasurementDeviceID]", new object[] { measurementDeviceId });
 
             if (dsReferenceChartTypeList != null && dsReferenceChartTypeList.Tables.Count > 0)
             {
                 dstReferenceChartTypeList = (dsReferenceChartTypeList.Tables[0].AsEnumerable().
                     Select(referenceChartType => new
                                                      {
-                                                         Value = DsReader.ReadInt(referenceChartType, "ReferenceChartTypeID"),
-                                                         Text = DsReader.ReadString(referenceChartType, "ChartName")
+                                                         Value = DataReader.ReadInt(referenceChartType, "ReferenceChartTypeID"),
+                                                         Text = DataReader.ReadString(referenceChartType, "ChartName")
                                                      })).ToDictionary(referenceChartType => referenceChartType.Value, referenceChartType => referenceChartType.Text);
 
             }
@@ -35,17 +35,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public ReferenceChartData GetReferenceChartData(int projectId)
         {
             var chartData = new ReferenceChartData();
-            var dsReferenceChart = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetReferenceChart]", new object[] { projectId });
+            var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChart]", new object[] { projectId });
 
             if (dsReferenceChart.Tables[0].Rows.Count == 0)
                 return chartData;
 
-            chartData.ChartName = DsReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ChartName");
-            chartData.MeasurementDeviceTypeId = DsReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "MeasurementDeviceTypeID");
-            chartData.NumOfCols = DsReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfCols");
-            chartData.NumOfRows = DsReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfRows");
-            chartData.TotalPatches = DsReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "TotalPatches");
-            chartData.MeasureDeviceSrNo = DsReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
+            chartData.ChartName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ChartName");
+            chartData.MeasurementDeviceTypeId = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "MeasurementDeviceTypeID");
+            chartData.NumOfCols = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfCols");
+            chartData.NumOfRows = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfRows");
+            chartData.TotalPatches = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "TotalPatches");
+            chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
             //Apply security on device serial no.
             chartData.ActivationKey =
                 Utilities.GetMd5Hash(DateTime.Now.Year + DateTime.Now.DayOfYear + "+yg92s+" + chartData.MeasureDeviceSrNo);
@@ -53,14 +53,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 Select(x =>
                        new ReferenceChart()
                            {
-                               ReferenceChartTypeId = DsReader.ReadShort(x, "ReferenceChartTypeID"),
-                               SampleName = DsReader.ReadString(x, "SampleName"),
-                               CmykC = DsReader.ReadDecimal(x, "CMYK_C"),
-                               CmykM = DsReader.ReadDecimal(x, "CMYK_M"),
-                               CmykY = DsReader.ReadDecimal(x, "CMYK_Y"),
-                               CmykK = DsReader.ReadDecimal(x, "CMYK_K"),
-                               PatchTypeId = DsReader.ReadShort(x, "PatchTypeID"),
-                               HtmlColor = DsReader.ReadString(x, "HTMLColor")
+                               ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                               SampleName = DataReader.ReadString(x, "SampleName"),
+                               CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                               CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                               CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                               CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                               PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                               HtmlColor = DataReader.ReadString(x, "HTMLColor")
                            }).ToList();
             if (chartData.MeasurementDeviceTypeId > System.Convert.ToInt32(EMeasurementDeviceType.I1Pro))
             {
@@ -71,25 +71,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
 
                     if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeX"))
-                        chartData.ChartSetting.ChartSizeX = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeX");
+                        chartData.ChartSetting.ChartSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeX");
                     if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeY"))
-                        chartData.ChartSetting.ChartSizeY = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeY");
+                        chartData.ChartSetting.ChartSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeY");
                     if (dsChartSettings.Tables[0].Columns.Contains("BarSizeX"))
-                        chartData.ChartSetting.BarSizeX = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeX");
+                        chartData.ChartSetting.BarSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeX");
                     if (dsChartSettings.Tables[0].Columns.Contains("BarSizeY"))
-                        chartData.ChartSetting.BarSizeY = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeY");
+                        chartData.ChartSetting.BarSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeY");
                     if (dsChartSettings.Tables[0].Columns.Contains("MarkerDistance"))
-                        chartData.ChartSetting.MarkerDistance = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "MarkerDistance");
+                        chartData.ChartSetting.MarkerDistance = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "MarkerDistance");
                     if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeX"))
-                        chartData.ChartSetting.PatchSizeX = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeX");
+                        chartData.ChartSetting.PatchSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeX");
                     if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeY"))
-                        chartData.ChartSetting.PatchSizeY = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeY");
+                        chartData.ChartSetting.PatchSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeY");
                     if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstLineY"))
-                        chartData.ChartSetting.DistToFirstLineY = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstLineY");
+                        chartData.ChartSetting.DistToFirstLineY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstLineY");
                     if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstField"))
-                        chartData.ChartSetting.DistToFirstField = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstField");
+                        chartData.ChartSetting.DistToFirstField = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstField");
                     if (dsChartSettings.Tables[0].Columns.Contains("DistToBar"))
-                        chartData.ChartSetting.DistToBar = DsReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToBar");
+                        chartData.ChartSetting.DistToBar = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToBar");
                 }
             }
             return chartData;

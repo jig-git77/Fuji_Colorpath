@@ -15,14 +15,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> GetSourceProfileList()
         {
             var dstSourceProfileList = new Dictionary<int, string>();
-            var dsSourceProfileList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetSourceProfileList]");
+            var dsSourceProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSourceProfileList]");
             if (dsSourceProfileList != null && dsSourceProfileList.Tables.Count > 0)
             {
                 dstSourceProfileList = (from sourceProfile in dsSourceProfileList.Tables[0].AsEnumerable()
                                         select new
                                                    {
-                                                       Value = DsReader.ReadInt(sourceProfile, "SourceProfileID"),
-                                                       Text = DsReader.ReadString(sourceProfile, "SourceProfileName"),
+                                                       Value = DataReader.ReadInt(sourceProfile, "SourceProfileID"),
+                                                       Text = DataReader.ReadString(sourceProfile, "SourceProfileName"),
                                                    }).ToDictionary(sourceProfile => sourceProfile.Value, sourceProfile => sourceProfile.Text);
             }
             return dstSourceProfileList;

@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             
             var dstMeasurementDeviceList = new Dictionary<int, string>();
             //========== Get data from data access=================//
-            var dsMeasurementDeviceList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetMeasurementDeviceBySyncDeviceID]", new object[] { syncDeviceId });
+            var dsMeasurementDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementDeviceBySyncDeviceID]", new object[] { syncDeviceId });
 
 
             if (dsMeasurementDeviceList != null && dsMeasurementDeviceList.Tables.Count > 0 )
@@ -24,9 +24,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 dstMeasurementDeviceList = (dsMeasurementDeviceList.Tables[0].AsEnumerable().
                     Select(measurementDevice => new
                                                     {
-                                                        Value = DsReader.ReadInt(measurementDevice, "MeasurementDeviceID"),
+                                                        Value = DataReader.ReadInt(measurementDevice, "MeasurementDeviceID"),
                                                         Text =
-                                                    DsReader.ReadString(measurementDevice, "MeasurementDeviceTypeName") + DsReader.ReadString(measurementDevice, "SerialNumber")
+                                                    DataReader.ReadString(measurementDevice, "MeasurementDeviceTypeName") + DataReader.ReadString(measurementDevice, "SerialNumber")
                                                     })).ToDictionary(measurementDevice => measurementDevice.Value, measurementDevice => measurementDevice.Text);
 
             }

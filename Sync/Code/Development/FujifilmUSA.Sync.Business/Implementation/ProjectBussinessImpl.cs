@@ -17,24 +17,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var objProjectList = new List<Project>();
             //========== Get data from data access=================//
-            var dsProjectList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetAllSyncProjectBySyncDeviceID]", new object[] { syncDeviceId });
+            var dsProjectList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetAllSyncProjectBySyncDeviceID]", new object[] { syncDeviceId });
 
             if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
             {
                 objProjectList = dsProjectList.Tables[0].AsEnumerable().
                     Select(x => new Project()
                                     {
-                                        ProjectId = DsReader.ReadInt(x,"ProjectID"),
-                                        ProjectName = DsReader.ReadString(x, "ProjectName"),
-                                        CreatedDate = DsReader.ReadDate(x,"CreatedDate"),
-                                        SyncDeviceId = DsReader.ReadInt(x,"SyncDeviceID"),
-                                        ΔEType = DsReader.ReadInt(x,"ΔEType"),
-                                        DeviceLinkProfileId = DsReader.ReadInt(x,"DLPID"),
-                                        IsUsed = DsReader.ReadBoolean(x,"IsUsed"),
-                                        ReTargetId = DsReader.ReadInt(x,"ReTargetID"),
-                                        ProjectTypeId = DsReader.ReadInt(x,"ProjectTypeID"),
-                                        OutputTypeId = DsReader.ReadInt(x,"OutPutTypeID"),
-                                        ProjectStatus = (ECPSyncRunStatus)DsReader.ReadInt(x,"ProjStatus")
+                                        ProjectId = DataReader.ReadInt(x,"ProjectID"),
+                                        ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                        CreatedDate = DataReader.ReadDate(x,"CreatedDate"),
+                                        SyncDeviceId = DataReader.ReadInt(x,"SyncDeviceID"),
+                                        ΔEType = DataReader.ReadInt(x,"ΔEType"),
+                                        DeviceLinkProfileId = DataReader.ReadInt(x,"DLPID"),
+                                        IsUsed = DataReader.ReadBoolean(x,"IsUsed"),
+                                        ReTargetId = DataReader.ReadInt(x,"ReTargetID"),
+                                        ProjectTypeId = DataReader.ReadInt(x,"ProjectTypeID"),
+                                        OutputTypeId = DataReader.ReadInt(x,"OutPutTypeID"),
+                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x,"ProjStatus")
                                     }).ToList();
             }
             return objProjectList;

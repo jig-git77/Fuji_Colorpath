@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
 
             //========== Get data from data access=================//
-            var dsTaskeroUserLogin = DataAccessFactory.Instance.GetResult("[CPV].[uspGetCheckLogin]", new object[] { userName, password, allowedIp });
+            var dsTaskeroUserLogin = DataAccessFactory.Instance.GetDsResult("[CPV].[uspGetCheckLogin]", new object[] { userName, password, allowedIp });
 
             if (dsTaskeroUserLogin != null && dsTaskeroUserLogin.Tables.Count > 0 && dsTaskeroUserLogin.Tables[0].Rows.Count >0)
             {

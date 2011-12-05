@@ -1,12 +1,13 @@
 using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace FujifilmUSA.Sync.Common
 {
 	/// <summary>
 	/// Summary description for DSReader.
 	/// </summary>
-	public class DsReader
+	public class DataReader
 	{
 	    /// <summary>
 	    /// To read a string column value from datarow.
@@ -149,6 +150,29 @@ namespace FujifilmUSA.Sync.Common
 
 		}
 
+        /// <summary>
+        /// To read byte array column value from datarow.
+        /// </summary>
+        /// <param name="objRow"></param>
+        /// <param name="columnName"></param>
+        /// <returns>byte[]</returns>
+        public static byte[] ReadByteArray(DataRow objRow, string columnName)
+        {
+            byte[] iRetVal;
+            try
+            {
+                if (objRow.IsNull(columnName))
+                    return default(byte[]);
+                else
+                    iRetVal = (byte[])(objRow[columnName]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRetVal;
+
+        }
 
 		/// <summary>
 		/// To read a Long column value from datarow.

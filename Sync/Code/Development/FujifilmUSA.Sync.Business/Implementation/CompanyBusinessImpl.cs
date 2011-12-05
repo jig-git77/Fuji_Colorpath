@@ -14,14 +14,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> GetCompanyList()
         {
             var dstCompanyList = new Dictionary<int, string>(); 
-            var dsCompanyList = DataAccessFactory.Instance.GetResult("[CPSync4D].[uspGetCompanyList]", new object[] { 0 });
+            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetCompanyList]", new object[] { 0 });
             if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
             {
                 dstCompanyList = (dsCompanyList.Tables[0].AsEnumerable().Select(
                     company => new
                                    {
-                                       Value = DsReader.ReadInt(company, "CompanyID"),
-                                       Text = DsReader.ReadString(company, "CompanyName")
+                                       Value = DataReader.ReadInt(company, "CompanyID"),
+                                       Text = DataReader.ReadString(company, "CompanyName")
                                    })).ToDictionary(company => company.Value, company => company.Text);
             }
             return dstCompanyList;
