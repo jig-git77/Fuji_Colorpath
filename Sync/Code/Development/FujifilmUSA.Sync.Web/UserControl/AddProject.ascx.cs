@@ -28,7 +28,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            
             BindDeviceLinkProfile();
             //dynamic data = new[] {
             //    new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"},
@@ -68,10 +67,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindDeviceLinkProfile()
         {
-            this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
-            this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);
-            _presenteraddproject.GetDeviceLinkProfileList();
-            grdDLP.DataSource = GetDeviceLinkProfileList;
+            if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue) && !string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
+            {
+                this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
+                this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);
+                _presenteraddproject.GetDeviceLinkProfileList();
+                grdDLP.DataSource = GetDeviceLinkProfileList;
+            }
         }
         private void BindMeasurementIlluminant()
         {
