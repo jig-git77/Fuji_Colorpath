@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddProduct" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script type="text/javascript" language="javascript">    
         function SelectDeviceLinkProfileId(dlpId) {            
             document.getElementById('<%= hdnDeviceLinkProfileId.ClientID %>').value = dlpId;            
@@ -7,8 +8,8 @@
 </script>
 <div class="contant_top">
     &nbsp;</div>
-<div class="contant_middle">
-    <div class="head">
+<div class="contant_middle">    
+    <div class="head">    
         <h1>
             Add Project</h1>        
         <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button" ValidationGroup="SaveProject"
@@ -16,6 +17,7 @@
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
             Save</span></asp:LinkButton></div>
+    <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" /></center>
     <div class="clear">
     </div>
     <div class="product_list_table">

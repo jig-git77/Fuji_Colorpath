@@ -78,11 +78,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //    }
         //}
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtProjectName.Text.Trim()))
-            {
-                SaveProjectAndMeasurementSetting();
-            }
+        {            
+            
+            //Validate source profile
+            if (string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
+                ucStatusbar1.DisplayMessage("Please select source profile.", false);
+            //Validate destination profile
+            else if(string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
+                ucStatusbar1.DisplayMessage("Please select destination profile.", false);
+            //Validate the selected DLP
+            else if (hdnDeviceLinkProfileId.Value == "0")
+                ucStatusbar1.DisplayMessage("Please select DLP.", false);            
+            //If everything is validate fire the save event
+            else            
+                SaveProjectAndMeasurementSetting();            
         }
         #endregion
 
