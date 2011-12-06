@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddProduct {
         
         /// <summary>
+        /// lbtnProjectSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnProjectSave;
+        
+        /// <summary>
         /// imgAdd control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadPageView RadPageView2;
+        
+        /// <summary>
+        /// hdnDeviceLinkProfileId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDeviceLinkProfileId;
         
         /// <summary>
         /// chkUseMeasurementPlugin control.

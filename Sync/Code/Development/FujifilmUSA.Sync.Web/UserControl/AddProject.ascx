@@ -1,14 +1,20 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddProduct" %>
+<script type="text/javascript" language="javascript">    
+        function SelectDeviceLinkProfileId(dlpId) {            
+            document.getElementById('<%= hdnDeviceLinkProfileId.ClientID %>').value = dlpId;            
+        }
+</script>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
     <div class="head">
         <h1>
-            Add Project</h1>
-        <a href="#" class="button"><span>
+            Add Project</h1>        
+        <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button">
+        <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
-            Save</span></a></div>
+            Save</span></asp:LinkButton></div>
     <div class="clear">
     </div>
     <div class="product_list_table">
@@ -68,7 +74,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px">
+                                            <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged" >
                                             </telerik:RadComboBox>
                                         </td>
                                         <td>
@@ -76,32 +82,31 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px">
+                                            <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged" >
                                             </telerik:RadComboBox>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">
                                             <div style="padding: 10px 5px 5px 5px;">
-                                                <telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource"
+                                                <telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource" OnItemDataBound="grdDLP_ItemDataBound"
                                                     EnableEmbeddedSkins="false" Skin="Fujifilm" SkinID="CommonGrid">
                                                     <MasterTableView>
                                                         <Columns>
                                                             <telerik:GridTemplateColumn>
                                                                 <ItemTemplate>
-                                                                    <asp:Image ID="imgBullet" ImageUrl="~/Images/table_bullate.png" runat="server" />
+                                                                    <asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile" />
+                                                                    <%--<asp:Image ID="imgBullet" ImageUrl="~/Images/table_bullate.png" runat="server" />          --%>                                                        
                                                                 </ItemTemplate>
                                                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                                                             </telerik:GridTemplateColumn>
-                                                            <telerik:GridBoundColumn DataField="Source" HeaderText="Source" UniqueName="Source">
+                                                            <telerik:GridBoundColumn DataField="DeviceLinkProfileName" HeaderText="Device Link Profile Name" UniqueName="DeviceLinkProfileName">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Paper" HeaderText="Paper" UniqueName="Paper">
+                                                            <telerik:GridBoundColumn DataField="SrcProfile.SourceProfileName" HeaderText="Source Profile Name" UniqueName="SourceProfileName">
                                                             </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="PrintVariables" HeaderText="Print Variables"
-                                                                UniqueName="PrintVariables">
-                                                            </telerik:GridBoundColumn>
-                                                            <telerik:GridBoundColumn DataField="Separations" HeaderText="Separations" UniqueName="Separations">
-                                                            </telerik:GridBoundColumn>
+                                                            <telerik:GridBoundColumn DataField="DestProfile.DestinationProfileName" HeaderText="Destination Profile Name"
+                                                                UniqueName="DestinationProfileName">
+                                                            </telerik:GridBoundColumn>                                                            
                                                         </Columns>
                                                     </MasterTableView>
                                                     <ClientSettings EnableRowHoverStyle="true" Selecting-AllowRowSelect="true">
@@ -112,7 +117,8 @@
                                     </tr>
                                 </table>
                             </telerik:RadPageView>
-                            <telerik:RadPageView ID="RadPageView2" runat="server">                              
+                            <telerik:RadPageView ID="RadPageView2" runat="server">   
+                                <asp:HiddenField ID="hdnDeviceLinkProfileId" runat="server" />                           
                                 <table style="padding: 20px 20px 20px 20px;" border="0" cellpadding="0" cellspacing="20">
                                     <tr><td><asp:CheckBox ID="chkUseMeasurementPlugin" runat="server" Text="Use Measurement Plugin" /></td></tr>
                                     <tr>
@@ -121,15 +127,15 @@
                                                 <table border="0" cellpadding="0" cellspacing="4" style="padding-right: 20px;">
                                                     <tr>
                                                         <td><asp:Label ID="lblIlluminant" runat="server" Text="Illuminant:"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbIlluminant" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                        <td><telerik:RadComboBox ID="cmbIlluminant" runat="server"></telerik:RadComboBox></td>
                                                     </tr>
                                                     <tr>
                                                         <td><asp:Label ID="lblObserver" runat="server" Text="Observer:"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbObserver" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                        <td><telerik:RadComboBox ID="cmbObserver" runat="server"></telerik:RadComboBox></td>
                                                     </tr>
                                                     <tr style="padding: 0px 0px 5px 0px;">
-                                                        <td><asp:Label ID="lblDensityType" runat="server" Text="Density Typ:e"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbDensityType" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                        <td><asp:Label ID="lblDensityType" runat="server" Text="Density Type:"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbDensityType" runat="server"></telerik:RadComboBox></td>
                                                     </tr>
                                                 </table>
                                             </asp:Panel>
@@ -138,11 +144,11 @@
                                             <table border="0" cellpadding="4" cellspacing="4">
                                                     <tr>
                                                         <td><asp:Label ID="lblDeviceType" runat="server" Text="Device Type:"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                        <td><telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"></telerik:RadComboBox></td>
                                                     </tr>
                                                     <tr>
                                                         <td><asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                        <td><telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"></telerik:RadComboBox></td>
                                                     </tr>                                                  
                                             </table>
                                         </td>
