@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web {
     
     
-    public partial class Information {
+    public partial class AddMeasurement {
         
         /// <summary>
         /// ucInformation control.
@@ -19,6 +19,6 @@ namespace FujifilmUSA.Sync.Web {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.Information ucInformation;
+        protected global::FujifilmUSA.Sync.Web.UserControl.AddMeasurement ucInformation;
     }
 }

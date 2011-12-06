@@ -151,16 +151,40 @@
     <Content Include="Images\tab_right.png" />
     <Content Include="Index.aspx" />
     <Content Include="Index.htm" />
-    <Content Include="Information.aspx" />
+    <Content Include="AddMeasurement.aspx" />
     <Content Include="Javascript\html5.js" />
     <Content Include="Javascript\jquery-1.7.1.js" />
+    <Content Include="JQuery\jquery-1.6.2.min.js" />
+    <Content Include="JQuery\jquery-blockUI.js" />
+    <Content Include="JQuery\jquery-jtemplates.js" />
+    <Content Include="JQuery\jquery.simplemodal.js" />
+    <Content Include="JQuery\jquery.validate.js" />
+    <Content Include="JQuery\json2.js" />
+    <Content Include="JQuery\wtooltip.min.js" />
+    <Content Include="JS\AC_RunActiveContent.js" />
+    <Content Include="JS\chartread.js" />
+    <Content Include="JS\ChartTooltip.js" />
+    <Content Include="JS\ColorPicker\Forecolor.gif" />
+    <Content Include="JS\ColorPicker\images\ed_color_bg.gif" />
+    <Content Include="JS\ColorPicker\images\spacer.gif" />
+    <Content Include="JS\ColorPicker\picker.html" />
+    <Content Include="JS\ColorPicker\picker.js" />
+    <Content Include="JS\ColorPicker\popups\select_color.html" />
+    <Content Include="JS\CommonFunctions.js" />
+    <Content Include="JS\Corner-Curves.js" />
+    <Content Include="JS\excanvas.js" />
+    <Content Include="JS\i1read.js" />
+    <Content Include="JS\isisread.js" />
+    <Content Include="JS\swfobject.js" />
+    <Content Include="JS\WebComm.js" />
+    <Content Include="JS\wz_jsgraphics.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
-    <Content Include="UserControl\Information.ascx" />
+    <Content Include="UserControl\AddMeasurement.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
@@ -192,12 +216,12 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Information.aspx.cs">
-      <DependentUpon>Information.aspx</DependentUpon>
+    <Compile Include="AddMeasurement.aspx.cs">
+      <DependentUpon>AddMeasurement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Information.aspx.designer.cs">
-      <DependentUpon>Information.aspx</DependentUpon>
+    <Compile Include="AddMeasurement.aspx.designer.cs">
+      <DependentUpon>AddMeasurement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -238,12 +262,12 @@
     <Compile Include="UserControl\DeviceList.ascx.designer.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Information.ascx.cs">
-      <DependentUpon>Information.ascx</DependentUpon>
+    <Compile Include="UserControl\AddMeasurement.ascx.cs">
+      <DependentUpon>AddMeasurement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\Information.ascx.designer.cs">
-      <DependentUpon>Information.ascx</DependentUpon>
+    <Compile Include="UserControl\AddMeasurement.ascx.designer.cs">
+      <DependentUpon>AddMeasurement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>

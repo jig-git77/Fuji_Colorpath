@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class Information : System.Web.UI.Page
+    public partial class AddMeasurement : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

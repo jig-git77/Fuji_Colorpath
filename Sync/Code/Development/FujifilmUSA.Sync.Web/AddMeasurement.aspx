@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Information.aspx.cs" Inherits="FujifilmUSA.Sync.Web.Information"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AddMeasurement"
     MasterPageFile="~/MainMaster.Master" %>
 
 <%@ Register Src="~/UserControl/Information.ascx" TagName="Information" TagPrefix="uc1" %>
