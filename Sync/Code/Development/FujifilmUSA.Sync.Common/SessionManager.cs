@@ -10,6 +10,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _currentUser = "SESSION_CURRENTUSER";
         private const string _currentSyncDevice = "SESSION_CURRENTSYNCDEVICE";
         private const string _dictionaryList = "SESSION_DICTIONARYLIST";
+        private const string _currentProject = "SESSION_CURRENTPROJECT";
         #endregion
 
         #region Singleton
@@ -52,6 +53,21 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_currentSyncDevice] = value;
+            }
+        }
+        public Project CurrentProject
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentProject] != null)
+                {
+                    return (Project)HttpContext.Current.Session[_currentProject];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentProject] = value;
             }
         }
         public Dictionary<int, string> DictionaryList
