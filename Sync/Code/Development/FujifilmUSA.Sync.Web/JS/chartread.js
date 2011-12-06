@@ -122,7 +122,7 @@ function addEvent(obj, name, func) {
 }
 
 function load() {
-    jQuery('#lblPluginMessage').html("Error in plugin.");
+    jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
     });
@@ -134,7 +134,7 @@ function load() {
         plugin().setDebug("/tmp/isis.log");
     }
     var newHTML = '<B>Fuji Color Manager Plugin Version ' + plugin().plugin_version + '</B>.';
-    jQuery('#lblPluginMessage').html(newHTML);
+    jQuery("[id*='lblPluginMessage']").html(newHTML);
     //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
     //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
@@ -151,29 +151,29 @@ function DisplayLog() {
 }
 function presentScannerList(ScannerList) {
     //ScannerList is an array of scanners with properties.    
-    jQuery('#lblPluginMessage').html("");
+    jQuery("[id*='lblPluginMessage']").html("");
     if (ScannerList.length == 0)  return;
     if (ScannerList[0]["State"] == "Deleted") {
 
-        jQuery('#btnCalibrate').css('display', 'none');
-        jQuery('#tblMessage').css('background-color', '#EF6E79');
-        jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");
-        jQuery('#btnCalibrate').css('display', 'none');
-        jQuery('#btnMeasureAndUploadChart').css('display', 'none');
-        jQuery('#btnCancelMeasurement').css('display', 'none');
+        jQuery("[id*='btnCalibrate']").css('display', 'none');
+        jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+        jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+        jQuery("[id*='btnCalibrate']").css('display', 'none');
+        jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
+        jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
     }
     else {
         g_ScannerList = ScannerList;
         if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
-            jQuery('#tblMessage').css('background-color', '#6BB19C');
-            jQuery('#lblMessage').html("Status : Please calibrate.");
-            jQuery('#btnCalibrate').css('display', '');
+            jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+            jQuery("[id*='lblMessage']").html("Status : Please calibrate.");
+            jQuery("[id*='btnCalibrate']").css('display', '');
         }
         else {
-            jQuery('#tblMessage').css('background-color', '#6BB19C');
-            jQuery('#lblMessage').html("Status : Click on 'Measure Chart' button.");
-            jQuery('#btnMeasureAndUploadChart').css('display', '');
-            jQuery('#btnCancelMeasurement').css('display', '');
+            jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+            jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+            jQuery("[id*='btnCancelMeasurement']").css('display', '');
         }
     }
 }
@@ -238,24 +238,24 @@ function scan(scanner, colorspace, chart) {
     if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
         if (result == "ERROR: Activation Error") {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : This is not valid license device.");
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : This is not valid license device.");
         }
         else if (result != "OK") {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");               
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");               
         }
     }
     else {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : This is not valid license device.");
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : This is not valid license device.");
             return;
         }
         else if (result != "OK") {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
             return;
         }
         // Display the original chart from the reference values.
@@ -278,7 +278,7 @@ function scan(scanner, colorspace, chart) {
 }
 
 function refreshCanvas() {
-    jQuery('#Canvas').empty();
+    jQuery("[id*='Canvas']").empty();
 }
 // This function takes the current saved chart data and uploads it to
 // the server as a json string, then pops up the result.

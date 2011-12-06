@@ -9,8 +9,8 @@ function presentCalibrateDialog(scanner, myQuery) {
     // Calibrate sets the Request to standard strings regardless of language and you can
     // index pre-supplied strings (CALIBRATEINSTRUCTIONS, CALIBRATEACKNOWLEDGED, CANCELLED) like this:
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
-    jQuery('#lblMessage').html("Status : " + myQuery["Prompt"]);
+    jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -35,14 +35,14 @@ function presentCalibrateDone(scanner, msg, final) {
         // This would be either "CANCELLED" or "ERROR: ..."
         // for CANCELLED, you might just want to do nothing.
         if (!(msg == "OK" || msg == "CANCELLED")) {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : " + msg);
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : " + msg);
         }
         else {
-            jQuery('#tblMessage').css('background-color', '#6BB19C');
-            jQuery('#lblMessage').html("Status : Calibration Successful.");
-            jQuery('#btnMeasureAndUploadChart').css('display', '');
-            jQuery('#btnCancelMeasurement').css('display', '');
+            jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+            jQuery("[id*='lblMessage']").html("Status : Calibration Successful.");
+            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+            jQuery("[id*='btnCancelMeasurement']").css('display', '');
         }
     }
 }
@@ -50,7 +50,8 @@ function presentCalibrateDone(scanner, msg, final) {
 //  a callback to present instructions to the user, and a callback
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
-    var myQuery = new Object();    
+    alert('hi');
+    var myQuery = new Object();
     myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press the i1 trigger.</B>";
     myQuery["CALIBRATEACKNOWLEDGED"] = "<B>Calibration In Progress.</B>";
 
@@ -61,8 +62,8 @@ function calibrateDevice(scanner) {
     scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
     var result = plugin().calibrateDevice(scanner, myQuery, presentCalibrateDialog, presentCalibrateDone);
     if (result != "OK") {
-        jQuery('#tblMessage').css('background-color', '#EF6E79');
-        jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");        
+        jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+        jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
     }
 }
 // This function presents the EyeOne calibrate query.  We do this
@@ -78,17 +79,17 @@ function presentStripDialogi1(scanner, chart, query) {
     // will present the options of which strip to read next (defaulting to the
     // next strip in the sequence).
     //
-    if (query["Request"] == "READACKNOWLEDGED") {        
+    if (query["Request"] == "READACKNOWLEDGED") {
         query["Prompt"] = "<B>Strip read in progress.</B>";
     } else {
-        if (scanner["Type"] == "iO") {            
+        if (scanner["Type"] == "iO") {
             query["Prompt"] = "<B>Please place the chart on the platten and click to continue.</B>";
-        } else {            
+        } else {
             query["Prompt"] = "<B>Please place the scanner over the strip " + chart["CurrentStrip"] + ".<BR>press and hold the trigger while sliding the scanner across the strip.</B>";
         }
-    }    
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
-    jQuery('#lblMessage').html("Status : " + query["Prompt"]);
+    }
+    jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
 }
 //
 // The "Done" callback functions take three args.  The scanner, 
@@ -131,8 +132,8 @@ function presentScanDonei1(scanner, mychart, final) {
 
                 var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
                 if (result != "OK") {
-                    jQuery('#tblMessage').css('background-color', '#EF6E79');
-                    jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");                     
+                    jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+                    jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
                 }
             }
         }
@@ -160,8 +161,8 @@ function presentScanDonei1(scanner, mychart, final) {
 
             var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
             if (result != "OK") {
-                jQuery('#tblMessage').css('background-color', '#EF6E79');
-                jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");                 
+                jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+                jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
             }
             return;
         }
@@ -253,16 +254,16 @@ function presentScanDonei1(scanner, mychart, final) {
 
         var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result != "OK") {
-            jQuery('#tblMessage').css('background-color', '#EF6E79');
-            jQuery('#lblMessage').html("Status : Scanning Device has been unplugged.");             
+            jQuery("[id*='tblMessage']").css('background-color', '#EF6E79');
+            jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
         }
     }
 
     if (next == -1) {
         //jQuery('#btnUploadData').css('display', '');
-        jQuery('#tblMessage').css('background-color', '#6BB19C');
-        jQuery('#lblMessage').html("Status : Measurement Complete.");
-        jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
+        jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+        jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
+        jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
 
         var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
         var x = 0;
@@ -304,8 +305,8 @@ function presentProgressi1(scanner, mychart) {
     var lines = samples / width;
     prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
-    jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
+    jQuery("[id*='tblMessage']").css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
     //presentQuery(prog);
 
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing

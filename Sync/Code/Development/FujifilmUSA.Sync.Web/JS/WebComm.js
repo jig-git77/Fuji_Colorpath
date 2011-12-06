@@ -1,37 +1,16 @@
-﻿function getStatus() {
-    //Make ajax request...
-    jQuery.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "Services/PluginService.svc/GetStatus",
-        processData: false,
-        dataType: "json",
-        //If the call succeeds
-        success:
-        function (response) {
-            jQuery.growlUI('Success', 'Web service ping was successful. The service status is: ' + response.GetStatusResult, 3000);
-        },
-        //If the call fails
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert(XMLHttpRequest.responseText);
-            jQuery.growlUI('Error', XMLHttpRequest.responseText, 20000);
-        }
-    });
-}
-
-//Date Serialize Issue: http://stackoverflow.com/questions/206384/how-to-format-json-date
+﻿//Date Serialize Issue: http://stackoverflow.com/questions/206384/how-to-format-json-date
 Date.prototype.toMSJSON = function () {
     var date = '/Date(' + this.getTime() + ')/'; //the number of milliseconds since midnight of January 1, 1970 and the specified date.
     return date;
 };
 
-function GetReferenceChart(ProjectID) {    
+function GetReferenceChart(ProjectID) {
     //Make ajax request...
     jQuery.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "Services/PluginService.svc/GetReferenceChart",
-        data: JSON.stringify({ ProjectID: ProjectID }),
+        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID,
+        //data: JSON.stringify({ ProjectID: ProjectID }),
         processData: false,
         dataType: "json", //this only applies to response from the server and (not request send to server)
         //If the call succeeds

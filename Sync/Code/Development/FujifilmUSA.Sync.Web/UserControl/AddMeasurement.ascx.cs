@@ -12,7 +12,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(!IsPostBack)
+            {
+                hdProjectID.Value = "5";
+                hdProjectTypeID.Value = "1";
+                hdPressRunID.Value = "1";
+                hdChartTypeID.Value = "5";
+            }
         }
 
         protected void grdRecentUploadList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)

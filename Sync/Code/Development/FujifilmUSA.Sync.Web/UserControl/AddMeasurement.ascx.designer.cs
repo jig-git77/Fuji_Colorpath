@@ -22,6 +22,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadButton btnAnalyze;
         
         /// <summary>
+        /// tblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable tblMessage;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// lblPluginMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPluginMessage;
+        
+        /// <summary>
         /// lblMeasurementName control.
         /// </summary>
         /// <remarks>
@@ -37,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtMeasurementName;
+        protected global::System.Web.UI.WebControls.TextBox txtMeasurementName;
         
         /// <summary>
         /// btnCalibrate control.
@@ -76,22 +103,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid grdRecentUploadList;
         
         /// <summary>
-        /// hiddenPressRunID control.
+        /// hdPressRunID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenPressRunID;
+        protected global::System.Web.UI.WebControls.HiddenField hdPressRunID;
         
         /// <summary>
-        /// hiddenProjectTypeID control.
+        /// hdProjectTypeID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hiddenProjectTypeID;
+        protected global::System.Web.UI.WebControls.HiddenField hdProjectTypeID;
         
         /// <summary>
         /// hdProjectID control.
