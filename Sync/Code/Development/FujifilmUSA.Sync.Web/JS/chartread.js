@@ -184,8 +184,7 @@ function presentScannerList(ScannerList) {
 function ListDevices() {
     result = plugin().requestScannerList(presentScannerList);
     if (result != 'OK') {
-        alert("Failed to request scanner list: " + result, "Error");
-        //confirm("Failed to request scanner list: " + result, "Error");
+        confirm("Failed to request scanner list: " + result, "Error");
     }
 }
 

@@ -21,7 +21,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {            
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
             confirm(mychart["Result"], "Error");
         }
         if (typeof final == "string") {

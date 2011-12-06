@@ -94,6 +94,19 @@
 </div>
 <div class="contant_bottom">
     &nbsp;</div>
+<!-- modal content -->
+<div id='confirm'>
+    <div class='header'>
+        <span></span>
+    </div>
+    <div class='message'>
+    </div>
+    <div class='buttons'>
+        <div class='no simplemodal-close'>
+            <input type="button" value="OK" id="btnCloseModelPopup" style="border: none; background-color: transparent;
+                padding-top: 4px" /></div>
+    </div>
+</div>
 <p>
     <asp:HiddenField ID="hiddenPressRunID" runat="server" />
     <asp:HiddenField ID="hiddenProjectTypeID" runat="server" />
@@ -119,8 +132,7 @@
             if (jQuery('#btnMeasureAndUploadChart').val() == 'Measure Chart') {
                 var MeasurementName = jQuery("#TxtMeasurementName").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
-                    alert("Please enter measurement name that is at least three characters long.");
-                    //confirm("Please enter measurement name that is at least three characters long.", "Error");
+                    confirm("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);

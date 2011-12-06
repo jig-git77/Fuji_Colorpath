@@ -113,7 +113,7 @@ function presentScanDonei1(scanner, mychart, final) {
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {            
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
             confirm(mychart["Result"], "Error");
         }
         if (typeof final == "string") {
@@ -145,7 +145,7 @@ function presentScanDonei1(scanner, mychart, final) {
     var idx = mychart["NumberOfRows"];
 
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
-        if (results.length != mychart["NumberOfColumns"]) {            
+        if (results.length != mychart["NumberOfColumns"]) {
             confirm("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
             if (typeof final == "string") {
                 eval(final);
@@ -172,7 +172,7 @@ function presentScanDonei1(scanner, mychart, final) {
         console.log("Looking for strip " + curstr);
         idx = mychart["RowNames"].indexOf(curstr);
 
-        if (idx < 0 || idx > mychart["NumberOfRows"]) {            
+        if (idx < 0 || idx > mychart["NumberOfRows"]) {
             confirm("ERROR: Cannot determine current read column", "Error");
             return;
         }
