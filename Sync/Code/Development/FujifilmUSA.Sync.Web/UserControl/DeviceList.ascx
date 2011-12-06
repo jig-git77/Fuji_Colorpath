@@ -48,29 +48,31 @@
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td colspan="2">
-                                   
-                                    <telerik:RadGrid ID="grbDeviceList" runat="server" AutoGenerateColumns="false" 
-                                        onitemcommand="grbDeviceList_ItemCommand" 
-                                        onneeddatasource="grbDeviceList_NeedDataSource">
+                                    <telerik:RadGrid ID="grbDeviceList" runat="server" AutoGenerateColumns="false" OnItemCommand="grbDeviceList_ItemCommand"
+                                        OnNeedDataSource="grbDeviceList_NeedDataSource" ShowHeader="false" GridLines="None">
                                         <MasterTableView>
-                                            <ItemTemplate>
-                                                <div class="product_list">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="left">
-                                                                <%# Eval("DeviceName")%>
-                                                            </div>
-                                                            <div class="right">
-                                                                <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" CommandName="SelectDevice"><span>Select</span></asp:LinkButton>
-                                                            </div>
-                                                            <div class="clear">
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="clear">
-                                                </div>
-                                            </ItemTemplate>
+                                            <Columns>
+                                                <telerik:GridTemplateColumn>
+                                                    <ItemTemplate>
+                                                        <div class="product_list">
+                                                            <ul>
+                                                                <li>
+                                                                    <div class="left">
+                                                                        <%# Eval("DeviceName")%>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" CommandName="SelectDevice"><span>Select</span></asp:LinkButton>
+                                                                    </div>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="clear">
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
+                                            </Columns>
                                         </MasterTableView>
                                     </telerik:RadGrid>
                                 </td>

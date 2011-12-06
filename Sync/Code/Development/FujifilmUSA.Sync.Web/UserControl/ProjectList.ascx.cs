@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentSyncDevice != null)
             {
 
-                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                this.SyncDeviceId = 1; // SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
                 _presenterprojectlist.GetProjectListBySyncDeviceId();
                 grdProjectList.DataSource = GetProjectListBySyncDeviceId;
                 //grdProjectList.DataBind();

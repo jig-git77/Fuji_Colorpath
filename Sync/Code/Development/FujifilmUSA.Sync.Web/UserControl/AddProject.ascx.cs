@@ -22,9 +22,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindOutputType();
-            BindSourceProfile();
-            BindDestinationProfile();
+            if (!IsPostBack)
+            {
+                BindOutputType();
+                BindMeasurementDeviceType();
+            }
         }
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
@@ -48,8 +50,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindProjectType()
         {
-            cmbOutputType.DataSource = Enum.GetValues(typeof(EProjectType));
-            cmbOutputType.DataBind();
+            cmbProjectType.DataSource = Enum.GetValues(typeof(EProjectType));
+            cmbProjectType.DataBind();
         }
         private void BindSourceProfile()
         {
@@ -77,8 +79,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindMeasurementIlluminant()
         {
-           // cmbIlluminant.DataSource = Enum.GetValues(typeof(EMeasurementIlluminant));
-           // cmbIlluminant.DataBind();
+            cmbIlluminant.DataSource = Enum.GetValues(typeof(EMeasurementIlluminant));
+            cmbIlluminant.DataBind();
         }
         private void BindReferenceDensityType()
         {
@@ -86,20 +88,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // cmbDensityTyp.DataBind();
 
         }
-        private void BindMeasurementDevice()
+        private void BindMeasurementDeviceType()
         {
             this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
             _presenteraddproject.GetMeasurementDeviceListBySyncDeviceId();
-            //cmbMeasurementDevice.DataSource = GetMeasurementDeviceListBySyncDeviceId;
-            //cmbMeasurementDevice.DataBind();
+            cmbDeviceType.DataSource = GetMeasurementDeviceListBySyncDeviceId;
+            cmbDeviceType.DataBind();
             
         }
         private void BindReferenceChartType()
         {
-            //this.MeasurementDeviceId = int.Parse(cmbMeasurementDevice.SelectedValue);
+            this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue);
             _presenteraddproject.GetReferenceChartTypeListByMeasurementDeviceId();
-            //cmbReferenceChartType.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
-            //cmbReferenceChartType.DataBind();
+            cmbAlignmentChart.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
+            cmbAlignmentChart.DataBind();
         }
 
         private int SaveProjectAndMEasurementSetting()

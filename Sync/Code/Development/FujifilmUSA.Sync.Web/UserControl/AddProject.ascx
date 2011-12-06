@@ -56,11 +56,7 @@
                                 <telerik:RadTab Text="DLP" Value="DLP">
                                 </telerik:RadTab>
                                 <telerik:RadTab Text="Measurement Setup" Value="Measurement Setup">
-                                </telerik:RadTab>
-                                <telerik:RadTab Text="DLP" Value="DLP">
-                                </telerik:RadTab>
-                                <telerik:RadTab Text="Measurement Setup" Value="Measurement Setup">
-                                </telerik:RadTab>
+                                </telerik:RadTab>                                
                             </Tabs>
                         </telerik:RadTabStrip>
                         <telerik:RadMultiPage ID="RadMultiPage1" runat="server" SelectedIndex="0" CssClass="RadPageViewBorder">
@@ -116,26 +112,42 @@
                                     </tr>
                                 </table>
                             </telerik:RadPageView>
-                            <telerik:RadPageView ID="RadPageView2" runat="server">
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
-                                2222<br />
+                            <telerik:RadPageView ID="RadPageView2" runat="server">                              
+                                <table style="padding: 20px 20px 20px 20px;" border="0" cellpadding="0" cellspacing="20">
+                                    <tr><td><asp:CheckBox ID="chkUseMeasurementPlugin" runat="server" Text="Use Measurement Plugin" /></td></tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Panel GroupingText="Measurement Settings" ID="pnlMeasurementSettings" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="4" style="padding-right: 20px;">
+                                                    <tr>
+                                                        <td><asp:Label ID="lblIlluminant" runat="server" Text="Illuminant:"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbIlluminant" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><asp:Label ID="lblObserver" runat="server" Text="Observer:"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbObserver" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                    </tr>
+                                                    <tr style="padding: 0px 0px 5px 0px;">
+                                                        <td><asp:Label ID="lblDensityType" runat="server" Text="Density Typ:e"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbDensityType" runat="server" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </td>
+                                        <td>
+                                            <table border="0" cellpadding="4" cellspacing="4">
+                                                    <tr>
+                                                        <td><asp:Label ID="lblDeviceType" runat="server" Text="Device Type:"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label></td>
+                                                        <td><telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true"></telerik:RadComboBox></td>
+                                                    </tr>                                                  
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
                             </telerik:RadPageView>
                         </telerik:RadMultiPage>
                     </div>

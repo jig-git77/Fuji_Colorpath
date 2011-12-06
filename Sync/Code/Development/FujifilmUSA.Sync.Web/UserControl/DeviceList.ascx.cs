@@ -24,8 +24,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
             
+        }       
+
+        protected void grbDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            BindDeviceList();
         }
 
+        protected void grbDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            if (e.CommandName == "SelectDevice")
+            {
+                GridDataItem item = e.Item as GridDataItem;
+
+                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
+                Response.Redirect("ProjectList.aspx");
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -58,7 +73,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbBranch.SelectedIndex != 0)
             {
-                grbDeviceList.Rebind();
+                BindDeviceList();
+                grbDeviceList.DataBind();
             }
         }
 
@@ -113,20 +129,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<SyncDevice> GetSyncDeviceListByUserId { get; set; }
         #endregion
 
-        protected void grbDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-        {
-            BindDeviceList();
-        }
-
-        protected void grbDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectDevice")
-            {
-                GridDataItem item = e.Item as GridDataItem;
-
-                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
-                //Response.Redirect("ProjectList.aspx");
-            }
-        }
+     
     }
 }
