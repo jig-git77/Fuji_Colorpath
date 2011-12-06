@@ -22,18 +22,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if(!IsPostBack)
-            //{
-            //    BindProject();
-            //}
+            SessionManager.CheckLogin();
         }
 
         protected void grdProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             BindProject();
-            //this.SyncDeviceId = 1;
-            //_presenterprojectlist.GetProjectListBySyncDeviceId();
-            //grdProjectList.DataSource = GetProjectListBySyncDeviceId;
         }
         #endregion
 
@@ -42,8 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentSyncDevice != null)
             {
-
-                this.SyncDeviceId = 1; // SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
                 _presenterprojectlist.GetProjectListBySyncDeviceId();
                 grdProjectList.DataSource = GetProjectListBySyncDeviceId;
                 //grdProjectList.DataBind();

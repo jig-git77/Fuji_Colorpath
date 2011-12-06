@@ -1,4 +1,5 @@
-﻿using FujifilmUSA.Sync.Entity;
+﻿using System.Collections.Generic;
+using FujifilmUSA.Sync.Entity;
 using System.Web;
 
 namespace FujifilmUSA.Sync.Common
@@ -8,6 +9,7 @@ namespace FujifilmUSA.Sync.Common
         #region Private Variables
         private const string _currentUser = "SESSION_CURRENTUSER";
         private const string _currentSyncDevice = "SESSION_CURRENTSYNCDEVICE";
+        private const string _dictionaryList = "SESSION_DICTIONARYLIST";
         #endregion
 
         #region Singleton
@@ -50,6 +52,21 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_currentSyncDevice] = value;
+            }
+        }
+        public Dictionary<int, string> DictionaryList
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_dictionaryList] != null)
+                {
+                    return (Dictionary<int, string>)HttpContext.Current.Session[_dictionaryList];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_dictionaryList] = value;
             }
         }
 

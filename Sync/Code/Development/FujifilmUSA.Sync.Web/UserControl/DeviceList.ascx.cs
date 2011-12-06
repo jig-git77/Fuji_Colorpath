@@ -24,49 +24,61 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
             
-        }       
-
-        protected void grbDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-        {
-            BindDeviceList();
-        }
-
-        protected void grbDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            if (e.CommandName == "SelectDevice")
-            {
-                GridDataItem item = e.Item as GridDataItem;
-
-                if (item != null) SessionManager.Instance.CurrentSyncDevice = item.DataItem as SyncDevice;
-                Response.Redirect("ProjectList.aspx");
-            }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            {
-                SessionManager.CheckLogin();
+            SessionManager.CheckLogin();
 
+            if (!IsPostBack)
+            {
                 if (SessionManager.Instance.CurrentUser.RoleId == 1)
                 {
                     trFilter.Visible = true;
                     BindCompanyDropDown();
-                    cmbBranch.Items.Insert(0, new RadComboBoxItem("", "-- Select --"));
-                    
+                    cmbBranch.Items.Insert(0, new RadComboBoxItem("-- Select --", "0"));
+
                 }
                 else
                 {
                     trFilter.Visible = false;
-                   // BindDeviceList(); // jayesh
                 }
-                
+
             }
+        }
+
+
+        protected void rlvDeviceList_ItemDataBound(object sender, RadListViewItemEventArgs e)
+        {
+            if (e.Item is RadListViewDataItem)
+            {
+                var item = (RadListViewDataItem)e.Item;
+                var lbtnSelectDevice = (LinkButton) e.Item.FindControl("lbtnSelectDevice");
+                lbtnSelectDevice.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
+            }
+        }
+        protected void lbtnSelectDevice_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentSyncDevice =
+                (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton) (sender)).Attributes["SyncDeviceId"].ToString())).
+                    Select(x => new SyncDevice()
+                                    {
+                                        SyncDeviceId = x.Key,
+                                        DeviceName = x.Value.ToString()
+                                    }
+                    ).FirstOrDefault());
+            Response.Redirect("ProjectList.aspx");
+        }
+        protected void rlvDeviceList_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
+        {
+            BindDeviceList();
         }
         protected void cmbCompany_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             if (cmbCompany.SelectedIndex != 0)
             {
                 BindBranchDropDown(int.Parse(cmbCompany.SelectedValue));
+                BindDeviceList();
+                rlvDeviceList.DataBind();
             }
         }
         protected void cmbBranch_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -74,11 +86,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (cmbBranch.SelectedIndex != 0)
             {
                 BindDeviceList();
-                grbDeviceList.DataBind();
+                rlvDeviceList.DataBind();
             }
         }
-
-
         #endregion
 
         #region Method
@@ -87,19 +97,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentersyncdevice.GetCompanyList();
             cmbCompany.DataSource = GetCompanyList;
             cmbCompany.DataBind();
-            cmbCompany.Items.Insert(0, new RadComboBoxItem("", "-- Select --" ));
+            cmbCompany.Items.Insert(0, new RadComboBoxItem("-- Select --","0" ));
         }
         private void BindBranchDropDown(int companyId)
         {
+            cmbBranch.Items.Clear();
             this.CompanyId = companyId;
             _presentersyncdevice.GetBranchList();
             cmbBranch.DataSource = GetBranchList;
             cmbBranch.DataBind();
-            cmbBranch.Items.Insert(0, new RadComboBoxItem("", "-- Select --"));
+            cmbBranch.Items.Insert(0, new RadComboBoxItem("-- Select --","0"));
         }
         private void BindDeviceList()
         {
-            if (cmbCompany.SelectedIndex > 0 && cmbBranch.SelectedIndex > 0)
+            if (cmbCompany.SelectedIndex > 0)
             {
                 this.TaskeroUserId = SessionManager.Instance.CurrentUser.TaskeroUserId;
                 this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
@@ -112,9 +123,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     this.BranchId = int.Parse(cmbBranch.SelectedValue);
                 }
                 _presentersyncdevice.GetSyncDeviceListByUserId();
-                grbDeviceList.DataSource = GetSyncDeviceListByUserId;
+                rlvDeviceList.DataSource = GetSyncDeviceListByUserId;
+
+                SessionManager.Instance.DictionaryList = (GetSyncDeviceListByUserId.Select(
+                    deviceList => new
+                    {
+                        Value = deviceList.SyncDeviceId,
+                        Text = deviceList.DeviceName
+                    })).ToDictionary(deviceList => deviceList.Value, deviceList => deviceList.Text);
             }
-            //rlvDeviceList.DataBind();
         }
 
         #endregion

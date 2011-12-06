@@ -22,6 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionManager.CheckLogin();
             if (!IsPostBack)
             {
                 BindOutputType();
@@ -56,14 +57,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            //BindDeviceLinkProfile();
-            //dynamic data = new[] {
-            //    new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"},
-            //    new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"},
-            //        new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"},
-            //            new { Source = "123456", Paper = "paper3",PrintVariables="ass",Separations="asasasas"}
-            //};
-            //grdDLP.DataSource = data;
             BindDeviceLinkProfile();
         }
         #endregion
@@ -82,6 +75,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
             {
                 //BindDeviceLinkProfile();
+            }
+        }
+        protected void lbtnProjectSave_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtProjectName.Text.Trim()))
+            {
+                SaveProjectAndMeasurementSetting();
             }
         }
         #endregion
@@ -145,10 +145,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindMeasurementDeviceType()
         {
-            this.SyncDeviceId = 6;//SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-            _presenteraddproject.GetMeasurementDeviceListBySyncDeviceId();
-            cmbDeviceType.DataSource = GetMeasurementDeviceListBySyncDeviceId;
-            cmbDeviceType.DataBind();
+            if (SessionManager.Instance.CurrentSyncDevice != null)
+            {
+                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                _presenteraddproject.GetMeasurementDeviceListBySyncDeviceId();
+                cmbDeviceType.DataSource = GetMeasurementDeviceListBySyncDeviceId;
+                cmbDeviceType.DataBind();
+            }
 
         }
         private void BindReferenceChartType()
@@ -160,39 +163,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        private int SaveProjectAndMEasurementSetting()
+        private int SaveProjectAndMeasurementSetting()
         {
-            ObjProject = null;
-            ObjMeasurementSetting = null;
+            ObjProject = new Project();
+            ObjMeasurementSetting = new MeasurementSetting();
+            if (SessionManager.Instance.CurrentSyncDevice != null)
+            {
+                ObjProject.ProjectName = txtProjectName.Text.Trim();
+                ObjProject.CreatedDate = DateTime.Now;
+                ObjProject.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;// 1;
+                ObjProject.ΔEType = 1;
+                ObjProject.DeviceLinkProfileId = Convert.ToInt32(hdnDeviceLinkProfileId.Value);
+                ObjProject.IsUsed = false;
+                ObjProject.UseDLP = true;
+                ObjProject.ReTargetId = 0;
+                ObjProject.ProjectTypeId = Convert.ToInt32(cmbProjectType.SelectedValue);
+                ObjProject.OutputTypeId = Convert.ToInt32(cmbOutputType.SelectedValue);
+                ObjProject.StartDate = DateTime.Now;
+                ObjProject.SyncRunId = 0;
+                ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
 
-            ObjProject.ProjectName = txtProjectName.Text.Trim();
-            ObjProject.CreatedDate = DateTime.Now;
-            ObjProject.SyncDeviceId = 1;
-            ObjProject.ΔEType = 0;            
-            ObjProject.DeviceLinkProfileId = Convert.ToInt32(hdnDeviceLinkProfileId.Value);
-            ObjProject.IsUsed = false;
-            ObjProject.UseDLP = false;
-            ObjProject.ReTargetId = 0;
-            ObjProject.ProjectTypeId = Convert.ToInt32(cmbProjectType.SelectedValue);
-            ObjProject.OutputTypeId = Convert.ToInt32(cmbOutputType.SelectedValue);
-            ObjProject.StartDate = DateTime.Now;
-            ObjProject.SyncRunId = 0;
-            ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
 
-
-            ObjMeasurementSetting.UsePlugin = chkUseMeasurementPlugin.Checked;
-            ObjMeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
-            ObjMeasurementSetting.Illuminant = Convert.ToInt32(cmbIlluminant.SelectedValue);
-            ObjMeasurementSetting.DensityType = Convert.ToInt32(cmbDensityType.SelectedValue);
-            //to-do
-            //ObjMeasurementSetting.UVIncluded = ;
-            //ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
-            //ObjMeasurementSetting.IlluminationMode = ;
-            //ObjMeasurementSetting.InstrumentTypeId = ;
-            //ObjMeasurementSetting.SerialNumber = ;
-            _presenteraddproject.InsertProjectAndMeasurementSetting();
-            //InsertProjectAndMeasurementSetting
-            return 1;
+                ObjMeasurementSetting.UsePlugin = chkUseMeasurementPlugin.Checked;
+                ObjMeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
+                ObjMeasurementSetting.Illuminant = Convert.ToInt32(cmbIlluminant.SelectedValue);
+                ObjMeasurementSetting.DensityType = Convert.ToInt32(cmbDensityType.SelectedValue);
+                //to-do
+                ObjMeasurementSetting.UVIncluded = true;
+                ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
+                ObjMeasurementSetting.IlluminationMode = 1;
+                ObjMeasurementSetting.InstrumentTypeId = 1;  // Static
+                ObjMeasurementSetting.SerialNumber = "304060"; // Static
+                _presenteraddproject.InsertProjectAndMeasurementSetting();
+                if(InsertProjectAndMeasurementSetting!=null)
+                {
+                    return 1;
+                }
+            }
+            
+            return 0;
         }
 
         #endregion
@@ -211,5 +220,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public MeasurementSetting ObjMeasurementSetting { get; set; }
         public Project InsertProjectAndMeasurementSetting { get; set; }
         #endregion
+
+        
     }
 }
