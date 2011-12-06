@@ -38,12 +38,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindReferenceDensityType();
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
-            }           
+            }
         }
 
         protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
         {
-             if (e.Item.DataItem != null && e.Item.ItemType == GridItemType.Item)
+            if (e.Item.DataItem != null && e.Item.ItemType == GridItemType.Item)
             {
                 DeviceLinkProfile dlp = e.Item.DataItem as DeviceLinkProfile;
 
@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        
+
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             BindDeviceLinkProfile();
@@ -62,21 +62,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        protected void cmbDestinationProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
-            {
-                //BindDeviceLinkProfile();
-            }
-        }
+        //protected void cmbDestinationProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
+        //    {
+        //        //BindDeviceLinkProfile();
+        //    }
+        //}
 
-        protected void cmbSourceProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
-            {
-                //BindDeviceLinkProfile();
-            }
-        }
+        //protected void cmbSourceProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        //{
+        //    if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
+        //    {
+        //        //BindDeviceLinkProfile();
+        //    }
+        //}
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtProjectName.Text.Trim()))
@@ -174,11 +174,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjProject.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;// 1;
                 ObjProject.ΔEType = 1;
                 ObjProject.DeviceLinkProfileId = Convert.ToInt32(hdnDeviceLinkProfileId.Value);
-                ObjProject.IsUsed = false;
+                ObjProject.IsUsed = true;
                 ObjProject.UseDLP = true;
                 ObjProject.ReTargetId = 0;
-                ObjProject.ProjectTypeId = Convert.ToInt32(cmbProjectType.SelectedValue);
-                ObjProject.OutputTypeId = Convert.ToInt32(cmbOutputType.SelectedValue);
+                //EProjectType projectType = (EProjectType)Enum.Parse(typeof(EProjectType), cmbProjectType.SelectedValue);
+                ObjProject.ProjectTypeId = (int)(EProjectType)Enum.Parse(typeof(EProjectType), cmbProjectType.SelectedValue);
+                ObjProject.OutputTypeId = (int)(EOutputType)Enum.Parse(typeof(EOutputType), cmbOutputType.SelectedValue);
                 ObjProject.StartDate = DateTime.Now;
                 ObjProject.SyncRunId = 0;
                 ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
@@ -186,8 +187,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 ObjMeasurementSetting.UsePlugin = chkUseMeasurementPlugin.Checked;
                 ObjMeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
-                ObjMeasurementSetting.Illuminant = Convert.ToInt32(cmbIlluminant.SelectedValue);
-                ObjMeasurementSetting.DensityType = Convert.ToInt32(cmbDensityType.SelectedValue);
+                ObjMeasurementSetting.Illuminant = (int)(EMeasurementIlluminant)Enum.Parse(typeof(EMeasurementIlluminant), cmbIlluminant.SelectedValue);
+                ObjMeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);
                 //to-do
                 ObjMeasurementSetting.UVIncluded = true;
                 ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
@@ -195,14 +196,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjMeasurementSetting.InstrumentTypeId = 1;  // Static
                 ObjMeasurementSetting.SerialNumber = "304060"; // Static
                 _presenteraddproject.InsertProjectAndMeasurementSetting();
-                if(InsertProjectAndMeasurementSetting!=null)
+                if (InsertProjectAndMeasurementSetting != null)
                 {
                     SessionManager.Instance.CurrentProject = InsertProjectAndMeasurementSetting;
                     Response.Redirect("AddMeasurement.aspx");
                     return 1;
                 }
             }
-            
+
             return 0;
         }
 
@@ -223,6 +224,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project InsertProjectAndMeasurementSetting { get; set; }
         #endregion
 
-        
+
     }
 }

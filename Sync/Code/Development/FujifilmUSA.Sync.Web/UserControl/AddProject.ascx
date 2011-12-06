@@ -11,7 +11,7 @@
     <div class="head">
         <h1>
             Add Project</h1>        
-        <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button" 
+        <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button" ValidationGroup="SaveProject"
             onclick="lbtnProjectSave_Click">
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
@@ -26,8 +26,8 @@
                     :
                 </td>
                 <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox>
+                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px" ValidationGroup="SaveProject">
+                    </telerik:RadTextBox><asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>
                 </td>
                 <td class="float_right">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
@@ -75,7 +75,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged" >
+                                            <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true">
                                             </telerik:RadComboBox>
                                         </td>
                                         <td>
@@ -83,7 +83,7 @@
                                             :
                                         </td>
                                         <td>
-                                            <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged" >
+                                            <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true">
                                             </telerik:RadComboBox>
                                         </td>
                                     </tr>
@@ -119,7 +119,7 @@
                                 </table>
                             </telerik:RadPageView>
                             <telerik:RadPageView ID="RadPageView2" runat="server">   
-                                <asp:HiddenField ID="hdnDeviceLinkProfileId" runat="server" />                           
+                                <asp:HiddenField ID="hdnDeviceLinkProfileId" runat="server" Value="0"/>                           
                                 <table style="padding: 20px 20px 20px 20px;" border="0" cellpadding="0" cellspacing="20">
                                     <tr><td><asp:CheckBox ID="chkUseMeasurementPlugin" runat="server" Text="Use Measurement Plugin" /></td></tr>
                                     <tr>
