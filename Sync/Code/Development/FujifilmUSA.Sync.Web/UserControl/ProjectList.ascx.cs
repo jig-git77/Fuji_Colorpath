@@ -22,13 +22,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();            
+            SessionManager.CheckLogin();
+        }
+        #endregion
+
+        #region Control events
+        protected void lbtnProjectName_Click(object sender, EventArgs e)
+        {
+            System.Web.UI.WebControls.LinkButton lbtnProjectName = sender as System.Web.UI.WebControls.LinkButton;
+            this.ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"].ToString());
+            _presenterprojectlist.GetProjectByProjectId();
+            SessionManager.Instance.CurrentProject = GetProjectByProjectId;
+            Response.Redirect("AddMeasurement.aspx");
         }
 
         protected void grdProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
             if (e.CommandName == "DeleteProject")
-            { 
+            {
                 GridDataItem selectedItem = e.Item as GridDataItem;
                 this.ProjectId = Convert.ToInt32(selectedItem.GetDataKeyValue("ProjectId"));
                 _presenterprojectlist.DeleteProject();
@@ -62,6 +73,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         imgbtnDelete.Attributes.Add("onclick", "javascript: return ConfirmDeleteProject();");
                     }
+
+                    System.Web.UI.WebControls.LinkButton lbtnProjectName = e.Item.FindControl("lbtnProjectName") as System.Web.UI.WebControls.LinkButton;
+                    if (lbtnProjectName != null)
+                    {
+                        lbtnProjectName.Attributes.Add("ProjectId", project.ProjectId.ToString());
+                    }
                 }
             }
         }
@@ -82,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdProjectList.DataSource = GetProjectListBySyncDeviceId;
                 //grdProjectList.DataBind();
             }
-        }      
+        }
         #endregion
 
         #region IViewProjectList Members

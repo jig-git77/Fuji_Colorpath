@@ -29,7 +29,7 @@
                             <%--<telerik:GridBoundColumn DataField="ProjectName" UniqueName="ProjectName" HeaderText="Project Name"></telerik:GridBoundColumn>--%>
                             <telerik:GridTemplateColumn UniqueName="ProjectName" HeaderText="Project Name">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" />
+                                    <asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" OnClick="lbtnProjectName_Click" />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>                            
                             <telerik:GridTemplateColumn UniqueName="Info" HeaderText="Info">
