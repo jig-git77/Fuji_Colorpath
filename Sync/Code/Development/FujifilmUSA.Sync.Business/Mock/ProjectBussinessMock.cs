@@ -23,6 +23,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public Project GetProjectByProjectId(int projectId)
+        {
+            return new Project();
+        }
+
         #endregion
     }
 }

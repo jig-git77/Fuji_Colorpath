@@ -90,6 +90,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Project> GetProjectListBySyncDeviceId { get; set; }
         public int ProjectId { get; set; }
         public int DeleteProject { get; set; }
+        public Project GetProjectByProjectId { get; set; }
         #endregion
     }
 }

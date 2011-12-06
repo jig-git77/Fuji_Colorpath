@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         List<Project> GetProjectListBySyncDeviceId { get; set; }
         int DeleteProject { get; set; }
+        Project GetProjectByProjectId { get; set; }
     }
 }

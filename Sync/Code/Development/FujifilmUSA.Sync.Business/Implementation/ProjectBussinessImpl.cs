@@ -111,6 +111,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteProject]",
                                                                new object[]{ projectId });
         }
+      
+        public Project GetProjectByProjectId(int projectId)
+        {
+            var objProject = new Project();
+            //========== Get data from data access=================//
+            var dsProject = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSyncProjectByProjectID]", new object[] { projectId });
+
+            if (dsProject != null && dsProject.Tables.Count > 0 && dsProject.Tables[0].Rows.Count > 0)
+            {
+                objProject = dsProject.Tables[0].AsEnumerable().
+                    Select(x => new Project()
+                                    {
+                                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                        ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                        CreatedDate = DataReader.ReadDate(x, "CreatedDate"),
+                                        SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),
+                                        ΔEType = DataReader.ReadInt(x, "ΔEType"),
+                                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
+                                        IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                        ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
+                                        ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
+                                        OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                                        ProjectStatus = (ECPSyncRunStatus) DataReader.ReadInt(x, "ProjStatus")
+                                    }).FirstOrDefault();
+            }
+            return objProject;
+        }
 
         #endregion
     }
