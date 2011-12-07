@@ -10,12 +10,12 @@
     
     function windowLoad(oWindow, args) {
         oWindow.set_title("Project Information");
+        oWindow.set_status('');
     } 
 
     function OpenInformationBox(url) {        
         var oWnd = radopen(url, "ProjectInformationRadWindow");
-        oWnd.add_pageLoad(windowLoad);
-        oWnd.set_status('hello');
+        oWnd.add_pageLoad(windowLoad);       
         return false;
     }
 </script>
