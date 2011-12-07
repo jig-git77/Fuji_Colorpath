@@ -182,6 +182,7 @@
     <Content Include="MailTemplates\ErrorMessage.htm" />
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
+    <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
@@ -189,6 +190,7 @@
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
+    <Content Include="UserControl\SyncRunExport.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -248,6 +250,13 @@
     <Compile Include="Services\PluginDataService.svc.cs">
       <DependentUpon>PluginDataService.svc</DependentUpon>
     </Compile>
+    <Compile Include="SyncRunExport.aspx.cs">
+      <DependentUpon>SyncRunExport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SyncRunExport.aspx.designer.cs">
+      <DependentUpon>SyncRunExport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddProject.ascx.cs">
       <DependentUpon>AddProject.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,6 +305,13 @@
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.designer.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SyncRunExport.ascx.cs">
+      <DependentUpon>SyncRunExport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SyncRunExport.ascx.designer.cs">
+      <DependentUpon>SyncRunExport.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

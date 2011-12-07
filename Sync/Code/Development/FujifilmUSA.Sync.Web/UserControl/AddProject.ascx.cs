@@ -207,7 +207,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (InsertProjectAndMeasurementSetting != null)
                 {
                     SessionManager.Instance.CurrentProject = InsertProjectAndMeasurementSetting;
-                    Response.Redirect("AddMeasurement.aspx");
+                    Response.Redirect("SyncRunExport.aspx");
                     return 1;
                 }
             }
