@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void grdProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
-            if (e.Item.DataItem != null && e.Item.ItemType == GridItemType.Item)
+            if (e.Item.DataItem != null)
             {
                 Project project = e.Item.DataItem as Project;
                 if (project != null)

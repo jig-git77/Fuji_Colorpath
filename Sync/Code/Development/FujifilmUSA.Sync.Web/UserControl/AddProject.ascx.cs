@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
         {
-            if (e.Item.DataItem != null && e.Item.ItemType == GridItemType.Item)
+            if (e.Item.DataItem != null)
             {
                 DeviceLinkProfile dlp = e.Item.DataItem as DeviceLinkProfile;
 
