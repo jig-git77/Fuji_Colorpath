@@ -7,7 +7,34 @@
         else
             return false;
     }
+    
+    function windowLoad(oWindow, args) {
+        oWindow.set_title("Project Information");
+    } 
+
+    function OpenInformationBox(url) {        
+        var oWnd = radopen(url, "ProjectInformationRadWindow");
+        oWnd.add_pageLoad(windowLoad);
+        oWnd.set_status('hello');
+        return false;
+    }
 </script>
+<script language="javascript" type="text/javascript">
+    function Close() {
+        var oWindow = GetRadWindow1();
+        //oWindow.BrowserWindow.location.href = GetRadWindow1().BrowserWindow.location.href;
+        GetRadWindow1().close();
+    }
+
+    function GetRadWindow1() {
+        var oWindow = null;
+        if (window.radWindow) oWindow = window.radWindow;
+        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+        return oWindow;
+    } 
+</script>
+
+
 <div class="contant_top">
     &nbsp;</div>    
 <div class="contant_middle">
@@ -59,3 +86,18 @@
 
 <div class="clear">
 </div>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Width="450px" 
+    Height="400px" Modal="True" Title="Project Information">
+    <Windows>
+                <telerik:RadWindow 
+                    id="ProjectInformationRadWindow" 
+                    runat="server"
+                    showcontentduringload="true"
+                    width="400px"
+                    height="400px"
+                    title="Project"
+                    behaviors="Close, Move" Behavior="Close, Move">
+                </telerik:RadWindow>
+            </Windows>
+
+    </telerik:RadWindowManager>

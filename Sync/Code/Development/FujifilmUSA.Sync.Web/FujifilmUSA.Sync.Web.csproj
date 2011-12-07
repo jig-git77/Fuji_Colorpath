@@ -180,6 +180,7 @@
     <Content Include="JS\wz_jsgraphics.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
+    <Content Include="ProjectInformation.aspx" />
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
     <Content Include="SyncRunExport.aspx" />
@@ -188,6 +189,7 @@
     <Content Include="UserControl\AddMeasurement.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\Login.ascx" />
+    <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="UserControl\SyncRunExport.ascx" />
@@ -238,6 +240,13 @@
     </Compile>
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectInformation.aspx.cs">
+      <DependentUpon>ProjectInformation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectInformation.aspx.designer.cs">
+      <DependentUpon>ProjectInformation.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProjectList.aspx.cs">
       <DependentUpon>ProjectList.aspx</DependentUpon>
@@ -291,6 +300,13 @@
     </Compile>
     <Compile Include="UserControl\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProjectInformation.ascx.cs">
+      <DependentUpon>ProjectInformation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProjectInformation.ascx.designer.cs">
+      <DependentUpon>ProjectInformation.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProjectList.ascx.cs">
       <DependentUpon>ProjectList.ascx</DependentUpon>
