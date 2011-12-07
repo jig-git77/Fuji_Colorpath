@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Entity
 {
@@ -16,7 +17,7 @@ namespace FujifilmUSA.Sync.Entity
         public int ProjectTypeId { get; set; }
         public int OutputTypeId { get; set; }
         public DateTime StartDate { get; set; }
-        public int SyncRunId { get; set; }
+        public List<SyncRun> ProjectRuns { get; set; }
         public ECPSyncRunStatus ProjectStatus { get; set; }       
     }
 }

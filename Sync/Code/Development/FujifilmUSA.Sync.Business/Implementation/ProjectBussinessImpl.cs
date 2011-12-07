@@ -24,17 +24,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 objProjectList = dsProjectList.Tables[0].AsEnumerable().
                     Select(x => new Project()
                                     {
-                                        ProjectId = DataReader.ReadInt(x,"ProjectID"),
+                                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
                                         ProjectName = DataReader.ReadString(x, "ProjectName"),
-                                        CreatedDate = DataReader.ReadDate(x,"CreatedDate"),
-                                        SyncDeviceId = DataReader.ReadInt(x,"SyncDeviceID"),
-                                        ΔEType = DataReader.ReadInt(x,"ΔEType"),
-                                        DeviceLinkProfileId = DataReader.ReadInt(x,"DLPID"),
-                                        IsUsed = DataReader.ReadBoolean(x,"IsUsed"),
-                                        ReTargetId = DataReader.ReadInt(x,"ReTargetID"),
-                                        ProjectTypeId = DataReader.ReadInt(x,"ProjectTypeID"),
-                                        OutputTypeId = DataReader.ReadInt(x,"OutPutTypeID"),
-                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x,"ProjStatus")
+                                        CreatedDate = DataReader.ReadDate(x, "CreatedDate"),
+                                        SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),
+                                        ΔEType = DataReader.ReadInt(x, "ΔEType"),
+                                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
+                                        IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                        ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
+                                        ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
+                                        OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus")
                                     }).ToList();
             }
             return objProjectList;
@@ -44,21 +44,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var objProjectInPeramater = new List<Parameters>();
             var objProjectOutPeramater = new List<Parameters>();
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@ProjectName", Size = 0, Type = DbType.String, Value = objProject.ProjectName});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@SyncDeviceID", Size = 0, Type = DbType.Int16, Value = objProject.SyncDeviceId});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@ΔEType", Size = 0, Type = DbType.Int16, Value = objProject.ΔEType});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@DLPID", Size = 0, Type = DbType.Int16, Value = objProject.DeviceLinkProfileId});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objProject.IsUsed});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@UseDLP", Size = 0, Type = DbType.Boolean, Value = objProject.UseDLP});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@OutputTypeID", Size = 0, Type = DbType.Int16, Value = objProject.OutputTypeId});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@StartDatetime", Size = 0, Type = DbType.DateTime, Value = objProject.StartDate});
-            objProjectInPeramater.Add(new Parameters() {ParameterName = "@ProjectTypeID", Size = 0, Type = DbType.Int16, Value = objProject.ProjectTypeId});
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProjectName", Size = 0, Type = DbType.String, Value = objProject.ProjectName });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@SyncDeviceID", Size = 0, Type = DbType.Int16, Value = objProject.SyncDeviceId });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@ΔEType", Size = 0, Type = DbType.Int16, Value = objProject.ΔEType });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 0, Type = DbType.Int16, Value = objProject.DeviceLinkProfileId });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objProject.IsUsed });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@UseDLP", Size = 0, Type = DbType.Boolean, Value = objProject.UseDLP });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@OutputTypeID", Size = 0, Type = DbType.Int16, Value = objProject.OutputTypeId });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@StartDatetime", Size = 0, Type = DbType.DateTime, Value = objProject.StartDate });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProjectTypeID", Size = 0, Type = DbType.Int16, Value = objProject.ProjectTypeId });
             //objInPeramater.Add(new Parameters() { ParameterName = "@ReTargetID", Size = 0, Type = DbType.Int16, Value = objProject.ReTargetId });
 
-            objProjectOutPeramater.Add(new Parameters() {ParameterName = "@ProjectID", Size = 4, Type = DbType.Int16, Value = objProject.ProjectId});
-            objProjectOutPeramater.Add(new Parameters() {ParameterName = "@SyncRunID", Size = 4, Type = DbType.Int16, Value = objProject.SyncRunId});
-
+            objProjectOutPeramater.Add(new Parameters() { ParameterName = "@ProjectID", Size = 4, Type = DbType.Int16 });
             
+
+
 
 
             DataAccessFactory.Instance.ExecuteProcedureWithTransaction(
@@ -72,14 +72,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                 objProjectOutPeramater);
                                 objProject.ProjectId =
                                     Convert.ToInt16(
-                                        objProjectOutPeramater.Where(x => x.ParameterName == "@ProjectID").Select(
-                                            x => x.Value).
-                                            FirstOrDefault());
-                                objProject.SyncRunId =
-                                    Convert.ToInt16(
-                                        objProjectOutPeramater.Where(x => x.ParameterName == "@SyncRunID").Select(
-                                            x => x.Value).
-                                            FirstOrDefault());
+                                        objProjectOutPeramater.Single(x => x.ParameterName == "@ProjectID").Value);
                             },
                         () =>
                             {
@@ -102,16 +95,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                             }
                     });
-            return objProject;
+
+            return GetProjectByProjectId(objProject.ProjectId);
 
         }
 
         public int DeleteProject(int projectId)
         {
             return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteProject]",
-                                                               new object[]{ projectId });
+                                                               new object[] { projectId });
         }
-      
+
         public Project GetProjectByProjectId(int projectId)
         {
             var objProject = new Project();
@@ -133,8 +127,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
                                         ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
                                         OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
-                                        ProjectStatus = (ECPSyncRunStatus) DataReader.ReadInt(x, "ProjStatus")
+                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus")
                                     }).FirstOrDefault();
+
+                objProject.ProjectRuns = dsProject.Tables[1].AsEnumerable().
+                    Select(x => new SyncRun()
+                    {
+                        SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
+                        SyncRunName = DataReader.ReadString(x, "SyncRunName"),
+                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                        Status = DataReader.ReadShort(x, "Status"),
+                        StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                        EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                        MasterSyncRunId = DataReader.ReadInt(x, "MasterSyncRunID"),
+                    }).ToList();
             }
             return objProject;
         }

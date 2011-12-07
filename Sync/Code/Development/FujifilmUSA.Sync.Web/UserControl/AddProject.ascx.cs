@@ -181,7 +181,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjProject.ProjectTypeId = (int)(EProjectType)Enum.Parse(typeof(EProjectType), cmbProjectType.SelectedValue);
                 ObjProject.OutputTypeId = (int)(EOutputType)Enum.Parse(typeof(EOutputType), cmbOutputType.SelectedValue);
                 ObjProject.StartDate = DateTime.Now;
-                ObjProject.SyncRunId = 0;
+                
                 ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
 
 
