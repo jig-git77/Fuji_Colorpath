@@ -225,7 +225,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DestinationProfileId { get; set; }
         public List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
         public int SyncDeviceId { get; set; }
-        public Dictionary<int, string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
+        public Dictionary<string , string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
         public int MeasurementDeviceId { get; set; }
         public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId { get; set; }
         public Project ObjProject { get; set; }

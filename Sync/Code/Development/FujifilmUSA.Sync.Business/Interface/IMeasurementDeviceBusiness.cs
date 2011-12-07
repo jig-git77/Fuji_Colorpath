@@ -4,6 +4,6 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IMeasurementDeviceBusiness : ITaskBase
     {
-        Dictionary<int, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId);
+        Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId);
     }
 }

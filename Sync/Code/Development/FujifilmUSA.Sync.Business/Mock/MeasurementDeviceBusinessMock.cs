@@ -10,9 +10,9 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMeasurementDeviceBusiness Members
 
-        public Dictionary<int, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
+        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
         {
-            return new Dictionary<int, string>();
+            return new Dictionary<string, string>();
         }
 
         #endregion

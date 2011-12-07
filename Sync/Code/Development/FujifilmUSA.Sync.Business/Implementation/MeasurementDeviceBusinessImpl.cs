@@ -11,10 +11,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IMeasurementDeviceBusiness Members
 
-        public Dictionary<int, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
+        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
         {
             
-            var dstMeasurementDeviceList = new Dictionary<int, string>();
+            var dstMeasurementDeviceList = new Dictionary<string, string>();
             //========== Get data from data access=================//
             var dsMeasurementDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementDeviceBySyncDeviceID]", new object[] { syncDeviceId });
 
@@ -24,9 +24,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 dstMeasurementDeviceList = (dsMeasurementDeviceList.Tables[0].AsEnumerable().
                     Select(measurementDevice => new
                                                     {
-                                                        Value = DataReader.ReadInt(measurementDevice, "MeasurementDeviceID"),
-                                                        Text =
-                                                    DataReader.ReadString(measurementDevice, "MeasurementDeviceTypeName") + DataReader.ReadString(measurementDevice, "SerialNumber")
+                                                        Value = 
+                                                        DataReader.ReadInt(measurementDevice, "MeasurementDeviceTypeID") + 
+                                                        " - " + 
+                                                        DataReader.ReadInt(measurementDevice, "MeasurementDeviceID"),
+                                                        Text = 
+                                                        DataReader.ReadString(measurementDevice, "MeasurementDeviceTypeName") +" - "+ DataReader.ReadString(measurementDevice, "SerialNumber")
                                                     })).ToDictionary(measurementDevice => measurementDevice.Value, measurementDevice => measurementDevice.Text);
 
             }
