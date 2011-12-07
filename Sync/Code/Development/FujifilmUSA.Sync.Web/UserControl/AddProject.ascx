@@ -147,7 +147,7 @@
                                             <table border="0" cellpadding="4" cellspacing="4">
                                                     <tr>
                                                         <td><asp:Label ID="lblDeviceType" runat="server" Text="Device Type:"></asp:Label></td>
-                                                        <td><telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"></telerik:RadComboBox></td>
+                                                        <td><telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true" ></telerik:RadComboBox></td>
                                                     </tr>
                                                     <tr>
                                                         <td><asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label></td>

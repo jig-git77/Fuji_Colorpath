@@ -34,12 +34,12 @@
                             </telerik:GridTemplateColumn>                            
                             <telerik:GridTemplateColumn UniqueName="Info" HeaderText="Info">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="btnInfo" runat="server" ImageUrl="../Images/info_icon.png" />
+                                    <asp:ImageButton ID="btnInfo" runat="server" ToolTip="Information" AlternateText="Information" ImageUrl="../Images/info_icon.png" />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="Delete" HeaderText="Delete">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="imgbtnDelete" runat="server"  ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" />
+                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="Status" HeaderText="Status">

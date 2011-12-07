@@ -61,9 +61,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         switch (project.ProjectStatus)
                         {
-                            case ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/edit_icon.png"); break;
-                            case ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/right_icon   .png"); break;
-                            case ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/close_icon.png"); break;
+                            case ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/edit_icon.png");
+                                imgStatus.ToolTip = "Open";
+                                imgStatus.AlternateText = "Open";
+                                break;
+                            case ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/right_icon   .png");
+                                imgStatus.ToolTip = "Certify";
+                                imgStatus.AlternateText = "Certify";
+                                break;
+                            case ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/close_icon.png");
+                                imgStatus.ToolTip = "Closed";
+                                imgStatus.AlternateText = "Closed";
+                                break;
                             case ECPSyncRunStatus.NotUsed: break; //not to be used currently
                         }
                     }

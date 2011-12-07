@@ -38,9 +38,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindReferenceDensityType();
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
-            }
+            }            
         }
-
+        
         protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
         {
             if (e.Item.DataItem != null)
@@ -62,36 +62,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        //protected void cmbDestinationProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        //{
-        //    if (!string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
-        //    {
-        //        //BindDeviceLinkProfile();
-        //    }
-        //}
+        protected void cmbDeviceType_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            BindReferenceChartType();
+        }
 
-        //protected void cmbSourceProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        //{
-        //    if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
-        //    {
-        //        //BindDeviceLinkProfile();
-        //    }
-        //}
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
-        {            
-            
+        {
+
             //Validate source profile
             if (string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
                 ucStatusbar1.DisplayMessage("Please select source profile.", false);
             //Validate destination profile
-            else if(string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
+            else if (string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
                 ucStatusbar1.DisplayMessage("Please select destination profile.", false);
             //Validate the selected DLP
             else if (hdnDeviceLinkProfileId.Value == "0")
-                ucStatusbar1.DisplayMessage("Please select DLP.", false);            
+                ucStatusbar1.DisplayMessage("Please select DLP.", false);
             //If everything is validate fire the save event
-            else            
-                SaveProjectAndMeasurementSetting();            
+            else
+                SaveProjectAndMeasurementSetting();
         }
         #endregion
 
@@ -164,8 +154,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         }
         private void BindReferenceChartType()
-        {
-            this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue);
+        {            
+            //Split device type and take the 2nd position number as MeasurementDeviceId
+            this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[1].Trim());
             _presenteraddproject.GetReferenceChartTypeListByMeasurementDeviceId();
             cmbAlignmentChart.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
             cmbAlignmentChart.DataBind();
@@ -202,8 +193,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjMeasurementSetting.UVIncluded = true;
                 ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
                 ObjMeasurementSetting.IlluminationMode = 1;
-                ObjMeasurementSetting.InstrumentTypeId = 1;  // Static
-                ObjMeasurementSetting.SerialNumber = "304060"; // Static
+                
+                //Split the device type and take the 1st position id.
+                ObjMeasurementSetting.InstrumentTypeId = Convert.ToInt32(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[0].Trim());
+
+                //Split the device type and take the 3rd position string.
+                string[] splittedDeviceType = cmbDeviceType.SelectedItem.Text.Trim().Split(new char[] { '-' });
+                ObjMeasurementSetting.SerialNumber = string.Empty;
+                if (splittedDeviceType.Length > 2)
+                    ObjMeasurementSetting.SerialNumber = splittedDeviceType[2].Trim();
+
                 _presenteraddproject.InsertProjectAndMeasurementSetting();
                 if (InsertProjectAndMeasurementSetting != null)
                 {
@@ -225,7 +224,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int DestinationProfileId { get; set; }
         public List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
         public int SyncDeviceId { get; set; }
-        public Dictionary<string , string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
+        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
         public int MeasurementDeviceId { get; set; }
         public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId { get; set; }
         public Project ObjProject { get; set; }
