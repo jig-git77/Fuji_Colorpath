@@ -145,6 +145,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objProject;
         }
 
+        public void CloseSyncRunProcess(int syncRunId, int status, DateTime endDateTime)
+        {
+            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCloseSyncRunProcess]",
+                                                        new object[] {syncRunId, status, endDateTime});
+        }
+
         #endregion
     }
 }

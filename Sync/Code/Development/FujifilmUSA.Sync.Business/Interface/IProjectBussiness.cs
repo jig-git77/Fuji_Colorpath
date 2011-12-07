@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using System;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
@@ -9,6 +10,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Project InsertProjectAndMeasurementSetting(Project objProject,MeasurementSetting objMeasurementSetting);
         int DeleteProject(int projectId);
         Project GetProjectByProjectId(int projectId);
-
+        void CloseSyncRunProcess(int syncRunId, int status, DateTime endDateTime);
     }
 }

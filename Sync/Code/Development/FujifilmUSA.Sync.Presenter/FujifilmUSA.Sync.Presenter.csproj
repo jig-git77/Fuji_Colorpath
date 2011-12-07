@@ -46,11 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PresenterAddProject.cs" />
+    <Compile Include="PresenterExportProfile.cs" />
     <Compile Include="PresenterProjectList.cs" />
     <Compile Include="PresenterSyncDevice.cs" />
     <Compile Include="PresenterTaskeroUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewInterface\IViewAddProject.cs" />
+    <Compile Include="ViewInterface\IViewExportProfile.cs" />
     <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewSyncDevice.cs" />
     <Compile Include="ViewInterface\IViewTaskeroUser.cs" />

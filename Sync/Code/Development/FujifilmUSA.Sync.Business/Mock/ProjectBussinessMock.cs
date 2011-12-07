@@ -6,7 +6,6 @@ namespace FujifilmUSA.Sync.Business.Mock
 {
     public class ProjectBussinessMock : IProjectBussiness
     {
-
         #region IProjectBussiness Members
 
         public List<Project> GetProjectListBySyncDeviceId(int syncDeviceId)
@@ -26,6 +25,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public Project GetProjectByProjectId(int projectId)
         {
             return new Project();
+        }
+
+        public void CloseSyncRunProcess(int syncRunId, int status, System.DateTime endDateTime)
+        {
+            //Do Nothing...
         }
 
         #endregion
