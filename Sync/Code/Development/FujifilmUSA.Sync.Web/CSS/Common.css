@@ -454,6 +454,16 @@ label
     padding: 0;
     display: block;
 }
+#menu2 li span
+{
+    background: url(../Images/menu_arrow.png) no-repeat 50px center;
+    padding-left: 10px;
+    color: #010101;
+    font-size: 13px;
+    border-bottom: solid 1px #dadada;
+    display: block;
+    padding: 7px 0 6px 60px;
+}
 #menu2 li a
 {
     background: url(../Images/menu_arrow.png) no-repeat 50px center;
