@@ -11,7 +11,13 @@ namespace FujifilmUSA.Sync.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {                
+                //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                //Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+                //Response.Cache.SetNoStore();  
+            }
+            
         }
     }
 }

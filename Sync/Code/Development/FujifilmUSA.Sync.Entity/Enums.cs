@@ -37,26 +37,26 @@ namespace FujifilmUSA.Sync.Entity
         AddSupportUser,
         AddTempRHDevice,
         AddUser,
-        DeleteBranch, 
-        DeleteCompany, 
-        DeleteDevice, 
-        DeleteDongle, 
-        DeletePrintTarget, 
-        DeleteTempRHDevice, 
-        DeleteUser, 
+        DeleteBranch,
+        DeleteCompany,
+        DeleteDevice,
+        DeleteDongle,
+        DeletePrintTarget,
+        DeleteTempRHDevice,
+        DeleteUser,
         DiscardCPVMeasurement,
-        RemoveSupportUser, 
+        RemoveSupportUser,
         ResetDeviceStatus,
-        UpdateBranch, 
-        UpdateDevice, 
-        UpdateDongle, 
-        UpdateTempRHDevice, 
+        UpdateBranch,
+        UpdateDevice,
+        UpdateDongle,
+        UpdateTempRHDevice,
         UpdateUser,
-        ViewCPVMeasurements, 
-        ViewDataMonitor, 
-        ViewDeviceStatus, 
-        ViewErrorLog, 
-        ViewPressData, 
+        ViewCPVMeasurements,
+        ViewDataMonitor,
+        ViewDeviceStatus,
+        ViewErrorLog,
+        ViewPressData,
         ViewReports
     }
 
@@ -82,7 +82,7 @@ namespace FujifilmUSA.Sync.Entity
     public enum EStatus
     {
         Failed = 0,
-        Caution = 1, 
+        Caution = 1,
         Passed = 2
     }
 
@@ -95,10 +95,10 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EDeviceStatus
     {
-        None = 0, 
-        Green = 1, 
-        Yellow = 2, 
-        Orange = 3, 
+        None = 0,
+        Green = 1,
+        Yellow = 2,
+        Orange = 3,
         Red = 4
     }
 
@@ -123,17 +123,17 @@ namespace FujifilmUSA.Sync.Entity
         ReportJobRunCertificationNonProcess = 11,
         ReportPressMakeReady = 12,
         ReportSingleMeasurement = 13,
-        CPSPrintStandardsReport = 14, 
+        CPSPrintStandardsReport = 14,
         CPSPrintStandardsReportISO = 15
     }
 
     public enum EDeviceType
     {
-        None = 0, 
-        Color = 1, 
-        Plate = 2, 
-        Monitor = 3, 
-        WideFormat = 4, 
+        None = 0,
+        Color = 1,
+        Plate = 2,
+        Monitor = 3,
+        WideFormat = 4,
         Press = 5
     }
 
@@ -249,6 +249,9 @@ namespace FujifilmUSA.Sync.Entity
     {
         Home = 1,
         Device = 2,
-        Project = 3
+        Project = 3,
+        ProjectSetup = 4,
+        SyncRun = 5,
+        NewSyncRun = 6
     }
 }

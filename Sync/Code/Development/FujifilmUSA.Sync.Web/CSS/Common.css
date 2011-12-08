@@ -24,6 +24,7 @@ img
 {
     border: 0px;
     vertical-align: top;
+   
 }
 ul, li
 {
@@ -415,15 +416,14 @@ label
 #menu li
 {
     background: url(../Images/sidebar_menu_bg.png) repeat-x bottom left #fff;
-    padding: 10px 0;
+    padding: 10px;
     overflow: hidden;
     overflow: inherit;
     display: block;
 }
 #menu li a
-{
-    display: block;
-    padding: 0 16px;
+{    
+    padding:0 5px;
     color: #010101;
     font-size: 13px;
 }

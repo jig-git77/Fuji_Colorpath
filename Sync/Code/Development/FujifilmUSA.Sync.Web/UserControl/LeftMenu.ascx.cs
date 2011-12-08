@@ -13,16 +13,58 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class LeftMenu : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
-        {                      
-            if (!IsPostBack)
-            {
-                
-                //CreateLeftMenu();
-            }
+        {
+            CreateLeftMenuList();
         }
         public void Page_PreRender(Object o, EventArgs e)
         {
-            CreateLeftMenuList();
+            var lstRemovable = new List<string>();
+            for (int i = ph.Controls.Count - 1; i >= 0; i--)
+            {
+                if (ph.Controls[i].GetType().Name.ToLower().Contains("LeftMenuItem".ToLower()))
+                {
+                    switch (((LeftMenuItem)ph.Controls[i]).ItemLevel)
+                    {
+                        case LeftMenuItemLevel.Device:
+                            if (SessionManager.Instance.CurrentSyncDevice == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        case LeftMenuItemLevel.Project:
+                            if (SessionManager.Instance.CurrentProject == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        case LeftMenuItemLevel.SyncRun:
+                            if (SessionManager.Instance.CurrentProject == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        case LeftMenuItemLevel.NewSyncRun:
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (ph.Controls[i].GetType().Name.ToLower().Contains("LeftMenuProjectItem".ToLower()))
+                {
+                    switch (((LeftMenuProjectItem)ph.Controls[i]).ItemLevel)
+                    {
+                        case LeftMenuItemLevel.ProjectSetup:
+                            if (SessionManager.Instance.CurrentProject == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        case LeftMenuItemLevel.SyncRun:
+                            if (SessionManager.Instance.CurrentProject == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        case LeftMenuItemLevel.NewSyncRun:
+                            if (SessionManager.Instance.CurrentProject == null)
+                                ph.Controls.Remove(ph.Controls[i]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+            }
         }
         public void CreateLeftMenu()
         {
@@ -34,11 +76,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentSyncDevice = null;
                 SessionManager.Instance.CurrentProject = null;
             }
-            
+
             if (currentPage == "ProjectList.aspx")
-            {                
+            {
                 SessionManager.Instance.CurrentProject = null;
-            }            
+            }
 
             StringBuilder sb = new StringBuilder();
             sb.Append("<ul id='menu'><li>");
@@ -53,14 +95,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (currentPage == "AddProject.aspx")
                 {
                     sb.Append("<ul id='menu2'><li><span>New Project</span></li></ul>");
-                    sb.Append("<ul id='menu2'><li><span>Project SetUp</span></li></ul>");                   
+                    sb.Append("<ul id='menu2'><li><span>Project SetUp</span></li></ul>");
                 }
                 if (SessionManager.Instance.CurrentProject != null)
                 {
                     sb.Append("<li>");
                     sb.Append("<a href='#'><span class='image'><img src='images/print_icon.png' alt=''></span><span class='text'>");
                     sb.Append(SessionManager.Instance.CurrentProject.ProjectName);
-                    sb.Append("</span></a>");                   
+                    sb.Append("</span></a>");
                     sb.Append("<div class='clear'></div>");
                     sb.Append("</li>");
                     sb.Append("</ul>");
@@ -68,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     sb.Append("<li><span>Project SetUp</span></li>");
                     foreach (var item in SessionManager.Instance.CurrentProject.ProjectRuns)
                     {
-                        sb.Append("<li><span>");                        
+                        sb.Append("<li><span>");
                         sb.Append(item.SyncRunName);
                         sb.Append("</span>");
                         sb.Append("<ul class='submenu'>");
@@ -78,15 +120,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         sb.Append("</ul>");
                         sb.Append("</li>");
 
-                        if(SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status==0)
+                        if (SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status == 0)
                         {
                             sb.Append("<li><a>New Project</a></li>");
                         }
                     }
-                    sb.Append("</ul");                                                            
-                }               
+                    sb.Append("</ul");
+                }
             }
-            sb.Append("<div class='clear'></div>");         
+            sb.Append("<div class='clear'></div>");
             divLeftmenu.InnerHtml = sb.ToString();
         }
 
@@ -95,37 +137,69 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ph.Controls.Clear();
 
             var items = new List<System.Web.UI.UserControl>();
-            var ctrlItem = ((LeftMenuItem) this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+            var ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = LeftMenuItemLevel.Home;
-            ctrlItem.ItemName = "Home";
+            ctrlItem.ItemName = "Home";                        
+
+            //string[] currentURLList = Request.Url.ToString().Split(new char[] { '/' });
+            //string currentPage = currentURLList[currentURLList.Length - 1].Trim();
+           
+            //if (currentPage == "Index.aspx")
+            //{
+            //    SessionManager.Instance.CurrentSyncDevice = null;
+            //    SessionManager.Instance.CurrentProject = null;
+            //}
+
+            //if (currentPage == "ProjectList.aspx")
+            //{
+            //    SessionManager.Instance.CurrentProject = null;
+            //}        
             ph.Controls.Add(ctrlItem);
 
-            //if(SessionManager.Instance.CurrentSyncDevice == null) return;
+            if (SessionManager.Instance.CurrentSyncDevice != null)
+            {
+                ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                ctrlItem.ItemLevel = LeftMenuItemLevel.Device;
+                ctrlItem.ItemName = SessionManager.Instance.CurrentSyncDevice.DeviceName;                
+                ctrlItem.ID = "HomeControlId";
+                ph.Controls.Add(ctrlItem);
 
-            ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = LeftMenuItemLevel.Device;
-            ctrlItem.ItemName = "Device Name";
-            ph.Controls.Add(ctrlItem);
 
-            //if (SessionManager.Instance.CurrentProject == null) return;
-            
-            ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = LeftMenuItemLevel.Project;
-            ctrlItem.ItemName = "Project Name";
-            ph.Controls.Add(ctrlItem);
+                if (SessionManager.Instance.CurrentProject != null)
+                {
+                    ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                    ctrlItem.ItemLevel = LeftMenuItemLevel.Project;
+                    ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;                    
+                    ph.Controls.Add(ctrlItem);
 
-            var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-            ctrlProjItem.SyncRunName = "Run-0";
-            ph.Controls.Add(ctrlProjItem);
 
-            ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-            ctrlProjItem.SyncRunName = "Run-1";
-            ph.Controls.Add(ctrlProjItem);
+                    var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                    ctrlProjItem.ItemLevel = LeftMenuItemLevel.ProjectSetup;
+                    ctrlProjItem.ItemName = "Project Setup";
+                    ph.Controls.Add(ctrlProjItem);
 
-            //dlLeftMenu.DataSource = items;
-            //dlLeftMenu.DataBind();
+                    foreach (var item in SessionManager.Instance.CurrentProject.ProjectRuns)
+                    {
+                        ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                        ctrlProjItem.ItemLevel = LeftMenuItemLevel.SyncRun;
+                        ctrlProjItem.ItemName = item.SyncRunName;
+                        ph.Controls.Add(ctrlProjItem);
 
-            //ph.Controls.Add(ctrlProjItem);
+                        //ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                        //ctrlProjItem.ItemLevel = LeftMenuItemLevel.SyncRun;
+                        //ctrlProjItem.ItemName = "Run-1";
+                        //ph.Controls.Add(ctrlProjItem);
+
+                        if (item.Status == 2)
+                        {
+                            ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                            ctrlProjItem.ItemLevel = LeftMenuItemLevel.NewSyncRun;
+                            ctrlProjItem.ItemName = "Add New Run";
+                            ph.Controls.Add(ctrlProjItem);
+                        }
+                    }
+                }
+            }
         }
     }
 }
