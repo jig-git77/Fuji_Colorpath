@@ -17,7 +17,7 @@ function GetReferenceChart(ProjectID) {
         success:
         function (response) {
             //ReferenceChart object returned as JSON from WCF
-            var objChart = response.GetReferenceChartResult;
+            var objChart = response;
             SetChartResult(objChart);
         },
         //If the call fails
@@ -31,28 +31,29 @@ function GetReferenceChart(ProjectID) {
 
 //this method initialize global chart object called g_chart which in turns being pass to the plug-in
 function SetChartResult(objChart) {
-
     //var g_paper = new Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     g_Chart["DeviceSettings"] = new Object();
     g_Chart["RowNames"] = new Array();
-    g_Chart["Size"] = objChart.TotalPatch;
+    g_Chart["Size"] = objChart.TotalPatches;
+
     g_Chart["Name"] = objChart.ChartName;
-    g_Chart["NumberOfRows"] = objChart.PatchRows;
-    g_Chart["NumberOfColumns"] = objChart.NumOfColumns;
+    g_Chart["NumberOfRows"] = objChart.NumOfRows;
+    g_Chart["NumberOfColumns"] = objChart.NumOfCols;
     actKey = objChart.ActivationKey;
     g_Chart["ReadCS"] = "Density,CIELab,CIEXYZ,sRGB,Spectral";
     for (m = 1; m <= g_Chart["NumberOfRows"]; m++) {
         g_Chart["RowNames"].push("row " + m);
     }
 
+    
     if (objChart.DeviceSetting != null && objChart.DeviceSetting != "undefined") {
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.Illuminant;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.DensityStandard;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.Observer;
         g_Chart["Mode"] = objChart.DeviceSetting.Mode;
     }
-
-    if (objChart.InstrumentTypeID > 1 && objChart.ChartSettings != null) {
+    
+    if (objChart.MeasurementDeviceTypeId > 1 && objChart.ChartSettings != null) {
         g_Chart["ChartType"] = "Native";
         g_Chart["ChartSizeX"] = objChart.ChartSettings["ChartSizeX"];
         g_Chart["ChartSizeY"] = objChart.ChartSettings["ChartSizeY"];
@@ -66,19 +67,22 @@ function SetChartResult(objChart) {
         g_Chart["PatchSizeY"] = objChart.ChartSettings["PatchSizeY"];
     }
 
+
+    
     g_Chart["RefBase"] = new Array();
-    for (i = 0; i < g_Chart["Size"]; i++) {
+    for (i = 0; i < g_Chart["Size"]; i++) {        
         var patch = new Object();
-        patch["SampleName"] = objChart.ReferencePatch[i].SampleName;
-        patch["HTMLColor"] = objChart.ReferencePatch[i].HTMLColor;
-        patch["CMYK_C"] = objChart.ReferencePatch[i].CMYK_C;
-        patch["CMYK_M"] = objChart.ReferencePatch[i].CMYK_M;
-        patch["CMYK_Y"] = objChart.ReferencePatch[i].CMYK_Y;
-        patch["CMYK_K"] = objChart.ReferencePatch[i].CMYK_K;
-        patch["PatchTypeID"] = objChart.ReferencePatch[i].PatchTypeID;
+        patch["SampleName"] = objChart.ChartPatches[i].SampleName;                
+        patch["HTMLColor"] = objChart.ChartPatches[i].HtmlColor;
+        patch["CMYK_C"] = objChart.ChartPatches[i].CmykC;
+        patch["CMYK_M"] = objChart.ChartPatches[i].CmykM;
+        patch["CMYK_Y"] = objChart.ChartPatches[i].CmykY;
+        patch["CMYK_K"] = objChart.ChartPatches[i].CmykK;
+        patch["PatchTypeID"] = objChart.ChartPatches[i].PatchTypeID;
         g_Chart["RefBase"].push(patch);
     }
-
+    
+    
     //clear the Measured patch array
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
 }

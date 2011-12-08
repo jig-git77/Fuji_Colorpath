@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Entity
         public string MeasureDeviceSrNo { get; set; }
         public ChartSetting ChartSetting { get; set; }
         public string ActivationKey { get; set; }
+        public DeviceSetting DeviceSetting { get; set; }
     }
 }

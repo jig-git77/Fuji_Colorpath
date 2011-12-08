@@ -199,7 +199,7 @@ function ListDevices() {
 // other values may be included and are passed through to the callback functions
 function scan(scanner, colorspace, chart) {
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
-    if (g_Chart["Result"].length > 0) g_Chart["Result"].length = 0;
+    if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
     localchart["ReadCS"] = colorspace;
     localchart["Substrate"] = paper;

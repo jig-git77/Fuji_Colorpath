@@ -48,6 +48,7 @@
     <Compile Include="ChartSetting.cs" />
     <Compile Include="DestinationProfile.cs" />
     <Compile Include="DeviceLinkProfile.cs" />
+    <Compile Include="DeviceSetting.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Measurement.cs" />
     <Compile Include="MeasurementDevice.cs" />

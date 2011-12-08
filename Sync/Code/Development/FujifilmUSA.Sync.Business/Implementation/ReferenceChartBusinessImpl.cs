@@ -49,6 +49,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             //Apply security on device serial no.
             chartData.ActivationKey =
                 Utilities.GetMd5Hash(DateTime.Now.Year + DateTime.Now.DayOfYear + "+yg92s+" + chartData.MeasureDeviceSrNo);
+            chartData.DeviceSetting = new DeviceSetting();
+
             chartData.ChartPatches = dsReferenceChart.Tables[1].AsEnumerable().
                 Select(x =>
                        new ReferenceChart()
