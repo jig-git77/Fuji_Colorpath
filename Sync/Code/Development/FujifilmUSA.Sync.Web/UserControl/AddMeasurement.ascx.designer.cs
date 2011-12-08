@@ -67,33 +67,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtMeasurementName;
         
         /// <summary>
-        /// btnCalibrate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton btnCalibrate;
-        
-        /// <summary>
-        /// btnMeasureAndUploadChart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton btnMeasureAndUploadChart;
-        
-        /// <summary>
-        /// btnCancelMeasurement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadButton btnCancelMeasurement;
-        
-        /// <summary>
         /// grdRecentUploadList control.
         /// </summary>
         /// <remarks>

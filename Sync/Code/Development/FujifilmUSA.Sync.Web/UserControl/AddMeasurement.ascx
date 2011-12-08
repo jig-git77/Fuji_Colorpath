@@ -19,54 +19,54 @@
 <script src="JS/isisread.js" type="text/javascript"></script>
 <script src="JS/WebComm.js" type="text/javascript"></script>
 <style>
-        .my_rectangle
-        {
-            width: 25px;
-            height: 25px;
-            background: pink;
-        }
-        .tooltipclass
-        {
-            background: #fbfacd;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #000;
-        }
-        
-        .pluginImageTooltipClass
-        {
-            background: #fbfacd;
-            border-width: 1px;
-            border-style: solid;
-            border-color: #000;
-            font-family: Tahoma;
-            font-size: 11px;
-        }
-        #modalBackground
-        {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9;
-            background-color: #333333;
-            display: none;
-            opacity: 0.40;
-            filter: alpha(opacity=40);
-        }
-        #modalWindow
-        {
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 10;
-            background-color: white;
-            display: none;
-            width: 40em;
-            height: 10em;            
-        }
-    </style>
+    .my_rectangle
+    {
+        width: 25px;
+        height: 25px;
+        background: pink;
+    }
+    .tooltipclass
+    {
+        background: #fbfacd;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000;
+    }
+    
+    .pluginImageTooltipClass
+    {
+        background: #fbfacd;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #000;
+        font-family: Tahoma;
+        font-size: 11px;
+    }
+    #modalBackground
+    {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+        background-color: #333333;
+        display: none;
+        opacity: 0.40;
+        filter: alpha(opacity=40);
+    }
+    #modalWindow
+    {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        background-color: white;
+        display: none;
+        width: 40em;
+        height: 10em;
+    }
+</style>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -103,18 +103,21 @@
             </telerik:RadTextBox>--%>
         </div>
         <div class="float_r">
-            <telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
-            </telerik:RadButton>
+            <input class="green_bt" id="btnCalibrate" value="Calibrate" />
+            <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
+            </telerik:RadButton>--%>
         </div>
         <div class="clear">
         </div>
         <div class="float_l">
-            <telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
-            </telerik:RadButton>
+            <input class="green_bt" id="btnMeasureAndUploadChart" value="Measure / Upload" />
+            <%--<telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
+            </telerik:RadButton>--%>
         </div>
         <div class="float_r">
-            <telerik:RadButton ID="btnCancelMeasurement" runat="server" Text="Cancel Measurement">
-            </telerik:RadButton>
+            <input class="green_bt" id="btnCancelMeasurement" value="Cancel Measurement" />
+            <%--<telerik:RadButton ID="btnCancelMeasurement" runat="server" Text="Cancel Measurement">
+            </telerik:RadButton>--%>
         </div>
         <div class="clear">
         </div>
@@ -207,6 +210,7 @@
                     return false;
                 }
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
+                return false;
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
@@ -231,88 +235,88 @@
             return false;
         });
 
-        alert(g_Chart["RefBase"]);
+        //        alert(g_Chart["RefBase"]);
 
-        var area = new Object();
-        area["W"] = 0;
-        area["H"] = 0;
+        //        var area = new Object();
+        //        area["W"] = 0;
+        //        area["H"] = 0;
 
-        var distance = new Object();
-        distance["R"] = 0;
-        distance["C"] = 0;
+        //        var distance = new Object();
+        //        distance["R"] = 0;
+        //        distance["C"] = 0;
 
-        var w = parseInt(jQuery("[id*='Canvas']").width());
-        var h = parseInt(jQuery("[id*='Canvas']").height());
-        var startPosition = 1;        
-        col = g_Chart["NumberOfColumns"];
-        row = g_Chart["NumberOfRows"];
+        //        var w = parseInt(jQuery("[id*='Canvas']").width());
+        //        var h = parseInt(jQuery("[id*='Canvas']").height());
+        //        var startPosition = 1;
+        //        col = g_Chart["NumberOfColumns"];
+        //        row = g_Chart["NumberOfRows"];
 
-        area["H"] = (((h / row) / 2) / 2) + '';
-        distance["R"] = (((h / row) / 2) / 2) + '';
+        //        area["H"] = (((h / row) / 2) / 2) + '';
+        //        distance["R"] = (((h / row) / 2) / 2) + '';
 
-        area["W"] = ((w / col) / 2) + '';
-        distance["C"] = ((w / col) / 2) + '';
+        //        area["W"] = ((w / col) / 2) + '';
+        //        distance["C"] = ((w / col) / 2) + '';
 
-        var noOfCells = g_Chart["Size"];
-        var drawCells = 0;
-        var cId = 0;
-        var x1 = 0;
-        var y1 = 0;
+        //        var noOfCells = g_Chart["Size"];
+        //        var drawCells = 0;
+        //        var cId = 0;
+        //        var x1 = 0;
+        //        var y1 = 0;
 
-        //if (byPress == "2") {
-        //y1 = parseInt(area["H"]);
-        //}
+        //        //if (byPress == "2") {
+        //        //y1 = parseInt(area["H"]);
+        //        //}
 
-        for (i = 0; i < row; i++) {
+        //        for (i = 0; i < row; i++) {
 
-            y1 = y1 + (parseInt(area["H"]) ) + parseInt(distance["R"] * 2);
+        //            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
 
-            x1 = 0;
+        //            x1 = 0;
 
-            for (j = 0; j < col; j++) {
+        //            for (j = 0; j < col; j++) {
 
-                if (noOfCells > drawCells) {
+        //                if (noOfCells > drawCells) {
 
-                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+        //                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
-                    var xx1 = startPosition + x1;
-                    var yy1 = startPosition + y1;
+        //                    var xx1 = startPosition + x1;
+        //                    var yy1 = startPosition + y1;
 
-                    var jg2 = new jsGraphics("Canvas");
-                    var rgbx = g_Chart["RefBase"][cId]["HTMLColor"];
-                    jg2.setColor(rgbx);
-                    //jg2.setColor(sync150.RefBase[cId].HTMLColor); // blue
-                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-                    jg2.paint();
-                    drawCells++;
+        //                    var jg2 = new jsGraphics("Canvas");
+        //                    var rgbx = g_Chart["RefBase"][cId]["HTMLColor"];
+        //                    jg2.setColor(rgbx);
+        //                    //jg2.setColor(sync150.RefBase[cId].HTMLColor); // blue
+        //                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+        //                    jg2.paint();
+        //                    drawCells++;
 
-                    if (cId < 149)
-                        cId++;
-                    else
-                        cId = 0;
-                }
+        //                    if (cId < 149)
+        //                        cId++;
+        //                    else
+        //                        cId = 0;
+        //                }
 
-            }
-        }
-//        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-//        //alert(jg.style);
-//        var x = 0;
-//        var y = 0;
+        //            }
+        //        }
+        //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+        //        //alert(jg.style);
+        //        var x = 0;
+        //        var y = 0;
 
-//        alert(jQuery("[id*='Canvas']").width());
-//        alert(jQuery("[id*='Canvas']").height());
-//        for (var cursample = 0; cursample < g_Chart["RefBase"].length; cursample++) {
-//            var rgbx = g_Chart["RefBase"][cursample]["HTMLColor"];
-//            jg.setColor(rgbx);
-//            jg.fillRect(x * 20, y * 20, 20, 10);
+        //        alert(jQuery("[id*='Canvas']").width());
+        //        alert(jQuery("[id*='Canvas']").height());
+        //        for (var cursample = 0; cursample < g_Chart["RefBase"].length; cursample++) {
+        //            var rgbx = g_Chart["RefBase"][cursample]["HTMLColor"];
+        //            jg.setColor(rgbx);
+        //            jg.fillRect(x * 20, y * 20, 20, 10);
 
-//            x++;
-//            if (x >= g_Chart["NumberOfColumns"]) {
-//                x = 0;
-//                y++;
-//            }
-//        }
-//        jg.paint();
+        //            x++;
+        //            if (x >= g_Chart["NumberOfColumns"]) {
+        //                x = 0;
+        //                y++;
+        //            }
+        //        }
+        //        jg.paint();
     });
 
     function confirm(message, type) {
