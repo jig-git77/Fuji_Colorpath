@@ -557,8 +557,10 @@ label
 {
     margin: 17px auto 0 auto;
     width: 654px; /*border: solid 1px #9e9e9e;     border-collapse: collapse;*/
+    border: solid 1px #9e9e9e;     border-collapse: collapse;
+    
 }
-/*
+
 .product_list_table th
 {
     background: url(../Images/product_list_table_head.png) repeat-x top left;
@@ -583,7 +585,12 @@ label
 .product_list_table tr.blue
 {
     background: #ebfffa;
-    color: #367b6a;
+    color: #367b6a; 
+}
+.product_list_table tr.blue a
+{
+    color: #367b6a !important; 
+    text-decoration: none !important;
 }
 .product_list_table tr.purpal
 {
@@ -595,7 +602,7 @@ label
     background: #f6ffeb;
     color: #5b6f24;
 }
-*/
+
 /****Add Product ****/
 #contant .add_form
 {

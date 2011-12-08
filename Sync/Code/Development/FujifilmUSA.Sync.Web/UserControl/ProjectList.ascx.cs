@@ -23,7 +23,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
-        }
+            if (!IsPostBack)
+                BindProject();
+        }       
         #endregion
 
         #region Control events
@@ -36,20 +38,77 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect("AddMeasurement.aspx");
         }
 
-        protected void grdProjectList_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            if (e.CommandName == "DeleteProject")
-            {
-                GridDataItem selectedItem = e.Item as GridDataItem;
-                this.ProjectId = Convert.ToInt32(selectedItem.GetDataKeyValue("ProjectId"));
-                _presenterprojectlist.DeleteProject();
+        #region Telerik grid
+        //protected void grdProjectList_ItemCommand(object sender, GridCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "DeleteProject")
+        //    {
+        //        GridDataItem selectedItem = e.Item as GridDataItem;
+        //        this.ProjectId = Convert.ToInt32(selectedItem.GetDataKeyValue("ProjectId"));
+        //        _presenterprojectlist.DeleteProject();
 
-                //Rebind the grid to refresh the data
-                grdProjectList.Rebind();
-            }
-        }
+        //        //Rebind the grid to refresh the data
+        //        grdProjectList.Rebind();
+        //    }
+        //}
 
-        protected void grdProjectList_ItemDataBound(object sender, GridItemEventArgs e)
+        //protected void grdProjectList_ItemDataBound(object sender, GridItemEventArgs e)
+        //{
+        //    if (e.Item.DataItem != null)
+        //    {
+        //        Project project = e.Item.DataItem as Project;
+        //        if (project != null)
+        //        {
+        //            System.Web.UI.WebControls.Image imgStatus = e.Item.FindControl("imgStatus") as System.Web.UI.WebControls.Image;
+        //            if (imgStatus != null)
+        //            {
+        //                switch (project.ProjectStatus)
+        //                {
+        //                    case ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/edit_icon.png");
+        //                        imgStatus.ToolTip = "Open";
+        //                        imgStatus.AlternateText = "Open";
+        //                        break;
+        //                    case ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/right_icon   .png");
+        //                        imgStatus.ToolTip = "Certify";
+        //                        imgStatus.AlternateText = "Certify";
+        //                        break;
+        //                    case ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/close_icon.png");
+        //                        imgStatus.ToolTip = "Closed";
+        //                        imgStatus.AlternateText = "Closed";
+        //                        break;
+        //                    case ECPSyncRunStatus.NotUsed: break; //not to be used currently
+        //                }
+        //            }
+
+        //            System.Web.UI.WebControls.ImageButton imgbtnDelete = e.Item.FindControl("imgbtnDelete") as System.Web.UI.WebControls.ImageButton;
+        //            if (imgbtnDelete != null)
+        //            {
+        //                imgbtnDelete.Attributes.Add("onclick", "javascript: return ConfirmDeleteProject();");
+        //            }
+
+        //            System.Web.UI.WebControls.LinkButton lbtnProjectName = e.Item.FindControl("lbtnProjectName") as System.Web.UI.WebControls.LinkButton;
+        //            if (lbtnProjectName != null)
+        //            {
+        //                lbtnProjectName.Attributes.Add("ProjectId", project.ProjectId.ToString());
+        //            }
+
+        //            System.Web.UI.WebControls.ImageButton btnInfo = e.Item.FindControl("btnInfo") as System.Web.UI.WebControls.ImageButton;
+        //            if (btnInfo != null)
+        //            {
+        //                btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('"+ ResolveUrl("~/ProjectInformation.aspx") +"');");
+
+        //            }
+        //        }
+        //    }
+        //}
+
+        //protected void grdProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        //{
+        //    BindProject();
+        //} 
+        #endregion
+
+        protected void grdProjectList_ItemDataBound(object sender, System.Web.UI.WebControls.ListViewItemEventArgs e)
         {
             if (e.Item.DataItem != null)
             {
@@ -92,16 +151,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     System.Web.UI.WebControls.ImageButton btnInfo = e.Item.FindControl("btnInfo") as System.Web.UI.WebControls.ImageButton;
                     if (btnInfo != null)
                     {
-                        btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('"+ ResolveUrl("~/ProjectInformation.aspx") +"');");
-                        
+                        btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/ProjectInformation.aspx") + "');");
+
                     }
                 }
             }
         }
 
-        protected void grdProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        protected void grdProjectList_ItemCommand(object sender, System.Web.UI.WebControls.ListViewCommandEventArgs e)
         {
-            BindProject();
+            if (e.CommandName == "DeleteProject")
+            {
+                //GridDataItem selectedItem = e.Item as GridDataItem;
+                this.ProjectId = Convert.ToInt32(e.CommandArgument); //Convert.ToInt32(selectedItem.GetDataKeyValue("ProjectId"));
+                _presenterprojectlist.DeleteProject();
+
+                ////Rebind the grid to refresh the data
+                //grdProjectList.Rebind();
+                BindProject();
+            }
         }
         #endregion
 
@@ -113,7 +181,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
                 _presenterprojectlist.GetProjectListBySyncDeviceId();
                 grdProjectList.DataSource = GetProjectListBySyncDeviceId;
-                //grdProjectList.DataBind();
+                grdProjectList.DataBind();
             }
         }
         #endregion

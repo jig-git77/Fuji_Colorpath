@@ -46,14 +46,38 @@
             New Project</span></a></div>
     <div class="clear">
     </div>
-    <table border="0" cellspacing="0" cellpadding="0" class="product_list_table">
+    <%--<table border="0" cellspacing="0" cellpadding="0" class="product_list_table">
         <tr>
-            <td>
-                <telerik:RadGrid ID="grdProjectList" runat="server" AutoGenerateColumns="false"  OnItemCommand="grdProjectList_ItemCommand"
+            <td>--%>
+            <asp:ListView ID="grdProjectList" runat="server" OnItemCommand="grdProjectList_ItemCommand" OnItemDataBound="grdProjectList_ItemDataBound" ItemPlaceholderID="phItemPlaceholder">
+            <LayoutTemplate>
+                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
+                <thead>
+                    <tr>
+                        <th align="left" scope="col">Project Name</th>
+                        <th align="center" scope="col" width="10%">Info</th>
+                        <th align="center" scope="col" width="10%">Delete</th>
+                        <th align="center" scope="col" width="10%">Status</th>
+                    </tr>
+                </thead>
+                <tbody>                                    
+                    <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
+                </tbody>
+                </table>
+            </LayoutTemplate>
+            <ItemTemplate>
+                <tr class="blue">
+                    <td align="left"><asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" OnClick="lbtnProjectName_Click" /></td>
+                    <td align="center"><asp:ImageButton ID="btnInfo" runat="server" ToolTip="Information" AlternateText="Information" ImageUrl="../Images/info_icon.png" /></td>
+                    <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("ProjectId") %>' /></td>
+                    <td align="center"><asp:Image ID="imgStatus" runat="server" ImageUrl="../Images/close_icon.png" /></td>
+              </tr>
+            </ItemTemplate>
+            </asp:ListView>
+                <%--<telerik:RadGrid ID="grdProjectList" runat="server" AutoGenerateColumns="false"  OnItemCommand="grdProjectList_ItemCommand"
                     ShowFooter="false" OnNeedDataSource="grdProjectList_NeedDataSource" OnItemDataBound="grdProjectList_ItemDataBound" >
                     <MasterTableView DataKeyNames="ProjectId">
-                        <Columns>
-                            <%--<telerik:GridBoundColumn DataField="ProjectName" UniqueName="ProjectName" HeaderText="Project Name"></telerik:GridBoundColumn>--%>
+                        <Columns>                            
                             <telerik:GridTemplateColumn UniqueName="ProjectName" HeaderText="Project Name">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" OnClick="lbtnProjectName_Click" />
@@ -76,10 +100,10 @@
                             </telerik:GridTemplateColumn>
                         </Columns>
                     </MasterTableView>
-                </telerik:RadGrid>
-            </td>
+                </telerik:RadGrid>--%>
+           <%-- </td>
         </tr>
-    </table>
+    </table>--%>
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

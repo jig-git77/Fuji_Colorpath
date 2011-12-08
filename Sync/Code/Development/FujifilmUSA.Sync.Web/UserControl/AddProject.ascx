@@ -20,7 +20,7 @@
     <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" /></center>
     <div class="clear">
     </div>
-    <div class="product_list_table">
+    <div class="add_form">
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
