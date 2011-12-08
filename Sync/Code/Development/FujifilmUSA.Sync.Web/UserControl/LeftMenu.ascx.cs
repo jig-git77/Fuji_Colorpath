@@ -15,10 +15,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {                      
             if (!IsPostBack)
             {
-                CreateLeftMenu();
+                //CreateLeftMenu();
             }
         }
-        
+        public void Page_PreRender(Object o, EventArgs e)
+        {
+            CreateLeftMenu();
+        }
         public void CreateLeftMenu()
         {
             string[] currentURLList = Request.Url.ToString().Split(new char[] { '/' });
@@ -63,15 +66,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     sb.Append("<li><span>Project SetUp</span></li>");
                     foreach (var item in SessionManager.Instance.CurrentProject.ProjectRuns)
                     {
-                        sb.Append("<li><span>");
+                        sb.Append("<li><span>");                        
                         sb.Append(item.SyncRunName);
                         sb.Append("</span>");
                         sb.Append("<ul class='submenu'>");
-                        sb.Append("<li class='active'><a>Measure</a></li>");
+                        sb.Append("<li class='active'><a href='AddMeasurement.aspx'>Measure</a></li>");
                         sb.Append("<li><a>Analyze</a></li>");
-                        sb.Append("<li><a>Expert</a></li>");
+                        sb.Append("<li><a href='SyncRunExport.aspx'>Expert</a></li>");
                         sb.Append("</ul>");
-                        sb.Append("</li>");                       
+                        sb.Append("</li>");
+
+                        if(SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status==0)
+                        {
+                            sb.Append("<li><a>New Project</a></li>");
+                        }
                     }
                     sb.Append("</ul");                                                            
                 }               
