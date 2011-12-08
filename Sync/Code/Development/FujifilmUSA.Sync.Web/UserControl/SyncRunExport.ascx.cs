@@ -24,10 +24,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();
         }
 
-        protected void btnCloseTune_Click(object sender, EventArgs e)
+        protected void btnCloseRun_Click(object sender, EventArgs e)
         {
-            //SyncRunId = SessionManager.Instance.DictionaryList
-            //_presenterExportProfile.CloseSyncRunProcess();
+            SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+            Status = Convert.ToInt32(FujifilmUSA.Sync.Entity.ECPSyncRunStatus.Closed);
+            EndDateTime = DateTime.UtcNow;
+            _presenterExportProfile.CloseSyncRunProcess();
         }
 
         #region IViewExportProfile Members

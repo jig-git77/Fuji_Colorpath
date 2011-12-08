@@ -13,12 +13,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class SyncRunExport {
         
         /// <summary>
-        /// btnCloseTune control.
+        /// btnCloseRun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadButton btnCloseTune;
+        protected global::Telerik.Web.UI.RadButton btnCloseRun;
     }
 }

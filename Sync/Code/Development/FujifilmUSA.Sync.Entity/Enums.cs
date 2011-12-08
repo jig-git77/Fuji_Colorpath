@@ -245,7 +245,10 @@ namespace FujifilmUSA.Sync.Entity
     {
         StatusT = 1,
     }
-
-
-
+    public enum LeftMenuItemLevel
+    {
+        Home = 1,
+        Device = 2,
+        Project = 3
+    }
 }

@@ -210,6 +210,7 @@
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
+                return false;
                 //call grid click event...
             }
         });
@@ -219,6 +220,7 @@
             jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             OnCancel();
             ListDevices();
+            return false;
         });
         jQuery("[id*='btnRefresh']").click(function () {
             refreshTry++;
@@ -226,6 +228,7 @@
             if (refreshTry == 2) {
                 jQuery("[id*='lblMessage']").html(jQuery("[id*='lblMessage']").text() + '<br>Hint: Having problem with plugins? Try to close and re-open your browser!</br>');
             }
+            return false;
         });
     });
 

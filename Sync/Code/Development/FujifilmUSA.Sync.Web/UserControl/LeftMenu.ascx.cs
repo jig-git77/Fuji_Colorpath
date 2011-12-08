@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -15,12 +16,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {                      
             if (!IsPostBack)
             {
+                
                 //CreateLeftMenu();
             }
         }
         public void Page_PreRender(Object o, EventArgs e)
         {
-            CreateLeftMenu();
+            CreateLeftMenuList();
         }
         public void CreateLeftMenu()
         {
@@ -86,6 +88,44 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             sb.Append("<div class='clear'></div>");         
             divLeftmenu.InnerHtml = sb.ToString();
+        }
+
+        public void CreateLeftMenuList()
+        {
+            ph.Controls.Clear();
+
+            var items = new List<System.Web.UI.UserControl>();
+            var ctrlItem = ((LeftMenuItem) this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+            ctrlItem.ItemLevel = LeftMenuItemLevel.Home;
+            ctrlItem.ItemName = "Home";
+            ph.Controls.Add(ctrlItem);
+
+            //if(SessionManager.Instance.CurrentSyncDevice == null) return;
+
+            ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+            ctrlItem.ItemLevel = LeftMenuItemLevel.Device;
+            ctrlItem.ItemName = "Device Name";
+            ph.Controls.Add(ctrlItem);
+
+            //if (SessionManager.Instance.CurrentProject == null) return;
+            
+            ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+            ctrlItem.ItemLevel = LeftMenuItemLevel.Project;
+            ctrlItem.ItemName = "Project Name";
+            ph.Controls.Add(ctrlItem);
+
+            var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+            ctrlProjItem.SyncRunName = "Run-0";
+            ph.Controls.Add(ctrlProjItem);
+
+            ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+            ctrlProjItem.SyncRunName = "Run-1";
+            ph.Controls.Add(ctrlProjItem);
+
+            //dlLeftMenu.DataSource = items;
+            //dlLeftMenu.DataBind();
+
+            //ph.Controls.Add(ctrlProjItem);
         }
     }
 }

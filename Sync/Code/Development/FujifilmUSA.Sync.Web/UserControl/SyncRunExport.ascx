@@ -7,7 +7,7 @@
         <h1>
             Export</h1>
         <div class="Information_divAnalyze">
-            <telerik:RadButton ID="btnCloseTune" Text="Close Run" runat="server" OnClick="btnCloseTune_Click">
+            <telerik:RadButton ID="btnCloseRun" Text="Close Run" runat="server" OnClick="btnCloseRun_Click">
             </telerik:RadButton>
         </div>
     </div>

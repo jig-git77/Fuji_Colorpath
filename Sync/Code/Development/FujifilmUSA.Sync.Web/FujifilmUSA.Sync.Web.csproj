@@ -188,6 +188,8 @@
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
+    <Content Include="UserControl\LeftMenuItem.ascx" />
+    <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
@@ -293,6 +295,20 @@
     </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
