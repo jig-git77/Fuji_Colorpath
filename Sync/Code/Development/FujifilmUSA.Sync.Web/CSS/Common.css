@@ -956,7 +956,12 @@ label
     text-align: right;
 }
 
-
+.no_data_found
+{     
+    padding-left: 15px;
+    padding-top: 5px;
+}
+    
 #confirm {display:none;}
 
 /* Overlay */

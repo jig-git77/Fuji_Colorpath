@@ -73,9 +73,8 @@
     <div class="head">
         <h1>
             Add Measurement</h1>
-        <div class="Information_divAnalyze">
-            <telerik:RadButton ID="btnAnalyze" Text="Analyze" runat="server">
-            </telerik:RadButton>
+        <div class="Information_divAnalyze">            
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button"><span>Analyze</span></asp:LinkButton>
         </div>
     </div>
     <div class="clear">
@@ -171,6 +170,7 @@
                               <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
                             </table>
                         </LayoutTemplate>
+                        <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
                         <ItemTemplate>
                             <tr>
                                 <td align="center"><asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label></td> 

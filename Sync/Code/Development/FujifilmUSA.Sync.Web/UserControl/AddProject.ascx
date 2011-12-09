@@ -109,7 +109,7 @@
                     </tbody>
                 </table>
             </LayoutTemplate>
-            <%--<EmptyDataTemplate><div>There are no records to display</div></EmptyDataTemplate>--%>
+            <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
   	                <td align="center" valign="middle"><asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile" /></td>
