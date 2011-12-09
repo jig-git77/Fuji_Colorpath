@@ -69,7 +69,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //if (e.CommandName == "DeleteProject")
             //{
             //    this.SyncRunId =Convert.ToInt32(e.CommandArgument);
-            //    _presentermeasurement.DeleteMeasurements
+            //    _presentermeasurement.DeleteMeasurements();
             //}
         }
 
