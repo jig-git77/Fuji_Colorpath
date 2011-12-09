@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>Home</title>
+    <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />
     <script src="Javascript/html5.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
