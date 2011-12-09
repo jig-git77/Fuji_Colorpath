@@ -5,6 +5,7 @@
 <%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
 <!DOCTYPE html>
 <html>
+
 <head runat="server">
     <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />

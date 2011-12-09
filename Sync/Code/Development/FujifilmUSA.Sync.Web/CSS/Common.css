@@ -815,7 +815,7 @@ label
 .color_pallate .color_pallate_middle
 {
     background: url(../Images/color_palette_box_bg.png) repeat-y top left;
-    padding-left: 1px;
+    /* padding-left: 1px;*/
 }
 .color_pallate .color_pallate_middle .color_bar
 {

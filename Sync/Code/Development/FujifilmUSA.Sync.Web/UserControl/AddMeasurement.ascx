@@ -74,7 +74,7 @@
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
-            <telerik:RadButton ID="btnAnalyze" Text="Analyze" runat="server" >
+            <telerik:RadButton ID="btnAnalyze" Text="Analyze" runat="server">
             </telerik:RadButton>
         </div>
     </div>
@@ -103,7 +103,8 @@
             </telerik:RadTextBox>--%>
         </div>
         <div class="float_r">
-            <span><input class="green_bt" type="button" id="btnCalibrate" value="Calibrate" /></span>
+            <span>
+                <input class="green_bt" type="button" id="btnCalibrate" value="Calibrate" /></span>
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
@@ -138,7 +139,7 @@
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-            <telerik:RadGrid ID="grdRecentUploadList" runat="server" AutoGenerateColumns="false"
+            <%-- <telerik:RadGrid ID="grdRecentUploadList" runat="server" AutoGenerateColumns="false"
                 OnNeedDataSource="grdRecentUploadList_NeedDataSource" BorderStyle="None" Width="99.9%">
                 <MasterTableView>
                     <Columns>
@@ -154,7 +155,40 @@
                         </telerik:GridTemplateColumn>
                     </Columns>
                 </MasterTableView>
-            </telerik:RadGrid>
+            </telerik:RadGrid>--%>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />                   
+                   <asp:ListView ID="lvMeasurement" runat="server" 
+                        ItemPlaceholderID="phItemPlaceholder" onitemcommand="lvMeasurement_ItemCommand">
+                        <LayoutTemplate>
+                            <table border="0" cellspacing="0" cellpadding="0" class="recent_upload">
+                              <tr>
+                                <th scope="col">Measurement Name</th>
+                                <th scope="col">Upload Date Time</th>
+                                <th scope="col">Delete</th>
+                              </tr>
+                              <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td align="center"><asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label></td> 
+                                <td align="center"><asp:Label ID="lblMeasurementDate" runat="server" Text=' <%# Eval("MeasurementDate").ToString().Replace(":000", " ") %>'></asp:Label></td>
+                                <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' /></td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+           <%-- <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
+                DisplayAfter="0">
+                <ProgressTemplate>
+                    <div id="DIV_Progress1" runat="server" class="PROGRESS" align="center">
+                        <img src="Images/Loading2.gif" style="background: transparent;" alt="Loading" /><br />
+                        <b>Loading</b></div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>--%>
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
@@ -211,6 +245,7 @@
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
+                document.getElementById('<%= btnBindGrid.ClientID %>').click();
                 //call grid click event...
             }
         });
