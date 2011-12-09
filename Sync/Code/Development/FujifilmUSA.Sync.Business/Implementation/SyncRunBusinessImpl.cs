@@ -43,16 +43,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                               patch.CmykM,
                                                                               patch.CmykY,
                                                                               patch.CmykK,
-                                                                              patch.CielabL,
-                                                                              patch.CielabA,
-                                                                              patch.CielabB,
-                                                                              patch.CiexyzX,
-                                                                              patch.CiexyzY,
-                                                                              patch.CiexyzZ,
-                                                                              patch.DensityV,
-                                                                              patch.DensityC,
-                                                                              patch.DensityM,
-                                                                              patch.DensityY
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              0
+                                                                              //patch.Cielab.L,
+                                                                              //patch.Cielab.A,
+                                                                              //patch.Cielab.B,
+                                                                              //patch.Ciexyz.X,
+                                                                              //patch.Ciexyz.Y,
+                                                                              //patch.Ciexyz.Z,
+                                                                              //patch.Density.Visual,
+                                                                              //patch.Density.Red,
+                                                                              //patch.Density.Green,
+                                                                              //patch.Density.Blue
                                                                           }));
             return measurement.MeasurementId;
         }

@@ -202,14 +202,14 @@ function presentScanDonei1(scanner, mychart, final) {
         var CIEXYZ = new XYZ(XYZResults["X"].toFixed(2), XYZResults["Y"].toFixed(2), XYZResults["Z"].toFixed(2));
         var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
         mpatch = new Patch();
-        mpatch.LAB = LABResults;
-        mpatch.XYZ = XYZResults;
+        mpatch.Cielab = LABResults;
+        mpatch.Ciexyz = XYZResults;
         mpatch.Density = _Density;
         mpatch.SampleName = sName;
-        mpatch.CMYK_C = mychart["ReferencePatch"][ind]["CMYK_C"];
-        mpatch.CMYK_M = mychart["ReferencePatch"][ind]["CMYK_M"];
-        mpatch.CMYK_Y = mychart["ReferencePatch"][ind]["CMYK_Y"];
-        mpatch.CMYK_K = mychart["ReferencePatch"][ind]["CMYK_K"];
+        mpatch.CmykC = mychart["ReferencePatch"][ind]["CMYK_C"];
+        mpatch.CmykM = mychart["ReferencePatch"][ind]["CMYK_M"];
+        mpatch.CmykY = mychart["ReferencePatch"][ind]["CMYK_Y"];
+        mpatch.CmykK = mychart["ReferencePatch"][ind]["CMYK_K"];
         mpatch.PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         MeasuredPatches.push(mpatch);
     }
