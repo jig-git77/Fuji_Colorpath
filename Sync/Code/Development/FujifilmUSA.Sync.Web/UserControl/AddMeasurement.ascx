@@ -74,7 +74,7 @@
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
-            <telerik:RadButton ID="btnAnalyze" Text="Analyze" runat="server">
+            <telerik:RadButton ID="btnAnalyze" Text="Analyze" runat="server" >
             </telerik:RadButton>
         </div>
     </div>
