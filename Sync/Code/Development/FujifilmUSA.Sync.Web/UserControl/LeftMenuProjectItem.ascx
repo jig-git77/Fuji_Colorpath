@@ -1,8 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LeftMenuProjectItem.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenuProjectItem" %>
-<%--<li>
-        <asp:LinkButton runat="server" ID="lnkProjectSetup" Text="Project Setup"></asp:LinkButton>
-    </li>--%>
 <ul id="menu2">
     <li>
         <asp:LinkButton runat="server" ID="lnkSyncRunName" OnClick="lnkSyncRunName_Click"></asp:LinkButton>

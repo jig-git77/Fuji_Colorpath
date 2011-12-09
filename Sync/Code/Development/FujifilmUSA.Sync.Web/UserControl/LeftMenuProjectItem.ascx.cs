@@ -36,8 +36,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ulSyncSubMenu.Visible = false;
                     break;
                 case LeftMenuItemLevel.SyncRun:
+                    if(SessionManager.Instance.CurrentProject.ProjectRuns.First().SyncRunId == CurrentSyncRun.SyncRunId)
+                    {
+                        lnkMeasurement.Visible = false;
+                        lnkAnalyse.Visible = false;
+                    }
+                    if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
+                    {
+                        lnkMeasurement.Visible = false;
+                    }
                     ulSyncSubMenu.Visible = true;
-                    lnkSyncRunName.OnClientClick = "return false";
                     break;
                 case LeftMenuItemLevel.NewSyncRun:
                     ulSyncSubMenu.Visible = false;
@@ -45,6 +53,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 
             }
             lnkSyncRunName.Text = ItemName;
+
+            if(CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
+            {
+                lnkSyncRunName.Font.Bold = true;
+            }
         }
 
         protected void lnkItem_Click(object sender, EventArgs e)
@@ -78,13 +91,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case LeftMenuItemLevel.ProjectSetup:
                     Response.Redirect("AddProject.aspx");
                     break;
+                case LeftMenuItemLevel.SyncRun:
+                    SessionManager.Instance.CurrentSyncRun = this.CurrentSyncRun;
+                    if (SessionManager.Instance.CurrentProject.ProjectRuns.First().SyncRunId == this.CurrentSyncRun.SyncRunId)
+                    {
+                        Response.Redirect("SyncRunExport.aspx");
+                    }
+                    Response.Redirect(
+                        this.CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Open)
+                            ? "AddMeasurement.aspx"
+                            : "SyncRunAnalyze.aspx");
+                    Response.Redirect("AddProject.aspx");
+                    break;
                 case LeftMenuItemLevel.NewSyncRun:
                     ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                     Status = ECPSyncRunStatus.Open;
                     CreatedDateTime = DateTime.UtcNow;
                     _presenterLeftMenu.AddProjectSyncRun();
                     SessionManager.Instance.CurrentProject = this.CurrentProject;
-                    SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.SingleOrDefault(x=>x.Status == Convert.ToInt16(ECPSyncRunStatus.Open));
+                    SessionManager.Instance.CurrentSyncRun = this.CurrentProject.ProjectRuns.Last();
                     Response.Redirect("AddMeasurement.aspx");
                     break;
             }
@@ -92,42 +117,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewLeftMenu Members
 
-        public int ProjectId
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public ECPSyncRunStatus Status
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public DateTime CreatedDateTime
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
+        public int ProjectId { get; set; }
+        
+        public ECPSyncRunStatus Status { get; set; }
+        
+        public DateTime CreatedDateTime { get; set; }
+        
         public Project CurrentProject { get; set; }
         
         #endregion

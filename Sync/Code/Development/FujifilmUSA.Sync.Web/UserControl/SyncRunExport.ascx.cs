@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -24,12 +25,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();
         }
 
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (SessionManager.Instance.CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
+            {
+                btnCloseRun.Enabled = false;
+            }
+        }
+
         protected void btnCloseRun_Click(object sender, EventArgs e)
         {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-            Status = Convert.ToInt32(FujifilmUSA.Sync.Entity.ECPSyncRunStatus.Closed);
+            Status = ECPSyncRunStatus.Closed;
             EndDateTime = DateTime.UtcNow;
             _presenterExportProfile.CloseSyncRunProcess();
+            SessionManager.Instance.CurrentProject = null;
+            SessionManager.Instance.CurrentSyncRun = null;
+            Response.Redirect("ProjectList.aspx");
         }
 
         protected void btnExport_Click(object sender, EventArgs e)
@@ -39,16 +52,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MeasurementIds = string.Empty; //TODO: Add Measurement Ids
             _presenterExportProfile.OptimizeProfile();
         }
-        
+
+
         #region IViewExportProfile Members
 
         public int SyncRunId { get; set; }
 
-        public int Status { get; set; }
+        public ECPSyncRunStatus Status { get; set; }
 
         public DateTime EndDateTime { get; set; }
-
-        Entity.ECPSyncRunStatus IViewExportProfile.Status { get; set; }
 
         public int ProjectId { get; set; }
 

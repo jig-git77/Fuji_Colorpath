@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _dictionaryList = "SESSION_DICTIONARYLIST";
         private const string _currentProject = "SESSION_CURRENTPROJECT";
         private const string _currentSyncRun = "SESSION_CURRENTSYNCRUN";
+        private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
         #endregion
 
         #region Singleton
@@ -101,6 +102,22 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_dictionaryList] = value;
+            }
+        }
+
+        public LeftMenuItemLevel CurrentNavigation
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentNavigation] != null)
+                {
+                    return (LeftMenuItemLevel) System.Enum.Parse(typeof (LeftMenuItemLevel), HttpContext.Current.Session[_currentNavigation].ToString());
+                }
+                return LeftMenuItemLevel.Home;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentNavigation] = value;
             }
         }
 

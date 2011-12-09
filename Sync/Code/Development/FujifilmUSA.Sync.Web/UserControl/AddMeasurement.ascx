@@ -74,7 +74,7 @@
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">            
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button"><span>Analyze</span></asp:LinkButton>
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"><span>Analyze</span></asp:LinkButton>
         </div>
     </div>
     <div class="clear">

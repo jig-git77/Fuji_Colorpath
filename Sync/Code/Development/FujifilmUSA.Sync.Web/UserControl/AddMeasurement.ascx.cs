@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //    dynamic data = new[] {
         //        new { MeasurementName = "123456", UploadDateTime = DateTime.Now},
         //         new { MeasurementName = "654231", UploadDateTime = DateTime.Now.AddMinutes(10)}
-                
+
         //    };
         //    //  grdRecentUploadList.DataSource = data;
         //}
@@ -51,12 +51,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //if (SessionManager.Instance.CurrentSyncRun.SyncRunId != null)
             //{
-                this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-                _presentermeasurement.GetMeasurements();
+            this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+            _presentermeasurement.GetMeasurements();
 
-                lvMeasurement.DataSource = this.Measurements;
-                lvMeasurement.DataBind();
-               
+            lvMeasurement.DataSource = this.Measurements;
+            lvMeasurement.DataBind();
+
             //}
         }
         #region IViewMeasurement Mebers
@@ -72,7 +72,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //    _presentermeasurement.DeleteMeasurements();
             //}
         }
+        protected void btnAnalyze_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SyncRunAnalyze.aspx");
+        }
 
-        
     }
 }

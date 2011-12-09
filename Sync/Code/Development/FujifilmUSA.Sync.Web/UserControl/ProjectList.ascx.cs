@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -32,18 +33,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control events
         protected void lbtnProjectName_Click(object sender, EventArgs e)
         {
-            System.Web.UI.WebControls.LinkButton lbtnProjectName = sender as System.Web.UI.WebControls.LinkButton;
+            var lbtnProjectName = sender as LinkButton;
+            if (lbtnProjectName == null) return;
+            
             this.ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"].ToString());
             _presenterprojectlist.GetProjectByProjectId();
             SessionManager.Instance.CurrentProject = GetProjectByProjectId;
             SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
-            if (SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status == Convert.ToInt16(ECPSyncRunStatus.Open))
+
+            if (SessionManager.Instance.CurrentProject.ProjectRuns.Count() == 1)
             {
-                Response.Redirect("AddMeasurement.aspx");
+                Response.Redirect("SyncRunExport.aspx");
             }
             else
             {
-                Response.Redirect("SyncRunAnalyze.aspx");
+                if (SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status == Convert.ToInt16(ECPSyncRunStatus.Open))
+                {
+                    Response.Redirect("AddMeasurement.aspx");
+                }
+                else
+                {
+                    Response.Redirect("SyncRunAnalyze.aspx");
+                }
             }
         }
 
@@ -117,14 +128,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //} 
         #endregion
 
-        protected void grdProjectList_ItemDataBound(object sender, System.Web.UI.WebControls.ListViewItemEventArgs e)
+        protected void grdProjectList_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
             if (e.Item.DataItem != null)
             {
-                Project project = e.Item.DataItem as Project;
+                var project = e.Item.DataItem as Project;
                 if (project != null)
                 {
-                    System.Web.UI.WebControls.Image imgStatus = e.Item.FindControl("imgStatus") as System.Web.UI.WebControls.Image;
+                    var imgStatus = e.Item.FindControl("imgStatus") as Image;
                     if (imgStatus != null)
                     {
                         switch (project.ProjectStatus)
@@ -145,19 +156,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
 
-                    System.Web.UI.WebControls.ImageButton imgbtnDelete = e.Item.FindControl("imgbtnDelete") as System.Web.UI.WebControls.ImageButton;
+                    var imgbtnDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
                     if (imgbtnDelete != null)
                     {
                         imgbtnDelete.Attributes.Add("onclick", "javascript: return ConfirmDeleteProject();");
                     }
 
-                    System.Web.UI.WebControls.LinkButton lbtnProjectName = e.Item.FindControl("lbtnProjectName") as System.Web.UI.WebControls.LinkButton;
+                    var lbtnProjectName = e.Item.FindControl("lbtnProjectName") as LinkButton;
                     if (lbtnProjectName != null)
                     {
                         lbtnProjectName.Attributes.Add("ProjectId", project.ProjectId.ToString());
                     }
 
-                    System.Web.UI.WebControls.ImageButton btnInfo = e.Item.FindControl("btnInfo") as System.Web.UI.WebControls.ImageButton;
+                    var btnInfo = e.Item.FindControl("btnInfo") as ImageButton;
                     if (btnInfo != null)
                     {
                         btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/ProjectInformation.aspx") + "');");
@@ -167,7 +178,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void grdProjectList_ItemCommand(object sender, System.Web.UI.WebControls.ListViewCommandEventArgs e)
+        protected void grdProjectList_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName == "DeleteProject")
             {

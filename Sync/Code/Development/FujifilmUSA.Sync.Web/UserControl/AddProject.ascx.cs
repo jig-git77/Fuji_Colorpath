@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -110,7 +111,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ucStatusbar1.DisplayMessage("Please select DLP.", false);
             //If everything is validate fire the save event
             else
+            {
                 SaveProjectAndMeasurementSetting();
+            }
         }
         #endregion
 
@@ -202,7 +205,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        private int SaveProjectAndMeasurementSetting()
+        private void SaveProjectAndMeasurementSetting()
         {
             ObjProject = new Project();
             ObjMeasurementSetting = new MeasurementSetting();
@@ -246,12 +249,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (InsertProjectAndMeasurementSetting != null)
                 {
                     SessionManager.Instance.CurrentProject = InsertProjectAndMeasurementSetting;
+                    SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
                     Response.Redirect("SyncRunExport.aspx");
-                    return 1;
                 }
             }
-
-            return 0;
         }
 
         #endregion

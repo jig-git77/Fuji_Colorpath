@@ -142,7 +142,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ctrlItem.ItemName = "Home";
             ph.Controls.Add(ctrlItem);
 
-
             if (SessionManager.Instance.CurrentSyncDevice == null) return;
             ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = LeftMenuItemLevel.Device;
@@ -156,7 +155,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ctrlItem.ItemLevel = LeftMenuItemLevel.Project;
             ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
             ph.Controls.Add(ctrlItem);
-
 
             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
             ctrlProjItem.ItemLevel = LeftMenuItemLevel.ProjectSetup;

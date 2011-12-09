@@ -13,5 +13,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
 
         }
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SyncRunExport.aspx");
+        }
     }
 }

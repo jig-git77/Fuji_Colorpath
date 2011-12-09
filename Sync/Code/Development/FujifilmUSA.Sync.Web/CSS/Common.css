@@ -966,6 +966,12 @@ label
     width: 200px;
     text-align: right;
 }
+.active
+{
+    background: #e9e9e9;
+    font-weight: bold;
+}
+
 
 .no_data_found
 {     

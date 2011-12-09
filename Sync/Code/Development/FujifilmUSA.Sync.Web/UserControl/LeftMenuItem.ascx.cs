@@ -13,30 +13,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class LeftMenuItem : System.Web.UI.UserControl
     {
         public LeftMenuItemLevel ItemLevel { get; set; }
-        public string ItemName { get; set; }        
+        public string ItemName { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }        
+
+        }
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
             switch (ItemLevel)
             {
                 case LeftMenuItemLevel.Home:
+                    if (SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Home)
+                        lnkbtn.Attributes.Add("class", "active");
                     imgItem.ImageUrl = "../images/home_icon.png";
                     break;
                 case LeftMenuItemLevel.Device:
+                    if (SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Device)
+                        lnkbtn.Attributes.Add("class", "active");
                     imgItem.ImageUrl = "../images/print_icon.png";
                     break;
                 case LeftMenuItemLevel.Project:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    lnkItem.OnClientClick = "return false";
+                    lnkItem.Enabled = false;
                     break;
             }
-            lnkItem.Text = ItemName;           
-            
+            lnkItem.Text = ItemName;
+
         }
 
         protected void lnkItem_Click(object sender, EventArgs e)
@@ -54,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentSyncRun = null;
                     Response.Redirect("ProjectList.aspx");
                     break;
-            }             
+            }
         }
     }
 }
