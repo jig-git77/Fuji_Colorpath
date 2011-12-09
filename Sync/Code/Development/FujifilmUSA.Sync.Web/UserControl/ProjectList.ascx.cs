@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -35,7 +36,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             this.ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"].ToString());
             _presenterprojectlist.GetProjectByProjectId();
             SessionManager.Instance.CurrentProject = GetProjectByProjectId;
-            Response.Redirect("AddMeasurement.aspx");
+            SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
+            if (SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status == Convert.ToInt16(ECPSyncRunStatus.Open))
+            {
+                Response.Redirect("AddMeasurement.aspx");
+            }
+            else
+            {
+                Response.Redirect("SyncRunAnalyze.aspx");
+            }
         }
 
         #region Telerik grid

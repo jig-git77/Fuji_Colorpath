@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Entity
         public int ProjectTypeId { get; set; }
         public int OutputTypeId { get; set; }
         public DateTime StartDate { get; set; }
+        public int ReferenceChartTypeId { get; set; }
         public List<SyncRun> ProjectRuns { get; set; }
         public ECPSyncRunStatus ProjectStatus { get; set; }
     }

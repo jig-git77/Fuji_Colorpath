@@ -54,13 +54,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 var lnkItem = sender as LinkButton;
                 if(lnkItem != null)
                 {
+                    SessionManager.Instance.CurrentSyncRun = this.CurrentSyncRun;
                     if(lnkItem.ID == "lnkMeasurement")
                     {
                         Response.Redirect("AddMeasurement.aspx");
                     }
                     else if (lnkItem.ID == "lnkAnalyse")
                     {
-                        Response.Redirect("AnalyseMeasurements.aspx");
+                        Response.Redirect("SyncRunAnalyze.aspx");
                     }
                     else if (lnkItem.ID == "lnkExport")
                     {
@@ -84,9 +85,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterLeftMenu.AddProjectSyncRun();
                     SessionManager.Instance.CurrentProject = this.CurrentProject;
                     SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.SingleOrDefault(x=>x.Status == Convert.ToInt16(ECPSyncRunStatus.Open));
+                    Response.Redirect("AddMeasurement.aspx");
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 

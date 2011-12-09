@@ -36,7 +36,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      ExecuteProcedure("CPSync4D.uspInsertMeasuredPatch",
                                                                       new object[]
                                                                           {
-                                                                              patch.MeasurementId,
+                                                                              measurement.MeasurementId,
+                                                                              null,
                                                                               patch.SampleName,
                                                                               patch.CmykC,
                                                                               patch.CmykM,

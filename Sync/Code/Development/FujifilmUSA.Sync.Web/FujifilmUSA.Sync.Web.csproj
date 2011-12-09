@@ -183,6 +183,7 @@
     <Content Include="ProjectInformation.aspx" />
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
+    <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
@@ -194,6 +195,7 @@
     <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
+    <Content Include="UserControl\SyncRunAnalyze.ascx" />
     <Content Include="UserControl\SyncRunExport.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -260,6 +262,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PluginDataService.svc.cs">
       <DependentUpon>PluginDataService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="SyncRunAnalyze.aspx.cs">
+      <DependentUpon>SyncRunAnalyze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SyncRunAnalyze.aspx.designer.cs">
+      <DependentUpon>SyncRunAnalyze.aspx</DependentUpon>
     </Compile>
     <Compile Include="SyncRunExport.aspx.cs">
       <DependentUpon>SyncRunExport.aspx</DependentUpon>
@@ -337,6 +346,13 @@
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.designer.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SyncRunAnalyze.ascx.cs">
+      <DependentUpon>SyncRunAnalyze.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SyncRunAnalyze.ascx.designer.cs">
+      <DependentUpon>SyncRunAnalyze.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\SyncRunExport.ascx.cs">
       <DependentUpon>SyncRunExport.ascx</DependentUpon>

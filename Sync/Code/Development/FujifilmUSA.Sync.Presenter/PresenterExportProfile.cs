@@ -20,15 +20,15 @@ namespace FujifilmUSA.Sync.Presenter
 
         public Project CloseSyncRunProcess()
         {
-            var task = (IProjectBussiness) new BusinessFactory<IProjectBussiness>().CreateObject();
-            task.CloseSyncRun(_viewExportProfile.SyncRunId,Convert.ToInt32(_viewExportProfile.Status), _viewExportProfile.EndDateTime);
-
+            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            task.CloseSyncRun(_viewExportProfile.SyncRunId, Convert.ToInt32(_viewExportProfile.Status), _viewExportProfile.EndDateTime);
             return task.GetProjectByProjectId(_viewExportProfile.ProjectId);
         }
 
         public void OptimizeProfile()
         {
             var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
+            _viewExportProfile.MeasurementIds = string.Join(",", task.GetMeasurement(_viewExportProfile.SyncRunId).Select(x => x.MeasurementId).ToArray());
             task.OptimizeDeviceLinkProfile(_viewExportProfile.MeasurementIds, _viewExportProfile.SyncRunId, _viewExportProfile.ProjectId);
         }
     }

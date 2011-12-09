@@ -127,7 +127,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
                                         ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
                                         OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
-                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus")
+                                        ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                        ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
                                     }).FirstOrDefault();
 
                 objProject.ProjectRuns = dsProject.Tables[1].AsEnumerable().

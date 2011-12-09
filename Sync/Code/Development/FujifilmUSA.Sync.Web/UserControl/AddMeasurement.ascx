@@ -336,7 +336,7 @@
         var MeasurementDateTime = dt1.toMSJSON();
         var SyncRunID = jQuery("input[id$=hdSyncRunID]").val();
         var MeasurementTypeID = jQuery("input[id$=hdMeasurementTypeID]").val();
-        var MsmtName = jQuery("#txtMeasurementName").val();
+        var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
         var obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
 
         //Make ajax request...
