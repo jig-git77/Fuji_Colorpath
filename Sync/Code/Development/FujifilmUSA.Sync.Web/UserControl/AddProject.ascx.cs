@@ -40,8 +40,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindReferenceChartType();
             }            
         }
-        
-        protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
+
+        protected void grdDLP_ItemDataBound(object sender, System.Web.UI.WebControls.ListViewItemEventArgs e)
         {
             if (e.Item.DataItem != null)
             {
@@ -54,14 +54,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
+        
+        //protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
+        //{
+        //    if (e.Item.DataItem != null)
+        //    {
+        //        DeviceLinkProfile dlp = e.Item.DataItem as DeviceLinkProfile;
+
+        //        System.Web.UI.WebControls.RadioButton rbtnDeviceLinkProfileId = e.Item.FindControl("rbtnDeviceLinkProfileId") as System.Web.UI.WebControls.RadioButton;
+        //        if (rbtnDeviceLinkProfileId != null)
+        //        {
+        //            rbtnDeviceLinkProfileId.Attributes.Add("onclick", "javascript: return SelectDeviceLinkProfileId(" + dlp.DeviceLinkProfileId + ");");
+        //        }
+        //    }
+        //}
 
         protected void grdDLP_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            BindDeviceLinkProfile();
+            //BindDeviceLinkProfile();
         }
         #endregion
 
         #region Control Events
+        protected void cmbDestinationProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
+            {
+                BindDeviceLinkProfile();
+            }
+        }
+
+        protected void cmbSourceProfile_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
+            {
+                BindDeviceLinkProfile();
+            }
+        }
         protected void cmbDeviceType_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             BindReferenceChartType();
@@ -116,12 +145,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue) && !string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
             {
                 this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
-                this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);
-                _presenteraddproject.GetDeviceLinkProfileList();
-                grdDLP.DataSource = GetDeviceLinkProfileList;
+                this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);               
             }
+            else
+            {
+                this.SourceProfileId = 0;
+                this.DestinationProfileId = 0;
+            }
+            _presenteraddproject.GetDeviceLinkProfileList();
+            grdDLP.DataSource = GetDeviceLinkProfileList;
+            grdDLP.DataBind();
+            RefreshProjectId();
         }
-
+        private void RefreshProjectId()
+        {
+            hdnDeviceLinkProfileId.Value = "0";
+        }
         #region Measurement Setup - Methods
         private void BindMeasurementIlluminant()
         {
@@ -185,7 +224,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
 
 
-                ObjMeasurementSetting.UsePlugin = chkUseMeasurementPlugin.Checked;
+                ObjMeasurementSetting.UsePlugin = true;//static //chkUseMeasurementPlugin.Checked;
                 ObjMeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
                 ObjMeasurementSetting.Illuminant = (int)(EMeasurementIlluminant)Enum.Parse(typeof(EMeasurementIlluminant), cmbIlluminant.SelectedValue);
                 ObjMeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);

@@ -66,7 +66,7 @@
                 </table>
             </LayoutTemplate>
             <ItemTemplate>
-                <tr class="blue">
+                <tr class="purpal">
                     <td align="left"><asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" OnClick="lbtnProjectName_Click" /></td>
                     <td align="center"><asp:ImageButton ID="btnInfo" runat="server" ToolTip="Information" AlternateText="Information" ImageUrl="../Images/info_icon.png" /></td>
                     <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("ProjectId") %>' /></td>

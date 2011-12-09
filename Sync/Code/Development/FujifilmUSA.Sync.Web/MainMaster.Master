@@ -10,6 +10,7 @@
     <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />
     <script src="Javascript/html5.js" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
