@@ -716,6 +716,17 @@ label
 {
     float: right;
 }
+.calibutton
+{
+    background: url(../Images/contant_box_haed_bt_left.png) no-repeat top left;
+    float: right;
+    color: #000000;
+    text-align: center;
+    font-size: 13px;
+    margin: 5px 4px 0 0;
+    line-height: 24px;
+    padding-left: 8px;
+}
 .tabcontant .combopart label
 {
     float: left;

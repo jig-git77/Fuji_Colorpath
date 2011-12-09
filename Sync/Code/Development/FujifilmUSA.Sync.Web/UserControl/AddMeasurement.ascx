@@ -102,20 +102,19 @@
             </telerik:RadTextBox>--%>
         </div>
         <div class="float_r">
-            <span>
-                <input class="green_bt" type="button" id="btnCalibrate" value="Calibrate" /></span>
+            <span><input  type="button" id="btnCalibrate" value="Calibrate" /></span>
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
         <div class="clear">
         </div>
         <div class="float_l">
-            <input class="green_bt" type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
+            <input type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
             <%--<telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
             </telerik:RadButton>--%>
         </div>
         <div class="float_r">
-            <input class="green_bt" type="button" id="btnCancelMeasurement" value="Cancel Measurement" />
+            <input type="button" id="btnCancelMeasurement" value="Cancel Measurement" />
             <%--<telerik:RadButton ID="btnCancelMeasurement" runat="server" Text="Cancel Measurement">
             </telerik:RadButton>--%>
         </div>
@@ -241,6 +240,8 @@
                     confirm("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
+               
+
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
