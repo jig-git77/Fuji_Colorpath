@@ -103,19 +103,19 @@
             </telerik:RadTextBox>--%>
         </div>
         <div class="float_r">
-            <input class="green_bt" id="btnCalibrate" value="Calibrate" />
+            <span><input class="green_bt" type="button" id="btnCalibrate" value="Calibrate" /></span>
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
         <div class="clear">
         </div>
         <div class="float_l">
-            <input class="green_bt" id="btnMeasureAndUploadChart" value="Measure / Upload" />
+            <input class="green_bt" type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
             <%--<telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
             </telerik:RadButton>--%>
         </div>
         <div class="float_r">
-            <input class="green_bt" id="btnCancelMeasurement" value="Cancel Measurement" />
+            <input class="green_bt" type="button" id="btnCancelMeasurement" value="Cancel Measurement" />
             <%--<telerik:RadButton ID="btnCancelMeasurement" runat="server" Text="Cancel Measurement">
             </telerik:RadButton>--%>
         </div>
@@ -178,10 +178,9 @@
     </div>
 </div>
 <p>
-    <asp:HiddenField ID="hdPressRunID" runat="server" />
-    <asp:HiddenField ID="hdProjectTypeID" runat="server" />
+    <asp:HiddenField ID="hdSyncRunID" runat="server" />
     <asp:HiddenField ID="hdProjectID" runat="server" />
-    <asp:HiddenField ID="hdChartTypeID" runat="server" />
+    <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
 </p>
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
@@ -195,7 +194,6 @@
         load();   //first you have to load the plugin
         GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
         ListDevices();
-        alert(g_Chart["RefBase"]);
     }
     jQuery(document).ready(function () {
         jQuery("[id*='btnCalibrate']").click(function () {
@@ -210,11 +208,9 @@
                     return false;
                 }
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
-                return false;
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
-                return false;
                 //call grid click event...
             }
         });
@@ -224,7 +220,6 @@
             jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             OnCancel();
             ListDevices();
-            return false;
         });
         jQuery("[id*='btnRefresh']").click(function () {
             refreshTry++;
@@ -232,7 +227,6 @@
             if (refreshTry == 2) {
                 jQuery("[id*='lblMessage']").html(jQuery("[id*='lblMessage']").text() + '<br>Hint: Having problem with plugins? Try to close and re-open your browser!</br>');
             }
-            return false;
         });
 
         //        alert(g_Chart["RefBase"]);
@@ -340,11 +334,10 @@
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
         var MeasurementDateTime = dt1.toMSJSON();
-        var PressRunID = jQuery("input[id$=hiddenPressRunID]").val();
-        var ProjectTypeID = jQuery("input[id$=hiddenProjectTypeID]").val();
-        var ChartTypeID = jQuery("input[id$=hdChartTypeID]").val();
+        var SyncRunID = jQuery("input[id$=hdSyncRunID]").val();
+        var MeasurementTypeID = jQuery("input[id$=hdMeasurementTypeID]").val();
         var MsmtName = jQuery("#txtMeasurementName").val();
-        var obj = { objMeasurement: { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, PressRunID: PressRunID, ChartTypeID: ChartTypeID, ProjectTypeID: ProjectTypeID, MeasuredPatches: MeasuredPatches} };
+        var obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
 
         //Make ajax request...
         jQuery.ajax({
@@ -367,19 +360,14 @@
         },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                //alert(XMLHttpRequest.responseText);
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                 confirm("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-                //jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, 20000);
             }
         });
 
         /**clear the array **/
         OnCancel();
-        //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
-        //ListDevices();
         refreshCanvas();
-        //jQuery("[id*='btnUploadData']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
     }
     if (window.addEventListener) // W3C standard

@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
             //Apply security on device serial no.
             chartData.ActivationKey =
-                Utilities.GetMd5Hash(DateTime.Now.Year + DateTime.Now.DayOfYear + "+yg92s+" + chartData.MeasureDeviceSrNo);
+                Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
             chartData.DeviceSetting = new DeviceSetting();
 
             chartData.ChartPatches = dsReferenceChart.Tables[1].AsEnumerable().

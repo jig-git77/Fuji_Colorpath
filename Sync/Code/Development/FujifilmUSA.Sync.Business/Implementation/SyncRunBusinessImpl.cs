@@ -21,14 +21,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 ExecuteProcedure("CPSync4D.uspInsertMeasurement",
                                  new List<Parameters>()
                                      {
-                                         new Parameters() {ParameterName = "@SyncRunID", Value = measurement.SyncRunId},
-                                         new Parameters() {ParameterName = "@MeasurementDate", Value = measurement.MeasurementDate},
-                                         new Parameters() {ParameterName = "@MeasurementName", Value = measurement.MeasurementName},
-                                         new Parameters() {ParameterName = "@MeasurementTypeID", Value = measurement.MeasurementTypeId},
+                                         new Parameters() {ParameterName = "@SyncRunID", Size = 0, Value = measurement.SyncRunId},
+                                         new Parameters() {ParameterName = "@MeasurementDate", Size = 0, Value = measurement.MeasurementDate},
+                                         new Parameters() {ParameterName = "@MeasurementName", Size = 0, Value = measurement.MeasurementName},
+                                         new Parameters() {ParameterName = "@MeasurementTypeID", Size = 0, Value = measurement.MeasurementTypeId},
                                      },
                                  new List<Parameters>()
                                      {
-                                         new Parameters() {ParameterName = "@MeasurementID"},
+                                         new Parameters() {ParameterName = "@MeasurementID", Size = 4},
                                      });
 
             measurement.MeasurementId = System.Convert.ToInt32(outParams[0].Value);

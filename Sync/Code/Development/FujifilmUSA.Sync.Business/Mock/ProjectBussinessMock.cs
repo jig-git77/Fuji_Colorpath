@@ -27,7 +27,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Project();
         }
 
-        public void CloseSyncRunProcess(int syncRunId, int status, System.DateTime endDateTime)
+        public void CloseSyncRun(int syncRunId, int status, System.DateTime endDateTime)
+        {
+            //Do Nothing...
+        }
+
+        public void CreateSyncRun(int projectId, int status, System.DateTime createdDateTime)
         {
             //Do Nothing...
         }

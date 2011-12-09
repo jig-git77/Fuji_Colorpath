@@ -39,30 +39,30 @@ namespace FujifilmUSA.Sync.Entity
         }
 
 
-        public IlluminantType Illuminant { get; set; }
-        public DensityType DensityStandard { get; set; }
-        public ObserverType Observer { get; set; }
-        public IlluminationMode Mode { get; set; }
-        
-        public string IlluminantString
+        private IlluminantType _illuminant;
+        private DensityType _densityStandard;
+        private ObserverType _observer;
+        private IlluminationMode _mode;
+
+        public string Illuminant
         {
-            get { return Enum.GetName(typeof(IlluminantType), this.Illuminant); }
-            set { this.Illuminant = (IlluminantType)Enum.Parse(typeof(IlluminantType), value); }
+            get { return Enum.GetName(typeof(IlluminantType), this._illuminant); }
+            set { this._illuminant = (IlluminantType)Enum.Parse(typeof(IlluminantType), value); }
         }
-        public string DensityTypeString
+        public string DensityStandard
         {
-            get { return Enum.GetName(typeof(DensityType), this.DensityStandard); }
-            set { this.DensityStandard = (DensityType)Enum.Parse(typeof(DensityType), value); }
+            get { return Enum.GetName(typeof(DensityType), this._densityStandard); }
+            set { this._densityStandard = (DensityType)Enum.Parse(typeof(DensityType), value); }
         }
-        public string ObserverAngle
+        public string Observer
         {
-            get { return Enum.GetName(typeof(ObserverType), this.Observer); }
-            set { this.Observer = (ObserverType)Enum.Parse(typeof(DensityType), value); }
+            get { return Enum.GetName(typeof(ObserverType), this._observer); }
+            set { this._observer = (ObserverType)Enum.Parse(typeof(DensityType), value); }
         }
-        public string IlluminationModeString
+        public string Mode
         {
-            get { return Enum.GetName(typeof(IlluminationMode), this.Mode); }
-            set { this.Mode = (IlluminationMode)Enum.Parse(typeof(IlluminationMode), value); }
+            get { return Enum.GetName(typeof(IlluminationMode), this._mode); }
+            set { this._mode = (IlluminationMode)Enum.Parse(typeof(IlluminationMode), value); }
         }
 
 
@@ -71,10 +71,10 @@ namespace FujifilmUSA.Sync.Entity
         /// </summary>
         public DeviceSetting()
         {
-            this.Illuminant = IlluminantType.D50;
-            this.DensityStandard = DensityType.ANSIT;
-            this.Observer = ObserverType.TwoDegree;
-            this.Mode = IlluminationMode.UV;
+            this._illuminant = IlluminantType.D50;
+            this._densityStandard = DensityType.ANSIT;
+            this._observer = ObserverType.TwoDegree;
+            this._mode = IlluminationMode.UV;
         }
 
     }

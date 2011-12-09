@@ -76,22 +76,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid grdRecentUploadList;
         
         /// <summary>
-        /// hdPressRunID control.
+        /// hdSyncRunID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdPressRunID;
-        
-        /// <summary>
-        /// hdProjectTypeID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdProjectTypeID;
+        protected global::System.Web.UI.WebControls.HiddenField hdSyncRunID;
         
         /// <summary>
         /// hdProjectID control.
@@ -103,12 +94,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.HiddenField hdProjectID;
         
         /// <summary>
-        /// hdChartTypeID control.
+        /// hdMeasurementTypeID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdChartTypeID;
+        protected global::System.Web.UI.WebControls.HiddenField hdMeasurementTypeID;
     }
 }

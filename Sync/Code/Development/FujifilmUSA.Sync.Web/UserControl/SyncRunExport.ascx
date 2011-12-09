@@ -9,6 +9,8 @@
         <div class="Information_divAnalyze">
             <telerik:RadButton ID="btnCloseRun" Text="Close Run" runat="server" OnClick="btnCloseRun_Click">
             </telerik:RadButton>
+            <telerik:RadButton ID="btnExport" Text="Export" runat="server" OnClick="btnExport_Click">
+            </telerik:RadButton>
         </div>
     </div>
     <div class="clear">

@@ -32,14 +32,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterExportProfile.CloseSyncRunProcess();
         }
 
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+            MeasurementIds = string.Empty; //TODO: Add Measurement Ids
+            _presenterExportProfile.OptimizeProfile();
+        }
+        
         #region IViewExportProfile Members
 
         public int SyncRunId { get; set; }
 
-        public int Status{ get; set; }
-        
-        public DateTime EndDateTime{ get; set; }
-        
+        public int Status { get; set; }
+
+        public DateTime EndDateTime { get; set; }
+
+        Entity.ECPSyncRunStatus IViewExportProfile.Status { get; set; }
+
+        public int ProjectId { get; set; }
+
+        public string MeasurementIds { get; set; }
+
         #endregion
     }
 }

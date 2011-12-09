@@ -50,7 +50,6 @@ function presentCalibrateDone(scanner, msg, final) {
 //  a callback to present instructions to the user, and a callback
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
-    alert('hi');
     var myQuery = new Object();
     myQuery["CALIBRATEINSTRUCTIONS"] = "<B>Please place i1Pro in the calibration cradle and press the i1 trigger.</B>";
     myQuery["CALIBRATEACKNOWLEDGED"] = "<B>Calibration In Progress.</B>";
@@ -221,22 +220,22 @@ function presentScanDonei1(scanner, mychart, final) {
         next = idx + 1;
     }
 
-    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    var x = 0;
-    var y = idx;
+//    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+//    var x = 0;
+//    var y = idx;
 
-    for (var cursample = 0; cursample < results.length; cursample++) {
-        var srgb = results[cursample]["sRGB"];
-        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        jg.setColor(rgbx);
-        jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
-        x++;
-        if (x >= mychart["NumberOfColumns"]) {
-            x = 0;
-            y++;
-        }
-    }
-    jg.paint();
+//    for (var cursample = 0; cursample < results.length; cursample++) {
+//        var srgb = results[cursample]["sRGB"];
+//        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+//        jg.setColor(rgbx);
+//        jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
+//        x++;
+//        if (x >= mychart["NumberOfColumns"]) {
+//            x = 0;
+//            y++;
+//        }
+//    }
+//    jg.paint();
 
     //
     // Now ask for the next strip, if we were not at the end
@@ -265,34 +264,34 @@ function presentScanDonei1(scanner, mychart, final) {
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
 
-        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-        var x = 0;
-        var y = 0;
-        for (cursample = 0; cursample < mychart["RefBase"].length; cursample++) {
-            var rgbx = mychart["RefBase"][cursample]["HTMLColor"];
-            jg.setColor(rgbx);
-            jg.fillRect(x * 20, y * 20, 20, 10);
-            x++;
-            if (x >= mychart["NumberOfColumns"]) {
-                x = 0;
-                y++;
-            }
-        }
-        jg.paint();
-        x = 0;
-        y = 0;
-        for (var cursample = 0; cursample < g_Chart["Result"].length; cursample++) {
-            var srgb = g_Chart["Result"][cursample]["sRGB"];
-            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-            jg.setColor(rgbx);
-            jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
-            x++;
-            if (x >= mychart["NumberOfColumns"]) {
-                x = 0;
-                y++;
-            }
-        }
-        jg.paint();
+//        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+//        var x = 0;
+//        var y = 0;
+//        for (cursample = 0; cursample < mychart["RefBase"].length; cursample++) {
+//            var rgbx = mychart["RefBase"][cursample]["HTMLColor"];
+//            jg.setColor(rgbx);
+//            jg.fillRect(x * 20, y * 20, 20, 10);
+//            x++;
+//            if (x >= mychart["NumberOfColumns"]) {
+//                x = 0;
+//                y++;
+//            }
+//        }
+//        jg.paint();
+//        x = 0;
+//        y = 0;
+//        for (var cursample = 0; cursample < g_Chart["Result"].length; cursample++) {
+//            var srgb = g_Chart["Result"][cursample]["sRGB"];
+//            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+//            jg.setColor(rgbx);
+//            jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
+//            x++;
+//            if (x >= mychart["NumberOfColumns"]) {
+//                x = 0;
+//                y++;
+//            }
+//        }
+//        jg.paint();
     }
 }
 function presentProgressi1(scanner, mychart) {
@@ -309,21 +308,21 @@ function presentProgressi1(scanner, mychart) {
     jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
     //presentQuery(prog);
 
-    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    var cursample = 0;
-    var x = 0;
-    var y = 0;
-    for (cursample = 0; cursample < samples; cursample++) {
-        var srgb = result[cursample]["sRGB"];
-        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        jg.setColor(rgbx);
-        jg.fillRect(x * 20, (y * 20) + 10, 20, 20);
-        x++;
-        if (x >= width) {
-            x = 0;
-            y++;
-        }
-    }
-    jg.paint();
+//    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+//    var cursample = 0;
+//    var x = 0;
+//    var y = 0;
+//    for (cursample = 0; cursample < samples; cursample++) {
+//        var srgb = result[cursample]["sRGB"];
+//        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+//        jg.setColor(rgbx);
+//        jg.fillRect(x * 20, (y * 20) + 10, 20, 20);
+//        x++;
+//        if (x >= width) {
+//            x = 0;
+//            y++;
+//        }
+//    }
+//    jg.paint();
     return "OK";
 }

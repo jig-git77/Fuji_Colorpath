@@ -8,7 +8,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewExportProfile
     {
         int SyncRunId { get; set; }
-        int Status { get; set; }
+        Entity.ECPSyncRunStatus Status { get; set; }
         DateTime EndDateTime { get; set; }
+        int ProjectId { get; set;}
+        string MeasurementIds { get; set; }
     }
 }

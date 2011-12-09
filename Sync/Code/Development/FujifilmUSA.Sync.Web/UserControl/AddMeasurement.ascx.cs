@@ -17,9 +17,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if(!IsPostBack)
             {
                 hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                hdProjectTypeID.Value = "1";
-                hdPressRunID.Value = "1";
-                hdChartTypeID.Value = "5";
+                hdSyncRunID.Value = "1";
+                hdMeasurementTypeID.Value = "5";
             }
         }
 

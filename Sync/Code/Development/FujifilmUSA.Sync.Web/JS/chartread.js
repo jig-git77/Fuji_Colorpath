@@ -259,21 +259,21 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-        //alert(jg.style);
-        var x = 0;
-        var y = 0;
-        for (var cursample = 0; cursample < chart["RefBase"].length; cursample++) {
-            var rgbx = chart["RefBase"][cursample]["HTMLColor"];
-            jg.setColor(rgbx);
-            jg.fillRect(x * 20, y * 20, 20, 10);
-            x++;
-            if (x >= chart["NumberOfColumns"]) {
-                x = 0;
-                y++;
-            }
-        }
-        jg.paint();
+//        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+//        //alert(jg.style);
+//        var x = 0;
+//        var y = 0;
+//        for (var cursample = 0; cursample < chart["RefBase"].length; cursample++) {
+//            var rgbx = chart["RefBase"][cursample]["HTMLColor"];
+//            jg.setColor(rgbx);
+//            jg.fillRect(x * 20, y * 20, 20, 10);
+//            x++;
+//            if (x >= chart["NumberOfColumns"]) {
+//                x = 0;
+//                y++;
+//            }
+//        }
+//        jg.paint();
     }
 }
 
