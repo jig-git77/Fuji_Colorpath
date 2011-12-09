@@ -280,7 +280,8 @@ label
 {
     background: url(../Images/sidebar_box_bg.png) repeat-y top left;
     width: 187px;
-    height: 100%;
+    min-height: 780px;
+    
 }
 /***Contant**/
 #contant
