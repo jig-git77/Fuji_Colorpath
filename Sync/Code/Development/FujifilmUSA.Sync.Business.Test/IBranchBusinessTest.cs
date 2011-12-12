@@ -3,11 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Implementation;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Business.Test
 {
-    
-    
     /// <summary>
     ///This is a test class for IBranchBusinessTest and is intended
     ///to contain all IBranchBusinessTest Unit Tests
@@ -68,6 +67,7 @@ namespace FujifilmUSA.Sync.Business.Test
 
         internal virtual IBranchBusiness CreateIBranchBusiness()
         {
+
             // TODO: Instantiate an appropriate concrete class.
             IBranchBusiness target = new BranchBusinessImpl();
             return target;
@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Business.Test
             Dictionary<int, string> actual;
             actual = target.GetBranchList(CompanyId);
             Assert.IsTrue(actual != null);
-            
+
         }
 
         /// <summary>

@@ -41,10 +41,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkMeasurement.Visible = false;
                         lnkAnalyse.Visible = false;
                     }
-                    if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
-                    {
-                        lnkMeasurement.Visible = false;
-                    }
+                    //if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
+                    //{
+                    //    lnkMeasurement.Visible = false;
+                    //}
                     ulSyncSubMenu.Visible = true;
                     break;
                 case LeftMenuItemLevel.NewSyncRun:

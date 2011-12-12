@@ -25,13 +25,6 @@ namespace FujifilmUSA.Sync.Presenter
             return task.GetProjectByProjectId(_viewExportProfile.ProjectId);
         }
 
-        public void OptimizeProfile()
-        {
-            var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
-            _viewExportProfile.MeasurementIds = string.Join(",", task.GetMeasurement(_viewExportProfile.SyncRunId).Select(x => x.MeasurementId).ToArray());
-            task.OptimizeDeviceLinkProfile(_viewExportProfile.MeasurementIds, _viewExportProfile.SyncRunId, _viewExportProfile.ProjectId);
-        }
-
         public void GetIccProfileBySyncRunId()
         {
             var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();

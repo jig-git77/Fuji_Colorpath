@@ -12,7 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         ECPSyncRunStatus Status { get; set; }
         DateTime EndDateTime { get; set; }
         int ProjectId { get; set;}
-        string MeasurementIds { get; set; }
         byte[] IccProfile { get; set; }
     }
 }
