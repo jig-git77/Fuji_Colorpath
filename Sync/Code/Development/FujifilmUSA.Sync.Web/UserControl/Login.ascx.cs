@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Login : System.Web.UI.UserControl , IViewTaskeroUser
     {
-
+        
         
         #region "Declaration"
         private PresenterTaskeroUser _presentertaskerouser;        
