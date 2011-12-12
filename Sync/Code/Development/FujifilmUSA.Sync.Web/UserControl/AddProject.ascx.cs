@@ -23,7 +23,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
+            SessionManager.CheckLogin();           
+
             if (!IsPostBack)
             {
                 BindOutputType();
@@ -99,16 +100,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 
+            //Project name is required field
+            if(string.IsNullOrEmpty(txtProjectName.Text.Trim()))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_ProjectName_Required"), false);
+            }
             //Validate source profile
-            if (string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
-                ucStatusbar1.DisplayMessage("Please select source profile.", false);
+            else if (string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_SourceProfile_Required"), false);
             //Validate destination profile
             else if (string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
-                ucStatusbar1.DisplayMessage("Please select destination profile.", false);
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_DestinationProfile_Required"), false);
             //Validate the selected DLP
             else if (hdnDeviceLinkProfileId.Value == "0")
-                ucStatusbar1.DisplayMessage("Please select DLP.", false);
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_DLP_Required"), false);
             //If everything is validate fire the save event
             else
             {

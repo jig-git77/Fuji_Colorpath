@@ -30,7 +30,7 @@
     <div class="head">    
         <h1>
             Add Project</h1>        
-        <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button" ValidationGroup="SaveProject"
+        <asp:LinkButton ID="lbtnProjectSave" runat="server" CssClass="button" 
             onclick="lbtnProjectSave_Click">
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
@@ -46,8 +46,8 @@
                     :
                 </td>
                 <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px" ValidationGroup="SaveProject">
-                    </telerik:RadTextBox><asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>
+                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
+                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
                 <td class="float_right">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>

@@ -73,7 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    ucStatusbar1.DisplayMessage("Invalid login entered.", false);    
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);    
                 }
             }
             catch (Exception ex)

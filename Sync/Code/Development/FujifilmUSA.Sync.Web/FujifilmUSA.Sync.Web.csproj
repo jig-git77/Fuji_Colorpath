@@ -217,6 +217,11 @@
     <Compile Include="AddProject.aspx.designer.cs">
       <DependentUpon>AddProject.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\ResourceMessages.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -380,7 +385,12 @@
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ResourceMessages.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ResourceMessages.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="MainMaster.Master" />
   </ItemGroup>

@@ -65,6 +65,7 @@
                 </tbody>
                 </table>
             </LayoutTemplate>
+            <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
                     <td align="left"><asp:LinkButton ID="lbtnProjectName" runat="server" Text='<%# Eval("ProjectName") %>' ForeColor="Blue" Font-Underline="true" OnClick="lbtnProjectName_Click" /></td>
