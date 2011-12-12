@@ -8,6 +8,37 @@ namespace FujifilmUSA.Sync.Common
     public class Utilities
     {
         #region DownloadFile
+        /// <summary>
+        /// FileContent As Byte Array (Do not save on disk)
+        /// </summary>
+        /// <param name="fileContent">Content of the File as byte array</param>
+        /// <param name="FileName">FileName</param>
+        public static void DownloadFile(byte[] fileContent, string FileName)
+        {
+            try
+            {
+                //========== Download File ==========//
+                byte[] data = fileContent;
+
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.ClearHeaders();
+                System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                //Content Disposition forces file download instead of opening in the browser
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
+                System.Web.HttpContext.Current.Response.BinaryWrite(data);
+                try
+                {
+                    System.Web.HttpContext.Current.Response.End();
+                }
+                catch
+                {
+                    //do nothing for thread abort exception
+                }
+            }
+            catch (Exception Exc)
+            { string str = Exc.Message; }
+        }
+
         public static void DownlaodFile(string FolderPath, string FileName, string ShowOnDialogName)
         {
             try

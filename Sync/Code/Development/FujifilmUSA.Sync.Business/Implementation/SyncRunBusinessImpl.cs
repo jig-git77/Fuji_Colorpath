@@ -174,6 +174,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return masterSyncRunId;
         }
 
+
+        public byte[] GetIccProfileBySyncRunId(int syncRunId)
+        {
+            byte[] iccProfile = null;
+
+            var dsSyncRunIccProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetICCProfile]", new object[] { syncRunId });
+
+            iccProfile = dsSyncRunIccProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "ICCProfile")).FirstOrDefault();
+
+
+            return iccProfile;
+        }
+
         #endregion
     }
 }

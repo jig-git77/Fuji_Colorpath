@@ -28,6 +28,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+
+        public byte[] GetIccProfileBySyncRunId(int syncRunId)
+        {
+            return null;
+        }
+
         #endregion
     }
 }

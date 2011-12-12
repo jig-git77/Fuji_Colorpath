@@ -47,25 +47,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnExport_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+        //    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+        //    SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+        //    MeasurementIds = string.Empty; //TODO: Add Measurement Ids
+        //    _presenterExportProfile.OptimizeProfile();
+
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-            MeasurementIds = string.Empty; //TODO: Add Measurement Ids
-            _presenterExportProfile.OptimizeProfile();
+            _presenterExportProfile.GetIccProfileBySyncRunId();
+            //Prompt for download file
+            if (IccProfile != null && IccProfile.Length > 0)
+                FujifilmUSA.Sync.Common.Utilities.DownloadFile(IccProfile,"Profile.icc");
+            
         }
 
 
         #region IViewExportProfile Members
-
         public int SyncRunId { get; set; }
-
         public ECPSyncRunStatus Status { get; set; }
-
         public DateTime EndDateTime { get; set; }
-
         public int ProjectId { get; set; }
-
         public string MeasurementIds { get; set; }
-
+        public byte[] IccProfile { get; set; }
         #endregion
     }
 }
