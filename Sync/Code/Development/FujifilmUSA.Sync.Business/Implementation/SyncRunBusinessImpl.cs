@@ -174,7 +174,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return masterSyncRunId;
         }
 
-
         public byte[] GetIccProfileBySyncRunId(int syncRunId)
         {
             byte[] iccProfile = null;

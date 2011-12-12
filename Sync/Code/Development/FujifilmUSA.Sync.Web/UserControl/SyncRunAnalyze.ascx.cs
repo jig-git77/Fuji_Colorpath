@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
             MeasurementIds = string.Empty; //TODO: Add Measurement Ids
             _presenterSyncRunAnalyze.OptimizeProfile();
+            Response.Redirect("SyncRunExport.aspx");
         }
 
         #region IViewSyncRunAnalyze Members
