@@ -13,7 +13,7 @@
             </telerik:RadButton>--%>
             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" CssClass="button">
                 <span>
-                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
+                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/export.png" />
                     Export</span>
             </asp:LinkButton>
         </div>
