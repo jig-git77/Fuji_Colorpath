@@ -73,8 +73,12 @@
     <div class="head">
         <h1>
             Add Measurement</h1>
-        <div class="Information_divAnalyze">            
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"><span>Analyze</span></asp:LinkButton>
+        <div class="Information_divAnalyze">
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click">
+                <span>
+                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
+                    Analyze</span>
+            </asp:LinkButton>
         </div>
     </div>
     <div class="clear">
@@ -102,7 +106,8 @@
             </telerik:RadTextBox>--%>
         </div>
         <div class="float_r">
-            <span><input  type="button" id="btnCalibrate" value="Calibrate" /></span>
+            <span>
+                <input type="button" id="btnCalibrate" value="Calibrate" /></span>
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
@@ -156,31 +161,47 @@
             </telerik:RadGrid>--%>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />                   
-                   <asp:ListView ID="lvMeasurement" runat="server" 
-                        ItemPlaceholderID="phItemPlaceholder" onitemcommand="lvMeasurement_ItemCommand">
+                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />
+                    <asp:ListView ID="lvMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder"
+                        OnItemCommand="lvMeasurement_ItemCommand">
                         <LayoutTemplate>
                             <table border="0" cellspacing="0" cellpadding="0" class="recent_upload">
-                              <tr>
-                                <th scope="col">Measurement Name</th>
-                                <th scope="col">Upload Date Time</th>
-                                <th scope="col">Delete</th>
-                              </tr>
-                              <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
+                                <tr>
+                                    <th scope="col">
+                                        Measurement Name
+                                    </th>
+                                    <th scope="col">
+                                        Upload Date Time
+                                    </th>
+                                    <th scope="col">
+                                        Delete
+                                    </th>
+                                </tr>
+                                <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
                             </table>
                         </LayoutTemplate>
-                        <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
+                        <EmptyDataTemplate>
+                            <div class="no_data_found">
+                                No records available</div>
+                        </EmptyDataTemplate>
                         <ItemTemplate>
                             <tr>
-                                <td align="center"><asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label></td> 
-                                <td align="center"><asp:Label ID="lblMeasurementDate" runat="server" Text=' <%# Eval("MeasurementDate").ToString().Replace(":000", " ") %>'></asp:Label></td>
-                                <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' /></td>
+                                <td align="center">
+                                    <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
+                                </td>
+                                <td align="center">
+                                    <asp:Label ID="lblMeasurementDate" runat="server" Text=' <%# Eval("MeasurementDate").ToString().Replace(":000", " ") %>'></asp:Label>
+                                </td>
+                                <td align="center">
+                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
+                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' />
+                                </td>
                             </tr>
                         </ItemTemplate>
                     </asp:ListView>
                 </ContentTemplate>
             </asp:UpdatePanel>
-           <%-- <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
+            <%-- <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
                 DisplayAfter="0">
                 <ProgressTemplate>
                     <div id="DIV_Progress1" runat="server" class="PROGRESS" align="center">
@@ -240,7 +261,7 @@
                     confirm("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
-               
+
 
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }

@@ -24,7 +24,7 @@
                 onfocus="javascript:focusControl(this,'Username');" Text="Username"></asp:TextBox>
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
                 onfocus="javascript:focusControl(this,'Password');" Text="Password" TextMode="Password"></asp:TextBox>
-            <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text="Remember me!" />
+            <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text=" Remember me!"/>
             <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" />
         </div>
         <div class="clear">
@@ -36,7 +36,7 @@
 <script language="javascript">
     jQuery(document).ready(function () {
         if (jQuery("[id*='txtPassword']").val() == '') {
-            jQuery("[id*='txtPassword']").val('Password');
+            jQuery("[id*='txtPassword']").val('Password'); 
         }
     });   
 </script>
