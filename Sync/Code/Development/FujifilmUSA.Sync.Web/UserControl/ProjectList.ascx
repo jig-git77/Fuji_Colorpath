@@ -2,7 +2,7 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProductList" %>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
-        if (confirm("Are you sure you want to delete the selected project?"))
+        if (confirm('<%= ProjectList_DeleteProject_Confirmation %>'))
             return true;
         else
             return false;

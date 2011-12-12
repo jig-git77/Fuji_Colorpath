@@ -104,5 +104,14 @@ namespace Resources {
                 return ResourceManager.GetString("Login_InvalidLogin", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected project?.
+        /// </summary>
+        internal static string ProjectList_DeleteProject_Confirmation {
+            get {
+                return ResourceManager.GetString("ProjectList_DeleteProject_Confirmation", resourceCulture);
+            }
+        }
     }
 }

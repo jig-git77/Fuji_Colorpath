@@ -14,6 +14,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region "Declaration"
         private PresenterProjectList _presenterprojectlist;
+
+        public string ProjectList_DeleteProject_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("ProjectList_DeleteProject_Confirmation");
+            }
+        }
         #endregion
 
         #region "Page Events"
@@ -27,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();
             if (!IsPostBack)
                 BindProject();
-        }       
+        }
         #endregion
 
         #region Control events
@@ -35,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             var lbtnProjectName = sender as LinkButton;
             if (lbtnProjectName == null) return;
-            
+
             this.ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"].ToString());
             _presenterprojectlist.GetProjectByProjectId();
             SessionManager.Instance.CurrentProject = GetProjectByProjectId;

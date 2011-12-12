@@ -132,4 +132,7 @@
   <data name="Login_InvalidLogin" xml:space="preserve">
     <value>Invalid login entered</value>
   </data>
+  <data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the selected project?</value>
+  </data>
 </root>
