@@ -1,5 +1,6 @@
 ﻿using System;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -7,7 +8,7 @@ namespace FujifilmUSA.Sync.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Home;
 
 
         }

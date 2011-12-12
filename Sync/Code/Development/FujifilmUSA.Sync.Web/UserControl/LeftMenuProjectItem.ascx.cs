@@ -40,6 +40,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkMeasurement.Visible = false;
                         lnkAnalyse.Visible = false;
+                        if (SessionManager.Instance.CurrentProject.ProjectRuns.Count > 1)
+                        {
+                            lnkExport.Visible = false;
+                            lnkSyncRunName.Enabled = false;
+                            //lnkSyncRunName.Style.Add("cursor","pointer");
+                        }
                     }
                     //if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
                     //{
@@ -56,7 +62,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if(CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
             {
-                lnkSyncRunName.Font.Bold = true;
+                lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measurement;
+                lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
+                lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Export;
             }
         }
 

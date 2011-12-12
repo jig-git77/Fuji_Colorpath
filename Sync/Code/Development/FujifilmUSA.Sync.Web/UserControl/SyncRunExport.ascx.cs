@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
+           
         }
 
         protected void Page_PreRender(object sender, EventArgs e)

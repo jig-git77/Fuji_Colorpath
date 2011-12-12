@@ -252,6 +252,9 @@ namespace FujifilmUSA.Sync.Entity
         Project = 3,
         ProjectSetup = 4,
         SyncRun = 5,
-        NewSyncRun = 6
+        NewSyncRun = 6,
+        Measurement = 7,
+        Analyze = 8,
+        Export = 9
     }
 }

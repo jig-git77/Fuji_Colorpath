@@ -463,29 +463,31 @@ label
     font-size: 13px;
     border-bottom: solid 1px #dadada;
     display: block;
-    padding: 7px 0 6px 60px;
+    padding: 7px 0 6px 60x;
 }
 #menu2 li a
 {
-    background: url(../Images/menu_arrow.png) no-repeat 50px center;
+    background: url(../Images/menu_arrow.png) no-repeat 36px center;
     padding-left: 10px;
     color: #010101;
     font-size: 13px;
     border-bottom: solid 1px #dadada;
     display: block;
-    padding: 7px 0 6px 60px;
+    padding: 7px 0 6px 46px;
 }
 #menu2 li a:hover
 {
-    background: url(../Images/menu_arrow.png) no-repeat 50px center #e9e9e9;
+    background: url(../Images/menu_arrow.png) no-repeat 36px center #e9e9e9;
 }
 #menu2 li .submenu li a
 {
     background: none;
+    padding: 7px 0 6px 60px;
 }
 #menu2 li .submenu li a:hover
 {
     background: #e9e9e9;
+    padding: 7px 0 6px 60px;
 }
 #menu2 li .submenu li.active a
 {
