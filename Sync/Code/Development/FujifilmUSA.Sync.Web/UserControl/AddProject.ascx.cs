@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();           
+            SessionManager.CheckLogin();
 
             if (!IsPostBack)
             {
@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindReferenceDensityType();
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
-            }            
+            }
         }
 
         protected void grdDLP_ItemDataBound(object sender, System.Web.UI.WebControls.ListViewItemEventArgs e)
@@ -56,7 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        
+
         //protected void grdDLP_ItemDataBound(object sender, GridItemEventArgs e)
         //{
         //    if (e.Item.DataItem != null)
@@ -103,10 +103,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 
             //Project name is required field
-            if(string.IsNullOrEmpty(txtProjectName.Text.Trim()))
-            {
+            if (string.IsNullOrEmpty(txtProjectName.Text.Trim()))
                 ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_ProjectName_Required"), false);
-            }
             //Validate source profile
             else if (string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
                 ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_SourceProfile_Required"), false);
@@ -116,11 +114,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //Validate the selected DLP
             else if (hdnDeviceLinkProfileId.Value == "0")
                 ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_DLP_Required"), false);
+
             //If everything is validate fire the save event
             else
-            {
                 SaveProjectAndMeasurementSetting();
-            }
+
         }
         #endregion
 
@@ -155,7 +153,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue) && !string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
             {
                 this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
-                this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);               
+                this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);
             }
             else
             {
@@ -203,7 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         }
         private void BindReferenceChartType()
-        {            
+        {
             //Split device type and take the 2nd position number as MeasurementDeviceId
             this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[1].Trim());
             _presenteraddproject.GetReferenceChartTypeListByMeasurementDeviceId();
@@ -230,7 +228,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjProject.ProjectTypeId = (int)(EProjectType)Enum.Parse(typeof(EProjectType), cmbProjectType.SelectedValue);
                 ObjProject.OutputTypeId = (int)(EOutputType)Enum.Parse(typeof(EOutputType), cmbOutputType.SelectedValue);
                 ObjProject.StartDate = DateTime.Now;
-                
+
                 ObjProject.ProjectStatus = ECPSyncRunStatus.Open;
 
 
@@ -242,7 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjMeasurementSetting.UVIncluded = true;
                 ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
                 ObjMeasurementSetting.IlluminationMode = 1;
-                
+
                 //Split the device type and take the 1st position id.
                 ObjMeasurementSetting.InstrumentTypeId = Convert.ToInt32(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[0].Trim());
 

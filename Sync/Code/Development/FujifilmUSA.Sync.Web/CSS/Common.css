@@ -978,6 +978,26 @@ label
     padding-left: 15px;
     padding-top: 5px;
 }
+
+.error{
+	background:url(../images/error_left.png) no-repeat top left;
+	color:#F00;
+	display:block;
+	text-align:left;
+	height:38px;
+	line-height:38px;
+	padding-left:14px;
+	margin-bottom:20px;
+	}
+.error span{
+	background:url(../images/error_right.png) no-repeat top right;
+	display:block;
+	}
+.error span strong{
+	background:url(../images/error.png) no-repeat 0 10px;
+	padding-left:24px;
+	display:block;
+	}
     
 #confirm {display:none;}
 

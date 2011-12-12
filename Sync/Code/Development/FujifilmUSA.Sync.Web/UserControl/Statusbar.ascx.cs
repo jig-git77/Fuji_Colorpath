@@ -12,13 +12,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         public string Message { get; set; }
         public bool Status { get; set; }
+
+        #region Page events
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
+        #endregion
+
         #region Declaration
-        
+
         public void DisplayMessage(string message, bool status)
         {
             this.Message = message;
             this.Status = status;
-            
+            this.Visible = true;
         }
 
         protected void Page_PreRender(object sender, EventArgs e)

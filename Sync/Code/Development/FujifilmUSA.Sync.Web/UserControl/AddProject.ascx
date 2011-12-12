@@ -34,11 +34,11 @@
             onclick="lbtnProjectSave_Click">
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
-            Save</span></asp:LinkButton></div>
-    <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" /></center>
+            Save</span></asp:LinkButton></div>    
     <div class="clear">
     </div>
     <div class="add_form">    
+    <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></center>
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
