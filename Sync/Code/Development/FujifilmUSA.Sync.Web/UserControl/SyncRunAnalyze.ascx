@@ -8,7 +8,7 @@
             Analyze</h1>
         <div class="Information_divAnalyze">
             <telerik:RadButton ID="btnOptimize" Text="Optimize Profile" runat="server" OnClick="btnOptimize_Click">
-            </telerik:RadButton>  &nbsp;              
+            </telerik:RadButton>  &nbsp;             
             <%--  <telerik:RadButton ID="btnExport" Text="Export" runat="server" OnClick="btnExport_Click">
             </telerik:RadButton>--%>
             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" CssClass="button">
