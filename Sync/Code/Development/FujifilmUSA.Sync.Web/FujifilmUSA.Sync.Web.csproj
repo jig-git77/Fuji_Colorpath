@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddProject.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
@@ -185,11 +186,14 @@
     <Content Include="JS\wz_jsgraphics.js" />
     <Content Include="Login.aspx" />
     <Content Include="MailTemplates\ErrorMessage.htm" />
+    <Content Include="MeasurementDeviceList.aspx" />
     <Content Include="ProjectInformation.aspx" />
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
+    <Content Include="Settings.aspx" />
     <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
+    <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
@@ -197,8 +201,10 @@
     <Content Include="UserControl\LeftMenuItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\Login.ascx" />
+    <Content Include="UserControl\MeasurementDeviceList.ascx" />
     <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
+    <Content Include="UserControl\Settings.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="UserControl\SyncRunAnalyze.ascx" />
     <Content Include="UserControl\SyncRunExport.ascx" />
@@ -215,6 +221,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddMeasurementDevice.aspx.cs">
+      <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMeasurementDevice.aspx.designer.cs">
+      <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddProject.aspx.cs">
       <DependentUpon>AddProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +268,13 @@
     <Compile Include="MainMaster.Master.designer.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="MeasurementDeviceList.aspx.cs">
+      <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeasurementDeviceList.aspx.designer.cs">
+      <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjectInformation.aspx.cs">
       <DependentUpon>ProjectInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -273,6 +293,20 @@
     <Compile Include="Services\PluginDataService.svc.cs">
       <DependentUpon>PluginDataService.svc</DependentUpon>
     </Compile>
+    <Compile Include="AdminMaster.Master.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMaster.Master.designer.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SyncRunAnalyze.aspx.cs">
       <DependentUpon>SyncRunAnalyze.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -286,6 +320,13 @@
     </Compile>
     <Compile Include="SyncRunExport.aspx.designer.cs">
       <DependentUpon>SyncRunExport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddMeasurementDevice.ascx.cs">
+      <DependentUpon>AddMeasurementDevice.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddMeasurementDevice.ascx.designer.cs">
+      <DependentUpon>AddMeasurementDevice.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject.ascx.cs">
       <DependentUpon>AddProject.ascx</DependentUpon>
@@ -336,6 +377,13 @@
     <Compile Include="UserControl\Login.ascx.designer.cs">
       <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\MeasurementDeviceList.ascx.cs">
+      <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MeasurementDeviceList.ascx.designer.cs">
+      <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\ProjectInformation.ascx.cs">
       <DependentUpon>ProjectInformation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,6 +397,13 @@
     </Compile>
     <Compile Include="UserControl\ProjectList.ascx.designer.cs">
       <DependentUpon>ProjectList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Settings.ascx.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Settings.ascx.designer.cs">
+      <DependentUpon>Settings.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
@@ -401,6 +456,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\FujifilmSkin\Fujifilm.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminMaster.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
