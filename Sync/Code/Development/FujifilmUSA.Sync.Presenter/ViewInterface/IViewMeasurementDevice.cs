@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         MeasurementDevice SaveSyncMeasurementDevice { get; set; }
         int SyncMeasurementDeviceId { get; set; }
         Dictionary<int, string> DongleList { get; set; }
+        Dictionary<int, string> MeasurementDeviceTypeList { get; set; }
         int BranchId { get; set; }
     }
 }

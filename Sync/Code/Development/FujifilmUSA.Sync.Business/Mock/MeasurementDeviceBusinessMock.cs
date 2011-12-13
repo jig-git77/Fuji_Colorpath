@@ -50,5 +50,13 @@ namespace FujifilmUSA.Sync.Business.Mock
             dongleList.Add(1, "Demo");
             return dongleList;
         }
+
+
+        public Dictionary<int, string> GetMeasurementDeviceTypeList()
+        {
+            Dictionary<int, string> measurementDeviceTypeList = new Dictionary<int, string>();
+            measurementDeviceTypeList.Add(1, "Demo");
+            return measurementDeviceTypeList;
+        }
     }
 }

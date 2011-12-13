@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<MeasurementDevice> GetSyncMeasurementDeviceList();
         int DeleteSyncMeasurementDevice(int syncMeasurementDeviceId);
         Dictionary<int, string> GetDongleList(int branchId);
+        Dictionary<int, string> GetMeasurementDeviceTypeList();
     }
 }

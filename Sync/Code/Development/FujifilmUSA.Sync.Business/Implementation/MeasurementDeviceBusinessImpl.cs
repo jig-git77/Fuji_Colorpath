@@ -178,5 +178,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return dongleList;
         }
+        public Dictionary<int, string> GetMeasurementDeviceTypeList()
+        {
+            Dictionary<int, string> measurementDeviceTypeList = new Dictionary<int, string>();
+            var dsMeasurementDeviceTypeList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSyncMeasurementDeviceType]");
+            if (dsMeasurementDeviceTypeList != null && dsMeasurementDeviceTypeList.Tables.Count > 0 && dsMeasurementDeviceTypeList.Tables[0].Rows.Count > 0)
+            {
+                measurementDeviceTypeList = dsMeasurementDeviceTypeList.Tables[0].AsEnumerable().ToDictionary(x => DataReader.ReadInt(x, "MeasurementDeviceTypeID"), x => DataReader.ReadString(x, "MeasurementDeviceTypeName"));
+            }
+            return measurementDeviceTypeList;
+        }
     }
 }
