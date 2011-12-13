@@ -56,7 +56,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             //objInPeramater.Add(new Parameters() { ParameterName = "@ReTargetID", Size = 0, Type = DbType.Int16, Value = objProject.ReTargetId });
 
             objProjectOutPeramater.Add(new Parameters() { ParameterName = "@ProjectID", Size = 4, Type = DbType.Int16 });
-            
+
 
 
 
@@ -133,15 +133,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                 objProject.ProjectRuns = dsProject.Tables[1].AsEnumerable().
                     Select(x => new SyncRun()
-                    {
-                        SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
-                        SyncRunName = DataReader.ReadString(x, "SyncRunName"),
-                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                        Status = DataReader.ReadShort(x, "Status"),
-                        StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
-                        EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
-                        MasterSyncRunId = DataReader.ReadInt(x, "MasterSyncRunID"),
-                    }).ToList();
+                                    {
+                                        SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
+                                        SyncRunName = DataReader.ReadString(x, "SyncRunName"),
+                                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                        Status = DataReader.ReadShort(x, "Status"),
+                                        StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                                        EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                                        MasterSyncRunId = DataReader.ReadInt(x, "MasterSyncRunID"),
+                                        HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                        HasProfile = DataReader.ReadBoolean(x, "HasProfile")
+                                    }).ToList();
             }
             return objProject;
         }
@@ -149,13 +151,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public void CloseSyncRun(int syncRunId, int status, DateTime endDateTime)
         {
             DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCloseSyncRun]",
-                                                        new object[] {syncRunId, status, endDateTime});
+                                                        new object[] { syncRunId, status, endDateTime });
         }
 
         public void CreateSyncRun(int projectId, int status, DateTime createdDateTime)
         {
             DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCreateSyncRun]",
-                                                        new object[] {projectId, status, createdDateTime});
+                                                        new object[] { projectId, status, createdDateTime });
         }
 
         #endregion

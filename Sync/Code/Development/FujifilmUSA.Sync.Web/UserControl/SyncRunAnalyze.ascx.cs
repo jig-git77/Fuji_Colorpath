@@ -13,6 +13,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presenterSyncRunAnalyze = new PresenterSyncRunAnalyze(this);
         }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            btnExport.Enabled = SessionManager.Instance.CurrentSyncRun.HasProfile;
+        }
 
         protected void btnExport_Click(object sender, EventArgs e)
         {
@@ -25,6 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
             MeasurementIds = string.Empty; //TODO: Add Measurement Ids
             _presenterSyncRunAnalyze.OptimizeProfile();
+            SessionManager.Instance.CurrentSyncRun.HasProfile = true;
             Response.Redirect("SyncRunExport.aspx");
         }
 

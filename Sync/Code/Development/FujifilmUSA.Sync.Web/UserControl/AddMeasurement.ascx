@@ -4,8 +4,8 @@
 <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-    }   
-   
+    }
+
     function ConfirmDeleteMeasurement() {
         if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>'))
             return true;
@@ -148,25 +148,9 @@
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-            <%-- <telerik:RadGrid ID="grdRecentUploadList" runat="server" AutoGenerateColumns="false"
-                OnNeedDataSource="grdRecentUploadList_NeedDataSource" BorderStyle="None" Width="99.9%">
-                <MasterTableView>
-                    <Columns>
-                        <telerik:GridBoundColumn DataField="MeasurementName" UniqueName="MeasurementName"
-                            HeaderText="Measurement Name">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="UploadDateTime" UniqueName="UploadDateTime" HeaderText="Upload Date Time">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn HeaderText="Delete">
-                            <ItemTemplate>
-                                <asp:ImageButton ID="btnDelete" runat="server" CommandName="Delete" ImageUrl="~/Images/delete_icon.png" />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>--%>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
+                    <%--<asp:HiddenField runat="server" ID="hdnHasMeasurement" />--%>
                     <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />
                     <asp:ListView ID="lvMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder"
                         OnItemCommand="lvMeasurement_ItemCommand">
@@ -200,21 +184,14 @@
                                 </td>
                                 <td align="center">
                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
-                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' OnClientClick="javascript:return ConfirmDeleteMeasurement();" />
+                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>'
+                                        OnClientClick="javascript:return ConfirmDeleteMeasurement();" />
                                 </td>
                             </tr>
                         </ItemTemplate>
                     </asp:ListView>
                 </ContentTemplate>
             </asp:UpdatePanel>
-            <%-- <asp:UpdateProgress runat="server" DynamicLayout="true" ID="UP_Home1" AssociatedUpdatePanelID="UpdatePanel1"
-                DisplayAfter="0">
-                <ProgressTemplate>
-                    <div id="DIV_Progress1" runat="server" class="PROGRESS" align="center">
-                        <img src="Images/Loading2.gif" style="background: transparent;" alt="Loading" /><br />
-                        <b>Loading</b></div>
-                </ProgressTemplate>
-            </asp:UpdateProgress>--%>
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
@@ -255,6 +232,11 @@
         GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
         ListDevices();
     }
+//    function ToggleAnalyze(val) {
+//        alert(val);
+//        debugger;
+//        document.getElementById('<%= btnAnalyze.ClientID %>').disabled = val;
+//    }
     jQuery(document).ready(function () {
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
@@ -267,14 +249,12 @@
                     MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
-
-
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
                 document.getElementById('<%= btnBindGrid.ClientID %>').click();
-                //call grid click event...
+                //ToggleAnalyze(jQuery("[id*='hdnHasMeasurement']").val());
             }
         });
 

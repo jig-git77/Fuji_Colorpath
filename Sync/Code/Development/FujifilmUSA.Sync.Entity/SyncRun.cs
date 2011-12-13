@@ -10,5 +10,7 @@ namespace FujifilmUSA.Sync.Entity
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public int MasterSyncRunId { get; set; }
+        public bool HasMeasurements { get; set; }
+        public bool HasProfile { get; set; }
     }
 }

@@ -30,6 +30,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
+            lnkSyncRunName.Text = ItemName;
+
             switch (ItemLevel)
             {
                 case LeftMenuItemLevel.ProjectSetup:
@@ -44,12 +46,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             lnkExport.Visible = false;
                             lnkSyncRunName.Enabled = false;
-                            //lnkSyncRunName.Style.Add("cursor","pointer");
                         }
                     }
+                    else
+                    {
+                        lnkAnalyse.Enabled = CurrentSyncRun.HasMeasurements;
+                        lnkExport.Enabled = CurrentSyncRun.HasMeasurements && CurrentSyncRun.HasProfile;
+                    }
+
                     if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
                     {
                         lnkMeasurement.Visible = false;
+                    }
+                    if (CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
+                    {
+                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measurement;
+                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
+                        lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Export;
                     }
                     ulSyncSubMenu.Visible = true;
                     break;
@@ -57,14 +70,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ulSyncSubMenu.Visible = false;
                     break;
                 
-            }
-            lnkSyncRunName.Text = ItemName;
-
-            if(CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
-            {
-                lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measurement;
-                lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
-                lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Export;
             }
         }
 

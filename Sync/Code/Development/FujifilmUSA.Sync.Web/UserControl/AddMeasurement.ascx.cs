@@ -39,16 +39,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurement();
             }
         }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //btnAnalyze.Enabled = SessionManager.Instance.CurrentSyncRun.HasMeasurements;
+        }
 
-        //protected void grdRecentUploadList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-        //{
-        //    dynamic data = new[] {
-        //        new { MeasurementName = "123456", UploadDateTime = DateTime.Now},
-        //         new { MeasurementName = "654231", UploadDateTime = DateTime.Now.AddMinutes(10)}
-
-        //    };
-        //    //  grdRecentUploadList.DataSource = data;
-        //}
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
             BindMeasurement();
@@ -56,15 +51,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindMeasurement()
         {
-            //if (SessionManager.Instance.CurrentSyncRun.SyncRunId != null)
-            //{
             this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
             _presentermeasurement.GetMeasurements();
-
+            SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
+            //hdnHasMeasurement.Value = (!SessionManager.Instance.CurrentSyncRun.HasMeasurements).ToString().ToLower();
+            //ScriptManager.RegisterClientScriptBlock(
+            //    this,
+            //    this.GetType(),
+            //    "test",
+            //    string.Format("ToggleAnalyze({0})", SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower()),
+            //    true);
             lvMeasurement.DataSource = this.Measurements;
             lvMeasurement.DataBind();
-
-            //}
         }
         protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
