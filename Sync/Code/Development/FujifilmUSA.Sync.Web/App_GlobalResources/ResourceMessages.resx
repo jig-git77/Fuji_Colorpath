@@ -135,4 +135,7 @@
   <data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete the selected project?</value>
   </data>
+  <data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all imformation of selected measurement?</value>
+  </data>
 </root>

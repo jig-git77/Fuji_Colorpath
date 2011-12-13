@@ -176,6 +176,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return iccProfile;
         }
 
+        public int DeleteMeasurement(int measurementId)
+        {
+            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurement]",
+                                                           new object[] { measurementId });
+        }
+
         #endregion
     }
 }

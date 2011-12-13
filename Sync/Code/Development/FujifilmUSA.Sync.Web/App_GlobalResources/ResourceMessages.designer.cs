@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all imformation of selected measurement?.
+        /// </summary>
+        internal static string AddMeasurement_DeleteMeasurement_Confirmation {
+            get {
+                return ResourceManager.GetString("AddMeasurement_DeleteMeasurement_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select destination profile.
         /// </summary>
         internal static string AddProject_DestinationProfile_Required {

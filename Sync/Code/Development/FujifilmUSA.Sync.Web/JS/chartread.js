@@ -184,7 +184,7 @@ function presentScannerList(ScannerList) {
 function ListDevices() {
     result = plugin().requestScannerList(presentScannerList);
     if (result != 'OK') {
-        confirm("Failed to request scanner list: " + result, "Error");
+        MeasurementDialog("Failed to request scanner list: " + result, "Error");
     }
 }
 

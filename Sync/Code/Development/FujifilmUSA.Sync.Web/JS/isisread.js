@@ -22,7 +22,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         // This type of query means we finish up with an error, so just present the
         // error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            confirm(mychart["Result"], "Error");
+            MeasurementDialog(mychart["Result"], "Error");
         }
         if (typeof final == "string") {
             eval(final);
@@ -41,7 +41,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var width = mychart["NumberOfColumns"];
     var expected = mychart["NumberOfRows"] * width;
     if (results.length != expected) {
-        confirm("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");        
+        MeasurementDialog("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");        
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {

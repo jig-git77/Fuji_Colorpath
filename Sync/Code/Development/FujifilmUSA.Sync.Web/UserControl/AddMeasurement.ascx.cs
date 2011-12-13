@@ -16,6 +16,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterMeasurement _presentermeasurement;
+        public string AddMeasurement_DeleteMeasurement_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
+            }
+        }
         #endregion
         protected override void OnInit(EventArgs e)
         {
@@ -59,23 +66,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //}
         }
-        #region IViewMeasurement Mebers
-        public int SyncRunId { get; set; }
-        public List<Measurement> Measurements { get; set; }
-        #endregion
-
         protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
-            //if (e.CommandName == "DeleteProject")
-            //{
-            //    this.SyncRunId =Convert.ToInt32(e.CommandArgument);
-            //    _presentermeasurement.DeleteMeasurements();
-            //}
+            if (e.CommandName == "DeleteProject")
+            {
+                this.MeasurementId = Convert.ToInt32(e.CommandArgument);
+                _presentermeasurement.DeleteMeasurement();
+                BindMeasurement();
+            }
         }
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
             Response.Redirect("SyncRunAnalyze.aspx");
         }
 
+        #region IViewMeasurement Mebers
+        public int SyncRunId { get; set; }
+        public List<Measurement> Measurements { get; set; }
+        public int MeasurementId { get; set; }
+        public int MeasurementDeleted { get; set; }
+        #endregion
     }
 }

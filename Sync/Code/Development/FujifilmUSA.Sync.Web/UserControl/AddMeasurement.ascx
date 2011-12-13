@@ -4,8 +4,14 @@
 <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-    }
+    }   
    
+    function ConfirmDeleteMeasurement() {
+        if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>'))
+            return true;
+        else
+            return false;
+    }
 
 </script>
 <script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
@@ -194,7 +200,7 @@
                                 </td>
                                 <td align="center">
                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
-                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' />
+                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>' OnClientClick="javascript:return ConfirmDeleteMeasurement();" />
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -258,7 +264,7 @@
             if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Measure Chart') {
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
-                    confirm("Please enter measurement name that is at least three characters long.", "Error");
+                    MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
 
@@ -287,7 +293,7 @@
         });
     });
 
-    function confirm(message, type) {
+    function MeasurementDialog(message, type) {
         jQuery("[id*='confirm']").modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
             position: ["20%", ],
@@ -328,14 +334,14 @@
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
             //document.getElementById('btnBindGrid.ClientID').click();
-            confirm("Response From Server', 'measurement added successfully", "Successfully saved");
+            MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 
         },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                confirm("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
             }
         });
 
