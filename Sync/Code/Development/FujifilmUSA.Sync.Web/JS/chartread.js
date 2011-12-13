@@ -302,10 +302,11 @@ function scan(scanner, colorspace, chart) {
                     jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
                     jg2.paint();
                     drawCells++;
-                    if (cId < 149)
-                        cId++;
-                    else
-                        cId = 0;
+                    cId++;
+//                    if (cId < 149)
+//                        cId++;
+//                    else
+//                        cId = 0;
                 }
 
             }

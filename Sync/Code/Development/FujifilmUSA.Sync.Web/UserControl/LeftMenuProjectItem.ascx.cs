@@ -47,10 +47,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             //lnkSyncRunName.Style.Add("cursor","pointer");
                         }
                     }
-                    //if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
-                    //{
-                    //    lnkMeasurement.Visible = false;
-                    //}
+                    if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
+                    {
+                        lnkMeasurement.Visible = false;
+                    }
                     ulSyncSubMenu.Visible = true;
                     break;
                 case LeftMenuItemLevel.NewSyncRun:

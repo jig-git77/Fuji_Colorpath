@@ -87,8 +87,13 @@
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Update.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
     <Content Include="CSS\Common.css" />
+    <Content Include="Images\analyze.png" />
     <Content Include="Images\body_bg.png" />
-    <Content Include="Images\close_icon.png" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\error_left.png" />
+    <Content Include="Images\error_right.png" />
+    <Content Include="Images\export.png" />
+    <Content Include="Images\Project_Close.png" />
     <Content Include="Images\color_palette.jpg" />
     <Content Include="Images\color_palette_box_bg.png" />
     <Content Include="Images\color_palette_box_bottom.png" />
@@ -102,8 +107,8 @@
     <Content Include="Images\contant_box_haed_bt_right.png" />
     <Content Include="Images\contant_box_haed_bt_right_hover.png" />
     <Content Include="Images\contant_box_top.png" />
+    <Content Include="Images\Project_Certify.png" />
     <Content Include="Images\delete_icon.png" />
-    <Content Include="Images\edit_icon.png" />
     <Content Include="Images\gray_bt_left.png" />
     <Content Include="Images\gray_bt_right.png" />
     <Content Include="Images\green_bt_left.png" />
@@ -124,6 +129,7 @@
     <Content Include="Images\logo.png" />
     <Content Include="Images\menu_arrow.png" />
     <Content Include="Images\new_project_icon.png" />
+    <Content Include="Images\Project_Open.png" />
     <Content Include="Images\page_box_bg.png" />
     <Content Include="Images\page_box_bottom.png" />
     <Content Include="Images\page_box_top.png" />
@@ -131,7 +137,6 @@
     <Content Include="Images\print_icon.png" />
     <Content Include="Images\product_list_bg.png" />
     <Content Include="Images\product_list_table_head.png" />
-    <Content Include="Images\right_icon.png" />
     <Content Include="Images\save_icon.png" />
     <Content Include="Images\setting_icon.png" />
     <Content Include="Images\setting_icon_hover.png" />
@@ -403,9 +408,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4362</DevelopmentServerPort>
+          <DevelopmentServerPort>2250</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/FujifilmUSA.Sync.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

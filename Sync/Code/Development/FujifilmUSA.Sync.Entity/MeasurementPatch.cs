@@ -7,9 +7,9 @@ namespace FujifilmUSA.Sync.Entity
         public int MeasurementId { get; set; }
         public string SampleName { get; set; }
         public short SampleId { get; set; }
-        //public Density Density { get; set; }
-        //public CieXyz Ciexyz { get; set; }
-        //public CieLab Cielab { get; set; }
+        public Density Density { get; set; }
+        public CieXyz Ciexyz { get; set; }
+        public CieLab Cielab { get; set; }
         public decimal CmykC { get; set; }
         public decimal CmykM { get; set; }
         public decimal CmykY { get; set; }
@@ -21,6 +21,11 @@ namespace FujifilmUSA.Sync.Entity
         public double X { get; set; }
         public double Y { get; set; }
         public double Z { get; set; }
+
+        public CieXyz()
+        {
+            
+        }
 
         public CieXyz(double x, double y, double z)
         {
@@ -51,6 +56,11 @@ namespace FujifilmUSA.Sync.Entity
         public double Blue { get; set; }
         public double Visual { get; set; }
 
+        public Density()
+        {
+            
+        }
+
         public Density(double r, double g, double b, double v)
         {
             this.Red = r;
@@ -65,7 +75,12 @@ namespace FujifilmUSA.Sync.Entity
         public double L { get; set; }
         public double A { get; set; }
         public double B { get; set; }
-    
+
+        public CieLab()
+        {
+            
+        }
+
         public CieLab(double l, double a, double b)
         {
             this.L = l;
