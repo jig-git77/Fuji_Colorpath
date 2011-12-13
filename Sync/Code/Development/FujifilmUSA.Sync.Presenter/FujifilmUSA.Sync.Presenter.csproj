@@ -49,6 +49,7 @@
     <Compile Include="PresenterExportProfile.cs" />
     <Compile Include="PresenterLeftMenu.cs" />
     <Compile Include="PresenterMeasurement.cs" />
+    <Compile Include="PresenterMeasurementDevice.cs" />
     <Compile Include="PresenterProjectList.cs" />
     <Compile Include="PresenterSyncDevice.cs" />
     <Compile Include="PresenterSyncRunAnalyze.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="ViewInterface\IViewExportProfile.cs" />
     <Compile Include="ViewInterface\IViewLeftMenu.cs" />
     <Compile Include="ViewInterface\IViewMeasurement.cs" />
+    <Compile Include="ViewInterface\IViewMeasurementDevice.cs" />
     <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewSyncDevice.cs" />
     <Compile Include="ViewInterface\IViewSyncRunAnalyze.cs" />

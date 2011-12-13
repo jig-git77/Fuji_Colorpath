@@ -15,6 +15,40 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
+        public Entity.MeasurementDevice GetSyncMeasurementDeviceByMeasurementDeviceId(int measurementDeviceId)
+        {
+            return new Entity.MeasurementDevice();
+        }
+
+        public int DeleteSyncMeasurementDevice(int syncMeasurementDeviceId)
+        {
+            return 0;
+        }
         #endregion
+
+
+        public List<Entity.MeasurementDevice> GetSyncMeasurementDeviceList()
+        {
+            return new List<Entity.MeasurementDevice>();
+        }
+
+
+        public int InsertSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
+        {
+            return 0;
+        }
+
+        public int UpdateSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
+        {
+            return 0;
+        }
+
+
+        public Dictionary<int, string> GetDongleList(int branchId)
+        {
+            Dictionary<int, string> dongleList = new Dictionary<int, string>();
+            dongleList.Add(1, "Demo");
+            return dongleList;
+        }
     }
 }
