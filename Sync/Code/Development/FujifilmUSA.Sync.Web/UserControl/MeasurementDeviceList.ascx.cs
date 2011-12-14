@@ -42,12 +42,46 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+        public object DisplayIsActiveCustomValue(object value)
+        {
+            if (Convert.ToBoolean(value))
+                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_True");
+            else
+                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_False");
+        } 
+
         public void BindMeasurementDeviceList()
         {
             _presentermeasurementdevice.GetSyncMeasurementDeviceList();
             grdMeasurementDevice.DataSource = SyncMeasurementDeviceList;
             grdMeasurementDevice.DataBind();
         }
+        #endregion
+
+
+        #region Control Events
+
+        protected void grdMeasurementDevice_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            this.SyncMeasurementDeviceId = Convert.ToInt32(e.CommandArgument);
+            if (e.CommandName == "EditMeasurementDevice")
+            {
+                _presentermeasurementdevice.GetSyncMeasurementDeviceByMeasurementDeviceId();
+                SessionManager.Instance.CurrentMeasurementDevice = SyncMeasurementDevice;
+
+                if (SessionManager.Instance.CurrentMeasurementDevice != null)
+                {
+                    Response.Redirect("AddMeasurementDevice.aspx");
+                }
+            }
+            if (e.CommandName == "DeleteMeasurementDevice")
+            {                
+                _presentermeasurementdevice.DeleteSyncMeasurementDevice();
+                BindMeasurementDeviceList();
+            }
+        
+        }
+
         #endregion
 
         #region IViewMeasurementDevice Members
@@ -60,5 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> MeasurementDeviceTypeList { get; set; }
         public int BranchId { get; set; }
         #endregion
+
+        
     }
 }

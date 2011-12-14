@@ -167,8 +167,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else if (string.IsNullOrEmpty(txtSerialNo.Text.Trim()))
             {
                 ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
-
+                check = false;
             }
+            else if (IsDuplicateDeviceSerialNumber(txtSerialNo.Text.Trim()))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
+                check = false;
+            }
+            
 
             return check;
         }
