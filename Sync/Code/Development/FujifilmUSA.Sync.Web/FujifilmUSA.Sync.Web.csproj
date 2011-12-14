@@ -88,6 +88,10 @@
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Update.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
     <Content Include="CSS\Common.css" />
+    <Content Include="Images\admin_box_bg.png" />
+    <Content Include="Images\admin_box_bottom.png" />
+    <Content Include="Images\admin_box_haed_bg.png" />
+    <Content Include="Images\admin_box_top.png" />
     <Content Include="Images\analyze.png" />
     <Content Include="Images\body_bg.png" />
     <Content Include="Images\edit_icon.png" />

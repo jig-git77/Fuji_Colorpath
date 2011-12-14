@@ -11,7 +11,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class Settings : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
+            SessionManager.CheckLogin();
         }
 
         protected void lnkMeasurementDevice_Click(object sender, EventArgs e)

@@ -27,7 +27,7 @@
      <%-- <section id="sidebar">      	
         	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
       </section>--%>
-      <section id="contant">
+      <section id="contant" class="admin">
           <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
       </section>
       <div class="clear"></div>

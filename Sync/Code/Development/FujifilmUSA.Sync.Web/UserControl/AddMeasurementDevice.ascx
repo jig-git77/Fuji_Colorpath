@@ -1,12 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementDevice.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementDevice" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-
-
-
-<div class="contant_top">
-    &nbsp;</div>    
-<div class="contant_middle">
+<div class="admin_top">&nbsp;</div>
+<div class="admin_middle">
     <div class="head">
        <h1>
             Add Sync Measurement Device</h1>        
@@ -15,9 +11,8 @@
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
             Save</span></asp:LinkButton></div>
-    <div class="clear">
-    </div>  
-     <div class="add_form">    
+    <div class="clear"></div>  
+    <div class="add_form">    
     <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></center>
      <table cellpadding="0" cellspacing="5" border="0" width="100%">
             <tr id="trFilter" runat="server">
@@ -89,8 +84,5 @@
         </table>
     </div>
 </div>
-<div class="contant_bottom">
-    &nbsp;</div>
-
-<div class="clear">
-</div>
+<div class="admin_bottom">&nbsp;</div>
+<div class="clear"></div>

@@ -1016,3 +1016,87 @@ label
 #confirm-container a.modal-close:active,
 #confirm-container a.modal-close:visited {text-decoration:none; font-weight:bold; position:absolute; right:10px; top:2px; color:#fff;}
 #confirm-container a.modal-close:hover {color:#ccc;}
+
+
+/***admin page - start***/
+#contant.admin{ width:918px;}
+.admin_top{
+	background:url(../images/admin_box_top.png) no-repeat top left;
+	height:9px;
+}
+.admin_bottom{
+	background:url(../images/admin_box_bottom.png) no-repeat top left;
+	height:10px;
+}
+.admin_middle{
+	background:url(../images/admin_box_bg.png) repeat-y top left;
+	min-height:781px;
+		
+	}
+#contant.admin .head{
+	background:url(../images/admin_box_haed_bg.png) no-repeat top left;
+	height:34px;
+	width:890px;
+	margin:0 0 0 3px;
+	position:relative;
+	top:-7px;
+	padding:0 0 0 17px;
+	line-height:34px;
+	}
+/***admin page - end***/
+
+/****product  page ***/
+.admin_list_table
+{
+    margin: 17px auto 0 auto;
+    width: 854px; /*border: solid 1px #9e9e9e;     border-collapse: collapse;*/
+    border: solid 1px #9e9e9e;     border-collapse: collapse;
+    
+}
+
+.admin_list_table th
+{
+    background: url(../Images/product_list_table_head.png) repeat-x top left;
+    padding: 6px 16px 4px 16px;
+    border-left: solid 1px #9e9e9e;
+    color: #525252;
+    font-size: 16px;
+}
+.admin_list_table td
+{
+    padding: 4px 16px;
+    border-left: solid 1px #dcdcdc;
+    border-collapse: collapse;
+    font-size: 14px;
+    font-weight: bold;
+    border-top: solid 1px #9e9e9e;
+}
+.admin_list_table td:first-child
+{
+    border-left: 0;
+}
+.admin_list_table tr.blue
+{
+    background: #ebfffa;
+    color: #367b6a; 
+}
+.admin_list_table tr.blue a
+{
+    color: #367b6a !important; 
+    text-decoration: none !important;
+}
+.admin_list_table tr.purpal
+{
+    background: #ebf4ff;
+    color: #3f6798;    
+}
+.admin_list_table tr.purpal a
+{    
+    color: #3f6798 !important;
+    text-decoration: none !important;       
+}
+.admin_list_table tr.green
+{
+    background: #f6ffeb;
+    color: #5b6f24;
+}

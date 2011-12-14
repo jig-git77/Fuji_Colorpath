@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementDeviceList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementDeviceList" %>
-<div class="contant_top">
-    &nbsp;</div>    
-<div class="contant_middle">
+<div class="admin_top">&nbsp;</div>
+<div class="admin_middle">
     <div class="head">
         <h1>Sync Measurement Device</h1>
         <a href="AddMeasurementDevice.aspx" class="button"><span>
@@ -11,7 +10,7 @@
     </div>   
            <asp:ListView ID="grdMeasurementDevice" runat="server"  ItemPlaceholderID="phItemPlaceholder">
             <LayoutTemplate>
-                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
+                <table cellspacing="0" cellpadding="0" border="0" class="admin_list_table">
                 <thead>
                     <tr>
                         <th align="left" scope="col">Company Name</th>
@@ -38,15 +37,12 @@
                     <td align="left"><asp:Label ID="lblSerialNumber" runat="server" Text='<%#Eval("SerialNumber") %>'></asp:Label></td>
                     <td align="left"><asp:Label ID="lblMeasuremntDeviceType" runat="server" Text='<%#Eval("MeasurementDeviceTypeDetail.DeviceTypeName") %>'></asp:Label></td>
                     <td align="center"><asp:Label ID="lblIsActive" runat="server" Text='<%#Eval("IsActive") %>'></asp:Label></td>
-                    <td align="center"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MeasurementDevice" AlternateText="Edit" ImageUrl="" CommandName="EditMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
+                    <td align="center"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MeasurementDevice" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
                     <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MeasurementDevice" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
               </tr>
             </ItemTemplate>
             </asp:ListView>
            
 </div>
-<div class="contant_bottom">
-    &nbsp;</div>
-
-<div class="clear">
-</div>
+<div class="admin_bottom">&nbsp;</div>
+<div class="clear"></div>
