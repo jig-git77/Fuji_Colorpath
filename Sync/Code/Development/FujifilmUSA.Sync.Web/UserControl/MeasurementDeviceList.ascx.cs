@@ -16,6 +16,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterMeasurementDevice _presentermeasurementdevice;
+        public string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("MeasurementDeviceList_DeleteMeasurementDevice_Confirmation");
+            }
+        }
         #endregion
 
         #region Page Events
@@ -40,14 +47,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentermeasurementdevice.GetSyncMeasurementDeviceList();
             grdMeasurementDevice.DataSource = SyncMeasurementDeviceList;
             grdMeasurementDevice.DataBind();
-        }
-
-        public object DisplayIsActiveCustomValue(object value)
-        {
-            if (Convert.ToBoolean(value))            
-                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_True");
-            else
-                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_False");
         }
         #endregion
 

@@ -123,6 +123,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         IsActive = DataReader.ReadBoolean(x, "IsActive"),
                         MeasurementDeviceId = DataReader.ReadInt(x, "CPSyncMeasurementDeviceID"),
                         SerialNumber = DataReader.ReadString(x, "SerialNumber"),
+                        CompanyId = DataReader.ReadInt(x, "CompanyID"),
+                        BranchId = DataReader.ReadInt(x, "BranchID"),
                         MeasurementDeviceTypeDetail = new Entity.MeasurementDeviceType()
                         {
                             DeviceTypeId = DataReader.ReadInt(x, "MeasurementDeviceTypeID"),
@@ -150,6 +152,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     SerialNumber = DataReader.ReadString(x, "SerialNumber"),
                     CompanyName = DataReader.ReadString(x, "CompanyName"),
                     BranchName = DataReader.ReadString(x, "BranchName"),
+                    CompanyId = DataReader.ReadInt(x, "CompanyID"),
+                    BranchId = DataReader.ReadInt(x, "BranchID"),
                     CPSerialNumber = DataReader.ReadString(x, "CPSerialNum"),
                     MeasurementDeviceTypeDetail = new Entity.MeasurementDeviceType()
                     {

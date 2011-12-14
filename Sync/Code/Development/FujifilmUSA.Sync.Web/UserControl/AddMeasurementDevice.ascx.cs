@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Declaration
         private PresenterSyncDevice _presentersyncdevice;
-        private PresenterMeasurementDevice _presentermeasurementdevice;
+        private PresenterMeasurementDevice _presentermeasurementdevice;       
         #endregion
 
         #region
@@ -29,11 +29,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
             if (!Page.IsPostBack)
             {
                 FillCompanyList();
                 FillDeviceList();
+
+                if (SessionManager.Instance.CurrentMeasurementDevice != null)
+                {
+                    LoadMeasurementDevice();
+                    ToggleInputControlState(false);
+                }
+                else
+                    ToggleInputControlState(true);
             }
         }
         public void FillCompanyList()
@@ -92,35 +99,79 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public void SaveMeasurementDevice()
         {
-
             MeasurementDevice objMeasurementDevice = new MeasurementDevice();
 
             objMeasurementDevice.CPDongleId = Convert.ToInt32(cmbDongleSerialNo.SelectedItem.Value);
-            objMeasurementDevice.MeasurementDeviceTypeDetail = new MeasurementDeviceType() {  DeviceTypeId = Convert.ToInt32(1) };
+            objMeasurementDevice.MeasurementDeviceTypeDetail = new MeasurementDeviceType() { DeviceTypeId = Convert.ToInt32(cmbDeviceType.SelectedItem.Value) };
             objMeasurementDevice.SerialNumber = txtSerialNo.Text;
             objMeasurementDevice.IsActive = chkIsActive.Checked;
-            this.SaveSyncMeasurementDevice = objMeasurementDevice;
-            _presentermeasurementdevice.InsertSyncMeasurementDevice();
+
+            if (SessionManager.Instance.CurrentMeasurementDevice != null)
+            {                
+                objMeasurementDevice.MeasurementDeviceId =Convert.ToInt32(SessionManager.Instance.CurrentMeasurementDevice.MeasurementDeviceId);
+                this.SaveSyncMeasurementDevice = objMeasurementDevice;              
+                _presentermeasurementdevice.UpdateSyncMeasurementDevice();
+                SessionManager.Instance.CurrentMeasurementDevice = null;
+            }
+            else
+            {
+                this.SaveSyncMeasurementDevice = objMeasurementDevice;              
+                _presentermeasurementdevice.InsertSyncMeasurementDevice();
+            }
+            Response.Redirect("MeasurementDeviceList.aspx");
+        }
+        public void LoadMeasurementDevice()
+        {
+            SyncMeasurementDevice = SessionManager.Instance.CurrentMeasurementDevice;
+            //Step - 1 Select CompanyId
+            cmbCompanyName.SelectedValue = SyncMeasurementDevice.CompanyId.ToString();          
+            //Step - 2 FillBranchList
+            FillBranchList(); //Selected companyId is used to fill the branch list.
+            //Step - 3 Select BranchId
+            cmbBranch.SelectedValue = SyncMeasurementDevice.BranchId.ToString();            
+            //Step - 4 FillDongleList
+            FillDongleList(); //Selected brach Id is used to fill the dongle list.            
+            cmbDongleSerialNo.SelectedValue = SyncMeasurementDevice.CPDongleId.ToString();           
+            txtSerialNo.Text = SyncMeasurementDevice.SerialNumber;            
+            cmbDeviceType.SelectedValue = SyncMeasurementDevice.MeasurementDeviceTypeDetail.DeviceTypeId.ToString();            
+            chkIsActive.Checked = SyncMeasurementDevice.IsActive;
+        }
+        public void ToggleInputControlState(bool value)
+        {
+            cmbCompanyName.Enabled = value;
+            cmbBranch.Enabled = value;
+            cmbDongleSerialNo.Enabled =value;
+            txtSerialNo.Enabled = value;
+            cmbDeviceType.Enabled = value;
         }
 
-        #region Duplicate Device Serial Number
-        /// <summary>
-        /// Check whether device with duplicate serial number is found or not?
-        /// Current condition checks on following criteria
-        /// 1. Device Serial No. - Inputed in textbox
-        /// </summary>
-        /// <param name="serialNo"></param>
-        /// <returns></returns>
-        private bool IsDuplicateDeviceSerialNumber(string serialNo)
+        public bool CheckValidation()
         {
-            this._presentermeasurementdevice.GetSyncMeasurementDeviceList();
-            var measurementDevice = SyncMeasurementDeviceList.Where(d => d.SerialNumber.Trim().Equals(serialNo, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-            if (measurementDevice == null)
-                return false;
-            else
-                return true;
-        } 
-        #endregion
+            bool check = true;
+
+            if (string.IsNullOrEmpty(cmbCompanyName.SelectedValue))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_CompanyName_Required"), false);
+                check = false;
+            }
+            else if (string.IsNullOrEmpty(cmbBranch.SelectedValue))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_BranchName_Required"), false);
+                check = false;
+            }
+            else if (string.IsNullOrEmpty(cmbDongleSerialNo.SelectedValue))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_DongleSerialNo_Required"), false);
+                check = false;
+            }
+            else if (string.IsNullOrEmpty(txtSerialNo.Text.Trim()))
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
+
+            }
+
+            return check;
+        }
 
         #region IViewSyncDevice Member
         public  int TaskeroUserId { get; set; }

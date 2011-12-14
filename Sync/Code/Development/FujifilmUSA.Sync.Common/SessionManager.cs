@@ -13,6 +13,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _currentProject = "SESSION_CURRENTPROJECT";
         private const string _currentSyncRun = "SESSION_CURRENTSYNCRUN";
         private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
+        private const string _currentMeasurementDevice = "SESSION_CURRENTMEASUREMENTDEVICE";
         #endregion
 
         #region Singleton
@@ -88,7 +89,21 @@ namespace FujifilmUSA.Sync.Common
                 HttpContext.Current.Session[_currentSyncRun] = value;
             }
         }
-
+        public MeasurementDevice CurrentMeasurementDevice
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentMeasurementDevice] != null)
+                {
+                    return (MeasurementDevice)HttpContext.Current.Session[_currentMeasurementDevice];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentMeasurementDevice] = value;
+            }
+        }
         public Dictionary<int, string> DictionaryList
         {
             get

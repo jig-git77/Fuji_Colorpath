@@ -138,10 +138,4 @@
   <data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all imformation of selected measurement?</value>
   </data>
-  <data name="MeasurementDeviceList_IsActive_False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="MeasurementDeviceList_IsActive_True" xml:space="preserve">
-    <value>Yes</value>
-  </data>
 </root>

@@ -12,7 +12,14 @@ namespace FujifilmUSA.Sync.Entity
 
         //Properties for displaying
         public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
         public string BranchName { get; set; }
+        public int BranchId { get; set; }
         public string CPSerialNumber { get; set; }        
+        
+        public MeasurementDevice()
+        {
+            MeasurementDeviceTypeDetail = new MeasurementDeviceType();
+        }
     }
 }
