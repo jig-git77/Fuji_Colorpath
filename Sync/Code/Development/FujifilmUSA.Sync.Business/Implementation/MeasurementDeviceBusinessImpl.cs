@@ -39,9 +39,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         #endregion
 
-
-
-
         #region Insert Sync Measurement Device
         public int InsertSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
         {
@@ -109,7 +106,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
         #endregion
 
-
         #region Get Sync Measurement Device by MeasurementDeviceId
         public Entity.MeasurementDevice GetSyncMeasurementDeviceByMeasurementDeviceId(int measurementDeviceId)
         {
@@ -138,12 +134,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
         #endregion
 
-
         #region Get Measurement device List
         public List<Entity.MeasurementDevice> GetSyncMeasurementDeviceList()
         {
             List<Entity.MeasurementDevice> measurementDeviceList = new List<Entity.MeasurementDevice>();
-            var dsMeasurementDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSyncMeasurementDeviceByDeviceId]");
+            var dsMeasurementDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSyncMeasurementDeviceList]");
 
             if (dsMeasurementDeviceList != null && dsMeasurementDeviceList.Tables.Count > 0 && dsMeasurementDeviceList.Tables[0].Rows.Count > 0)
             {
@@ -153,6 +148,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     IsActive = DataReader.ReadBoolean(x, "IsActive"),
                     MeasurementDeviceId = DataReader.ReadInt(x, "CPSyncMeasurementDeviceID"),
                     SerialNumber = DataReader.ReadString(x, "SerialNumber"),
+                    CompanyName = DataReader.ReadString(x, "CompanyName"),
+                    BranchName = DataReader.ReadString(x, "BranchName"),
+                    CPSerialNumber = DataReader.ReadString(x, "CPSerialNum"),
                     MeasurementDeviceTypeDetail = new Entity.MeasurementDeviceType()
                     {
                         DeviceTypeId = DataReader.ReadInt(x, "MeasurementDeviceTypeID"),
