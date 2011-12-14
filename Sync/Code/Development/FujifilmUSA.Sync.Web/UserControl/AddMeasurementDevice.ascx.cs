@@ -173,6 +173,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             return check;
         }
 
+        #region Duplicate Device Serial Number
+        /// <summary>
+        /// Check whether device with duplicate serial number is found or not?
+        /// Current condition checks on following criteria
+        /// 1. Device Serial No. - Inputed in textbox
+        /// </summary>
+        /// <param name="serialNo"></param>
+        /// <returns></returns>
+        private bool IsDuplicateDeviceSerialNumber(string serialNo)
+        {
+            this._presentermeasurementdevice.GetSyncMeasurementDeviceList();
+            var measurementDevice = SyncMeasurementDeviceList.Where(d => d.SerialNumber.Trim().Equals(serialNo, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            if (measurementDevice == null)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         #region IViewSyncDevice Member
         public  int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
