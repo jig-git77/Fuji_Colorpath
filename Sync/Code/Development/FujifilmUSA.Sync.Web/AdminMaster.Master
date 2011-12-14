@@ -4,8 +4,8 @@
 <%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
 <!DOCTYPE html>
+<html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />
