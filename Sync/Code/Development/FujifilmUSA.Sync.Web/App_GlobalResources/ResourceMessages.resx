@@ -145,21 +145,24 @@
     <value>Yes</value>
   </data>
   <data name="AddMeasurementDevice_BranchName_Required" xml:space="preserve">
-    <value>Please Select BranchName</value>
+    <value>Please select branch name</value>
   </data>
   <data name="AddMeasurementDevice_CompanyName_Required" xml:space="preserve">
-    <value>Please Select Company Name</value>
+    <value>Please select company name</value>
   </data>
   <data name="AddMeasurementDevice_DongleSerialNo_Required" xml:space="preserve">
-    <value>Please Select Dongle</value>
+    <value>Please select dongle</value>
   </data>
   <data name="AddMeasurementDevice_SerialNo_Required" xml:space="preserve">
-    <value>Please Provide Serial Number</value>
+    <value>Please provide serial number</value>
   </data>
   <data name="Measurement_SerialNo_Duplicate" xml:space="preserve">
     <value>Duplicate Serial Number</value>
   </data>
   <data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected measurement device?</value>
+  </data>
+  <data name="Duplicate_MeasurementDevice_SerialNo" xml:space="preserve">
+    <value>Duplicate serial number</value>
   </data>
 </root>

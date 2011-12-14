@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Select BranchName.
+        ///   Looks up a localized string similar to Please select branch name.
         /// </summary>
         internal static string AddMeasurementDevice_BranchName_Required {
             get {
@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Select Company Name.
+        ///   Looks up a localized string similar to Please select company name.
         /// </summary>
         internal static string AddMeasurementDevice_CompanyName_Required {
             get {
@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Select Dongle.
+        ///   Looks up a localized string similar to Please select dongle.
         /// </summary>
         internal static string AddMeasurementDevice_DongleSerialNo_Required {
             get {
@@ -88,7 +88,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Provide Serial Number.
+        ///   Looks up a localized string similar to Please provide serial number.
         /// </summary>
         internal static string AddMeasurementDevice_SerialNo_Required {
             get {
@@ -138,6 +138,15 @@ namespace Resources {
         internal static string AddProject_SourceProfile_Required {
             get {
                 return ResourceManager.GetString("AddProject_SourceProfile_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate serial number.
+        /// </summary>
+        internal static string Duplicate_MeasurementDevice_SerialNo {
+            get {
+                return ResourceManager.GetString("Duplicate_MeasurementDevice_SerialNo", resourceCulture);
             }
         }
         

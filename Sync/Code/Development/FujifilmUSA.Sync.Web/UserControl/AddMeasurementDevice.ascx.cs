@@ -95,7 +95,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
-            SaveMeasurementDevice();
+            if (CheckValidation())
+            {
+                SaveMeasurementDevice();
+            }
         }
         public void SaveMeasurementDevice()
         {
@@ -171,7 +174,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else if (IsDuplicateDeviceSerialNumber(txtSerialNo.Text.Trim()))
             {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Duplicate_MeasurementDevice_SerialNo"), false);
                 check = false;
             }
             
