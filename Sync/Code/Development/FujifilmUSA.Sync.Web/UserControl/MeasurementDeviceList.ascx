@@ -13,14 +13,14 @@
                 <table cellspacing="0" cellpadding="0" border="0" class="admin_list_table">
                 <thead>
                     <tr>
-                        <th align="left" scope="col">Company Name</th>
-                        <th align="left" scope="col" width="15%">Branch Name</th>
-                        <th align="left" scope="col" width="10%">Dongle Serial No.</th>
-                        <th align="left" scope="col" width="15%">Serial Number</th>
-                        <th align="left" scope="col" width="10%">Device Type</th>
-                        <th align="center" scope="col" width="10%">Is Active</th>
-                        <th align="center" scope="col" width="10%">Edit</th>
-                        <th align="center" scope="col" width="10%">Delete</th>
+                        <th align="left" scope="col">Company</th>
+                        <th align="left" scope="col" width="15%">Branch</th>
+                        <th align="left" scope="col" width="15%">Dongle Sr. No.</th>
+                        <th align="left" scope="col" width="15%">Device Sr. No.</th>
+                        <th align="left" scope="col" width="10%">Type</th>
+                        <th align="left" scope="col" width="10%">Active?</th>
+                        <th align="center" scope="col" width="3%"></th>
+                        <th align="center" scope="col" width="3%"></th>
                     </tr>
                 </thead>
                 <tbody>                                    
@@ -36,7 +36,7 @@
                     <td align="left"><asp:Label ID="lblDongleSerialNo" runat="server" Text='<%#Eval("CPSerialNumber") %>'></asp:Label></td>
                     <td align="left"><asp:Label ID="lblSerialNumber" runat="server" Text='<%#Eval("SerialNumber") %>'></asp:Label></td>
                     <td align="left"><asp:Label ID="lblMeasuremntDeviceType" runat="server" Text='<%#Eval("MeasurementDeviceTypeDetail.DeviceTypeName") %>'></asp:Label></td>
-                    <td align="center"><asp:Label ID="lblIsActive" runat="server" Text='<%#Eval("IsActive") %>'></asp:Label></td>
+                    <td align="left"><asp:Label ID="lblIsActive" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsActive")) %>'></asp:Label></td>
                     <td align="center"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MeasurementDevice" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
                     <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MeasurementDevice" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
               </tr>

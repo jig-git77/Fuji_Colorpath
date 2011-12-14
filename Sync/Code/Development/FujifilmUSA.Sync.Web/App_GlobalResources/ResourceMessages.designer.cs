@@ -115,6 +115,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string MeasurementDeviceList_IsActive_False {
+            get {
+                return ResourceManager.GetString("MeasurementDeviceList_IsActive_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string MeasurementDeviceList_IsActive_True {
+            get {
+                return ResourceManager.GetString("MeasurementDeviceList_IsActive_True", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the selected project?.
         /// </summary>
         internal static string ProjectList_DeleteProject_Confirmation {

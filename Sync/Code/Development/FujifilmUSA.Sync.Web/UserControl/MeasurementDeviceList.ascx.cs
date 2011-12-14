@@ -26,6 +26,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionManager.CheckLogin();
             if (!Page.IsPostBack)
             {
                 BindMeasurementDeviceList();
@@ -39,6 +40,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentermeasurementdevice.GetSyncMeasurementDeviceList();
             grdMeasurementDevice.DataSource = SyncMeasurementDeviceList;
             grdMeasurementDevice.DataBind();
+        }
+
+        public object DisplayIsActiveCustomValue(object value)
+        {
+            if (Convert.ToBoolean(value))            
+                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_True");
+            else
+                return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_False");
         }
         #endregion
 
