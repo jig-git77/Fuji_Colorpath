@@ -1,6 +1,9 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminMaster.Master.cs" Inherits="FujifilmUSA.Sync.Web.AdminMaster" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -12,43 +15,27 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-     <form id="form1" runat="server">
+    <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <section id="bodyWrapper"> 
   <!--Start PageWrapper-->
   <div class="curve_top">&nbsp;</div>
-  <section id="pageWrapper"> 
-  <%--	<div class="top_link"><a href="#">Your IP-Address:  <%=Request.UserHostAddress %></a>    |    <a href="#">Logged in as:  <%=SessionManager.Instance.CurrentUser.LoginId%>-<%=SessionManager.Instance.CurrentUser.FirstName %> <%=SessionManager.Instance.CurrentUser.LastName%></a>    |    
-        <asp:LinkButton ID="lbtnLogout" runat="server" onclick="lbtnLogout_Click">Logout</asp:LinkButton>    |    <a href="#">English</a></div>--%>
-    <!--Start Header-->
-    <header>
-      <section id="header">
-        	<div class="logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
-            <div class="setting"><a href="Settings.aspx">&nbsp;</a></div>
-      </section>
-    </header>
-    <!--End Header-->
+  <section id="pageWrapper">
+    <uc1:Header ID="ucHeader" runat="server" />   
     <section id="containar">
-     <%-- <section id="sidebar">
-      	
-        	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />
-        
+     <%-- <section id="sidebar">      	
+        	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
       </section>--%>
       <section id="contant">
-          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-    </asp:ContentPlaceHolder>
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
       </section>
       <div class="clear"></div>
     </section>
   </section>
   <div class="curve_bottom">&nbsp;</div>
   <!--End PageWrapper--> 
-  <footer>
-   		<div id="footer">
-        	<img src="images/powerby_logo.png" alt="" />
-        </div>
-    </footer>
+  <uc1:Footer ID="ucFooter" runat="server" />
 </section>
     </form>
 </body>

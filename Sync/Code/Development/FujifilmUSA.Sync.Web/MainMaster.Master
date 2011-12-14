@@ -1,8 +1,8 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs"
-    Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
-
 <%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
 <!DOCTYPE html>
 <html>
 
@@ -22,36 +22,20 @@
   <!--Start PageWrapper-->
   <div class="curve_top">&nbsp;</div>
   <section id="pageWrapper"> 
-  	<div class="top_link"><a href="#">Your IP-Address:  <%=Request.UserHostAddress %></a>    |    <a href="#">Logged in as:  <%=SessionManager.Instance.CurrentUser.LoginId%>-<%=SessionManager.Instance.CurrentUser.FirstName %> <%=SessionManager.Instance.CurrentUser.LastName%></a>    |    
-        <asp:LinkButton ID="lbtnLogout" runat="server" onclick="lbtnLogout_Click">Logout</asp:LinkButton>    |    <a href="#">English</a></div>
-    <!--Start Header-->
-    <header>
-      <section id="header">
-        	<div class="logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
-            <div class="setting"><a href="#">&nbsp;</a></div>
-      </section>
-    </header>
-    <!--End Header-->
+  	<uc1:Header ID="ucHeader" runat="server" />
     <section id="containar">
-      <section id="sidebar">
-      	
-        	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />
-        
+      <section id="sidebar">      	
+        	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
       </section>
       <section id="contant">
-          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-    </asp:ContentPlaceHolder>
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
       </section>
       <div class="clear"></div>
     </section>
   </section>
   <div class="curve_bottom">&nbsp;</div>
   <!--End PageWrapper--> 
-  <footer>
-   		<div id="footer">
-        	<img src="images/powerby_logo.png" alt="" />
-        </div>
-    </footer>
+  <uc1:Footer ID="ucFooter" runat="server" />
 </section>
     </form>
 </body>

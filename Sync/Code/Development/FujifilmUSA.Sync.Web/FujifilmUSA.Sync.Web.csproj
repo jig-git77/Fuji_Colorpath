@@ -197,6 +197,8 @@
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
+    <Content Include="UserControl\Footer.ascx" />
+    <Content Include="UserControl\Header.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\LeftMenuItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
@@ -348,6 +350,20 @@
     </Compile>
     <Compile Include="UserControl\AddMeasurement.ascx.designer.cs">
       <DependentUpon>AddMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Header.ascx.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Header.ascx.designer.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
