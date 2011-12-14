@@ -145,6 +145,7 @@
     <Content Include="Images\sidebar_box_bottom.png" />
     <Content Include="Images\sidebar_box_top.png" />
     <Content Include="Images\sidebar_menu_bg.png" />
+    <Content Include="Images\syncmeasurementdevice.png" />
     <Content Include="Images\tab.png" />
     <Content Include="Images\table_bullate.png" />
     <Content Include="Images\tab_active.png" />
