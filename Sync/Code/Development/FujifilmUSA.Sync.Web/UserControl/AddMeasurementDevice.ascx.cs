@@ -20,8 +20,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterMeasurementDevice _presentermeasurementdevice;       
         #endregion
 
-        #region
-        #endregion
+        #region Page Events
         protected override void OnInit(EventArgs e)
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
@@ -43,6 +42,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ToggleInputControlState(true);
             }
         }
+        #endregion
+
+        #region Methods
         public void FillCompanyList()
         {
             _presentersyncdevice.GetCompanyList();
@@ -50,6 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompanyName.DataBind();
             cmbCompanyName.Items.Insert(0,new RadComboBoxItem("--Select Company--",""));
         }
+
         public void FillBranchList()
         {
             if (!string.IsNullOrEmpty(cmbCompanyName.SelectedItem.Value))
@@ -61,6 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.DataBind();
                 cmbBranch.Items.Insert(0, new RadComboBoxItem("--Select Branch--", ""));
         }
+
         public void FillDongleList()
         {
             if (!string.IsNullOrEmpty(cmbBranch.SelectedItem.Value))
@@ -72,34 +76,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDongleSerialNo.DataBind();
             cmbDongleSerialNo.Items.Insert(0, new RadComboBoxItem("--Select Dongle--", ""));
         }
+
         public void FillDeviceList()
         {
             _presentermeasurementdevice.GetMeasurementDeviceTypeList();
             cmbDeviceType.DataSource = MeasurementDeviceTypeList;
             cmbDeviceType.DataBind();            
         }
-        protected void cmbCompanyName_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbCompanyName.SelectedItem.Value))
-            {
-                FillBranchList();
-            }
-        }
-        protected void cmbBranch_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cmbBranch.SelectedItem.Value))
-            {
-                FillDongleList();
-            }
-        }
-
-        protected void lbtnProjectSave_Click(object sender, EventArgs e)
-        {
-            if (CheckValidation())
-            {
-                SaveMeasurementDevice();
-            }
-        }
+        
         public void SaveMeasurementDevice()
         {
             MeasurementDevice objMeasurementDevice = new MeasurementDevice();
@@ -123,6 +107,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             Response.Redirect("MeasurementDeviceList.aspx");
         }
+
         public void LoadMeasurementDevice()
         {
             SyncMeasurementDevice = SessionManager.Instance.CurrentMeasurementDevice;
@@ -139,6 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDeviceType.SelectedValue = SyncMeasurementDevice.MeasurementDeviceTypeDetail.DeviceTypeId.ToString();            
             chkIsActive.Checked = SyncMeasurementDevice.IsActive;
         }
+
         public void ToggleInputControlState(bool value)
         {
             cmbCompanyName.Enabled = value;
@@ -152,32 +138,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             bool check = true;
 
-            if (string.IsNullOrEmpty(cmbCompanyName.SelectedValue))
+            if (SessionManager.Instance.CurrentMeasurementDevice == null)
             {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_CompanyName_Required"), false);
-                check = false;
+                if (string.IsNullOrEmpty(cmbCompanyName.SelectedValue))
+                {
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_CompanyName_Required"), false);
+                    check = false;
+                }
+                else if (string.IsNullOrEmpty(cmbBranch.SelectedValue))
+                {
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_BranchName_Required"), false);
+                    check = false;
+                }
+                else if (string.IsNullOrEmpty(cmbDongleSerialNo.SelectedValue))
+                {
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_DongleSerialNo_Required"), false);
+                    check = false;
+                }
+                else if (string.IsNullOrEmpty(txtSerialNo.Text.Trim()))
+                {
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
+                    check = false;
+                }
+                else if (IsDuplicateDeviceSerialNumber(txtSerialNo.Text.Trim()))
+                {
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Duplicate_MeasurementDevice_SerialNo"), false);
+                    check = false;
+                }
             }
-            else if (string.IsNullOrEmpty(cmbBranch.SelectedValue))
-            {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_BranchName_Required"), false);
-                check = false;
-            }
-            else if (string.IsNullOrEmpty(cmbDongleSerialNo.SelectedValue))
-            {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_DongleSerialNo_Required"), false);
-                check = false;
-            }
-            else if (string.IsNullOrEmpty(txtSerialNo.Text.Trim()))
-            {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddMeasurementDevice_SerialNo_Required"), false);
-                check = false;
-            }
-            else if (IsDuplicateDeviceSerialNumber(txtSerialNo.Text.Trim()))
-            {
-                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Duplicate_MeasurementDevice_SerialNo"), false);
-                check = false;
-            }
-            
 
             return check;
         }
@@ -201,6 +189,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #endregion
+
+        #region Control Events
+        protected void cmbCompanyName_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbCompanyName.SelectedItem.Value))
+            {
+                FillBranchList();
+            }
+        }
+        protected void cmbBranch_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(cmbBranch.SelectedItem.Value))
+            {
+                FillDongleList();
+            }
+        }
+
+        protected void lbtnProjectSave_Click(object sender, EventArgs e)
+        {            
+            if (CheckValidation())
+            {
+                SaveMeasurementDevice();
+            }         
+        }
+        #endregion
+      
         #region IViewSyncDevice Member
         public  int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
