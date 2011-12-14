@@ -61,42 +61,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Select Branch Name.
-        /// </summary>
-        internal static string AddMeasurementDevice_BranchName_Required {
-            get {
-                return ResourceManager.GetString("AddMeasurementDevice_BranchName_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please Select Company Name.
-        /// </summary>
-        internal static string AddMeasurementDevice_CompanyName_Required {
-            get {
-                return ResourceManager.GetString("AddMeasurementDevice_CompanyName_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please Select Dongle.
-        /// </summary>
-        internal static string AddMeasurementDevice_DongleSerialNo_Required {
-            get {
-                return ResourceManager.GetString("AddMeasurementDevice_DongleSerialNo_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please Provide Serial No.
-        /// </summary>
-        internal static string AddMeasurementDevice_SerialNo_Required {
-            get {
-                return ResourceManager.GetString("AddMeasurementDevice_SerialNo_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all imformation of selected measurement?.
         /// </summary>
         internal static string AddMeasurement_DeleteMeasurement_Confirmation {
@@ -147,6 +111,24 @@ namespace Resources {
         internal static string Login_InvalidLogin {
             get {
                 return ResourceManager.GetString("Login_InvalidLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string MeasurementDeviceList_IsActive_False {
+            get {
+                return ResourceManager.GetString("MeasurementDeviceList_IsActive_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string MeasurementDeviceList_IsActive_True {
+            get {
+                return ResourceManager.GetString("MeasurementDeviceList_IsActive_True", resourceCulture);
             }
         }
         
