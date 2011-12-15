@@ -15,6 +15,13 @@
 <table border="0" cellpadding="1" cellspacing="0" align="center">
     <tr>
         <td align="center" valign="bottom" style="width: 130px"><asp:LinkButton ID="lnkMeasurementDevice" runat="server" ToolTip="Measurement Device" onclick="lnkMeasurementDevice_Click"><div><asp:Image ID="imgMeasurementDevice" runat="server" AlternateText="MeasurementDevice" ImageUrl="../Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></div>Measurement Device</asp:LinkButton></td>
+       <%--<td align="center" valign="bottom" style="width: 130px"> <span class='image'>
+         <asp:Image CssClass="image" runat="server" ID="imgItem" AlternateText="MeasurementDevice" ImageUrl="../Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></span>
+            <asp:LinkButton CssClass="text" runat="server" ID="lnkItem" ToolTip="Measurement Device" Text="Measurement">            
+            </asp:LinkButton></td>--%>
+    </tr>
+    <tr>
+        <td align="center" valign="bottom" style="width: 130px"><asp:LinkButton ID="lnkDestinationProfile" runat="server" ToolTip="Destination Profile"><div><asp:Image ID="imgDestinationProfile" runat="server"  ImageUrl="" ToolTip="Destination Profile" AlternateText="Destination Profile" /></div></asp:LinkButton></td>
     </tr>
 </table>   
 </div>
