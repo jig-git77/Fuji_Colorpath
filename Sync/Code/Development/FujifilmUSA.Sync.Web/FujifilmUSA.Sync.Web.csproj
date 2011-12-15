@@ -89,6 +89,7 @@
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Update.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
     <Content Include="CSS\Common.css" />
+    <Content Include="DestinationProfile.aspx" />
     <Content Include="Images\admin_box_bg.png" />
     <Content Include="Images\admin_box_bottom.png" />
     <Content Include="Images\admin_box_haed_bg.png" />
@@ -202,6 +203,7 @@
     <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
+    <Content Include="UserControl\DestinationProfile.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
     <Content Include="UserControl\Footer.ascx" />
@@ -248,6 +250,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DestinationProfile.aspx.cs">
+      <DependentUpon>DestinationProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DestinationProfile.aspx.designer.cs">
+      <DependentUpon>DestinationProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -343,6 +352,13 @@
     </Compile>
     <Compile Include="UserControl\AddProject.ascx.designer.cs">
       <DependentUpon>AddProject.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DestinationProfile.ascx.cs">
+      <DependentUpon>DestinationProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DestinationProfile.ascx.designer.cs">
+      <DependentUpon>DestinationProfile.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DeviceList.ascx.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>

@@ -21,8 +21,11 @@
             </asp:LinkButton></td>--%>
     </tr>
     <tr>
-        <td align="center" valign="bottom" style="width: 130px"><asp:LinkButton ID="lnkDestinationProfile" runat="server" ToolTip="Destination Profile"><div><asp:Image ID="imgDestinationProfile" runat="server"  ImageUrl="" ToolTip="Destination Profile" AlternateText="Destination Profile" /></div></asp:LinkButton></td>
+        <td align="center" valign="bottom" style="width: 130px">
+            <asp:LinkButton ID="lnkDestinationProfile" runat="server" 
+                ToolTip="Destination Profile" onclick="lnkDestinationProfile_Click"><div><asp:Image ID="imgDestinationProfile" runat="server"  ImageUrl="" ToolTip="Destination Profile" AlternateText="Destination Profile" /></div></asp:LinkButton></td>
     </tr>
 </table>   
 </div>
 <div class="admin_bottom">&nbsp;</div>
+ 

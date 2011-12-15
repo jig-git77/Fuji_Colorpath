@@ -19,5 +19,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.Redirect("~/MeasurementDeviceList.aspx");
         }
+
+        protected void lnkDestinationProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/DestinationProfile.aspx");
+        }
     }
 }
