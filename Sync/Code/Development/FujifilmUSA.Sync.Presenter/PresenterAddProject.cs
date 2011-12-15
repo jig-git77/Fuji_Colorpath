@@ -21,7 +21,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetDestinationProfileList()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            _viewAddProject.GetDestinationProfileList = task.GetDestinationProfileList();
+            _viewAddProject.GetDestinationProfileList = task.GetDestinationProfileforCombo();
         }
 
         public void GetDeviceLinkProfileList()
