@@ -5,7 +5,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IDestinationProfileBusiness : ITaskBase
     {
-        Dictionary<int, string> GetDestinationProfileforCombo();
+        Dictionary<int, string> GetDestinationProfiles();
         List<DestinationProfile> GetDestinationProfileList();
     }
     

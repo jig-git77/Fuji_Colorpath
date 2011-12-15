@@ -12,10 +12,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         #region IDestinationProfileBusiness Members
 
-        public Dictionary<int, string> GetDestinationProfileforCombo()
+        public Dictionary<int, string> GetDestinationProfiles()
         {
             var dstDestinationProfileList = new Dictionary<int, string>();
-            var dsDestinationProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]");
+            var dsDestinationProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfiles]");
             if (dsDestinationProfileList != null && dsDestinationProfileList.Tables.Count > 0)
             {
                 dstDestinationProfileList = (dsDestinationProfileList.Tables[0].AsEnumerable().Select(
@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             public List<Entity.DestinationProfile> GetDestinationProfileList()
             {
                 List<Entity.DestinationProfile> destinationProfileList = new List<Entity.DestinationProfile>();
-                var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[CPSync4D.uspGetDestinationProfile]");
+                var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]");
 
                 if (dsDestinationProfile != null && dsDestinationProfile.Tables.Count > 0 && dsDestinationProfile.Tables[0].Rows.Count > 0)
                 {

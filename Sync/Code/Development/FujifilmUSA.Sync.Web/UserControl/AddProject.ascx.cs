@@ -143,8 +143,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindDestinationProfile()
         {
-            _presenteraddproject.GetDestinationProfileList();
-            cmbDestinationProfile.DataSource = GetDestinationProfileList;
+            _presenteraddproject.GetDestinationProfiles();
+            cmbDestinationProfile.DataSource = GetDestinationProfiles;
             cmbDestinationProfile.DataBind();
             cmbDestinationProfile.Items.Insert(0, new RadComboBoxItem("-- Select --", ""));
         }
@@ -264,7 +264,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewAddProject Members
         public Dictionary<int, string> GetSourceProfileList { get; set; }
-        public Dictionary<int, string> GetDestinationProfileList { get; set; }
+        public Dictionary<int, string> GetDestinationProfiles { get; set; }
         public int SourceProfileId { get; set; }
         public int DestinationProfileId { get; set; }
         public List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
@@ -276,7 +276,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public MeasurementSetting ObjMeasurementSetting { get; set; }
         public Project InsertProjectAndMeasurementSetting { get; set; }
         #endregion
-
-
+       
     }
 }

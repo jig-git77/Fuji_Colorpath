@@ -165,4 +165,13 @@
   <data name="Duplicate_MeasurementDevice_SerialNo" xml:space="preserve">
     <value>Duplicate serial number</value>
   </data>
+  <data name="DestimationProfile_IsUse_False" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DestimationProfile_IsUse_True" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DestinationProfile_DeleteDestinationProfile_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all information of selected destination profile?</value>
+  </data>
 </root>

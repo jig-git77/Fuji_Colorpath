@@ -18,10 +18,10 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddProject.GetSourceProfileList = task.GetSourceProfileList();
         }
 
-        public void GetDestinationProfileList()
+        public void GetDestinationProfiles()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            _viewAddProject.GetDestinationProfileList = task.GetDestinationProfileforCombo();
+            _viewAddProject.GetDestinationProfiles = task.GetDestinationProfiles();
         }
 
         public void GetDeviceLinkProfileList()

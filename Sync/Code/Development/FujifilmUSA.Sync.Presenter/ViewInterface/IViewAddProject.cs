@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewAddProject
     {
         Dictionary<int, string> GetSourceProfileList { get; set; }
-        Dictionary<int, string> GetDestinationProfileList { get; set; }
+        Dictionary<int, string> GetDestinationProfiles { get; set; }
 
         int SourceProfileId { get; set; }
         int DestinationProfileId { get; set; }
