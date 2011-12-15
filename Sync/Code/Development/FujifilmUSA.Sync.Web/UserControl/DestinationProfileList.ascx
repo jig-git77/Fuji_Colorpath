@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DestinationProfile.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.DestinationProfile" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DestinationProfileList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.DestinationProfileList" %>
 <div class="admin_top">&nbsp;</div>
 <div class="admin_middle">
     <div class="head">

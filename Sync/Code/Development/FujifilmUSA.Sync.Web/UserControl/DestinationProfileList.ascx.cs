@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace FujifilmUSA.Sync.Web
+namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DestinationProfile : System.Web.UI.Page
+    public partial class DestinationProfileList : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

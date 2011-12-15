@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkDestinationProfile_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/DestinationProfile.aspx");
+            Response.Redirect("~/DestinationProfileList.aspx");
         }
     }
 }

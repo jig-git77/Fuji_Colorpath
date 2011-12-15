@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web {
     
     
-    public partial class DestinationProfile {
+    public partial class DestinationProfileList {
         
         /// <summary>
         /// ucDestinationProfile control.
@@ -19,6 +19,6 @@ namespace FujifilmUSA.Sync.Web {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.DestinationProfile ucDestinationProfile;
+        protected global::FujifilmUSA.Sync.Web.UserControl.DestinationProfileList ucDestinationProfile;
     }
 }

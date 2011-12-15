@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web.UserControl {
     
     
-    public partial class DestinationProfile {
+    public partial class DestinationProfileList {
         
         /// <summary>
         /// imgAdd control.
