@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<DestinationProfile> DestinationProfileListing { get; set; }
         #endregion
 
+        #region Control Events
         protected void grdDestinationProfile_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName == "DeleteDestinationProfile")
@@ -69,5 +70,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
         }
+        #endregion
     }
 }
