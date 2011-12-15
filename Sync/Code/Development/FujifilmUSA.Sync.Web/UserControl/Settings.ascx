@@ -18,12 +18,10 @@
        <%--<td align="center" valign="bottom" style="width: 130px"> <span class='image'>
          <asp:Image CssClass="image" runat="server" ID="imgItem" AlternateText="MeasurementDevice" ImageUrl="../Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></span>
             <asp:LinkButton CssClass="text" runat="server" ID="lnkItem" ToolTip="Measurement Device" Text="Measurement">            
-            </asp:LinkButton></td>--%>
-    </tr>
-    <tr>
+            </asp:LinkButton></td>--%>    
         <td align="center" valign="bottom" style="width: 130px">
             <asp:LinkButton ID="lnkDestinationProfile" runat="server" 
-                ToolTip="Destination Profile" onclick="lnkDestinationProfile_Click"><div><asp:Image ID="imgDestinationProfile" runat="server"  ImageUrl="" ToolTip="Destination Profile" AlternateText="Destination Profile" /></div></asp:LinkButton></td>
+                ToolTip="Destination Profile" onclick="lnkDestinationProfile_Click"><div><asp:Image ID="imgDestinationProfile" runat="server"  ImageUrl="" ToolTip="Destination Profile"/></div>Destination Profile</asp:LinkButton></td>
     </tr>
 </table>   
 </div>
