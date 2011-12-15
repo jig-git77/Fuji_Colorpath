@@ -150,7 +150,7 @@
         <div class="color_pallate_middle">
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <%--<asp:HiddenField runat="server" ID="hdnHasMeasurement" />--%>
+                    <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
                     <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />
                     <asp:ListView ID="lvMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder"
                         OnItemCommand="lvMeasurement_ItemCommand">
@@ -232,12 +232,18 @@
         GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
         ListDevices();
     }
-//    function ToggleAnalyze(val) {
-//        alert(val);
-//        debugger;
-//        document.getElementById('<%= btnAnalyze.ClientID %>').disabled = val;
-//    }
+
     jQuery(document).ready(function () {
+
+        //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
+        jQuery('#<%= btnAnalyze.ClientID %>').click(function () {
+            var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
+            if (hasMeasurementValue == 'true')
+                return true;
+            else
+                return false;                
+        });
+
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
             return false;

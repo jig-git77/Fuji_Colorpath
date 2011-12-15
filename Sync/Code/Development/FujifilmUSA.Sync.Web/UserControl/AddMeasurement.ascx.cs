@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
+            SessionManager.CheckLogin();            
             if (!IsPostBack)
             {
                 hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
@@ -40,8 +40,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //btnAnalyze.Enabled = SessionManager.Instance.CurrentSyncRun.HasMeasurements;
+        {                     
+            hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
         }
 
         protected void btnBindGrid_Click(object sender, EventArgs e)
