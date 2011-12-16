@@ -52,8 +52,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item is RadListViewDataItem)
             {
                 var item = (RadListViewDataItem)e.Item;
-                var lbtnSelectDevice = (LinkButton) e.Item.FindControl("lbtnSelectDevice");
+                var lbtnSelectDevice = (LinkButton)e.Item.FindControl("lbtnSelectDevice");
+                var lbtnDestination = (LinkButton)e.Item.FindControl("lbtnDestination");
                 lbtnSelectDevice.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
+                lbtnDestination.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());                
             }
         }
         protected void lbtnSelectDevice_Click(object sender, EventArgs e)
@@ -67,6 +69,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     }
                     ).FirstOrDefault());
             Response.Redirect("ProjectList.aspx");
+        }
+        protected void lbtnDestination_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentSyncDevice =
+               (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
+                   Select(x => new SyncDevice()
+                   {
+                       SyncDeviceId = x.Key,
+                       DeviceName = x.Value.ToString()
+                   }
+                   ).FirstOrDefault());
+            Response.Redirect("DestinationProfileList.aspx");
         }
         protected void rlvDeviceList_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
         {

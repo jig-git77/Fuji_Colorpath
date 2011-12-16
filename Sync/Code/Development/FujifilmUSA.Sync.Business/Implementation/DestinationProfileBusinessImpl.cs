@@ -12,10 +12,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         #region IDestinationProfileBusiness Members
 
-        public Dictionary<int, string> GetDestinationProfiles()
+        public Dictionary<int, string> GetDestinationProfiles(int SyncDeviceId)
         {
             var dstDestinationProfileList = new Dictionary<int, string>();
-            var dsDestinationProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfiles]");
+            var dsDestinationProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfiles]", new object[] { SyncDeviceId });
             if (dsDestinationProfileList != null && dsDestinationProfileList.Tables.Count > 0)
             {
                 dstDestinationProfileList = (dsDestinationProfileList.Tables[0].AsEnumerable().Select(
@@ -27,10 +27,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return dstDestinationProfileList;
         }
-            public List<Entity.DestinationProfile> GetDestinationProfileList()
+            public List<Entity.DestinationProfile> GetDestinationProfileList(int SyncDeviceId)
             {
                 List<Entity.DestinationProfile> destinationProfileList = new List<Entity.DestinationProfile>();
-                var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]");
+                var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]", new object[] { SyncDeviceId });
 
                 if (dsDestinationProfile != null && dsDestinationProfile.Tables.Count > 0 && dsDestinationProfile.Tables[0].Rows.Count > 0)
                 {
@@ -38,7 +38,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
                         DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName"),
-                        IsUse =  DataReader.ReadBoolean(x, "IsUse")                                                
+                        IsUse =  DataReader.ReadBoolean(x, "IsUse"),
+                        SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),                        
                     }).ToList();
                 }
                 return destinationProfileList;

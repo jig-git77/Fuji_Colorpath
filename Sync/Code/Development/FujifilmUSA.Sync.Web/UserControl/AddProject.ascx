@@ -53,7 +53,7 @@
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-                <td class="ProjectListtd4">
+                <td class="ProjectListtd2">
                     <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">                      
                     </telerik:RadComboBox>
                 </td>

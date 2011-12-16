@@ -13,24 +13,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddMeasurement {
         
         /// <summary>
-        /// btnAnalyze control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAnalyze;
-        
-        /// <summary>
-        /// imgAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgAdd;
-        
-        /// <summary>
         /// tblMessage control.
         /// </summary>
         /// <remarks>

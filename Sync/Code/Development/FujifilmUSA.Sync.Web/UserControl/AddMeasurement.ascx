@@ -73,10 +73,10 @@
         height: 10em;
     }
 </style>
-<div class="contant_top">
-    &nbsp;</div>
-<div class="contant_middle">
-    <div class="head">
+<%--<div class="contant_top">
+    &nbsp;</div>--%>
+<%--<div class="contant_middle">--%>
+   <%-- <div class="head">
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="clear">
-    </div>
+    </div>--%>
     <div class="info_form">
         <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
             background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
@@ -128,9 +128,7 @@
             <input type="button" id="btnCancelMeasurement" value="Cancel Measurement" />
             <%--<telerik:RadButton ID="btnCancelMeasurement" runat="server" Text="Cancel Measurement">
             </telerik:RadButton>--%>
-        </div>
-        <div class="clear">
-        </div>
+        </div>      
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
@@ -198,9 +196,9 @@
     </div>
     <div class="clear">
     </div>
-</div>
-<div class="contant_bottom">
-    &nbsp;</div>
+<%--</div>--%>
+<%--<div class="contant_bottom">
+    &nbsp;</div>--%>
 <!-- modal content -->
 <div id='confirm'>
     <div class='header'>
@@ -214,11 +212,9 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
-<p>
-    <asp:HiddenField ID="hdSyncRunID" runat="server" />
-    <asp:HiddenField ID="hdProjectID" runat="server" />
-    <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
-</p>
+<asp:HiddenField ID="hdSyncRunID" runat="server" />
+<asp:HiddenField ID="hdProjectID" runat="server" />
+<asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script language="javascript" type="text/javascript">
@@ -236,13 +232,7 @@
     jQuery(document).ready(function () {
 
         //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
-        jQuery('#<%= btnAnalyze.ClientID %>').click(function () {
-            var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
-            if (hasMeasurementValue == 'true')
-                return true;
-            else
-                return false;                
-        });
+
 
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);

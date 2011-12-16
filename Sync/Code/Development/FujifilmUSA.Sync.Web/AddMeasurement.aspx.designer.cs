@@ -13,12 +13,12 @@ namespace FujifilmUSA.Sync.Web {
     public partial class AddMeasurement {
         
         /// <summary>
-        /// ucAddMeasurement control.
+        /// ucAddMeasurementCommon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.AddMeasurement ucAddMeasurement;
+        protected global::FujifilmUSA.Sync.Web.UserControl.AddMeasurementCommon ucAddMeasurementCommon;
     }
 }

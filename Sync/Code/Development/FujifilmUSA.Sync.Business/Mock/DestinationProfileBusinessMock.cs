@@ -7,11 +7,11 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDestinationProfileBusiness Members
 
-        public Dictionary<int, string> GetDestinationProfiles()
+        public Dictionary<int, string> GetDestinationProfiles(int SyncDeviceId)
         {
             return new Dictionary<int, string>();
         }
-        public List<Entity.DestinationProfile> GetDestinationProfileList()
+        public List<Entity.DestinationProfile> GetDestinationProfileList(int SyncDeviceId)
         {
             return new List<Entity.DestinationProfile>();
         }

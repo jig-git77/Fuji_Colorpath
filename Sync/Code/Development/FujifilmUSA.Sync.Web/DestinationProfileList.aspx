@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true" CodeBehind="DestinationProfileList.aspx.cs" Inherits="FujifilmUSA.Sync.Web.DestinationProfileList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="DestinationProfileList.aspx.cs" Inherits="FujifilmUSA.Sync.Web.DestinationProfileList" %>
 <%@ Register Src="~/UserControl/DestinationProfileList.ascx" TagName="DestinationProfileList" TagPrefix="uc"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

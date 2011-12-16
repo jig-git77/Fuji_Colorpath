@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddDestinationProfile.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddProject.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
@@ -201,6 +202,8 @@
     <Content Include="Settings.aspx" />
     <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
+    <Content Include="UserControl\AddDestinationProfile.ascx" />
+    <Content Include="UserControl\AddMeasurementCommon.ascx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DestinationProfileList.ascx" />
@@ -232,6 +235,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddDestinationProfile.aspx.cs">
+      <DependentUpon>AddDestinationProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDestinationProfile.aspx.designer.cs">
+      <DependentUpon>AddDestinationProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -338,6 +348,20 @@
     </Compile>
     <Compile Include="SyncRunExport.aspx.designer.cs">
       <DependentUpon>SyncRunExport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDestinationProfile.ascx.cs">
+      <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDestinationProfile.ascx.designer.cs">
+      <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddMeasurementCommon.ascx.cs">
+      <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddMeasurementCommon.ascx.designer.cs">
+      <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddMeasurementDevice.ascx.cs">
       <DependentUpon>AddMeasurementDevice.ascx</DependentUpon>

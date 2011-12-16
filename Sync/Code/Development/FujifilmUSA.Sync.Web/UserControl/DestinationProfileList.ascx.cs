@@ -44,6 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         public void BindDestinationProfileList()
         {
+            this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
             _presenterdestinationprofile.GetDestinationProfileList();
             grdDestinationProfile.DataSource = DestinationProfileListing;
             grdDestinationProfile.DataBind();
@@ -58,10 +59,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        #region IViewDestinationProfile Members
-        public List<DestinationProfile> DestinationProfileListing { get; set; }
-        #endregion
-
         #region Control Events
         protected void grdDestinationProfile_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
@@ -71,5 +68,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        #region IViewDestinationProfile Members
+        public List<DestinationProfile> DestinationProfileListing { get; set; }
+        public int SyncDeviceId { get; set; }
+        #endregion
+
+        
     }
 }

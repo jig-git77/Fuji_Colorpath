@@ -7,20 +7,20 @@
             return false;
     }
     </script>
-<div class="admin_top">&nbsp;</div>
-<div class="admin_middle">
+<div class="contant_top">&nbsp;</div>
+<div class="contant_middle">
     <div class="head">
         <h1>Destination Profile</h1>
-        <a href="" class="button"><span>
+        <a href="AddDestinationProfile.aspx" class="button"><span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
-            Add Destination Profile</span></a></div>
+            New Destination Profile</span></a></div>
     <div class="clear">
     </div>   
            <asp:ListView ID="grdDestinationProfile" runat="server"  
         ItemPlaceholderID="phItemPlaceholder" 
         onitemcommand="grdDestinationProfile_ItemCommand">
             <LayoutTemplate>
-                <table cellspacing="0" cellpadding="0" border="0" class="admin_list_table">
+                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
                 <thead>
                     <tr>
                         <th align="left" scope="col">Destination Profile Name</th>
@@ -45,6 +45,6 @@
             </ItemTemplate>
             </asp:ListView>            
 </div> 
-<div class="admin_bottom">&nbsp;</div>
+<div class="contant_bottom">&nbsp;</div>
 <div class="clear"></div>
 

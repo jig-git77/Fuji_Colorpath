@@ -143,6 +143,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindDestinationProfile()
         {
+            this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
             _presenteraddproject.GetDestinationProfiles();
             cmbDestinationProfile.DataSource = GetDestinationProfiles;
             cmbDestinationProfile.DataBind();
@@ -208,6 +209,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbAlignmentChart.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
             cmbAlignmentChart.DataBind();
         }
+
         #endregion
 
         private void SaveProjectAndMeasurementSetting()
