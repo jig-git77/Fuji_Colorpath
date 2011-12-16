@@ -58,7 +58,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #endregion
-       
+
+        #region Control Events
+        protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
 
         #region IViewAddProject Members
         public Dictionary<int, string> GetSourceProfileList { get; set; }
