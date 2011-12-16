@@ -43,9 +43,8 @@
                     <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("DestinationProfileID") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
               </tr>
             </ItemTemplate>
-            </asp:ListView>
-           
-</div>
+            </asp:ListView>            
+</div> 
 <div class="admin_bottom">&nbsp;</div>
 <div class="clear"></div>
 
