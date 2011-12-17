@@ -90,7 +90,7 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l"><asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label><telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"></telerik:RadComboBox></div>
-        <div class="float_r"><asp:Label ID="Label2" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label><telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"></telerik:RadComboBox></div>
+        <div class="float_r"><asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label><telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"></telerik:RadComboBox></div>
         <div class="clear"></div>
 </div>
         <asp:ListView ID="grdDLP" runat="server" ItemPlaceholderID="phItemTemplate" OnItemDataBound="grdDLP_ItemDataBound">
