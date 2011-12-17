@@ -24,6 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
         protected override void OnInit(EventArgs e)
         {
             _presentermeasurement = new PresenterMeasurement(this);
