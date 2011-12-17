@@ -52,9 +52,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public object DisplayIsActiveCustomValue(object value)
         {
             if (Convert.ToBoolean(value))
-                return ResourceManager.GetResourceMessage("DestimationProfile_IsUse_True");
+                return ResourceManager.GetResourceMessage("DestinationProfile_IsUse_True");
             else
-                return ResourceManager.GetResourceMessage("DestimationProfile_IsUse_False");
+                return ResourceManager.GetResourceMessage("DestinationProfile_IsUse_False");
         } 
 
         #endregion
