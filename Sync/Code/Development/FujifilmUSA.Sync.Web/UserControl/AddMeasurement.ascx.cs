@@ -33,15 +33,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();            
             if (!IsPostBack)
             {
-                //hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                //hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
-                //hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
-                //BindMeasurement();
+                hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
+                hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
+                BindMeasurement();
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            //hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
+            hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
         }
 
         protected void btnBindGrid_Click(object sender, EventArgs e)

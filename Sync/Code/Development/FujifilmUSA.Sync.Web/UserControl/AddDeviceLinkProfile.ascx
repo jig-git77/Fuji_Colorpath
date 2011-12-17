@@ -28,9 +28,12 @@
                     <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>               
+                 <td class="float_right">
+                    &nbsp;
+                </td>
             </tr>
              <tr>
-              <td class="float_right">
+              <td class="ProjectListtd1">
                     <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
@@ -42,16 +45,17 @@
                 </td>
                 <td class="ProjectListtd2">                    
                     <telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"></telerik:RadComboBox>
-                </td>
-                <td class="float_right">
-                    &nbsp;
-                </td>
-                <td class="ProjectListtd4">
-                    &nbsp;
-                </td>
+                </td>               
             </tr>           
             <tr>
-                <td></td>
+                <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
+                </td>
+                <td class="ProjectListtd2">
+                <telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" ></telerik:RadComboBox></td>
+                <td class="ProjectListtd1"><asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label>
+                </td>
+                <td class="ProjectListtd2">
+                <telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" ></telerik:RadComboBox></td>
             </tr>
         </table>
     </div>    
