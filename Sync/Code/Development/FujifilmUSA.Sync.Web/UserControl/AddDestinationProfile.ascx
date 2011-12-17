@@ -25,7 +25,7 @@
                     :
                 </td>
                <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
+                    <telerik:RadTextBox ID="txtDestinationProfile" runat="server" SkinID="width196px">
                     </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
                 <td class="float_right">

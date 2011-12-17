@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="PresenterAddProject.cs" />
     <Compile Include="PresenterDestinationProfile.cs" />
+    <Compile Include="PresenterDeviceLinkProfile.cs" />
     <Compile Include="PresenterExportProfile.cs" />
     <Compile Include="PresenterLeftMenu.cs" />
     <Compile Include="PresenterMeasurement.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewInterface\IViewAddProject.cs" />
     <Compile Include="ViewInterface\IViewDestinationProfile.cs" />
+    <Compile Include="ViewInterface\IViewDeviceLinkProfile.cs" />
     <Compile Include="ViewInterface\IViewExportProfile.cs" />
     <Compile Include="ViewInterface\IViewLeftMenu.cs" />
     <Compile Include="ViewInterface\IViewMeasurement.cs" />

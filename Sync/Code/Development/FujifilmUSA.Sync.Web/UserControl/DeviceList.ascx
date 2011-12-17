@@ -64,7 +64,7 @@
                                                             <asp:LinkButton ID="lbtnSelectDevice" runat="server" CssClass="gray_bt" OnClick="lbtnSelectDevice_Click"><span>Optimize</span></asp:LinkButton>
                                                             </div>                                                        
                                                             <div class="right">
-                                                            <asp:LinkButton ID="lbtnDLP" runat="server" CssClass="gray_bt" ><span>DLP</span></asp:LinkButton>
+                                                            <asp:LinkButton ID="lbtnDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDLP_Click"><span>DLP</span></asp:LinkButton>
                                                             </div>
                                                        <div class="right">
                                                             <asp:LinkButton ID="lbtnDestination" runat="server" CssClass="gray_bt" OnClick="lbtnDestination_Click"><span>Destination</span></asp:LinkButton>

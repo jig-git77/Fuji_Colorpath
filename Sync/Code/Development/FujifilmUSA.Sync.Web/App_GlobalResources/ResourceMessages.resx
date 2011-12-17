@@ -174,4 +174,7 @@
   <data name="DestinationProfile_DeleteDestinationProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected destination profile?</value>
   </data>
+  <data name="DLP_DeleteDestinationProfile_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete all information of selected DLP profile?</value>
+  </data>
 </root>

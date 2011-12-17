@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddDestinationProfile.aspx" />
+    <Content Include="AddDeviceLinkProfile.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddProject.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
@@ -91,6 +92,7 @@
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
     <Content Include="CSS\Common.css" />
     <Content Include="DestinationProfileList.aspx" />
+    <Content Include="DeviceLinkProfileList.aspx" />
     <Content Include="Images\admin_box_bg.png" />
     <Content Include="Images\admin_box_bottom.png" />
     <Content Include="Images\admin_box_haed_bg.png" />
@@ -203,12 +205,14 @@
     <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddDestinationProfile.ascx" />
+    <Content Include="UserControl\AddDeviceLinkProfile.ascx" />
     <Content Include="UserControl\AddMeasurementCommon.ascx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
     <Content Include="UserControl\DestinationProfileList.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
+    <Content Include="UserControl\DeviceLinkProfileList.ascx" />
     <Content Include="UserControl\Footer.ascx" />
     <Content Include="UserControl\Header.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
@@ -242,6 +246,13 @@
     <Compile Include="AddDestinationProfile.aspx.designer.cs">
       <DependentUpon>AddDestinationProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddDeviceLinkProfile.aspx.cs">
+      <DependentUpon>AddDeviceLinkProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceLinkProfile.aspx.designer.cs">
+      <DependentUpon>AddDeviceLinkProfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -267,6 +278,13 @@
     </Compile>
     <Compile Include="DestinationProfileList.aspx.designer.cs">
       <DependentUpon>DestinationProfileList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceLinkProfileList.aspx.cs">
+      <DependentUpon>DeviceLinkProfileList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeviceLinkProfileList.aspx.designer.cs">
+      <DependentUpon>DeviceLinkProfileList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -356,6 +374,13 @@
     <Compile Include="UserControl\AddDestinationProfile.ascx.designer.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddDeviceLinkProfile.ascx.cs">
+      <DependentUpon>AddDeviceLinkProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceLinkProfile.ascx.designer.cs">
+      <DependentUpon>AddDeviceLinkProfile.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddMeasurementCommon.ascx.cs">
       <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -397,6 +422,13 @@
     </Compile>
     <Compile Include="UserControl\AddMeasurement.ascx.designer.cs">
       <DependentUpon>AddMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DeviceLinkProfileList.ascx.cs">
+      <DependentUpon>DeviceLinkProfileList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DeviceLinkProfileList.ascx.designer.cs">
+      <DependentUpon>DeviceLinkProfileList.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>

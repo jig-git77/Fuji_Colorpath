@@ -18,7 +18,7 @@
     </div>   
            <asp:ListView ID="grdDestinationProfile" runat="server"  
         ItemPlaceholderID="phItemPlaceholder" 
-        onitemcommand="grdDestinationProfile_ItemCommand">
+        >
             <LayoutTemplate>
                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
                 <thead>
@@ -37,8 +37,8 @@
             <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
-                    <td align="left"><asp:Label ID="lblCompanyName" runat="server" Text='<%#Eval("DestinationProfileName") %>'></asp:Label></td>
-                    <td align="left" width="30%"><asp:Label ID="lblBranchName" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsUse")) %>'></asp:Label></td>
+                    <td align="left"><asp:Label ID="lblDestinationProfileName" runat="server" Text='<%#Eval("DestinationProfileName") %>'></asp:Label></td>
+                    <td align="left" width="30%"><asp:Label ID="lblInUse" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsUse")) %>'></asp:Label></td>
                     <td align="center" width="5%"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile" CommandArgument='<%# Eval("DestinationProfileID") %>' /></td>                    
                     <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("DestinationProfileID") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
               </tr>

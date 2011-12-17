@@ -44,6 +44,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objDeviceLinkProfileList;
         }
 
+        public List<DeviceLinkProfile> GetDeviceLinkProfileListOnSyncDeviceId(int SyncDeviceId)
+        {
+            var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
+            //========== Get data from data access=================//
+            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPListBySyncDeviceId]", new object[] { SyncDeviceId });
+
+            if (dsDeviceLinkProfileList != null && dsDeviceLinkProfileList.Tables.Count > 0 && dsDeviceLinkProfileList.Tables[0].Rows.Count > 0)
+            {
+                objDeviceLinkProfileList = dsDeviceLinkProfileList.Tables[0].AsEnumerable().
+                    Select(x => new DeviceLinkProfile()
+                    {
+                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
+                        DeviceLinkProfileName = DataReader.ReadString(x, "DLPName"),
+                        //Profile = DsReader.ReadString(x, "Profile"),
+                        IsUse = DataReader.ReadBoolean(x, "IsUse"),                        
+                        DestProfile =
+                            new DestinationProfile
+                            {
+                                DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
+                                DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName")
+                            }
+
+                    }).ToList();
+            }
+            return objDeviceLinkProfileList;
+        }
+
         #endregion
     }
 }

@@ -6,5 +6,6 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface IDeviceLinkProfileBusiness : ITaskBase
     {
         List<DeviceLinkProfile> GetDeviceLinkProfileList(int sourceProfileId, int destinationProfileId);
+        List<DeviceLinkProfile> GetDeviceLinkProfileListOnSyncDeviceId(int SyncDeviceId);
     }
 }

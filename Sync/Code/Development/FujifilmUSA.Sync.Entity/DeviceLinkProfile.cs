@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Entity
         public Boolean IsUse { get; set; }
         public SourceProfile SrcProfile { get; set; }
         public DestinationProfile DestProfile { get; set; }
+        public int SyncDeviceId { get; set; }
     }
 }

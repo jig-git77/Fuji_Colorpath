@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all information of selected DLP profile?.
+        /// </summary>
+        internal static string DLP_DeleteDestinationProfile_Confirmation {
+            get {
+                return ResourceManager.GetString("DLP_DeleteDestinationProfile_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duplicate serial number.
         /// </summary>
         internal static string Duplicate_MeasurementDevice_SerialNo {
