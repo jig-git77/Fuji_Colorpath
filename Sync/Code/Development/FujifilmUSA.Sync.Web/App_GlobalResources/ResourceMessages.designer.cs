@@ -142,29 +142,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete all information of selected destination profile?.
+        /// </summary>
+        internal static string DestinationProfile_DeleteDestinationProfile_Confirmation {
+            get {
+                return ResourceManager.GetString("DestinationProfile_DeleteDestinationProfile_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string DestimationProfile_IsUse_False {
+        internal static string DestinationProfile_IsUse_False {
             get {
-                return ResourceManager.GetString("DestimationProfile_IsUse_False", resourceCulture);
+                return ResourceManager.GetString("DestinationProfile_IsUse_False", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string DestimationProfile_IsUse_True {
+        internal static string DestinationProfile_IsUse_True {
             get {
-                return ResourceManager.GetString("DestimationProfile_IsUse_True", resourceCulture);
+                return ResourceManager.GetString("DestinationProfile_IsUse_True", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete all information of selected destination profile?.
+        ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string DestinationProfile_DeleteDestinationProfile_Confirmation {
+        internal static string DeviceLinkProfile_IsUse_False {
             get {
-                return ResourceManager.GetString("DestinationProfile_DeleteDestinationProfile_Confirmation", resourceCulture);
+                return ResourceManager.GetString("DeviceLinkProfile_IsUse_False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string DeviceLinkProfile_IsUse_True {
+            get {
+                return ResourceManager.GetString("DeviceLinkProfile_IsUse_True", resourceCulture);
             }
         }
         

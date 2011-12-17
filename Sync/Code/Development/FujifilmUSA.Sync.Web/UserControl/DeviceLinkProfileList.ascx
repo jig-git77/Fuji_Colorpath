@@ -11,14 +11,13 @@
 <div class="contant_middle">
     <div class="head">
         <h1>Destination Profile</h1>
-        <a href="AddDLP.aspx" class="button"><span>
+        <a href="AddDeviceLinkProfile.aspx" class="button"><span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
             New DLP</span></a></div>
     <div class="clear">
     </div>   
            <asp:ListView ID="grdDLP" runat="server"  
-        ItemPlaceholderID="phItemPlaceholder" 
-        onitemcommand="grdDLP_ItemCommand">
+        ItemPlaceholderID="phItemPlaceholder"> 
             <LayoutTemplate>
                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
                 <thead>
@@ -37,10 +36,10 @@
             <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
-                    <td align="left"><asp:Label ID="lblDLPName" runat="server" Text='<%#Eval("DLPName") %>'></asp:Label></td>
+                    <td align="left"><asp:Label ID="lblDLPName" runat="server" Text='<%#Eval("DeviceLinkProfileName") %>'></asp:Label></td>
                     <td align="left" width="30%"><asp:Label ID="lblInUse" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsUse")) %>'></asp:Label></td>
-                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile" CommandArgument='<%# Eval("DestinationProfileID") %>' /></td>                    
-                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("DestinationProfileID") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
+                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile" CommandArgument='<%# Eval("DeviceLinkProfileId") %>' /></td>                    
+                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("DeviceLinkProfileId") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
               </tr>
             </ItemTemplate>
             </asp:ListView>            
