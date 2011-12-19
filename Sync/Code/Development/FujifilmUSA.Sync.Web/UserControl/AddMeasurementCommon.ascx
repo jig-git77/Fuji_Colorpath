@@ -72,10 +72,9 @@
         height: 10em;
     }
 </style>
-<div class="contant_top">
-    &nbsp;</div>
+
 <div class="contant_middle">
-    <div class="head">
+  <%--<div class="head">
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
@@ -85,8 +84,8 @@
                     Analyze</span>
             </asp:LinkButton>
         </div>
-    </div>
-    <div class="clear">
+    </div>--%>
+    <%--<div class="clear">
     </div>
     <div class="info_form">
         <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
@@ -100,7 +99,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>--%>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" CssClass="LabelTitle"></asp:Label>
@@ -116,8 +115,7 @@
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
-        <div class="clear">
-        </div>
+        
         <div class="float_l">
             <input type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
             <%--<telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
@@ -195,11 +193,9 @@
         <div class="color_pallate_bottom">
             &nbsp;</div>
     </div>
-    <div class="clear">
-    </div>
+   
 </div>
-<div class="contant_bottom">
-    &nbsp;</div>
+
 <!-- modal content -->
 <div id='confirm'>
     <div class='header'>
@@ -213,11 +209,11 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
-<p>
+
     <asp:HiddenField ID="hdSyncRunID" runat="server" />
     <asp:HiddenField ID="hdProjectID" runat="server" />
     <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
-</p>
+
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script language="javascript" type="text/javascript">
@@ -232,16 +228,7 @@
         ListDevices();
     }
 
-    jQuery(document).ready(function () {
-
-        //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
-        jQuery('#<%= btnAnalyze.ClientID %>').click(function () {
-            var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
-            if (hasMeasurementValue == 'true')
-                return true;
-            else
-                return false;
-        });
+    jQuery(document).ready(function () {       
 
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
@@ -268,14 +255,7 @@
             jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             OnCancel();
             ListDevices();
-        });
-        jQuery("[id*='btnRefresh']").click(function () {
-            refreshTry++;
-            ControlVisibility();
-            if (refreshTry == 2) {
-                jQuery("[id*='lblMessage']").html(jQuery("[id*='lblMessage']").text() + '<br>Hint: Having problem with plugins? Try to close and re-open your browser!</br>');
-            }
-        });
+        });      
     });
 
     function MeasurementDialog(message, type) {

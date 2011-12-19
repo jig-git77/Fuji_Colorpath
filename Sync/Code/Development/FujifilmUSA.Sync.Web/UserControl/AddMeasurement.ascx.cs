@@ -31,53 +31,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();            
-            if (!IsPostBack)
-            {
-                hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
-                hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
-                BindMeasurement();
-            }
+            //SessionManager.CheckLogin();            
+            //if (!IsPostBack)
+            //{
+            //    hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+            //    hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
+            //    hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
+            //    BindMeasurement();
+            //}
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
+            //hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
         }
 
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
-            BindMeasurement();
+            //BindMeasurement();
         }
 
         private void BindMeasurement()
         {
-            this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-            _presentermeasurement.GetMeasurements();
-            SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
-            //hdnHasMeasurement.Value = (!SessionManager.Instance.CurrentSyncRun.HasMeasurements).ToString().ToLower();
-            //ScriptManager.RegisterClientScriptBlock(
-            //    this,
-            //    this.GetType(),
-            //    "test",
-            //    string.Format("ToggleAnalyze({0})", SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower()),
-            //    true);
-            lvMeasurement.DataSource = this.Measurements;
-            lvMeasurement.DataBind();
+            //this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+            //_presentermeasurement.GetMeasurements();
+            //SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
+            ////hdnHasMeasurement.Value = (!SessionManager.Instance.CurrentSyncRun.HasMeasurements).ToString().ToLower();
+            ////ScriptManager.RegisterClientScriptBlock(
+            ////    this,
+            ////    this.GetType(),
+            ////    "test",
+            ////    string.Format("ToggleAnalyze({0})", SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower()),
+            ////    true);
+            //lvMeasurement.DataSource = this.Measurements;
+            //lvMeasurement.DataBind();
         }
-        protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "DeleteProject")
-            {
-                this.MeasurementId = Convert.ToInt32(e.CommandArgument);
-                _presentermeasurement.DeleteMeasurement();
-                BindMeasurement();
-            }
-        }
-        protected void btnAnalyze_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("SyncRunAnalyze.aspx");
-        }
+        //protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "DeleteProject")
+        //    {
+        //        this.MeasurementId = Convert.ToInt32(e.CommandArgument);
+        //        _presentermeasurement.DeleteMeasurement();
+        //        BindMeasurement();
+        //    }
+        //}
+        //protected void btnAnalyze_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("SyncRunAnalyze.aspx");
+        //}
 
         #region IViewMeasurement Mebers
         public int SyncRunId { get; set; }

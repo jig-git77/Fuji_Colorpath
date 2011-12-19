@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDestinationProfile.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDestinationProfile" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/AddMeasurement.ascx" TagName="AddMeasurement" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
+
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -13,6 +14,19 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
     <div class="clear">
+    </div>
+    <div class="info_form">
+        <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
+            background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
+                    <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
+                </td>
+                <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
+                    <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="add_form">
         <center>
@@ -52,7 +66,7 @@
             </tr>
         </table>
     </div>    
-    <uc:AddMeasurement ID="ucAddMeasurement" runat="server" />
+    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
 </div>
 
 <div class="contant_bottom">
