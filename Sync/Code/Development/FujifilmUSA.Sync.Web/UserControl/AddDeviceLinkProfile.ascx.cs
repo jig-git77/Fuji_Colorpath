@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #endregion
-
+         
         #region Methods
         private void BindMeasurementDeviceType()
         {
@@ -81,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
         {
-
+            lbtnDeviceLinkProfileSave.Text = "Save";
         }
         #endregion
 
