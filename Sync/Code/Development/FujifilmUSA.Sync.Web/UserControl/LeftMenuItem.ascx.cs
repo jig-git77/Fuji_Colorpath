@@ -41,11 +41,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkItem.Enabled = false;
                     break;
             }
-            
-            lnkItem.Text = ItemName;
-            
-
-
+            lnktext.InnerHtml = ItemName;
+            //lnkItem.Text = ItemName;            
         }
         #endregion
 
