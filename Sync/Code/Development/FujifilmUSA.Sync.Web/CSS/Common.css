@@ -424,7 +424,7 @@ label
 }
 #menu li a
 {    
-    padding:0 5px;
+    /*padding:0 5px;*/
     color: #010101;
     font-size: 13px;
 }
@@ -444,6 +444,16 @@ label
     margin-left: 10px;
     line-height: 18px;
 }
+
+.mytext
+{
+    float: left;
+    width: 100px;
+    margin-left: 10px;
+    line-height: 18px;
+    padding-left:2px;    
+}
+
 #menu2
 {
     margin: 0 8px 0 4px;
@@ -998,7 +1008,7 @@ label
 	padding-left:24px;
 	display:block;
 	}
-    
+
 #confirm {display:none;}
 
 /* Overlay */

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls; 
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
@@ -25,24 +26,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            
+           
             switch (ItemLevel)
             {
-                case LeftMenuItemLevel.Home:
+                case LeftMenuItemLevel.Home:                    
                     imgItem.ImageUrl = "../images/home_icon.png";
-                    lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Home;
+                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Home;
                     break;
                 case LeftMenuItemLevel.Device:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Device;
+                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Device;
                     break;
                 case LeftMenuItemLevel.Project:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    lnkItem.Enabled = false;
+                    imgItem.Enabled = false;
                     break;
-            }
-            lnktext.InnerHtml = ItemName;
-            //lnkItem.Text = ItemName;            
+            }            
+            lnkItem.Text =ItemName;              
         }
         #endregion
 
@@ -65,6 +65,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+       
 
     }
 }
