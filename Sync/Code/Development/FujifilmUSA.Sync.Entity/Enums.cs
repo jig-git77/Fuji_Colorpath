@@ -258,7 +258,7 @@ namespace FujifilmUSA.Sync.Entity
         Export = 9
     }
 
-    public enum ProfileTypeId
+    public enum ProfileType
     {
         None = 0,
         SourceProfile = 1,

@@ -4,7 +4,7 @@
     {
         public int MeasurementLinkId { get; set; }
         public Measurement Measurement { get; set; }
-        public ProfileTypeId TypeId { get; set; }
+        public ProfileType TypeId { get; set; }
         public int ProfileId { get; set; }
     }
 }

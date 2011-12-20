@@ -201,9 +201,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementLink.Measurement.MeasurementId;
         }
 
-        public List<Measurement> GetMeasurement(int profileId, ProfileTypeId typeId)
+        public List<Measurement> GetMeasurement(int profileId, ProfileType typeId)
         {
-            if (profileId <= 0 || typeId == ProfileTypeId.None) return new List<Measurement>();
+            if (profileId <= 0 || typeId == ProfileType.None) return new List<Measurement>();
             return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByProfileID]", new object[] { profileId, typeId }));
         }
 
