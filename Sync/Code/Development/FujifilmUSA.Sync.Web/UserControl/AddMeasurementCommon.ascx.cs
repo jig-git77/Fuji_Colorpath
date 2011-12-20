@@ -25,6 +25,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        #region Page Event
         protected override void OnInit(EventArgs e)
         {
             _presentermeasurement = new PresenterMeasurement(this);
@@ -34,22 +36,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();            
             if (!IsPostBack)
             {
-                hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
-                hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
-                BindMeasurement();
+                if(SessionManager.Instance.ProfileTypeID == ProfileType.DestinationProfile)
+                {
+                    
+                }
+                if (SessionManager.Instance.ProfileTypeID == ProfileType.Optimization)
+                {
+                    hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
+                    hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
+                    hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
+                    BindMeasurement();
+                }
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
+            if (SessionManager.Instance.ProfileTypeID == ProfileType.Optimization)
+            {
+                hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
+            }
         }
 
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
             BindMeasurement();
         }
+        protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteProject")
+            {
+                this.MeasurementId = Convert.ToInt32(e.CommandArgument);
+                _presentermeasurement.DeleteMeasurement();
+                BindMeasurement();
+            }
+        }
+        #endregion
 
+        #region Methods
         private void BindMeasurement()
         {
             this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
@@ -65,15 +88,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lvMeasurement.DataSource = this.Measurements;
             lvMeasurement.DataBind();
         }
-        protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "DeleteProject")
-            {
-                this.MeasurementId = Convert.ToInt32(e.CommandArgument);
-                _presentermeasurement.DeleteMeasurement();
-                BindMeasurement();
-            }
-        }
+        #endregion
         //protected void btnAnalyze_Click(object sender, EventArgs e)
         //{
         //    Response.Redirect("SyncRunAnalyze.aspx");

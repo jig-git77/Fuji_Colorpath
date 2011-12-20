@@ -9,8 +9,8 @@ function GetReferenceChart(ProjectID) {
     //Make ajax request...
     jQuery.ajax({
         type: "GET",
-        contentType: "application/json; charset=utf-8",
-        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID,
+        contentType: "application/json; charset=utf-8",        
+        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID,        
         //data: JSON.stringify({ ProjectID: ProjectID }),
         processData: false,
         dataType: "json", //this only applies to response from the server and (not request send to server)

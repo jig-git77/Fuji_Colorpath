@@ -115,7 +115,8 @@
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
-        
+         <div class="clear">
+        </div>
         <div class="float_l">
             <input type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
             <%--<telerik:RadButton ID="btnMeasureAndUploadChart" runat="server" Text="Measure / Upload">
@@ -226,7 +227,7 @@
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
         
         load();   //first you have to load the plugin
-        
+
         GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
         ListDevices();
     }

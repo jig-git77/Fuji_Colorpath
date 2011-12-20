@@ -149,8 +149,7 @@ function DisplayLog() {
     newHTML += '</PRE><BR>';
     document.getElementById("Log").innerHTML = newHTML;
 }
-function presentScannerList(ScannerList) {
-    alert("asdasd");
+function presentScannerList(ScannerList) {    
     //ScannerList is an array of scanners with properties.    
     jQuery("[id*='lblPluginMessage']").html("");
     if (ScannerList.length == 0) return;
