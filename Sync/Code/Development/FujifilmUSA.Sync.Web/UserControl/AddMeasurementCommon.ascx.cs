@@ -74,10 +74,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurement();
             }
         }
-        protected void btnAnalyze_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("SyncRunAnalyze.aspx");
-        }
+        //protected void btnAnalyze_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("SyncRunAnalyze.aspx");
+        //}
 
         #region IViewMeasurement Mebers
         public int SyncRunId { get; set; }

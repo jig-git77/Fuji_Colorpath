@@ -85,5 +85,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int MeasurementId { get; set; }
         public int MeasurementDeleted { get; set; }
         #endregion
+
+        protected void btnAnalyze_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SyncRunAnalyze.aspx");
+        }
     }
 }

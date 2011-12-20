@@ -27,7 +27,8 @@ jQuery(document).ready(function () {
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" >
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" 
+                onclick="btnAnalyze_Click" >
                 <span>
                     <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
                     Analyze</span>
