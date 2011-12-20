@@ -19,10 +19,12 @@
                                     &nbsp; :
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
+                                   <%-- <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
                                         OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
-                                    </telerik:RadComboBox>
-
+                                    </telerik:RadComboBox>--%>
+                                    <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
+                                        onselectedindexchanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
@@ -31,9 +33,12 @@
                                     &nbsp :
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
+                                    <%--<telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
                                         OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true">
-                                    </telerik:RadComboBox>
+                                    </telerik:RadComboBox>--%>
+                                     <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
+                                        onselectedindexchanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true">
+                                    </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
