@@ -23,12 +23,28 @@ namespace FujifilmUSA.Sync.Web.Services
             return refChartData.GetReferenceChartData(Convert.ToInt32(projectId));
         }
 
+        [WebGet(UriTemplate = "GetReferenceChartByTypeId/{ReferenceChartTypeId}/{SerialNo}")]
+        [OperationContract]
+        public ReferenceChartData GetReferenceChartByTypeId(string referenceChartTypeId, string serialNo)
+        {
+            var refChartData = ((IReferenceChartBusiness)new Business.BusinessFactory<IReferenceChartBusiness>().CreateObject());
+            return refChartData.GetReferenceChartDataByTypeId(Convert.ToInt32(referenceChartTypeId), serialNo);
+        }
+
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
         public int SaveMeasurement(Measurement measurement)
         {
             var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
             return refChartData.SaveMeasurement(measurement);
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurementLink")]
+        [OperationContract]
+        public int SaveMeasurementLink(MeasurementLink measurementLink)
+        {
+            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            return refChartData.SaveMeasurement(measurementLink);
         }
     }
 }

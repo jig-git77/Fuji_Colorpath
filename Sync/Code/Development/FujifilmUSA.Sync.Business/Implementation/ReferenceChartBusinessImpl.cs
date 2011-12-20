@@ -6,7 +6,6 @@ using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System;
-using System.Security.Cryptography;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -34,9 +33,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public ReferenceChartData GetReferenceChartData(int projectId)
         {
-            var chartData = new ReferenceChartData();
-            var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChart]", new object[] { projectId });
+            return ConvertReferenceChartData(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChart]", new object[] {projectId}));
+        }
 
+        public ReferenceChartData GetReferenceChartDataByTypeId(int referenceChartTypeId, string serialNo)
+        {
+            return ConvertReferenceChartData(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChartByTypeId]", new object[] {referenceChartTypeId, serialNo}));
+        }
+
+        #endregion
+
+        #region Private Methods
+        private ReferenceChartData ConvertReferenceChartData(DataSet dsReferenceChart)
+        {
+            var chartData = new ReferenceChartData();
+            
             if (dsReferenceChart.Tables[0].Rows.Count == 0)
                 return chartData;
 
@@ -54,16 +65,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
             chartData.ChartPatches = dsReferenceChart.Tables[1].AsEnumerable().
                 Select(x =>
                        new ReferenceChart()
-                           {
-                               ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
-                               SampleName = DataReader.ReadString(x, "SampleName"),
-                               CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
-                               CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
-                               CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
-                               CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                               PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
-                               HtmlColor = DataReader.ReadString(x, "HTMLColor")
-                           }).ToList();
+                       {
+                           ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                           SampleName = DataReader.ReadString(x, "SampleName"),
+                           CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                           CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                           CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                           CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                           PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                           HtmlColor = DataReader.ReadString(x, "HTMLColor")
+                       }).ToList();
             if (chartData.MeasurementDeviceTypeId > System.Convert.ToInt32(EMeasurementDeviceType.I1Pro))
             {
                 var reader = DataAccessFactory.Instance.GetXmlResult("CPSync4D.uspGetChartSettings", new object[] { chartData.ReferenceChartTypeId });
@@ -96,7 +107,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return chartData;
         }
-
         #endregion
     }
 }

@@ -39,6 +39,16 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public int SaveMeasurement(MeasurementLink measurementLink)
+        {
+            return 0;
+        }
+
+        public List<Measurement> GetMeasurement(int profileId, ProfileTypeId typeId)
+        {
+            return new List<Measurement>();
+        }
+
         #endregion
     }
 }

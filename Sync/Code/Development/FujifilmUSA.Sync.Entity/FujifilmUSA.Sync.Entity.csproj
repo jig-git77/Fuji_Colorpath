@@ -53,6 +53,7 @@
     <Compile Include="Measurement.cs" />
     <Compile Include="MeasurementDevice.cs" />
     <Compile Include="MeasurementDeviceType.cs" />
+    <Compile Include="MeasurementLink.cs" />
     <Compile Include="MeasurementPatch.cs" />
     <Compile Include="MeasurementSetting.cs" />
     <Compile Include="Permission.cs" />

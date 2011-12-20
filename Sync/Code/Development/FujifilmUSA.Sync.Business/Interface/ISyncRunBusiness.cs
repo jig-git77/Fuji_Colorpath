@@ -14,5 +14,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int GetMasterSyncRunId(int syncRunId);
         byte[] GetIccProfileBySyncRunId(int syncRunId);
         int DeleteMeasurement(int measurementId);
+        int SaveMeasurement(MeasurementLink measurementLink);
+        List<Measurement> GetMeasurement(int profileId, ProfileTypeId typeId);
     }
 }

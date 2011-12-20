@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.ProfilerService;
 using FujifilmUSA.Sync.DataAccess;
@@ -17,61 +18,62 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             if (measurement == null || measurement.Patches == null || measurement.Patches.Count == 0) return 0;
 
-            var outParams = DataAccessFactory.Instance.
-                ExecuteProcedure("CPSync4D.uspInsertMeasurement",
-                                 new List<Parameters>()
-                                     {
-                                         new Parameters() {ParameterName = "@SyncRunID", Size = 0, Value = measurement.SyncRunId},
-                                         new Parameters() {ParameterName = "@MeasurementDate", Size = 0, Value = measurement.MeasurementDate},
-                                         new Parameters() {ParameterName = "@MeasurementName", Size = 0, Value = measurement.MeasurementName},
-                                         new Parameters() {ParameterName = "@MeasurementTypeID", Size = 0, Value = measurement.MeasurementTypeId},
-                                     },
-                                 new List<Parameters>()
-                                     {
-                                         new Parameters() {ParameterName = "@MeasurementID", Size = 4},
-                                     });
+            DataAccessFactory.
+                Instance.
+                ExecuteProcedureWithTransaction(
+                    new List<Action>()
+                        {
+                            () =>
+                                {
+                                    var outParams = DataAccessFactory.Instance.
+                                        ExecuteProcedure("CPSync4D.uspInsertMeasurement",
+                                                         new List<Parameters>()
+                                                             {
+                                                                 new Parameters() {ParameterName = "@SyncRunID", Size = 0, Value = measurement.SyncRunId},
+                                                                 new Parameters() {ParameterName = "@MeasurementDate", Size = 0, Value = measurement.MeasurementDate},
+                                                                 new Parameters() {ParameterName = "@MeasurementName", Size = 0, Value = measurement.MeasurementName},
+                                                                 new Parameters() {ParameterName = "@MeasurementTypeID", Size = 0, Value = measurement.MeasurementTypeId},
+                                                             },
+                                                         new List<Parameters>()
+                                                             {
+                                                                 new Parameters() {ParameterName = "@MeasurementID", Size = 4},
+                                                             });
 
-            measurement.MeasurementId = System.Convert.ToInt32(outParams[0].Value);
-            measurement.Patches.ForEach(patch => DataAccessFactory.Instance.
-                                                     ExecuteProcedure("CPSync4D.uspInsertMeasuredPatch",
-                                                                      new object[]
-                                                                          {
-                                                                              measurement.MeasurementId,
-                                                                              null,
-                                                                              patch.SampleName,
-                                                                              patch.CmykC,
-                                                                              patch.CmykM,
-                                                                              patch.CmykY,
-                                                                              patch.CmykK,
-                                                                              patch.Cielab.L,
-                                                                              patch.Cielab.A,
-                                                                              patch.Cielab.B,
-                                                                              patch.Ciexyz.X,
-                                                                              patch.Ciexyz.Y,
-                                                                              patch.Ciexyz.Z,
-                                                                              patch.Density.Visual,
-                                                                              patch.Density.Red,
-                                                                              patch.Density.Green,
-                                                                              patch.Density.Blue
-                                                                          }));
+                                    measurement.MeasurementId = System.Convert.ToInt32(outParams[0].Value);
+                                },
+                            () =>
+                                {
+                                    measurement.Patches.ForEach(patch => DataAccessFactory.Instance.
+                                                                             ExecuteProcedure("CPSync4D.uspInsertMeasuredPatch",
+                                                                                              new object[]
+                                                                                                  {
+                                                                                                      measurement.MeasurementId,
+                                                                                                      null,
+                                                                                                      patch.SampleName,
+                                                                                                      patch.CmykC,
+                                                                                                      patch.CmykM,
+                                                                                                      patch.CmykY,
+                                                                                                      patch.CmykK,
+                                                                                                      patch.Cielab.L,
+                                                                                                      patch.Cielab.A,
+                                                                                                      patch.Cielab.B,
+                                                                                                      patch.Ciexyz.X,
+                                                                                                      patch.Ciexyz.Y,
+                                                                                                      patch.Ciexyz.Z,
+                                                                                                      patch.Density.Visual,
+                                                                                                      patch.Density.Red,
+                                                                                                      patch.Density.Green,
+                                                                                                      patch.Density.Blue
+                                                                                                  }));
+                                }
+                        });
             return measurement.MeasurementId;
         }
 
         public List<Measurement> GetMeasurement(int syncRunId)
         {
             if (syncRunId <= 0) return new List<Measurement>();
-
-            var dsMeasurements = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByPressRunID]", new object[] { syncRunId });
-            var lstMeasurements = dsMeasurements.Tables[0].AsEnumerable().
-                Select(x => new Measurement()
-                                {
-                                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                    MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                    SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
-                                    IsUse = DataReader.ReadBoolean(x, "IsUse")
-                                }).ToList();
-            return lstMeasurements;
+            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementBySyncRunID]", new object[] { syncRunId }));
         }
 
         public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId)
@@ -84,7 +86,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               };
 
             //Load pcs and dcs Data
-            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.uspGetPCSData", new object[] {measurementIds});
+            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.uspGetPCSData", new object[] { measurementIds });
             if (dsPcsDcsData.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
@@ -104,18 +106,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (masterSyncRunId == 0) return optimizeDlp;
 
             //Get Existing DLP profile
-            var dlpProfile = DataAccessFactory.Instance.GetScalar("[CPSync4D].[uspGetICCProfile]", new object[] {masterSyncRunId});
+            var dlpProfile = DataAccessFactory.Instance.GetScalar("[CPSync4D].[uspGetICCProfile]", new object[] { masterSyncRunId });
             if (dlpProfile == System.DBNull.Value) return optimizeDlp;
 
             request.DeviceLinkProfile = new IccProfile()
                                             {
-                                                ProfileData = (byte[]) dlpProfile
+                                                ProfileData = (byte[])dlpProfile
                                             };
 
             //Get Source and Destination DLP Profile
-            var dsSrcDestProfiles = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProjectSrcAndDestProfiles]", new object[] {projectId});
+            var dsSrcDestProfiles = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProjectSrcAndDestProfiles]", new object[] { projectId });
             if (dsSrcDestProfiles.Tables[0].Rows.Count != 1) return optimizeDlp;
-            
+
             request.SourceProfile = new IccProfile()
                                         {
                                             ProfileData = DataReader.ReadByteArray(dsSrcDestProfiles.Tables[0].Rows[0], "SourceProfile")
@@ -148,8 +150,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
 
             //Store optimize dlp to current sync run
-            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] {syncRunId, optimizeDlp.Profile});
-            
+            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] { syncRunId, optimizeDlp.Profile });
+
             return optimizeDlp;
         }
 
@@ -182,6 +184,45 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                            new object[] { measurementId });
         }
 
+        public int SaveMeasurement(MeasurementLink measurementLink)
+        {
+            if (measurementLink == null || measurementLink.Measurement == null || measurementLink.Measurement.Patches == null || measurementLink.Measurement.Patches.Count > 0)
+                return 0;
+            measurementLink.Measurement.MeasurementId = SaveMeasurement(measurementLink.Measurement);
+            DataAccessFactory.Instance.
+                ExecuteProcedure("[CPSync4D].[uspInsertMeasurementLink]",
+                                 new object[]
+                                     {
+                                         measurementLink.Measurement.MeasurementId,
+                                         Convert.ToInt32(measurementLink.TypeId),
+                                         measurementLink.ProfileId
+                                     });
+
+            return measurementLink.Measurement.MeasurementId;
+        }
+
+        public List<Measurement> GetMeasurement(int profileId, ProfileTypeId typeId)
+        {
+            if (profileId <= 0 || typeId == ProfileTypeId.None) return new List<Measurement>();
+            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByProfileID]", new object[] { profileId, typeId }));
+        }
+
+        #endregion
+
+        #region Private Methods
+        private List<Measurement> ConvertMeasurement(DataSet dsMeasurements)
+        {
+            var lstMeasurements = dsMeasurements.Tables[0].AsEnumerable().
+                Select(x => new Measurement()
+                {
+                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                    MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                    SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
+                    IsUse = DataReader.ReadBoolean(x, "IsUse")
+                }).ToList();
+            return lstMeasurements;
+        }
         #endregion
     }
 }

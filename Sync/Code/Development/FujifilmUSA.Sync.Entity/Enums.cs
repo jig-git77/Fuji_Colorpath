@@ -258,15 +258,12 @@ namespace FujifilmUSA.Sync.Entity
         Export = 9
     }
 
-    public enum EMeasurementProfileTypeID
+    public enum ProfileTypeId
     {
-        DestinationProfile = 1,
-        DLP = 2,
-        SourceProfile = 3,
+        None = 0,
+        SourceProfile = 1,
+        DestinationProfile = 2,
+        Dlp = 3,
         Optimization = 4
     }
-
-
-
-
 }

@@ -18,6 +18,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new ReferenceChartData();
         }
 
+        public ReferenceChartData GetReferenceChartDataByTypeId(int referenceChartTypeId, string serialNo)
+        {
+            return new ReferenceChartData();
+        }
+
         #endregion
     }
 }
