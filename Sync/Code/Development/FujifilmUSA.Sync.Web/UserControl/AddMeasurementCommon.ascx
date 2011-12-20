@@ -219,11 +219,14 @@
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {
+        
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
+        
         load();   //first you have to load the plugin
+        
         GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
         ListDevices();
     }

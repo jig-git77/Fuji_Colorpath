@@ -3,23 +3,19 @@
 <%@ Register src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-jQuery(document).ready(function () {
+    jQuery(document).ready(
+    function () {
 
         //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
-        jQuery('#<%= btnAnalyze.ClientID %>').click(function () {
-            var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
-            if (hasMeasurementValue == 'true')
-                return true;
-            else
-                return false;
-        });
-         jQuery("[id*='btnRefresh']").click(function () {
-            refreshTry++;
-            ControlVisibility();
-            if (refreshTry == 2) {
-                jQuery("[id*='lblMessage']").html(jQuery("[id*='lblMessage']").text() + '<br>Hint: Having problem with plugins? Try to close and re-open your browser!</br>');
-            }
-        });
+        jQuery('#<%= btnAnalyze.ClientID %>').click(
+            function () {
+                var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
+                if (hasMeasurementValue == 'true')
+                    return true;
+                else
+                    return false;
+            });
+    });
 </script>
 <div class="contant_top"></div>
 <div class="contant_middle">

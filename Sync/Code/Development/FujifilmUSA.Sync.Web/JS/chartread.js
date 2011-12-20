@@ -121,7 +121,7 @@ function addEvent(obj, name, func) {
     }
 }
 
-function load() {
+function load() {    
     jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
@@ -150,6 +150,7 @@ function DisplayLog() {
     document.getElementById("Log").innerHTML = newHTML;
 }
 function presentScannerList(ScannerList) {
+    alert("asdasd");
     //ScannerList is an array of scanners with properties.    
     jQuery("[id*='lblPluginMessage']").html("");
     if (ScannerList.length == 0) return;

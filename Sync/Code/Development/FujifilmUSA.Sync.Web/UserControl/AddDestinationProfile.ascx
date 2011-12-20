@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDestinationProfile.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDestinationProfile" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
-
+<%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon"
+    TagPrefix="uc" %>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -28,51 +28,32 @@
             </tr>
         </table>
     </div>
-    <div class="add_form">
-        <center>
-            <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
-        </center>
-        <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
-            <tr>
-                <td class="ProjectListtd1">
-                    <asp:Label ID="lblDestinationProfileName" runat="server" Text="Name" CssClass="LabelTitle"></asp:Label>
-                    :
-                </td>
-               <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtDestinationProfile" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>                  
-                </td>    
-                 <td class="float_right">
-                    &nbsp;
-                </td>           
-            </tr>
-             <tr>
-              <td class="ProjectListtd1">
-                    <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>
-                    :
-                </td>
-                <td class="ProjectListtd2">
-                   <%-- <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  SkinID="width200px" ></telerik:RadComboBox>--%>
-                     <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  width="200px">
-                   </asp:DropDownList>
-                </td>
-                <td class="ProjectListtd1">
-                    <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>
-                </td>
-                <td class="ProjectListtd2">                    
-                    <%--<telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"></telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" width="200px">
-                    </asp:DropDownList>
-                </td>               
-            </tr>           
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-    </div>    
+    <div class="info_form">
+        <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+    </div>
+    <div class="info_form">
+        <div class="float_l InformationtxtDivWidth" style="margin-bottom: 1px;">
+            <asp:Label ID="lblDestinationProfileName" runat="server" Text="Name" CssClass="LabelTitle"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="txtDestinationProfile" runat="server" SkinID="width250px"></asp:TextBox>
+            <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+        </div>
+        <div class="float_l" style="margin-bottom: 3px;">
+            <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>&nbsp;
+            <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
+                OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"
+                Width="200px">
+            </asp:DropDownList>
+        </div>
+        <div class="float_r">
+            <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>&nbsp;
+            <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
+                Width="200px">
+            </asp:DropDownList>
+        </div>
+    </div>
     <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
 </div>
-
 <div class="contant_bottom">
     &nbsp;</div>
 <div class="clear">

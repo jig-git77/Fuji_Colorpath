@@ -5,6 +5,7 @@ Date.prototype.toMSJSON = function () {
 };
 
 function GetReferenceChart(ProjectID) {
+    
     //Make ajax request...
     jQuery.ajax({
         type: "GET",
@@ -16,13 +17,12 @@ function GetReferenceChart(ProjectID) {
         //If the call succeeds
         success:
         function (response) {
-            //ReferenceChart object returned as JSON from WCF
+           //ReferenceChart object returned as JSON from WCF
             var objChart = response;
             SetChartResult(objChart);
         },
         //If the call fails
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            //alert(XMLHttpRequest.responseText);
             var jsonFault = JSON.parse(XMLHttpRequest.responseText);
             jQuery.growlUI('Error', "Error Cause:" + jsonFault.Reason + "</ br> Error Detail:" + jsonFault.DetailedInformation, 20000);
         }

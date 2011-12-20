@@ -82,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtDestinationProfile;
+        protected global::System.Web.UI.WebControls.TextBox txtDestinationProfile;
         
         /// <summary>
         /// lblDeviceType control.
