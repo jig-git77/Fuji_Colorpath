@@ -59,7 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
-            BindMeasurement();
+            //BindMeasurement();
         }
         protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
         {

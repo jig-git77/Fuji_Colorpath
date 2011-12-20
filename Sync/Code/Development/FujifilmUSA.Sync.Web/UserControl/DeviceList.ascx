@@ -6,15 +6,16 @@
     <div class="head">
         <h1>
             Device List</h1>
+            </div>           
         <div class="clear">
         </div>
-        <div class="ContainerClass">
+        <div class="form">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr id="trFilter" runat="server">
                     <td>
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
-                                <td class="DeviceListFirstTD">
+                                <td class="DeviceListFirstTD"  style="vertical-align:top !important;">
                                     <asp:Label ID="lblCompany" runat="server" Text="Company" CssClass="LabelTitle"></asp:Label>
                                     &nbsp; :
                                 </td>
@@ -23,29 +24,24 @@
                                         OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
                                     </telerik:RadComboBox>--%>
                                     <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
-                                        onselectedindexchanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true">
+                                        onselectedindexchanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true" CssClass="select">
                                     </asp:DropDownList>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="DeviceListFirstTD">
+                                <td class="DeviceListFirstTD"  style="vertical-align:top !important;" >
                                     <asp:Label ID="lblBranch" runat="server" Text="Branch" CssClass="LabelTitle"></asp:Label>
                                     &nbsp :
                                 </td>
-                                <td>
+                                <td >
                                     <%--<telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
                                         OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true">
                                     </telerik:RadComboBox>--%>
                                      <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                        onselectedindexchanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true">
+                                        onselectedindexchanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true"  CssClass="select">
                                     </asp:DropDownList>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="Hight30px">
-                                    <hr />
-                                </td>
-                            </tr>
+                            </tr>                            
                         </table>
                     </td>
                 </tr>
@@ -94,6 +90,6 @@
     </div>
     <div class="clear">
     </div>
-</div>
+
 <div class="contant_bottom">
     &nbsp;</div>
