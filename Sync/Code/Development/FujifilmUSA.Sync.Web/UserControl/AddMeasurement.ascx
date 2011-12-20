@@ -48,7 +48,9 @@ jQuery(document).ready(function () {
             </tr>
         </table>
     </div>
+    
     <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
+    
     <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
 </div>
 <div class="contant_bottom">

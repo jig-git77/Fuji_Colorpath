@@ -73,7 +73,7 @@
     }
 </style>
 
-<div class="contant_middle">
+<div>
   <%--<div class="head">
         <h1>
             Add Measurement</h1>
