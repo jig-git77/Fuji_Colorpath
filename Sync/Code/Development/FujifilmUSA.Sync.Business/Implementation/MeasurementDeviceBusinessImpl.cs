@@ -10,35 +10,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class MeasurementDeviceBusinessImpl : IMeasurementDeviceBusiness
     {
-        #region IMeasurementDeviceBusiness Members
-
-        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
-        {
-
-            var dstMeasurementDeviceList = new Dictionary<string, string>();
-            //========== Get data from data access=================//
-            var dsMeasurementDeviceList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementDeviceBySyncDeviceID]", new object[] { syncDeviceId });
-
-
-            if (dsMeasurementDeviceList != null && dsMeasurementDeviceList.Tables.Count > 0)
-            {
-                dstMeasurementDeviceList = (dsMeasurementDeviceList.Tables[0].AsEnumerable().
-                    Select(measurementDevice => new
-                                                    {
-                                                        Value =
-                                                        DataReader.ReadInt(measurementDevice, "MeasurementDeviceTypeID") +
-                                                        " - " +
-                                                        DataReader.ReadInt(measurementDevice, "MeasurementDeviceID"),
-                                                        Text =
-                                                        DataReader.ReadString(measurementDevice, "MeasurementDeviceTypeName") + " - " + DataReader.ReadString(measurementDevice, "SerialNumber")
-                                                    })).ToDictionary(measurementDevice => measurementDevice.Value, measurementDevice => measurementDevice.Text);
-
-            }
-            return dstMeasurementDeviceList;
-        }
-
-        #endregion
-
         #region Insert Sync Measurement Device
         public int InsertSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
         {
@@ -166,29 +137,5 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDeviceList;
         }
         #endregion
-
-
-        public Dictionary<int, string> GetDongleList(int branchId)
-        {
-            Dictionary<int, string> dongleList = new Dictionary<int, string>();
-            var dsDongleList = DataAccessFactory.Instance.GetDsResult("[CPV].[uspGetDongleListByBranchID]", new object[] { 
-                branchId
-            });
-            if (dsDongleList != null && dsDongleList.Tables.Count > 0 && dsDongleList.Tables[0].Rows.Count > 0)
-            {
-                dongleList = dsDongleList.Tables[0].AsEnumerable().ToDictionary(x => DataReader.ReadInt(x, "CPDongleID"), x => DataReader.ReadString(x, "DongleDescription"));
-            }
-            return dongleList;
-        }
-        public Dictionary<int, string> GetMeasurementDeviceTypeList()
-        {
-            Dictionary<int, string> measurementDeviceTypeList = new Dictionary<int, string>();
-            var dsMeasurementDeviceTypeList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSyncMeasurementDeviceType]");
-            if (dsMeasurementDeviceTypeList != null && dsMeasurementDeviceTypeList.Tables.Count > 0 && dsMeasurementDeviceTypeList.Tables[0].Rows.Count > 0)
-            {
-                measurementDeviceTypeList = dsMeasurementDeviceTypeList.Tables[0].AsEnumerable().ToDictionary(x => DataReader.ReadInt(x, "MeasurementDeviceTypeID"), x => DataReader.ReadString(x, "MeasurementDeviceTypeName"));
-            }
-            return measurementDeviceTypeList;
-        }
     }
 }

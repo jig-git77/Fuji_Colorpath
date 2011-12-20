@@ -4,10 +4,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IReferenceChartBusiness :ITaskBase
     {
-        Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId(int measurementDeviceId);
-
         ReferenceChartData GetReferenceChartData(int projectId);
-
         ReferenceChartData GetReferenceChartDataByTypeId(int referenceChartTypeId, string serialNo);
     }
 }

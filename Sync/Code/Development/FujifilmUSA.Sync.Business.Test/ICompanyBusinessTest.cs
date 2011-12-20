@@ -76,16 +76,16 @@ namespace FujifilmUSA.Sync.Business.Test
         /// <summary>
         ///A test for GetCompanyList
         ///</summary>
-        [TestMethod()]
-        public void GetCompanyListTest()
-        {
-            ICompanyBusiness target = CreateICompanyBusiness(); // TODO: Initialize to an appropriate value
+        //[TestMethod()]
+        //public void GetCompanyListTest()
+        //{
+        //    ICompanyBusiness target = CreateICompanyBusiness(); // TODO: Initialize to an appropriate value
             
-            Dictionary<int, string> actual;
-            actual = target.GetCompanyList();
-            Assert.IsTrue(actual != null);
+        //    Dictionary<int, string> actual;
+        //    actual = target.GetCompanyList();
+        //    Assert.IsTrue(actual != null);
             
             
-        }
+        //}
     }
 }

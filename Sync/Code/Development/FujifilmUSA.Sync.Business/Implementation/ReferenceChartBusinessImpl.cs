@@ -13,24 +13,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IReferenceChartTypeBusiness Members
 
-        public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId(int measurementDeviceId)
-        {
-            var dstReferenceChartTypeList = new Dictionary<int, string>();
-            var dsReferenceChartTypeList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChartTypeByMeasurementDeviceID]", new object[] { measurementDeviceId });
-
-            if (dsReferenceChartTypeList != null && dsReferenceChartTypeList.Tables.Count > 0)
-            {
-                dstReferenceChartTypeList = (dsReferenceChartTypeList.Tables[0].AsEnumerable().
-                    Select(referenceChartType => new
-                                                     {
-                                                         Value = DataReader.ReadInt(referenceChartType, "ReferenceChartTypeID"),
-                                                         Text = DataReader.ReadString(referenceChartType, "ChartName")
-                                                     })).ToDictionary(referenceChartType => referenceChartType.Value, referenceChartType => referenceChartType.Text);
-
-            }
-            return dstReferenceChartTypeList;
-        }
-
         public ReferenceChartData GetReferenceChartData(int projectId)
         {
             return ConvertReferenceChartData(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetReferenceChart]", new object[] {projectId}));

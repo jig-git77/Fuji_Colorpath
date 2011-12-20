@@ -76,30 +76,30 @@ namespace FujifilmUSA.Sync.Business.Test
         /// <summary>
         ///A test for GetBranchList
         ///</summary>
-        [TestMethod()]
-        public void GetBranchListTest()
-        {
-            IBranchBusiness target = CreateIBranchBusiness(); // TODO: Initialize to an appropriate value
-            int CompanyId = 1; // TODO: Initialize to an appropriate value            
-            Dictionary<int, string> actual;
-            actual = target.GetBranchList(CompanyId);
-            Assert.IsTrue(actual != null);
+        //[TestMethod()]
+        //public void GetBranchListTest()
+        //{
+        //    IBranchBusiness target = CreateIBranchBusiness(); // TODO: Initialize to an appropriate value
+        //    int CompanyId = 1; // TODO: Initialize to an appropriate value            
+        //    Dictionary<int, string> actual;
+        //    actual = target.GetBranchList(CompanyId);
+        //    Assert.IsTrue(actual != null);
 
-        }
+        //}
 
-        /// <summary>
-        ///A test for GetBranchList
-        ///</summary>
-        [TestMethod()]
-        public void GetBranchListTest1()
-        {
-            IBranchBusiness target = CreateIBranchBusiness(); // TODO: Initialize to an appropriate value
-            int CompanyId = 0; // TODO: Initialize to an appropriate value
-            Dictionary<int, string> expected = null; // TODO: Initialize to an appropriate value
-            Dictionary<int, string> actual;
-            actual = target.GetBranchList(CompanyId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
+        ///// <summary>
+        /////A test for GetBranchList
+        /////</summary>
+        //[TestMethod()]
+        //public void GetBranchListTest1()
+        //{
+        //    IBranchBusiness target = CreateIBranchBusiness(); // TODO: Initialize to an appropriate value
+        //    int CompanyId = 0; // TODO: Initialize to an appropriate value
+        //    Dictionary<int, string> expected = null; // TODO: Initialize to an appropriate value
+        //    Dictionary<int, string> actual;
+        //    actual = target.GetBranchList(CompanyId);
+        //    Assert.AreEqual(expected, actual);
+        //    Assert.Inconclusive("Verify the correctness of this test method.");
+        //}
     }
 }

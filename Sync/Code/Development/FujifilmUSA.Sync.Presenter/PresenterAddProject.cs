@@ -14,13 +14,13 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void GetSourceProfileList()
         {
-            var task = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewAddProject.GetSourceProfileList = task.GetSourceProfileList();
         }
 
         public void GetDestinationProfiles()
         {
-            var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewAddProject.GetDestinationProfiles = task.GetDestinationProfiles(_viewAddProject.SyncDeviceId);
         }
 
@@ -33,13 +33,13 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void GetMeasurementDeviceListBySyncDeviceId()
         {
-            var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewAddProject.GetMeasurementDeviceListBySyncDeviceId = task.GetMeasurementDeviceListBySyncDeviceId(_viewAddProject.SyncDeviceId);
         }
 
         public void GetReferenceChartTypeListByMeasurementDeviceId()
         {
-            var task = (IReferenceChartBusiness)new BusinessFactory<IReferenceChartBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewAddProject.GetReferenceChartTypeListByMeasurementDeviceId = task.GetReferenceChartTypeListByMeasurementDeviceId(_viewAddProject.MeasurementDeviceId);
         }
 

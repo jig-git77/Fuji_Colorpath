@@ -49,12 +49,12 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void GetDongleList()
         {
-            var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewMeasurementDevice.DongleList = task.GetDongleList(_viewMeasurementDevice.BranchId);
         }
         public void GetMeasurementDeviceTypeList()
         {
-            var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewMeasurementDevice.MeasurementDeviceTypeList = task.GetMeasurementDeviceTypeList();
         }
     }
