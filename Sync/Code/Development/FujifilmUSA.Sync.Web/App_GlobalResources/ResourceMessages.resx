@@ -183,4 +183,13 @@
   <data name="DeviceLinkProfile_IsUse_True" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="AddDestinationProfile_AlignmentChart_Required" xml:space="preserve">
+    <value>Please select alignment chart</value>
+  </data>
+  <data name="AddDestinationProfile_DestinationProfileName_Required" xml:space="preserve">
+    <value>Please provide destination profile name</value>
+  </data>
+  <data name="AddDestinationProfile_DeviceType_Required" xml:space="preserve">
+    <value>Please select device type</value>
+  </data>
 </root>

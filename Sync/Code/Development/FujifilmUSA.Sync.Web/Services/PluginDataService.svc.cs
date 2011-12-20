@@ -46,5 +46,24 @@ namespace FujifilmUSA.Sync.Web.Services
             var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
             return refChartData.SaveMeasurement(measurementLink);
         }
+
+        [WebInvoke(Method = "POST", UriTemplate = "InsertDestinationProfile")]
+        [OperationContract]
+        public int InsertDestinationProfile(DestinationProfile objDestinationProfile)
+        {
+            var refChartData = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
+            return refChartData.InsertDestinationProfile(objDestinationProfile);
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "InsertDeviceLinkProfile")]
+        [OperationContract]
+        public int InsertDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
+        {
+            var refChartData = ((IDeviceLinkProfileBusiness)new Business.BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject());
+            return refChartData.InsertDeviceLinkProfile(objDeviceLinkProfile);
+        }
+
+
+
     }
 }

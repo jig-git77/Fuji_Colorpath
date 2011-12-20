@@ -15,6 +15,19 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Entity.DestinationProfile>();
         }
+
+        int IDestinationProfileBusiness.InsertDestinationProfile(Entity.DestinationProfile objDestinationProfile)
+        {
+            return 0;
+        }
+        
+        public void UpdateDestinationProfile(int destinationProfileId, byte[] profile)
+        {
+        }
         #endregion
+
+
+
+      
     }
 }

@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="IBranchBusinessTest.cs" />
     <Compile Include="ICompanyBusinessTest.cs" />
-    <Compile Include="IProjectBussinessTest.cs" />
+    <Compile Include="IDestinationProfileBusinessDestinationProfile.cs" />
     <Compile Include="ITaskeroUserBusinessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

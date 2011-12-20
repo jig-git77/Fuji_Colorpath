@@ -71,6 +71,42 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objDeviceLinkProfileList;
         }
 
+        public int InsertDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
+        {
+            var objProjectInPeramater = new List<Parameters>();
+            var objProjectOutPeramater = new List<Parameters>();
+
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@SourceProfileID", Size = 0, Type = DbType.Int16, Value = objDeviceLinkProfile.SrcProfile.SourceProfileId });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@DestinationProfileID", Size = 0, Type = DbType.Int16, Value = objDeviceLinkProfile.DestProfile.DestinationProfileId });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@DLPName", Size = 0, Type = DbType.String, Value = objDeviceLinkProfile.DeviceLinkProfileName });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objDeviceLinkProfile.IsUse });
+
+            objProjectOutPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 4, Type = DbType.Int16 });
+
+
+            DataAccessFactory.Instance.ExecuteProcedureWithTransaction(
+                new List<Action>()
+                    {
+                        () =>
+                            {
+                                objProjectOutPeramater =
+                                    DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertDLPProfile]",
+                                                                                objProjectInPeramater,
+                                                                                objProjectOutPeramater);
+                                objDeviceLinkProfile.DeviceLinkProfileId =
+                                    Convert.ToInt16(
+                                        objProjectOutPeramater.Single(x => x.ParameterName == "@DLPID").Value);
+                            }
+                    });
+
+            return objDeviceLinkProfile.DeviceLinkProfileId;
+        }
+
+        public void UpdateDestinationProfile(int deviceLinkProfileId, byte[] profile)
+        {
+            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDLPProfile]", new object[] { deviceLinkProfileId, profile });
+        }
+
         #endregion
     }
 }
