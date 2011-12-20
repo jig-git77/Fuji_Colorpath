@@ -60,13 +60,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case LeftMenuItemLevel.Device:
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentSyncRun = null;
-                    Response.Redirect("ProjectList.aspx");
+                    GetProfileType();
                     break;
             }
         }
         #endregion
 
-       
+        #region Methods
+        private void GetProfileType()
+        {
+            if (SessionManager.Instance.ProfileTypeID.ToString()!=string.Empty)
+            {
+                switch (SessionManager.Instance.ProfileTypeID)
+                { 
+                    case ProfileType.Optimization:
+                        Response.Redirect("ProjectList.aspx");
+                        break;
+                    case ProfileType.DestinationProfile:
+                        Response.Redirect("DestinationProfileList.aspx");
+                        break;
+                    case ProfileType.Dlp:
+                        Response.Redirect("DeviceLinkProfileList.aspx");
+                        break;
+
+                }
+
+            }
+        }
+        #endregion
+
 
     }
 }

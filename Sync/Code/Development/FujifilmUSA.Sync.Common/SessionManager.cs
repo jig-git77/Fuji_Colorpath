@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _currentSyncRun = "SESSION_CURRENTSYNCRUN";
         private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
         private const string _currentMeasurementDevice = "SESSION_CURRENTMEASUREMENTDEVICE";
+        private const string _currentProfileTypeID = "SESSION_CURRENTPROFILETYPEID";
         #endregion
 
         #region Singleton
@@ -139,6 +140,21 @@ namespace FujifilmUSA.Sync.Common
         public static void CheckLogin()
         {
             if(SessionManager.Instance.CurrentUser==null) { HttpContext.Current.Response.Redirect("Login.aspx"); }
+        }
+        public ProfileType ProfileTypeID
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentProfileTypeID] != null)
+                {
+                    return (ProfileType)System.Enum.Parse(typeof(ProfileType), HttpContext.Current.Session[_currentProfileTypeID].ToString());
+                }
+                return ProfileType.Optimization;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentProfileTypeID] = value;
+            }
         }
     }
 }

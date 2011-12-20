@@ -28,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
+            SessionManager.Instance.ProfileTypeID = ProfileType.Dlp;
             if (!Page.IsPostBack)
             {               
                 BindMeasurementDeviceType();

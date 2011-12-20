@@ -10,7 +10,7 @@
 <div class="contant_top">&nbsp;</div>
 <div class="contant_middle">
     <div class="head">
-        <h1>Destination Profile</h1>
+        <h1>Device Link Profile</h1>
         <a href="AddDeviceLinkProfile.aspx" class="button"><span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
             New DLP</span></a></div>
