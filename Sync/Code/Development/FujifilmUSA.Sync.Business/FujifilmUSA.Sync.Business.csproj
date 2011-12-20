@@ -53,6 +53,7 @@
     <Compile Include="Implementation\DeviceLinkProfileBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\MiscDataBusinessImpl.cs" />
+    <Compile Include="Implementation\ProfileBusinessImpl.cs" />
     <Compile Include="Implementation\ProjectBussinessImpl.cs" />
     <Compile Include="Implementation\ReferenceChartBusinessImpl.cs" />
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Interface\IDeviceLinkProfileBusiness.cs" />
     <Compile Include="Interface\IMeasurementDeviceBusiness.cs" />
     <Compile Include="Interface\IMiscDataBusiness.cs" />
+    <Compile Include="Interface\IProfileBusiness.cs" />
     <Compile Include="Interface\IProjectBussiness.cs" />
     <Compile Include="Interface\IReferenceChartBusiness.cs" />
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Mock\DeviceLinkProfileBusinessMock.cs" />
     <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />
     <Compile Include="Mock\MiscDataBusinessMock.cs" />
+    <Compile Include="Mock\ProfileBusinessMock.cs" />
     <Compile Include="Mock\ProjectBussinessMock.cs" />
     <Compile Include="Mock\ReferenceChartBusinessMock.cs" />
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />

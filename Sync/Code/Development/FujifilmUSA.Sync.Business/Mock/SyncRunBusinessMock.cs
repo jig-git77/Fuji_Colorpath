@@ -44,11 +44,6 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<Measurement> GetMeasurement(int profileId, ProfileType typeId)
-        {
-            return new List<Measurement>();
-        }
-
         #endregion
     }
 }

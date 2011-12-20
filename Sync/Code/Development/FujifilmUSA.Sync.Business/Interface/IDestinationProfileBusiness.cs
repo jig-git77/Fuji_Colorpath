@@ -5,8 +5,9 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IDestinationProfileBusiness : ITaskBase
     {
-         List<DestinationProfile> GetDestinationProfileList(int syncDeviceId);
-         int InsertDestinationProfile(DestinationProfile objDestinationProfile);
-         void UpdateDestinationProfile(int destinationProfileId, byte[] profile);
+        List<DestinationProfile> GetDestinationProfileList(int syncDeviceId);
+        int InsertDestinationProfile(DestinationProfile objDestinationProfile);
+        void UpdateDestinationProfile(int destinationProfileId, byte[] profile);
+        bool CreateDestinationProfile(string measurementIds, int destinationId);
     }
 }

@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System;
+using FujifilmUSA.Sync.Business.ProfilerService;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -65,10 +66,62 @@ namespace FujifilmUSA.Sync.Business.Implementation
             DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDestinationProfile]", new object[] { destinationProfileId, profile });
         }
 
+        public bool CreateDestinationProfile(string measurementIds, int destinationId)
+        {
+            var destinationProfile = new DestinationProfile();
+            var request = new CreateSourceProfileRequest()
+                              {
+                                  DCSData = new List<double>(),
+                                  PCSData = new List<double>(),
+                              };
+
+            //Load pcs and dcs Data
+            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.uspGetPCSData", new object[] {measurementIds});
+            if (dsPcsDcsData.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
+                {
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
+
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+                }
+            }
+
+            //Add options and call profile service to generate optimize dlp
+            using (var client = new ProfilerClient())
+            {
+                request.Options = new List<Parameter>
+                                  {
+                                      new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
+                                      new Parameter() {Name = "ProfileSize", Value = "2"},
+                                      new Parameter() {Name = "Rendering", Value = "3"},
+                                      new Parameter() {Name = "DLBypassBlack", Value = "100"},
+                                      new Parameter() {Name = "DLExceptions", Value = "129"},
+                                      new Parameter() {Name = "ProfileFormat", Value = "2"},
+                                      new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
+                                      new Parameter() {Name = "Flags", Value = "0"},
+                                      new Parameter() {Name = "Attributes0", Value = "0"},
+                                      new Parameter() {Name = "Attributes1", Value = "0"},
+                                      new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
+                                  };
+                var response = client.CreateSourceProfile(request);
+                destinationProfile.Profile = response.Profile.ProfileData;
+            }
+
+            if (destinationProfile.Profile != null)
+            {
+                DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDestinationProfile]", new object[] { destinationId, destinationProfile.Profile });
+            }
+
+            return true;
+        }
 
         #endregion
-
-        
     }
 }
 

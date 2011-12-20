@@ -201,16 +201,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementLink.Measurement.MeasurementId;
         }
 
-        public List<Measurement> GetMeasurement(int profileId, ProfileType typeId)
-        {
-            if (profileId <= 0 || typeId == ProfileType.None) return new List<Measurement>();
-            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByProfileID]", new object[] { profileId, typeId }));
-        }
-
         #endregion
 
         #region Private Methods
-        private List<Measurement> ConvertMeasurement(DataSet dsMeasurements)
+        internal static List<Measurement> ConvertMeasurement(DataSet dsMeasurements)
         {
             var lstMeasurements = dsMeasurements.Tables[0].AsEnumerable().
                 Select(x => new Measurement()
