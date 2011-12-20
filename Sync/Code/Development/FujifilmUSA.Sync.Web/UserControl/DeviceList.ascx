@@ -22,6 +22,7 @@
                                     <telerik:RadComboBox ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
                                         OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true">
                                     </telerik:RadComboBox>
+
                                 </td>
                             </tr>
                             <tr>

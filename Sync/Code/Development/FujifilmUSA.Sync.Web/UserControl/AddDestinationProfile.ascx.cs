@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Telerik.Web.UI;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
@@ -31,7 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
             }
-        }
+        } 
 
         #endregion
 
@@ -65,6 +66,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         }
         #endregion
+        protected void cmbDeviceType_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            BindReferenceChartType();
+        }
 
         #region IViewAddProject Members
         public Dictionary<int, string> GetSourceProfileList { get; set; }

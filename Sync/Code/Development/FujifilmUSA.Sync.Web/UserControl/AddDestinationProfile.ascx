@@ -52,7 +52,7 @@
                     :
                 </td>
                 <td class="ProjectListtd2">
-                    <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" SkinID="width200px" ></telerik:RadComboBox>
+                    <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  SkinID="width200px" ></telerik:RadComboBox>
                 </td>
                 <td class="ProjectListtd1">
                     <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>
