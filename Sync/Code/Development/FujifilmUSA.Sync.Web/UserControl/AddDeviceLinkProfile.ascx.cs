@@ -66,7 +66,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenteraddproject.GetSourceProfileList();
             cmbSourceProfile.DataSource = GetSourceProfileList;
             cmbSourceProfile.DataBind();
-            cmbSourceProfile.Items.Insert(0, new RadComboBoxItem("-- Select --", ""));
+            cmbSourceProfile.Items.Insert(0, new ListItem("-- Select --", ""));
         }
         private void BindDestinationProfile()
         {
@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenteraddproject.GetDestinationProfiles();
             cmbDestinationProfile.DataSource = GetDestinationProfiles;
             cmbDestinationProfile.DataBind();
-            cmbDestinationProfile.Items.Insert(0, new RadComboBoxItem("-- Select --", ""));
+            cmbDestinationProfile.Items.Insert(0, new ListItem("-- Select --", ""));
         }
         #endregion
 
@@ -82,6 +82,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
         {
             lbtnDeviceLinkProfileSave.Text = "Save";
+        }      
+        protected void cmbDeviceType_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            BindReferenceChartType();
         }
         #endregion
 
@@ -99,5 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public MeasurementSetting ObjMeasurementSetting { get; set; }
         public Project InsertProjectAndMeasurementSetting { get; set; }
         #endregion
+
+        
     }    
 }

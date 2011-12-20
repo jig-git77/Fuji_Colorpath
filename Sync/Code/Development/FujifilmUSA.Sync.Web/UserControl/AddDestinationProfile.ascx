@@ -40,7 +40,7 @@
                 </td>
                <td class="ProjectListtd2">
                     <telerik:RadTextBox ID="txtDestinationProfile" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>                  
                 </td>    
                  <td class="float_right">
                     &nbsp;
@@ -52,13 +52,17 @@
                     :
                 </td>
                 <td class="ProjectListtd2">
-                    <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  SkinID="width200px" ></telerik:RadComboBox>
+                   <%-- <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  SkinID="width200px" ></telerik:RadComboBox>--%>
+                     <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true"  width="200px">
+                   </asp:DropDownList>
                 </td>
                 <td class="ProjectListtd1">
                     <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>
                 </td>
                 <td class="ProjectListtd2">                    
-                    <telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"></telerik:RadComboBox>
+                    <%--<telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"></telerik:RadComboBox>--%>
+                    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" width="200px">
+                    </asp:DropDownList>
                 </td>               
             </tr>           
             <tr>

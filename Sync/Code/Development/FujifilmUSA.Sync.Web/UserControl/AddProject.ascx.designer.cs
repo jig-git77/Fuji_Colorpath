@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddProduct {
         
         /// <summary>
+        /// hdnSelectedTabIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedTabIndex;
+        
+        /// <summary>
         /// lbtnProjectSave control.
         /// </summary>
         /// <remarks>
@@ -73,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbProjectType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbProjectType;
         
         /// <summary>
         /// lblOutputType control.
@@ -91,7 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbOutputType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbOutputType;
         
         /// <summary>
         /// Label1 control.
@@ -109,7 +118,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbSourceProfile;
+        protected global::System.Web.UI.WebControls.DropDownList cmbSourceProfile;
         
         /// <summary>
         /// Label2 control.
@@ -127,7 +136,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDestinationProfile;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDestinationProfile;
         
         /// <summary>
         /// grdDLP control.
@@ -172,7 +181,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbIlluminant;
+        protected global::System.Web.UI.WebControls.DropDownList cmbIlluminant;
         
         /// <summary>
         /// lblObserver control.
@@ -190,7 +199,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbObserver;
+        protected global::System.Web.UI.WebControls.DropDownList cmbObserver;
         
         /// <summary>
         /// lblDensityType control.
@@ -208,7 +217,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDensityType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDensityType;
         
         /// <summary>
         /// lblDeviceType control.
@@ -226,7 +235,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDeviceType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDeviceType;
         
         /// <summary>
         /// lblAlignmentChart control.
@@ -244,6 +253,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbAlignmentChart;
+        protected global::System.Web.UI.WebControls.DropDownList cmbAlignmentChart;
     }
 }

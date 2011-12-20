@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDeviceType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDeviceType;
         
         /// <summary>
         /// lblAlignmentChart control.
@@ -118,7 +118,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbAlignmentChart;
+        protected global::System.Web.UI.WebControls.DropDownList cmbAlignmentChart;
         
         /// <summary>
         /// Label1 control.
@@ -136,7 +136,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbSourceProfile;
+        protected global::System.Web.UI.WebControls.DropDownList cmbSourceProfile;
         
         /// <summary>
         /// Label2 control.
@@ -154,7 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDestinationProfile;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDestinationProfile;
         
         /// <summary>
         /// ucAddMeasurementCommon control.
