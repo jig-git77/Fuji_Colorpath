@@ -41,29 +41,41 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurementLink")]
         [OperationContract]
-        public int SaveMeasurementLink(MeasurementLink measurementLink)
+        public int SaveDestinationMeasurement(DestinationProfile objDestinationProfile,MeasurementLink measurementLink)
         {
-            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
-            return refChartData.SaveMeasurement(measurementLink);
-        }
-
-        [WebInvoke(Method = "POST", UriTemplate = "InsertDestinationProfile")]
-        [OperationContract]
-        public int InsertDestinationProfile(DestinationProfile objDestinationProfile)
-        {
-            var refChartData = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
-            return refChartData.InsertDestinationProfile(objDestinationProfile);
+            var destId = 0;
+            if(objDestinationProfile.DestinationProfileId == 0)
+            {
+                var insertDest = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
+                measurementLink.ProfileId = insertDest.InsertDestinationProfile(objDestinationProfile);
+            }
+            else
+            {
+                measurementLink.ProfileId = objDestinationProfile.DestinationProfileId;
+            }
+            measurementLink.TypeId = ProfileType.DestinationProfile;
+            var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            return insertMst.SaveMeasurement(measurementLink);
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "InsertDeviceLinkProfile")]
         [OperationContract]
-        public int InsertDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
+        public int SaveDeviceLinkMeasurement(DeviceLinkProfile objDeviceLinkProfile, MeasurementLink measurementLink)
         {
-            var refChartData = ((IDeviceLinkProfileBusiness)new Business.BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject());
-            return refChartData.InsertDeviceLinkProfile(objDeviceLinkProfile);
+            var destId = 0;
+            if (objDeviceLinkProfile.DeviceLinkProfileId == 0)
+            {
+                var insertDlp = ((IDeviceLinkProfileBusiness)new Business.BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject());
+                measurementLink.ProfileId = insertDlp.InsertDeviceLinkProfile(objDeviceLinkProfile);
+            }
+            else
+            {
+                measurementLink.ProfileId = objDeviceLinkProfile.DeviceLinkProfileId;
+            }
+
+            measurementLink.TypeId = ProfileType.Dlp;
+            var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            return insertMst.SaveMeasurement(measurementLink);
         }
-
-
-
     }
 }
