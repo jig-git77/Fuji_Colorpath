@@ -83,10 +83,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             lbtnDeviceLinkProfileSave.Text = "Save";
         }      
-        protected void cmbDeviceType_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            BindReferenceChartType();
-        }
+        //protected void cmbDeviceType_SelectedIndexChanged1(object sender, EventArgs e)
+        //{
+        //    BindReferenceChartType();
+        //}
         #endregion
 
         #region IViewAddProject Members
