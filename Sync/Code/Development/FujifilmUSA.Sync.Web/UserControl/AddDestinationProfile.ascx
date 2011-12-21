@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDestinationProfile.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDestinationProfile" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon"
     TagPrefix="uc" %>
 <div class="contant_top">
@@ -15,21 +16,9 @@
                 Save</span></asp:LinkButton></div>
     <div class="clear">
     </div>
+    <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
     <div class="info_form">
-        <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
-            background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
-                    <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
-                </td>
-                <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
-                    <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="info_form">
-        <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+        <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
     <div class="info_form">
         <%--<div class="float_l InformationtxtDivWidth" style="margin-bottom: 1px;">
@@ -84,7 +73,7 @@
         </table>      
 
     </div>
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
+    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="DestinationProfile" />
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

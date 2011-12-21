@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddMeasurementCommon : System.Web.UI.UserControl, IViewMeasurement
     {
         #region Declaration
+        
         private PresenterMeasurement _presentermeasurement;
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
@@ -24,6 +25,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
+
+        public ProfileType Type { get; set; }
+        
         #endregion
 
         #region Page Event
@@ -36,11 +40,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();            
             if (!IsPostBack)
             {
-                if(SessionManager.Instance.ProfileTypeID == ProfileType.DestinationProfile)
+                if (Type == ProfileType.DestinationProfile)
                 {
                     
                 }
-                if (SessionManager.Instance.ProfileTypeID == ProfileType.Optimization)
+                if (Type == ProfileType.Optimization)
                 {
                     hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                     hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();

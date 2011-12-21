@@ -220,6 +220,7 @@
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\MeasurementDeviceList.ascx" />
+    <Content Include="UserControl\MeasurementStatusbar.ascx" />
     <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Settings.ascx" />
@@ -478,6 +479,13 @@
     </Compile>
     <Compile Include="UserControl\MeasurementDeviceList.ascx.designer.cs">
       <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MeasurementStatusbar.ascx.cs">
+      <DependentUpon>MeasurementStatusbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MeasurementStatusbar.ascx.designer.cs">
+      <DependentUpon>MeasurementStatusbar.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProjectInformation.ascx.cs">
       <DependentUpon>ProjectInformation.ascx</DependentUpon>

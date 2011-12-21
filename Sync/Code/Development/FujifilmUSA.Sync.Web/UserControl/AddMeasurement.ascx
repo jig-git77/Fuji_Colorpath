@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurement" %>
 <%@ Register src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
+<%@ Register src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery(document).ready(
@@ -32,22 +33,9 @@
         </div>
     </div>
   
-    <div class="info_form">
-        <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
-            background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
-                    <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
-                </td>
-                <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
-                    <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
-                </td>
-            </tr>
-        </table>
-    </div>
     
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
-    
+    <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
+    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="Optimization" />    
     <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
 </div>
 <div class="contant_bottom">
