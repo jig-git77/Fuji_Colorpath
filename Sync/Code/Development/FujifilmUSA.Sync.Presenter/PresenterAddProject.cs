@@ -47,6 +47,6 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
             _viewAddProject.InsertProjectAndMeasurementSetting = task.InsertProjectAndMeasurementSetting(_viewAddProject.ObjProject, _viewAddProject.ObjMeasurementSetting);
-        }
+        }       
     }
 }
