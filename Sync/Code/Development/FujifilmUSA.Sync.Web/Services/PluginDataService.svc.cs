@@ -77,5 +77,16 @@ namespace FujifilmUSA.Sync.Web.Services
             var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
             return insertMst.SaveMeasurement(request.MeasurementLink);
         }
+
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetReferenceChartTypeListByMeasurementDeviceId/{measurementDeviceId}")]
+        [OperationContract]
+        public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId(string measurementDeviceId)
+        {
+            var refChartData = ((IMiscDataBusiness)new Business.BusinessFactory<IMiscDataBusiness>().CreateObject());
+            return refChartData.GetReferenceChartTypeListByMeasurementDeviceId(Convert.ToInt32(measurementDeviceId));
+        }
+
+
     }
 }

@@ -68,10 +68,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion      
 
-        protected void cmbDeviceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindReferenceChartType();
-        }
+        //protected void cmbDeviceType_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    BindReferenceChartType();
+        //}
         #region IViewAddProject Members
         public Dictionary<int, string> GetSourceProfileList { get; set; }
         public Dictionary<int, string> GetDestinationProfiles { get; set; }
