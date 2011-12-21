@@ -147,14 +147,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Method
         private void BindOutputType()
-        {
-            cmbOutputType.DataSource = Enum.GetValues(typeof(EOutputType));
+        {           
+            var dictionary = new Dictionary<int, string>();
+            foreach (int value in Enum.GetValues(typeof(EOutputType)))
+            {
+                dictionary.Add(value, Enum.GetName(typeof(EOutputType), value));
+            }
+
+            cmbOutputType.DataSource = dictionary;
+            cmbOutputType.DataTextField = "Value";
+            cmbOutputType.DataValueField = "Key";
             cmbOutputType.DataBind();
 
         }
         private void BindProjectType()
         {
-            cmbProjectType.DataSource = Enum.GetValues(typeof(EProjectType));
+            var dictionary = new Dictionary<int, string>();
+            foreach (int value in Enum.GetValues(typeof(EProjectType)))
+            {
+                dictionary.Add(value, Enum.GetName(typeof(EProjectType), value));
+            }
+
+            cmbProjectType.DataSource = dictionary;
+            cmbProjectType.DataTextField = "Value";
+            cmbProjectType.DataValueField = "Key";
             cmbProjectType.DataBind();
         }
         private void BindSourceProfile()
@@ -368,4 +384,4 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
        
     }
-}
+} 
