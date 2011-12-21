@@ -64,8 +64,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
                                 DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName")
+                            },
+                        SrcProfile =
+                            new SourceProfile
+                            {
+                                SourceProfileId = DataReader.ReadInt(x, "SourceProfileID"),                                
                             }
-
+                            
                     }).ToList();
             }
             return objDeviceLinkProfileList;
