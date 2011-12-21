@@ -36,7 +36,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             //Do Nothing...
         }
-
+        public MeasurementSetting GetMeasurementSettingByProjectID(int projectID)
+        {
+            return new MeasurementSetting();
+        }
         #endregion
     }
 }
