@@ -151,6 +151,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public int DeleteProject { get; set; }
         public Project GetProjectByProjectId { get; set; }
+        public MeasurementSetting GetMeasurementSettingByProjectID { get; set; }
         #endregion
     }
 }

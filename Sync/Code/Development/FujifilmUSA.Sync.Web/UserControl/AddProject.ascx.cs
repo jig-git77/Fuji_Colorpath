@@ -10,10 +10,12 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddProduct : System.Web.UI.UserControl, IViewAddProject
+    public partial class AddProduct : System.Web.UI.UserControl, IViewAddProject,IViewProjectList,IViewDeviceLinkProfile
     {
         #region "Declaration"
         private PresenterAddProject _presenteraddproject;
+        private PresenterProjectList _presenterprojectlist;
+        private PresenterDeviceLinkProfile _presenterdevicelinkprofile;
         #endregion
 
         #region "Page Events"
@@ -21,6 +23,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenteraddproject = new PresenterAddProject(this);
+            _presenterprojectlist = new PresenterProjectList(this);
+            _presenterdevicelinkprofile = new PresenterDeviceLinkProfile(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,6 +45,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindReferenceDensityType();
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
+
+                if (SessionManager.Instance.CurrentProject != null)
+                {
+                    LoadProjectByProjectId();
+                    ToggleInputControlState(false);
+                }
             }
         }
 
@@ -49,11 +59,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item.DataItem != null)
             {
                 DeviceLinkProfile dlp = e.Item.DataItem as DeviceLinkProfile;
-
+                
                 System.Web.UI.WebControls.RadioButton rbtnDeviceLinkProfileId = e.Item.FindControl("rbtnDeviceLinkProfileId") as System.Web.UI.WebControls.RadioButton;
                 if (rbtnDeviceLinkProfileId != null)
                 {
                     rbtnDeviceLinkProfileId.Attributes.Add("onclick", "javascript: return SelectDeviceLinkProfileId(" + dlp.DeviceLinkProfileId + ");");
+                }
+                if (SessionManager.Instance.CurrentProject != null)
+                {
+                    if (dlp.DeviceLinkProfileId == SessionManager.Instance.CurrentProject.DeviceLinkProfileId)
+                    {
+                        rbtnDeviceLinkProfileId.Checked = true;
+                    }
                 }
             }
         }
@@ -216,6 +233,63 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbAlignmentChart.DataBind();
         }
 
+        private void LoadProjectByProjectId()
+        {
+            if (SessionManager.Instance.CurrentProject != null)
+            {
+
+                //Get Current Project Detail by Project Id
+                this.ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                _presenterprojectlist.GetProjectByProjectId();
+                txtProjectName.Text = GetProjectByProjectId.ProjectName;
+                cmbProjectType.SelectedValue = GetProjectByProjectId.ProjectTypeId.ToString();
+                cmbOutputType.SelectedValue = GetProjectByProjectId.OutputTypeId.ToString();
+                this.SyncDeviceId = GetProjectByProjectId.SyncDeviceId;
+
+                // Get DevicelinkProfileList by SyncDevieId
+                _presenterdevicelinkprofile.GetDeviceLinkProfileListOnSyncDeviceId();
+                cmbSourceProfile.SelectedValue = GetDeviceLinkProfileList.FirstOrDefault().SrcProfile.SourceProfileId.ToString();
+                cmbDestinationProfile.SelectedValue = GetDeviceLinkProfileList.FirstOrDefault().DestProfile.DestinationProfileId.ToString();                                
+                BindDeviceLinkProfile();                
+
+                // Get Measurement Detail By ProjectId
+                _presenterprojectlist.GetMeasurementSettingByProjectID();
+                cmbIlluminant.SelectedValue = GetMeasurementSettingByProjectID.Illuminant.ToString();
+                cmbObserver.SelectedValue =GetMeasurementSettingByProjectID.Observer.ToString();
+                cmbDensityType.SelectedValue = GetMeasurementSettingByProjectID.DensityType.ToString();                
+                cmbAlignmentChart.SelectedValue = GetMeasurementSettingByProjectID.ReferenceChartTypeId.ToString();                
+               
+                foreach (ListItem item in cmbDeviceType.Items)
+                {
+                    if (item.Text.Contains(GetMeasurementSettingByProjectID.SerialNumber))
+                    {
+                        item.Selected = true;
+                    }
+                    else
+                    {
+                        item.Selected = false;
+                    }
+                }
+
+
+            }
+        }
+
+        public void ToggleInputControlState(bool value)
+        {
+            txtProjectName.Enabled =value;
+            cmbProjectType.Enabled = value;
+            cmbOutputType.Enabled = value;
+            cmbSourceProfile.Enabled = value;
+            cmbDestinationProfile.Enabled = value;
+            grdDLP.Enabled = value;
+            cmbIlluminant.Enabled = value;
+            cmbObserver.Enabled = value;
+            cmbDensityType.Enabled = value;
+            cmbDeviceType.Enabled = value;
+            cmbAlignmentChart.Enabled = value;
+            lbtnProjectSave.Enabled = value;
+        }
         #endregion
 
         private void SaveProjectAndMeasurementSetting()
@@ -283,7 +357,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project ObjProject { get; set; }
         public MeasurementSetting ObjMeasurementSetting { get; set; }
         public Project InsertProjectAndMeasurementSetting { get; set; }
-        #endregion                      
+        #endregion               
+       
+        #region IViewProjectList Members        
+        public List<Project> GetProjectListBySyncDeviceId { get; set; }
+        public int ProjectId { get; set; }
+        public int DeleteProject { get; set; }
+        public Project GetProjectByProjectId { get; set; }
+        public MeasurementSetting GetMeasurementSettingByProjectID { get; set; }
+        #endregion
        
     }
 }
