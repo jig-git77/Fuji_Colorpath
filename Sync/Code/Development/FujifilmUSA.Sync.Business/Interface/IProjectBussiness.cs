@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Project GetProjectByProjectId(int projectId);
         void CloseSyncRun(int syncRunId, int status, DateTime endDateTime);
         void CreateSyncRun(int projectId, int status, DateTime createdDateTime);
+        MeasurementSetting GetMeasurementSettingByProjectID(int ProjectID);
     }
 }
