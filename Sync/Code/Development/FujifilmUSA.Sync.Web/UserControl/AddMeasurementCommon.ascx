@@ -232,9 +232,9 @@
         var ReferenceChartTypeId;
         var SerialNo;
         if (Type == "DestinationProfile") {
-            OnCancel();            
-            refreshCanvas();
-            jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+            //OnCancel();            
+            //refreshCanvas();
+            //jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             
             ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart'] :selected").val();
             SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text();
