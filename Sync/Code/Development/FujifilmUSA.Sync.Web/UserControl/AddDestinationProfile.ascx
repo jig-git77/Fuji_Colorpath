@@ -66,7 +66,7 @@
                 </td>
                 <td>
                     <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-                        CssClass="select " Width="180px">
+                        CssClass="select " Width="200px" onchange=" ControlVisibility();">
                     </asp:DropDownList>
                 </td>
             </tr>

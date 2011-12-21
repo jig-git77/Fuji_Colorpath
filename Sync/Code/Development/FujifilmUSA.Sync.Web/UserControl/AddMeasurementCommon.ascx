@@ -219,16 +219,29 @@
 </object>
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
-    function ControlVisibility() {
-        
+    function ControlVisibility() {        
+
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
-        
+
         load();   //first you have to load the plugin
 
-        GetReferenceChart((jQuery("[id*='hdProjectID']").val()));
+        var Type = '<%=Type %>';
+        var ReferenceChartTypeId;
+        var SerialNo;
+        if (Type == "DestinationProfile") {
+            OnCancel();            
+            refreshCanvas();
+            jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+            
+            ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart'] :selected").val();
+            SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text();
+            SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
+            SerialNo = SerialNo.replace(" ", "")        
+        }
+        GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
         ListDevices();
     }
 
