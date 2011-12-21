@@ -160,6 +160,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                         new object[] { projectId, status, createdDateTime });
         }
 
+        public MeasurementSetting GetMeasurementSettingByProjectID(int ProjectID)
+        {
+            var objMeasurementSetting = new MeasurementSetting();
+            //========== Get data from data access=================//
+            var dsMeasurementSetting = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementSettingByProjectId]", new object[] { ProjectID });
+
+            if (dsMeasurementSetting != null && dsMeasurementSetting.Tables.Count > 0 && dsMeasurementSetting.Tables[0].Rows.Count > 0)
+            {
+
+                objMeasurementSetting = dsMeasurementSetting.Tables[0].AsEnumerable().                
+                    Select(x => new MeasurementSetting()
+                    {
+                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                        MeasurementSettingId = DataReader.ReadInt(x, "MeasurementSettingID"),
+                        Illuminant = DataReader.ReadInt(x, "Illuminant"),
+                        DensityType = DataReader.ReadInt(x, "DensityType"),
+                        SerialNumber=DataReader.ReadString(x,"SerialNumber"),
+                        ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeID")                        
+                    }).FirstOrDefault();                
+            }
+            return objMeasurementSetting;
+        }
         #endregion
     }
 }
