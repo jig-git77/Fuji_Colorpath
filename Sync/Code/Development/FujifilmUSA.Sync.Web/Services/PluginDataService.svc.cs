@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Web.Services
             return refChartData.SaveMeasurement(measurement);
         }
 
-        [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurementLink")]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveDestinationMeasurement",BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         public int SaveDestinationMeasurement(DestinationProfile objDestinationProfile,MeasurementLink measurementLink)
         {
@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.Services
             return insertMst.SaveMeasurement(measurementLink);
         }
 
-        [WebInvoke(Method = "POST", UriTemplate = "InsertDeviceLinkProfile")]
+        [WebInvoke(Method = "POST", UriTemplate = "SaveDeviceLinkMeasurement", BodyStyle = WebMessageBodyStyle.WrappedRequest)]
         [OperationContract]
         public int SaveDeviceLinkMeasurement(DeviceLinkProfile objDeviceLinkProfile, MeasurementLink measurementLink)
         {
