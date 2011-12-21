@@ -50,7 +50,7 @@
                 <td class="ProjectListtd2">
                    <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox>--%><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
-                    <asp:TextBox ID="txtProjectName" runat="server" Width="178px"></asp:TextBox>
+                    <asp:TextBox ID="txtProjectName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>
                 <td class="float_right">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
@@ -63,7 +63,7 @@
                     </asp:DropDownList>
                 </td>
             </tr>
-            <tr>
+            <tr> 
                 <td class="ProjectListtd1">
                     <asp:Label ID="lblOutputType" runat="server" Text="Output Type" CssClass="LabelTitle"></asp:Label>
                     :

@@ -47,7 +47,7 @@
                     &nbsp;
                 </td>
                <td>
-                    <asp:TextBox ID="txtDestinationProfile" runat="server" width="178px"></asp:TextBox>
+                    <asp:TextBox ID="txtDestinationProfile" runat="server" width="178px" Height="19px"></asp:TextBox>
                     <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
             </tr>
