@@ -104,7 +104,7 @@
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" CssClass="LabelTitle"></asp:Label>
             &nbsp;
-            <asp:TextBox ID="txtMeasurementName" runat="server" SkinID="width250px">
+            <asp:TextBox ID="txtMeasurementName" runat="server" width="178px">
             </asp:TextBox>
             <%--<telerik:RadTextBox ID="txtMeasurementName" runat="server" SkinID="width250px">
             </telerik:RadTextBox>--%>

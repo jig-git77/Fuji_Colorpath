@@ -22,7 +22,7 @@
                 $(activeTab).fadeIn(); //Fade in the active content
                 return false;
             });
-
+             
         });
 </script>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
@@ -48,8 +48,9 @@
                     :
                 </td>
                 <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                   <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
+                    </telerik:RadTextBox>--%><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                    <asp:TextBox ID="txtProjectName" runat="server" Width="178px"></asp:TextBox>
                 </td>
                 <td class="float_right">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
@@ -58,7 +59,7 @@
                 <td class="ProjectListtd2">
                    <%-- <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">                      
                     </telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbProjectType" runat="server" Width="200px" CssClass="select">
+                    <asp:DropDownList ID="cmbProjectType" runat="server" Width="180px" CssClass="select">
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -70,7 +71,7 @@
                 <td class="ProjectListtd2">
                    <%-- <telerik:RadComboBox ID="cmbOutputType" runat="server" SkinID="width200px">
                     </telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbOutputType" runat="server" Width="200px"  CssClass="select"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbOutputType" runat="server" Width="180px"  CssClass="select"></asp:DropDownList>
                 </td>
                 <td class="float_right">
                     &nbsp;
@@ -97,11 +98,11 @@
         <div class="float_l">
         <asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
         <%--<telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"></telerik:RadComboBox></div>--%>
-        <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" Width="200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
+        <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" Width="180px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
         <div class="float_r">
         <asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label>
         <%--<telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"></telerik:RadComboBox></div>--%>
-        <asp:DropDownList ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
+        <asp:DropDownList ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" Width="180px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
         <div class="clear"></div>
         
         </div>

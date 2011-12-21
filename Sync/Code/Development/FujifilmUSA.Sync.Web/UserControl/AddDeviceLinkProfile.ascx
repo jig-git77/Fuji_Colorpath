@@ -37,45 +37,46 @@
                     <asp:Label ID="lblDeviceLinkProfileName" runat="server" Text="Name" CssClass="LabelTitle"></asp:Label>
                     :
                 </td>
-               <td class="ProjectListtd2">
-                    <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
+               <td  colspan="2">
+                   <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                   <asp:TextBox ID="txtProjectName" runat="server" Width="178px"></asp:TextBox>
                 </td>               
-                 <td class="float_right">
+                 <%--<td class="float_right">
                     &nbsp;
-                </td>
+                </td>--%>
             </tr>
              <tr>
               <td class="ProjectListtd1">
                     <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>                    :
                 </td>
-                <td class="ProjectListtd2">
+                <td >
                     <%--<telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" SkinID="width200px" ></telerik:RadComboBox>--%>
                     <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" 
-                        DataTextField="Value" AutoPostBack="true" width="200px" CssClass="select"
+                        DataTextField="Value" AutoPostBack="true" width="180px" CssClass="select"
                         onselectedindexchanged="cmbDeviceType_SelectedIndexChanged1">
                     </asp:DropDownList>
                 </td>
                 <td class="ProjectListtd1">
                     <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>
                 </td>
-                <td class="ProjectListtd2">                    
+                <td >                    
                    <%-- <telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"></telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"  width="200px" CssClass="select"></asp:DropDownList>
+                    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
                 </td>               
             </tr>           
             <tr>
                 <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
                 </td>
-                <td class="ProjectListtd2">
+                <td >
                 <%--<telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" ></telerik:RadComboBox>--%>
-                <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="200px" CssClass="select"></asp:DropDownList>
+                <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
                 </td>
                 <td class="ProjectListtd1"><asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label>
                 </td>
-                <td class="ProjectListtd2">
+                <td>
                 <%--<telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" ></telerik:RadComboBox>--%>
-                <asp:DropDownList ID="cmbDestinationProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="200px" CssClass="select"></asp:DropDownList>
+                <asp:DropDownList ID="cmbDestinationProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
                 </td>
             </tr>
         </table>
