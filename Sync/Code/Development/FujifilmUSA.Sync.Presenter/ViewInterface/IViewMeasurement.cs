@@ -12,5 +12,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Measurement> Measurements { get; set; }
         int MeasurementId { get; set; }
         int MeasurementDeleted { get; set; }
+        int ProfileId { get; set; }
+        ProfileType TypeId { get; set; }
     }
 }

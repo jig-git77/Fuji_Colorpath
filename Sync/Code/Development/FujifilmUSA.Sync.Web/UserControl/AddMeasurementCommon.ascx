@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementCommon.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementCommon" %>
+<%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
@@ -149,7 +150,7 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
-                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none;" OnClick="btnBindGrid_Click" />
+                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display:none" OnClick="btnBindGrid_Click" />                   
                     <asp:ListView ID="lvMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder"
                         OnItemCommand="lvMeasurement_ItemCommand">
                         <LayoutTemplate>
@@ -214,6 +215,8 @@
     <asp:HiddenField ID="hdSyncRunID" runat="server" />
     <asp:HiddenField ID="hdProjectID" runat="server" />
     <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
+    <asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
+
 
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
@@ -262,7 +265,8 @@
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
-                document.getElementById('<%= btnBindGrid.ClientID %>').click();
+                //document.getElementById('<%= btnBindGrid.ClientID %>').click();
+                //jQuery("[id*='btnBindGrid']").click();
                 //ToggleAnalyze(jQuery("[id*='hdnHasMeasurement']").val());
             }
         });
@@ -293,19 +297,40 @@
     }
     function saveMeasurement() {
         /****passing date and time from JavaScript to WCF serialization issue  http://stackoverflow.com/questions/4474352/send-jquery-json-to-wcf-rest-using-date ***/
+        var Type = '<%=Type %>';
+        var serviceLink;
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
         var MeasurementDateTime = dt1.toMSJSON();
         var SyncRunID = jQuery("input[id$=hdSyncRunID]").val();
         var MeasurementTypeID = jQuery("input[id$=hdMeasurementTypeID]").val();
         var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
-        var obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
+        var obj;
+        var objDestinationProfile;
+        var objMeasurementLink;
+        var objMeasurement;
+        if (Type == "DestinationProfile") {
+            SyncRunID = "0";
+            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
+            var DestinationProfilename = jQuery("input[id$=txtDestinationProfile]").val();
+            var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
+            var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();            
+            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
+            objMeasurementLink = {Measurement:objMeasurement};
+            objDestinationProfile = { DestinationProfileId: DestinationProfileID,DestinationProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID };
+            obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
+            serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
+        }
+        else {
+            obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
+            serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
+        }
 
         //Make ajax request...
         jQuery.ajax({
             type: "POST", //for complex object POST is preferred
             contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-            url: "Services/PluginDataService.svc/SaveMeasurement",
+            url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             data: JSON.stringify(obj),
@@ -315,13 +340,16 @@
             //If the call succeeds
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
-            //document.getElementById('btnBindGrid.ClientID').click();
+            jQuery("input[id$=hdProfileID]").val(response);            
+            jQuery("[id*='btnBindGrid']").click();
             MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 
         },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Error");
+
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                 MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
             }

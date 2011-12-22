@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (Type == ProfileType.DestinationProfile)
                 {
-                    
+                    BindMeasurement();
                 }
                 if (Type == ProfileType.Optimization)
                 {
@@ -63,7 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
-            //BindMeasurement();
+            BindMeasurement();
         }
         protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
@@ -79,9 +79,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         private void BindMeasurement()
         {
-            this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-            _presentermeasurement.GetMeasurements();
-            SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
+            if (Type == ProfileType.DestinationProfile)
+            {
+                if (hdProfileID.Value.Trim() != "0")
+                {
+
+                    this.TypeId = Type;
+                    this.ProfileId = int.Parse(hdProfileID.Value);
+                    _presentermeasurement.GetMeasurementsbyProfileType();
+                }
+            }
+            if (Type == ProfileType.Optimization)
+              {
+                  this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+                  _presentermeasurement.GetMeasurements();
+                  SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
+              }
             //hdnHasMeasurement.Value = (!SessionManager.Instance.CurrentSyncRun.HasMeasurements).ToString().ToLower();
             //ScriptManager.RegisterClientScriptBlock(
             //    this,
@@ -103,6 +116,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Measurement> Measurements { get; set; }
         public int MeasurementId { get; set; }
         public int MeasurementDeleted { get; set; }
+        public int ProfileId { get; set; }
+        public ProfileType TypeId { get; set; }
         #endregion
     }    
 }

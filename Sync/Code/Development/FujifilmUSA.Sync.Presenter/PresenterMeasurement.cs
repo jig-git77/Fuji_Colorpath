@@ -23,6 +23,12 @@ namespace FujifilmUSA.Sync.Presenter
             _viewMeasurement.Measurements = task.GetMeasurement(_viewMeasurement.SyncRunId);
         }
 
+        public void GetMeasurementsbyProfileType()
+        {
+            var task = (IProfileBusiness)new BusinessFactory<IProfileBusiness>().CreateObject();
+            _viewMeasurement.Measurements = task.GetMeasurement(_viewMeasurement.ProfileId,_viewMeasurement.TypeId);
+        }
+
         public void DeleteMeasurement()
         {
             var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();

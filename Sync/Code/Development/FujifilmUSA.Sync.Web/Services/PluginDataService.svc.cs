@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public int SaveDestinationMeasurement(SaveDestinationMeasurementRequest request)
         {
             var destId = 0;
-            if(request.DestinationProfile.DestinationProfileId == 0)
+            if (request.DestinationProfile.DestinationProfileId == 0)
             {
                 var insertDest = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
                 request.MeasurementLink.ProfileId = insertDest.InsertDestinationProfile(request.DestinationProfile);
@@ -55,7 +55,8 @@ namespace FujifilmUSA.Sync.Web.Services
             }
             request.MeasurementLink.TypeId = ProfileType.DestinationProfile;
             var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
-            return insertMst.SaveMeasurement(request.MeasurementLink);
+            insertMst.SaveMeasurement(request.MeasurementLink);
+            return request.MeasurementLink.ProfileId;
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveDeviceLinkMeasurement")]
@@ -75,7 +76,8 @@ namespace FujifilmUSA.Sync.Web.Services
 
             request.MeasurementLink.TypeId = ProfileType.Dlp;
             var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
-            return insertMst.SaveMeasurement(request.MeasurementLink);
+            insertMst.SaveMeasurement(request.MeasurementLink);
+            return request.MeasurementLink.ProfileId;
         }
 
 

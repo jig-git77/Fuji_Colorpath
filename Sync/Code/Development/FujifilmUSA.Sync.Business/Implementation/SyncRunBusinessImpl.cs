@@ -186,7 +186,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public int SaveMeasurement(MeasurementLink measurementLink)
         {
-            if (measurementLink == null || measurementLink.Measurement == null || measurementLink.Measurement.Patches == null || measurementLink.Measurement.Patches.Count > 0)
+            if (measurementLink == null || measurementLink.Measurement == null || measurementLink.Measurement.Patches == null || measurementLink.Measurement.Patches.Count == 0)
                 return 0;
             measurementLink.Measurement.MeasurementId = SaveMeasurement(measurementLink.Measurement);
             DataAccessFactory.Instance.
