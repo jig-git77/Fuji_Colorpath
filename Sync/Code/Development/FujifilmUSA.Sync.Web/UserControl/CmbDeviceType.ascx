@@ -29,6 +29,7 @@
                         //If the call succeeds
                         success:
                             function (response) {
+                                GetRefChartData();
                             },
                         //If the call fails
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -55,7 +56,7 @@
     </td>
     <td>
         <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-            CssClass="select " Width="143px" onchange=" ControlVisibility();">
+            CssClass="select " Width="143px" onchange=" GetRefChartData();">
         </asp:DropDownList>
     </td>
 <%--    <td class="ProjectListtd1">

@@ -5,12 +5,12 @@ Date.prototype.toMSJSON = function () {
 };
 
 function GetReferenceChart(Type, ProjectID, ReferenceChartTypeId, SerialNo) {
-
+    
     var serviceLink;
     if (Type == "Optimization") {
         serviceLink = "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID;        
     }
-    if (Type == "DestinationProfile") {        
+    if (Type == "DestinationProfile" || Type == "Dlp") {        
         serviceLink = "Services/PluginDataService.svc/GetReferenceChartByTypeId/" + ReferenceChartTypeId + "/" + SerialNo;        
     }
 

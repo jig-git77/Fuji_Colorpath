@@ -31,31 +31,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
-        /// tblMessage control.
+        /// ucMeasurementStatusbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable tblMessage;
-        
-        /// <summary>
-        /// lblMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
-        
-        /// <summary>
-        /// lblPluginMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPluginMessage;
+        protected global::FujifilmUSA.Sync.Web.UserControl.MeasurementStatusbar ucMeasurementStatusbar;
         
         /// <summary>
         /// ucStatusbar1 control.
@@ -76,13 +58,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblDeviceLinkProfileName;
         
         /// <summary>
-        /// txtProjectName control.
+        /// txtDeviceLinkProfileName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProjectName;
+        protected global::System.Web.UI.WebControls.TextBox txtDeviceLinkProfileName;
         
         /// <summary>
         /// ucCmbDeviceType control.

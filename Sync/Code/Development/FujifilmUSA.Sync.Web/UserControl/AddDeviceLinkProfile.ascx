@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDeviceLinkProfile.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddDeviceLinkProfile" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
 
@@ -17,19 +18,7 @@
                 Save</span></asp:LinkButton></div>
     <div class="clear">
     </div>
-    <div class="info_form">
-        <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
-            background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
-                    <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
-                </td>
-                <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
-                    <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
     <div class="add_form">
         <center>
             <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
@@ -43,7 +32,7 @@
                <td  colspan="2">
                    <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
                     </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
-                   <asp:TextBox ID="txtProjectName" runat="server" Width="178px" Height="19px"></asp:TextBox>
+                   <asp:TextBox ID="txtDeviceLinkProfileName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>               
                  <%--<td class="float_right">
                     &nbsp;
@@ -68,7 +57,7 @@
             </tr>
         </table>
     </div>    
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" />
+    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="Dlp" />
 </div>
 
 <div class="contant_bottom">

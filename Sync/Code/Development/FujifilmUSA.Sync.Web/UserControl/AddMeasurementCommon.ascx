@@ -223,7 +223,6 @@
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {        
-
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
@@ -231,21 +230,26 @@
 
         load();   //first you have to load the plugin
 
-        var Type = '<%=Type %>';
+        GetRefChartData();
+        ListDevices();
+    }
+    function GetRefChartData() {
+        jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+        var Type = '<%=Type %>';        
         var ReferenceChartTypeId;
         var SerialNo;
-        if (Type == "DestinationProfile") {
+        if (Type == "DestinationProfile" || Type == "Dlp") {
             //OnCancel();            
             //refreshCanvas();
             //jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-            
+
             ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart'] :selected").val();
             SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text();
             SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
-            SerialNo = SerialNo.replace(" ", "")        
+            SerialNo = SerialNo.replace(" ", "")
         }
+    
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
-        ListDevices();
     }
 
     jQuery(document).ready(function () {       
@@ -306,6 +310,7 @@
         var MeasurementTypeID = jQuery("input[id$=hdMeasurementTypeID]").val();
         var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
         var obj;
+        var objSourceProfile;
         var objDestinationProfile;
         var objMeasurementLink;
         var objMeasurement;
@@ -321,7 +326,24 @@
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
         }
-        else {
+        else if (Type == "Dlp") {
+            SyncRunID = "0";
+            var SourceProfileID = jQuery("[id*='cmbSourceProfile'] :selected").val();
+            var DestinationProfileID = jQuery("[id*='cmbDestinationProfile'] :selected").val();
+
+            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
+            var DeviceLinkProfilename = jQuery("input[id$=txtDeviceLinkProfileName]").val();
+            var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
+            var DeviceLinkProfileID = jQuery("input[id$=hdProfileID]").val();
+            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
+            objMeasurementLink = { Measurement: objMeasurement };
+            objSourceProfile = {SourceProfileId:SourceProfileID};
+            objDestinationProfile = { DestinationProfileId: DestinationProfileID};
+            objDeviceLinkProfile = { DeviceLinkProfileId: DeviceLinkProfileID, DeviceLinkProfileName: DeviceLinkProfilename,SrcProfile: objSourceProfile,DestProfile: objDestinationProfile,SyncDeviceId: SyncDeviceID };
+            obj = { DeviceLinkProfile: objDeviceLinkProfile, MeasurementLink: objMeasurementLink };
+            serviceLink = "Services/PluginDataService.svc/SaveDeviceLinkMeasurement";
+        }
+        else if (Type == "Optimization") {
             obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
         }
