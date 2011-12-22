@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddProduct : System.Web.UI.UserControl, IViewAddProject,IViewProjectList,IViewDeviceLinkProfile
+    public partial class AddProduct : System.Web.UI.UserControl, IViewAddProject, IViewProjectList, IViewDeviceLinkProfile
     {
         #region "Declaration"
         private PresenterAddProject _presenteraddproject;
@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurementIlluminant();
                 BindMeasurementObserver();
                 BindReferenceDensityType();
-              
+
 
                 if (SessionManager.Instance.CurrentProject != null)
                 {
@@ -58,11 +58,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item.DataItem != null)
             {
                 DeviceLinkProfile dlp = e.Item.DataItem as DeviceLinkProfile;
-                
+
                 System.Web.UI.WebControls.RadioButton rbtnDeviceLinkProfileId = e.Item.FindControl("rbtnDeviceLinkProfileId") as System.Web.UI.WebControls.RadioButton;
                 if (rbtnDeviceLinkProfileId != null)
                 {
-                    rbtnDeviceLinkProfileId.Attributes.Add("onclick", "javascript: return SelectDeviceLinkProfileId(" + dlp.DeviceLinkProfileId + ");");
+                    rbtnDeviceLinkProfileId.Attributes.Add("onclick", "javascript: return fnCheckUnCheck('" + rbtnDeviceLinkProfileId.ClientID + "','" + dlp.DeviceLinkProfileId + "');");
                 }
                 if (SessionManager.Instance.CurrentProject != null)
                 {
@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Control Events        
+        #region Control Events
 
         protected void cmbDestinationProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -111,7 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindDeviceLinkProfile();
             }
         }
-        
+
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
@@ -139,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Method
         private void BindOutputType()
-        {           
+        {
             var dictionary = new Dictionary<int, string>();
             foreach (int value in Enum.GetValues(typeof(EOutputType)))
             {
@@ -170,7 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenteraddproject.GetSourceProfileList();
             cmbSourceProfile.DataSource = GetSourceProfileList;
             cmbSourceProfile.DataBind();
-            cmbSourceProfile.Items.Insert(0,new ListItem("-- Select --", ""));
+            cmbSourceProfile.Items.Insert(0, new ListItem("-- Select --", ""));
         }
         private void BindDestinationProfile()
         {
@@ -214,9 +214,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbIlluminant.DataTextField = "Value";
             cmbIlluminant.DataValueField = "Key";
             cmbIlluminant.DataBind();
-          
+
         }
-         
+
         private void BindMeasurementObserver()
         {
             RadComboBoxItem item = new RadComboBoxItem();
@@ -238,8 +238,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDensityType.DataBind();
 
         }
-       
-       
+
+
 
         private void LoadProjectByProjectId()
         {
@@ -259,13 +259,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterdevicelinkprofile.GetDeviceLinkProfileListByDLPID();
                 cmbSourceProfile.SelectedValue = GetDeviceLinkProfileListByDLPID.SrcProfile.SourceProfileId.ToString();
                 cmbDestinationProfile.SelectedValue = GetDeviceLinkProfileListByDLPID.DestProfile.DestinationProfileId.ToString();
-                BindDeviceLinkProfile();                
+                BindDeviceLinkProfile();
 
                 // Get Measurement Detail By ProjectId
                 _presenterprojectlist.GetMeasurementSettingByProjectID();
                 cmbIlluminant.SelectedValue = GetMeasurementSettingByProjectID.Illuminant.ToString();
-                cmbObserver.SelectedValue =GetMeasurementSettingByProjectID.Observer.ToString();
-                cmbDensityType.SelectedValue = GetMeasurementSettingByProjectID.DensityType.ToString();                
+                cmbObserver.SelectedValue = GetMeasurementSettingByProjectID.Observer.ToString();
+                cmbDensityType.SelectedValue = GetMeasurementSettingByProjectID.DensityType.ToString();
                 ucCmbDeviceType.AlignmentChart_Value = GetMeasurementSettingByProjectID.ReferenceChartTypeId.ToString();
 
                 ucCmbDeviceType.SetCmbDeviceTypeBySerialNumber = GetMeasurementSettingByProjectID.SerialNumber;
@@ -276,7 +276,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public void ToggleInputControlState(bool value)
         {
-            txtProjectName.Enabled =value;
+            txtProjectName.Enabled = value;
             cmbProjectType.Enabled = value;
             cmbOutputType.Enabled = value;
             cmbSourceProfile.Enabled = value;
@@ -356,9 +356,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project ObjProject { get; set; }
         public MeasurementSetting ObjMeasurementSetting { get; set; }
         public Project InsertProjectAndMeasurementSetting { get; set; }
-        #endregion               
-       
-        #region IViewProjectList Members        
+        #endregion
+
+        #region IViewProjectList Members
         public List<Project> GetProjectListBySyncDeviceId { get; set; }
         public int ProjectId { get; set; }
         public int DeleteProject { get; set; }
@@ -372,4 +372,4 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
     }
-} 
+}

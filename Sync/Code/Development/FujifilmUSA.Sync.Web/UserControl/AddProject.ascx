@@ -4,9 +4,6 @@
 <%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
 
 <script type="text/javascript" language="javascript">    
-        function SelectDeviceLinkProfileId(dlpId) {            
-            document.getElementById('<%= hdnDeviceLinkProfileId.ClientID %>').value = dlpId;
-        }
         $(document).ready(function () {
 
             //Default Action
@@ -26,6 +23,20 @@
             });
 
         });
+</script>
+<script type="text/javascript" language="javascript">
+    function fnCheckUnCheck(currentRadioButton,dlpId) {
+        $('input[type="radio"][id*="grdDLP_rbtnDeviceLinkProfileId"]').each(function () {
+
+            if ($(this).attr('id') == currentRadioButton) {
+                $(this).attr('checked', true);                
+                document.getElementById('<%= hdnDeviceLinkProfileId.ClientID %>').value = dlpId;
+            }
+            else {
+                $(this).attr('checked', false);
+            }
+        });
+    }
 </script>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
 <div class="contant_top">
@@ -89,7 +100,7 @@
         <section class="inner_tab">
             <ul class="tabs">
                 <li><span><a href="#tab1">DLP</a></span></li>
-                <li><span><a href="#tab2">Measurement Setup</a></span></li>
+                <li><span><a href="#tab2">Measurement Setup</a></span></li>                                
             </ul>
             <div class="clear"></div>
         </section>
@@ -127,12 +138,12 @@
             <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
-  	                <td align="center" valign="middle"><asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile" /></td>
+  	                <td align="center" valign="middle"><asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile"/></td>
                     <td align="center"><%# Eval("DeviceLinkProfileName") %></td>
                     <td align="center"><%# Eval("SrcProfile.SourceProfileName") %></td>
                     <td align="center"><%# Eval("DestProfile.DestinationProfileName") %></td>                                        
                 </tr>
-            </ItemTemplate>
+            </ItemTemplate> 
         </asp:ListView>
             <%--<telerik:RadGrid ID="grdDLP" runat="server" AutoGenerateColumns="false" OnNeedDataSource="grdDLP_NeedDataSource" OnItemDataBound="grdDLP_ItemDataBound"
                                 EnableEmbeddedSkins="false" Skin="Fujifilm" SkinID="CommonGrid">
