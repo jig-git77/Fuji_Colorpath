@@ -23,6 +23,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         public void UpdateDestinationProfile(int deviceLinkProfileId, byte[] profile)
         {
         }
+        public DeviceLinkProfile GetDeviceLinkProfileListByDLPID(int DLPID)
+        {
+            return new DeviceLinkProfile();
+        }
         #endregion
 
 
