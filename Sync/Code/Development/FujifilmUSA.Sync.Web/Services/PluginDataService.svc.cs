@@ -91,18 +91,18 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsBySyncId/{syncRunId}")]
         [OperationContract]
-        public List<Measurement> GetMeasurementsBySyncId(int syncRunId)
+        public List<Measurement> GetMeasurementsBySyncId(string syncRunId)
         {
             var getMeasurement = (ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject();
-            return getMeasurement.GetMeasurement(syncRunId);
+            return getMeasurement.GetMeasurement(int.Parse(syncRunId));
         }
 
-        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByProfileType/{profileId}/{typeId}")]
+        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByProfileType/{profileId}/{type}")]
         [OperationContract]
-        public List<Measurement> GetMeasurementsByProfileType(int profileId, ProfileType typeId)
+        public List<Measurement> GetMeasurementsByProfileType(string profileId, string type)
         {
             var getMeasurement = (IProfileBusiness)new Business.BusinessFactory<IProfileBusiness>().CreateObject();
-            return getMeasurement.GetMeasurement(profileId, typeId);
+            return getMeasurement.GetMeasurement(int.Parse(profileId), (ProfileType)Enum.Parse(typeof(ProfileType), type, true));
         }
 
     }
