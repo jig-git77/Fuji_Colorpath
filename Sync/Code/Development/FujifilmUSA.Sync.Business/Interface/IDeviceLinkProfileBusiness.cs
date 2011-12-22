@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<DeviceLinkProfile> GetDeviceLinkProfileListOnSyncDeviceId(int syncDeviceId);
         int InsertDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile);
         void UpdateDestinationProfile(int deviceLinkProfileId, byte[] profile);
+        DeviceLinkProfile GetDeviceLinkProfileListByDLPID(int DLPID);
     }
 }
