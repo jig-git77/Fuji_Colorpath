@@ -10,5 +10,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
         int SyncDeviceId { get; set; }
+        int DLPID { get; set; }
+        DeviceLinkProfile GetDeviceLinkProfileListByDLPID { get; set; }                   
     }
 }

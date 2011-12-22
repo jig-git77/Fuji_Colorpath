@@ -212,10 +212,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Measurement Setup - Methods
         private void BindMeasurementIlluminant()
         {
-            cmbIlluminant.DataSource = Enum.GetValues(typeof(EMeasurementIlluminant));
-            cmbIlluminant.DataBind();
-        }
+            var dictionary = new Dictionary<int, string>();
+            foreach (int value in Enum.GetValues(typeof(EMeasurementIlluminant)))
+            {
+                dictionary.Add(value, Enum.GetName(typeof(EMeasurementIlluminant), value));
+            }
 
+            cmbIlluminant.DataSource = dictionary;
+            cmbIlluminant.DataTextField = "Value";
+            cmbIlluminant.DataValueField = "Key";
+            cmbIlluminant.DataBind();
+          
+        }
+         
         private void BindMeasurementObserver()
         {
             RadComboBoxItem item = new RadComboBoxItem();
@@ -225,7 +234,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindReferenceDensityType()
         {
-            cmbDensityType.DataSource = Enum.GetValues(typeof(EMeasurementDensityType));
+            var dictionary = new Dictionary<int, string>();
+            foreach (int value in Enum.GetValues(typeof(EMeasurementDensityType)))
+            {
+                dictionary.Add(value, Enum.GetName(typeof(EMeasurementDensityType), value));
+            }
+
+            cmbDensityType.DataSource = dictionary;
+            cmbDensityType.DataTextField = "Value";
+            cmbDensityType.DataValueField = "Key";
             cmbDensityType.DataBind();
 
         }
@@ -262,10 +279,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbOutputType.SelectedValue = GetProjectByProjectId.OutputTypeId.ToString();
                 this.SyncDeviceId = GetProjectByProjectId.SyncDeviceId;
 
-                // Get DevicelinkProfileList by SyncDevieId
-                _presenterdevicelinkprofile.GetDeviceLinkProfileListOnSyncDeviceId();
-                cmbSourceProfile.SelectedValue = GetDeviceLinkProfileList.FirstOrDefault().SrcProfile.SourceProfileId.ToString();
-                cmbDestinationProfile.SelectedValue = GetDeviceLinkProfileList.FirstOrDefault().DestProfile.DestinationProfileId.ToString();                                
+                // Get DevicelinkProfileList by DLPID
+                this.DLPID = GetProjectByProjectId.DeviceLinkProfileId;
+                _presenterdevicelinkprofile.GetDeviceLinkProfileListByDLPID();
+                cmbSourceProfile.SelectedValue = GetDeviceLinkProfileListByDLPID.SrcProfile.SourceProfileId.ToString();
+                cmbDestinationProfile.SelectedValue = GetDeviceLinkProfileListByDLPID.DestProfile.DestinationProfileId.ToString();
                 BindDeviceLinkProfile();                
 
                 // Get Measurement Detail By ProjectId
@@ -382,6 +400,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project GetProjectByProjectId { get; set; }
         public MeasurementSetting GetMeasurementSettingByProjectID { get; set; }
         #endregion
-       
+
+        #region IViewDeviceLinkProfile
+        public int DLPID { get; set; }
+        public DeviceLinkProfile GetDeviceLinkProfileListByDLPID { get; set; }
+        #endregion
+
     }
 } 

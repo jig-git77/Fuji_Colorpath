@@ -63,6 +63,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewDeviceLinkProfile Members
         public  List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
         public int SyncDeviceId { get; set; }
+        public int DLPID { get; set; }
+        public DeviceLinkProfile GetDeviceLinkProfileListByDLPID { get; set; }
         #endregion        
         
     }

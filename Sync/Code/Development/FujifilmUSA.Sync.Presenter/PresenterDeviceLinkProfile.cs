@@ -22,5 +22,10 @@ namespace FujifilmUSA.Sync.Presenter
             _viewDeviceLinkProfile.GetDeviceLinkProfileList = task.GetDeviceLinkProfileListOnSyncDeviceId(_viewDeviceLinkProfile.SyncDeviceId);
 
         }
+        public void GetDeviceLinkProfileListByDLPID()
+        {
+            var task = (IDeviceLinkProfileBusiness)new BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject();
+            _viewDeviceLinkProfile.GetDeviceLinkProfileListByDLPID = task.GetDeviceLinkProfileListByDLPID(_viewDeviceLinkProfile.DLPID);
+        }
     }
 }
