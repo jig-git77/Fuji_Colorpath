@@ -79,15 +79,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenteraddproject = new PresenterAddProject(this);
-        }
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            SessionManager.CheckLogin();
+            
             if (!Page.IsPostBack)
             {               
                 BindMeasurementDeviceType();
                 BindReferenceChartType();
             }
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            
         } 
 
         #endregion
