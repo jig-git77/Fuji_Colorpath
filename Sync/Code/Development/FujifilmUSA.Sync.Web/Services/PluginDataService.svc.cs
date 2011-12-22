@@ -89,6 +89,21 @@ namespace FujifilmUSA.Sync.Web.Services
             return refChartData.GetReferenceChartTypeListByMeasurementDeviceId(Convert.ToInt32(measurementDeviceId));
         }
 
+        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsBySyncId/{syncRunId}")]
+        [OperationContract]
+        public List<Measurement> GetMeasurementsBySyncId(int syncRunId)
+        {
+            var getMeasurement = (ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject();
+            return getMeasurement.GetMeasurement(syncRunId);
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByProfileType/{profileId}/{typeId}")]
+        [OperationContract]
+        public List<Measurement> GetMeasurementsByProfileType(int profileId, ProfileType typeId)
+        {
+            var getMeasurement = (IProfileBusiness)new Business.BusinessFactory<IProfileBusiness>().CreateObject();
+            return getMeasurement.GetMeasurement(profileId, typeId);
+        }
 
     }
 }

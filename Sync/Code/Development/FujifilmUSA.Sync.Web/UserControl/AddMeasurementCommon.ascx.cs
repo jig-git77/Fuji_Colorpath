@@ -81,13 +81,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Type == ProfileType.DestinationProfile)
             {
-                if (hdProfileID.Value.Trim() != "0")
-                {
+                //if (hdProfileID.Value.Trim() != "0")
+                //{
 
                     this.TypeId = Type;
-                    this.ProfileId = int.Parse(hdProfileID.Value);
+                    this.ProfileId = 29; // int.Parse(hdProfileID.Value);
                     _presentermeasurement.GetMeasurementsbyProfileType();
-                }
+               // }
             }
             if (Type == ProfileType.Optimization)
               {
