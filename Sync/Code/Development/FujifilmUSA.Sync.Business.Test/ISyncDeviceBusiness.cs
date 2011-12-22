@@ -2,17 +2,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
+using FujifilmUSA.Sync.Business.Implementation;
 
 namespace FujifilmUSA.Sync.Business.Test
 {
     
     
     /// <summary>
-    ///This is a test class for IDestinationProfileBusinessTest and is intended
-    ///to contain all IDestinationProfileBusinessTest Unit Tests
+    ///This is a test class for ISyncDeviceBusinessTest and is intended
+    ///to contain all ISyncDeviceBusinessTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class IDestinationProfileBusinessTest
+    public class ISyncDeviceBusinessTest
     {
 
 
@@ -65,34 +67,31 @@ namespace FujifilmUSA.Sync.Business.Test
         #endregion
 
 
-        internal virtual IDestinationProfileBusiness CreateIDestinationProfileBusiness()
+        internal virtual ISyncDeviceBusiness CreateISyncDeviceBusiness()
         {
             // TODO: Instantiate an appropriate concrete class.
-            IDestinationProfileBusiness target = null;
+            ISyncDeviceBusiness target = new SyncDeviceBusinessImpl();
             return target;
         }
 
         /// <summary>
-        ///A test for InsertDestinationProfile
+        ///A test for GetSyncDeviceListByUserId
         ///</summary>
         [TestMethod()]
-        public void InsertDestinationProfileTest()
+        public void GetSyncDeviceListByUserIdTest()
         {
-            IDestinationProfileBusiness target = CreateIDestinationProfileBusiness(); // TODO: Initialize to an appropriate value
-            DestinationProfile objDestinationProfile = new DestinationProfile(); // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-
-            objDestinationProfile.DestinationProfileName = "Test Profile";
-            objDestinationProfile.SyncDeviceId = 1;
-            objDestinationProfile.IsUse = true;
+            ISyncDeviceBusiness target = CreateISyncDeviceBusiness(); // TODO: Initialize to an appropriate value
+            int taskeroUserId = 6; // TODO: Initialize to an appropriate value
+            int roleId = 1; // TODO: Initialize to an appropriate value
+            int companyId = 1; // TODO: Initialize to an appropriate value
+            int branchId = 1; // TODO: Initialize to an appropriate value
             
-            
+            List<SyncDevice> actual;
+            actual = target.GetSyncDeviceListByUserId(taskeroUserId, roleId, companyId, branchId);
+            Assert.IsTrue(true);
 
 
-            actual = target.InsertDestinationProfile(objDestinationProfile);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+
         }
     }
 }

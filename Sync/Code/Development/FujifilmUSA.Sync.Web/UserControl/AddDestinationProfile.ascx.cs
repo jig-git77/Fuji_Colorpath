@@ -27,39 +27,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
-            
-            if (!Page.IsPostBack)
-            {               
-                BindMeasurementDeviceType();
-                BindReferenceChartType();
-            }
         } 
 
         #endregion
 
-        #region Methods
-        private void BindMeasurementDeviceType()
-        {
-            if (SessionManager.Instance.CurrentSyncDevice != null)
-            {
-                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-                _presenteraddproject.GetMeasurementDeviceListBySyncDeviceId();
-                cmbDeviceType.DataSource = GetMeasurementDeviceListBySyncDeviceId;
-                cmbDeviceType.DataBind();
-            }
-
-        }
-
-        private void BindReferenceChartType()
-        {
-            //Split device type and take the 2nd position number as MeasurementDeviceId
-            this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[1].Trim());
-            _presenteraddproject.GetReferenceChartTypeListByMeasurementDeviceId();
-            cmbAlignmentChart.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
-            cmbAlignmentChart.DataBind();
-        }
-
-        #endregion
 
         #region Control Events
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)

@@ -58,8 +58,14 @@
   <ItemGroup>
     <Compile Include="IBranchBusinessTest.cs" />
     <Compile Include="ICompanyBusinessTest.cs" />
-    <Compile Include="IDestinationProfileBusinessDestinationProfile.cs" />
-    <Compile Include="IProjectBussinessTest.cs" />
+    <Compile Include="IDestinationProfileBusiness.cs" />
+    <Compile Include="IDeviceLinkProfileBusiness.cs" />
+    <Compile Include="IMeasurementDeviceBusiness.cs" />
+    <Compile Include="IMiscDataBusiness.cs" />
+    <Compile Include="IProjectBussiness.cs" />
+    <Compile Include="IReferenceChartBusiness.cs" />
+    <Compile Include="ISyncDeviceBusiness.cs" />
+    <Compile Include="ISyncRunBusiness.cs" />
     <Compile Include="ITaskeroUserBusinessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

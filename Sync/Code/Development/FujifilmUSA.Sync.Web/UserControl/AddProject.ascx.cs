@@ -43,8 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMeasurementIlluminant();
                 BindMeasurementObserver();
                 BindReferenceDensityType();
-                BindMeasurementDeviceType();
-                BindReferenceChartType();
+              
 
                 if (SessionManager.Instance.CurrentProject != null)
                 {
@@ -113,13 +112,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         
-
-        protected void cmbDeviceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindReferenceChartType();
-            //tab1.Visible = false;
-            //tab2.Visible = true;
-        }
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
@@ -246,25 +238,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDensityType.DataBind();
 
         }
-        private void BindMeasurementDeviceType()
-        {
-            if (SessionManager.Instance.CurrentSyncDevice != null)
-            {
-                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-                _presenteraddproject.GetMeasurementDeviceListBySyncDeviceId();
-                cmbDeviceType.DataSource = GetMeasurementDeviceListBySyncDeviceId;
-                cmbDeviceType.DataBind();
-            }
-
-        }
-        private void BindReferenceChartType()
-        {
-            //Split device type and take the 2nd position number as MeasurementDeviceId
-            this.MeasurementDeviceId = int.Parse(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[1].Trim());
-            _presenteraddproject.GetReferenceChartTypeListByMeasurementDeviceId();
-            cmbAlignmentChart.DataSource = GetReferenceChartTypeListByMeasurementDeviceId;
-            cmbAlignmentChart.DataBind();
-        }
+       
+       
 
         private void LoadProjectByProjectId()
         {
@@ -291,19 +266,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbIlluminant.SelectedValue = GetMeasurementSettingByProjectID.Illuminant.ToString();
                 cmbObserver.SelectedValue =GetMeasurementSettingByProjectID.Observer.ToString();
                 cmbDensityType.SelectedValue = GetMeasurementSettingByProjectID.DensityType.ToString();                
-                cmbAlignmentChart.SelectedValue = GetMeasurementSettingByProjectID.ReferenceChartTypeId.ToString();                
-               
-                foreach (ListItem item in cmbDeviceType.Items)
-                {
-                    if (item.Text.Contains(GetMeasurementSettingByProjectID.SerialNumber))
-                    {
-                        item.Selected = true;
-                    }
-                    else
-                    {
-                        item.Selected = false;
-                    }
-                }
+                ucCmbDeviceType.AlignmentChart_Value = GetMeasurementSettingByProjectID.ReferenceChartTypeId.ToString();
+
+                ucCmbDeviceType.SetCmbDeviceTypeBySerialNumber = GetMeasurementSettingByProjectID.SerialNumber;
 
 
             }
@@ -320,8 +285,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbIlluminant.Enabled = value;
             cmbObserver.Enabled = value;
             cmbDensityType.Enabled = value;
-            cmbDeviceType.Enabled = value;
-            cmbAlignmentChart.Enabled = value;
+            ucCmbDeviceType.DeviceType_Enable = value;
+            ucCmbDeviceType.AlignmentChart_Enable = value;
             lbtnProjectSave.Enabled = value;
         }
         #endregion
@@ -354,14 +319,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ObjMeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);
                 //to-do
                 ObjMeasurementSetting.UVIncluded = true;
-                ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(cmbAlignmentChart.SelectedValue);
+                ObjMeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucCmbDeviceType.AlignmentChart_Value);
                 ObjMeasurementSetting.IlluminationMode = 1;
 
                 //Split the device type and take the 1st position id.
-                ObjMeasurementSetting.InstrumentTypeId = Convert.ToInt32(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[0].Trim());
+                ObjMeasurementSetting.InstrumentTypeId = Convert.ToInt32(ucCmbDeviceType.DeviceType_Value.Split(new char[] { '-' })[0].Trim());
 
                 //Split the device type and take the 3rd position string.
-                string[] splittedDeviceType = cmbDeviceType.SelectedItem.Text.Trim().Split(new char[] { '-' });
+                string[] splittedDeviceType = ucCmbDeviceType.DeviceType_SelectedItem.Text.Trim().Split(new char[] { '-' });
                 ObjMeasurementSetting.SerialNumber = string.Empty;
                 if (splittedDeviceType.Length > 2)
                     ObjMeasurementSetting.SerialNumber = splittedDeviceType[2].Trim();

@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddProduct" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
+
 <script type="text/javascript" language="javascript">    
         function SelectDeviceLinkProfileId(dlpId) {            
             document.getElementById('<%= hdnDeviceLinkProfileId.ClientID %>').value = dlpId;
@@ -165,48 +167,35 @@
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart"><asp:HiddenField ID="hdnDeviceLinkProfileId" runat="server" Value="0"/>  
-        <div class="float_l" style="padding-left: 20px;"><asp:Panel GroupingText="Measurement Settings" ID="pnlMeasurementSettings" runat="server">
-                            <table border="0" cellpadding="0" cellspacing="4" style="padding-right: 20px;">
-                                <tr>
-                                    <td><asp:Label ID="lblIlluminant" runat="server" Text="Illuminant:"></asp:Label></td>
-                                    <td>
-                                    <%--<telerik:RadComboBox ID="cmbIlluminant" runat="server"></telerik:RadComboBox>--%>
-                                    <asp:DropDownList ID="cmbIlluminant" runat="server" Width="150px"  CssClass="select"></asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><asp:Label ID="lblObserver" runat="server" Text="Observer:"></asp:Label></td>
-                                    <td>
-                                    <%--<telerik:RadComboBox ID="cmbObserver" runat="server"></telerik:RadComboBox>--%>
-                                    <asp:DropDownList ID="cmbObserver" runat="server" Width="150px"  CssClass="select"></asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr style="padding: 0px 0px 5px 0px;">
-                                    <td><asp:Label ID="lblDensityType" runat="server" Text="Density Type:" ></asp:Label></td>
-                                    <td>
-                                   <%-- <telerik:RadComboBox ID="cmbDensityType" runat="server"></telerik:RadComboBox>--%>
-                                     <asp:DropDownList ID="cmbDensityType" runat="server" Width="150px"  CssClass="select"></asp:DropDownList>
-                                    </td>
-                                </tr>
+        <div style="margin-top : 15px; "><asp:Panel GroupingText="Measurement Settings" ID="pnlMeasurementSettings" runat="server">
+                            <table border="0" cellpadding="0" cellspacing="0" style ="padding-left : 5px;">
+                                    <td style =" padding-right: 5px;"><asp:Label ID="lblIlluminant" runat="server" Text="Illuminant:"></asp:Label></td>
+                                    <td ><asp:DropDownList ID="cmbIlluminant" runat="server" Width="142px"  CssClass="select"></asp:DropDownList></td>
+                                    <td width = "20px"></td>
+                                    <td style =" padding-right: 5px;"><asp:Label ID="lblObserver" runat="server" Text="Observer:"></asp:Label></td>
+                                    <td><asp:DropDownList ID="cmbObserver" runat="server" Width="142px"  CssClass="select"></asp:DropDownList></td>
+                                    <td width = "20px"></td>
+                                    <td style =" padding-right: 5px;"><asp:Label ID="lblDensityType" runat="server" Text="Density Type:" ></asp:Label></td>
+                                    <td><asp:DropDownList ID="cmbDensityType" runat="server" Width="135px"  CssClass="select"></asp:DropDownList></td>
                             </table>
                         </asp:Panel></div>
-    <div class="float_r" style="padding-right: 20px;"><table border="0" cellpadding="5" cellspacing="5">
-                                <tr>
-                                    <td><asp:Label ID="lblDeviceType" runat="server" Text="Device Type:"></asp:Label></td>
-                                    <td>
-                                    <%--<telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true" ></telerik:RadComboBox>--%>
-                                        <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true" Width="150px"  CssClass="select" ></asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label></td>
-                                    <td>
-                                    <%--<telerik:RadComboBox ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"></telerik:RadComboBox>--%>
-                                        <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" Width="150px"  CssClass="select"></asp:DropDownList>
-                                    </td>
-                                </tr>                                                  
-                        </table>
+                        <div style=" margin-top : 15px; ">
+    <div id="DeviceSettings">
+        <fieldset>
+            <legend>Device Settings </legend>
+            <table cellspacing="4" cellpadding="0" border="0" style="padding-right: 20px;">
+                <tbody>
+                    <tr>
+                        <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
     </div>
+</div>
+
+
+
     <div class="clear"></div>
 </div>                            	
 </div>

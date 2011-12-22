@@ -209,6 +209,7 @@
     <Content Include="UserControl\AddMeasurementCommon.ascx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
+    <Content Include="UserControl\CmbDeviceType.ascx" />
     <Content Include="UserControl\DestinationProfileList.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\AddMeasurement.ascx" />
@@ -402,6 +403,13 @@
     </Compile>
     <Compile Include="UserControl\AddProject.ascx.designer.cs">
       <DependentUpon>AddProject.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CmbDeviceType.ascx.cs">
+      <DependentUpon>CmbDeviceType.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CmbDeviceType.ascx.designer.cs">
+      <DependentUpon>CmbDeviceType.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DestinationProfileList.ascx.cs">
       <DependentUpon>DestinationProfileList.ascx</DependentUpon>

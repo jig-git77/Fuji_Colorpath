@@ -75,17 +75,48 @@ namespace FujifilmUSA.Sync.Business.Test
         }
 
         /// <summary>
+        ///A test for GetProjectListBySyncDeviceId
+        ///</summary>
+        [TestMethod()]
+        public void GetProjectListBySyncDeviceIdTest()
+        {
+            IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
+            int syncDeviceId = 6; // TODO: Initialize to an appropriate value
+            List<Project> actual;
+            actual = target.GetProjectListBySyncDeviceId(syncDeviceId);
+            Assert.IsTrue(true);
+        }
+
+        /// <summary>
+        ///A test for GetProjectByProjectId
+        ///</summary>
+        [TestMethod()]
+        public void GetProjectByProjectIdTest()
+        {
+            IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
+            int projectId = 26; // TODO: Initialize to an appropriate value
+
+            Project actual;
+            actual = target.GetProjectByProjectId(projectId);
+            Assert.IsTrue(true);
+
+        }
+
+
+        /// <summary>
         ///A test for InsertProjectAndMeasurementSetting
         ///</summary>
         [TestMethod()]
         public void InsertProjectAndMeasurementSettingTest()
         {
             IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
+
+
             Project objProject = new Project();
             MeasurementSetting objMeasurementSetting = new MeasurementSetting();
 
             objProject.ProjectName = "TestByAjay";
-            objProject.SyncDeviceId = 1;
+            objProject.SyncDeviceId = 6;
             objProject.ΔEType = 1;
             objProject.DeviceLinkProfileId = 4;
             objProject.IsUsed = true;
@@ -97,7 +128,7 @@ namespace FujifilmUSA.Sync.Business.Test
 
             objMeasurementSetting.UsePlugin = true;
             objMeasurementSetting.Observer = 1;
-            objMeasurementSetting.Illuminant= 1;
+            objMeasurementSetting.Illuminant = 1;
             objMeasurementSetting.DensityType = 1;
             objMeasurementSetting.UVIncluded = true;
             objMeasurementSetting.ReferenceChartTypeId = 1;
@@ -105,25 +136,59 @@ namespace FujifilmUSA.Sync.Business.Test
             objMeasurementSetting.InstrumentTypeId = 1;
             objMeasurementSetting.SerialNumber = "Ajay";
 
-            
             Project actual;
             actual = target.InsertProjectAndMeasurementSetting(objProject, objMeasurementSetting);
             Assert.IsTrue(actual != null);
+
+        }
+
+
+        /// <summary>
+        ///A test for CreateSyncRun
+        ///</summary>
+        [TestMethod()]
+        public void CreateSyncRunTest()
+        {
+            IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
+            int projectId = 50; // TODO: Initialize to an appropriate value
+            int status = 1; // TODO: Initialize to an appropriate value
+            DateTime createdDateTime = DateTime.Today; // TODO: Initialize to an appropriate value
+            target.CreateSyncRun(projectId, status, createdDateTime);
+            Assert.IsTrue(true);
+
         }
 
         /// <summary>
-        ///A test for GetProjectListBySyncDeviceId
+        ///A test for CloseSyncRun
         ///</summary>
         [TestMethod()]
-        public void GetProjectListBySyncDeviceIdTest()
+        public void CloseSyncRunTest()
         {
             IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
-            int syncDeviceId = 0; // TODO: Initialize to an appropriate value
-            List<Project> expected = null; // TODO: Initialize to an appropriate value
-            List<Project> actual;
-            actual = target.GetProjectListBySyncDeviceId(syncDeviceId);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            int syncRunId = 68; // TODO: Initialize to an appropriate value
+            int status = 2; // TODO: Initialize to an appropriate value
+            DateTime endDateTime = DateTime.Today; // TODO: Initialize to an appropriate value
+            target.CloseSyncRun(syncRunId, status, endDateTime);
+            Assert.IsTrue(true);
+
+
         }
+
+     
+
+        /// <summary>
+        ///A test for DeleteProject
+        ///</summary>
+        [TestMethod()]
+        public void DeleteProjectTest()
+        {
+            IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
+            int projectId = 50; // TODO: Initialize to an appropriate value
+            int actual;
+            actual = target.DeleteProject(projectId);
+            Assert.IsTrue(true);
+        }
+
+     
     }
 }
