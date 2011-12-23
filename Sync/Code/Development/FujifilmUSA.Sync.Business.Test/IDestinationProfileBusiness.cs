@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int syncDeviceId = 6; // TODO: Initialize to an appropriate value
 
             List<DestinationProfile> actual;
-            actual = target.GetDestinationProfileList(syncDeviceId);
+            actual = target.GetDestinationProfiles(syncDeviceId);
 
             Assert.IsTrue(true);
 

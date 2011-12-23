@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     public class DeviceLinkProfileBusinessImpl : IDeviceLinkProfileBusiness
     {
         #region IDeviceLinkProfileBusiness Members
-        public List<DeviceLinkProfile> GetDeviceLinkProfileList(int sourceProfileId, int destinationProfileId)
+        public List<DeviceLinkProfile> GetDeviceLinkProfiles(int sourceProfileId, int destinationProfileId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
             //========== Get data from data access=================//
@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return objDeviceLinkProfileList;
         }
-        public List<DeviceLinkProfile> GetDeviceLinkProfileListOnSyncDeviceId(int SyncDeviceId)
+        public List<DeviceLinkProfile> GetDeviceLinkProfilesOnSyncDeviceId(int SyncDeviceId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
             //========== Get data from data access=================//
@@ -77,11 +77,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var destinationTask = (IDestinationProfileBusiness) new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
             objDeviceLinkProfile.DestProfile =
-                destinationTask.GetDestinationProfileByDestinationProfileId(objDeviceLinkProfile.DestProfile.DestinationProfileId);
+                destinationTask.GetDestinationProfile(objDeviceLinkProfile.DestProfile.DestinationProfileId);
 
             var sourceTask = (ISourceProfileBusiness) new BusinessFactory<ISourceProfileBusiness>().CreateObject();
             objDeviceLinkProfile.SrcProfile =
-                sourceTask.GetSourceProfileBySourceProfileId(objDeviceLinkProfile.SrcProfile.SourceProfileId);
+                sourceTask.GetSourceProfile(objDeviceLinkProfile.SrcProfile.SourceProfileId);
 
             var request = new CreateDeviceLinkProfileRequest();
 
@@ -129,7 +129,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public DeviceLinkProfile GetDeviceLinkProfileListByDLPID(int DLPID)
+        public DeviceLinkProfile GetDeviceLinkProfile(int DLPID)
         {
             var objDeviceLinkProfileList = new DeviceLinkProfile();
             //========== Get data from data access=================//

@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     public class DestinationProfileBusinessImpl : IDestinationProfileBusiness
     {
         #region IDestinationProfileBusiness Members
-        public List<DestinationProfile> GetDestinationProfileList(int syncDeviceId)
+        public List<DestinationProfile> GetDestinationProfiles(int syncDeviceId)
         {
             var destinationProfileList = new List<Entity.DestinationProfile>();
             var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]", new object[] { syncDeviceId });
@@ -122,8 +122,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
        
-
-        public DestinationProfile GetDestinationProfileByDestinationProfileId(int destinationProfileId)
+        public DestinationProfile GetDestinationProfile(int destinationProfileId)
         {
             var destinationProfile = new DestinationProfile();
             var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileByDestinationProfileID]", new object[] { destinationProfileId });

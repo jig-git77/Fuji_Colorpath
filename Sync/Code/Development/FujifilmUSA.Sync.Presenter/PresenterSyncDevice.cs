@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetSyncDeviceListByUserId()
         {
             var task = (ISyncDeviceBusiness)new BusinessFactory<ISyncDeviceBusiness>().CreateObject();
-            _viewSyncDevice.GetSyncDeviceListByUserId = task.GetSyncDeviceListByUserId(_viewSyncDevice.TaskeroUserId, _viewSyncDevice.RoleId, _viewSyncDevice.CompanyId, _viewSyncDevice.BranchId);
+            _viewSyncDevice.GetSyncDeviceListByUserId = task.GetSyncDevicesByUserId(_viewSyncDevice.TaskeroUserId, _viewSyncDevice.RoleId, _viewSyncDevice.CompanyId, _viewSyncDevice.BranchId);
         }
     }
 }

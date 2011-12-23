@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
             task.CloseSyncRun(_viewExportProfile.SyncRunId, Convert.ToInt32(_viewExportProfile.Status), _viewExportProfile.EndDateTime);
-            return task.GetProjectByProjectId(_viewExportProfile.ProjectId);
+            return task.GetProject(_viewExportProfile.ProjectId);
         }
 
         public void GetIccProfileBySyncRunId()

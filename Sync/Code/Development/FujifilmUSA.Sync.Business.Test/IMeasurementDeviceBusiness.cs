@@ -85,7 +85,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int measurementDeviceId = 24; // TODO: Initialize to an appropriate value
         
             MeasurementDevice actual;
-            actual = target.GetSyncMeasurementDeviceByMeasurementDeviceId(measurementDeviceId);
+            actual = target.GetSyncMeasurementDevice(measurementDeviceId);
             Assert.IsTrue(true);
 
 
@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Business.Test
             IMeasurementDeviceBusiness target = CreateIMeasurementDeviceBusiness(); // TODO: Initialize to an appropriate value
         
             List<MeasurementDevice> actual;
-            actual = target.GetSyncMeasurementDeviceList();
+            actual = target.GetSyncMeasurementDevices();
             Assert.IsTrue(true);
 
 
@@ -161,14 +161,9 @@ namespace FujifilmUSA.Sync.Business.Test
         {
             IMeasurementDeviceBusiness target = CreateIMeasurementDeviceBusiness(); // TODO: Initialize to an appropriate value
             int syncMeasurementDeviceId = 27; // TODO: Initialize to an appropriate value
-            int actual;
-            
+            bool actual;
             actual = target.DeleteSyncMeasurementDevice(syncMeasurementDeviceId);
-            Assert.IsTrue(true);
-
-
+            Assert.IsTrue(actual);
         }
-
-
     }
 }

@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Business.Test
             IProjectBussiness target = CreateIProjectBussiness(); // TODO: Initialize to an appropriate value
             int syncDeviceId = 6; // TODO: Initialize to an appropriate value
             List<Project> actual;
-            actual = target.GetProjectListBySyncDeviceId(syncDeviceId);
+            actual = target.GetProjectsBySyncDeviceId(syncDeviceId);
             Assert.IsTrue(true);
         }
 
@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int projectId = 26; // TODO: Initialize to an appropriate value
 
             Project actual;
-            actual = target.GetProjectByProjectId(projectId);
+            actual = target.GetProject(projectId);
             Assert.IsTrue(true);
 
         }

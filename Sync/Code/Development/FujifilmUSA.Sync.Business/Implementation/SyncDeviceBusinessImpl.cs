@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region ISyncDeviceBusiness Members
 
-        public List<SyncDevice> GetSyncDeviceListByUserId(int taskeroUserId, int roleId, int companyId, int branchId)
+        public List<SyncDevice> GetSyncDevicesByUserId(int taskeroUserId, int roleId, int companyId, int branchId)
         {
             var objSyncDeviceList = new List<SyncDevice>();
             //========== Get data from data access=================//

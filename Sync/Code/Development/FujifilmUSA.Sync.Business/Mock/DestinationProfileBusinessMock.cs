@@ -8,16 +8,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDestinationProfileBusiness Members
 
-        public Dictionary<int, string> GetDestinationProfiles(int SyncDeviceId)
-        {
-            return new Dictionary<int, string>();
-        }
-        public List<Entity.DestinationProfile> GetDestinationProfileList(int SyncDeviceId)
+        public List<DestinationProfile> GetDestinationProfiles(int syncDeviceId)
         {
             return new List<Entity.DestinationProfile>();
         }
 
-        int IDestinationProfileBusiness.InsertDestinationProfile(Entity.DestinationProfile objDestinationProfile)
+        int IDestinationProfileBusiness.InsertDestinationProfile(DestinationProfile destinationProfile)
         {
             return 0;
         }
@@ -32,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public DestinationProfile GetDestinationProfileByDestinationProfileId(int destinationProfileId)
+        public DestinationProfile GetDestinationProfile(int destinationProfileId)
         {
             return new DestinationProfile();
         }

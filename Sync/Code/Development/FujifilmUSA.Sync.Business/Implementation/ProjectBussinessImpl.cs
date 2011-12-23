@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IProjectBussiness Members
 
-        public List<Project> GetProjectListBySyncDeviceId(int syncDeviceId)
+        public List<Project> GetProjectsBySyncDeviceId(int syncDeviceId)
         {
             var objProjectList = new List<Project>();
             //========== Get data from data access=================//
@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }
                     });
 
-            return GetProjectByProjectId(objProject.ProjectId);
+            return GetProject(objProject.ProjectId);
 
         }
 
@@ -106,7 +106,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                new object[] { projectId });
         }
 
-        public Project GetProjectByProjectId(int projectId)
+        public Project GetProject(int projectId)
         {
             var objProject = new Project();
             //========== Get data from data access=================//
@@ -148,23 +148,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objProject;
         }
 
-        public void CloseSyncRun(int syncRunId, int status, DateTime endDateTime)
+        public bool CloseSyncRun(int syncRunId, int status, DateTime endDateTime)
         {
             DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCloseSyncRun]",
                                                         new object[] { syncRunId, status, endDateTime });
+            return true;
         }
 
-        public void CreateSyncRun(int projectId, int status, DateTime createdDateTime)
+        public int CreateSyncRun(int projectId, int status, DateTime createdDateTime)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCreateSyncRun]",
+            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspCreateSyncRun]",
                                                         new object[] { projectId, status, createdDateTime });
         }
 
-        public MeasurementSetting GetMeasurementSettingByProjectID(int ProjectID)
+        public MeasurementSetting GetMeasurementSettingByProjectId(int ProjectId)
         {
             var objMeasurementSetting = new MeasurementSetting();
             //========== Get data from data access=================//
-            var dsMeasurementSetting = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementSettingByProjectId]", new object[] { ProjectID });
+            var dsMeasurementSetting = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementSettingByProjectId]", new object[] { ProjectId });
 
             if (dsMeasurementSetting != null && dsMeasurementSetting.Tables.Count > 0 && dsMeasurementSetting.Tables[0].Rows.Count > 0)
             {

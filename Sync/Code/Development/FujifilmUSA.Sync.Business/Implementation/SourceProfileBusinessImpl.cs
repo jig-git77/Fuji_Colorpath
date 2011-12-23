@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region ISourceProfileBusiness Members
 
-        public SourceProfile GetSourceProfileBySourceProfileId(int sourceProfileId)
+        public SourceProfile GetSourceProfile(int sourceProfileId)
         {
             var sourceProfile = new SourceProfile();
             var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSourceProfileBySourceProfileID]", new object[] { sourceProfileId });

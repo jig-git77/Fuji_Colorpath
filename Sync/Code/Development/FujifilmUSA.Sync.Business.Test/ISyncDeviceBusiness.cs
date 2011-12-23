@@ -87,7 +87,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int branchId = 1; // TODO: Initialize to an appropriate value
             
             List<SyncDevice> actual;
-            actual = target.GetSyncDeviceListByUserId(taskeroUserId, roleId, companyId, branchId);
+            actual = target.GetSyncDevicesByUserId(taskeroUserId, roleId, companyId, branchId);
             Assert.IsTrue(true);
 
 

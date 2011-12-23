@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 
@@ -8,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IProjectBussiness Members
 
-        public List<Project> GetProjectListBySyncDeviceId(int syncDeviceId)
+        public List<Project> GetProjectsBySyncDeviceId(int syncDeviceId)
         {
             return new List<Project>();
         }
@@ -22,21 +23,21 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public Project GetProjectByProjectId(int projectId)
+        public Project GetProject(int projectId)
         {
             return new Project();
         }
 
-        public void CloseSyncRun(int syncRunId, int status, System.DateTime endDateTime)
+        public bool CloseSyncRun(int syncRunId, int status, DateTime endDateTime)
         {
-            //Do Nothing...
+            return true;
         }
 
-        public void CreateSyncRun(int projectId, int status, System.DateTime createdDateTime)
+        public int CreateSyncRun(int projectId, int status, DateTime createdDateTime)
         {
-            //Do Nothing...
+            return 0;
         }
-        public MeasurementSetting GetMeasurementSettingByProjectID(int projectID)
+        public MeasurementSetting GetMeasurementSettingByProjectId(int projectId)
         {
             return new MeasurementSetting();
         }

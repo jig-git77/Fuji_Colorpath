@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public SourceProfile GetSourceProfileBySourceProfileId(int sourceProfileId)
+        public SourceProfile GetSourceProfile(int sourceProfileId)
         {
             return new SourceProfile();
         }

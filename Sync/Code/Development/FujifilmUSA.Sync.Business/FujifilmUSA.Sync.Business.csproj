@@ -47,8 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
-    <Compile Include="Implementation\BranchBusinessImpl.cs" />
-    <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\DestinationProfileBusinessImpl.cs" />
     <Compile Include="Implementation\DeviceLinkProfileBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
@@ -60,8 +58,6 @@
     <Compile Include="Implementation\SyncDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\SyncRunBusinessImpl.cs" />
     <Compile Include="Implementation\TaskeroUserBusinessImpl.cs" />
-    <Compile Include="Interface\IBranchBusiness.cs" />
-    <Compile Include="Interface\ICompanyBusiness.cs" />
     <Compile Include="Interface\IDestinationProfileBusiness.cs" />
     <Compile Include="Interface\IDeviceLinkProfileBusiness.cs" />
     <Compile Include="Interface\IMeasurementDeviceBusiness.cs" />
@@ -74,8 +70,6 @@
     <Compile Include="Interface\ISyncRunBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\ITaskeroUserBusiness.cs" />
-    <Compile Include="Mock\BranchBusinessMock.cs" />
-    <Compile Include="Mock\CompanyBusinessMock.cs" />
     <Compile Include="Mock\DestinationProfileBusinessMock.cs" />
     <Compile Include="Mock\DeviceLinkProfileBusinessMock.cs" />
     <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />

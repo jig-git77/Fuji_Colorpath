@@ -85,7 +85,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int destinationProfileId = 4; // TODO: Initialize to an appropriate value
             List<DeviceLinkProfile> actual;
 
-            actual = target.GetDeviceLinkProfileList(sourceProfileId, destinationProfileId);
+            actual = target.GetDeviceLinkProfiles(sourceProfileId, destinationProfileId);
 
             Assert.IsTrue(true);
 
@@ -101,7 +101,7 @@ namespace FujifilmUSA.Sync.Business.Test
             int SyncDeviceId = 6; // TODO: Initialize to an appropriate value
 
             List<DeviceLinkProfile> actual;
-            actual = target.GetDeviceLinkProfileListOnSyncDeviceId(SyncDeviceId);
+            actual = target.GetDeviceLinkProfilesOnSyncDeviceId(SyncDeviceId);
             
             Assert.IsTrue(true);
 

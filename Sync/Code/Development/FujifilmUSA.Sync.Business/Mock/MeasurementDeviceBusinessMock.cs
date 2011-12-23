@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -10,53 +11,31 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMeasurementDeviceBusiness Members
 
-        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId(int syncDeviceId)
+        public MeasurementDevice GetSyncMeasurementDevice(int measurementDeviceId)
         {
-            return new Dictionary<string, string>();
+            return new MeasurementDevice();
         }
 
-        public Entity.MeasurementDevice GetSyncMeasurementDeviceByMeasurementDeviceId(int measurementDeviceId)
+        public bool DeleteSyncMeasurementDevice(int syncMeasurementDeviceId)
         {
-            return new Entity.MeasurementDevice();
+            return true;
         }
 
-        public int DeleteSyncMeasurementDevice(int syncMeasurementDeviceId)
+        public List<MeasurementDevice> GetSyncMeasurementDevices()
+        {
+            return new List<MeasurementDevice>();
+        }
+
+
+        public int InsertSyncMeasurementDevice(MeasurementDevice measurementDevice)
+        {
+            return 0;
+        }
+
+        public int UpdateSyncMeasurementDevice(MeasurementDevice measurementDevice)
         {
             return 0;
         }
         #endregion
-
-
-        public List<Entity.MeasurementDevice> GetSyncMeasurementDeviceList()
-        {
-            return new List<Entity.MeasurementDevice>();
-        }
-
-
-        public int InsertSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
-        {
-            return 0;
-        }
-
-        public int UpdateSyncMeasurementDevice(Entity.MeasurementDevice measurementDevice)
-        {
-            return 0;
-        }
-
-
-        public Dictionary<int, string> GetDongleList(int branchId)
-        {
-            Dictionary<int, string> dongleList = new Dictionary<int, string>();
-            dongleList.Add(1, "Demo");
-            return dongleList;
-        }
-
-
-        public Dictionary<int, string> GetMeasurementDeviceTypeList()
-        {
-            Dictionary<int, string> measurementDeviceTypeList = new Dictionary<int, string>();
-            measurementDeviceTypeList.Add(1, "Demo");
-            return measurementDeviceTypeList;
-        }
     }
 }

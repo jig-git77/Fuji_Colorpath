@@ -20,31 +20,31 @@ namespace FujifilmUSA.Sync.Presenter
         public void InsertSyncMeasurementDevice()
         {
             var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
-            _viewMeasurementDevice.SyncMeasurementDeviceResult = task.InsertSyncMeasurementDevice(_viewMeasurementDevice.SaveSyncMeasurementDevice);
+            task.InsertSyncMeasurementDevice(_viewMeasurementDevice.SaveSyncMeasurementDevice);
         }
 
         public void UpdateSyncMeasurementDevice()
         {
             var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
-            _viewMeasurementDevice.SyncMeasurementDeviceResult = task.UpdateSyncMeasurementDevice(_viewMeasurementDevice.SaveSyncMeasurementDevice);
+            task.UpdateSyncMeasurementDevice(_viewMeasurementDevice.SaveSyncMeasurementDevice);
         }
 
         public void DeleteSyncMeasurementDevice()
         {
             var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
-            _viewMeasurementDevice.SyncMeasurementDeviceResult = task.DeleteSyncMeasurementDevice(_viewMeasurementDevice.SyncMeasurementDeviceId);
+            task.DeleteSyncMeasurementDevice(_viewMeasurementDevice.SyncMeasurementDeviceId);
         }
 
         public void GetSyncMeasurementDeviceByMeasurementDeviceId()
         {
             var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
-            _viewMeasurementDevice.SyncMeasurementDevice = task.GetSyncMeasurementDeviceByMeasurementDeviceId(_viewMeasurementDevice.SyncMeasurementDeviceId);
+            _viewMeasurementDevice.SyncMeasurementDevice = task.GetSyncMeasurementDevice(_viewMeasurementDevice.SyncMeasurementDeviceId);
         }
 
         public void GetSyncMeasurementDeviceList()
         {
             var task = (IMeasurementDeviceBusiness)new BusinessFactory<IMeasurementDeviceBusiness>().CreateObject();
-            _viewMeasurementDevice.SyncMeasurementDeviceList = task.GetSyncMeasurementDeviceList();
+            _viewMeasurementDevice.SyncMeasurementDeviceList = task.GetSyncMeasurementDevices();
         }
 
         public void GetDongleList()
