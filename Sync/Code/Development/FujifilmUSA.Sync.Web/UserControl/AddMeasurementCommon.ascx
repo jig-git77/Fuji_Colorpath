@@ -238,7 +238,7 @@
         var Type = '<%=Type %>';        
         var ReferenceChartTypeId;
         var SerialNo;
-        if (Type == "DestinationProfile" || Type == "Dlp") {
+        if (Type == "DestinationProfile") {
             //OnCancel();            
             //refreshCanvas();
             //jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
@@ -325,24 +325,7 @@
             objDestinationProfile = { DestinationProfileId: DestinationProfileID,DestinationProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID };
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
-        }
-        else if (Type == "Dlp") {
-            SyncRunID = "0";
-            var SourceProfileID = jQuery("[id*='cmbSourceProfile'] :selected").val();
-            var DestinationProfileID = jQuery("[id*='cmbDestinationProfile'] :selected").val();
-
-            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            var DeviceLinkProfilename = jQuery("input[id$=txtDeviceLinkProfileName]").val();
-            var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
-            var DeviceLinkProfileID = jQuery("input[id$=hdProfileID]").val();
-            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            objMeasurementLink = { Measurement: objMeasurement };
-            objSourceProfile = {SourceProfileId:SourceProfileID};
-            objDestinationProfile = { DestinationProfileId: DestinationProfileID};
-            objDeviceLinkProfile = { DeviceLinkProfileId: DeviceLinkProfileID, DeviceLinkProfileName: DeviceLinkProfilename,SrcProfile: objSourceProfile,DestProfile: objDestinationProfile,SyncDeviceId: SyncDeviceID };
-            obj = { DeviceLinkProfile: objDeviceLinkProfile, MeasurementLink: objMeasurementLink };
-            serviceLink = "Services/PluginDataService.svc/SaveDeviceLinkMeasurement";
-        }
+        }      
         else if (Type == "Optimization") {
             obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             serviceLink = "Services/PluginDataService.svc/SaveMeasurement";

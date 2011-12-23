@@ -1,10 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDeviceLinkProfile.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddDeviceLinkProfile" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
-
-
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -17,8 +12,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
     <div class="clear">
-    </div>
-    <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
+    </div>    
     <div class="add_form">
         <center>
             <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
@@ -30,17 +24,13 @@
                     :
                 </td>
                <td  colspan="2">
-                   <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                 <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                    <asp:TextBox ID="txtDeviceLinkProfileName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>               
                  <%--<td class="float_right">
                     &nbsp;
                 </td>--%>
-            </tr>
-             <tr>
-                    <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            
-            </tr>           
+            </tr>                     
             <tr>
                 <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
                 </td>
@@ -56,8 +46,7 @@
                 </td>
             </tr>
         </table>
-    </div>    
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="Dlp" />
+    </div>        
 </div>
 
 <div class="contant_bottom">

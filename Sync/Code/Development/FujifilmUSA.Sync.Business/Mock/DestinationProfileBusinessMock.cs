@@ -32,6 +32,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
+        public DestinationProfile GetDestinationProfileByDestinationProfileId(int destinationProfileId)
+        {
+            return new DestinationProfile();
+        }
+
         #endregion
     }
 }

@@ -113,12 +113,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 destinationProfile.Profile = response.Profile.ProfileData;
             }
 
+            
             if (destinationProfile.Profile != null)
             {
                 DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDestinationProfile]", new object[] { destinationId, destinationProfile.Profile });
             }
 
             return true;
+        }
+       
+
+        public DestinationProfile GetDestinationProfileByDestinationProfileId(int destinationProfileId)
+        {
+            var destinationProfile = new DestinationProfile();
+            var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileByDestinationProfileID]", new object[] { destinationProfileId });
+
+            if (dsDestinationProfile != null && dsDestinationProfile.Tables.Count > 0 && dsDestinationProfile.Tables[0].Rows.Count > 0)
+            {
+                destinationProfile = dsDestinationProfile.Tables[0].AsEnumerable().Select(x => new DestinationProfile()
+                {
+                    DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
+                    DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName"),
+                    IsUse = DataReader.ReadBoolean(x, "IsUse"),
+                    SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),
+                    Profile = DataReader.ReadByteArray(x, "Profile")
+                }).FirstOrDefault();
+            }
+            return destinationProfile;
         }
 
         #endregion

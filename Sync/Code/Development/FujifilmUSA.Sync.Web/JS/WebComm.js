@@ -10,7 +10,7 @@ function GetReferenceChart(Type, ProjectID, ReferenceChartTypeId, SerialNo) {
     if (Type == "Optimization") {
         serviceLink = "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID;        
     }
-    if (Type == "DestinationProfile" || Type == "Dlp") {        
+    if (Type == "DestinationProfile") {        
         serviceLink = "Services/PluginDataService.svc/GetReferenceChartByTypeId/" + ReferenceChartTypeId + "/" + SerialNo;        
     }
 

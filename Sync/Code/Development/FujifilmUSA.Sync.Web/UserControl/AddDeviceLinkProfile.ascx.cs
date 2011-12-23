@@ -59,14 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
-        {
-            lbtnDeviceLinkProfileSave.Text = "Save";
-        }      
-        //protected void cmbDeviceType_SelectedIndexChanged1(object sender, EventArgs e)
-        //{
-        //    BindReferenceChartType();
-        //}
+      
         #endregion
 
         #region IViewAddProject Members

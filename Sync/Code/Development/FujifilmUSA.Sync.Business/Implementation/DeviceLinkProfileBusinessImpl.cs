@@ -13,7 +13,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
     public class DeviceLinkProfileBusinessImpl : IDeviceLinkProfileBusiness
     {
         #region IDeviceLinkProfileBusiness Members
-
         public List<DeviceLinkProfile> GetDeviceLinkProfileList(int sourceProfileId, int destinationProfileId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
@@ -43,7 +42,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return objDeviceLinkProfileList;
         }
-
         public List<DeviceLinkProfile> GetDeviceLinkProfileListOnSyncDeviceId(int SyncDeviceId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
@@ -75,43 +73,59 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return objDeviceLinkProfileList;
         }
-
-        public int InsertDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
+        public bool CreateDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
         {
-            var objProjectInPeramater = new List<Parameters>();
-            var objProjectOutPeramater = new List<Parameters>();
+            objDeviceLinkProfile.DestProfile =
+                (new DestinationProfileBusinessImpl()).GetDestinationProfileByDestinationProfileId(objDeviceLinkProfile.DestProfile.DestinationProfileId);
 
-            objProjectInPeramater.Add(new Parameters() { ParameterName = "@SourceProfileID", Size = 0, Type = DbType.Int16, Value = objDeviceLinkProfile.SrcProfile.SourceProfileId });
-            objProjectInPeramater.Add(new Parameters() { ParameterName = "@DestinationProfileID", Size = 0, Type = DbType.Int16, Value = objDeviceLinkProfile.DestProfile.DestinationProfileId });
-            objProjectInPeramater.Add(new Parameters() { ParameterName = "@DLPName", Size = 0, Type = DbType.String, Value = objDeviceLinkProfile.DeviceLinkProfileName });
-            objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objDeviceLinkProfile.IsUse });
+            objDeviceLinkProfile.SrcProfile =
+                (new SourceProfileBusinessImpl()).GetSourceProfileBySourceProfileId(objDeviceLinkProfile.SrcProfile.SourceProfileId);
 
-            objProjectOutPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 4, Type = DbType.Int16 });
+            var request = new CreateDeviceLinkProfileRequest();
+
+            //Add options and call profile service to generate optimize dlp
+            using (var client = new ProfilerClient())
+            {
+                request.Options = new List<Parameter>
+                                      {
+                                          new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
+                                          new Parameter() {Name = "ProfileSize", Value = "2"},
+                                          new Parameter() {Name = "Rendering", Value = "3"},
+                                          new Parameter() {Name = "DLBypassBlack", Value = "100"},
+                                          new Parameter() {Name = "DLExceptions", Value = "129"},
+                                          new Parameter() {Name = "ProfileFormat", Value = "2"},
+                                          new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
+                                          new Parameter() {Name = "Flags", Value = "0"},
+                                          new Parameter() {Name = "Attributes0", Value = "0"},
+                                          new Parameter() {Name = "Attributes1", Value = "0"},
+                                          new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
+                                      };
+                request.DestinationProfile = new IccProfile()
+                                                 {
+                                                     ProfileData = objDeviceLinkProfile.DestProfile.Profile
+                                                 };
+                request.SourceProfile = new IccProfile()
+                                            {
+                                                ProfileData = objDeviceLinkProfile.SrcProfile.Profile
+                                            };
+                var response = client.CreateDeviceLinkProfile(request);
+                objDeviceLinkProfile.Profile = response.DeviceLinkProfile.ProfileData;
 
 
-            DataAccessFactory.Instance.ExecuteProcedureWithTransaction(
-                new List<Action>()
-                    {
-                        () =>
-                            {
-                                objProjectOutPeramater =
-                                    DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertDLPProfile]",
-                                                                                objProjectInPeramater,
-                                                                                objProjectOutPeramater);
-                                objDeviceLinkProfile.DeviceLinkProfileId =
-                                    Convert.ToInt16(
-                                        objProjectOutPeramater.Single(x => x.ParameterName == "@DLPID").Value);
-                            }
-                    });
+            }
+            if (objDeviceLinkProfile.Profile != null)
+            {
+                DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertDLPProfile]",
+                                                            new object[]
+                                                                {
+                                                                    objDeviceLinkProfile.DeviceLinkProfileId, objDeviceLinkProfile.SrcProfile.SourceProfileId,
+                                                                    objDeviceLinkProfile.DestProfile.DestinationProfileId, objDeviceLinkProfile.DeviceLinkProfileName,
+                                                                    objDeviceLinkProfile.IsUse, objDeviceLinkProfile.Profile
+                                                                });
+            }
 
-            return objDeviceLinkProfile.DeviceLinkProfileId;
+            return true;
         }
-
-        public void UpdateDestinationProfile(int deviceLinkProfileId, byte[] profile)
-        {
-            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDLPProfile]", new object[] { deviceLinkProfileId, profile });
-        }
-
         public DeviceLinkProfile GetDeviceLinkProfileListByDLPID(int DLPID)
         {
             var objDeviceLinkProfileList = new DeviceLinkProfile();

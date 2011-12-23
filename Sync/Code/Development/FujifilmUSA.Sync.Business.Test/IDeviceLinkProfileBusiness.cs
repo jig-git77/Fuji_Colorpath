@@ -108,41 +108,31 @@ namespace FujifilmUSA.Sync.Business.Test
 
         }
 
-        /// <summary>
-        ///A test for InsertDeviceLinkProfile
-        ///</summary>
-        [TestMethod()]
-        public void InsertDeviceLinkProfileTest()
-        {
-            IDeviceLinkProfileBusiness target = CreateIDeviceLinkProfileBusiness(); // TODO: Initialize to an appropriate value
-            DeviceLinkProfile objDeviceLinkProfile = new DeviceLinkProfile(); // TODO: Initialize to an appropriate value
+        ///// <summary>
+        /////A test for InsertDeviceLinkProfile
+        /////</summary>
+        //[TestMethod()]
+        //public void InsertDeviceLinkProfileTest()
+        //{
+        //    IDeviceLinkProfileBusiness target = CreateIDeviceLinkProfileBusiness(); // TODO: Initialize to an appropriate value
+        //    DeviceLinkProfile objDeviceLinkProfile = new DeviceLinkProfile(); // TODO: Initialize to an appropriate value
 
-            objDeviceLinkProfile.SrcProfile = new SourceProfile();
-            objDeviceLinkProfile.DestProfile = new DestinationProfile();
+        //    objDeviceLinkProfile.SrcProfile = new SourceProfile();
+        //    objDeviceLinkProfile.DestProfile = new DestinationProfile();
 
-            objDeviceLinkProfile.SrcProfile.SourceProfileId = 9;
-            objDeviceLinkProfile.DestProfile.DestinationProfileId = 4;
-            objDeviceLinkProfile.DeviceLinkProfileName = "Test DLP";
-            objDeviceLinkProfile.IsUse = true;
+        //    objDeviceLinkProfile.SrcProfile.SourceProfileId = 9;
+        //    objDeviceLinkProfile.DestProfile.DestinationProfileId = 4;
+        //    objDeviceLinkProfile.DeviceLinkProfileName = "Test DLP";
+        //    objDeviceLinkProfile.IsUse = true;
+        //    byte[] profile;
+        //    int actual;
+        //    actual = target.InsertDeviceLinkProfile(objDeviceLinkProfile, profile);
 
-            int actual;
-            actual = target.InsertDeviceLinkProfile(objDeviceLinkProfile);
+        //    Assert.IsTrue(true);
 
-            Assert.IsTrue(true);
+        //}
 
-        }
-
-        /// <summary>
-        ///A test for UpdateDestinationProfile
-        ///</summary>
-        [TestMethod()]
-        public void UpdateDestinationProfileTest()
-        {
-            IDeviceLinkProfileBusiness target = CreateIDeviceLinkProfileBusiness(); // TODO: Initialize to an appropriate value
-            int deviceLinkProfileId = 5; // TODO: Initialize to an appropriate value
-            byte[] profile = null; // TODO: Initialize to an appropriate value
-            target.UpdateDestinationProfile(deviceLinkProfileId, profile);
-            Assert.IsTrue(true);
-        }
+      
+       
     }
 }
