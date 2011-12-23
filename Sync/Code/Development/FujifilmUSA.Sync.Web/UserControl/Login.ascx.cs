@@ -15,7 +15,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         
         
         #region "Declaration"
-        private PresenterTaskeroUser _presentertaskerouser;        
+        private PresenterTaskeroUser _presentertaskerouser;
+        public string btnLoginId
+        {
+            get { return bntLogin.UniqueID; }
+        }
         #endregion
 
         #region "Page Events"
