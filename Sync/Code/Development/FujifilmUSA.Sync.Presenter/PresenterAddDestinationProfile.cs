@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
@@ -20,13 +17,15 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void CreateDestinationProfile()
         {
-            var task = (IProfileBusiness)new BusinessFactory<IProfileBusiness>().CreateObject();
-            _viewAddDestinationProfile.MeasurementIds = string.Join(",",
-                                                                    task.GetMeasurement(_viewAddDestinationProfile.DestinationId, ProfileType.DestinationProfile).Select(
-                                                                        x => x.MeasurementId).ToArray());
+            var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+            var measurementIds = string.Join(",",
+                                                                    task.GetMeasurement(
+                                                                        _viewAddDestinationProfile.ProfileId,
+                                                                        ProfileType.DestinationProfile).
+                                                                        Select(x => x.MeasurementId).ToArray());
 
             var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            _viewAddDestinationProfile.CreateResult = destTask.CreateDestinationProfile(_viewAddDestinationProfile.MeasurementIds, _viewAddDestinationProfile.DestinationId);
+            destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfile.ProfileId);
         }
     }
 }

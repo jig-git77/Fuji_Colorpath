@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
@@ -51,17 +46,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
             _presenterExportProfile.GetIccProfileBySyncRunId();
             //Prompt for download file
-            if (IccProfile != null && IccProfile.Length > 0)
-                FujifilmUSA.Sync.Common.Utilities.DownloadFile(IccProfile,"Profile.icc");
+            if (Profile != null && Profile.Data.Profile != null)
+                Utilities.DownloadFile(Profile.Data.Profile, "Profile.icc");
         }
 
         #region IViewExportProfile Members
-        public int SyncRunId { get; set; }
-        public ECPSyncRunStatus Status { get; set; }
-        public DateTime EndDateTime { get; set; }
-        public int ProjectId { get; set; }
-        public string MeasurementIds { get; set; }
-        public byte[] IccProfile { get; set; }
+
+        public ECPSyncRunStatus Status { get; set;}
+
+        public int SyncRunId { get; set;}
+        
+        public DateTime EndDateTime { get; set;}
+        
+        public int ProjectId { get; set;}
+        
+        #endregion
+
+        #region IViewBaseProfile Members
+
+        public IBaseProfile Profile { get; set;}
+        
         #endregion
     }
 }

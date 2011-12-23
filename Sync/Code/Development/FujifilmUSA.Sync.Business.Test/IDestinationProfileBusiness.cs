@@ -101,7 +101,7 @@ namespace FujifilmUSA.Sync.Business.Test
             DestinationProfile objDestinationProfile = new DestinationProfile(); // TODO: Initialize to an appropriate value
             int actual;
 
-            objDestinationProfile.DestinationProfileName = "Test Profile";
+            objDestinationProfile.ProfileName = "Test Profile";
             objDestinationProfile.SyncDeviceId = 6;
             objDestinationProfile.IsUse = true;
 

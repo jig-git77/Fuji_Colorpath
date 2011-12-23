@@ -2,10 +2,24 @@
 
 namespace FujifilmUSA.Sync.Entity
 {
-    public class SourceProfile : ProfileData
+    public class SourceProfile : IBaseProfile
     {
-        public int SourceProfileId { get; set; }
-        public string SourceProfileName { get; set; }
-        public Boolean IsUse { get; set; }
+        public SourceProfile()
+        {
+            Data = new ProfileData();
+        }
+        #region IBaseProfile Members
+
+        public int ProfileId { get; set; }
+
+        public string ProfileName { get; set; }
+
+        public ProfileData Data { get; set; }
+
+        public int SyncDeviceId { get; set; }
+
+        public bool IsUse { get; set; }
+
+        #endregion
     }
 }

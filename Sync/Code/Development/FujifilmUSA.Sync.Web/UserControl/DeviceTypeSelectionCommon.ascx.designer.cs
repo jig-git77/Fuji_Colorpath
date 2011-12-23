@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web.UserControl {
     
     
-    public partial class CmbDeviceType {
+    public partial class DeviceTypeSelectionCommon {
         
         /// <summary>
         /// cmbDeviceType control.

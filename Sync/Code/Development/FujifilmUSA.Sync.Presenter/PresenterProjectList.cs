@@ -16,26 +16,19 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetProjectListBySyncDeviceId()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _viewProjectList.GetProjectListBySyncDeviceId = task.GetProjectsBySyncDeviceId(_viewProjectList.SyncDeviceId);
+            _viewProjectList.Projects = task.GetProjectsBySyncDeviceId(_viewProjectList.Project.SyncDeviceId);
         }
 
         public void DeleteProject()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _viewProjectList.DeleteProject = task.DeleteProject(_viewProjectList.ProjectId);
+            task.DeleteProject(_viewProjectList.Project.ProjectId);
         }
 
-        public void GetProjectByProjectId()
+        public void GetProject()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _viewProjectList.GetProjectByProjectId = task.GetProject(_viewProjectList.ProjectId);
-
+            _viewProjectList.Project = task.GetProject(_viewProjectList.Project.ProjectId);
         }
-        public void GetMeasurementSettingByProjectID()
-        {
-            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _viewProjectList.GetMeasurementSettingByProjectID = task.GetMeasurementSettingByProjectId(_viewProjectList.ProjectId);
-        }
-
     }
 }

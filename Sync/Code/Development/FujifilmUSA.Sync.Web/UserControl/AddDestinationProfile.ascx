@@ -26,25 +26,6 @@
         <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
     <div class="add_form">
-        <%--<div class="float_l InformationtxtDivWidth" style="margin-bottom: 1px;">
-            <asp:Label ID="lblDestinationProfileName" runat="server" Text="Name" CssClass="LabelTitle"></asp:Label>
-            &nbsp;
-            <asp:TextBox ID="txtDestinationProfile" runat="server" SkinID="width250px"></asp:TextBox>
-           <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>
-        </div>
-        <div class="float_l" style="margin-bottom: 3px;">
-            <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>&nbsp;
-            <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
-                OnSelectedIndexChanged="cmbDeviceType_SelectedIndexChanged" AutoPostBack="true" CssClass="select"
-                Width="200px">
-            </asp:DropDownList>
-        </div>
-        <div class="float_r">
-            <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>&nbsp;
-            <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" CssClass="select "
-                Width="200px">
-            </asp:DropDownList>
-        </div>--%>
            <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">

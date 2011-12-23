@@ -12,10 +12,10 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddDeviceLinkProfile : System.Web.UI.UserControl,IViewAddProject,IViewAddDeviceLinkProfile
+    public partial class AddDeviceLinkProfile : System.Web.UI.UserControl, IViewAddDeviceLinkProfile, IViewGetSourceDestinationCombo
     {
-         #region "Declaration"
-        private PresenterAddProject _presenteraddproject;
+        #region "Declaration"
+        private PresenterGetSourceDestinationCombo _presenterGetSourceDestinationCombo;
         private PresenterAddDeviceLinkProfile _presenteradddevicelinkprofile;
         #endregion
 
@@ -23,33 +23,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnInit(EventArgs e)
         {
-            _presenteraddproject = new PresenterAddProject(this);
+            _presenterGetSourceDestinationCombo = new PresenterGetSourceDestinationCombo(this);
             _presenteradddevicelinkprofile = new PresenterAddDeviceLinkProfile(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
             if (!Page.IsPostBack)
-            {               
+            {
                 BindSourceProfile();
                 BindDestinationProfile();
             }
         }
 
         #endregion
-         
+
         #region Methods
         private void BindSourceProfile()
         {
-            _presenteraddproject.GetSourceProfileList();
-            cmbSourceProfile.DataSource = GetSourceProfileList;
+            _presenterGetSourceDestinationCombo.GetSourceProfileList();
+            cmbSourceProfile.DataSource = GetSourceProfiles;
             cmbSourceProfile.DataBind();
             cmbSourceProfile.Items.Insert(0, new ListItem("-- Select --", ""));
         }
         private void BindDestinationProfile()
         {
             this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-            _presenteraddproject.GetDestinationProfiles();
+            _presenterGetSourceDestinationCombo.GetDestinationProfiles();
             cmbDestinationProfile.DataSource = GetDestinationProfiles;
             cmbDestinationProfile.DataBind();
             cmbDestinationProfile.Items.Insert(0, new ListItem("-- Select --", ""));
@@ -59,35 +59,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnDeviceLinkProfileSave_Click(object sender, EventArgs e)
         {
-            ObjDeviceLinkProfile = new DeviceLinkProfile();
-            ObjDeviceLinkProfile.DeviceLinkProfileName = txtDeviceLinkProfileName.Text.Trim();
-            ObjDeviceLinkProfile.DestProfile = (new DestinationProfile() {DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue)});
-            ObjDeviceLinkProfile.SrcProfile = (new SourceProfile() { SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue) });
-            ObjDeviceLinkProfile.IsUse = true;
+            DeviceLinkProfile = new DeviceLinkProfile
+                                    {
+                                        ProfileName = txtDeviceLinkProfileName.Text.Trim(),
+                                        DestProfile = (new DestinationProfile() {ProfileId = int.Parse(cmbDestinationProfile.SelectedValue)}),
+                                        SrcProfile = (new SourceProfile() {ProfileId = int.Parse(cmbSourceProfile.SelectedValue)}),
+                                        IsUse = true
+                                    };
             _presenteradddevicelinkprofile.CreateDeviceLinkProfile();
-            if(CreateResult)
-                Response.Redirect("DeviceLinkProfileList.aspx",true);
+            Response.Redirect("DeviceLinkProfileList.aspx", true);
         }
         #endregion
 
-        #region IViewAddProject Members
-        public Dictionary<int, string> GetSourceProfileList { get; set; }
-        public Dictionary<int, string> GetDestinationProfiles { get; set; }
-        public int SourceProfileId { get; set; }
-        public int DestinationProfileId { get; set; }
-        public List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
-        public int SyncDeviceId { get; set; }
-        public Dictionary<string, string> GetMeasurementDeviceListBySyncDeviceId { get; set; }
-        public int MeasurementDeviceId { get; set; }
-        public Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId { get; set; }
-        public Project ObjProject { get; set; }
-        public MeasurementSetting ObjMeasurementSetting { get; set; }
-        public Project InsertProjectAndMeasurementSetting { get; set; }
+        #region IViewAddDeviceLinkProfile Members
+
+        public DeviceLinkProfile DeviceLinkProfile { get; set; }
+
         #endregion
 
-        #region IViewAddDeviceLinkProfile Members
-        public DeviceLinkProfile ObjDeviceLinkProfile { get; set; }
-        public bool CreateResult { get; set; }
+        #region IViewGetSourceDestination Members
+
+        public Dictionary<int, string> GetSourceProfiles { get; set; }
+
+        public Dictionary<int, string> GetDestinationProfiles { get; set; }
+
         #endregion
-    }    
+
+        #region IViewBaseSyncDevice Members
+
+        public int SyncDeviceId { get; set; }
+
+        #endregion
+    }
 }

@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.CmbDeviceType ucCmbDeviceType;
+        protected global::FujifilmUSA.Sync.Web.UserControl.DeviceTypeSelectionCommon ucCmbDeviceType;
         
         /// <summary>
         /// ucAddMeasurementCommon control.

@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
@@ -11,10 +7,10 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DestinationProfileList : System.Web.UI.UserControl,IViewDestinationProfile
+    public partial class DestinationProfileList : System.Web.UI.UserControl,IViewDestinationProfiles
     {
         #region Declaration
-        private PresenterDestinationProfile _presenterdestinationprofile;
+        private PresenterDestinationProfileList _presenterdestinationprofile;
 
         public string DestinationProfile_DeleteDestinationProfile_Confirmation
         {
@@ -28,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
-            _presenterdestinationprofile = new PresenterDestinationProfile(this);
+            _presenterdestinationprofile = new PresenterDestinationProfileList(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
             _presenterdestinationprofile.GetDestinationProfileList();
-            grdDestinationProfile.DataSource = DestinationProfileListing;
+            grdDestinationProfile.DataSource = DestinationProfiles;
             grdDestinationProfile.DataBind();
         }
         public object DisplayIsActiveCustomValue(object value)
@@ -60,21 +56,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        #region Control Events
-        protected void grdDestinationProfile_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "DeleteDestinationProfile")
-            {
+        #region IViewDestinationProfiles Members
 
-            }
-        }
-        #endregion
-
-        #region IViewDestinationProfile Members
-        public List<DestinationProfile> DestinationProfileListing { get; set; }
-        public int SyncDeviceId { get; set; }
-        #endregion
-
+        public List<DestinationProfile> DestinationProfiles { get; set; }
         
+        #endregion
+
+        #region IViewBaseSyncDevice Members
+
+        public int SyncDeviceId{ get; set; }
+        
+        #endregion
     }
 }

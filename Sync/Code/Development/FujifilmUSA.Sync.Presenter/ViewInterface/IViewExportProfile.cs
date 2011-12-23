@@ -6,12 +6,11 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewExportProfile
+    public interface IViewExportProfile : IViewBaseProfile
     {
-        int SyncRunId { get; set; }
         ECPSyncRunStatus Status { get; set; }
+        int SyncRunId { get; set; }
         DateTime EndDateTime { get; set; }
-        int ProjectId { get; set;}
-        byte[] IccProfile { get; set; }
+        int ProjectId { get; set; }
     }
 }

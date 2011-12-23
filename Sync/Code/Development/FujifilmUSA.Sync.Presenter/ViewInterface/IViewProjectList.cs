@@ -6,13 +6,8 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewProjectList
+    public interface IViewProjectList : IViewBaseProject
     {
-        int SyncDeviceId { get; set; }
-        int ProjectId { get; set; }
-        List<Project> GetProjectListBySyncDeviceId { get; set; }
-        int DeleteProject { get; set; }
-        Project GetProjectByProjectId { get; set; }
-        MeasurementSetting GetMeasurementSettingByProjectID { get; set; }
+        List<Project> Projects { get; set; }
     }
 }

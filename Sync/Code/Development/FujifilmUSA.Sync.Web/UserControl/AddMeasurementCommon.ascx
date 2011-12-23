@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementCommon.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementCommon" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementCommon.ascx.cs"
+    Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementCommon" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -18,11 +19,8 @@
 <script src="JS/i1read.js" type="text/javascript"></script>
 <script src="JS/isisread.js" type="text/javascript"></script>
 <script src="JS/WebComm.js" type="text/javascript"></script>
-
 <script src="jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
-
-
 <style>
     .my_rectangle
     {
@@ -72,7 +70,6 @@
         height: 10em;
     }
 </style>
-
 <div>
     <%--<div class="head">
         <h1>
@@ -115,7 +112,7 @@
             <%--<telerik:RadButton ID="btnCalibrate" runat="server" Text="Calibrate">
             </telerik:RadButton>--%>
         </div>
-         <div class="clear">
+        <div class="clear">
         </div>
         <div class="float_l">
             <input type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
@@ -142,35 +139,21 @@
         <div class="color_pallate_bottom">
             &nbsp;</div>
     </div>
-
-    
-    <script type="text/javascript">
-
-        
-
-
-    </script>
-
     <div class="color_pallate">
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-           <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
-                    <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
-                    <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display:none" OnClick="btnBindGrid_Click" />                   
-                    <div id="measurementContainer">
-                    </div>
+            <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
+            <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none" OnClick="btnBindGrid_Click" />
+            <div id="measurementContainer">
+            </div>
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
     </div>
-
-
-    
-   
 </div>
-
 <!-- modal content -->
 <div id='confirm'>
     <div class='header'>
@@ -184,16 +167,12 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
-
-    <asp:HiddenField ID="hdSyncRunID" runat="server" />
-    <asp:HiddenField ID="hdProjectID" runat="server" />
-    <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
-    <asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
-
-
+<asp:HiddenField ID="hdSyncRunID" runat="server" />
+<asp:HiddenField ID="hdProjectID" runat="server" />
+<asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
+<asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
-
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
           <tr>
                 <th scope="col">
@@ -206,7 +185,7 @@
                     Delete
                 </th>
           </tr>
-    </script>
+</script>
 <script id="MeasurementDetailTemplate" type="text/x-jQuery-tmpl">
          <tr id = "${MeasurementId}">
                 <td align="center">
@@ -228,11 +207,10 @@
                             >
                 </td>
          </tr>
-    </script>
-
+</script>
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
-    function ControlVisibility() {        
+    function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
@@ -245,7 +223,7 @@
     }
     function GetRefChartData() {
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-        var Type = '<%=Type %>';        
+        var Type = '<%=Type %>';
         var ReferenceChartTypeId;
         var SerialNo;
         if (Type == "DestinationProfile") {
@@ -258,7 +236,7 @@
             SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
             SerialNo = SerialNo.replace(" ", "")
         }
-    
+
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
     }
 
@@ -333,13 +311,13 @@
             MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
             var DestinationProfilename = jQuery("input[id$=txtDestinationProfile]").val();
             var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
-            var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();            
+            var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            objMeasurementLink = {Measurement:objMeasurement};
-            objDestinationProfile = { DestinationProfileId: DestinationProfileID,DestinationProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID };
+            objMeasurementLink = { Measurement: objMeasurement };
+            objDestinationProfile = { DestinationProfileId: DestinationProfileID, DestinationProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID };
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
-        }      
+        }
         else if (Type == "Optimization") {
             obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
@@ -359,7 +337,7 @@
             //If the call succeeds
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
-            jQuery("input[id$=hdProfileID]").val(response);            
+            jQuery("input[id$=hdProfileID]").val(response);
             jQuery("[id*='btnBindGrid']").click();
             MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
@@ -397,15 +375,14 @@
 
 
     function bindMeasurementData() {
-        
-        var Type = '<%=pTypeId %>';
+        var Type = '<%=Type %>';
         var serviceUrl;
-        if (Type == "2") {
+        if (Type == "DestinationProfile") {
             var ProfileId = jQuery("input[id$=hdProfileID]").val();
             serviceUrl = "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId + "/" + Type;
         }
-        if (Type == "4") {
-            var SyncRunId = 0; 
+        if (Type == "Optimization") {
+            var SyncRunId = 0;
             serviceUrl = "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + SyncRunId;
         }
 
@@ -415,7 +392,7 @@
             url: serviceUrl, // "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId +"/"+Type,
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
-            cache : false,
+            cache: false,
             dataFilter: function (data, type) {
 
                 var json = jQuery.parseJSON(data);
@@ -457,52 +434,51 @@
         }
     }
 
-    function deletemeasurement(smeasurementId)
-    {
-       //measurement.name
-            var isdeleted = false;
-            var measurementId = $.trim(smeasurementId);
-            var serviceLink = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
-            //Make ajax request...
-            jQuery.ajax({
-                type: "POST", //for complex object POST is preferred
-                contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-                url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
-                processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-                dataType: "json",  ////this only applies to response from the server and (not request send to server)
-                dataFilter: function (data, type) {
+    function deletemeasurement(smeasurementId) {
+        //measurement.name
+        var isdeleted = false;
+        var measurementId = $.trim(smeasurementId);
+        var serviceLink = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
+        //Make ajax request...
+        jQuery.ajax({
+            type: "POST", //for complex object POST is preferred
+            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
+            url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
+            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
+            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            dataFilter: function (data, type) {
 
-                    return true;
-                    //bindMeasurementData();
-                    //RemoveTr(data,measurementId);
+                return true;
+                //bindMeasurementData();
+                //RemoveTr(data,measurementId);
 
-                },
+            },
 
-                //If the call succeeds
-                success:
+            //If the call succeeds
+            success:
                     function (response) {   //the response param passed to the success callback contains the returned json
                     },
 
-                //If the call fails
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("Error");
+            //If the call fails
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Error");
 
-                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-                }
-            });
+                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+            }
+        });
     }
 
     function RemoveTr(isdeleted, measurementId) {
-        
+
         if (isdeleted == true) {
-                $('#' + measurementId).remove();
-            }
-            var rowCount = $('#lvMeasurement1 tr').length;
-            if (rowCount <= 0) {
-                $("#measurementContainer").html("");
-                $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
-            }
+            $('#' + measurementId).remove();
+        }
+        var rowCount = $('#lvMeasurement1 tr').length;
+        if (rowCount <= 0) {
+            $("#measurementContainer").html("");
+            $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
+        }
     }
 
     /*--------------- Function to convert json date string to javascript date ----------------------*/
@@ -514,4 +490,3 @@
 
 
 </script>
-

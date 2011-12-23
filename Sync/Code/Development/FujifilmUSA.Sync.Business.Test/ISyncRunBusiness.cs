@@ -7,8 +7,8 @@ using FujifilmUSA.Sync.Business.Implementation;
 
 namespace FujifilmUSA.Sync.Business.Test
 {
-    
-    
+
+
     /// <summary>
     ///This is a test class for ISyncRunBusinessTest and is intended
     ///to contain all ISyncRunBusinessTest Unit Tests
@@ -106,22 +106,22 @@ namespace FujifilmUSA.Sync.Business.Test
 
         }
 
-        /// <summary>
-        ///A test for GetMeasurement
-        ///</summary>
-        [TestMethod()]
-        public void GetMeasurementTest()
-        {
-            ISyncRunBusiness target = CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
-            int syncRunId = 6;
+        ///// <summary>
+        /////A test for GetMeasurement
+        /////</summary>
+        //[TestMethod()]
+        //public void GetMeasurementTest()
+        //{
+        //    ISyncRunBusiness target = CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
+        //    int syncRunId = 6;
 
-            List<Measurement> actual;
-            actual = target.GetMeasurement(syncRunId);
-            Assert.IsTrue(true);
+        //    List<Measurement> actual;
+        //    actual = target.GetMeasurement(syncRunId);
+        //    Assert.IsTrue(true);
 
 
 
-        }
+        //}
 
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace FujifilmUSA.Sync.Business.Test
         [TestMethod()]
         public void SaveMeasurementTest()
         {
-            ISyncRunBusiness target = CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
+            IMeasurementBusiness target = new MeasurementBusinessImpl();// CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
             Measurement measurement = new Measurement(); // TODO: Initialize to an appropriate value
 
             MeasurementPatch patch = new MeasurementPatch();
@@ -153,7 +153,7 @@ namespace FujifilmUSA.Sync.Business.Test
             patch.Density.Red = 0;
             patch.Density.Green = 0;
             patch.Density.Blue = 0;
-            measurement.Patches = new List<MeasurementPatch>() { patch  };
+            measurement.Patches = new List<MeasurementPatch>() { patch };
 
 
             measurement.SyncRunId = 0;
@@ -163,9 +163,9 @@ namespace FujifilmUSA.Sync.Business.Test
 
             int actual;
             actual = target.SaveMeasurement(measurement);
-            
+
             Assert.IsTrue(true);
-            
+
 
         }
 
@@ -193,7 +193,7 @@ namespace FujifilmUSA.Sync.Business.Test
         [TestMethod()]
         public void DeleteMeasurementTest()
         {
-            ISyncRunBusiness target = CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
+            IMeasurementBusiness target = new MeasurementBusinessImpl();// CreateISyncRunBusiness(); // TODO: Initialize to an appropriate value
             int measurementId = 37; // TODO: Initialize to an appropriate value
             int actual;
             actual = target.DeleteMeasurement(measurementId);
@@ -201,10 +201,15 @@ namespace FujifilmUSA.Sync.Business.Test
 
         }
 
-     
+        [TestMethod]
+        public void Test()
+        {
+            var dict = Common.Utilities.GetEnumDropdown<ECPSyncRunStatus>();
+            Assert.IsTrue(true);
+        }
 
-       
-     
+
+
 
 
     }

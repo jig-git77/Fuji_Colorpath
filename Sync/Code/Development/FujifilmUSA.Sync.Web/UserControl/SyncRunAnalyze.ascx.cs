@@ -36,11 +36,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewSyncRunAnalyze Members
 
         public int SyncRunId { get; set; }
+        
+        public int ProjectId{ get; set; }
+        
+        public string MeasurementIds{ get; set; }
+        
+        #endregion
 
-        public int ProjectId { get; set; }
+        #region IViewBaseSyncDevice Members
 
-        public string MeasurementIds { get; set; }
-
+        public int SyncDeviceId{ get; set; }
+        
         #endregion
     }
 }

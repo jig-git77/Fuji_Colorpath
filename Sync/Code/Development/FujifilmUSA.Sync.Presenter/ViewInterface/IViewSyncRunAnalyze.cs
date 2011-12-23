@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewSyncRunAnalyze
+    public interface IViewSyncRunAnalyze : IViewBaseSyncDevice
     {
         int SyncRunId { get; set; }
         int ProjectId { get; set; }

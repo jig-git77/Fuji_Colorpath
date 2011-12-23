@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
-using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -21,9 +17,8 @@ namespace FujifilmUSA.Sync.Presenter
         public void AddProjectSyncRun()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            task.CreateSyncRun(_viewLeftMenu.ProjectId, Convert.ToInt32(_viewLeftMenu.Status), _viewLeftMenu.CreatedDateTime);
-
-            _viewLeftMenu.CurrentProject = task.GetProject(_viewLeftMenu.ProjectId);
+            task.CreateSyncRun(_viewLeftMenu.Project.ProjectId, Convert.ToInt32(_viewLeftMenu.Project.ProjectStatus), _viewLeftMenu.CreatedDateTime);
+            _viewLeftMenu.Project = task.GetProject(_viewLeftMenu.Project.ProjectId);
         }
     }
 }

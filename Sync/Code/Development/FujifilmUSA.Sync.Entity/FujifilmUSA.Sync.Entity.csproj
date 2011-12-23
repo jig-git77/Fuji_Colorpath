@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBaseProfile.cs" />
     <Compile Include="ChartSetting.cs" />
     <Compile Include="DestinationProfile.cs" />
     <Compile Include="DeviceLinkProfile.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="MeasurementPatch.cs" />
     <Compile Include="MeasurementSetting.cs" />
     <Compile Include="MessageContracts\SaveDestinationMeasurementRequest.cs" />
+    <Compile Include="OptimizeProfile.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="ProfileData.cs" />
     <Compile Include="Project.cs" />

@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public int SaveMeasurement(Measurement measurement)
         {
-            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            var refChartData = ((IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject());
             return refChartData.SaveMeasurement(measurement);
         }
 
@@ -44,17 +44,17 @@ namespace FujifilmUSA.Sync.Web.Services
         public int SaveDestinationMeasurement(SaveDestinationMeasurementRequest request)
         {
             var destId = 0;
-            if (request.DestinationProfile.DestinationProfileId == 0)
+            if (request.DestinationProfile.ProfileId == 0)
             {
                 var insertDest = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
                 request.MeasurementLink.ProfileId = insertDest.InsertDestinationProfile(request.DestinationProfile);
             }
             else
             {
-                request.MeasurementLink.ProfileId = request.DestinationProfile.DestinationProfileId;
+                request.MeasurementLink.ProfileId = request.DestinationProfile.ProfileId;
             }
             request.MeasurementLink.TypeId = ProfileType.DestinationProfile;
-            var insertMst = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            var insertMst = ((IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject());
             insertMst.SaveMeasurement(request.MeasurementLink);
             return request.MeasurementLink.ProfileId;
         }
@@ -72,7 +72,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public List<Measurement> GetMeasurementsBySyncId(string syncRunId)
         {
-            var getMeasurement = (ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject();
+            var getMeasurement = (IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject();
             return getMeasurement.GetMeasurement(int.Parse(syncRunId));
         }
 
@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public List<Measurement> GetMeasurementsByProfileType(string profileId, string type)
         {
-            var getMeasurement = (IProfileBusiness)new Business.BusinessFactory<IProfileBusiness>().CreateObject();
+            var getMeasurement = (IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject();
             return getMeasurement.GetMeasurement(int.Parse(profileId), (ProfileType)Enum.Parse(typeof(ProfileType), type, true));
         }
 
@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Web.Services
         [OperationContract]
         public int DeleteMeasurement(string measurementId)
         {
-            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            var refChartData = ((IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject());
             return refChartData.DeleteMeasurement(int.Parse(measurementId));
         }
 

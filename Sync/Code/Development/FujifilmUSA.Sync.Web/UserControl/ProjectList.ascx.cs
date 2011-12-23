@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Telerik.Web.UI;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
@@ -45,9 +44,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var lbtnProjectName = sender as LinkButton;
             if (lbtnProjectName == null) return;
 
-            this.ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"].ToString());
-            _presenterprojectlist.GetProjectByProjectId();
-            SessionManager.Instance.CurrentProject = GetProjectByProjectId;
+            Project = new Project()
+                          {
+                              ProjectId = Convert.ToInt32(lbtnProjectName.Attributes["projectid"])
+                          };
+            _presenterprojectlist.GetProject();
+            SessionManager.Instance.CurrentProject = Project;
             SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
 
             if (SessionManager.Instance.CurrentProject.ProjectRuns.Count() == 1)
@@ -56,14 +58,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                if (SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status == Convert.ToInt16(ECPSyncRunStatus.Open))
-                {
-                    Response.Redirect("AddMeasurement.aspx");
-                }
-                else
-                {
-                    Response.Redirect("SyncRunAnalyze.aspx");
-                }
+                Response.Redirect(
+                    SessionManager.Instance.CurrentProject.ProjectRuns.Last().Status ==
+                    Convert.ToInt16(ECPSyncRunStatus.Open)
+                        ? "AddMeasurement.aspx"
+                        : "SyncRunAnalyze.aspx");
             }
         }
 
@@ -80,18 +79,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         switch (project.ProjectStatus)
                         {
                             case ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                                imgStatus.ToolTip = "Open";
-                                imgStatus.AlternateText = "Open";
+                                imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
                                 break;
                             case ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                                imgStatus.ToolTip = "Certify";
-                                imgStatus.AlternateText = "Certify";
+                                imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
                                 break;
                             case ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                                imgStatus.ToolTip = "Closed";
-                                imgStatus.AlternateText = "Closed";
+                                imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
                                 break;
-                            case ECPSyncRunStatus.NotUsed: break; //not to be used currently
+                            case ECPSyncRunStatus.NotUsed: break;
                         }
                     }
 
@@ -121,12 +120,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.CommandName == "DeleteProject")
             {
-                //GridDataItem selectedItem = e.Item as GridDataItem;
-                this.ProjectId = Convert.ToInt32(e.CommandArgument); //Convert.ToInt32(selectedItem.GetDataKeyValue("ProjectId"));
+                Project = new Project()
+                              {
+                                  ProjectId = Convert.ToInt32(e.CommandArgument)
+                              };
                 _presenterprojectlist.DeleteProject();
-
-                ////Rebind the grid to refresh the data
-                //grdProjectList.Rebind();
                 BindProject();
             }
         }
@@ -137,21 +135,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentSyncDevice != null)
             {
-                this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                Project = new Project()
+                              {
+                                  SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId
+                              };
                 _presenterprojectlist.GetProjectListBySyncDeviceId();
-                grdProjectList.DataSource = GetProjectListBySyncDeviceId;
+                grdProjectList.DataSource = Projects;
                 grdProjectList.DataBind();
             }
         }
         #endregion
 
         #region IViewProjectList Members
-        public int SyncDeviceId { get; set; }
-        public List<Project> GetProjectListBySyncDeviceId { get; set; }
-        public int ProjectId { get; set; }
-        public int DeleteProject { get; set; }
-        public Project GetProjectByProjectId { get; set; }
-        public MeasurementSetting GetMeasurementSettingByProjectID { get; set; }
+
+        public List<Project> Projects { get; set;}
+        
+        #endregion
+
+        #region IViewBaseProject Members
+
+        public Project Project{ get; set;}
+        
         #endregion
     }
 }

@@ -2,6 +2,8 @@
 using System.Configuration;
 using System.Security.Cryptography;
 using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -244,6 +246,11 @@ namespace FujifilmUSA.Sync.Common
                 }
             }
             return sBuilder.ToString();
+        }
+
+        public static Dictionary<int, string> GetEnumDropdown<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => Enum.GetName(typeof(T), value));
         }
     }
 }

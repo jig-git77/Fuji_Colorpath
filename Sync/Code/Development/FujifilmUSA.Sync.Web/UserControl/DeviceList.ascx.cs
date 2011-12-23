@@ -23,7 +23,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
-            
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,13 +35,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trFilter.Visible = true;
                     BindCompanyDropDown();
                     cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-
                 }
                 else
                 {
                     trFilter.Visible = false;
                 }
-
             }
         }
 

@@ -117,12 +117,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Response.Redirect("AddProject.aspx");
                     break;
                 case LeftMenuItemLevel.NewSyncRun:
-                    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                    Status = ECPSyncRunStatus.Open;
+                    Project = new Project()
+                                  {
+                                      ProjectId = SessionManager.Instance.CurrentProject.ProjectId,
+                                      ProjectStatus = ECPSyncRunStatus.Open
+                                  };
                     CreatedDateTime = DateTime.UtcNow;
                     _presenterLeftMenu.AddProjectSyncRun();
-                    SessionManager.Instance.CurrentProject = this.CurrentProject;
-                    SessionManager.Instance.CurrentSyncRun = this.CurrentProject.ProjectRuns.Last();
+                    SessionManager.Instance.CurrentProject = this.Project;
+                    SessionManager.Instance.CurrentSyncRun = this.Project.ProjectRuns.Last();
                     Response.Redirect("AddMeasurement.aspx");
                     break;
             }
@@ -130,13 +133,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewLeftMenu Members
 
-        public int ProjectId { get; set; }
-        
-        public ECPSyncRunStatus Status { get; set; }
-        
         public DateTime CreatedDateTime { get; set; }
         
-        public Project CurrentProject { get; set; }
+        #endregion
+
+        #region IViewBaseProject Members
+
+        public Project Project { get; set; }
         
         #endregion
     }

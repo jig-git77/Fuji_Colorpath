@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
@@ -28,7 +25,13 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetIccProfileBySyncRunId()
         {
             var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
-            _viewExportProfile.IccProfile = task.GetIccProfileBySyncRunId(_viewExportProfile.SyncRunId);
+            _viewExportProfile.Profile = new OptimizeProfile
+                                             {
+                                                 Data =
+                                                     {
+                                                         Profile = task.GetIccProfileBySyncRunId(_viewExportProfile.SyncRunId)
+                                                     }
+                                             };
         }
     }
 }

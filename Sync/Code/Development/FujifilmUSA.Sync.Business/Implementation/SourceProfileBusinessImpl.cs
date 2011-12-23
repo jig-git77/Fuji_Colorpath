@@ -19,13 +19,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
             {
-                sourceProfile = dsSourceProfile.Tables[0].AsEnumerable().Select(x => new SourceProfile()
-                {
-                    SourceProfileId = DataReader.ReadInt(x, "SourceProfileID"),
-                    SourceProfileName = DataReader.ReadString(x, "SourceProfileName"),
-                    IsUse = DataReader.ReadBoolean(x, "IsUse"),
-                    Profile = DataReader.ReadByteArray(x, "Profile")
-                }).FirstOrDefault();
+                sourceProfile = dsSourceProfile.Tables[0].
+                    AsEnumerable().
+                    Select(x => new SourceProfile()
+                                    {
+                                        ProfileId = DataReader.ReadInt(x, "SourceProfileID"),
+                                        ProfileName = DataReader.ReadString(x, "SourceProfileName"),
+                                        IsUse = DataReader.ReadBoolean(x, "IsUse"),
+                                        Data = new ProfileData()
+                                                   {
+                                                       Profile = DataReader.ReadByteArray(x, "Profile")
+                                                   }
+                                    }).FirstOrDefault();
             }
             return sourceProfile;
         }

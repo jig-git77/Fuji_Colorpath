@@ -12,7 +12,7 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class MeasurementDeviceList : System.Web.UI.UserControl,IViewMeasurementDevice
+    public partial class MeasurementDeviceList : System.Web.UI.UserControl, IViewMeasurementDevice
     {
         #region Declaration
         private PresenterMeasurementDevice _presentermeasurementdevice;
@@ -27,7 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Page Events
         protected override void OnInit(EventArgs e)
-        {            
+        {
             _presentermeasurementdevice = new PresenterMeasurementDevice(this);
         }
 
@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_True");
             else
                 return ResourceManager.GetResourceMessage("MeasurementDeviceList_IsActive_False");
-        } 
+        }
 
         public void BindMeasurementDeviceList()
         {
@@ -75,11 +75,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
             if (e.CommandName == "DeleteMeasurementDevice")
-            {                
+            {
                 _presentermeasurementdevice.DeleteSyncMeasurementDevice();
                 BindMeasurementDeviceList();
             }
-        
+
         }
 
         #endregion
@@ -95,6 +95,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int BranchId { get; set; }
         #endregion
 
-        
+
     }
 }

@@ -6,11 +6,8 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewLeftMenu
+    public interface IViewLeftMenu : IViewBaseProject
     {
-        int ProjectId { get; set; }
-        Entity.ECPSyncRunStatus Status { get; set; }
         DateTime CreatedDateTime { get; set; }
-        Project CurrentProject { get; set; }
     }
 }

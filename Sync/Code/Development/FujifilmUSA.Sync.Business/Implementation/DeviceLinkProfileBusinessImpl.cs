@@ -17,71 +17,68 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
             //========== Get data from data access=================//
-            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPList]", new object[] {sourceProfileId, destinationProfileId});
+            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPList]", new object[] { sourceProfileId, destinationProfileId });
 
             if (dsDeviceLinkProfileList != null && dsDeviceLinkProfileList.Tables.Count > 0 && dsDeviceLinkProfileList.Tables[0].Rows.Count > 0)
             {
                 objDeviceLinkProfileList = dsDeviceLinkProfileList.Tables[0].AsEnumerable().
                     Select(x => new DeviceLinkProfile()
                                     {
-                                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
-                                        DeviceLinkProfileName = DataReader.ReadString(x, "DLPName"),
-                                        //Profile = DsReader.ReadString(x, "Profile"),
+                                        ProfileId = DataReader.ReadInt(x, "DLPID"),
+                                        ProfileName = DataReader.ReadString(x, "DLPName"),
                                         IsUse = DataReader.ReadBoolean(x, "IsUse"),
                                         SrcProfile =
-                                            new SourceProfile
-                                                {SourceProfileId = DataReader.ReadInt(x, "SourceProfileID"), SourceProfileName = DataReader.ReadString(x, "SourceProfileName")},
+                                            new SourceProfile { ProfileId = DataReader.ReadInt(x, "SourceProfileID"), ProfileName = DataReader.ReadString(x, "SourceProfileName") },
                                         DestProfile =
                                             new DestinationProfile
                                                 {
-                                                    DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
-                                                    DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName")
+                                                    ProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
+                                                    ProfileName = DataReader.ReadString(x, "DestinationProfileName")
                                                 }
 
                                     }).ToList();
             }
             return objDeviceLinkProfileList;
         }
-        public List<DeviceLinkProfile> GetDeviceLinkProfilesOnSyncDeviceId(int SyncDeviceId)
+        public List<DeviceLinkProfile> GetDeviceLinkProfilesOnSyncDeviceId(int syncDeviceId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
             //========== Get data from data access=================//
-            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPListBySyncDeviceId]", new object[] { SyncDeviceId });
+            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPListBySyncDeviceId]", new object[] { syncDeviceId });
 
             if (dsDeviceLinkProfileList != null && dsDeviceLinkProfileList.Tables.Count > 0 && dsDeviceLinkProfileList.Tables[0].Rows.Count > 0)
             {
                 objDeviceLinkProfileList = dsDeviceLinkProfileList.Tables[0].AsEnumerable().
                     Select(x => new DeviceLinkProfile()
                     {
-                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
-                        DeviceLinkProfileName = DataReader.ReadString(x, "DLPName"),
-                        //Profile = DsReader.ReadString(x, "Profile"),
-                        IsUse = DataReader.ReadBoolean(x, "IsUse"),                        
+                        ProfileId = DataReader.ReadInt(x, "DLPID"),
+                        ProfileName = DataReader.ReadString(x, "DLPName"),
+                        IsUse = DataReader.ReadBoolean(x, "IsUse"),
                         DestProfile =
                             new DestinationProfile
                             {
-                                DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
-                                DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName")
+                                ProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
+                                ProfileName = DataReader.ReadString(x, "DestinationProfileName")
                             },
                         SrcProfile =
                             new SourceProfile
                             {
-                                SourceProfileId = DataReader.ReadInt(x, "SourceProfileID"),                                
+                                ProfileId = DataReader.ReadInt(x, "SourceProfileID"),
                             }
-                            
+
                     }).ToList();
             }
             return objDeviceLinkProfileList;
         }
-        public bool CreateDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
+        public bool CreateDeviceLinkProfile(DeviceLinkProfile deviceLinkProfile)
         {
-            var destinationTask = (IDestinationProfileBusiness) new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            objDeviceLinkProfile.DestProfile =
-                destinationTask.GetDestinationProfile(objDeviceLinkProfile.DestProfile.DestinationProfileId);
+            var destinationTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            deviceLinkProfile.DestProfile =
+                destinationTask.GetDestinationProfile(deviceLinkProfile.DestProfile.ProfileId);
 
-            var sourceTask = (ISourceProfileBusiness) new BusinessFactory<ISourceProfileBusiness>().CreateObject();
-            objDeviceLinkProfile.SrcProfile =
-                sourceTask.GetSourceProfile(objDeviceLinkProfile.SrcProfile.SourceProfileId);
+            var sourceTask = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
+            deviceLinkProfile.SrcProfile =
+                sourceTask.GetSourceProfile(deviceLinkProfile.SrcProfile.ProfileId);
 
             var request = new CreateDeviceLinkProfileRequest();
 
@@ -104,59 +101,60 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                       };
                 request.DestinationProfile = new IccProfile()
                                                  {
-                                                     ProfileData = objDeviceLinkProfile.DestProfile.Profile
+                                                     ProfileData = deviceLinkProfile.DestProfile.Data.Profile
                                                  };
                 request.SourceProfile = new IccProfile()
                                             {
-                                                ProfileData = objDeviceLinkProfile.SrcProfile.Profile
+                                                ProfileData = deviceLinkProfile.SrcProfile.Data.Profile
                                             };
                 var response = client.CreateDeviceLinkProfile(request);
-                objDeviceLinkProfile.Profile = response.DeviceLinkProfile.ProfileData;
-
-
+                deviceLinkProfile.Data.Profile = response.DeviceLinkProfile.ProfileData;
             }
-            if (objDeviceLinkProfile.Profile != null)
+            if (deviceLinkProfile.Data.Profile != null)
             {
                 DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertDLPProfile]",
                                                             new object[]
                                                                 {
-                                                                    objDeviceLinkProfile.DeviceLinkProfileId, objDeviceLinkProfile.SrcProfile.SourceProfileId,
-                                                                    objDeviceLinkProfile.DestProfile.DestinationProfileId, objDeviceLinkProfile.DeviceLinkProfileName,
-                                                                    objDeviceLinkProfile.IsUse, objDeviceLinkProfile.Profile
+                                                                    deviceLinkProfile.ProfileId,
+                                                                    deviceLinkProfile.SrcProfile.ProfileId,
+                                                                    deviceLinkProfile.DestProfile.ProfileId,
+                                                                    deviceLinkProfile.ProfileName,
+                                                                    deviceLinkProfile.IsUse,
+                                                                    deviceLinkProfile.Data.Profile
                                                                 });
             }
 
             return true;
         }
 
-        public DeviceLinkProfile GetDeviceLinkProfile(int DLPID)
+        public DeviceLinkProfile GetDeviceLinkProfile(int dlpId)
         {
             var objDeviceLinkProfileList = new DeviceLinkProfile();
             //========== Get data from data access=================//
-            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPListByDLPID]", new object[] { DLPID});
+            var dsDeviceLinkProfileList = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDLPListByDLPID]", new object[] {dlpId});
 
             if (dsDeviceLinkProfileList != null && dsDeviceLinkProfileList.Tables.Count > 0 && dsDeviceLinkProfileList.Tables[0].Rows.Count > 0)
             {
                 objDeviceLinkProfileList = dsDeviceLinkProfileList.Tables[0].AsEnumerable().
                     Select(x => new DeviceLinkProfile()
-                    {
-                        DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
-                        DeviceLinkProfileName = DataReader.ReadString(x, "DLPName"),
-                        //Profile = DsReader.ReadString(x, "Profile"),
-                        IsUse = DataReader.ReadBoolean(x, "IsUse"),
-                        SrcProfile =
-                            new SourceProfile { SourceProfileId = DataReader.ReadInt(x, "SourceProfileID"), SourceProfileName = DataReader.ReadString(x, "SourceProfileName") },
-                        DestProfile =
-                            new DestinationProfile
-                            {
-                                DestinationProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
-                                DestinationProfileName = DataReader.ReadString(x, "DestinationProfileName")
-                            }
+                                    {
+                                        ProfileId = DataReader.ReadInt(x, "DLPID"),
+                                        ProfileName = DataReader.ReadString(x, "DLPName"),
+                                        IsUse = DataReader.ReadBoolean(x, "IsUse"),
+                                        SrcProfile =
+                                            new SourceProfile {ProfileId = DataReader.ReadInt(x, "SourceProfileID"), ProfileName = DataReader.ReadString(x, "SourceProfileName")},
+                                        DestProfile =
+                                            new DestinationProfile
+                                                {
+                                                    ProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
+                                                    ProfileName = DataReader.ReadString(x, "DestinationProfileName")
+                                                }
 
-                    }).FirstOrDefault();
+                                    }).FirstOrDefault();
             }
             return objDeviceLinkProfileList;
         }
+
         #endregion
     }
 

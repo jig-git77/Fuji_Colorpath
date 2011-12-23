@@ -8,18 +8,18 @@ using FujifilmUSA.Sync.Business;
 
 namespace FujifilmUSA.Sync.Presenter
 {
-    public class PresenterDestinationProfile
+    public class PresenterDestinationProfileList
     {
-        private readonly IViewDestinationProfile _viewDestinationProfile;
+        private readonly IViewDestinationProfiles _viewDestinationProfile;
 
-        public PresenterDestinationProfile(IViewDestinationProfile viewDestinationProfile)
+        public PresenterDestinationProfileList(IViewDestinationProfiles viewDestinationProfile)
         {
             this._viewDestinationProfile = viewDestinationProfile;
         }
         public void GetDestinationProfileList()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            _viewDestinationProfile.DestinationProfileListing = task.GetDestinationProfiles(_viewDestinationProfile.SyncDeviceId);
+            _viewDestinationProfile.DestinationProfiles = task.GetDestinationProfiles(_viewDestinationProfile.SyncDeviceId);
         }
     }
 }

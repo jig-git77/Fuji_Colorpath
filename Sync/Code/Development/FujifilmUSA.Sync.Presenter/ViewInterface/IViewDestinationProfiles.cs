@@ -6,9 +6,8 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewDestinationProfile
+    public interface IViewDestinationProfiles : IViewBaseSyncDevice
     {
-        List<DestinationProfile> DestinationProfileListing { get; set; }
-        int SyncDeviceId { get; set; }
+        List<DestinationProfile> DestinationProfiles { get; set; }
     }
 }

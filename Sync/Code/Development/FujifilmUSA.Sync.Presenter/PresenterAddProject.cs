@@ -12,41 +12,31 @@ namespace FujifilmUSA.Sync.Presenter
             this._viewAddProject = viewAddProject;
         }
 
-        public void GetSourceProfileList()
-        {
-            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
-            _viewAddProject.GetSourceProfileList = task.GetSourceProfileList();
-        }
-
-        public void GetDestinationProfiles()
-        {
-            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
-            _viewAddProject.GetDestinationProfiles = task.GetDestinationProfiles(_viewAddProject.SyncDeviceId);
-        }
-
         public void GetDeviceLinkProfileList()
         {
             var task = (IDeviceLinkProfileBusiness)new BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject();
-            _viewAddProject.GetDeviceLinkProfileList = task.GetDeviceLinkProfiles(_viewAddProject.SourceProfileId, _viewAddProject.DestinationProfileId);
+            _viewAddProject.DeviceLinkProfiles = task.GetDeviceLinkProfiles(_viewAddProject.SourceProfileId, _viewAddProject.DestinationProfileId);
 
-        }
-
-        public void GetMeasurementDeviceListBySyncDeviceId()
-        {
-            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
-            _viewAddProject.GetMeasurementDeviceListBySyncDeviceId = task.GetMeasurementDeviceListBySyncDeviceId(_viewAddProject.SyncDeviceId);
-        }
-
-        public void GetReferenceChartTypeListByMeasurementDeviceId()
-        {
-            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
-            _viewAddProject.GetReferenceChartTypeListByMeasurementDeviceId = task.GetReferenceChartTypeListByMeasurementDeviceId(_viewAddProject.MeasurementDeviceId);
         }
 
         public void InsertProjectAndMeasurementSetting()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
-            _viewAddProject.InsertProjectAndMeasurementSetting = task.InsertProjectAndMeasurementSetting(_viewAddProject.ObjProject, _viewAddProject.ObjMeasurementSetting);
-        }       
+            _viewAddProject.Project = task.InsertProjectAndMeasurementSetting(_viewAddProject.Project, _viewAddProject.MeasurementSetting);
+        }
+
+        public void GetDeviceLinkProfile()
+        {
+            var task = (IDeviceLinkProfileBusiness)new BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject();
+            var deviceLinkProfile = task.GetDeviceLinkProfile(_viewAddProject.Project.DeviceLinkProfileId);
+            _viewAddProject.SourceProfileId = deviceLinkProfile.SrcProfile.ProfileId;
+            _viewAddProject.DestinationProfileId = deviceLinkProfile.DestProfile.ProfileId;
+        }
+
+        public void GetMeasurementSetting()
+        {
+            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            _viewAddProject.MeasurementSetting = task.GetMeasurementSettingByProjectId(_viewAddProject.Project.ProjectId);
+        }
     }
 }

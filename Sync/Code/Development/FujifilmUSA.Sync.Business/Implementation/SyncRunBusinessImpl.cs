@@ -14,68 +14,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region ISyncRunBusiness Members
 
-        public int SaveMeasurement(Measurement measurement)
-        {
-            if (measurement == null || measurement.Patches == null || measurement.Patches.Count == 0) return 0;
-
-            DataAccessFactory.
-                Instance.
-                ExecuteProcedureWithTransaction(
-                    new List<Action>()
-                        {
-                            () =>
-                                {
-                                    var outParams = DataAccessFactory.Instance.
-                                        ExecuteProcedure("CPSync4D.uspInsertMeasurement",
-                                                         new List<Parameters>()
-                                                             {
-                                                                 new Parameters() {ParameterName = "@SyncRunID", Size = 0, Value = measurement.SyncRunId},
-                                                                 new Parameters() {ParameterName = "@MeasurementDate", Size = 0, Value = measurement.MeasurementDate},
-                                                                 new Parameters() {ParameterName = "@MeasurementName", Size = 0, Value = measurement.MeasurementName},
-                                                                 new Parameters() {ParameterName = "@MeasurementTypeID", Size = 0, Value = measurement.MeasurementTypeId},
-                                                             },
-                                                         new List<Parameters>()
-                                                             {
-                                                                 new Parameters() {ParameterName = "@MeasurementID", Size = 4},
-                                                             });
-
-                                    measurement.MeasurementId = System.Convert.ToInt32(outParams[0].Value);
-                                },
-                            () =>
-                                {
-                                    measurement.Patches.ForEach(patch => DataAccessFactory.Instance.
-                                                                             ExecuteProcedure("CPSync4D.uspInsertMeasuredPatch",
-                                                                                              new object[]
-                                                                                                  {
-                                                                                                      measurement.MeasurementId,
-                                                                                                      null,
-                                                                                                      patch.SampleName,
-                                                                                                      patch.CmykC,
-                                                                                                      patch.CmykM,
-                                                                                                      patch.CmykY,
-                                                                                                      patch.CmykK,
-                                                                                                      patch.Cielab.L,
-                                                                                                      patch.Cielab.A,
-                                                                                                      patch.Cielab.B,
-                                                                                                      patch.Ciexyz.X,
-                                                                                                      patch.Ciexyz.Y,
-                                                                                                      patch.Ciexyz.Z,
-                                                                                                      patch.Density.Visual,
-                                                                                                      patch.Density.Red,
-                                                                                                      patch.Density.Green,
-                                                                                                      patch.Density.Blue
-                                                                                                  }));
-                                }
-                        });
-            return measurement.MeasurementId;
-        }
-
-        public List<Measurement> GetMeasurement(int syncRunId)
-        {
-            if (syncRunId <= 0) return new List<Measurement>();
-            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementBySyncRunID]", new object[] { syncRunId }));
-        }
-
         public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId)
         {
             var optimizeDlp = new DeviceLinkProfile();
@@ -146,11 +84,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                       new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
                                   };
                 var response = client.OptimizeDeviceLinkProfile(request);
-                optimizeDlp.Profile = response.OptimizedProfile.ProfileData;
+                optimizeDlp.Data.Profile = response.OptimizedProfile.ProfileData;
             }
 
             //Store optimize dlp to current sync run
-            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] { syncRunId, optimizeDlp.Profile });
+            DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] { syncRunId, optimizeDlp.Data.Profile});
 
             return optimizeDlp;
         }
@@ -178,45 +116,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return iccProfile;
         }
 
-        public int DeleteMeasurement(int measurementId)
-        {
-            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurement]",
-                                                           new object[] { measurementId });
-        }
-
-        public int SaveMeasurement(MeasurementLink measurementLink)
-        {
-            if (measurementLink == null || measurementLink.Measurement == null || measurementLink.Measurement.Patches == null || measurementLink.Measurement.Patches.Count == 0)
-                return 0;
-            measurementLink.Measurement.MeasurementId = SaveMeasurement(measurementLink.Measurement);
-            DataAccessFactory.Instance.
-                ExecuteProcedure("[CPSync4D].[uspInsertMeasurementLink]",
-                                 new object[]
-                                     {
-                                         measurementLink.Measurement.MeasurementId,
-                                         Convert.ToInt32(measurementLink.TypeId),
-                                         measurementLink.ProfileId
-                                     });
-
-            return measurementLink.Measurement.MeasurementId;
-        }
-
         #endregion
 
-        #region Private Methods
-        internal static List<Measurement> ConvertMeasurement(DataSet dsMeasurements)
-        {
-            var lstMeasurements = dsMeasurements.Tables[0].AsEnumerable().
-                Select(x => new Measurement()
-                {
-                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                    MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                    SyncRunId = DataReader.ReadInt(x, "SyncRunID"),
-                    IsUse = DataReader.ReadBoolean(x, "IsUse")
-                }).ToList();
-            return lstMeasurements;
-        }
-        #endregion
+        
     }
 }

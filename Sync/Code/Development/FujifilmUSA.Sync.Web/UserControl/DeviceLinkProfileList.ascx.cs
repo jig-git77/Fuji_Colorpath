@@ -12,10 +12,10 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DeviceLinkProfileList : System.Web.UI.UserControl,IViewDeviceLinkProfile
+    public partial class DeviceLinkProfileList : System.Web.UI.UserControl, IViewDeviceLinkProfiles
     {
-         #region Declaration
-        private PresenterDeviceLinkProfile _presenterdevicelinkprofile;
+        #region Declaration
+        private PresenterDeviceLinkProfileList _presenterdevicelinkprofile;
 
         public string DLP_DeleteDestinationProfile_Confirmation
         {
@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
-            _presenterdevicelinkprofile = new PresenterDeviceLinkProfile(this);
+            _presenterdevicelinkprofile = new PresenterDeviceLinkProfileList(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.ProfileTypeID = ProfileType.Dlp;
             if (!Page.IsPostBack)
             {
-                BindDeviceLinkProfileList();    
+                BindDeviceLinkProfileList();
             }
         }
         #endregion
@@ -46,8 +46,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void BindDeviceLinkProfileList()
         {
             this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-            _presenterdevicelinkprofile.GetDeviceLinkProfileListOnSyncDeviceId();
-            grdDLP.DataSource = GetDeviceLinkProfileList;
+            _presenterdevicelinkprofile.GetDeviceLinkProfiles();
+            grdDLP.DataSource = DeviceLinkProfiles;
             grdDLP.DataBind();
         }
         public object DisplayIsActiveCustomValue(object value)
@@ -56,16 +56,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("DeviceLinkProfile_IsUse_True");
             else
                 return ResourceManager.GetResourceMessage("DeviceLinkProfile_IsUse_False");
-        } 
+        }
 
         #endregion
-       
+
         #region IViewDeviceLinkProfile Members
-        public  List<DeviceLinkProfile> GetDeviceLinkProfileList { get; set; }
+        public List<DeviceLinkProfile> DeviceLinkProfiles { get; set; }
         public int SyncDeviceId { get; set; }
-        public int DLPID { get; set; }
-        public DeviceLinkProfile GetDeviceLinkProfileListByDLPID { get; set; }
-        #endregion        
-        
+        public int DlpId { get; set; }
+        public DeviceLinkProfile DeviceLinkProfile { get; set; }
+        #endregion
+
     }
 }
