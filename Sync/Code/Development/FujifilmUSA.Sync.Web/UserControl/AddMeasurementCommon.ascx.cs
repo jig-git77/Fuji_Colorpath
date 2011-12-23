@@ -27,10 +27,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public ProfileType Type { get; set; }
+        public int pTypeId { get { return Convert.ToInt32(Type); } }
         
         #endregion
 
         #region Page Event
+        
         protected override void OnInit(EventArgs e)
         {
             _presentermeasurement = new PresenterMeasurement(this);
@@ -42,15 +44,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (Type == ProfileType.DestinationProfile)
                 {
-                    BindMeasurement();
+                    
                 }
                 if (Type == ProfileType.Optimization)
                 {
                     hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                     hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
                     hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
-                    BindMeasurement();
                 }
+                this.TypeId = Type;
+                hdProfileID.Value = this.ProfileId.ToString();
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -60,56 +63,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
             }
         }
-
         protected void btnBindGrid_Click(object sender, EventArgs e)
         {
-            BindMeasurement();
+            //BindMeasurement();
         }
-        protected void lvMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "DeleteProject")
-            {
-                this.MeasurementId = Convert.ToInt32(e.CommandArgument);
-                _presentermeasurement.DeleteMeasurement();
-                BindMeasurement();
-            }
-        }
+
         #endregion
 
-        #region Methods
-        private void BindMeasurement()
-        {
-            if (Type == ProfileType.DestinationProfile)
-            {
-                //if (hdProfileID.Value.Trim() != "0")
-                //{
-
-                    this.TypeId = Type;
-                    this.ProfileId = 29; // int.Parse(hdProfileID.Value);
-                    _presentermeasurement.GetMeasurementsbyProfileType();
-               // }
-            }
-            if (Type == ProfileType.Optimization)
-              {
-                  this.SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-                  _presentermeasurement.GetMeasurements();
-                  SessionManager.Instance.CurrentSyncRun.HasMeasurements = (this.Measurements.Count > 0);
-              }
-            //hdnHasMeasurement.Value = (!SessionManager.Instance.CurrentSyncRun.HasMeasurements).ToString().ToLower();
-            //ScriptManager.RegisterClientScriptBlock(
-            //    this,
-            //    this.GetType(),
-            //    "test",
-            //    string.Format("ToggleAnalyze({0})", SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower()),
-            //    true);
-            lvMeasurement.DataSource = this.Measurements;
-            lvMeasurement.DataBind();
-        }
-        #endregion
-        //protected void btnAnalyze_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("SyncRunAnalyze.aspx");
-        //}
 
         #region IViewMeasurement Mebers
         public int SyncRunId { get; set; }

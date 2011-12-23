@@ -4,6 +4,8 @@ Date.prototype.toMSJSON = function () {
     return date;
 };
 
+
+/*--------------- Function to fill cmbcharttype control by ajax call ----------------------*/
 function GetReferenceChart(Type, ProjectID, ReferenceChartTypeId, SerialNo) {
     
     var serviceLink;

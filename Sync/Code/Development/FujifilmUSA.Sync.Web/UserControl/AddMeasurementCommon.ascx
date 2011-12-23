@@ -6,13 +6,7 @@
         document.write(unescape("%3Cscript src='JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
     }
 
-    function ConfirmDeleteMeasurement() {
-        if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>'))
-            return true;
-        else
-            return false;
-    }
-
+    
 </script>
 <script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
 <script src="jQuery/json2.js" type="text/javascript"></script>
@@ -24,6 +18,11 @@
 <script src="JS/i1read.js" type="text/javascript"></script>
 <script src="JS/isisread.js" type="text/javascript"></script>
 <script src="JS/WebComm.js" type="text/javascript"></script>
+
+<script src="jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
+
+
 <style>
     .my_rectangle
     {
@@ -75,7 +74,7 @@
 </style>
 
 <div>
-  <%--<div class="head">
+    <%--<div class="head">
         <h1>
             Add Measurement</h1>
         <div class="Information_divAnalyze">
@@ -143,6 +142,15 @@
         <div class="color_pallate_bottom">
             &nbsp;</div>
     </div>
+
+    
+    <script type="text/javascript">
+
+        
+
+
+    </script>
+
     <div class="color_pallate">
         <div class="color_pallate_head">
             Recent Upload</div>
@@ -151,50 +159,15 @@
                 <ContentTemplate>--%>
                     <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
                     <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display:none" OnClick="btnBindGrid_Click" />                   
-                    <asp:ListView ID="lvMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder"
-                        OnItemCommand="lvMeasurement_ItemCommand">
-                        <LayoutTemplate>
-                            <table border="0" cellspacing="0" cellpadding="0" class="recent_upload">
-                                <tr>
-                                    <th scope="col">
-                                        Measurement Name
-                                    </th>
-                                    <th scope="col">
-                                        Upload Date Time
-                                    </th>
-                                    <th scope="col">
-                                        Delete
-                                    </th>
-                                </tr>
-                                <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
-                            </table>
-                        </LayoutTemplate>
-                        <EmptyDataTemplate>
-                            <div class="no_data_found">
-                                No records available</div>
-                        </EmptyDataTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td align="center">
-                                    <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
-                                </td>
-                                <td align="center">
-                                    <asp:Label ID="lblMeasurementDate" runat="server" Text=' <%# Eval("MeasurementDate").ToString().Replace(":000", " ") %>'></asp:Label>
-                                </td>
-                                <td align="center">
-                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
-                                        ImageUrl="../Images/delete_icon.png" CommandName="DeleteProject" CommandArgument='<%# Eval("MeasurementId") %>'
-                                        OnClientClick="javascript:return ConfirmDeleteMeasurement();" />
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:ListView>
-               <%-- </ContentTemplate>
-            </asp:UpdatePanel>--%>
+                    <div id="measurementContainer">
+                    </div>
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
     </div>
+
+
+    
    
 </div>
 
@@ -220,6 +193,43 @@
 
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
+
+<script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
+          <tr>
+                <th scope="col">
+                    Measurement Name
+                </th>
+                <th scope="col">
+                    Upload Date Time
+                </th>
+                <th scope="col">
+                    Delete
+                </th>
+          </tr>
+    </script>
+<script id="MeasurementDetailTemplate" type="text/x-jQuery-tmpl">
+         <tr id = "${MeasurementId}">
+                <td align="center">
+                    <span id="lblMeasurementName">
+                        ${MeasurementName}</span>
+                </td>
+                <td align="center">
+                    <span id="lblMeasurementDate">
+                       ${MeasurementDate}</span>
+                </td>
+                <td align="center">
+                    <input 
+                            type="image" 
+                            onclick="javascript:return ConfirmDeleteMeasurement(this);" 
+                            alt="Delete"
+                            src="Images/delete_icon.png" title="Delete Project" 
+                            id="imgbtnDelete"
+                            name=" ${MeasurementId}"
+                            >
+                </td>
+         </tr>
+    </script>
+
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {        
@@ -252,7 +262,7 @@
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
     }
 
-    jQuery(document).ready(function () {       
+    jQuery(document).ready(function () {
 
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
@@ -280,7 +290,11 @@
             jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             OnCancel();
             ListDevices();
-        });      
+        });
+
+        //Data binding of Uploaded Measurement
+        bindMeasurementData();
+
     });
 
     function MeasurementDialog(message, type) {
@@ -364,7 +378,12 @@
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+        bindMeasurementData();
     }
+
+
+
+
     if (window.addEventListener) // W3C standard
     {
         window.addEventListener('load', ControlVisibility(), false); // NB **not** 'onload'
@@ -374,47 +393,125 @@
         window.attachEvent('onload', ControlVisibility());
     }
 
+
+
+
     function bindMeasurementData() {
-        var Type = '<%=Type %>';
         
+        var Type = '<%=pTypeId %>';
         var serviceUrl;
-        if (Type == "DestinationProfile") {
-            var ProfileId = jQuery("input[id$=hdProfileID]").val();        
-            serviceUrl = "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId +"/"+Type;
+        if (Type == "2") {
+            var ProfileId = jQuery("input[id$=hdProfileID]").val();
+            serviceUrl = "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId + "/" + Type;
         }
-        if (Type == "Optimization") {
+        if (Type == "4") {
             var SyncRunId = 0; 
             serviceUrl = "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + SyncRunId;
         }
 
-         jQuery.ajax({
-                        type: "GET", //for complex object POST is preferred
-                        contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-                        url: serviceUrl, // "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId +"/"+Type,
-                        processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-                        dataType: "json",  ////this only applies to response from the server and (not request send to server)
-                        dataFilter: function (data, type) {
-//                            var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
-//                            cmbAlignmentChart.find('option').remove();
+        jQuery.ajax({
+            type: "GET", //for complex object POST is preferred
+            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
+            url: serviceUrl, // "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId +"/"+Type,
+            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
+            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            cache : false,
+            dataFilter: function (data, type) {
 
-//                            var json = jQuery.parseJSON(data);
-//                            var i = 1;
-//                            for (i = 0; i < json.length; i++) {
-//                                jQuery("select[id$=cmbAlignmentChart]").append('<option value=' + json[i].Key + '>' + json[i].Value + '</option>');
-//                            }
-                        },
-                        //If the call succeeds
-                        success:
+                var json = jQuery.parseJSON(data);
+
+                for (i = 0; i < json.length; i++) {
+                    var date = GetDate(json[i].MeasurementDate);
+                    json[i].MeasurementDate = date;
+                }
+                if (json.length > 0) {
+                    $("#measurementContainer").html("");
+                    $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
+                    $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
+                    $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
+                }
+                else {
+                    $("#measurementContainer").html("");
+                    $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
+                }
+
+            },
+            //If the call succeeds
+            success:
                             function (response) {
                             },
-                        //If the call fails
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                            MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-                        }
-                        });
-
-
+            //If the call fails
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+            }
+        });
     }
+
+    var isDeleted = false;
+    function ConfirmDeleteMeasurement(measurement) {
+        if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
+
+            deletemeasurement(measurement.name);
+            bindMeasurementData();
+        }
+    }
+
+    function deletemeasurement(smeasurementId)
+    {
+       //measurement.name
+            var isdeleted = false;
+            var measurementId = $.trim(smeasurementId);
+            var serviceLink = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
+            //Make ajax request...
+            jQuery.ajax({
+                type: "POST", //for complex object POST is preferred
+                contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
+                url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
+                processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
+                dataType: "json",  ////this only applies to response from the server and (not request send to server)
+                dataFilter: function (data, type) {
+
+                    return true;
+                    //bindMeasurementData();
+                    //RemoveTr(data,measurementId);
+
+                },
+
+                //If the call succeeds
+                success:
+                    function (response) {   //the response param passed to the success callback contains the returned json
+                    },
+
+                //If the call fails
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Error");
+
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                }
+            });
+    }
+
+    function RemoveTr(isdeleted, measurementId) {
+        
+        if (isdeleted == true) {
+                $('#' + measurementId).remove();
+            }
+            var rowCount = $('#lvMeasurement1 tr').length;
+            if (rowCount <= 0) {
+                $("#measurementContainer").html("");
+                $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
+            }
+    }
+
+    /*--------------- Function to convert json date string to javascript date ----------------------*/
+    function GetDate(jsonDate) {
+        var value = new Date(parseInt(jsonDate.substr(6)));
+        return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear() + " " + value.toLocaleTimeString();
+    }
+
+
+
 </script>
 

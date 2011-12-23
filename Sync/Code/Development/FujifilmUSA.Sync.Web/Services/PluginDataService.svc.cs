@@ -84,5 +84,14 @@ namespace FujifilmUSA.Sync.Web.Services
             return getMeasurement.GetMeasurement(int.Parse(profileId), (ProfileType)Enum.Parse(typeof(ProfileType), type, true));
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "DeleteMeasurement/{measurementId}")]
+        [OperationContract]
+        public int DeleteMeasurement(string measurementId)
+        {
+            var refChartData = ((ISyncRunBusiness)new Business.BusinessFactory<ISyncRunBusiness>().CreateObject());
+            return refChartData.DeleteMeasurement(int.Parse(measurementId));
+        }
+
+
     }
 }

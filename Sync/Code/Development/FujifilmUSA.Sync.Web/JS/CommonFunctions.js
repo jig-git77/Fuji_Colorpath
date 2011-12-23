@@ -79,6 +79,8 @@ function CheckNumeric(e)
         RemoveCharKeyValue(e);
     }
 }
+
+
 function CallPrint(strid)
 {
 	var prtContent = document.getElementById(strid);

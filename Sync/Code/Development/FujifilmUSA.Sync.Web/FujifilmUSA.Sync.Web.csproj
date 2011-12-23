@@ -175,6 +175,7 @@
     <Content Include="JQuery\jquery-blockUI.js" />
     <Content Include="JQuery\jquery-jtemplates.js" />
     <Content Include="JQuery\jquery.simplemodal.js" />
+    <Content Include="JQuery\jquery.tmpl.js" />
     <Content Include="JQuery\jquery.validate.js" />
     <Content Include="JQuery\json2.js" />
     <Content Include="JQuery\wtooltip.min.js" />
