@@ -42,25 +42,8 @@
     </script>
 
 
-     <td>
-        <asp:Label ID="lblDeviceType" runat="server" Text="Device Type:"></asp:Label>&nbsp;
-    </td>
-    <td>
-        <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
-            CssClass="select" Width="143px">
-        </asp:DropDownList>
-    </td>
-
-    <td>
-        <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label>&nbsp;
-    </td>
-    <td>
-        <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-            CssClass="select " Width="143px" onchange=" GetRefChartData();">
-        </asp:DropDownList>
-    </td>
-<%--    <td class="ProjectListtd1">
-        <asp:Label ID="lblDeviceType" runat="server" Text="Device Type:" CssClass="LabelTitle"></asp:Label>&nbsp;
+     <td class="ProjectListtd1" >
+        Device Type &nbsp; :
     </td>
     <td>
         <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
@@ -68,13 +51,12 @@
         </asp:DropDownList>
     </td>
 
-
     <td class="ProjectListtd1">
-        <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:" CssClass="LabelTitle"></asp:Label>&nbsp;
+        Alignment Chart &nbsp; :
     </td>
     <td>
         <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-            CssClass="select " Width="200px" onchange=" ControlVisibility();">
+            CssClass="select " Width="180px" onchange=" GetRefChartData();">
         </asp:DropDownList>
-    </td>--%>
+    </td>
 

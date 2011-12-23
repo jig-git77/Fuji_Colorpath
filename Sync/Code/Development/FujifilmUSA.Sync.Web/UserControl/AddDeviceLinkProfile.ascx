@@ -21,8 +21,8 @@
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
-                    <asp:Label ID="lblDeviceLinkProfileName" runat="server" Text="Name" CssClass="LabelTitle"></asp:Label>
-                    :
+                    <asp:Label ID="lblDeviceLinkProfileName" runat="server" Text="Name" ></asp:Label>
+                    &nbsp; :
                 </td>
                <td  colspan="2">
                  <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
@@ -33,13 +33,13 @@
                 </td>--%>
             </tr>                     
             <tr>
-                <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
+                <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source" ></asp:Label>&nbsp; :
                 </td>
                 <td >
                 <%--<telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" ></telerik:RadComboBox>--%>
                 <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
                 </td>
-                <td class="ProjectListtd1"><asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label>
+                <td class="ProjectListtd1"><asp:Label ID="Label2" runat="server" Text="Select Destination" ></asp:Label>&nbsp; :
                 </td>
                 <td>
                 <%--<telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" ></telerik:RadComboBox>--%>

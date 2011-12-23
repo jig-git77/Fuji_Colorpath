@@ -20,7 +20,7 @@
                     <table cellpadding="0" cellspacing="5" border="0" width="100%">
                         <tr>
                             <td style="width: 20%;">
-                                <asp:Label ID="lblCompanyName" runat="server" Text="Company Name" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblCompanyName" runat="server" Text="Company Name" ></asp:Label>
                                 &nbsp; :
                             </td>
                             <td>
@@ -31,7 +31,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblBranchName" runat="server" Text="Branch Name" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblBranchName" runat="server" Text="Branch Name" ></asp:Label>
                                 &nbsp :
                             </td>
                             <td>
@@ -41,7 +41,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblDongleSerialNo" runat="server" Text="Dongle Serial No" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblDongleSerialNo" runat="server" Text="Dongle Serial No" ></asp:Label>
                                 &nbsp :
                             </td>
                             <td>
@@ -51,7 +51,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblSerialNo" runat="server" Text="Serial No" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblSerialNo" runat="server" Text="Serial No" ></asp:Label>
                                 &nbsp :
                             </td>
                             <td>
@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" ></asp:Label>
                                 &nbsp :
                             </td>
                             <td>
@@ -71,7 +71,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label ID="lblIsActive" runat="server" Text="Is Active" CssClass="LabelTitle"></asp:Label>
+                                <asp:Label ID="lblIsActive" runat="server" Text="Is Active" ></asp:Label>
                                 &nbsp :
                             </td>
                             <td>

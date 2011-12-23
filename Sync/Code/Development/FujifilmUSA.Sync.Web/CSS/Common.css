@@ -1112,3 +1112,12 @@ label
     background: #f6ffeb;
     color: #5b6f24;
 }
+
+
+
+/**** addmeasurementCommon usercontrol ***/
+.txtMeasurementName
+{
+    width:178px;
+    Height:19px;
+}

@@ -48,8 +48,7 @@
            <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
-                    <asp:Label ID="lblDestinationProfileName" runat="server" Text="Name:" CssClass="LabelTitle"></asp:Label>
-                    &nbsp;
+                    Name &nbsp; :
                 </td>
                <td>
                     <asp:TextBox ID="txtDestinationProfile" runat="server" width="178px" Height="19px"></asp:TextBox>

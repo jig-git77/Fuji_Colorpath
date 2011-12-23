@@ -57,8 +57,8 @@
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
-                    <asp:Label ID="lblProjectName" runat="server" Text="Project Name" CssClass="LabelTitle"></asp:Label>
-                    :
+                    <asp:Label ID="lblProjectName" runat="server" Text="Project Name" ></asp:Label>
+                    &nbsp; :
                 </td>
                 <td class="ProjectListtd2">
                    <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
@@ -66,8 +66,8 @@
                     <asp:TextBox ID="txtProjectName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>
                 <td class="float_right">
-                    <asp:Label ID="lblProjectType" runat="server" Text="Project Type" CssClass="LabelTitle"></asp:Label>
-                    :
+                    <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>
+                    &nbsp; :
                 </td>
                 <td class="ProjectListtd2">
                    <%-- <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">                      
@@ -78,7 +78,7 @@
             </tr>
             <tr> 
                 <td class="ProjectListtd1">
-                    <asp:Label ID="lblOutputType" runat="server" Text="Output Type" CssClass="LabelTitle"></asp:Label>
+                    <asp:Label ID="lblOutputType" runat="server" Text="Output Type" ></asp:Label>
                     :
                 </td>
                 <td class="ProjectListtd2">
@@ -108,12 +108,12 @@
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
-        <div class="float_l">
-        <asp:Label ID="Label1" runat="server" Text="Select Source:" CssClass="LabelTitle"></asp:Label>
+        <div class="float_l" style="padding-left: 10px;" >
+        <asp:Label ID="Label1" runat="server" Text="Select Source"></asp:Label> &nbsp; : &nbsp;
         <%--<telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"></telerik:RadComboBox></div>--%>
         <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" Width="180px"  AutoPostBack="true" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
-        <div class="float_r">
-        <asp:Label ID="Label2" runat="server" Text="Select Destination:" CssClass="LabelTitle"></asp:Label>
+        <div class="float_r" style=" padding-right : 10px;">
+        <asp:Label ID="Label2" runat="server" Text="Select Destination" ></asp:Label> &nbsp; : &nbsp;
         <%--<telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"></telerik:RadComboBox></div>--%>
         <asp:DropDownList ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" Width="180px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
         <div class="clear"></div>
@@ -194,7 +194,7 @@
     <div id="DeviceSettings">
         <fieldset>
             <legend>Device Settings </legend>
-            <table cellspacing="4" cellpadding="0" border="0" style="padding-right: 20px;">
+            <table cellspacing="4" cellpadding="0" style="width:100%;" border="0" style="padding-right: 20px;">
                 <tbody>
                     <tr>
                         <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            

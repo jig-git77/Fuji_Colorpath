@@ -15,7 +15,7 @@
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
                                 <td class="DeviceListFirstTD">
-                                    <asp:Label ID="lblCompany" runat="server" Text="Company" CssClass="LabelTitle"></asp:Label>
+                                    <asp:Label ID="lblCompany" runat="server" Text="Company" ></asp:Label>
                                     &nbsp; :
                                 </td>
                                 <td>
@@ -29,7 +29,7 @@
                             </tr>
                             <tr>
                                 <td class="DeviceListFirstTD">
-                                    <asp:Label ID="lblBranch" runat="server" Text="Branch" CssClass="LabelTitle"></asp:Label>
+                                    <asp:Label ID="lblBranch" runat="server" Text="Branch" ></asp:Label>
                                     &nbsp :
                                 </td>
                                 <td>
