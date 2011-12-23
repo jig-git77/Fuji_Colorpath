@@ -7,7 +7,8 @@
     <div class="head">
         <h1>
             Add Device Link Profile</h1>
-        <asp:LinkButton ID="lbtnDeviceLinkProfileSave" runat="server" CssClass="button">
+        <asp:LinkButton ID="lbtnDeviceLinkProfileSave" runat="server" CssClass="button" 
+            onclick="lbtnDeviceLinkProfileSave_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>

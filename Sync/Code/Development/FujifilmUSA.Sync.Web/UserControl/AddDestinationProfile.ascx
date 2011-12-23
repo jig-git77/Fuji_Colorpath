@@ -14,7 +14,8 @@
     <div class="head">
         <h1>
             Add Destination Profile</h1>
-        <asp:LinkButton ID="lbtnDestinationProfileSave" runat="server" CssClass="button">
+        <asp:LinkButton ID="lbtnDestinationProfileSave" runat="server" 
+            CssClass="button" onclick="lbtnDestinationProfileSave_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
@@ -55,10 +56,8 @@
                     <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
             </tr>
-            <tr>
                 <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            
-            </tr>
-        </table>      
+            </table>      
 
     </div>
     <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="DestinationProfile" />

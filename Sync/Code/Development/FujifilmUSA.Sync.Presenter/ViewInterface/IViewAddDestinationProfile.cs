@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         int DestinationId { get; set; }
         string MeasurementIds { get; set; }
+        bool CreateResult { get; set; }
     }
 }

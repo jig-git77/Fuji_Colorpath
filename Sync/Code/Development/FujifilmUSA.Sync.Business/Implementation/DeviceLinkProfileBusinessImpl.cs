@@ -75,11 +75,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
         public bool CreateDeviceLinkProfile(DeviceLinkProfile objDeviceLinkProfile)
         {
+            var destinationTask = (IDestinationProfileBusiness) new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
             objDeviceLinkProfile.DestProfile =
-                (new DestinationProfileBusinessImpl()).GetDestinationProfileByDestinationProfileId(objDeviceLinkProfile.DestProfile.DestinationProfileId);
+                destinationTask.GetDestinationProfileByDestinationProfileId(objDeviceLinkProfile.DestProfile.DestinationProfileId);
 
+            var sourceTask = (ISourceProfileBusiness) new BusinessFactory<ISourceProfileBusiness>().CreateObject();
             objDeviceLinkProfile.SrcProfile =
-                (new SourceProfileBusinessImpl()).GetSourceProfileBySourceProfileId(objDeviceLinkProfile.SrcProfile.SourceProfileId);
+                sourceTask.GetSourceProfileBySourceProfileId(objDeviceLinkProfile.SrcProfile.SourceProfileId);
 
             var request = new CreateDeviceLinkProfileRequest();
 
@@ -126,6 +128,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             return true;
         }
+
         public DeviceLinkProfile GetDeviceLinkProfileListByDLPID(int DLPID)
         {
             var objDeviceLinkProfileList = new DeviceLinkProfile();

@@ -12,10 +12,11 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddDeviceLinkProfile : System.Web.UI.UserControl,IViewAddProject
+    public partial class AddDeviceLinkProfile : System.Web.UI.UserControl,IViewAddProject,IViewAddDeviceLinkProfile
     {
          #region "Declaration"
         private PresenterAddProject _presenteraddproject;
+        private PresenterAddDeviceLinkProfile _presenteradddevicelinkprofile;
         #endregion
 
         #region "Page Events"
@@ -23,11 +24,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenteraddproject = new PresenterAddProject(this);
+            _presenteradddevicelinkprofile = new PresenterAddDeviceLinkProfile(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
-            
             if (!Page.IsPostBack)
             {               
                 BindSourceProfile();
@@ -38,9 +39,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
          
         #region Methods
-       
-
-       
         private void BindSourceProfile()
         {
             _presenteraddproject.GetSourceProfileList();
@@ -59,7 +57,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-      
+        protected void lbtnDeviceLinkProfileSave_Click(object sender, EventArgs e)
+        {
+            ObjDeviceLinkProfile = new DeviceLinkProfile();
+            ObjDeviceLinkProfile.DeviceLinkProfileName = txtDeviceLinkProfileName.Text.Trim();
+            ObjDeviceLinkProfile.DestProfile = (new DestinationProfile() {DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue)});
+            ObjDeviceLinkProfile.SrcProfile = (new SourceProfile() { SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue) });
+            ObjDeviceLinkProfile.IsUse = true;
+            _presenteradddevicelinkprofile.CreateDeviceLinkProfile();
+            if(CreateResult)
+                Response.Redirect("DeviceLinkProfileList.aspx",true);
+        }
         #endregion
 
         #region IViewAddProject Members
@@ -77,6 +85,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project InsertProjectAndMeasurementSetting { get; set; }
         #endregion
 
-        
+        #region IViewAddDeviceLinkProfile Members
+        public DeviceLinkProfile ObjDeviceLinkProfile { get; set; }
+        public bool CreateResult { get; set; }
+        #endregion
     }    
 }
