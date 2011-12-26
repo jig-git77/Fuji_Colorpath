@@ -3,7 +3,7 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
 
 <div class="contant_top">
@@ -36,7 +36,7 @@
                     <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
             </tr>
-                <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            
+                <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" />        
             </table>      
 
     </div>

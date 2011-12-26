@@ -143,10 +143,7 @@
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-            <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>--%>
             <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
-            <asp:Button ID="btnBindGrid" runat="server" Text="Bind" Style="display: none" OnClick="btnBindGrid_Click" />
             <div id="measurementContainer">
             </div>
         </div>
@@ -222,6 +219,8 @@
         ListDevices();
     }
     function GetRefChartData() {
+        
+        debugger;
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         var Type = '<%=Type %>';
         var ReferenceChartTypeId;
@@ -232,7 +231,7 @@
             //jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
 
             ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text();
+            SerialNo = jQuery("[id*='ucDeviceTypeSelectionCommon'] :selected").text();
             SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
             SerialNo = SerialNo.replace(" ", "")
         }
@@ -257,9 +256,6 @@
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
-                //document.getElementById('<%= btnBindGrid.ClientID %>').click();
-                //jQuery("[id*='btnBindGrid']").click();
-                //ToggleAnalyze(jQuery("[id*='hdnHasMeasurement']").val());
             }
         });
 
@@ -338,7 +334,6 @@
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
             jQuery("input[id$=hdProfileID]").val(response);
-            jQuery("[id*='btnBindGrid']").click();
             MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 

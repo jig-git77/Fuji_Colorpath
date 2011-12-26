@@ -197,11 +197,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);
                 //to-do
                 MeasurementSetting.UVIncluded = true;
-                MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucCmbDeviceType.ReferenceChartTypeValue);
+                MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
                 MeasurementSetting.IlluminationMode = 1;
 
-                MeasurementSetting.InstrumentTypeId = ucCmbDeviceType.InstrumentTypeId;
-                MeasurementSetting.SerialNumber = ucCmbDeviceType.SerialNumber;
+                MeasurementSetting.InstrumentTypeId = ucDeviceTypeSelectionCommon.InstrumentTypeId;
+                MeasurementSetting.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
 
                 _presenteraddproject.InsertProjectAndMeasurementSetting();
                 SessionManager.Instance.CurrentProject = Project;
@@ -252,8 +252,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbIlluminant.SelectedValue = MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = MeasurementSetting.Observer.ToString();
                 cmbDensityType.SelectedValue = MeasurementSetting.DensityType.ToString();
-                ucCmbDeviceType.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
-                ucCmbDeviceType.SerialNumber = MeasurementSetting.SerialNumber;
+                ucDeviceTypeSelectionCommon.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
+                ucDeviceTypeSelectionCommon.SerialNumber = MeasurementSetting.SerialNumber;
             }
         }
         public void ToggleInputControlState(bool value)
@@ -267,8 +267,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbIlluminant.Enabled = value;
             cmbObserver.Enabled = value;
             cmbDensityType.Enabled = value;
-            ucCmbDeviceType.DeviceTypeEnable = value;
-            ucCmbDeviceType.ReferenceChartTypeEnable = value;
+            ucDeviceTypeSelectionCommon.DeviceTypeEnable = value;
+            ucDeviceTypeSelectionCommon.ReferenceChartTypeEnable = value;
             lbtnProjectSave.Enabled = value;
         }
         #endregion

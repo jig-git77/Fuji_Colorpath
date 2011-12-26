@@ -1,9 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceTypeSelectionCommon.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.UserControl.CmbDeviceType" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceTypeSelectionCommon" %>
 <script type="text/javascript" language="javascript">
     function cmbDeviceTypeChangeEvent() {
         var measurementDevice = jQuery("[id$=cmbDeviceType]").val();
         var measurementDeviceId = jQuery.trim(measurementDevice.split('-')[1]);
+
+        debugger;
 
         //Make ajax request...
         jQuery.ajax({
@@ -11,8 +13,11 @@
             contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
             url: "Services/PluginDataService.svc/GetReferenceChartTypeListByMeasurementDeviceId/" + measurementDeviceId,
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
+            cache : false,
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             dataFilter: function (data, type) {
+
+                debugger;
                 var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
                 cmbAlignmentChart.find('option').remove();
 
@@ -35,7 +40,7 @@
         });
     }
     $(document).ready(function () {
-        cmbDeviceTypeChangeEvent();
+        //cmbDeviceTypeChangeEvent();
         jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent());
     });
         

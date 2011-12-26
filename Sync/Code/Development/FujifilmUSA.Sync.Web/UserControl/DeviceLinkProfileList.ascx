@@ -36,10 +36,10 @@
             <EmptyDataTemplate><div class="no_data_found">No records available</div></EmptyDataTemplate>
             <ItemTemplate>
                 <tr class="purpal">
-                    <td align="left"><asp:Label ID="lblDLPName" runat="server" Text='<%#Eval("DeviceLinkProfileName") %>'></asp:Label></td>
+                    <td align="left"><asp:Label ID="lblDLPName" runat="server" Text='<%#Eval("ProfileName") %>'></asp:Label></td>
                     <td align="left" width="30%"><asp:Label ID="lblInUse" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsUse")) %>'></asp:Label></td>
-                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile" CommandArgument='<%# Eval("DeviceLinkProfileId") %>' /></td>                    
-                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("DeviceLinkProfileId") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
+                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile" CommandArgument='<%# Eval("ProfileId") %>' /></td>                    
+                    <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("ProfileId") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
               </tr>
             </ItemTemplate>
             </asp:ListView>            

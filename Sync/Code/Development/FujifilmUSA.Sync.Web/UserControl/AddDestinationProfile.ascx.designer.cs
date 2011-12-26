@@ -58,13 +58,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtDestinationProfile;
         
         /// <summary>
-        /// ucCmbDeviceType control.
+        /// ucDeviceTypeSelectionCommon control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.DeviceTypeSelectionCommon ucCmbDeviceType;
+        protected global::FujifilmUSA.Sync.Web.UserControl.DeviceTypeSelectionCommon ucDeviceTypeSelectionCommon;
         
         /// <summary>
         /// ucAddMeasurementCommon control.

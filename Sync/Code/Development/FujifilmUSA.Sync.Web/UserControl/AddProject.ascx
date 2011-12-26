@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddProduct" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/CmbDeviceType.ascx" TagName="CmbDeviceType" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
 <script type="text/javascript" language="javascript">    
         $(document).ready(function () {
@@ -197,7 +197,7 @@
             <table cellspacing="4" cellpadding="0" style="width:100%;" border="0" style="padding-right: 20px;">
                 <tbody>
                     <tr>
-                        <uc:CmbDeviceType ID="ucCmbDeviceType" runat="server" />            
+                        <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" />     
                     </tr>
                 </tbody>
             </table>
