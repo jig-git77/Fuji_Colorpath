@@ -109,7 +109,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     var btnInfo = e.Item.FindControl("btnInfo") as ImageButton;
                     if (btnInfo != null)
                     {
-                        btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/ProjectInformation.aspx") + "');");
+                        btnInfo.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/ProjectInformation.aspx?ProjectID="+project.ProjectId.ToString()) + "');");
 
                     }
                 }
