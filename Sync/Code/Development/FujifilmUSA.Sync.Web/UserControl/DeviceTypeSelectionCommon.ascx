@@ -5,8 +5,7 @@
         var measurementDevice = jQuery("[id$=cmbDeviceType]").val();
         var measurementDeviceId = jQuery.trim(measurementDevice.split('-')[1]);
 
-        debugger;
-
+      
         //Make ajax request...
         jQuery.ajax({
             type: "GET", //for complex object POST is preferred
@@ -17,7 +16,7 @@
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             dataFilter: function (data, type) {
 
-                debugger;
+              
                 var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
                 cmbAlignmentChart.find('option').remove();
 
@@ -28,10 +27,10 @@
                 }
             },
             //If the call succeeds
-            success:
-                            function (response) {
-                                GetRefChartData();
-                            },
+//            success:
+//                            function (response) {
+//                                GetRefChartData();
+//                            },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);

@@ -220,7 +220,6 @@
     }
     function GetRefChartData() {
         
-        debugger;
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         var Type = '<%=Type %>';
         var ReferenceChartTypeId;
