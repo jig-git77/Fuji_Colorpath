@@ -197,7 +197,7 @@
             <table cellspacing="4" cellpadding="0" style="width:100%;" border="0" style="padding-right: 20px;">
                 <tbody>
                     <tr>
-                        <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" />     
+                        <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" Type="Optimization" />
                     </tr>
                 </tbody>
             </table>

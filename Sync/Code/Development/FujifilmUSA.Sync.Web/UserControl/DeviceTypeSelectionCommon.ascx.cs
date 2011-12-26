@@ -4,11 +4,13 @@ using System.Linq;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class DeviceTypeSelectionCommon : System.Web.UI.UserControl, IViewGetMeasurementDeviceType
     {
+        public ProfileType Type { get; set; }
         #region Variable Declarations
 
         private PresenterGetMeasurementDeviceType _presenterGetMeasurementDeviceType;

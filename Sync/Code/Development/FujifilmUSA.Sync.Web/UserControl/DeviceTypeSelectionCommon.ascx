@@ -12,25 +12,34 @@
             contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
             url: "Services/PluginDataService.svc/GetReferenceChartTypeListByMeasurementDeviceId/" + measurementDeviceId,
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-            cache : false,
+            cache: false,
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             dataFilter: function (data, type) {
 
-              
+                debugger;
+                var ddAlignData = jQuery.parseJSON(data);
                 var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
-                cmbAlignmentChart.find('option').remove();
+                cmbAlignmentChart.empty();
+                $.each(ddAlignData, function(index, optionData) {
+                cmbAlignmentChart.append("<option value='" 
+                    + optionData.key 
+                    + "'>" + optionData.Value
+                    + "</option>");
+            });
 
-                var json = jQuery.parseJSON(data);
-                var i = 1;
-                for (i = 0; i < json.length; i++) {
-                    jQuery("select[id$=cmbAlignmentChart]").append('<option value=' + json[i].Key + '>' + json[i].Value + '</option>');
-                }
+
+//                
+//                var i = 1;
+//                for (i = 0; i < ddAlignData.length; i++) {
+//                    //jQuery("select[id$=cmbAlignmentChart]").append('<option value=' + json[i].Key + '>' + json[i].Value + '</option>');
+//                    jQuery("select[id$=cmbAlignmentChart]").addOption(ddAlignData[i].key, ddAlignData[i].Value, false);
+//                }
             },
             //If the call succeeds
-//            success:
-//                            function (response) {
-//                                GetRefChartData();
-//                            },
+            success:
+                            function (response) {
+
+                            },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
@@ -38,9 +47,15 @@
             }
         });
     }
+    function cmbAlignmentChartChangeEvent() {
+        alert('<%=Type %>');
+        if ('<%=Type %>' != "Optimization") {
+            GetRefChartData();
+        }
+    }
     $(document).ready(function () {
-        //cmbDeviceTypeChangeEvent();
         jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent());
+        jQuery("select[id$=cmbAlignmentChart]").change(cmbAlignmentChartChangeEvent());
     });
         
 </script>
@@ -57,6 +72,6 @@
 </td>
 <td>
     <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-        CssClass="select " Width="143px" onchange=" GetRefChartData();">
+        CssClass="select " Width="143px">
     </asp:DropDownList>
 </td>

@@ -36,7 +36,7 @@
                     <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
             </tr>
-                <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" />        
+                <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" Type="DestinationProfile" />
             </table>      
 
     </div>
