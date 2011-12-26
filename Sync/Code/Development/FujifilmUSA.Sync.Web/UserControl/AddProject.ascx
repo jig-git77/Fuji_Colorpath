@@ -3,26 +3,28 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
-<script type="text/javascript" language="javascript">    
-        $(document).ready(function () {
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
 
-            //Default Action
-            $(".tabcontant").hide(); //Hide all content
-            $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
-            $(".tabcontant:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
+        //Default Action
+        $(".tabcontant").hide(); //Hide all content
+        $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
+        $(".tabcontant:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
 
-            //On Click Event
-            $("ul.tabs li").click(function () {
-                $("ul.tabs li").removeClass("active"); //Remove any "active" class
-                $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
-                $(this).addClass("active"); //Add "active" class to selected tab
-                $(".tabcontant").hide(); //Hide all tab content
-                var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-                $(activeTab).fadeIn(); //Fade in the active content
-                return false;
-            });
-
+        //On Click Event
+        $("ul.tabs li").click(function () {
+            $("ul.tabs li").removeClass("active"); //Remove any "active" class
+            $('#<%= hdnSelectedTabIndex.ClientID %>').val($(this).index());
+            $(this).addClass("active"); //Add "active" class to selected tab
+            $(".tabcontant").hide(); //Hide all tab content
+            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+            $(activeTab).fadeIn(); //Fade in the active content
+            return false;
         });
+
+        
+
+    });
 </script>
 <script type="text/javascript" language="javascript">
     function fnCheckUnCheck(currentRadioButton,dlpId) {
@@ -139,9 +141,9 @@
             <ItemTemplate>
                 <tr class="purpal">
   	                <td align="center" valign="middle"><asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile"/></td>
-                    <td align="center"><%# Eval("DeviceLinkProfileName") %></td>
-                    <td align="center"><%# Eval("SrcProfile.SourceProfileName") %></td>
-                    <td align="center"><%# Eval("DestProfile.DestinationProfileName") %></td>                                        
+                    <td align="center"><%# Eval("ProfileName") %></td>
+                    <td align="center"><%# Eval("SrcProfile.ProfileName")%></td>
+                    <td align="center"><%# Eval("DestProfile.ProfileName")%></td>                                        
                 </tr>
             </ItemTemplate> 
         </asp:ListView>

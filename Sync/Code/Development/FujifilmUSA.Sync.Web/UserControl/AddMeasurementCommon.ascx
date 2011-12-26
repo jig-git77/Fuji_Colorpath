@@ -215,14 +215,14 @@
 
         load();   //first you have to load the plugin
 
-        GetRefChartData();
+        
         ListDevices();
     }
     function GetRefChartData() {
         
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         var Type = '<%=Type %>';
-        var ReferenceChartTypeId;
+        var ReferenceChartTypeId = '';
         var SerialNo;
         if (Type == "DestinationProfile") {
             //OnCancel();            

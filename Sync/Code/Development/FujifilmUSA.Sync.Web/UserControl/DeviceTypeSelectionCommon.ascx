@@ -16,24 +16,15 @@
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             dataFilter: function (data, type) {
 
-                debugger;
                 var ddAlignData = jQuery.parseJSON(data);
                 var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
                 cmbAlignmentChart.empty();
-                $.each(ddAlignData, function(index, optionData) {
-                cmbAlignmentChart.append("<option value='" 
-                    + optionData.key 
+                $.each(ddAlignData, function (index, optionData) {
+                    cmbAlignmentChart.append("<option value='"
+                    + optionData.key
                     + "'>" + optionData.Value
                     + "</option>");
-            });
-
-
-//                
-//                var i = 1;
-//                for (i = 0; i < ddAlignData.length; i++) {
-//                    //jQuery("select[id$=cmbAlignmentChart]").append('<option value=' + json[i].Key + '>' + json[i].Value + '</option>');
-//                    jQuery("select[id$=cmbAlignmentChart]").addOption(ddAlignData[i].key, ddAlignData[i].Value, false);
-//                }
+                });
             },
             //If the call succeeds
             success:
@@ -48,14 +39,14 @@
         });
     }
     function cmbAlignmentChartChangeEvent() {
-        alert('<%=Type %>');
         if ('<%=Type %>' != "Optimization") {
             GetRefChartData();
         }
     }
     $(document).ready(function () {
-        jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent());
-        jQuery("select[id$=cmbAlignmentChart]").change(cmbAlignmentChartChangeEvent());
+        jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent);
+        jQuery("select[id$=cmbAlignmentChart]").change(cmbAlignmentChartChangeEvent);
+        cmbDeviceTypeChangeEvent();
     });
         
 </script>
@@ -63,15 +54,21 @@
         Device Type &nbsp; :
 </td>
 <td>
-    <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
+<%--    <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
         CssClass="select" Width="143px">
-    </asp:DropDownList>
+    </asp:DropDownList>--%>
+    
+    <select  ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" class="select" Width="143px">
+    </select>
 </td>
 <td>
     <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label>&nbsp;
 </td>
 <td>
-    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
+<%--    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
         CssClass="select " Width="143px">
-    </asp:DropDownList>
+    </asp:DropDownList>--%>
+    <select ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" class="select" width="143px">
+    </select>
+
 </td>

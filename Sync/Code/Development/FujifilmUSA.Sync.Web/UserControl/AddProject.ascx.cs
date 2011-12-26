@@ -267,8 +267,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbIlluminant.Enabled = value;
             cmbObserver.Enabled = value;
             cmbDensityType.Enabled = value;
-            ucDeviceTypeSelectionCommon.DeviceTypeEnable = value;
-            ucDeviceTypeSelectionCommon.ReferenceChartTypeEnable = value;
+            //ucDeviceTypeSelectionCommon.DeviceTypeEnable = value;
+            //ucDeviceTypeSelectionCommon.ReferenceChartTypeEnable = value;
             lbtnProjectSave.Enabled = value;
         }
         #endregion

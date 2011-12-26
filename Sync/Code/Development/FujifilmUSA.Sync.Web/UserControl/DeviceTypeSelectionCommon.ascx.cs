@@ -19,9 +19,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
+                return string.IsNullOrEmpty(cmbDeviceType.Value)
                            ? 0
-                           : Convert.ToInt32(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[0].Trim());
+                           : Convert.ToInt32(cmbDeviceType.Value.Split(new char[] { '-' })[0].Trim());
+                //return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
+                //           ? 0
+                //           : Convert.ToInt32(cmbDeviceType.SelectedValue.Split(new char[] { '-' })[0].Trim());
             }
         }
 
@@ -29,9 +32,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
+                return string.IsNullOrEmpty(cmbDeviceType.Value)
                            ? string.Empty
-                           : cmbDeviceType.SelectedValue.Split(new char[] { '-' })[2].Trim();
+                           : cmbDeviceType.Value.Split(new char[] { '-' })[2].Trim();
+                //return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
+                //           ? string.Empty
+                //           : cmbDeviceType.SelectedValue.Split(new char[] { '-' })[2].Trim();
             }
             set
             {
@@ -43,20 +49,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public string ReferenceChartTypeValue
         {
-            get { return cmbAlignmentChart.SelectedValue; }
-            set { cmbAlignmentChart.SelectedValue = value; }
+            get { return cmbAlignmentChart.Value; }
+            set { cmbAlignmentChart.Value = value; }
         }
 
         public bool ReferenceChartTypeEnable
         {
-            get { return cmbAlignmentChart.Enabled; }
-            set { cmbAlignmentChart.Enabled = value; }
+            get { return cmbAlignmentChart.Disabled; }
+            set { cmbAlignmentChart.Disabled = value; }
         }
 
         public bool DeviceTypeEnable
         {
-            get { return cmbDeviceType.Enabled; }
-            set { cmbDeviceType.Enabled = value; }
+            get { return cmbDeviceType.Disabled; }
+            set { cmbDeviceType.Disabled = value; }
         }
 
         public Dictionary<string, string> DeviceTypeSource { get; set; }
@@ -73,6 +79,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterGetMeasurementDeviceType.GetMeasurementDeviceListBySyncDeviceId();
                 cmbDeviceType.DataSource = MeasurementDevices;
                 cmbDeviceType.DataBind();
+
+                //this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "cmbDeviceTypeChangeEvent", "cmbDeviceTypeChangeEvent();", true);
             }
         }
         #endregion

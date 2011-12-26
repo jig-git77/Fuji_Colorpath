@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbDeviceType;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect cmbDeviceType;
         
         /// <summary>
         /// lblAlignmentChart control.
@@ -37,6 +37,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbAlignmentChart;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect cmbAlignmentChart;
     }
 }
