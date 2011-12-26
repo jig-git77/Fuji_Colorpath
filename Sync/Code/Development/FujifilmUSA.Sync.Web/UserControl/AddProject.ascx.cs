@@ -243,8 +243,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 this.SyncDeviceId = Project.SyncDeviceId;
 
                 _presenteraddproject.GetDeviceLinkProfile();
-                cmbSourceProfile.SelectedValue = SourceProfileId.ToString();
-                cmbDestinationProfile.SelectedValue = DestinationProfileId.ToString();
+                cmbSourceProfile.SelectedValue = deviceLinkProfile.SrcProfile.ProfileId.ToString();
+                cmbDestinationProfile.SelectedValue = deviceLinkProfile.DestProfile.ProfileId.ToString();
                 BindDeviceLinkProfile();
 
                 // Get Measurement Detail By ProjectId
@@ -252,8 +252,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbIlluminant.SelectedValue = MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = MeasurementSetting.Observer.ToString();
                 cmbDensityType.SelectedValue = MeasurementSetting.DensityType.ToString();
-                ucDeviceTypeSelectionCommon.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
-                ucDeviceTypeSelectionCommon.SerialNumber = MeasurementSetting.SerialNumber;
+                //ucDeviceTypeSelectionCommon.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
+                //ucDeviceTypeSelectionCommon.SerialNumber = MeasurementSetting.SerialNumber;
             }
         }
         public void ToggleInputControlState(bool value)
@@ -280,6 +280,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> ReferenceChartTypes { get; set; }
 
         public List<DeviceLinkProfile> DeviceLinkProfiles { get; set; }
+
+        public DeviceLinkProfile deviceLinkProfile { get; set; }
 
         public int SourceProfileId { get; set; }
 
