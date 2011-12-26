@@ -50,7 +50,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentersyncdevice.GetCompanyList();
             cmbCompanyName.DataSource = GetCompanyList;
             cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0,new RadComboBoxItem("--Select Company--",""));
+            cmbCompanyName.Items.Insert(0,new ListItem("--Select Company--",""));
         }
 
         public void FillBranchList()
@@ -62,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presentersyncdevice.GetBranchList();
                 cmbBranch.DataSource = GetBranchList;
                 cmbBranch.DataBind();
-                cmbBranch.Items.Insert(0, new RadComboBoxItem("--Select Branch--", ""));
+                cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", ""));
         }
 
         public void FillDongleList()
@@ -74,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentermeasurementdevice.GetDongleList();
             cmbDongleSerialNo.DataSource = DongleList;
             cmbDongleSerialNo.DataBind();
-            cmbDongleSerialNo.Items.Insert(0, new RadComboBoxItem("--Select Dongle--", ""));
+            cmbDongleSerialNo.Items.Insert(0, new ListItem("--Select Dongle--", ""));
         }
 
         public void FillDeviceList()
@@ -192,14 +192,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        protected void cmbCompanyName_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(cmbCompanyName.SelectedItem.Value))
             {
                 FillBranchList();
             }
         }
-        protected void cmbBranch_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(cmbBranch.SelectedItem.Value))
             {

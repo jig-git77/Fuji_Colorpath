@@ -23,10 +23,10 @@
                                 <asp:Label ID="lblCompanyName" runat="server" Text="Company Name" ></asp:Label>
                                 &nbsp; :
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" 
-                                 OnSelectedIndexChanged="cmbCompanyName_SelectedIndexChanged">
-                                </telerik:RadComboBox>
+                            <td>                                
+                                <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" 
+                                 OnSelectedIndexChanged="cmbCompanyName_SelectedIndexChanged" Width="180px">
+                                </asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -34,9 +34,8 @@
                                 <asp:Label ID="lblBranchName" runat="server" Text="Branch Name" ></asp:Label>
                                 &nbsp :
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged">
-                                </telerik:RadComboBox>
+                            <td>                               
+                                <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" Width="180px"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -44,9 +43,8 @@
                                 <asp:Label ID="lblDongleSerialNo" runat="server" Text="Dongle Serial No" ></asp:Label>
                                 &nbsp :
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbDongleSerialNo" runat="server" DataValueField="Key" DataTextField="Value">
-                                </telerik:RadComboBox>
+                            <td>                               
+                                <asp:DropDownList ID="cmbDongleSerialNo" runat="server" DataValueField="Key" DataTextField="Value" Width="180px"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -54,9 +52,8 @@
                                 <asp:Label ID="lblSerialNo" runat="server" Text="Serial No" ></asp:Label>
                                 &nbsp :
                             </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtSerialNo" runat="server">
-                                </telerik:RadTextBox>
+                            <td>                               
+                                <asp:TextBox ID="txtSerialNo" runat="server" Width="178px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -64,9 +61,8 @@
                                 <asp:Label ID="lblDeviceType" runat="server" Text="Device Type" ></asp:Label>
                                 &nbsp :
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true">
-                                </telerik:RadComboBox>
+                            <td>                               
+                                <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" Width="180px"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>

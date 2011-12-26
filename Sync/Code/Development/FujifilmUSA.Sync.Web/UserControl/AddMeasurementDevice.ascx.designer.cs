@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbCompanyName;
+        protected global::System.Web.UI.WebControls.DropDownList cmbCompanyName;
         
         /// <summary>
         /// lblBranchName control.
@@ -82,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbBranch;
+        protected global::System.Web.UI.WebControls.DropDownList cmbBranch;
         
         /// <summary>
         /// lblDongleSerialNo control.
@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDongleSerialNo;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDongleSerialNo;
         
         /// <summary>
         /// lblSerialNo control.
@@ -118,7 +118,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtSerialNo;
+        protected global::System.Web.UI.WebControls.TextBox txtSerialNo;
         
         /// <summary>
         /// lblDeviceType control.
@@ -136,7 +136,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbDeviceType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbDeviceType;
         
         /// <summary>
         /// lblIsActive control.
