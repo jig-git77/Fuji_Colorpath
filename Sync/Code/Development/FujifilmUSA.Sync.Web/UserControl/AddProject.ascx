@@ -54,7 +54,7 @@
             Save</span></asp:LinkButton></div>    
     <div class="clear">
     </div>
-    <div class="add_form">    
+    <div class="add_form" style= "margin-top: 0px;"  >    
     <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></center>
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
