@@ -25,6 +25,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
+        public int DeleteDeviceLinkProfile(int dlpId)
+        {
+            return 0;
+        }
+
         #endregion
     }
 

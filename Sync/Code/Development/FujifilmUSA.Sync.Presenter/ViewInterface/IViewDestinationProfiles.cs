@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewDestinationProfiles : IViewBaseSyncDevice
     {
+        int DestinationProfileId { get; set; }
         List<DestinationProfile> DestinationProfiles { get; set; }
     }
 }

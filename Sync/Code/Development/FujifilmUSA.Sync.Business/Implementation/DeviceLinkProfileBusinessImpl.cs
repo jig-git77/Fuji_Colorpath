@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return objDeviceLinkProfileList;
         }
+        
         public List<DeviceLinkProfile> GetDeviceLinkProfilesOnSyncDeviceId(int syncDeviceId)
         {
             var objDeviceLinkProfileList = new List<DeviceLinkProfile>();
@@ -70,6 +71,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return objDeviceLinkProfileList;
         }
+        
         public bool CreateDeviceLinkProfile(DeviceLinkProfile deviceLinkProfile)
         {
             var destinationTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
@@ -153,6 +155,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     }).FirstOrDefault();
             }
             return objDeviceLinkProfileList;
+        }
+
+        public int DeleteDeviceLinkProfile(int dlpId)
+        {
+            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteDeviceLinkProfile]",
+                                                           new object[] { dlpId });
         }
 
         #endregion

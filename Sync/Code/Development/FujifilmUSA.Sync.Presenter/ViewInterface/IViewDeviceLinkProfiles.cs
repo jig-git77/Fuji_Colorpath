@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewDeviceLinkProfiles : IViewBaseSyncDevice
     {
+        int DLPId { get; set; }
         List<DeviceLinkProfile> DeviceLinkProfiles { get; set; }
     }
 }

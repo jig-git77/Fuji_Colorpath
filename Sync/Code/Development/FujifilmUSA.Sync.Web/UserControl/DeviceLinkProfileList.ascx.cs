@@ -42,6 +42,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Control events
+        protected void grdDLP_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteDestinationProfile")
+            {
+                this.DLPId = Convert.ToInt32(e.CommandArgument);
+                _presenterdevicelinkprofile.DeleteDeviceLinkProfile();
+                BindDeviceLinkProfileList();
+            }
+        }
+        #endregion
+
         #region Methods
         public void BindDeviceLinkProfileList()
         {
@@ -63,9 +75,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewDeviceLinkProfile Members
         public List<DeviceLinkProfile> DeviceLinkProfiles { get; set; }
         public int SyncDeviceId { get; set; }
-        public int DlpId { get; set; }
         public DeviceLinkProfile DeviceLinkProfile { get; set; }
+        public int DLPId { get; set; }
         #endregion
+
+
+        
 
     }
 }

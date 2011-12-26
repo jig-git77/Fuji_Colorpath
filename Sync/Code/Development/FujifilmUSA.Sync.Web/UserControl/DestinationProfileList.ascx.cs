@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -38,7 +39,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Control events
+        protected void grdDestinationProfile_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteDestinationProfile")
+            {
+                this.DestinationProfileId = Convert.ToInt32(e.CommandArgument);
+                _presenterdestinationprofile.DeleteDestinationProfile();
+                BindDestinationProfileList();
+            }
+        }
+        #endregion
+
         #region Methods
+        
         public void BindDestinationProfileList()
         {
             this.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
@@ -46,6 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             grdDestinationProfile.DataSource = DestinationProfiles;
             grdDestinationProfile.DataBind();
         }
+
         public object DisplayIsActiveCustomValue(object value)
         {
             if (Convert.ToBoolean(value))
@@ -58,6 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewDestinationProfiles Members
 
+        public int DestinationProfileId { get; set; }
         public List<DestinationProfile> DestinationProfiles { get; set; }
         
         #endregion
@@ -67,5 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId{ get; set; }
         
         #endregion
+
+        
     }
 }

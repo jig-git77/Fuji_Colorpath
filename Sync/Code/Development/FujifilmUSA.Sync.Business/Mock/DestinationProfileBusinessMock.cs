@@ -33,6 +33,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DestinationProfile();
         }
 
+        public int DeleteDestinationProfile(int destinationProfileId)
+        {
+            return 0;
+        }
+
         #endregion
     }
 }

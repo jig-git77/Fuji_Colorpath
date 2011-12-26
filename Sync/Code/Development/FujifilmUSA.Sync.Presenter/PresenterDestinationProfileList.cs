@@ -16,10 +16,19 @@ namespace FujifilmUSA.Sync.Presenter
         {
             this._viewDestinationProfile = viewDestinationProfile;
         }
+
         public void GetDestinationProfileList()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
             _viewDestinationProfile.DestinationProfiles = task.GetDestinationProfiles(_viewDestinationProfile.SyncDeviceId);
         }
+
+        public int DeleteDestinationProfile()
+        {
+            var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            return task.DeleteDestinationProfile(_viewDestinationProfile.DestinationProfileId);
+        }
+
+
     }
 }

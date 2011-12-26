@@ -17,7 +17,7 @@
     <div class="clear">
     </div>   
            <asp:ListView ID="grdDLP" runat="server"  
-        ItemPlaceholderID="phItemPlaceholder"> 
+        ItemPlaceholderID="phItemPlaceholder"   OnItemCommand="grdDLP_ItemCommand"> 
             <LayoutTemplate>
                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
                 <thead>
