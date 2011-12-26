@@ -71,32 +71,6 @@
     }
 </style>
 <div>
-    <%--<div class="head">
-        <h1>
-            Add Measurement</h1>
-        <div class="Information_divAnalyze">
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click">
-                <span>
-                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
-                    Analyze</span>
-            </asp:LinkButton>
-        </div>
-    </div>--%>
-    <%--<div class="clear">
-    </div>
-    <div class="info_form">
-        <table id="tblMessage" runat="server" width="100%" style="border: 1px solid #0C3D30;
-            background-color: #6BB19C; color: Black; height: 45px;" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="padding: 2px 2px 2px 5px; font-weight: bold;" valign="top">
-                    <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."></asp:Label>
-                </td>
-                <td style="padding: 2px 5px 2px 2px; font-weight: bold;" align="right" valign="top">
-                    <asp:Label ID="lblPluginMessage" runat="server" Text="loading..."></asp:Label>
-                </td>
-            </tr>
-        </table>
-    </div>--%>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name"></asp:Label>
@@ -225,12 +199,8 @@
         var ReferenceChartTypeId = '';
         var SerialNo;
         if (Type == "DestinationProfile") {
-            //OnCancel();            
-            //refreshCanvas();
-            //jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-
-            ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            SerialNo = jQuery("[id*='ucDeviceTypeSelectionCommon'] :selected").text();
+            ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart']").val();
+            SerialNo = jQuery("[id*='cmbDeviceType']").text();
             SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
             SerialNo = SerialNo.replace(" ", "")
         }
@@ -304,12 +274,12 @@
         if (Type == "DestinationProfile") {
             SyncRunID = "0";
             MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            var DestinationProfilename = jQuery("input[id$=txtDestinationProfile]").val();
+            var DestinationProfilename = jQuery("[id$=txtDestinationProfile]").val();
             var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
             var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             objMeasurementLink = { Measurement: objMeasurement };
-            objDestinationProfile = { DestinationProfileId: DestinationProfileID, DestinationProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID };
+            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true };
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
         }

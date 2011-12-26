@@ -89,17 +89,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 request.Options = new List<Parameter>
                                       {
-                                          new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
+                                          new Parameter() {Name = "ProfileType", Value = "DeviceLink"},
                                           new Parameter() {Name = "ProfileSize", Value = "2"},
-                                          new Parameter() {Name = "Rendering", Value = "3"},
-                                          new Parameter() {Name = "DLBypassBlack", Value = "100"},
-                                          new Parameter() {Name = "DLExceptions", Value = "129"},
-                                          new Parameter() {Name = "ProfileFormat", Value = "2"},
-                                          new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
-                                          new Parameter() {Name = "Flags", Value = "0"},
-                                          new Parameter() {Name = "Attributes0", Value = "0"},
-                                          new Parameter() {Name = "Attributes1", Value = "0"},
-                                          new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
+                                          new Parameter() {Name = "Rendering", Value = "14"},
+                                          new Parameter() {Name = "PerceptualCompression2", Value = "16"},
+                                          new Parameter() {Name = "PerceptualCompressionMergeFactor", Value = "75"},
+                                          new Parameter() {Name = "DLType", Value = "6"},
+                                          new Parameter() {Name = "DLExceptions", Value = "65536"},
+                                          new Parameter() {Name = "DLOptimizeExceptions", Value = "524289"},
+                                          new Parameter() {Name = "DLExceptionRange", Value = "15"},
+                                          new Parameter() {Name = "DLOptimizeInkRange", Value = "0.2"},
+                                          new Parameter() {Name = "Description", Value = "7900/Xerox 1000 DLP Setting v1.0"},
+                                          new Parameter() {Name = "BlackGeneration", Value = "GCR2Smooth"},
+                                          new Parameter() {Name = "InkMax", Value = "79 79 77 95 BalanceCMY"},
+                                          new Parameter() {Name = "InkTotal", Value = "330"},
+                                          new Parameter() {Name = "BlackStart", Value = "10"},
+                                          new Parameter() {Name = "BlackWidth", Value = "100"}
                                       };
                 request.DestinationProfile = new IccProfile()
                                                  {

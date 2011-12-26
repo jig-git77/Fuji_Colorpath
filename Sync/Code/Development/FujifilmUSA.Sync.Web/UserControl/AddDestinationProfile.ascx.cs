@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProfileId = ucAddMeasurementCommon.ProfileId;
             _presenteradddestinationprofile.CreateDestinationProfile();
-            Response.Redirect("DestinationProfileList.ascx");
+            Response.Redirect("DestinationProfileList.aspx");
         }
         #endregion      
     

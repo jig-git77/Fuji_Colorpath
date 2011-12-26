@@ -18,7 +18,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-        public int ProfileId { get; set; }
+
+        public int ProfileId { get { return Convert.ToInt32(hdProfileID.Value); } }
 
         public ProfileType Type { get; set; }
 
@@ -28,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnInit(EventArgs e)
         {
-            
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,10 +41,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdProjectID.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                     hdSyncRunID.Value = SessionManager.Instance.CurrentSyncRun.SyncRunId.ToString();
                     hdMeasurementTypeID.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
-                }
-                else if (Type == ProfileType.DestinationProfile)
-                {
-                    hdProfileID.Value = ProfileId.ToString();
                 }
             }
         }

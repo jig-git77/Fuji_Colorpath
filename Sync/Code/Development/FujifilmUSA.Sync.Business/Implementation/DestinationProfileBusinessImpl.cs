@@ -96,19 +96,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             using (var client = new ProfilerClient())
             {
                 request.Options = new List<Parameter>
-                                  {
-                                      new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
-                                      new Parameter() {Name = "ProfileSize", Value = "2"},
-                                      new Parameter() {Name = "Rendering", Value = "3"},
-                                      new Parameter() {Name = "DLBypassBlack", Value = "100"},
-                                      new Parameter() {Name = "DLExceptions", Value = "129"},
-                                      new Parameter() {Name = "ProfileFormat", Value = "2"},
-                                      new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
-                                      new Parameter() {Name = "Flags", Value = "0"},
-                                      new Parameter() {Name = "Attributes0", Value = "0"},
-                                      new Parameter() {Name = "Attributes1", Value = "0"},
-                                      new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
-                                  };
+                                      {
+                                          new Parameter() {Name = "ProfileType", Value = "Printer"},
+                                          new Parameter() {Name = "ProfileSize", Value = "2"},
+                                          new Parameter() {Name = "ProfileFormat", Value = "4"},
+                                          new Parameter() {Name = "SaveProfilerInfo", Value = "1"},
+                                          new Parameter() {Name = "GridA2B0", Value = "3"},
+                                          new Parameter() {Name = "GridA2B2", Value = "3"},
+                                          new Parameter() {Name = "GridB2A0", Value = "3"},
+                                          new Parameter() {Name = "GridB2A1", Value = "3"},
+                                          new Parameter() {Name = "GridB2A2", Value = "3"},
+                                          new Parameter() {Name = "Description", Value = "Destination profile"}
+                                      };
                 var response = client.CreateSourceProfile(request);
                 destinationProfile.Data.Profile = response.Profile.ProfileData;
             }
@@ -137,7 +136,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ProfileName = DataReader.ReadString(x, "DestinationProfileName"),
                                         IsUse = DataReader.ReadBoolean(x, "IsUse"),
                                         SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),
-                                        Data = new ProfileData() {Profile = DataReader.ReadByteArray(x, "Profile")}
+                                        Data = new ProfileData() { Profile = DataReader.ReadByteArray(x, "Profile") }
                                     }).FirstOrDefault();
             }
             return destinationProfile;

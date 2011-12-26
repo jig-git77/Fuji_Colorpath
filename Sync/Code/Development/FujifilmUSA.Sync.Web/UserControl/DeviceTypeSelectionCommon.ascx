@@ -5,7 +5,7 @@
         var measurementDevice = jQuery("[id$=cmbDeviceType]").val();
         var measurementDeviceId = jQuery.trim(measurementDevice.split('-')[1]);
 
-      
+
         //Make ajax request...
         jQuery.ajax({
             type: "GET", //for complex object POST is preferred
@@ -14,22 +14,30 @@
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
             cache: false,
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
-            dataFilter: function (data, type) {
+            //            dataFilter: function (data, type) {
 
-                var ddAlignData = jQuery.parseJSON(data);
-                var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
-                cmbAlignmentChart.empty();
-                $.each(ddAlignData, function (index, optionData) {
-                    cmbAlignmentChart.append("<option value='"
-                    + optionData.key
-                    + "'>" + optionData.Value
-                    + "</option>");
-                });
-            },
+            //                var ddAlignData = jQuery.parseJSON(data);
+            //                var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
+            //                cmbAlignmentChart.empty();
+            //                $.each(ddAlignData, function (index, optionData) {
+            //                    cmbAlignmentChart.append("<option value='"
+            //                    + optionData.Key
+            //                    + "'>" + optionData.Value
+            //                    + "</option>");
+            //                });
+            //            },
             //If the call succeeds
             success:
                             function (response) {
-
+                                var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
+                                cmbAlignmentChart.empty();
+                                $.each(response, function (index, optionData) {
+                                    cmbAlignmentChart.append("<option value='"
+                                    + optionData.Key
+                                    + "'>" + optionData.Value
+                                    + "</option>");
+                                });
+                                cmbAlignmentChartChangeEvent()
                             },
             //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -47,28 +55,29 @@
         jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent);
         jQuery("select[id$=cmbAlignmentChart]").change(cmbAlignmentChartChangeEvent);
         cmbDeviceTypeChangeEvent();
+        //cmbAlignmentChartChangeEvent();
     });
         
 </script>
-<td class="ProjectListtd1" >
-        Device Type &nbsp; :
+<td class="ProjectListtd1">
+    Device Type &nbsp; :
 </td>
 <td>
-<%--    <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
+    <asp:DropDownList ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value"
         CssClass="select" Width="143px">
-    </asp:DropDownList>--%>
-    
-    <select  ID="cmbDeviceType" runat="server" DataValueField="Key" DataTextField="Value" class="select" Width="143px">
-    </select>
+    </asp:DropDownList>
+    <%--<select id="cmbDeviceType" runat="server" datavaluefield="Key" datatextfield="Value"
+        class="select" width="143px">
+    </select>--%>
 </td>
 <td>
     <asp:Label ID="lblAlignmentChart" runat="server" Text="Alignment Chart:"></asp:Label>&nbsp;
 </td>
 <td>
-<%--    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-        CssClass="select " Width="143px">
-    </asp:DropDownList>--%>
-    <select ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value" class="select" width="143px">
-    </select>
-
+    <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
+        CssClass="select " Width="143px" EnableViewState="false">
+    </asp:DropDownList>
+    <%--<select id="cmbAlignmentChart" name="cmbAlignmentChart" runat="server" datavaluefield="Key" datatextfield="Value"
+        class="select" width="143px">
+    </select>--%>
 </td>
