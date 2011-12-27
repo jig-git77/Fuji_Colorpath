@@ -13,21 +13,12 @@ namespace FujifilmUSA.Sync.Web {
     public partial class ProjectInformation {
         
         /// <summary>
-        /// form1 control.
+        /// ucProjectInformation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// ucProjectInformation1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ProjectInformation ucProjectInformation1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ProjectInformation ucProjectInformation;
     }
 }

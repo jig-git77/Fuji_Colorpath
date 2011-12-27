@@ -15,5 +15,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int MeasurementDeviceId { get; set; }
 
         MeasurementSetting MeasurementSetting { get; set; }
+
+        DeviceLinkProfile deviceLinkProfile { get; set; }
     }
 }

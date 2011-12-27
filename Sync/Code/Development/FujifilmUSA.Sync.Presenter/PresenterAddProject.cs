@@ -28,9 +28,10 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetDeviceLinkProfile()
         {
             var task = (IDeviceLinkProfileBusiness)new BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject();
-            var deviceLinkProfile = task.GetDeviceLinkProfile(_viewAddProject.Project.DeviceLinkProfileId);
-            _viewAddProject.SourceProfileId = deviceLinkProfile.SrcProfile.ProfileId;
-            _viewAddProject.DestinationProfileId = deviceLinkProfile.DestProfile.ProfileId;
+             _viewAddProject.deviceLinkProfile = task.GetDeviceLinkProfile(_viewAddProject.Project.DeviceLinkProfileId);
+            //_viewAddProject.SourceProfileId = deviceLinkProfile.SrcProfile.ProfileId;
+            //_viewAddProject.DestinationProfileId = deviceLinkProfile.DestProfile.ProfileId;
+
         }
 
         public void GetMeasurementSetting()

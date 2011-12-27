@@ -118,8 +118,8 @@
                     id="ProjectInformationRadWindow" 
                     runat="server"
                     showcontentduringload="true"
-                    width="400px"
-                    height="400px"
+                    width="750px"
+                    height="500px"
                     title="Project"
                     behaviors="Close, Move" Behavior="Close, Move">
                 </telerik:RadWindow>

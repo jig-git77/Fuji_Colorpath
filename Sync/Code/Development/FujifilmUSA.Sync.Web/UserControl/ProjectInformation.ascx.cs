@@ -54,9 +54,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
                 _presenterprojectlist.GetProject();
                 lblProjectName.Text = Project.ProjectName;
-                lblProjectStatus.Text = ((ECPSyncRunStatus)Project.ProjectStatus).ToString();
-                grdSyncRun.DataSource = Project.ProjectRuns;
-                grdSyncRun.DataBind();
+                //lblProjectStatus.Text = ((ECPSyncRunStatus)Project.ProjectStatus).ToString();
+
+                if (imgStatus != null)
+                {
+                    switch (Project.ProjectStatus)
+                    {
+                        case ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                            imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
+                            imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
+                            break;
+                        case ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                            imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
+                            imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
+                            break;
+                        case ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                            imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
+                            imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
+                            break;
+                        case ECPSyncRunStatus.NotUsed: break;
+                    }
+                }
+
+                rptSyncRun.DataSource = Project.ProjectRuns;
+                rptSyncRun.DataBind();
                 _presenteraddproject.GetDeviceLinkProfile();
                 lblSourceProfile.Text = deviceLinkProfile.SrcProfile.ProfileName;
                 lblDestinationProfile.Text = deviceLinkProfile.DestProfile.ProfileName;
@@ -103,15 +124,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        protected void grdSyncRun_ItemDataBound(object sender, ListViewItemEventArgs e)
+        protected void rptSyncRun_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
         {
             if (e.Item.DataItem != null)
             {
-                Label lblStatus = (Label)e.Item.FindControl("lblStatus");
-                lblStatus.Text=((ECPSyncRunStatus)Convert.ToInt32(DataBinder.Eval(e.Item.DataItem,"Status"))).ToString();
+                //Label lblStatus = (Label)e.Item.FindControl("lblStatus");
+                //lblStatus.Text = ((ECPSyncRunStatus)Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Status"))).ToString();
+                var SyncRun = e.Item.DataItem as SyncRun;
+
+                if (SyncRun != null)
+                {
+
+                    var imgStatus = e.Item.FindControl("imgStatus") as Image;
+
+                    if (imgStatus != null)
+                    {
+                        switch (SyncRun.Status)
+                        {
+                            case (int)ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.NotUsed: break;
+                        }
+                    }
+                }
             }
         }
-        
         
     }
 }

@@ -324,6 +324,13 @@
     <Compile Include="MeasurementDeviceList.aspx.designer.cs">
       <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopUpMaster.Master.cs">
+      <DependentUpon>PopUpMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUpMaster.Master.designer.cs">
+      <DependentUpon>PopUpMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="ProjectInformation.aspx.cs">
       <DependentUpon>ProjectInformation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -372,7 +379,6 @@
     </Compile>
     <Compile Include="UserControl\AddDestinationProfile.ascx.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddDestinationProfile.ascx.designer.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
@@ -386,7 +392,6 @@
     </Compile>
     <Compile Include="UserControl\AddMeasurementCommon.ascx.cs">
       <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddMeasurementCommon.ascx.designer.cs">
       <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
@@ -407,7 +412,6 @@
     </Compile>
     <Compile Include="UserControl\DeviceTypeSelectionCommon.ascx.cs">
       <DependentUpon>DeviceTypeSelectionCommon.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\DeviceTypeSelectionCommon.ascx.designer.cs">
       <DependentUpon>DeviceTypeSelectionCommon.ascx</DependentUpon>
@@ -512,7 +516,6 @@
     </Compile>
     <Compile Include="UserControl\Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
@@ -571,6 +574,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PopUpMaster.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

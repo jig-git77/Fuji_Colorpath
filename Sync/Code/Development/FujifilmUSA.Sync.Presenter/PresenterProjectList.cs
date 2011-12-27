@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Presenter
 
          public PresenterProjectList(IViewProjectList viewProjectList)
         {
-            _viewProjectList = viewProjectList;
+            this._viewProjectList = viewProjectList;
         }
 
         public void GetProjectListBySyncDeviceId()

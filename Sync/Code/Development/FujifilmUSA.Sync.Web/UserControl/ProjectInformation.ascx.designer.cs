@@ -58,48 +58,21 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblDLP;
         
         /// <summary>
-        /// lblDeviceType control.
+        /// imgStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeviceType;
+        protected global::System.Web.UI.WebControls.Image imgStatus;
         
         /// <summary>
-        /// lblReferenceChartType control.
+        /// rptSyncRun control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReferenceChartType;
-        
-        /// <summary>
-        /// lblProjectStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProjectStatus;
-        
-        /// <summary>
-        /// grdSyncRun control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView grdSyncRun;
-        
-        /// <summary>
-        /// btnCloseWindow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCloseWindow;
+        protected global::System.Web.UI.WebControls.Repeater rptSyncRun;
     }
 }
