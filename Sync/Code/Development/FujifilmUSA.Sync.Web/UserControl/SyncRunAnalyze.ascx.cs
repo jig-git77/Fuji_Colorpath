@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -15,23 +16,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            btnExport.Enabled = SessionManager.Instance.CurrentSyncRun.HasProfile;
+            if (SessionManager.Instance.CurrentSyncRun.HasProfile)
+                btnOptimize.Visible = false;
+            else
+                btnExport.Visible = false;
+            if (SessionManager.Instance.CurrentSyncRun.Status != (int)ECPSyncRunStatus.Open)
+                btnCertify.Visible = false;
         }
 
         protected void btnExport_Click(object sender, EventArgs e)
         {
             Response.Redirect("SyncRunExport.aspx");
         }
-
-        protected void btnOptimize_Click(object sender, EventArgs e)
-        {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
-            MeasurementIds = string.Empty; //TODO: Add Measurement Ids
-            _presenterSyncRunAnalyze.OptimizeProfile();
-            SessionManager.Instance.CurrentSyncRun.HasProfile = true;
-            Response.Redirect("SyncRunExport.aspx");
-        }
+       
 
         #region IViewSyncRunAnalyze Members
 
@@ -48,5 +45,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId{ get; set; }
         
         #endregion
+
+        protected void btnOptimize_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+            MeasurementIds = string.Empty; //TODO: Add Measurement Ids
+            _presenterSyncRunAnalyze.OptimizeProfile();
+            SessionManager.Instance.CurrentSyncRun.HasProfile = true;
+            Response.Redirect("SyncRunExport.aspx");
+        }
     }
 }
