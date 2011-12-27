@@ -317,10 +317,11 @@
         });
 
         /**clear the array **/
+        bindMeasurementData();
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-        bindMeasurementData();
+       
     }
 
 
@@ -339,6 +340,7 @@
 
 
     function bindMeasurementData() {
+        
         var Type = '<%=Type %>';
         var serviceUrl;
         if (Type == "DestinationProfile") {
@@ -346,7 +348,7 @@
             serviceUrl = "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId + "/" + Type;
         }
         if (Type == "Optimization") {
-            var SyncRunId = 0;
+            var SyncRunId = jQuery("input[id$=hdSyncRunID]").val();
             serviceUrl = "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + SyncRunId;
         }
 
