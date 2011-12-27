@@ -104,6 +104,9 @@
     <Content Include="Images\error_left.png" />
     <Content Include="Images\error_right.png" />
     <Content Include="Images\export.png" />
+    <Content Include="Images\mesurementStatusbar_box_bottom.png" />
+    <Content Include="Images\mesurementStatusbar_box_middle.png" />
+    <Content Include="Images\mesurementStatusbar_box_top.png" />
     <Content Include="Images\Project_Close.png" />
     <Content Include="Images\color_palette.jpg" />
     <Content Include="Images\color_palette_box_bg.png" />
@@ -392,6 +395,7 @@
     </Compile>
     <Compile Include="UserControl\AddMeasurementCommon.ascx.cs">
       <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddMeasurementCommon.ascx.designer.cs">
       <DependentUpon>AddMeasurementCommon.ascx</DependentUpon>

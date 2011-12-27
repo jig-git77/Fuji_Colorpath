@@ -622,7 +622,7 @@ label
 /****Add Product ****/
 #contant .add_form
 {
-    margin: 26px 26px 0 18px;
+    margin: 0px 26px 0 18px;
     padding-bottom: 0px;
 }
 #contant .add_form label
@@ -1010,33 +1010,29 @@ label
 	padding-left:24px;
 	display:block;
 	}
-	
-.statusbar{
-	background:url(../images/error_left.png) no-repeat top left;
-	/*color:#F00;*/
-	display:block;
-	text-align:left;
-	height:38px;
-	line-height:38px;
-	padding-left:14px;
-	margin-bottom:20px;
-	}
-.statusbar div{
-	background:url(../images/error_right.png) no-repeat top right;
-	width : 100%;
-	height: 100%;
-	display:block;
-	}
 
-.statusbar div span
-    {
-        padding-right:14px;
-	}
-.statusbar div span strong{
-	background:url(../images/error.png) no-repeat 0 10px;
-	padding-left:24px;
-	display:block;
-	}	
+	
+/* mesurement information status bar */
+.mesurementStatusbar{
+width:672px;
+margin-bottom: 20px;
+}
+.mesurementStatusbar .top{
+background:url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
+height:10px;
+}
+
+.mesurementStatusbar .middle{
+    background:url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
+    padding:0px 5px 0px 5px;
+}
+
+.mesurementStatusbar .bottom{
+background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
+height:10px;
+}	
+	
+		
 	
 .PluginStatus{
 	background:url(../images/error_left.png) no-repeat top left;
