@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
         private const string _currentMeasurementDevice = "SESSION_CURRENTMEASUREMENTDEVICE";
         private const string _currentProfileTypeID = "SESSION_CURRENTPROFILETYPEID";
+        private const string _hasMeasurement = "SESSION_HASMEASUREMENT";
         #endregion
 
         #region Singleton
@@ -154,6 +155,21 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_currentProfileTypeID] = value;
+            }
+        }
+        public bool HasMeasurement
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_hasMeasurement] != null)
+                {
+                    return bool.Parse(HttpContext.Current.Session[_hasMeasurement].ToString());
+                }
+                return false;
+            }
+            set
+            {
+                HttpContext.Current.Session[_hasMeasurement] = value;
             }
         }
     }

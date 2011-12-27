@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Services;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
@@ -45,13 +46,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            if (SessionManager.Instance.ProfileTypeID == ProfileType.Optimization)
-            {
-                hdnHasMeasurement.Value = SessionManager.Instance.CurrentSyncRun.HasMeasurements.ToString().ToLower();
-            }
-        }
         #endregion
     }
 }

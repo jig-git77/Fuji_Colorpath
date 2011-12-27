@@ -10,11 +10,10 @@
         //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
         jQuery('#<%= btnAnalyze.ClientID %>').click(
             function () {
-                var hasMeasurementValue = jQuery('#<%= hdnHasMeasurement.ClientID %>').val();
-                if (hasMeasurementValue == 'true')
+                if (jQuery("input[id*='hdHasMeasurement']").val() > 0)
                     return true;
                 else
-                    return false;
+                    return false;   
             });
     });
 </script>
@@ -35,8 +34,7 @@
   
     
     <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="Optimization" />    
-    <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
+    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="Optimization" />        
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

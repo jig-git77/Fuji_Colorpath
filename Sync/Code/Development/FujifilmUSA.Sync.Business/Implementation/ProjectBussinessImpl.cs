@@ -141,7 +141,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
                                         EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
                                         MasterSyncRunId = DataReader.ReadInt(x, "MasterSyncRunID"),
-                                        HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                        //HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
                                         HasProfile = DataReader.ReadBoolean(x, "HasProfile")
                                     }).ToList();
             }

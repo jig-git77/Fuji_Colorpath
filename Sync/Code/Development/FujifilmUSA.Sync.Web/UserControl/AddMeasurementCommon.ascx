@@ -70,6 +70,7 @@
         height: 10em;
     }
 </style>
+
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
@@ -117,7 +118,6 @@
         <div class="color_pallate_head">
             Recent Upload</div>
         <div class="color_pallate_middle">
-            <asp:HiddenField runat="server" ID="hdnHasMeasurement" />
             <div id="measurementContainer">
             </div>
         </div>
@@ -138,10 +138,13 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
+
+
 <asp:HiddenField ID="hdSyncRunID" runat="server" />
 <asp:HiddenField ID="hdProjectID" runat="server" />
 <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
 <asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
+
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
@@ -179,18 +182,23 @@
                 </td>
          </tr>
 </script>
+
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {
+        
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
 
         load();   //first you have to load the plugin
-
-        
         ListDevices();
+       
+//        PageMethods.SetSession();
+//        var setsession = '<%=SessionManager.Instance.HasMeasurement%>';
+//        alert(setsession);
+        
     }
     function GetRefChartData() {
         
@@ -368,12 +376,14 @@
                     json[i].MeasurementDate = date;
                 }
                 if (json.length > 0) {
+                    jQuery("input[id*='hdHasMeasurement']").val(json.length);
                     $("#measurementContainer").html("");
                     $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                     $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                     $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
                 }
                 else {
+                    jQuery("input[id*='hdHasMeasurement']").val('0');
                     $("#measurementContainer").html("");
                     $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
                 }

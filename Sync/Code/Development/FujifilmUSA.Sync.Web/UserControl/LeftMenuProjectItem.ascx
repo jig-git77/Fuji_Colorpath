@@ -8,7 +8,7 @@
                 <asp:LinkButton runat="server" ID="lnkMeasurement" Text="Measurement" OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
-                <asp:LinkButton runat="server" ID="lnkAnalyse" Text="Analyze" OnClick="lnkItem_Click"></asp:LinkButton>
+                <asp:LinkButton runat="server" ID="lnkAnalyse" Text="Analyze"  OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
                 <asp:LinkButton runat="server" ID="lnkExport" Text="Export" OnClick="lnkItem_Click"></asp:LinkButton>
@@ -16,3 +16,12 @@
         </ul>
     </li>
 </ul>
+
+<script language="javascript" type="text/javascript">
+    function CheckMeasurement() {        
+        if (jQuery("input[id*='hdHasMeasurement']").val() > 0)             
+            return true;        
+        else
+            return false;        
+    }
+</script>

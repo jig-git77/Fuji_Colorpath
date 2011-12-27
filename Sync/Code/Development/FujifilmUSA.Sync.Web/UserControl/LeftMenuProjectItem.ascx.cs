@@ -17,7 +17,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public LeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
         public SyncRun CurrentSyncRun { get; set; }
-
+        public bool IsLastRun { get { return (this.CurrentSyncRun.SyncRunId == SessionManager.Instance.CurrentProject.ProjectRuns.Last().SyncRunId); }
+        }
         protected override void OnInit(EventArgs e)
         {
             _presenterLeftMenu = new PresenterLeftMenu(this);
@@ -50,19 +51,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                     {
-                        lnkAnalyse.Enabled = CurrentSyncRun.HasMeasurements;
-                        lnkExport.Enabled = CurrentSyncRun.HasMeasurements && CurrentSyncRun.HasProfile;
+                        lnkExport.Enabled = CurrentSyncRun.HasProfile;
                     }
 
                     if (CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
                     {
                         lnkMeasurement.Visible = false;
                     }
+                    
                     if (CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
                     {
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measurement;
                         lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
                         lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Export;
+                       
+                    }
+                    if (IsLastRun)
+                    {
+                        lnkAnalyse.Attributes.Add("onclick", "return CheckMeasurement();");
                     }
                     ulSyncSubMenu.Visible = true;
                     break;
