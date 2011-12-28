@@ -55,9 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int ProfileId { get; set; }
 
-        public int ProfilerOptionId { get; set; }
-
-        public ProfileType ProfilerType { get; set; }
+        public int ProfilerOptionId { get; set; }        
 
         public Dictionary<int, string> GetProfileOption { get; set; }
 
