@@ -8,6 +8,15 @@
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         jQuery("select[id$=cmbDeviceType]").css("width", "178px");
+        
+        //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
+        jQuery('#<%= lbtnDestinationProfileSave.ClientID %>').click(
+            function () {
+                if (jQuery("input[id*='hdHasMeasurement']").val() > 0)
+                    return true;
+                else
+                    return false;
+            });
     });
         
 </script>
