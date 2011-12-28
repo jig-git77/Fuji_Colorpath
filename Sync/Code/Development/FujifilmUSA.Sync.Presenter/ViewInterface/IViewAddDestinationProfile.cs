@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewAddDestinationProfile
     {
         int ProfileId { get; set; }
+        int ProfilerOptionId { get; set; }
     }
 }

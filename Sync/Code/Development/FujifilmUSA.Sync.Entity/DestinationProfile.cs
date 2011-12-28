@@ -17,6 +17,8 @@
         public int SyncDeviceId{ get; set; }
         
         public bool IsUse{ get; set; }
+
+        public int ProfileOptionID { get; set; }
         
         #endregion
     }

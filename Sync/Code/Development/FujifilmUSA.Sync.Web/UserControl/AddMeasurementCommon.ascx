@@ -283,11 +283,12 @@
             SyncRunID = "0";
             MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
             var DestinationProfilename = jQuery("[id$=txtDestinationProfile]").val();
+            var ProfilerOptionID = jQuery("[id*='cmbProfilerOption'] :selected").val();
             var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
             var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             objMeasurementLink = { Measurement: objMeasurement };
-            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true };
+            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true, ProfilerOptionId:ProfilerOptionID};
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
         }

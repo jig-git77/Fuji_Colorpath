@@ -256,8 +256,7 @@ namespace FujifilmUSA.Sync.Entity
         Measurement = 7,
         Analyze = 8,
         Export = 9
-    }
-
+    }   
     public enum ProfileType
     {
         None = 0,
@@ -265,5 +264,11 @@ namespace FujifilmUSA.Sync.Entity
         DestinationProfile = 2,
         Dlp = 3,
         Optimization = 4
+    }
+    public enum ProfilerOption
+    {
+        Epsonx900Family = 1,
+        FujifilmJpress = 2,
+        Xerox800_1000 = 3
     }
 }

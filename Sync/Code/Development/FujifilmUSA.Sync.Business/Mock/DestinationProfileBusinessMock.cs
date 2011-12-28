@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
         
-        public bool CreateDestinationProfile(string measurementIds, int destinationId)
+        public bool CreateDestinationProfile(string measurementIds, int destinationId,int profilerOptionId)
         {
             return true;
         }

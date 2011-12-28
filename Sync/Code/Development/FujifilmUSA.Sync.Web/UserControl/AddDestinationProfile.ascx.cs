@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
         {
             ProfileId = ucAddMeasurementCommon.ProfileId;
+            ProfilerOptionId =Convert.ToInt32(cmbProfilerOption.SelectedValue);
             _presenteradddestinationprofile.CreateDestinationProfile();
             Response.Redirect("DestinationProfileList.aspx");
         }
@@ -51,6 +52,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewAddDestinationProfile Members
 
         public int ProfileId { get; set; }
+
+        public int ProfilerOptionId { get; set; }
         
         #endregion
 

@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Presenter
                                                                         Select(x => x.MeasurementId).ToArray());
 
             var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfile.ProfileId);
+            destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfile.ProfileId,_viewAddDestinationProfile.ProfilerOptionId);
         }
     }
 }
