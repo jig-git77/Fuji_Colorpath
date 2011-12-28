@@ -187,6 +187,7 @@
     var refreshTry = 0;
     function ControlVisibility() {
         
+        
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
@@ -194,11 +195,9 @@
 
         load();   //first you have to load the plugin
         ListDevices();
-       
-//        PageMethods.SetSession();
-//        var setsession = '<%=SessionManager.Instance.HasMeasurement%>';
-//        alert(setsession);
-        
+        if ('<%=Type %>' == "Optimization") {
+            GetRefChartData();
+        }
     }
     function GetRefChartData() {
         
@@ -248,7 +247,7 @@
 
     });
 
-    function MeasurementDialog(message, type) {
+    function MeasurementDialog(message, type) {        
         jQuery("[id*='confirm']").modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
             position: ["20%", ],
@@ -288,15 +287,15 @@
             var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             objMeasurementLink = { Measurement: objMeasurement };
-            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true, ProfilerOptionId:ProfilerOptionID};
+            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true, ProfileOptionId: ProfilerOptionID };
             obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
         }
         else if (Type == "Optimization") {
             obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
-        }
-
+        }   
+        
         //Make ajax request...
         jQuery.ajax({
             type: "POST", //for complex object POST is preferred
@@ -312,7 +311,7 @@
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
             jQuery("input[id$=hdProfileID]").val(response);
-            MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
+            //MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 
         },
@@ -321,7 +320,7 @@
                 alert("Error");
 
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+               // MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
             }
         });
 

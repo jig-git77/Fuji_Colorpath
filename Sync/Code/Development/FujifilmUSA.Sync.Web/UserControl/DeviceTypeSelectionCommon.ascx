@@ -28,7 +28,7 @@
             //            },
             //If the call succeeds
             success:
-                            function (response) {
+                            function (response) {                                
                                 var cmbAlignmentChart = jQuery("select[id$=cmbAlignmentChart]");
                                 cmbAlignmentChart.empty();
                                 $.each(response, function (index, optionData) {
@@ -46,7 +46,9 @@
             }
         });
     }
-    function cmbAlignmentChartChangeEvent() {
+    function cmbAlignmentChartChangeEvent() {        
+        var selectedval = jQuery("[id$='cmbAlignmentChart'] :selected").val()
+        jQuery("input[id$=hdAlignmentChartSelectedValue]").val(selectedval);        
         if ('<%=Type %>' != "Optimization") {
             GetRefChartData();
         }
@@ -57,7 +59,10 @@
         cmbDeviceTypeChangeEvent();
         //cmbAlignmentChartChangeEvent();
     });
+
+    function GetSelectedValue() {
         
+    }
 </script>
 <td class="ProjectListtd1">
     Device Type &nbsp; :
@@ -75,8 +80,11 @@
 </td>
 <td>
     <asp:DropDownList ID="cmbAlignmentChart" runat="server" DataValueField="Key" DataTextField="Value"
-        CssClass="select " Width="143px" EnableViewState="false">
+        CssClass="select " Width="143px" EnableViewState="false">        
     </asp:DropDownList>
+    <asp:HiddenField ID="hdAlignmentChartSelectedValue" runat="server">
+        </asp:HiddenField>
+
     <%--<select id="cmbAlignmentChart" name="cmbAlignmentChart" runat="server" datavaluefield="Key" datatextfield="Value"
         class="select" width="143px">
     </select>--%>

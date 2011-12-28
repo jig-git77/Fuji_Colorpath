@@ -18,7 +18,7 @@
         
         public bool IsUse{ get; set; }
 
-        public int ProfileOptionID { get; set; }
+        public int ProfileOptionId { get; set; }
         
         #endregion
     }

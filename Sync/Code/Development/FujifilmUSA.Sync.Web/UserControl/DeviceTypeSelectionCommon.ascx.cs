@@ -32,12 +32,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
+                return string.IsNullOrEmpty(cmbDeviceType.SelectedItem.Text)
                            ? string.Empty
-                           : cmbDeviceType.SelectedValue.Split(new char[] { '-' })[2].Trim();
-                //return string.IsNullOrEmpty(cmbDeviceType.SelectedValue)
-                //           ? string.Empty
-                //           : cmbDeviceType.SelectedValue.Split(new char[] { '-' })[2].Trim();
+                           : cmbDeviceType.SelectedItem.Text.Split(new char[] {'-'}).Last().Trim();
             }
             set
             {
@@ -49,8 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public string ReferenceChartTypeValue
         {
-            get { return cmbAlignmentChart.SelectedValue; }
-            set { cmbAlignmentChart.SelectedValue = value; }
+            get { return hdAlignmentChartSelectedValue.Value.Trim(); }
+            
+            //get { return cmbAlignmentChart.SelectedValue; }
+            //set { cmbAlignmentChart.SelectedValue = value; }
         }
 
         public bool ReferenceChartTypeEnable

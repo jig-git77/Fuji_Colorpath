@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             objProjectInPeramater.Add(new Parameters() { ParameterName = "@DestinationProfileName", Size = 0, Type = DbType.String, Value = objDestinationProfile.ProfileName });
             objProjectInPeramater.Add(new Parameters() { ParameterName = "@SyncDeviceID", Size = 0, Type = DbType.Int16, Value = objDestinationProfile.SyncDeviceId });
             objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objDestinationProfile.IsUse });
-            objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProfilerOptionID", Size = 0, Type = DbType.Int16, Value = objDestinationProfile.ProfileOptionID });
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProfilerOptionID", Size = 0, Type = DbType.Int16, Value = objDestinationProfile.ProfileOptionId });
             objProjectOutPeramater.Add(new Parameters() { ParameterName = "@DestinationProfileID", Size = 4, Type = DbType.Int16 });
 
 
