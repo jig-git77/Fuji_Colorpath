@@ -90,7 +90,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
                     request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_K"));
                 }
-            }
+            } 
 
             //Add options and call profile service to generate destination dlp
             var profilerOptionDetail = ((IProfilerOptionDetailBusiness)new BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
