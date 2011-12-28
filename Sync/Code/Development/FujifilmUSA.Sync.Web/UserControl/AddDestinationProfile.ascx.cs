@@ -54,6 +54,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProfileId { get; set; }
 
         public int ProfilerOptionId { get; set; }
+
+        public ProfileType ProfilerType { get; set; }
         
         #endregion
 
@@ -68,5 +70,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId { get; set; }
         
         #endregion
+
     }
 }

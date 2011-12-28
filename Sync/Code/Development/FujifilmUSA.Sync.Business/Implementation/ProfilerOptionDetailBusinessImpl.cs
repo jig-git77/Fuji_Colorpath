@@ -1,11 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
+using System.Data;
+using FujifilmUSA.Sync.DataAccess;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    class ProfilerOptionDetailBusinessImpl
+    public class ProfilerOptionDetailBusinessImpl : IProfilerOptionDetailBusiness
     {
+        #region IProfilerOptionDetailBusiness Members
+
+        public List<ProfilerOptionDetail> GetProfilerOptionDetailByProfilerID(int ProfileroptionID, ProfileType ProfilerType)
+        {
+            var profileroptionDetailList = new List<ProfilerOptionDetail>();
+            var dsprofileroptionDetail = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProfilerOptionDetailByProfilerID]", new object[] { ProfileroptionID,ProfilerType });
+
+            if (dsprofileroptionDetail != null && dsprofileroptionDetail.Tables.Count > 0 && dsprofileroptionDetail.Tables[0].Rows.Count > 0)
+            {
+                profileroptionDetailList = dsprofileroptionDetail.Tables[0].AsEnumerable().Select(x => new ProfilerOptionDetail()
+                {
+                    ProfilerOptionDetailID = DataReader.ReadInt(x, "ProfilerOptionDetailID"),
+                    ProfilerOptionID = DataReader.ReadInt(x, "ProfilerOptionID"),
+                    Key = DataReader.ReadString(x, "Key"),
+                    Value = DataReader.ReadString(x, "Value"),
+                    ProfilerType = (ProfileType)Enum.Parse(typeof(ProfileType), DataReader.ReadInt(x, "ProfilerType").ToString(), true)
+                }).ToList();
+            }
+            return profileroptionDetailList;
+        }
+
+        #endregion
     }
 }

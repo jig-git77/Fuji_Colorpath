@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 {
     public class ProfilerOptionDetailMock
     {
-        public List<ProfilerOptionDetail> GetProfilerOptionDetailByProfilerID(int ProfileroptionID)
+        public List<ProfilerOptionDetail> GetProfilerOptionDetailByProfilerID(int ProfileroptionID,ProfileType ProfileType)
         {
             return new List<ProfilerOptionDetail>();
         }

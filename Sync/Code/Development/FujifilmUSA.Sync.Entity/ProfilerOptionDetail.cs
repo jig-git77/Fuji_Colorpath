@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Entity
        public int ProfilerOptionID { get; set;}
        public string Key { get; set;}
        public string Value { get; set;}
-       public int ProfilerType { get; set; }
+       public ProfileType ProfilerType { get; set; }
 
     }
 }

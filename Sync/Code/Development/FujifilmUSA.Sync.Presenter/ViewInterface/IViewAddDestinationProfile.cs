@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         int ProfileId { get; set; }
         int ProfilerOptionId { get; set; }
+        ProfileType ProfilerType { get; set; }        
     }
 }
