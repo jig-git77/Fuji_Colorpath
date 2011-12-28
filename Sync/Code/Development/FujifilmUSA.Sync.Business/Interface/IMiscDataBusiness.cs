@@ -15,6 +15,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetMeasurementDeviceTypeList();
         Dictionary<int, string> GetReferenceChartTypeListByMeasurementDeviceId(int measurementDeviceId);
         Dictionary<int, string> GetSourceProfileList();
-        Dictionary<int, string> GetProfilerOption { get; set; }
+        Dictionary<int, string> GetProfilerOption(); 
     }
 }

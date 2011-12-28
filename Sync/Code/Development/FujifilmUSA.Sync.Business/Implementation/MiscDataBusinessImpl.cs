@@ -144,7 +144,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstSourceProfileList;
         }
 
-        public Dictionary<int, string> GetProflierOption()
+        public Dictionary<int, string> GetProfilerOption()
         {
             var ProfilerOptionList = new Dictionary<int, string>();
             var dsProfilerOptionDetail = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProfilerOption]");
@@ -160,5 +160,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return ProfilerOptionList;
         }
         #endregion
+
+
+    
     }
 }

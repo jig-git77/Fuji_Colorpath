@@ -47,6 +47,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
+        public Dictionary<int, string> GetProfilerOption()
+        {
+            return new Dictionary<int, string>();
+        }
         #endregion
     }
 }

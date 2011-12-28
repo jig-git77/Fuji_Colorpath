@@ -78,7 +78,6 @@
     <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />
     <Compile Include="Mock\MiscDataBusinessMock.cs" />
     <Compile Include="Mock\ProfilerOptionDetailMock.cs" />
-    <Compile Include="Mock\ProfileroptionMock.cs" />
     <Compile Include="Mock\ProjectBussinessMock.cs" />
     <Compile Include="Mock\ReferenceChartBusinessMock.cs" />
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />

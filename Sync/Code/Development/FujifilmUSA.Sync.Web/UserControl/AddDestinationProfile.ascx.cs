@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -42,7 +43,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         public void BindProfileOption()
         {
-            cmbProfilerOption.DataSource = Utilities.GetEnumDropdown<ProfilerOption>();
+            _presenteradddestinationprofile.GetProfilerOption();
+            cmbProfilerOption.DataSource = GetProfileOption;
             cmbProfilerOption.DataTextField = "Value";
             cmbProfilerOption.DataValueField = "Key";
             cmbProfilerOption.DataBind();
@@ -56,12 +58,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProfilerOptionId { get; set; }
 
         public ProfileType ProfilerType { get; set; }
-        
+
+        public Dictionary<int, string> GetProfileOption { get; set; }
+
         #endregion
 
         #region IViewGetMeasurementDeviceType Members
 
-        public System.Collections.Generic.Dictionary<string, string> MeasurementDevices { get; set; }
+        public Dictionary<string, string> MeasurementDevices { get; set; }       
         
         #endregion
 
@@ -70,6 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId { get; set; }
         
         #endregion
+
 
     }
 }
