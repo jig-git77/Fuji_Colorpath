@@ -14,13 +14,11 @@
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
-    
-
     <div class="head">
         <h1>
             Add Destination Profile</h1>
-        <asp:LinkButton ID="lbtnDestinationProfileSave" runat="server" 
-            CssClass="button" onclick="lbtnDestinationProfileSave_Click">
+        <asp:LinkButton ID="lbtnDestinationProfileSave" runat="server" CssClass="button"
+            OnClick="lbtnDestinationProfileSave_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
@@ -31,19 +29,25 @@
         <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
     <div class="add_form">
-           <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
+        <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
                 <td class="ProjectListtd1">
                     Name &nbsp; :
                 </td>
-               <td>
-                    <asp:TextBox ID="txtDestinationProfile" runat="server" width="178px" Height="19px"></asp:TextBox>
+                <td>
+                    <asp:TextBox ID="txtDestinationProfile" runat="server" Width="178px" Height="19px"></asp:TextBox>
                     <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                 </td>
+                <td class="ProjectListtd1">
+                    Profiler Option &nbsp; :
+                </td>
+                <td>
+                    <asp:DropDownList ID="cmbProfilerOption" runat="server" Width="180px" CssClass="select">
+                    </asp:DropDownList>
+                </td>
             </tr>
-                <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" Type="DestinationProfile" />
-            </table>      
-
+            <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" Type="DestinationProfile" />
+        </table>
     </div>
     <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="DestinationProfile" />
 </div>

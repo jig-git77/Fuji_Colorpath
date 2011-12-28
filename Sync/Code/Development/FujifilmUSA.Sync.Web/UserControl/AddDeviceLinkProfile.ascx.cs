@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindSourceProfile();
                 BindDestinationProfile();
+                BindProfileOption();
             }
         }
 
@@ -53,9 +54,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDestinationProfile.DataSource = GetDestinationProfiles;
             cmbDestinationProfile.DataBind();
             cmbDestinationProfile.Items.Insert(0, new ListItem("-- Select --", ""));
+        }        
+        public void BindProfileOption()
+        {
+            cmbProfilerOption.DataSource = Utilities.GetEnumDropdown<ProfilerOption>();
+            cmbProfilerOption.DataTextField = "Value";
+            cmbProfilerOption.DataValueField = "Key";
+            cmbProfilerOption.DataBind();
         }
         #endregion
-
         #region Control Events
         protected void lbtnDeviceLinkProfileSave_Click(object sender, EventArgs e)
         {

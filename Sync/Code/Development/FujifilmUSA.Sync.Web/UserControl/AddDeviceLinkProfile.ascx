@@ -24,13 +24,17 @@
                     <asp:Label ID="lblDeviceLinkProfileName" runat="server" Text="Name" ></asp:Label>
                     &nbsp; :
                 </td>
-               <td  colspan="2">
+               <td>
                  <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                    <asp:TextBox ID="txtDeviceLinkProfileName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>               
-                 <%--<td class="float_right">
-                    &nbsp;
-                </td>--%>
+                  <td class="ProjectListtd1">
+                    Profiler Option &nbsp; :
+                </td>
+                <td>
+                    <asp:DropDownList ID="cmbProfilerOption" runat="server" Width="180px" CssClass="select">
+                    </asp:DropDownList>
+                </td>
             </tr>                     
             <tr>
                 <td class="ProjectListtd1"><asp:Label ID="Label1" runat="server" Text="Select Source" ></asp:Label>&nbsp; :

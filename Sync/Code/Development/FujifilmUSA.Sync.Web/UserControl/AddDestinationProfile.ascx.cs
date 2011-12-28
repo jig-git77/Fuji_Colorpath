@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -20,6 +21,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
+            if (!Page.IsPostBack)
+            {
+                BindProfileOption();
+            }
         } 
 
         #endregion
@@ -32,7 +37,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect("DestinationProfileList.aspx");
         }
         #endregion      
-    
+
+        #region Methods
+        public void BindProfileOption()
+        {
+            cmbProfilerOption.DataSource = Utilities.GetEnumDropdown<ProfilerOption>();
+            cmbProfilerOption.DataTextField = "Value";
+            cmbProfilerOption.DataValueField = "Key";
+            cmbProfilerOption.DataBind();
+        }
+        #endregion
+
         #region IViewAddDestinationProfile Members
 
         public int ProfileId { get; set; }
