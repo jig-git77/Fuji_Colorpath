@@ -8,7 +8,9 @@
             DestProfile = new DestinationProfile();
             Data = new ProfileData();
         }
+
         public IBaseProfile SrcProfile { get; set; }
+        
         public IBaseProfile DestProfile { get; set; }
 
         #region IBaseProfile Members
@@ -22,6 +24,8 @@
         public int SyncDeviceId { get; set; }
 
         public bool IsUse { get; set; }
+
+        public int ProfileOptionId { get; set; }
 
         #endregion
     }

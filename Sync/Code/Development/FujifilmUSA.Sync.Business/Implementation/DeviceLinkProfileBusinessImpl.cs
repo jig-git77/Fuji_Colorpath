@@ -84,28 +84,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             var request = new CreateDeviceLinkProfileRequest();
 
-            //Add options and call profile service to generate optimize dlp
+            //Add options and call profile service to generate dlp
+            var profilerOptionDetail = ((IProfilerOptionDetailBusiness)new BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
+            var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(deviceLinkProfile.ProfileOptionId, ProfileType.Dlp);
+            
             using (var client = new ProfilerClient())
             {
-                request.Options = new List<Parameter>
-                                      {
-                                          new Parameter() {Name = "ProfileType", Value = "DeviceLink"},
-                                          new Parameter() {Name = "ProfileSize", Value = "2"},
-                                          new Parameter() {Name = "Rendering", Value = "14"},
-                                          new Parameter() {Name = "PerceptualCompression2", Value = "16"},
-                                          new Parameter() {Name = "PerceptualCompressionMergeFactor", Value = "75"},
-                                          new Parameter() {Name = "DLType", Value = "6"},
-                                          new Parameter() {Name = "DLExceptions", Value = "65536"},
-                                          new Parameter() {Name = "DLOptimizeExceptions", Value = "524289"},
-                                          new Parameter() {Name = "DLExceptionRange", Value = "15"},
-                                          new Parameter() {Name = "DLOptimizeInkRange", Value = "0.2"},
-                                          new Parameter() {Name = "Description", Value = "7900/Xerox 1000 DLP Setting v1.0"},
-                                          new Parameter() {Name = "BlackGeneration", Value = "GCR2Smooth"},
-                                          new Parameter() {Name = "InkMax", Value = "79 79 77 95 BalanceCMY"},
-                                          new Parameter() {Name = "InkTotal", Value = "330"},
-                                          new Parameter() {Name = "BlackStart", Value = "10"},
-                                          new Parameter() {Name = "BlackWidth", Value = "100"}
-                                      };
+                request.Options = new List<Parameter>();
+                optionDetails.ForEach(
+                    option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
+                
                 request.DestinationProfile = new IccProfile()
                                                  {
                                                      ProfileData = deviceLinkProfile.DestProfile.Data.Profile
@@ -127,7 +115,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                     deviceLinkProfile.DestProfile.ProfileId,
                                                                     deviceLinkProfile.ProfileName,
                                                                     deviceLinkProfile.IsUse,
-                                                                    deviceLinkProfile.Data.Profile
+                                                                    deviceLinkProfile.Data.Profile,
+                                                                    deviceLinkProfile.ProfileOptionId
                                                                 });
             }
 
