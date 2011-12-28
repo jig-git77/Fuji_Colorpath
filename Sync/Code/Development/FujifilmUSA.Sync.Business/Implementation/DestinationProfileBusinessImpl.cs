@@ -108,6 +108,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (destinationProfile.Data.Profile != null)
             {
                 DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDestinationProfile]", new object[] { destinationId, destinationProfile.Data.Profile });
+
+                //Cleanup of Masurement
+
+                DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurementLink]", new object[] { destinationId, ProfileType.DestinationProfile });
             }
 
             return true;
