@@ -67,7 +67,7 @@
                     </telerik:RadTextBox>--%><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                     <asp:TextBox ID="txtProjectName" runat="server" Width="178px" Height="19px"></asp:TextBox>
                 </td>
-                <td class="float_right">
+                <td class="ProjectListtd1">
                     <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>
                     &nbsp; :
                 </td>

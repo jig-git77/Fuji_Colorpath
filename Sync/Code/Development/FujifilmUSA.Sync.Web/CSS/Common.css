@@ -813,7 +813,7 @@ label
     float: left;
     height: 30px;
     margin-bottom: 20px;
-    padding-left:6px;
+    padding-left:5px; 
 }
 #contant .info_form .float_r
 {
