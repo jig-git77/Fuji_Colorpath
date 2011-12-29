@@ -3,11 +3,11 @@
 // the language of the query.
 function presentChartDialogiSis(scanner, chart, query) {
     if (query["Request"] == "READACKNOWLEDGED") {        
-        query["Prompt"] = "<B>Chart read in progress</B>";
+        query["Prompt"] = "Chart read in progress";
     } else {        
-        query["Prompt"] = "<B>Please place the chart in the scanner<BR>and click in this window.</B>";
+        query["Prompt"] = "Please place the chart in the scanner and click in this window.";
     }
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery('#lblMessage').html("Status : " + query["Prompt"]);
 }
 function presentScanDoneiSis(scanner, mychart, final) {
@@ -82,7 +82,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     // Add an upload button and canvas
     //
 
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery('#lblMessage').html("Status : Measurement Complete.");
     jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
 
@@ -123,7 +123,7 @@ function presentProgressiSis(scanner, mychart) {
     var lines = samples / width;
     prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
-    jQuery('#tblMessage').css('background-color', '#6BB19C');
+    jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
     
     var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing

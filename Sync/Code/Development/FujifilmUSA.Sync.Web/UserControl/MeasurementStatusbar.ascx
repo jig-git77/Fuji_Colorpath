@@ -4,9 +4,10 @@
     <div class="top">
         &nbsp;</div>
     <div class="middle" runat="server" id="tblMessage">
-        <asp:Label ID="lblMessage" runat="server" Text="<b>Status</b> : Scanning device is not loaded."
-            Style="float: left;"></asp:Label>
-        <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right;"></asp:Label>
+        <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."
+            Style="font-weight: bold; padding-left: 5px;"></asp:Label>
+        <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right;
+            font-weight: bold; padding-right: 5px;"></asp:Label>
         &nbsp;
         <br />
     </div>

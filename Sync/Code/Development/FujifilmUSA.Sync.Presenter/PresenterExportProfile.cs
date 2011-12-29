@@ -15,11 +15,10 @@ namespace FujifilmUSA.Sync.Presenter
             _viewExportProfile = viewExportProfile;
         }
 
-        public Project CloseSyncRunProcess()
+        public void CloseSyncRunProcess()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
             task.CloseSyncRun(_viewExportProfile.SyncRunId, Convert.ToInt32(_viewExportProfile.Status), _viewExportProfile.EndDateTime);
-            return task.GetProject(_viewExportProfile.ProjectId);
         }
 
         public void GetIccProfileBySyncRunId()

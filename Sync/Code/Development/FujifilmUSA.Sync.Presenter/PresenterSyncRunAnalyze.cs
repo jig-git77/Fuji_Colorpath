@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -21,6 +22,12 @@ namespace FujifilmUSA.Sync.Presenter
 
             var optimizeProfileTask = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
             optimizeProfileTask.OptimizeDeviceLinkProfile(_viewSyncRunAnalyze.MeasurementIds, _viewSyncRunAnalyze.SyncRunId, _viewSyncRunAnalyze.ProjectId);
+        }
+
+        public void CertifySyncRunProcess()
+        {
+            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            task.CertifySyncRun(_viewSyncRunAnalyze.SyncRunId, Convert.ToInt32(_viewSyncRunAnalyze.Status), _viewSyncRunAnalyze.EndDateTime);
         }
     }
 }

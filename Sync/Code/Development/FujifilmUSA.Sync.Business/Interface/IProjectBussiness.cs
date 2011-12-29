@@ -11,6 +11,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int DeleteProject(int projectId);
         Project GetProject(int projectId);
         bool CloseSyncRun(int syncRunId, int status, DateTime endDateTime);
+        bool CertifySyncRun(int syncRunId, int status, DateTime endDateTime);
         int CreateSyncRun(int projectId, int status, DateTime createdDateTime);
         MeasurementSetting GetMeasurementSettingByProjectId(int projectId);
     }

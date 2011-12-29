@@ -33,6 +33,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
+        public bool CertifySyncRun(int syncRunId, int status, DateTime endDateTime)
+        {
+            return true;
+        }
+
         public int CreateSyncRun(int projectId, int status, DateTime createdDateTime)
         {
             return 0;

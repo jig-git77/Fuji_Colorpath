@@ -13,19 +13,15 @@
                     <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />
                    Optimize Profile</span> &nbsp; 
             </asp:LinkButton>
-            <%--<telerik:RadButton ID="btnOptimize" Text="Optimize Profile" runat="server" OnClick="btnOptimize_Click">
-            </telerik:RadButton>  &nbsp;   --%>          
-            <%--  <telerik:RadButton ID="btnExport" Text="Export" runat="server" OnClick="btnExport_Click">
-            </telerik:RadButton>--%>
             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" CssClass="button">
                 <span>
                     <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/export.png" />
                     Export</span>
             </asp:LinkButton>            
-            <asp:LinkButton ID="btnCertify" runat="server"  CssClass="button">
+            <asp:LinkButton ID="btnCertify" runat="server" CssClass="button" OnClick="btnCertify_Click">
                 <span>
                     <asp:Image ID="Image1" runat="server" ImageUrl="../Images/export.png" />
-                    Cetify</span>
+                    Certify</span>
             </asp:LinkButton> &nbsp;
         
         </div>
