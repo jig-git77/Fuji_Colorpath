@@ -311,6 +311,7 @@
             success:
         function (response) {   //the response param passed to the success callback contains the returned json
             jQuery("input[id$=hdProfileID]").val(response);
+            bindMeasurementData();
             //MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
             //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
 
@@ -325,7 +326,7 @@
         });
 
         /**clear the array **/
-        bindMeasurementData();
+        
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
@@ -347,8 +348,7 @@
 
 
 
-    function bindMeasurementData() {
-        
+    function bindMeasurementData() {        
         var Type = '<%=Type %>';
         var serviceUrl;
         if (Type == "DestinationProfile") {
