@@ -207,7 +207,7 @@
         var SerialNo;
         if (Type == "DestinationProfile") {
             ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart']").val();
-            SerialNo = jQuery("[id*='cmbDeviceType']").text();
+            SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text(); //jQuery("[id*='cmbDeviceType']").text();
             SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
             SerialNo = SerialNo.replace(" ", "")
         }
