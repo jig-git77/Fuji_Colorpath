@@ -18,6 +18,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new SourceProfile();
         }
 
+        public List<SourceProfile> GetSourceProfiles()
+        {
+            return new List<SourceProfile>();
+        }
+
         #endregion
     }
 }
