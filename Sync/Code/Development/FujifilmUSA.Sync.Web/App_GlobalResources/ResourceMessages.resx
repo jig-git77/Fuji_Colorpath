@@ -192,4 +192,10 @@
   <data name="AddDestinationProfile_DeviceType_Required" xml:space="preserve">
     <value>Please select device type</value>
   </data>
+  <data name="SourceProfile_IsUse_False" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SourceProfile_IsUse_True" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

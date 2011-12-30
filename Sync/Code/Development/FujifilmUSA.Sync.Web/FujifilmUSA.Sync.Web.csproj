@@ -206,6 +206,7 @@
     <Content Include="ProjectList.aspx" />
     <Content Include="Services\PluginDataService.svc" />
     <Content Include="Settings.aspx" />
+    <Content Include="SourceProfileList.aspx" />
     <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddDestinationProfile.ascx" />
@@ -229,6 +230,7 @@
     <Content Include="UserControl\ProjectInformation.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\Settings.ascx" />
+    <Content Include="UserControl\SourceProfileList.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="UserControl\SyncRunAnalyze.ascx" />
     <Content Include="UserControl\SyncRunExport.ascx" />
@@ -365,6 +367,13 @@
     </Compile>
     <Compile Include="Settings.aspx.designer.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SourceProfileList.aspx.cs">
+      <DependentUpon>SourceProfileList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SourceProfileList.aspx.designer.cs">
+      <DependentUpon>SourceProfileList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SyncRunAnalyze.aspx.cs">
       <DependentUpon>SyncRunAnalyze.aspx</DependentUpon>
@@ -520,9 +529,17 @@
     </Compile>
     <Compile Include="UserControl\Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\Settings.ascx.designer.cs">
       <DependentUpon>Settings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SourceProfileList.ascx.cs">
+      <DependentUpon>SourceProfileList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SourceProfileList.ascx.designer.cs">
+      <DependentUpon>SourceProfileList.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>

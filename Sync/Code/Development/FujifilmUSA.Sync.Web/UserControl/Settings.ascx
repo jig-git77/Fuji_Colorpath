@@ -27,6 +27,14 @@
                             ImageUrl="../Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></div>
                     Measurement Device</asp:LinkButton>
             </td>
+             <td align="center" valign="bottom" style="width: 130px">
+                <asp:LinkButton ID="lnkSourceProfile" runat="server" ToolTip="Source Profile" 
+                     onclick="lnkSourceProfile_Click">
+                    <div>
+                        <asp:Image ID="imgSourceProfile" runat="server" AlternateText="SourceProfile"
+                             ToolTip="Source Profile" /></div>
+                    Source Profile</asp:LinkButton>
+            </td>
             <%--<td align="center" valign="bottom" style="width: 130px"> <span class='image'>
          <asp:Image CssClass="image" runat="server" ID="imgItem" AlternateText="MeasurementDevice" ImageUrl="../Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></span>
             <asp:LinkButton CssClass="text" runat="server" ID="lnkItem" ToolTip="Measurement Device" Text="Measurement">            
