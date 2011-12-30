@@ -35,6 +35,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return sourceProfile;
         }
 
+        public List<SourceProfile> GetSourceProfiles()
+        {
+            var sourceProfileList = new List<SourceProfile>();
+            var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetSourceProfiles]");
+
+            if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
+            {
+                sourceProfileList = dsSourceProfile.Tables[0].AsEnumerable().Select(x => new SourceProfile()
+                {
+                    ProfileId = DataReader.ReadInt(x, "SourceProfileID"),
+                    ProfileName = DataReader.ReadString(x, "SourceProfileName"),
+                    IsUse = DataReader.ReadBoolean(x, "IsUse")                    
+                }).ToList();
+            }
+            return sourceProfileList;
+        }
+
         #endregion
     }
 }
