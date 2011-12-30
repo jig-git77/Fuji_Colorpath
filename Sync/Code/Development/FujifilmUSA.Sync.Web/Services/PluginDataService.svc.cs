@@ -59,6 +59,25 @@ namespace FujifilmUSA.Sync.Web.Services
             return request.MeasurementLink.ProfileId;
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "SaveSourceMeasurement")]
+        [OperationContract]
+        public int SaveSourceMeasurement(SaveSourceMeasurementRequest request)
+        {            
+            if (request.SourceProfile.ProfileId == 0)
+            {
+                var insertDest = ((ISourceProfileBusiness)new Business.BusinessFactory<ISourceProfileBusiness>().CreateObject());
+                request.MeasurementLink.ProfileId = insertDest.InsertSourceProfile(request.SourceProfile);
+            }
+            else
+            {
+                request.MeasurementLink.ProfileId = request.SourceProfile.ProfileId;
+            }
+            request.MeasurementLink.TypeId = ProfileType.SourceProfile;
+            var insertMst = ((IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject());
+            insertMst.SaveMeasurement(request.MeasurementLink);
+            return request.MeasurementLink.ProfileId;
+        }
+
 
         [WebInvoke(Method = "GET", UriTemplate = "GetReferenceChartTypeListByMeasurementDeviceId/{measurementDeviceId}")]
         [OperationContract]

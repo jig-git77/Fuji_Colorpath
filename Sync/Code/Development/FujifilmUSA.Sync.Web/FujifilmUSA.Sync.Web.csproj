@@ -68,6 +68,7 @@
     <Content Include="AddDeviceLinkProfile.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddProject.aspx" />
+    <Content Include="AddSourceProfile.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
@@ -214,6 +215,7 @@
     <Content Include="UserControl\AddMeasurementCommon.ascx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject.ascx" />
+    <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\DeviceTypeSelectionCommon.ascx" />
     <Content Include="UserControl\DestinationProfileList.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
@@ -274,6 +276,13 @@
     </Compile>
     <Compile Include="AddProject.aspx.designer.cs">
       <DependentUpon>AddProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddSourceProfile.aspx.cs">
+      <DependentUpon>AddSourceProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddSourceProfile.aspx.designer.cs">
+      <DependentUpon>AddSourceProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_GlobalResources\ResourceMessages.designer.cs">
       <AutoGen>True</AutoGen>
@@ -391,6 +400,7 @@
     </Compile>
     <Compile Include="UserControl\AddDestinationProfile.ascx.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddDestinationProfile.ascx.designer.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
@@ -423,8 +433,16 @@
     <Compile Include="UserControl\AddProject.ascx.designer.cs">
       <DependentUpon>AddProject.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddSourceProfile.ascx.cs">
+      <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddSourceProfile.ascx.designer.cs">
+      <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\DeviceTypeSelectionCommon.ascx.cs">
       <DependentUpon>DeviceTypeSelectionCommon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\DeviceTypeSelectionCommon.ascx.designer.cs">
       <DependentUpon>DeviceTypeSelectionCommon.ascx</DependentUpon>

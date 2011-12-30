@@ -5,6 +5,8 @@ using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System;
+using FujifilmUSA.Sync.Business.ProfilerService;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -52,6 +54,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return sourceProfileList;
         }
 
+        public int InsertSourceProfile(SourceProfile objSourceProfile)
+        {
+            var objProjectInPeramater = new List<Parameters>();
+            var objProjectOutPeramater = new List<Parameters>();
+
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@SourceProfileName", Size = 0, Type = DbType.String, Value = objSourceProfile.ProfileName });            
+            objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objSourceProfile.IsUse });            
+            objProjectOutPeramater.Add(new Parameters() { ParameterName = "@SourceProfileID", Size = 4, Type = DbType.Int16 });
+
+
+            DataAccessFactory.Instance.ExecuteProcedureWithTransaction(
+                new List<Action>()
+                    {
+                        () =>
+                            {
+                                objProjectOutPeramater =
+                                    DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspInsertSourceProfile]",
+                                                                                objProjectInPeramater,
+                                                                                objProjectOutPeramater);
+                                objSourceProfile.ProfileId =
+                                    Convert.ToInt16(
+                                        objProjectOutPeramater.Single(x => x.ParameterName == "@SourceProfileID").Value);
+                            }
+                    });
+
+            return objSourceProfile.ProfileId;
+        }
         #endregion
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="PresenterAddDestinationProfile.cs" />
     <Compile Include="PresenterAddDeviceLinkProfile.cs" />
     <Compile Include="PresenterAddProject.cs" />
+    <Compile Include="PresenterAddSourceProfile.cs" />
     <Compile Include="PresenterDestinationProfileList.cs" />
     <Compile Include="PresenterDeviceLinkProfileList.cs" />
     <Compile Include="PresenterExportProfile.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="ViewInterface\IViewAddDestinationProfile.cs" />
     <Compile Include="ViewInterface\IViewAddDeviceLinkProfile.cs" />
     <Compile Include="ViewInterface\IViewAddProject.cs" />
+    <Compile Include="ViewInterface\IViewAddSourceProfile.cs" />
     <Compile Include="ViewInterface\IViewGetMeasurementDeviceType.cs" />
     <Compile Include="ViewInterface\IViewGetSourceDestinationCombo.cs" />
     <Compile Include="ViewInterface\IViewSourceProfiles.cs" />

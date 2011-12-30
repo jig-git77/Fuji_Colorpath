@@ -74,6 +74,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 _presenterGetMeasurementDeviceType = new PresenterGetMeasurementDeviceType(this);
+                if (Type== ProfileType.SourceProfile)
+                    SyncDeviceId = 6;
+                else
                 SyncDeviceId = Common.SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
                 _presenterGetMeasurementDeviceType.GetMeasurementDeviceListBySyncDeviceId();
                 cmbDeviceType.DataSource = MeasurementDevices;

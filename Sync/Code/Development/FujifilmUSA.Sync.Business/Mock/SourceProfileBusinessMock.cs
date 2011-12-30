@@ -22,7 +22,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<SourceProfile>();
         }
-
+        int ISourceProfileBusiness.InsertSourceProfile(SourceProfile sourceProfile)
+        {
+            return 0;
+        }
         #endregion
     }
 }

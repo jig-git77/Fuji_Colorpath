@@ -278,6 +278,7 @@
         var objDestinationProfile;
         var objMeasurementLink;
         var objMeasurement;
+        alert(Type);
         if (Type == "DestinationProfile") {
             SyncRunID = "0";
             MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
@@ -294,7 +295,21 @@
         else if (Type == "Optimization") {
             obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
-        }   
+        }
+
+        else if (Type == "SourceProfile") {
+            SyncRunID = "0";
+            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
+            var SourceProfilename = jQuery("[id$=txtSourceProfile]").val();
+            var ProfilerOptionID = jQuery("[id*='cmbProfilerOption'] :selected").val();
+            var SyncDeviceID = 6;
+            var SourceProfileID = jQuery("input[id$=hdProfileID]").val();
+            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
+            objMeasurementLink = { Measurement: objMeasurement };
+            objSourceProfile = { ProfileId: SourceProfileID, ProfileName: SourceProfilename, IsUse: true};
+            obj = { SourceProfile: objSourceProfile, MeasurementLink: objMeasurementLink };
+            serviceLink = "Services/PluginDataService.svc/SaveSourceMeasurement";
+        }
         
         //Make ajax request...
         jQuery.ajax({
