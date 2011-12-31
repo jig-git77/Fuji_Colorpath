@@ -10,7 +10,8 @@
     <div class="head">
         <h1>
             Add Source Profile</h1>
-        <asp:LinkButton ID="lbtnSourceProfileSave" runat="server" CssClass="button">           
+        <asp:LinkButton ID="lbtnSourceProfileSave" runat="server" CssClass="button" 
+            onclick="lbtnSourceProfileSave_Click">           
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>

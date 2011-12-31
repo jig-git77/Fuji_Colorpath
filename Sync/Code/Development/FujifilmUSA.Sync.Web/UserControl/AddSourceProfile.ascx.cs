@@ -35,6 +35,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         } 
         #endregion  
 
+        #region Control Events
+        protected void lbtnSourceProfileSave_Click(object sender, EventArgs e)
+        {
+            //ProfileId = ucAddMeasurementCommon.ProfileId;
+            ProfileId = 9;
+            ProfilerOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue);
+            _presenteraddsourceprofile.CreateSourceProfile();
+            Response.Redirect("SourceProfileList.aspx");
+        }
+        #endregion
+
         #region Methods
         public void BindProfileOption()
         {
@@ -49,9 +60,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewAddSourceProfile Members
 
         public Dictionary<int, string> GetProfileOption { get; set; }
+        public int ProfileId { get; set; }
+        public int ProfilerOptionId { get; set; } 
 
         #endregion
-
-
     }
 }

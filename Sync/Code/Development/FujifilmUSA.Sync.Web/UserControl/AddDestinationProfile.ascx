@@ -5,7 +5,7 @@
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
-<script type="text/javascript" language="javascript">
+<%--<script type="text/javascript" language="javascript">
     $(document).ready(function () {
         jQuery("select[id$=cmbDeviceType]").css("width", "180px");
         
@@ -19,7 +19,7 @@
             });
     });
         
-</script>
+</script>--%>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">

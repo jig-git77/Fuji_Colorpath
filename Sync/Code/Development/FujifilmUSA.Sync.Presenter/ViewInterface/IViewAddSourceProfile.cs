@@ -10,5 +10,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewAddSourceProfile
     {
         Dictionary<int, string> GetProfileOption { get; set; }
+        int ProfileId { get; set; }
+        int ProfilerOptionId { get; set; }  
     }
 }

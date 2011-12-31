@@ -26,6 +26,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public bool CreateSourceProfile(string measurementIds, int destinationId, int profilerOptionId)
+        {
+            return true;
+        }
         #endregion
     }
 }

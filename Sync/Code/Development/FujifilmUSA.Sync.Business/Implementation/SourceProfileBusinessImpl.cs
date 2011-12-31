@@ -81,6 +81,56 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             return objSourceProfile.ProfileId;
         }
+        public bool CreateSourceProfile(string measurementIds, int sourceId, int profilerOptionId)
+        {
+            var sourceProfile = new SourceProfile();
+            var request = new CreateSourceProfileRequest()
+            {
+                DCSData = new List<double>(),
+                PCSData = new List<double>(),
+            };
+
+            //Load pcs and dcs Data
+            var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.uspGetPCSData", new object[] { measurementIds });
+            if (dsPcsDcsData.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
+                {
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
+                    request.PCSData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
+
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+                    request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+                }
+            }
+
+            //Add options and call profile service to generate destination dlp
+            var profilerOptionDetail = ((IProfilerOptionDetailBusiness)new BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
+            var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(profilerOptionId, ProfileType.SourceProfile);
+
+            using (var client = new ProfilerClient())
+            {
+                request.Options = new List<Parameter>();
+                optionDetails.ForEach(
+                    option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
+                var response = client.CreateSourceProfile(request);
+                sourceProfile.Data.Profile = response.Profile.ProfileData;
+            }
+
+            if (sourceProfile.Data.Profile != null)
+            {
+                DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateSourceProfile]", new object[] { sourceId, sourceProfile.Data.Profile });
+
+                //Cleanup of Masurement
+
+                DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurementLink]", new object[] { sourceId, ProfileType.SourceProfile });
+            }
+
+            return true;
+        }
         #endregion
     }
 }

@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         SourceProfile GetSourceProfile(int sourceProfileId);
         List<SourceProfile> GetSourceProfiles();
         int InsertSourceProfile(SourceProfile objSourceProfile);
+        bool CreateSourceProfile(string measurementIds, int destinationId, int profilerOptionId);
     }
 }
 
