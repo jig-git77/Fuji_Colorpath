@@ -11,7 +11,6 @@
 </script>
 <script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
 <script src="jQuery/json2.js" type="text/javascript"></script>
-<script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
 <script src="jQuery/jquery-blockUI.js" type="text/javascript"></script>
 <script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
 <script src="JS/excanvas.js" type="text/javascript"></script>
@@ -21,6 +20,7 @@
 <script src="JS/WebComm.js" type="text/javascript"></script>
 <script src="jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
+<script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
 <style>
     .my_rectangle
     {
@@ -244,7 +244,7 @@
 
         //Data binding of Uploaded Measurement
         bindMeasurementData();
-
+        ControlVisibility();
     });
 
     function MeasurementDialog(message, type) {        
@@ -351,14 +351,14 @@
 
 
 
-    if (window.addEventListener) // W3C standard
-    {
-        window.addEventListener('load', ControlVisibility(), false); // NB **not** 'onload'
-    }
-    else if (window.attachEvent) // Microsoft
-    {
-        window.attachEvent('onload', ControlVisibility());
-    }
+//    if (window.addEventListener) // W3C standard
+//    {
+//        window.addEventListener('load', ControlVisibility(), false); // NB **not** 'onload'
+//    }
+//    else if (window.attachEvent) // Microsoft
+//    {
+//        window.attachEvent('onload', ControlVisibility());
+//    }
 
 
 
