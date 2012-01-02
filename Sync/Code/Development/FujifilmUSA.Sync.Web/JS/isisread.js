@@ -126,7 +126,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
             var xx1 = startPosition + x1;
             var yy1 = startPosition + y1;
 
-            var jg2 = new jsGraphics("Canvas");
+            //var jg2 = new jsGraphics("Canvas");
+            var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
 
             var srgb = results[j]["sRGB"];
             var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);

@@ -296,7 +296,8 @@ function scan(scanner, colorspace, chart) {
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
                     var xx1 = startPosition + x1;
                     var yy1 = startPosition + y1;
-                    var jg2 = new jsGraphics("Canvas");
+                    //var jg2 = new jsGraphics("Canvas");
+                    var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
                     jg2.setColor(rgbx);
                     jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
