@@ -8,8 +8,21 @@ function presentChartDialogiSis(scanner, chart, query) {
         query["Prompt"] = "Please place the chart in the scanner and click in this window.";
     }
     jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery('#lblMessage').html("Status : " + query["Prompt"]);
+    jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
 }
+var area = new Object();
+area["W"] = 0;
+area["H"] = 0;
+
+var distance = new Object();
+distance["R"] = 0;
+distance["C"] = 0;
+
+var drawCells = 0;
+var cId = 0;
+var x1 = 0;
+var y1 = 0;
+
 function presentScanDoneiSis(scanner, mychart, final) {
     // Before we finalize the request, get all the values from
     // the strip read and present them to the user.
@@ -41,7 +54,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var width = mychart["NumberOfColumns"];
     var expected = mychart["NumberOfRows"] * width;
     if (results.length != expected) {
-        MeasurementDialog("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");        
+        MeasurementDialog("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {
@@ -83,25 +96,64 @@ function presentScanDoneiSis(scanner, mychart, final) {
     //
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery('#lblMessage').html("Status : Measurement Complete.");
-    jQuery('#btnMeasureAndUploadChart').val('Upload Measurement');
+    jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
+    jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
 
-    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    var cursample = 0;
-    var x = 0;
-    var y = 0;
-    for (cursample = 0; cursample < samples; cursample++) {
-        var srgb = results[cursample]["sRGB"];
-        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        jg.setColor(rgbx);
-        jg.fillRect(x * 20, y * 20, 20, 20);
-        x++;
-        if (x >= width) {
-            x = 0;
-            y++;
+
+    var w = parseInt(jQuery("[id*='Canvas']").width());
+    var h = parseInt(jQuery("[id*='Canvas']").height());
+    var startPosition = 1;
+    col = mychart["NumberOfColumns"];
+    row = mychart["NumberOfRows"];
+    area["H"] = (((h / row) / 2) / 2) + '';
+    distance["R"] = (((h / row) / 2) / 2) + '';
+    area["W"] = ((w / col) / 2) + '';
+    distance["C"] = ((w / col) / 2) + '';
+    var noOfCells = mychart["Size"];
+    if (y1 == 0) {
+        y1 = parseInt(area["H"]);
+    }
+    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+
+    x1 = 0;
+    col = results.length;
+    for (j = 0; j < col; j++) {
+
+        if (noOfCells > drawCells) {
+
+            x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+
+            var xx1 = startPosition + x1;
+            var yy1 = startPosition + y1;
+
+            var jg2 = new jsGraphics("Canvas");
+
+            var srgb = results[j]["sRGB"];
+            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+            jg2.setColor(rgbx);
+            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+            jg2.paint();
+            drawCells++;
         }
     }
-    jg.paint();
+
+
+    //    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+    //    var cursample = 0;
+    //    var x = 0;
+    //    var y = 0;
+    //    for (cursample = 0; cursample < samples; cursample++) {
+    //        var srgb = results[cursample]["sRGB"];
+    //        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+    //        jg.setColor(rgbx);
+    //        jg.fillRect(x * 20, y * 20, 20, 20);
+    //        x++;
+    //        if (x >= width) {
+    //            x = 0;
+    //            y++;
+    //        }
+    //    }
+    //    jg.paint();
 
     // We have to make one more call to the library.  The 
     // calibrate itself ran in a non-browser thread.  We need
@@ -124,23 +176,23 @@ function presentProgressiSis(scanner, mychart) {
     prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
     jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery('#lblMessage').html("Status : " + prog["Prompt"]);
+    jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
     
-    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    var cursample = 0;
-    var x = 0;
-    var y = 0;
-    for (cursample = 0; cursample < samples; cursample++) {
-        var srgb = result[cursample]["sRGB"];
-        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        jg.setColor(rgbx);
-        jg.fillRect(x * 20, y * 20, 20, 20);
-        x++;
-        if (x >= width) {
-            x = 0;
-            y++;
-        }
-    }
-    jg.paint();
+//    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+//    var cursample = 0;
+//    var x = 0;
+//    var y = 0;
+//    for (cursample = 0; cursample < samples; cursample++) {
+//        var srgb = result[cursample]["sRGB"];
+//        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+//        jg.setColor(rgbx);
+//        jg.fillRect(x * 20, y * 20, 20, 20);
+//        x++;
+//        if (x >= width) {
+//            x = 0;
+//            y++;
+//        }
+//    }
+//    jg.paint();
     return "OK";
 }
