@@ -111,9 +111,14 @@ function mkDiv(x, y, w, h)
 		';"><\/div>';
 }
 
+var extraIEHtml = '';
 
-function mkDivIe(x, y, w, h)
-{
+function mkDivIe(x, y, w, h) {
+    this.extraIEHtml = 'left:' + x + 'px;'+
+		'top:' + y + 'px;'+
+		'width:' + w + 'px;'+
+		'height:' + h + 'px;'+
+		'clip:rect(0,'+w+'px,'+h+'px,0);';
 	this.htm += '%%'+this.color+';'+x+';'+y+';'+w+';'+h+';';
 }
 
@@ -149,8 +154,7 @@ function htmRpc()
 {
 	return this.htm.replace(
 		regex,
-		'<div style="overflow:hidden;position:absolute;background-color:'+
-		'$1;left:$2;top:$3;width:$4;height:$5"></div>\n');
+		'<div style=" ' + this.extraIEHtml + ' overflow:hidden;position:absolute;background-color:$1;left:$2;top:$3;width:$4;height:$5"></div>\n');
 }
 
 
@@ -927,6 +931,7 @@ text both horizontally (e.g. right) and vertically within that rectangle */
 		this.cnv = document.all? (this.wnd.document.all[id] || null)
 			: document.getElementById? (this.wnd.document.getElementById(id) || null)
 			: null;
+		this.cnv = this.cnv ? jQuery("div[id*='Canvas']")[0] : this.cnv;
 		this.defhtm = (this.cnv && this.cnv.innerHTML)? this.cnv.innerHTML : '';
 		this.paint = jg_dom? pntCnvDom : jg_ie? pntCnvIe : jg_ihtm? pntCnvIhtm : pntCnv;
 	}
