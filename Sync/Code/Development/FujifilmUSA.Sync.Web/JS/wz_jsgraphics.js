@@ -720,9 +720,8 @@ function jsGraphics(id, wnd)
 	};
 
 
-	this.fillRect = function(x, y, w, h)
-	{
-		this.mkDiv(x, y, w, h);
+	this.fillRect = function (x, y, w, h) {	  
+	    this.mkDiv(x, y, w, h);
 	};
 
 

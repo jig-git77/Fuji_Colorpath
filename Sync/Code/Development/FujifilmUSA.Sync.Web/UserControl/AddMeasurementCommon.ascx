@@ -222,7 +222,7 @@
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Measure Chart') {
+            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Measure Chart') {                
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
                     MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
@@ -422,6 +422,7 @@
             deletemeasurement(measurement.name);
             bindMeasurementData();
         }
+        return false;
     }
 
     function deletemeasurement(smeasurementId) {
@@ -437,11 +438,7 @@
             processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
             dataType: "json",  ////this only applies to response from the server and (not request send to server)
             dataFilter: function (data, type) {
-
-                return true;
-                //bindMeasurementData();
-                //RemoveTr(data,measurementId);
-
+                return false;
             },
 
             //If the call succeeds

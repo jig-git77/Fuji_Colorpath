@@ -241,8 +241,16 @@ function presentScanDonei1(scanner, mychart, final) {
     var startPosition = 1;
     col = mychart["NumberOfColumns"];
     row = mychart["NumberOfRows"];
-    area["H"] = (((h / row) / 2) / 2) + '';
-    distance["R"] = (((h / row) / 2) / 2) + '';
+
+    if (row != 1) {
+        area["H"] = (((h / row) / 2) / 2) + '';
+        distance["R"] = (((h / row) / 2) / 2) + '';
+    }
+    else {
+        area["H"] = 20;
+        distance["R"] = 1;
+    }        
+    
     area["W"] = ((w / col) / 2) + '';
     distance["C"] = ((w / col) / 2) + '';
     var noOfCells = mychart["Size"];
@@ -253,20 +261,17 @@ function presentScanDonei1(scanner, mychart, final) {
 
     x1 = 0;
     col = results.length;
-    for (j = 0; j < col; j++) {
-
-        if (noOfCells > drawCells) {
-
+    for (j = 0; j < col; j++) {        
+        if (noOfCells > drawCells) {            
             x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
             var xx1 = startPosition + x1;
             var yy1 = startPosition + y1;
 
             //var jg2 = new jsGraphics("Canvas");
-            var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
-
-            var srgb = results[j]["sRGB"];
-            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+            var jg2 = new jsGraphics(document.getElementById("Canvas").id);
+            var srgb = results[j]["sRGB"];            
+            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);            
             jg2.setColor(rgbx);
             jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
             jg2.paint();
@@ -295,7 +300,8 @@ function presentScanDonei1(scanner, mychart, final) {
     //
     // Now ask for the next strip, if we were not at the end
     //
-    if (next != -1) {
+    if (next != -1) {      
+
         mychart["CurrentStrip"] = mychart["RowNames"][next];
         var query = new Object();
         query["Success"] = "Samples Complete";
@@ -319,6 +325,18 @@ function presentScanDonei1(scanner, mychart, final) {
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
         drawCells = 0;
+        area = new Object();
+        area["W"] = 0;
+        area["H"] = 0;
+
+        distance = new Object();
+        distance["R"] = 0;
+        distance["C"] = 0;
+
+        drawCells = 0;
+        cId = 0;
+        x1 = 0;
+        y1 = 0;
         //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
         //        var x = 0;
         //        var y = 0;

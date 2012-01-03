@@ -198,6 +198,7 @@ function ListDevices() {
 // Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
 // other values may be included and are passed through to the callback functions
 function scan(scanner, colorspace, chart) {
+    
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -259,8 +260,7 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-
-
+        
         var area = new Object();
         area["W"] = 0;
         area["H"] = 0;
@@ -275,8 +275,16 @@ function scan(scanner, colorspace, chart) {
         col = chart["NumberOfColumns"];
         row = chart["NumberOfRows"];
 
-        area["H"] = (((h / row) / 2) / 2) + '';
-        distance["R"] = (((h / row) / 2) / 2) + '';
+
+        if (row != 1) {
+            area["H"] = (((h / row) / 2) / 2) + '';           
+            distance["R"] = (((h / row) / 2) / 2) + '';
+        }
+        else {
+            area["H"] = 20;  
+            distance["R"] = 1;
+        }
+        
 
         area["W"] = ((w / col) / 2) + '';
         distance["C"] = ((w / col) / 2) + '';
@@ -295,7 +303,7 @@ function scan(scanner, colorspace, chart) {
                 if (noOfCells > drawCells) {
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
                     var xx1 = startPosition + x1;
-                    var yy1 = startPosition + y1;
+                    var yy1 = startPosition + y1;                    
                     //var jg2 = new jsGraphics("Canvas");
                     var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
