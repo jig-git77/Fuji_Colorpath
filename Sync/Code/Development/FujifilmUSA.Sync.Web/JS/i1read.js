@@ -318,7 +318,7 @@ function presentScanDonei1(scanner, mychart, final) {
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
-
+        drawCells = 0;
         //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
         //        var x = 0;
         //        var y = 0;

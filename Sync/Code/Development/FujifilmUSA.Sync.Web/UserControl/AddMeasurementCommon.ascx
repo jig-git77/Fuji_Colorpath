@@ -278,7 +278,6 @@
         var objDestinationProfile;
         var objMeasurementLink;
         var objMeasurement;
-        alert(Type);
         if (Type == "DestinationProfile") {
             SyncRunID = "0";
             MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
