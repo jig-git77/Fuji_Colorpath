@@ -49,9 +49,9 @@
     function cmbAlignmentChartChangeEvent() {        
         var selectedval = jQuery("[id$='cmbAlignmentChart'] :selected").val()
         jQuery("input[id$=hdAlignmentChartSelectedValue]").val(selectedval);        
-        if ('<%=Type %>' != "Optimization") {
-            GetRefChartData();
-        }
+//        if ('<%=Type %>' != "Optimization") {
+//            GetRefChartData();
+//        }
     }
     $(document).ready(function () {
         jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent);

@@ -195,9 +195,9 @@
 
         load();   //first you have to load the plugin
         ListDevices();
-        if ('<%=Type %>' == "Optimization") {
+        //if ('<%=Type %>' == "Optimization") {
             GetRefChartData();
-        }
+       // }
     }
     function GetRefChartData() {
         
@@ -206,10 +206,10 @@
         var ReferenceChartTypeId = '';
         var SerialNo;
         if (Type == "DestinationProfile") {
-            ReferenceChartTypeId = jQuery("[id*='cmbAlignmentChart']").val();
-            SerialNo = jQuery("[id*='cmbDeviceType'] :selected").text(); //jQuery("[id*='cmbDeviceType']").text();
-            SerialNo = SerialNo.substring(SerialNo.lastIndexOf('-') + 1);
-            SerialNo = SerialNo.replace(" ", "")
+          
+            ReferenceChartTypeId = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
+            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';
+            
         }
 
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
@@ -280,15 +280,10 @@
         var objMeasurement;
         if (Type == "DestinationProfile") {
             SyncRunID = "0";
-            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            var DestinationProfilename = jQuery("[id$=txtDestinationProfile]").val();
-            var ProfilerOptionID = jQuery("[id*='cmbProfilerOption'] :selected").val();
-            var SyncDeviceID = '<%=SessionManager.Instance.CurrentSyncDevice.SyncDeviceId%>';
+            MeasurementTypeID = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
             var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            objMeasurementLink = { Measurement: objMeasurement };
-            objDestinationProfile = { ProfileId: DestinationProfileID, ProfileName: DestinationProfilename, SyncDeviceId: SyncDeviceID, IsUse: true, ProfileOptionId: ProfilerOptionID };
-            obj = { DestinationProfile: objDestinationProfile, MeasurementLink: objMeasurementLink };
+            obj = { Measurement: objMeasurement, ProfileId: DestinationProfileID };                        
             serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
         }
         else if (Type == "Optimization") {

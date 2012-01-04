@@ -15,22 +15,28 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddDestinationProfile = viewAddDestinationProfile;
         }
 
-        public void CreateDestinationProfile()
-        {
-            var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
-            var measurementIds = string.Join(",",
-                                                                    task.GetMeasurement(
-                                                                        _viewAddDestinationProfile.ProfileId,
-                                                                        ProfileType.DestinationProfile).
-                                                                        Select(x => x.MeasurementId).ToArray());
+        //public void CreateDestinationProfile()
+        //{
+        //    var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+        //    var measurementIds = string.Join(",",
+        //                                                            task.GetMeasurement(
+        //                                                                _viewAddDestinationProfile.ProfileId,
+        //                                                                ProfileType.DestinationProfile).
+        //                                                                Select(x => x.MeasurementId).ToArray());
 
-            var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
-            destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfile.ProfileId,_viewAddDestinationProfile.ProfilerOptionId);
-        }
+        //    var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+        //    destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfile.ProfileId,_viewAddDestinationProfile.ProfilerOptionId);
+        //}
         public void GetProfilerOption()
         {
             var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
             _viewAddDestinationProfile.GetProfileOption = task.GetProfilerOption();
+        }
+
+        public void InsertDestinationProfile()
+        {
+            var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            _viewAddDestinationProfile.ProfileId =  destTask.InsertDestinationProfile(_viewAddDestinationProfile.DestinationProfile);
         }
     }
 }

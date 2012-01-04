@@ -57,7 +57,6 @@
     <Compile Include="MeasurementLink.cs" />
     <Compile Include="MeasurementPatch.cs" />
     <Compile Include="MeasurementSetting.cs" />
-    <Compile Include="MessageContracts\SaveDestinationMeasurementRequest.cs" />
     <Compile Include="MessageContracts\SaveSourceMeasurementRequest.cs" />
     <Compile Include="OptimizeProfile.cs" />
     <Compile Include="Permission.cs" />

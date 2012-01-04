@@ -41,22 +41,13 @@ namespace FujifilmUSA.Sync.Web.Services
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveDestinationMeasurement")]
         [OperationContract]
-        public int SaveDestinationMeasurement(SaveDestinationMeasurementRequest request)
+        public int SaveDestinationMeasurement(MeasurementLink request)
         {
-            var destId = 0;
-            if (request.DestinationProfile.ProfileId == 0)
-            {
-                var insertDest = ((IDestinationProfileBusiness)new Business.BusinessFactory<IDestinationProfileBusiness>().CreateObject());
-                request.MeasurementLink.ProfileId = insertDest.InsertDestinationProfile(request.DestinationProfile);
-            }
-            else
-            {
-                request.MeasurementLink.ProfileId = request.DestinationProfile.ProfileId;
-            }
-            request.MeasurementLink.TypeId = ProfileType.DestinationProfile;
+            //request.MeasurementLink.ProfileId = request.DestinationProfile.ProfileId;
+            request.TypeId = ProfileType.DestinationProfile;
             var insertMst = ((IMeasurementBusiness)new Business.BusinessFactory<IMeasurementBusiness>().CreateObject());
-            insertMst.SaveMeasurement(request.MeasurementLink);
-            return request.MeasurementLink.ProfileId;
+            insertMst.SaveMeasurement(request);
+            return request.ProfileId;
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "SaveSourceMeasurement")]

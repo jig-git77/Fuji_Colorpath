@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddDestinationProfile.aspx" />
+    <Content Include="AddDestinationProfileMeasurement.aspx" />
     <Content Include="AddDeviceLinkProfile.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddProject.aspx" />
@@ -211,6 +212,7 @@
     <Content Include="SyncRunAnalyze.aspx" />
     <Content Include="SyncRunExport.aspx" />
     <Content Include="UserControl\AddDestinationProfile.ascx" />
+    <Content Include="UserControl\AddDestinationProfileMeasurement.ascx" />
     <Content Include="UserControl\AddDeviceLinkProfile.ascx" />
     <Content Include="UserControl\AddMeasurementCommon.ascx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
@@ -255,6 +257,13 @@
     </Compile>
     <Compile Include="AddDestinationProfile.aspx.designer.cs">
       <DependentUpon>AddDestinationProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddDestinationProfileMeasurement.aspx.cs">
+      <DependentUpon>AddDestinationProfileMeasurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDestinationProfileMeasurement.aspx.designer.cs">
+      <DependentUpon>AddDestinationProfileMeasurement.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddDeviceLinkProfile.aspx.cs">
       <DependentUpon>AddDeviceLinkProfile.aspx</DependentUpon>
@@ -404,6 +413,13 @@
     </Compile>
     <Compile Include="UserControl\AddDestinationProfile.ascx.designer.cs">
       <DependentUpon>AddDestinationProfile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDestinationProfileMeasurement.ascx.cs">
+      <DependentUpon>AddDestinationProfileMeasurement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDestinationProfileMeasurement.ascx.designer.cs">
+      <DependentUpon>AddDestinationProfileMeasurement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddDeviceLinkProfile.ascx.cs">
       <DependentUpon>AddDeviceLinkProfile.ascx</DependentUpon>

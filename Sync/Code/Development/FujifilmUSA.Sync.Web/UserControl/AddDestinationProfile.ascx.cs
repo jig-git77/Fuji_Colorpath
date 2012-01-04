@@ -33,10 +33,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
         {
-            ProfileId = ucAddMeasurementCommon.ProfileId;
-            ProfilerOptionId =Convert.ToInt32(cmbProfilerOption.SelectedValue);
-            _presenteradddestinationprofile.CreateDestinationProfile();
-            Response.Redirect("DestinationProfileList.aspx");
+            DestinationProfile = new DestinationProfile();
+            DestinationProfile.ProfileName = txtDestinationProfile.Text;
+            DestinationProfile.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+            DestinationProfile.IsUse = true;
+            DestinationProfile.ProfileOptionId = int.Parse(cmbProfilerOption.SelectedValue);
+            _presenteradddestinationprofile.InsertDestinationProfile();
+            DestinationProfile.ProfileId = ProfileId;
+
+            DestinationProfile.ReferenceChartTypeId = int.Parse(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
+            DestinationProfile.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
+            SessionManager.Instance.CurrentDestinationProfile = DestinationProfile;
+            
+            Response.Redirect("AddDestinationProfileMeasurement.aspx");
         }
         #endregion      
 
@@ -52,13 +61,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region IViewAddDestinationProfile Members
-
         public int ProfileId { get; set; }
-
-        public int ProfilerOptionId { get; set; }        
-
         public Dictionary<int, string> GetProfileOption { get; set; }
-
+        public DestinationProfile DestinationProfile { get; set; }
         #endregion
 
         #region IViewGetMeasurementDeviceType Members
@@ -72,7 +77,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId { get; set; }
         
         #endregion
-
-
     }
 }

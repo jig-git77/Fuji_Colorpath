@@ -5,21 +5,6 @@
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
-<%--<script type="text/javascript" language="javascript">
-    $(document).ready(function () {
-        jQuery("select[id$=cmbDeviceType]").css("width", "180px");
-        
-        //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
-        jQuery('#<%= lbtnDestinationProfileSave.ClientID %>').click(
-            function () {
-                if (jQuery("input[id*='hdHasMeasurement']").val() > 0)
-                    return true;
-                else
-                    return false;
-            });
-    });
-        
-</script>--%>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -32,8 +17,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
     <div class="clear">
-    </div>
-    <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
+    </div>    
     <div class="info_form">
         <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
@@ -57,8 +41,7 @@
             </tr>
             <uc:DeviceTypeSelectionCommon ID="ucDeviceTypeSelectionCommon" runat="server" Type="DestinationProfile" />
         </table>
-    </div>
-    <uc:AddMeasurementCommon ID="ucAddMeasurementCommon" runat="server" Type="DestinationProfile" />
+    </div>    
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

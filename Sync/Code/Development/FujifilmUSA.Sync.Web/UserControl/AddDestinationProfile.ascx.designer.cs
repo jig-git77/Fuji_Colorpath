@@ -31,15 +31,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
-        /// ucMeasurementStatusbar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.MeasurementStatusbar ucMeasurementStatusbar;
-        
-        /// <summary>
         /// ucStatusbar1 control.
         /// </summary>
         /// <remarks>
@@ -74,14 +65,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.DeviceTypeSelectionCommon ucDeviceTypeSelectionCommon;
-        
-        /// <summary>
-        /// ucAddMeasurementCommon control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.AddMeasurementCommon ucAddMeasurementCommon;
     }
 }
