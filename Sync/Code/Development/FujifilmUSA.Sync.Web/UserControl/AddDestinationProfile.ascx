@@ -14,8 +14,7 @@
         <asp:LinkButton ID="lbtnDestinationProfileSave" runat="server" CssClass="button"
             OnClick="lbtnDestinationProfileSave_Click">
             <span>
-                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
-                Save</span></asp:LinkButton></div>
+                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />Add Measurement</span></asp:LinkButton></div>
     <div class="clear">
     </div>    
     <div class="info_form">
