@@ -64,18 +64,18 @@ function SetChartResult(objChart) {
         g_Chart["Mode"] = objChart.DeviceSetting.Mode;
     }
     
-    if (objChart.MeasurementDeviceTypeId > 1 && objChart.ChartSettings != null) {
+    if (objChart.MeasurementDeviceTypeId > 1 && objChart.ChartSetting != null) {
         g_Chart["ChartType"] = "Native";
-        g_Chart["ChartSizeX"] = objChart.ChartSettings["ChartSizeX"];
-        g_Chart["ChartSizeY"] = objChart.ChartSettings["ChartSizeY"];
-        g_Chart["BarSizeX"] = objChart.ChartSettings["BarSizeX"];
-        g_Chart["BarSizeY"] = objChart.ChartSettings["BarSizeY"];
-        g_Chart["DistToBar"] = objChart.ChartSettings["DistToBar"];
-        g_Chart["DistToFirstLineY"] = objChart.ChartSettings["DistToFirstLineY"];
-        g_Chart["MarkerDistance"] = objChart.ChartSettings["MarkerDistance"];
-        g_Chart["DistToFirstField"] = objChart.ChartSettings["DistToFirstField"];
-        g_Chart["PatchSizeX"] = objChart.ChartSettings["PatchSizeX"];
-        g_Chart["PatchSizeY"] = objChart.ChartSettings["PatchSizeY"];
+        g_Chart["ChartSizeX"] = objChart.ChartSetting["ChartSizeX"];
+        g_Chart["ChartSizeY"] = objChart.ChartSetting["ChartSizeY"];
+        g_Chart["BarSizeX"] = objChart.ChartSetting["BarSizeX"];
+        g_Chart["BarSizeY"] = objChart.ChartSetting["BarSizeY"];
+        g_Chart["DistToBar"] = objChart.ChartSetting["DistToBar"];
+        g_Chart["DistToFirstLineY"] = objChart.ChartSetting["DistToFirstLineY"];
+        g_Chart["MarkerDistance"] = objChart.ChartSetting["MarkerDistance"];
+        g_Chart["DistToFirstField"] = objChart.ChartSetting["DistToFirstField"];
+        g_Chart["PatchSizeX"] = objChart.ChartSetting["PatchSizeX"];
+        g_Chart["PatchSizeY"] = objChart.ChartSetting["PatchSizeY"];
     }
 
 

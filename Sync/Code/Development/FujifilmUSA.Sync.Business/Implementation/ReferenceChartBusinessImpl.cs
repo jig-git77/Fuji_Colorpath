@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 dsChartSettings.ReadXml(reader);
                 if (dsChartSettings.Tables.Count > 0)
                 {
-
+                    chartData.ChartSetting = new ChartSetting();
                     if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeX"))
                         chartData.ChartSetting.ChartSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeX");
                     if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeY"))
