@@ -144,6 +144,7 @@
 <asp:HiddenField ID="hdProjectID" runat="server" />
 <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
 <asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
+<asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
@@ -206,10 +207,8 @@
         var ReferenceChartTypeId = '';
         var SerialNo;
         if (Type == "DestinationProfile") {
-          
-            ReferenceChartTypeId = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
-            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';
-            
+            ReferenceChartTypeId = jQuery("input[id$=hdMeasurementTypeID]").val();
+            SerialNo = jQuery("input[id$=hdSerialNumber]").val();            
         }
 
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
@@ -279,8 +278,7 @@
         var objMeasurementLink;
         var objMeasurement;
         if (Type == "DestinationProfile") {
-            SyncRunID = "0";
-            MeasurementTypeID = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
+            SyncRunID = "0";            
             var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
             objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
             obj = { Measurement: objMeasurement, ProfileId: DestinationProfileID };                        

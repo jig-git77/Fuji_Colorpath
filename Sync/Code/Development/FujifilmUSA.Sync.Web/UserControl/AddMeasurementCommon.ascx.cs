@@ -47,6 +47,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else if(Type == ProfileType.DestinationProfile)
                 {
                     hdProfileID.Value = SessionManager.Instance.CurrentDestinationProfile.ProfileId.ToString();
+                    hdMeasurementTypeID.Value = SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId.ToString();
+                    hdSerialNumber.Value = SessionManager.Instance.CurrentDestinationProfile.SerialNumber.ToString();
                 }
             }
         }
