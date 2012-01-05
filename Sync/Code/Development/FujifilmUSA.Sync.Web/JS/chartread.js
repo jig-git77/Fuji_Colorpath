@@ -260,66 +260,69 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-        
-        var area = new Object();
-        area["W"] = 0;
-        area["H"] = 0;
 
-        var distance = new Object();
-        distance["R"] = 0;
-        distance["C"] = 0;
+        chartDrawFrom = 1;
+        CallDrawChart();
 
-        var w = parseInt(jQuery("[id*='Canvas']").width());
-        var h = parseInt(jQuery("[id*='Canvas']").height());
-        var startPosition = 1;
-        col = chart["NumberOfColumns"];
-        row = chart["NumberOfRows"];
+//        var area = new Object();
+//        area["W"] = 0;
+//        area["H"] = 0;
+
+//        var distance = new Object();
+//        distance["R"] = 0;
+//        distance["C"] = 0;
+
+//        var w = parseInt(jQuery("[id*='Canvas']").width());
+//        var h = parseInt(jQuery("[id*='Canvas']").height());
+//        var startPosition = 1;
+//        col = chart["NumberOfColumns"];
+//        row = chart["NumberOfRows"];
 
 
-        if (row != 1) {
-            area["H"] = (((h / row) / 2) / 2) + '';           
-            distance["R"] = (((h / row) / 2) / 2) + '';
-        }
-        else {
-            area["H"] = 20;  
-            distance["R"] = 1;
-        }
-        
+//        if (row != 1) {
+//            area["H"] = (((h / row) / 2) / 2) + '';           
+//            distance["R"] = (((h / row) / 2) / 2) + '';
+//        }
+//        else {
+//            area["H"] = 20;  
+//            distance["R"] = 1;
+//        }
+//        
 
-        area["W"] = ((w / col) / 2) + '';
-        distance["C"] = ((w / col) / 2) + '';
+//        area["W"] = ((w / col) / 2) + '';
+//        distance["C"] = ((w / col) / 2) + '';
 
-        var noOfCells = chart["Size"];
-        var drawCells = 0;
-        var cId = 0;
-        var x1 = 0;
-        var y1 = 0;
+//        var noOfCells = chart["Size"];
+//        var drawCells = 0;
+//        var cId = 0;
+//        var x1 = 0;
+//        var y1 = 0;
 
-        for (i = 0; i < row; i++) {
-            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
-            x1 = 0;
-            for (j = 0; j < col; j++) {
+//        for (i = 0; i < row; i++) {
+//            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+//            x1 = 0;
+//            for (j = 0; j < col; j++) {
 
-                if (noOfCells > drawCells) {
-                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-                    var xx1 = startPosition + x1;
-                    var yy1 = startPosition + y1;                    
-                    //var jg2 = new jsGraphics("Canvas");
-                    var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
-                    var rgbx = chart["RefBase"][cId]["HTMLColor"];
-                    jg2.setColor(rgbx);
-                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-                    jg2.paint();
-                    drawCells++;
-                    cId++;
-//                    if (cId < 149)
-//                        cId++;
-//                    else
-//                        cId = 0;
-                }
+//                if (noOfCells > drawCells) {
+//                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+//                    var xx1 = startPosition + x1;
+//                    var yy1 = startPosition + y1;                    
+//                    //var jg2 = new jsGraphics("Canvas");
+//                    //var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
+//                    var rgbx = chart["RefBase"][cId]["HTMLColor"];
+//                    jg2.setColor(rgbx);
+//                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+//                    jg2.paint();
+//                    drawCells++;
+//                    cId++;
+////                    if (cId < 149)
+////                        cId++;
+////                    else
+////                        cId = 0;
+//                }
 
-            }
-        }
+//            }
+//        }
 
 
 

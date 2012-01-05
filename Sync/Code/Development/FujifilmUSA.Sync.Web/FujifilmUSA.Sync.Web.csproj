@@ -195,6 +195,7 @@
     <Content Include="JS\ColorPicker\popups\select_color.html" />
     <Content Include="JS\CommonFunctions.js" />
     <Content Include="JS\Corner-Curves.js" />
+    <Content Include="JS\DrawChartCommon.js" />
     <Content Include="JS\excanvas.js" />
     <Content Include="JS\i1read.js" />
     <Content Include="JS\isisread.js" />
