@@ -21,7 +21,6 @@
 <script src="jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
-<script src="JS/DrawChartCommon.js" type="text/javascript"></script>
 <style>
     .my_rectangle
     {
@@ -103,17 +102,13 @@
         <div class="clear">
         </div>
     </div>
-     <input id="btnDraw" type="button" value="Draw" onclick="draw();" />
     <div class="color_pallate">
         <div class="color_pallate_head">
             Colorbar</div>
         <div class="color_pallate_middle">
             <div class="color_bar">
-                <%--<div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;">
+                <div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;">
                 </div>
---%>
-                <canvas id="Canvas" style="position: relative; height: 350px; width: 630px;"></canvas>
-
             </div>
         </div>
         <div class="color_pallate_bottom">
@@ -210,10 +205,11 @@
         var Type = '<%=Type %>';
         var ReferenceChartTypeId = '';
         var SerialNo;
-        if (Type == "DestinationProfile") {          
-
+        if (Type == "DestinationProfile") {
+          
             ReferenceChartTypeId = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
-            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';            
+            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';
+            
         }
 
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);

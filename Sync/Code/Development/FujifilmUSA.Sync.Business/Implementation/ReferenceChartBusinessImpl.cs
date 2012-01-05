@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (dsReferenceChart.Tables[0].Rows.Count == 0)
                 return chartData;
 
+            chartData.ReferenceChartTypeId = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
             chartData.ChartName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ChartName");
             chartData.MeasurementDeviceTypeId = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "MeasurementDeviceTypeID");
             chartData.NumOfCols = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfCols");

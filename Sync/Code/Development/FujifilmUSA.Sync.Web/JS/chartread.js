@@ -135,7 +135,9 @@ function load() {
     }
     var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
     jQuery("[id*='lblPluginMessage']").html(newHTML);
+    //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
+    //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 
 function DisplayLog() {
@@ -195,14 +197,15 @@ function ListDevices() {
 // chart["ReferencePatch"] = array of expected values
 // Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
 // other values may be included and are passed through to the callback functions
-
 function scan(scanner, colorspace, chart) {
+    
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
     localchart["ReadCS"] = colorspace;
     localchart["Substrate"] = paper;
-    if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
+    if (scanner["Type"] == "iO" ||
+        scanner["Type"] == "iSis") {
         // This device will read the entire chart in a single go. So we copy entire RefBase (how chart is laid out) to the ReferencePatch
         if (typeof chart["RefBase"] != "undefined") {
             localchart["ReferencePatch"] = chart["RefBase"];
@@ -257,69 +260,85 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-        chartDrawFrom = 1;
-        CallDrawChart(chart);
+        
+        var area = new Object();
+        area["W"] = 0;
+        area["H"] = 0;
 
-//        var area = new Object();
-//        area["W"] = 0;
-//        area["H"] = 0;
+        var distance = new Object();
+        distance["R"] = 0;
+        distance["C"] = 0;
 
-//        var distance = new Object();
-//        distance["R"] = 0;
-//        distance["C"] = 0;
-
-//        var w = parseInt(jQuery("[id*='Canvas']").width());
-//        var h = parseInt(jQuery("[id*='Canvas']").height());
-//        var startPosition = 1;
-//        col = chart["NumberOfColumns"];
-//        row = chart["NumberOfRows"];
+        var w = parseInt(jQuery("[id*='Canvas']").width());
+        var h = parseInt(jQuery("[id*='Canvas']").height());
+        var startPosition = 1;
+        col = chart["NumberOfColumns"];
+        row = chart["NumberOfRows"];
 
 
-//        if (row != 1) {
-//            area["H"] = (((h / row) / 2) / 2) + '';           
-//            distance["R"] = (((h / row) / 2) / 2) + '';
-//        }
-//        else {
-//            area["H"] = 20;  
-//            distance["R"] = 1;
-//        }
-//        
+        if (row != 1) {
+            area["H"] = (((h / row) / 2) / 2) + '';           
+            distance["R"] = (((h / row) / 2) / 2) + '';
+        }
+        else {
+            area["H"] = 20;  
+            distance["R"] = 1;
+        }
+        
 
-//        area["W"] = ((w / col) / 2) + '';
-//        distance["C"] = ((w / col) / 2) + '';
+        area["W"] = ((w / col) / 2) + '';
+        distance["C"] = ((w / col) / 2) + '';
 
-//        var noOfCells = chart["Size"];
-//        var drawCells = 0;
-//        var cId = 0;
-//        var x1 = 0;
-//        var y1 = 0;
+        var noOfCells = chart["Size"];
+        var drawCells = 0;
+        var cId = 0;
+        var x1 = 0;
+        var y1 = 0;
 
-//        for (i = 0; i < row; i++) {
-//            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
-//            x1 = 0;
-//            for (j = 0; j < col; j++) {
+        for (i = 0; i < row; i++) {
+            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+            x1 = 0;
+            for (j = 0; j < col; j++) {
 
-//                if (noOfCells > drawCells) {
-//                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-//                    var xx1 = startPosition + x1;
-//                    var yy1 = startPosition + y1;                    
-//                    //var jg2 = new jsGraphics("Canvas");
-//                    //var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
-//                    var rgbx = chart["RefBase"][cId]["HTMLColor"];
-//                    jg2.setColor(rgbx);
-//                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-//                    jg2.paint();
-//                    drawCells++;
-//                    cId++;
-////                    if (cId < 149)
-////                        cId++;
-////                    else
-////                        cId = 0;
-//                }
+                if (noOfCells > drawCells) {
+                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+                    var xx1 = startPosition + x1;
+                    var yy1 = startPosition + y1;                    
+                    //var jg2 = new jsGraphics("Canvas");
+                    var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
+                    var rgbx = chart["RefBase"][cId]["HTMLColor"];
+                    jg2.setColor(rgbx);
+                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+                    jg2.paint();
+                    drawCells++;
+                    cId++;
+//                    if (cId < 149)
+//                        cId++;
+//                    else
+//                        cId = 0;
+                }
 
-//            }
-//        }
-     
+            }
+        }
+
+
+
+
+        //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
+        //        //alert(jg.style);
+        //        var x = 0;
+        //        var y = 0;
+        //        for (var cursample = 0; cursample < chart["RefBase"].length; cursample++) {
+        //            var rgbx = chart["RefBase"][cursample]["HTMLColor"];
+        //            jg.setColor(rgbx);
+        //            jg.fillRect(x * 20, y * 20, 20, 10);
+        //            x++;
+        //            if (x >= chart["NumberOfColumns"]) {
+        //                x = 0;
+        //                y++;
+        //            }
+        //        }
+        //        jg.paint();
     }
 }
 
