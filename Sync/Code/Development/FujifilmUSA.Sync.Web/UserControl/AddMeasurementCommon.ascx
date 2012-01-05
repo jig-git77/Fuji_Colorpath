@@ -210,11 +210,10 @@
         var Type = '<%=Type %>';
         var ReferenceChartTypeId = '';
         var SerialNo;
-        if (Type == "DestinationProfile") {
-          
+        if (Type == "DestinationProfile") {          
+
             ReferenceChartTypeId = '<%=SessionManager.Instance.CurrentDestinationProfile.ReferenceChartTypeId%>';
-            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';
-            
+            SerialNo = '<%=SessionManager.Instance.CurrentDestinationProfile.SerialNumber%>';            
         }
 
         GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);

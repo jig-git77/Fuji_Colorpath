@@ -98,18 +98,18 @@ function presentStripDialogi1(scanner, chart, query) {
 // C++ side to do final thread and memory cleanup. Sample values
 // must be retriveved before the final call.
 //
-var area = new Object();
-area["W"] = 0;
-area["H"] = 0;
+//var area = new Object();
+//area["W"] = 0;
+//area["H"] = 0;
 
-var distance = new Object();
-distance["R"] = 0;
-distance["C"] = 0;
+//var distance = new Object();
+//distance["R"] = 0;
+//distance["C"] = 0;
 
-var drawCells = 0;
-var cId = 0;
-var x1 = 0;
-var y1 = 0;
+//var drawCells = 0;
+//var cId = 0;
+//var x1 = 0;
+//var y1 = 0;
 function presentScanDonei1(scanner, mychart, final) {
 
 
@@ -235,67 +235,54 @@ function presentScanDonei1(scanner, mychart, final) {
         next = idx + 1;
     }
 
+    chartDrawFrom = 2;
+    CallDrawChart(mychart);
 
-    var w = parseInt(jQuery("[id*='Canvas']").width());
-    var h = parseInt(jQuery("[id*='Canvas']").height());
-    var startPosition = 1;
-    col = mychart["NumberOfColumns"];
-    row = mychart["NumberOfRows"];
+//    var w = parseInt(jQuery("[id*='Canvas']").width());
+//    var h = parseInt(jQuery("[id*='Canvas']").height());
+//    var startPosition = 1;
+//    col = mychart["NumberOfColumns"];
+//    row = mychart["NumberOfRows"];
 
-    if (row != 1) {
-        area["H"] = (((h / row) / 2) / 2) + '';
-        distance["R"] = (((h / row) / 2) / 2) + '';
-    }
-    else {
-        area["H"] = 20;
-        distance["R"] = 1;
-    }        
-    
-    area["W"] = ((w / col) / 2) + '';
-    distance["C"] = ((w / col) / 2) + '';
-    var noOfCells = mychart["Size"];
-    if (y1 == 0) {
-        y1 = parseInt(area["H"]);
-    }
-    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+//    if (row != 1) {
+//        area["H"] = (((h / row) / 2) / 2) + '';
+//        distance["R"] = (((h / row) / 2) / 2) + '';
+//    }
+//    else {
+//        area["H"] = 20;
+//        distance["R"] = 1;
+//    }        
+//    
+//    area["W"] = ((w / col) / 2) + '';
+//    distance["C"] = ((w / col) / 2) + '';
+//    var noOfCells = mychart["Size"];
+//    if (y1 == 0) {
+//        y1 = parseInt(area["H"]);
+//    }
+//    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
 
-    x1 = 0;
-    col = results.length;
-    for (j = 0; j < col; j++) {        
-        if (noOfCells > drawCells) {            
-            x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+//    x1 = 0;
+//    col = results.length;
+//    for (j = 0; j < col; j++) {        
+//        if (noOfCells > drawCells) {            
+//            x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
-            var xx1 = startPosition + x1;
-            var yy1 = startPosition + y1;
+//            var xx1 = startPosition + x1;
+//            var yy1 = startPosition + y1;
 
-            //var jg2 = new jsGraphics("Canvas");
-            var jg2 = new jsGraphics(document.getElementById("Canvas").id);
-            var srgb = results[j]["sRGB"];            
-            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);            
-            jg2.setColor(rgbx);
-            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-            jg2.paint();
-            drawCells++;
-        }
-    }
+//            //var jg2 = new jsGraphics("Canvas");
+//            var jg2 = new jsGraphics(document.getElementById("Canvas").id);
+//            var srgb = results[j]["sRGB"];            
+//            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);            
+//            jg2.setColor(rgbx);
+//            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+//            jg2.paint();
+//            drawCells++;
+//        }
+//    }
 
 
-    //    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    //    var x = 0;
-    //    var y = idx;
-
-    //    for (var cursample = 0; cursample < results.length; cursample++) {
-    //        var srgb = results[cursample]["sRGB"];
-    //        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-    //        jg.setColor(rgbx);
-    //        jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
-    //        x++;
-    //        if (x >= mychart["NumberOfColumns"]) {
-    //            x = 0;
-    //            y++;
-    //        }
-    //    }
-    //    jg.paint();
+//   
 
     //
     // Now ask for the next strip, if we were not at the end
@@ -324,19 +311,19 @@ function presentScanDonei1(scanner, mychart, final) {
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
-        drawCells = 0;
-        area = new Object();
-        area["W"] = 0;
-        area["H"] = 0;
+//        drawCells = 0;
+//        area = new Object();
+//        area["W"] = 0;
+//        area["H"] = 0;
 
-        distance = new Object();
-        distance["R"] = 0;
-        distance["C"] = 0;
+//        distance = new Object();
+//        distance["R"] = 0;
+//        distance["C"] = 0;
 
-        drawCells = 0;
-        cId = 0;
-        x1 = 0;
-        y1 = 0;
+//        drawCells = 0;
+//        cId = 0;
+//        x1 = 0;
+//        y1 = 0;
         //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
         //        var x = 0;
         //        var y = 0;

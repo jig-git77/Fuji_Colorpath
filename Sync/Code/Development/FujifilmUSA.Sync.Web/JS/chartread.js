@@ -135,9 +135,7 @@ function load() {
     }
     var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
     jQuery("[id*='lblPluginMessage']").html(newHTML);
-    //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
-    //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 
 function DisplayLog() {
@@ -197,15 +195,14 @@ function ListDevices() {
 // chart["ReferencePatch"] = array of expected values
 // Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
 // other values may be included and are passed through to the callback functions
+
 function scan(scanner, colorspace, chart) {
-    
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
     localchart["ReadCS"] = colorspace;
     localchart["Substrate"] = paper;
-    if (scanner["Type"] == "iO" ||
-        scanner["Type"] == "iSis") {
+    if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
         // This device will read the entire chart in a single go. So we copy entire RefBase (how chart is laid out) to the ReferencePatch
         if (typeof chart["RefBase"] != "undefined") {
             localchart["ReferencePatch"] = chart["RefBase"];
@@ -260,9 +257,8 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-
         chartDrawFrom = 1;
-        CallDrawChart();
+        CallDrawChart(chart);
 
 //        var area = new Object();
 //        area["W"] = 0;
@@ -323,25 +319,7 @@ function scan(scanner, colorspace, chart) {
 
 //            }
 //        }
-
-
-
-
-        //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-        //        //alert(jg.style);
-        //        var x = 0;
-        //        var y = 0;
-        //        for (var cursample = 0; cursample < chart["RefBase"].length; cursample++) {
-        //            var rgbx = chart["RefBase"][cursample]["HTMLColor"];
-        //            jg.setColor(rgbx);
-        //            jg.fillRect(x * 20, y * 20, 20, 10);
-        //            x++;
-        //            if (x >= chart["NumberOfColumns"]) {
-        //                x = 0;
-        //                y++;
-        //            }
-        //        }
-        //        jg.paint();
+     
     }
 }
 
