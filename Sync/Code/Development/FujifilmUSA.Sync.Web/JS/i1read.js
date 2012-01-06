@@ -210,7 +210,7 @@ function presentScanDonei1(scanner, mychart, final) {
     for (ind = 0; ind < g_Chart["NumberOfColumns"]; ind++) {
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
-        var DensityResults = results[ind]["Density"];
+        var DensityResults = results[ind]["Density"];        
         var sName = mychart["ReferencePatch"][ind]["SampleName"];
         var PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         var CIELab = new LAB(LABResults["L"].toFixed(2), LABResults["A"].toFixed(2), LABResults["B"].toFixed(2));

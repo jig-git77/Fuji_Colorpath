@@ -71,7 +71,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         var PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         var CIELab = new LAB(LABResults["L"].toFixed(2), LABResults["A"].toFixed(2), LABResults["B"].toFixed(2));
         var CIEXYZ = new XYZ(XYZResults["X"].toFixed(2), XYZResults["Y"].toFixed(2), XYZResults["Z"].toFixed(2));
-        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
+        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));        
         mpatch = new Patch();
         mpatch.LAB = LABResults;
         mpatch.XYZ = XYZResults;

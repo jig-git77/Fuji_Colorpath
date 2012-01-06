@@ -324,11 +324,9 @@
 
         },
             //If the call fails
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Error");
-
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-               // MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+            error: function (XMLHttpRequest, textStatus, errorThrown) {                
+               var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+               MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
             }
         });
 
