@@ -15,19 +15,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
         #region IDestinationProfileBusiness Members
         public List<DestinationProfile> GetDestinationProfiles(int syncDeviceId)
         {
-            var destinationProfileList = new List<Entity.DestinationProfile>();
-            var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]", new object[] { syncDeviceId });
-
-            if (dsDestinationProfile != null && dsDestinationProfile.Tables.Count > 0 && dsDestinationProfile.Tables[0].Rows.Count > 0)
-            {
-                destinationProfileList = dsDestinationProfile.Tables[0].AsEnumerable().Select(x => new Entity.DestinationProfile()
-                {
-                    ProfileId = DataReader.ReadInt(x, "DestinationProfileID"),
-                    ProfileName = DataReader.ReadString(x, "DestinationProfileName"),
-                    IsUse = DataReader.ReadBoolean(x, "IsUse"),
-                    SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID"),
-                }).ToList();
-            }
+            var destinationProfileList = new List<DestinationProfile>();
+            Common.ImplementBusinessLogic(() =>
+                                              {
+                                                  var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetDestinationProfileList]",
+                                                                                                                    new object[] {syncDeviceId});
+                                                  if (dsDestinationProfile != null && dsDestinationProfile.Tables.Count > 0 && dsDestinationProfile.Tables[0].Rows.Count > 0)
+                                                  {
+                                                      destinationProfileList = dsDestinationProfile.Tables[0].
+                                                          AsEnumerable().
+                                                          Select(x =>
+                                                                 new DestinationProfile()
+                                                                     {
+                                                                         ProfileId =
+                                                                             DataReader.ReadInt(x,
+                                                                                                "DestinationProfileID"),
+                                                                         ProfileName =
+                                                                             DataReader.ReadString(x,
+                                                                                                   "DestinationProfileName"),
+                                                                         IsUse =
+                                                                             DataReader.ReadBoolean(x,
+                                                                                                    "IsUse"),
+                                                                         SyncDeviceId =
+                                                                             DataReader.ReadInt(x,
+                                                                                                "SyncDeviceID"),
+                                                                     }).ToList();
+                                                  }
+                                              }, this);
             return destinationProfileList;
         }
 
@@ -66,7 +80,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateDestinationProfile]", new object[] { destinationProfileId, profile });
         }
 
-        public bool CreateDestinationProfile(string measurementIds, int destinationId,int profilerOptionId)
+        public bool CreateDestinationProfile(string measurementIds, int destinationId, int profilerOptionId)
         {
             var destinationProfile = new DestinationProfile();
             var request = new CreateSourceProfileRequest()
@@ -90,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
                     request.DCSData.Add(DataReader.ReadDouble(row, "CMYK_K"));
                 }
-            } 
+            }
 
             //Add options and call profile service to generate destination dlp
             var profilerOptionDetail = ((IProfilerOptionDetailBusiness)new BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
@@ -100,7 +114,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             {
                 request.Options = new List<Parameter>();
                 optionDetails.ForEach(
-                    option => request.Options.Add(new Parameter() {Name = option.Key, Value = option.Value}));
+                    option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
                 var response = client.CreateSourceProfile(request);
                 destinationProfile.Data.Profile = response.Profile.ProfileData;
             }
@@ -143,6 +157,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteDestinationProfile]",
                                                            new object[] { destinationProfileId });
         }
+
+        #endregion
+
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

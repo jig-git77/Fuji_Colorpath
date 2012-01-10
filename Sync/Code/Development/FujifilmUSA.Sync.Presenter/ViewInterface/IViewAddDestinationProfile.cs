@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddDestinationProfile
+    public interface IViewAddDestinationProfile : IViewError
     {
         int ProfileId { get; set; }
         Dictionary<int, string> GetProfileOption { get; set; }

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Implementation\DestinationProfileBusinessImpl.cs" />
     <Compile Include="Implementation\DeviceLinkProfileBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementBusinessImpl.cs" />

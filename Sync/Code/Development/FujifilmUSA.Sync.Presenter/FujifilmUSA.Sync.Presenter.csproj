@@ -83,6 +83,7 @@
     <Compile Include="ViewInterface\IViewSyncDevice.cs" />
     <Compile Include="ViewInterface\IViewSyncRunAnalyze.cs" />
     <Compile Include="ViewInterface\IViewTaskeroUser.cs" />
+    <Compile Include="ViewInterface\ViewBase\IViewError.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presenteradddestinationprofile = new PresenterAddDestinationProfile(this);
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
@@ -76,6 +77,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int SyncDeviceId { get; set; }
         
+        #endregion
+
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            
+        }
+
         #endregion
     }
 }

@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void InsertDestinationProfile()
         {
             var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            destTask.ErrorOccured += _viewAddDestinationProfile.ErrorOccured;
             _viewAddDestinationProfile.ProfileId =  destTask.InsertDestinationProfile(_viewAddDestinationProfile.DestinationProfile);
         }
     }
