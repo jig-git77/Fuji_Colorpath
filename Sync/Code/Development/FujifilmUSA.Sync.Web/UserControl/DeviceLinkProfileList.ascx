@@ -16,6 +16,8 @@
             New DLP</span></a></div>
     <div class="clear">
     </div>   
+     <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
            <asp:ListView ID="grdDLP" runat="server"  
         ItemPlaceholderID="phItemPlaceholder"   OnItemCommand="grdDLP_ItemCommand"> 
             <LayoutTemplate>
@@ -42,7 +44,12 @@
                     <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("ProfileId") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
               </tr>
             </ItemTemplate>
-            </asp:ListView>            
+            </asp:ListView>     
+            </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="grdDLP" EventName="ItemCommand" />
+            </Triggers> 
+        </asp:UpdatePanel>       
 </div> 
 <div class="contant_bottom">&nbsp;</div>
 <div class="clear"></div>

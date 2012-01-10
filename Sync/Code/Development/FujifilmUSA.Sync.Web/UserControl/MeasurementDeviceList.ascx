@@ -16,6 +16,8 @@
             Add Sync Measurement Device</span></a></div>
     <div class="clear">
     </div>   
+        <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
            <asp:ListView ID="grdMeasurementDevice" runat="server"  
         ItemPlaceholderID="phItemPlaceholder" 
         onitemcommand="grdMeasurementDevice_ItemCommand">
@@ -52,7 +54,11 @@
               </tr>
             </ItemTemplate>
             </asp:ListView>
-           
+              </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="grdMeasurementDevice" EventName="ItemCommand" />
+            </Triggers> 
+        </asp:UpdatePanel>
 </div>
 <div class="admin_bottom">&nbsp;</div>
 <div class="clear"></div>

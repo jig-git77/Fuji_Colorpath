@@ -2,39 +2,9 @@
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteDestinationProfile() {
         if (confirm('<%= DestinationProfile_DeleteDestinationProfile_Confirmation %>'))
-        {
-            //measurement.name
-//            var serviceLink = "Services/PluginDataService.svc/DeleteDestinationProfile/" + destinationProfileId;
-//            //Make ajax request...
-//            jQuery.ajax({
-//                type: "POST", //for complex object POST is preferred
-//                contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-//                url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
-//                processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-//                dataType: "json",  ////this only applies to response from the server and (not request send to server)
-//                dataFilter: function (data, type) {
-
-//                    return true;
-//                    //bindMeasurementData();
-//                    //RemoveTr(data,measurementId);
-//                },
-
-//                //If the call succeeds
-//                success:
-//                    function (response) {   //the response param passed to the success callback contains the returned json
-//                    },
-
-//                //If the call fails
-//                error: function (XMLHttpRequest, textStatus, errorThrown) {
-//                    alert("Error");
-
-//                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-//                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-//                }
-//            });
-        }
-         
-           
+            return true;
+        else
+            return false;
     }
     </script>
 <div class="contant_top">&nbsp;</div>
@@ -46,6 +16,8 @@
             New Destination Profile</span></a></div>
     <div class="clear">
     </div>   
+         <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
            <asp:ListView ID="grdDestinationProfile" runat="server"  
         ItemPlaceholderID="phItemPlaceholder"  OnItemCommand="grdDestinationProfile_ItemCommand"
         >
@@ -73,7 +45,16 @@
                     <td align="center" width="5%"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Destination Profile" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteDestinationProfile" CommandArgument='<%# Eval("ProfileID") %>' OnClientClick="return ConfirmDeleteDestinationProfile()" /></td>                    
               </tr>
             </ItemTemplate>
-            </asp:ListView>            
+            </asp:ListView>   
+            
+              </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="grdDestinationProfile" EventName="ItemCommand" />
+            </Triggers> 
+            
+        </asp:UpdatePanel>              
+        
+       
 </div> 
 <div class="contant_bottom">&nbsp;</div>
 <div class="clear"></div>

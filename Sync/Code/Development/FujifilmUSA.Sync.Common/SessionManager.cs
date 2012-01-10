@@ -175,20 +175,6 @@ namespace FujifilmUSA.Sync.Common
                 HttpContext.Current.Session[_currentProfileTypeID] = value;
             }
         }
-        public bool HasMeasurement
-        {
-            get
-            {
-                if (HttpContext.Current.Session[_hasMeasurement] != null)
-                {
-                    return bool.Parse(HttpContext.Current.Session[_hasMeasurement].ToString());
-                }
-                return false;
-            }
-            set
-            {
-                HttpContext.Current.Session[_hasMeasurement] = value;
-            }
-        }
+       
     }
 }

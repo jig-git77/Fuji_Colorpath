@@ -41,6 +41,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trFilter.Visible = false;
                 }
             }
+            
         }
 
 
@@ -109,7 +110,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindBranchDropDown(int companyId)
         {
-            cmbBranch.Items.Clear();
             this.CompanyId = companyId;
             _presentersyncdevice.GetBranchList();
             cmbBranch.DataSource = GetBranchList;
@@ -139,6 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Value = deviceList.SyncDeviceId,
                         Text = deviceList.DeviceName
                     })).ToDictionary(deviceList => deviceList.Value, deviceList => deviceList.Text);
+
             }
         }
 
@@ -147,12 +148,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
        
         protected void cmbCompany_SelectedIndexChanged1(object sender, EventArgs e)
         {
+            cmbBranch.Items.Clear();
             if (cmbCompany.SelectedIndex != 0)
             {
                 BindBranchDropDown(int.Parse(cmbCompany.SelectedValue));
                 BindDeviceList();
                 rlvDeviceList.DataBind();
             }
+            else
+                cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+            rlvDeviceList.Visible = cmbCompany.SelectedIndex != 0;
         }
 
         protected void cmbBranch_SelectedIndexChanged1(object sender, EventArgs e)

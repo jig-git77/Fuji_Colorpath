@@ -49,6 +49,8 @@
     <%--<table border="0" cellspacing="0" cellpadding="0" class="product_list_table">
         <tr>
             <td>--%>
+              <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
             <asp:ListView ID="grdProjectList" runat="server" OnItemCommand="grdProjectList_ItemCommand" OnItemDataBound="grdProjectList_ItemDataBound" ItemPlaceholderID="phItemPlaceholder">
             <LayoutTemplate>
                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table">
@@ -75,6 +77,11 @@
               </tr>
             </ItemTemplate>
             </asp:ListView>
+              </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="grdProjectList" EventName="ItemCommand" />
+            </Triggers> 
+        </asp:UpdatePanel>
                 <%--<telerik:RadGrid ID="grdProjectList" runat="server" AutoGenerateColumns="false"  OnItemCommand="grdProjectList_ItemCommand"
                     ShowFooter="false" OnNeedDataSource="grdProjectList_NeedDataSource" OnItemDataBound="grdProjectList_ItemDataBound" >
                     <MasterTableView DataKeyNames="ProjectId">

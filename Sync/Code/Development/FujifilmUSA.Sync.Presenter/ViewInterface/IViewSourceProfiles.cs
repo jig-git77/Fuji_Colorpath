@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewSourceProfiles
     {
+        int SourceProfileID {get;set;}
         List<SourceProfile> GetSourceProfiles { get; set; }
     }
 }

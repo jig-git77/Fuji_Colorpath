@@ -109,6 +109,10 @@
         <section id="tab1" class="contantbox tabcontant" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
+        <asp:UpdatePanel ID="upPanel" runat="server">
+        <ContentTemplate>
+
+       
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
         <asp:Label ID="Label1" runat="server" Text="Select Source"></asp:Label> &nbsp; : &nbsp;
@@ -120,6 +124,7 @@
         <asp:DropDownList ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" Width="180px" AutoPostBack="true" OnSelectedIndexChanged="cmbDestinationProfile_SelectedIndexChanged"  CssClass="select"></asp:DropDownList></div>
         <div class="clear"></div>
         
+
         </div>
         <asp:ListView ID="grdDLP" runat="server" ItemPlaceholderID="phItemTemplate" OnItemDataBound="grdDLP_ItemDataBound">
             <LayoutTemplate>
@@ -173,6 +178,12 @@
                                 </ClientSettings>
                             </telerik:RadGrid>--%>
         
+         </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="cmbSourceProfile" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="cmbDestinationProfile" EventName="SelectedIndexChanged" />
+        </Triggers>
+        </asp:UpdatePanel>
     </div>
         <div class="tab_bottom">&nbsp;</div>
         </section>

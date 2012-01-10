@@ -9,6 +9,8 @@
         <div class="clear">
         </div>
         <div class="ContainerClass">
+         <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr id="trFilter" runat="server">
                     <td>
@@ -43,7 +45,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="Hight30px">
-                                    <hr />
+                                    <hr width="98%" />
                                 </td>
                             </tr>
                         </table>
@@ -90,6 +92,13 @@
                     </td>
                 </tr>
             </table>
+            </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="cmbCompany" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="cmbBranch" EventName="SelectedIndexChanged" />
+            </Triggers> 
+        </asp:UpdatePanel>
+
         </div>
     </div>
     <div class="clear">

@@ -57,18 +57,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void cmbDestinationProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
-            {
-                BindDeviceLinkProfile();
-            }
+            BindDeviceLinkProfile();
         }
 
         protected void cmbSourceProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue))
-            {
-                BindDeviceLinkProfile();
-            }
+            BindDeviceLinkProfile();
         }
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
@@ -155,13 +149,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
                 this.DestinationProfileId = int.Parse(cmbDestinationProfile.SelectedValue);
+                _presenteraddproject.GetDeviceLinkProfileList();
             }
             else
             {
                 this.SourceProfileId = 0;
                 this.DestinationProfileId = 0;
             }
-            _presenteraddproject.GetDeviceLinkProfileList();
             grdDLP.DataSource = DeviceLinkProfiles;
             grdDLP.DataBind();
             RefreshProjectId();

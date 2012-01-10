@@ -11,7 +11,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class SourceProfileList : System.Web.UI.UserControl,IViewSourceProfiles
     {
         #region Declaration
-        private PresenterSourceProfileList _presentersourceprofile;        
+        private PresenterSourceProfileList _presentersourceprofile;
+
+        public string SourceProfile_DeleteSourceProfile_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("SourceProfile_DeleteSourceProfile_Confirmation");
+            }
+        }
+
         #endregion
 
         #region Page Events
@@ -29,7 +38,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-        
+
+        #region Control events
+
+        protected void grdSourceProfile_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteSourceProfile")
+            {
+                this.SourceProfileID = Convert.ToInt32(e.CommandArgument);
+                _presentersourceprofile.DeleteSourceProfile();
+                 BindSourceProfileList();
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         public void BindSourceProfileList()
@@ -50,11 +73,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region IViewSourceProfiles Members
-
         public List<SourceProfile> GetSourceProfiles { get; set; }
-
+        public int SourceProfileID { get; set; }
         #endregion
-        
 
+
+
+
+
+
+
+
+        
     }
 }

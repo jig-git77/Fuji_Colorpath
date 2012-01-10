@@ -21,5 +21,13 @@ namespace FujifilmUSA.Sync.Presenter
             var task = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
             _viewSourceProfiles.GetSourceProfiles = task.GetSourceProfiles();
         }
+
+        public void DeleteSourceProfile()
+        {
+            var task = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
+            task.DeleteSourceProfile(_viewSourceProfiles.SourceProfileID);
+        }
+
+
     }
 }

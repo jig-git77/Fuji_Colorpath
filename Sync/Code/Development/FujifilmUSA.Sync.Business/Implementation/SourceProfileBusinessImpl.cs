@@ -131,6 +131,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
             return true;
         }
+
+        public int DeleteSourceProfile(int sourceProfileID)
+        {
+            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteSourceProfile]",
+                                                           new object[] { sourceProfileID });
+        }
+
+
         #endregion
     }
 }

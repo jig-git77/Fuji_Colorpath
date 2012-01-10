@@ -1,4 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SourceProfileList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SourceProfileList" %>
+<script type="text/javascript" language="javascript">
+    function ConfirmDeleteSourceProfile() {
+        if (confirm('<%= SourceProfile_DeleteSourceProfile_Confirmation %>'))
+            return true;
+        else
+            return false;
+    }
+    </script>
 <div class="admin_top">&nbsp;</div>
 <div class="admin_middle">
     <div class="head">
@@ -8,8 +16,11 @@
             New Source Profile</span></a></div>
     <div class="clear">
     </div>   
+        <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
         <asp:ListView ID="grdSourceProfile" runat="server"  
-        ItemPlaceholderID="phItemPlaceholder">
+        ItemPlaceholderID="phItemPlaceholder" 
+        onitemcommand="grdSourceProfile_ItemCommand">
             <LayoutTemplate>
                 <table cellspacing="0" cellpadding="0" border="0" class="admin_list_table">
                 <thead>
@@ -35,6 +46,13 @@
               </tr>
             </ItemTemplate>
             </asp:ListView>
+
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="grdSourceProfile" EventName="ItemCommand" />
+            </Triggers>
+        </asp:UpdatePanel>
+
            
 </div>
 <div class="admin_bottom">&nbsp;</div>
