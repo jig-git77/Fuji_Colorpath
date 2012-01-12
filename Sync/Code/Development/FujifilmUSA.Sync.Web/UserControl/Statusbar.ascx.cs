@@ -18,7 +18,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Page events
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
+            //Note : Every time this event fire and control set visible = false
+            //this.Visible = false;
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
