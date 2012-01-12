@@ -106,6 +106,9 @@
     <Content Include="Images\error_left.png" />
     <Content Include="Images\error_right.png" />
     <Content Include="Images\export.png" />
+    <Content Include="Images\login_eror_bottom.png" />
+    <Content Include="Images\login_eror_middle.png" />
+    <Content Include="Images\login_eror_top.png" />
     <Content Include="Images\mesurementStatusbar_box_bottom.png" />
     <Content Include="Images\mesurementStatusbar_box_middle.png" />
     <Content Include="Images\mesurementStatusbar_box_top.png" />

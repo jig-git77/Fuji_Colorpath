@@ -1031,6 +1031,28 @@ height:10px;
 background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
 height:10px;
 }	
+
+
+.login_eror .mesurementStatusbar{
+width:388px;
+margin-bottom: 20px;
+}
+.login_eror .mesurementStatusbar .top{
+background:url(../images/login_eror_top.png) no-repeat top left;
+height:10px;
+}
+
+.login_eror .mesurementStatusbar .middle{
+    background:url(../images/login_eror_middle.png) repeat-y top left;
+    padding:0px 5px 0px 5px;
+}
+
+.login_eror .mesurementStatusbar .bottom{
+background:url(../images/login_eror_bottom.png) no-repeat top left;
+height:10px;
+}	
+
+
 	
 		
 	
