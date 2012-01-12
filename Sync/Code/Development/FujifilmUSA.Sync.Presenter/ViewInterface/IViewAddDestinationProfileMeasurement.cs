@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddDestinationProfileMeasurement
+    public interface IViewAddDestinationProfileMeasurement : IViewError
     {
         int ProfileId { get; set; }
         int ProfilerOptionId { get; set; }        

@@ -41,11 +41,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+          ucMeasurementStatusbar.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+
         #region IViewAddDeviceLinkProfileMeasurement Members
 
         public int ProfileId { get; set;}
         public int ProfilerOptionId { get; set; }
 
         #endregion
+
     }
 }

@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenu : System.Web.UI.UserControl
     {
+        #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
@@ -67,7 +68,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
         }
+        #endregion
 
+        #region "Methods"
         public void CreateLeftMenuList()
         {
             ph.Controls.Clear();
@@ -114,5 +117,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ph.Controls.Add(ctrlProjItem);
             }
         }
+        #endregion
+
     }
 }

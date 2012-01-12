@@ -10,10 +10,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Header : System.Web.UI.UserControl
     {
+        #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+        #endregion
+
+        #region "Control Events"
         protected void lbtnLogout_Click(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentUser != null)
@@ -26,5 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Response.Redirect("Login.aspx");
             }
         }
+        #endregion
+
     }
 }

@@ -13,22 +13,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenuProjectItem : System.Web.UI.UserControl, IViewLeftMenu
     {
+        #region Variable Declarations
+     
         private PresenterLeftMenu _presenterLeftMenu = null;
         public LeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
         public SyncRun CurrentSyncRun { get; set; }
-        public bool IsLastRun { get { return (this.CurrentSyncRun.SyncRunId == SessionManager.Instance.CurrentProject.ProjectRuns.Last().SyncRunId); }
+        public bool IsLastRun
+        {
+            get { return (this.CurrentSyncRun.SyncRunId == SessionManager.Instance.CurrentProject.ProjectRuns.Last().SyncRunId); }
         }
+        
+        #endregion
+
+        #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
             _presenterLeftMenu = new PresenterLeftMenu(this);
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
         protected void Page_PreRender(object sender, EventArgs e)
         {
             lnkSyncRunName.Text = ItemName;
@@ -39,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ulSyncSubMenu.Visible = false;
                     break;
                 case LeftMenuItemLevel.SyncRun:
-                    if(SessionManager.Instance.CurrentProject.ProjectRuns.First().SyncRunId == CurrentSyncRun.SyncRunId)
+                    if (SessionManager.Instance.CurrentProject.ProjectRuns.First().SyncRunId == CurrentSyncRun.SyncRunId)
                     {
                         lnkMeasurement.Visible = false;
                         lnkAnalyse.Visible = false;
@@ -58,13 +64,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkMeasurement.Visible = false;
                     }
-                    
+
                     if (CurrentSyncRun != null && SessionManager.Instance.CurrentSyncRun.SyncRunId == CurrentSyncRun.SyncRunId)
                     {
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measurement;
                         lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
                         lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Export;
-                       
+
                     }
                     if (IsLastRun)
                     {
@@ -75,19 +81,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case LeftMenuItemLevel.NewSyncRun:
                     ulSyncSubMenu.Visible = false;
                     break;
-                
             }
         }
+        #endregion
 
+        #region Control events
         protected void lnkItem_Click(object sender, EventArgs e)
         {
-            if(sender != null)
+            if (sender != null)
             {
                 var lnkItem = sender as LinkButton;
-                if(lnkItem != null)
+                if (lnkItem != null)
                 {
                     SessionManager.Instance.CurrentSyncRun = this.CurrentSyncRun;
-                    if(lnkItem.ID == "lnkMeasurement")
+                    if (lnkItem.ID == "lnkMeasurement")
                     {
                         Response.Redirect("AddMeasurement.aspx");
                     }
@@ -124,10 +131,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case LeftMenuItemLevel.NewSyncRun:
                     Project = new Project()
-                                  {
-                                      ProjectId = SessionManager.Instance.CurrentProject.ProjectId,
-                                      ProjectStatus = ECPSyncRunStatus.Open
-                                  };
+                    {
+                        ProjectId = SessionManager.Instance.CurrentProject.ProjectId,
+                        ProjectStatus = ECPSyncRunStatus.Open
+                    };
                     CreatedDateTime = DateTime.UtcNow;
                     _presenterLeftMenu.AddProjectSyncRun();
                     SessionManager.Instance.CurrentProject = this.Project;
@@ -136,6 +143,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
         }
+        #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            //TODO: Not Implemented 
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewLeftMenu Members
 

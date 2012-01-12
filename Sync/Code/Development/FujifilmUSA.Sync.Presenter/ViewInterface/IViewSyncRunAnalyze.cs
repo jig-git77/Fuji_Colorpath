@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewSyncRunAnalyze : IViewBaseSyncDevice
+    public interface IViewSyncRunAnalyze : IViewBaseSyncDevice, IViewError
     {
         ECPSyncRunStatus Status { get; set; }
         DateTime EndDateTime { get; set; }

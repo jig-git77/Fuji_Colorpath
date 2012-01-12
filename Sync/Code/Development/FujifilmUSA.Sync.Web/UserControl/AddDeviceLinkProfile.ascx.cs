@@ -82,6 +82,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+
         #region IViewAddDeviceLinkProfile Members
 
         public DeviceLinkProfile DeviceLinkProfile { get; set; }
@@ -103,5 +112,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId { get; set; }
 
         #endregion
+
+        
+
     }
 }

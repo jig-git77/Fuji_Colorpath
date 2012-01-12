@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementDeviceList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementDeviceList" %>
+<%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx"  %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
         if (confirm('<%= MeasurementDeviceList_DeleteMeasurementDevice_Confirmation %>'))
@@ -11,11 +13,19 @@
 <div class="admin_middle">
     <div class="head">
         <h1>Sync Measurement Device</h1>
-        <a href="AddMeasurementDevice.aspx" class="button"><span>
+        <asp:LinkButton ID="likAdd" runat="server"
+            class="button" onclick="likAdd_Click">
+        <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
-            Add Sync Measurement Device</span></a></div>
+            Add Sync Measurement Device</span>
+        </asp:LinkButton>
+<%--        <a href="AddMeasurementDevice.aspx" runat="server" class="button">
+            </a>
+--%>            </div>
+            
     <div class="clear">
-    </div>   
+    </div>
+    <div style="margin-left: 10px; margin-right: 15px;" ><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></div>   
         <asp:UpdatePanel ID="upPanel" runat="server">
             <ContentTemplate>
            <asp:ListView ID="grdMeasurementDevice" runat="server"  

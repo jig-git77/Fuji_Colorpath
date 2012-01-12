@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewExportProfile : IViewBaseProfile
+    public interface IViewExportProfile : IViewBaseProfile, IViewError
     {
         ECPSyncRunStatus Status { get; set; }
         int SyncRunId { get; set; }

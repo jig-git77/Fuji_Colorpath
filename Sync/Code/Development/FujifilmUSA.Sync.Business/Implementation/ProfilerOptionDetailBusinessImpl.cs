@@ -16,21 +16,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<ProfilerOptionDetail> GetProfilerOptionDetails(int profileroptionId, ProfileType profilerType)
         {
             var profileroptionDetailList = new List<ProfilerOptionDetail>();
-            var dsprofileroptionDetail = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProfilerOptionDetailByProfilerID]", new object[] { profileroptionId,profilerType });
-
-            if (dsprofileroptionDetail != null && dsprofileroptionDetail.Tables.Count > 0 && dsprofileroptionDetail.Tables[0].Rows.Count > 0)
+            Common.ImplementBusinessLogic(() =>
             {
-                profileroptionDetailList = dsprofileroptionDetail.Tables[0].AsEnumerable().Select(x => new ProfilerOptionDetail()
+                var dsprofileroptionDetail = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProfilerOptionDetailByProfilerID]", new object[] { profileroptionId, profilerType });
+
+                if (dsprofileroptionDetail != null && dsprofileroptionDetail.Tables.Count > 0 && dsprofileroptionDetail.Tables[0].Rows.Count > 0)
                 {
-                    ProfilerOptionDetailId = DataReader.ReadInt(x, "ProfilerOptionDetailID"),
-                    ProfilerOptionId = DataReader.ReadInt(x, "ProfilerOptionID"),
-                    Key = DataReader.ReadString(x, "Key"),
-                    Value = DataReader.ReadString(x, "Value"),
-                    ProfilerType = (ProfileType)Enum.Parse(typeof(ProfileType), DataReader.ReadInt(x, "ProfilerType").ToString(), true)
-                }).ToList();
-            }
+                    profileroptionDetailList = dsprofileroptionDetail.Tables[0].AsEnumerable().Select(x => new ProfilerOptionDetail()
+                    {
+                        ProfilerOptionDetailId = DataReader.ReadInt(x, "ProfilerOptionDetailID"),
+                        ProfilerOptionId = DataReader.ReadInt(x, "ProfilerOptionID"),
+                        Key = DataReader.ReadString(x, "Key"),
+                        Value = DataReader.ReadString(x, "Value"),
+                        ProfilerType = (ProfileType)Enum.Parse(typeof(ProfileType), DataReader.ReadInt(x, "ProfilerType").ToString(), true)
+                    }).ToList();
+                }
+            }, this, ErrorOccured);
             return profileroptionDetailList;
+
         }
+
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

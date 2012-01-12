@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void AddProjectSyncRun()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            task.ErrorOccured += _viewLeftMenu.ErrorOccured;  
             task.CreateSyncRun(_viewLeftMenu.Project.ProjectId, Convert.ToInt32(_viewLeftMenu.Project.ProjectStatus), _viewLeftMenu.CreatedDateTime);
             _viewLeftMenu.Project = task.GetProject(_viewLeftMenu.Project.ProjectId);
         }

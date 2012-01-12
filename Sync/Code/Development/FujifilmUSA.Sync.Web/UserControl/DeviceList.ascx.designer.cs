@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel upPanel;
         
         /// <summary>
+        /// ucStatusbar1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar1;
+        
+        /// <summary>
         /// trFilter control.
         /// </summary>
         /// <remarks>

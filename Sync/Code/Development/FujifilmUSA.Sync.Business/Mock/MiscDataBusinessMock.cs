@@ -52,5 +52,13 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
         #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
+
+        #endregion
+
+
     }
 }

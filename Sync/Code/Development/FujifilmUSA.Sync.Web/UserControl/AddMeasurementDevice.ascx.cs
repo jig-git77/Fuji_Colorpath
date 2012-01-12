@@ -28,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
                 FillCompanyList();
@@ -37,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     LoadMeasurementDevice();
                     ToggleInputControlState(false);
+
                 }
                 else
                     ToggleInputControlState(true);
@@ -215,6 +217,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }         
         }
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
       
         #region IViewSyncDevice Member
         public  int TaskeroUserId { get; set; }
@@ -235,6 +246,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> DongleList { get; set; }
         public Dictionary<int, string> MeasurementDeviceTypeList { get; set; }
         #endregion
+
     }
     
 }

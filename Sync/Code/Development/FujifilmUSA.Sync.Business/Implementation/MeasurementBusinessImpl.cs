@@ -16,21 +16,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<Measurement> GetMeasurement(int syncRunId)
         {
-            if (syncRunId <= 0) return new List<Measurement>();
-            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementBySyncRunID]", new object[] { syncRunId }));
+            List<Measurement> lstMeasurement = new List<Measurement>();
+            Common.ImplementBusinessLogic(() =>
+            {
+                if (syncRunId <= 0)
+                    lstMeasurement = new List<Measurement>();
+                else
+                    lstMeasurement = ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementBySyncRunID]", new object[] { syncRunId }));
+
+            }, this, ErrorOccured);
+            return lstMeasurement;
         }
 
         public List<Measurement> GetMeasurement(int profileId, ProfileType typeId)
         {
-            if (profileId <= 0 || typeId == ProfileType.None) return new List<Measurement>();
-            return ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByProfileID]", new object[] { profileId, typeId }));
+            List<Measurement> lstMeasurement = new List<Measurement>();
+            Common.ImplementBusinessLogic(() =>
+            {
+                if (profileId <= 0 || typeId == ProfileType.None) 
+                    lstMeasurement = new List<Measurement>();
+                else
+                    lstMeasurement = ConvertMeasurement(DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementByProfileID]", new object[] { profileId, typeId }));
+            }, this, ErrorOccured);
+            return lstMeasurement;
         }
 
         public int SaveMeasurement(Measurement measurement)
         {
             if (measurement == null || measurement.Patches == null || measurement.Patches.Count == 0) return 0;
 
-            DataAccessFactory.
+            Common.ImplementBusinessLogic(() =>
+            {
+                DataAccessFactory.
                 Instance.
                 ExecuteProcedureWithTransaction(
                     new List<Action>()
@@ -79,6 +96,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                                   }));
                                 }
                         });
+            }, this, ErrorOccured);
             return measurement.MeasurementId;
         }
 
@@ -87,7 +105,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (measurementLink == null || measurementLink.Measurement == null || measurementLink.Measurement.Patches == null || measurementLink.Measurement.Patches.Count == 0)
                 return 0;
             measurementLink.Measurement.MeasurementId = SaveMeasurement(measurementLink.Measurement);
-            DataAccessFactory.Instance.
+
+            Common.ImplementBusinessLogic(() =>
+            {
+                DataAccessFactory.Instance.
                 ExecuteProcedure("[CPSync4D].[uspInsertMeasurementLink]",
                                  new object[]
                                      {
@@ -95,14 +116,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                          Convert.ToInt32(measurementLink.TypeId),
                                          measurementLink.ProfileId
                                      });
+            }, this, ErrorOccured);
 
             return measurementLink.Measurement.MeasurementId;
         }
 
         public int DeleteMeasurement(int measurementId)
         {
-            return DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurement]",
-                                                           new object[] { measurementId });
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(() =>
+            {
+                returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspDeleteMeasurement]",
+                                                               new object[] { measurementId });
+            }, this, ErrorOccured);
+            return returnValue;
         }
 
         #endregion
@@ -121,6 +148,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }).ToList();
             return lstMeasurements;
         }
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
+
         #endregion
     }
 }

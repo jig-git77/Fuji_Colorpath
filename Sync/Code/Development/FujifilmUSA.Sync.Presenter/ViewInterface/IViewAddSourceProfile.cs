@@ -7,7 +7,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddSourceProfile
+    public interface IViewAddSourceProfile : IViewError
     {
         Dictionary<int, string> GetProfileOption { get; set; }
         int ProfileId { get; set; }

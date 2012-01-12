@@ -10,17 +10,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Statusbar : System.Web.UI.UserControl
     {
+        #region Declaration
         public string Message { get; set; }
         public bool Status { get; set; }
+        #endregion
 
         #region Page events
         protected void Page_Load(object sender, EventArgs e)
         {
             this.Visible = false;
         }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            lblMessage.Text = this.Message;
+            lblMessage.ForeColor = (this.Status) ? Color.Green : Color.Red;
+        }
         #endregion
 
-        #region Declaration
+        #region "Methods"
 
         public void DisplayMessage(string message, bool status)
         {
@@ -29,11 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             this.Visible = true;
         }
 
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            lblMessage.Text = this.Message;
-            lblMessage.ForeColor = (this.Status) ? Color.Green : Color.Red;
-        }
+      
         #endregion
 
 

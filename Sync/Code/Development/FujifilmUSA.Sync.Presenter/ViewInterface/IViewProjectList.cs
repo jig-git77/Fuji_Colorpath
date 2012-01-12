@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewProjectList : IViewBaseProject
+    public interface IViewProjectList : IViewBaseProject, IViewError
     {
         List<Project> Projects { get; set; }
     }

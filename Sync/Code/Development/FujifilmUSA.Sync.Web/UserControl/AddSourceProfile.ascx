@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddSourceProfile.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddSourceProfile" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
@@ -19,9 +18,6 @@
     </div>
     <div>
     <uc:MeasurementStatusbar ID="ucMeasurementStatusbar" runat="server" />
-    <div class="info_form">
-        <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
-    </div>
     <div class="add_form">
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>

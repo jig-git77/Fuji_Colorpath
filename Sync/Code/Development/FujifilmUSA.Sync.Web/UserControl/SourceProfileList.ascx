@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SourceProfileList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SourceProfileList" %>
+<%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx"  %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteSourceProfile() {
         if (confirm('<%= SourceProfile_DeleteSourceProfile_Confirmation %>'))
@@ -15,7 +17,8 @@
             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
             New Source Profile</span></a></div>
     <div class="clear">
-    </div>   
+    </div> 
+    <div style="margin-left: 10px; margin-right: 15px;" ><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></div>  
         <asp:UpdatePanel ID="upPanel" runat="server">
             <ContentTemplate>
         <asp:ListView ID="grdSourceProfile" runat="server"  

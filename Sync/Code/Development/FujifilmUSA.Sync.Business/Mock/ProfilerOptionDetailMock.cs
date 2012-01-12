@@ -14,5 +14,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ProfilerOptionDetail>();
         }
         #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
+
+        #endregion
     }
 }

@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void TaskeroUserLogin()
         {
             var task = (ITaskeroUserBusiness)new BusinessFactory<ITaskeroUserBusiness>().CreateObject();
+            task.ErrorOccured += _viewTaskeroUser.ErrorOccured; 
             _viewTaskeroUser.GetTaskeroUser = task.UserLogin(_viewTaskeroUser.UserName, _viewTaskeroUser.Password,_viewTaskeroUser.AllowedIp);
         }
     }

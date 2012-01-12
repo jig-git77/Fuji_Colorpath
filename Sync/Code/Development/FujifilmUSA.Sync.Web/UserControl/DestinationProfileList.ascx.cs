@@ -32,11 +32,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.CheckLogin();
             SessionManager.Instance.ProfileTypeID = ProfileType.DestinationProfile;
-
             if (!Page.IsPostBack)
             {
-                BindDestinationProfileList();    
-            }
+                BindDestinationProfileList();
+            }   
         }
         #endregion
 
@@ -72,6 +71,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+
         #region IViewDestinationProfiles Members
 
         public int DestinationProfileId { get; set; }
@@ -84,7 +92,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncDeviceId{ get; set; }
         
         #endregion
-
         
     }
 }

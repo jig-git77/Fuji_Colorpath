@@ -13,13 +13,15 @@
 </script>
 <div id="login_box">
     <div class="curve_top_login">
-    </div>
+    </div>  
     <div id="pageWrapper">
         <div class="login_logo">
             <a href="#">
                 <asp:Image ID="imgCompanyLogo" runat="server" ImageUrl="~/Images/login_logo.png" /></a></div>    
         <div class="login_contant">
-            <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+            <div style="text-align:left; margin: 10px 10px 10px 0px;">
+              <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+            </div>
             <asp:TextBox ID="txtUserName" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Username');"
                 onfocus="javascript:focusControl(this,'Username');" Text="Username"></asp:TextBox>
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"

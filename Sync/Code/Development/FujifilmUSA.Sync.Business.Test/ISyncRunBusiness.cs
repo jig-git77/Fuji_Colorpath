@@ -204,8 +204,8 @@ namespace FujifilmUSA.Sync.Business.Test
         [TestMethod]
         public void Test()
         {
-            var dict = Common.Utilities.GetEnumDropdown<ECPSyncRunStatus>();
-            Assert.IsTrue(true);
+            //var dict = Common.Utilities.GetEnumDropdown<ECPSyncRunStatus>();
+            //Assert.IsTrue(true);
         }
 
 

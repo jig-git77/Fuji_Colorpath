@@ -20,12 +20,14 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetDestinationProfileList()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            task.ErrorOccured += _viewDestinationProfile.ErrorOccured;
             _viewDestinationProfile.DestinationProfiles = task.GetDestinationProfiles(_viewDestinationProfile.SyncDeviceId);
         }
 
         public int DeleteDestinationProfile()
         {
             var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            task.ErrorOccured += _viewDestinationProfile.ErrorOccured;
             return task.DeleteDestinationProfile(_viewDestinationProfile.DestinationProfileId);
         }
 

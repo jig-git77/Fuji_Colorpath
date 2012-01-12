@@ -30,8 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();            
-
+            SessionManager.CheckLogin();
             if (!Page.IsPostBack)
             {
                 BindSourceProfileList();
@@ -72,18 +71,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+
         #region IViewSourceProfiles Members
         public List<SourceProfile> GetSourceProfiles { get; set; }
         public int SourceProfileID { get; set; }
         #endregion
 
-
-
-
-
-
-
-
-        
     }
 }

@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProductList" %>
+<%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx"  %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
         if (confirm('<%= ProjectList_DeleteProject_Confirmation %>'))
@@ -46,6 +48,7 @@
             New Project</span></a></div>
     <div class="clear">
     </div>
+    <div style="margin-left: 10px; margin-right: 15px;" ><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></div>
     <%--<table border="0" cellspacing="0" cellpadding="0" class="product_list_table">
         <tr>
             <td>--%>

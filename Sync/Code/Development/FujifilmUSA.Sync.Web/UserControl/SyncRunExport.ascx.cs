@@ -8,18 +8,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class SyncRunExport : System.Web.UI.UserControl, IViewExportProfile
     {
+        #region Variable Declarations
         private PresenterExportProfile _presenterExportProfile;
+        #endregion
 
+        #region Page Method
         protected override void OnInit(EventArgs e)
         {
             _presenterExportProfile = new PresenterExportProfile(this);
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
         }
-
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentSyncRun.Status == Convert.ToInt16(ECPSyncRunStatus.Closed))
@@ -27,7 +28,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 btnCloseRun.Enabled = false;
             }
         }
+        #endregion
 
+        #region Control Events
+        
         protected void btnCloseRun_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
@@ -39,7 +43,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentSyncRun = null;
             Response.Redirect("ProjectList.aspx");
         }
-
         protected void btnExport_Click(object sender, EventArgs e)
         {
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
@@ -48,6 +51,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Profile != null && Profile.Data.Profile != null)
                 Utilities.DownloadFile(Profile.Data.Profile, "Profile.icc");
         }
+
+        #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewExportProfile Members
 

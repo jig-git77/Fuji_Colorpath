@@ -13,7 +13,7 @@
             Save</span></asp:LinkButton></div>
     <div class="clear"></div>  
     <div class="add_form">    
-    <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></center>
+    <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
      <table cellpadding="0" cellspacing="5" border="0" width="100%">
             <tr id="trFilter" runat="server">
                 <td>

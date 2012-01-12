@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDestinationProfile.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDestinationProfile" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddMeasurementCommon.ascx" TagName="AddMeasurementCommon" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/DeviceTypeSelectionCommon.ascx" TagName="DeviceTypeSelectionCommon" TagPrefix="uc" %>
 
@@ -17,7 +16,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />Add Measurement</span></asp:LinkButton></div>
     <div class="clear">
     </div>    
-    <div class="info_form">
+    <div class="info_form" style="margin : 0 20px 0" >
         <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
     <div class="add_form">

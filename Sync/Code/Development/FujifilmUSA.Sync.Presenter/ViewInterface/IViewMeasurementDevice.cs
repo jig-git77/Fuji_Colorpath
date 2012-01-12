@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewMeasurementDevice
+    public interface IViewMeasurementDevice : IViewError
     {
         MeasurementDevice SyncMeasurementDevice { get; set; }
         List<MeasurementDevice> SyncMeasurementDeviceList { get; set; }

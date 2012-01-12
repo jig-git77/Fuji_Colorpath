@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewLeftMenu : IViewBaseProject
+    public interface IViewLeftMenu : IViewBaseProject, IViewError
     {
         DateTime CreatedDateTime { get; set; }
     }

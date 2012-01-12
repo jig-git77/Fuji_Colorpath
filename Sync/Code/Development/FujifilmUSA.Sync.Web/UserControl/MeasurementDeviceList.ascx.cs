@@ -30,7 +30,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presentermeasurementdevice = new PresenterMeasurementDevice(this);
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
@@ -58,7 +57,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-
         #region Control Events
 
         protected void grdMeasurementDevice_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -82,7 +80,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         }
 
+        protected void likAdd_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentMeasurementDevice = null;
+            Response.RedirectPermanent("AddMeasurementDevice.aspx");
+        }
+
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewMeasurementDevice Members
         public MeasurementDevice SyncMeasurementDevice { get; set; }
@@ -94,6 +107,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> MeasurementDeviceTypeList { get; set; }
         public int BranchId { get; set; }
         #endregion
+
+      
+
+      
 
 
     }

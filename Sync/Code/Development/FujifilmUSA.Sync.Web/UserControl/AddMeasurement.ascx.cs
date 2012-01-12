@@ -24,16 +24,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        
+        #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();            
 
         }
+        #endregion
 
-       protected void btnAnalyze_Click(object sender, EventArgs e)
+        #region Control Events
+        protected void btnAnalyze_Click(object sender, EventArgs e)
         {
             Response.Redirect("SyncRunAnalyze.aspx");
         }
+        #endregion
+
     }
 }

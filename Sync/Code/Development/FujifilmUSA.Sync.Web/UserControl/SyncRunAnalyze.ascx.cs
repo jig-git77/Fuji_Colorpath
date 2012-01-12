@@ -51,6 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MeasurementIds = string.Empty; //TODO: Add Measurement Ids
             _presenterSyncRunAnalyze.OptimizeProfile();
             SessionManager.Instance.CurrentSyncRun.HasProfile = true;
+            
             Response.Redirect("SyncRunExport.aspx");
         }
 
@@ -66,6 +67,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Response.Redirect("ProjectList.aspx");
         }
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewSyncRunAnalyze Members
 

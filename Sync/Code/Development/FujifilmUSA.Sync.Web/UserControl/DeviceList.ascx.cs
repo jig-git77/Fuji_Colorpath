@@ -19,7 +19,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region "Page Events"
-
         protected override void OnInit(EventArgs e)
         {
             _presentersyncdevice = new PresenterSyncDevice(this);
@@ -27,7 +26,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
-
             if (!IsPostBack)
             {
                 if (SessionManager.Instance.CurrentUser.RoleId == 1)
@@ -41,63 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trFilter.Visible = false;
                 }
             }
-            
         }
-
-
-        protected void rlvDeviceList_ItemDataBound(object sender, RadListViewItemEventArgs e)
-        {
-            if (e.Item is RadListViewDataItem)
-            {
-                var item = (RadListViewDataItem)e.Item;
-                var lbtnSelectDevice = (LinkButton)e.Item.FindControl("lbtnSelectDevice");
-                var lbtnDestination = (LinkButton)e.Item.FindControl("lbtnDestination");
-                var lbtnDLP = (LinkButton)e.Item.FindControl("lbtnDLP");
-                lbtnSelectDevice.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
-                lbtnDestination.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
-                lbtnDLP.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());                
-            }
-        }
-        protected void lbtnSelectDevice_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentSyncDevice =
-                (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton) (sender)).Attributes["SyncDeviceId"].ToString())).
-                    Select(x => new SyncDevice()
-                                    {
-                                        SyncDeviceId = x.Key,
-                                        DeviceName = x.Value.ToString()
-                                    }
-                    ).FirstOrDefault());
-            Response.Redirect("ProjectList.aspx");
-        }
-        protected void lbtnDestination_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentSyncDevice =
-               (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
-                   Select(x => new SyncDevice()
-                   {
-                       SyncDeviceId = x.Key,
-                       DeviceName = x.Value.ToString()
-                   }
-                   ).FirstOrDefault());
-            Response.Redirect("DestinationProfileList.aspx");
-        }
-        protected void lbtnDLP_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentSyncDevice =
-               (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
-                   Select(x => new SyncDevice()
-                   {
-                       SyncDeviceId = x.Key,
-                       DeviceName = x.Value.ToString()
-                   }
-                   ).FirstOrDefault());
-            Response.Redirect("DeviceLinkProfileList.aspx");
-        }
-        protected void rlvDeviceList_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
-        {
-            BindDeviceList();
-        }        
         #endregion
 
         #region Method
@@ -145,7 +87,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-       
+        #region Control events
+        protected void rlvDeviceList_ItemDataBound(object sender, RadListViewItemEventArgs e)
+        {
+            if (e.Item is RadListViewDataItem)
+            {
+                var item = (RadListViewDataItem)e.Item;
+                var lbtnSelectDevice = (LinkButton)e.Item.FindControl("lbtnSelectDevice");
+                var lbtnDestination = (LinkButton)e.Item.FindControl("lbtnDestination");
+                var lbtnDLP = (LinkButton)e.Item.FindControl("lbtnDLP");
+                lbtnSelectDevice.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
+                lbtnDestination.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
+                lbtnDLP.Attributes.Add("SyncDeviceId", ((SyncDevice)item.DataItem).SyncDeviceId.ToString());
+            }
+        }
+        protected void lbtnSelectDevice_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentSyncDevice =
+                (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
+                    Select(x => new SyncDevice()
+                    {
+                        SyncDeviceId = x.Key,
+                        DeviceName = x.Value.ToString()
+                    }
+                    ).FirstOrDefault());
+            Response.Redirect("ProjectList.aspx");
+        }
+        protected void lbtnDestination_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentSyncDevice =
+               (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
+                   Select(x => new SyncDevice()
+                   {
+                       SyncDeviceId = x.Key,
+                       DeviceName = x.Value.ToString()
+                   }
+                   ).FirstOrDefault());
+            Response.Redirect("DestinationProfileList.aspx");
+        }
+        protected void lbtnDLP_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentSyncDevice =
+               (SessionManager.Instance.DictionaryList.Where(x => x.Key == int.Parse(((LinkButton)(sender)).Attributes["SyncDeviceId"].ToString())).
+                   Select(x => new SyncDevice()
+                   {
+                       SyncDeviceId = x.Key,
+                       DeviceName = x.Value.ToString()
+                   }
+                   ).FirstOrDefault());
+            Response.Redirect("DeviceLinkProfileList.aspx");
+        }
+        protected void rlvDeviceList_NeedDataSource(object sender, RadListViewNeedDataSourceEventArgs e)
+        {
+            BindDeviceList();
+        }        
         protected void cmbCompany_SelectedIndexChanged1(object sender, EventArgs e)
         {
             cmbBranch.Items.Clear();
@@ -159,7 +154,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
             rlvDeviceList.Visible = cmbCompany.SelectedIndex != 0;
         }
-
         protected void cmbBranch_SelectedIndexChanged1(object sender, EventArgs e)
         {
             if (cmbBranch.SelectedIndex != 0)
@@ -168,7 +162,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rlvDeviceList.DataBind();
             }
         }
+        #endregion
 
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+        
         #region IViewSyncDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }

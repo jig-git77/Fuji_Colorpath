@@ -11,6 +11,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class DeviceTypeSelectionCommon : System.Web.UI.UserControl, IViewGetMeasurementDeviceType
     {
         public ProfileType Type { get; set; }
+
         #region Variable Declarations
 
         private PresenterGetMeasurementDeviceType _presenterGetMeasurementDeviceType;
@@ -84,6 +85,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ((Statusbar)this.Parent.FindControl("ucStatusbar1")).DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewGetMeasurementDeviceType Members
 

@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewTaskeroUser
+    public interface IViewTaskeroUser : IViewError
     {
         string UserName { get; set; }
         string Password { get; set; }

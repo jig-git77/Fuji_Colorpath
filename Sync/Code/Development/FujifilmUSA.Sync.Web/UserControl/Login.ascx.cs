@@ -51,8 +51,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void bntLogin_Click(object sender, EventArgs e)
         {
-            try
-            {
                 UserName = txtUserName.Text.Trim();
                 Password = txtPassword.Text.Trim();
                 _presentertaskerouser.TaskeroUserLogin();
@@ -78,16 +76,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
                 }
-            }
-            catch (Exception ex)
-            {
-                ucStatusbar1.DisplayMessage(ex.Message, false);
-
-            }
-
-
         }
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewTaskeroUser Members
         public string UserName { get; set; }

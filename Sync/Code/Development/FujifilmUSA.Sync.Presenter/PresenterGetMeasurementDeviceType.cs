@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetMeasurementDeviceListBySyncDeviceId()
         {
             var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
+            task.ErrorOccured += _viewGetMeasurementDeviceType.ErrorOccured; 
             _viewGetMeasurementDeviceType.MeasurementDevices = task.GetMeasurementDeviceListBySyncDeviceId(_viewGetMeasurementDeviceType.SyncDeviceId);
         }
     }

@@ -30,6 +30,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetProfilerOption()
         {
             var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
+            task.ErrorOccured += _viewAddDestinationProfile.ErrorOccured;
             _viewAddDestinationProfile.GetProfileOption = task.GetProfilerOption();
         }
 

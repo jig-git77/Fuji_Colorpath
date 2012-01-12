@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void CreateDestinationProfile()
         {
             var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+            task.ErrorOccured += _viewAddDestinationProfileMeasurement.ErrorOccured;
             var measurementIds = string.Join(",",
                                                                     task.GetMeasurement(
                                                                         _viewAddDestinationProfileMeasurement.ProfileId,
@@ -28,6 +29,7 @@ namespace FujifilmUSA.Sync.Presenter
                                                                         Select(x => x.MeasurementId).ToArray());
 
             var destTask = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            destTask.ErrorOccured += _viewAddDestinationProfileMeasurement.ErrorOccured;
             destTask.CreateDestinationProfile(measurementIds, _viewAddDestinationProfileMeasurement.ProfileId, _viewAddDestinationProfileMeasurement.ProfilerOptionId);
         }
     }

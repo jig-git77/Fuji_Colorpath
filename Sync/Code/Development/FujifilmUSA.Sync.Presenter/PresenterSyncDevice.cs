@@ -16,19 +16,22 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetBranchList()
         {
             var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncDevice.ErrorOccured; 
             _viewSyncDevice.GetBranchList = task.GetBranchList(_viewSyncDevice.CompanyId);
         }
 
         public void GetCompanyList()
         {
             var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncDevice.ErrorOccured;
             _viewSyncDevice.GetCompanyList = task.GetCompanyList();
         }
 
         public void GetSyncDeviceListByUserId()
         {
             var task = (ISyncDeviceBusiness)new BusinessFactory<ISyncDeviceBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncDevice.ErrorOccured; 
             _viewSyncDevice.GetSyncDeviceListByUserId = task.GetSyncDevicesByUserId(_viewSyncDevice.TaskeroUserId, _viewSyncDevice.RoleId, _viewSyncDevice.CompanyId, _viewSyncDevice.BranchId);
-        }
+         }
     }
 }

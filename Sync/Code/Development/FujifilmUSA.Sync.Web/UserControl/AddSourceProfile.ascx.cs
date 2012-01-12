@@ -32,7 +32,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindProfileOption();
             }
-        } 
+        }
+        
         #endregion  
 
         #region Control Events
@@ -56,6 +57,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbProfilerOption.DataBind();
         }
         #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucMeasurementStatusbar.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
 
         #region IViewAddSourceProfile Members
 

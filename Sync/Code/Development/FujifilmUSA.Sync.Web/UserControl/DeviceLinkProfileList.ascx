@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceLinkProfileList.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceLinkProfileList" %>
+<%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx"  %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
         if (confirm('<%= DLP_DeleteDestinationProfile_Confirmation %>'))
@@ -16,6 +18,7 @@
             New DLP</span></a></div>
     <div class="clear">
     </div>   
+    <div style="margin-left: 10px; margin-right: 15px;" ><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></div>
      <asp:UpdatePanel ID="upPanel" runat="server">
             <ContentTemplate>
            <asp:ListView ID="grdDLP" runat="server"  

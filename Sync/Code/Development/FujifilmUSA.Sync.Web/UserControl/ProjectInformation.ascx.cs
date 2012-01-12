@@ -24,24 +24,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presenteraddproject = new PresenterAddProject(this);
             _presenterprojectlist = new PresenterProjectList(this);
-        }        
+        }
 
-        #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 if (Request.QueryString.HasKeys())
                 {
-                    if(Request.QueryString["ProjectID"]!=null)
+                    if (Request.QueryString["ProjectID"] != null)
                     {
-                        LoadProjectByProjectId();        
+                        LoadProjectByProjectId();
                     }
                 }
-                
+
             }
         }
-
+        #endregion
+      
         #region Methods
         private void LoadProjectByProjectId()
         {
@@ -86,6 +86,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
        
         #endregion
 
+        #region Control Events
+        protected void rptSyncRun_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.DataItem != null)
+            {
+                //Label lblStatus = (Label)e.Item.FindControl("lblStatus");
+                //lblStatus.Text = ((ECPSyncRunStatus)Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Status"))).ToString();
+                var SyncRun = e.Item.DataItem as SyncRun;
+
+                if (SyncRun != null)
+                {
+
+                    var imgStatus = e.Item.FindControl("imgStatus") as Image;
+
+                    if (imgStatus != null)
+                    {
+                        switch (SyncRun.Status)
+                        {
+                            case (int)ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                                imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
+                                imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
+                                break;
+                            case (int)ECPSyncRunStatus.NotUsed: break;
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Error Handling Method
+        public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
+        {
+            ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
+        }
+        #endregion
+
+        //*******************************************************************//
+
         #region IViewAddProject Members
 
         public Dictionary<string, string> MeasurementDevices { get; set; }
@@ -124,41 +171,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        protected void rptSyncRun_ItemDataBound(Object Sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.DataItem != null)
-            {
-                //Label lblStatus = (Label)e.Item.FindControl("lblStatus");
-                //lblStatus.Text = ((ECPSyncRunStatus)Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Status"))).ToString();
-                var SyncRun = e.Item.DataItem as SyncRun;
-
-                if (SyncRun != null)
-                {
-
-                    var imgStatus = e.Item.FindControl("imgStatus") as Image;
-
-                    if (imgStatus != null)
-                    {
-                        switch (SyncRun.Status)
-                        {
-                            case (int)ECPSyncRunStatus.Open: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                                imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
-                                imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
-                                break;
-                            case (int)ECPSyncRunStatus.Certify: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                                imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
-                                imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
-                                break;
-                            case (int)ECPSyncRunStatus.Closed: imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                                imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
-                                imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
-                                break;
-                            case (int)ECPSyncRunStatus.NotUsed: break;
-                        }
-                    }
-                }
-            }
-        }
         
     }
 }

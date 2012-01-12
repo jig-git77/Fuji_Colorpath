@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -14,12 +15,12 @@ namespace FujifilmUSA.Sync.Common
 
         #region Properties       
 
-        public static readonly string ConnectionString = System.Configuration.ConfigurationSettings.AppSettings["ConnectionString"].ToString();        
-        public static readonly string Domain = System.Configuration.ConfigurationSettings.AppSettings["Domain"].ToString();
-        public static readonly string Email = System.Configuration.ConfigurationSettings.AppSettings["Email"].ToString();
-        public static readonly string Email_FROM = System.Configuration.ConfigurationSettings.AppSettings["Email_FROM"].ToString();
-        public static readonly string Pass = System.Configuration.ConfigurationSettings.AppSettings["Pass"].ToString();
-        public static readonly string SMTP = System.Configuration.ConfigurationSettings.AppSettings["SMTP"].ToString();        
+        public static readonly string ConnectionString = ConfigurationManager.AppSettings["ConnectionString"];
+        public static readonly string Domain = ConfigurationManager.AppSettings["Domain"];
+        public static readonly string Email = ConfigurationManager.AppSettings["Email"];
+        public static readonly string Email_FROM = ConfigurationManager.AppSettings["Email_FROM"];
+        public static readonly string Pass = ConfigurationManager.AppSettings["Pass"];
+        public static readonly string SMTP = ConfigurationManager.AppSettings["SMTP"];
         public static readonly string SiteTitle = "Taskero Sync USA";
         #endregion
     }

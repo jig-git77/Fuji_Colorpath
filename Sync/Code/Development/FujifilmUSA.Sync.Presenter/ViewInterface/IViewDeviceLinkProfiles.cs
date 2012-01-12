@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewDeviceLinkProfiles : IViewBaseSyncDevice
+    public interface IViewDeviceLinkProfiles : IViewBaseSyncDevice, IViewError
     {
         int DLPId { get; set; }
         List<DeviceLinkProfile> DeviceLinkProfiles { get; set; }

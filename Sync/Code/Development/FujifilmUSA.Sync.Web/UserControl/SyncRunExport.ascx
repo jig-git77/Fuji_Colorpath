@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SyncRunExport.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SyncRunExport" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -16,6 +18,10 @@
     <div class="clear">
     </div>
     <div class="ContainerClass">
+       <div class="info_form" style="margin : 0 20px 0" >
+            <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+        </div>
+
     </div>
 </div>
 <div class="contant_bottom">

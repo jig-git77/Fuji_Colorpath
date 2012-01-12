@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewGetMeasurementDeviceType : IViewBaseSyncDevice
+    public interface IViewGetMeasurementDeviceType : IViewBaseSyncDevice, IViewError
     {
         Dictionary<string, string> MeasurementDevices { get; set; }
     }

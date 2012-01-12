@@ -18,12 +18,14 @@ namespace FujifilmUSA.Sync.Presenter
         public void CloseSyncRunProcess()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            task.ErrorOccured += _viewExportProfile.ErrorOccured;  
             task.CloseSyncRun(_viewExportProfile.SyncRunId, Convert.ToInt32(_viewExportProfile.Status), _viewExportProfile.EndDateTime);
         }
 
         public void GetIccProfileBySyncRunId()
         {
             var task = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
+            task.ErrorOccured += _viewExportProfile.ErrorOccured; 
             _viewExportProfile.Profile = new OptimizeProfile
                                              {
                                                  Data =

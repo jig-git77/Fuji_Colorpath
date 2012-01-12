@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectInformation.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProjectInformation" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+
 <script language="javascript" type="text/javascript">
     function CloseProjectInformation() {
         var oWindow = GetProjectInformationRadWindow();
@@ -14,10 +16,14 @@
         return oWindow;
     } 
 </script>
+
 <table cellpadding="0" cellspacing="5" border="0" width="80%">
     <tr id="trFilter" runat="server">
         <td>
             <table cellpadding="0" cellspacing="5" border="0" width="100%" style="margin: 0 0 0 19px;">
+                <tr>
+                    <uc:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+                </tr>
                 <tr>
                     <td style="width:30%; font-size:13px; font-weight:bold" >
                         Project Name:

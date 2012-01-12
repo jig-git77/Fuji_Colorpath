@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Business
 {
     public class Common
     {
-        public static void ImplementBusinessLogic(Action action, ITaskBase taskBase)
+        public static void ImplementBusinessLogic(Action action, ITaskBase taskBase, ErrorHandler handler)
         {
             try
             {
@@ -16,7 +16,14 @@ namespace FujifilmUSA.Sync.Business
             }
             catch (Exception e)
             {
-                taskBase.ErrorOccured(taskBase, new ErrorArgs(e.Message));
+                if (handler != null)
+                {
+                    handler(taskBase, new ErrorArgs(e.Message));
+                }
+                else
+                {
+                    throw e;
+                }
             }
         }
     }

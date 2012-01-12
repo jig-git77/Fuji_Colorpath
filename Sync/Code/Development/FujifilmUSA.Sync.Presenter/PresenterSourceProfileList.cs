@@ -19,12 +19,14 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetSourceProfileList()
         {
             var task = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
+            task.ErrorOccured += _viewSourceProfiles.ErrorOccured;  
             _viewSourceProfiles.GetSourceProfiles = task.GetSourceProfiles();
         }
 
         public void DeleteSourceProfile()
         {
             var task = (ISourceProfileBusiness)new BusinessFactory<ISourceProfileBusiness>().CreateObject();
+            task.ErrorOccured += _viewSourceProfiles.ErrorOccured; 
             task.DeleteSourceProfile(_viewSourceProfiles.SourceProfileID);
         }
 

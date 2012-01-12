@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceList" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -11,6 +12,7 @@
         <div class="ContainerClass">
          <asp:UpdatePanel ID="upPanel" runat="server">
             <ContentTemplate>
+            <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /> 
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr id="trFilter" runat="server">
                     <td>
@@ -98,7 +100,6 @@
             <asp:AsyncPostBackTrigger ControlID="cmbBranch" EventName="SelectedIndexChanged" />
             </Triggers> 
         </asp:UpdatePanel>
-
         </div>
     </div>
     <div class="clear">
