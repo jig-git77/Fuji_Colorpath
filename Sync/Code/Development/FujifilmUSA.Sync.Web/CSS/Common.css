@@ -1016,6 +1016,7 @@ label
 .mesurementStatusbar{
 width:672px;
 margin-bottom: 20px;
+
 }
 .mesurementStatusbar .top{
 background:url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
@@ -1032,25 +1033,49 @@ background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
 height:10px;
 }	
 
+/* status bar information */
+.statusbar{
+width:672px;
+margin-bottom: 20px;
+line-height:14px;
+text-align:left;
 
-.login_eror .mesurementStatusbar{
+}
+.statusbar .top{
+background:url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
+height:10px;
+}
+
+.statusbar .middle{
+    background:url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
+    padding:0px 5px 0px 5px;
+}
+
+.statusbar .bottom{
+background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
+height:10px;
+}	
+
+/* login Error Information */
+.login_eror .statusbar{
 width:388px;
 margin-bottom: 20px;
 }
-.login_eror .mesurementStatusbar .top{
+.login_eror .statusbar .top{
 background:url(../images/login_eror_top.png) no-repeat top left;
 height:10px;
 }
 
-.login_eror .mesurementStatusbar .middle{
+.login_eror .statusbar .middle{
     background:url(../images/login_eror_middle.png) repeat-y top left;
     padding:0px 5px 0px 5px;
 }
 
-.login_eror .mesurementStatusbar .bottom{
+.login_eror .statusbar .bottom{
 background:url(../images/login_eror_bottom.png) no-repeat top left;
 height:10px;
 }	
+
 
 
 	
