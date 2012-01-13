@@ -182,6 +182,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="cmbSourceProfile" EventName="SelectedIndexChanged" />
             <asp:AsyncPostBackTrigger ControlID="cmbDestinationProfile" EventName="SelectedIndexChanged" />
+           
         </Triggers>
         </asp:UpdatePanel>
     </div>

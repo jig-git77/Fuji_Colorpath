@@ -67,8 +67,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnProjectSave_Click(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
-
             //Project name is required field
             if (string.IsNullOrEmpty(txtProjectName.Text.Trim()))
                 ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_ProjectName_Required"), false);
@@ -145,6 +143,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void BindDeviceLinkProfile()
         {
+            //If Instance is not created, viewstate is not maintain.
+            DeviceLinkProfiles = new List<DeviceLinkProfile>();
             if (!string.IsNullOrEmpty(cmbSourceProfile.SelectedValue) && !string.IsNullOrEmpty(cmbDestinationProfile.SelectedValue))
             {
                 this.SourceProfileId = int.Parse(cmbSourceProfile.SelectedValue);
@@ -156,6 +156,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 this.SourceProfileId = 0;
                 this.DestinationProfileId = 0;
             }
+            
             grdDLP.DataSource = DeviceLinkProfiles;
             grdDLP.DataBind();
             RefreshProjectId();
