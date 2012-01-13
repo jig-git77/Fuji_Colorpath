@@ -33,7 +33,14 @@ namespace FujifilmUSA.Sync.DataAccess
 
         private static string ConnectionString
         {
-            get { return ConfigurationManager.ConnectionStrings["DevConnection"].ConnectionString; }
+            get
+            {
+#if Development
+                return ConfigurationManager.ConnectionStrings["DevConnection"].ConnectionString;
+#elif Stage
+                return ConfigurationManager.ConnectionStrings["StageConnection"].ConnectionString;
+#endif
+            }
         }
         public SqlDatabase Database
         {
