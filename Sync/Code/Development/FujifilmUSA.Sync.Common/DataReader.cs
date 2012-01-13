@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 
 namespace FujifilmUSA.Sync.Common
 {

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business
 {
@@ -16,13 +14,15 @@ namespace FujifilmUSA.Sync.Business
             }
             catch (Exception e)
             {
+                LogManager.WriteLog(e.Message);
+                
                 if (handler != null)
                 {
                     handler(taskBase, new ErrorArgs(e.Message));
                 }
                 else
                 {
-                    throw e;
+                    throw;
                 }
             }
         }
