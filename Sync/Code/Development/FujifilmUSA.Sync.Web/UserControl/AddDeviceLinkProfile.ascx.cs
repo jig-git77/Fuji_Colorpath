@@ -69,16 +69,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnDeviceLinkProfileSave_Click(object sender, EventArgs e)
         {
-            DeviceLinkProfile = new DeviceLinkProfile
-                                    {
-                                        ProfileName = txtDeviceLinkProfileName.Text.Trim(),
-                                        DestProfile = (new DestinationProfile() {ProfileId = int.Parse(cmbDestinationProfile.SelectedValue)}),
-                                        SrcProfile = (new SourceProfile() {ProfileId = int.Parse(cmbSourceProfile.SelectedValue)}),
-                                        IsUse = true,
-                                        ProfileOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue)
-                                    };
-            _presenteradddevicelinkprofile.CreateDeviceLinkProfile();
-            Response.Redirect("DeviceLinkProfileList.aspx", true);
+            if (Page.IsValid)
+            {
+                DeviceLinkProfile = new DeviceLinkProfile
+                                        {
+                                            ProfileName = txtDeviceLinkProfileName.Text.Trim(),
+                                            DestProfile = (new DestinationProfile() { ProfileId = int.Parse(cmbDestinationProfile.SelectedValue) }),
+                                            SrcProfile = (new SourceProfile() { ProfileId = int.Parse(cmbSourceProfile.SelectedValue) }),
+                                            IsUse = true,
+                                            ProfileOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue)
+                                        };
+                _presenteradddevicelinkprofile.CreateDeviceLinkProfile();
+                Response.Redirect("DeviceLinkProfileList.aspx", true);
+            }
         }
         #endregion
 

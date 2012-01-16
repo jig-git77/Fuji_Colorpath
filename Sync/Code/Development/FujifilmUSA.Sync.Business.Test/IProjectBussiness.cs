@@ -121,9 +121,10 @@ namespace FujifilmUSA.Sync.Business.Test
             objProject.DeviceLinkProfileId = 4;
             objProject.IsUsed = true;
             objProject.UseDLP = true;
-            objProject.OutputTypeId = 1;
+            //objProject.OutputTypeId = 1;
             objProject.StartDate = DateTime.Now;
-            objProject.ProjectTypeId = 1;
+            //objProject.ProjectTypeId = 1;
+            objProject.ProfileOptionId = 1; 
             objProject.ReTargetId = 1;
 
             objMeasurementSetting.UsePlugin = true;

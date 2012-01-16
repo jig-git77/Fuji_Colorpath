@@ -13,6 +13,8 @@
             Save</span></asp:LinkButton></div>
     <div class="clear"></div>  
     <div class="add_form">    
+     <asp:UpdatePanel ID="upPanel" runat="server">
+            <ContentTemplate>
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
      <table cellpadding="0" cellspacing="5" border="0" width="100%">
             <tr id="trFilter" runat="server">
@@ -44,7 +46,7 @@
                                 &nbsp :
                             </td>
                             <td>                               
-                                <asp:DropDownList ID="cmbDongleSerialNo" runat="server" DataValueField="Key" DataTextField="Value" Width="180px"></asp:DropDownList>
+                                <asp:DropDownList ID="cmbDongleSerialNo" runat="server" DataValueField="Key" DataTextField="Value" AutoPostBack="true" Width="180px"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -78,6 +80,12 @@
                 </td>
             </tr>
         </table>
+          </ContentTemplate>
+            <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="cmbCompanyName" EventName="SelectedIndexChanged" />
+            <asp:AsyncPostBackTrigger ControlID="cmbBranch" EventName="SelectedIndexChanged" />
+            </Triggers> 
+        </asp:UpdatePanel>
     </div>
 </div>
 <div class="admin_bottom">&nbsp;</div>

@@ -8,12 +8,22 @@
         <h1>
             Add Device Link Profile</h1>
         <asp:LinkButton ID="lbtnDeviceLinkProfileSave" runat="server" CssClass="button" 
-            onclick="lbtnDeviceLinkProfileSave_Click">
+            onclick="lbtnDeviceLinkProfileSave_Click" ValidationGroup ="vgDLP">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/save_icon.png" />
                 Save</span></asp:LinkButton></div>
     <div class="clear">
-    </div>    
+    </div> 
+    <div id="validationSummary" class="add_form" >
+        <asp:ValidationSummary 
+                ID="vsDeviceLinkProfile" 
+                runat="server" 
+                ShowSummary="true" 
+                ValidationGroup="vgDLP" 
+                ForeColor="Red"
+                >
+         </asp:ValidationSummary>
+    </div>   
     <div class="add_form">
         <center>
             <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
@@ -25,8 +35,14 @@
                     &nbsp; :
                 </td>
                <td>
-                 <%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
                    <asp:TextBox ID="txtDeviceLinkProfileName" runat="server" Width="178px" Height="19px"></asp:TextBox>
+                   <asp:RequiredFieldValidator 
+                        ID="rfvDeviceLinkProfileName" 
+                        runat="server" 
+                        Display="None"
+                        ControlToValidate="txtDeviceLinkProfileName" 
+                        ErrorMessage = "Please provide DLP name." 
+                        ValidationGroup="vgDLP" ></asp:RequiredFieldValidator>
                 </td>               
                   <td class="ProjectListtd1">
                     Profiler Option &nbsp; :
@@ -42,12 +58,28 @@
                 <td >
                 <%--<telerik:RadComboBox ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value" SkinID="width200px"  AutoPostBack="true" ></telerik:RadComboBox>--%>
                 <asp:DropDownList ID="cmbSourceProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
+                 <asp:RequiredFieldValidator 
+                        ID="rfvSourceProfile" 
+                        runat="server" 
+                        Display="None"
+                        ControlToValidate="cmbSourceProfile" 
+                        InitialValue=""
+                        ErrorMessage = "Please provide source profile." 
+                        ValidationGroup="vgDLP" ></asp:RequiredFieldValidator>
                 </td>
                 <td class="ProjectListtd1"><asp:Label ID="Label2" runat="server" Text="Select Destination" ></asp:Label>&nbsp; :
                 </td>
                 <td>
                 <%--<telerik:RadComboBox ID="cmbDestinationProfile" DataValueField="Key" DataTextField="Value" runat="server" SkinID="width200px" AutoPostBack="true" ></telerik:RadComboBox>--%>
                 <asp:DropDownList ID="cmbDestinationProfile" runat="server" DataValueField="Key" DataTextField="Value"  width="180px" CssClass="select"></asp:DropDownList>
+                <asp:RequiredFieldValidator 
+                        ID="rfvDestinationProfile" 
+                        runat="server" 
+                        Display="None"
+                        ControlToValidate="cmbDestinationProfile" 
+                        InitialValue=""
+                        ErrorMessage = "Please provide destination profile." 
+                        ValidationGroup="vgDLP" ></asp:RequiredFieldValidator>
                 </td>
             </tr>
         </table>

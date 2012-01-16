@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region ISyncRunBusiness Members
 
-        public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId)
+        public DeviceLinkProfile OptimizeDeviceLinkProfile(string measurementIds, int syncRunId, int projectId, int profileOptionId)
         {
             var optimizeDlp = new DeviceLinkProfile();
 
@@ -69,23 +69,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ProfileData = DataReader.ReadByteArray(dsSrcDestProfiles.Tables[0].Rows[0], "DestinationProfile")
                             };
 
+
+
+                            //Add options and call profile service to generate project dlp
+                            var profilerOptionDetail = ((IProfilerOptionDetailBusiness)new BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
+                            var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(profileOptionId, ProfileType.Optimization);
+
+
                             //Add options and call profile service to generate optimize dlp
                             using (var client = new ProfilerClient())
                             {
-                                request.Options = new List<Parameter>
-                                  {
-                                      new Parameter() {Name = "ProfileType", Value = "OptimizeDeviceLink"},
-                                      new Parameter() {Name = "ProfileSize", Value = "2"},
-                                      new Parameter() {Name = "Rendering", Value = "3"},
-                                      new Parameter() {Name = "DLBypassBlack", Value = "100"},
-                                      new Parameter() {Name = "DLExceptions", Value = "129"},
-                                      new Parameter() {Name = "ProfileFormat", Value = "2"},
-                                      new Parameter() {Name = "DLOptimizationLimit", Value = "0"},
-                                      new Parameter() {Name = "Flags", Value = "0"},
-                                      new Parameter() {Name = "Attributes0", Value = "0"},
-                                      new Parameter() {Name = "Attributes1", Value = "0"},
-                                      new Parameter() {Name = "SaveProfilerInfo", Value = "1"}
-                                  };
+                                request.Options = new List<Parameter>();
+                                optionDetails.ForEach(
+                                                option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
                                 var response = client.OptimizeDeviceLinkProfile(request);
                                 optimizeDlp.Data.Profile = response.OptimizedProfile.ProfileData;
                             }

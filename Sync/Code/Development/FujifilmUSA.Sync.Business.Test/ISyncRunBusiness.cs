@@ -179,9 +179,10 @@ namespace FujifilmUSA.Sync.Business.Test
             string measurementIds = string.Empty; // TODO: Initialize to an appropriate value
             int syncRunId = 29; // TODO: Initialize to an appropriate value
             int projectId = 26; // TODO: Initialize to an appropriate value
+            int profileOptionId = 1;
 
             DeviceLinkProfile actual;
-            actual = target.OptimizeDeviceLinkProfile(measurementIds, syncRunId, projectId);
+            actual = target.OptimizeDeviceLinkProfile(measurementIds, syncRunId, projectId, profileOptionId);
             Assert.IsTrue(true);
 
 

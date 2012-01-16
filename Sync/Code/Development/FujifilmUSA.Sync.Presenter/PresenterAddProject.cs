@@ -20,6 +20,14 @@ namespace FujifilmUSA.Sync.Presenter
 
         }
 
+        public void GetProfilerOption()
+        {
+            var task = (IMiscDataBusiness)new BusinessFactory<IMiscDataBusiness>().CreateObject();
+            task.ErrorOccured += _viewAddProject.ErrorOccured;
+            _viewAddProject.GetProfileOption = task.GetProfilerOption();
+        }
+
+
         public void InsertProjectAndMeasurementSetting()
         {
             var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();

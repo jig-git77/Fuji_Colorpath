@@ -9,6 +9,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         DateTime EndDateTime { get; set; }
         int SyncRunId { get; set; }
         int ProjectId { get; set; }
+        int ProfileOptionId { get; set; }
         string MeasurementIds { get; set; }
     }
 }

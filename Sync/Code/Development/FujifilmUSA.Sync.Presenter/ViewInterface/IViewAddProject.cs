@@ -17,5 +17,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         MeasurementSetting MeasurementSetting { get; set; }
 
         DeviceLinkProfile deviceLinkProfile { get; set; }
+
+        Dictionary<int, string> GetProfileOption { get; set; }
     }
 }

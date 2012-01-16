@@ -31,9 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsPostBack)
             {
-                BindOutputType();
-                BindProjectType();
-
+                BindProfileOption();
 
                 BindSourceProfile();
                 BindDestinationProfile();
@@ -111,20 +109,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Private Method
-        private void BindOutputType()
+        public void BindProfileOption()
         {
-            cmbOutputType.DataSource = Utilities.GetEnumDropdown<EOutputType>();
-            cmbOutputType.DataTextField = "Value";
-            cmbOutputType.DataValueField = "Key";
-            cmbOutputType.DataBind();
-
-        }
-        private void BindProjectType()
-        {
-            cmbProjectType.DataSource = Utilities.GetEnumDropdown<EProjectType>();
-            cmbProjectType.DataTextField = "Value";
-            cmbProjectType.DataValueField = "Key";
-            cmbProjectType.DataBind();
+            GetProfileOption = new Dictionary<int, string>();
+            _presenteraddproject.GetProfilerOption();
+            cmbProfilerOption.DataSource = GetProfileOption;
+            cmbProfilerOption.DataTextField = "Value";
+            cmbProfilerOption.DataValueField = "Key";
+            cmbProfilerOption.DataBind();
         }
         private void BindSourceProfile()
         {
@@ -179,8 +171,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Project.IsUsed = true;
                 Project.UseDLP = true;
                 Project.ReTargetId = 0;
-                Project.ProjectTypeId = (int)(EProjectType)Enum.Parse(typeof(EProjectType), cmbProjectType.SelectedValue);
-                Project.OutputTypeId = (int)(EOutputType)Enum.Parse(typeof(EOutputType), cmbOutputType.SelectedValue);
+                Project.ProfileOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue);
                 Project.StartDate = DateTime.Now;
 
                 Project.ProjectStatus = ECPSyncRunStatus.Open;
@@ -232,8 +223,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //Get Current Project Detail by Project Id
                 Project = SessionManager.Instance.CurrentProject;
                 txtProjectName.Text = Project.ProjectName;
-                cmbProjectType.SelectedValue = Project.ProjectTypeId.ToString();
-                cmbOutputType.SelectedValue = Project.OutputTypeId.ToString();
+                cmbProfilerOption.SelectedValue = Project.ProfileOptionId.ToString();
 
                 this.SyncDeviceId = Project.SyncDeviceId;
 
@@ -254,8 +244,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void ToggleInputControlState(bool value)
         {
             txtProjectName.Enabled = value;
-            cmbProjectType.Enabled = value;
-            cmbOutputType.Enabled = value;
+            cmbProfilerOption.Enabled = value;
             cmbSourceProfile.Enabled = value;
             cmbDestinationProfile.Enabled = value;
             grdDLP.Enabled = value;
@@ -266,6 +255,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //ucDeviceTypeSelectionCommon.ReferenceChartTypeEnable = value;
             lbtnProjectSave.Enabled = value;
         }
+
         #endregion
 
         #region Error Handling Method
@@ -295,6 +285,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public MeasurementSetting MeasurementSetting { get; set; }
 
+        public Dictionary<int, string> GetProfileOption { get; set; }
+
         #endregion
 
         #region IViewGetSourceDestinationCombo Members
@@ -316,5 +308,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
 
         #endregion
+
+
+        
     }
 }

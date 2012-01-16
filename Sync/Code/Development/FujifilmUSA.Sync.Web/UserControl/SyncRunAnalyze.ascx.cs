@@ -47,6 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void btnOptimize_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            ProfileOptionId = SessionManager.Instance.CurrentProject.ProfileOptionId;
             SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
             MeasurementIds = string.Empty; //TODO: Add Measurement Ids
             _presenterSyncRunAnalyze.OptimizeProfile();
@@ -82,7 +83,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SyncRunId { get; set; }
         
         public int ProjectId{ get; set; }
-        
+
+        public int ProfileOptionId { get; set; }
+
         public string MeasurementIds{ get; set; }
         
         #endregion
@@ -100,5 +103,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DateTime EndDateTime { get; set; }
         
         #endregion
+
+
+        
     }
 }

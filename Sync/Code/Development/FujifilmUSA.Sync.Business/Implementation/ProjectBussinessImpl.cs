@@ -34,8 +34,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
                             IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                             ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
-                            ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
-                            OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                            //ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
+                            //OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                            ProfileOptionId = DataReader.ReadInt(x, "ProfileOptionId"),
                             ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus")
                         }).ToList();
                 }
@@ -57,9 +58,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 objProjectInPeramater.Add(new Parameters() { ParameterName = "@DLPID", Size = 0, Type = DbType.Int16, Value = objProject.DeviceLinkProfileId });
                 objProjectInPeramater.Add(new Parameters() { ParameterName = "@IsUse", Size = 0, Type = DbType.Boolean, Value = objProject.IsUsed });
                 objProjectInPeramater.Add(new Parameters() { ParameterName = "@UseDLP", Size = 0, Type = DbType.Boolean, Value = objProject.UseDLP });
-                objProjectInPeramater.Add(new Parameters() { ParameterName = "@OutputTypeID", Size = 0, Type = DbType.Int16, Value = objProject.OutputTypeId });
+                objProjectInPeramater.Add(new Parameters() { ParameterName = "@OutputTypeID", Size = 0, Type = DbType.Int16, Value = 0 });
                 objProjectInPeramater.Add(new Parameters() { ParameterName = "@StartDatetime", Size = 0, Type = DbType.DateTime, Value = objProject.StartDate });
-                objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProjectTypeID", Size = 0, Type = DbType.Int16, Value = objProject.ProjectTypeId });
+                objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProjectTypeID", Size = 0, Type = DbType.Int16, Value = 0 });
+                objProjectInPeramater.Add(new Parameters() { ParameterName = "@ProfileOptionId", Size = 0, Type = DbType.Int16, Value = objProject.ProfileOptionId });
+
                 //objInPeramater.Add(new Parameters() { ParameterName = "@ReTargetID", Size = 0, Type = DbType.Int16, Value = objProject.ReTargetId });
 
                 objProjectOutPeramater.Add(new Parameters() { ParameterName = "@ProjectID", Size = 4, Type = DbType.Int16 });
@@ -137,8 +140,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             DeviceLinkProfileId = DataReader.ReadInt(x, "DLPID"),
                             IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                             ReTargetId = DataReader.ReadInt(x, "ReTargetID"),
-                            ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
-                            OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                            //ProjectTypeId = DataReader.ReadInt(x, "ProjectTypeID"),
+                            //OutputTypeId = DataReader.ReadInt(x, "OutPutTypeID"),
+                            ProfileOptionId = DataReader.ReadInt(x, "ProfileOptionId"),
                             ProjectStatus = (ECPSyncRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                             ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
                         }).FirstOrDefault();

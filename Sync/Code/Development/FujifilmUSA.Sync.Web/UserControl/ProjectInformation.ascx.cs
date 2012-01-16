@@ -155,6 +155,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<Project> Projects { get; set; }
 
+        public Dictionary<int, string> GetProfileOption { get; set; }
+
         #endregion
      
         #region IViewGetSourceDestinationCombo Members
@@ -171,6 +173,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        
     }
 }

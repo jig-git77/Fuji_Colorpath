@@ -58,41 +58,22 @@
     <center><ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" /></center>
         <table border="0" cellspacing="5" cellpadding="0" class="Width100percent">
             <tr>
-                <td class="ProjectListtd1">
+                <td class="ProjectListtd1" style="width: 100px;">
                     <asp:Label ID="lblProjectName" runat="server" Text="Project Name" ></asp:Label>
                     &nbsp; :
                 </td>
-                <td class="ProjectListtd2">
-                   <%-- <telerik:RadTextBox ID="txtProjectName" runat="server" SkinID="width196px">
-                    </telerik:RadTextBox>--%><%--<asp:RequiredFieldValidator ID="rfvProjectName" runat="server" ControlToValidate="txtProjectName" ErrorMessage="*" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="SaveProject"></asp:RequiredFieldValidator>--%>
+                <td>
                     <asp:TextBox ID="txtProjectName" runat="server" Width="178px" Height="19px"></asp:TextBox>
-                </td>
-                <td class="ProjectListtd1">
-                    <asp:Label ID="lblProjectType" runat="server" Text="Project Type"></asp:Label>
-                    &nbsp; :
-                </td>
-                <td class="ProjectListtd2">
-                   <%-- <telerik:RadComboBox ID="cmbProjectType" runat="server" SkinID="width200px">                      
-                    </telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbProjectType" runat="server" Width="180px" CssClass="select">
-                    </asp:DropDownList>
                 </td>
             </tr>
             <tr> 
-                <td class="ProjectListtd1">
-                    <asp:Label ID="lblOutputType" runat="server" Text="Output Type" ></asp:Label>
-                    :
+                <td style="width:100px;" class="ProjectListtd1">
+                    <asp:Label ID="lblProfilerOption" runat="server" Text="Profiler Option" ></asp:Label>
+                    &nbsp; :
                 </td>
-                <td class="ProjectListtd2">
-                   <%-- <telerik:RadComboBox ID="cmbOutputType" runat="server" SkinID="width200px">
-                    </telerik:RadComboBox>--%>
-                    <asp:DropDownList ID="cmbOutputType" runat="server" Width="180px"  CssClass="select"></asp:DropDownList>
-                </td>
-                <td class="float_right">
-                    &nbsp;
-                </td>
-                <td class="ProjectListtd4">
-                    &nbsp;
+                <td>
+                    <asp:DropDownList ID="cmbProfilerOption" runat="server" Width="180px" CssClass="select">
+                    </asp:DropDownList>
                 </td>
             </tr>           
         </table>
@@ -146,7 +127,7 @@
             <ItemTemplate>
                 <tr class="purpal">
   	                <td align="center" valign="middle"><asp:RadioButton ID="rbtnDeviceLinkProfileId" runat="server" GroupName="DeviceLinkProfile"/></td>
-                    <td align="center"><%# Eval("ProfileName") %></td>
+                    <td align="left"><%# Eval("ProfileName") %></td>
                     <td align="center"><%# Eval("SrcProfile.ProfileName")%></td>
                     <td align="center"><%# Eval("DestProfile.ProfileName")%></td>                                        
                 </tr>

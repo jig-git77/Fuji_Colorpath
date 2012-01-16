@@ -40,6 +40,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar1;
         
         /// <summary>
+        /// vsSaveDestinationProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vsSaveDestinationProfile;
+        
+        /// <summary>
         /// txtDestinationProfile control.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDestinationProfile;
+        
+        /// <summary>
+        /// rfvDestinationProfileName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDestinationProfileName;
         
         /// <summary>
         /// cmbProfilerOption control.

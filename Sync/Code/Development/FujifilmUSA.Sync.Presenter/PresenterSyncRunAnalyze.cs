@@ -22,8 +22,8 @@ namespace FujifilmUSA.Sync.Presenter
             _viewSyncRunAnalyze.MeasurementIds = string.Join(",", task.GetMeasurement(_viewSyncRunAnalyze.SyncRunId).Select(x => x.MeasurementId).ToArray());
 
             var optimizeProfileTask = (ISyncRunBusiness)new BusinessFactory<ISyncRunBusiness>().CreateObject();
-            optimizeProfileTask.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured;  
-            optimizeProfileTask.OptimizeDeviceLinkProfile(_viewSyncRunAnalyze.MeasurementIds, _viewSyncRunAnalyze.SyncRunId, _viewSyncRunAnalyze.ProjectId);
+            optimizeProfileTask.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured;
+            optimizeProfileTask.OptimizeDeviceLinkProfile(_viewSyncRunAnalyze.MeasurementIds, _viewSyncRunAnalyze.SyncRunId, _viewSyncRunAnalyze.ProjectId, _viewSyncRunAnalyze.ProfileOptionId);
         }
 
         public void CertifySyncRunProcess()

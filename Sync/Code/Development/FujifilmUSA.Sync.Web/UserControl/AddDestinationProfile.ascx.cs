@@ -34,20 +34,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnDestinationProfileSave_Click(object sender, EventArgs e)
         {
-            DestinationProfile = new DestinationProfile();
-            DestinationProfile.ProfileName = txtDestinationProfile.Text;
-            DestinationProfile.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
-            DestinationProfile.IsUse = true;
-            DestinationProfile.ProfileOptionId = int.Parse(cmbProfilerOption.SelectedValue);
-            _presenteradddestinationprofile.InsertDestinationProfile();
-            DestinationProfile.ProfileId = ProfileId;
+            if (Page.IsValid)
+            {
+                DestinationProfile = new DestinationProfile();
+                DestinationProfile.ProfileName = txtDestinationProfile.Text;
+                DestinationProfile.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;
+                DestinationProfile.IsUse = true;
+                DestinationProfile.ProfileOptionId = int.Parse(cmbProfilerOption.SelectedValue);
+                _presenteradddestinationprofile.InsertDestinationProfile();
+                DestinationProfile.ProfileId = ProfileId;
 
-            DestinationProfile.ReferenceChartTypeId = int.Parse(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
-            DestinationProfile.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
-            SessionManager.Instance.CurrentDestinationProfile = DestinationProfile;
+                DestinationProfile.ReferenceChartTypeId = int.Parse(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
+                DestinationProfile.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
+                SessionManager.Instance.CurrentDestinationProfile = DestinationProfile;
 
-            if (DestinationProfile.ProfileId != 0)
-                Response.Redirect("AddDestinationProfileMeasurement.aspx");
+                if (DestinationProfile.ProfileId != 0)
+                    Response.Redirect("AddDestinationProfileMeasurement.aspx");
+            }
         }
         #endregion      
 

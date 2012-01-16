@@ -67,40 +67,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtProjectName;
         
         /// <summary>
-        /// lblProjectType control.
+        /// lblProfilerOption control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblProjectType;
+        protected global::System.Web.UI.WebControls.Label lblProfilerOption;
         
         /// <summary>
-        /// cmbProjectType control.
+        /// cmbProfilerOption control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbProjectType;
-        
-        /// <summary>
-        /// lblOutputType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOutputType;
-        
-        /// <summary>
-        /// cmbOutputType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbOutputType;
+        protected global::System.Web.UI.WebControls.DropDownList cmbProfilerOption;
         
         /// <summary>
         /// upPanel control.

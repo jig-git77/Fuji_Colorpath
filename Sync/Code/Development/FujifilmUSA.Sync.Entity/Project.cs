@@ -14,8 +14,11 @@ namespace FujifilmUSA.Sync.Entity
         public Boolean IsUsed { get; set; }
         public Boolean UseDLP { get; set; }
         public int ReTargetId { get; set; }
-        public int ProjectTypeId { get; set; }
-        public int OutputTypeId { get; set; }
+
+        public int ProfileOptionId { get; set; }
+        //public int ProjectTypeId { get; set; }
+        //public int OutputTypeId { get; set; }
+
         public DateTime StartDate { get; set; }
         public int ReferenceChartTypeId { get; set; }
         public List<SyncRun> ProjectRuns { get; set; }
