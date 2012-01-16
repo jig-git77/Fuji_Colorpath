@@ -69,18 +69,16 @@ function presentScanDoneiSis(scanner, mychart, final) {
         var DensityResults = results[ind]["Density"];
         var sName = mychart["ReferencePatch"][ind]["SampleName"];
         var PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
-        var CIELab = new LAB(LABResults["L"].toFixed(2), LABResults["A"].toFixed(2), LABResults["B"].toFixed(2));
-        var CIEXYZ = new XYZ(XYZResults["X"].toFixed(2), XYZResults["Y"].toFixed(2), XYZResults["Z"].toFixed(2));
-        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));        
+        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
         mpatch = new Patch();
-        mpatch.LAB = LABResults;
-        mpatch.XYZ = XYZResults;
+        mpatch.Cielab = LABResults;
+        mpatch.Ciexyz = XYZResults;
         mpatch.Density = _Density;
         mpatch.SampleName = sName;
-        mpatch.CMYK_C = mychart["ReferencePatch"][ind]["CMYK_C"];
-        mpatch.CMYK_M = mychart["ReferencePatch"][ind]["CMYK_M"];
-        mpatch.CMYK_Y = mychart["ReferencePatch"][ind]["CMYK_Y"];
-        mpatch.CMYK_K = mychart["ReferencePatch"][ind]["CMYK_K"];
+        mpatch.CmykC = mychart["ReferencePatch"][ind]["CMYK_C"];
+        mpatch.CmykM = mychart["ReferencePatch"][ind]["CMYK_M"];
+        mpatch.CmykY = mychart["ReferencePatch"][ind]["CMYK_Y"];
+        mpatch.CmykK = mychart["ReferencePatch"][ind]["CMYK_K"];
         mpatch.PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         MeasuredPatches.push(mpatch);
     }
@@ -100,43 +98,43 @@ function presentScanDoneiSis(scanner, mychart, final) {
     jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
 
 
-    var w = parseInt(jQuery("[id*='Canvas']").width());
-    var h = parseInt(jQuery("[id*='Canvas']").height());
-    var startPosition = 1;
-    col = mychart["NumberOfColumns"];
-    row = mychart["NumberOfRows"];
-    area["H"] = (((h / row) / 2) / 2) + '';
-    distance["R"] = (((h / row) / 2) / 2) + '';
-    area["W"] = ((w / col) / 2) + '';
-    distance["C"] = ((w / col) / 2) + '';
-    var noOfCells = mychart["Size"];
-    if (y1 == 0) {
-        y1 = parseInt(area["H"]);
-    }
-    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+//    var w = parseInt(jQuery("[id*='Canvas']").width());
+//    var h = parseInt(jQuery("[id*='Canvas']").height());
+//    var startPosition = 1;
+//    col = mychart["NumberOfColumns"];
+//    row = mychart["NumberOfRows"];
+//    area["H"] = (((h / row) / 2) / 2) + '';
+//    distance["R"] = (((h / row) / 2) / 2) + '';
+//    area["W"] = ((w / col) / 2) + '';
+//    distance["C"] = ((w / col) / 2) + '';
+//    var noOfCells = mychart["Size"];
+//    if (y1 == 0) {
+//        y1 = parseInt(area["H"]);
+//    }
+//    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
 
-    x1 = 0;
-    col = results.length;
-    for (j = 0; j < col; j++) {
+//    x1 = 0;
+//    col = results.length;
+//    for (j = 0; j < col; j++) {
 
-        if (noOfCells > drawCells) {
+//        if (noOfCells > drawCells) {
 
-            x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+//            x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
-            var xx1 = startPosition + x1;
-            var yy1 = startPosition + y1;
+//            var xx1 = startPosition + x1;
+//            var yy1 = startPosition + y1;
 
-            //var jg2 = new jsGraphics("Canvas");
-            var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
+//            //var jg2 = new jsGraphics("Canvas");
+//            var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
 
-            var srgb = results[j]["sRGB"];
-            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-            jg2.setColor(rgbx);
-            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-            jg2.paint();
-            drawCells++;
-        }
-    }
+//            var srgb = results[j]["sRGB"];
+//            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+//            jg2.setColor(rgbx);
+//            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+//            jg2.paint();
+//            drawCells++;
+//        }
+//    }
 
 
     //    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
@@ -171,29 +169,31 @@ function presentProgressiSis(scanner, mychart) {
     var result = mychart["Result"];
     var samples = result.length;
     var prog = new Object();
-    var width = mychart["NumberOfColumns"];
-    var height = mychart["NumberOfRows"];
-    var lines = samples / width;
+    var chartWidth = parseInt(jQuery("[id*='Canvas']").width());
+    var chartHeight = parseInt(jQuery("[id*='Canvas']").height());
+    var columnCount = mychart["NumberOfColumns"];
+    var rowCount = mychart["NumberOfRows"];
+    var cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
     prog["Prompt"] = "Reading progress " + samples + " samples";
     prog["Answers"] = "NONE";
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
-    
-//    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-//    var cursample = 0;
-//    var x = 0;
-//    var y = 0;
-//    for (cursample = 0; cursample < samples; cursample++) {
-//        var srgb = result[cursample]["sRGB"];
-//        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-//        jg.setColor(rgbx);
-//        jg.fillRect(x * 20, y * 20, 20, 20);
-//        x++;
-//        if (x >= width) {
-//            x = 0;
-//            y++;
-//        }
-//    }
-//    jg.paint();
+    var jg = new jsGraphics(document.getElementById("Canvas").id);
+    var cursample = 0;
+    var x = 0;
+    var y = 0;
+    for (cursample = 0; cursample < samples; cursample++) {
+        var srgb = result[cursample]["sRGB"];
+        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+        jg.setColor(rgbx);
+        jg.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        jg.paint();
+        x++;
+        if (x >= columnCount) {
+            x = 0;
+            y++;
+        }
+
+    }
     return "OK";
 }
