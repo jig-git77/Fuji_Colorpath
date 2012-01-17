@@ -8,6 +8,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System.Web.Security;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -70,7 +71,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiLogin"].Value = "";
                         Response.Cookies["SyncFujiPass"].Value = "";
                     }
-                    Response.Redirect("Index.aspx");
+
+                    FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                    FormsAuthentication.RedirectToLoginPage();
+                    //Response.Redirect("Index.aspx");
+                  
                 }
                 else
                 {

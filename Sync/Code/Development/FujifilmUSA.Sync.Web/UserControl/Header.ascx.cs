@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
+using System.Web.Security;
+
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -26,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Session.Clear();
                 Session.RemoveAll();
                 Session.Abandon();
+                FormsAuthentication.SignOut();               
                 #endregion
                 Response.Redirect("Login.aspx");
             }
