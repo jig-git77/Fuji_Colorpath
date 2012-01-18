@@ -73,9 +73,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
 
                     FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                    FormsAuthentication.RedirectToLoginPage();
-                    //Response.Redirect("Index.aspx");
-                  
+                    //FormsAuthentication.RedirectToLoginPage();
+                    Response.Redirect("Index.aspx");
                 }
                 else
                 {
