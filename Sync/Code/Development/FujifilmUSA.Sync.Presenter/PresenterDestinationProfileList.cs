@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
@@ -31,6 +32,17 @@ namespace FujifilmUSA.Sync.Presenter
             return task.DeleteDestinationProfile(_viewDestinationProfile.DestinationProfileId);
         }
 
-
+        public void GetProfileByDestinationProfileId()
+        {
+            var task = (IDestinationProfileBusiness)new BusinessFactory<IDestinationProfileBusiness>().CreateObject();
+            task.ErrorOccured += _viewDestinationProfile.ErrorOccured;
+            _viewDestinationProfile.Profile = new OptimizeProfile
+            {
+                Data =
+                {
+                    Profile = task.GetProfileByDestinationProfileId(_viewDestinationProfile.DestinationProfileId)
+                }
+            };
+        }
     }
 }

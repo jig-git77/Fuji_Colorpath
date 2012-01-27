@@ -59,8 +59,8 @@
                             <asp:Label ID="lblInUse" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsUse")) %>'></asp:Label>
                         </td>
                         <td align="center" width="5%">
-                            <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Destination Profile"
-                                AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditDestinationProfile"
+                            <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Download Destination Profile"
+                                AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="DownloadDestinationProfile"
                                 CommandArgument='<%# Eval("ProfileID") %>' />
                         </td>
                         <td align="center" width="5%">

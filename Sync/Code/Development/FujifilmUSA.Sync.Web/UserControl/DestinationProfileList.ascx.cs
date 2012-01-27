@@ -48,6 +48,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterdestinationprofile.DeleteDestinationProfile();
                 BindDestinationProfileList();
             }
+            if (e.CommandName == "DownloadDestinationProfile")
+            {
+                this.DestinationProfileId = Convert.ToInt32(e.CommandArgument);
+                _presenterdestinationprofile.GetProfileByDestinationProfileId();
+                //Prompt for download file
+                if (Profile != null && Profile.Data.Profile != null)
+                    Utilities.DownloadFile(Profile.Data.Profile, "DestinationProfile.icc");
+            }
         }
         #endregion
 
@@ -91,6 +99,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int SyncDeviceId{ get; set; }
         
+        #endregion
+
+        #region IViewBaseProfile Members
+
+        public IBaseProfile Profile { get; set; }
+
         #endregion
         
     }

@@ -11,5 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void UpdateDestinationProfile(int destinationProfileId, byte[] profile);
         bool CreateDestinationProfile(string measurementIds, int destinationId,int profilerOptionId);
         int DeleteDestinationProfile(int destinationProfileId);
+        byte[] GetProfileByDestinationProfileId(int destinationProfileId);
     }
 }

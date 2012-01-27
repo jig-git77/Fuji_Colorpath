@@ -38,6 +38,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public byte[] GetProfileByDestinationProfileId(int destinationProfileId)
+        {
+            return null;
+        }
         #endregion
 
         #region ITaskBase Members
@@ -45,5 +49,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+       
     }
 }

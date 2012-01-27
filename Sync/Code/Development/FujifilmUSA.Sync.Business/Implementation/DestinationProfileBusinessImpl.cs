@@ -178,6 +178,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public byte[] GetProfileByDestinationProfileId(int destinationProfileId)
+        {
+            byte[] profile = null;
+
+            Common.ImplementBusinessLogic(() =>
+            {
+                var dsDestinationProfile = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetProfileByDestinationProfileID]", new object[] { destinationProfileId });
+
+                profile = dsDestinationProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "Profile")).FirstOrDefault();
+            }, this, ErrorOccured);
+
+            return profile;
+        }
         #endregion
 
 
@@ -186,6 +199,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+      
+
+      
+
+      
     }
 }
 
