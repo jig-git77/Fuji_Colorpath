@@ -163,36 +163,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MeasurementSetting = new MeasurementSetting();
             if (SessionManager.Instance.CurrentSyncDevice != null)
             {
-                Project.ProjectName = txtProjectName.Text.Trim();
-                Project.CreatedDate = DateTime.Now;
-                Project.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;// 1;
-                Project.ΔEType = 1;
-                Project.DeviceLinkProfileId = Convert.ToInt32(hdnDeviceLinkProfileId.Value);
-                Project.IsUsed = true;
-                Project.UseDLP = true;
-                Project.ReTargetId = 0;
-                Project.ProfileOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue);
-                Project.StartDate = DateTime.Now;
+                if (SessionManager.Instance.CurrentProject != null) // Edit Measurment Settings
+                {
+                    Project = SessionManager.Instance.CurrentProject;
+                    _presenteraddproject.GetMeasurementSetting();
+                    MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
+                    MeasurementSetting.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
+                    _presenteraddproject.EditMeasurementSetting();
+                }
+                else // Insert new Project
+                {
+                    Project.ProjectName = txtProjectName.Text.Trim();
+                    Project.CreatedDate = DateTime.Now;
+                    Project.SyncDeviceId = SessionManager.Instance.CurrentSyncDevice.SyncDeviceId;// 1;
+                    Project.ΔEType = 1;
+                    Project.DeviceLinkProfileId = Convert.ToInt32(hdnDeviceLinkProfileId.Value);
+                    Project.IsUsed = true;
+                    Project.UseDLP = true;
+                    Project.ReTargetId = 0;
+                    Project.ProfileOptionId = Convert.ToInt32(cmbProfilerOption.SelectedValue);
+                    Project.StartDate = DateTime.Now;
 
-                Project.ProjectStatus = ECPSyncRunStatus.Open;
+                    Project.ProjectStatus = ECPSyncRunStatus.Open;
 
 
-                MeasurementSetting.UsePlugin = true;//static //chkUseMeasurementPlugin.Checked;
-                MeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
-                MeasurementSetting.Illuminant = (int)(EMeasurementIlluminant)Enum.Parse(typeof(EMeasurementIlluminant), cmbIlluminant.SelectedValue);
-                MeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);
-                //to-do
-                MeasurementSetting.UVIncluded = true;
-                MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
-                MeasurementSetting.IlluminationMode = 1;
+                    MeasurementSetting.UsePlugin = true;//static //chkUseMeasurementPlugin.Checked;
+                    MeasurementSetting.Observer = Convert.ToInt32(cmbObserver.SelectedValue);
+                    MeasurementSetting.Illuminant = (int)(EMeasurementIlluminant)Enum.Parse(typeof(EMeasurementIlluminant), cmbIlluminant.SelectedValue);
+                    MeasurementSetting.DensityType = (int)(EMeasurementDensityType)Enum.Parse(typeof(EMeasurementDensityType), cmbDensityType.SelectedValue);
+                    //to-do
+                    MeasurementSetting.UVIncluded = true;
+                    MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
+                    MeasurementSetting.IlluminationMode = 1;
 
-                MeasurementSetting.InstrumentTypeId = ucDeviceTypeSelectionCommon.InstrumentTypeId;
-                MeasurementSetting.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
+                    MeasurementSetting.InstrumentTypeId = ucDeviceTypeSelectionCommon.InstrumentTypeId;
+                    MeasurementSetting.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
 
-                _presenteraddproject.InsertProjectAndMeasurementSetting();
-                SessionManager.Instance.CurrentProject = Project;
-                SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
-                Response.Redirect("SyncRunExport.aspx");
+                    _presenteraddproject.InsertProjectAndMeasurementSetting();
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentSyncRun = SessionManager.Instance.CurrentProject.ProjectRuns.Last();
+                    Response.Redirect("SyncRunExport.aspx");
+                }
             }
         }
         private void BindMeasurementIlluminant()
@@ -231,14 +242,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbSourceProfile.SelectedValue = deviceLinkProfile.SrcProfile.ProfileId.ToString();
                 cmbDestinationProfile.SelectedValue = deviceLinkProfile.DestProfile.ProfileId.ToString();
                 BindDeviceLinkProfile();
+                hdnDeviceLinkProfileId.Value = Convert.ToString(Project.DeviceLinkProfileId);
 
                 // Get Measurement Detail By ProjectId
                 _presenteraddproject.GetMeasurementSetting();
                 cmbIlluminant.SelectedValue = MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = MeasurementSetting.Observer.ToString();
                 cmbDensityType.SelectedValue = MeasurementSetting.DensityType.ToString();
-                //ucDeviceTypeSelectionCommon.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
-                //ucDeviceTypeSelectionCommon.SerialNumber = MeasurementSetting.SerialNumber;
+                ucDeviceTypeSelectionCommon.SerialNumber = MeasurementSetting.SerialNumber;
+                ucDeviceTypeSelectionCommon.ReferenceChartTypeValue = MeasurementSetting.ReferenceChartTypeId.ToString();
             }
         }
         public void ToggleInputControlState(bool value)
@@ -253,7 +265,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDensityType.Enabled = value;
             //ucDeviceTypeSelectionCommon.DeviceTypeEnable = value;
             //ucDeviceTypeSelectionCommon.ReferenceChartTypeEnable = value;
-            lbtnProjectSave.Enabled = value;
+            //lbtnProjectSave.Enabled = value;
         }
 
         #endregion

@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         List<Project> GetProjectsBySyncDeviceId(int syncDeviceId);
         Project InsertProjectAndMeasurementSetting(Project objProject, MeasurementSetting objMeasurementSetting);
+        int EditMeasurementSetting(MeasurementSetting objMeasurementSetting);
         int DeleteProject(int projectId);
         Project GetProject(int projectId);
         bool CloseSyncRun(int syncRunId, int status, DateTime endDateTime);

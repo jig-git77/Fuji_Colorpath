@@ -35,6 +35,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddProject.Project = task.InsertProjectAndMeasurementSetting(_viewAddProject.Project, _viewAddProject.MeasurementSetting);
         }
 
+        public void EditMeasurementSetting()
+        {
+            var task = (IProjectBussiness)new BusinessFactory<IProjectBussiness>().CreateObject();
+            task.ErrorOccured += _viewAddProject.ErrorOccured;
+            task.EditMeasurementSetting(_viewAddProject.MeasurementSetting);
+        }
+
         public void GetDeviceLinkProfile()
         {
             var task = (IDeviceLinkProfileBusiness)new BusinessFactory<IDeviceLinkProfileBusiness>().CreateObject();

@@ -48,9 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ReferenceChartTypeValue
         {
             get { return hdAlignmentChartSelectedValue.Value.Trim(); }
-            
-            //get { return cmbAlignmentChart.SelectedValue; }
-            //set { cmbAlignmentChart.SelectedValue = value; }
+            set { hdAlignmentChartSelectedValue.Value = value; }
         }
 
         public bool ReferenceChartTypeEnable

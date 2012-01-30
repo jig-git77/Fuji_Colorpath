@@ -108,6 +108,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return project;
         }
 
+        public int EditMeasurementSetting(MeasurementSetting objMeasurementSetting)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(() =>
+            {
+                returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspEditMeasurementSetting]",
+                                               new object[] 
+                                               { 
+                                                    objMeasurementSetting.MeasurementSettingId,
+                                                    objMeasurementSetting.ReferenceChartTypeId,
+                                                    objMeasurementSetting.SerialNumber
+                                               });
+
+            }, this, ErrorOccured);
+            return returnValue;
+        }
+
+
         public int DeleteProject(int projectId)
         {
             int returnValue = 0;

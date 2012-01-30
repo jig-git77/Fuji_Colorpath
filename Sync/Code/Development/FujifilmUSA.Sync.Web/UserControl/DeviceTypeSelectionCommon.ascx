@@ -46,18 +46,34 @@
             }
         });
     }
-    function cmbAlignmentChartChangeEvent() {        
-        var selectedval = jQuery("[id$='cmbAlignmentChart'] :selected").val()
-        jQuery("input[id$=hdAlignmentChartSelectedValue]").val(selectedval);        
-//        if ('<%=Type %>' != "Optimization") {
-//            GetRefChartData();
-//        }
+    var isLoad = false;
+    function cmbAlignmentChartChangeEvent() {
+        if (isLoad == false) 
+        {
+            var selectedval = jQuery("[id$='cmbAlignmentChart'] :selected").val();
+            jQuery("input[id$=hdAlignmentChartSelectedValue]").val(selectedval);
+        }
+        else
+        {
+            var selectedval = jQuery("input[id$=hdAlignmentChartSelectedValue]").val();
+            if (selectedval == null || selectedval == undefined || selectedval == '' || selectedval == '0') // When Edit call seleted value set from database.
+            {
+                var selectedval = jQuery("[id$='cmbAlignmentChart'] :selected").val();
+                jQuery("input[id$=hdAlignmentChartSelectedValue]").val(selectedval);                
+            }
+            else // When inset selected value set bydefualt first value of combo. 
+            {
+                $("select[id$=cmbAlignmentChart]").val(selectedval);
+            }
+            isLoad = false;
+        }
+
     }
     $(document).ready(function () {
+        isLoad = true;
         jQuery("select[id$=cmbDeviceType]").change(cmbDeviceTypeChangeEvent);
         jQuery("select[id$=cmbAlignmentChart]").change(cmbAlignmentChartChangeEvent);
         cmbDeviceTypeChangeEvent();
-        //cmbAlignmentChartChangeEvent();
     });
 
     function GetSelectedValue() {

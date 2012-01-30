@@ -18,6 +18,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Project();  
         }
 
+        public int EditMeasurementSetting(MeasurementSetting objMeasurementSetting)
+        {
+            return 0;
+        }
+
         public int DeleteProject(int projectId)
         {
             return 0;
