@@ -132,6 +132,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public List<MeasurementPatch> GetMeasurementPatch(int measurementID)
+        {
+            List<MeasurementPatch> lstMeasurementPatch = new List<MeasurementPatch>();
+            Common.ImplementBusinessLogic(() =>
+            {
+                lstMeasurementPatch = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[uspGetMeasurementPatchByMeasurementID]", new object[] { measurementID }).Tables[0].AsEnumerable().
+                                         Select(x => new MeasurementPatch()
+                                         {
+                                             SampleName = DataReader.ReadString(x, "Sample_Name"),
+                                             CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                                             CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                                             CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                             CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                                             Cielab = new CieLab(DataReader.ReadDouble(x, "LAB_L"), DataReader.ReadDouble(x, "LAB_A"), DataReader.ReadDouble(x, "LAB_B"))
+                                         }).ToList();
+            }, this, ErrorOccured);
+            return lstMeasurementPatch;
+        }
+
         #endregion
 
         #region Private Methods

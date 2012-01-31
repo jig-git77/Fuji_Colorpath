@@ -13,5 +13,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int SaveMeasurement(Measurement measurement);
         int SaveMeasurement(MeasurementLink measurementLink);
         int DeleteMeasurement(int measurementId);
+        List<MeasurementPatch> GetMeasurementPatch(int measurementID);
     }
 }

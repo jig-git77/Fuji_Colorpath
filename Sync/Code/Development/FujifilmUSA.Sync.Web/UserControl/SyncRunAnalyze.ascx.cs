@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -10,7 +11,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterSyncRunAnalyze _presenterSyncRunAnalyze;
+        public string AddMeasurement_DeleteMeasurement_Confirmation
+        {
+            get
+            {
+                return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
+            }
+        }
         #endregion
+
 
         #region Page Method
         protected void Page_Load(object sender, EventArgs e)
@@ -35,7 +44,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ECPSyncRunStatus.NotUsed:
                     break;
             }
+            BindMeasurementList();
         }
+        #endregion
+
+        #region Methods
+
+        public void BindMeasurementList()
+        {
+            lstMeasurement = new System.Collections.Generic.List<Measurement>();
+            if (SessionManager.Instance.CurrentSyncRun != null)
+            {
+                SyncRunId = SessionManager.Instance.CurrentSyncRun.SyncRunId;
+                _presenterSyncRunAnalyze.GetMeasurementsBySyncId();
+            }
+            grdMeasurement.DataSource = lstMeasurement;
+            grdMeasurement.DataBind();
+            
+        }
+
         #endregion
 
         #region Control Events
@@ -67,6 +94,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentSyncRun = null;
             Response.Redirect("ProjectList.aspx");
         }
+
+        protected void grdMeasurement_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            Measurement = new Measurement();
+            Measurement.MeasurementId = Convert.ToInt32(e.CommandArgument);
+            switch (e.CommandName)
+            {
+                case "ExportTxt":
+                        _presenterSyncRunAnalyze.GetMeasurementPatch();
+                        ExportFile<MeasurementPatch> txtConverter = new ExportFile<MeasurementPatch>(Measurement.Patches, "Export.txt");
+                        txtConverter.ExecuteResult();
+                    break;
+                case "ExportCvs":
+                        _presenterSyncRunAnalyze.GetMeasurementPatch();
+                        ExportFile<MeasurementPatch> cvsConverter = new ExportFile<MeasurementPatch>(Measurement.Patches, "Export.csv");
+                        cvsConverter.ExecuteResult();
+                    break;
+                case "DeleteMeasurement":
+                        _presenterSyncRunAnalyze.DeleteMeasurement();
+                        BindMeasurementList();
+                    break;
+            }
+        }
         #endregion
 
         #region Error Handling Method
@@ -87,7 +137,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProfileOptionId { get; set; }
 
         public string MeasurementIds{ get; set; }
-        
+
+        public System.Collections.Generic.List<Measurement> lstMeasurement{ get; set; }
+
+        public Measurement Measurement { get; set;}
+
         #endregion
 
         #region IViewBaseSyncDevice Members
@@ -104,7 +158,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         
         #endregion
 
-
-        
     }
+
+
+    
+
 }

@@ -35,7 +35,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-
+        public List<MeasurementPatch> GetMeasurementPatch(int measurementID)
+        {
+            return new List<MeasurementPatch>();
+        }
         #endregion
 
         #region ITaskBase Members

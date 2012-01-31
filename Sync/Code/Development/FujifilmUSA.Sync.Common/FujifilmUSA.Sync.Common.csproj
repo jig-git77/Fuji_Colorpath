@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReader.cs" />
+    <Compile Include="ExportFile.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="ResourceManager.cs" />
     <Compile Include="SessionManager.cs" />

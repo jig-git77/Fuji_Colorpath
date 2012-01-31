@@ -32,5 +32,27 @@ namespace FujifilmUSA.Sync.Presenter
             task.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured; 
             task.CertifySyncRun(_viewSyncRunAnalyze.SyncRunId, Convert.ToInt32(_viewSyncRunAnalyze.Status), _viewSyncRunAnalyze.EndDateTime);
         }
+
+        public void GetMeasurementsBySyncId()
+        {
+            var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured;
+            _viewSyncRunAnalyze.lstMeasurement = task.GetMeasurement(_viewSyncRunAnalyze.SyncRunId);
+        }
+
+        public void DeleteMeasurement()
+        {
+            var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured;
+            task.DeleteMeasurement(_viewSyncRunAnalyze.Measurement.MeasurementId);
+        }
+
+        public void GetMeasurementPatch()
+        {
+            var task = (IMeasurementBusiness)new BusinessFactory<IMeasurementBusiness>().CreateObject();
+            task.ErrorOccured += _viewSyncRunAnalyze.ErrorOccured;
+            _viewSyncRunAnalyze.Measurement.Patches = task.GetMeasurementPatch(_viewSyncRunAnalyze.Measurement.MeasurementId);
+        }
+
     }
 }
