@@ -17,6 +17,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -133,6 +134,7 @@
     <Content Include="Images\admin_box_top.png" />
     <Content Include="Images\analyze.png" />
     <Content Include="Images\body_bg.png" />
+    <Content Include="Images\cvs_icon.png" />
     <Content Include="Images\edit_icon.png" />
     <Content Include="Images\error.png" />
     <Content Include="Images\error_left.png" />
@@ -207,6 +209,7 @@
     <Content Include="Images\tab_contant_top.png" />
     <Content Include="Images\tab_left.png" />
     <Content Include="Images\tab_right.png" />
+    <Content Include="Images\txt_icon.png" />
     <Content Include="Index.aspx" />
     <Content Include="Index.htm" />
     <Content Include="AddMeasurement.aspx" />
