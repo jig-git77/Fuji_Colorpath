@@ -170,6 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     MeasurementSetting.ReferenceChartTypeId = Convert.ToInt32(ucDeviceTypeSelectionCommon.ReferenceChartTypeValue);
                     MeasurementSetting.SerialNumber = ucDeviceTypeSelectionCommon.SerialNumber;
                     _presenteraddproject.EditMeasurementSetting();
+                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("AddProject_Update_Message"), true);
                 }
                 else // Insert new Project
                 {

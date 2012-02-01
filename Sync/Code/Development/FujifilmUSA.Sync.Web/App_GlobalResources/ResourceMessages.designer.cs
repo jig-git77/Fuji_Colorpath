@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Project details updated sucessfully.
+        /// </summary>
+        internal static string AddProject_Update_Message {
+            get {
+                return ResourceManager.GetString("AddProject_Update_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected destination profile?.
         /// </summary>
         internal static string DestinationProfile_DeleteDestinationProfile_Confirmation {

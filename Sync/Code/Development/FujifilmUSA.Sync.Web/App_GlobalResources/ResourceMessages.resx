@@ -201,4 +201,7 @@
   <data name="SourceProfile_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected source profile?</value>
   </data>
+  <data name="AddProject_Update_Message" xml:space="preserve">
+    <value>Project details updated sucessfully</value>
+  </data>
 </root>
