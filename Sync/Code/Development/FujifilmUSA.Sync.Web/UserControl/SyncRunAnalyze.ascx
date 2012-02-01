@@ -91,8 +91,8 @@
                                     <asp:ImageButton 
                                         ID="imgbtnExportTxt" 
                                         runat="server" 
-                                        ToolTip="Export Txt"
-                                        AlternateText="Export Txt" 
+                                        ToolTip="Export Text File"
+                                        AlternateText="Export Text File" 
                                         ImageUrl="../Images/txt_icon.png" 
                                         CommandName="ExportTxt"
                                         CommandArgument='<%# Eval("MeasurementID") %>' OnClientClick="return true;" />
@@ -102,8 +102,8 @@
                                     <asp:ImageButton 
                                         ID="imgbtnExportCvs" 
                                         runat="server" 
-                                        ToolTip="Export Cvs"
-                                        AlternateText="Export Cvs" 
+                                        ToolTip="Export CSV File"
+                                        AlternateText="Export CSV File" 
                                         ImageUrl="../Images/cvs_icon.png" 
                                         CommandName="ExportCvs"
                                         CommandArgument='<%# Eval("MeasurementID") %>' OnClientClick="return true;" />
