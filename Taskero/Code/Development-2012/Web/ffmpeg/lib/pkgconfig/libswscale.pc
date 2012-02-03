@@ -1,0 +1,12 @@
+prefix=C:\Program Files (x86)/FFmpeg
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libswscale
+Description: FFmpeg image rescaling library
+Version: 0.5.0
+Requires:  ogg >= 1.1 vorbis vorbisenc libavcodec = 51.25.0
+Conflicts:
+Libs: 
+Cflags: -I${includedir} -I${includedir}/swscale
