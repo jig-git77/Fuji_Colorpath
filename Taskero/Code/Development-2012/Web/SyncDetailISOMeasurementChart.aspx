@@ -23,6 +23,13 @@
     </asp:ScriptManager>
     <asp:Literal ID="LtrlCSS" runat="server"></asp:Literal>
     <asp:Literal ID="LtrlJS" runat="server"></asp:Literal>
+    <table class="SYNCTABLE" cellspacing="0" cellpadding="0" border="0" >
+<tbody>
+<tr>
+<td class="green-title"> &nbsp; Now Analyzing: &nbsp; <asp:Label ID="lblNowAnalyzing" runat ="server"></asp:Label> </td>
+</tr>
+<tr>
+    <td>
     <table id="Table1" cellpadding="0" cellspacing="0" border="0" style="width: 100%"
         runat="server" class="popup-table">
         <tr>
@@ -65,39 +72,396 @@
                                                 </td>
                                                 <td style="width: 60%;" id="TDEPrimary" runat="server">
                                                     <DCWC:Chart ID="ChartISOSummary_DeltaE" runat="server" Width="210px" Height="315px"
-                                                        ImageUrl="~/UploadFiles/temp/ISOSummary_DeltaE" ImageType="Jpeg" EnableViewState="false">
-                                                        <BorderSkin FrameBackGradientEndColor="White" FrameBorderColor="Black" FrameBorderWidth="2"
+                                                        ImageUrl="~/UploadFiles/temp/ISOSummary_DeltaE" ImageType="Jpeg">
+                                                        <Legend Name="Default"></Legend>
+                                                        <Legends>
+                                                            <DCWC:Legend Name="Default">
+                                                            </DCWC:Legend>
+                                                        </Legends>
+                                                        <BorderSkin FrameBackGradientEndColor="White" FrameBorderWidth="2"
                                                             SkinStyle="Raised" FrameBackColor="White"></BorderSkin>
                                                         <UI>
+                                                            <ContextMenu>
+                                                                <Items>
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                </Items>
+                                                            </ContextMenu>
                                                             <Toolbar BackColor="White" BorderColor="LightSlateGray">
+                                                                <Items>
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                    <DCWC:CommandUIItem CommandName="Separator" />
+                                                                </Items>
                                                                 <BorderSkin FrameBackGradientEndColor="LightBlue" PageColor="Transparent" SkinStyle="Raised"
                                                                     FrameBackColor="SteelBlue"></BorderSkin>
                                                             </Toolbar>
+                                                            <Commands>
+                                                                <DCWC:Command CommandType="LoadGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="LoadAppearance">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="LoadAll">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Separator">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="ResetAppearance">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Separator">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="SaveGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="SaveImage">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SaveAppearance">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SaveAll">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Copy">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Paste">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Print">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="PrintPreview">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Toggle3DGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="Toggle3D">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Toggle3DClustered">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Toggle3DRightAngle">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Rotate3DGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="RotateLeft">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="RotateRight">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="RotateUp">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="RotateDown">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Modify3DPerspectiveGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="Modify3DPerspectiveDec">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Modify3DPerspectiveInc">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Modify3DPointDepthGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="Modify3DPointDepthDec">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Modify3DPointDepthInc">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Modify3DPointGapGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="Modify3DPointGapDec">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Modify3DPointGapInc">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleLegend">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleDataLabels">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="SelectChartGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="SelectChartPoint">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartBubble">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartLine">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartSpline">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStepLine">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartFastLine">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartFastPoint">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartBar">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedBar">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedBar100">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartColumn">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedColumn">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedColumn100">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartArea">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartSplineArea">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedArea">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedArea100">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartPie">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartDoughnut">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStock">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartCandleStick">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartRange">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartSplineRange">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartGantt">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartRangeColumn">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartRadar">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartPolar">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartBoxPlot">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartRenko">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartThreeLineBreak">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartKagi">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartPointAndFigure">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartFunnel">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartPyramid">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartRose">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectChartStackedRose">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="SelectPaletteGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="SelectPaletteDefault">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteLightSteelBlue">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteEarthTones">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteGrayScale">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteSemiTransparent">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteExcelLike">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteLightBeige">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteBerry">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteChocolate">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteFire">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteGreenBlue">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteDundas">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteAcidWash">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteDundasDark">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteArtDeco">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteKindergarten">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteMilkShake">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteMidDay">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteRainbowVapors">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteTanzanite">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteTan">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteVegas">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="SelectPaletteWaterLilies">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="AddAnnotationGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="AddCalloutAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddArrowAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddBorder3DAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddTextAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddRectangleAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddEllipseAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddPolylineAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddPolygonAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddLineAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddVerticalLineAnnotation">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="AddHorizontalLineAnnotation">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Delete">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Properties">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="BringToFront">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="SendToBack">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleMajorGridLines">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleMinorGridLines">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleInterlacedAxes">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="ToggleReverseAxes">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="FinancialIndicatorsGroup">
+                                                                    <SubCommands>
+                                                                        <DCWC:Command CommandType="MovingAverage">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="ExponentialMovingAverage">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="TriangularMovingAverage">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="WeightedMovingAverage">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Forecasting">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="TypicalPrice">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="MedianPrice">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="WeightedClose">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="Envelopes">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="BollingerBands">
+                                                                        </DCWC:Command>
+                                                                        <DCWC:Command CommandType="ErrorBar">
+                                                                        </DCWC:Command>
+                                                                    </SubCommands>
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Separator">
+                                                                </DCWC:Command>
+                                                                <DCWC:Command CommandType="Spacer">
+                                                                </DCWC:Command>
+                                                            </Commands>
                                                         </UI>
                                                         <Series>
                                                             <DCWC:Series Name="Series0" BackGradientType="DiagonalRight" BorderColor="26, 59, 105"
-                                                                BorderWidth="0" Color="#D4E8FA" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                                                Label="" CustomAttributes="LabelStyle=Top,DrawingStyle=Cylinder" ShowInLegend="true">
+                                                                BorderWidth="0" Color="212, 232, 250" ShadowOffset="70" 
+                                                                Font="Microsoft Sans Serif, 7pt, style=Underline" 
+                                                                CustomAttributes="DrawingStyle=Cylinder, LabelStyle=Top">
                                                             </DCWC:Series>
                                                             <DCWC:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" CustomAttributes="DrawingStyle=Cylinder"
-                                                                ShowInLegend="false">
+                                                                ShowInLegend="False">
                                                             </DCWC:Series>
                                                             <DCWC:Series Name="Series2" BorderWidth="0" Color="Transparent" CustomAttributes="DrawingStyle=Cylinder"
-                                                                ShowInLegend="false" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
+                                                                ShowInLegend="False" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                                             </DCWC:Series>
                                                         </Series>
                                                         <ChartAreas>
                                                             <DCWC:ChartArea Name="ChartArea1">
-                                                                <Area3DStyle YAngle="0" XAngle="0" Enable3D="true" RightAngleAxes="False" WallWidth="0"
+                                                                <AxisX2>
+                                                                    <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                        IntervalType="Auto" />
+                                                                </AxisX2>
+                                                                <AxisY2>
+                                                                    <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                        IntervalType="Auto" />
+                                                                </AxisY2>
+                                                                <Area3DStyle YAngle="0" XAngle="0" Enable3D="True" RightAngleAxes="False" WallWidth="0"
                                                                     Clustered="True"></Area3DStyle>
-                                                                <AxisX Interval="Auto" Enabled="true" LabelsAutoFit="False" Reverse="true">
-                                                                    <MajorGrid Enabled="false" LineColor="Beige"></MajorGrid>
-                                                                    <MajorTickMark Enabled="false" />
-                                                                    <LabelStyle Font="Verdana, 7pt" />
+                                                                <AxisX Enabled="True" LabelsAutoFit="False" Reverse="True">
+                                                                    <MajorGrid Enabled="False" LineColor="Beige" Interval="Auto" 
+                                                                        IntervalOffset="Auto" IntervalOffsetType="Auto" IntervalType="Auto"></MajorGrid>
+                                                                    <MinorGrid Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                        IntervalType="Auto" Interval="Auto" />
+                                                                    <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorTickMark Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                        IntervalType="Auto" Interval="Auto" />
+                                                                    <LabelStyle Font="Verdana, 7pt" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                 </AxisX>
                                                                 <AxisY Enabled="True" LabelsAutoFit="False">
-                                                                    <MajorGrid LineColor="Beige"></MajorGrid>
-                                                                    <LabelStyle Format="###" Font="Verdana, 7pt" FontColor="Black" />
+                                                                    <MajorGrid LineColor="Beige" Disabled="False" Interval="Auto" 
+                                                                        IntervalOffset="Auto" IntervalOffsetType="Auto" IntervalType="Auto"></MajorGrid>
+                                                                    <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                        IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                    <LabelStyle Format="###" Font="Verdana, 7pt" Interval="Auto" 
+                                                                        IntervalOffset="Auto" IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                 </AxisY>
                                                             </DCWC:ChartArea>
                                                         </ChartAreas>
@@ -120,39 +484,396 @@
                                                             <td>
                                                                 <DCWC:Chart ID="CHRT_SummaryISODensity" ImageType="Jpeg" runat="server" Width="380px"
                                                                     Height="175px" ImageUrl="~/UploadFiles/temp/CHRT_SummaryISODensity" BackGradientType="Center"
-                                                                    Palette="Kindergarten" BackGradientEndColor="#FFFFFF" BorderLineColor="#808080"
-                                                                    EnableViewState="false">
+                                                                    Palette="Kindergarten" BackGradientEndColor="White" BorderLineColor="Gray">
                                                                     <Series>
                                                                         <DCWC:Series Name="Series0" BackGradientType="DiagonalRight" BorderColor="26, 59, 105"
-                                                                            BorderWidth="0" Color="Transparent" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                                                            Label="" CustomAttributes="LabelStyle=Top,DrawingStyle=Cylinder" ShowInLegend="true">
+                                                                            BorderWidth="0" Color="Transparent" ShadowOffset="70" 
+                                                                            Font="Microsoft Sans Serif, 7pt, style=Underline" 
+                                                                            CustomAttributes="DrawingStyle=Cylinder, LabelStyle=Top">
                                                                         </DCWC:Series>
-                                                                        <DCWC:Series Name="Series1" BorderColor="100, 0 , 0 , 0" ChartArea="ChartArea1" BorderWidth="1"
-                                                                            CustomAttributes="DrawingStyle=Cylinder" ShowInLegend="false">
+                                                                        <DCWC:Series Name="Series1" BorderColor="100, 0, 0, 0" ChartArea="ChartArea1"
+                                                                            CustomAttributes="DrawingStyle=Cylinder" ShowInLegend="False">
                                                                         </DCWC:Series>
                                                                         <DCWC:Series Name="Series2" BorderWidth="0" Color="Transparent" CustomAttributes="DrawingStyle=Cylinder"
-                                                                            ShowInLegend="false" MarkerImage="~/Images/green.png">
+                                                                            ShowInLegend="False" MarkerImage="~/Images/green.png">
                                                                         </DCWC:Series>
                                                                     </Series>
-                                                                    <BorderSkin SkinStyle="None"></BorderSkin>
+                                                                    <Legend Name="Default"></Legend>
+                                                                    <Legends>
+                                                                        <DCWC:Legend Name="Default">
+                                                                        </DCWC:Legend>
+                                                                    </Legends>
                                                                     <UI>
+                                                                        <ContextMenu>
+                                                                            <Items>
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                            </Items>
+                                                                        </ContextMenu>
                                                                         <Toolbar BackColor="White" BorderColor="LightSlateGray">
+                                                                            <Items>
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                <DCWC:CommandUIItem CommandName="Separator" />
+                                                                            </Items>
                                                                             <BorderSkin FrameBackGradientEndColor="LightBlue" PageColor="Transparent" SkinStyle="Raised"
                                                                                 FrameBackColor="SteelBlue"></BorderSkin>
                                                                         </Toolbar>
+                                                                        <Commands>
+                                                                            <DCWC:Command CommandType="LoadGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="LoadAppearance">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="LoadAll">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Separator">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="ResetAppearance">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Separator">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="SaveGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="SaveImage">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SaveAppearance">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SaveAll">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Copy">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Paste">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Print">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="PrintPreview">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Toggle3DGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="Toggle3D">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Toggle3DClustered">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Toggle3DRightAngle">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Rotate3DGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="RotateLeft">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="RotateRight">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="RotateUp">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="RotateDown">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Modify3DPerspectiveGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="Modify3DPerspectiveDec">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Modify3DPerspectiveInc">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Modify3DPointDepthGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="Modify3DPointDepthDec">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Modify3DPointDepthInc">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Modify3DPointGapGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="Modify3DPointGapDec">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Modify3DPointGapInc">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleLegend">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleDataLabels">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="SelectChartGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="SelectChartPoint">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartBubble">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartLine">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartSpline">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStepLine">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartFastLine">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartFastPoint">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartBar">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedBar">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedBar100">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartColumn">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedColumn">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedColumn100">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartArea">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartSplineArea">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedArea">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedArea100">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartPie">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartDoughnut">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStock">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartCandleStick">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartRange">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartSplineRange">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartGantt">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartRangeColumn">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartRadar">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartPolar">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartBoxPlot">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartRenko">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartThreeLineBreak">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartKagi">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartPointAndFigure">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartFunnel">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartPyramid">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartRose">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectChartStackedRose">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="SelectPaletteGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="SelectPaletteDefault">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteLightSteelBlue">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteEarthTones">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteGrayScale">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteSemiTransparent">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteExcelLike">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteLightBeige">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteBerry">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteChocolate">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteFire">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteGreenBlue">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteDundas">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteAcidWash">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteDundasDark">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteArtDeco">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteKindergarten">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteMilkShake">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteMidDay">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteRainbowVapors">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteTanzanite">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteTan">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteVegas">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="SelectPaletteWaterLilies">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="AddAnnotationGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="AddCalloutAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddArrowAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddBorder3DAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddTextAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddRectangleAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddEllipseAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddPolylineAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddPolygonAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddLineAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddVerticalLineAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="AddHorizontalLineAnnotation">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Delete">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Properties">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="BringToFront">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="SendToBack">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleMajorGridLines">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleMinorGridLines">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleInterlacedAxes">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="ToggleReverseAxes">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="FinancialIndicatorsGroup">
+                                                                                <SubCommands>
+                                                                                    <DCWC:Command CommandType="MovingAverage">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="ExponentialMovingAverage">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="TriangularMovingAverage">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="WeightedMovingAverage">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Forecasting">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="TypicalPrice">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="MedianPrice">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="WeightedClose">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="Envelopes">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="BollingerBands">
+                                                                                    </DCWC:Command>
+                                                                                    <DCWC:Command CommandType="ErrorBar">
+                                                                                    </DCWC:Command>
+                                                                                </SubCommands>
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Separator">
+                                                                            </DCWC:Command>
+                                                                            <DCWC:Command CommandType="Spacer">
+                                                                            </DCWC:Command>
+                                                                        </Commands>
                                                                     </UI>
                                                                     <ChartAreas>
                                                                         <DCWC:ChartArea Name="ChartArea1" BorderColor="26, 59, 105" BackGradientEndColor="White"
                                                                             BackColor="Gray" BackGradientType="TopBottom" BorderStyle="Solid" ShadowOffset="1">
-                                                                            <Area3DStyle YAngle="10" Light="Realistic" XAngle="10" Enable3D="true" RightAngleAxes="False"
-                                                                                WallWidth="0" Clustered="true"></Area3DStyle>
-                                                                            <%--Enable3D="true"--%>
-                                                                            <Position Height="99" Width="94" X="0" Y="2" />
+                                                                            <Area3DStyle YAngle="10" Light="Realistic" XAngle="10" Enable3D="True" RightAngleAxes="False"
+                                                                                WallWidth="0" Clustered="True"></Area3DStyle>
+                                                                            <AxisX2>
+                                                                                <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" />
+                                                                            </AxisX2>
+                                                                            <AxisY2>
+                                                                                <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" />
+                                                                            </AxisY2>
+                                                                            <Position Height="98" Width="94" Y="2" Auto="False" />
                                                                             <AxisY Enabled="True">
-                                                                                <MajorGrid LineColor="Beige" />
+                                                                                <MajorGrid LineColor="Beige" Disabled="False" Interval="Auto" 
+                                                                                    IntervalOffset="Auto" IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" />
                                                                             </AxisY>
-                                                                            <AxisX Enabled="True" Interval="Auto">
-                                                                                <MajorGrid LineColor="Beige" />
+                                                                            <AxisX Enabled="True">
+                                                                                <MajorGrid LineColor="Beige" Disabled="False" Interval="Auto" 
+                                                                                    IntervalOffset="Auto" IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorGrid Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" Interval="Auto" />
+                                                                                <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                    IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                <MinorTickMark Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" Interval="Auto" />
+                                                                                <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                    IntervalType="Auto" />
                                                                             </AxisX>
                                                                         </DCWC:ChartArea>
                                                                     </ChartAreas>
@@ -177,8 +898,9 @@
                                                                         <td style="background: #FFFFFF url(images/BGISOPaperGraph1.jpg) no-repeat; width: 276px;
                                                                             height: 169px; padding-left: 34px; padding-bottom: 14px;">
                                                                             <DCWC:Chart ID="CHRT_ISOPaper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1.jpg"
-                                                                                ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_ISOPaper1" Width="240px" Height="120px"
-                                                                                EnableViewState="false">
+                                                                                ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_ISOPaper1" 
+                                                                                Width="240px" Height="120px">
+                                                                                <Legend Enabled="False" Name="Default"></Legend>
                                                                                 <Legends>
                                                                                     <DCWC:Legend Name="Default" Enabled="False">
                                                                                     </DCWC:Legend>
@@ -195,13 +917,17 @@
                                                                                     <DCWC:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                                         Color="80, 65, 140, 140" YValueType="Double">
                                                                                     </DCWC:Series>                                                                                    
-                                                                                    <DCWC:Series Name="SeriesRed1" Color="Red" ChartType="Line" BorderWidth="1" ShowInLegend="false" >
+                                                                                    <DCWC:Series Name="SeriesRed1" Color="Red" ChartType="Line" 
+                                                                                        ShowInLegend="False" >
                                                                                     </DCWC:Series>
-                                                                                    <DCWC:Series Name="SeriesRed2" Color="Red" ChartType="Line" BorderWidth="1" ShowInLegend="false" >
+                                                                                    <DCWC:Series Name="SeriesRed2" Color="Red" ChartType="Line" 
+                                                                                        ShowInLegend="False" >
                                                                                     </DCWC:Series>
-                                                                                    <DCWC:Series Name="SeriesRed3" Color="Red" ChartType="Line" BorderWidth="1" ShowInLegend="false" >
+                                                                                    <DCWC:Series Name="SeriesRed3" Color="Red" ChartType="Line" 
+                                                                                        ShowInLegend="False" >
                                                                                     </DCWC:Series>
-                                                                                    <DCWC:Series Name="SeriesRed4" Color="Red" ChartType="Line" BorderWidth="1" ShowInLegend="false" >
+                                                                                    <DCWC:Series Name="SeriesRed4" Color="Red" ChartType="Line" 
+                                                                                        ShowInLegend="False" >
                                                                                     </DCWC:Series>
                                                                                 </Series>
                                                                                 <BorderSkin PageColor="AliceBlue" />
@@ -213,33 +939,389 @@
                                                                                     <DCWC:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
                                                                                         <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
                                                                                             LineStyle="NotSet">
-                                                                                            <MajorGrid Enabled="False" />
-                                                                                            <MajorTickMark Enabled="false" />
-                                                                                            <LabelStyle Enabled="False" />
+                                                                                            <MajorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                                         </AxisY>
                                                                                         <AxisX Margin="False" TitleAlignment="Near" Maximum="20" Minimum="-20" LineStyle="NotSet">
-                                                                                            <MajorGrid Enabled="False" />
-                                                                                            <MajorTickMark Enabled="false" />
-                                                                                            <LabelStyle Enabled="False" />
+                                                                                            <MajorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                                         </AxisX>
+                                                                                        <AxisX2>
+                                                                                            <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                                IntervalType="Auto" />
+                                                                                        </AxisX2>
+                                                                                        <AxisY2>
+                                                                                            <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                                IntervalType="Auto" />
+                                                                                        </AxisY2>
                                                                                     </DCWC:ChartArea>
                                                                                 </ChartAreas>
+                                                                                <UI>
+                                                                                    <ContextMenu>
+                                                                                        <Items>
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                        </Items>
+                                                                                    </ContextMenu>
+                                                                                    <Toolbar>
+                                                                                        <Items>
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                        </Items>
+                                                                                        <BorderSkin PageColor="" />
+                                                                                    </Toolbar>
+                                                                                    <Commands>
+                                                                                        <DCWC:Command CommandType="LoadGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="LoadAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="LoadAll">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Separator">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ResetAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Separator">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SaveGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SaveImage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SaveAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SaveAll">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Copy">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Paste">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Print">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="PrintPreview">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Toggle3DGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Toggle3D">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Toggle3DClustered">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Toggle3DRightAngle">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Rotate3DGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="RotateLeft">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateRight">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateUp">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateDown">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPerspectiveGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPerspectiveDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPerspectiveInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPointDepthGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPointDepthDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPointDepthInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPointGapGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPointGapDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPointGapInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleLegend">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleDataLabels">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SelectChartGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SelectChartPoint">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBubble">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSpline">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStepLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFastLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFastPoint">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedBar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedBar100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedColumn100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSplineArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedArea100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPie">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartDoughnut">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStock">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartCandleStick">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRange">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSplineRange">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartGantt">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRangeColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRadar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPolar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBoxPlot">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRenko">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartThreeLineBreak">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartKagi">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPointAndFigure">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFunnel">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPyramid">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRose">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedRose">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SelectPaletteGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDefault">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteLightSteelBlue">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteEarthTones">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteGrayScale">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteSemiTransparent">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteExcelLike">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteLightBeige">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteBerry">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteChocolate">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteFire">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteGreenBlue">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDundas">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteAcidWash">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDundasDark">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteArtDeco">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteKindergarten">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteMilkShake">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteMidDay">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteRainbowVapors">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteTanzanite">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteTan">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteVegas">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteWaterLilies">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="AddAnnotationGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="AddCalloutAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddArrowAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddBorder3DAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddTextAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddRectangleAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddEllipseAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddPolylineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddPolygonAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddVerticalLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddHorizontalLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Delete">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Properties">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="BringToFront">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SendToBack">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleMajorGridLines">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleMinorGridLines">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleInterlacedAxes">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleReverseAxes">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="FinancialIndicatorsGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="MovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ExponentialMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="TriangularMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="WeightedMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Forecasting">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="TypicalPrice">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="MedianPrice">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="WeightedClose">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Envelopes">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="BollingerBands">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ErrorBar">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Separator">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Spacer">
+                                                                                        </DCWC:Command>
+                                                                                    </Commands>
+                                                                                </UI>
                                                                             </DCWC:Chart>
                                                                         </td>
                                                                         <td style="background: #FFFFFF url(images/BGISOPaperGraph2.jpg) no-repeat; width: 104px;
                                                                             height: 169px; padding-left: 28px; padding-bottom: 12px;">
                                                                             <DCWC:Chart ID="CHRT_ISOPaper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2.jpg"
-                                                                                ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_ISOPaper2" Width="69px" Height="118px"
-                                                                                EnableViewState="false">
+                                                                                ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_ISOPaper2" Width="69px" 
+                                                                                Height="118px">
+                                                                                <Legend Enabled="False" Name="Default"></Legend>
                                                                                 <Legends>
                                                                                     <DCWC:Legend Name="Default" Enabled="False">
                                                                                     </DCWC:Legend>
                                                                                 </Legends>
                                                                                 <Series>
-                                                                                    <DCWC:Series Name="Series1" BorderColor="100, 0 , 0 , 0" ChartArea="Default" BorderWidth="1"
-                                                                                        CustomAttributes="DrawingStyle=Cylinder" ShowInLegend="false">
+                                                                                    <DCWC:Series Name="Series1" BorderColor="100, 0, 0, 0"
+                                                                                        CustomAttributes="DrawingStyle=Cylinder" ShowInLegend="False">
                                                                                     </DCWC:Series>
-                                                                                    <DCWC:Series Name="Series2" Color="Green" ChartArea="Default" BorderWidth="2" ShowInLegend="false">
+                                                                                    <DCWC:Series Name="Series2" Color="Green" BorderWidth="2" ShowInLegend="False">
                                                                                     </DCWC:Series>
                                                                                     <DCWC:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                                         BorderColor="Red" Color="80, 65, 140, 140" YValueType="Double">
@@ -254,22 +1336,372 @@
                                                                                     <DCWC:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
                                                                                         <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
                                                                                             LineStyle="NotSet">
-                                                                                            <MajorGrid Enabled="False" />
-                                                                                            <MajorTickMark Enabled="false" />
-                                                                                            <LabelStyle Enabled="False" />
+                                                                                            <MajorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                                         </AxisY>
-                                                                                        <AxisX Margin="true" TitleAlignment="Near" LineStyle="NotSet">
-                                                                                            <MajorGrid Enabled="False" />
-                                                                                            <MajorTickMark Enabled="false" />
-                                                                                            <LabelStyle Enabled="False" />
+                                                                                        <AxisX TitleAlignment="Near" LineStyle="NotSet">
+                                                                                            <MajorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                                         </AxisX>
-                                                                                        <AxisX2 Interval="Auto" Minimum="0" Maximum="1" LineStyle="NotSet">
-                                                                                            <MajorGrid Enabled="False" />
-                                                                                            <MajorTickMark Enabled="false" />
-                                                                                            <LabelStyle Enabled="False" />
+                                                                                        <AxisX2 Minimum="0" Maximum="1" LineStyle="NotSet">
+                                                                                            <MajorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                                IntervalType="Auto" Interval="Auto" />
+                                                                                            <MajorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                                IntervalType="Auto" Interval="Auto" />
+                                                                                            <LabelStyle Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
                                                                                         </AxisX2>
+                                                                                        <AxisY2>
+                                                                                            <MajorGrid Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorGrid Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MajorTickMark Disabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <MinorTickMark Enabled="False" Interval="Auto" IntervalOffset="Auto" 
+                                                                                                IntervalOffsetType="Auto" IntervalType="Auto" />
+                                                                                            <LabelStyle Interval="Auto" IntervalOffset="Auto" IntervalOffsetType="Auto" 
+                                                                                                IntervalType="Auto" />
+                                                                                        </AxisY2>
                                                                                     </DCWC:ChartArea>
                                                                                 </ChartAreas>
+                                                                                <UI>
+                                                                                    <ContextMenu>
+                                                                                        <Items>
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                        </Items>
+                                                                                    </ContextMenu>
+                                                                                    <Toolbar>
+                                                                                        <Items>
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                            <DCWC:CommandUIItem CommandName="Separator" />
+                                                                                        </Items>
+                                                                                        <BorderSkin PageColor="" />
+                                                                                    </Toolbar>
+                                                                                    <Commands>
+                                                                                        <DCWC:Command CommandType="LoadGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="LoadAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="LoadAll">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Separator">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ResetAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Separator">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SaveGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SaveImage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SaveAppearance">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SaveAll">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Copy">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Paste">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Print">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="PrintPreview">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Toggle3DGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Toggle3D">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Toggle3DClustered">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Toggle3DRightAngle">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Rotate3DGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="RotateLeft">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateRight">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateUp">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="RotateDown">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPerspectiveGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPerspectiveDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPerspectiveInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPointDepthGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPointDepthDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPointDepthInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Modify3DPointGapGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="Modify3DPointGapDec">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Modify3DPointGapInc">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleLegend">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleDataLabels">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SelectChartGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SelectChartPoint">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBubble">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSpline">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStepLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFastLine">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFastPoint">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedBar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedBar100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedColumn100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSplineArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedArea">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedArea100">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPie">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartDoughnut">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStock">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartCandleStick">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRange">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartSplineRange">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartGantt">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRangeColumn">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRadar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPolar">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartBoxPlot">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRenko">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartThreeLineBreak">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartKagi">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPointAndFigure">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartFunnel">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartPyramid">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartRose">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectChartStackedRose">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SelectPaletteGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDefault">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteLightSteelBlue">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteEarthTones">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteGrayScale">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteSemiTransparent">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteExcelLike">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteLightBeige">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteBerry">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteChocolate">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteFire">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteGreenBlue">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDundas">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteAcidWash">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteDundasDark">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteArtDeco">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteKindergarten">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteMilkShake">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteMidDay">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteRainbowVapors">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteTanzanite">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteTan">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteVegas">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="SelectPaletteWaterLilies">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="AddAnnotationGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="AddCalloutAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddArrowAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddBorder3DAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddTextAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddRectangleAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddEllipseAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddPolylineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddPolygonAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddVerticalLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="AddHorizontalLineAnnotation">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Delete">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Properties">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="BringToFront">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="SendToBack">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleMajorGridLines">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleMinorGridLines">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleInterlacedAxes">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="ToggleReverseAxes">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="FinancialIndicatorsGroup">
+                                                                                            <SubCommands>
+                                                                                                <DCWC:Command CommandType="MovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ExponentialMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="TriangularMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="WeightedMovingAverage">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Forecasting">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="TypicalPrice">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="MedianPrice">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="WeightedClose">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="Envelopes">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="BollingerBands">
+                                                                                                </DCWC:Command>
+                                                                                                <DCWC:Command CommandType="ErrorBar">
+                                                                                                </DCWC:Command>
+                                                                                            </SubCommands>
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Separator">
+                                                                                        </DCWC:Command>
+                                                                                        <DCWC:Command CommandType="Spacer">
+                                                                                        </DCWC:Command>
+                                                                                    </Commands>
+                                                                                </UI>
                                                                             </DCWC:Chart>
                                                                         </td>
                                                                     </tr>
@@ -1013,7 +2445,8 @@
                         <ContentTemplate>
                             <asp:ImageButton ID="btn_Excel" runat="server" OnClick="btn_Excel_Click" ImageUrl="~/Images/excel-icon.gif"
                                 ToolTip="Export To Excel" />&nbsp;<asp:ImageButton ID="btn_DownloadFile" runat="server"
-                                    OnClick="btn_DownloadFile_Click" ImageUrl="~/Images/notepad-icon.gif" ToolTip="Download File" /></br>
+                                    OnClick="btn_DownloadFile_Click" ImageUrl="~/Images/notepad-icon.gif" ToolTip="Download File" />
+                            <br></br>
                             <div style="overflow: hidden; width: 740px; height: 30px;">
                                 <table class="MasterTable_Green gridTabContainer1_TabPanChart_GV_MeasurementISOData_ctl01"
                                     cellpadding="0" cellspacing="0" border="0">
@@ -1166,6 +2599,11 @@
             </td>
         </tr>
     </table>
+    </td>
+</tr>
+</tbody>
+</table>
+
     <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
         position: absolute">
     </div>

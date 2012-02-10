@@ -58,7 +58,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TaskeroMobile", "TaskeroMob
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "49347"
+		VWDPort = "49292"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject

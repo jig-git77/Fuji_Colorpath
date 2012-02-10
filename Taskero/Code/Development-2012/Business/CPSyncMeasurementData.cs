@@ -70,6 +70,17 @@ namespace Fuji.Business
         }
         #endregion
 
+        #region uspGetAnalyzeISOAvgChartData
+        public DataSet uspGetAnalyzeISOAvgChartData()
+        {
+            SqlCommand Cmd = new SqlCommand();
+            Cmd.CommandType = CommandType.StoredProcedure;
+            Cmd.CommandText = "CPSync.uspGetAnalyzeISOAvgChartData";
+            Cmd.Parameters.AddWithValue("@PressRunID", this.PressRunID);
+            return (new DataAccess.Database()).GetDataSet(Cmd);
+        }
+        #endregion
+
         #region uspGetChartGrayBalanceData
         public DataSet uspGetChartGrayBalanceData()
         {

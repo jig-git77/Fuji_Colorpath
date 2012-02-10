@@ -34,6 +34,7 @@ public partial class SyncDetail : PageBase
     public string projectclose = "";
     public string pressrunid = "";
     public string pressrunclose = "";
+    public string pressRunName = "";
     #endregion
 
 
@@ -767,6 +768,7 @@ public partial class SyncDetail : PageBase
                 string PressLeftManuData = "";
                 //====== Create Project Menu with javascript click function ============//
                 PressLeftManuData = "<table border='0' cellpadding='0' cellspacing='7' width='100%'><tr><td align='center'><img src='Images/leftnavbottomarrow.gif' /></td></tr></table>";
+                HDPressRunName.Value = DT_SyncPressRun.Rows[0]["PressRunName"].ToString();
                 PressLeftManuData += "<table border='0' cellpadding='0' cellspacing='4' width='100%' class='SYNCTABLELEFTTABLE' onclick='CallPressRunBindGrid()' style='cursor:pointer'><tr><td>Select Press Run :</td></tr><tr><td>" + DT_SyncPressRun.Rows[0]["PressRunName"].ToString() + "</td></tr></table>";
                 obj.Insert(2, PressLeftManuData);
             }
@@ -1401,6 +1403,7 @@ public partial class SyncDetail : PageBase
                     string PressLeftManuData = "";
                     //====== Create Project Menu with javascript click function ============//
                     PressLeftManuData = "<table border='0' cellpadding='0' cellspacing='7' width='100%'><tr><td align='center'><img src='Images/leftnavbottomarrow.gif' /></td></tr></table>";
+                    HDPressRunName.Value = DT_SyncPressRun.Rows[0]["PressRunName"].ToString();
                     PressLeftManuData += "<table border='0' cellpadding='0' cellspacing='4' width='100%' class='SYNCTABLELEFTTABLE' onclick='CallPressRunBindGrid()' style='cursor:pointer'><tr><td>Select Press Run :</td></tr><tr><td>" + DT_SyncPressRun.Rows[0]["PressRunName"].ToString() + "</td></tr></table>";
                     obj.Insert(2, PressLeftManuData);
                 }
@@ -2339,6 +2342,24 @@ public partial class SyncDetail : PageBase
         FRMGeneratePDFReport.Style.Add("display", "");
     }
 
+
+    /// <summary>
+    /// This click Analyze Average Of Measurements checkbox to set agerage measurements.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void chkAnalyzeAverageOfMeasurements_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            //======== Bind Trend Line E Chart =================//
+            FillTrendLineDeltaEChart();
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+    }
 
     #endregion
 
@@ -4238,9 +4259,28 @@ public partial class SyncDetail : PageBase
                 //else
                 //{
                 if (Fuji.Common.Sessions.GetSession("SelectedProjectTypeID").ToString() == Convert.ToInt16(Enums.ProjectType.G7).ToString())
+                {
+                    tblAverageOfMeasurements.Visible = false;
                     FRM1.Attributes.Add("src", "SyncDetailMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
+                }
                 else
-                    FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim());
+                {
+                    tblAverageOfMeasurements.Visible = true;
+                    CHRT_TrendLineDeltaE.Enabled = chkAnalyzeAverageOfMeasurements.Checked;
+                   
+                    string queryString = string.Empty;
+                    if (chkAnalyzeAverageOfMeasurements.Checked)
+                    {
+                        CHRT_TrendLineDeltaE.MapAreas.Clear();
+                        CHRT_TrendLineDeltaE.MapEnabled = false;
+
+                        queryString = string.Format("&PressRunID={0}", Fuji.Common.Sessions.GetSession("SelectedPressRunID").ToString());
+                        if (!string.IsNullOrEmpty(HDPressRunName.Value))
+                            queryString = string.Format("{0}&PressRunName={1}", queryString, HDPressRunName.Value);
+                    }
+                    
+                    FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim() + queryString);
+                }
                 // }
 
                 FRM1.Style.Add("display", "");

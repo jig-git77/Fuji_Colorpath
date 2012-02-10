@@ -2379,6 +2379,26 @@
                                                     <table id="TblAnalyze" runat="server" border="0" width="100%" style="height: 640px;"
                                                         visible="false" cellpadding="0" cellspacing="0" class="TABLE1">
                                                         <tr>
+                                                            <td>
+                                                                <table id="tblAverageOfMeasurements" runat="server" border="0" width="100%" cellpadding="5" cellspacing="0">
+                                                                    <tr>
+                                                                        <td>
+                                                                          <asp:CheckBox 
+                                                                                    ID="chkAnalyzeAverageOfMeasurements" 
+                                                                                    runat="server" 
+                                                                                    Checked="false" 
+                                                                                    Font-Bold="true"
+                                                                                    AutoPostBack = "true"
+                                                                                    OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click"
+                                                                                    >
+                                                                           </asp:CheckBox>
+                                                                           <span style="font-weight: bold; vertical-align:text-top;">Analyze Average Of Measurements</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td valign="top">
                                                                 <table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                                     <tr>
@@ -3024,6 +3044,7 @@
     <asp:HiddenField ID="HDTrendDelta" runat="server" />
     <asp:HiddenField ID="HDCurrentMeasurement" runat="server" />
     <asp:HiddenField ID="HDClientDatatime" runat="server" />
+    <asp:HiddenField ID="HDPressRunName" runat="server" />
     <asp:Button ID="HDButCurrentMeasurement" runat="server" Text="Button" OnClick="HDButCurrentMeasurement_Click" Style="display: none" />
     <ajaxtoolkit:ModalPopupExtender runat="server" ID="programmaticModalPopup" BehaviorID="programmaticModalPopupBehavior"
         Y="225" TargetControlID="hiddenTargetControlForModalPopup" PopupControlID="programmaticPopup"

@@ -77,13 +77,15 @@ public partial class SyncDetailISOMeasurementChart : PageBase
             {
 
                 //// ===== Create Object of CPSyncMeasurementData  ======//
-                //CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
+                CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
 
                 //// ===== Get Data from data base  ==================//
-                //objCPSyncMeasurementData.PressRunID = Convert.ToInt32(Request.QueryString["PressRunID"]);
-                //DS = objCPSyncMeasurementData.uspGetChartsDataAvg();
+                objCPSyncMeasurementData.PressRunID = Convert.ToInt32(Request.QueryString["PressRunID"]);
+                DS = objCPSyncMeasurementData.uspGetAnalyzeISOAvgChartData();
 
-
+                if (Request.QueryString["PressRunName"] != null)
+                    lblNowAnalyzing.Text = string.Format("Average of Run {0}’s Enabled Measurements",Request.QueryString["PressRunName"].ToString());
+                
             }
             else
             {
