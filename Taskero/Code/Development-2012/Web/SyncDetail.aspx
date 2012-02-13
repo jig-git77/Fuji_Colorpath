@@ -7,8 +7,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 <%@ Register Src="Common/GenerateSyncReport.ascx" TagName="GenerateSyncReport" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-   <script src="flex/AC_OETags.js" type="text/javascript"></script>
-   <%--<script src="JS/xychartread_isis.js" type="text/javascript"></script>--%>
+    <script src="flex/AC_OETags.js" type="text/javascript"></script>
+    <%--<script src="JS/xychartread_isis.js" type="text/javascript"></script>--%>
     <script language="JavaScript" type="text/javascript">
         var requiredMajorVersion = 10;
         var requiredMinorVersion = 0;
@@ -138,7 +138,7 @@
                                                                                         <rad:GridBoundColumn DataField="PressManufacturer" UniqueName="PressManufacturer"
                                                                                             AllowFiltering="false" Visible="true" HeaderText="Device Manufacturer" ItemStyle-Width="40%"
                                                                                             HeaderStyle-Width="40%">
-                                                                                        </rad:GridBoundColumn>                                                                                       
+                                                                                        </rad:GridBoundColumn>
                                                                                     </Columns>
                                                                                 </MasterTableView>
                                                                             </rad:RadGrid>
@@ -239,10 +239,10 @@
                                                                                     <Columns>
                                                                                         <rad:GridBoundColumn DataField="ProjectID" HeaderText="ProjectID" Visible="false"
                                                                                             UniqueName="column1">
-                                                                                            
                                                                                         </rad:GridBoundColumn>
-                                                                                          <rad:GridBoundColumn DataField="ChartTypeID" HeaderText="ChartTypeID" Visible="false"
-                                                                                            UniqueName="column2">  </rad:GridBoundColumn>
+                                                                                        <rad:GridBoundColumn DataField="ChartTypeID" HeaderText="ChartTypeID" Visible="false"
+                                                                                            UniqueName="column2">
+                                                                                        </rad:GridBoundColumn>
                                                                                         <%--<rad:GridBoundColumn DataField="ProjStatusID" HeaderText="ProjStatusID" UniqueName="ProjStatusID"
                                                                                             Visible="false">
                                                                                         </rad:GridBoundColumn>--%>
@@ -351,19 +351,21 @@
                                                                                         Project Name :
                                                                                     </td>
                                                                                     <td style="width: 30%">
-                                                                                        <asp:TextBox ID="TxtProjectName" runat="server" CssClass="TEXTBOX"></asp:TextBox> <asp:HiddenField ID="ClientDatatime" runat="server" />
+                                                                                        <asp:TextBox ID="TxtProjectName" runat="server" CssClass="TEXTBOX"></asp:TextBox>
+                                                                                        <asp:HiddenField ID="ClientDatatime" runat="server" />
                                                                                     </td>
-                                                                                     <td id="td1" runat="server" class="FORM-TEXT-BLACK" style="width: 20%">
+                                                                                    <td id="td1" runat="server" class="FORM-TEXT-BLACK" style="width: 20%">
                                                                                         Output Type :
                                                                                     </td>
                                                                                     <td id="td2" runat="server" style="width: 30%">
                                                                                         <asp:DropDownList ID="DDLOutputType" runat="server" Width="120px" CssClass="DROPDOWNLIST"
-                                                                                            AutoPostBack="True" OnSelectedIndexChanged="DDLOutputType_SelectedIndexChanged" EnableViewState="false">
-                                                                                            <asp:ListItem Text="Offset" Value="1" ></asp:ListItem>
-                                                                                            <asp:ListItem Text="Screen" Value="2"></asp:ListItem>  
-                                                                                            <asp:ListItem Text="Wide Format" Value="3"></asp:ListItem> 
+                                                                                            AutoPostBack="True" OnSelectedIndexChanged="DDLOutputType_SelectedIndexChanged"
+                                                                                            EnableViewState="false">
+                                                                                            <asp:ListItem Text="Offset" Value="1"></asp:ListItem>
+                                                                                            <asp:ListItem Text="Screen" Value="2"></asp:ListItem>
+                                                                                            <asp:ListItem Text="Wide Format" Value="3"></asp:ListItem>
                                                                                         </asp:DropDownList>
-                                                                                     </td>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td id="tdProjectTypeTitle" runat="server" class="FORM-TEXT-BLACK" style="width: 20%">
@@ -371,11 +373,12 @@
                                                                                     </td>
                                                                                     <td id="tdProjectTypeDDL" runat="server" style="width: 30%">
                                                                                         <asp:DropDownList ID="DDLProjectType" runat="server" Width="120px" CssClass="DROPDOWNLIST"
-                                                                                            AutoPostBack="True" OnSelectedIndexChanged="DDLProjectType_SelectedIndexChanged" EnableViewState="true">
+                                                                                            AutoPostBack="True" OnSelectedIndexChanged="DDLProjectType_SelectedIndexChanged"
+                                                                                            EnableViewState="true">
                                                                                             <asp:ListItem Text="G7" Value="1"></asp:ListItem>
-                                                                                            <asp:ListItem Text="ISO" Value="2"></asp:ListItem>  
+                                                                                            <asp:ListItem Text="ISO" Value="2"></asp:ListItem>
                                                                                         </asp:DropDownList>
-                                                                                     </td>
+                                                                                    </td>
                                                                                     <td class="FORM-TEXT-BLACK" style="width: 20%">
                                                                                         &nbsp;
                                                                                     </td>
@@ -2173,19 +2176,19 @@
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td valign="top">
-                                                                                                    <table border="0" width="100%" cellpadding="0" cellspacing="0">                                                                                                       
+                                                                                                    <table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                                                                         <tr>
                                                                                                             <td align="center">
-                                                                                                             <fieldset>
+                                                                                                                <fieldset>
                                                                                                                     <legend class="subtitle">Notes</legend>
-                                                                                                                <table border="0" width="99%" cellpadding="0" cellspacing="5">
-                                                                                                                    <tr>
-                                                                                                                        <td style="padding-left: 5px;">
-                                                                                                                            <asp:TextBox ID="TxtNotes" PCTypeId="18" runat="server" Columns="130" Rows="5" TextMode="MultiLine" onkeypress = "return imposeMaxLength(this, 250);"
-                                                                                                                                MaxLength="250" CssClass="TEXTBOX"></asp:TextBox>
-                                                                                                                        </td>
-                                                                                                                    </tr>
-                                                                                                                </table>
+                                                                                                                    <table border="0" width="99%" cellpadding="0" cellspacing="5">
+                                                                                                                        <tr>
+                                                                                                                            <td style="padding-left: 5px;">
+                                                                                                                                <asp:TextBox ID="TxtNotes" PCTypeId="18" runat="server" Columns="130" Rows="5" TextMode="MultiLine"
+                                                                                                                                    onkeypress="return imposeMaxLength(this, 250);" MaxLength="250" CssClass="TEXTBOX"></asp:TextBox>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                    </table>
                                                                                                                 </fieldset>
                                                                                                             </td>
                                                                                                         </tr>
@@ -2195,82 +2198,97 @@
                                                                                         </table>
                                                                                     </td>
                                                                                 </tr>
-                                                                            </table>                                                                            
+                                                                            </table>
                                                                         </ContentTemplate>
                                                                     </ajaxtoolkit:TabPanel>
                                                                     <ajaxtoolkit:TabPanel ID="TabPanMeasurementSetup" Width="100%" runat="server" HeaderText="Measurement Setup">
                                                                         <ContentTemplate>
-                                                                            <table border="0" width="100%" style="height: 440px; padding:20px;" cellpadding="0" cellspacing="0">
-                                                                                <tr style="height:40px;">
-                                                                                    <td valign="top" >
-                                                                                        <b><asp:CheckBox ID="ChkUseMeasurementPlugin" CssClass="subtitle" runat="server" Text="Use Measurement Plugin" /></b>
-                                                                                    </td>                                                                                    
-                                                                                </tr>    
-                                                                                <tr style="height:120px;" >
+                                                                            <table border="0" width="100%" style="height: 440px; padding: 20px;" cellpadding="0"
+                                                                                cellspacing="0">
+                                                                                <tr style="height: 40px;">
+                                                                                    <td valign="top">
+                                                                                        <b>
+                                                                                            <asp:CheckBox ID="ChkUseMeasurementPlugin" CssClass="subtitle" runat="server" Text="Use Measurement Plugin" /></b>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr style="height: 120px;">
                                                                                     <td valign="top">
                                                                                         <table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                                                             <tr>
-                                                                                                <td valign="top" style="height:120px;">
-                                                                                                     <fieldset style="width:90%;">
+                                                                                                <td valign="top" style="height: 120px;">
+                                                                                                    <fieldset style="width: 90%;">
                                                                                                         <legend class="subtitle">Measurement Settings</legend>
                                                                                                         <table border="0" width="100%" cellpadding="2" cellspacing="2">
                                                                                                             <tr>
-                                                                                                                <td>Illuminant :</td>
-                                                                                                                <td> 
+                                                                                                                <td>
+                                                                                                                    Illuminant :
+                                                                                                                </td>
+                                                                                                                <td>
                                                                                                                     <asp:DropDownList ID="ddlMeasurentIlluminant" runat="server" CssClass="DROPDOWNLIST">
-                                                                                                                         <asp:ListItem Selected="True" Text="D50" Value="1"></asp:ListItem>
+                                                                                                                        <asp:ListItem Selected="True" Text="D50" Value="1"></asp:ListItem>
                                                                                                                     </asp:DropDownList>
-                                                                                                                 </td>
-                                                                                                             </tr>
-                                                                                                             <tr>
-                                                                                                                <td>Observer :</td>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                    Observer :
+                                                                                                                </td>
                                                                                                                 <td>
                                                                                                                     <asp:DropDownList ID="ddlMeasurentObserver" runat="server" CssClass="DROPDOWNLIST">
-                                                                                                                         <asp:ListItem Selected="True" Text="2" Value="1"></asp:ListItem>
+                                                                                                                        <asp:ListItem Selected="True" Text="2" Value="1"></asp:ListItem>
                                                                                                                     </asp:DropDownList>
                                                                                                                 </td>
-                                                                                                             </tr>
-                                                                                                             <tr>
-                                                                                                                <td>Density Type :</td>
+                                                                                                            </tr>
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                    Density Type :
+                                                                                                                </td>
                                                                                                                 <td>
                                                                                                                     <asp:DropDownList ID="ddlMeasurentDensityType" runat="server" CssClass="DROPDOWNLIST">
-                                                                                                                         <asp:ListItem Selected="True" Text="StatusT" Value="1"></asp:ListItem>
+                                                                                                                        <asp:ListItem Selected="True" Text="StatusT" Value="1"></asp:ListItem>
                                                                                                                     </asp:DropDownList>
                                                                                                                 </td>
-                                                                                                             </tr>                                                                                            
+                                                                                                            </tr>
                                                                                                         </table>
-                                                                                                     </fieldset>
+                                                                                                    </fieldset>
                                                                                                 </td>
-                                                                                                 <td valign="top">
-                                                                                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server"> 
-                                                                                                        
+                                                                                                <td valign="top">
+                                                                                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                                                                         <ContentTemplate>
-                                                                                                             <table border="0" width="90%" cellpadding="2" cellspacing="2">
+                                                                                                            <table border="0" width="90%" cellpadding="2" cellspacing="2">
                                                                                                                 <tr>
-                                                                                                                    <td class="subtitle">Device Type :</td>
-                                                                                                                    <td> 
-                                                                                                                        <asp:DropDownList ID="ddlMeasurentDeviceType" runat="server" CssClass="DROPDOWNLIST" AutoPostBack="true" OnSelectedIndexChanged="ddlMeasurentDeviceType_SelectedIndexChanged">                                                                                                                            
-                                                                                                                        </asp:DropDownList>
-                                                                                                                     </td>
-                                                                                                                 </tr>
-                                                                                                                 <tr>
-                                                                                                                    <td class="subtitle">Alignment Chart :</td>
+                                                                                                                    <td class="subtitle">
+                                                                                                                        Device Type :
+                                                                                                                    </td>
                                                                                                                     <td>
-                                                                                                                        <asp:DropDownList ID="ddlMeasurentAlignmentChart" runat="server" CssClass="DROPDOWNLIST">                                                                                                             
+                                                                                                                        <asp:DropDownList ID="ddlMeasurentDeviceType" runat="server" CssClass="DROPDOWNLIST"
+                                                                                                                            AutoPostBack="true" OnSelectedIndexChanged="ddlMeasurentDeviceType_SelectedIndexChanged">
                                                                                                                         </asp:DropDownList>
-                                                                                                                     </td>
-                                                                                                                 </tr>                                                                                                                                                                                       
-                                                                                                             </table>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td class="subtitle">
+                                                                                                                        Alignment Chart :
+                                                                                                                    </td>
+                                                                                                                    <td>
+                                                                                                                        <asp:DropDownList ID="ddlMeasurentAlignmentChart" runat="server" CssClass="DROPDOWNLIST">
+                                                                                                                        </asp:DropDownList>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            </table>
                                                                                                         </ContentTemplate>
-                                                                                                     </asp:UpdatePanel>                                                                                         
+                                                                                                    </asp:UpdatePanel>
                                                                                                 </td>
                                                                                             </tr>
-                                                                                        </table>                                                                                        
+                                                                                        </table>
                                                                                     </td>
-                                                                                </tr>                                                                                                                                                          
-                                                                             
-                                                                                <tr><td>&nbsp;</td></tr>
-                                                                            </table>                                                                            
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        &nbsp;
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
                                                                         </ContentTemplate>
                                                                     </ajaxtoolkit:TabPanel>
                                                                 </ajaxtoolkit:TabContainer>
@@ -2288,21 +2306,21 @@
                                                         visible="false" cellpadding="0" cellspacing="0" class="TABLE1">
                                                         <tr id="TrPlugin" runat="server">
                                                             <td valign="top">
-                                                                <iframe id="IFramePlugin" runat="server" name="IFramePlugin" style="height: 600px; width: 100%; display: none"
-                                                                    frameborder="0" scrolling="auto"></iframe>
+                                                                <iframe id="IFramePlugin" runat="server" name="IFramePlugin" style="height: 600px;
+                                                                    width: 100%; display: none" frameborder="0" scrolling="auto"></iframe>
                                                             </td>
                                                         </tr>
                                                         <tr id="TrFlexObject" runat="server">
                                                             <td valign="top">
-                                                            <script language="JavaScript" type="text/javascript">
-                                                                var hasProductInstall = DetectFlashVer(6, 0, 65);
-                                                                var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
-                                                                if (hasProductInstall && !hasRequestedVersion) {
-                                                                    var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
-                                                                    var MMredirectURL = window.location;
-                                                                    document.title = document.title.slice(0, 47) + " - Flash Player Installation";
-                                                                    var MMdoctitle = document.title;
-                                                                    AC_FL_RunContent(
+                                                                <script language="JavaScript" type="text/javascript">
+                                                                    var hasProductInstall = DetectFlashVer(6, 0, 65);
+                                                                    var hasRequestedVersion = DetectFlashVer(requiredMajorVersion, requiredMinorVersion, requiredRevision);
+                                                                    if (hasProductInstall && !hasRequestedVersion) {
+                                                                        var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
+                                                                        var MMredirectURL = window.location;
+                                                                        document.title = document.title.slice(0, 47) + " - Flash Player Installation";
+                                                                        var MMdoctitle = document.title;
+                                                                        AC_FL_RunContent(
                                                                         "src", "playerProductInstall",
                                                                         "FlashVars", "",
                                                                         "width", "100%",
@@ -2316,8 +2334,8 @@
                                                                         "type", "application/x-shockwave-flash",
                                                                         "pluginspage", "http://www.adobe.com/go/getflashplayer"
                                                                         );
-                                                                } else if (hasRequestedVersion) {
-                                                                    AC_FL_RunContent(
+                                                                    } else if (hasRequestedVersion) {
+                                                                        AC_FL_RunContent(
                                                                         "src", "Flex/FileUploadApp",
                                                                         "FlashVars", "appurl=<%=appurl%>&uploadurl=<%=uploadurl%>&pressrunid=<%=pressrunid%>&serialno=<%=serialno%>&pressrunclose=<%=pressrunclose%>",
                                                                         "width", "100%",
@@ -2331,12 +2349,12 @@
                                                                         "type", "application/x-shockwave-flash",
                                                                         "pluginspage", "http://www.adobe.com/go/getflashplayer"
                                                                         );
-                                                                } else {
-                                                                    var alternateContent = 'Alternate HTML content should be placed here. '
+                                                                    } else {
+                                                                        var alternateContent = 'Alternate HTML content should be placed here. '
                                                                         + 'This content requires the Adobe Flash Player. '
                                                                         + '<a href=http://www.adobe.com/go/getflash/>Get Flash</a>';
-                                                                    document.write(alternateContent);  // insert non-flash content
-                                                                }
+                                                                        document.write(alternateContent);  // insert non-flash content
+                                                                    }
                                                                 </script>
                                                                 <noscript>
                                                                     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="FileUploadApp" width="100%"
@@ -2380,19 +2398,14 @@
                                                         visible="false" cellpadding="0" cellspacing="0" class="TABLE1">
                                                         <tr>
                                                             <td>
-                                                                <table id="tblAverageOfMeasurements" runat="server" border="0" width="100%" cellpadding="5" cellspacing="0">
+                                                                <table id="tblAverageOfMeasurements" runat="server" border="0" width="100%" cellpadding="5"
+                                                                    cellspacing="0">
                                                                     <tr>
                                                                         <td>
-                                                                          <asp:CheckBox 
-                                                                                    ID="chkAnalyzeAverageOfMeasurements" 
-                                                                                    runat="server" 
-                                                                                    Checked="false" 
-                                                                                    Font-Bold="true"
-                                                                                    AutoPostBack = "true"
-                                                                                    OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click"
-                                                                                    >
-                                                                           </asp:CheckBox>
-                                                                           <span style="font-weight: bold; vertical-align:text-top;">Analyze Average Of Measurements</span>
+                                                                            <asp:CheckBox ID="chkAnalyzeAverageOfMeasurements" runat="server" Checked="false"
+                                                                                Font-Bold="true" AutoPostBack="true" OnCheckedChanged="chkAnalyzeAverageOfMeasurements_Click">
+                                                                            </asp:CheckBox>
+                                                                            <span style="font-weight: bold; vertical-align: text-top;">Analyze Average Of Measurements</span>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -2991,7 +3004,6 @@
                                                                                     </ContentTemplate>
                                                                                 </ajaxtoolkit:TabPanel>
                                                                             </ajaxtoolkit:TabContainer>
-
                                                                             <script language="javascript" type="text/javascript">
                                                                                 function funDeltaRefPrev(obj) {
                                                                                     if (obj == 'Ref') {
@@ -3004,7 +3016,6 @@
                                                                                     }
                                                                                 }                                                                                        
                                                                             </script>
-
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -3038,23 +3049,28 @@
     <asp:Button runat="server" ID="hiddenTargetControlForModalPopup" Style="display: none" />
     <asp:Button runat="server" ID="btnBindPressGrid" Style="display: none" OnClick="btnBindPressGrid_Click" />
     <asp:Button runat="server" ID="btnBindPressRunGrid" Style="display: none" OnClick="btnBindPressRunGrid_Click" />
-    <asp:Button runat="server" ID="btnBindPrintTargetCondition" Style="display: none" OnClick="btnBindPrintTargetCondition_Click" />
+    <asp:Button runat="server" ID="btnBindPrintTargetCondition" Style="display: none"
+        OnClick="btnBindPrintTargetCondition_Click" />
     <asp:Button runat="server" ID="btnBindMeasurement" Style="display: none" OnClick="btnBindMeasurement_Click" />
     <asp:Button runat="server" ID="btnBindAnalyze" Style="display: none" OnClick="btnBindAnalyze_Click" />
     <asp:HiddenField ID="HDTrendDelta" runat="server" />
     <asp:HiddenField ID="HDCurrentMeasurement" runat="server" />
     <asp:HiddenField ID="HDClientDatatime" runat="server" />
+    <asp:HiddenField ID="HDCurrentMeasurementName" runat="server" />
     <asp:HiddenField ID="HDPressRunName" runat="server" />
-    <asp:Button ID="HDButCurrentMeasurement" runat="server" Text="Button" OnClick="HDButCurrentMeasurement_Click" Style="display: none" />
+    <asp:Button ID="HDButCurrentMeasurement" runat="server" Text="Button" OnClick="HDButCurrentMeasurement_Click"
+        Style="display: none" />
     <ajaxtoolkit:ModalPopupExtender runat="server" ID="programmaticModalPopup" BehaviorID="programmaticModalPopupBehavior"
         Y="225" TargetControlID="hiddenTargetControlForModalPopup" PopupControlID="programmaticPopup"
         BackgroundCssClass="modalBackground" DropShadow="false" PopupDragHandleControlID="programmaticPopupDragHandle">
     </ajaxtoolkit:ModalPopupExtender>
-    <asp:Panel runat="server" ID="programmaticPopup" Style="display: none; height: 250px;background-color: Transparent; background: ">
+    <asp:Panel runat="server" ID="programmaticPopup" Style="display: none; height: 250px;
+        background-color: Transparent; background: ">
         <a id="hideModalPopupViaClientButton" href="#" style="border: none; text-decoration: none;">
-            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;top: 3px; text-align: right;" />
+            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;
+                top: 3px; text-align: right;" />
         </a>
-        <iframe id="FrmPopup" src="" width="400px" height="250px" frameborder="0" marginwidth="0" 
+        <iframe id="FrmPopup" src="" width="400px" height="250px" frameborder="0" marginwidth="0"
             scrolling="no" marginheight="0" allowtransparency="true" style="background-color: transparent">
         </iframe>
     </asp:Panel>
@@ -3066,12 +3082,13 @@
     <asp:Panel runat="server" ID="programmaticGamutPopup" Style="display: none; height: 700px;
         background-color: Transparent;">
         <a id="hideGamutModalPopupViaClientButton" href="#" style="border: none; text-decoration: none;">
-            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;top: 3px; text-align: right;" />
+            <img src="Images/Close2.png" style="position: absolute; border: none; right: 5px;
+                top: 3px; text-align: right;" />
         </a>
-        <iframe id="FrmChartPopup" src="" frameborder="0" marginwidth="0" scrolling="no" marginheight="0" allowtransparency="true" style="background-color: transparent">
+        <iframe id="FrmChartPopup" src="" frameborder="0" marginwidth="0" scrolling="no"
+            marginheight="0" allowtransparency="true" style="background-color: transparent">
         </iframe>
     </asp:Panel>
-
     <script language="javascript" type="text/javascript">
         function pageLoad() {
             $addHandler($get("hideModalPopupViaClientButton"), 'click', hideModalPopupViaClient);
@@ -3153,9 +3170,9 @@
             }
             return true;
         }
-        function imposeMaxLength(Object, MaxLen) {                        
+        function imposeMaxLength(Object, MaxLen) {
             if (Object.value.length <= MaxLen) {
-                return (Object.value.length  <= MaxLen);
+                return (Object.value.length <= MaxLen);
             }
             return false;
         }

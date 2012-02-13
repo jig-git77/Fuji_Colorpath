@@ -4180,9 +4180,15 @@ public partial class SyncDetail : PageBase
                 if (HDCurrentMeasurement.Value.Trim() == "")
                     HDCurrentMeasurement.Value = DT.Rows[DT.Rows.Count - 1]["MeasurementID"].ToString();
 
+            //========== Defualt set empty Measurement Name ==========//        
+            HDCurrentMeasurementName.Value = string.Empty;
+
             //========== Bind the Chart ==========//        
             for (int i = 0; i < DT.Rows.Count; i = i + 1)
             {
+                #region Get Measurement Name for ISO chart title
+                HDCurrentMeasurementName.Value = DT.Rows[i]["MeasurementName"].ToString();
+                #endregion
 
                 #region Bind point in chart in "PatchTypeID" wise
                 if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString())
@@ -4278,6 +4284,9 @@ public partial class SyncDetail : PageBase
                         if (!string.IsNullOrEmpty(HDPressRunName.Value))
                             queryString = string.Format("{0}&PressRunName={1}", queryString, HDPressRunName.Value);
                     }
+
+                    if (!string.IsNullOrEmpty(HDCurrentMeasurementName.Value))
+                        queryString = string.Format("{0}&CurrentMeasurementName={1}", queryString, HDCurrentMeasurementName.Value);
                     
                     FRM1.Attributes.Add("src", "SyncDetailISOMeasurementChart.aspx?MeasurementID=" + HDCurrentMeasurement.Value.Trim() + queryString);
                 }

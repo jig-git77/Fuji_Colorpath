@@ -89,6 +89,9 @@ public partial class SyncDetailISOMeasurementChart : PageBase
             }
             else
             {
+                if (Request.QueryString["CurrentMeasurementName"] != null)
+                    lblNowAnalyzing.Text = string.Format("{0}", Request.QueryString["CurrentMeasurementName"]);
+
                 // ===== Create Object of CPSyncMeasurementData  ======//
                 CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
 
