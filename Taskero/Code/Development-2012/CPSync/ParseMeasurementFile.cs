@@ -13,7 +13,7 @@ namespace CPSync
 
         Measurement objMeasurement = new Measurement();
 
-        
+
 
         // string strFileContent =  System.IO.File.ReadAllText("C:\\Development\\Profiling\\Files\\Files for comparision\\for chirag\\140 pacth Spectral.txt");
 
@@ -66,7 +66,7 @@ namespace CPSync
 
                 return Status;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return enumsUploadFileStatus.ExceptionThrown;
             }
@@ -79,10 +79,10 @@ namespace CPSync
         /// <param name="strFileContent"></param>
         /// <param name="filename"></param>
         /// <returns>upload status enums </returns>
-        public string ParseMeasurment(int PressRunID,string strFileContent, string filename,DateTime LocalDate)
+        public string ParseMeasurment(int PressRunID, string strFileContent, string filename, DateTime LocalDate)
         {
 
-          
+
             //http://www.codeproject.com/KB/database/DataSetFrmDelimTxt.aspx
             try
             {
@@ -93,7 +93,7 @@ namespace CPSync
                 }
 
                 //Returns and newlines 
-                Rows = strFileContent.Split(SplitLineAt,StringSplitOptions.RemoveEmptyEntries);
+                Rows = strFileContent.Split(SplitLineAt, StringSplitOptions.RemoveEmptyEntries);
 
                 for (int idxColFormat = 0; idxColFormat <= Rows.Length - 1; idxColFormat++)
                 {
@@ -101,7 +101,7 @@ namespace CPSync
                     {
                         idxColFormat = idxColFormat + 1;
                         ExtractColumns(idxColFormat);
-                        break; 
+                        break;
                     }
                 }
 
@@ -124,7 +124,7 @@ namespace CPSync
                 }
 
                 //validate file by counting pathces and verifying position of the paper patch
-                if ((objDS.Tables["SpectralData"].Rows.Count == 300) || (objDS.Tables["SpectralData"].Rows.Count == 150) || (objDS.Tables["SpectralData"].Rows.Count == 40) || (objDS.Tables["SpectralData"].Rows.Count == 24) )
+                if ((objDS.Tables["SpectralData"].Rows.Count == 300) || (objDS.Tables["SpectralData"].Rows.Count == 150) || (objDS.Tables["SpectralData"].Rows.Count == 40) || (objDS.Tables["SpectralData"].Rows.Count == 24))
                 {
                     if (objDS.Tables["SpectralData"].Rows.Count == 300)
                     {
@@ -133,7 +133,7 @@ namespace CPSync
 
 
                         ////check patch E1 is a paper patch
-                       
+
                         DataColumn[] dcol = new DataColumn[1];
                         dcol[0] = objDS.Tables["SpectralData"].Columns["SAMPLE_NAME"];
 
@@ -179,7 +179,7 @@ namespace CPSync
                         }
                         else
                         {
-                            return "invalid file. missing sample name in fuji 150 patch measurement file";    
+                            return "invalid file. missing sample name in fuji 150 patch measurement file";
                             //return enumsUploadFileStatus.InvalidFile;
                         }
                     }
@@ -232,16 +232,16 @@ namespace CPSync
                         else
                         {
                             return "invalid file. missing sample name in ISO 24 patch measurement file";
-                           
+
                         }
                     }
-                   
+
                 }
                 else
                 {
-            
+
                     return "invalid measurement file - only p2p, fuji150, sync 40 or ISO 24 patch charts can be measured ";
-                  
+
                 }
 
 
@@ -297,7 +297,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral360 = Convert.ToDouble(Row["SPECTRAL_360"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_360,objMeasuredPatch.Spectral360);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_360, objMeasuredPatch.Spectral360);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm370") == true)
@@ -319,7 +319,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral380 = Convert.ToDouble(Row["SPECTRAL_380"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_380,objMeasuredPatch.Spectral380);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_380, objMeasuredPatch.Spectral380);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm390") == true)
@@ -352,7 +352,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral410 = Convert.ToDouble(Row["SPECTRAL_410"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_410,objMeasuredPatch.Spectral410);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_410, objMeasuredPatch.Spectral410);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm420") == true)
@@ -363,7 +363,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral420 = Convert.ToDouble(Row["SPECTRAL_420"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_420,objMeasuredPatch.Spectral420);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_420, objMeasuredPatch.Spectral420);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm430") == true)
@@ -374,7 +374,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral430 = Convert.ToDouble(Row["SPECTRAL_430"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_430,objMeasuredPatch.Spectral430);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_430, objMeasuredPatch.Spectral430);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm440") == true)
@@ -385,9 +385,9 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral440 = Convert.ToDouble(Row["SPECTRAL_440"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_440,objMeasuredPatch.Spectral440);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_440, objMeasuredPatch.Spectral440);
 
-                   
+
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm450") == true)
                     {
                         objMeasuredPatch.Spectral450 = Convert.ToDouble(Row["nm450"]);
@@ -396,7 +396,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral450 = Convert.ToDouble(Row["SPECTRAL_450"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_450,objMeasuredPatch.Spectral450);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_450, objMeasuredPatch.Spectral450);
 
 
 
@@ -408,7 +408,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral460 = Convert.ToDouble(Row["SPECTRAL_460"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_460,objMeasuredPatch.Spectral460);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_460, objMeasuredPatch.Spectral460);
 
 
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm470") == true)
@@ -419,7 +419,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral470 = Convert.ToDouble(Row["SPECTRAL_470"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_470,objMeasuredPatch.Spectral470);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_470, objMeasuredPatch.Spectral470);
 
                     //480    
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm480") == true)
@@ -441,7 +441,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral490 = Convert.ToDouble(Row["SPECTRAL_490"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_490,objMeasuredPatch.Spectral490);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_490, objMeasuredPatch.Spectral490);
 
                     //500    
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm500") == true)
@@ -452,7 +452,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral500 = Convert.ToDouble(Row["SPECTRAL_500"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_500,objMeasuredPatch.Spectral500);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_500, objMeasuredPatch.Spectral500);
 
                     //510   
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm510") == true)
@@ -463,7 +463,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral510 = Convert.ToDouble(Row["SPECTRAL_510"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_510,objMeasuredPatch.Spectral510);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_510, objMeasuredPatch.Spectral510);
 
 
                     //520   
@@ -511,7 +511,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral550 = Convert.ToDouble(Row["SPECTRAL_550"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_550,objMeasuredPatch.Spectral550);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_550, objMeasuredPatch.Spectral550);
 
 
                     //560
@@ -523,7 +523,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral560 = Convert.ToDouble(Row["SPECTRAL_560"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_560,objMeasuredPatch.Spectral560);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_560, objMeasuredPatch.Spectral560);
 
 
                     //570
@@ -559,7 +559,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral590 = Convert.ToDouble(Row["SPECTRAL_590"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_590,objMeasuredPatch.Spectral590);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_590, objMeasuredPatch.Spectral590);
 
 
                     //600
@@ -583,7 +583,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral610 = Convert.ToDouble(Row["SPECTRAL_610"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_610,objMeasuredPatch.Spectral610);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_610, objMeasuredPatch.Spectral610);
 
 
                     //620
@@ -607,7 +607,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral630 = Convert.ToDouble(Row["SPECTRAL_630"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_630,objMeasuredPatch.Spectral630);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_630, objMeasuredPatch.Spectral630);
 
 
                     //640
@@ -619,7 +619,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral640 = Convert.ToDouble(Row["SPECTRAL_640"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_640,objMeasuredPatch.Spectral640);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_640, objMeasuredPatch.Spectral640);
 
 
                     //650
@@ -631,7 +631,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral650 = Convert.ToDouble(Row["SPECTRAL_650"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_650,objMeasuredPatch.Spectral650);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_650, objMeasuredPatch.Spectral650);
 
 
                     //660
@@ -643,7 +643,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral660 = Convert.ToDouble(Row["SPECTRAL_660"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_660,objMeasuredPatch.Spectral660);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_660, objMeasuredPatch.Spectral660);
 
 
                     //670
@@ -691,7 +691,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral700 = Convert.ToDouble(Row["SPECTRAL_700"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_700,objMeasuredPatch.Spectral700);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_700, objMeasuredPatch.Spectral700);
 
 
                     //710
@@ -703,9 +703,9 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral710 = Convert.ToDouble(Row["SPECTRAL_710"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_710,objMeasuredPatch.Spectral710);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_710, objMeasuredPatch.Spectral710);
 
-                
+
                     //720
                     if (objDS.Tables["SpectralData"].Columns.Contains("nm720") == true)
                     {
@@ -715,7 +715,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral720 = Convert.ToDouble(Row["SPECTRAL_700"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_720,objMeasuredPatch.Spectral720);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_720, objMeasuredPatch.Spectral720);
 
 
                     //730
@@ -727,7 +727,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral730 = Convert.ToDouble(Row["SPECTRAL_730"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_730,objMeasuredPatch.Spectral730);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_730, objMeasuredPatch.Spectral730);
 
 
                     //740
@@ -751,7 +751,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral750 = Convert.ToDouble(Row["SPECTRAL_750"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_750,objMeasuredPatch.Spectral750);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_750, objMeasuredPatch.Spectral750);
 
 
                     //760
@@ -775,7 +775,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral770 = Convert.ToDouble(Row["SPECTRAL_770"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_770,objMeasuredPatch.Spectral770);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_770, objMeasuredPatch.Spectral770);
 
 
                     //780
@@ -799,7 +799,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral790 = Convert.ToDouble(Row["SPECTRAL_790"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_790,objMeasuredPatch.Spectral790);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_790, objMeasuredPatch.Spectral790);
 
 
                     //800
@@ -835,7 +835,7 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral820 = Convert.ToDouble(Row["SPECTRAL_820"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_820,objMeasuredPatch.Spectral820);
+                    objMeasuredPatch.SetPatchSpectrum((int)MeasuredPatch.Spectrum.SPECTRAL_820, objMeasuredPatch.Spectral820);
 
 
                     //830
@@ -847,11 +847,11 @@ namespace CPSync
                     {
                         objMeasuredPatch.Spectral830 = Convert.ToDouble(Row["SPECTRAL_830"]);
                     }
-                    objMeasuredPatch.SetPatchSpectrum((int)(MeasuredPatch.Spectrum.SPECTRAL_830),objMeasuredPatch.Spectral830);
+                    objMeasuredPatch.SetPatchSpectrum((int)(MeasuredPatch.Spectrum.SPECTRAL_830), objMeasuredPatch.Spectral830);
 
 
-                   
-                    if ( objMeasurement.MeasurementTypeID == (int)(Measurement.ChartType.ISO24Patch) )
+
+                    if (objMeasurement.MeasurementTypeID == (int)(Measurement.ChartType.ISO24Patch))
                     {
                         objMeasuredPatch.Density = ColorMath.CalcStatusEDensity(objMeasuredPatch.GetPatchSpectrum());
                     }
@@ -866,7 +866,7 @@ namespace CPSync
                         objMeasuredPatch.LAB = ColorMath.XYZtoLab(objMeasuredPatch.XYZ);
                     }
 
-                   objMeasurement.MeasuredPatches.Add(objMeasuredPatch);
+                    objMeasurement.MeasuredPatches.Add(objMeasuredPatch);
 
                 }
 
@@ -878,13 +878,19 @@ namespace CPSync
                 objMeasurement.Save();
                 objMeasurement.SaveDotGain();
 
+                //If G7 Project we need to Calculate Gray a* b* along with ΔF
                 if (objMeasurement.MeasurementTypeID != (int)(Measurement.ChartType.ISO24Patch))
-                objMeasurement.SaveΔF();
+                {
+                    objMeasurement.SaveΔF();
 
-                GetCurve obj = new GetCurve(objMeasurement.MeasurementID.ToString(), objMeasurement.PressRunID);
-                obj.GetG7NPDC(objMeasurement);
-                
-                
+                    GetCurve obj = new GetCurve(objMeasurement.MeasurementID.ToString(), objMeasurement.PressRunID);
+                    obj.GetG7NPDC(objMeasurement);
+                }
+
+                //if 24patch Chart is measured it is an ISO project and we need to caulculate Gray a*b* from measurement data
+                if (objMeasurement.MeasurementTypeID == (int)(Measurement.ChartType.ISO24Patch))
+                    objMeasurement.SaveISOGrayab();
+
                 //System.Diagnostics.Debugger.Break();
 
                 return "Success";
@@ -900,7 +906,7 @@ namespace CPSync
                 }
 
                 return exc.ToString();
-                
+
             }
         }
 
@@ -977,9 +983,9 @@ namespace CPSync
                 throw new Exception(ex.ToString());
             }
         }
-        
+
 
     }
-  
-    
+
+
 }

@@ -11,8 +11,8 @@ public class Measurement
     {
         p2pChart = 1,
         Fuji150Patch = 2,
-        Sync40Patch=3,
-        ISO24Patch=4
+        Sync40Patch = 3,
+        ISO24Patch = 4
     }
 
     private int _PressRunID = 0;
@@ -67,8 +67,8 @@ public class Measurement
     private GenericTypedList<MeasuredPatch> _MeasuredPatches = new GenericTypedList<MeasuredPatch>();
     public GenericTypedList<MeasuredPatch> MeasuredPatches
     {
-        get {   return _MeasuredPatches;}
-        set {   _MeasuredPatches = value; }
+        get { return _MeasuredPatches; }
+        set { _MeasuredPatches = value; }
     }
 
 
@@ -76,11 +76,11 @@ public class Measurement
 
     public void Save()
     {
-       
+
         SqlCommand objCmd = new SqlCommand();
         try
         {
-            
+
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "CPSync.uspInsertMeasurement";
 
@@ -96,7 +96,7 @@ public class Measurement
             //execute the query which will return the output param measurementid
             (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
 
-            this._MeasurementID=  Convert.ToInt32(objCmd.Parameters["@MeasurementID"].Value.ToString());
+            this._MeasurementID = Convert.ToInt32(objCmd.Parameters["@MeasurementID"].Value.ToString());
 
             foreach (MeasuredPatch objPatch in MeasuredPatches)
             {
@@ -129,10 +129,10 @@ public class Measurement
             objCmd.CommandText = "CPSync.uspInsertColorCharDotGain";
 
             objCmd.Parameters.AddWithValue("@MeasurementID", this._MeasurementID);
-          
+
             //execute the query which will return the output param measurementid
             (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
-                     
+
 
         }
         catch (SqlException ex)
@@ -159,9 +159,37 @@ public class Measurement
 
             objCmd.Parameters.AddWithValue("@MeasurementID", this._MeasurementID);
 
-            //execute the query which will return the output param measurementid
+
             (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
-            
+
+        }
+        catch (SqlException ex)
+        {
+            throw new Exception(ex.ToString());
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.ToString());
+        }
+
+    }
+
+
+    public void SaveISOGrayab()
+    {
+
+        SqlCommand objCmd = new SqlCommand();
+        try
+        {
+
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandText = "CPSync.uspInsertColorCharISOGrayab";
+
+            objCmd.Parameters.AddWithValue("@MeasurementID", this._MeasurementID);
+
+
+            (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
+
         }
         catch (SqlException ex)
         {
