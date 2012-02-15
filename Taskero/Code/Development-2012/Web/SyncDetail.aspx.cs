@@ -4187,9 +4187,15 @@ public partial class SyncDetail : PageBase
             for (int i = 0; i < DT.Rows.Count; i = i + 1)
             {
                 #region Get Measurement Name for ISO chart title
-                HDCurrentMeasurementName.Value = DT.Rows[i]["MeasurementName"].ToString();
+                if (string.IsNullOrEmpty(HDCurrentMeasurementName.Value) && !string.IsNullOrEmpty(HDCurrentMeasurement.Value))
+                {
+                    if(Convert.ToInt32(DT.Rows[i]["MeasurementID"]) == Convert.ToInt32(HDCurrentMeasurement.Value.Trim()))
+                    {
+                        var measurementName = DT.Rows[i]["MeasurementName"].ToString();
+                        HDCurrentMeasurementName.Value = (measurementName.Contains("_") ? measurementName.Substring(0, measurementName.LastIndexOf('_')) : measurementName);
+                    }
+                }
                 #endregion
-
                 #region Bind point in chart in "PatchTypeID" wise
                 if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(Enums.CPSyncPatchType.Cyan).ToString())
                 {
