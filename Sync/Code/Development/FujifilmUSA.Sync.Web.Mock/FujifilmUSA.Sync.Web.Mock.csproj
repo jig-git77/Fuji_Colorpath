@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0DECDB99-C09F-4264-888D-6FF85E391D57}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FujifilmUSA.Sync.Web.Mock</RootNamespace>
+    <AssemblyName>FujifilmUSA.Sync.Web.Mock</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.UI, Version=2011.3.1305.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q3 2011 SP1\Bin40\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins">
+      <HintPath>C:\Program Files (x86)\Telerik\RadControls for ASP.NET AJAX Q3 2011 SP1\Bin40\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Delete.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Edit.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Filter.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\MoveDown.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\MoveUp.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingFirst.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingLast.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingNext.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\PagingPrev.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Refresh.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\rgCommandRow.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\rgDrag.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SingleMinus.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SinglePlus.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SortAsc.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\SortDesc.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\sprite.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Update.gif" />
+    <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Vista.gif" />
+    <Content Include="CSS\Common.css" />
+    <Content Include="Images\admin_box_bg.png" />
+    <Content Include="Images\admin_box_bottom.png" />
+    <Content Include="Images\admin_box_haed_bg.png" />
+    <Content Include="Images\admin_box_top.png" />
+    <Content Include="Images\analyze.png" />
+    <Content Include="Images\big_bt_left.png" />
+    <Content Include="Images\big_bt_left_disable.png" />
+    <Content Include="Images\big_bt_left_hover.png" />
+    <Content Include="Images\big_bt_right.png" />
+    <Content Include="Images\big_bt_right_disable.png" />
+    <Content Include="Images\big_bt_right_hover.png" />
+    <Content Include="Images\body_bg.png" />
+    <Content Include="Images\color_palette.jpg" />
+    <Content Include="Images\color_palette_box_bg.png" />
+    <Content Include="Images\color_palette_box_bottom.png" />
+    <Content Include="Images\color_palette_box_head.png" />
+    <Content Include="Images\contant_box_bg.png" />
+    <Content Include="Images\contant_box_bottom.png" />
+    <Content Include="Images\contant_box_haed_bg.png" />
+    <Content Include="Images\contant_box_haed_bt_bg.png" />
+    <Content Include="Images\contant_box_haed_bt_left.png" />
+    <Content Include="Images\contant_box_haed_bt_left_hover.png" />
+    <Content Include="Images\contant_box_haed_bt_right.png" />
+    <Content Include="Images\contant_box_haed_bt_right_hover.png" />
+    <Content Include="Images\contant_box_top.png" />
+    <Content Include="Images\cvs_icon.png" />
+    <Content Include="Images\delete_icon.png" />
+    <Content Include="Images\edit_icon.png" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\error_left.png" />
+    <Content Include="Images\error_right.png" />
+    <Content Include="Images\export.png" />
+    <Content Include="Images\First.png" />
+    <Content Include="Images\gray_bt_left.png" />
+    <Content Include="Images\gray_bt_right.png" />
+    <Content Include="Images\green_bt_left.png" />
+    <Content Include="Images\green_bt_left_hover.png" />
+    <Content Include="Images\green_bt_right.png" />
+    <Content Include="Images\green_bt_right_hover.png" />
+    <Content Include="Images\header_bg.png" />
+    <Content Include="Images\home_icon.png" />
+    <Content Include="Images\info_icon.png" />
+    <Content Include="Images\input_left.png" />
+    <Content Include="Images\input_right.png" />
+    <Content Include="Images\Last.png" />
+    <Content Include="Images\line.png" />
+    <Content Include="Images\login_box_top.png" />
+    <Content Include="Images\login_bt.png" />
+    <Content Include="Images\login_bt_hover.png" />
+    <Content Include="Images\login_eror_bottom.png" />
+    <Content Include="Images\login_eror_middle.png" />
+    <Content Include="Images\login_eror_top.png" />
+    <Content Include="Images\login_input.png" />
+    <Content Include="Images\login_logo.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\menu_arrow.png" />
+    <Content Include="Images\mesurementStatusbar_box_bottom.png" />
+    <Content Include="Images\mesurementStatusbar_box_middle.png" />
+    <Content Include="Images\mesurementStatusbar_box_top.png" />
+    <Content Include="Images\new_project_icon.png" />
+    <Content Include="Images\Next.png" />
+    <Content Include="Images\page_box_bg.png" />
+    <Content Include="Images\page_box_bottom.png" />
+    <Content Include="Images\page_box_top.png" />
+    <Content Include="Images\powerby_logo.png" />
+    <Content Include="Images\Previous.png" />
+    <Content Include="Images\print_icon.png" />
+    <Content Include="Images\product_list_bg.png" />
+    <Content Include="Images\product_list_table_head.png" />
+    <Content Include="Images\Project_Certify.png" />
+    <Content Include="Images\Project_Close.png" />
+    <Content Include="Images\Project_Open.png" />
+    <Content Include="Images\save_icon.png" />
+    <Content Include="Images\Search.png" />
+    <Content Include="Images\setting_icon.png" />
+    <Content Include="Images\setting_icon_hover.png" />
+    <Content Include="Images\sidebar_box_bg.png" />
+    <Content Include="Images\sidebar_box_bottom.png" />
+    <Content Include="Images\sidebar_box_top.png" />
+    <Content Include="Images\sidebar_menu_bg.png" />
+    <Content Include="Images\sourceprofile.png" />
+    <Content Include="Images\syncmeasurementdevice.png" />
+    <Content Include="Images\tab.png" />
+    <Content Include="Images\table_bullate.png" />
+    <Content Include="Images\tab_active.png" />
+    <Content Include="Images\tab_active_left.png" />
+    <Content Include="Images\tab_active_right.png" />
+    <Content Include="Images\tab_contant_bg.png" />
+    <Content Include="Images\tab_contant_bottom.png" />
+    <Content Include="Images\tab_contant_top.png" />
+    <Content Include="Images\tab_left.png" />
+    <Content Include="Images\tab_right.png" />
+    <Content Include="Images\txt_icon.png" />
+    <Content Include="Index.aspx" />
+    <Content Include="Javascript\html5.js" />
+    <Content Include="Javascript\jquery-1.7.1.js" />
+    <Content Include="JQuery\jquery-1.6.2.min.js" />
+    <Content Include="JQuery\jquery-blockUI.js" />
+    <Content Include="JQuery\jquery-jtemplates.js" />
+    <Content Include="JQuery\jquery.simplemodal.js" />
+    <Content Include="JQuery\jquery.tmpl.js" />
+    <Content Include="JQuery\jquery.validate.js" />
+    <Content Include="JQuery\json2.js" />
+    <Content Include="JQuery\wtooltip.min.js" />
+    <Content Include="JS\AC_RunActiveContent.js" />
+    <Content Include="JS\chartread.js" />
+    <Content Include="JS\ChartTooltip.js" />
+    <Content Include="JS\CommonFunctions.js" />
+    <Content Include="JS\Corner-Curves.js" />
+    <Content Include="JS\DrawChartCommon.js" />
+    <Content Include="JS\excanvas.js" />
+    <Content Include="JS\i1read.js" />
+    <Content Include="JS\isisread.js" />
+    <Content Include="JS\swfobject.js" />
+    <Content Include="JS\WebComm.js" />
+    <Content Include="JS\wz_jsgraphics.js" />
+    <Content Include="OperationSelection.aspx" />
+    <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\Footer.ascx" />
+    <Content Include="UserControl\Header.ascx" />
+    <Content Include="UserControl\LeftMenu.ascx" />
+    <Content Include="UserControl\LeftMenuItem.ascx" />
+    <Content Include="UserControl\LeftMenuProjectItem.ascx" />
+    <Content Include="UserControl\DeviceList.ascx" />
+    <Content Include="UserControl\Pagging.ascx" />
+    <Content Include="UserControl\ProjectList.ascx" />
+    <Content Include="UserControl\OperationSelection.ascx" />
+    <Content Include="UserControl\SearchingDevice.ascx" />
+    <Content Include="UserControl\Statusbar.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainMaster.Master.cs">
+      <DependentUpon>MainMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMaster.Master.designer.cs">
+      <DependentUpon>MainMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OperationSelection.aspx.cs">
+      <DependentUpon>OperationSelection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OperationSelection.aspx.designer.cs">
+      <DependentUpon>OperationSelection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectList.aspx.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectList.aspx.designer.cs">
+      <DependentUpon>ProjectList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Header.ascx.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Header.ascx.designer.cs">
+      <DependentUpon>Header.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenu.ascx.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DeviceList.ascx.cs">
+      <DependentUpon>DeviceList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DeviceList.ascx.designer.cs">
+      <DependentUpon>DeviceList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Pagging.ascx.cs">
+      <DependentUpon>Pagging.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Pagging.ascx.designer.cs">
+      <DependentUpon>Pagging.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProjectList.ascx.cs">
+      <DependentUpon>ProjectList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProjectList.ascx.designer.cs">
+      <DependentUpon>ProjectList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\OperationSelection.ascx.cs">
+      <DependentUpon>OperationSelection.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\OperationSelection.ascx.designer.cs">
+      <DependentUpon>OperationSelection.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SearchingDevice.ascx.cs">
+      <DependentUpon>SearchingDevice.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SearchingDevice.ascx.designer.cs">
+      <DependentUpon>SearchingDevice.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Statusbar.ascx.cs">
+      <DependentUpon>Statusbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Statusbar.ascx.designer.cs">
+      <DependentUpon>Statusbar.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\FujifilmSkin\Fujifilm.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MainMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
+      <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
+      <Name>FujifilmUSA.Sync.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
+      <Project>{B3DEFE33-B211-45E8-8062-A7535A340754}</Project>
+      <Name>FujifilmUSA.Sync.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51741</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/FujifilmUSA.Sync.Web.Mock</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
