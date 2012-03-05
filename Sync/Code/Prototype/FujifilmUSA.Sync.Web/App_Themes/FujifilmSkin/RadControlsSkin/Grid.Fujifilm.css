@@ -1,0 +1,668 @@
+/*Telerik RadGrid Fujifilm Skin*/
+
+/*global*/
+
+.RadGrid_Fujifilm
+{
+    border: 1px solid;
+    border-color: #c8c8c8;
+    background-color: #ededed;
+    color: #333;
+}
+
+.RadGrid_Fujifilm, .RadGrid_Fujifilm .rgMasterTable, .RadGrid_Fujifilm .rgDetailTable, .RadGrid_Fujifilm .rgGroupPanel table, .RadGrid_Fujifilm .rgCommandRow table, .RadGrid_Fujifilm .rgEditForm table, .RadGrid_Fujifilm .rgPager table, .GridToolTip_Fujifilm
+{
+    font: 12px/16px "segoe ui" ,arial,sans-serif;
+}
+
+.RadGrid_Fujifilm .rgHeader:first-child, .RadGrid_Fujifilm th.rgResizeCol:first-child, .RadGrid_Fujifilm .rgFilterRow > td:first-child, .RadGrid_Fujifilm .rgRow > td:first-child, .RadGrid_Fujifilm .rgAltRow > td:first-child
+{
+    border-left-width: 0;
+    padding-left: 8px;
+}
+
+.RadGrid_Fujifilm .rgAdd, .RadGrid_Fujifilm .rgRefresh, .RadGrid_Fujifilm .rgEdit, .RadGrid_Fujifilm .rgDel, .RadGrid_Fujifilm .rgFilter, .RadGrid_Fujifilm .rgPagePrev, .RadGrid_Fujifilm .rgPageNext, .RadGrid_Fujifilm .rgPageFirst, .RadGrid_Fujifilm .rgPageLast, .RadGrid_Fujifilm .rgExpand, .RadGrid_Fujifilm .rgCollapse, .RadGrid_Fujifilm .rgSortAsc, .RadGrid_Fujifilm .rgSortDesc, .RadGrid_Fujifilm .rgUpdate, .RadGrid_Fujifilm .rgCancel, .RadGrid_Fujifilm .rgUngroup, .RadGrid_Fujifilm .rgExpXLS, .RadGrid_Fujifilm .rgExpDOC, .RadGrid_Fujifilm .rgExpPDF, .RadGrid_Fujifilm .rgExpCSV
+{
+    background-image: url('Grid/sprite.gif');
+}
+
+/*header*/
+
+.RadGrid_Fujifilm .rgHeaderDiv
+{
+    background: #ebeef6 0 -7750px repeat-x url('Grid/sprite.gif');
+}
+.rgTwoLines .rgHeaderDiv
+{
+    background-position: 0 -7250px;
+}
+
+.RadGrid_Fujifilm .rgHeader, .RadGrid_Fujifilm th.rgResizeCol
+{
+    border: 1px solid; /*border-color:#fff #c8c8c8 #e5e5e5 #e5e5e5;*/
+    border-color: #fff #e5e5e5 #e5e5e5 #c8c8c8;
+    border-top-width: 0;
+    background-color: #e5e5e5; /*background:0 -2300px repeat-x #a6d9f4 url('Grid/sprite.gif');*/
+}
+
+.RadGrid_Fujifilm th.rgSorted
+{
+    border-bottom-color: #79b3d8;
+    background-color: #d9ecf6;
+    background-position: 0 -2600px;
+}
+
+.RadGrid_Fujifilm .rgHeader, .RadGrid_Fujifilm .rgHeader a
+{
+    color: #333;
+}
+
+/*rows*/
+
+.RadGrid_Fujifilm .rgRow td, .RadGrid_Fujifilm .rgAltRow td, .RadGrid_Fujifilm .rgEditRow td, .RadGrid_Fujifilm .rgFooter td
+{
+    border-style: solid;
+    border-width: 1px 1px 1px;
+}
+
+.RadGrid_Fujifilm .rgRow td, .RadGrid_Fujifilm .rgAltRow td
+{
+    border-color:  #c8c8c8 #ededed #ededed #c8c8c8;
+}
+
+.RadGrid_Fujifilm .rgRow .rgSorted, .RadGrid_Fujifilm .rgAltRow .rgSorted
+{
+    background-color: #f2f3f5;
+}
+
+.RadGrid_Fujifilm .rgSelectedRow .rgSorted, .RadGrid_Fujifilm .rgActiveRow .rgSorted, .RadGrid_Fujifilm .rgHoveredRow .rgSorted, .RadGrid_Fujifilm .rgEditRow .rgSorted
+{
+    background-color: transparent;
+}
+
+.RadGrid_Fujifilm .rgRow a, .RadGrid_Fujifilm .rgAltRow a, .RadGrid_Fujifilm .rgEditRow a, .RadGrid_Fujifilm .rgFooter a, .RadGrid_Fujifilm .rgEditForm a
+{
+    color: #06c;
+}
+
+.RadGrid_Fujifilm .rgSelectedRow
+{
+    background-color: #f6ffeb; /*background:#abdbf5 0 -3900px repeat-x url('Grid/sprite.gif');*/
+}
+* + html .RadGrid_Fujifilm .rgSelectedRow .rgSorted
+{
+    background-color: #abdbf5;
+}
+* html .RadGrid_Fujifilm .rgSelectedRow .rgSorted
+{
+    background-color: #abdbf5;
+}
+
+.RadGrid_Fujifilm .rgActiveRow, .RadGrid_Fujifilm .rgHoveredRow
+{
+    background-color: #ebf4ff; /*background:#d7f0fc 0 -2900px repeat-x url('Grid/sprite.gif');*/
+}
+* + html .RadGrid_Fujifilm .rgActiveRow .rgSorted, * + html .RadGrid_Fujifilm .rgHoveredRow .rgSorted
+{
+    background-color: #d7f0fc;
+}
+* html .RadGrid_Fujifilm .rgActiveRow .rgSorted, * html .RadGrid_Fujifilm .rgHoveredRow .rgSorted
+{
+    background-color: #d7f0fc;
+}
+
+.RadGrid_Fujifilm .rgEditRow
+{
+    background: #96cfee 0 -4900px repeat-x url('Grid/sprite.gif');
+}
+* + html .RadGrid_Fujifilm .rgEditRow .rgSorted
+{
+    background-color: #96cfee;
+}
+* html .RadGrid_Fujifilm .rgEditRow .rgSorted
+{
+    background-color: #96cfee;
+}
+
+.RadGrid_Fujifilm .rgSelectedRow td, .RadGrid_Fujifilm .rgActiveRow td, .RadGrid_Fujifilm .rgHoveredRow td, .RadGrid_Fujifilm .rgEditRow td
+{
+    border-left-width: 1px;
+    border-right-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.RadGrid_Fujifilm .rgSelectedRow td
+{
+    border-bottom-color: #f6ffeb;
+}
+
+.RadGrid_Fujifilm .rgActiveRow td, .RadGrid_Fujifilm .rgHoveredRow td
+{
+    border-bottom-color: #ebf4ff;
+}
+
+.RadGrid_Fujifilm .rgEditRow td
+{
+    border-bottom-color: #96cfee;
+}
+
+.RadGrid_Fujifilm .rgDrag
+{
+    background-image: url('Grid/rgDrag.gif');
+}
+
+/*footer*/
+
+.RadGrid_Fujifilm .rgFooterDiv, .RadGrid_Fujifilm .rgFooter
+{
+    background: #e0e5f5;
+}
+
+.RadGrid_Fujifilm .rgFooter td
+{
+    border-top-width: 1px;
+    border-color: #aec5d1 #e0e5f5 #fff #e0e5f5;
+}
+
+/*status*/
+
+.RadGrid_Fujifilm .rgPager .rgStatus
+{
+    border: 1px solid;
+    border-color: #aec5d1 #9cb6c5 #fff #9cb6c5;
+    border-left-width: 0;
+}
+
+.RadGrid_Fujifilm .rgStatus div
+{
+    background-image: url('Common/loading_small.gif');
+}
+
+/*pager*/
+
+.RadGrid_Fujifilm .rgPager
+{
+    background: #eff7fc;
+}
+
+.RadGrid_Fujifilm td.rgPagerCell
+{
+    border: 1px solid;
+    border-color: #aec5d1 #fff #fff;
+    border-right-width: 0;
+}
+
+.RadGrid_Fujifilm .rgInfoPart
+{
+    color: #8a8a8a;
+}
+
+.RadGrid_Fujifilm .rgInfoPart strong
+{
+    color: #4c4e54;
+}
+
+.RadGrid_Fujifilm .rgPageFirst
+{
+    background-position: 0 -550px;
+}
+.RadGrid_Fujifilm .rgPageFirst:hover
+{
+    background-position: 0 -600px;
+}
+.RadGrid_Fujifilm .rgPagePrev
+{
+    background-position: 0 -700px;
+}
+.RadGrid_Fujifilm .rgPagePrev:hover
+{
+    background-position: 0 -750px;
+}
+.RadGrid_Fujifilm .rgPageNext
+{
+    background-position: 0 -850px;
+}
+.RadGrid_Fujifilm .rgPageNext:hover
+{
+    background-position: 0 -900px;
+}
+.RadGrid_Fujifilm .rgPageLast
+{
+    background-position: 0 -1000px;
+}
+.RadGrid_Fujifilm .rgPageLast:hover
+{
+    background-position: 0 -1050px;
+}
+
+.RadGrid_Fujifilm .rgPager .rgPagerButton
+{
+    border-color: #a6d9f4;
+    background: #cfcfcf repeat-x 0 -1550px url('Grid/sprite.gif');
+    color: #000;
+    font: 12px/12px "segoe ui" ,arial,sans-serif;
+}
+
+.RadGrid_Fujifilm .rgNumPart a:hover, .RadGrid_Fujifilm .rgNumPart a:hover span, .RadGrid_Fujifilm .rgNumPart a.rgCurrentPage, .RadGrid_Fujifilm .rgNumPart a.rgCurrentPage span
+{
+    background: no-repeat url('Grid/sprite.gif');
+}
+
+.RadGrid_Fujifilm .rgNumPart a
+{
+    color: #000;
+}
+
+.RadGrid_Fujifilm .rgNumPart a:hover
+{
+    background-position: 100% -1250px;
+    color: #06c;
+}
+
+.RadGrid_Fujifilm .rgNumPart a:hover span
+{
+    background-position: 0 -1150px;
+}
+
+.RadGrid_Fujifilm .rgNumPart a.rgCurrentPage, .RadGrid_Fujifilm .rgNumPart a.rgCurrentPage:hover
+{
+    background-position: 100% -1450px;
+    color: #000;
+}
+
+.RadGrid_Fujifilm .rgNumPart a.rgCurrentPage span, .RadGrid_Fujifilm .rgNumPart a.rgCurrentPage:hover span
+{
+    background-position: 0 -1350px;
+}
+
+/*sorting, reordering*/
+
+.RadGrid_Fujifilm .rgHeader .rgSortAsc
+{
+    background-position: 3px -248px;
+    height: 10px;
+}
+
+.RadGrid_Fujifilm .rgHeader .rgSortDesc
+{
+    background-position: 3px -198px;
+    height: 10px;
+}
+
+.GridReorderTop_Fujifilm, .GridReorderBottom_Fujifilm
+{
+    height: 11px;
+    background: 0 0 no-repeat url('Grid/sprite.gif');
+}
+
+.GridReorderBottom_Fujifilm
+{
+    background-position: 0 -50px;
+}
+
+/*filtering*/
+
+.RadGrid_Fujifilm .rgFilterRow
+{
+    background: #ebeef6;
+}
+
+.RadGrid_Fujifilm .rgFilterRow td
+{
+    border-left: 1px solid #ededed;
+    border-right: 1px solid #fff;
+}
+
+.RadGrid_Fujifilm .rgFilter
+{
+    background-position: 0 -300px;
+}
+
+.RadGrid_Fujifilm .rgFilter:hover
+{
+    background-position: 0 -350px;
+}
+
+.RadGrid_Fujifilm .rgFilterActive, .RadGrid_Fujifilm .rgFilterActive:hover
+{
+    background-position: 0 -400px;
+}
+
+.RadGrid_Fujifilm .rgFilterBox
+{
+    border-color: #abadb3 #dbdfe6 #e3e9ef #e2e3ea;
+    font: 12px "segoe ui" ,arial,sans-serif;
+    color: #333;
+}
+
+/*filter context menu*/
+
+.RadMenu_Fujifilm .rgHCMClear, .RadMenu_Fujifilm .rgHCMFilter
+{
+    border-color: #707070;
+    background: #cfcfcf center -23px repeat-x url('FormDecorator/ButtonSprites.gif');
+    color: #000;
+    font-family: "segoe ui" ,arial,sans-serif;
+}
+
+.RadMenu_Fujifilm .rgHCMClear:hover, .RadMenu_Fujifilm .rgHCMFilter:hover
+{
+    border-color: #3c7fb1;
+    background-position: center -67px;
+    background-color: #a7d9f5;
+}
+
+/*context menu*/
+
+.GridContextMenu_Fujifilm .rmLeftImage
+{
+    background-image: url('../Common/Grid/contextMenu.gif');
+}
+
+.GridContextMenu_Fujifilm .rgHCMSortAsc .rmLeftImage
+{
+    background-position: 0 0;
+}
+
+.GridContextMenu_Fujifilm .rgHCMSortDesc .rmLeftImage
+{
+    background-position: 0 -40px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMUnsort .rmLeftImage
+{
+    background-position: 0 -80px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMGroup .rmLeftImage
+{
+    background-position: 0 -120px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMUngroup .rmLeftImage
+{
+    background-position: 0 -160px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMCols .rmLeftImage
+{
+    background-position: 0 -200px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMFilter .rmLeftImage
+{
+    background-position: 0 -240px;
+}
+
+.GridContextMenu_Fujifilm .rgHCMUnfilter .rmLeftImage
+{
+    background-position: 0 -280px;
+}
+
+/*grouping*/
+
+.RadGrid_Fujifilm .rgGroupPanel
+{
+    border: 1px solid;
+    border-color: #eaedf6 #f2f5fa #9cb6c5;
+    background: #e6ebf5 0 -1900px repeat-x url('Grid/sprite.gif');
+}
+
+.RadGrid_Fujifilm .rgGroupPanel td
+{
+    border: 0;
+    border-bottom: 1px solid #f2f5fa;
+    padding: 0;
+}
+
+.RadGrid_Fujifilm .rgGroupPanel td td
+{
+    border: 0;
+    padding: 2px 3px 1px;
+}
+
+.RadGrid_Fujifilm .rgGroupPanel td td td
+{
+    padding: 0;
+}
+
+.RadGrid_Fujifilm .rgGroupPanel .rgSortAsc
+{
+    background-position: 4px -144px;
+}
+
+.RadGrid_Fujifilm .rgGroupPanel .rgSortDesc
+{
+    background-position: 4px -94px;
+}
+
+.RadGrid_Fujifilm .rgUngroup
+{
+    background-position: 0 -7200px;
+}
+
+.RadGrid_Fujifilm .rgGroupItem
+{
+    border: 1px solid;
+    border-color: #8a929e #9298a1 #9298a1;
+    background: #e6ebf5 0 -7000px repeat-x url('Grid/sprite.gif');
+}
+
+.RadGrid_Fujifilm .rgGroupHeader
+{
+    background: 0 -6489px repeat-x url('Grid/sprite.gif');
+    font-size: 1.1em;
+    line-height: 21px;
+    color: #039;
+}
+
+.RadGrid_Fujifilm .rgGroupHeader td
+{
+    padding: 0 8px;
+}
+
+.RadGrid_Fujifilm .rgGroupHeader .rgGroupCol
+{
+    background: #fff none;
+}
+
+.RadGrid_Fujifilm .rgExpand
+{
+    background-position: 5px -496px;
+}
+
+.RadGrid_Fujifilm .rgCollapse
+{
+    background-position: 3px -444px;
+}
+
+.RadGrid_Fujifilm .rgGroupHeader .rgExpand, .RadGrid_Fujifilm .rgGroupHeader .rgCollapse
+{
+    background-color: #fff;
+}
+
+.RadGrid_Fujifilm .rgGroupHeader td p, .RadGrid_Fujifilm .rgGroupHeader td div div
+{
+    background: #fff;
+}
+
+/*editing*/
+
+.RadGrid_Fujifilm .rgEditForm
+{
+    border-bottom: 1px solid #ededed;
+}
+
+.RadGrid_Fujifilm .rgUpdate
+{
+    background-position: 0 -1800px;
+}
+
+.RadGrid_Fujifilm .rgCancel
+{
+    background-position: 0 -1850px;
+}
+
+/*hierarchy*/
+
+.RadGrid_Fujifilm .rgDetailTable
+{
+    border-color: #ededed;
+}
+
+/*command row*/
+
+.RadGrid_Fujifilm .rgCommandRow
+{
+    background: #4e96aa 0 0 repeat-x url('Grid/rgCommandRow.gif');
+    color: #fff;
+}
+
+.RadGrid_Fujifilm .rgCommandCell
+{
+    border: 0;
+    padding: 0;
+}
+
+.RadGrid_Fujifilm thead .rgCommandCell
+{
+    border-bottom: 1px solid #3c7fb1;
+}
+
+.RadGrid_Fujifilm tfoot .rgCommandCell, .RadGrid_Fujifilm .rgMasterTable > tbody > tr.rgCommandRow .rgCommandCell
+{
+    border-top: 1px solid #3c7fb1;
+}
+
+.RadGrid_Fujifilm .rgCommandTable td
+{
+    border: 0;
+    padding: 2px 7px;
+}
+
+.RadGrid_Fujifilm .rgCommandTable
+{
+    border: 1px solid;
+    border-color: #b2ccd8 #75a4b7 #95c3ce;
+}
+
+.RadGrid_Fujifilm .rgCommandRow a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+.RadGrid_Fujifilm .rgAdd
+{
+    margin-right: 3px;
+    background-position: 0 -1650px;
+}
+
+.RadGrid_Fujifilm .rgRefresh
+{
+    margin-right: 3px;
+    background-position: 0 -1600px;
+}
+
+.RadGrid_Fujifilm .rgEdit
+{
+    background-position: 0 -1700px;
+}
+
+.RadGrid_Fujifilm .rgDel
+{
+    background-position: 0 -1750px;
+}
+
+.RadGrid_Fujifilm .rgExpXLS, .RadGrid_Fujifilm .rgExpDOC, .RadGrid_Fujifilm .rgExpPDF, .RadGrid_Fujifilm .rgExpCSV
+{
+    background-image: url('../Common/Grid/export.gif');
+}
+
+.RadGrid_Fujifilm .rgExpXLS
+{
+    background-position: 0 0;
+}
+.RadGrid_Fujifilm .rgExpDOC
+{
+    background-position: 0 -50px;
+}
+.RadGrid_Fujifilm .rgExpPDF
+{
+    background-position: 0 -100px;
+}
+.RadGrid_Fujifilm .rgExpCSV
+{
+    background-position: 0 -150px;
+}
+
+/*multirow select*/
+
+.GridRowSelector_Fujifilm
+{
+    background: #039;
+}
+
+/*row drag n drop*/
+
+.GridItemDropIndicator_Fujifilm
+{
+    border-top: 1px dashed #039;
+}
+
+/*tooltip*/
+
+.GridToolTip_Fujifilm
+{
+    border: 1px solid #767676;
+    padding: 3px;
+    background: #e4e5f0;
+    color: #000;
+}
+
+/*rtl*/
+
+.RadGridRTL_Fujifilm .rgHeader:first-child, .RadGridRTL_Fujifilm th.rgResizeCol:first-child, .RadGridRTL_Fujifilm .rgFilterRow > td:first-child, .RadGridRTL_Fujifilm .rgRow > td:first-child, .RadGridRTL_Fujifilm .rgAltRow > td:first-child
+{
+    border-left-width: 1px;
+    padding-left: 7px;
+}
+
+.RadGridRTL_Fujifilm .rgPageFirst
+{
+    background-position: 0 -1000px;
+}
+.RadGridRTL_Fujifilm .rgPageFirst:hover
+{
+    background-position: 0 -1050px;
+}
+.RadGridRTL_Fujifilm .rgPagePrev
+{
+    background-position: 0 -850px;
+}
+.RadGridRTL_Fujifilm .rgPagePrev:hover
+{
+    background-position: 0 -900px;
+}
+.RadGridRTL_Fujifilm .rgPageNext
+{
+    background-position: 0 -700px;
+}
+.RadGridRTL_Fujifilm .rgPageNext:hover
+{
+    background-position: 0 -750px;
+}
+.RadGridRTL_Fujifilm .rgPageLast
+{
+    background-position: 0 -550px;
+}
+.RadGridRTL_Fujifilm .rgPageLast:hover
+{
+    background-position: 0 -600px;
+}
+
+.RadGridRTL_Fujifilm .rgExpand
+{
+    background-position: -20px -496px;
+}
