@@ -24,6 +24,43 @@
   <section id="pageWrapper"> 
   	<uc1:Header ID="ucHeader" runat="server" />  
     <section id="containar">
+    <script type="text/javascript" language="javascript">
+    var title = '';
+    function OpenInformationBox(url) {
+        var oWnd = radopen(url, "RadModelWindow");
+        if (url.indexOf("ModelControlId=1") >= 0) {
+            title = "Open Print Condition";
+            oWnd.setSize(650, 300);
+        }
+        if (url.indexOf("ModelControlId=2") >= 0) {
+            title = "Close Print Condition";
+            oWnd.setSize(650, 270);
+        }
+        if (url.indexOf("ModelControlId=3") >= 0) {
+            title = "Download Chart";
+            oWnd.setSize(650, 270);
+        }
+        oWnd.add_pageLoad(windowLoad);
+        return false;
+    }
+    function windowLoad(oWindow, args) {
+        oWindow.set_title(title);
+        oWindow.set_status('');
+    }
+</script>
+    <telerik:RadWindowManager ID="RadWindowManager" runat="server" 
+    Modal="True" 
+    >
+    <Windows>
+                <telerik:RadWindow 
+                    id="RadModelWindow" 
+                    runat="server"
+                    showcontentduringload="false"
+                    behaviors="Close, Move" Behavior="Close, Move"
+                    >
+                </telerik:RadWindow>
+            </Windows>
+</telerik:RadWindowManager>
       <section id="sidebar">      	
         	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
       </section>
@@ -36,7 +73,9 @@
   <div class="curve_bottom">&nbsp;</div>
   <!--End PageWrapper--> 
   <uc1:Footer ID="ucFooter" runat="server" />
+
 </section>
     </form>
 </body>
 </html>
+

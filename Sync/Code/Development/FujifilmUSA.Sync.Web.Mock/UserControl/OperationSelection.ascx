@@ -23,9 +23,9 @@
         </div>
         <div class="ContainerClass">
             <div>
-                <label>Select An Option Below:</label>
+                <%--<label>Select An Option Below:</label>
                 <div class="clear">
-                </div>
+                </div>--%>
             </div>
             <div>
                 <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />

@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
         #region Control events
         protected void lbtnDLPOptimization_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ProjectList.aspx");
+            Response.Redirect("~/ProjectList.aspx");
         }
         #endregion
 

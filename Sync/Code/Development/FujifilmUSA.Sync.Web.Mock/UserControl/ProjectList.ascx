@@ -1,6 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.ProjectList" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/ProjectList/ClosePrintCondition.ascx" TagName="ClosePrintCondition" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/ProjectList/OpenPrintCondition.ascx" TagName="OpenPrintCondition" TagPrefix="uc" %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
         if (confirm('<%= ProjectList_DeleteProject_Confirmation %>'))
@@ -8,32 +11,8 @@
         else
             return false;
     }
-
-    function windowLoad(oWindow, args) {
-        oWindow.set_title("Project Information");
-        oWindow.set_status('');
-    }
-
-    function OpenInformationBox(url) {
-        var oWnd = radopen(url, "ProjectInformationRadWindow");
-        oWnd.add_pageLoad(windowLoad);
-        return false;
-    }
 </script>
-<script language="javascript" type="text/javascript">
-    function Close() {
-        var oWindow = GetRadWindow1();
-        //oWindow.BrowserWindow.location.href = GetRadWindow1().BrowserWindow.location.href;
-        GetRadWindow1().close();
-    }
 
-    function GetRadWindow1() {
-        var oWindow = null;
-        if (window.radWindow) oWindow = window.radWindow;
-        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
-        return oWindow;
-    } 
-</script>
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -74,40 +53,37 @@
     &nbsp;</div>
 <div class="contant_middle">
     <div class="head">
-    <table>
-                <tr>
-                    <td style="width: 93%">
-                        <h1>
+   <h1>
                             DLP Optimization</h1>
-                    </td>
-                    <td style="width: 50px;">
-                        <asp:LinkButton ID="LinkButton2" runat="server"><h1>Help</h1></asp:LinkButton>
-                    </td>
-                </tr>
-            </table>
+                        <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button" 
+                        ValidationGroup="vgDestination"
+            onclick="lbtnCreateNewPrintCondition_Click">
+        <span>
+            <asp:Image ID="imgAdd" runat="server" ImageUrl="../../Images/new_project_icon.png" />
+            Create New Print Condition</span></asp:LinkButton>
     </div>
     <div class="clear"></div>
-    <div class="formDeviceNoLine" >
+    <div class="formDeviceNoLine" style="display:none;">
          <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
-         <div style="float: left">
+        <%-- <div style="float: left">
                                     <label>
                                         Select DLP Optimized Print Condition</label>
                                 </div>
          <div style="float: right">
                                     <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" ValidationGroup="vgDestination"
-                                        CssClass="gray_bt" >
+                                        CssClass="gray_bt" onclick="lbtnCreateNewPrintCondition_Click" >
                                         <span>
-                                            <%--<asp:Image ID="imgAdd" runat="server" style=" padding-top: 8px;"  ImageUrl="../Images/new_project_icon.png" />--%>
                                             Create New Print Condition </span>
                                     </asp:LinkButton>
-                                </div>
+                                </div>--%>
          <div class="clear">
          </div>
     </div>
-    <div class="listDevice">
-       <table cellpadding="0" cellspacing="0" border="0" width="97%">
+    <div class="listDevice" style="margin-left:15px;">
+       <table cellpadding="0" cellspacing="0" border="0" >
            <tr id="trListHeader" runat="server">
                 <td>
+
                     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
                         <AjaxSettings>
                             <telerik:AjaxSetting AjaxControlID="rgProjectList">
@@ -131,7 +107,7 @@
                         OnNeedDataSource="rgProjectList_NeedDataSource"
                         OnItemCommand="rgProjectList_ItemCommand" 
                         onitemdatabound="rgProjectList_ItemDataBound" 
-                        Width="500"
+                        Width="100%"
                         >
                         <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                         <MasterTableView DataKeyNames="ProjectId" >
@@ -139,9 +115,10 @@
                                 <telerik:GridTemplateColumn 
                                     DataField="ProjectId" 
                                     AllowFiltering="false"
-                                    HeaderText="Select"
+                                    HeaderText=""
                                     UniqueName="Select" 
                                     SortExpression="ProjectId" 
+                                    FilterControlWidth="50"
                                     >
                                     <ItemTemplate>
                                             <asp:ImageButton 
@@ -149,7 +126,7 @@
                                                         runat="server" 
                                                         ToolTip="Select Project" 
                                                         AlternateText="Select"
-                                                        ImageUrl="../Images/next.png" 
+                                                        ImageUrl="../../Images/next.png" 
                                                         CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                         CommandName="Select"
                                             />
@@ -186,7 +163,6 @@
                                         <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
                                             <script type="text/javascript">
                                                 function StatusIndexChanged(sender, args) {
-                                                    debugger;
                                                     var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
                                                     tableView.filter("ProjectStatusId", args.get_item().get_value(), "EqualTo");
                                                 }
@@ -200,10 +176,11 @@
                                     HeaderText="Project Name"
                                     UniqueName="ProjectName" 
                                     SortExpression="ProjectName" 
-                                    FilterControlWidth="110"
+                                    FilterControlWidth="100"
+                                    ItemStyle-Wrap="true"
                                     >
                                     <ItemTemplate>
-                                        <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
+                                        <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>'   />
                                     </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn 
@@ -313,15 +290,12 @@
                                                 runat="server" 
                                                 ToolTip="Delete Project" 
                                                 AlternateText="Delete"
-                                                ImageUrl="../Images/delete_icon.png" 
+                                                ImageUrl="../../Images/delete_icon.png" 
                                                 CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                 CommandName="Delete"
                                                 />
                                    </ItemTemplate>
                                     </telerik:GridTemplateColumn>
-
-
-
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
@@ -330,6 +304,10 @@
        </table>
     </div>
     <div class="clear"></div>
+    <uc:ClosePrintCondition ID="ucClosePrintCondition" runat="server"  />
+    <uc:OpenPrintCondition ID="ucOpenPrintCondition" runat="server" />
+
 </div>
 <div class="contant_bottom">
     &nbsp;</div>
+

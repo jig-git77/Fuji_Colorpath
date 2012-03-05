@@ -58,6 +58,24 @@ namespace FujifilmUSA.Sync.Web.Mock {
         protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Header ucHeader;
         
         /// <summary>
+        /// RadWindowManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager RadWindowManager;
+        
+        /// <summary>
+        /// RadModelWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow RadModelWindow;
+        
+        /// <summary>
         /// LeftMenu2 control.
         /// </summary>
         /// <remarks>

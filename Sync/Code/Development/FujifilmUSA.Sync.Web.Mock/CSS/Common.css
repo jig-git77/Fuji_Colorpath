@@ -1364,7 +1364,7 @@ height:10px;
 }
 .listDevice
 {
-    margin: 23px 20px 0 23px;
+    margin: 10px 20px 0 23px;
     padding-bottom: 10px;
     line-height: 34px;
 }
@@ -1414,3 +1414,125 @@ height:10px;
     line-height: 34px;
 }
 /**************************/
+
+/**** Open Print Condition ***/
+.OpenPrintCondition
+{
+    margin-left:10px;
+}
+.divImage
+{
+    float: left; 
+    margin-top:10px; 
+    margin-right:23px;
+}
+.Content
+{
+    margin-top:0; 
+    margin-bottom: 23px; 
+    float: left; 
+    line-height:34px;
+}
+.buttonright
+{
+    float: right; 
+    padding-left: 23px;
+}
+.buttonleft
+{
+    float: left;  
+    padding-left: 23px;
+}
+/**************************/
+
+.drawLine
+{
+	background:url(../images/big_bt_left.png) no-repeat top left	;
+}
+
+/**************************/
+
+/**** Section Group ***/
+.section_top
+{
+    background: url(../Images/section_contant_top.png) no-repeat top left;
+    height: 7px;
+}
+.section_middle
+{
+    background: url(../Images/tab_contant_bg.png) repeat-y top left;
+    overflow: hidden;
+}
+.section_middle .combopart
+{
+    margin: 0;
+}
+
+.section_middle .combopart .header
+{
+    background: url(../Images/section_line_bg.png) repeat-x bottom left;
+    padding:5px;
+    line-height: 24px;
+}
+.section_middle .combopart .header .content
+{
+    padding: -20px 5px 50px 5px; 
+}
+.section_middle .combopart .header .content .text
+{
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+.section_middle .combopart .area
+{
+    padding:5px;
+}
+.section_bottom
+{
+    background: url(../Images/tab_contant_bottom.png) no-repeat bottom left;
+    height: 7px;
+}
+/**************************/
+
+/**** Section Small Group ***/
+.section_small_top
+{
+    background: url(../Images/section_smallbox_top.png) no-repeat top left;
+    height: 7px;
+}
+.section_small_middle
+{
+    background: url(../Images/section_smallbox_bg.png) repeat-y top left;
+    overflow: hidden;
+}
+.section_small_middle .combopart
+{
+    margin: 0;
+}
+
+.section_small_middle .combopart .header
+{
+    background: url(../Images/section_line_bg.png) repeat-x bottom left;
+    padding:5px;
+    line-height: 24px;
+}
+.section_small_middle .combopart .header .content
+{
+    padding: -20px 5px 50px 5px; 
+}
+.section_small_middle .combopart .header .content .text
+{
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+.section_small_middle .combopart .area
+{
+    padding:5px;
+}
+.section_small_bottom
+{
+    background: url(../Images/section_smallbox_bottom.png) no-repeat bottom left;
+    height: 7px;
+}

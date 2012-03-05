@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.DeviceList" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/Pagging.ascx" TagName="Pagging" TagPrefix="ucPagging" %>
-<%@ Register Src="~/UserControl/SearchingDevice.ascx" TagName="Searching" TagPrefix="ucSearching" %>
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -87,12 +85,12 @@
     <div class="formDevice">
         <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
-            <tr id="tr1" runat="server">
+         <%--   <tr id="tr1" runat="server">
                 <td>
                     <label>
                         Show Presses For:</label>
                 </td>
-            </tr>
+            </tr>--%>
             <tr id="tr2" runat="server">
                 <td>
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -158,7 +156,7 @@
                     <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                         AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                         EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                        OnItemCommand="rgDeviceList_ItemCommand">
+                        OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
                         <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                         <MasterTableView DataKeyNames="DeviceName">
                             <Columns>

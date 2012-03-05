@@ -62,6 +62,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddProject.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
@@ -159,6 +160,11 @@
     <Content Include="Images\Project_Open.png" />
     <Content Include="Images\save_icon.png" />
     <Content Include="Images\Search.png" />
+    <Content Include="Images\section_contant_top.png" />
+    <Content Include="Images\section_line_bg.png" />
+    <Content Include="Images\section_smallbox_bg.png" />
+    <Content Include="Images\section_smallbox_bottom.png" />
+    <Content Include="Images\section_smallbox_top.png" />
     <Content Include="Images\setting_icon.png" />
     <Content Include="Images\setting_icon_hover.png" />
     <Content Include="Images\sidebar_box_bg.png" />
@@ -201,8 +207,22 @@
     <Content Include="JS\swfobject.js" />
     <Content Include="JS\WebComm.js" />
     <Content Include="JS\wz_jsgraphics.js" />
+    <Content Include="Login.aspx" />
     <Content Include="OperationSelection.aspx" />
+    <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
+    <Content Include="UserControl\AddProject\SavePrintCondition.ascx" />
+    <Content Include="UserControl\AddProject\MeasurementSetup.ascx" />
+    <Content Include="UserControl\ModelWindowContainer.ascx" />
+    <Content Include="UserControl\Login.ascx" />
+    <Content Include="UserControl\PopupControl\ClosePrintCondition.ascx" />
+    <Content Include="UserControl\AddProject\AddProjectDescription.ascx" />
+    <Content Include="UserControl\AddProject\AddProject.ascx" />
+    <Content Include="UserControl\AddProject\ProfilerOptions.ascx" />
+    <Content Include="UserControl\AddProject\TargetColorSpace.ascx" />
+    <Content Include="UserControl\ModelWindow.ascx" />
+    <Content Include="UserControl\PopupControl\OpenPrintCondition.ascx" />
     <Content Include="UserControl\Footer.ascx" />
     <Content Include="UserControl\Header.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
@@ -223,6 +243,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProject.aspx.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProject.aspx.designer.cs">
+      <DependentUpon>AddProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -244,6 +278,20 @@
     <Compile Include="OperationSelection.aspx.designer.cs">
       <DependentUpon>OperationSelection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopUpMaster.Master.cs">
+      <DependentUpon>PopUpMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopUpMaster.Master.designer.cs">
+      <DependentUpon>PopUpMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PrintCondition.aspx.cs">
+      <DependentUpon>PrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintCondition.aspx.designer.cs">
+      <DependentUpon>PrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjectList.aspx.cs">
       <DependentUpon>ProjectList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -252,6 +300,90 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\PopupControl\SaveWindow.ascx.cs">
+      <DependentUpon>SaveWindow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\SaveWindow.ascx.designer.cs">
+      <DependentUpon>SaveWindow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\SavePrintCondition.ascx.cs">
+      <DependentUpon>SavePrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\SavePrintCondition.ascx.designer.cs">
+      <DependentUpon>SavePrintCondition.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\MeasurementSetup.ascx.cs">
+      <DependentUpon>MeasurementSetup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\MeasurementSetup.ascx.designer.cs">
+      <DependentUpon>MeasurementSetup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ModelWindowContainer.ascx.cs">
+      <DependentUpon>ModelWindowContainer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ModelWindowContainer.ascx.designer.cs">
+      <DependentUpon>ModelWindowContainer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ClosePrintCondition.ascx.cs">
+      <DependentUpon>ClosePrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ClosePrintCondition.ascx.designer.cs">
+      <DependentUpon>ClosePrintCondition.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\AddProjectDescription.ascx.cs">
+      <DependentUpon>AddProjectDescription.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\AddProjectDescription.ascx.designer.cs">
+      <DependentUpon>AddProjectDescription.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\AddProject.ascx.cs">
+      <DependentUpon>AddProject.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\AddProject.ascx.designer.cs">
+      <DependentUpon>AddProject.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\ProfilerOptions.ascx.cs">
+      <DependentUpon>ProfilerOptions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\ProfilerOptions.ascx.designer.cs">
+      <DependentUpon>ProfilerOptions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\TargetColorSpace.ascx.cs">
+      <DependentUpon>TargetColorSpace.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\TargetColorSpace.ascx.designer.cs">
+      <DependentUpon>TargetColorSpace.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ModelWindow.ascx.cs">
+      <DependentUpon>ModelWindow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ModelWindow.ascx.designer.cs">
+      <DependentUpon>ModelWindow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\OpenPrintCondition.ascx.cs">
+      <DependentUpon>OpenPrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\OpenPrintCondition.ascx.designer.cs">
+      <DependentUpon>OpenPrintCondition.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -346,6 +478,10 @@
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="PopUpMaster.Master" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

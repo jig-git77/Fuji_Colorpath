@@ -13,13 +13,22 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
     public partial class ProjectList {
         
         /// <summary>
-        /// LinkButton2 control.
+        /// lbtnCreateNewPrintCondition control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnCreateNewPrintCondition;
+        
+        /// <summary>
+        /// imgAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
         /// ucStatusbar1 control.
@@ -29,15 +38,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Statusbar ucStatusbar1;
-        
-        /// <summary>
-        /// lbtnCreateNewPrintCondition control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnCreateNewPrintCondition;
         
         /// <summary>
         /// trListHeader control.
@@ -74,5 +74,23 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid rgProjectList;
+        
+        /// <summary>
+        /// ucClosePrintCondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl ucClosePrintCondition;
+        
+        /// <summary>
+        /// ucOpenPrintCondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl ucOpenPrintCondition;
     }
 }
