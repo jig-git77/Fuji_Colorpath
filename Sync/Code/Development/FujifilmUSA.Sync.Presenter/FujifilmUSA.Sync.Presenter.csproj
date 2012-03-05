@@ -77,47 +77,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PresenterAddDestinationProfile.cs" />
-    <Compile Include="PresenterAddDeviceLinkProfile.cs" />
-    <Compile Include="PresenterAddDestinationProfileMeasurement.cs" />
-    <Compile Include="PresenterAddProject.cs" />
-    <Compile Include="PresenterAddSourceProfile.cs" />
-    <Compile Include="PresenterDestinationProfileList.cs" />
-    <Compile Include="PresenterDeviceLinkProfileList.cs" />
-    <Compile Include="PresenterExportProfile.cs" />
-    <Compile Include="PresenterGetMeasurementDeviceType.cs" />
-    <Compile Include="PresenterGetSourceDestinationCombo.cs" />
-    <Compile Include="PresenterLeftMenu.cs" />
-    <Compile Include="PresenterMeasurementDevice.cs" />
-    <Compile Include="PresenterProjectList.cs" />
-    <Compile Include="PresenterSourceProfileList.cs" />
-    <Compile Include="PresenterSyncDevice.cs" />
-    <Compile Include="PresenterSyncRunAnalyze.cs" />
-    <Compile Include="PresenterTaskeroUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewInterface\IViewAddDestinationProfile.cs" />
-    <Compile Include="ViewInterface\IViewAddDeviceLinkProfile.cs" />
-    <Compile Include="ViewInterface\IViewAddDestinationProfileMeasurement.cs" />
-    <Compile Include="ViewInterface\IViewAddProject.cs" />
-    <Compile Include="ViewInterface\IViewAddSourceProfile.cs" />
-    <Compile Include="ViewInterface\IViewGetMeasurementDeviceType.cs" />
-    <Compile Include="ViewInterface\IViewGetSourceDestinationCombo.cs" />
-    <Compile Include="ViewInterface\IViewSourceProfiles.cs" />
-    <Compile Include="ViewInterface\ViewBase\IViewBaseProfile.cs" />
-    <Compile Include="ViewInterface\ViewBase\IViewBaseProject.cs" />
-    <Compile Include="ViewInterface\ViewBase\IViewBaseSyncDevice.cs" />
-    <Compile Include="ViewInterface\IViewDestinationProfiles.cs" />
-    <Compile Include="ViewInterface\IViewDeviceLinkProfiles.cs" />
-    <Compile Include="ViewInterface\IViewExportProfile.cs" />
-    <Compile Include="ViewInterface\IViewLeftMenu.cs" />
-    <Compile Include="ViewInterface\IViewMeasurementDevice.cs" />
-    <Compile Include="ViewInterface\IViewProjectList.cs" />
-    <Compile Include="ViewInterface\IViewSyncDevice.cs" />
-    <Compile Include="ViewInterface\IViewSyncRunAnalyze.cs" />
-    <Compile Include="ViewInterface\IViewTaskeroUser.cs" />
-    <Compile Include="ViewInterface\ViewBase\IViewError.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewInterface\ViewBase\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
       <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>

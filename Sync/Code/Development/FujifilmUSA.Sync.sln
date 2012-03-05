@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web", "FujifilmUSA.Sync.Web\FujifilmUSA.Sync.Web.csproj", "{0B100010-C5AC-48CA-91FD-0A449F82D2C2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Common", "FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj", "{B791085B-2607-458F-B9AA-5DDC581589AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj", "{B3DEFE33-B211-45E8-8062-A7535A340754}"
@@ -12,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Presenter", "FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj", "{05EC147C-DCDC-4470-A7FD-7579E28735EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Business", "FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj", "{71A9790F-C074-413D-8E34-4C7321BD06E9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Business.Test", "FujifilmUSA.Sync.Business.Test\FujifilmUSA.Sync.Business.Test.csproj", "{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{363E3DDB-CFA6-4F40-B228-E23DAA632382}"
 	ProjectSection(SolutionItems) = preProject
@@ -28,37 +24,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web.Mock",
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = FujifilmUSA.Sync.Web\\FujifilmUSA.Sync.Web.csproj
-		SccProjectName1 = FujifilmUSA.Sync.Web
-		SccLocalPath1 = FujifilmUSA.Sync.Web
-		SccProjectUniqueName2 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
-		SccProjectName2 = FujifilmUSA.Sync.Common
-		SccLocalPath2 = FujifilmUSA.Sync.Common
-		SccProjectUniqueName3 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
-		SccProjectName3 = FujifilmUSA.Sync.Entity
-		SccLocalPath3 = FujifilmUSA.Sync.Entity
-		SccProjectUniqueName4 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
-		SccProjectName4 = FujifilmUSA.Sync.Presenter
-		SccLocalPath4 = FujifilmUSA.Sync.Presenter
-		SccProjectUniqueName5 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
-		SccProjectName5 = FujifilmUSA.Sync.Business
-		SccLocalPath5 = FujifilmUSA.Sync.Business
-		SccProjectUniqueName6 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
-		SccProjectName6 = FujifilmUSA.Sync.Model
-		SccLocalPath6 = FujifilmUSA.Sync.Model
-		SccProjectUniqueName7 = FujifilmUSA.Sync.Business.Test\\FujifilmUSA.Sync.Business.Test.csproj
-		SccProjectName7 = FujifilmUSA.Sync.Business.Test
-		SccLocalPath7 = FujifilmUSA.Sync.Business.Test
-		SccProjectUniqueName8 = FujifilmUSA.Sync.Entity.Mock\\FujifilmUSA.Sync.Entity.Mock.csproj
-		SccProjectName8 = FujifilmUSA.Sync.Entity.Mock
-		SccLocalPath8 = FujifilmUSA.Sync.Entity.Mock
-		SccProjectUniqueName9 = FujifilmUSA.Sync.Web.Mock\\FujifilmUSA.Sync.Web.Mock.csproj
-		SccProjectName9 = FujifilmUSA.Sync.Web.Mock
-		SccLocalPath9 = FujifilmUSA.Sync.Web.Mock
+		SccProjectUniqueName1 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
+		SccProjectName1 = FujifilmUSA.Sync.Common
+		SccLocalPath1 = FujifilmUSA.Sync.Common
+		SccProjectUniqueName2 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
+		SccProjectName2 = FujifilmUSA.Sync.Entity
+		SccLocalPath2 = FujifilmUSA.Sync.Entity
+		SccProjectUniqueName3 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
+		SccProjectName3 = FujifilmUSA.Sync.Presenter
+		SccLocalPath3 = FujifilmUSA.Sync.Presenter
+		SccProjectUniqueName4 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
+		SccProjectName4 = FujifilmUSA.Sync.Model
+		SccLocalPath4 = FujifilmUSA.Sync.Model
+		SccProjectUniqueName5 = FujifilmUSA.Sync.Entity.Mock\\FujifilmUSA.Sync.Entity.Mock.csproj
+		SccProjectName5 = FujifilmUSA.Sync.Entity.Mock
+		SccLocalPath5 = FujifilmUSA.Sync.Entity.Mock
+		SccProjectUniqueName6 = FujifilmUSA.Sync.Web.Mock\\FujifilmUSA.Sync.Web.Mock.csproj
+		SccProjectName6 = FujifilmUSA.Sync.Web.Mock
+		SccLocalPath6 = FujifilmUSA.Sync.Web.Mock
+		SccProjectUniqueName7 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
+		SccProjectName7 = FujifilmUSA.Sync.Business
+		SccLocalPath7 = FujifilmUSA.Sync.Business
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FujifilmUSA.Sync.vsmdi
@@ -70,14 +60,6 @@ Global
 		Stage|Any CPU = Stage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Development|Any CPU.ActiveCfg = Development|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Development|Any CPU.Build.0 = Development|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Stage|Any CPU.ActiveCfg = Stage|Any CPU
-		{0B100010-C5AC-48CA-91FD-0A449F82D2C2}.Stage|Any CPU.Build.0 = Stage|Any CPU
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Development|Any CPU.ActiveCfg = Development|Any CPU
@@ -118,14 +100,6 @@ Global
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Stage|Any CPU.ActiveCfg = Stage|Any CPU
 		{71A9790F-C074-413D-8E34-4C7321BD06E9}.Stage|Any CPU.Build.0 = Stage|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Development|Any CPU.ActiveCfg = Development|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Development|Any CPU.Build.0 = Development|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Stage|Any CPU.ActiveCfg = Stage|Any CPU
-		{2E2ECABC-E2D4-4F64-9867-8D1DBE265A55}.Stage|Any CPU.Build.0 = Stage|Any CPU
 		{050CFE70-AFF6-4D52-93E6-2C804CF143D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{050CFE70-AFF6-4D52-93E6-2C804CF143D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{050CFE70-AFF6-4D52-93E6-2C804CF143D7}.Development|Any CPU.ActiveCfg = Debug|Any CPU
