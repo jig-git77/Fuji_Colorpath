@@ -8,7 +8,6 @@ using FujifilmUSA.Sync.Business.Implementation;
 namespace FujifilmUSA.Sync.Business.Test
 {
     
-    
     /// <summary>
     ///This is a test class for IDestinationProfileBusinessTest and is intended
     ///to contain all IDestinationProfileBusinessTest Unit Tests
