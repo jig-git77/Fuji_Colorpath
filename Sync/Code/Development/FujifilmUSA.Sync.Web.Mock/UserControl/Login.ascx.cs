@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-//using FujifilmUSA.Sync.Presenter.ViewInterface;
-//using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Entity;
-using System.Web.Security;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Login : System.Web.UI.UserControl
     {
@@ -30,8 +21,8 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentUser != null)
-                Response.Redirect("Index.aspx");
+            //if (SessionManager.Instance.CurrentUser != null)
+            //    Response.Redirect("Index.aspx");
 
             if (!IsPostBack)
             {

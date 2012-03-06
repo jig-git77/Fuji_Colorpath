@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl {
+namespace FujifilmUSA.Sync.Web.UserControl {
     
     
     public partial class SavePrintCondition {
@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Statusbar ucStatusbar1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar1;
         
         /// <summary>
         /// lblMedia control.
@@ -190,6 +190,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.SaveWindow ucSaveWindow;
+        protected global::FujifilmUSA.Sync.Web.UserControl.SaveWindow ucSaveWindow;
     }
 }

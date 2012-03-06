@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class SaveWindow : System.Web.UI.UserControl
     {

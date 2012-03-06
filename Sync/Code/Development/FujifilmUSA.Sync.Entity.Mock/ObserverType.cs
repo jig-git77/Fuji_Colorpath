@@ -1,4 +1,4 @@
-namespace FujifilmUSA.Sync.Entity.Mock
+namespace FujifilmUSA.Sync.Entity
 {
     public class ObserverType
     {

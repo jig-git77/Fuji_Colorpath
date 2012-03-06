@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.Mock.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>

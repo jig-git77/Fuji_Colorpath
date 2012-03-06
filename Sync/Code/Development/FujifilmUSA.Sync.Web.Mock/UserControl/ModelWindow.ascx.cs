@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 using System.ComponentModel;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ModelWindow : System.Web.UI.UserControl
     {

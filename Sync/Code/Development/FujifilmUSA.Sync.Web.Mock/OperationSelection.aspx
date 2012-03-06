@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OperationSelection.aspx.cs" Inherits="FujifilmUSA.Sync.Web.Mock.OperationSelection"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OperationSelection.aspx.cs" Inherits="FujifilmUSA.Sync.Web.OperationSelection"
     MasterPageFile="~/MainMaster.Master" %>
 
 <%@ Register Src="~/UserControl/OperationSelection.ascx" TagName="OperationSelection" TagPrefix="uc1" %>

@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
-using FujifilmUSA.Sync.Entity;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class DeviceList : System.Web.UI.UserControl
     {

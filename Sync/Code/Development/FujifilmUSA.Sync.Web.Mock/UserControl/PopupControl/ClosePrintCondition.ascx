@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.ClosePrintCondition" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
 <div style="display: block; margin:10px;"  class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>

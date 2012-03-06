@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FujifilmUSA.Sync.Entity.Mock")]
+[assembly: AssemblyTitle("FujifilmUSA.Sync.Entity")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Softweb")]
-[assembly: AssemblyProduct("FujifilmUSA.Sync.Entity.Mock")]
+[assembly: AssemblyProduct("FujifilmUSA.Sync.Entity")]
 [assembly: AssemblyCopyright("Copyright © Softweb 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

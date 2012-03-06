@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ModelWindow.ascx.cs" Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.ModelWindow"     %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ModelWindow.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ModelWindow"     %>
 <%--<%@ Register Src="~/UserControl/ProjectList/ClosePrintCondition.ascx" TagName="ClosePrintCondition" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/ProjectList/OpenPrintCondition.ascx" TagName="OpenPrintCondition" TagPrefix="uc" %>
 --%>

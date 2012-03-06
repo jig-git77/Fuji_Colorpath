@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementSetup.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.MeasurementSetup" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <div class="formDeviceNoLine" style="display:none;">
     <%--<div style="float: left">

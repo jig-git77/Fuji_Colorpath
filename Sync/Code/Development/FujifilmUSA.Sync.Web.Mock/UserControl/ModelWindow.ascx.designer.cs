@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl {
+namespace FujifilmUSA.Sync.Web.UserControl {
     
     
     public partial class ModelWindow {

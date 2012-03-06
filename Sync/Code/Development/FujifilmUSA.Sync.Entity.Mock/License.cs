@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace FujifilmUSA.Sync.Entity.Mock
+namespace FujifilmUSA.Sync.Entity
 {
     public class License
     {

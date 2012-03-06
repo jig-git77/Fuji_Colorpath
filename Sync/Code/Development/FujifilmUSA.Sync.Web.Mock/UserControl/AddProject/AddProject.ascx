@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProject.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.AddProject" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.AddProject" %>
 <%@ Register Src="~/UserControl/AddProject/AddProjectDescription.ascx" TagName="AddProjectDescription" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddProject/TargetColorSpace.ascx" TagName="TargetColorSpace" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/AddProject/ProfilerOptions.ascx" TagName="ProfilerOptions" TagPrefix="uc" %>

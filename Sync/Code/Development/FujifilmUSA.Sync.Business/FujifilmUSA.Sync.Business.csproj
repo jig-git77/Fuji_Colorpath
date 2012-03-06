@@ -93,10 +93,6 @@
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
-      <Project>{B3DEFE33-B211-45E8-8062-A7535A340754}</Project>
-      <Name>FujifilmUSA.Sync.Entity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Model\FujifilmUSA.Sync.DataAccess.csproj">
       <Project>{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}</Project>
       <Name>FujifilmUSA.Sync.DataAccess</Name>

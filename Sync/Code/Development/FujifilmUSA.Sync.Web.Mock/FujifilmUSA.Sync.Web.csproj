@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FujifilmUSA.Sync.Web.Mock</RootNamespace>
-    <AssemblyName>FujifilmUSA.Sync.Web.Mock</AssemblyName>
+    <RootNamespace>FujifilmUSA.Sync.Web</RootNamespace>
+    <AssemblyName>FujifilmUSA.Sync.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
@@ -474,9 +474,13 @@
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
-      <Project>{B3DEFE33-B211-45E8-8062-A7535A340754}</Project>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.csproj">
+      <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
+      <Project>{05EC147C-DCDC-4470-A7FD-7579E28735EC}</Project>
+      <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

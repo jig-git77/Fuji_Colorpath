@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl {
+namespace FujifilmUSA.Sync.Web.UserControl {
     
     
     public partial class ProjectList {
@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Statusbar ucStatusbar1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar1;
         
         /// <summary>
         /// trListHeader control.
@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.OpenPrintCondition ucOpenPrintCondition;
+        protected global::FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition ucOpenPrintCondition;
         
         /// <summary>
         /// ClosePrintConditionWindow control.
@@ -118,6 +118,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.ClosePrintCondition ucClosePrintCondition;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition ucClosePrintCondition;
     }
 }

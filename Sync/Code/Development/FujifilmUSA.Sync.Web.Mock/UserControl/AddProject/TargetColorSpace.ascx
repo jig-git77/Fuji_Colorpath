@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TargetColorSpace.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.TargetColorSpace" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.TargetColorSpace" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
     <div class="formDeviceNoLine" style="display:none;">
         <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />

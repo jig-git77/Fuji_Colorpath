@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace FujifilmUSA.Sync.Entity.Mock
+namespace FujifilmUSA.Sync.Entity
 {
     public class ChartSetting
     {

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectList.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.ProjectList" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.ProjectList" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/PopupControl/ClosePrintCondition.ascx" TagName="ClosePrintCondition"
     TagPrefix="uc" %>

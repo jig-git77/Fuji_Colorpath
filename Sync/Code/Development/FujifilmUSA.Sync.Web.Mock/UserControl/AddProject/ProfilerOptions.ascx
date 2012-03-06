@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProfilerOptions.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.ProfilerOptions" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.ProfilerOptions" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <div class="listDevice" style=" margin-left: 10px;">
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />

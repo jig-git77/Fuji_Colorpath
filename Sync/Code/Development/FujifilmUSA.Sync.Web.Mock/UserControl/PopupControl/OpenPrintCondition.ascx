@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OpenPrintCondition.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.OpenPrintCondition" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition" %>
 <div>
     <div class="top">
         &nbsp;</div>

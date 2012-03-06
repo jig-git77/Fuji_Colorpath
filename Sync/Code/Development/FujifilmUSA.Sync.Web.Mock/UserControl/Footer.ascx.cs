@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Footer : System.Web.UI.UserControl
     {

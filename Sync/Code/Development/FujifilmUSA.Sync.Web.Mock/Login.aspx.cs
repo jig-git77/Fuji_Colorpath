@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace FujifilmUSA.Sync.Web.Mock
+namespace FujifilmUSA.Sync.Web
 {
     public partial class Login : System.Web.UI.Page
     {

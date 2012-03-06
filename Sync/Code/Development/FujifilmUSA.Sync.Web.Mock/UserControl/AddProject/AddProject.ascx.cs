@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using FujifilmUSA.Sync.Entity;
-using System.Linq;
-using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Common;
-using Telerik.Web.UI;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddProject : System.Web.UI.UserControl
     {

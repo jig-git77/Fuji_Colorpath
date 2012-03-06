@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Pagging.ascx.cs" Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.Pagging" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Pagging.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Pagging" %>
 <div class="PaggingHeader">
 <table  cellspacing="0" cellpadding="0" border="0">
     <tr>

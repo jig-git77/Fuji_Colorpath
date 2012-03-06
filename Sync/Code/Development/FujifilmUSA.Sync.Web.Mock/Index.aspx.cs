@@ -1,8 +1,6 @@
 ﻿using System;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Entity;
 
-namespace FujifilmUSA.Sync.Web.Mock
+namespace FujifilmUSA.Sync.Web
 {
     public partial class Index : System.Web.UI.Page
     {

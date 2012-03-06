@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchingDevice.ascx.cs" Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.SearchingDevice" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchingDevice.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SearchingDevice" %>
 
 <script type="text/javascript"> 
 //<![CDATA[

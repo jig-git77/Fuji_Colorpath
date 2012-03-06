@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Common", "FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj", "{B791085B-2607-458F-B9AA-5DDC581589AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj", "{B3DEFE33-B211-45E8-8062-A7535A340754}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.DataAccess", "FujifilmUSA.Sync.Model\FujifilmUSA.Sync.DataAccess.csproj", "{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Presenter", "FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj", "{05EC147C-DCDC-4470-A7FD-7579E28735EC}"
@@ -18,37 +16,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity.Mock", "FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.Mock.csproj", "{050CFE70-AFF6-4D52-93E6-2C804CF143D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.csproj", "{050CFE70-AFF6-4D52-93E6-2C804CF143D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web.Mock", "FujifilmUSA.Sync.Web.Mock\FujifilmUSA.Sync.Web.Mock.csproj", "{0DECDB99-C09F-4264-888D-6FF85E391D57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web", "FujifilmUSA.Sync.Web.Mock\FujifilmUSA.Sync.Web.csproj", "{0DECDB99-C09F-4264-888D-6FF85E391D57}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
 		SccProjectName1 = FujifilmUSA.Sync.Common
 		SccLocalPath1 = FujifilmUSA.Sync.Common
-		SccProjectUniqueName2 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
-		SccProjectName2 = FujifilmUSA.Sync.Entity
-		SccLocalPath2 = FujifilmUSA.Sync.Entity
-		SccProjectUniqueName3 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
-		SccProjectName3 = FujifilmUSA.Sync.Presenter
-		SccLocalPath3 = FujifilmUSA.Sync.Presenter
-		SccProjectUniqueName4 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
-		SccProjectName4 = FujifilmUSA.Sync.Model
-		SccLocalPath4 = FujifilmUSA.Sync.Model
-		SccProjectUniqueName5 = FujifilmUSA.Sync.Entity.Mock\\FujifilmUSA.Sync.Entity.Mock.csproj
-		SccProjectName5 = FujifilmUSA.Sync.Entity.Mock
-		SccLocalPath5 = FujifilmUSA.Sync.Entity.Mock
-		SccProjectUniqueName6 = FujifilmUSA.Sync.Web.Mock\\FujifilmUSA.Sync.Web.Mock.csproj
-		SccProjectName6 = FujifilmUSA.Sync.Web.Mock
-		SccLocalPath6 = FujifilmUSA.Sync.Web.Mock
-		SccProjectUniqueName7 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
-		SccProjectName7 = FujifilmUSA.Sync.Business
-		SccLocalPath7 = FujifilmUSA.Sync.Business
+		SccProjectUniqueName2 = FujifilmUSA.Sync.Presenter\\FujifilmUSA.Sync.Presenter.csproj
+		SccProjectName2 = FujifilmUSA.Sync.Presenter
+		SccLocalPath2 = FujifilmUSA.Sync.Presenter
+		SccProjectUniqueName3 = FujifilmUSA.Sync.Model\\FujifilmUSA.Sync.DataAccess.csproj
+		SccProjectName3 = FujifilmUSA.Sync.Model
+		SccLocalPath3 = FujifilmUSA.Sync.Model
+		SccProjectUniqueName4 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
+		SccProjectName4 = FujifilmUSA.Sync.Business
+		SccLocalPath4 = FujifilmUSA.Sync.Business
+		SccProjectUniqueName5 = FujifilmUSA.Sync.Web.Mock\\FujifilmUSA.Sync.Web.csproj
+		SccProjectName5 = FujifilmUSA.Sync.Web.Mock
+		SccLocalPath5 = FujifilmUSA.Sync.Web.Mock
+		SccProjectUniqueName6 = FujifilmUSA.Sync.Entity.Mock\\FujifilmUSA.Sync.Entity.csproj
+		SccProjectName6 = FujifilmUSA.Sync.Entity.Mock
+		SccLocalPath6 = FujifilmUSA.Sync.Entity.Mock
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FujifilmUSA.Sync.vsmdi
@@ -68,14 +63,6 @@ Global
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Stage|Any CPU.ActiveCfg = Stage|Any CPU
 		{B791085B-2607-458F-B9AA-5DDC581589AF}.Stage|Any CPU.Build.0 = Stage|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Development|Any CPU.ActiveCfg = Development|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Development|Any CPU.Build.0 = Development|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Stage|Any CPU.ActiveCfg = Stage|Any CPU
-		{B3DEFE33-B211-45E8-8062-A7535A340754}.Stage|Any CPU.Build.0 = Stage|Any CPU
 		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFC75611-B7B0-4651-8FA7-A9B7A9EA9AD7}.Development|Any CPU.ActiveCfg = Development|Any CPU

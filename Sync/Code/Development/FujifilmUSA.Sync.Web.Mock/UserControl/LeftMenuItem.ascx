@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LeftMenuItem.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.LeftMenuItem" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenuItem" %>
 <ul id="menu">
     <li>     
        <span style = "float:left; width:18px"><asp:Image runat="server" ID="imgItem" /> </span>

@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProjectDescription.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.AddProjectDescription" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.AddProjectDescription" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 
 <script type="text/javascript" language="javascript">

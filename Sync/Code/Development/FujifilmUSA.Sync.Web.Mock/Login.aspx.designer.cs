@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock
+namespace FujifilmUSA.Sync.Web
 {
     
     
@@ -29,6 +29,6 @@ namespace FujifilmUSA.Sync.Web.Mock
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Login ucLogin1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Login ucLogin1;
     }
 }

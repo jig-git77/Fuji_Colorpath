@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 using System.ComponentModel;
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl
+namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ModelWindowContainer : System.Web.UI.UserControl
     {
@@ -49,17 +49,17 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
             {
                 case "1":
                     this.ModelControlId = 1;
-                    //var openPrintCondition = ((FujifilmUSA.Sync.Web.Mock.UserControl.OpenPrintCondition)this.LoadControl("~/UserControl/ProjectList/OpenPrintCondition.ascx"));
+                    //var openPrintCondition = ((FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition)this.LoadControl("~/UserControl/ProjectList/OpenPrintCondition.ascx"));
                     //ph.Controls.Add(openPrintCondition);
                     break;
                 case "2":
                     this.ModelControlId = 2;
-                    //var closePrintCondition = ((FujifilmUSA.Sync.Web.Mock.UserControl.ClosePrintCondition)this.LoadControl("~/UserControl/ProjectList/ClosePrintCondition.ascx"));
+                    //var closePrintCondition = ((FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition)this.LoadControl("~/UserControl/ProjectList/ClosePrintCondition.ascx"));
                     //ph.Controls.Add(closePrintCondition);
                     break;
                 case "3":
                     this.ModelControlId = 3;
-                    //var closePrintCondition = ((FujifilmUSA.Sync.Web.Mock.UserControl.ClosePrintCondition)this.LoadControl("~/UserControl/ProjectList/ClosePrintCondition.ascx"));
+                    //var closePrintCondition = ((FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition)this.LoadControl("~/UserControl/ProjectList/ClosePrintCondition.ascx"));
                     //ph.Controls.Add(closePrintCondition);
                     break;
             }

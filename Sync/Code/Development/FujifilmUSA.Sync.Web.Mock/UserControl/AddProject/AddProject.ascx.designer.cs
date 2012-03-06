@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock.UserControl {
+namespace FujifilmUSA.Sync.Web.UserControl {
     
     
     public partial class AddProject {
@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.AddProjectDescription ucAddProjectDescription;
+        protected global::FujifilmUSA.Sync.Web.UserControl.AddProjectDescription ucAddProjectDescription;
         
         /// <summary>
         /// ucTargetColorSpace control.
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.TargetColorSpace ucTargetColorSpace;
+        protected global::FujifilmUSA.Sync.Web.UserControl.TargetColorSpace ucTargetColorSpace;
         
         /// <summary>
         /// ucProfilerOptions control.
@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.ProfilerOptions ucProfilerOptions;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ProfilerOptions ucProfilerOptions;
         
         /// <summary>
         /// ucMeasurementSetup control.
@@ -73,7 +73,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.MeasurementSetup ucMeasurementSetup;
+        protected global::FujifilmUSA.Sync.Web.UserControl.MeasurementSetup ucMeasurementSetup;
         
         /// <summary>
         /// ucSavePrintCondition control.
@@ -82,6 +82,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.SavePrintCondition ucSavePrintCondition;
+        protected global::FujifilmUSA.Sync.Web.UserControl.SavePrintCondition ucSavePrintCondition;
     }
 }

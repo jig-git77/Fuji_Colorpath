@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SaveWindow.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.SaveWindow" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.SaveWindow" %>
 <div class="listDevice" style="margin-left: 10px">
     <table cellpadding="0" cellspacing="10" width="100%">
         <tr>

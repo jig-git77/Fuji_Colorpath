@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SavePrintCondition.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.SavePrintCondition" %>
+    Inherits="FujifilmUSA.Sync.Web.UserControl.SavePrintCondition" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/PopupControl/SaveWindow.ascx" TagName="SaveWindow" TagPrefix="uc" %>
 

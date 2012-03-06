@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.Mock {
+namespace FujifilmUSA.Sync.Web {
     
     
     public partial class MainMaster {
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.Mock {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Header ucHeader;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Header ucHeader;
         
         /// <summary>
         /// LeftMenu2 control.
@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.Mock {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.LeftMenu LeftMenu2;
+        protected global::FujifilmUSA.Sync.Web.UserControl.LeftMenu LeftMenu2;
         
         /// <summary>
         /// ContentPlaceHolder1 control.
@@ -82,6 +82,6 @@ namespace FujifilmUSA.Sync.Web.Mock {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.Footer ucFooter;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Footer ucFooter;
     }
 }

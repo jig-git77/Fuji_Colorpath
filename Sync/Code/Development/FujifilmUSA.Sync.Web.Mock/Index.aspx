@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="FujifilmUSA.Sync.Web.Mock.Index"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="FujifilmUSA.Sync.Web.Index"
     MasterPageFile="~/MainMaster.Master" %>
 
 <%@ Register Src="~/UserControl/DeviceList.ascx" TagName="DeviceList" TagPrefix="uc1" %>
