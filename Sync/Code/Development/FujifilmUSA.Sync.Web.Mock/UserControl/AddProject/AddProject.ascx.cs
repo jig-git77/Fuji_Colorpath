@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
                     hTitle.InnerText = "New Print Condition - Save Print Condition";
                     lbtnCreateNewPrintCondition.ValidationGroup = "";
                     lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Save<span>";
-                    lbtnCreateNewPrintCondition.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/PrintCondition.aspx?ModelControlId=3") + "')");
+                    lbtnCreateNewPrintCondition.Attributes.Add("onclick", "javascript: return ShowConfirmSaveWindow();");
                     break;
 
             }

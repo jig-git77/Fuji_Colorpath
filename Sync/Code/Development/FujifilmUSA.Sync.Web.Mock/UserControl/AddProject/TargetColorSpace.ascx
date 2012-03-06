@@ -20,17 +20,6 @@
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>
-                    <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-                        <AjaxSettings>
-                            <telerik:AjaxSetting AjaxControlID="rgProjectList">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="panelAddProjectDescription" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                        </AjaxSettings>
-                    </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Office2010Silver" />
-                    --%>
                     <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None">
                         <table>
                             <tr>

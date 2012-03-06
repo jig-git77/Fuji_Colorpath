@@ -166,12 +166,30 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtChartPriview;
         
         /// <summary>
+        /// RadWindowManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindowManager RadWindowManager;
+        
+        /// <summary>
+        /// ConfirmSaveWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ConfirmSaveWindow;
+        
+        /// <summary>
         /// ucSaveWindow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ucSaveWindow;
+        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.SaveWindow ucSaveWindow;
     }
 }

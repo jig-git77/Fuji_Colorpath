@@ -1,8 +1,22 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SavePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.Mock.UserControl.SavePrintCondition" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/AddProject/SaveWindow.ascx" TagName="SaveWindow" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/PopupControl/SaveWindow.ascx" TagName="SaveWindow" TagPrefix="uc" %>
 
+ <script type="text/javascript" language="javascript">
+     function ShowConfirmSaveWindow() {
+         var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+         oWnd.show();
+         return false;
+     }
+</script>
+<script language="javascript" type="text/javascript">
+    function Close() {
+        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }
+</script>
 <div class="formDeviceNoLine" style="display:none;">
   <%--  <div style="float: left">
         <label>
@@ -19,17 +33,6 @@
 </div>
 <div class="listDevice" style="margin-left:10px">
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
-     <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-                        <AjaxSettings>
-                            <telerik:AjaxSetting AjaxControlID="rgProjectList">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="panelAddProjectDescription" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                        </AjaxSettings>
-                    </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Office2010Silver" />
-                --%>
     <table cellpadding="0" cellspacing="10" border="0" >
         <tr>
             <td valign="top" style="width:320px">
@@ -285,5 +288,24 @@
     </table>
 </div>
 <div class="clear"></div>
-<uc:SaveWindow ID="ucSaveWindow" runat="server" />
+
+    
+ <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" >
+    <Windows>
+                <telerik:RadWindow 
+                    id="ConfirmSaveWindow" 
+                    runat="server"
+                    showcontentduringload="false"
+                    Title="Download Chart"
+                    Width="650"
+                    Height="270"
+                    behaviors="Close, Move" Behavior="Close, Move"
+                    >
+                    <ContentTemplate>
+                        <uc:SaveWindow ID="ucSaveWindow" runat="server" />
+                    </ContentTemplate>    
+                </telerik:RadWindow>
+            </Windows>
+</telerik:RadWindowManager>
+
 <div class="clear"></div>

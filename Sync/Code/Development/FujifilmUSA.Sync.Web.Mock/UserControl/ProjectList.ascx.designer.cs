@@ -76,13 +76,22 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         protected global::Telerik.Web.UI.RadGrid rgProjectList;
         
         /// <summary>
-        /// ucClosePrintCondition control.
+        /// RadWindowManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ucClosePrintCondition;
+        protected global::Telerik.Web.UI.RadWindowManager RadWindowManager;
+        
+        /// <summary>
+        /// OpenPrintConditionWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow OpenPrintConditionWindow;
         
         /// <summary>
         /// ucOpenPrintCondition control.
@@ -91,6 +100,24 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ucOpenPrintCondition;
+        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.OpenPrintCondition ucOpenPrintCondition;
+        
+        /// <summary>
+        /// ClosePrintConditionWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow ClosePrintConditionWindow;
+        
+        /// <summary>
+        /// ucClosePrintCondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.Mock.UserControl.ClosePrintCondition ucClosePrintCondition;
     }
 }

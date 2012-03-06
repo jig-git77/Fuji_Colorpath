@@ -152,7 +152,7 @@
                             </telerik:AjaxSetting>
                         </AjaxSettings>
                     </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Office2010Silver" />
+                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  />
                     <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                         AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                         EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"

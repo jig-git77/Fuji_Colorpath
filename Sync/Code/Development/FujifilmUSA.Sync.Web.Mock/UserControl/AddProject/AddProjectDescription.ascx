@@ -37,7 +37,7 @@
                             </telerik:AjaxSetting>
                         </AjaxSettings>
                     </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Office2010Silver" />
+                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  />
                     <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None">
                         <table>
                             <tr>

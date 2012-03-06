@@ -12,7 +12,7 @@
                             <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/error.png" />
                         </div>
                         <div class="Content">
-                            <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                            <asp:Label ID="lblOpenPrintConditionMessage" runat="server"></asp:Label>
                         </div>
                     </div>
                     <div class="clear">
@@ -22,7 +22,7 @@
             <tr>
                 <td>
                     <div class="buttonright">
-                        <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
+                        <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseOpenPrintConditionWindow() return flase;"
                             CssClass="gray_bt">
                                         <span>
                                             Close </span>

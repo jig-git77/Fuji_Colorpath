@@ -16,11 +16,11 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
         #region Page events
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            //this.Visible = (this.Parent != null && ((FujifilmUSA.Sync.Web.Mock.UserControl.ModelWindowContainer)Parent).ModelControlId == 2);
-            if (!IsPostBack && Request.QueryString["ProjectName"] != null)
-            {
-                lblMessage.Text = string.Format("Options for '{0}' Print Condition", Request.QueryString["ProjectName"]);
-            }
+            //if (!IsPostBack && Request.QueryString["ProjectName"] != null)
+            //{
+            //    this.Visible = Request.QueryString["ModelControlId"].ToString().Equals("2", StringComparison.OrdinalIgnoreCase);
+            //    lblMessage.Text = string.Format("Options for '{0}' Print Condition", Request.QueryString["ProjectName"]);
+            //}
 
         }
         #endregion

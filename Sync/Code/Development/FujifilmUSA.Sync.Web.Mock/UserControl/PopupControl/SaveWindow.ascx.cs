@@ -16,7 +16,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
         #region Page events
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            this.Visible = (this.Parent != null && ((FujifilmUSA.Sync.Web.Mock.UserControl.ModelWindowContainer)Parent).ModelControlId == 3);
         }
         #endregion
 

@@ -6,7 +6,7 @@
     <div class="OpenPrintCondition" style="margin-left:23px;">
         <div style="float:left;">
             <div class="Content">
-                <asp:Label ID="lblMessage" runat="server"></asp:Label>
+                <asp:Label ID="lblClosePrintConditionMessage" runat="server"></asp:Label>
             </div>
         </div>
         <div style="float:left;">
@@ -30,7 +30,7 @@
             <div>
                 </br>
                 <div class="buttonright">
-                    <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();" CssClass="gray_bt">
+                    <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseClosePrintConditionWindow();" CssClass="gray_bt">
                         <span>Close</span>
                     </asp:LinkButton>
                 </div>
