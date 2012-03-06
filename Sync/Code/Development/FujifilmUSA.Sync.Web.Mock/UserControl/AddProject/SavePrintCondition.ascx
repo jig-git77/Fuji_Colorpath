@@ -297,8 +297,8 @@
                     runat="server"
                     showcontentduringload="false"
                     Title="Download Chart"
-                    Width="650"
-                    Height="270"
+                    Width="730"
+                    Height="400"
                     behaviors="Close, Move" Behavior="Close, Move"
                     >
                     <ContentTemplate>

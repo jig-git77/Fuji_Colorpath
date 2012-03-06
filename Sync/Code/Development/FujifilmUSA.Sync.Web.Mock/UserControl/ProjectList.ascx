@@ -33,15 +33,12 @@
 </script>
 <script language="javascript" type="text/javascript">
     function CloseOpenPrintConditionWindow() {
-        debugger;
         var oWnd = $find("<%= OpenPrintConditionWindow.ClientID %>");
         oWnd.close();
-        return false;
     }
     function CloseClosePrintConditionWindow() {
         var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
         oWnd.close();
-        return false;
     }
 </script>
 <style type="text/css">
@@ -120,6 +117,11 @@
                             <telerik:AjaxSetting AjaxControlID="rgProjectList">
                                 <UpdatedControls>
                                     <telerik:AjaxUpdatedControl ControlID="rgProjectList" LoadingPanelID="RadAjaxLoadingPanel1" />
+                                </UpdatedControls>
+                            </telerik:AjaxSetting>
+                            <telerik:AjaxSetting AjaxControlID="rgRadWindowManager">
+                                <UpdatedControls>
+                                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager" LoadingPanelID="RadAjaxLoadingPanel1" />
                                 </UpdatedControls>
                             </telerik:AjaxSetting>
                         </AjaxSettings>

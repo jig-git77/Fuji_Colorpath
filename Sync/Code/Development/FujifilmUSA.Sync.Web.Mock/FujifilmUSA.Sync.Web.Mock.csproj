@@ -147,6 +147,7 @@
     <Content Include="Images\mesurementStatusbar_box_top.png" />
     <Content Include="Images\new_project_icon.png" />
     <Content Include="Images\Next.png" />
+    <Content Include="Images\no_image.png" />
     <Content Include="Images\page_box_bg.png" />
     <Content Include="Images\page_box_bottom.png" />
     <Content Include="Images\page_box_top.png" />

@@ -101,6 +101,7 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl
                         case ECPSyncRunStatus.NotUsed:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                            imgStatus.ImageUrl = ResolveUrl("../Images/no_image.png");
                             break;
                     }
                 }

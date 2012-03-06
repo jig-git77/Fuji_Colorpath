@@ -13,15 +13,6 @@ namespace FujifilmUSA.Sync.Web.Mock.UserControl {
     public partial class OpenPrintCondition {
         
         /// <summary>
-        /// imgAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgAdd;
-        
-        /// <summary>
         /// lblOpenPrintConditionMessage control.
         /// </summary>
         /// <remarks>

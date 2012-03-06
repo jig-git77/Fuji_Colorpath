@@ -5,7 +5,6 @@
 <%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
 <!DOCTYPE html>
 <html>
-
 <head id="Head1" runat="server">
     <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />
@@ -13,6 +12,30 @@
     <script src="JQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+   <%-- <style>
+		.equal_height {  }
+	</style>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            //set the starting bigestHeight variable
+            var biggestHeight = 0;
+            //check each of them
+            $('.equal_height').each(function () {
+                debugger;
+                //if the height of the current element is
+                //bigger then the current biggestHeight value
+                if ($(this).height() > biggestHeight) {
+                    //update the biggestHeight with the
+                    //height of the current elements
+                    biggestHeight = $(this).height();
+                }
+            });
+            //when checking for biggestHeight is done set that
+            //height to all the elements
+            $('.equal_height').height(biggestHeight);
+
+        });
+	</script>--%>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -24,48 +47,11 @@
   <section id="pageWrapper"> 
   	<uc1:Header ID="ucHeader" runat="server" />  
     <section id="containar">
-    <script type="text/javascript" language="javascript">
-    var title = '';
-    function OpenInformationBox(url) {
-        var oWnd = radopen(url, "RadModelWindow");
-        if (url.indexOf("ModelControlId=1") >= 0) {
-            title = "Open Print Condition";
-            oWnd.setSize(650, 300);
-        }
-        if (url.indexOf("ModelControlId=2") >= 0) {
-            title = "Close Print Condition";
-            oWnd.setSize(650, 270);
-        }
-        if (url.indexOf("ModelControlId=3") >= 0) {
-            title = "Download Chart";
-            oWnd.setSize(650, 270);
-        }
-        oWnd.add_pageLoad(windowLoad);
-        return false;
-    }
-    function windowLoad(oWindow, args) {
-        oWindow.set_title(title);
-        oWindow.set_status('');
-    }
-</script>
-    <telerik:RadWindowManager ID="RadWindowManager" runat="server" 
-    Modal="True" 
-    >
-    <Windows>
-                <telerik:RadWindow 
-                    id="RadModelWindow" 
-                    runat="server"
-                    showcontentduringload="false"
-                    behaviors="Close, Move" Behavior="Close, Move"
-                    >
-                </telerik:RadWindow>
-            </Windows>
-</telerik:RadWindowManager>
-      <section id="sidebar">      	
-        	 <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
+    <section id="sidebar">
+        	    <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
       </section>
       <section id="contant">
-          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
       </section>
       <div class="clear"></div>
     </section>
