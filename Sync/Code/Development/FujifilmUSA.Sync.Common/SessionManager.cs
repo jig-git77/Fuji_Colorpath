@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web;
+﻿using System.Web;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Common
