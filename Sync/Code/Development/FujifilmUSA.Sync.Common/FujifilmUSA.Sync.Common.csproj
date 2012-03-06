@@ -101,6 +101,12 @@
   <ItemGroup>
     <Content Include="LoggingDatabase.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.csproj">
+      <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
+      <Name>FujifilmUSA.Sync.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

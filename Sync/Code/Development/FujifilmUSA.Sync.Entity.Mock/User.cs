@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 namespace FujifilmUSA.Sync.Entity
 {
     public class User
@@ -12,10 +13,10 @@ namespace FujifilmUSA.Sync.Entity
         public byte RoleId { get; set; }
         public byte? RegionId { get; set; }
         public int LastModifiedUserId { get; set; }
-        public System.DateTime LastModifiedDate { get; set; }
+        public DateTime LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
-        public List<UserLicense> UserLicenses { get; set; }
-        public List<UserBranch> UserBranches { get; set; }
-        public List<UserCompany> UserCompanies { get; set; }
+        //public List<UserLicense> UserLicenses { get; set; }
+        //public List<UserBranch> UserBranches { get; set; }
+        //public List<UserCompany> UserCompanies { get; set; }
     }
 }
