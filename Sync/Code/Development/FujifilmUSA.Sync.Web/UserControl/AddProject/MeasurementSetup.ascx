@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementSetup.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<div class="formDeviceNoLine" style="display:none;">
+<div class="formDeviceNoLine" style="display: none;">
     <%--<div style="float: left">
         <label>
         </label>
@@ -15,47 +15,62 @@
     <div class="clear">
     </div>
 </div>
-<div class="listDevice" style="margin-left:10px;">
+<div class="listDevice" style="margin-left: 10px;">
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     <table cellpadding="0" cellspacing="10" border="0" width="97%">
         <tr id="trListHeader" runat="server">
             <td>
-              
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
                         &nbsp;</div>
                     <div class="section_middle">
                         <div class="combopart">
-                             <div class="header">
-                               <div class="content">
-                                <div class="text" style="float: left">
-                                Spectrophotometer Options
-                                </div>
-                                <div class="clear">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left">
+                                        Spectrophotometer Options
+                                    </div>
+                                    <div class="clear">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            <asp:Panel ID="panelSpectrophotometerOptions" style="padding:5px" runat="server" BorderStyle="None">
+                            <asp:Panel ID="panelSpectrophotometerOptions" Style="padding: 5px" runat="server"
+                                BorderStyle="None">
                                 <table>
                                     <tr>
                                         <td style="width: 140px">
-                                            <span>Measurement Device:<span style="color: Red;">&nbsp*</span>
-                                            </span>
+                                            <span>Measurement Device:<span style="color: Red;">&nbsp*</span> </span>
                                         </td>
-                                        <td >
-                                            <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" CssClass="select">
-                                            </asp:DropDownList>
-                                            <asp:RequiredFieldValidator 
-                                            ID="rfvMeasurementDevice" 
-                                            runat="server" 
-                                            Display="Dynamic"
-                                            ControlToValidate="cmbMeasurementDevice" 
-                                            ErrorMessage = "Please select measurement device." 
-                                             ForeColor="Red"
-                                            ValidationGroup="vgMeasurementSetup" ></asp:RequiredFieldValidator>
+                                        <td>
+                                            <div style="float: left;">
+                                                <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" CssClass="select">
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div style="float: left">
+                                                <asp:RequiredFieldValidator ID="rfvMeasurementDevice" runat="server" Display="Dynamic"
+                                                    ControlToValidate="cmbMeasurementDevice" ForeColor="Red" ValidationGroup="vgMeasurementSetup">
+                                              <div class="tooltip_round_box" style="width: 200px;">
+                                            <div class="tooltip_arrow" style="margin-top: -3px;">
+                                                &nbsp;</div>
+                                            <div class="tooltip_top_left">
+                                            </div>
+                                            <div class="tooltip_top_right">
+                                            </div>
+                                            <div class="tooltip_inside">
+                                                Please select measurement device.
+                                            </div>
+                                            <div class="tooltip_bottom_left">
+                                            </div>
+                                            <div class="tooltip_bottom_right">
+                                            </div>
+                                        </div>
+                                                </asp:RequiredFieldValidator>
+                                            </div>
+                                            <div class="clear">
+                                            </div>
                                         </td>
                                     </tr>
-                                   <%-- <tr>
+                                    <%-- <tr>
                                         <td colspan="2">
                                             <label>
                                                 Measurement Settings</label>
@@ -107,7 +122,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <asp:Panel ID="panelAlignmentChart" style="margin-left: 5px; margin-right:5px;" runat="server" BorderStyle="None">
+                            <asp:Panel ID="panelAlignmentChart" Style="margin-left: 5px; margin-right: 5px;"
+                                runat="server" BorderStyle="None">
                                 <table cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                         <td>
@@ -120,12 +136,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                             <asp:TextBox ID="txtChartPriview" runat="server" 
-                                                Width="99%" Height="200px"
-                                                TextMode="MultiLine" 
-                                                Enabled="false" 
-                                                ReadOnly="true"
-                                                Text="chart priview">
+                                            <asp:TextBox ID="txtChartPriview" runat="server" Width="99%" Height="200px" TextMode="MultiLine"
+                                                Enabled="false" ReadOnly="true" Text="chart priview">
                                             </asp:TextBox>
                                         </td>
                                     </tr>

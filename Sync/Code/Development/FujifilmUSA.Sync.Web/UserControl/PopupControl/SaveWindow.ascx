@@ -27,15 +27,31 @@
                                                 <span>Print Condition Name:</span>
                                             </td>
                                             <td>
-                                                <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px"></asp:TextBox>
-                                                <asp:RequiredFieldValidator 
-                                                    ID="rfvProjectName" 
-                                                    runat="server" 
-                                                    Display="Dynamic" 
-                                                    ControlToValidate="txtProjectName"
-                                                    ErrorMessage="Please provide project name." 
-                                                    ForeColor="Red" 
-                                                    ValidationGroup="vgSaveWindows"></asp:RequiredFieldValidator>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
+                                                        ControlToValidate="txtProjectName" ForeColor="Red" ValidationGroup="vgSaveWindows">
+                                                      <div class="tooltip_round_box" style="width: 200px;">
+                                            <div class="tooltip_arrow" style="margin-top: -3px;">
+                                                &nbsp;</div>
+                                            <div class="tooltip_top_left">
+                                            </div>
+                                            <div class="tooltip_top_right">
+                                            </div>
+                                            <div class="tooltip_inside">
+                                                Please provide project name.
+                                            </div>
+                                            <div class="tooltip_bottom_left">
+                                            </div>
+                                            <div class="tooltip_bottom_right">
+                                            </div>
+                                        </div>
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                                <div class="clear">
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -108,7 +124,8 @@
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
-                    <asp:LinkButton ID="lbtnContinue" runat="server" ValidationGroup="vgSaveWindows" CssClass="gray_bt">
+                    <asp:LinkButton ID="lbtnContinue" runat="server" ValidationGroup="vgSaveWindows"
+                        CssClass="gray_bt">
                 <span> Continue </span>
                     </asp:LinkButton>
                 </div>

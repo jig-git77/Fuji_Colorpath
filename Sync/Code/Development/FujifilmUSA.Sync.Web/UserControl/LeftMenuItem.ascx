@@ -4,7 +4,7 @@
     <li>     
        <span style = "float:left; width:18px"><asp:Image runat="server" ID="imgItem" /> </span>
         <span class="mytext" id="lnktext" runat="server" >
-            <asp:LinkButton CssClass="text"  runat="server" ID="lnkItem" OnClick="lnkItem_Click" > 
+            <asp:LinkButton CssClass="text"  runat="server" ID="lnkItem" > 
             </asp:LinkButton>
         </span>
     </li>

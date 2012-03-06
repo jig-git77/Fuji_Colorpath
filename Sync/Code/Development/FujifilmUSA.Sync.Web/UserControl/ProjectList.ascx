@@ -41,6 +41,13 @@
         oWnd.close();
     }
 </script>
+  <script type='text/javascript'>
+    //Code for resize of left menu bar
+//      $(".listDevice").bind("resize", function () {
+//          alert('Test');
+//      });
+	</script>
+
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -274,6 +281,7 @@
                                 </telerik:GridTemplateColumn>
                             </Columns>
                         </MasterTableView>
+                       
                     </telerik:RadGrid>
                 </td>
             </tr>

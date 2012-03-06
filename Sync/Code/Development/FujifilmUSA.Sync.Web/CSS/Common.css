@@ -1536,3 +1536,62 @@ height:10px;
     background: url(../Images/section_smallbox_bottom.png) no-repeat bottom left;
     height: 7px;
 }
+
+/**************************/
+
+/**** Validation ToolTip ***/
+.tooltip_round_box
+    {
+        position: absolute;
+        padding-left: 17px;
+        z-index: 1;
+        line-height:16px;
+    }
+    .tooltip_arrow
+    {
+        background: url(../Images/tooltip_arrow.png) no-repeat top left;
+        width: 18px;
+        height: 25px;
+        position: absolute;
+        left: 0;
+        top: 8px;
+        z-index: 5;
+    }
+    .tooltip_top_left, .tooltip_bottom_left
+    {
+        margin-right: 9px;
+    }
+    .tooltip_top_left, .tooltip_top_right, .tooltip_bottom_left, .tooltip_bottom_right
+    {
+        background-image: url(../Images/tooltip_corner.png);
+        font-size: 2px;
+        height: 9px;
+    }
+    .tooltip_top_right
+    {
+        background-position: 100% 0;
+    }
+    .tooltip_top_right, .tooltip_bottom_right
+    {
+        margin-left: 9px;
+        margin-top: -9px;
+    }
+    .tooltip_bottom_left
+    {
+        background-position: 0 -9px;
+    }
+    .tooltip_bottom_right
+    {
+        background-position: 100% -9px;
+    }
+    .tooltip_inside
+    {
+        background: none repeat scroll 0 0 #fff;
+        border-left: 1px solid #b5d4e8;
+        border-right: 1px solid #b5d4e8;
+        color: Red;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+/**************************/
+
