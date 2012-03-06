@@ -470,11 +470,14 @@
     <Content Include="MainMaster.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PopUpMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.csproj">
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
@@ -483,10 +486,6 @@
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="PopUpMaster.Master" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

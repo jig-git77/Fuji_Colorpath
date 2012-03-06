@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Common", "FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj", "{B791085B-2607-458F-B9AA-5DDC581589AF}"
@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity.Mock\FujifilmUSA.Sync.Entity.csproj", "{050CFE70-AFF6-4D52-93E6-2C804CF143D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Entity", "FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj", "{050CFE70-AFF6-4D52-93E6-2C804CF143D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web", "FujifilmUSA.Sync.Web.Mock\FujifilmUSA.Sync.Web.csproj", "{0DECDB99-C09F-4264-888D-6FF85E391D57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FujifilmUSA.Sync.Web", "FujifilmUSA.Sync.Web\FujifilmUSA.Sync.Web.csproj", "{0DECDB99-C09F-4264-888D-6FF85E391D57}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -38,12 +38,12 @@ Global
 		SccProjectUniqueName4 = FujifilmUSA.Sync.Business\\FujifilmUSA.Sync.Business.csproj
 		SccProjectName4 = FujifilmUSA.Sync.Business
 		SccLocalPath4 = FujifilmUSA.Sync.Business
-		SccProjectUniqueName5 = FujifilmUSA.Sync.Web.Mock\\FujifilmUSA.Sync.Web.csproj
-		SccProjectName5 = FujifilmUSA.Sync.Web.Mock
-		SccLocalPath5 = FujifilmUSA.Sync.Web.Mock
-		SccProjectUniqueName6 = FujifilmUSA.Sync.Entity.Mock\\FujifilmUSA.Sync.Entity.csproj
-		SccProjectName6 = FujifilmUSA.Sync.Entity.Mock
-		SccLocalPath6 = FujifilmUSA.Sync.Entity.Mock
+		SccProjectUniqueName5 = FujifilmUSA.Sync.Web\\FujifilmUSA.Sync.Web.csproj
+		SccProjectName5 = FujifilmUSA.Sync.Web
+		SccLocalPath5 = FujifilmUSA.Sync.Web
+		SccProjectUniqueName6 = FujifilmUSA.Sync.Entity\\FujifilmUSA.Sync.Entity.csproj
+		SccProjectName6 = FujifilmUSA.Sync.Entity
+		SccLocalPath6 = FujifilmUSA.Sync.Entity
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FujifilmUSA.Sync.vsmdi
