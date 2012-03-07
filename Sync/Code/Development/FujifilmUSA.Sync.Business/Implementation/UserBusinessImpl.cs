@@ -7,6 +7,8 @@ using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Interface;
+using System.ComponentModel;
+using FujifilmUSA.Sync.Common;
 
 
 namespace FujifilmUSA.Sync.Business.Implementation
@@ -18,70 +20,36 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public User UserLogin(string userName, string password, string allowedIp)
         {
             //========== Create Entity object =================//
-            var objTaskeroUser = new User();
+            var objUser = new User();
 
             Common.ImplementBusinessLogic(() =>
             {
-                //var objRole = new Roles();
-
-                var objRolePermissionList = new List<Permission>();
-                var objUserPermissionList = new List<Permission>();
-
-                //========== Create data table object comes form store procedure=================//
-                DataTable dtTaskeroUserDetail;
-                DataTable dtUserRole;
-                DataTable dtRolePermission;
-                DataTable dtUserPermission;
-
-
                 //========== Get data from data access=================//
-                var dsTaskeroUserLogin = DataAccessFactory.Instance.GetDsResult("[CPV].[uspGetCheckLogin]", new object[] { userName, password, allowedIp });
+                var dsUser = DataAccessFactory.Instance.GetDsResult("[uspGetUser]", new object[] { userName, password });
 
-                if (dsTaskeroUserLogin != null && dsTaskeroUserLogin.Tables.Count > 0 && dsTaskeroUserLogin.Tables[0].Rows.Count > 0)
+                if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                 {
                     //========== Store in to data table from dataset =================//
-                    dtTaskeroUserDetail = dsTaskeroUserLogin.Tables[0];
-                    dtUserRole = dsTaskeroUserLogin.Tables[1];
-                    dtRolePermission = dsTaskeroUserLogin.Tables[2];
-                    dtUserPermission = dsTaskeroUserLogin.Tables[3];
-
-                    objTaskeroUser.UserId = int.Parse(dtTaskeroUserDetail.Rows[0]["TaskeroUserID"].ToString());
-                    objTaskeroUser.LoginId = dtTaskeroUserDetail.Rows[0]["LoginID"].ToString();
-                    objTaskeroUser.LoginPass = dtTaskeroUserDetail.Rows[0]["LoginPass"].ToString();
-                    objTaskeroUser.LastName = dtTaskeroUserDetail.Rows[0]["LastName"].ToString();
-                    objTaskeroUser.FirstName = dtTaskeroUserDetail.Rows[0]["FirstName"].ToString();
-                    //objTaskeroUser.RoleId = int.Parse(dtTaskeroUserDetail.Rows[0]["RoleID"].ToString());
-                    //objTaskeroUser.AllowedIp = dtTaskeroUserDetail.Rows[0]["IPAccess"].ToString();
-
-                    //if (dtUserRole.Rows.Count > 0)
-                    //{
-                    //    objRole.RoleId = int.Parse(dtUserRole.Rows[0]["RoleID"].ToString());
-                    //    objRole.RoleDesc = dtUserRole.Rows[0]["RoleDesc"].ToString();
-                    //    objRole.RoleLevel = int.Parse(dtUserRole.Rows[0]["RoleLevel"].ToString());
-                    //    if (dtRolePermission.Rows.Count > 0)
-                    //    {
-                    //        objRolePermissionList.AddRange(from DataRow dr in dtRolePermission.Rows
-                    //                                       select new Permission { PermissionId = int.Parse(dr["PermissionID"].ToString()), PermissionDesc = dr["PermissionDesc"].ToString() });
-                    //        objRole.RolePermission = objRolePermissionList;
-                    //    }
-                    //    objTaskeroUser.UserRoles = objRole;
-                    //}
-
-                    //if (dtUserPermission.Rows.Count > 0)
-                    //{
-                    //    if (dtUserPermission.Rows.Count > 0)
-                    //    {
-                    //        objUserPermissionList.AddRange(from DataRow dr in dtUserPermission.Rows
-                    //                                       select new Permission { PermissionId = int.Parse(dr["PermissionID"].ToString()), PermissionDesc = dr["PermissionDesc"].ToString() });
-                    //        objTaskeroUser.UserPermission = objUserPermissionList;
-                    //    }
-                    //}
-
+                    objUser = dsUser.Tables[0].AsEnumerable().
+                       Select(x => new User()
+                       {
+                           UserId = DataReader.ReadInt(x, "UserId")
+                           ,LoginId = DataReader.ReadString(x, "LoginId")
+                           ,LoginPass = DataReader.ReadString(x, "LoginPass")
+                           ,LastName = DataReader.ReadString(x, "LastName")
+                           ,FirstName = DataReader.ReadString(x, "FirstName")
+                           ,RoleId = DataReader.ReadByte(x, "RoleId")
+                           ,Email = DataReader.ReadString(x, "Email")
+                           ,RegionId = DataReader.ReadByte(x, "RegionId")
+                           ,LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId")
+                           ,LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate")
+                           ,IsActive = DataReader.ReadBoolean(x, "IsActive")
+                       }).FirstOrDefault();
                 }
                 //return new TaskeroUser();
             }, this, ErrorOccured);
 
-            return objTaskeroUser;
+            return objUser;
         }
 
         #endregion
@@ -92,4 +60,5 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         #endregion
     }
+
 }

@@ -174,6 +174,30 @@ namespace FujifilmUSA.Sync.Common
 
         }
 
+        /// <summary>
+        /// To read byte column value from datarow.
+        /// </summary>
+        /// <param name="objRow"></param>
+        /// <param name="columnName"></param>
+        /// <returns>byte[]</returns>
+        public static byte ReadByte(DataRow objRow, string columnName)
+        {
+            byte iRetVal;
+            try
+            {
+                if (objRow.IsNull(columnName))
+                    return default(byte);
+                else
+                    iRetVal = (byte)(objRow[columnName]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return iRetVal;
+
+        }
+
 		/// <summary>
 		/// To read a Long column value from datarow.
 		/// </summary>
