@@ -21,6 +21,15 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _instance; }
         }
+
+        public static void CheckLogin()
+        {
+            if (SessionManager.Instance.CurrentUser == null) 
+            { 
+                HttpContext.Current.Response.Redirect("Login.aspx"); 
+            }
+        }
+
         #endregion
 
         #region Sessions
