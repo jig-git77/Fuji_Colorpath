@@ -109,6 +109,7 @@
                         &nbsp;</div>
                 </div>
             </td>
+            <td style="width:10px"></td>
             <td valign="top" style="width:320px">
                  <div style="display: block;">
                   <div class="section_small_top">
@@ -184,6 +185,7 @@
                 </div>
             </td>
         </tr>
+        <tr style="height:10px"></tr>
         <tr>
             <td valign="top">
             <div style="display: block;" >
@@ -241,6 +243,7 @@
                         &nbsp;</div>
                 </div>
             </td>
+            <td style="width:10px"></td>
             <td valign="top">
                 <div style="display: block;">
                      <div class="section_small_top">

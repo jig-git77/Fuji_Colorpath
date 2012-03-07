@@ -19,6 +19,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        protected void lbtnSave_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddMeasurement.aspx");
+        }
+
         #region "Methods"
         #endregion
         

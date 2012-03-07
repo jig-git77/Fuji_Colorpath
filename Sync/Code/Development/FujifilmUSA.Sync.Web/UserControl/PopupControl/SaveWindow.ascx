@@ -116,7 +116,7 @@
         </tr>
         <tr>
             <td>
-                <div class="buttonright">
+             <div class="buttonright" style=" padding-left: 3px">
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
                         CssClass="gray_bt">
                                         <span>
@@ -124,9 +124,9 @@
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
-                    <asp:LinkButton ID="lbtnContinue" runat="server" ValidationGroup="vgSaveWindows"
-                        CssClass="gray_bt">
-                <span> Continue </span>
+                    <asp:LinkButton ID="lbtnSave" runat="server" ValidationGroup="vgSaveWindows"
+                        CssClass="gray_bt" onclick="lbtnSave_Click">
+                    <span> Save </span>
                     </asp:LinkButton>
                 </div>
                 <div class="clear">

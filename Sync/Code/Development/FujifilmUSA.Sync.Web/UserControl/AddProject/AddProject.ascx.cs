@@ -56,12 +56,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "4":
                     hTitle.InnerText = "New Print Condition - Measurement Setup";
                     lbtnCreateNewPrintCondition.ValidationGroup = "vgMeasurementSetup";
-                    lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Comfirm Save<span>";
+                    lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/Search.png'/>Preview<span>";
                     break;
                 case "5":
                     hTitle.InnerText = "New Print Condition - Save Print Condition";
                     lbtnCreateNewPrintCondition.ValidationGroup = "";
-                    lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Save<span>";
+                    lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
                     lbtnCreateNewPrintCondition.Attributes.Add("onclick", "javascript: return ShowConfirmSaveWindow();");
                     break;
 
