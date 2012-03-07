@@ -80,9 +80,15 @@
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Implementation\MiscDataBusinessImpl.cs" />
+    <Compile Include="Implementation\SyncDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
+    <Compile Include="Interface\IMiscDataBusiness.cs" />
+    <Compile Include="Interface\ISyncDeviceBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="Mock\MiscDataBusinessMock.cs" />
+    <Compile Include="Mock\SyncDeviceBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ProfilerService\Reference.cs">

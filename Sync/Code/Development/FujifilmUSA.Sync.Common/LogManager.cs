@@ -6,10 +6,10 @@ namespace FujifilmUSA.Sync.Common
     {
         public static void WriteLog(string logMessage)
         {
-            Logger.Write(new LogEntry()
-                             {
-                                 Message = logMessage
-                             });
+            //Logger.Write(new LogEntry()
+            //                 {
+            //                     Message = logMessage
+            //                 });
         }
     }
 }

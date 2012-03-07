@@ -234,7 +234,9 @@
     <Content Include="UserControl\OperationSelection.ascx" />
     <Content Include="UserControl\SearchingDevice.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
