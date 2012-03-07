@@ -77,7 +77,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PresenterLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewInterface\IViewLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewInterface\ViewBase\" />
@@ -86,6 +88,10 @@
     <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
       <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>
       <Name>FujifilmUSA.Sync.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
+      <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
+      <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

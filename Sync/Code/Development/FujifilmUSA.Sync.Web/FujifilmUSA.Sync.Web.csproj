@@ -57,9 +57,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution References\Telerik.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\Solution References\Telerik.Web.UI.Skins.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProject.aspx" />

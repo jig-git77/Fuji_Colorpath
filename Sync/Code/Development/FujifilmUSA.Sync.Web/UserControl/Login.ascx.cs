@@ -1,12 +1,17 @@
 ﻿using System;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Web;
+using System.Web.Security;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Login : System.Web.UI.UserControl
+    public partial class Login : System.Web.UI.UserControl , IViewLogin
     {
         #region "Declaration"
-        //private PresenterTaskeroUser _presentertaskerouser;
+        private PresenterLogin _presenterlogin;
         public string btnLoginId
         {
             get { return bntLogin.UniqueID; }
@@ -17,12 +22,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnInit(EventArgs e)
         {
-            //_presentertaskerouser = new PresenterTaskeroUser(this);
+            _presenterlogin = new PresenterLogin(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (SessionManager.Instance.CurrentUser != null)
-            //    Response.Redirect("Index.aspx");
+            if (SessionManager.Instance.CurrentUser != null)
+                Response.Redirect("Index.aspx");
 
             if (!IsPostBack)
             {
@@ -43,35 +48,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void bntLogin_Click(object sender, EventArgs e)
         {
-                //UserName = txtUserName.Text.Trim();
-                //Password = txtPassword.Text.Trim();
-                //_presentertaskerouser.TaskeroUserLogin();
-                //if (GetTaskeroUser != null && GetTaskeroUser.LoginId != null)
-                //{
-                //    SessionManager.Instance.CurrentUser = GetTaskeroUser;
-                //    if (chkRememberMe.Checked == true)
-                //    {
-                //        var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
-                //        Response.SetCookie(objCookie);
+            UserName = txtUserName.Text.Trim();
+            Password = txtPassword.Text.Trim();
+            _presenterlogin.UserLogin();
+            if (CurrentUser != null && CurrentUser.LoginId != null)
+            {
+                SessionManager.Instance.CurrentUser = CurrentUser;
+                if (chkRememberMe.Checked == true)
+                {
+                    var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
+                    Response.SetCookie(objCookie);
 
-                //        objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
-                //        Response.SetCookie(objCookie);
-                //    }
-                //    else
-                //    {
-                //        Response.Cookies["SyncFujiLogin"].Value = "";
-                //        Response.Cookies["SyncFujiPass"].Value = "";
-                //    }
+                    objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
+                    Response.SetCookie(objCookie);
+                }
+                else
+                {
+                    Response.Cookies["SyncFujiLogin"].Value = "";
+                    Response.Cookies["SyncFujiPass"].Value = "";
+                }
 
-                //    FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                //    //FormsAuthentication.RedirectToLoginPage();
-                //    Response.Redirect("Index.aspx");
-                //}
-                //else
-                //{
-                //    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
-                //}
+                FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                //FormsAuthentication.RedirectToLoginPage();
                 Response.Redirect("Index.aspx");
+            }
+            else
+            {
+                ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
+            }
         }
         #endregion
 
@@ -84,11 +88,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         //*******************************************************************//
 
-        //#region IViewTaskeroUser Members
-        //public string UserName { get; set; }
-        //public string Password { get; set; }
-        //public string AllowedIp { get; set; }
-        //public TaskeroUser GetTaskeroUser { get; set; }
-        //#endregion
+        #region IViewTaskeroUser Members
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public User CurrentUser { get; set; }
+        public string AllowedIp { get; set; }
+        #endregion
+
+       
     }
 }
