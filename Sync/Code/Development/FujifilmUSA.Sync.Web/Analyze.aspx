@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" 
     AutoEventWireup="true" 
-    CodeBehind="AddMeasurement.aspx.cs" 
-    Inherits="FujifilmUSA.Sync.Web.AddMeasurement"
+    CodeBehind="Analyze.aspx.cs" 
+    Inherits="FujifilmUSA.Sync.Web.Analyze"
     MasterPageFile="~/MainMaster.Master" EnableEventValidation="false" %>
 
 <%@ Register Src="~/UserControl/Analyze.ascx" TagName="Analyze" TagPrefix="uc" %>
