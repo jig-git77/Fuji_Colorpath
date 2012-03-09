@@ -25,11 +25,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Controls events
+        protected void lbtnReOptimize_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Measurement.aspx?ProjectName=''");
+        }
+        #endregion
+
         #region "Methods"
         public void DisplayMessage(string message, bool status)
         {
         }
 #endregion
+
+        
+
+    
 
 
         
