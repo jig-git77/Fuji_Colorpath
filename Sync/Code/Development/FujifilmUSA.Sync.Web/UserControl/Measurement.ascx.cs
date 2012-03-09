@@ -38,7 +38,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Analyze.aspx");
+            if (Request.QueryString["ProjectName"] != null)
+            {
+                Response.Redirect("Analyze.aspx?ProjectName=" + Request.QueryString["ProjectName"]);
+            }
+            else
+                Response.Redirect("Analyze.aspx");
+            
         }
         #endregion
 

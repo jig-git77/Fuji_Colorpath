@@ -219,6 +219,7 @@
     <Content Include="UserControl\LeftMenuItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectSetting.ascx" />
+    <Content Include="UserControl\PopupControl\CreateDLP.ascx" />
     <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
     <Content Include="UserControl\AddProject\SavePrintCondition.ascx" />
     <Content Include="UserControl\AddProject\MeasurementSetup.ascx" />
@@ -369,6 +370,13 @@
     </Compile>
     <Compile Include="UserControl\LeftMenuProjectSetting.ascx.designer.cs">
       <DependentUpon>LeftMenuProjectSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\CreateDLP.ascx.cs">
+      <DependentUpon>CreateDLP.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\CreateDLP.ascx.designer.cs">
+      <DependentUpon>CreateDLP.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PopupControl\SaveWindow.ascx.cs">
       <DependentUpon>SaveWindow.ascx</DependentUpon>
