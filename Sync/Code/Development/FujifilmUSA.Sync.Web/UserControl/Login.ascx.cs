@@ -8,7 +8,7 @@ using System.Web.Security;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Login : System.Web.UI.UserControl , IViewLogin
+    public partial class Login : System.Web.UI.UserControl, IViewLogin
     {
         #region "Declaration"
         private PresenterLogin _presenterlogin;
@@ -67,9 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Response.Cookies["SyncFujiLogin"].Value = "";
                     Response.Cookies["SyncFujiPass"].Value = "";
                 }
-
                 FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                //FormsAuthentication.RedirectToLoginPage();
                 Response.Redirect("Index.aspx");
             }
             else
@@ -95,6 +93,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string AllowedIp { get; set; }
         #endregion
 
-       
+
     }
 }

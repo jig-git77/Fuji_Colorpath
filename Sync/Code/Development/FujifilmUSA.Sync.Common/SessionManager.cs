@@ -6,9 +6,12 @@ namespace FujifilmUSA.Sync.Common
     public class SessionManager
     {
         #region Private Variables
-
         private const string _userSession = "UserSession";
-
+        private const string _deviceSession = "DeviceSession";
+        private const string _projectSession = "ProjectSession";
+        private const string _optimizeRunSession = "OptimizeRunSession";
+        private const string _navigationSession = "NavigationSession";
+        private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
         #endregion
 
         #region Singleton
@@ -24,9 +27,9 @@ namespace FujifilmUSA.Sync.Common
 
         public static void CheckLogin()
         {
-            if (SessionManager.Instance.CurrentUser == null) 
-            { 
-                HttpContext.Current.Response.Redirect("Login.aspx"); 
+            if (SessionManager.Instance.CurrentUser == null)
+            {
+                HttpContext.Current.Response.Redirect("Login.aspx");
             }
         }
 
@@ -48,6 +51,87 @@ namespace FujifilmUSA.Sync.Common
                 HttpContext.Current.Session[_userSession] = value;
             }
         }
+
+        public object NavigationSession
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_navigationSession] != null)
+                {
+                    return HttpContext.Current.Session[_navigationSession];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_navigationSession] = value;
+            }
+        }
+
+        public Device CurrentDevice
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_deviceSession] != null)
+                {
+                    return (Device)HttpContext.Current.Session[_deviceSession];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_deviceSession] = value;
+            }
+        }
+
+        public Project CurrentProject
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_projectSession] != null)
+                {
+                    return (Project)HttpContext.Current.Session[_projectSession];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_projectSession] = value;
+            }
+        }
+
+        public OptimizeRun CurrentOptimizeRun
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_optimizeRunSession] != null)
+                {
+                    return (OptimizeRun)HttpContext.Current.Session[_optimizeRunSession];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_optimizeRunSession] = value;
+            }
+        }
+
+        public LeftMenuItemLevel CurrentNavigation
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentNavigation] != null)
+                {
+                    return (LeftMenuItemLevel)System.Enum.Parse(typeof(LeftMenuItemLevel), HttpContext.Current.Session[_currentNavigation].ToString());
+                }
+                return LeftMenuItemLevel.Home;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentNavigation] = value;
+            }
+        }
+
         #endregion
     }
 }

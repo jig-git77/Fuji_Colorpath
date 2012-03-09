@@ -211,6 +211,10 @@
     <Content Include="OperationSelection.aspx" />
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\LeftMenu.ascx" />
+    <Content Include="UserControl\LeftMenuItem.ascx" />
+    <Content Include="UserControl\LeftMenuProjectItem.ascx" />
+    <Content Include="UserControl\LeftMenuProjectSetting.ascx" />
     <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
     <Content Include="UserControl\AddProject\SavePrintCondition.ascx" />
     <Content Include="UserControl\AddProject\MeasurementSetup.ascx" />
@@ -225,9 +229,6 @@
     <Content Include="UserControl\PopupControl\OpenPrintCondition.ascx" />
     <Content Include="UserControl\Footer.ascx" />
     <Content Include="UserControl\Header.ascx" />
-    <Content Include="UserControl\LeftMenu.ascx" />
-    <Content Include="UserControl\LeftMenuItem.ascx" />
-    <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
     <Content Include="UserControl\Pagging.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
@@ -302,6 +303,34 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\LeftMenu.ascx.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
+      <DependentUpon>LeftMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectItem.ascx.designer.cs">
+      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectSetting.ascx.cs">
+      <DependentUpon>LeftMenuProjectSetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeftMenuProjectSetting.ascx.designer.cs">
+      <DependentUpon>LeftMenuProjectSetting.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\PopupControl\SaveWindow.ascx.cs">
       <DependentUpon>SaveWindow.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -400,27 +429,6 @@
     <Compile Include="UserControl\Header.ascx.designer.cs">
       <DependentUpon>Header.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\LeftMenu.ascx.cs">
-      <DependentUpon>LeftMenu.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\LeftMenu.ascx.designer.cs">
-      <DependentUpon>LeftMenu.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\LeftMenuItem.ascx.cs">
-      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\LeftMenuItem.ascx.designer.cs">
-      <DependentUpon>LeftMenuItem.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\LeftMenuProjectItem.ascx.cs">
-      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\LeftMenuProjectItem.ascx.designer.cs">
-      <DependentUpon>LeftMenuProjectItem.ascx</DependentUpon>
-    </Compile>
     <Compile Include="UserControl\DeviceList.ascx.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -487,6 +495,7 @@
       <Name>FujifilmUSA.Sync.Presenter</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -497,7 +506,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51741</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FujifilmUSA.Sync.Web.Mock</IISUrl>
+          <IISUrl>http://localhost/FujifilmUSA.Sync.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

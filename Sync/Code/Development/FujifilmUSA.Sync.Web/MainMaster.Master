@@ -1,4 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs"
+    Inherits="FujifilmUSA.Sync.Web.MainMaster" %>
+
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
@@ -13,8 +15,10 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-		.equal_height {  }
-	</style>
+        .equal_height
+        {
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -43,4 +47,3 @@
     </form>
 </body>
 </html>
-
