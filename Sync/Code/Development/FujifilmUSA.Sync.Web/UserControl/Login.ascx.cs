@@ -84,15 +84,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //}
         #endregion
 
-        //*******************************************************************//
-
         #region IViewTaskeroUser Members
         public string UserName { get; set; }
         public string Password { get; set; }
         public User CurrentUser { get; set; }
-        public string AllowedIp { get; set; }
         #endregion
-
-
     }
 }

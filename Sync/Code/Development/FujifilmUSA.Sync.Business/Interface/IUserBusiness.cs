@@ -8,6 +8,6 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IUserBusiness : ITaskBase
     {
-        User UserLogin(string userName, string password, string allowedIp);
+        User UserLogin(string userName, string password);
     }
 }

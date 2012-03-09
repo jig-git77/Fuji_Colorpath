@@ -11,6 +11,5 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string UserName { get; set; }
         string Password { get; set; }
         User CurrentUser { get; set; }
-        string AllowedIp { get; set; }
     }
 }

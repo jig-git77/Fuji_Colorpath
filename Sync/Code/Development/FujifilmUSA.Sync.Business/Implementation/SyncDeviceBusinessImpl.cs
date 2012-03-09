@@ -15,37 +15,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Device> GetSyncDevicesByUserId(int taskeroUserId, int roleId, int companyId, int branchId)
         {
             var objSyncDeviceList = new List<Device>();
-
-            Common.ImplementBusinessLogic(() =>
+            var dsSyncDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetSyncDeviceListByCompanyIdANDBranchId]", new object[] { companyId, branchId });
+            if (dsSyncDeviceList != null && dsSyncDeviceList.Tables.Count > 0 && dsSyncDeviceList.Tables[0].Rows.Count > 0)
             {
-                //========== Get data from data access=================//
-                var dsSyncDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetSyncDeviceListByCompanyIdANDBranchId]", new object[] {companyId, branchId });
-
-                if (dsSyncDeviceList != null && dsSyncDeviceList.Tables.Count > 0 && dsSyncDeviceList.Tables[0].Rows.Count > 0)
-                {
-                    objSyncDeviceList = dsSyncDeviceList.Tables[0].AsEnumerable().
-                        Select(x => new Device()
-                        {
-                            //CpDongleId = DataReader.ReadInt(x, "CPDongleID"),
-                            //CpSerialNum = DataReader.ReadString(x, "CPSerialNUM"),
-                            //DeviceManufacturer = DataReader.ReadString(x, "DeviceManufacturer"),
-                            DeviceId = DataReader.ReadInt(x, "DeviceID"),
-                            DeviceName = DataReader.ReadString(x, "DeviceName"),
-                            //DeviceTypeId = DataReader.ReadInt(x, "DeviceTypeID"),
-                            //NumOfInkUnits = DataReader.ReadInt(x, "NumOfInkUnits"),
-                            //SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID")
-                        }).ToList();
-                }
-            }, this, ErrorOccured);
-
+                objSyncDeviceList = dsSyncDeviceList.Tables[0].AsEnumerable().
+                    Select(x => new Device()
+                    {
+                        //CpDongleId = DataReader.ReadInt(x, "CPDongleID"),
+                        //CpSerialNum = DataReader.ReadString(x, "CPSerialNUM"),
+                        //DeviceManufacturer = DataReader.ReadString(x, "DeviceManufacturer"),
+                        DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                        DeviceName = DataReader.ReadString(x, "DeviceName"),
+                        //DeviceTypeId = DataReader.ReadInt(x, "DeviceTypeID"),
+                        //NumOfInkUnits = DataReader.ReadInt(x, "NumOfInkUnits"),
+                        //SyncDeviceId = DataReader.ReadInt(x, "SyncDeviceID")
+                    }).ToList();
+            }
             return objSyncDeviceList;
         }
-
-        #endregion
-
-        #region ITaskBase Members
-
-        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

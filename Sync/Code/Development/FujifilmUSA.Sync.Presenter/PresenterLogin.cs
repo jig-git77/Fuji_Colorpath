@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var task = (IUserBusiness)new BusinessFactory<IUserBusiness>().CreateObject();
             //task.ErrorOccured += _viewTaskeroUser.ErrorOccured;
-            _view.CurrentUser = task.UserLogin(_view.UserName, _view.Password, _view.AllowedIp);
+            _view.CurrentUser = task.UserLogin(_view.UserName, _view.Password);
 
         }
 
