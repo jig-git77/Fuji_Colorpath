@@ -7,7 +7,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenuProjectSetting : System.Web.UI.UserControl
     {
-        #region "Page Events"
         protected void Page_PreRender(object sender, EventArgs e)
         {
             lnkDescription.Enabled =
@@ -81,10 +80,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
         }
-
-        #endregion
-
-        #region Control events
         protected void lnkItem_Click(object sender, EventArgs e)
         {
             if (sender != null)
@@ -95,24 +90,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     switch (lnkItem.ID)
                     {
                         case "lnkDescription":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Description;
                             break;
                         case "lnkTargetColorSpace":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.TargetColorSpace;
                             break;
                         case "lnkProfilerOption":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.ProfilerOption;
                             break;
                         case "lnkMeasurementSetup":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.MeasurementSetup;
                             break;
                         case "lnkSave":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Save;
                             break;
                         case "lnkMeasure":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Measure;
                             break;
                         case "lnkAnalyze":
+                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Analyze;
                             break;
                     }
+                    Response.Redirect("~/AddProject.aspx");
                 }
             }
         }
-
-        #endregion
     }
 }

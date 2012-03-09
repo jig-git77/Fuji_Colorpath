@@ -1,25 +1,18 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddProjectDescription.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.UserControl.AddProjectDescription" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectDescription.ascx.cs"
+    Inherits="FujifilmUSA.Sync.Web.UserControl.ProjectDescription" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<script type="text/javascript" language="javascript">
-
-    function Validation() {
-
-
-    }
-</script>
+<div class="head">
+    <h1 id="hTitle" runat="server">
+        New Print Condition - Description
+    </h1>
+    <asp:LinkButton ID="lnkbtnPrintDescription" runat="server" CssClass="button" ValidationGroup="vgDescription"
+        OnClick="lnkbtnPrintDescription_Click">
+        <span>
+            <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Traget ColorSpace</span></asp:LinkButton>
+</div>
 <div class="formDeviceNoLine" style="display: none;">
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
-    <%-- <div style="float: left">
-            <label>
-                Enter Print Condition Description</label>
-        </div>
-        <div style="float: right">
-            <asp:LinkButton ID="lbtnTargetColorSpace" runat="server" CssClass="gray_bt" 
-                onclick="lbtnTargetColorSpace_Click" ValidationGroup="vgDescription" >
-                                        <span>Traget ColorSpace </span>
-            </asp:LinkButton>
-        </div>--%>
     <div class="clear">
     </div>
 </div>
@@ -62,12 +55,12 @@
                                 <span>Media:<span style="color: Red;">*</span></span>
                             </td>
                             <td>
-                                <div style="float:left;" >
-                                <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                <div style="float: left;">
+                                    <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px"></asp:TextBox>
                                 </div>
-                                <div style="float:left" >
-                                <asp:RequiredFieldValidator ID="rfvMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
-                                     ForeColor="Red" ValidationGroup="vgDescription">
+                                <div style="float: left">
+                                    <asp:RequiredFieldValidator ID="rfvMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
+                                        ForeColor="Red" ValidationGroup="vgDescription">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -83,9 +76,10 @@
                                             <div class="tooltip_bottom_right">
                                             </div>
                                         </div>
-                                </asp:RequiredFieldValidator>
+                                    </asp:RequiredFieldValidator>
                                 </div>
-                                <div class="clear"></div>
+                                <div class="clear">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -93,12 +87,12 @@
                                 <span>Colorant:<span style="color: Red;">*</span></span>
                             </td>
                             <td>
-                            <div style="float:left;" >
-                                <asp:TextBox ID="txtColorant" runat="server" Width="200px" Height="19px"></asp:TextBox>
-                                 </div>
-                                <div style="float:left" >
-                                <asp:RequiredFieldValidator ID="rfvColorant" runat="server" Display="Dynamic" ControlToValidate="txtColorant"
-                                    ForeColor="Red" ValidationGroup="vgDescription">
+                                <div style="float: left;">
+                                    <asp:TextBox ID="txtColorant" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                </div>
+                                <div style="float: left">
+                                    <asp:RequiredFieldValidator ID="rfvColorant" runat="server" Display="Dynamic" ControlToValidate="txtColorant"
+                                        ForeColor="Red" ValidationGroup="vgDescription">
                                       <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -116,8 +110,9 @@
                                         </div>
                                     
                                     </asp:RequiredFieldValidator>
-                                     </div>
-                                <div class="clear"></div>
+                                </div>
+                                <div class="clear">
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -125,12 +120,12 @@
                                 <span>Rip Settings:<span style="color: Red;">*</span></span>
                             </td>
                             <td>
-                             <div style="float:left;" >
-                                <asp:TextBox ID="txtRipSetting" runat="server" Width="200px" Height="19px"></asp:TextBox>
-                                  </div>
-                                <div style="float:left" >
-                                <asp:RequiredFieldValidator ID="rfvRipSetting" runat="server" Display="Dynamic" ControlToValidate="txtRipSetting"
-                                     ForeColor="Red" ValidationGroup="vgDescription">
+                                <div style="float: left;">
+                                    <asp:TextBox ID="txtRipSetting" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                </div>
+                                <div style="float: left">
+                                    <asp:RequiredFieldValidator ID="rfvRipSetting" runat="server" Display="Dynamic" ControlToValidate="txtRipSetting"
+                                        ForeColor="Red" ValidationGroup="vgDescription">
                                      <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -147,9 +142,9 @@
                                             </div>
                                         </div>
                                     </asp:RequiredFieldValidator>
-                                    </div>
-                                <div class="clear"></div>
-
+                                </div>
+                                <div class="clear">
+                                </div>
                             </td>
                         </tr>
                         <tr>

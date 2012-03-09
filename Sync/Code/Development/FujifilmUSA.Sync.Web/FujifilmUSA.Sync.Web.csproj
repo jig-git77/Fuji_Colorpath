@@ -225,8 +225,8 @@
     <Content Include="UserControl\ModelWindowContainer.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\PopupControl\ClosePrintCondition.ascx" />
-    <Content Include="UserControl\AddProject\AddProjectDescription.ascx" />
-    <Content Include="UserControl\AddProject\AddProject.ascx" />
+    <Content Include="UserControl\AddProject\ProjectDescription.ascx" />
+    <Content Include="UserControl\AddProject\ProjectSettingsContainer.ascx" />
     <Content Include="UserControl\AddProject\ProfilerOptions.ascx" />
     <Content Include="UserControl\AddProject\TargetColorSpace.ascx" />
     <Content Include="UserControl\ModelWindow.ascx" />
@@ -412,19 +412,19 @@
     <Compile Include="UserControl\PopupControl\ClosePrintCondition.ascx.designer.cs">
       <DependentUpon>ClosePrintCondition.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddProject\AddProjectDescription.ascx.cs">
-      <DependentUpon>AddProjectDescription.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\ProjectDescription.ascx.cs">
+      <DependentUpon>ProjectDescription.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\AddProject\AddProjectDescription.ascx.designer.cs">
-      <DependentUpon>AddProjectDescription.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\ProjectDescription.ascx.designer.cs">
+      <DependentUpon>ProjectDescription.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddProject\AddProject.ascx.cs">
-      <DependentUpon>AddProject.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\ProjectSettingsContainer.ascx.cs">
+      <DependentUpon>ProjectSettingsContainer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\AddProject\AddProject.ascx.designer.cs">
-      <DependentUpon>AddProject.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\ProjectSettingsContainer.ascx.designer.cs">
+      <DependentUpon>ProjectSettingsContainer.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject\ProfilerOptions.ascx.cs">
       <DependentUpon>ProfilerOptions.ascx</DependentUpon>

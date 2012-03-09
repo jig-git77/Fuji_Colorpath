@@ -17,17 +17,16 @@
         return false;
     }
 </script>
-<div class="formDeviceNoLine" style="display:none;">
-  <%--  <div style="float: left">
-        <label>
-        </label>
-    </div>
-    <div style="float: right">
-        <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" 
-            onclick="lbtnSave_Click">
-                <span>Save</span>
-        </asp:LinkButton>
-    </div>--%>
+<div class="head">
+    <h1 id="hTitle" runat="server">
+        New Print Condition - Save Print Condition
+    </h1>
+    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClick="lnkbtnSavePrintCondition_Click">
+        <span>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Comfirm Save</span></asp:LinkButton>
+</div>
+<div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
     </div>
 </div>

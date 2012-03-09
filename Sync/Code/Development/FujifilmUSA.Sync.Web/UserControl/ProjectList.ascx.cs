@@ -33,11 +33,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-      
+
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AddProject.aspx?Stage=1");
+            SessionManager.Instance.CurrentProject = new Project() { IsNewlyCreated = true };
+            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Description;
+            Response.Redirect("AddProject.aspx");
         }
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
@@ -186,11 +188,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
             projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
             projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
- 
+
             return projectList;
         }
 
-        
+
         //*******************************************************************//
         //#region IViewProjectList Members
         //public List<Project> Projects { get; set;}
@@ -219,7 +221,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public DateTime StartDate { get; set; }
         public int ReferenceChartTypeId { get; set; }
-        
+
         public string Media { get; set; }
         public string Colorant { get; set; }
 

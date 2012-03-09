@@ -29,6 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();
             if (!IsPostBack)
             {
+                SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Home;
                 BindCompanyDropDown();
                 //BindDeviceList();
             }
@@ -63,6 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.CommandName == "Select")
             {
                 string arg = e.CommandArgument as string;
+                SessionManager.Instance.CurrentDevice = new Device() { DeviceName = "TestDevice" };
                 Response.Redirect("OperationSelection.aspx");
             }
         }
@@ -162,7 +164,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
 
-       
+
     }
 
     public class MockDeviceName

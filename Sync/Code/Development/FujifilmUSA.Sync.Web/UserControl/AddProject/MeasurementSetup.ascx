@@ -1,17 +1,16 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementSetup.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<div class="head">
+    <h1 id="hTitle" runat="server">
+        New Print Condition - Measurement Setup
+    </h1>
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
+        <span>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Comfirm Save</span></asp:LinkButton>
+</div>
 <div class="formDeviceNoLine" style="display: none;">
-    <%--<div style="float: left">
-        <label>
-        </label>
-    </div>
-    <div style="float: right">
-        <asp:LinkButton ID="lbtnComfirmSave" runat="server" CssClass="gray_bt" 
-            onclick="lbtnComfirmSave_Click">
-                <span>Comfirm Save</span>
-        </asp:LinkButton>
-    </div>--%>
     <div class="clear">
     </div>
 </div>

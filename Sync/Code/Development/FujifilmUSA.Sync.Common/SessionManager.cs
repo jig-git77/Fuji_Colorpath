@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _projectSession = "ProjectSession";
         private const string _optimizeRunSession = "OptimizeRunSession";
         private const string _navigationSession = "NavigationSession";
-        private const string _currentNavigation = "SESSION_CURRENTNAVIGATION";
+        private const string _operationSession = "OperationSession";
         #endregion
 
         #region Singleton
@@ -49,22 +49,6 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_userSession] = value;
-            }
-        }
-
-        public object NavigationSession
-        {
-            get
-            {
-                if (HttpContext.Current.Session[_navigationSession] != null)
-                {
-                    return HttpContext.Current.Session[_navigationSession];
-                }
-                return null;
-            }
-            set
-            {
-                HttpContext.Current.Session[_navigationSession] = value;
             }
         }
 
@@ -120,18 +104,33 @@ namespace FujifilmUSA.Sync.Common
         {
             get
             {
-                if (HttpContext.Current.Session[_currentNavigation] != null)
+                if (HttpContext.Current.Session[_navigationSession] != null)
                 {
-                    return (LeftMenuItemLevel)System.Enum.Parse(typeof(LeftMenuItemLevel), HttpContext.Current.Session[_currentNavigation].ToString());
+                    return (LeftMenuItemLevel)System.Enum.Parse(typeof(LeftMenuItemLevel), HttpContext.Current.Session[_navigationSession].ToString());
                 }
                 return LeftMenuItemLevel.Home;
             }
             set
             {
-                HttpContext.Current.Session[_currentNavigation] = value;
+                HttpContext.Current.Session[_navigationSession] = value;
             }
         }
 
+        public Operation CurrentOperation
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_operationSession] != null)
+                {
+                    return (Operation)System.Enum.Parse(typeof(Operation), HttpContext.Current.Session[_operationSession].ToString());
+                }
+                return Operation.None;
+            }
+            set
+            {
+                HttpContext.Current.Session[_operationSession] = value;
+            }
+        }
         #endregion
     }
 }

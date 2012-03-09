@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case LeftMenuItemLevel.ProjectSetup:
                     ulSyncSubMenu.Visible = false;
                     break;
-                case LeftMenuItemLevel.SyncRun:
+                case LeftMenuItemLevel.OptimizeRun:
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == CurrentSyncRun.OptimizeRunId)
                     {
                         lnkMeasurement.Visible = false;
@@ -112,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case LeftMenuItemLevel.ProjectSetup:
                     Response.Redirect("AddProject.aspx");
                     break;
-                case LeftMenuItemLevel.SyncRun:
+                case LeftMenuItemLevel.OptimizeRun:
                     SessionManager.Instance.CurrentOptimizeRun = this.CurrentSyncRun;
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == this.CurrentSyncRun.OptimizeRunId)
                     {

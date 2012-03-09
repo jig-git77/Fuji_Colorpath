@@ -10,7 +10,34 @@
 namespace FujifilmUSA.Sync.Web.UserControl {
     
     
-    public partial class AddProjectDescription {
+    public partial class ProjectDescription {
+        
+        /// <summary>
+        /// hTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hTitle;
+        
+        /// <summary>
+        /// lnkbtnPrintDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnPrintDescription;
+        
+        /// <summary>
+        /// imgAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
         /// ucStatusbar1 control.
