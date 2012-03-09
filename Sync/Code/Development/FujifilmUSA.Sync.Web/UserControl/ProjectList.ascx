@@ -19,6 +19,7 @@
                    ' Confirm which DLP is used in your workflow. </br> In order to continue optimizing ' +
                    ' this DLP your workflow must be using ' + projectName + '.';
         jQuery("span[id$='lblOpenPrintConditionMessage']").html(msg);
+        jQuery("input[id$='hdProjectName']").val(projectName);
         var oWnd = $find("<%= OpenPrintConditionWindow.ClientID %>");
         oWnd.show();
         return false;
@@ -292,14 +293,14 @@
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Open Print Condition" Width="650" Height="300" Behaviors="Close, Move"
+                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move"
                 Behavior="Close, Move">
                 <ContentTemplate>
                     <uc:OpenPrintCondition ID="ucOpenPrintCondition" runat="server" />
                 </ContentTemplate>
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Close Print Condition" Width="650" Height="270" Behaviors="Close, Move"
+                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move"
                 Behavior="Close, Move">
                 <ContentTemplate>
                     <uc:ClosePrintCondition ID="ucClosePrintCondition" runat="server" />

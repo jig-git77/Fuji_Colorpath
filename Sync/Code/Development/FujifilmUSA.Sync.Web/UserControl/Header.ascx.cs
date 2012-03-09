@@ -22,16 +22,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Control Events"
         protected void lbtnLogout_Click(object sender, EventArgs e)
         {
-            //if (SessionManager.Instance.CurrentUser != null)
-            //{
-            //    #region Clear Session Information
-            //    Session.Clear();
-            //    Session.RemoveAll();
-            //    Session.Abandon();
-            //    FormsAuthentication.SignOut();               
-            //    #endregion
-            //    Response.Redirect("Login.aspx");
-            //}
+            if (SessionManager.Instance.CurrentUser != null)
+            {
+                #region Clear Session Information
+                Session.Clear();
+                Session.RemoveAll();
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                #endregion
+                Response.Redirect("Login.aspx");
+            }
         }
         #endregion
 

@@ -59,7 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Measurement.aspx" />
     <Content Include="AddProject.aspx" />
+    <Content Include="Analyze.aspx" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid.Fujifilm.css" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\AddRecord.gif" />
     <Content Include="App_Themes\FujifilmSkin\RadControlsSkin\Grid\Cancel.gif" />
@@ -185,8 +187,7 @@
     <Content Include="Images\tooltip_corner.png" />
     <Content Include="Images\txt_icon.png" />
     <Content Include="Index.aspx" />
-    <Content Include="Javascript\html5.js" />
-    <Content Include="Javascript\jquery-1.7.1.js" />
+    <Content Include="JS\html5.js" />
     <Content Include="JQuery\jquery-1.6.2.min.js" />
     <Content Include="JQuery\jquery-blockUI.js" />
     <Content Include="JQuery\jquery-jtemplates.js" />
@@ -211,6 +212,9 @@
     <Content Include="OperationSelection.aspx" />
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\Measurement.ascx" />
+    <Content Include="UserControl\MeasurementCommon.ascx" />
+    <Content Include="UserControl\Analyze.ascx" />
     <Content Include="UserControl\LeftMenu.ascx" />
     <Content Include="UserControl\LeftMenuItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
@@ -246,12 +250,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Measurement.aspx.cs">
+      <DependentUpon>Measurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Measurement.aspx.designer.cs">
+      <DependentUpon>Measurement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddProject.aspx.cs">
       <DependentUpon>AddProject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AddProject.aspx.designer.cs">
       <DependentUpon>AddProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Analyze.aspx.cs">
+      <DependentUpon>Analyze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Analyze.aspx.designer.cs">
+      <DependentUpon>Analyze.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -303,6 +321,27 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\Measurement.ascx.cs">
+      <DependentUpon>Measurement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Measurement.ascx.designer.cs">
+      <DependentUpon>Measurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\MeasurementCommon.ascx.cs">
+      <DependentUpon>MeasurementCommon.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\MeasurementCommon.ascx.designer.cs">
+      <DependentUpon>MeasurementCommon.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Analyze.ascx.cs">
+      <DependentUpon>Analyze.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Analyze.ascx.designer.cs">
+      <DependentUpon>Analyze.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\LeftMenu.ascx.cs">
       <DependentUpon>LeftMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
