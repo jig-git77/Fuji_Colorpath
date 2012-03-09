@@ -1,19 +1,30 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OpenPrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition" %>
-<div>
-    <div class="top">
+
+
+    <div style="display: block; margin:10px;"  class="contantbox tabcontant">
+    <div class="section_top">
         &nbsp;</div>
-    <div class="OpenPrintCondition">
+    <div class="section_middle">
+        <div class="combopart">
+          <%--  <div class="header">
+                <div class="content">
+                    <div style="float: left;" class="text">
+                        
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>--%>
+            <div style="padding: 5px;" id="cotainer">
+                <div class="OpenPrintCondition">
         <table>
             <tr>
                 <td>
                     <div>
                         <table>
                             <tr>
-                                <td valign="top" style=" padding-top:10px; width: 50px">
-                                    <%--<asp:Image ID="imgAdd" runat="server" ImageUrl="../../Images/error.png" />--%>
-                                </td>
-                                <td class="Content"><asp:Label ID="lblOpenPrintConditionMessage" runat="server"></asp:Label>
+                                <td class="Content" style="line-height:24px;"><asp:Label ID="lblOpenPrintConditionMessage" runat="server"></asp:Label>
                                 </td>    
                             </tr>
                         </table>
@@ -23,8 +34,8 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <div class="buttonright">
+                <td align="right">
+                    <div class="buttonright" style=" padding-left: 3px">
                         <asp:LinkButton ID="lbtnClose" runat="server" 
                         OnClientClick="javascript: CloseOpenPrintConditionWindow(); return false;"
                             CssClass="gray_bt">
@@ -32,7 +43,6 @@
                                             Close </span>
                         </asp:LinkButton>
                     </div>
-
                     <div class="buttonright">
                         <asp:LinkButton ID="lbtnContinue" runat="server" CssClass="gray_bt" 
                             OnClick="lbtnContinue_Click">
@@ -45,6 +55,12 @@
             </tr>
         </table>
     </div>
-    <div class="bottom">
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <div class="section_bottom">
         &nbsp;</div>
 </div>
+
