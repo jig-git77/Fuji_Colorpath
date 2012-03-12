@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control events
         protected void lbtnContinue_Click(object sender, EventArgs e)
         {
-            Response.RedirectPermanent("Measurement.aspx?ProjectName='" + hdProjectName.Value + "'");
+            Response.RedirectPermanent("Analyze.aspx?ProjectName='" + hdProjectName.Value + "'");
         }
         #endregion
 

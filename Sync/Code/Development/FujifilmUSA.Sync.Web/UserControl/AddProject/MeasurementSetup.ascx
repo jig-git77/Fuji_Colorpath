@@ -5,7 +5,7 @@
     <h1 id="hTitle" runat="server">
         New Print Condition - Measurement Setup
     </h1>
-    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" ValidationGroup="vgMeasurementSetup" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" />
             Preview</span></asp:LinkButton>

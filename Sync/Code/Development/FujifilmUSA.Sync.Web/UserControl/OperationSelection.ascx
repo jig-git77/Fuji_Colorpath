@@ -33,7 +33,6 @@
                    <asp:LinkButton ID="lbtnColorValidation" runat="server" ValidationGroup="vgDestination"
                     CssClass="disable_big_bt" OnClientClick="return false;" >
                     <span>
-                        <asp:Image ID="imgColorValidtion" runat="server" />
                         Color Validation </span>
                 </asp:LinkButton>
                 </div>
@@ -41,7 +40,6 @@
                 <asp:LinkButton ID="lbtnDLPOptimization" runat="server" ValidationGroup="vgDestination"
                     CssClass="big_bt" OnClick="lbtnDLPOptimization_Click">
                     <span>
-                        <asp:Image ID="Image1" runat="server" />
                         DLP Optimization </span>
                 </asp:LinkButton>
                 </div>
@@ -49,7 +47,6 @@
                 <asp:LinkButton ID="lbtAligmentCurves" runat="server" ValidationGroup="vgDestination"
                     CssClass="disable_big_bt" OnClientClick="return false;" >
                     <span>
-                        <asp:Image ID="Image2" runat="server" />
                         Aligment Curves </span>
                 </asp:LinkButton>
                 </div>

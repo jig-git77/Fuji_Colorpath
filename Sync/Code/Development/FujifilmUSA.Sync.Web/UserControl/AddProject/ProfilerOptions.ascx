@@ -83,9 +83,6 @@
                                 <div class="content">
                                     <div class="text">
                                         <div style="float: left">
-                                            <asp:LinkButton ID="lbtnOption" runat="server">
-                                                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
-                                            </asp:LinkButton>
                                         </div>
                                         <div style="float: left;">
                                             <label>

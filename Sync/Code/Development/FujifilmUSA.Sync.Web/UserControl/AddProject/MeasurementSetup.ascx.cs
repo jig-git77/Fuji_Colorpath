@@ -7,14 +7,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class MeasurementSetup : System.Web.UI.UserControl
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            BindMeasurementDevice();
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                BindMeasurementDevice();
-            }
         }
-
         private void BindMeasurementDevice()
         {
             var dic = new Dictionary<int, string> {{1, "i1-Pro - 873613"}};

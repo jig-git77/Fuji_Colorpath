@@ -10,7 +10,6 @@
     &nbsp;</div>
 <div class="contant_middle">
     <asp:PlaceHolder runat="server" ID="ph"></asp:PlaceHolder>
-    <div class="clear" />
 </div>
-<div class="contant_bottom">
-    &nbsp;</div>
+<div></div>
+<div class="contant_bottom">&nbsp;</div>
