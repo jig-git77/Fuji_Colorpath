@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Login</title>
     <link href="CSS/Common.css" rel="stylesheet" type="text/css" />
-    <script src="Javascript/jquery-1.7.1.js" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.7.1.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="form1" runat="server">
