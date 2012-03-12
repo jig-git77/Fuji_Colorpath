@@ -24,7 +24,7 @@
          OnClientClick=" javascript:ShowConfirmSaveWindow();return false;"
          >
         <span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
             Comfirm Save</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">

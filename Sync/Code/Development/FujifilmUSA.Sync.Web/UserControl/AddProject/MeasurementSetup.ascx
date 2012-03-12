@@ -7,8 +7,8 @@
     </h1>
     <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
-            Comfirm Save</span></asp:LinkButton>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" />
+            Preview</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
