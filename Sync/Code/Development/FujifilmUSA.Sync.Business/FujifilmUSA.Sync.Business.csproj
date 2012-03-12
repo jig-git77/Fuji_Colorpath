@@ -80,14 +80,24 @@
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="Implementation\MeasurementBusinessImpl.cs" />
     <Compile Include="Implementation\MiscDataBusinessImpl.cs" />
+    <Compile Include="Implementation\OptimizeRunBusinessImpl.cs" />
+    <Compile Include="Implementation\ProjectBusinessImpl.cs" />
     <Compile Include="Implementation\SyncDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
+    <Compile Include="Interface\IMeasurementBusiness.cs" />
+    <Compile Include="Interface\IOptimizeRunBusiness.cs" />
     <Compile Include="Interface\IMiscDataBusiness.cs" />
+    <Compile Include="Interface\IProjectBusiness.cs" />
     <Compile Include="Interface\ISyncDeviceBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="Messages\MeasurementDataResponse.cs" />
+    <Compile Include="Mock\MeasurementBusinessMock.cs" />
     <Compile Include="Mock\MiscDataBusinessMock.cs" />
+    <Compile Include="Mock\OptimizeRunBusinessMock.cs" />
+    <Compile Include="Mock\ProjectBusinessMock.cs" />
     <Compile Include="Mock\SyncDeviceBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,28 +138,9 @@
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.OptimizeDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProfilerService\Profiler.wsdl" />
-    <None Include="Service References\ProfilerService\Profiler.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProfilerService\Profiler4.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ProfilerService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ProfilerService\configuration91.svcinfo" />
@@ -158,12 +149,30 @@
     <None Include="Service References\ProfilerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ProfilerService\Profiler1.wsdl" />
+    <None Include="Service References\ProfilerService\Profiler5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerService\Profiler51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerService\Profiler52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerService\Profiler53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProfilerService\Profiler54.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ProfilerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Service References\ProfilerService\Profiler1.disco" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

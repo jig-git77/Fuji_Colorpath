@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Device> GetSyncDevicesByUserId(int taskeroUserId, int roleId, int companyId, int branchId)
         {
             var objSyncDeviceList = new List<Device>();
-            var dsSyncDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetSyncDeviceListByCompanyIdANDBranchId]", new object[] { companyId, branchId });
+            var dsSyncDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetSyncDeviceList]", new object[] { companyId, branchId });
             if (dsSyncDeviceList != null && dsSyncDeviceList.Tables.Count > 0 && dsSyncDeviceList.Tables[0].Rows.Count > 0)
             {
                 objSyncDeviceList = dsSyncDeviceList.Tables[0].AsEnumerable().
