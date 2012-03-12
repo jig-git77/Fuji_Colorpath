@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
-    TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/PopupControl/ConfirmSave.ascx" TagName="ConfirmSave" TagPrefix="uc" %>
 <script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
         if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>'))
@@ -41,16 +41,32 @@
     var delay = 1000;
 
     function ShowCreateDLP() {
-        var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
-        InitializeTimer();
-        oWnd.show();
-        return false;
+        ChooseRadWindow();
     }
+
+    //According to new or old Project open rad window
+    function ChooseRadWindow() {
+        if ("<%= IsNewDLP %>" == "True") {
+            var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
+            InitializeTimer();
+            oWnd.show();
+        }
+        else {
+            var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+            oWnd.show();
+        }
+    }
+
 
     function CloseCreateDLP() {
         var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
         oWnd.close();
     }
+    function CloseConfirmSaveWindow() {
+        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+        oWnd.close();
+    }
+
 
     function InitializeTimer() {
         // Set the length of the timer, in seconds
@@ -69,6 +85,8 @@
         if (secs == 0) {
             StopTheClock();
             CloseCreateDLP();
+            debugger;
+            window.location = 'Export.aspx';
         }
         else {
             self.status = secs
@@ -221,9 +239,15 @@
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
         <telerik:RadWindow ID="CreateDLPWindow" runat="server" ShowContentDuringLoad="false"
-            Title="Create DLP" Width="716" Height="250" Behaviors="Close, Move" Behavior="Move">
+            Title="Create DLP" Width="716" Height="250" Behavior="Move">
             <ContentTemplate>
                 <uc:CreateDLP ID="ucCreateDLP" runat="server" />
+            </ContentTemplate>
+        </telerik:RadWindow>
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+            Title="Confirm Save" Width="718" Height="275"  Behavior="Close, Move">
+            <ContentTemplate>
+                <uc:ConfirmSave ID="ConfirmSave" runat="server" />
             </ContentTemplate>
         </telerik:RadWindow>
     </Windows>

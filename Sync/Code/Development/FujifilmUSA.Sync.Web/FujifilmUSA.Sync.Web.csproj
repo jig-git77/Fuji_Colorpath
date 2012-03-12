@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Export.aspx" />
+    <Content Include="JQuery\jquery-1.7.1.js" />
     <Content Include="Measurement.aspx" />
     <Content Include="AddProject.aspx" />
     <Content Include="Analyze.aspx" />
@@ -212,6 +214,7 @@
     <Content Include="OperationSelection.aspx" />
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\Export.ascx" />
     <Content Include="UserControl\Measurement.ascx" />
     <Content Include="UserControl\MeasurementCommon.ascx" />
     <Content Include="UserControl\Analyze.ascx" />
@@ -219,6 +222,7 @@
     <Content Include="UserControl\LeftMenuItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectItem.ascx" />
     <Content Include="UserControl\LeftMenuProjectSetting.ascx" />
+    <Content Include="UserControl\PopupControl\ConfirmSave.ascx" />
     <Content Include="UserControl\PopupControl\CreateDLP.ascx" />
     <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
     <Content Include="UserControl\AddProject\SavePrintCondition.ascx" />
@@ -251,6 +255,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Export.aspx.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Export.aspx.designer.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Measurement.aspx.cs">
       <DependentUpon>Measurement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -322,6 +333,13 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\Export.ascx.cs">
+      <DependentUpon>Export.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Export.ascx.designer.cs">
+      <DependentUpon>Export.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\Measurement.ascx.cs">
       <DependentUpon>Measurement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -370,6 +388,13 @@
     </Compile>
     <Compile Include="UserControl\LeftMenuProjectSetting.ascx.designer.cs">
       <DependentUpon>LeftMenuProjectSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ConfirmSave.ascx.cs">
+      <DependentUpon>ConfirmSave.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ConfirmSave.ascx.designer.cs">
+      <DependentUpon>ConfirmSave.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PopupControl\CreateDLP.ascx.cs">
       <DependentUpon>CreateDLP.ascx</DependentUpon>

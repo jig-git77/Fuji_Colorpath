@@ -18,8 +18,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
+        public bool IsNewDLP
+        {
+            get { return Request.QueryString["ProjectName"] == null; }
+        }
         #endregion
-
 
         #region Page Method
         protected void Page_Load(object sender, EventArgs e)
@@ -33,18 +36,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnDownloadAndSaveDLP.Text = "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
             }
         }
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            BindMeasurementList();
-        }
         #endregion
 
         #region Methods
-
-        public void BindMeasurementList()
-        {
-        }
-
         #endregion
 
         #region Control Events
@@ -52,49 +46,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
         }
         #endregion
-
-        #region Error Handling Method
-        //public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
-        //{
-        //    ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
-        //}
-        #endregion
-
-        //*******************************************************************//
-
-        //#region IViewSyncRunAnalyze Members
-
-        //public int SyncRunId { get; set; }
-
-        //public int ProjectId { get; set; }
-
-        //public int ProfileOptionId { get; set; }
-
-        //public string MeasurementIds { get; set; }
-
-        //public System.Collections.Generic.List<Measurement> lstMeasurement { get; set; }
-
-        //public Measurement Measurement { get; set; }
-
-        //#endregion
-
-        //#region IViewBaseSyncDevice Members
-
-        //public int SyncDeviceId { get; set; }
-
-        //#endregion
-
-        //#region IViewSyncRunAnalyze Members
-
-        ////public ECPSyncRunStatus Status { get; set; }
-
-        //public DateTime EndDateTime { get; set; }
-
-        //#endregion
-
+    
     }
-
-
-
-
 }

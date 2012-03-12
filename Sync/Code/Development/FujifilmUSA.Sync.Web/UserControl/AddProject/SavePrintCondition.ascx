@@ -7,7 +7,6 @@
      function ShowConfirmSaveWindow() {
          var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
          oWnd.show();
-         return false;
      }
 </script>
 <script language="javascript" type="text/javascript">
@@ -21,7 +20,9 @@
     <h1 id="hTitle" runat="server">
         New Print Condition - Save Print Condition
     </h1>
-    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClick="lnkbtnSavePrintCondition_Click">
+    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button"  
+         OnClientClick=" javascript:ShowConfirmSaveWindow();return false;"
+         >
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Comfirm Save</span></asp:LinkButton>
