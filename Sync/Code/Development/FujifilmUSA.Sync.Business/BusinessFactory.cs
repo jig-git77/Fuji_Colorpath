@@ -7,11 +7,11 @@ namespace FujifilmUSA.Sync.Business
     public class BusinessFactory<T>
         where T : ITaskBase
     {
-        public ITaskBase CreateObject()
-        {            
-            string className = Utilities.ReadConfigValue(typeof (T).Name);
-            var business = (ITaskBase) Activator.CreateInstance(Type.GetType(className));
-            return business;
+        public static T CreateObject()
+        {
+            string className = Utilities.ReadConfigValue(typeof(T).Name);
+            var business = Activator.CreateInstance(Type.GetType(className));
+            return (T)business;
         }
     }
 }

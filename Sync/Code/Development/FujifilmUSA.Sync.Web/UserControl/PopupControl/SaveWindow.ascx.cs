@@ -1,30 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SaveWindow : System.Web.UI.UserControl
+    public partial class SaveWindow : System.Web.UI.UserControl, IViewConfirmSave
     {
-        #region Declaration
-        #endregion
-
-        #region Page events
-        protected void Page_PreRender(object sender, EventArgs e)
+        private PresenterConfirmSave _presenterConfirmSave;
+        protected void Page_Init(object sender, EventArgs e)
         {
+            _presenterConfirmSave = new PresenterConfirmSave(this);
         }
-        #endregion
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
+            Project = SessionManager.Instance.CurrentProject;
+            _presenterConfirmSave.SaveProject();
+            SessionManager.Instance.CurrentProject = Project;
             Response.Redirect("Measurement.aspx");
         }
-        #region "Methods"
+
+        #region IViewConfirmSave Members
+        public string ProjectName { get; set; }
+        public Project Project { get; set; }
         #endregion
-        
     }
 }

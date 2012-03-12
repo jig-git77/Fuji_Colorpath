@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class LeftMenuProjectItem : System.Web.UI.UserControl
     {
         #region Variable Declarations
-     
+
         //private PresenterLeftMenu _presenterLeftMenu = null;
         public LeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get { return (this.CurrentSyncRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId); }
         }
-        
+
         #endregion
 
         #region "Page Events"
@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //lnkExport.Enabled = CurrentSyncRun.HasProfile;
                     }
 
-                    if (CurrentSyncRun.Status == Convert.ToInt16(OptimizeRunStatus.Closed))
+                    if (CurrentSyncRun.Status == OptimizeRunStatus.Closed)
                     {
                         lnkMeasurement.Visible = false;
                     }
@@ -119,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Redirect("SyncRunExport.aspx");
                     }
                     Response.Redirect(
-                        this.CurrentSyncRun.Status == Convert.ToInt16(OptimizeRunStatus.Open)
+                        CurrentSyncRun.Status == OptimizeRunStatus.Open
                             ? "AddMeasurement.aspx"
                             : "SyncRunAnalyze.aspx");
                     Response.Redirect("AddProject.aspx");

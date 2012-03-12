@@ -1,19 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.DataAccess;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    public class ProjectBusinessImpl:IProjectBusiness
+    public class ProjectBusinessImpl : IProjectBusiness
     {
         #region IProjectBusiness Members
 
         public Project GetProjectDetail(int projectId)
         {
             var project = new Project();
+            var dsProject = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetProjectDetail", new object[] { projectId });
+
+            if (dsProject.Tables[0].Rows.Count > 0)
+            {
+                project = dsProject.Tables[0].AsEnumerable().
+                    Select(x => new Project()
+                    {
+                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                        ProjectName = DataReader.ReadString(x, "ProjectName"),
+                        CreateDate = DataReader.ReadDate(x, "CreateDate"),
+                        CurrDlpId = DataReader.ReadInt(x, "CurrDLPID"),
+                        IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                        ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
+                    }).FirstOrDefault();
+
+                project.OptimizeRuns = dsProject.Tables[1].AsEnumerable().
+                    Select(x => new OptimizeRun()
+                    {
+                        OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                        RunName = DataReader.ReadString(x, "RunName"),
+                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                        StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                        EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                        MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
+                        HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                        HasProfile = DataReader.ReadBoolean(x, "HasProfile")
+                    }).ToList();
+            }
             return project;
         }
 

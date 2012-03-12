@@ -77,10 +77,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PresenterConfirmSave.cs" />
     <Compile Include="PresenterLogin.cs" />
     <Compile Include="PresenterSyncDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewInterface\IViewError.cs" />
+    <Compile Include="ViewInterface\IViewConfirmSave.cs" />
     <Compile Include="ViewInterface\IViewLogin.cs" />
     <Compile Include="ViewInterface\IViewSyncDevice.cs" />
     <Compile Include="ViewInterface\ViewBase\IViewBaseSyncDevice.cs" />

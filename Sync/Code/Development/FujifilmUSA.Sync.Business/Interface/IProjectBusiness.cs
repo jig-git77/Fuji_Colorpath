@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    public interface IProjectBusiness
+    public interface IProjectBusiness : ITaskBase
     {
         Project GetProjectDetail(int projectId);
     }

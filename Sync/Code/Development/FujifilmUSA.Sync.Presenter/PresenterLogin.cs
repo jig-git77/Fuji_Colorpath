@@ -10,7 +10,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Presenter
 {
-    public class PresenterLogin 
+    public class PresenterLogin
     {
         private readonly IViewLogin _view;
         public PresenterLogin(IViewLogin view)
@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void UserLogin()
         {
-            var task = (IUserBusiness)new BusinessFactory<IUserBusiness>().CreateObject();
+            var task = BusinessFactory<IUserBusiness>.CreateObject();
             //task.ErrorOccured += _viewTaskeroUser.ErrorOccured;
             _view.CurrentUser = task.UserLogin(_view.UserName, _view.Password);
 
