@@ -682,7 +682,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2250</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FujifilmUSA.Sync.Web</IISUrl>
+          <IISUrl>http://localhost/FujifilmUSA.Sync.Web.ProtoType</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
