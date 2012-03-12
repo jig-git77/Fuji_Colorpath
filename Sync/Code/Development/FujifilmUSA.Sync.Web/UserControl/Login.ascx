@@ -40,7 +40,7 @@
 <script language="javascript">
     jQuery(document).ready(function () {
         if (jQuery("[id*='txtPassword']").val() == '') {
-            jQuery("[id*='txtPassword']").val('Password'); 
+            jQuery("[id*='txtPassword']").val('Password');
         }
     });   
 </script>
