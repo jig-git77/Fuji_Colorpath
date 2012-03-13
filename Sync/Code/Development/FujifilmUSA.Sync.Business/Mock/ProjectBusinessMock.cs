@@ -24,6 +24,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public Dictionary<int, string> GetSourceProfile()
+        {
+            return new Dictionary<int, string>();
+        }
+
         #endregion
     }
 }

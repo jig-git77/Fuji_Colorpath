@@ -12,6 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Project GetProjectDetail(int projectId);
         List<Project> GetProjectsByDeviceId(int deviceId);
         int DeleteProject(int projectId);
-
+        Dictionary<int, string> GetSourceProfile();
     }
 }

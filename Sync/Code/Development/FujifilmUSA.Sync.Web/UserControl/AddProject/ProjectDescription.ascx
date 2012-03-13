@@ -37,8 +37,7 @@
                                 <span>Press:</span>
                             </td>
                             <td style="width: 400px">
-                                <asp:TextBox ID="txtPress" runat="server" Width="200px" Height="19px" Enabled="false"
-                                    Text="Komori LS 40"></asp:TextBox>
+                                <asp:TextBox ID="txtPress" runat="server" Width="200px" Height="19px" Enabled="false" ></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -46,8 +45,7 @@
                                 <span>Device Family:</span>
                             </td>
                             <td>
-                                <asp:TextBox ID="txtDeviceFamily" runat="server" Width="200px" Height="19px" Enabled="false"
-                                    Text="Komori"></asp:TextBox>
+                                <asp:TextBox ID="txtDeviceFamily" runat="server" Width="200px" Height="19px" Enabled="false" ></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
