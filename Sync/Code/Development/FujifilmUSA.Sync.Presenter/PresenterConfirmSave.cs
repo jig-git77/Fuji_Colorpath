@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             //Apply procedure for saving a project.
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewConfirmSave.Project = projectBusiness.GetProjectDetail(_viewConfirmSave.Project.ProjectId);
+            //_viewConfirmSave.Project = projectBusiness.GetProjectDetail(_viewConfirmSave.Project.ProjectId);
         }
     }
 }

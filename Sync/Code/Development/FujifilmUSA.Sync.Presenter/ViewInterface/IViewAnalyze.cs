@@ -5,8 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewBaseSyncDevice
+    public interface IViewAnalyze
     {
-        int SyncDeviceId { get; set; }
     }
 }

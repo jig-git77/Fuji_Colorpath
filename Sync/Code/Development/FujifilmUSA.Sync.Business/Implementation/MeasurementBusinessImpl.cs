@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -11,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IMeasurementBusiness Members
 
-        public MeasurementDataResponse GetMeasurementData(int[] measurementIds)
+        public MeasurementDataResponse GetMeasurementData(List<int> measurementIds)
         {
             var response = new MeasurementDataResponse();
             var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetMeasurementData", new object[] { String.Join(",", measurementIds) });
@@ -22,9 +23,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
                     response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
                     response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
-                    response.DcsData.Add(DataReader.ReadDouble(row, "CIELAB_L*"));
-                    response.DcsData.Add(DataReader.ReadDouble(row, "CIELAB_A*"));
-                    response.DcsData.Add(DataReader.ReadDouble(row, "CIELAB_B*"));
+
+                    response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+                    response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+                    response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+                    response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
                 }
             }
             return response;

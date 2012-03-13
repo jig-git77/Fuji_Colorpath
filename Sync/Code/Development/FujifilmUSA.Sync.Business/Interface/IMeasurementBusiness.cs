@@ -1,9 +1,10 @@
 ﻿using FujifilmUSA.Sync.Business.Messages;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
-    interface IMeasurementBusiness
+    public interface IMeasurementBusiness : ITaskBase
     {
-        MeasurementDataResponse GetMeasurementData(int[] measurementIds);
+        MeasurementDataResponse GetMeasurementData(List<int> measurementIds);
     }
 }

@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Data;
+using System.Linq;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.DataAccess;
+using System.Collections.Generic;
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Business.ProfilerService;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -15,14 +20,59 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             new object[] { projectId, status, startDateTime });
         }
 
-        public void CreateFirstDlp(int optimizeRunId)
+        public void CreateFirstDlp(int projectId, int optimizeRunId, List<int> measurementIds)
         {
-            DataAccessFactory.Instance.GetDsResult("CPSync4D.GetSourceAndDestinationProfileData", new object[] {optimizeRunId});
+            var sourceProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
+            var request = new OptimizeDeviceLinkProfileRequest()
+            {
+                DCSData = new List<double>(),
+                PCSData = new List<double>(),
+            };
+
+            var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
+            request.PCSData = measurementDataResponse.PcsData;
+            request.DCSData = measurementDataResponse.DcsData;
+
+            request.SourceProfile = new IccProfile() { ProfileData = sourceProfile };
+            //Add options and call profile service to generate project dlp
+            //var profilerOptionDetail = BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
+            //var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(profileOptionId, ProfileType.Optimization);
+
+
+            //Add options and call profile service to generate optimize dlp
+            using (var client = new ProfilerClient())
+            {
+                request.Options = new List<Parameter>();
+                //optionDetails.ForEach(
+                //                option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
+                var response = client.OptimizeDeviceLinkProfile(request);
+                //optimizeDlp.Data.Profile = response.OptimizedProfile.ProfileData;
+            }
+
+            //Store optimize dlp to current sync run
+            //DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] { syncRunId, optimizeDlp.Data.Profile });
+
         }
+
 
         public byte[] GetDeviceLinkProfile(int optimizeRunId)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Measurement> GetMeasurements(int optimizeRunId)
+        {
+            var dsMeasurements = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetMeasurementsByOptimizeRunID", new object[] { optimizeRunId });
+            var measurements = dsMeasurements.Tables[0].AsEnumerable().
+                Select(x => new Measurement()
+                                {
+                                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                    MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                                    OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                }).ToList();
+            return measurements;
         }
 
         #endregion

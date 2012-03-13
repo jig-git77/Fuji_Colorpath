@@ -97,7 +97,7 @@
                 </div>
                 <div class="buttonright" style="padding-left: 3px">
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseConfirmSaveWindow(); return false;"
-                        CssClass="gray_bt" onclick="lbtnClose_Click">
+                        CssClass="gray_bt">
                                         <span>
                                             Close </span>
                     </asp:LinkButton>

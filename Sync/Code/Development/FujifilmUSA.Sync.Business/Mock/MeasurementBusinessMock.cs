@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 
@@ -11,7 +8,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMeasurementBusiness Members
 
-        public MeasurementDataResponse GetMeasurementData(int[] measurementIds)
+        public MeasurementDataResponse GetMeasurementData(List<int> measurementIds)
         {
             return new MeasurementDataResponse();
         }
