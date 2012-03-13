@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject = new Project() { IsNewlyCreated = true };
-            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Description;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
 
@@ -52,11 +52,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.CommandName == "Select")
             {
-                string arg = e.CommandArgument as string;
+                ProjectId = Convert.ToInt32(e.CommandArgument);
+                _presenterProjectList.GetProjectDetail();
+                SessionManager.Instance.CurrentProject = Project;
             }
             if (e.CommandName == "Delete" && e.CommandArgument != null)
             {
-                DeleteProject(int.Parse(e.CommandArgument as string));
+                DeleteProject(Convert.ToInt32(e.CommandArgument));
             }
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -84,28 +86,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     switch (project.Status)
                     {
-                        case OptimizeRunStatus.Open:
+                        case EOptimizeRunStatus.Open:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectName + "')");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                            imgStatus.ToolTip = OptimizeRunStatus.Open.ToString();
-                            imgStatus.AlternateText = OptimizeRunStatus.Open.ToString();
+                            imgStatus.ToolTip = EOptimizeRunStatus.Open.ToString();
+                            imgStatus.AlternateText = EOptimizeRunStatus.Open.ToString();
                             break;
-                        case OptimizeRunStatus.Closed:
+                        case EOptimizeRunStatus.Closed:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectName + "')");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                            imgStatus.ToolTip = OptimizeRunStatus.Closed.ToString();
-                            imgStatus.AlternateText = OptimizeRunStatus.Closed.ToString();
+                            imgStatus.ToolTip = EOptimizeRunStatus.Closed.ToString();
+                            imgStatus.AlternateText = EOptimizeRunStatus.Closed.ToString();
                             break;
-                        case OptimizeRunStatus.Certify:
+                        case EOptimizeRunStatus.Certify:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return false;");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                            imgStatus.ToolTip = OptimizeRunStatus.Certify.ToString();
-                            imgStatus.AlternateText = OptimizeRunStatus.Certify.ToString();
+                            imgStatus.ToolTip = EOptimizeRunStatus.Certify.ToString();
+                            imgStatus.AlternateText = EOptimizeRunStatus.Certify.ToString();
                             break;
-                        case OptimizeRunStatus.NotUsed:
+                        case EOptimizeRunStatus.NotUsed:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return false;");
                             imgStatus.ImageUrl = ResolveUrl("../Images/no_image.png");
@@ -117,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblStandard.Text = SourceProfile[project.SourceProfileId];
             }
         }
-  
+
         //Print Standard Rad Combobox event     
         protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
         {
@@ -146,7 +148,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //}
         private void GetSourceProfiles()
         {
-            CompnayId = 1;
+            CompanyId = 1;
             SourceProfile = new Dictionary<int, string>();
             _presenterProjectList.GetSourceProfileByCompany();
         }
@@ -169,7 +171,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return DateTime.Parse(dateValue);
             }
         }
-        
+
         private void BindProject()
         {
             GetSourceProfiles();
@@ -188,8 +190,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void DeleteProject(int projectId)
         {
-            Project = new Entity.Project();
-            Project.ProjectId = projectId;
+            Project = new Entity.Project { ProjectId = projectId };
             _presenterProjectList.DeleteProject();
         }
 
@@ -199,8 +200,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }
         public Project Project { get; set; }
-        public int CompnayId { get; set; }
+        public int CompanyId { get; set; }
         public Dictionary<int, string> SourceProfile { get; set; }
+        public int ProjectId { get; set; }
         #endregion
 
     }

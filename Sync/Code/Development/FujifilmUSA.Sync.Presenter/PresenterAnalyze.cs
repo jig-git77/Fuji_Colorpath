@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Business.Interface;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -16,7 +18,13 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void CreateDestinationAndDlp()
         {
-            
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.
+                CreateInitialDestinationAndDeviceLinkProfiles(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds);
+
         }
     }
 }

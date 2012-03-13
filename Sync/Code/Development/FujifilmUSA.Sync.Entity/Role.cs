@@ -3,9 +3,9 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class Role
     {
-        public byte RoleId { get; set; }
+        public short RoleId { get; set; }
         public string RoleDesc { get; set; }
-        public byte RoleLevel { get; set; }
+        public short RoleLevel { get; set; }
         public bool IsWebEnabled { get; set; }
         public List<RolePermission> RolePermissions { get; set; }
     }

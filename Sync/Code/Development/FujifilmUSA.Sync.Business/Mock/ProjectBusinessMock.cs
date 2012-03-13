@@ -24,6 +24,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
+        {
+            return new Dictionary<string, string>();
+        }
         public Dictionary<int, string> GetSourceProfile()
         {
             return new Dictionary<int, string>();

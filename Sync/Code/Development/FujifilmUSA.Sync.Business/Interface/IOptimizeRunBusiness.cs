@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds);
         byte[] GetDeviceLinkProfile(int optimizeRunId);
         List<Measurement> GetMeasurements(int optimizeRunId);
+        void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds);
     }
 }

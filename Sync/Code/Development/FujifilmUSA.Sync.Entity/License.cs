@@ -8,9 +8,9 @@ namespace FujifilmUSA.Sync.Entity
         public int BranchId { get; set; }
         public DateTime ActivationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public byte NumOfDevice { get; set; }
+        public short NumOfDevice { get; set; }
         public string LicenseDesc { get; set; }
-        public byte LicenseTypeId { get; set; }
+        public short LicenseTypeId { get; set; }
         public bool IsActive { get; set; }
         public List<UserLicense> UserLicenses { get; set; }
         public List<Device> Devices { get; set; }

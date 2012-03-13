@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.CheckLogin();
             if (!IsPostBack)
             {
-                SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Home;
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
             }
         }

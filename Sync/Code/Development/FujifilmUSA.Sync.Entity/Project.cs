@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Entity
         //public SourceProfile SourceProfile { get; set; }
         public Device Device { get; set; }
         public bool IsNewlyCreated { set; get; }
-        public OptimizeRunStatus Status { get; set; }
+        public EOptimizeRunStatus Status { get; set; }
         public int ReferenceChartTypeId { get; set; }
     }
 }

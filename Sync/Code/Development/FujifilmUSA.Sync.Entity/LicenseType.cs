@@ -3,7 +3,7 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class LicenseType
     {
-        public byte LicenseTypeId { get; set; }
+        public short LicenseTypeId { get; set; }
         public string Type { get; set; }
         public List<License> Licenses { get; set; }
     }

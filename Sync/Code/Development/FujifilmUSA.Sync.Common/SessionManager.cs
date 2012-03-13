@@ -100,15 +100,15 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-        public LeftMenuItemLevel CurrentNavigation
+        public ELeftMenuItemLevel CurrentNavigation
         {
             get
             {
                 if (HttpContext.Current.Session[_navigationSession] != null)
                 {
-                    return (LeftMenuItemLevel)System.Enum.Parse(typeof(LeftMenuItemLevel), HttpContext.Current.Session[_navigationSession].ToString());
+                    return (ELeftMenuItemLevel)System.Enum.Parse(typeof(ELeftMenuItemLevel), HttpContext.Current.Session[_navigationSession].ToString());
                 }
-                return LeftMenuItemLevel.Home;
+                return ELeftMenuItemLevel.Home;
             }
             set
             {
@@ -116,15 +116,15 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-        public Operation CurrentOperation
+        public EOperation CurrentOperation
         {
             get
             {
                 if (HttpContext.Current.Session[_operationSession] != null)
                 {
-                    return (Operation)System.Enum.Parse(typeof(Operation), HttpContext.Current.Session[_operationSession].ToString());
+                    return (EOperation)System.Enum.Parse(typeof(EOperation), HttpContext.Current.Session[_operationSession].ToString());
                 }
-                return Operation.None;
+                return EOperation.None;
             }
             set
             {

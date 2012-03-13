@@ -34,30 +34,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
             request.PcsData = measurementDataResponse.PcsData;
             request.DcsData = measurementDataResponse.DcsData;
 
-            //Add options and call profile service to generate project dlp
-            //var profilerOptionDetail = BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
-            //var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(profileOptionId, ProfileType.Optimization);
-
-
-            //Add options and call profile service to generate optimize dlp
-            using (var client = new ProfilerClient())
+            var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            var destinationOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DestinationProfile);
+            foreach (KeyValuePair<string, string> option in destinationOptions)
             {
-                //request.Options = new List<Parameter>();
-                //optionDetails.ForEach(
-                //                option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
-                var response = client.CreateDestinationAndDeviceLinkProfile(request);
-                //optimizeDlp.Data.Profile = response.OptimizedProfile.ProfileData;
+                request.DestinationProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
             }
 
-            //Store optimize dlp to current sync run
-            //DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateICCProfile]", new object[] { syncRunId, optimizeDlp.Data.Profile });
+            var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+            foreach (KeyValuePair<string, string> option in dlpOptions)
+            {
+                request.DlpOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+            }
 
+            using (var client = new ProfilerClient())
+            {
+                var response = client.CreateDestinationAndDeviceLinkProfile(request);
+                DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateInitialDestinationAndDlp",
+                                                            new object[] { optimizeRunId, response.DestinationProfile.ProfileData, response.DeviceLinkProfile.ProfileData });
+            }
         }
 
 
         public byte[] GetDeviceLinkProfile(int optimizeRunId)
         {
-            throw new NotImplementedException();
+            return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetDeviceLinkProfile", new object[] { optimizeRunId });
         }
 
         public List<Measurement> GetMeasurements(int optimizeRunId)
@@ -73,6 +74,39 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                                 }).ToList();
             return measurements;
+        }
+
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
+        {
+            var sourceProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
+            var destinationProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetDestinationProfileData", new object[] { projectId });
+            var deviceLinkProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetLastOptimizedDlp", new object[] { projectId });
+            var request = new OptimizeDeviceLinkProfileRequest()
+            {
+                PCSData = new List<double>(),
+                DCSData = new List<double>(),
+                SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
+                DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile }
+            };
+
+            var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
+            request.PCSData = measurementDataResponse.PcsData;
+            request.DCSData = measurementDataResponse.DcsData;
+
+            var options = BusinessFactory<IProjectBusiness>.CreateObject().
+                GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+            foreach (KeyValuePair<string, string> option in options)
+            {
+                request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value });
+            }
+
+            using (var client = new ProfilerClient())
+            {
+                var response = client.OptimizeDeviceLinkProfile(request);
+                DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
+                                                            new object[] { optimizeRunId, response.OptimizedProfile.ProfileData });
+            }
         }
 
         #endregion

@@ -7,5 +7,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewAnalyze
     {
+        int ProjectId { get; set; }
+        int OptimizeRunId { get; set; }
+        List<int> MeasurementIds { get; set; }
     }
 }

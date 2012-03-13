@@ -20,28 +20,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             switch (SessionManager.Instance.CurrentNavigation)
             {
-                case LeftMenuItemLevel.Description:
+                case ELeftMenuItemLevel.Description:
                     lnkDescription.Enabled = true;
                     break;
-                case LeftMenuItemLevel.TargetColorSpace:
+                case ELeftMenuItemLevel.TargetColorSpace:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.ProfilerOption:
+                case ELeftMenuItemLevel.ProfilerOption:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.MeasurementSetup:
+                case ELeftMenuItemLevel.MeasurementSetup:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
                         lnkMeasurementSetup.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.Save:
+                case ELeftMenuItemLevel.Save:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkSave.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.Measure:
+                case ELeftMenuItemLevel.Measure:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkMeasure.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.Analyze:
+                case ELeftMenuItemLevel.Analyze:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkAnalyze.Enabled =
                         true;
                     break;
-                case LeftMenuItemLevel.Download:
+                case ELeftMenuItemLevel.Download:
                     lnkDescription.Enabled =
                         lnkTargetColorSpace.Enabled =
                         lnkProfilerOption.Enabled =
@@ -90,25 +90,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     switch (lnkItem.ID)
                     {
                         case "lnkDescription":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Description;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
                             break;
                         case "lnkTargetColorSpace":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.TargetColorSpace;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
                             break;
                         case "lnkProfilerOption":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.ProfilerOption;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
                             break;
                         case "lnkMeasurementSetup":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.MeasurementSetup;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
                             break;
                         case "lnkSave":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Save;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
                             break;
                         case "lnkMeasure":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Measure;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
                             break;
                         case "lnkAnalyze":
-                            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Analyze;
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                             break;
                     }
                     Response.Redirect("~/AddProject.aspx");

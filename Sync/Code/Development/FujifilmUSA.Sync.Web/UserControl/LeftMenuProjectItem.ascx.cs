@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Variable Declarations
 
         //private PresenterLeftMenu _presenterLeftMenu = null;
-        public LeftMenuItemLevel ItemLevel { get; set; }
+        public ELeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
         public OptimizeRun CurrentSyncRun { get; set; }
         public bool IsLastRun
@@ -41,10 +41,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             switch (ItemLevel)
             {
-                case LeftMenuItemLevel.ProjectSetup:
+                case ELeftMenuItemLevel.ProjectSetup:
                     ulSyncSubMenu.Visible = false;
                     break;
-                case LeftMenuItemLevel.OptimizeRun:
+                case ELeftMenuItemLevel.OptimizeRun:
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == CurrentSyncRun.OptimizeRunId)
                     {
                         lnkMeasurement.Visible = false;
@@ -60,16 +60,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         //lnkExport.Enabled = CurrentSyncRun.HasProfile;
                     }
 
-                    if (CurrentSyncRun.Status == OptimizeRunStatus.Closed)
+                    if (CurrentSyncRun.Status == EOptimizeRunStatus.Closed)
                     {
                         lnkMeasurement.Visible = false;
                     }
 
                     if (CurrentSyncRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentSyncRun.OptimizeRunId)
                     {
-                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Measure;
-                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Analyze;
-                        lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Download;
+                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                        lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
                     }
                     if (IsLastRun)
                     {
@@ -109,17 +109,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             switch (ItemLevel)
             {
-                case LeftMenuItemLevel.ProjectSetup:
+                case ELeftMenuItemLevel.ProjectSetup:
                     Response.Redirect("AddProject.aspx");
                     break;
-                case LeftMenuItemLevel.OptimizeRun:
+                case ELeftMenuItemLevel.OptimizeRun:
                     SessionManager.Instance.CurrentOptimizeRun = this.CurrentSyncRun;
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == this.CurrentSyncRun.OptimizeRunId)
                     {
                         Response.Redirect("SyncRunExport.aspx");
                     }
                     Response.Redirect(
-                        CurrentSyncRun.Status == OptimizeRunStatus.Open
+                        CurrentSyncRun.Status == EOptimizeRunStatus.Open
                             ? "AddMeasurement.aspx"
                             : "SyncRunAnalyze.aspx");
                     Response.Redirect("AddProject.aspx");

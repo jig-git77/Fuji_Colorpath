@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Web.UI.WebControls;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -21,7 +22,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsNewDlp
         {
-
             get { return SessionManager.Instance.CurrentProject.IsNewlyCreated; }
         }
 
@@ -35,13 +35,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            header.InnerText = string.Format("New Print Condition - Analyze (No DLP)");
-            lbtnDownloadAndSaveDLP.Text = "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>";
-            if (Request.QueryString["ProjectName"] != null)
-            {
-                header.InnerText = string.Format("Analyze - {0}.icc", Request.QueryString["ProjectName"]);
-                lbtnDownloadAndSaveDLP.Text = "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
-            }
+            header.InnerText = IsNewDlp
+                                   ? string.Format("New Print Condition - Analyze (No DLP)")
+                                   : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+            lbtnDownloadAndSaveDLP.Text = IsNewDlp
+                                              ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
+                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
         }
         #endregion
 
@@ -54,5 +53,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+
+        #region IViewAnalyze Members
+
+        public int ProjectId { get; set; }
+
+        public int OptimizeRunId { get; set; }
+
+        public List<int> MeasurementIds { get; set; }
+
+        #endregion
     }
 }

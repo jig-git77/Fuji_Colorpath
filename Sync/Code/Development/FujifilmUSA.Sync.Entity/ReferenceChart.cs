@@ -4,7 +4,7 @@ namespace FujifilmUSA.Sync.Entity
     public class ReferenceChart
     {
         public int ReferenceChartId { get; set; }
-        public byte ChartTypeId { get; set; }
+        public short ChartTypeId { get; set; }
         public short? SampleId { get; set; }
         public string SampleName { get; set; }
         public decimal CmykC { get; set; }

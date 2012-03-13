@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Entity
         public string MeasurementName { get; set; }
         public int OptimizeRunId { get; set; }
         public DateTime MeasurementDate { get; set; }
-        public byte ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
         public bool IsUsed { get; set; }
         public List<MeasurementPatch> MeasurementPatches { get; set; }
         public OptimizeRun OptimizeRun { get; set; }

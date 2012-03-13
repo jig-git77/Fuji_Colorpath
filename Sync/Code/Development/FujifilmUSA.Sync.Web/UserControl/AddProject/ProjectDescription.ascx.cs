@@ -41,7 +41,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                 TechnicianName=txtTechnicianName.Text.Trim()
                                                                             };
 
-            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.TargetColorSpace;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
         #endregion

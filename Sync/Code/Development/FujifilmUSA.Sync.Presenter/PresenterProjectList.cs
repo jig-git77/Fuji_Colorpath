@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetSourceProfileByCompany()
         {
             var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewProjectList.SourceProfile = task.SourceProfileByCompany(_viewProjectList.CompnayId);
+            _viewProjectList.SourceProfile = task.SourceProfileByCompany(_viewProjectList.CompanyId);
         }
 
         public void GetProjectListByDeviceId()
@@ -35,6 +35,12 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var task = BusinessFactory<IProjectBusiness>.CreateObject();
             _viewProjectList.SourceProfile = task.GetSourceProfile();
+        }
+
+        public void GetProjectDetail()
+        {
+            var task = BusinessFactory<IProjectBusiness>.CreateObject();
+            _viewProjectList.Project = task.GetProjectDetail(_viewProjectList.ProjectId);
         }
     }
 }

@@ -29,6 +29,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
+        {
+            
+        }
+
         #endregion
     }
 }

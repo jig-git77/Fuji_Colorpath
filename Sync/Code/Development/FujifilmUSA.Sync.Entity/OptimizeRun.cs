@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Entity
         public int OptimizeRunId { get; set; }
         public string RunName { get; set; }
         public int ProjectId { get; set; }
-        public OptimizeRunStatus Status { get; set; }
+        public EOptimizeRunStatus Status { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime? EndDateTime { get; set; }
         public byte[] DeviceLinkProfile { get; set; }

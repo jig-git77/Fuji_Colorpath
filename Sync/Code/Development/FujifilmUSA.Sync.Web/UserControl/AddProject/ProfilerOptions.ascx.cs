@@ -46,8 +46,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.MeasurementSetup;
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();                        
         }
 
         #endregion

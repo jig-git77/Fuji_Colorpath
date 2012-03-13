@@ -1,10 +1,10 @@
 ﻿namespace FujifilmUSA.Sync.Entity
 {
-    public enum LeftMenuItemLevel
+    public enum ELeftMenuItemLevel
     {
         Home = 1,
         Device = 2,
-        Operation=3,
+        Operation = 3,
         Project = 4,
         ProjectSetup = 5,
         Description = 6,
@@ -18,7 +18,7 @@
         OptimizeRun = 14
     }
 
-    public enum OptimizeRunStatus
+    public enum EOptimizeRunStatus
     {
         Open = 1,
         Closed = 2,
@@ -26,11 +26,19 @@
         NotUsed = 4
     }
 
-    public enum Operation
+    public enum EOperation
     {
         None = 0,
         ColorValidation = 1,
         DlpOptimization = 2,
         AligmentCurves = 3
+    }
+
+    public enum EProfileType
+    {
+        SourceProfile = 1,
+        DestinationProfile = 2,
+        DeviceLinkProfile = 3,
+        OptimizeDlp = 4
     }
 }

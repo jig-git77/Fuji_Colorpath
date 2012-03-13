@@ -20,15 +20,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     switch (((LeftMenuItem)ph.Controls[i]).ItemLevel)
                     {
-                        case LeftMenuItemLevel.Device:
+                        case ELeftMenuItemLevel.Device:
                             if (SessionManager.Instance.CurrentDevice == null)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
-                        case LeftMenuItemLevel.Project:
+                        case ELeftMenuItemLevel.Project:
                             if (SessionManager.Instance.CurrentProject == null)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
-                        case LeftMenuItemLevel.OptimizeRun:
+                        case ELeftMenuItemLevel.OptimizeRun:
                             if (SessionManager.Instance.CurrentProject == null)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
@@ -40,11 +40,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     switch (((LeftMenuProjectItem)ph.Controls[i]).ItemLevel)
                     {
-                        case LeftMenuItemLevel.ProjectSetup:
+                        case ELeftMenuItemLevel.ProjectSetup:
                             if (SessionManager.Instance.CurrentProject == null || !SessionManager.Instance.CurrentProject.IsNewlyCreated)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
-                        case LeftMenuItemLevel.OptimizeRun:
+                        case ELeftMenuItemLevel.OptimizeRun:
                             if (SessionManager.Instance.CurrentProject == null || SessionManager.Instance.CurrentProject.IsNewlyCreated)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
@@ -63,21 +63,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ph.Controls.Clear();
 
             var ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = LeftMenuItemLevel.Home;
+            ctrlItem.ItemLevel = ELeftMenuItemLevel.Home;
             ctrlItem.ItemName = "Home";
             ctrlItem.ID = "_Home";
             ph.Controls.Add(ctrlItem);
 
             if (SessionManager.Instance.CurrentDevice == null) return;
             ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = LeftMenuItemLevel.Device;
+            ctrlItem.ItemLevel = ELeftMenuItemLevel.Device;
             ctrlItem.ItemName = SessionManager.Instance.CurrentDevice.DeviceName;
             ctrlItem.ID = "_Device";
             ph.Controls.Add(ctrlItem);
 
-            if (SessionManager.Instance.CurrentOperation == Operation.None) return;
+            if (SessionManager.Instance.CurrentOperation == EOperation.None) return;
             ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = LeftMenuItemLevel.Operation;
+            ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation;
             ctrlItem.ItemName = "DLP Optimization";
             ctrlItem.ID = "_Operation";
             ph.Controls.Add(ctrlItem);
@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.IsNewlyCreated)
             {
                 ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-                ctrlItem.ItemLevel = LeftMenuItemLevel.ProjectSetup;
+                ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
                 ctrlItem.ItemName = "New Print Condition";
                 ph.Controls.Add(ctrlItem);
                 ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
@@ -96,13 +96,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-                ctrlItem.ItemLevel = LeftMenuItemLevel.Project;
+                ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
                 ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
                 ph.Controls.Add(ctrlItem);
                 foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                 {
                     var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                    ctrlProjItem.ItemLevel = LeftMenuItemLevel.OptimizeRun;
+                    ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
                     ctrlProjItem.ItemName = item.RunName;
                     ctrlProjItem.CurrentSyncRun = item;
                     ph.Controls.Add(ctrlProjItem);

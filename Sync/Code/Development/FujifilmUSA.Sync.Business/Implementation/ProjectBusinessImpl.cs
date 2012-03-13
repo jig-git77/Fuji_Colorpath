@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Data;
-
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
@@ -31,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         CreateDate = DataReader.ReadDate(x, "CreateDate"),
                         CurrDlpId = DataReader.ReadInt(x, "CurrDLPID"),
                         IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                        Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                         ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
                     }).FirstOrDefault();
 
@@ -41,7 +38,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                         RunName = DataReader.ReadString(x, "RunName"),
                         ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                        Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
                         StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
                         EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
                         MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
@@ -68,7 +65,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
                         CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                         PrintCondition = new PrintCondition() { Media = DataReader.ReadString(x, "Media"), Colorant = DataReader.ReadString(x, "Colorant"), RipSettings = DataReader.ReadString(x, "RipSettings") },
-                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus") 
+                        Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
                     }).ToList();
             }
             return objProjectList;
@@ -82,6 +79,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
+        {
+            var dsProjectOption = DataAccessFactory.Instance.GetDsResult(
+                "CPSync4D.GetProjectOptions",
+                new object[] { projectId, Convert.ToInt32(type) });
+            var projectOptions = dsProjectOption.Tables[0].AsEnumerable().
+                Select(x =>
+                       new KeyValuePair<string, string>(
+                           DataReader.ReadString(x, "ProfilerOption"),
+                           DataReader.ReadString(x, "ProfilerOptionValue"))).ToDictionary(x => x.Key, x => x.Value);
+            return projectOptions;
+        }
         public Dictionary<int, string> GetSourceProfile()
         {
             var dstSourceList = new Dictionary<int, string>();

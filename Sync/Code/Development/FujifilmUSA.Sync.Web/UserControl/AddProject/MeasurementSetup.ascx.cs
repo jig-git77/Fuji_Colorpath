@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Save;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();                                    
         }
     }

@@ -21,36 +21,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var ctrl = new System.Web.UI.Control();
             switch (SessionManager.Instance.CurrentNavigation)
             {
-                case LeftMenuItemLevel.Description:
+                case ELeftMenuItemLevel.Description:
                     ctrl = this.LoadControl("~/UserControl/AddProject/ProjectDescription.ascx");
                     ctrl.ID = "ctrl_ProjectDescription";
                     ph.Controls.Add(ctrl);
                     break;
-                case LeftMenuItemLevel.TargetColorSpace:
+                case ELeftMenuItemLevel.TargetColorSpace:
                     ctrl = this.LoadControl("~/UserControl/AddProject/TargetColorSpace.ascx");
                     ctrl.ID = "ctrl_TargetColorSpace";
                     ph.Controls.Add(ctrl);
                     break;
-                case LeftMenuItemLevel.ProfilerOption:
+                case ELeftMenuItemLevel.ProfilerOption:
                     ctrl = this.LoadControl("~/UserControl/AddProject/ProfilerOptions.ascx");
                     ctrl.ID = "ctrl_ProfilerOptions";
                     ph.Controls.Add(ctrl);
                     break;
-                case LeftMenuItemLevel.MeasurementSetup:
+                case ELeftMenuItemLevel.MeasurementSetup:
                     ctrl = this.LoadControl("~/UserControl/AddProject/MeasurementSetup.ascx");
                     ctrl.ID = "ctrl_MeasurementSetup";
                     ph.Controls.Add(ctrl);
                     break;
-                case LeftMenuItemLevel.Save:
+                case ELeftMenuItemLevel.Save:
                     ctrl = this.LoadControl("~/UserControl/AddProject/SavePrintCondition.ascx");
                     ctrl.ID = "ctrl_SavePrintCondition";
                     ph.Controls.Add(ctrl);
                     break;
-                case LeftMenuItemLevel.Measure:
+                case ELeftMenuItemLevel.Measure:
                     break;
-                case LeftMenuItemLevel.Analyze:
+                case ELeftMenuItemLevel.Analyze:
                     break;
-                case LeftMenuItemLevel.Download:
+                case ELeftMenuItemLevel.Download:
                     break;
             }
         }

@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class LeftMenuItem : System.Web.UI.UserControl
     {
         #region Declaration
-        public LeftMenuItemLevel ItemLevel { get; set; }
+        public ELeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
         #endregion
 
@@ -17,23 +17,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             switch (ItemLevel)
             {
-                case LeftMenuItemLevel.Home:
+                case ELeftMenuItemLevel.Home:
                     imgItem.ImageUrl = "../images/home_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Home;
+                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Home;
                     break;
-                case LeftMenuItemLevel.Device:
+                case ELeftMenuItemLevel.Device:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Device;
+                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Device;
                     break;
-                case LeftMenuItemLevel.Operation:
+                case ELeftMenuItemLevel.Operation:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == LeftMenuItemLevel.Operation;
+                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Operation;
                     break;
-                case LeftMenuItemLevel.ProjectSetup:
+                case ELeftMenuItemLevel.ProjectSetup:
                     imgItem.ImageUrl = "../images/print_icon.png";
                     imgItem.Enabled = false;
                     break;
-                case LeftMenuItemLevel.Project:
+                case ELeftMenuItemLevel.Project:
                     imgItem.ImageUrl = "../images/print_icon.png";
                     imgItem.Enabled = false;
                     break;
@@ -45,20 +45,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             switch (this.ItemLevel)
             {
-                case LeftMenuItemLevel.Home:
+                case ELeftMenuItemLevel.Home:
                     SessionManager.Instance.CurrentDevice = null;
-                    SessionManager.Instance.CurrentOperation = Operation.None;
+                    SessionManager.Instance.CurrentOperation = EOperation.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("Index.aspx");
                     break;
-                case LeftMenuItemLevel.Device:
-                    SessionManager.Instance.CurrentOperation = Operation.None;
+                case ELeftMenuItemLevel.Device:
+                    SessionManager.Instance.CurrentOperation = EOperation.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("OperationSelection.aspx");
                     break;
-                case LeftMenuItemLevel.Operation:
+                case ELeftMenuItemLevel.Operation:
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("ProjectList.aspx");

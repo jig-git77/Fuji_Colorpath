@@ -2,7 +2,7 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class DensityType
     {
-        public byte DensityTypeId { get; set; }
-        public string DensityType1 { get; set; }
+        public short DensityTypeId { get; set; }
+        public string Type { get; set; }
     }
 }

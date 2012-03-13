@@ -10,13 +10,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Operation;
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
                 lblDeviceName.Text = SessionManager.Instance.CurrentDevice.DeviceName;
             }
         }
         protected void lbtnDLPOptimization_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentOperation = Operation.DlpOptimization;
+            SessionManager.Instance.CurrentOperation = EOperation.DlpOptimization;
             Response.Redirect("~/ProjectList.aspx");
         }
     }

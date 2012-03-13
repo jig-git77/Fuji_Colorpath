@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.ProfilerOption;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();            
         }
         #endregion
@@ -62,11 +62,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }
         public Project Project { get; set; }
-        public int CompnayId { get; set; }
+        public int CompanyId { get; set; }
         public Dictionary<int, string> SourceProfile { get; set; }
+        public int ProjectId { get; set; }
         #endregion
-
-
-      
     }
 }
