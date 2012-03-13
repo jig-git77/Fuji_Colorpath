@@ -137,12 +137,13 @@
                         <AjaxSettings>
                             <telerik:AjaxSetting AjaxControlID="cmbCompany">
                                 <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                                    <telerik:AjaxUpdatedControl ControlID="cmbBranch"  LoadingPanelID="RadAjaxLoadingPanel1" />
+                                    <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
                                 </UpdatedControls>
                             </telerik:AjaxSetting>
                             <telerik:AjaxSetting AjaxControlID="cmbBranch">
                                 <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                                    <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
                                 </UpdatedControls>
                             </telerik:AjaxSetting>
                             <telerik:AjaxSetting AjaxControlID="rgDeviceList">
@@ -152,7 +153,7 @@
                             </telerik:AjaxSetting>
                         </AjaxSettings>
                     </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Vista" />
                     <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                         AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                         EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
@@ -162,8 +163,17 @@
                         <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                         <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyDesc">
                             <Columns>
-                                <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText=""
-                                    UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px">
+                                <telerik:GridTemplateColumn 
+                                    DataField="DeviceName" 
+                                    AllowFiltering="true" 
+                                    HeaderText=""
+                                    UniqueName="DeviceName" 
+                                    SortExpression="DeviceName" 
+                                    FilterControlWidth="200px"
+                                    AutoPostBackOnFilter="true"
+                                    CurrentFilterFunction="Contains"
+                                    ShowFilterIcon="false"
+                                    >
                                     <ItemTemplate>
                                         <div class="product_list">
                                             <ul>
