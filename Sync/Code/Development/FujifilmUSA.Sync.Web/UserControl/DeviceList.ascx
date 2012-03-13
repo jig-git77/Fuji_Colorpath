@@ -167,7 +167,7 @@
                                             <ul>
                                                 <li>
                                                     <div class="left">
-                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceName") %>'
+                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
                                                             CommandName="Select">
                                                                                     <span><%# Eval("DeviceName")%></span>
                                                         </asp:LinkButton>

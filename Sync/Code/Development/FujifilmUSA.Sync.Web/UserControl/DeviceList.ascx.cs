@@ -62,15 +62,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.CommandName == "Select")
             {
-                string arg = e.CommandArgument as string;
-                SessionManager.Instance.CurrentDevice = new Device() { DeviceName = "TestDevice" };
+                var deviceId = Convert.ToInt32(e.CommandArgument);
+                SessionManager.Instance.CurrentDevice = DeviceListById.Where(x => x.DeviceId == deviceId).SingleOrDefault();
                 Response.Redirect("OperationSelection.aspx");
             }
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             BindDeviceList();
-            rgDeviceList.DataSource = DeviceListById;
+            //rgDeviceList.DataSource = DeviceListById;
         }
         #endregion
 

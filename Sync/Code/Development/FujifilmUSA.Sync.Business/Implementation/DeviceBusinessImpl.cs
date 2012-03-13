@@ -18,11 +18,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetDeviceList]", new object[] { companyId, branchId });
             if (dsDeviceList != null && dsDeviceList.Tables.Count > 0 && dsDeviceList.Tables[0].Rows.Count > 0)
             {
+                DeviceFamily objDeviceFamily = new DeviceFamily();
+
                 objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
-                    Select(x => new Device()
+                Select(x => new Device()
                     {
                         DeviceId = DataReader.ReadInt(x, "DeviceID"),
                         DeviceName = DataReader.ReadString(x, "DeviceName"),
+                        DeviceFamily = new DeviceFamily()
+                        {
+                            DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
+                            DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
+                        }
                     }).ToList();
             }
             return objDeviceList;
