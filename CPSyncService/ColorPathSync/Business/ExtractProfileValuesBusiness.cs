@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ColorPathSync.Business
 {
-    internal partial class ProfilerBusiness
+    public partial class ProfilerBusiness
     {
         public static ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request)
         {

@@ -21,6 +21,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +71,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CreateDestinationAndDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
     <Compile Include="Business\ExtractProfileValuesBusiness.cs" />
@@ -80,6 +82,8 @@
     <Compile Include="DataContracts\ProfileExtractType.cs" />
     <Compile Include="ICPSync.cs" />
     <Compile Include="MessageContracts\BaseResponse.cs" />
+    <Compile Include="MessageContracts\CreateDestinationAndDeviceLinkProfileRequest.cs" />
+    <Compile Include="MessageContracts\CreateDestinationAndDeviceLinkProfileResponse.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileResponse.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesRequest.cs" />

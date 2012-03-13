@@ -4,7 +4,7 @@ using System;
 
 namespace ColorPathSync.Business
 {
-    internal partial class ProfilerBusiness
+    public partial class ProfilerBusiness
     {
         public static CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {

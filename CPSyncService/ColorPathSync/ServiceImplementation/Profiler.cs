@@ -25,5 +25,10 @@ namespace ColorPathSync.ServiceImplementation
         {
             return ProfilerBusiness.ExtractProfileValues(request);
         }
+
+        public CreateDestinationAndDeviceLinkProfileResponse CreateDestinationAndDeviceLinkProfile(CreateDestinationAndDeviceLinkProfileRequest request)
+        {
+            return ProfilerBusiness.CreateDestinationAndDeviceLinkProfile(request);
+        }
     }
 }
