@@ -188,6 +188,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
         public int CompanyId { get; set; }
         public Dictionary<int, string> SourceProfile { get; set; }
+        public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
         public int ProjectId { get; set; }
         #endregion
 

@@ -45,7 +45,7 @@
                                             <span>Selected Presets:</span>
                                         </td>
                                         <td style="width: 450px">
-                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" Width="200px" CssClass="select">
+                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" Width="200px" CssClass="select" DataValueField="Key" DataTextField="Value">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

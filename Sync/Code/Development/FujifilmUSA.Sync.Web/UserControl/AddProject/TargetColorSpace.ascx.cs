@@ -24,22 +24,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                BindProfileSource();
-            }
+            BindProfileSource();
+           
         }
         #endregion
-
 
         #region Control Events
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentProject.SourceProfile = new FujifilmUSA.Sync.Entity.SourceProfile
+            {
+               SourceProfileId= (short)Convert.ToInt32(cmbSourceProfile.SelectedValue),
+               ProfileDesc=txtProfileDescription.Text
+
+            };
+
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();            
         }
         #endregion
-
 
         #region Method
 
@@ -48,13 +51,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterProjectList.GetSourceProfile();
             cmbSourceProfile.DataSource = SourceProfile;
             cmbSourceProfile.DataBind();
-            cmbSourceProfile.Items.Insert(0, new ListItem("-- Select --", "0"));
-
-            //var dic = new Dictionary<int,string> {{1, "Gracol v02"}, {2, "Swop"}};
-            //cmbSourceProfile.DataSource = dic;
-            //cmbSourceProfile.DataTextField = "Value";
-            //cmbSourceProfile.DataValueField = "Key";
-            //cmbSourceProfile.DataBind();
         }
 
         #endregion
@@ -64,6 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
         public int CompanyId { get; set; }
         public Dictionary<int, string> SourceProfile { get; set; }
+        public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
         public int ProjectId { get; set; }
         #endregion
     }

@@ -26,7 +26,7 @@
                                 <span>Source Profile:</span>
                             </td>
                             <td style="width: 450px">
-                                <asp:DropDownList ID="cmbSourceProfile" runat="server" Width="200px" CssClass="select">
+                                <asp:DropDownList ID="cmbSourceProfile" runat="server" Width="200px" CssClass="select" DataValueField="Key" DataTextField="Value">
                                 </asp:DropDownList>
                             </td>
                         </tr>

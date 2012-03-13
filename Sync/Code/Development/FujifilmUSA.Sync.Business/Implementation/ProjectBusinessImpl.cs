@@ -99,13 +99,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (dsSourceList != null && dsSourceList.Tables.Count > 0)
             {
                 dstSourceList = (dsSourceList.Tables[0].AsEnumerable().Select(
-                    branch => new
+                    Source => new
                     {
-                        Value = DataReader.ReadInt(branch, "SourceProfileID"),
-                        Text = DataReader.ReadString(branch, "ProfileName")
-                    })).ToDictionary(branch => branch.Value, branch => branch.Text);
+                        Value = DataReader.ReadInt(Source, "SourceProfileID"),
+                        Text = DataReader.ReadString(Source, "ProfileName")
+                    })).ToDictionary(Source => Source.Value, Source => Source.Text);
             }
             return dstSourceList;
+        }
+
+        public Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset()
+        {
+            var dstPresetList = new Dictionary<int, string>();
+            var dsPresetList = DataAccessFactory.Instance.GetDsResult("[uspGetDeviceFamilyProfilerOption]",
+                                                                    new object[] { });
+            if (dsPresetList != null && dsPresetList.Tables.Count > 0)
+            {
+                dstPresetList = (dsPresetList.Tables[0].AsEnumerable().Select(
+                    Preset => new
+                    {
+                        Value = DataReader.ReadInt(Preset, "DeviceFamilyProfilerOptionID"),
+                        Text = DataReader.ReadString(Preset, "ProfilerOptionsDesc")
+                    })).ToDictionary(Preset => Preset.Value, Preset => Preset.Text);
+            }
+            return dstPresetList;
         }
 
         #endregion

@@ -13,5 +13,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int DeleteProject(int projectId);
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
         Dictionary<int, string> GetSourceProfile();
+        Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset();
     }
 }

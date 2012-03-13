@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Project Project { get; set; }
         int CompanyId { get; set; }
         Dictionary<int, string> SourceProfile{ get; set;}
+        Dictionary<int, string> ProfilerOptionsPreset { get; set; }
         int ProjectId { get; set; }
     }
 }

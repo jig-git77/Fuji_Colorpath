@@ -36,5 +36,11 @@ namespace FujifilmUSA.Sync.Presenter
             var task = BusinessFactory<IProjectBusiness>.CreateObject();
             _viewProjectList.SourceProfile = task.GetSourceProfile();
         }
+
+        public void GetDeviceFamilyProfilerOptionPreset()
+        {
+            var task = BusinessFactory<IProjectBusiness>.CreateObject();
+            _viewProjectList.SourceProfile = task.GetDeviceFamilyProfilerOptionPreset();
+        }
     }
 }
