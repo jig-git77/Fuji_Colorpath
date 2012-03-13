@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Data;
+
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
@@ -49,6 +51,37 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return project;
         }
+
+        public List<Project> GetProjectsByDeviceId(int deviceId)
+        {
+            var objProjectList = new List<Project>();
+            var dsProjectList = DataAccessFactory.Instance.GetDsResult("[uspProjectByDeviceID]", new object[] { deviceId });
+            if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+            {
+                objProjectList = dsProjectList.Tables[0].AsEnumerable().
+                    Select(x => new Project()
+                    {
+                        ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                        ProjectName = DataReader.ReadString(x, "ProjectName"),
+                        DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
+                        IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                        SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                        CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                        PrintCondition = new PrintCondition() { Media = DataReader.ReadString(x, "Media"), Colorant = DataReader.ReadString(x, "Colorant"), RipSettings = DataReader.ReadString(x, "RipSettings") },
+                        Status = (OptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus") 
+                    }).ToList();
+            }
+            return objProjectList;
+        }
+
+        public int DeleteProject(int projectId)
+        {
+            int returnValue = 0;
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[uspDeleteProject]",
+                                                     new object[] { projectId });
+            return returnValue;
+        }
+
 
         #endregion
     }

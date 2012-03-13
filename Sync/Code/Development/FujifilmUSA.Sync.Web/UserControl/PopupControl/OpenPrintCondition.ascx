@@ -18,7 +18,7 @@
             </div>--%>
             <div style="padding: 5px;" id="cotainer">
                 <div class="OpenPrintCondition">
-        <table>
+        <table width="650px">
             <tr>
                 <td>
                     <div>

@@ -5,10 +5,14 @@ using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
 
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Presenter;
+
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProjectList : System.Web.UI.UserControl
+    public partial class ProjectList : System.Web.UI.UserControl, IViewProjectList
     {
+        private PresenterProjectList _presenterProjectList;
         #region "Declaration"
         public string ProjectList_DeleteProject_Confirmation
         {
@@ -23,16 +27,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected override void OnInit(EventArgs e)
         {
+            _presenterProjectList = new PresenterProjectList(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentDevice.DeviceId = 1;
             if (!IsPostBack)
             {
                 BindProject();
             }
         }
         #endregion
-
 
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
@@ -41,63 +46,66 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
+
+        //Grid Events
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
             if (e.CommandName == "Select")
             {
                 string arg = e.CommandArgument as string;
             }
-            if (e.CommandName == "Delete")
+            if (e.CommandName == "Delete" && e.CommandArgument != null)
             {
-                string arg = e.CommandArgument as string;
+                DeleteProject(int.Parse(e.CommandArgument as string));
             }
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            rgProjectList.DataSource = GetProjectList();
+            GetSourceProfiles();
+            GetProjectList();
+            rgProjectList.DataSource = Projects;
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
-            var project = e.Item.DataItem as MockProject;
+            var project = e.Item.DataItem as Entity.Project;
             if (e.Item.ItemType == GridItemType.FilteringItem)
             {
                 //if (e.Item.FindControl("RadComboBoxStatus") != null)
                 //    BindSearchSyncRunStatus(e.Item.FindControl("RadComboBoxStatus") as RadComboBox);
-                //if (e.Item.FindControl("RadComboBoxPrintStandard") != null)
+                //if (!Page.IsPostBack && e.Item.FindControl("RadComboBoxPrintStandard") != null)
                 //    BindSearchPrintStandardType(e.Item.FindControl("RadComboBoxPrintStandard") as RadComboBox);
             }
+
             if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
             {
                 var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
                 var imgStatus = e.Item.FindControl("imgStatus") as Image;
                 if (imgStatus != null)
                 {
-                    switch (project.ProjectStatus)
+                    switch (project.Status)
                     {
-                        case 1:
+                        case OptimizeRunStatus.Open:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectName + "')");
-                            //                                btnSelect.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/PrintCondition.aspx?ModelControlId=1&ProjectName=" + project.ProjectName) + "')");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                            //imgStatus.ToolTip = ECPSyncRunStatus.Open.ToString();
-                            //imgStatus.AlternateText = ECPSyncRunStatus.Open.ToString();
+                            imgStatus.ToolTip = OptimizeRunStatus.Open.ToString();
+                            imgStatus.AlternateText = OptimizeRunStatus.Open.ToString();
                             break;
-                        case 3:
+                        case OptimizeRunStatus.Closed:
+                            if (btnSelect != null)
+                                btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectName + "')");
+                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                            imgStatus.ToolTip = OptimizeRunStatus.Closed.ToString();
+                            imgStatus.AlternateText = OptimizeRunStatus.Closed.ToString();
+                            break;
+                        case OptimizeRunStatus.Certify:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return false;");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                            //imgStatus.ToolTip = ECPSyncRunStatus.Certify.ToString();
-                            //imgStatus.AlternateText = ECPSyncRunStatus.Certify.ToString();
+                            imgStatus.ToolTip = OptimizeRunStatus.Certify.ToString();
+                            imgStatus.AlternateText = OptimizeRunStatus.Certify.ToString();
                             break;
-                        case 2:
-                            if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectName + "')");
-                            //    btnSelect.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/PrintCondition.aspx?ModelControlId=2&ProjectName=" + project.ProjectName) + "')");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                            //imgStatus.ToolTip = ECPSyncRunStatus.Closed.ToString();
-                            //imgStatus.AlternateText = ECPSyncRunStatus.Closed.ToString();
-                            break;
-                        case 4:
+                        case OptimizeRunStatus.NotUsed:
                             if (btnSelect != null)
                                 btnSelect.Attributes.Add("onclick", "javascript: return false;");
                             imgStatus.ImageUrl = ResolveUrl("../Images/no_image.png");
@@ -105,127 +113,96 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
                 var lblStandard = e.Item.FindControl("lblStandard") as Label;
-                if (lblStandard != null)
-                    lblStandard.Text = project.PrintStandardType.ToString();
+                if (lblStandard != null && SourceProfile.ContainsKey(project.SourceProfileId))
+                    lblStandard.Text = SourceProfile[project.SourceProfileId];
             }
+        }
+  
+        //Print Standard Rad Combobox event     
+        protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
+        {
+            RadComboBox combo = sender as RadComboBox;
+            GetSourceProfiles();
+            BindSearchPrintStandardType(combo);
+            combo.SelectedValue = hdSelectedSourceProfileId.Value.ToString();
+        }
+        protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            hdSelectedSourceProfileId.Value = e.Value;
+            //rgProjectList.MasterTableView.FilterExpression = "([SourceProfileId] = '" + e.Value + "')"; ;
+            //rgProjectList.MasterTableView.Rebind();
         }
         #endregion
 
         #region Method
-        private void BindSearchSyncRunStatus(RadComboBox SyncRunStatus)
+
+        //private void BindSearchSyncRunStatus(RadComboBox SyncRunStatus)
+        //{
+        //    //Dictionary<int, string> dic = Utilities.GetEnumDropdown<ECPSyncRunStatus>();
+        //    //SyncRunStatus.DataSource = dic;
+        //    //SyncRunStatus.DataTextField = "Value";
+        //    //SyncRunStatus.DataValueField = "Key";
+        //    //SyncRunStatus.DataBind();
+        //}
+        private void GetSourceProfiles()
         {
-            //Dictionary<int, string> dic = Utilities.GetEnumDropdown<ECPSyncRunStatus>();
-            //SyncRunStatus.DataSource = dic;
-            //SyncRunStatus.DataTextField = "Value";
-            //SyncRunStatus.DataValueField = "Key";
-            //SyncRunStatus.DataBind();
+            CompnayId = 1;
+            SourceProfile = new Dictionary<int, string>();
+            _presenterProjectList.GetSourceProfileByCompany();
         }
         private void BindSearchPrintStandardType(RadComboBox cmbSearchPrintStandardType)
         {
-            //cmbSearchPrintStandardType.DataSource = Utilities.GetEnumDropdown<EPrintStandardType>();
-            //cmbSearchPrintStandardType.DataTextField = "Value";
-            //cmbSearchPrintStandardType.DataValueField = "Key";
-            //cmbSearchPrintStandardType.DataBind();
+            foreach (var profile in SourceProfile)
+            {
+                cmbSearchPrintStandardType.Items.Add(new RadComboBoxItem(profile.Value.ToString(), profile.Key.ToString()));
+            }
         }
-        protected DateTime? CreatedDateDate(GridItem item)
+        protected DateTime? FillterCreatedDateDate(GridItem item)
         {
-            if (item.OwnerTableView.GetColumn("CreatedDate").CurrentFilterValue == string.Empty)
+            if (item.OwnerTableView.GetColumn("CreateDate").CurrentFilterValue == string.Empty)
             {
                 return new DateTime?();
             }
             else
             {
-                var dateValue = item.OwnerTableView.GetColumn("CreatedDate").CurrentFilterValue.Split(' ')[0];
+                var dateValue = item.OwnerTableView.GetColumn("CreateDate").CurrentFilterValue.Split(' ')[0];
                 return DateTime.Parse(dateValue);
             }
         }
+        
         private void BindProject()
         {
-            List<MockProject> lst = new List<MockProject>();
-            lst = GetProjectList();
-            rgProjectList.DataSource = lst;
+            GetSourceProfiles();
+            GetProjectList();
+            rgProjectList.DataSource = Projects;
             rgProjectList.DataBind();
+
         }
-        #endregion
-
-        #region Error Handling Method
-        //public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
-        //{
-        //    ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
-        //}
-        #endregion
-
-        private List<MockProject> GetProjectList()
+        private void GetProjectList()
         {
-            List<MockProject> projectList = new List<MockProject>();
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-17 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-18 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-30 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-30 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-30 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-30 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 78, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "OptimizeXeroxDlpCustom OptimizeXeroxDlpCustom", Media = "Media 1", Colorant = "Colorant 1", CreatedDate = Convert.ToDateTime("2012-01-16 17:12:23.050"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 3 });
-            projectList.Add(new MockProject() { ProjectId = 79, ProjectStatus = 3, PrintStandardType = "PSO_12647_2", ProjectName = "Edit Testing", Media = "Media 2", Colorant = "Colorant 2", CreatedDate = Convert.ToDateTime("2012-01-30 10:52:04.170"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 80, ProjectStatus = 2, PrintStandardType = "SWOP_3", ProjectName = "Edit Test2", Media = "Media 3", Colorant = "Colorant 3", CreatedDate = Convert.ToDateTime("2012-01-30 12:49:18.577"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 81, ProjectStatus = 4, PrintStandardType = "SWOP_5", ProjectName = "EditProjectTest", Media = "Media 4", Colorant = "Colorant 4", CreatedDate = Convert.ToDateTime("2012-02-01 12:03:51.460"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 17, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
-            projectList.Add(new MockProject() { ProjectId = 82, ProjectStatus = 1, PrintStandardType = "GRACoL", ProjectName = "tREDST", Media = "Media 5", Colorant = "Colorant 5", CreatedDate = Convert.ToDateTime("2012-02-23 13:45:59.590"), SyncDeviceId = 6, ΔEType = 1, DeviceLinkProfileId = 4, IsUsed = true, UseDLP = true, ProfileOptionId = 1 });
+            Project = new Entity.Project();
+            Projects = new List<Project>();
+            Project.DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            _presenterProjectList.GetProjectListByDeviceId();
+        }
 
-            return projectList;
+        private void DeleteProject(int projectId)
+        {
+            Project = new Entity.Project();
+            Project.ProjectId = projectId;
+            _presenterProjectList.DeleteProject();
         }
 
 
-        //*******************************************************************//
-        //#region IViewProjectList Members
-        //public List<Project> Projects { get; set;}
-        //#endregion
+        #endregion
 
-        //#region IViewBaseProject Members
-        //public Project Project{ get; set;}
-        //#endregion
+        #region IViewProjectList Members
+        public List<Project> Projects { get; set; }
+        public Project Project { get; set; }
+        public int CompnayId { get; set; }
+        public Dictionary<int, string> SourceProfile { get; set; }
+        #endregion
+
     }
 
-    public class MockProject
-    {
-        public int ProjectId { get; set; }
-        public string ProjectName { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public int SyncDeviceId { get; set; }
-        public int ΔEType { get; set; }
-        public int DeviceLinkProfileId { get; set; }
-        public Boolean IsUsed { get; set; }
-        public Boolean UseDLP { get; set; }
-        public int ReTargetId { get; set; }
-
-        public int ProfileOptionId { get; set; }
-        //public int ProjectTypeId { get; set; }
-        //public int OutputTypeId { get; set; }
-
-        public DateTime StartDate { get; set; }
-        public int ReferenceChartTypeId { get; set; }
-
-        public string Media { get; set; }
-        public string Colorant { get; set; }
-
-        public int ProjectStatus { get; set; }
-        public string PrintStandardType { get; set; }
-    }
 }

@@ -14,7 +14,7 @@
         <ucLogin:Login ID="ucLogin1" runat="server" />
     </div>
     <div id="footer">
-        <img alt="" src="Images/powerby_logo.png">
+        <img alt="#" src="Images/powerby_logo.png" />
     </div>
     </form>
 </body>

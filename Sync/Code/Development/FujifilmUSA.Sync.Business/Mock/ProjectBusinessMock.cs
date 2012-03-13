@@ -16,6 +16,14 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Project();
         }
 
+        public List<Project> GetProjectsByDeviceId(int deviceId)
+        {
+            return new List<Project>();
+        }
+        public int DeleteProject(int projectId)
+        {
+            return 0;
+        }
         #endregion
     }
 }

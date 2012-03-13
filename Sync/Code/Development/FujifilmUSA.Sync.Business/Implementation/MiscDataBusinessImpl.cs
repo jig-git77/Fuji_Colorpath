@@ -44,6 +44,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return dstCompanyList;
         }
+        public Dictionary<int, string> SourceProfileByCompany(int companyId)
+        {
+            var dsSourceProfileList = new Dictionary<int, string>();
+            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[uspGetSourceProfileByCompany]", new object[] { companyId });
+            if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
+            {
+                dsSourceProfileList = (dsCompanyList.Tables[0].AsEnumerable().Select(
+                    company => new
+                    {
+                        Value = DataReader.ReadInt(company, "SourceProfileID"),
+                        Text = DataReader.ReadString(company, "ProfileName")
+                    })).ToDictionary(company => company.Value, company => company.Text);
+            }
+            return dsSourceProfileList;
+        }
         #endregion
     }
 }

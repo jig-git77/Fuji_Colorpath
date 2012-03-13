@@ -12,10 +12,10 @@ namespace FujifilmUSA.Sync.Entity
         public DateTime CreateDate { get; set; }
         public int? CurrDlpId { get; set; }
         public bool IsUsed { get; set; }
-        public List<MeasurementSetting> MeasurementSettings { get; set; }
+        public MeasurementSetting MeasurementSetting { get; set; }
         public List<OptimizeRun> OptimizeRuns { get; set; }
-        public List<PrintCondition> PrintConditions { get; set; }
-        public List<ProjectOption> ProjectOptions { get; set; }
+        public PrintCondition PrintCondition { get; set; }
+        public ProjectOption ProjectOption { get; set; }
         //public SourceProfile SourceProfile { get; set; }
         //public Device Device { get; set; }
         public bool IsNewlyCreated { set; get; }

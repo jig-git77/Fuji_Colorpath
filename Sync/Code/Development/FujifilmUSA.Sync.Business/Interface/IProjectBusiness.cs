@@ -8,6 +8,10 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IProjectBusiness : ITaskBase
     {
+        
         Project GetProjectDetail(int projectId);
+        List<Project> GetProjectsByDeviceId(int deviceId);
+        int DeleteProject(int projectId);
+
     }
 }

@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using FujifilmUSA.Sync.Common;
+
+namespace FujifilmUSA.Sync.Web.UserControl
+{
+    public partial class Settings : System.Web.UI.UserControl
+    {
+
+        #region Page Events
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            SessionManager.CheckLogin();
+        }
+
+        #endregion
+
+        #region Control Events
+
+        protected void lnkMeasurementDevice_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("~/MeasurementDeviceList.aspx");
+        }
+        protected void lnkSourceProfile_Click(object sender, EventArgs e)
+        {
+            //Response.Redirect("~/SourceProfileList.aspx");
+        }
+
+        #endregion
+
+     
+    }
+}
