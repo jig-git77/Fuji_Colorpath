@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IMiscDataBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int companyId)
+        public Dictionary<int, string> BranchList(int companyId)
         {
             var dstBranchList = new Dictionary<int, string>();
             var dsBranchList = DataAccessFactory.Instance.GetDsResult("[uspGetCompany]",
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstBranchList;
         }
 
-        public Dictionary<int, string> GetCompanyList()
+        public Dictionary<int, string> CompanyList()
         {
             var dstCompanyList = new Dictionary<int, string>();
             var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[uspGetCompany]", new object[] { 0 });

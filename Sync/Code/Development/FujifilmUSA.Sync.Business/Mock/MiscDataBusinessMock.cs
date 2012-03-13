@@ -7,12 +7,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMiscDataBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int companyId)
+        public Dictionary<int, string> BranchList(int companyId)
         {
             return new Dictionary<int, string>();
         }
 
-        public Dictionary<int, string> GetCompanyList()
+        public Dictionary<int, string> CompanyList()
         {
             return new Dictionary<int, string>();
         }

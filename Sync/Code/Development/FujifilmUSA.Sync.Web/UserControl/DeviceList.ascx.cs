@@ -13,16 +13,16 @@ using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DeviceList : System.Web.UI.UserControl, IViewSyncDevice
+    public partial class DeviceList : System.Web.UI.UserControl, IViewDevice
     {
         #region "Declaration"
-        private PresenterSyncDevice _presentersyncdevice;
+        private PresenterDevice _presenterdevice;
         #endregion
 
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
-            _presentersyncdevice = new PresenterSyncDevice(this);
+            _presenterdevice = new PresenterDevice(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +31,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Home;
                 BindCompanyDropDown();
-                //BindDeviceList();
             }
         }
         #endregion
@@ -48,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
                 cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-            rgDeviceList.Visible = cmbCompany.SelectedIndex != 0;
+                rgDeviceList.Visible = cmbCompany.SelectedIndex != 0;
 
         }
         protected void cmbBranch_SelectedIndexChanged1(object sender, EventArgs e)
@@ -70,106 +69,66 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            rgDeviceList.DataSource = GetList();
+            BindDeviceList();
+            rgDeviceList.DataSource = DeviceListById;
         }
         #endregion
 
         #region Method
         private void BindCompanyDropDown()
         {
-            _presentersyncdevice.GetCompanyList();
-            cmbCompany.DataSource = GetCompanyList;
+            _presenterdevice.CompanyList();
+            cmbCompany.DataSource = CompanyList;
             cmbCompany.DataBind();
             cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
         }
         private void BindBranchDropDown(int companyId)
         {
             this.CompanyId = companyId;
-            _presentersyncdevice.GetBranchList();
-            cmbBranch.DataSource = GetBranchList;
+            _presenterdevice.BranchList();
+            cmbBranch.DataSource = BranchList;
             cmbBranch.DataBind();
             cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
         }
 
         #endregion
 
-        #region Error Handling Method
-        //public void ErrorOccured(object sender, Business.Interface.ErrorArgs e)
-        //{
-        //    ucStatusbar1.DisplayMessage(e.ErrorMessage, false);
-        //}
-        #endregion
-
         #region Method
         private void BindDeviceList()
         {
-            if (cmbCompany.SelectedIndex > 0)
+            if (cmbBranch.SelectedIndex > 0 && cmbCompany.SelectedIndex > 0)
             {
-                //this.TaskeroUserId = SessionManager.Instance.CurrentUser.UserId;
-                //this.RoleId = SessionManager.Instance.CurrentUser.RoleId;
                 this.CompanyId = 0;
                 this.BranchId = 0;
-                //if (SessionManager.Instance.CurrentUser.RoleId == 1)
-                //{
-
-                //    this.CompanyId = int.Parse(cmbCompany.SelectedValue);
-                //    this.BranchId = int.Parse(cmbBranch.SelectedValue);
-                //}
 
                 this.CompanyId = int.Parse(cmbCompany.SelectedValue);
                 this.BranchId = int.Parse(cmbBranch.SelectedValue);
 
-                _presentersyncdevice.GetSyncDeviceListByUserId();
-                rgDeviceList.DataSource = GetSyncDeviceListByUserId;
-
-                //SessionManager.Instance.DictionaryList = (GetSyncDeviceListByUserId.Select(
-                //    deviceList => new
-                //    {
-                //        Value = deviceList.SyncDeviceId,
-                //        Text = deviceList.DeviceName
-                //    })).ToDictionary(deviceList => deviceList.Value, deviceList => deviceList.Text);
-
+                _presenterdevice.DeviceListById();
+                rgDeviceList.DataSource = DeviceListById;
             }
+           
         }
 
-        private List<MockDeviceName> GetList()
-        {
-            List<MockDeviceName> deviceList = new List<MockDeviceName>();
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori LS 40 1" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 2" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 3" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 4" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 5" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 6" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Komori XL 40 7" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Heidelberg SM40 1" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Heidelberg SM40 2" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Heidelberg SM40 3" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Heidelberg SM40 4" });
-            deviceList.Add(new MockDeviceName() { DeviceName = "Heidelberg SM40 5" });
-            return deviceList;
-        }
+       
 
         #endregion
 
-
-        #region IViewSyncDevice Members
+        #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
         public int CompanyId { get; set; }
         public int BranchId { get; set; }
-        public Dictionary<int, string> GetBranchList { get; set; }
-        public Dictionary<int, string> GetCompanyList { get; set; }
-        public List<Device> GetSyncDeviceListByUserId { get; set; }
+        public Dictionary<int, string> BranchList { get; set; }
+        public Dictionary<int, string> CompanyList { get; set; }
+        public List<Device> DeviceListById { get; set; }
         #endregion
-
-
 
     }
 
     public class MockDeviceName
     {
-        public string DeviceName { get; set; }
+        //public string DeviceName { get; set; }
     }
 
 }

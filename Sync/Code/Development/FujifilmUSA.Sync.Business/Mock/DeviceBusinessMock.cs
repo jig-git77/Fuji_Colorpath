@@ -4,11 +4,11 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
-    public class SyncDeviceBusinessMock : ISyncDeviceBusiness
+    public class DeviceBusinessMock : IDeviceBusiness
     {
         #region ISyncDeviceBusiness Members
 
-        public List<Device> GetSyncDevicesByUserId(int taskeroUserId, int roleId, int companyId, int branchId)
+        public List<Device> DeviceListById(int companyId, int branchId)
         {
             return new List<Device>();
         }

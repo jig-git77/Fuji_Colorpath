@@ -4,7 +4,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IMiscDataBusiness : ITaskBase
     {
-        Dictionary<int, string> GetBranchList(int companyId);
-        Dictionary<int, string> GetCompanyList();
+        Dictionary<int, string> BranchList(int companyId);
+        Dictionary<int, string> CompanyList();
     }
 }
