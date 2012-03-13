@@ -126,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -149,20 +152,20 @@
     <None Include="Service References\ProfilerService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler1.wsdl" />
-    <None Include="Service References\ProfilerService\Profiler5.xsd">
+    <None Include="Service References\ProfilerService\Profiler.wsdl" />
+    <None Include="Service References\ProfilerService\Profiler.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler51.xsd">
+    <None Include="Service References\ProfilerService\Profiler1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler52.xsd">
+    <None Include="Service References\ProfilerService\Profiler2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler53.xsd">
+    <None Include="Service References\ProfilerService\Profiler3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProfilerService\Profiler54.xsd">
+    <None Include="Service References\ProfilerService\Profiler4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ProfilerService\Reference.svcmap">
@@ -171,7 +174,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler1.disco" />
+    <None Include="Service References\ProfilerService\Profiler.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

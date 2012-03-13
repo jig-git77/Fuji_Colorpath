@@ -20,16 +20,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/ColorPathSync/Profiler.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Profiler5.xsd" MetadataType="Schema" ID="3f3c7083-1d0a-4606-9838-a8d576d47a10" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd0" />
-    <MetadataFile FileName="Profiler51.xsd" MetadataType="Schema" ID="814557ae-5bc0-49a7-ad50-8fdb546da674" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd4" />
-    <MetadataFile FileName="Profiler1.disco" MetadataType="Disco" ID="eddb9480-7d05-4f22-bff6-64c54ddf0ebd" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?disco" />
-    <MetadataFile FileName="Profiler1.wsdl" MetadataType="Wsdl" ID="3d36a4c8-0508-4a19-8b1a-76090adbdc09" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?wsdl" />
-    <MetadataFile FileName="Profiler52.xsd" MetadataType="Schema" ID="aaf9fc77-bb3c-4702-9126-a1b827394034" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd1" />
-    <MetadataFile FileName="Profiler53.xsd" MetadataType="Schema" ID="dd5aa3de-0b91-4d2c-8cf3-00775b5b5eef" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd2" />
-    <MetadataFile FileName="Profiler54.xsd" MetadataType="Schema" ID="0a302d5f-6ca4-404b-b268-bfc185b5f361" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D/Profiler.svc?xsd=xsd3" />
+    <MetadataFile FileName="Profiler.xsd" MetadataType="Schema" ID="b4ee09af-c6f7-42ea-bfaf-5ad25ca10873" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd2" />
+    <MetadataFile FileName="Profiler.wsdl" MetadataType="Wsdl" ID="a729c503-ef71-45d0-80bd-99d73565eba9" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?wsdl" />
+    <MetadataFile FileName="Profiler1.xsd" MetadataType="Schema" ID="057dfca7-84b8-4a82-8ae8-9adceffd0992" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd4" />
+    <MetadataFile FileName="Profiler2.xsd" MetadataType="Schema" ID="c2955f25-3dc2-46d8-b1c5-96f9f645a9c6" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd3" />
+    <MetadataFile FileName="Profiler3.xsd" MetadataType="Schema" ID="f1117a6e-3922-4c74-b456-59857f82a2ef" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd1" />
+    <MetadataFile FileName="Profiler4.xsd" MetadataType="Schema" ID="1ceb22f2-9f9b-4f4f-b359-e9f5bfa4f717" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd0" />
+    <MetadataFile FileName="Profiler.disco" MetadataType="Disco" ID="53333744-dee1-40bb-9aaf-ba5ced9824a6" SourceId="1" SourceUrl="http://localhost/ColorPathSync/Profiler.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

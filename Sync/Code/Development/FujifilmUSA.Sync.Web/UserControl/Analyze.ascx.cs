@@ -7,27 +7,34 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Analyze : System.Web.UI.UserControl 
+    public partial class Analyze : System.Web.UI.UserControl, IViewAnalyze
     {
         #region Variable Declarations
-        //private PresenterSyncRunAnalyze _presenterSyncRunAnalyze;
-        public string AddMeasurement_DeleteMeasurement_Confirmation
+        private PresenterAnalyze _presenterAnalyze;
+        public string AddMeasurementDeleteMeasurementConfirmation
         {
             get
             {
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-        public bool IsNewDLP
+
+        public bool IsNewDlp
         {
-            get { return Request.QueryString["ProjectName"] == null; }
+
+            get { return SessionManager.Instance.CurrentProject.IsNewlyCreated; }
         }
+
         #endregion
 
         #region Page Method
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            _presenterAnalyze = new PresenterAnalyze(this);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            //_presenterSyncRunAnalyze = new PresenterSyncRunAnalyze(this);
             header.InnerText = string.Format("New Print Condition - Analyze (No DLP)");
             lbtnDownloadAndSaveDLP.Text = "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>";
             if (Request.QueryString["ProjectName"] != null)
@@ -46,6 +53,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
         }
         #endregion
-    
+
     }
 }

@@ -20,20 +20,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             new object[] { projectId, status, startDateTime });
         }
 
-        public void CreateFirstDlp(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
         {
             var sourceProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
-            var request = new OptimizeDeviceLinkProfileRequest()
-            {
-                DCSData = new List<double>(),
-                PCSData = new List<double>(),
-            };
+            var request = new CreateDestinationAndDeviceLinkProfileRequest()
+                              {
+                                  PcsData = new List<double>(),
+                                  DcsData = new List<double>(),
+                                  SourceProfile = new IccProfile() { ProfileData = sourceProfile }
+                              };
 
             var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
-            request.PCSData = measurementDataResponse.PcsData;
-            request.DCSData = measurementDataResponse.DcsData;
+            request.PcsData = measurementDataResponse.PcsData;
+            request.DcsData = measurementDataResponse.DcsData;
 
-            request.SourceProfile = new IccProfile() { ProfileData = sourceProfile };
             //Add options and call profile service to generate project dlp
             //var profilerOptionDetail = BusinessFactory<IProfilerOptionDetailBusiness>().CreateObject());
             //var optionDetails = profilerOptionDetail.GetProfilerOptionDetails(profileOptionId, ProfileType.Optimization);
@@ -42,10 +42,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             //Add options and call profile service to generate optimize dlp
             using (var client = new ProfilerClient())
             {
-                request.Options = new List<Parameter>();
+                //request.Options = new List<Parameter>();
                 //optionDetails.ForEach(
                 //                option => request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value }));
-                var response = client.OptimizeDeviceLinkProfile(request);
+                var response = client.CreateDestinationAndDeviceLinkProfile(request);
                 //optimizeDlp.Data.Profile = response.OptimizedProfile.ProfileData;
             }
 

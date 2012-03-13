@@ -85,7 +85,7 @@
     <div class="formDevice">
         <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
-         <%--   <tr id="tr1" runat="server">
+            <%--   <tr id="tr1" runat="server">
                 <td>
                     <label>
                         Show Presses For:</label>
@@ -152,13 +152,15 @@
                             </telerik:AjaxSetting>
                         </AjaxSettings>
                     </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  />
+                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
                     <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                         AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                         EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
                         OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
+                        <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
+                        </ClientSettings>
                         <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                        <MasterTableView DataKeyNames="DeviceName">
+                        <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyDesc">
                             <Columns>
                                 <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText=""
                                     UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px">

@@ -4,7 +4,7 @@
 <%@ Register Src="~/UserControl/PopupControl/ConfirmSave.ascx" TagName="ConfirmSave" TagPrefix="uc" %>
 <script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
-        if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>'))
+        if (confirm('<%= AddMeasurementDeleteMeasurementConfirmation %>'))
             return true;
         else
             return false;
@@ -46,7 +46,7 @@
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
-        if ("<%= IsNewDLP %>" == "True") {
+        if ("<%= IsNewDlp %>" == "True") {
             var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
             InitializeTimer();
             oWnd.show();

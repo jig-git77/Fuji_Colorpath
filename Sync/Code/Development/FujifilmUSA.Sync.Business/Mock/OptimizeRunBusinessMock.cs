@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
-        public void CreateFirstDlp(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
         {
 
         }

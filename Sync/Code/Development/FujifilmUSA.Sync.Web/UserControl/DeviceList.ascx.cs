@@ -62,8 +62,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.CommandName == "Select")
             {
-                var deviceId = Convert.ToInt32(e.CommandArgument);
-                SessionManager.Instance.CurrentDevice = DeviceListById.Where(x => x.DeviceId == deviceId).SingleOrDefault();
+                SessionManager.Instance.CurrentDevice = new Device()
+                                                            {
+                                                                DeviceId = Convert.ToInt32(((GridDataItem) e.Item).GetDataKeyValue("DeviceId")),
+                                                                DeviceName = ((GridDataItem) e.Item).GetDataKeyValue("DeviceName").ToString(),
+                                                                DeviceFamily = new DeviceFamily()
+                                                                                   {
+                                                                                       DeviceFamilyDesc =
+                                                                                           ((GridDataItem) e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
+                                                                                   }
+                                                            };
                 Response.Redirect("OperationSelection.aspx");
             }
         }
