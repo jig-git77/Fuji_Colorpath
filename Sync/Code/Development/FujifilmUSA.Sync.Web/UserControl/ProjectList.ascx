@@ -14,12 +14,9 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectName) {
-        var msg = 'Current ' + projectName + ' is open and has been inactive for 2.5 days.</br> ' +
-                   ' Confirm which DLP is used in your workflow. </br> In order to continue optimizing ' +
-                   ' this DLP your workflow must be using ' + projectName + '.';
-        jQuery("span[id$='lblOpenPrintConditionMessage']").html(msg);
+    function ShowOpenPrintConditionWindow(projectId,projectName) {
         jQuery("input[id$='hdProjectName']").val(projectName);
+        jQuery("input[id$='hdProjectId']").val(projectId);
         var oWnd = $find("<%= OpenPrintConditionWindow.ClientID %>");
         oWnd.show();
         return false;

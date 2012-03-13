@@ -5,15 +5,6 @@
         &nbsp;</div>
     <div class="section_middle">
         <div class="combopart">
-            <%--  <div class="header">
-                <div class="content">
-                    <div style="float: left;" class="text">
-                        
-                    </div>
-                    <div class="clear">
-                    </div>
-                </div>
-            </div>--%>
             <div style="padding: 5px;" id="cotainer">
                 <div class="OpenPrintCondition">
                     <table>
@@ -40,15 +31,15 @@
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnDownLoadCurrentDLP" runat="server" CssClass="gray_bt">
+                                    <asp:LinkButton ID="lbtnDownLoadCurrentDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadCurrentDLP_Click">
                     <span>DownLoad Current DLP</span>
                                     </asp:LinkButton>
                                 </div>
-                                <div class="buttonleft">
+                                <%--<div class="buttonleft">
                                     <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt">
                 <span>View Last Analysis</span>
                                     </asp:LinkButton>
-                                </div>
+                                </div>--%>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseClosePrintConditionWindow(); return false;"
                                         CssClass="gray_bt">

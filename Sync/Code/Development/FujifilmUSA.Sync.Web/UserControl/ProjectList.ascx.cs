@@ -50,12 +50,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //Grid Events
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
-            if (e.CommandName == "Select")
-            {
-                ProjectId = Convert.ToInt32(e.CommandArgument);
-                _presenterProjectList.GetProjectDetail();
-                SessionManager.Instance.CurrentProject = Project;
-            }
             if (e.CommandName == "Delete" && e.CommandArgument != null)
             {
                 DeleteProject(Convert.ToInt32(e.CommandArgument));
@@ -70,14 +64,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
             var project = e.Item.DataItem as Entity.Project;
-            if (e.Item.ItemType == GridItemType.FilteringItem)
-            {
-                //if (e.Item.FindControl("RadComboBoxStatus") != null)
-                //    BindSearchSyncRunStatus(e.Item.FindControl("RadComboBoxStatus") as RadComboBox);
-                //if (!Page.IsPostBack && e.Item.FindControl("RadComboBoxPrintStandard") != null)
-                //    BindSearchPrintStandardType(e.Item.FindControl("RadComboBoxPrintStandard") as RadComboBox);
-            }
-
             if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
             {
                 var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
@@ -88,7 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         case EOptimizeRunStatus.Open:
                             if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectName + "')");
+                                btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
                             imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
                             imgStatus.ToolTip = EOptimizeRunStatus.Open.ToString();
                             imgStatus.AlternateText = EOptimizeRunStatus.Open.ToString();

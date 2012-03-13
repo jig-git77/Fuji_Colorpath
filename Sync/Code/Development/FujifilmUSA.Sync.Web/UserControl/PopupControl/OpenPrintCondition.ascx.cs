@@ -1,33 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class OpenPrintCondition : System.Web.UI.UserControl
+    public partial class OpenPrintCondition : System.Web.UI.UserControl, IViewOpenPrintCondition
     {
-        #region Declaration
-        #endregion
-
-        #region Page events
-        protected void Page_PreRender(object sender, EventArgs e)
+        private PresenterOpenPrintCondition _presenterOpenPrintCondition;
+        protected void Page_Init(object sender, EventArgs e)
         {
+            _presenterOpenPrintCondition = new PresenterOpenPrintCondition(this);
         }
-        #endregion
 
-        #region Control events
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            lblOpenPrintConditionMessage.Text =
+                string.Format(
+                    "Current {0} is open and has been inactive for 2.5 days.</br>Confirm which DLP is used in your workflow. </br> In order to continue optimizing this DLP your workflow must be using {1}",
+                    hdProjectName.Value, hdProjectName.Value);
+        }
+
         protected void lbtnContinue_Click(object sender, EventArgs e)
         {
+            ProjectId = Convert.ToInt32(hdProjectId.Value.Trim());
+            _presenterOpenPrintCondition.GetProjectDetail();
+            SessionManager.Instance.CurrentProject = Project;
             Response.RedirectPermanent("Analyze.aspx?ProjectName='" + hdProjectName.Value + "'");
         }
-        #endregion
 
-        #region "Methods"
+        #region IViewOpenPrintCondition Members
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
         #endregion
-        
     }
 }
