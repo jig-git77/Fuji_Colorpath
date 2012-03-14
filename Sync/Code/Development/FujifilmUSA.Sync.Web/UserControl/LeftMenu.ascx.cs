@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
                     ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
                     ctrlProjItem.ItemName = item.RunName;
-                    ctrlProjItem.CurrentSyncRun = item;
+                    ctrlProjItem.CurrentRun = item;
                     ph.Controls.Add(ctrlProjItem);
                 }
             }

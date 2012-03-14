@@ -1,79 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenuProjectItem : System.Web.UI.UserControl
     {
         #region Variable Declarations
-
-        //private PresenterLeftMenu _presenterLeftMenu = null;
         public ELeftMenuItemLevel ItemLevel { get; set; }
         public string ItemName { get; set; }
-        public OptimizeRun CurrentSyncRun { get; set; }
-        public bool IsLastRun
-        {
-            get { return (this.CurrentSyncRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId); }
-        }
-
+        public OptimizeRun CurrentRun { get; set; }
         #endregion
 
         #region "Page Events"
-        protected override void OnInit(EventArgs e)
-        {
-            //_presenterLeftMenu = new PresenterLeftMenu(this);
-        }
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            lnkSyncRunName.Text = ItemName;
+            lnkRunName.Text = ItemName;
 
             switch (ItemLevel)
             {
-                case ELeftMenuItemLevel.ProjectSetup:
-                    ulSyncSubMenu.Visible = false;
-                    break;
                 case ELeftMenuItemLevel.OptimizeRun:
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == CurrentSyncRun.OptimizeRunId)
+                    if (CurrentRun.Status == EOptimizeRunStatus.Closed)
                     {
                         lnkMeasurement.Visible = false;
-                        lnkAnalyse.Visible = false;
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-                        {
-                            lnkExport.Visible = false;
-                            lnkSyncRunName.Enabled = false;
-                        }
+                    }
+
+                    if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
+                    {
+                        ulSubMenu.Visible = true;
+                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                        lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
                     }
                     else
                     {
-                        //lnkExport.Enabled = CurrentSyncRun.HasProfile;
-                    }
-
-                    if (CurrentSyncRun.Status == EOptimizeRunStatus.Closed)
-                    {
-                        lnkMeasurement.Visible = false;
-                    }
-
-                    if (CurrentSyncRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentSyncRun.OptimizeRunId)
-                    {
-                        lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
-                        lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
-                        lnkExport.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
-                    }
-                    if (IsLastRun)
-                    {
-                        lnkAnalyse.Attributes.Add("onclick", "return CheckMeasurement();");
+                        ulSubMenu.Visible = false;
                     }
                     break;
             }
@@ -88,41 +51,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 var lnkItem = sender as LinkButton;
                 if (lnkItem != null)
                 {
-                    SessionManager.Instance.CurrentOptimizeRun = this.CurrentSyncRun;
+                    SessionManager.Instance.CurrentOptimizeRun = this.CurrentRun;
                     if (lnkItem.ID == "lnkMeasurement")
                     {
-                        Response.Redirect("AddMeasurement.aspx");
+                        Response.Redirect("Measurement.aspx");
                     }
                     else if (lnkItem.ID == "lnkAnalyse")
                     {
-                        Response.Redirect("SyncRunAnalyze.aspx");
+                        Response.Redirect("Analyze.aspx");
                     }
                     else if (lnkItem.ID == "lnkExport")
                     {
-                        Response.Redirect("SyncRunExport.aspx");
+                        Response.Redirect("Export.aspx");
                     }
                 }
             }
         }
 
-        protected void lnkSyncRunName_Click(object sender, EventArgs e)
+        protected void lnkRunName_Click(object sender, EventArgs e)
         {
             switch (ItemLevel)
             {
-                case ELeftMenuItemLevel.ProjectSetup:
-                    Response.Redirect("AddProject.aspx");
-                    break;
                 case ELeftMenuItemLevel.OptimizeRun:
-                    SessionManager.Instance.CurrentOptimizeRun = this.CurrentSyncRun;
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId == this.CurrentSyncRun.OptimizeRunId)
-                    {
-                        Response.Redirect("SyncRunExport.aspx");
-                    }
+                    SessionManager.Instance.CurrentOptimizeRun = this.CurrentRun;
                     Response.Redirect(
-                        CurrentSyncRun.Status == EOptimizeRunStatus.Open
-                            ? "AddMeasurement.aspx"
-                            : "SyncRunAnalyze.aspx");
-                    Response.Redirect("AddProject.aspx");
+                        CurrentRun.Status == EOptimizeRunStatus.Open
+                            ? "Measurement.aspx"
+                            : "Analyze.aspx");
                     break;
             }
         }

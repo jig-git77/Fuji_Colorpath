@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
@@ -27,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = Convert.ToInt32(hdProjectId.Value.Trim());
             _presenterOpenPrintCondition.GetProjectDetail();
             SessionManager.Instance.CurrentProject = Project;
+            SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
             Response.RedirectPermanent("Analyze.aspx?ProjectName='" + hdProjectName.Value + "'");
         }
 

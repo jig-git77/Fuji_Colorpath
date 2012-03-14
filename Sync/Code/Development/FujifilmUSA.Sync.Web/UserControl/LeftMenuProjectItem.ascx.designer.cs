@@ -13,22 +13,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class LeftMenuProjectItem {
         
         /// <summary>
-        /// lnkSyncRunName control.
+        /// lnkRunName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkSyncRunName;
+        protected global::System.Web.UI.WebControls.LinkButton lnkRunName;
         
         /// <summary>
-        /// ulSyncSubMenu control.
+        /// ulSubMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulSyncSubMenu;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulSubMenu;
         
         /// <summary>
         /// lnkMeasurement control.
@@ -49,12 +49,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lnkAnalyse;
         
         /// <summary>
-        /// lnkExport control.
+        /// lnkDownload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkExport;
+        protected global::System.Web.UI.WebControls.LinkButton lnkDownload;
     }
 }
