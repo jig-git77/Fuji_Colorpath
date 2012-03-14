@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CompanyManagement.aspx" />
+    <Content Include="AddCompanyManagement.aspx" />
     <Content Include="Images\branch-manage-icon.png" />
     <Content Include="Images\company-manage-icon.png" />
     <Content Include="Images\user-manage-icon.png" />
@@ -222,7 +224,9 @@
     <Content Include="OperationSelection.aspx" />
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\CompanyManagement.ascx" />
     <Content Include="UserControl\MeasurementDeviceList.ascx" />
+    <Content Include="UserControl\AddCompanyManagement.ascx" />
     <Content Include="UserControl\Settings.ascx" />
     <Content Include="UserControl\Export.ascx" />
     <Content Include="UserControl\Measurement.ascx" />
@@ -276,6 +280,20 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyManagement.aspx.cs">
+      <DependentUpon>CompanyManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompanyManagement.aspx.designer.cs">
+      <DependentUpon>CompanyManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddCompanyManagement.aspx.cs">
+      <DependentUpon>AddCompanyManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddCompanyManagement.aspx.designer.cs">
+      <DependentUpon>AddCompanyManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="MeasurementDeviceList.aspx.cs">
       <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
@@ -369,12 +387,26 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\CompanyManagement.ascx.cs">
+      <DependentUpon>CompanyManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CompanyManagement.ascx.designer.cs">
+      <DependentUpon>CompanyManagement.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\MeasurementDeviceList.ascx.cs">
       <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\MeasurementDeviceList.ascx.designer.cs">
       <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddCompanyManagement.ascx.cs">
+      <DependentUpon>AddCompanyManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddCompanyManagement.ascx.designer.cs">
+      <DependentUpon>AddCompanyManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Settings.ascx.cs">
       <DependentUpon>Settings.ascx</DependentUpon>

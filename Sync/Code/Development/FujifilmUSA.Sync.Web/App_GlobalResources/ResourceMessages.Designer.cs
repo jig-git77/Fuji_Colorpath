@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected compnay?.
+        /// </summary>
+        internal static string CompanyManagement_DeleteCompany_Confirmation {
+            get {
+                return ResourceManager.GetString("CompanyManagement_DeleteCompany_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected destination profile?.
         /// </summary>
         internal static string DestinationProfile_DeleteDestinationProfile_Confirmation {

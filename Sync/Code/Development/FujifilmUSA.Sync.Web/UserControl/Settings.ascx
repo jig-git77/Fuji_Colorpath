@@ -20,7 +20,7 @@
                     Measurement Device</asp:LinkButton>
             </td>
             <td align="center" valign="bottom" style="width: 130px">
-                <asp:LinkButton ID="lbtnCompanyManagement" runat="server" ToolTip="Company Management" >
+                <asp:LinkButton ID="lbtnCompanyManagement" runat="server" ToolTip="Company Management" PostBackUrl ="~/CompanyManagement.aspx" >
                     <div>
                         <asp:Image ID="Image1" runat="server" AlternateText="Company Management"
                             ImageUrl="../Images/company-manage-icon.png" ToolTip="Company Management" /></div>

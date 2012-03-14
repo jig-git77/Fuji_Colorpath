@@ -204,4 +204,7 @@
   <data name="SourceProfile_IsUse_True" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected compnay?</value>
+  </data>
 </root>
