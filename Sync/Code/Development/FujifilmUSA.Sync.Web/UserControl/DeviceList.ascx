@@ -1,6 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceList" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
+    TagPrefix="ucCreateDLP" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -82,58 +85,55 @@
     </div>
     <div class="clear">
     </div>
-    <div class="formDevice">
-        <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
-        <table cellpadding="0" cellspacing="0" border="0" width="97%">
-            <%--   <tr id="tr1" runat="server">
-                <td>
-                    <label>
-                        Show Presses For:</label>
-                </td>
-            </tr>--%>
-            <tr id="tr2" runat="server">
-                <td>
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                        <tr>
-                            <td class="DeviceListFirstTD">
-                                <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
-                                &nbsp; :
-                            </td>
+    <div>
+        <asp:UpdatePanel ID="testPanel" runat="server">
+            <ContentTemplate>
+                <div class="formDevice">
+                    <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
+                    <table cellpadding="0" cellspacing="0" border="0" width="97%">
+                        <tr id="tr2" runat="server">
                             <td>
-                                <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
-                                    OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true"
-                                    CssClass="select" Width="180px">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="DeviceListFirstTD">
-                                <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
-                                &nbsp :
-                            </td>
-                            <td>
-                                <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                    OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true"
-                                    CssClass="select" Width="180px">
-                                </asp:DropDownList>
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <td class="DeviceListFirstTD">
+                                            <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
+                                            &nbsp; :
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
+                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true"
+                                                CssClass="select" Width="180px">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="DeviceListFirstTD">
+                                            <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
+                                            &nbsp :
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
+                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true"
+                                                CssClass="select" Width="180px">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="listDevice">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tr>
-                <td>
-                    <label>
-                        Select Presses</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+                </div>
+                <div class="listDevice">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td>
+                                <label>
+                                    Select Presses</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
                         <AjaxSettings>
                             <telerik:AjaxSetting AjaxControlID="cmbCompany">
                                 <UpdatedControls>
@@ -153,117 +153,64 @@
                             </telerik:AjaxSetting>
                         </AjaxSettings>
                     </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Vista" />
-                    <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
-                        AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
-                        EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                        OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
-                        <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
-                        </ClientSettings>
-                        <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                        <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyDesc">
-                            <Columns>
-                                <telerik:GridTemplateColumn 
-                                    DataField="DeviceName" 
-                                    AllowFiltering="true" 
-                                    HeaderText=""
-                                    UniqueName="DeviceName" 
-                                    SortExpression="DeviceName" 
-                                    FilterControlWidth="200px"
-                                    AutoPostBackOnFilter="true"
-                                    CurrentFilterFunction="Contains"
-                                    ShowFilterIcon="false"
-                                    >
-                                    <ItemTemplate>
-                                        <div class="product_list">
-                                            <ul>
-                                                <li>
-                                                    <div class="left">
-                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
-                                                            CommandName="Select">
+                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Vista" />--%>
+                                <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
+                                    AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
+                                    OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
+                                    <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
+                                    </ClientSettings>
+                                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyDesc">
+                                        <Columns>
+                                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText=""
+                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
+                                                AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" ShowFilterIcon="false">
+                                                <ItemTemplate>
+                                                    <div class="product_list">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="left">
+                                                                    <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
+                                                                        CommandName="Select">
                                                                                     <span><%# Eval("DeviceName")%></span>
-                                                        </asp:LinkButton>
+                                                                    </asp:LinkButton>
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                     <div class="clear">
                                                     </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                            </Columns>
-                        </MasterTableView>
-                    </telerik:RadGrid>
-                </td>
-            </tr>
-        </table>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                        </Columns>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <asp:UpdateProgress ID="UpdateProgress" runat="server" DynamicLayout="true" DisplayAfter="50"
+            AssociatedUpdatePanelID="testPanel">
+            <ProgressTemplate>
+                <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                    VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
+                </AjaxToolkit:AlwaysVisibleControlExtender>
+                <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
+                    z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+                </div>
+                <div id="divUpdate" style="color: #000; position: absolute; z-index: 1010">
+                    <ucCreateDLP:CreateDLP runat="server" ID="ucCreateDlpProgressBar" />
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
     </div>
     <div class="clear">
     </div>
 </div>
 <div class="contant_bottom">
     &nbsp;</div>
-<%--<table cellpadding="0" cellspacing="0">
-                                                    <tr>
-                                                        <td style="width: 100px;">
-                                                            <label style="font-size: 18px;">
-                                                                Search</label>
-                                                        </td>
-                                                        <td style="width: 100px;">
-                                                            <asp:TextBox ID="txtDeviceName" MaxLength="50" Font-Size="18px" runat="server" Width="300px"></asp:TextBox>
-                                                        </td>
-                                                        <td style="width: 100px;">
-                                                            <asp:LinkButton ID="lbtnSearchDevice" runat="server" ToolTip="Search Device" OnClick="lbtnSearchDevice_Click">
-                                                                <span>
-                                                                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/Search.png" /></span>
-                                                            </asp:LinkButton>
-                                                        </td>
-                                                        <td style="width: 100%;">
-                                                        </td>
-                                                    </tr>
-                                                </table>--%>
-<%--<FilterTemplate>
-                                                            <label>Search</label>
-                                                            <asp:TextBox ID="txtDeviceName" MaxLength="50" Font-Size="18px" runat="server" Width="300px"></asp:TextBox>
-                                                            <asp:LinkButton ID="lbtnSearchDevice" runat="server" ToolTip="Search Device">
-                                                            <span>
-                                                                  <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/Search.png" /></span> 
-                                                            </asp:LinkButton>
-
-
-                                                            <telerik:RadTextBox ID="RadTextBox1" runat="server" MaxLength="50" ></telerik:RadTextBox>
-                                                            <telerik:RadButton ID="RadButton1" runat="server" OnClientClicked="CountryIndexChanged" ButtonType="LinkButton" BorderWidth="0">
-                                                                <ContentTemplate>
-                                                                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/Search.png" />    
-                                                                </ContentTemplate>
-                                                            </telerik:RadButton> 
-                                                             <telerik:RadScriptBlock ID="RadScriptBlock3" runat="server">
-                                                                    <script type="text/javascript">
-                                                                        function CountryIndexChanged(sender, args) {
-                                                                            debugger;
-                                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                                            
-                                                                            tableView.filter("DeviceName", args.get_item().get_value(), "EqualTo");
-                                                                        }
-                                                                    </script>
-                                                                </telerik:RadScriptBlock>
-
-                                                           <telerik:RadComboBox ID="RadComboBoxCountry" DataSourceID="SqlDataSource4" DataTextField="Country"
-                                                                    DataValueField="Country" Height="100px" AppendDataBoundItems="true" SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Country").CurrentFilterValue %>'
-                                                                    runat="server" OnClientSelectedIndexChanged="CountryIndexChanged">
-                                                                    <Items>
-                                                                        <telerik:RadComboBoxItem Text="All" />
-                                                                    </Items>
-                                                                </telerik:RadComboBox>
-                                                                <telerik:RadScriptBlock ID="RadScriptBlock3" runat="server">
-                                                                    <script type="text/javascript">
-                                                                        function CountryIndexChanged(sender, args) {
-                                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                                            tableView.filter("Country", args.get_item().get_value(), "EqualTo");
-                                                                        }
-                                                                    </script>
-                                                                </telerik:RadScriptBlock>
-                                                           
-                                                            </FilterTemplate>--%>

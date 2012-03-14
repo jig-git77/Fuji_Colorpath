@@ -2,26 +2,24 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Common" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-
 <script type="text/javascript">
     if (typeof jQuery == 'undefined') {
         document.write(unescape("%3Cscript src='JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
     }
 </script>
-
-<script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
-<script src="jQuery/json2.js" type="text/javascript"></script>
-<script src="jQuery/jquery-blockUI.js" type="text/javascript"></script>
-<script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
-<script src="JS/excanvas.js" type="text/javascript"></script>
-<script src="JS/chartread.js" type="text/javascript"></script>
-<script src="JS/i1read.js" type="text/javascript"></script>
-<script src="JS/isisread.js" type="text/javascript"></script>
-<script src="JS/WebComm.js" type="text/javascript"></script>
-<script src="jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
-<script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
-<script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
-<style>
+<script src="~/JS/wz_jsgraphics.js" type="text/javascript"></script>
+<script src="~/jQuery/json2.js" type="text/javascript"></script>
+<script src="~/jQuery/jquery-blockUI.js" type="text/javascript"></script>
+<script src="~/jQuery/wtooltip.min.js" type="text/javascript"></script>
+<script src="~/JS/excanvas.js" type="text/javascript"></script>
+<script src="~/JS/chartread.js" type="text/javascript"></script>
+<script src="~/JS/i1read.js" type="text/javascript"></script>
+<script src="~/JS/isisread.js" type="text/javascript"></script>
+<script src="~/JS/WebComm.js" type="text/javascript"></script>
+<script src="~/jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
+<script src="~/jQuery/jquery.tmpl.js" type="text/javascript"></script>
+<script src="~/JQuery/jquery.simplemodal.js" type="text/javascript"></script>
+<style type="text/css">
     .my_rectangle
     {
         width: 25px;
@@ -70,13 +68,12 @@
         height: 10em;
     }
 </style>
-
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name"></asp:Label>
             &nbsp; : &nbsp;&nbsp;
-            <asp:TextBox ID="txtMeasurementName" runat="server" width="178px" Height="19px">
+            <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px">
             </asp:TextBox>
         </div>
         <div class="float_r">
@@ -130,14 +127,11 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
-
-
 <asp:HiddenField ID="hdSyncRunID" runat="server" />
 <asp:HiddenField ID="hdProjectID" runat="server" />
 <asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
 <asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
-
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
@@ -175,7 +169,6 @@
                 </td>
          </tr>
 </script>
-
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {
@@ -188,9 +181,7 @@
 
         load();   //first you have to load the plugin
         ListDevices();
-        //if ('<%=Type %>' == "Optimization") {
         GetRefChartData();
-        // }
     }
     function GetRefChartData() {
 

@@ -1,10 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
-<%@ Register src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon" TagPrefix="uc" %>
-<%--<%@ Register src="~/UserControl/MeasurementStatusbar.ascx" TagName="MeasurementStatusbar" TagPrefix="uc" %>
---%>
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
+    TagPrefix="uc" %>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     jQuery(document).ready(
     function () {
 
@@ -18,15 +17,15 @@
                 //                    return false;
             });
     });
-</script>
-<div class="contant_top"></div>
+</script>--%>
+<div class="contant_top">
+</div>
 <div class="contant_middle">
     <div class="head">
         <h1 id="header" runat="server">
             Measurement</h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" 
-                onclick="btnAnalyze_Click" >
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click">
                 <span>
                     <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
                     Analyze</span>
@@ -47,7 +46,7 @@
         <div class="bottom">
             &nbsp;</div>
     </div>
-    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />        
+    <uc:MeasurementCommon ID="ucMeasurementCommon" runat="server" Type="Optimization" />
 </div>
 <div class="contant_bottom">
     &nbsp;</div>
