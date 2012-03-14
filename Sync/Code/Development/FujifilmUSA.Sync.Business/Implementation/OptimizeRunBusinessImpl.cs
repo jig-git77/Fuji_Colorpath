@@ -22,7 +22,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
         {
-            var sourceProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
+            var sourceProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetSourceProfile(projectId);
             var request = new CreateDestinationAndDeviceLinkProfileRequest()
                               {
                                   PcsData = new List<double>(),
@@ -78,9 +78,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
         {
-            var sourceProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
-            var destinationProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetDestinationProfileData", new object[] { projectId });
-            var deviceLinkProfile = (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetLastOptimizedDlp", new object[] { projectId });
+            var sourceProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetSourceProfile(projectId);
+            var destinationProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetDestinationProfile(projectId);
+            var deviceLinkProfile = BusinessFactory<IProjectBusiness>.CreateObject().GetLastOptimizedDlp(projectId);
             var request = new OptimizeDeviceLinkProfileRequest()
             {
                 PCSData = new List<double>(),

@@ -49,15 +49,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownLoadDLP;
         
         /// <summary>
-        /// lbtnDLPFileName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDLPFileName;
-        
-        /// <summary>
         /// lbtnDownLoadChart control.
         /// </summary>
         /// <remarks>
@@ -67,15 +58,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownLoadChart;
         
         /// <summary>
-        /// lbtnChartFileName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnChartFileName;
-        
-        /// <summary>
         /// lbtnDownloadSourceICC control.
         /// </summary>
         /// <remarks>
@@ -83,14 +65,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadSourceICC;
-        
-        /// <summary>
-        /// lbtnDownloadSourceICCFileName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadSourceICCFileName;
     }
 }

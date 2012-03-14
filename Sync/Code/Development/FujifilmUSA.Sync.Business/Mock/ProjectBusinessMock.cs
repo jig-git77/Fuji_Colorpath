@@ -28,13 +28,33 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Dictionary<string, string>();
         }
-        public Dictionary<int, string> GetSourceProfile()
+        public Dictionary<int, string> GetSourceProfileList()
         {
             return new Dictionary<int, string>();
         }
         public Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset()
         {
             return new Dictionary<int, string>();
+        }
+
+        public byte[] GetChartPreviewOnProjectId(int projectId)
+        {
+            return new byte[1];
+        }
+
+        public byte[] GetSourceProfile(int projectId)
+        {
+            return new byte[1];
+        }
+
+        public byte[] GetDestinationProfile(int projectId)
+        {
+            return new byte[1];
+        }
+
+        public byte[] GetLastOptimizedDlp(int projectId)
+        {
+            return new byte[1];
         }
 
         #endregion

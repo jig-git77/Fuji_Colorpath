@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterOpenPrintCondition.GetProjectDetail();
             SessionManager.Instance.CurrentProject = Project;
             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-            Response.RedirectPermanent("Analyze.aspx?ProjectName='" + hdProjectName.Value + "'");
+            Response.RedirectPermanent("Analyze.aspx");
         }
 
         #region IViewOpenPrintCondition Members

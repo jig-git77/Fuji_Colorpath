@@ -57,7 +57,7 @@
                     </div>
                     <div class="text" style="float:right">
                     <div class="buttonright" style="padding-left: 3px">
-                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript:ChooseOptimize(); return false;">
+                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript:ChooseOptimize();" OnClick="lbtnOptimize_Click">
                 <span> No, Optimize </span>
                     </asp:LinkButton>
                 </div>

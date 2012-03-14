@@ -6,25 +6,24 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SaveWindow : System.Web.UI.UserControl, IViewConfirmSave
+    public partial class SaveWindow : System.Web.UI.UserControl, IViewSaveWindow
     {
-        private PresenterConfirmSave _presenterConfirmSave;
+        private PresenterSaveWindow _presenterSaveWindow;
         protected void Page_Init(object sender, EventArgs e)
         {
-            _presenterConfirmSave = new PresenterConfirmSave(this);
+            _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             Project = SessionManager.Instance.CurrentProject;
-            _presenterConfirmSave.SaveProject();
+            _presenterSaveWindow.SaveProject();
             SessionManager.Instance.CurrentProject = Project;
             Response.Redirect("Measurement.aspx");
         }
 
-        #region IViewConfirmSave Members
-        public string ProjectName { get; set; }
+        #region IViewSaveWindow Members
         public Project Project { get; set; }
         #endregion
     }

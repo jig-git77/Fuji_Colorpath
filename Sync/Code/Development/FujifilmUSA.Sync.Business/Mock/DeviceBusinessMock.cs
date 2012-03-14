@@ -6,7 +6,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 {
     public class DeviceBusinessMock : IDeviceBusiness
     {
-        #region ISyncDeviceBusiness Members
+        #region IDeviceBusiness Members
 
         public List<Device> DeviceListById(int companyId, int branchId)
         {

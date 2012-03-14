@@ -1,4 +1,5 @@
-﻿using FujifilmUSA.Sync.Business;
+﻿using System.Linq;
+using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 
@@ -11,12 +12,12 @@ namespace FujifilmUSA.Sync.Presenter
         {
             _viewConfirmSave = viewConfirmSave;
         }
-
-        public void SaveProject()
+        public void OptimizeDlp()
         {
-            //Apply procedure for saving a project.
-            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-            //_viewConfirmSave.Project = projectBusiness.GetProjectDetail(_viewConfirmSave.Project.ProjectId);
+            var task = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            var measurementIds = task.GetMeasurements(_viewConfirmSave.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
+            //TODO: remove comment
+            //task.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, measurementIds);
         }
     }
 }

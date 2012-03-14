@@ -91,7 +91,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            DataReader.ReadString(x, "ProfilerOptionValue"))).ToDictionary(x => x.Key, x => x.Value);
             return projectOptions;
         }
-        public Dictionary<int, string> GetSourceProfile()
+
+        public Dictionary<int, string> GetSourceProfileList()
         {
             var dstSourceList = new Dictionary<int, string>();
             var dsSourceList = DataAccessFactory.Instance.GetDsResult("[uspGetSourceProfile]",
@@ -123,6 +124,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     })).ToDictionary(Preset => Preset.Value, Preset => Preset.Text);
             }
             return dstPresetList;
+        }
+
+        public byte[] GetChartPreviewOnProjectId(int projectId)
+        {
+            return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetChartPreviewOnProjectId", new object[] { projectId });
+        }
+
+        public byte[] GetSourceProfile(int projectId)
+        {
+            return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetSourceProfileData", new object[] { projectId });
+        }
+
+        public byte[] GetDestinationProfile(int projectId)
+        {
+            return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetDestinationProfileData", new object[] { projectId });
+        }
+
+        public byte[] GetLastOptimizedDlp(int projectId)
+        {
+            return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetLastOptimizedDlp", new object[] { projectId });
         }
 
         #endregion

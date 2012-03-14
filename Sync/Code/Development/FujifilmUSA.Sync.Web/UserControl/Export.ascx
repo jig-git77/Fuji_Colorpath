@@ -43,12 +43,13 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadDLP" runat="server" CssClass="gray_bt">
-                                                    <span>DawnLoad DLP</span>
+                                                    <asp:LinkButton ID="lbtnDownLoadDLP" runat="server" CssClass="gray_bt" 
+                                                        onclick="lbtnDownLoadDLP_Click">
+                                                    <span>Download DLP</span>
                                                     </asp:LinkButton>
-                                                    <asp:LinkButton ID="lbtnDLPFileName" runat="server">
+                                                    <%--<asp:LinkButton ID="lbtnDLPFileName" runat="server">
                                                     <span>Komori LS 40 test DLP 000.icc</span>
-                                                    </asp:LinkButton>
+                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -58,12 +59,13 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadChart" runat="server" CssClass="gray_bt">
-                                                    <span>DawnLoad Chart</span>
+                                                    <asp:LinkButton ID="lbtnDownLoadChart" runat="server" CssClass="gray_bt" 
+                                                        onclick="lbtnDownLoadChart_Click">
+                                                    <span>Download Chart</span>
                                                     </asp:LinkButton>
-                                                    <asp:LinkButton ID="lbtnChartFileName" runat="server">
+                                                    <%--<asp:LinkButton ID="lbtnChartFileName" runat="server">
                                                     <span>Sync 500</span>
-                                                    </asp:LinkButton>
+                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -104,12 +106,13 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt">
+                                                    <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt" 
+                                                        onclick="lbtnDownloadSourceICC_Click">
                                                     <span>Download Source ICC</span>
                                                     </asp:LinkButton>
-                                                    <asp:LinkButton ID="lbtnDownloadSourceICCFileName" runat="server">
+                                                    <%--<asp:LinkButton ID="lbtnDownloadSourceICCFileName" runat="server">
                                                     <span>Komori LS 40 test.icc</span>
-                                                    </asp:LinkButton>
+                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                         </tbody>

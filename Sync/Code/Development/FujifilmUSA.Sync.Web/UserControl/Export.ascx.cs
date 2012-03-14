@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Export : System.Web.UI.UserControl
+    public partial class Export : System.Web.UI.UserControl, IViewExport
     {
-        #region Declaration
+        private PresenterExport _presenterExport;
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
             get
@@ -21,22 +15,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-        #endregion
 
-        #region "Page Events"
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
+            _presenterExport = new PresenterExport(this);
         }
-        #endregion
 
-        #region Control Events
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             Response.Redirect("Measurement.aspx");
         }
 
-        #endregion
+        protected void lbtnDownLoadDLP_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            _presenterExport.GetDeviceLinkProfile();
+        }
 
-      
+        protected void lbtnDownLoadChart_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            _presenterExport.GetChartPreview();
+        }
+
+        protected void lbtnDownloadSourceICC_Click(object sender, EventArgs e)
+        {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            _presenterExport.GetSourceProfile();
+        }
+
+        #region IViewExport Members
+        public int ProjectId { get; set; }
+        public int OptimizeRunId { get; set; }
+        public byte[] DeviceLinkProfile { get; set; }
+        public byte[] ChartPreview { get; set; }
+        public byte[] SourceProfile { get; set; }
+        #endregion
     }
 }
