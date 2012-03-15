@@ -32,12 +32,10 @@ namespace FujifilmUSA.Sync.Presenter
             task.DeleteProject(_viewProjectList.Project.ProjectId);
         }
 
-        
-
-        public void GetDeviceFamilyProfilerOptionPreset()
-        {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewProjectList.SourceProfile = task.GetDeviceFamilyProfilerOptionPreset();
-        }
+        //public void GetDeviceFamilyProfilerOptionPreset()
+        //{
+        //    var task = BusinessFactory<IProjectBusiness>.CreateObject();
+        //    _viewProjectList.SourceProfile = task.GetDeviceFamilyProfilerOptionPreset();
+        //}
     }
 }

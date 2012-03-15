@@ -138,7 +138,7 @@
                                     <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyDesc">
+                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc">
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText=""
                                                 UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"

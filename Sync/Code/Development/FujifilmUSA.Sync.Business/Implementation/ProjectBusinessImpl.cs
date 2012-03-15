@@ -109,19 +109,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstSourceList;
         }
 
-        public Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset()
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
         {
-            var dstPresetList = new Dictionary<int, string>();
-            var dsPresetList = DataAccessFactory.Instance.GetDsResult("[uspGetDeviceFamilyProfilerOption]",
-                                                                    new object[] { });
+            var dstPresetList = new List<DeviceFamilyProfilerOption>();
+            var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId });
             if (dsPresetList != null && dsPresetList.Tables.Count > 0)
             {
                 dstPresetList = (dsPresetList.Tables[0].AsEnumerable().Select(
-                    Preset => new
+                    Preset => new DeviceFamilyProfilerOption()
                     {
-                        Value = DataReader.ReadInt(Preset, "DeviceFamilyProfilerOptionID"),
-                        Text = DataReader.ReadString(Preset, "ProfilerOptionsDesc")
-                    })).ToDictionary(Preset => Preset.Value, Preset => Preset.Text);
+                        DeviceFamilyProfilerOptionId = DataReader.ReadInt(Preset,"DeviceFamilyProfilerOptionID"),
+                        ProfilerOptionsName = DataReader.ReadString(Preset, "ProfilerOptionsName"),
+                        ProfilerOptionsDesc = DataReader.ReadString(Preset,"ProfilerOptionsDesc"),
+                    })).ToList();
             }
             return dstPresetList;
         }

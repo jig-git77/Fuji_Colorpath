@@ -14,7 +14,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
         //Dictionary<int, string> GetSourceProfileList();
         List<SourceProfile> GetSourceProfileList();
-        Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset();
+        //Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset();
+        List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId);
         byte[] GetChartPreviewOnProjectId(int projectId);
         byte[] GetSourceProfile(int projectId);
         byte[] GetDestinationProfile(int projectId);

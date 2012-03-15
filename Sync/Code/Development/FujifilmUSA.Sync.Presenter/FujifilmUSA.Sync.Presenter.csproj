@@ -80,6 +80,7 @@
     <Compile Include="PresenterAnalyze.cs" />
     <Compile Include="PresenterCompanyManagement.cs" />
     <Compile Include="PresenterConfirmSave.cs" />
+    <Compile Include="PresenterDeviceFamilyProfilerOption.cs" />
     <Compile Include="PresenterExport.cs" />
     <Compile Include="PresenterLogin.cs" />
     <Compile Include="PresenterOpenPrintCondition.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="ViewInterface\IViewAnalyze.cs" />
     <Compile Include="ViewInterface\IViewCompanyManagement.cs" />
     <Compile Include="ViewInterface\IViewConfirmSave.cs" />
+    <Compile Include="ViewInterface\IViewDeviceFamilyProfilerOption.cs" />
     <Compile Include="ViewInterface\IViewExport.cs" />
     <Compile Include="ViewInterface\IViewLogin.cs" />
     <Compile Include="ViewInterface\IViewOpenPrintCondition.cs" />

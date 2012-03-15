@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
@@ -8,18 +9,19 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProfilerOptions : System.Web.UI.UserControl, IViewProjectList
+    public partial class ProfilerOptions : System.Web.UI.UserControl, IViewDeviceFamilyProfilerOption
     {
         #region "Declaration"
-        private PresenterProjectList _presenterProjectList;
+        //private PresenterProjectList _presenterProjectList;
+        private string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
+        private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         #endregion
 
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
-            _presenterProjectList = new PresenterProjectList(this);
+            _presenterDeviceFamilyProfilerOption = new PresenterDeviceFamilyProfilerOption(this);
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             BindPresets();
@@ -29,10 +31,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Method
         private void BindPresets()
         {
-            _presenterProjectList.GetDeviceFamilyProfilerOptionPreset();
-            cmbSelectedPresets.DataSource = ProfilerOptionsPreset;
-            cmbSelectedPresets.DataBind();
-
+            if (ViewState[_vsDeviceFamilyProfilerOption] == null)
+            {
+                DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
+                _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
+                cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+                cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+                ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+                cmbSelectedPresets.DataSource = (List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption];
+                cmbSelectedPresets.DataBind();
+                cmbSelectedPresets_SelectedIndexChanged(null, null);
+            }
+            
             //var dic = new Dictionary<int, string> { { 1, "Preserved Black" } };
             //cmbSelectedPresets.DataSource = dic;
             //cmbSelectedPresets.DataTextField = "Value";
@@ -42,23 +52,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Method
-
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();                        
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
-
         #endregion
 
-        #region IViewProjectList Members
-        public List<Project> Projects { get; set; }
-        public Project Project { get; set; }
-        public int CompanyId { get; set; }
-        public Dictionary<int, string> SourceProfile { get; set; }
-        public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
-        public int ProjectId { get; set; }
+        #region IViewDeviceFamilyProfilerOption Members
+        public short DeviceFamilyId { get; set; }
+        public List<DeviceFamilyProfilerOption> ProfileOption { get; set; }
         #endregion
+
+        protected void cmbSelectedPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ViewState[_vsDeviceFamilyProfilerOption] != null)
+            {
+                //txtProfileDescription.Text = "Hi";
+                txtProfileDescription.Text = ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue).ProfilerOptionsDesc;
+            }
+        }
 
     }
 }

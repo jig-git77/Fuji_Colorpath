@@ -69,6 +69,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                 DeviceName = ((GridDataItem) e.Item).GetDataKeyValue("DeviceName").ToString(),
                                                                 DeviceFamily = new DeviceFamily()
                                                                                    {
+                                                                                       DeviceFamilyId =
+                                                                                           Convert.ToInt16(((GridDataItem) e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
                                                                                        DeviceFamilyDesc =
                                                                                            ((GridDataItem) e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
                                                                                    }

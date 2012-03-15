@@ -32,11 +32,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<SourceProfile>();
         }
-        public Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset()
-        {
-            return new Dictionary<int, string>();
-        }
-
+        
         public byte[] GetChartPreviewOnProjectId(int projectId)
         {
             return new byte[1];
@@ -55,6 +51,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public byte[] GetLastOptimizedDlp(int projectId)
         {
             return new byte[1];
+        }
+
+        public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
+        {
+            return new List<DeviceFamilyProfilerOption>();
         }
 
         #endregion
