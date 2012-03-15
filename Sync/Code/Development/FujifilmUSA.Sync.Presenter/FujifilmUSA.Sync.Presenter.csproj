@@ -86,6 +86,7 @@
     <Compile Include="PresenterProjectList.cs" />
     <Compile Include="PresenterDevice.cs" />
     <Compile Include="PresenterSaveWindow.cs" />
+    <Compile Include="PresenterTargetColorspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewInterface\IViewAddCompanyManagement.cs" />
     <Compile Include="ViewInterface\IViewAnalyze.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewDevice.cs" />
     <Compile Include="ViewInterface\IViewSaveWindow.cs" />
+    <Compile Include="ViewInterface\IViewTargetColorspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewInterface\ViewBase\" />

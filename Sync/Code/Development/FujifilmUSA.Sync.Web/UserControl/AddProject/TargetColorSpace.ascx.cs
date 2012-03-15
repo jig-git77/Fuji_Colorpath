@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
@@ -9,38 +10,40 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class TargetColorSpace : System.Web.UI.UserControl, IViewProjectList
+    public partial class TargetColorSpace : System.Web.UI.UserControl, IViewTargetColorspace
     {
 
         #region "Declaration"
-        private PresenterProjectList _presenterProjectList;
+        private string _vsSourceProfile = "vsSourceProfile";
+        //private PresenterProjectList _presenterProjectList;
+        private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
 
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
-            _presenterProjectList = new PresenterProjectList(this);
+            _presenterTargetColorspace = new PresenterTargetColorspace(this);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindProfileSource();
-           
+            //if (!IsPostBack)
+            {
+                BindProfileSource();
+            }
         }
         #endregion
 
         #region Control Events
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.SourceProfile = new FujifilmUSA.Sync.Entity.SourceProfile
+            SessionManager.Instance.CurrentProject.SourceProfile = new SourceProfile
             {
-               SourceProfileId= (short)Convert.ToInt32(cmbSourceProfile.SelectedValue),
-               ProfileDesc=txtProfileDescription.Text
-
+                SourceProfileId = (short)Convert.ToInt32(cmbSourceProfile.SelectedValue),
             };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();            
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
         #endregion
 
@@ -48,20 +51,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindProfileSource()
         {
-            _presenterProjectList.GetSourceProfile();
-            cmbSourceProfile.DataSource = SourceProfile;
-            cmbSourceProfile.DataBind();
+            if (ViewState[_vsSourceProfile] == null)
+            {
+                _presenterTargetColorspace.GetSourceProfile();
+                cmbSourceProfile.DataValueField = "SourceProfileID";
+                cmbSourceProfile.DataTextField = "ProfileName";
+                ViewState[_vsSourceProfile] = SourceProfile;
+                cmbSourceProfile.DataSource = (List<SourceProfile>)ViewState[_vsSourceProfile];
+                cmbSourceProfile.DataBind();
+                cmbSourceProfile_SelectedIndexChanged(null, null);
+            }
         }
 
         #endregion
 
-        #region IViewProjectList Members
-        public List<Project> Projects { get; set; }
-        public Project Project { get; set; }
-        public int CompanyId { get; set; }
-        public Dictionary<int, string> SourceProfile { get; set; }
-        public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
-        public int ProjectId { get; set; }
+        #region IViewTargetColorspace Members
+        public List<SourceProfile> SourceProfile { get; set; }
         #endregion
+
+        protected void cmbSourceProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ViewState[_vsSourceProfile] != null)
+            {
+                txtProfileDescription.Text = ((List<SourceProfile>)ViewState[_vsSourceProfile]).Single(x => x.SourceProfileId.ToString() == cmbSourceProfile.SelectedValue).ProfileDesc;
+            }
+        }
     }
 }

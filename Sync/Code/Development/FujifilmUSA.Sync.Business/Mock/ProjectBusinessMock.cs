@@ -28,9 +28,9 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Dictionary<string, string>();
         }
-        public Dictionary<int, string> GetSourceProfileList()
+        public List<SourceProfile> GetSourceProfileList()
         {
-            return new Dictionary<int, string>();
+            return new List<SourceProfile>();
         }
         public Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset()
         {

@@ -8,6 +8,7 @@ namespace FujifilmUSA.Sync.Presenter
     {
         private readonly IViewProjectList _viewProjectList;
 
+
         public PresenterProjectList(IViewProjectList viewProjectList)
         {
             this._viewProjectList = viewProjectList;
@@ -31,11 +32,7 @@ namespace FujifilmUSA.Sync.Presenter
             task.DeleteProject(_viewProjectList.Project.ProjectId);
         }
 
-        public void GetSourceProfile()
-        {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewProjectList.SourceProfile = task.GetSourceProfileList();
-        }
+        
 
         public void GetDeviceFamilyProfilerOptionPreset()
         {
