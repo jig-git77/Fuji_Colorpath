@@ -1,7 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
+
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/ConfirmSave.ascx" TagName="ConfirmSave" TagPrefix="uc" %>
+
 <script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
         if (confirm('<%= AddMeasurementDeleteMeasurementConfirmation %>'))
@@ -35,67 +38,33 @@
 </script>
 <script type="text/javascript" language="javascript">
 
-    var secs;
-    var timerID = null;
-    var timerRunning = false;
-    var delay = 1000;
-
     function ShowCreateDLP() {
         ChooseRadWindow();
     }
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
+        jQuery("div[id$=divUpdateCreateDLP]").hide();
+        jQuery("div[id$=divUpdate]").hide();
         if ("<%= IsNewDlp %>" == "True") {
-            var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
-            InitializeTimer();
-            oWnd.show();
+            jQuery("div[id$=divUpdateCreateDLP]").show();
+            return true;
         }
         else {
+            jQuery("div[id$=divUpdate]").show();
             var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
             oWnd.show();
+            return false;
         }
     }
 
-
-    function CloseCreateDLP() {
-        var oWnd = $find("<%= CreateDLPWindow.ClientID %>");
-        oWnd.close();
-    }
     function CloseConfirmSaveWindow() {
         var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
         oWnd.close();
     }
 
 
-    function InitializeTimer() {
-        // Set the length of the timer, in seconds
-        secs = 10
-        StopTheClock()
-        StartTheTimer()
-    }
-
-    function StopTheClock() {
-        if (timerRunning)
-            clearTimeout(timerID)
-        timerRunning = false
-    }
-
-    function StartTheTimer() {
-        if (secs == 0) {
-            StopTheClock();
-            CloseCreateDLP();
-            debugger;
-            window.location = 'Export.aspx';
-        }
-        else {
-            self.status = secs
-            secs = secs - 1
-            timerRunning = true
-            timerID = self.setTimeout("StartTheTimer()", delay)
-        }
-    }
-
+  
 </script>
 <div class="contant_top">
     &nbsp;</div>
@@ -104,11 +73,16 @@
         <h1 id="header" runat="server">
             Analyze</h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClientClick="javascript:ShowCreateDLP(); return false;">
-                <span>
-                    <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />
-                    Download DLP</span> &nbsp;
-            </asp:LinkButton>
+            
+          <asp:UpdatePanel ID="upCreateDLP" runat="server">
+                <ContentTemplate>
+                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" 
+                        OnClientClick="javascript:ShowCreateDLP();" 
+                        onclick="lbtnDownloadAndSaveDLP_Click">
+                        <span><asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />Download DLP</span> &nbsp;
+                    </asp:LinkButton>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
     </div>
     <div class="listDevice" style="margin-left: 10px;">
@@ -233,25 +207,33 @@
             </tr>
         </table>
     </div>
+
 </div>
 <div class="clear">
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
-        <telerik:RadWindow ID="CreateDLPWindow" runat="server" ShowContentDuringLoad="false"
-            Title="Create DLP" Width="716" Height="250" Behavior="Move">
-            <ContentTemplate>
-                <uc:CreateDLP ID="ucCreateDLP" runat="server" />
-            </ContentTemplate>
-        </telerik:RadWindow>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-            Title="Confirm Save" Width="718" Height="275"  Behavior="Close, Move">
-            <ContentTemplate>
-                <uc:ConfirmSave ID="ConfirmSave" runat="server" />
-            </ContentTemplate>
+            Title="Confirm Save" Width="718" Height="275"  Behavior="Close, Move"
+            NavigateUrl="~/PopupConfirmSave.aspx"
+            >
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
-<div class="contant_bottom">
-    &nbsp;</div>
+<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" DisplayAfter="50"
+            AssociatedUpdatePanelID="upCreateDLP">
+            <ProgressTemplate>
+                <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                    VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
+                </AjaxToolkit:AlwaysVisibleControlExtender>
+                <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
+                    z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+                </div>
+                <div id="divUpdateCreateDLP" runat="server" style="color: #000; position: absolute; z-index: 1010">
+                    <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+                </div>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
+  
+<div class="contant_bottom">&nbsp;</div>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />

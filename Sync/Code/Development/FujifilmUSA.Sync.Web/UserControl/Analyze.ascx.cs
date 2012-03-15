@@ -22,7 +22,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsNewDlp
         {
-            get { return SessionManager.Instance.CurrentProject.IsNewlyCreated; }
+            get {
+                    return false;
+                    //return SessionManager.Instance.CurrentProject.IsNewlyCreated; 
+                }
         }
 
         #endregion
@@ -35,9 +38,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            header.InnerText = IsNewDlp
-                                   ? string.Format("New Print Condition - Analyze (No DLP)")
-                                   : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+            //header.InnerText = IsNewDlp
+            //                       ? string.Format("New Print Condition - Analyze (No DLP)")
+            //                       : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
@@ -63,5 +66,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<int> MeasurementIds { get; set; }
 
         #endregion
+
+        protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
+        {
+            System.Threading.Thread.Sleep(5000);
+        }
     }
 }

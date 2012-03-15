@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         
         /// <summary>
+        /// upCreateDLP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCreateDLP;
+        
+        /// <summary>
         /// lbtnDownloadAndSaveDLP control.
         /// </summary>
         /// <remarks>
@@ -112,24 +121,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadWindowManager RadWindowManager;
         
         /// <summary>
-        /// CreateDLPWindow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadWindow CreateDLPWindow;
-        
-        /// <summary>
-        /// ucCreateDLP control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.CreateDLP ucCreateDLP;
-        
-        /// <summary>
         /// ConfirmSaveWindow control.
         /// </summary>
         /// <remarks>
@@ -139,13 +130,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadWindow ConfirmSaveWindow;
         
         /// <summary>
-        /// ConfirmSave control.
+        /// updateProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ConfirmSave ConfirmSave;
+        protected global::System.Web.UI.UpdateProgress updateProgress;
         
         /// <summary>
         /// hdnSelectedTabIndex control.
