@@ -23,8 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool IsNewDlp
         {
             get {
-                    return false;
-                    //return SessionManager.Instance.CurrentProject.IsNewlyCreated; 
+                   return SessionManager.Instance.CurrentProject.IsNewlyCreated; 
                 }
         }
 
@@ -38,9 +37,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //header.InnerText = IsNewDlp
-            //                       ? string.Format("New Print Condition - Analyze (No DLP)")
-            //                       : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+            header.InnerText = IsNewDlp
+                                   ? string.Format("New Print Condition - Analyze (No DLP)")
+                                   : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";

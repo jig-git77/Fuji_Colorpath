@@ -22,15 +22,15 @@
         .UpdateProgressBackground
         {
             z-index: 3003;
-            position: fixed !important;
-            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
-            background-color: #e8e8ea !important;
-            width: 100% !important;
-            height: 100% !important;
+            position: fixed;
+            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+            background-color: #555555 !important;
+            width: 100% ;
+            height: 100% ;
             top: 0px;
             left: 0px;
-            opacity: .1;
-            mozopacity: .1;
+            opacity: .4;
+            mozopacity: .4;
         }
     </style>
 </head>
@@ -47,10 +47,8 @@
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
             </div>
             <div id="divUpdate" style="color: #000; position: absolute; z-index: 1010">
-                <%--<img src= alt="Loading" style="vertical-align: middle;
-                    margin: 2px;" />
-                <br />--%>
-                Loading...
+                <img src="Images/process.gif" alt="Loading" style="vertical-align: middle;
+                    margin: 2px;" ></img>
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>

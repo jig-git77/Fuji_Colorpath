@@ -1,30 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmSave.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
-
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
 
 <script type="text/javascript" language="javascript">
-
+    
+    //Click on Optimiz Button
     function ChooseOptimize() {
             CloseConfirmSaveWindow();
-            //jQuery("div[id$=divUpdateCreateDLP]").show();
-            //window.parent.location = 'Export.aspx';
+            window.parent.jQuery('div[id$=divUpdateCreateDLP]').show();
+            window.parent.location = "Export.aspx";
         }
-
-        function CloseConfirmSaveWindow() {
+    //Click on Close Button
+    function CloseConfirmSaveWindow() {
             var oWindow = GetProjectInformationRadWindow();
             GetProjectInformationRadWindow().close();
             return false;
         }
-
-        function GetProjectInformationRadWindow() {
+    
+    function GetProjectInformationRadWindow() {
             var oWindow = null;
             if (window.radWindow) oWindow = window.radWindow;
             else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
             return oWindow;
         }
-
 </script>
  
 
@@ -43,7 +42,7 @@
                <%--     <asp:UpdatePanel ID="upCreateDLP" runat="server">
                 <ContentTemplate>--%>
                     <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" 
-                            OnClientClick="javascript:ChooseOptimize(); return true;" 
+                            OnClientClick="javascript:ChooseOptimize(); return false;" 
                             onclick="lbtnOptimize_Click">
                         <span> No, Optimize </span>
                     </asp:LinkButton>

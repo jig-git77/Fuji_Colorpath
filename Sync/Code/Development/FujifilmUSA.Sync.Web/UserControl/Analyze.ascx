@@ -220,16 +220,28 @@
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
+ <style>
+        .Alpha
+        {
+            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+            background-color: #4AB097 !important;
+            opacity: 100;
+            mozopacity: 100;
+        }
+    </style>
 <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" DisplayAfter="50"
             AssociatedUpdatePanelID="upCreateDLP">
             <ProgressTemplate>
-                <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
-                    VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
+                <AjaxToolkit:AlwaysVisibleControlExtender 
+                    ID="AlwaysVisibleControl" 
+                    HorizontalSide="Left"
+                    VerticalSide="Top"
+                    TargetControlID="updateProgress" 
+                    HorizontalOffset="325" 
+                    VerticalOffset="210"
+                    runat="server">
                 </AjaxToolkit:AlwaysVisibleControlExtender>
-                <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
-                    z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-                </div>
-                <div id="divUpdateCreateDLP" runat="server" style="color: #000; position: absolute; z-index: 1010">
+                <div id="divUpdateCreateDLP"  class="Alpha"   runat="server">
                     <uc:CreateDLP runat="server" ID="ucCreateDLP" />
                 </div>
             </ProgressTemplate>
