@@ -303,10 +303,11 @@
                     Width="730"
                     Height="400"
                     behaviors="Close, Move" Behavior="Close, Move"
+                    NavigateUrl="~/PopupConfirmSave.aspx"
                     >
-                    <ContentTemplate>
+                   <%-- <ContentTemplate>
                         <uc:SaveWindow ID="ucSaveWindow" runat="server" />
-                    </ContentTemplate>    
+                    </ContentTemplate>  --%>  
                 </telerik:RadWindow>
             </Windows>
 </telerik:RadWindowManager>

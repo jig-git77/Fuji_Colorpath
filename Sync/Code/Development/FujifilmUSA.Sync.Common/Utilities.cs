@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -252,5 +253,12 @@ namespace FujifilmUSA.Sync.Common
         {
             return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => Enum.GetName(typeof(T), value));
         }
+
+        public static void PopupWindowsRedirect(UserControl ucControl,string url)
+        {
+            ucControl.Page.ClientScript.RegisterClientScriptBlock(ucControl.GetType(), "UniqueKey", string.Format("window.parent.location='{0}';", url), true);
+        }
+
+
     }
 }

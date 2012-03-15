@@ -25,8 +25,6 @@
         border-style: none;
     }
     
-    
-    
     .RadGrid_Default td.rgPagerCell
     {
         -moz-border-bottom-colors: none;
@@ -86,7 +84,7 @@
     <div class="clear">
     </div>
     <div>
-        <asp:UpdatePanel ID="testPanel" runat="server">
+        <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="formDevice">
                     <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
@@ -133,27 +131,6 @@
                         </tr>
                         <tr>
                             <td>
-                                <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-                        <AjaxSettings>
-                            <telerik:AjaxSetting AjaxControlID="cmbCompany">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="cmbBranch"  LoadingPanelID="RadAjaxLoadingPanel1" />
-                                    <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                            <telerik:AjaxSetting AjaxControlID="cmbBranch">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                            <telerik:AjaxSetting AjaxControlID="rgDeviceList">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                        </AjaxSettings>
-                    </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Vista" />--%>
                                 <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                                     AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
@@ -194,20 +171,6 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <asp:UpdateProgress ID="UpdateProgress" runat="server" DynamicLayout="true" DisplayAfter="50"
-            AssociatedUpdatePanelID="testPanel">
-            <ProgressTemplate>
-                <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
-                    VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
-                </AjaxToolkit:AlwaysVisibleControlExtender>
-                <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
-                    z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-                </div>
-                <div id="divUpdate" style="color: #000; position: absolute; z-index: 1010">
-                    <ucCreateDLP:CreateDLP runat="server" ID="ucCreateDlpProgressBar" />
-                </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
     </div>
     <div class="clear">
     </div>

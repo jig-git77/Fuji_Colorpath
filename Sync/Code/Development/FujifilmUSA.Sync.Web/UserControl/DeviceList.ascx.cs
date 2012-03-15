@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbBranch.SelectedIndex != 0)
             {
-                System.Threading.Thread.Sleep(2000);
+              
                 BindDeviceList();
                 rgDeviceList.DataBind();
             }

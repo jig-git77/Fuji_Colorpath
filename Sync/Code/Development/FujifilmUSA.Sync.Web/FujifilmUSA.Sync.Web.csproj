@@ -67,10 +67,14 @@
   <ItemGroup>
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
+    <Content Include="PopupConfirmSave.aspx" />
+    <Content Include="PopupSaveProject.aspx" />
+    <Content Include="PopupClosePrintCondition.aspx" />
     <Content Include="Images\branch-manage-icon.png" />
     <Content Include="Images\company-manage-icon.png" />
     <Content Include="Images\user-manage-icon.png" />
     <Content Include="MeasurementDeviceList.aspx" />
+    <Content Include="PopupOpenPrintCondition.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="Export.aspx" />
     <Content Include="JQuery\jquery-1.7.1.js" />
@@ -298,12 +302,40 @@
     <Compile Include="AddCompanyManagement.aspx.designer.cs">
       <DependentUpon>AddCompanyManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupConfirmSave.aspx.cs">
+      <DependentUpon>PopupConfirmSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupConfirmSave.aspx.designer.cs">
+      <DependentUpon>PopupConfirmSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupSaveProject.aspx.cs">
+      <DependentUpon>PopupSaveProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupSaveProject.aspx.designer.cs">
+      <DependentUpon>PopupSaveProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupClosePrintCondition.aspx.cs">
+      <DependentUpon>PopupClosePrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupClosePrintCondition.aspx.designer.cs">
+      <DependentUpon>PopupClosePrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MeasurementDeviceList.aspx.cs">
       <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MeasurementDeviceList.aspx.designer.cs">
       <DependentUpon>MeasurementDeviceList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupOpenPrintCondition.aspx.cs">
+      <DependentUpon>PopupOpenPrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupOpenPrintCondition.aspx.designer.cs">
+      <DependentUpon>PopupOpenPrintCondition.aspx</DependentUpon>
     </Compile>
     <Compile Include="Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>

@@ -26,16 +26,8 @@
     <div style="margin-left: 10px; margin-right: 15px;">
         <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
     </div>
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-      <%--  <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="rgMeasurementDevice">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="rgMeasurementDevice" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>--%>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+      <asp:UpdatePanel ID="testPanel" runat="server">
+            <ContentTemplate>
     <telerik:RadGrid ID="rgMeasurementDevice" ShowHeader="true" AllowFilteringByColumn="true"
         AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
         EnableLinqExpressions="false" 
@@ -121,6 +113,8 @@
             </Columns>
         </MasterTableView>
     </telerik:RadGrid>
+    </ContentTemplate>
+    </asp:UpdatePanel>
 </div>
 <div class="admin_bottom">
     &nbsp;</div>

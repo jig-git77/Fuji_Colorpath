@@ -103,24 +103,11 @@
         </div>
     </div>
     <div class="listDevice" style="margin-left: 15px;">
+          <asp:UpdatePanel ID="testPanel" runat="server">
+            <ContentTemplate>
         <table cellpadding="0" cellspacing="0" border="0">
             <tr id="trListHeader" runat="server">
                 <td>
-                    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-                        <AjaxSettings>
-                            <telerik:AjaxSetting AjaxControlID="rgProjectList">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="rgProjectList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                            <telerik:AjaxSetting AjaxControlID="rgRadWindowManager">
-                                <UpdatedControls>
-                                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager" LoadingPanelID="RadAjaxLoadingPanel1" />
-                                </UpdatedControls>
-                            </telerik:AjaxSetting>
-                        </AjaxSettings>
-                    </telerik:RadAjaxManager>
-                    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="Vista" />
                     <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" 
                         AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                         EnableLinqExpressions="False" OnNeedDataSource="rgProjectList_NeedDataSource"
@@ -302,25 +289,27 @@
                 </td>
             </tr>
         </table>
+        </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
     <div class="clear">
     </div>
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move"
+                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" NavigateUrl="~/PopupOpenPrintCondition.aspx"
                 Behavior="Close, Move">
-                <ContentTemplate>
+               <%-- <ContentTemplate>
                     <uc:OpenPrintCondition ID="ucOpenPrintCondition" runat="server" />
-                </ContentTemplate>
+                </ContentTemplate>--%>
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move"
+                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" NavigateUrl="~/PopupClosePrintCondition.aspx"
                 Behavior="Close, Move">
-                <ContentTemplate>
+<%--                <ContentTemplate>
                     <uc:ClosePrintCondition ID="ucClosePrintCondition" runat="server" />
                 </ContentTemplate>
-            </telerik:RadWindow>
+--%>            </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
 </div>
