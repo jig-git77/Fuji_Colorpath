@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web.UI;
+using System.Text;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -6,7 +8,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         protected void lbtnReOptimize_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Measurement.aspx?ProjectName=''");
+            Common.Utilities.PopupWindowsRedirect(this,"Measurement.aspx");
         }
         protected void lbtnDownLoadCurrentDLP_Click(object sender, EventArgs e)
         {

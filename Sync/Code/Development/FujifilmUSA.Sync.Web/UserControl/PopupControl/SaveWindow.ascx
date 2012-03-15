@@ -1,5 +1,21 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SaveWindow.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SaveWindow" %>
+ 
+ <script language="javascript" type="text/javascript">
+     function Close() {
+            var oWindow = GetProjectInformationRadWindow();
+            GetProjectInformationRadWindow().close();
+            return false;
+        }
+
+        function GetProjectInformationRadWindow() {
+            var oWindow = null;
+            if (window.radWindow) oWindow = window.radWindow;
+            else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+            return oWindow;
+        } 
+
+</script>
 <div class="listDevice" style="margin-left: 10px">
     <table cellpadding="0" cellspacing="10" width="100%">
         <tr>

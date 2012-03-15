@@ -1,5 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
+
+  <script language="javascript" type="text/javascript">
+      function CloseReOptimize() {
+          var oWindow = GetProjectInformationRadWindow();
+          GetProjectInformationRadWindow().close();
+          //window.parent.location = "Measurement.aspx?ProjectName=''"
+          return false;
+      }
+   
+      function CloseClosePrintConditionWindow() {
+          var oWindow = GetProjectInformationRadWindow();
+          GetProjectInformationRadWindow().close();
+          return false;
+      }
+
+      function GetProjectInformationRadWindow() {
+          var oWindow = null;
+          if (window.radWindow) oWindow = window.radWindow;
+          else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+          return oWindow;
+      }
+
+</script>
+
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
@@ -26,7 +50,7 @@
                         <tr>
                             <td align="left">
                                 <div class="buttonleft" style="padding-left: 3px">
-                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnReOptimize_Click">
+                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript: CloseReOptimize(); return true;" OnClick="lbtnReOptimize_Click">
                 <span>Re Optimize</span>
                                     </asp:LinkButton>
                                 </div>

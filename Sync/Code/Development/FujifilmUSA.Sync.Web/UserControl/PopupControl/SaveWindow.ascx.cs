@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
             SessionManager.Instance.CurrentProject = Project;
-            Response.Redirect("Measurement.aspx");
+            Common.Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
         }
 
         #region IViewSaveWindow Members

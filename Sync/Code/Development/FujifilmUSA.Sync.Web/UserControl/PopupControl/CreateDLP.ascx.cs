@@ -10,21 +10,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class CreateDLP : System.Web.UI.UserControl
     {
-        #region Declaration
-        #endregion
-
-        #region Page events
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-        }
-        #endregion
-
-        protected void lbtnSave_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Measurement.aspx");
-        }
-        #region "Methods"
-        #endregion
-        
     }
 }

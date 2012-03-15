@@ -19,12 +19,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterConfirmSave.OptimizeDlp();
-            Response.Redirect("Export.aspx");
+            Common.Utilities.PopupWindowsRedirect(this, "Export.aspx"); 
         }
 
         protected void lbtnYes_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ProjectList.aspx");
+            Common.Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
         }
 
         #region IViewConfirmSave Members

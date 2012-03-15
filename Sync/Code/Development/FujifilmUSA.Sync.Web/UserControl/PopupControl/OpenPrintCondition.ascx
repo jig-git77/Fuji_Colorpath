@@ -1,5 +1,22 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OpenPrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition" %>
+  
+  <script language="javascript" type="text/javascript">
+      function CloseOpenPrintConditionWindow() {
+        var oWindow = GetProjectInformationRadWindow();
+        GetProjectInformationRadWindow().close();
+        return false;
+    }
+
+    function GetProjectInformationRadWindow() {
+        var oWindow = null;
+        if (window.radWindow) oWindow = window.radWindow;
+        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+        return oWindow;
+    } 
+
+</script>
+<asp:HiddenField ID="hdRadWindowClientID" runat ="server" Value="" />
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
