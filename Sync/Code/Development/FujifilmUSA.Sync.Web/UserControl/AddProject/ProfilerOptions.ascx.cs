@@ -54,6 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Method
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
+            //TODO: Set Profiler Option in project session...
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
