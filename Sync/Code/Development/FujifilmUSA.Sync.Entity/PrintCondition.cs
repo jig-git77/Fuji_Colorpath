@@ -9,6 +9,6 @@ namespace FujifilmUSA.Sync.Entity
         public string RipSettings { get; set; }
         public string TechnicianName { get; set; }
         public string Notes { get; set; }
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
     }
 }

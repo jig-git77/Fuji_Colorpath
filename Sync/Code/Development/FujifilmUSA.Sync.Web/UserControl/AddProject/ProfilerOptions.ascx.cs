@@ -38,23 +38,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
                 cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
                 ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
-                cmbSelectedPresets.DataSource = (List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption];
+                cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
                 cmbSelectedPresets.DataBind();
                 cmbSelectedPresets_SelectedIndexChanged(null, null);
             }
-            
-            //var dic = new Dictionary<int, string> { { 1, "Preserved Black" } };
-            //cmbSelectedPresets.DataSource = dic;
-            //cmbSelectedPresets.DataTextField = "Value";
-            //cmbSelectedPresets.DataValueField = "Key";
-            //cmbSelectedPresets.DataBind();
         }
         #endregion
 
         #region Method
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            //TODO: Set Profiler Option in project session...
+            SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+            var familyPreset =
+                ((List<DeviceFamilyProfilerOption>) ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                    x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+            familyPreset.ProfilerOptionPresets.ForEach(x =>
+                                                       SessionManager.Instance.CurrentProject.ProjectOption.
+                                                           Add(new ProjectOption()
+                                                                   {
+                                                                       ProfileTypeId = x.ProfileTypeId,
+                                                                       ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
+                                                                       ProfilerOptionValue = x.ProfilerOptionValue,
+                                                                   }));
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
@@ -69,7 +74,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (ViewState[_vsDeviceFamilyProfilerOption] != null)
             {
-                //txtProfileDescription.Text = "Hi";
                 txtProfileDescription.Text = ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue).ProfilerOptionsDesc;
             }
         }

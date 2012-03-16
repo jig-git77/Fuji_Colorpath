@@ -15,9 +15,9 @@ namespace FujifilmUSA.Sync.Entity
         public MeasurementSetting MeasurementSetting { get; set; }
         public List<OptimizeRun> OptimizeRuns { get; set; }
         public PrintCondition PrintCondition { get; set; }
-        public ProjectOption ProjectOption { get; set; }
+        public List<ProjectOption> ProjectOption { get; set; }
         public SourceProfile SourceProfile { get; set; }
-        public Device Device { get; set; }
+        //public Device Device { get; set; }
         public bool IsNewlyCreated { set; get; }
         public EOptimizeRunStatus Status { get; set; }
         public int ReferenceChartTypeId { get; set; }

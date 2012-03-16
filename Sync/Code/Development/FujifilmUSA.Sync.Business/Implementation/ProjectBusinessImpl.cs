@@ -111,19 +111,39 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
         {
-            var dstPresetList = new List<DeviceFamilyProfilerOption>();
+            var presetList = new List<DeviceFamilyProfilerOption>();
             var dsPresetList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetDeviceFamilyProfilerOption", new object[] { deviceFamilyId });
             if (dsPresetList != null && dsPresetList.Tables.Count > 0)
             {
-                dstPresetList = (dsPresetList.Tables[0].AsEnumerable().Select(
-                    Preset => new DeviceFamilyProfilerOption()
+                presetList = dsPresetList.Tables[0].AsEnumerable().Select(
+                    x => new DeviceFamilyProfilerOption()
                     {
-                        DeviceFamilyProfilerOptionId = DataReader.ReadInt(Preset,"DeviceFamilyProfilerOptionID"),
-                        ProfilerOptionsName = DataReader.ReadString(Preset, "ProfilerOptionsName"),
-                        ProfilerOptionsDesc = DataReader.ReadString(Preset,"ProfilerOptionsDesc"),
-                    })).ToList();
+                        DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
+                        ProfilerOptionsName = DataReader.ReadString(x, "ProfilerOptionsName"),
+                        ProfilerOptionsDesc = DataReader.ReadString(x, "ProfilerOptionsDesc"),
+                    }).ToList();
+
+                var profilerOptionPresets = dsPresetList.Tables[1].
+                    AsEnumerable().
+                    Select(x =>
+                           new ProfilerOptionPreset()
+                               {
+                                   DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "DeviceFamilyProfilerOptionID"),
+                                   ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
+                                   ProfilerOption = new ProfilerOption()
+                                                        {
+                                                            ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
+                                                            Option = DataReader.ReadString(x, "ProfilerOption")
+                                                        },
+                                   ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue")
+                               }).ToList();
+                presetList.
+                    ForEach(x =>
+                            x.ProfilerOptionPresets = profilerOptionPresets.
+                                                          Where(y => y.DeviceFamilyProfilerOptionId == x.DeviceFamilyProfilerOptionId).
+                                                          ToList());
             }
-            return dstPresetList;
+            return presetList;
         }
 
         public byte[] GetChartPreviewOnProjectId(int projectId)
