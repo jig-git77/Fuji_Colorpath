@@ -2,6 +2,44 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.CompanyManagement" %>
 <%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
 
+<style type="text/css">
+    div.RadGrid .rgRow
+    {
+        background: #F7F7F7;
+    }
+    div.RadGrid .rgAltRow
+    {
+        background: #F7F7F7;
+    }
+    .rgPager table
+    {
+        border-top: 0px;
+        border-bottom: 1px solid #000000;
+        border-spacing: 1pt;
+        width: 100%;
+    }
+    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
+    {
+        color: #003CA9;
+    }
+    .RadGrid_Default td.rgPagerCell
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #828282 #EEEEEE #EEEEEE;
+        border-style: solid;
+        border-width: 0px 0 0px 0px;
+    }
+    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td
+    {
+        border-style: none;
+        border-width: 0 0 1px;
+    }
+</style>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
@@ -25,7 +63,7 @@
         <telerik:RadGrid ID="rgCompany" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
             AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
             OnNeedDataSource="rgCompany_NeedDataSource" OnItemCommand="rgCompany_ItemCommand"
-            OnItemDataBound="rgCompany_ItemDataBound" Width="98%" >
+            OnItemDataBound="rgCompany_ItemDataBound" Width="98%" HeaderStyle-Font-Bold="true" >
             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
             <MasterTableView DataKeyNames="CompanyId,CompanyName,RegionId">
                 <Columns>
@@ -45,19 +83,65 @@
                             <asp:Label ID="lblRegionName" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="CompanyId" AllowFiltering="false" HeaderText=""
-                        UniqueName="Edit">
+                    <telerik:GridTemplateColumn 
+                                    UniqueName="IsActive" 
+                                    AllowFiltering="true" 
+                                    HeaderText="IsActive?"
+                                    DataField="IsActive" 
+                                    DataType="System.Boolean"
+                                    >
+                                    <ItemTemplate>
+                                        <asp:Image ID="imgIsActive" runat="server" />
+                                    </ItemTemplate>
+                                    <FilterTemplate>
+                                        <telerik:RadComboBox ID="RadComboBoxIsActive" 
+                                            AppendDataBoundItems="true" 
+                                            runat="server"
+                                            OnClientSelectedIndexChanged="IsActiveIndexChanged" 
+                                            AutoPostBack="false" Width="50"
+                                            DropDownWidth="70"
+                                            >
+                                            <Items>
+                                                <telerik:RadComboBoxItem Text="ALL" />
+                                                <telerik:RadComboBoxItem Text="1" Value="1" />
+                                                <telerik:RadComboBoxItem Text="0" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                        <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
+                                            <script type="text/javascript">
+                                              
+                                                function IsActiveIndexChanged(sender, args) {
+                                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                    var filterVal = args.get_item().get_value();
+                                                    if (filterVal == "") {
+                                                        tableView.filter("Bool", filterVal, "ALL");
+                                                    }
+                                                    else if (filterVal == "1") {
+                                                        tableView.filter("Bool", "1", "EqualTo");
+                                                    }
+                                                    else if (filterVal == "0") {
+                                                        tableView.filter("Bool", "0", "IsNull");
+                                                    }
+                                                } 
+
+                                            </script>
+                                        </telerik:RadScriptBlock>
+                                    </FilterTemplate>
+                                </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn 
+                        DataField="CompanyId" 
+                        AllowFiltering="true" 
+                        HeaderText=""
+                        UniqueName="Edit"
+                        HeaderStyle-Width="100">
+                        <FilterTemplate>
+                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt">
+                                                    <span> Clear Fillter </span>
+                                </asp:LinkButton>
+                                                
+                        </FilterTemplate>
                         <ItemTemplate>
-                            <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Company" AlternateText="Edit"
-                                ImageUrl="../Images/edit_icon.png" 
-                                CommandArgument ='<%# Eval("CompanyId") %>'
-                                CommandName="Edit" />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="CompanyId" AllowFiltering="false" HeaderText=""
-                        UniqueName="Delete">
-                        <ItemTemplate>
-                             <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
+                            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                                 <script type="text/javascript" language="javascript">
                                     function ConfirmDeleteCompany() {
                                         if (confirm('<%= CompanyManagement_DeleteCompany_Confirmation %>'))
@@ -67,13 +151,36 @@
                                     }
                                 </script>
                             </telerik:RadCodeBlock>
-                            <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Company" AlternateText="Delete"
-                                ImageUrl="../Images/delete_icon.png" 
-                                OnClientClick="javascript:ConfirmDeleteCompany();"
-                                CommandArgument ='<%# Eval("CompanyId") %>'
-                                CommandName="Delete" />
+
+                            <div>
+                                <center>
+                                <div style="width: 45px;">     
+                                    <div style="float:left; padding-right: 10px;">
+                                        <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Company" AlternateText="Edit"
+                                        ImageUrl="../Images/edit_icon.png" 
+                                        CommandArgument ='<%# Eval("CompanyId") %>'
+                                        CommandName="Edit" />
+                                    </div>
+                                    <div style="float:left;" >
+                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Company" AlternateText="Delete"
+                                        ImageUrl="../Images/delete_icon.png" 
+                                        OnClientClick="javascript:ConfirmDeleteCompany();"
+                                        CommandArgument ='<%# Eval("CompanyId") %>'
+                                        CommandName="Delete" />
+                                     </div>
+                                    <div class="clear"></div>
+                            </div>
+                            </center>
+                            </div>
+
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
+                    <%--<telerik:GridTemplateColumn DataField="CompanyId" AllowFiltering="false" HeaderText=""
+                        UniqueName="Delete">
+                        <ItemTemplate>
+                          
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>--%>
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>

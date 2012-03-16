@@ -1,13 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Login" %>
-
-<link href="../CSS/Common.css" rel="stylesheet" type="text/css" />
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<script type="text/javascript" language="javascript">
-    jQuery(document).ready(function () {
-        if (jQuery("[id*='txtPassword']").val() == '') {
-            jQuery("[id*='txtPassword']").val('Password');
-        }
-    });   
+<script language="javascript">
     function blurControl(obj, text) {
         if (jQuery(obj).val() == '') {
             jQuery(obj).val(text);
@@ -18,8 +11,6 @@
         { jQuery(obj).val(''); }
     }
 </script>
-    <link href="../CSS/Common.css" rel="stylesheet" type="text/css" />
-    <script src="../JQuery/jquery-1.7.1.js" type="text/javascript"></script>
 <div id="login_box">
     <div class="curve_top_login">
     </div>  
@@ -46,3 +37,10 @@
     <div class="curve_bottom">
         &nbsp;</div>
 </div>
+<script language="javascript">
+    jQuery(document).ready(function () {
+        if (jQuery("[id*='txtPassword']").val() == '') {
+            jQuery("[id*='txtPassword']").val('Password');
+        }
+    });   
+</script>

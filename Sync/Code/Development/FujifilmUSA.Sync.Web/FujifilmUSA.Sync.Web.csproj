@@ -67,6 +67,12 @@
   <ItemGroup>
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
+    <Content Include="BranchManagement.aspx" />
+    <Content Include="AddBranchManagement.aspx" />
+    <Content Include="Images\admin-icon-divider.png" />
+    <Content Include="Images\device-manage-icon.png" />
+    <Content Include="Images\dongle-manage.png" />
+    <Content Include="Images\processbar.gif" />
     <Content Include="PopupConfirmSave.aspx" />
     <Content Include="PopupSaveProject.aspx" />
     <Content Include="PopupClosePrintCondition.aspx" />
@@ -232,6 +238,8 @@
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
     <Content Include="UserControl\CompanyManagement.ascx" />
+    <Content Include="UserControl\BranchManagement.ascx" />
+    <Content Include="UserControl\AddBranchManagement.ascx" />
     <Content Include="UserControl\MeasurementDeviceList.ascx" />
     <Content Include="UserControl\AddCompanyManagement.ascx" />
     <Content Include="UserControl\Settings.ascx" />
@@ -301,6 +309,20 @@
     </Compile>
     <Compile Include="AddCompanyManagement.aspx.designer.cs">
       <DependentUpon>AddCompanyManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BranchManagement.aspx.cs">
+      <DependentUpon>BranchManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BranchManagement.aspx.designer.cs">
+      <DependentUpon>BranchManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddBranchManagement.aspx.cs">
+      <DependentUpon>AddBranchManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddBranchManagement.aspx.designer.cs">
+      <DependentUpon>AddBranchManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="PopupConfirmSave.aspx.cs">
       <DependentUpon>PopupConfirmSave.aspx</DependentUpon>
@@ -428,6 +450,20 @@
     </Compile>
     <Compile Include="UserControl\CompanyManagement.ascx.designer.cs">
       <DependentUpon>CompanyManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\BranchManagement.ascx.cs">
+      <DependentUpon>BranchManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\BranchManagement.ascx.designer.cs">
+      <DependentUpon>BranchManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddBranchManagement.ascx.cs">
+      <DependentUpon>AddBranchManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddBranchManagement.ascx.designer.cs">
+      <DependentUpon>AddBranchManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MeasurementDeviceList.ascx.cs">
       <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>

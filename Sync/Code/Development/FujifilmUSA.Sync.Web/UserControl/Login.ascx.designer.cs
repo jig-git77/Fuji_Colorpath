@@ -7,8 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FujifilmUSA.Sync.Web.UserControl
-{
+namespace FujifilmUSA.Sync.Web.UserControl {
     
     
     public partial class Login {
