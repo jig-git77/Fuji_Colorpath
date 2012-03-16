@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Data;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
 using System.Collections.Generic;
+using FujifilmUSA.Sync.Entity;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -31,6 +34,39 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }
             }
             return response;
+        }
+
+        public int SaveMeasurement(Measurement measurement)
+        {
+            var measurementPatches = new XElement("MeasurementPatches",
+                                                  measurement.MeasurementPatches.
+                                                      Select(x =>
+                                                             new XElement("MeasurementPatch",
+                                                                          new XAttribute("SampleName", x.SampleName),
+                                                                          new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                          new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                          new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                          new XAttribute("CIELAB_L", x.CielabL),
+                                                                          new XAttribute("CIELAB_a", x.CielabA),
+                                                                          new XAttribute("CIELAB_b", x.CielabB)
+                                                                 )).ToList());
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            DataAccessFactory.
+                Instance.
+                ExecuteProcedure("CPSync4D.CreateMeasurement",
+                                 new List<Parameters>()
+                                     {
+                                         new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                         new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
+                                         new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                         new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                         new Parameters() {ParameterName = "@MeasurementPatches", Type = DbType.Xml, Value = measurementPatches},
+                                     },
+                                 new List<Parameters>()
+                                     {
+                                         outParam
+                                     });
+            return Convert.ToInt32(outParam.Value);
         }
 
         #endregion

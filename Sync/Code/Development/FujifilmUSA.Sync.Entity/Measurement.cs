@@ -11,6 +11,6 @@ namespace FujifilmUSA.Sync.Entity
         public short ReferenceChartTypeId { get; set; }
         public bool IsUsed { get; set; }
         public List<MeasurementPatch> MeasurementPatches { get; set; }
-        public OptimizeRun OptimizeRun { get; set; }
+        //public OptimizeRun OptimizeRun { get; set; }
     }
 }

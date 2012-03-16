@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
             SessionManager.Instance.CurrentProject = Project;

@@ -13,6 +13,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
+        private string vsIsPostBack = "_IsPostBack";
         #endregion
 
         #region "Page Events"
@@ -23,14 +24,44 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindMeasurementDevice();
-            BindIlluminant();
-            BindObserverType();
+            if (ViewState[vsIsPostBack] == null)
+            {
+                BindMeasurementDevice();
+                BindIlluminant();
+                BindObserverType();
+                ViewState[vsIsPostBack] = true;
+            }
         }
         #endregion
 
+        #region Control Events
+
+        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.MeasurementSetting =
+                new MeasurementSetting()
+                    {
+                        Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue),
+                        ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
+                        MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
+                        ReferenceChartTypeId = Convert.ToInt16(cmbAlignmentChart.SelectedValue)
+                    };
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+        }
+
+        protected void cmbMeasurementDevice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindAlignmentChart();
+        }
+
+        #endregion
+
+        #region Methods
         private void BindMeasurementDevice()
         {
+            if (cmbMeasurementDevice.DataSource != null) return;
+
             deviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetMeasurementDevice();
             cmbMeasurementDevice.DataValueField = "Key";
@@ -42,6 +73,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindIlluminant()
         {
+            if (cmbIlluminant.DataSource != null) return;
+
             _presenterMeasurementSetting.GetIlluminant();
             cmbIlluminant.DataValueField = "IlluminantID";
             cmbIlluminant.DataTextField = "IlluminantType";
@@ -51,12 +84,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindObserverType()
         {
+            if (cmbObserver.DataSource != null) return;
+
             _presenterMeasurementSetting.GetObserverType();
             cmbObserver.DataValueField = "ObserverTypeID";
             cmbObserver.DataTextField = "Type";
             cmbObserver.DataSource = Observer;
             cmbObserver.DataBind();
-
         }
 
         private void BindAlignmentChart()
@@ -68,6 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbAlignmentChart.DataSource = ReferenceChartType;
             cmbAlignmentChart.DataBind();
         }
+        #endregion
 
         #region IViewMeasurementSetting Members
         public List<Illuminant> Illumin { get; set; }
@@ -77,21 +112,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int MeasurementDeviceID { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         #endregion
-
-        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentProject.MeasurementSetting = new MeasurementSetting()
-            {
-
-            };
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
-            ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
-        }
-
-        protected void cmbMeasurementDevice_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindAlignmentChart();
-        }
-
     }
 }

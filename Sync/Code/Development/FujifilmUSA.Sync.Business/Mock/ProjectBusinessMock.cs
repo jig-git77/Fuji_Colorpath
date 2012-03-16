@@ -53,6 +53,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
+        public Project SaveProject(Project project)
+        {
+            return new Project();
+        }
+
         public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
         {
             return new List<DeviceFamilyProfilerOption>();

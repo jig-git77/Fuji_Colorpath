@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.DataAccess;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -62,7 +63,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         ProjectName = DataReader.ReadString(x, "ProjectName"),
                         DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                         IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                        SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                        SourceProfile = new SourceProfile() { SourceProfileId = DataReader.ReadShort(x, "SourceProfileId") },
                         CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                         PrintCondition = new PrintCondition() { Media = DataReader.ReadString(x, "Media"), Colorant = DataReader.ReadString(x, "Colorant"), RipSettings = DataReader.ReadString(x, "RipSettings") },
                         Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
@@ -163,6 +164,53 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public byte[] GetLastOptimizedDlp(int projectId)
         {
             return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetLastOptimizedDlp", new object[] { projectId });
+        }
+
+        public Project SaveProject(Project project)
+        {
+            var projectOptions = new XElement("ProjectOptions",
+                                                  project.ProjectOption.
+                                                      Select(x =>
+                                                             new XElement("ProjectOption",
+                                                                          new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                          new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
+                                                                          new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                 )).ToList());
+            var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
+            DataAccessFactory.
+                Instance.
+                ExecuteProcedure("CPSync4D.CreateProject",
+                                 new List<Parameters>()
+                                     {
+                                         new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
+                                         new Parameters() {ParameterName = "@SourceProfileID", Type = DbType.Int32, Value = project.SourceProfile.SourceProfileId},
+                                         new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
+                                         new Parameters() {ParameterName = "@CreateDate", Type = DbType.DateTime, Value = project.CreateDate.AddMilliseconds(-project.CreateDate.Millisecond)},
+                                         new Parameters() {ParameterName = "@Media", Size = 50, Type = DbType.String, Value = project.PrintCondition.Media},
+                                         new Parameters() {ParameterName = "@Colorant", Size = 50, Type = DbType.String, Value = project.PrintCondition.Colorant},
+                                         new Parameters() {ParameterName = "@RipSettings", Size = 50, Type = DbType.String, Value = project.PrintCondition.RipSettings},
+                                         new Parameters() {ParameterName = "@TechnicalName", Size = 30, Type = DbType.String, Value = project.PrintCondition.TechnicianName},
+                                         new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.PrintCondition.Notes},
+                                         new Parameters() {ParameterName = "@ObserverType", Type = DbType.Int16, Value = project.MeasurementSetting.ObserverType},
+                                         new Parameters() {ParameterName = "@Illuminant", Type = DbType.Int16, Value = project.MeasurementSetting.Illuminant},
+                                         new Parameters() {ParameterName = "@UVIncluded", Type = DbType.Boolean, Value = project.MeasurementSetting.UvIncluded},
+                                         new Parameters() {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
+                                         new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartTypeId},
+                                         new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()}
+                                     },
+                                 new List<Parameters>()
+                                     {
+                                         outParam
+                                     });
+            if (outParam.Value != null)
+            {
+                var projectId = Convert.ToInt32(outParam.Value);
+                return GetProjectDetail(projectId);
+            }
+            else
+            {
+                return new Project();
+            }
         }
 
         public List<Illuminant> GetIlluminantList()

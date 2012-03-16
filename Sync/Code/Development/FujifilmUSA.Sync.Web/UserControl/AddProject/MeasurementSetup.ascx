@@ -5,7 +5,8 @@
     <h1 id="hTitle" runat="server">
         New Print Condition - Measurement Setup
     </h1>
-    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" ValidationGroup="vgMeasurementSetup" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" ValidationGroup="vgMeasurementSetup"
+        CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" />
             Preview</span></asp:LinkButton>
@@ -42,8 +43,7 @@
                                         </td>
                                         <td>
                                             <div style="float: left;">
-                                                <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" 
-                                                    CssClass="select" OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged">
+                                                <asp:DropDownList ID="cmbMeasurementDevice" AutoPostBack="true" runat="server" Width="200px" OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged" CssClass="select">
                                                 </asp:DropDownList>
                                             </div>
                                             <div style="float: left">

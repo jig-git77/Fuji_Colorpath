@@ -42,7 +42,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject = new Project() { IsNewlyCreated = true };
+            SessionManager.Instance.CurrentProject = new Project()
+                                                         {
+                                                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                                                             IsUsed = true,
+                                                             IsNewlyCreated = true
+                                                         };
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
@@ -101,24 +106,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
                 var lblStandard = e.Item.FindControl("lblStandard") as Label;
-                if (lblStandard != null && SourceProfile.ContainsKey(project.SourceProfileId))
-                    lblStandard.Text = SourceProfile[project.SourceProfileId];
+                if (lblStandard != null && SourceProfile.ContainsKey(project.SourceProfile.SourceProfileId))
+                    lblStandard.Text = SourceProfile[project.SourceProfile.SourceProfileId];
             }
         }
 
         //Print Standard Rad Combobox event     
         protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
         {
-            RadComboBox combo = sender as RadComboBox;
+            var combo = sender as RadComboBox;
+            if (combo == null) return;
+
             GetSourceProfiles();
             BindSearchPrintStandardType(combo);
-            combo.SelectedValue = hdSelectedSourceProfileId.Value.ToString();
+            combo.SelectedValue = hdSelectedSourceProfileId.Value;
         }
         protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             hdSelectedSourceProfileId.Value = e.Value;
-            //rgProjectList.MasterTableView.FilterExpression = "([SourceProfileId] = '" + e.Value + "')"; ;
-            //rgProjectList.MasterTableView.Rebind();
         }
         #endregion
 

@@ -15,7 +15,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Declaration"
         private string _vsSourceProfile = "vsSourceProfile";
-        //private PresenterProjectList _presenterProjectList;
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
 
@@ -27,10 +26,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            {
                 BindProfileSource();
-            }
         }
         #endregion
 
@@ -39,35 +35,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.Instance.CurrentProject.SourceProfile = new SourceProfile
             {
-                SourceProfileId = (short)Convert.ToInt32(cmbSourceProfile.SelectedValue),
+                SourceProfileId = Convert.ToInt16(cmbSourceProfile.SelectedValue),
             };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
-        #endregion
-
-        #region Method
-
-        private void BindProfileSource()
-        {
-            if (ViewState[_vsSourceProfile] == null)
-            {
-                _presenterTargetColorspace.GetSourceProfile();
-                cmbSourceProfile.DataValueField = "SourceProfileID";
-                cmbSourceProfile.DataTextField = "ProfileName";
-                ViewState[_vsSourceProfile] = SourceProfile;
-                cmbSourceProfile.DataSource = (List<SourceProfile>)ViewState[_vsSourceProfile];
-                cmbSourceProfile.DataBind();
-                cmbSourceProfile_SelectedIndexChanged(null, null);
-            }
-        }
-
-        #endregion
-
-        #region IViewTargetColorspace Members
-        public List<SourceProfile> SourceProfile { get; set; }
-        #endregion
 
         protected void cmbSourceProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -76,5 +49,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtProfileDescription.Text = ((List<SourceProfile>)ViewState[_vsSourceProfile]).Single(x => x.SourceProfileId.ToString() == cmbSourceProfile.SelectedValue).ProfileDesc;
             }
         }
+        #endregion
+
+        #region Method
+
+        private void BindProfileSource()
+        {
+            if (ViewState[_vsSourceProfile] != null) return;
+
+            _presenterTargetColorspace.GetSourceProfile();
+            cmbSourceProfile.DataValueField = "SourceProfileID";
+            cmbSourceProfile.DataTextField = "ProfileName";
+            ViewState[_vsSourceProfile] = SourceProfile;
+            cmbSourceProfile.DataSource = (List<SourceProfile>)ViewState[_vsSourceProfile];
+            cmbSourceProfile.DataBind();
+            cmbSourceProfile_SelectedIndexChanged(null, null);
+        }
+
+        #endregion
+
+        #region IViewTargetColorspace Members
+        public List<SourceProfile> SourceProfile { get; set; }
+        #endregion
     }
 }

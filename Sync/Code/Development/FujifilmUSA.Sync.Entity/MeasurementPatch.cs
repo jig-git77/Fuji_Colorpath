@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Entity
         public decimal? Δe { get; set; }
         public decimal? Δe94 { get; set; }
         public decimal? Δe2000 { get; set; }
-        public List<MeasuredColorChar> MeasuredColorChars { get; set; }
-        public Measurement Measurement { get; set; }
+        //public List<MeasuredColorChar> MeasuredColorChars { get; set; }
+        //public Measurement Measurement { get; set; }
     }
 }

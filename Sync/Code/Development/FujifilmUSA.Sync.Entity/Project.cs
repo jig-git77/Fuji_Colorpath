@@ -6,7 +6,6 @@ namespace FujifilmUSA.Sync.Entity
     {
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
-        public short SourceProfileId { get; set; }
         public byte[] DestinationProfile { get; set; }
         public string ProjectName { get; set; }
         public DateTime CreateDate { get; set; }

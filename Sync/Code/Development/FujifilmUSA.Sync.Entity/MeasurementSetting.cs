@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool UvIncluded { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public short ReferenceChartTypeId { get; set; }
-        public Project Project { get; set; }
-        public MeasurementDevice MeasurementDevice { get; set; }
+        //public Project Project { get; set; }
+        //public MeasurementDevice MeasurementDevice { get; set; }
     }
 }

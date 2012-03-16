@@ -6,7 +6,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectDescription : System.Web.UI.UserControl
     {
-
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -16,7 +15,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-
 
         #region Methods
         private void LoadDeviceInfoFromSession()
@@ -29,7 +27,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-
         #region Control Events
         protected void lnkbtnPrintDescription_Click(object sender, EventArgs e)
         {
@@ -37,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                 Media = txtMedia.Text.Trim(),
                                                                                 Colorant=txtColorant.Text.Trim(),
                                                                                 RipSettings=txtRipSetting.Text.Trim(),
-                                                                                Notes=txtNotes.Text,
+                                                                                Notes=txtNotes.Text.Trim(),
                                                                                 TechnicianName=txtTechnicianName.Text.Trim()
                                                                             };
 
