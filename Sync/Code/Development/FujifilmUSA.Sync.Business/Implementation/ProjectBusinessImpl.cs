@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Project> GetProjectsByDeviceId(int deviceId)
         {
             var objProjectList = new List<Project>();
-            var dsProjectList = DataAccessFactory.Instance.GetDsResult("[uspProjectByDeviceID]", new object[] { deviceId });
+            var dsProjectList = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetProjectList", new object[] { deviceId });
             if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
             {
                 objProjectList = dsProjectList.Tables[0].AsEnumerable().

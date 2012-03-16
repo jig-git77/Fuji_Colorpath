@@ -99,7 +99,7 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
-                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged1" AutoPostBack="true"
+                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true"
                                                 CssClass="select" Width="180px">
                                             </asp:DropDownList>
                                         </td>
@@ -111,7 +111,7 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged1" AutoPostBack="true"
+                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true"
                                                 CssClass="select" Width="180px">
                                             </asp:DropDownList>
                                         </td>

@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control events
-        protected void cmbCompany_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBranch.Items.Clear();
             if (cmbCompany.SelectedIndex != 0)
@@ -47,14 +47,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
                 cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-                rgDeviceList.Visible = cmbCompany.SelectedIndex != 0;
+            rgDeviceList.Visible = cmbCompany.SelectedIndex != 0;
 
         }
-        protected void cmbBranch_SelectedIndexChanged1(object sender, EventArgs e)
+        protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbBranch.SelectedIndex != 0)
             {
-              
                 BindDeviceList();
                 rgDeviceList.DataBind();
             }
@@ -65,14 +64,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentDevice = new Device()
                                                             {
-                                                                DeviceId = Convert.ToInt32(((GridDataItem) e.Item).GetDataKeyValue("DeviceId")),
-                                                                DeviceName = ((GridDataItem) e.Item).GetDataKeyValue("DeviceName").ToString(),
+                                                                DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
+                                                                DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
                                                                 DeviceFamily = new DeviceFamily()
                                                                                    {
                                                                                        DeviceFamilyId =
-                                                                                           Convert.ToInt16(((GridDataItem) e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
+                                                                                           Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
                                                                                        DeviceFamilyDesc =
-                                                                                           ((GridDataItem) e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
+                                                                                           ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
                                                                                    }
                                                             };
                 Response.Redirect("OperationSelection.aspx");
@@ -102,9 +101,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
         }
 
-        #endregion
-
-        #region Method
         private void BindDeviceList()
         {
             if (cmbBranch.SelectedIndex > 0 && cmbCompany.SelectedIndex > 0)
@@ -118,10 +114,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterdevice.DeviceListById();
                 rgDeviceList.DataSource = DeviceListById;
             }
-           
-        }
 
-       
+        }
 
         #endregion
 
