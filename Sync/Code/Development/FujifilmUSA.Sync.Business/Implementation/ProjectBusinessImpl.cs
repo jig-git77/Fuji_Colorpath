@@ -81,9 +81,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
         {
-            var dsProjectOption = DataAccessFactory.Instance.GetDsResult(
-                "CPSync4D.GetProjectOptions",
-                new object[] { projectId, Convert.ToInt32(type) });
+            var dsProjectOption = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetProjectOptions",
+                                    new object[] { projectId, Convert.ToInt32(type) });
             var projectOptions = dsProjectOption.Tables[0].AsEnumerable().
                 Select(x =>
                        new KeyValuePair<string, string>(
@@ -164,6 +163,68 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public byte[] GetLastOptimizedDlp(int projectId)
         {
             return (byte[])DataAccessFactory.Instance.GetScalar("CPSync4D.GetLastOptimizedDlp", new object[] { projectId });
+        }
+
+        public List<Illuminant> GetIlluminantList()
+        {
+            var dstIlluminantList = new List<Illuminant>();
+            var dsIlluminantList = DataAccessFactory.Instance.GetDsResult("CP.GetIlluminantList", new object[] { });
+            if (dsIlluminantList != null && dsIlluminantList.Tables.Count > 0)
+            {
+                dstIlluminantList = (dsIlluminantList.Tables[0].AsEnumerable().Select(
+                    Illumin => new Illuminant()
+                    {
+                        IlluminantId = DataReader.ReadShort(Illumin, "IlluminantID"),
+                        IlluminantType = DataReader.ReadString(Illumin, "IlluminantType"),
+                    })).ToList();
+            }
+            return dstIlluminantList;
+        }
+
+        public List<ObserverType> GetObserverTypeList()
+        {
+            var dstObserverTypeList = new List<ObserverType>();
+            var dsObserverTypeList = DataAccessFactory.Instance.GetDsResult("CP.GetObserverTypeList", new object[] { });
+            if (dsObserverTypeList != null && dsObserverTypeList.Tables.Count > 0)
+            {
+                dstObserverTypeList = (dsObserverTypeList.Tables[0].AsEnumerable().Select(
+                    Observer => new ObserverType()
+                    {
+                        ObserverTypeId = DataReader.ReadShort(Observer, "ObserverTypeID"),
+                        Type = DataReader.ReadString(Observer, "ObserverType"),
+                    })).ToList();
+            }
+            return dstObserverTypeList;
+        }
+
+        public Dictionary<int, string> GetMeasurementDeviceList(int deviceId)
+        {
+            var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
+                                        new object[] { deviceId });
+            var measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
+                Select(x =>
+                        new KeyValuePair<int, string>(
+                            DataReader.ReadInt(x, "MeasurementDeviceID"),
+                            DataReader.ReadString(x, "MeasurementDevi"))).ToDictionary(x => x.Key, x => x.Value);
+
+            return measurementDevice;
+        }
+
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId)
+        {
+            var presetList = new List<ReferenceChartType>();
+            var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId });
+            if (dsPresetList != null && dsPresetList.Tables.Count > 0)
+            {
+                presetList = dsPresetList.Tables[0].AsEnumerable().Select(
+                    x => new ReferenceChartType()
+                    {
+                        ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                        ChartName = DataReader.ReadString(x, "ChartName"),
+                        ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
+                    }).ToList();
+            }
+            return presetList;
         }
 
         #endregion

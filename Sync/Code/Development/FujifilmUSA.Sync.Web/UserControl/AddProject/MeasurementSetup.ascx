@@ -42,7 +42,8 @@
                                         </td>
                                         <td>
                                             <div style="float: left;">
-                                                <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" CssClass="select">
+                                                <asp:DropDownList ID="cmbMeasurementDevice" runat="server" Width="200px" 
+                                                    CssClass="select" OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                             <div style="float: left">

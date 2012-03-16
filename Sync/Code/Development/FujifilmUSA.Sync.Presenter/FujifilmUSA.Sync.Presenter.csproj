@@ -84,6 +84,7 @@
     <Compile Include="PresenterDeviceFamilyProfilerOption.cs" />
     <Compile Include="PresenterExport.cs" />
     <Compile Include="PresenterLogin.cs" />
+    <Compile Include="PresenterMeasurementSetting.cs" />
     <Compile Include="PresenterOpenPrintCondition.cs" />
     <Compile Include="PresenterProjectList.cs" />
     <Compile Include="PresenterDevice.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="ViewInterface\IViewDeviceFamilyProfilerOption.cs" />
     <Compile Include="ViewInterface\IViewExport.cs" />
     <Compile Include="ViewInterface\IViewLogin.cs" />
+    <Compile Include="ViewInterface\IViewMeasurementSetting.cs" />
     <Compile Include="ViewInterface\IViewOpenPrintCondition.cs" />
     <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewDevice.cs" />

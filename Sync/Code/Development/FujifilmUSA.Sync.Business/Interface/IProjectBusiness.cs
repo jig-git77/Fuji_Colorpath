@@ -12,10 +12,12 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Project> GetProjectsByDeviceId(int deviceId);
         int DeleteProject(int projectId);
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
-        //Dictionary<int, string> GetSourceProfileList();
         List<SourceProfile> GetSourceProfileList();
-        //Dictionary<int, string> GetDeviceFamilyProfilerOptionPreset();
         List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId);
+        List<Illuminant> GetIlluminantList();
+        List<ObserverType> GetObserverTypeList();
+        Dictionary<int, string> GetMeasurementDeviceList(int deviceId);
+        List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID);
         byte[] GetChartPreviewOnProjectId(int projectId);
         byte[] GetSourceProfile(int projectId);
         byte[] GetDestinationProfile(int projectId);

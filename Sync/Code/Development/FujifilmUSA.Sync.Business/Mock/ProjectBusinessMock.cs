@@ -58,6 +58,26 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<DeviceFamilyProfilerOption>();
         }
 
+        public List<Illuminant> GetIlluminantList()
+        {
+            return new List<Illuminant>();
+        }
+
+        public List<ObserverType> GetObserverTypeList()
+        {
+            return new List<ObserverType>();
+        }
+
+        public Dictionary<int, string> GetMeasurementDeviceList(int deviceId)
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID)
+        {
+            return new List<ReferenceChartType>();
+        }
+
         #endregion
     }
 }
