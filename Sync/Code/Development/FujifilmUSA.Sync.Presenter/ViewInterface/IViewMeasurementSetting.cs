@@ -17,5 +17,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         int MeasurementDeviceID { get; set; }
         List<ReferenceChartType> ReferenceChartType { get; set; }
+
+        int ReferenceChartTypeId { get; set; }
+
+        byte[] ReferenceChartTypeImage { get; set; }
     }
 }

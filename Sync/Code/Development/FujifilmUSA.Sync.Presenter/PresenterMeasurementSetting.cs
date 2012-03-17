@@ -37,5 +37,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewMeasurementSetting.ReferenceChartType = task.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceID);
         }
 
+        public void GetReferenceChartTypeImage()
+        {
+            var task = BusinessFactory<IProjectBusiness>.CreateObject();
+            _viewMeasurementSetting.ReferenceChartTypeImage = task.GetReferenceChartTypeImage(_viewMeasurementSetting.ReferenceChartTypeId);
+        }
+
     }
 }

@@ -55,6 +55,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindAlignmentChart();
         }
 
+        protected void cmbAlignmentChart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayChartImage();
+        }
+
         #endregion
 
         #region Methods
@@ -101,6 +106,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbAlignmentChart.DataTextField = "ChartName";
             cmbAlignmentChart.DataSource = ReferenceChartType;
             cmbAlignmentChart.DataBind();
+            cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+        }
+
+        private void DisplayChartImage()
+        {
+            imgChart.ImageUrl = "ShowImage.aspx?id="+ Convert.ToString(cmbAlignmentChart.SelectedValue);
         }
         #endregion
 
@@ -111,6 +122,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> Measurement { get; set; }
         public int MeasurementDeviceID { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
+        public byte[] ReferenceChartTypeImage { get; set; }
+        public int ReferenceChartTypeId { get; set; }
         #endregion
     }
 }

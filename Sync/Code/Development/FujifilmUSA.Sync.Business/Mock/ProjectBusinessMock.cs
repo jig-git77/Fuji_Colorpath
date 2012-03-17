@@ -83,6 +83,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ReferenceChartType>();
         }
 
+        public byte[] GetReferenceChartTypeImage(int ReferenceChartTypeID)
+        {
+            return new byte[1];
+        }
+
         #endregion
     }
 }

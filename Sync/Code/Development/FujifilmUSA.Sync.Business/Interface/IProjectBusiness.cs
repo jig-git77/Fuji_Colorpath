@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<ObserverType> GetObserverTypeList();
         Dictionary<int, string> GetMeasurementDeviceList(int deviceId);
         List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID);
+        byte[] GetReferenceChartTypeImage(int ReferenceChartTypeID);
         byte[] GetChartPreviewOnProjectId(int projectId);
         byte[] GetSourceProfile(int projectId);
         byte[] GetDestinationProfile(int projectId);

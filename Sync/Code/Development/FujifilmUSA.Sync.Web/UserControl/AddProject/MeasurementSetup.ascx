@@ -130,15 +130,13 @@
                                             <span>Alignment Chart:</span>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select">
+                                            <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="cmbAlignmentChart_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">
-                                            <asp:TextBox ID="txtChartPriview" runat="server" Width="99%" Height="200px" TextMode="MultiLine"
-                                                Enabled="false" ReadOnly="true" Text="chart priview">
-                                            </asp:TextBox>
+                                        <td colspan="2" align="center">
+                                            <asp:Image ID="imgChart" runat="server" Width="600px" Height="450px" />
                                         </td>
                                     </tr>
                                 </table>

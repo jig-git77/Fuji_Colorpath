@@ -275,6 +275,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
+        public byte[] GetReferenceChartTypeImage(int ReferenceChartTypeID)
+        {
+            byte[] imageByte = null;
+            var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartImage", new object[] { ReferenceChartTypeID });
+            if (dsPresetList != null && dsPresetList.Tables.Count > 0)
+            {
+                imageByte = dsPresetList.Tables[0].AsEnumerable().Select(
+                    x => new ReferenceChartType()
+                    {
+                        ChartPreview = DataReader.ReadByteArray(x, "ChartPreview")
+
+                    }).SingleOrDefault().ChartPreview;
+            }
+            return imageByte;
+        }
+
+
+
         #endregion
     }
 }

@@ -237,6 +237,7 @@
     <Content Include="OperationSelection.aspx" />
     <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
+    <Content Include="UserControl\AddProject\ShowImage.aspx" />
     <Content Include="UserControl\CompanyManagement.ascx" />
     <Content Include="UserControl\BranchManagement.ascx" />
     <Content Include="UserControl\AddBranchManagement.ascx" />
@@ -444,6 +445,13 @@
       <DependentUpon>ProjectList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\AddProject\ShowImage.aspx.cs">
+      <DependentUpon>ShowImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\ShowImage.aspx.designer.cs">
+      <DependentUpon>ShowImage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\CompanyManagement.ascx.cs">
       <DependentUpon>CompanyManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -747,7 +755,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
