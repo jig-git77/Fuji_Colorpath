@@ -5,7 +5,7 @@
 <%@ Reference Control="~/UserControl/AddProject/TargetColorSpace.ascx" %>
 <%@ Reference Control="~/UserControl/AddProject/ProfilerOptions.ascx" %>
 <%@ Reference Control="~/UserControl/AddProject/MeasurementSetup.ascx" %>
-<%@ Reference Control="~/UserControl/AddProject/SavePrintCondition.ascx" %>
+<%@ Reference Control="~/UserControl/AddProject/PreviewPrintCondition.ascx" %>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">

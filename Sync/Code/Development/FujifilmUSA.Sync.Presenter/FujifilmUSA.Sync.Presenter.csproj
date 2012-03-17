@@ -86,6 +86,7 @@
     <Compile Include="PresenterLogin.cs" />
     <Compile Include="PresenterMeasurementSetting.cs" />
     <Compile Include="PresenterOpenPrintCondition.cs" />
+    <Compile Include="PresenterPreviewPrintCondition.cs" />
     <Compile Include="PresenterProjectList.cs" />
     <Compile Include="PresenterDevice.cs" />
     <Compile Include="PresenterSaveWindow.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="ViewInterface\IViewLogin.cs" />
     <Compile Include="ViewInterface\IViewMeasurementSetting.cs" />
     <Compile Include="ViewInterface\IViewOpenPrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewPreviewPrintCondition.cs" />
     <Compile Include="ViewInterface\IViewProjectList.cs" />
     <Compile Include="ViewInterface\IViewDevice.cs" />
     <Compile Include="ViewInterface\IViewSaveWindow.cs" />

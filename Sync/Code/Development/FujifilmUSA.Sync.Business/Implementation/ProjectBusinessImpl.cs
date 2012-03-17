@@ -275,6 +275,42 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId)
+        {
+            var data = new Dictionary<string, string>();
+            var dsPreviewData = DataAccessFactory.Instance.GetDsResult("CP.GetPreviewPrintDetail",
+                    new object[] { 
+                        MeasurementDeviceId, 
+                        illuminantId, 
+                        observerTypeId, 
+                        referenceChartTypeId, 
+                        deviceFamilyProfilerOptionId });
+
+            if (dsPreviewData.Tables[0].Rows.Count > 0)
+            {
+                data.Add("MeasurementDeviceId", dsPreviewData.Tables[0].Rows[0]["MeasurementDevice"].ToString());
+                
+            }
+            if (dsPreviewData.Tables[1].Rows.Count > 0)
+            {
+                data.Add("illuminantId", dsPreviewData.Tables[1].Rows[0]["IlluminantType"].ToString());
+            }
+            if (dsPreviewData.Tables[2].Rows.Count > 0)
+            {
+                data.Add("observerTypeId", dsPreviewData.Tables[2].Rows[0]["ObserverType"].ToString());
+            }
+            if (dsPreviewData.Tables[3].Rows.Count > 0)
+            {
+                data.Add("referenceChartTypeId", dsPreviewData.Tables[3].Rows[0]["ChartName"].ToString());
+            }
+            if (dsPreviewData.Tables[4].Rows.Count > 0)
+            {
+                data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsName"].ToString());
+                data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsDesc"].ToString());
+            }
+            return data;
+        }
+
         public byte[] GetReferenceChartTypeImage(int ReferenceChartTypeID)
         {
             byte[] imageByte = null;

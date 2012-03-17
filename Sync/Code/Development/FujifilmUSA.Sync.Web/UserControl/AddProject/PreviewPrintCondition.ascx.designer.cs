@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web.UserControl {
     
     
-    public partial class SavePrintCondition {
+    public partial class PreviewPrintCondition {
         
         /// <summary>
         /// hTitle control.
@@ -103,15 +103,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblMeasurementDevice;
         
         /// <summary>
-        /// lblMeasurementSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMeasurementSettings;
-        
-        /// <summary>
         /// lblIlluminant control.
         /// </summary>
         /// <remarks>
@@ -128,15 +119,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblObserver;
-        
-        /// <summary>
-        /// lblUVSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUVSettings;
         
         /// <summary>
         /// lblSelectedPresets control.
@@ -157,15 +139,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblPresetDescription;
         
         /// <summary>
-        /// lblAdvancedOptions control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAdvancedOptions;
-        
-        /// <summary>
         /// panelAlignmentChart control.
         /// </summary>
         /// <remarks>
@@ -175,13 +148,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Panel panelAlignmentChart;
         
         /// <summary>
-        /// cmbAlignmentChart control.
+        /// lblAlignmentChart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbAlignmentChart;
+        protected global::System.Web.UI.WebControls.Label lblAlignmentChart;
         
         /// <summary>
         /// txtChartPriview control.

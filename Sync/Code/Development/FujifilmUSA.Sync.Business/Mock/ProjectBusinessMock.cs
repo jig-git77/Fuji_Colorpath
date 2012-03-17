@@ -83,6 +83,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ReferenceChartType>();
         }
 
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId)
+        {
+            return new Dictionary<string, string>();
+        }
+
         public byte[] GetReferenceChartTypeImage(int ReferenceChartTypeID)
         {
             return new byte[1];

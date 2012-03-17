@@ -1,5 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SavePrintCondition.ascx.cs"
-    Inherits="FujifilmUSA.Sync.Web.UserControl.SavePrintCondition" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PreviewPrintCondition.ascx.cs"
+    Inherits="FujifilmUSA.Sync.Web.UserControl.PreviewPrintCondition" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%--<%@ Register Src="~/UserControl/PopupControl/SaveWindow.ascx" TagName="SaveWindow"
     TagPrefix="uc" %>--%>
@@ -135,14 +135,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Measurement Settings: </span>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblMeasurementSettings" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
                                             <span>Illuminant: </span>
                                         </td>
                                         <td>
@@ -155,14 +147,6 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>UV Settings: </span>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblUVSettings" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -215,14 +199,6 @@
                                             <asp:Label ID="lblPresetDescription" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Advanced Options: </span>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="lblAdvancedOptions" runat="server" Text=""></asp:Label>
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                             <div class="clear">
@@ -258,8 +234,7 @@
                                             <span>Alignment Chart:</span> &nbsp
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select">
-                                            </asp:DropDownList>
+                                            <asp:Label ID="lblAlignmentChart" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>

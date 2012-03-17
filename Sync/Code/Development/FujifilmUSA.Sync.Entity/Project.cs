@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Entity
         public PrintCondition PrintCondition { get; set; }
         public List<ProjectOption> ProjectOption { get; set; }
         public SourceProfile SourceProfile { get; set; }
+        public int DeviceFamilyProfilerOptionID { get; set; }
         //public Device Device { get; set; }
         public bool IsNewlyCreated { set; get; }
         public EOptimizeRunStatus Status { get; set; }

@@ -255,7 +255,7 @@
     <Content Include="UserControl\PopupControl\ConfirmSave.ascx" />
     <Content Include="UserControl\PopupControl\CreateDLP.ascx" />
     <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
-    <Content Include="UserControl\AddProject\SavePrintCondition.ascx" />
+    <Content Include="UserControl\AddProject\PreviewPrintCondition.ascx" />
     <Content Include="UserControl\AddProject\MeasurementSetup.ascx" />
     <Content Include="UserControl\ModelWindowContainer.ascx" />
     <Content Include="UserControl\Login.ascx" />
@@ -571,12 +571,12 @@
     <Compile Include="UserControl\PopupControl\SaveWindow.ascx.designer.cs">
       <DependentUpon>SaveWindow.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\AddProject\SavePrintCondition.ascx.cs">
-      <DependentUpon>SavePrintCondition.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\PreviewPrintCondition.ascx.cs">
+      <DependentUpon>PreviewPrintCondition.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserControl\AddProject\SavePrintCondition.ascx.designer.cs">
-      <DependentUpon>SavePrintCondition.ascx</DependentUpon>
+    <Compile Include="UserControl\AddProject\PreviewPrintCondition.ascx.designer.cs">
+      <DependentUpon>PreviewPrintCondition.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject\MeasurementSetup.ascx.cs">
       <DependentUpon>MeasurementSetup.ascx</DependentUpon>
