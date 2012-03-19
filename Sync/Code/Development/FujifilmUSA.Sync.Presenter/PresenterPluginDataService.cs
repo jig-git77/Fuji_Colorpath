@@ -20,7 +20,13 @@ namespace FujifilmUSA.Sync.Presenter
         public void GetReferenceChartData()
         {
             var task = Business.BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewPluginDataService.ReferenceChartData =  task.GetReferenceChartData(_viewPluginDataService.ProjectId);
+            _viewPluginDataService.ReferenceChartData = task.GetReferenceChartData(_viewPluginDataService.ProjectId);
+        }
+
+        public void GetMeasurementsOnRunId()
+        {
+            var task = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            _viewPluginDataService.Measurements = task.GetMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
         }
     }
 }

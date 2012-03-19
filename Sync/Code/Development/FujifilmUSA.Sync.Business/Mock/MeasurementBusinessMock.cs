@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Entity;
@@ -17,6 +18,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public int SaveMeasurement(Measurement measurement)
         {
             return 0;
+        }
+
+        public List<Measurement> GetMeasurementsOnRunId(int optimizeRunId)
+        {
+            return new List<Measurement>();
         }
 
         #endregion

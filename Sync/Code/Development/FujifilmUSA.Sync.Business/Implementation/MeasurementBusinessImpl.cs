@@ -60,13 +60,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                          new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
                                          new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
                                          new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
-                                         new Parameters() {ParameterName = "@MeasurementPatches", Type = DbType.Xml, Value = measurementPatches},
+                                         new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                      },
                                  new List<Parameters>()
                                      {
                                          outParam
                                      });
             return Convert.ToInt32(outParam.Value);
+        }
+
+        public List<Measurement> GetMeasurementsOnRunId(int optimizeRunId)
+        {
+            var dsMeasurements = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetMeasurementByOptimizeRunID", new object[] { optimizeRunId });
+            var measurements = dsMeasurements.
+                Tables[0].
+                AsEnumerable().
+                Select(x => new Measurement()
+                                {
+                                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                    MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                                    OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                }).ToList();
+            return measurements;
         }
 
         #endregion

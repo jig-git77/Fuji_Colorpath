@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 
@@ -22,6 +18,5 @@ namespace FujifilmUSA.Sync.Presenter
             var task = BusinessFactory<IProjectBusiness>.CreateObject();
             _viewSaveWindow.Project = task.SaveProject(_viewSaveWindow.Project);
         }
-
     }
 }

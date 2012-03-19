@@ -8,5 +8,6 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         MeasurementDataResponse GetMeasurementData(List<int> measurementIds);
         int SaveMeasurement(Measurement measurement);
+        List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
     }
 }

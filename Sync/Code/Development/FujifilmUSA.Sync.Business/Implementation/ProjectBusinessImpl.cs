@@ -169,13 +169,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Project SaveProject(Project project)
         {
             var projectOptions = new XElement("ProjectOptions",
-                                                  project.ProjectOption.
-                                                      Select(x =>
-                                                             new XElement("ProjectOption",
-                                                                          new XAttribute("ProfileTypeID", x.ProfileTypeId),
-                                                                          new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
-                                                                          new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
-                                                                 )).ToList());
+                                              project.ProjectOption.
+                                                  Select(x =>
+                                                         new XElement("ProjectOption",
+                                                                      new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                      new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
+                                                                      new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                             )).ToList());
             var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
             DataAccessFactory.
                 Instance.
@@ -185,7 +185,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                          new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
                                          new Parameters() {ParameterName = "@SourceProfileID", Type = DbType.Int32, Value = project.SourceProfile.SourceProfileId},
                                          new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
-                                         new Parameters() {ParameterName = "@CreateDate", Type = DbType.DateTime, Value = project.CreateDate.AddMilliseconds(-project.CreateDate.Millisecond)},
+                                         new Parameters()
+                                             {ParameterName = "@CreateDate", Type = DbType.DateTime, Value = project.CreateDate.AddMilliseconds(-project.CreateDate.Millisecond)},
                                          new Parameters() {ParameterName = "@Media", Size = 50, Type = DbType.String, Value = project.PrintCondition.Media},
                                          new Parameters() {ParameterName = "@Colorant", Size = 50, Type = DbType.String, Value = project.PrintCondition.Colorant},
                                          new Parameters() {ParameterName = "@RipSettings", Size = 50, Type = DbType.String, Value = project.PrintCondition.RipSettings},
@@ -196,6 +197,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                          new Parameters() {ParameterName = "@UVIncluded", Type = DbType.Boolean, Value = project.MeasurementSetting.UvIncluded},
                                          new Parameters() {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
                                          new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartTypeId},
+                                         new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
+                                         new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                          new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()}
                                      },
                                  new List<Parameters>()

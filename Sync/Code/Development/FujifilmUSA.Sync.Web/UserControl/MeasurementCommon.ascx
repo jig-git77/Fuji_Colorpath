@@ -267,7 +267,7 @@
         jQuery.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + OptimizeRunId,
+            url: "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId,
             processData: false,
             dataType: "json",
             cache: false,

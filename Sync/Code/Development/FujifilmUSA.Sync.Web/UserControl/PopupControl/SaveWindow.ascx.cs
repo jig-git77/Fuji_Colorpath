@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
@@ -21,7 +22,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
             SessionManager.Instance.CurrentProject = Project;
-            Common.Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+            Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
         }
 
         #region IViewSaveWindow Members

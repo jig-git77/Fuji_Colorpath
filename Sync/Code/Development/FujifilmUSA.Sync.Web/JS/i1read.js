@@ -111,9 +111,6 @@ var cId = 0;
 var x1 = 0;
 var y1 = 0;
 function presentScanDonei1(scanner, mychart, final) {
-
-
-
     /* chirag put logic to return if lengh of measurepatch = total patches so far*/
     //if (mychart["Size"] == MeasuredPatches.length) return;
 
@@ -210,21 +207,14 @@ function presentScanDonei1(scanner, mychart, final) {
     for (ind = 0; ind < g_Chart["NumberOfColumns"]; ind++) {
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
-        var DensityResults = results[ind]["Density"];
-        var sName = mychart["ReferencePatch"][ind]["SampleName"];
-        var PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
-        var CIELab = new LAB(LABResults["L"].toFixed(2), LABResults["A"].toFixed(2), LABResults["B"].toFixed(2));
-        var CIEXYZ = new XYZ(XYZResults["X"].toFixed(2), XYZResults["Y"].toFixed(2), XYZResults["Z"].toFixed(2));
-        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
         mpatch = new Patch();
-        mpatch.Cielab = LABResults;
-        mpatch.Ciexyz = XYZResults;
-        mpatch.Density = _Density;
-        mpatch.SampleName = sName;
-        mpatch.CmykC = mychart["ReferencePatch"][ind]["CMYK_C"];
-        mpatch.CmykM = mychart["ReferencePatch"][ind]["CMYK_M"];
-        mpatch.CmykY = mychart["ReferencePatch"][ind]["CMYK_Y"];
-        mpatch.CmykK = mychart["ReferencePatch"][ind]["CMYK_K"];
+        mpatch.CiexyzX = XYZResults["X"].toFixed(2);
+        mpatch.CiexyzY = XYZResults["Y"].toFixed(2);
+        mpatch.CiexyzZ = XYZResults["Z"].toFixed(2);
+        mpatch.CielabL = LABResults["L"].toFixed(2);
+        mpatch.CielabA = LABResults["A"].toFixed(2);
+        mpatch.CielabB = LABResults["B"].toFixed(2);
+        mpatch.SampleName = mychart["ReferencePatch"][ind]["SampleName"];
         mpatch.PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
         MeasuredPatches.push(mpatch);
     }
@@ -279,24 +269,6 @@ function presentScanDonei1(scanner, mychart, final) {
         }
     }
 
-
-    //    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    //    var x = 0;
-    //    var y = idx;
-
-    //    for (var cursample = 0; cursample < results.length; cursample++) {
-    //        var srgb = results[cursample]["sRGB"];
-    //        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-    //        jg.setColor(rgbx);
-    //        jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
-    //        x++;
-    //        if (x >= mychart["NumberOfColumns"]) {
-    //            x = 0;
-    //            y++;
-    //        }
-    //    }
-    //    jg.paint();
-
     //
     // Now ask for the next strip, if we were not at the end
     //
@@ -337,34 +309,6 @@ function presentScanDonei1(scanner, mychart, final) {
         cId = 0;
         x1 = 0;
         y1 = 0;
-        //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-        //        var x = 0;
-        //        var y = 0;
-        //        for (cursample = 0; cursample < mychart["RefBase"].length; cursample++) {
-        //            var rgbx = mychart["RefBase"][cursample]["HTMLColor"];
-        //            jg.setColor(rgbx);
-        //            jg.fillRect(x * 20, y * 20, 20, 10);
-        //            x++;
-        //            if (x >= mychart["NumberOfColumns"]) {
-        //                x = 0;
-        //                y++;
-        //            }
-        //        }
-        //        jg.paint();
-        //        x = 0;
-        //        y = 0;
-        //        for (var cursample = 0; cursample < g_Chart["Result"].length; cursample++) {
-        //            var srgb = g_Chart["Result"][cursample]["sRGB"];
-        //            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        //            jg.setColor(rgbx);
-        //            jg.fillRect(x * 20, (y * 20) + 10, 20, 10);
-        //            x++;
-        //            if (x >= mychart["NumberOfColumns"]) {
-        //                x = 0;
-        //                y++;
-        //            }
-        //        }
-        //        jg.paint();
     }
 }
 function presentProgressi1(scanner, mychart) {
@@ -379,23 +323,5 @@ function presentProgressi1(scanner, mychart) {
     prog["Answers"] = "NONE";
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
-    //presentQuery(prog);
-
-    //    var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-    //    var cursample = 0;
-    //    var x = 0;
-    //    var y = 0;
-    //    for (cursample = 0; cursample < samples; cursample++) {
-    //        var srgb = result[cursample]["sRGB"];
-    //        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-    //        jg.setColor(rgbx);
-    //        jg.fillRect(x * 20, (y * 20) + 10, 20, 20);
-    //        x++;
-    //        if (x >= width) {
-    //            x = 0;
-    //            y++;
-    //        }
-    //    }
-    //    jg.paint();
     return "OK";
 }

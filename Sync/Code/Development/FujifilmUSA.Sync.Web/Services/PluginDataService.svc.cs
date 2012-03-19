@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Web.Services
 {
     [ServiceContract(Namespace = "")]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-    public class PluginDataService:IViewPluginDataService
+    public class PluginDataService : IViewPluginDataService
     {
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
@@ -35,12 +35,22 @@ namespace FujifilmUSA.Sync.Web.Services
             return ReferenceChartData;
         }
 
-        #region IViewPluginDataService Members
+        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByOptimizeId/{optimizeRunId}")]
+        [OperationContract]
+        public List<Entity.Measurement> GetMeasurementsByOptimizeId(string optimizeRunId)
+        {
+            this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+            var presenter = new PresenterPluginDataService(this);
+            presenter.GetMeasurementsOnRunId();
+            return Measurements;
+        }
 
+        #region IViewPluginDataService Members
         public Entity.Measurement Measurement { get; set; }
-        public int ProjectId{ get; set; }
-        public ReferenceChartData ReferenceChartData{ get; set; }
-        
+        public int ProjectId { get; set; }
+        public ReferenceChartData ReferenceChartData { get; set; }
+        public int OptimizeRunId { get; set; }
+        public List<Entity.Measurement> Measurements { get; set; }
         #endregion
     }
 }
