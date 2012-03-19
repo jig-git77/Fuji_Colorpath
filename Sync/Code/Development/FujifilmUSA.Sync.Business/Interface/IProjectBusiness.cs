@@ -25,5 +25,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetDestinationProfile(int projectId);
         byte[] GetLastOptimizedDlp(int projectId);
         Project SaveProject(Project project);
+        ReferenceChartData GetReferenceChartData(int projectId);
+
     }
 }

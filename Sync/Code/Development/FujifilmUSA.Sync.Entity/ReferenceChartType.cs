@@ -5,9 +5,10 @@ namespace FujifilmUSA.Sync.Entity
     {
         public short ReferenceChartTypeId { get; set; }
         public string ChartName { get; set; }
-        public byte? NumOfRows { get; set; }
-        public byte? NumOfCols { get; set; }
-        public byte? InstrumentTypeId { get; set; }
+        public int NumOfRows { get; set; }
+        public int NumOfCols { get; set; }
+        public int TotalPatches { get; set; }
+        public short InstrumentTypeId { get; set; }
         public short ProjectTypeId { get; set; }
         public byte[] ChartPreview { get; set; }
         public bool? IsUsed { get; set; }

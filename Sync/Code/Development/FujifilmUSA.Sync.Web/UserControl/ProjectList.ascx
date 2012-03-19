@@ -14,11 +14,11 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId,projectName) {
-        jQuery("input[id$='hdProjectName']").val(projectName);
-        jQuery("input[id$='hdProjectId']").val(projectId);
-        var oWnd = $find("<%= OpenPrintConditionWindow.ClientID %>");
-        oWnd.show();
+    function ShowOpenPrintConditionWindow(projectId, projectName) {
+        alert(projectId);
+        var oWindow;
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName, "OpenPrintConditionWindow");
+        oWindow.show(); 
         return false;
     }
     function ShowClosePrintConditionWindow(projectName) {
@@ -297,19 +297,12 @@
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" NavigateUrl="~/PopupOpenPrintCondition.aspx"
-                Behavior="Close, Move">
-               <%-- <ContentTemplate>
-                    <uc:OpenPrintCondition ID="ucOpenPrintCondition" runat="server" />
-                </ContentTemplate>--%>
+                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" ShowContentDuringLoad="false"
                 Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" NavigateUrl="~/PopupClosePrintCondition.aspx"
                 Behavior="Close, Move">
-<%--                <ContentTemplate>
-                    <uc:ClosePrintCondition ID="ucClosePrintCondition" runat="server" />
-                </ContentTemplate>
---%>            </telerik:RadWindow>
+            </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
 </div>

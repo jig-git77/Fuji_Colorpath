@@ -1,24 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommon.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
-<%@ Import Namespace="FujifilmUSA.Sync.Common" %>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    if (typeof jQuery == 'undefined') {
-        document.write(unescape("%3Cscript src='JQuery/jquery-1.6.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-    }
-</script>
-<script src="~/JS/wz_jsgraphics.js" type="text/javascript"></script>
-<script src="~/jQuery/json2.js" type="text/javascript"></script>
-<script src="~/jQuery/jquery-blockUI.js" type="text/javascript"></script>
-<script src="~/jQuery/wtooltip.min.js" type="text/javascript"></script>
-<script src="~/JS/excanvas.js" type="text/javascript"></script>
-<script src="~/JS/chartread.js" type="text/javascript"></script>
-<script src="~/JS/i1read.js" type="text/javascript"></script>
-<script src="~/JS/isisread.js" type="text/javascript"></script>
-<script src="~/JS/WebComm.js" type="text/javascript"></script>
-<script src="~/jQuery/jquery-1.6.2.min.js" type="text/javascript"></script>
-<script src="~/jQuery/jquery.tmpl.js" type="text/javascript"></script>
-<script src="~/JQuery/jquery.simplemodal.js" type="text/javascript"></script>
+<script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
+<script src="jQuery/json2.js" type="text/javascript"></script>
+<script src="jQuery/jquery-blockUI.js"" type="text/javascript"></script>
+<script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
+<script src="JS/excanvas.js" type="text/javascript"></script>
+<script src="JS/chartread.js" type="text/javascript"></script>
+<script src="JS/i1read.js" type="text/javascript"></script>
+<script src="JS/isisread.js" type="text/javascript"></script>
+<script src="JS/WebComm.js" type="text/javascript"></script>
+<script src="jQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
+<script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
 <style type="text/css">
     .my_rectangle
     {
@@ -127,10 +120,9 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
-<asp:HiddenField ID="hdSyncRunID" runat="server" />
-<asp:HiddenField ID="hdProjectID" runat="server" />
-<asp:HiddenField ID="hdMeasurementTypeID" runat="server" />
-<asp:HiddenField ID="hdProfileID" runat="server" Value="0" />
+<asp:HiddenField ID="hdOptimizeRunId" runat="server" />
+<asp:HiddenField ID="hdProjectId" runat="server" />
+<asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
@@ -172,33 +164,21 @@
 <script language="javascript" type="text/javascript">
     var refreshTry = 0;
     function ControlVisibility() {
-
-
         jQuery("[id*='btnCalibrate']").css('display', 'none');
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
-
         load();   //first you have to load the plugin
         ListDevices();
         GetRefChartData();
     }
     function GetRefChartData() {
-
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-        var Type = '<%=Type %>';
         var ReferenceChartTypeId = '';
         var SerialNo;
-        if (Type == "DestinationProfile") {
-            ReferenceChartTypeId = jQuery("input[id$=hdMeasurementTypeID]").val();
-            SerialNo = jQuery("input[id$=hdSerialNumber]").val();
-        }
-
-        GetReferenceChart(Type, (jQuery("[id*='hdProjectID']").val()), ReferenceChartTypeId, SerialNo);
+        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
     }
-
     jQuery(document).ready(function () {
-
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
             return false;
@@ -216,15 +196,12 @@
                 upload();
             }
         });
-
         jQuery("[id*='btnCancelMeasurement']").click(function () {
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
             OnCancel();
             ListDevices();
         });
-
-        //Data binding of Uploaded Measurement
         bindMeasurementData();
         ControlVisibility();
     });
@@ -241,207 +218,117 @@
                 jQuery('.header', dialog.data[0]).append(type);
             }
         });
-        jQuery("[id*='btnCloseModelPopup']").focus().click(function () {
-
-        });
     }
     function saveMeasurement() {
-        /****passing date and time from JavaScript to WCF serialization issue  http://stackoverflow.com/questions/4474352/send-jquery-json-to-wcf-rest-using-date ***/
-        var Type = '<%=Type %>';
-        var serviceLink;
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
         var MeasurementDateTime = dt1.toMSJSON();
-        var SyncRunID = jQuery("input[id$=hdSyncRunID]").val();
-        var MeasurementTypeID = jQuery("input[id$=hdMeasurementTypeID]").val();
+        var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
+        var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
         var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
         var obj;
-        var objSourceProfile;
-        var objDestinationProfile;
-        var objMeasurementLink;
-        var objMeasurement;
-        if (Type == "DestinationProfile") {
-            SyncRunID = "0";
-            var DestinationProfileID = jQuery("input[id$=hdProfileID]").val();
-            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            obj = { Measurement: objMeasurement, ProfileId: DestinationProfileID };
-            serviceLink = "Services/PluginDataService.svc/SaveDestinationMeasurement";
-        }
-        else if (Type == "Optimization") {
-            obj = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: SyncRunID, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            serviceLink = "Services/PluginDataService.svc/SaveMeasurement";
-        }
-
-        else if (Type == "SourceProfile") {
-            SyncRunID = "0";
-            MeasurementTypeID = jQuery("[id*='cmbAlignmentChart'] :selected").val();
-            var SourceProfilename = jQuery("[id$=txtSourceProfile]").val();
-            var ProfilerOptionID = jQuery("[id*='cmbProfilerOption'] :selected").val();
-            var SyncDeviceID = 6;
-            var SourceProfileID = jQuery("input[id$=hdProfileID]").val();
-            objMeasurement = { MeasurementName: MsmtName, MeasurementDate: MeasurementDateTime, SyncRunId: 0, MeasurementTypeId: MeasurementTypeID, Patches: MeasuredPatches };
-            objMeasurementLink = { Measurement: objMeasurement };
-            objSourceProfile = { ProfileId: SourceProfileID, ProfileName: SourceProfilename, IsUse: true };
-            obj = { SourceProfile: objSourceProfile, MeasurementLink: objMeasurementLink };
-            serviceLink = "Services/PluginDataService.svc/SaveSourceMeasurement";
-        }
-
+        obj = {
+            MeasurementName: MsmtName,
+            MeasurementDate: MeasurementDateTime,
+            OptimizeRunId: OptimizeRunId,
+            ReferenceChartTypeId: ReferenceChartTypeId,
+            MeasurementPatches: MeasuredPatches
+        };
         //Make ajax request...
         jQuery.ajax({
-            type: "POST", //for complex object POST is preferred
-            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-            url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
-            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "Services/PluginDataService.svc/SaveMeasurement",
+            processData: false,
+            dataType: "json",
             data: JSON.stringify(obj),
             dataFilter: function (data, type) {
                 return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
             },
-            //If the call succeeds
             success:
-        function (response) {   //the response param passed to the success callback contains the returned json
-            jQuery("input[id$=hdProfileID]").val(response);
-            bindMeasurementData();
-            //MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
-            //jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
-
-        },
-            //If the call fails
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-            }
+                function (response) {
+                    bindMeasurementData();
+                    //MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
+                    jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
+                },
+            error:
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                }
         });
-
-        /**clear the array **/
-
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
-
     }
-
-    //    if (window.addEventListener) // W3C standard
-    //    {
-    //        window.addEventListener('load', ControlVisibility(), false); // NB **not** 'onload'
-    //    }
-    //    else if (window.attachEvent) // Microsoft
-    //    {
-    //        window.attachEvent('onload', ControlVisibility());
-    //    }
 
     function bindMeasurementData() {
-        var Type = '<%=Type %>';
-        var serviceUrl;
-        if (Type == "DestinationProfile") {
-            var ProfileId = jQuery("input[id$=hdProfileID]").val();
-            serviceUrl = "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId + "/" + Type;
-        }
-        if (Type == "Optimization") {
-            var SyncRunId = jQuery("input[id$=hdSyncRunID]").val();
-            serviceUrl = "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + SyncRunId;
-        }
-
+        var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         jQuery.ajax({
-            type: "GET", //for complex object POST is preferred
-            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-            url: serviceUrl, // "Services/PluginDataService.svc/GetMeasurementsByProfileType/" + ProfileId +"/"+Type,
-            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: "Services/PluginDataService.svc/GetMeasurementsBySyncId/" + OptimizeRunId,
+            processData: false,
+            dataType: "json",
             cache: false,
-            dataFilter: function (data, type) {
-
-                var json = jQuery.parseJSON(data);
-
-                for (i = 0; i < json.length; i++) {
-                    var date = GetDate(json[i].MeasurementDate);
-                    json[i].MeasurementDate = date;
-                }
-                if (json.length > 0) {
-                    jQuery("input[id*='hdHasMeasurement']").val(json.length);
-                    $("#measurementContainer").html("");
-                    $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
-                    $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
-                    $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
-                }
-                else {
-                    jQuery("input[id*='hdHasMeasurement']").val('0');
-                    $("#measurementContainer").html("");
-                    $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
-                }
-
-            },
-            //If the call succeeds
+            dataFilter:
+                function (data, type) {
+                    var json = jQuery.parseJSON(data);
+                    for (i = 0; i < json.length; i++) {
+                        var date = GetDate(json[i].MeasurementDate);
+                        json[i].MeasurementDate = date;
+                    }
+                    if (json.length > 0) {
+                        jQuery("input[id*='hdHasMeasurement']").val(json.length);
+                        $("#measurementContainer").html("");
+                        $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
+                        $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
+                        $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
+                    }
+                    else {
+                        jQuery("input[id*='hdHasMeasurement']").val('0');
+                        $("#measurementContainer").html("");
+                        $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
+                    }
+                },
             success:
-                            function (response) {
-                            },
-            //If the call fails
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
-            }
+                function (response) { },
+            error:
+                function (XMLHttpRequest, textStatus, errorThrown) {
+                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                }
         });
     }
-
-    var isDeleted = false;
     function ConfirmDeleteMeasurement(measurement) {
         if (confirm('<%= AddMeasurement_DeleteMeasurement_Confirmation %>')) {
-
             deletemeasurement(measurement.name);
             bindMeasurementData();
         }
         return false;
     }
-
     function deletemeasurement(smeasurementId) {
-        //measurement.name
-        var isdeleted = false;
         var measurementId = $.trim(smeasurementId);
-        var serviceLink = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
-        //Make ajax request...
         jQuery.ajax({
-            type: "POST", //for complex object POST is preferred
-            contentType: "application/json; charset=utf-8",   //this is very important application/json; charset=utf-8";  else it will fail
-            url: serviceLink,  //"Services/PluginDataService.svc/SaveMeasurement",
-            processData: false, //     I found that if I use processData=true, then the resulting string sent to the service is in querystring format, not in JSON. Not what I want for passing complex objects. So I set it to false. Using true would be fine for simpler non-JSON requests where you're doing WebGet, and all the params are in the query string
-            dataType: "json",  ////this only applies to response from the server and (not request send to server)
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId,
+            processData: false,
+            dataType: "json",
             dataFilter: function (data, type) {
                 return false;
             },
-
-            //If the call succeeds
             success:
-                    function (response) {   //the response param passed to the success callback contains the returned json
+                    function (response) {
                     },
-
-            //If the call fails
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Error");
-
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                 MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
             }
         });
     }
-
-    function RemoveTr(isdeleted, measurementId) {
-
-        if (isdeleted == true) {
-            $('#' + measurementId).remove();
-        }
-        var rowCount = $('#lvMeasurement1 tr').length;
-        if (rowCount <= 0) {
-            $("#measurementContainer").html("");
-            $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
-        }
-    }
-
-    /*--------------- Function to convert json date string to javascript date ----------------------*/
     function GetDate(jsonDate) {
         var value = new Date(parseInt(jsonDate.substr(6)));
         return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear() + " " + value.toLocaleTimeString();
     }
-
-
-
 </script>

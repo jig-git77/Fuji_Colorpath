@@ -5,11 +5,13 @@ namespace FujifilmUSA.Sync.Entity
         public int MeasurementSettingId { get; set; }
         public int ProjectId { get; set; }
         public short ObserverType { get; set; }
+        public string ObserverTypeName { get; set; }
         public short Illuminant { get; set; }
+        public string IlluminantName { get; set; }
         public bool UvIncluded { get; set; }
+        public string UvIncludedName { get; set; }
+        public string DensityType { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public short ReferenceChartTypeId { get; set; }
-        //public Project Project { get; set; }
-        //public MeasurementDevice MeasurementDevice { get; set; }
     }
 }

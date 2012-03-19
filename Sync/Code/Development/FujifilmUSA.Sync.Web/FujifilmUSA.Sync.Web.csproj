@@ -41,6 +41,9 @@
       <HintPath>..\Solution References\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -73,6 +76,7 @@
     <Content Include="Images\device-manage-icon.png" />
     <Content Include="Images\dongle-manage.png" />
     <Content Include="Images\processbar.gif" />
+    <Content Include="JQuery\jquery-1.7.1.min.js" />
     <Content Include="PopupConfirmSave.aspx" />
     <Content Include="PopupSaveProject.aspx" />
     <Content Include="PopupClosePrintCondition.aspx" />
@@ -81,9 +85,9 @@
     <Content Include="Images\user-manage-icon.png" />
     <Content Include="MeasurementDeviceList.aspx" />
     <Content Include="PopupOpenPrintCondition.aspx" />
+    <Content Include="Services\PluginDataService.svc" />
     <Content Include="Settings.aspx" />
     <Content Include="Export.aspx" />
-    <Content Include="JQuery\jquery-1.7.1.js" />
     <Content Include="Measurement.aspx" />
     <Content Include="AddProject.aspx" />
     <Content Include="Analyze.aspx" />
@@ -213,7 +217,6 @@
     <Content Include="Images\txt_icon.png" />
     <Content Include="Index.aspx" />
     <Content Include="JS\html5.js" />
-    <Content Include="JQuery\jquery-1.6.2.min.js" />
     <Content Include="JQuery\jquery-blockUI.js" />
     <Content Include="JQuery\jquery-jtemplates.js" />
     <Content Include="JQuery\jquery.simplemodal.js" />
@@ -359,6 +362,9 @@
     </Compile>
     <Compile Include="PopupOpenPrintCondition.aspx.designer.cs">
       <DependentUpon>PopupOpenPrintCondition.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\PluginDataService.svc.cs">
+      <DependentUpon>PluginDataService.svc</DependentUpon>
     </Compile>
     <Compile Include="Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
@@ -755,7 +761,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

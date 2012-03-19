@@ -31,40 +31,31 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtMeasurementName;
         
         /// <summary>
-        /// hdSyncRunID control.
+        /// hdOptimizeRunId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdSyncRunID;
+        protected global::System.Web.UI.WebControls.HiddenField hdOptimizeRunId;
         
         /// <summary>
-        /// hdProjectID control.
+        /// hdProjectId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdProjectID;
+        protected global::System.Web.UI.WebControls.HiddenField hdProjectId;
         
         /// <summary>
-        /// hdMeasurementTypeID control.
+        /// hdReferenceChartTypeId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdMeasurementTypeID;
-        
-        /// <summary>
-        /// hdProfileID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdProfileID;
+        protected global::System.Web.UI.WebControls.HiddenField hdReferenceChartTypeId;
         
         /// <summary>
         /// hdSerialNumber control.

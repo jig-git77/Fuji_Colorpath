@@ -2,7 +2,6 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
 <%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
 <%--<script type="text/javascript">
     jQuery(document).ready(
     function () {

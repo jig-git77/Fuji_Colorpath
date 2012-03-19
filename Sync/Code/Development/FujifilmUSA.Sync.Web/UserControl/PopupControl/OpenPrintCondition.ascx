@@ -16,7 +16,6 @@
     } 
 
 </script>
-<asp:HiddenField ID="hdRadWindowClientID" runat ="server" Value="" />
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>

@@ -41,4 +41,20 @@
         DeviceLinkProfile = 3,
         OptimizeDlp = 4
     }
+
+    public enum EDensityType
+    {
+        DIN = 1,
+        DINNB = 2,
+        ANSIA = 3,
+        ANSIE = 4,
+        ANSII = 5,
+        ANSIT = 6
+    }
+
+    public enum EIlluminationMode
+    {
+        UV = 1,           //UV Included
+        UVCut = 2         //No UV i.e. UVCut
+    }
 }

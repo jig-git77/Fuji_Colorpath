@@ -58,6 +58,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Project();
         }
 
+        public ReferenceChartData GetReferenceChartData(int projectId)
+        {
+            return new ReferenceChartData();
+        }
+
         public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)
         {
             return new List<DeviceFamilyProfilerOption>();
