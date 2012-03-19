@@ -157,13 +157,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblAlignmentChart;
         
         /// <summary>
-        /// txtChartPriview control.
+        /// imgChart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtChartPriview;
+        protected global::System.Web.UI.WebControls.Image imgChart;
         
         /// <summary>
         /// RadWindowManager control.

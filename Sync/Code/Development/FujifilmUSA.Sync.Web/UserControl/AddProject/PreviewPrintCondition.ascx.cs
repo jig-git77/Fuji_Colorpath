@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblAlignmentChart.Text = Data["referenceChartTypeId"];
             lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
             lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
-
+            imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
         }
 
         #region IViewPreviewPrintCondition Members
