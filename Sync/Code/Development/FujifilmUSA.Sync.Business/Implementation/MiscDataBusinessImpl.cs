@@ -44,6 +44,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return dstCompanyList;
         }
+
         public Dictionary<int, string> SourceProfileByCompany(int companyId)
         {
             var dsSourceProfileList = new Dictionary<int, string>();
@@ -107,6 +108,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstUserRoleList;
         }
 
+
+        public Dictionary<int, string> LicenseList(int branchId)
+        {
+            var dstLicenseList = new Dictionary<int, string>();
+            var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetLicenses]",
+                                                                    new object[] { branchId });
+            if (dsLicenseList != null && dsLicenseList.Tables.Count > 0)
+            {
+                dstLicenseList = (dsLicenseList.Tables[0].AsEnumerable().Select(
+                    license => new
+                    {
+                        Value = DataReader.ReadInt(license, "LicenseID"),
+                        Text = DataReader.ReadString(license, "LicenseDesc")
+                    })).ToDictionary(license => license.Value, license => license.Text);
+            }
+            return dstLicenseList;
+        }
+
+        public Dictionary<int, string> InstrumentTypeList()
+        {
+            var dstInstrumentTypeList = new Dictionary<int, string>();
+            var dsInstrumentTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[uspInstrumentType]", new object[] {  });
+            if (dsInstrumentTypeList != null && dsInstrumentTypeList.Tables.Count > 0)
+            {
+
+                dstInstrumentTypeList = (dsInstrumentTypeList.Tables[0].AsEnumerable().Select(
+                    InstrumentType => new
+                    {
+                        Value = DataReader.ReadInt(InstrumentType, "InstrumentTypeID"),
+                        Text = DataReader.ReadString(InstrumentType, "InstrumentType")
+                    })).ToDictionary(InstrumentType => InstrumentType.Value, InstrumentType => InstrumentType.Text);
+            }
+            return dstInstrumentTypeList;
+        }
 
         #endregion
     }

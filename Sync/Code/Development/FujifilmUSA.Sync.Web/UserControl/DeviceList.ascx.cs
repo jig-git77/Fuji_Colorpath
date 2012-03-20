@@ -124,8 +124,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int RoleId { get; set; }
         public int CompanyId { get; set; }
         public int BranchId { get; set; }
+        public MeasurementDevice MeasurementDevice { get; set; }
+        public List<MeasurementDevice> MeasurementDevices { get; set; }
         public Dictionary<int, string> BranchList { get; set; }
         public Dictionary<int, string> CompanyList { get; set; }
+        public Dictionary<int, string> LicenseList { get; set; }
+        public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
         #endregion
 

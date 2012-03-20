@@ -83,6 +83,7 @@
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementBusinessImpl.cs" />
+    <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\MiscDataBusinessImpl.cs" />
     <Compile Include="Implementation\OptimizeRunBusinessImpl.cs" />
     <Compile Include="Implementation\ProjectBusinessImpl.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Interface\IBranchBusiness.cs" />
     <Compile Include="Interface\ICompanyBusiness.cs" />
     <Compile Include="Interface\IMeasurementBusiness.cs" />
+    <Compile Include="Interface\IMeasurementDeviceBusiness.cs" />
     <Compile Include="Interface\IOptimizeRunBusiness.cs" />
     <Compile Include="Interface\IMiscDataBusiness.cs" />
     <Compile Include="Interface\IProjectBusiness.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Mock\BranchBusinessImpl.cs" />
     <Compile Include="Mock\CompanyBusinessImpl.cs" />
     <Compile Include="Mock\MeasurementBusinessMock.cs" />
+    <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />
     <Compile Include="Mock\MiscDataBusinessMock.cs" />
     <Compile Include="Mock\OptimizeRunBusinessMock.cs" />
     <Compile Include="Mock\ProjectBusinessMock.cs" />

@@ -1,20 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementDeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementDeviceList" %>
 <%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
-<script type="text/javascript" language="javascript">
-    function ConfirmDeleteProject() {
-        if (confirm('<%= MeasurementDeviceList_DeleteMeasurementDevice_Confirmation %>'))
-            return true;
-        else
-            return false;
-    }
-</script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
         <h1>
-            Sync Measurement Device</h1>
+            Measurement Device Management</h1>
         <asp:LinkButton ID="likAdd" runat="server" class="button" OnClick="likAdd_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
@@ -33,81 +25,80 @@
         EnableLinqExpressions="false" 
         OnNeedDataSource="rgMeasurementDevice_NeedDataSource"
         OnItemCommand="rgMeasurementDevice_ItemCommand" 
-        OnItemDataBound="rgMeasurementDevice_ItemDataBound"
         Width="100%" >
         <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
         <MasterTableView DataKeyNames="MeasurementDeviceId">
             <Columns>
-                <telerik:GridTemplateColumn UniqueName="Company" AllowFiltering="true" HeaderText="Company"
-                    DataField="Company" SortExpression="Company" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                <telerik:GridTemplateColumn UniqueName="CompanyName" AllowFiltering="true" HeaderText="Company Name"
+                    DataField="CompanyName" SortExpression="CompanyName" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
                     ShowFilterIcon="false">
                     <ItemTemplate>
-                        <asp:Label ID="lblCompany" runat="server" Text='<%# Eval("Company") %>' />
+                        <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' Width="150px" />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-            
-                <telerik:GridTemplateColumn UniqueName="Branch" AllowFiltering="true" HeaderText="Branch"
-                    DataField="Branch" SortExpression="Branch" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                <telerik:GridTemplateColumn UniqueName="BranchName" AllowFiltering="true" HeaderText="Branch Name"
+                    DataField="BranchName" SortExpression="BranchName" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
                     ShowFilterIcon="false">
                     <ItemTemplate>
-                        <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("Branch") %>' />
+                        <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-                <telerik:GridTemplateColumn UniqueName="Branch" AllowFiltering="true" HeaderText="SerialNumber"
+                <telerik:GridTemplateColumn UniqueName="LicenseType" AllowFiltering="true" HeaderText="License Type"
+                    DataField="LicenseType" SortExpression="LicenseType" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                    ShowFilterIcon="false">
+                    <ItemTemplate>
+                        <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
+                    </ItemTemplate>
+                </telerik:GridTemplateColumn>
+                <telerik:GridTemplateColumn UniqueName="SerialNumber" AllowFiltering="true" HeaderText="Serial Number"
                     DataField="SerialNumber" SortExpression="SerialNumber" AutoPostBackOnFilter="true"
                     CurrentFilterFunction="Contains" ShowFilterIcon="false">
                     <ItemTemplate>
-                        <asp:Label ID="lblSerialNumberName" runat="server" Text='<%# Eval("SerialNumber") %>' />
+                        <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>' />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-                <telerik:GridTemplateColumn UniqueName="DeviceType" AllowFiltering="true" HeaderText="DeviceType"
-                    DataField="DeviceType">
+                <telerik:GridTemplateColumn UniqueName="InstrumentType" AllowFiltering="true" HeaderText="Instrument Type"
+                    DataField="InstrumentType" SortExpression="InstrumentType" AutoPostBackOnFilter="true"
+                    CurrentFilterFunction="Contains" ShowFilterIcon="false">
                     <ItemTemplate>
-                        <asp:Label ID="lblDeviceType" runat="server" Text='<%# Eval("DeviceType") %>' />
+                        <asp:Label ID="lblInstrumentType" runat="server" Text='<%# Eval("InstrumentType.InstrumentName") %>' />
                     </ItemTemplate>
-                    <FilterTemplate>
-                        <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="true" runat="server"
-                            OnClientSelectedIndexChanged="StatusIndexChanged" AutoPostBack="false" Width="50"
-                            DropDownWidth="70" SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("DeviceType").CurrentFilterValue %>'>
-                            <Items>
-                                <telerik:RadComboBoxItem Text="ALL" />
-                                <telerik:RadComboBoxItem Text="Open" Value="Open" />
-                                <telerik:RadComboBoxItem Text="Closed" Value="Closed" />
-                                <telerik:RadComboBoxItem Text="Certify" Value="Certify" />
-                                <telerik:RadComboBoxItem Text="NotUsed" Value="NotUsed" />
-                            </Items>
-                        </telerik:RadComboBox>
-                        <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
-                            <script type="text/javascript">
-                                function StatusIndexChanged(sender, args) {
-                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                    tableView.filter("DeviceType", args.get_item().get_value(), "EqualTo");
-                                }
-                            </script>
-                        </telerik:RadScriptBlock>
-                    </FilterTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="IsActive" AllowFiltering="true" HeaderText="Active"
                     UniqueName="IsActive" SortExpression="IsActive" FilterControlWidth="100" ItemStyle-Wrap="true">
                     <ItemTemplate>
-                        <asp:Image ID="imgStatus" runat="server" ImageUrl='<%= Convert.ToBoolean(Eval("IsActive")) ? "~/Images/export.png" : "~/Images/analyze.png" %>' />
+                        <asp:Label ID="lblIsActive" runat="server" Text='<%# Convert.ToString(Eval("IsActive")) %>' />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
               
                 <telerik:GridTemplateColumn DataField="MeasurementDeviceId" AllowFiltering="false"
-                    HeaderText="" UniqueName="Update">
+                    HeaderText="Edit" UniqueName="Update">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgbtnUpdate" runat="server" ToolTip="Edit Measurement Device"
                             AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"MeasurementDeviceId") %>'
-                            CommandName="Update" />
+                            CommandName="Edit" />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="MeasurementDeviceId" AllowFiltering="false"
-                    HeaderText="" UniqueName="Delete">
+                    HeaderText="Delete" UniqueName="Delete">
                     <ItemTemplate>
-                        <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Measurement Device"
-                            AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"MeasurementDeviceId") %>'
-                            CommandName="Delete" />
+                              <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+                                <script type="text/javascript" language="javascript">
+                                    function ConfirmDeleteMeasurementDevice() {
+                                        debugger;
+                                        if (confirm('<%= MeasurementDeviceList_DeleteMeasurementDevice_Confirmation %>'))
+                                            return true;
+                                        else
+                                            return false;
+                                        
+                                    }
+                                </script>
+                            </telerik:RadCodeBlock>
+                        <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MeasurementDevice" AlternateText="Delete"
+                                        ImageUrl="../Images/delete_icon.png" 
+                                        OnClientClick="javascript:ConfirmDeleteMeasurementDevice();"
+                                        CommandArgument ='<%# DataBinder.Eval(Container.DataItem,"MeasurementDeviceId") %>'
+                                        CommandName="Delete" />
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
             </Columns>

@@ -6,6 +6,8 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         Dictionary<int, string> BranchList(int companyId);
         Dictionary<int, string> CompanyList();
+        Dictionary<int, string> LicenseList(int branchId);
+        Dictionary<int, string> InstrumentTypeList();
         Dictionary<int, string> SourceProfileByCompany(int companyId);
         Dictionary<int, string> RegionList();
         Dictionary<int, string> UserRoleList();

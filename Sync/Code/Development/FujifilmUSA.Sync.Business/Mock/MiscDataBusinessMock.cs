@@ -20,10 +20,21 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Dictionary<int, string>();
         }
+        public Dictionary<int, string> LicenseList(int branchId)
+        {
+            return new Dictionary<int, string>();
+        }
+
         public Dictionary<int, string> RegionList()
         {
             return new Dictionary<int, string>();
         }
+
+        public Dictionary<int, string> InstrumentTypeList()
+        {
+            return new Dictionary<int, string>();
+        }
+
 
         public  Dictionary<int, string> UserRoleList()
         {
@@ -34,5 +45,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
         #endregion
+
+       
     }
 }
