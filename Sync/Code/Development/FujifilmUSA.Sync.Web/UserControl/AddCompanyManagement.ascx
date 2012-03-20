@@ -13,6 +13,9 @@
     <div style="margin-left: 10px; margin-right: 15px;">
         <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
     </div>
+    <div style="margin-left: 10px; margin-right: 15px;">
+        <span>Fields marked with (<span style="color: Red;">*</span>) are Required</span>
+    </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
@@ -23,11 +26,11 @@
                         <table>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Company Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold">Company Name: &nbsp<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtCompanyName" runat="server" Width="200px" Height="19px" ></asp:TextBox>
+                                        <asp:TextBox ID="txtCompanyName" runat="server" Width="400px" MaxLength="50" Height="19px" ></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvCompanyName" runat="server" Display="Dynamic"
@@ -55,7 +58,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>Region Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold">Region Name: &nbsp<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <div style="float: left;">
@@ -81,6 +84,20 @@
                                             </div>
                                         </div>
                                         </asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <span style="font-weight:bold">Is Active? &nbsp: </span>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                       <asp:CheckBox ID="chkIsActive" runat="server" />
+                                    </div>
+                                    <div style="float: left">
                                     </div>
                                     <div class="clear">
                                     </div>

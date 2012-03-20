@@ -65,7 +65,7 @@
             OnNeedDataSource="rgCompany_NeedDataSource" OnItemCommand="rgCompany_ItemCommand"
             OnItemDataBound="rgCompany_ItemDataBound" Width="98%" HeaderStyle-Font-Bold="true" >
             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-            <MasterTableView DataKeyNames="CompanyId,CompanyName,RegionId">
+            <MasterTableView DataKeyNames="CompanyId,CompanyName,RegionId,IsActive">
                 <Columns>
                     <telerik:GridTemplateColumn DataField="CompanyName" AllowFiltering="true" HeaderText="Company Name"
                         UniqueName="CompanyName" SortExpression="CompanyName" FilterControlWidth="300"
@@ -85,48 +85,14 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
                                     UniqueName="IsActive" 
-                                    AllowFiltering="true" 
+                                    AllowFiltering="false" 
                                     HeaderText="IsActive?"
                                     DataField="IsActive" 
-                                    DataType="System.Boolean"
                                     >
                                     <ItemTemplate>
-                                        <asp:Image ID="imgIsActive" runat="server" />
+                                        <asp:Image ID="imgIsActive"  runat="server" ImageUrl=<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%> />
+                                        
                                     </ItemTemplate>
-                                    <FilterTemplate>
-                                        <telerik:RadComboBox ID="RadComboBoxIsActive" 
-                                            AppendDataBoundItems="true" 
-                                            runat="server"
-                                            OnClientSelectedIndexChanged="IsActiveIndexChanged" 
-                                            AutoPostBack="false" Width="50"
-                                            DropDownWidth="70"
-                                            >
-                                            <Items>
-                                                <telerik:RadComboBoxItem Text="ALL" />
-                                                <telerik:RadComboBoxItem Text="1" Value="1" />
-                                                <telerik:RadComboBoxItem Text="0" Value="0" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-                                        <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
-                                            <script type="text/javascript">
-                                              
-                                                function IsActiveIndexChanged(sender, args) {
-                                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                    var filterVal = args.get_item().get_value();
-                                                    if (filterVal == "") {
-                                                        tableView.filter("Bool", filterVal, "ALL");
-                                                    }
-                                                    else if (filterVal == "1") {
-                                                        tableView.filter("Bool", "1", "EqualTo");
-                                                    }
-                                                    else if (filterVal == "0") {
-                                                        tableView.filter("Bool", "0", "IsNull");
-                                                    }
-                                                } 
-
-                                            </script>
-                                        </telerik:RadScriptBlock>
-                                    </FilterTemplate>
                                 </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
                         DataField="CompanyId" 
@@ -135,7 +101,7 @@
                         UniqueName="Edit"
                         HeaderStyle-Width="100">
                         <FilterTemplate>
-                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt">
+                                <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="Fillter">
                                                     <span> Clear Fillter </span>
                                 </asp:LinkButton>
                                                 

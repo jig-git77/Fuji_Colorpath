@@ -13,6 +13,9 @@
     <div style="margin-left: 10px; margin-right: 15px;">
         <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
     </div>
+    <div style="margin-left: 10px; margin-right: 15px;">
+        <span>Fields marked with (<span style="color: Red;">*</span>) are Required</span>
+    </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
@@ -23,11 +26,11 @@
                         <table>
                             <tr>
                                 <td>
-                                    <span>Company Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Company Name: &nbsp<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompanyName" runat="server" Width="200px" CssClass="select">
+                                        <asp:DropDownList ID="cmbCompanyName" runat="server"  Width="400px" CssClass="select">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
@@ -56,11 +59,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Branch Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Branch Name: &nbsp<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtBranchName" runat="server" Width="200px" Height="19px" ></asp:TextBox>
+                                        <asp:TextBox ID="txtBranchName" runat="server" MaxLength="50" Width="400px" Height="19px" ></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic"
@@ -88,11 +91,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Location: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Location: &nbsp<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtLocation" runat="server" Width="200px" Height="19px" ></asp:TextBox>
+                                        <asp:TextBox ID="txtLocation" runat="server" MaxLength="50" Width="400px" Height="19px" ></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic"
@@ -120,7 +123,7 @@
                             </tr>
                               <tr>
                                 <td style="width: 130px">
-                                    <span>Is Active ?: &nbsp &nbsp</span>
+                                    <span style="font-weight:bold;">Is Active ?: &nbsp &nbsp</span>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">

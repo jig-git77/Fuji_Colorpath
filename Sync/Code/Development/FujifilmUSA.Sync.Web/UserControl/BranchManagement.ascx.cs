@@ -63,17 +63,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgBranch_ItemCommand(object sender, GridCommandEventArgs e)
         {
-            Branch branch = new Entity.Branch();
+            Branch = new Entity.Branch();
             switch (e.CommandName)
             {
+                case "Filter" :
+                    break;
+                case "ClearFilter":
+                    foreach (GridColumn column in rgBranch.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgBranch.MasterTableView.FilterExpression = string.Empty;
+                    rgBranch.MasterTableView.Rebind();
+                    break;
                 case "Delete" :
-                    branch.BranchId = Convert.ToInt32(e.CommandArgument);
+                    Branch.BranchId = Convert.ToInt32(e.CommandArgument);
                     _presenterBranchManagement.DeleteBranch();
                     break;
                 case "Edit":
-                    branch.BranchId = Convert.ToInt32(e.CommandArgument);
-                    GridDataItem item = (GridDataItem)e.Item; 
-                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + branch.CompanyId
+                    Branch.BranchId = Convert.ToInt32(e.CommandArgument);
+                    GridDataItem item = (GridDataItem)e.Item;
+                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId
                                             + "&BranchName=" + item.GetDataKeyValue("BranchName").ToString()
                                             + "&Location=" + item.GetDataKeyValue("Location").ToString()
                                             + "&CompanyID=" +  item.GetDataKeyValue("CompanyID").ToString()

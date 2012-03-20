@@ -54,18 +54,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgCompany_ItemCommand(object sender, GridCommandEventArgs e)
         {
             Company = new Entity.Company();
-            Company.CompanyId = Convert.ToInt32(e.CommandArgument);
             switch (e.CommandName)
             {
+                case "Fillter":
+                    foreach (GridColumn column in rgCompany.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgCompany.MasterTableView.FilterExpression = string.Empty;
+                    rgCompany.MasterTableView.Rebind();
+                    break;
                 case "Delete" :
+                    Company.CompanyId = Convert.ToInt32(e.CommandArgument);   
                     _presenterCompanyManagement.DeleteCompany();
                     break;
                 case "Edit":
+                    Company.CompanyId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item; 
                     int RegionId =  Convert.ToInt32(item.GetDataKeyValue("RegionId").ToString());   
                     Response.Redirect("AddCompanyManagement.aspx?CompanyId=" + Company.CompanyId 
                                             + "&CompanyName=" +  item.GetDataKeyValue("CompanyName").ToString()
-                                            + "&RegionId=" + item.GetDataKeyValue("RegionId").ToString());  
+                                            + "&RegionId=" + item.GetDataKeyValue("RegionId").ToString()
+                                            + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
+                                            );  
                     break;
             }
         }

@@ -1595,3 +1595,52 @@ height:10px;
     }
 /**************************/
 
+
+/**** Check List Box ***/
+.checkListBox
+{
+}
+
+.checkListBox label {
+    font-size: 12px;
+    height: 12px;
+    margin-left: 4px;
+    padding: 0;
+    padding-top: 1px;
+    vertical-align: top;
+}
+.checkListBox input {
+   vertical-align: middle;
+}
+
+/***********************/
+
+/**** Admin module sub header ***/
+.admin_header .header
+{
+    padding:5px;
+    line-height: 24px;
+}
+.admin_header .header .content
+{
+    padding: -20px 5px 50px 5px; 
+}
+.admin_header .header .content .text
+{
+    color: Gray;
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+/*******************************/
+.showpassword 
+{
+        background-color: #EEEEEE;
+        font-weight: bold;
+        text-align:center;
+        padding: 3px 3px 3px 3px;
+        top: 10px;
+        min-width: 90px;
+        border-radius: 3px 3px 3px 3px;
+        opacity: 0.9;
+}

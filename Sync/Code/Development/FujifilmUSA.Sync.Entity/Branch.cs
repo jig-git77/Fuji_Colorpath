@@ -8,6 +8,8 @@ namespace FujifilmUSA.Sync.Entity
         public string BranchName { get; set; }
         public string Location { get; set; }
         public bool IsActive { get; set; }
+        public short UserBranchId { get; set; }
+
         public List<License> Licenses { get; set; }
         public List<UserBranch> UserBranches { get; set; }
         public Company Company { get; set; }

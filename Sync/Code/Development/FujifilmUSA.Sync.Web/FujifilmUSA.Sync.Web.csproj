@@ -72,11 +72,20 @@
     <Content Include="AddCompanyManagement.aspx" />
     <Content Include="BranchManagement.aspx" />
     <Content Include="AddBranchManagement.aspx" />
+    <Content Include="AddUserManagement.aspx" />
+    <Content Include="UserControl\AddUserManagement.ascx" />
+    <Content Include="UserControl\UserManagement.ascx" />
+    <Content Include="UserManagement.aspx" />
+    <Content Include="CSS\MenuBar.css" />
     <Content Include="Images\admin-icon-divider.png" />
+    <Content Include="Images\blank.gif" />
+    <Content Include="Images\checkbox_checked.png" />
+    <Content Include="Images\checkbox_unchecked.png" />
     <Content Include="Images\device-manage-icon.png" />
+    <Content Include="Images\dock-bg.gif" />
     <Content Include="Images\dongle-manage.png" />
+    <Content Include="Images\main-bg.gif" />
     <Content Include="Images\processbar.gif" />
-    <Content Include="JQuery\jquery-1.7.1.min.js" />
     <Content Include="PopupConfirmSave.aspx" />
     <Content Include="PopupSaveProject.aspx" />
     <Content Include="PopupClosePrintCondition.aspx" />
@@ -244,6 +253,7 @@
     <Content Include="UserControl\CompanyManagement.ascx" />
     <Content Include="UserControl\BranchManagement.ascx" />
     <Content Include="UserControl\AddBranchManagement.ascx" />
+    <Content Include="UserControl\AdminMenuBar.ascx" />
     <Content Include="UserControl\MeasurementDeviceList.ascx" />
     <Content Include="UserControl\AddCompanyManagement.ascx" />
     <Content Include="UserControl\Settings.ascx" />
@@ -327,6 +337,34 @@
     </Compile>
     <Compile Include="AddBranchManagement.aspx.designer.cs">
       <DependentUpon>AddBranchManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddUserManagement.aspx.cs">
+      <DependentUpon>AddUserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUserManagement.aspx.designer.cs">
+      <DependentUpon>AddUserManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddUserManagement.ascx.cs">
+      <DependentUpon>AddUserManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddUserManagement.ascx.designer.cs">
+      <DependentUpon>AddUserManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserManagement.ascx.cs">
+      <DependentUpon>UserManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserManagement.ascx.designer.cs">
+      <DependentUpon>UserManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="PopupConfirmSave.aspx.cs">
       <DependentUpon>PopupConfirmSave.aspx</DependentUpon>
@@ -478,6 +516,13 @@
     </Compile>
     <Compile Include="UserControl\AddBranchManagement.ascx.designer.cs">
       <DependentUpon>AddBranchManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AdminMenuBar.ascx.cs">
+      <DependentUpon>AdminMenuBar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AdminMenuBar.ascx.designer.cs">
+      <DependentUpon>AdminMenuBar.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\MeasurementDeviceList.ascx.cs">
       <DependentUpon>MeasurementDeviceList.ascx</DependentUpon>

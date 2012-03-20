@@ -1,4 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Settings.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Settings" %>
+
+
+<script type="text/javascript">
+      jQuery(document).ready(function () {
+          $('#dock').hide();
+    });   
+</script>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
@@ -39,7 +47,7 @@
                         <img alt="" src="Images/admin-icon-divider.png">
                 </td>
                 <td align="center" valign="bottom" style="width:150px;">
-                        <asp:LinkButton ID="lbtnUserManagement" runat="server" ToolTip="User Management">
+                        <asp:LinkButton ID="lbtnUserManagement" runat="server" ToolTip="User Management" PostBackUrl="~/UserManagement.aspx" >
                             <div>
                                 <asp:Image ID="Image3" runat="server" AlternateText="User Management" ImageUrl="~/Images/user-manage-icon.png"
                                     ToolTip="User Management" /></div>

@@ -39,7 +39,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else //Edit Compnay
                 {
-                    SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]), Request.QueryString["CompanyName"].ToString(), Convert.ToInt32(Request.QueryString["RegionId"]));
+                    SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]), 
+                                Request.QueryString["CompanyName"].ToString(), 
+                                Convert.ToInt32(Request.QueryString["RegionId"]),
+                                Convert.ToBoolean(Request.QueryString["IsActive"]));
                 }
             }
         }
@@ -59,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Company = new Company();
             Company.CompanyName = txtCompanyName.Text;
-            Company.IsActive = true;
+            Company.IsActive = chkIsActive.Checked;
             Company.RegionId = Convert.ToByte(cmbRegionName.SelectedValue);
             if (CId == 0) // Add New Compnay
             {
@@ -75,11 +78,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
         }
-        private void SetCompnay(int compnayId,string companyName, int regionId)
+        private void SetCompnay(int compnayId,string companyName, int regionId,bool isActive)
         {
             CId = compnayId;
             txtCompanyName.Text = companyName;
             cmbRegionName.SelectedValue = regionId.ToString();
+            chkIsActive.Checked = isActive;
         }
         #endregion
 

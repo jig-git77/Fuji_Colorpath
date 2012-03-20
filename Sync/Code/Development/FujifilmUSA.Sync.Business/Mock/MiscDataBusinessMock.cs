@@ -24,6 +24,15 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Dictionary<int, string>();
         }
+
+        public  Dictionary<int, string> UserRoleList()
+        {
+            return new Dictionary<int, string>();
+        }
+        public Dictionary<int, string> RegionListByCompnay(int companyId)
+        {
+            return new Dictionary<int, string>();
+        }
         #endregion
     }
 }

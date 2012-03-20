@@ -62,21 +62,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void SaveCompnay()
         {
-            Branch  branch = new Branch();
-            branch.BranchName = txtBranchName.Text;
-            branch.Location = txtLocation.Text;
-            branch.CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue);
-            branch.IsActive = chkIsActive.Checked;
+            Branch = new Branch();
+            Branch.BranchName = txtBranchName.Text;
+            Branch.Location = txtLocation.Text;
+            Branch.CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue);
+            Branch.IsActive = chkIsActive.Checked;
             if (BId == 0) // Add New Compnay
             {
                 _presenterBranchManagement.InsertBranch();
             }
             else // Edit New Compnay
             {
-                branch.BranchId = BId;
+                Branch.BranchId = BId;
                 _presenterBranchManagement.UpdateBranch();
             }
-            Response.Redirect("CompanyManagement.aspx");
+            Response.Redirect("BranchManagement.aspx");
         }
         private void SetBranch(int branchId,string branchName,string location,int compnayId,bool isActive)
         {

@@ -1,6 +1,43 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BranchManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.BranchManagement" %>
 <%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
+<style type="text/css">
+    div.RadGrid .rgRow
+    {
+        background: #F7F7F7;
+    }
+    div.RadGrid .rgAltRow
+    {
+        background: #F7F7F7;
+    }
+    .rgPager table
+    {
+        border-top: 0px;
+        border-bottom: 1px solid #000000;
+        border-spacing: 1pt;
+        width: 100%;
+    }
+    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
+    {
+        color: #003CA9;
+    }
+    .RadGrid_Default td.rgPagerCell
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #828282 #EEEEEE #EEEEEE;
+        border-style: solid;
+        border-width: 0px 0 0px 0px;
+    }
+    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td
+    {
+        border-style: none;
+        border-width: 0 0 1px;
+    }
+</style>
 
 <div class="admin_top">
     &nbsp;</div>
@@ -26,7 +63,7 @@
         <telerik:RadGrid ID="rgBranch" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
             AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
             OnNeedDataSource="rgBranch_NeedDataSource" OnItemCommand="rgBranch_ItemCommand"
-             Width="98%" >
+             Width="98%" HeaderStyle-Font-Bold="true" >
             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
             <MasterTableView DataKeyNames="BranchID,CompanyID,BranchName,Location,IsActive">
                 <Columns>
@@ -36,7 +73,7 @@
                         HeaderText="Branch Name"
                         UniqueName="BranchName" 
                         SortExpression="BranchName" 
-                        FilterControlWidth="300"
+                        FilterControlWidth="200"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -52,7 +89,7 @@
                         HeaderText="Location"
                         UniqueName="Location" 
                         SortExpression="Location" 
-                        FilterControlWidth="200"
+                        FilterControlWidth="150"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -71,33 +108,38 @@
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true">
+                        AutoPostBackOnFilter="true"
+                        DataType="System.String"
+                        >
                         <ItemTemplate>
                             <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
-                        DataField="BranchID" 
-                        AllowFiltering="false" 
-                        HeaderText=""
-                        UniqueName="Edit">
-                        <ItemTemplate>
-                            <asp:ImageButton ID="imgbtnEdit" 
-                                runat="server" 
-                                ToolTip="Edit Branch" 
-                                AlternateText="Edit"
-                                ImageUrl="../Images/edit_icon.png" 
-                                CommandArgument ='<%# Eval("BranchID") %>'
-                                CommandName="Edit" />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                                    UniqueName="IsActive" 
+                                    AllowFiltering="false" 
+                                    HeaderText="IsActive?"
+                                    DataField="IsActive" 
+                                    ItemStyle-HorizontalAlign="Center"  
+                                    >
+                                    <ItemTemplate>
+                                        <asp:Image ID="imgIsActive"  runat="server" ImageUrl=<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%> />
+                                        
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
                         DataField="BranchID" 
-                        AllowFiltering="false" 
+                        AllowFiltering="true" 
                         HeaderText=""
-                        UniqueName="Delete">
+                        UniqueName="Edit">
+                        <FilterTemplate>
+                                 <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
+                                                    <span> Clear Fillter </span>
+                                </asp:LinkButton>
+                        </FilterTemplate>
                         <ItemTemplate>
-                             <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
+                        
+                            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
                                 <script type="text/javascript" language="javascript">
                                     function ConfirmDeleteBranch() {
                                         if (confirm('<%= CompanyManagement_DeleteCompany_Confirmation %>'))
@@ -107,13 +149,33 @@
                                     }
                                 </script>
                             </telerik:RadCodeBlock>
-                            <asp:ImageButton ID="imgbtnDelete" runat="server" 
-                                ToolTip="Delete Branch" 
-                                AlternateText="Delete"
-                                ImageUrl="../Images/delete_icon.png" 
-                                OnClientClick="javascript:ConfirmDeleteBranch();"
-                                CommandArgument ='<%# Eval("BranchID") %>'
-                                CommandName="Delete" />
+                            <div>
+                                <center>
+                                <div style="width: 45px;">     
+                                    <div style="float:left; padding-right: 10px;">
+                                         <asp:ImageButton ID="imgbtnEdit" 
+                                                        runat="server" 
+                                                        ToolTip="Edit Branch" 
+                                                        AlternateText="Edit"
+                                                        ImageUrl="../Images/edit_icon.png" 
+                                                        CommandArgument ='<%# Eval("BranchID") %>'
+                                                        CommandName="Edit" />
+                                    </div>
+                                    <div style="float:left;" >
+                                       <asp:ImageButton ID="imgbtnDelete" runat="server" 
+                                                        ToolTip="Delete Branch" 
+                                                        AlternateText="Delete"
+                                                        ImageUrl="../Images/delete_icon.png" 
+                                                        OnClientClick="javascript:ConfirmDeleteBranch();"
+                                                        CommandArgument ='<%# Eval("BranchID") %>'
+                                                        CommandName="Delete" />
+                                     </div>
+                                    <div class="clear"></div>
+                            </div>
+                            </center>
+                            </div>
+
+                         
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                 </Columns>

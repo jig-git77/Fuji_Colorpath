@@ -75,6 +75,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
             }
             return dstRegionList;
         }
+        public Dictionary<int, string> RegionListByCompnay(int companyId)
+        {
+            var dstRegionList = new Dictionary<int, string>();
+            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRegionByCompany]", new object[] { companyId } );
+            if (dsRegion != null && dsRegion.Tables.Count > 0)
+            {
+                dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
+                    region => new
+                    {
+                        Value = DataReader.ReadInt(region, "RegionID"),
+                        Text = DataReader.ReadString(region, "Region")
+                    })).ToDictionary(region => region.Value, region => region.Text);
+            }
+            return dstRegionList;
+        }
+
+        public Dictionary<int, string> UserRoleList()
+        {
+            var dstUserRoleList = new Dictionary<int, string>();
+            var dsUserRole = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRoles]");
+            if (dsUserRole != null && dsUserRole.Tables.Count > 0)
+            {
+                dstUserRoleList = (dsUserRole.Tables[0].AsEnumerable().Select(
+                    region => new
+                    {
+                        Value = DataReader.ReadInt(region, "RoleID"),
+                        Text = DataReader.ReadString(region, "RoleDesc")
+                    })).ToDictionary(region => region.Value, region => region.Text);
+            }
+            return dstUserRoleList;
+        }
+
 
         #endregion
     }
