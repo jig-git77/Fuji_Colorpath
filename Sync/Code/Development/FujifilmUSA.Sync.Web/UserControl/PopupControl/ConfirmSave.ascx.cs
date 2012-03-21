@@ -33,6 +33,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterConfirmSave.CloseOptimizeRun();
+            SessionManager.Instance.CurrentProject = null;
+            SessionManager.Instance.CurrentOptimizeRun = null;
             Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
         }
 

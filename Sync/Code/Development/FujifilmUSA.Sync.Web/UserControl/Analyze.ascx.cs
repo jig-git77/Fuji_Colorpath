@@ -83,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             BindMesurementChart();
         }
-        protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
+        protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;

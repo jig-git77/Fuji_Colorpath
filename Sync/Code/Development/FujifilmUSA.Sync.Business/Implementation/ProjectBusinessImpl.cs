@@ -394,12 +394,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartImage", new object[] { ReferenceChartTypeID });
             if (dsPresetList != null && dsPresetList.Tables.Count > 0)
             {
-                imageByte = dsPresetList.Tables[0].AsEnumerable().Select(
+                var rec = dsPresetList.Tables[0].AsEnumerable().Select(
                     x => new ReferenceChartType()
                     {
                         ChartPreview = DataReader.ReadByteArray(x, "ChartPreview")
 
-                    }).SingleOrDefault().ChartPreview;
+                    }).SingleOrDefault();
+                if(rec != null)
+                {
+                    imageByte = rec.ChartPreview;
+                }
             }
             return imageByte;
         }

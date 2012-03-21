@@ -93,27 +93,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         case "lnkDescription":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                            Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkTargetColorSpace":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
+                            Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkProfilerOption":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
+                            Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkMeasurementSetup":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+                            Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkSave":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                            Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkMeasure":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                            Response.Redirect("~/Measurement.aspx");
                             break;
                         case "lnkAnalyze":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                            Response.Redirect("~/Analyze.aspx");
+                            break;
+                        case "lnkDownload":
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                            Response.Redirect("~/Export.aspx");
                             break;
                     }
-                    Response.Redirect("~/AddProject.aspx");
                 }
             }
         }
