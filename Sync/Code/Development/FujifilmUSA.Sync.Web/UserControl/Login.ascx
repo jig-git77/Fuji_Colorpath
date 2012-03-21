@@ -38,6 +38,7 @@
         &nbsp;</div>
 </div>
 <script language="javascript">
+   
     jQuery(document).ready(function () {
         if (jQuery("[id*='txtPassword']").val() == '') {
             jQuery("[id*='txtPassword']").val('Password');

@@ -81,6 +81,8 @@
     <Content Include="Images\MarkerRed_Circle.gif" />
     <Content Include="Images\uncheck_checkbox.gif" />
     <Content Include="JQuery\jquery-1.7.1.min.js" />
+    <Content Include="JS\jquery.js" />
+    <Content Include="JS\MenuBar.js" />
     <Content Include="UserControl\AddUserManagement.ascx" />
     <Content Include="UserControl\UserManagement.ascx" />
     <Content Include="UserManagement.aspx" />
