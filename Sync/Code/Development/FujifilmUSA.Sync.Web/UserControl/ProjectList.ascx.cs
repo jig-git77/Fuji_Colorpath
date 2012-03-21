@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
                 BindProject();
             }
         }

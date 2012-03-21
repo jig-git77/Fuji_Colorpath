@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 
@@ -21,27 +23,46 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterExport = new PresenterExport(this);
         }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+            }
+        }
+
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            _presenterExport.CreateOptimizeRun();
+            _presenterExport.GetProjectDetail();
+            SessionManager.Instance.CurrentProject = Project;
+            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
             Response.Redirect("Measurement.aspx");
         }
 
         protected void lbtnDownLoadDLP_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterExport.GetDeviceLinkProfile();
+            if (DeviceLinkProfile != null)
+                Utilities.DownloadFile(DeviceLinkProfile, "Profile.icc");
         }
 
         protected void lbtnDownLoadChart_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.GetChartPreview();
+            if (ChartPreview != null)
+                Utilities.DownloadFile(ChartPreview, "chart.jpg");
         }
 
         protected void lbtnDownloadSourceICC_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.GetSourceProfile();
+            if (SourceProfile != null)
+                Utilities.DownloadFile(SourceProfile, "SourceProfile.icc");
         }
 
         #region IViewExport Members
@@ -50,6 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] DeviceLinkProfile { get; set; }
         public byte[] ChartPreview { get; set; }
         public byte[] SourceProfile { get; set; }
+        public Project Project { get; set; }
         #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 lblDeviceName.Text = SessionManager.Instance.CurrentDevice.DeviceName;
             }
         }

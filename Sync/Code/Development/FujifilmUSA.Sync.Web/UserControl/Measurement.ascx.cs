@@ -27,12 +27,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
-            header.InnerText = string.Format("New Print Condition - Measure (No DLP)");
-            if (Request.QueryString["ProjectName"] != null)
+            if (!IsPostBack)
             {
-                header.InnerText = string.Format("Measure - {0}.icc", Request.QueryString["ProjectName"]);
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             }
+            header.InnerText = Request.QueryString["ProjectName"] != null ? string.Format("Measure - {0}.icc", Request.QueryString["ProjectName"]) : string.Format("New Print Condition - Measure (No DLP)");
         }
+
         #endregion
 
         #region Control Events

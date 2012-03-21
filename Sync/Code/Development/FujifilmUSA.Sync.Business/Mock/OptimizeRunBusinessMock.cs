@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IOptimizeRunBusiness Members
 
-        public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
+        public void CreateOptimizeRun(int projectId, int status, int closeStatus, DateTime startDateTime)
         {
 
         }
@@ -31,7 +31,12 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
         {
-            
+
+        }
+
+        public void CloseOptimizeRun(int optimizeRunId, int status, DateTime endDateTime)
+        {
+
         }
 
         #endregion

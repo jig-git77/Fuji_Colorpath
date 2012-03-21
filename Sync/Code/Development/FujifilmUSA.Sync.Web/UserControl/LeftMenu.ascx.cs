@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 
@@ -83,13 +84,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ph.Controls.Add(ctrlItem);
 
             if (SessionManager.Instance.CurrentProject == null) return;
-            
+
 
             if (SessionManager.Instance.CurrentProject.IsNewlyCreated)
             {
                 ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                 ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
-                ctrlItem.ItemName = "New Print Condition";
+                ctrlItem.ItemName = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)
+                                        ? "New Print Condition"
+                                        : SessionManager.Instance.CurrentProject.ProjectName;
                 ph.Controls.Add(ctrlItem);
                 ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
             }
@@ -101,11 +104,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ph.Controls.Add(ctrlItem);
                 foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                 {
-                    var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                    ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
-                    ctrlProjItem.ItemName = item.RunName;
-                    ctrlProjItem.CurrentRun = item;
-                    ph.Controls.Add(ctrlProjItem);
+                    if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                    {
+                        var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                        ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
+                        ctrlProjItem.ItemName = item.RunName;
+                        ctrlProjItem.CurrentRun = item;
+                        ph.Controls.Add(ctrlProjItem);
+                    }
                 }
             }
         }

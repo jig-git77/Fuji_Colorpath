@@ -17,7 +17,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public MeasurementDataResponse GetMeasurementData(List<int> measurementIds)
         {
-            var response = new MeasurementDataResponse();
+            var response = new MeasurementDataResponse()
+                               {
+                                   DcsData = new List<double>(),
+                                   PcsData = new List<double>()
+                               };
             var dsPcsDcsData = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetMeasurementData", new object[] { String.Join(",", measurementIds) });
             if (dsPcsDcsData.Tables[0].Rows.Count > 0)
             {

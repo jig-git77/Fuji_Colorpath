@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
@@ -30,6 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
                     {
                         ulSubMenu.Visible = true;
+                        lnkRunName.Font.Bold = true;
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
                         lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
                         lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         Response.Redirect("Analyze.aspx");
                     }
-                    else if (lnkItem.ID == "lnkExport")
+                    else if (lnkItem.ID == "lnkDownload")
                     {
                         Response.Redirect("Export.aspx");
                     }

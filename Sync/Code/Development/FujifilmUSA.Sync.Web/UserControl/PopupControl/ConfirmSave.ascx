@@ -4,13 +4,6 @@
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
 
 <script type="text/javascript" language="javascript">
-    
-    //Click on Optimiz Button
-    function ChooseOptimize() {
-            CloseConfirmSaveWindow();
-            window.parent.jQuery('div[id$=divUpdateCreateDLP]').show();
-            window.parent.location = "Export.aspx";
-        }
     //Click on Close Button
     function CloseConfirmSaveWindow() {
             var oWindow = GetProjectInformationRadWindow();
@@ -25,8 +18,6 @@
             return oWindow;
         }
 </script>
- 
-
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
@@ -39,17 +30,10 @@
                     </div>
                     <div class="text" style="float:right">
                     <div class="buttonright" style="padding-left: 3px">
-               <%--     <asp:UpdatePanel ID="upCreateDLP" runat="server">
-                <ContentTemplate>--%>
                     <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" 
-                            OnClientClick="javascript:ChooseOptimize(); return false;" 
                             onclick="lbtnOptimize_Click">
                         <span> No, Optimize </span>
                     </asp:LinkButton>
-                <%--</ContentTemplate>
-                </asp:UpdatePanel>
---%>
-
                 </div>
                 <div class="buttonright">
                     <asp:LinkButton ID="lbtnYes" runat="server" CssClass="gray_bt" 

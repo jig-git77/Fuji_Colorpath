@@ -46,6 +46,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
                         HasProfile = DataReader.ReadBoolean(x, "HasProfile")
                     }).ToList();
+                if(project.OptimizeRuns.Count() == 1)
+                {
+                    project.IsNewlyCreated = true;
+                }
             }
             return project;
         }

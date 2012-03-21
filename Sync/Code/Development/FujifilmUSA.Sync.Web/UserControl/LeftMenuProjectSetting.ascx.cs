@@ -18,65 +18,67 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkAnalyze.Enabled =
                 lnkDownload.Enabled = false;
 
+            if (SessionManager.Instance.CurrentProject.PrintCondition != null && !string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media))
+            {
+                lnkDescription.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0)
+            {
+                lnkTargetColorSpace.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0)
+            {
+                lnkProfilerOption.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId > 0)
+            {
+                lnkMeasurementSetup.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.ProjectId > 0)
+            {
+                lnkSave.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
+                SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0 &&
+                SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
+            {
+                lnkMeasure.Enabled = lnkAnalyze.Enabled = lnkDownload.Enabled = true;
+            }
+
+            lnkDescription.Font.Bold =
+            lnkTargetColorSpace.Font.Bold =
+            lnkProfilerOption.Font.Bold =
+            lnkMeasurementSetup.Font.Bold =
+            lnkSave.Font.Bold =
+            lnkMeasure.Font.Bold =
+            lnkAnalyze.Font.Bold =
+            lnkDownload.Font.Bold = false;
+
             switch (SessionManager.Instance.CurrentNavigation)
             {
                 case ELeftMenuItemLevel.Description:
-                    lnkDescription.Enabled = true;
+                    lnkDescription.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.TargetColorSpace:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        true;
+                    lnkTargetColorSpace.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.ProfilerOption:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        true;
+                    lnkProfilerOption.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.MeasurementSetup:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        lnkMeasurementSetup.Enabled =
-                        true;
+                    lnkMeasurementSetup.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Save:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        lnkMeasurementSetup.Enabled =
-                        lnkSave.Enabled =
-                        true;
+                    lnkSave.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Measure:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        lnkMeasurementSetup.Enabled =
-                        lnkSave.Enabled =
-                        lnkMeasure.Enabled =
-                        true;
+                    lnkMeasure.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Analyze:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        lnkMeasurementSetup.Enabled =
-                        lnkSave.Enabled =
-                        lnkMeasure.Enabled =
-                        lnkAnalyze.Enabled =
-                        true;
+                    lnkAnalyze.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Download:
-                    lnkDescription.Enabled =
-                        lnkTargetColorSpace.Enabled =
-                        lnkProfilerOption.Enabled =
-                        lnkMeasurementSetup.Enabled =
-                        lnkSave.Enabled =
-                        lnkMeasure.Enabled =
-                        lnkAnalyze.Enabled =
-                        lnkDownload.Enabled = true;
+                    lnkDownload.Font.Bold = true;
                     break;
             }
         }

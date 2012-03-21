@@ -3,7 +3,6 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-using System.Web.UI.WebControls;
 using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -22,9 +21,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsNewDlp
         {
-            get {
-                   return SessionManager.Instance.CurrentProject.IsNewlyCreated; 
-                }
+            get
+            {
+                return SessionManager.Instance.CurrentProject.IsNewlyCreated;
+            }
         }
 
         #endregion
@@ -37,6 +37,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+            }
             header.InnerText = IsNewDlp
                                    ? string.Format("New Print Condition - Analyze (No DLP)")
                                    : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
@@ -81,9 +85,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
         {
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            _presenterAnalyze.GetMeasurementsOnRunId();
+            _presenterAnalyze.CreateDestinationAndDlp();
+            Response.Redirect("Export.aspx");
         }
         #endregion
-
 
         #region IViewAnalyze Members
 
@@ -98,12 +106,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Measurement Measurement { get; set; }
 
         #endregion
-
-        protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
-        {
-            System.Threading.Thread.Sleep(5000);
-        }
-
-
     }
 }

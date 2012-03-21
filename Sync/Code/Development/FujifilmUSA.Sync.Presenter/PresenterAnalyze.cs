@@ -27,6 +27,12 @@ namespace FujifilmUSA.Sync.Presenter
 
         }
 
+        public void GetMeasurementsOnRunId()
+        {
+            var task = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            _viewAnalyze.MeasurementIds = task.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Select(x => x.MeasurementId).ToList();
+        }
+
         public void GetAnalyzeChartMeasurement()
         {
             var measurementbusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();

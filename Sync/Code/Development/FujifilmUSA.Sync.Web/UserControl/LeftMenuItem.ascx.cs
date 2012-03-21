@@ -19,23 +19,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 case ELeftMenuItemLevel.Home:
                     imgItem.ImageUrl = "../images/home_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Home;
+                    lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Home;
                     break;
                 case ELeftMenuItemLevel.Device:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Device;
+                    lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Device;
                     break;
                 case ELeftMenuItemLevel.Operation:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Operation;
+                    lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Operation;
                     break;
                 case ELeftMenuItemLevel.ProjectSetup:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Enabled = false;
+                    lnkItem.Enabled = false;
                     break;
                 case ELeftMenuItemLevel.Project:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    imgItem.Enabled = false;
+                    lnkItem.Enabled = false;
                     break;
             }
             lnkItem.Text = ItemName;

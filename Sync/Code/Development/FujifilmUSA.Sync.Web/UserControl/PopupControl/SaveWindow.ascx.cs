@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterSaveWindow.SaveProject();
             SessionManager.Instance.CurrentProject = Project;
             SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
         }
 

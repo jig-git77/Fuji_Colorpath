@@ -14,10 +14,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IOptimizeRunBusiness Members
 
-        public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
+        public void CreateOptimizeRun(int projectId, int status,int closeStatus, DateTime startDateTime)
         {
             DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.CreateOptimizeRun",
-                                            new object[] { projectId, status, startDateTime });
+                                                        new object[] {projectId, status, closeStatus, startDateTime});
         }
 
         public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
@@ -27,7 +27,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               {
                                   PcsData = new List<double>(),
                                   DcsData = new List<double>(),
-                                  SourceProfile = new IccProfile() { ProfileData = sourceProfile }
+                                  SourceProfile = new IccProfile() { ProfileData = sourceProfile },
+                                  DestinationProfileOptions = new List<Parameter>(),
+                                  DlpOptions = new List<Parameter>()
                               };
 
             var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
@@ -87,7 +89,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 DCSData = new List<double>(),
                 SourceProfile = new IccProfile() { ProfileData = sourceProfile },
                 DestinationProfile = new IccProfile() { ProfileData = destinationProfile },
-                DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile }
+                DeviceLinkProfile = new IccProfile() { ProfileData = deviceLinkProfile },
+                Options = new List<Parameter>()
             };
 
             var measurementDataResponse = BusinessFactory<IMeasurementBusiness>.CreateObject().GetMeasurementData(measurementIds);
@@ -107,6 +110,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
                                                             new object[] { optimizeRunId, response.OptimizedProfile.ProfileData });
             }
+        }
+
+        public void CloseOptimizeRun(int optimizeRunId, int status, DateTime endDateTime)
+        {
+            DataAccessFactory.Instance.ExecuteProcedure(
+                "CPSync4D.CloseOptimizeRun",
+                new object[] {optimizeRunId, status, endDateTime});
         }
 
         #endregion

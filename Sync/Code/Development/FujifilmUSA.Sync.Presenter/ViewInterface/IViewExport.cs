@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -12,5 +13,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         byte[] DeviceLinkProfile { get; set; }
         byte[] ChartPreview { get; set; }
         byte[] SourceProfile { get; set; }
+        Project Project { get; set; }
     }
 }

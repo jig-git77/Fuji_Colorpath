@@ -15,12 +15,10 @@
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
-
         //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
         $(".hideclass:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").show(); //Show first tab content
-
         //On Click Event
         $("ul.tabs li").click(function () {
             $("ul.tabs li").removeClass("active"); //Remove any "active" class
@@ -31,40 +29,20 @@
             $(activeTab).fadeIn(); //Fade in the active content
             return false;
         });
-
-
-
     });
 </script>
 <script type="text/javascript" language="javascript">
-
-    function ShowCreateDLP() {
-        ChooseRadWindow();
-    }
-
     //According to new or old Project open rad window
     function ChooseRadWindow() {
-        jQuery("div[id$=divUpdateCreateDLP]").hide();
-        jQuery("div[id$=divUpdate]").hide();
         if ("<%= IsNewDlp %>" == "True") {
-            jQuery("div[id$=divUpdateCreateDLP]").show();
             return true;
         }
         else {
-            jQuery("div[id$=divUpdate]").show();
             var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
             oWnd.show();
             return false;
         }
     }
-
-    function CloseConfirmSaveWindow() {
-        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
-        oWnd.close();
-    }
-
-
-  
 </script>
 <div class="contant_top">
     &nbsp;</div>
@@ -75,11 +53,9 @@
         <div class="Information_divAnalyze">
             <asp:UpdatePanel ID="upCreateDLP" runat="server">
                 <ContentTemplate>
-                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClientClick="javascript:ShowCreateDLP();"
-                        OnClick="lbtnDownloadAndSaveDLP_Click">
-                        <span>
-                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />Download
-                            DLP</span> &nbsp;
+                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" 
+                        onclick="lbtnDownloadAndSaveDLP_Click" OnClientClick="return ChooseRadWindow();">
+                        <span><asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />Download DLP</span> &nbsp;
                     </asp:LinkButton>
                 </ContentTemplate>
             </asp:UpdatePanel>
