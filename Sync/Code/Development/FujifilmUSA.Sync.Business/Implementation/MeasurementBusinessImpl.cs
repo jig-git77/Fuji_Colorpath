@@ -93,16 +93,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId)
         {
             var dsMeasurements = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[GetAnalyzeChartMeasurement]", new object[] { optimizeRunId });
-            var measurements = dsMeasurements.Tables[0].AsEnumerable().
-                Select(x => new Measurement()
-                {
-                    MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                    MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                    ReferenceChart = new ReferenceChart() { PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"), HtmlColor = DataReader.ReadString(x, "HtmlColor") },
-                    Δe = DataReader.ReadDecimal(x, "ΔE"),
-                    MeasurementNo = DataReader.ReadInt(x, "MeasurementNo"),
-                    IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                }).ToList();
+            var measurements =
+                dsMeasurements.
+                    Tables[0].
+                    AsEnumerable().
+                    Select(x => new Measurement()
+                                    {
+                                        MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                        MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                        IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                    }).ToList();
+
+            measurements.ForEach(x =>
+                                     {
+                                         x.MeasurementPatches =
+                                             dsMeasurements.Tables[1].AsEnumerable().
+                                                 Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
+                                                 Select(y => new MeasurementPatch()
+                                                                 {
+                                                                     MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
+                                                                     MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
+                                                                     HtmlColor = DataReader.ReadString(y, "HtmlColor"),
+                                                                     Δe = DataReader.ReadDecimal(y, "ΔE"),
+                                                                 }).ToList();
+                                     });
             return measurements;
         }
 
@@ -114,7 +128,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                                                 measurement.IsUsed
                                                                                                  });
             return returnValue;
-       
+
         }
 
 
