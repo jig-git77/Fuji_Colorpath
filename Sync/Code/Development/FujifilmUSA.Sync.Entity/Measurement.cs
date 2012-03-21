@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 namespace FujifilmUSA.Sync.Entity
 {
@@ -12,5 +12,11 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsUsed { get; set; }
         public List<MeasurementPatch> MeasurementPatches { get; set; }
         //public OptimizeRun OptimizeRun { get; set; }
+
+        //For Anaylze Chart
+        public decimal? Δe { get; set; }
+        public int MeasurementNo { get; set; }
+        public ReferenceChart ReferenceChart { get; set; } 
+
     }
 }

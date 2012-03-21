@@ -10,5 +10,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }
         List<int> MeasurementIds { get; set; }
+
+        //For Anaylze Chart
+        List<Entity.Measurement> lstMeasurement { get; set; }
+        Entity.Measurement Measurement { get; set; }
     }
 }

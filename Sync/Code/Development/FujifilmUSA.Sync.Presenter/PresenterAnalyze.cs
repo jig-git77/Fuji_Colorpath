@@ -26,5 +26,18 @@ namespace FujifilmUSA.Sync.Presenter
                     _viewAnalyze.MeasurementIds);
 
         }
+
+        public void GetAnalyzeChartMeasurement()
+        {
+            var measurementbusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            _viewAnalyze.lstMeasurement = measurementbusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId);
+        }
+        public int UpdateMeasurementByAnalyzeChart()
+        {
+            var measurementbusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            return measurementbusiness.UpdateMeasurementByAnalyzeChart(_viewAnalyze.Measurement);
+        }
+
+
     }
 }

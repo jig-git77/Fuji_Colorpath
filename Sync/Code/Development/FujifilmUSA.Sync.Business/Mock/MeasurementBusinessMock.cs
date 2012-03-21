@@ -25,6 +25,14 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
+        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId)
+        {
+            return new List<Measurement>();
+        }
+        public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
+        {
+            return 0;
+        }
         #endregion
     }
 }

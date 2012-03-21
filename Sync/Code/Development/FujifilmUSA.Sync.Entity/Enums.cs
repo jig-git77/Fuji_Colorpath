@@ -57,4 +57,40 @@
         UV = 1,           //UV Included
         UVCut = 2         //No UV i.e. UVCut
     }
+
+    public enum CPPatchType
+    {
+        Cyan = 1,
+        Magenta = 2,
+        Yellow = 3,
+        Black = 4,
+        Overprint_Red = 5,
+        Overprint_Green = 6,
+        Overprint_Blue = 7,
+        Paper = 8,
+        Triplet_Solid_Gray = 9,
+        Gray_C_M_Y = 10,
+        Other = 11,
+        Cyan_Tint = 12,
+        Magenta_Tint = 13,
+        Yellow_Tint = 14,
+        Black_Tint = 15,
+        Cyan_Quarter_Tone = 16,
+        Cyan_Half_Tone = 17,
+        Cyan_Three_Quarter_Tone = 18,
+        Magenta_Quarter_Tone = 19,
+        Magenta_Half_Tone = 20,
+        Magenta_Three_Quarter_Tone = 21,
+        Yellow_Quarter_Tone = 22,
+        Yellow_Half_Tone = 23,
+        Yellow_Three_Quarter_Tone = 24,
+        Black_Quarter_Tone = 25,
+        Black_Half_Tone = 26,
+        Black_Three_Quarter_Tone = 27,
+        Gray_25 = 28,
+        Gray_50 = 29,
+        Gray_75 = 30
+    }
+
+
 }

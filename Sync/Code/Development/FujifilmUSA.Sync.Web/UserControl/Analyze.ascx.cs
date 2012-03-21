@@ -43,13 +43,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
+            if (!Page.IsPostBack)
+            {
+                BindMesurementChart();
+            }
         }
         #endregion
 
         #region Methods
+
+        private void BindMesurementChart()
+        {
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            lstMeasurement = new List<Entity.Measurement>();
+            _presenterAnalyze.GetAnalyzeChartMeasurement();
+
+            AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, lstMeasurement);
+            manager.CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value);
+            manager.BindChart();
+            hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+
+        }
+        
         #endregion
 
         #region Control Events
+        protected void hdChartButton_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(hdCheckBoxChange.Value) == 1)
+            {
+                Measurement = new Entity.Measurement();
+                Measurement.MeasurementId = Convert.ToInt32(hdMeasurement.Value);
+                Measurement.IsUsed = hdChartCheckBox.Checked;
+                _presenterAnalyze.UpdateMeasurementByAnalyzeChart();
+            }
+            BindMesurementChart();
+        }
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
         {
         }
@@ -64,11 +93,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<int> MeasurementIds { get; set; }
 
+        public List<Entity.Measurement> lstMeasurement { get; set; }
+
+        public Entity.Measurement Measurement { get; set; }
+
         #endregion
 
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
             System.Threading.Thread.Sleep(5000);
         }
+
+
     }
 }
