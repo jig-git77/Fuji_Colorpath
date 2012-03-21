@@ -80,6 +80,7 @@
     <Content Include="Images\checked_checkbox.gif" />
     <Content Include="Images\MarkerRed_Circle.gif" />
     <Content Include="Images\uncheck_checkbox.gif" />
+    <Content Include="JQuery\jquery-1.7.1.min.js" />
     <Content Include="UserControl\AddUserManagement.ascx" />
     <Content Include="UserControl\UserManagement.ascx" />
     <Content Include="UserManagement.aspx" />
@@ -830,7 +831,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
