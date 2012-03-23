@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 
@@ -63,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbDeviceFamily.DataValueField = "Key";
             cmbDeviceFamily.DataSource = DeviceFamilyList;
             cmbDeviceFamily.DataBind();
-            cmbDeviceFamily.Items.Insert(0, "--Select--");
+            cmbDeviceFamily.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
         }
         private void BindCompnay()
         {
@@ -75,6 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompany.DataSource = Compnaies;
             cmbCompany.DataBind();
             cmbCompany.Items.Insert(0, "--Select--");
+            cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
         }
         private void BindBranch()
         {
@@ -89,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.DataSource = Branches;
                 cmbBranch.DataBind();
             }
-            cmbBranch.Items.Insert(0, "--Select--");
+            cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", string.Empty));
         }
         private void BindLicenses()
         {
@@ -104,7 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbLicense.DataSource = Licenses;
                 cmbLicense.DataBind();
             }
-            cmbLicense.Items.Insert(0, "--Select--");
+            cmbBranch.Items.Insert(0, new ListItem("--Select License--", string.Empty));
         }
         private void SaveDevice()
         {

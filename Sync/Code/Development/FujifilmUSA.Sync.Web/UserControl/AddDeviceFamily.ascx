@@ -30,7 +30,7 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceFamilyName" runat="server" Display="Dynamic"
                                             ControlToValidate="txtDeviceFamilyName" ForeColor="Red" ValidationGroup="vgAddDeviceFamily">
-                                            <div class="tooltip_round_box" style="width: 200px;">
+                                            <div class="tooltip_round_box" style="width: 225px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
                                             <div class="tooltip_top_left">

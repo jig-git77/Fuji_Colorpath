@@ -71,7 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompanyName.DataValueField = "Key";
             cmbCompanyName.DataSource = Compnaies;
             cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0, "--Select Company--");
+            cmbCompanyName.Items.Insert(0, new ListItem("--Select Company--", ""));
         }
         private void BindRole()
         {
@@ -81,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbRole.DataValueField = "Key";
             cmbRole.DataSource = UserRoleList;
             cmbRole.DataBind();
-            cmbRole.Items.Insert(0, "--Select Role--");
+            cmbRole.Items.Insert(0, new ListItem("--Select Role--", ""));
         }
         private void BindBranch()
         {
@@ -125,7 +125,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                cmbRegion.Items.Insert(0, "--Select Region--");
+                cmbRegion.Items.Insert(0, new ListItem("--Select Region--", ""));
             }
         }
 

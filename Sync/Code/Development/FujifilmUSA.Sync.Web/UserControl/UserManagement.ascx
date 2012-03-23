@@ -38,6 +38,18 @@
         border-width: 0 0 1px;
     }
 </style>
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
+    <script type="text/javascript" language="javascript">
+        function ConfirmDeleteUser() {
+            if (confirm('<%= UserManagement_DeleteUser_Confirmation %>')) {
+                return true;
+                }
+            else {
+                return false;
+            }
+       }
+    </script>
+</telerik:RadCodeBlock>
 
 <div class="admin_top">
     &nbsp;</div>
@@ -135,11 +147,11 @@
                     </telerik:GridTemplateColumn>
                      
                      <telerik:GridTemplateColumn 
-                        DataField="CompnayName" 
+                        DataField="UserCompanies.Company.CompanyName" 
                         AllowFiltering="true" 
                         HeaderText="Compnay"
                         UniqueName="CompnayName" 
-                        SortExpression="CompnayName" 
+                        SortExpression="UserCompanies.Company.CompanyName" 
                         FilterControlWidth="70"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
@@ -147,7 +159,7 @@
                         AutoPostBackOnFilter="true"
                         >
                         <ItemTemplate>
-                            <asp:Label ID="lblCompnayName" runat="server" Text='<%# Eval("CompnayName") %>' />
+                            <asp:Label ID="lblCompnayName" runat="server" Text='<%# Eval("UserCompanies.Company.CompanyName") %>' />
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -196,19 +208,10 @@
                         </FilterTemplate>
                         <ItemTemplate>
                         
-                            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
-                                <script type="text/javascript" language="javascript">
-                                    function ConfirmDeleteUser() {
-                                        if (confirm('<%= UserManagement_DeleteUser_Confirmation %>'))
-                                            return true;
-                                        else
-                                            return false;
-                                    }
-                                </script>
-                            </telerik:RadCodeBlock>
                             <div>
                                 <center>
-                                <div style="width: 45px;">     
+                                <div style="width: 45px;">  
+                                    
                                     <div style="float:left; padding-right: 10px;">
                                          <asp:ImageButton ID="imgbtnEdit" 
                                                         runat="server" 
@@ -223,8 +226,8 @@
                                                         ToolTip="Delete User" 
                                                         AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript:ConfirmDeleteUser();"
-                                                        CommandArgument ='<%# Eval("UserId") %>'
+                                                        OnClientClick="javascript: ConfirmDeleteUser()"
+                                                        CommandArgument ='<%# Eval("UserId") %>'    
                                                         CommandName="Delete" />
                                      </div>
                                     <div class="clear"></div>
@@ -238,6 +241,7 @@
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>
+        
         </ContentTemplate>
         </asp:UpdatePanel>
     </div>

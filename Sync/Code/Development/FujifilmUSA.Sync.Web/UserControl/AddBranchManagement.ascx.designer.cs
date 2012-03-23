@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddBranchManagement {
         
         /// <summary>
-        /// Statusbar1 control.
+        /// ucStatusbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar Statusbar1;
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar;
         
         /// <summary>
         /// trListHeader control.

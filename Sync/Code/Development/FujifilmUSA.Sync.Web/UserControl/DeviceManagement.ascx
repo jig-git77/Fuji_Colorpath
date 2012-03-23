@@ -38,7 +38,16 @@
         border-width: 0 0 1px;
     }
 </style>
-
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
+        <script type="text/javascript" language="javascript">
+         function ConfirmDeleteDevice() {
+            if (confirm('<%= DeviceManagement_DeleteDevice_Confirmation %>'))
+                return true;
+            else
+                return false;
+           }
+        </script>
+</telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
@@ -79,7 +88,7 @@
                         HeaderText="Device Name"
                         UniqueName="DeviceName" 
                         SortExpression="DeviceName" 
-                        FilterControlWidth="100"
+                        FilterControlWidth="120"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -90,12 +99,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
-                        DataField="DeviceFamilyDesc" 
+                        DataField="DeviceFamily.DeviceFamilyDesc" 
                         AllowFiltering="true" 
                         HeaderText="DeviceFamily Desc"
                         UniqueName="DeviceFamilyDesc" 
-                        SortExpression="DeviceFamilyDesc" 
-                        FilterControlWidth="100"
+                        SortExpression="DeviceFamily.DeviceFamilyDesc" 
+                        FilterControlWidth="120"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -105,12 +114,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
-                        DataField="LicenseType" 
+                        DataField="License.LicenseType.Type" 
                         AllowFiltering="true" 
                         HeaderText="License Type"
                         UniqueName="LicenseType" 
-                        SortExpression="LicenseType" 
-                        FilterControlWidth="100"
+                        SortExpression="License.LicenseType.Type" 
+                        FilterControlWidth="120"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -122,12 +131,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
-                        DataField="CompanyName" 
+                        DataField="License.Branch.Company.CompanyName" 
                         AllowFiltering="true" 
                         HeaderText="Company Name"
                         UniqueName="CompanyName" 
-                        SortExpression="CompanyName" 
-                        FilterControlWidth="100"
+                        SortExpression="License.Branch.Company.CompanyName" 
+                        FilterControlWidth="120"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -139,12 +148,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn 
-                        DataField="BranchName" 
+                        DataField="License.Branch.BranchName" 
                         AllowFiltering="true" 
                         HeaderText="Branch Name"
                         UniqueName="BranchName" 
-                        SortExpression="BranchName" 
-                        FilterControlWidth="100"
+                        SortExpression="License.Branch.BranchName" 
+                        FilterControlWidth="120"
                         ItemStyle-Wrap="true" 
                         CurrentFilterFunction="Contains" 
                         ShowFilterIcon="false"
@@ -155,9 +164,6 @@
                             <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    
-
-
                     <telerik:GridTemplateColumn 
                                     UniqueName="IsActive" 
                                     AllowFiltering="false" 
@@ -182,16 +188,7 @@
                         </FilterTemplate>
                         <ItemTemplate>
                         
-                            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
-                                <script type="text/javascript" language="javascript">
-                                    function ConfirmDeleteDevice() {
-                                        if (confirm('<%= DeviceManagement_DeleteDevice_Confirmation %>'))
-                                            return true;
-                                        else
-                                            return false;
-                                    }
-                                </script>
-                            </telerik:RadCodeBlock>
+                            
                             <div>
                                 <center>
                                 <div style="width: 45px;">     

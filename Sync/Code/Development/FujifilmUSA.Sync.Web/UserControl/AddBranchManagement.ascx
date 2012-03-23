@@ -1,6 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddBranchManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddBranchManagement" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+
+        $('#DropDowlList1').val(1)
+
+    });
+</script>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -10,15 +19,10 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
-    </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <span>Fields marked with (<span style="color: Red;">*</span>) are Required</span>
-    </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
+        <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>
@@ -35,7 +39,7 @@
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvCompnayName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddBranch">
+                                            ControlToValidate="cmbCompanyName" ForeColor="Red"  ValidationGroup="vgAddBranch">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -52,6 +56,7 @@
                                             </div>
                                         </div>
                                         </asp:RequiredFieldValidator>
+                                       
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -67,7 +72,7 @@
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtBranchName" ForeColor="Red" ValidationGroup="vgBranchName">
+                                            ControlToValidate="txtBranchName" ForeColor="Red" ValidationGroup="vgAddBranch">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>

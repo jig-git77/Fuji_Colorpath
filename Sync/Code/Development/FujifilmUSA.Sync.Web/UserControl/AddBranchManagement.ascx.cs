@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 
@@ -31,6 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required,true);
             if (!Page.IsPostBack)
             {
                 BindCompnay();
@@ -59,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompanyName.DataValueField = "Key";
             cmbCompanyName.DataSource = Compnaies;
             cmbCompanyName.DataBind();
+            cmbCompanyName.Items.Insert(0,new ListItem("--Select--",string.Empty));
         }
         private void SaveCompnay()
         {
@@ -91,6 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
+            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveCompnay();
         }
         #endregion

@@ -18,11 +18,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterBranchManagement _presenterBranchManagement;
 
         #region Declaration
-        public string CompanyManagement_DeleteCompany_Confirmation
+        public string BranchManagement_DeleteBranch_Confirmation
         {
             get
             {
-                return ResourceManager.GetResourceMessage("CompanyManagement_DeleteCompany_Confirmation");
+                return ResourceManager.GetResourceMessage("BranchManagement_DeleteBranch_Confirmation");
             }
         }
         #endregion

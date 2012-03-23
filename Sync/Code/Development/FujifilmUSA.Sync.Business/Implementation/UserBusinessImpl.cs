@@ -70,16 +70,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            UserId = DataReader.ReadInt(x, "UserId"),
                            Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") }
                        },
-                       UserBranches = BranchList(dsUser.Tables[1])
+                       UserBranches = BranchList(DataReader.ReadInt(x, "UserId"), dsUser.Tables[1])
                    }).ToList();
             }
             return objUsers;
         }
 
-        private List<UserBranch> BranchList(DataTable dt)
+        private List<UserBranch> BranchList(int userId,DataTable dt)
         {
-            return dt.AsEnumerable().
-                                      Select(x => new UserBranch()
+           var userbarnch = dt.AsEnumerable().
+                Where(x => DataReader.ReadInt(x, "UserId").Equals(userId)).
+                Select(x=> new UserBranch()
                                       {
                                           UserBranchId = DataReader.ReadShort(x, "UserBranchId"),
                                           UserId = DataReader.ReadInt(x, "UserId"),
@@ -92,6 +93,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          IsActive = DataReader.ReadBoolean(x, "IsActive")
                                                      }
                                       }).ToList();
+            return userbarnch;
         }
 
         public int InsertUser(User user)
@@ -104,7 +106,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 					                                                                                            ,user.LastName
 					                                                                                            ,user.FirstName
 					                                                                                            ,user.Email
-					                                                                                            ,user.Role
+					                                                                                            ,user.Role.RoleId
 					                                                                                            ,user.RegionId
 					                                                                                            ,user.LastModifiedUserId
 					                                                                                            ,user.IsActive
@@ -126,7 +128,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 					                                                                                            ,user.LastName
 					                                                                                            ,user.FirstName
 					                                                                                            ,user.Email
-					                                                                                            ,user.Role
+					                                                                                            ,user.Role.RoleId
 					                                                                                            ,user.RegionId
 					                                                                                            ,user.LastModifiedUserId
 					                                                                                            ,user.IsActive

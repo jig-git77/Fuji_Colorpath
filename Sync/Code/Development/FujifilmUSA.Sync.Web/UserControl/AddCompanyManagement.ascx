@@ -10,15 +10,10 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
-    </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <span>Fields marked with (<span style="color: Red;">*</span>) are Required</span>
-    </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
+        <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>
@@ -67,7 +62,7 @@
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvRegionName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbRegionName" ForeColor="Red" ValidationGroup="vgCompanyName">
+                                            ControlToValidate="cmbRegionName" ForeColor="Red" ValidationGroup="vgCompanyName" >
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -76,7 +71,7 @@
                                             <div class="tooltip_top_right">
                                             </div>
                                             <div class="tooltip_inside">
-                                                Please provide region name.
+                                                Please select region.
                                             </div>
                                             <div class="tooltip_bottom_left">
                                             </div>

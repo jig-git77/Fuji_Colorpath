@@ -21,14 +21,6 @@ namespace FujifilmUSA.Sync.Entity
         public List<UserLicense> UserLicenses { get; set; }
         public List<UserBranch> UserBranches { get; set; }
 
-        //UseTo Fill the Grid Columns
-        public string CompnayName
-        {
-               get 
-               {
-                   return (this.UserCompanies != null && this.UserCompanies.Company != null) ? this.UserCompanies.Company.CompanyName : string.Empty;
-               } 
-        }
         //Get Multiple Branchs
         public string BranchName
         {

@@ -207,4 +207,13 @@
   <data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected compnay?</value>
   </data>
+  <data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected branch?</value>
+  </data>
+  <data name="DeviceManagement_DeleteDevice_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected device?</value>
+  </data>
+  <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected user?</value>
+  </data>
 </root>

@@ -44,6 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+       
         private void GetDevices()
         {
             DeviceList = new List<Device>();

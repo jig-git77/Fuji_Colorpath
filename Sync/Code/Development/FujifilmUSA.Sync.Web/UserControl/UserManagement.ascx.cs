@@ -54,6 +54,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgUser.DataSource = UserList;
             rgUser.DataBind();
         }
+
+        
         #endregion
 
         #region Control Events

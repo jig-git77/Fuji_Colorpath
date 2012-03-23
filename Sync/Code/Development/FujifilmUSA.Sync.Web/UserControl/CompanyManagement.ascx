@@ -39,7 +39,16 @@
         border-width: 0 0 1px;
     }
 </style>
-
+  <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+                                <script type="text/javascript" language="javascript">
+                                    function ConfirmDeleteCompany() {
+                                        if (confirm('<%= CompanyManagement_DeleteCompany_Confirmation %>'))
+                                            return true;
+                                        else
+                                            return false;
+                                    }
+                                </script>
+                            </telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
@@ -107,16 +116,7 @@
                                                 
                         </FilterTemplate>
                         <ItemTemplate>
-                            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                                <script type="text/javascript" language="javascript">
-                                    function ConfirmDeleteCompany() {
-                                        if (confirm('<%= CompanyManagement_DeleteCompany_Confirmation %>'))
-                                            return true;
-                                        else
-                                            return false;
-                                    }
-                                </script>
-                            </telerik:RadCodeBlock>
+                          
 
                             <div>
                                 <center>

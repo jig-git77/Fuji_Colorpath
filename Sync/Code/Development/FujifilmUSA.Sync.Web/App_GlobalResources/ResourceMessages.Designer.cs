@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected branch?.
+        /// </summary>
+        internal static string BranchManagement_DeleteBranch_Confirmation {
+            get {
+                return ResourceManager.GetString("BranchManagement_DeleteBranch_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected compnay?.
         /// </summary>
         internal static string CompanyManagement_DeleteCompany_Confirmation {
@@ -228,6 +237,15 @@ namespace Resources {
         internal static string DeviceLinkProfile_IsUse_True {
             get {
                 return ResourceManager.GetString("DeviceLinkProfile_IsUse_True", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected device?.
+        /// </summary>
+        internal static string DeviceManagement_DeleteDevice_Confirmation {
+            get {
+                return ResourceManager.GetString("DeviceManagement_DeleteDevice_Confirmation", resourceCulture);
             }
         }
         
@@ -327,6 +345,15 @@ namespace Resources {
         internal static string SourceProfile_IsUse_True {
             get {
                 return ResourceManager.GetString("SourceProfile_IsUse_True", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected user?.
+        /// </summary>
+        internal static string UserManagement_DeleteUser_Confirmation {
+            get {
+                return ResourceManager.GetString("UserManagement_DeleteUser_Confirmation", resourceCulture);
             }
         }
     }
