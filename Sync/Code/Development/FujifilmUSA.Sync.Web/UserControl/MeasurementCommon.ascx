@@ -89,8 +89,8 @@
             Colorbar</div>
         <div class="color_pallate_middle">
             <div class="color_bar">
-                <div id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;">
-                </div>
+                <canvas id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;">
+                </canvas>
             </div>
         </div>
         <div class="color_pallate_bottom">
