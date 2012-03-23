@@ -1,17 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommon.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
-<script src="JS/wz_jsgraphics.js" type="text/javascript"></script>
-<script src="jQuery/json2.js" type="text/javascript"></script>
-<script src="jQuery/jquery-blockUI.js"" type="text/javascript"></script>
-<script src="jQuery/wtooltip.min.js" type="text/javascript"></script>
-<script src="JS/excanvas.js" type="text/javascript"></script>
-<script src="JS/chartread.js" type="text/javascript"></script>
-<script src="JS/i1read.js" type="text/javascript"></script>
-<script src="JS/isisread.js" type="text/javascript"></script>
-<script src="JS/WebComm.js" type="text/javascript"></script>
-<script src="jQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
-<script src="jQuery/jquery.tmpl.js" type="text/javascript"></script>
-<script src="JQuery/jquery.simplemodal.js" type="text/javascript"></script>
+<script src="JS/wz_jsgraphics.js?version=4" type="text/javascript"></script>
+<script src="jQuery/json2.js?version=4" type="text/javascript"></script>
+<script src="jQuery/jquery-blockUI.js?version=4" type="text/javascript"></script>
+<script src="jQuery/wtooltip.min.js?version=4" type="text/javascript"></script>
+<script src="JS/excanvas.js?version=4" type="text/javascript"></script>
+<script src="JS/chartread.js?version=4" type="text/javascript"></script>
+<script src="JS/i1read.js?version=4" type="text/javascript"></script>
+<script src="JS/isisread.js?version=4" type="text/javascript"></script>
+<script src="JS/WebComm.js?version=4" type="text/javascript"></script>
+<script src="jQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+<script src="jQuery/jquery.tmpl.js?version=4" type="text/javascript"></script>
+<script src="JQuery/jquery.simplemodal.js?version=4" type="text/javascript"></script>
 <style type="text/css">
     .my_rectangle
     {
