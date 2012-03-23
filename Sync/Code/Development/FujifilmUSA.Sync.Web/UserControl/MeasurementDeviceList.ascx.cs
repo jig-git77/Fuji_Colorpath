@@ -81,8 +81,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-
-
         #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
@@ -96,14 +94,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
         #endregion
-
-
-
-
-
-
-
-
         
     }
 }

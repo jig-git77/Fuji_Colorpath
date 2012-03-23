@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsUsed { get; set; }
         //public List<Project> Projects { get; set; }
         //public List<ReferenceLab> ReferenceLABs { get; set; }
-        //public Company Company { get; set; }
-        //public Region Region { get; set; }
+        public Company Company { get; set; }
+        public Region Region { get; set; }
     }
 }

@@ -57,7 +57,7 @@
                         <img alt="" src="Images/admin-icon-divider.png">
                 </td>
                 <td align="center" valign="bottom" style="width:150px;">
-                        <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" PostBackUrl="~/MeasurementDeviceList.aspx">
+                        <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" PostBackUrl="~/SourceProfileManagement.aspx">
                             <div>
                                 <asp:Image ID="imgSoruceProfile" runat="server" AlternateText="Soruce Profile" ImageUrl="~/Images/sourceprofile.png"
                                     ToolTip="Soruce Profile" /></div>

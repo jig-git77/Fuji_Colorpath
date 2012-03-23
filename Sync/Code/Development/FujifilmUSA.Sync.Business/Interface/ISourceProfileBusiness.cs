@@ -1,0 +1,16 @@
+﻿using FujifilmUSA.Sync.Business.Messages;
+using System.Collections.Generic;
+using FujifilmUSA.Sync.Entity;
+
+namespace FujifilmUSA.Sync.Business.Interface
+{
+    public interface ISourceProfileBusiness : ITaskBase
+    {
+        Dictionary<int, string> RegionList();
+        int InsertSourceProfiel(SourceProfile SourceProfile);
+        int UpdateSourceProfile(SourceProfile SourceProfile);
+        bool DeleteSourceProfile(int SourceProfileId);
+        List<SourceProfile> GetSourceProfiles();
+        SourceProfile GetSourceProfile(int iSourceProfileID);
+    }
+}

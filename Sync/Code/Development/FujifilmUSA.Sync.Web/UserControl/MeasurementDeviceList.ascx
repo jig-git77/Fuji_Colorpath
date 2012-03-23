@@ -1,6 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementDeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementDeviceList" %>
 <%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
+<script type="text/javascript" language="javascript">
+    function ConfirmDeleteMeasurementDevice() {
+        if (confirm('<%= MeasurementDeviceList_DeleteMeasurementDevice_Confirmation %>'))
+            return true;
+        else
+            return false;
+
+    }
+</script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle">
@@ -82,21 +91,9 @@
                 <telerik:GridTemplateColumn DataField="MeasurementDeviceId" AllowFiltering="false"
                     HeaderText="Delete" UniqueName="Delete">
                     <ItemTemplate>
-                              <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                                <script type="text/javascript" language="javascript">
-                                    function ConfirmDeleteMeasurementDevice() {
-                                        debugger;
-                                        if (confirm('<%= MeasurementDeviceList_DeleteMeasurementDevice_Confirmation %>'))
-                                            return true;
-                                        else
-                                            return false;
-                                        
-                                    }
-                                </script>
-                            </telerik:RadCodeBlock>
                         <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MeasurementDevice" AlternateText="Delete"
                                         ImageUrl="../Images/delete_icon.png" 
-                                        OnClientClick="javascript:ConfirmDeleteMeasurementDevice();"
+                                        OnClientClick="return ConfirmDeleteMeasurementDevice();"
                                         CommandArgument ='<%# DataBinder.Eval(Container.DataItem,"MeasurementDeviceId") %>'
                                         CommandName="Delete" />
                     </ItemTemplate>
