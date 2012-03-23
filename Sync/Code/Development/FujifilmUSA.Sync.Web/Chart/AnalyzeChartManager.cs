@@ -28,44 +28,39 @@ namespace FujifilmUSA.Sync.Web
             SetLast();
 
             int i = 0;
-            foreach (Entity.Measurement measurement in Measurements)
-            {
-                #region Bind point in chart in "PatchTypeID" wise
-
-                measurement.MeasurementPatches.ForEach(x =>
-                                                           {
-                                                               switch (x.MeasurementPatchId)
-                                                               {
-                                                                   case (int)CPPatchType.Cyan:
-                                                                       AddPoint(0, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Magenta:
-                                                                       AddPoint(1, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Yellow:
-                                                                       AddPoint(2, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Black:
-                                                                       AddPoint(3, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Overprint_Red:
-                                                                       AddPoint(4, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Overprint_Green:
-                                                                       AddPoint(5, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Overprint_Blue:
-                                                                       AddPoint(6, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                                   case (int)CPPatchType.Triplet_Solid_Gray:
-                                                                       AddPoint(7, x, i, measurement.MeasurementName);
-                                                                       break;
-                                                               }
-                                                           });
-                #endregion
-                AddCheckBox(i, measurement);
+            Measurements.ForEach(p => {
+                p.MeasurementPatches.ForEach(x => {
+                    switch (x.MeasurementPatchId)
+                    {
+                        case (int)CPPatchType.Cyan:
+                            AddPoint(0, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Magenta:
+                            AddPoint(1, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Yellow:
+                            AddPoint(2, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Black:
+                            AddPoint(3, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Overprint_Red:
+                            AddPoint(4, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Overprint_Green:
+                            AddPoint(5, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Overprint_Blue:
+                            AddPoint(6, x, i, p.MeasurementName);
+                            break;
+                        case (int)CPPatchType.Triplet_Solid_Gray:
+                            AddPoint(7, x, i, p.MeasurementName);
+                            break;
+                    }
+                });
+                AddCheckBox(i, p);
                 i++;
-            }
+            });
 
         }
         private void SetGraphWidth()

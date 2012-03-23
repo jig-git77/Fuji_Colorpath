@@ -126,6 +126,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstLicenseList;
         }
 
+        public Dictionary<int, string> DeviceFamilyList()
+        {
+            var dstDeviceFamilyList = new Dictionary<int, string>();
+            var dsDeviceFamilyList = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetDeviceFamilys]");
+            if (dsDeviceFamilyList != null && dsDeviceFamilyList.Tables.Count > 0)
+            {
+                dstDeviceFamilyList = (dsDeviceFamilyList.Tables[0].AsEnumerable().Select(
+                    license => new
+                    {
+                        Value = DataReader.ReadInt(license, "DeviceFamilyID"),
+                        Text = DataReader.ReadString(license, "DeviceFamilyDesc")
+                    })).ToDictionary(license => license.Value, license => license.Text);
+            }
+            return dstDeviceFamilyList;
+        }
+
         public Dictionary<int, string> InstrumentTypeList()
         {
             var dstInstrumentTypeList = new Dictionary<int, string>();

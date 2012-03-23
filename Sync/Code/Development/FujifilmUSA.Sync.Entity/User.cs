@@ -10,12 +10,11 @@ namespace FujifilmUSA.Sync.Entity
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Email { get; set; }
-        public short RoleId { get; set; }
+        public Role Role { get; set; }
         public byte? RegionId { get; set; }
         public int LastModifiedUserId { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
-        
         public UserCompany UserCompanies { get; set; }
         public Region Region { get; set; }
 
@@ -47,8 +46,5 @@ namespace FujifilmUSA.Sync.Entity
                 return branchName;
             }
         }
-        
-
-
     }
 }

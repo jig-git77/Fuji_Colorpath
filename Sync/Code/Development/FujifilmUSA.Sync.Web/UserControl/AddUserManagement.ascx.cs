@@ -11,16 +11,17 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddUserManagement : System.Web.UI.UserControl, IViewAddUserManagement 
+    public partial class AddUserManagement : System.Web.UI.UserControl, IViewAddUserManagement
     {
         private PresenterUserManagement _presenterUserManagement;
-        
+
         #region Declaration
         private int UId
         {
-            get {
-                return (ViewState["UserId"] != null && !string.IsNullOrEmpty(ViewState["UserId"].ToString())) ? Convert.ToInt32(ViewState["UserId"]) : 0; 
-                }
+            get
+            {
+                return (ViewState["UserId"] != null && !string.IsNullOrEmpty(ViewState["UserId"].ToString())) ? Convert.ToInt32(ViewState["UserId"]) : 0;
+            }
             set { ViewState["UserId"] = value.ToString(); }
         }
         private string SelectedBranch
@@ -29,9 +30,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 return !string.IsNullOrEmpty(ViewState["SelectedBranch"].ToString()) ? ViewState["SelectedBranch"].ToString() : string.Empty;
             }
-            set { 
-                    ViewState["SelectedBranch"] = value; 
-                }
+            set
+            {
+                ViewState["SelectedBranch"] = value;
+            }
         }
         #endregion
 
@@ -126,12 +128,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRegion.Items.Insert(0, "--Select Region--");
             }
         }
-    
+
         private void SaveCompnay()
         {
             if (cmbCompanyName.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select company.",false);
+                ucStatusbar.DisplayMessage("Please select company.", false);
                 return;
             }
             if (!chkUserBranch.Items.Cast<ListItem>().ToList().Any(p => p.Selected))
@@ -139,7 +141,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ucStatusbar.DisplayMessage("Please select branch.", false);
                 return;
             }
-           
+
             if (txtPassWord.Text.Equals(string.Empty))
             {
                 ucStatusbar.DisplayMessage("Please select password.", false);
@@ -162,15 +164,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ucStatusbar.DisplayMessage("Please select role.", false);
                 return;
             }
-            
+
 
             User = new User();
             User.UserCompanies = new UserCompany() { CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue) };
             User.UserBranches = new List<UserBranch>();
-            chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p=> p.Selected).ForEach(p => User.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(p.Value) }) );
+            chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).ForEach(p => User.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(p.Value) }));
 
-            if(cmbRegion.SelectedIndex != 0)
-                User.RegionId = Convert.ToByte(cmbRegion.SelectedValue); 
+            if (cmbRegion.SelectedIndex != 0)
+                User.RegionId = Convert.ToByte(cmbRegion.SelectedValue);
 
             User.FirstName = txtFirstName.Text;
             User.LastName = txtLastName.Text;
@@ -179,7 +181,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             User.LoginPass = txtPassWord.Text;
             User.IsActive = chkIsActive.Checked;
             User.LastModifiedUserId = SessionManager.Instance.CurrentUser.UserId;
-            User.RoleId = Convert.ToInt16(cmbRole.SelectedValue);
+            User.Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) };
 
 
 
@@ -189,7 +191,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else // Edit New Compnay
             {
-                 User.UserId = UId;
+                User.UserId = UId;
                 _presenterUserManagement.UpdateUser();
             }
             Response.Redirect("UserManagement.aspx");
@@ -201,12 +203,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterUserManagement.GetUserById();
 
             cmbCompanyName.SelectedValue = User.UserCompanies.CompanyId.ToString();
-            
+
             BindBranch();
             chkUserBranch.Items.Cast<ListItem>().ToList().ForEach(p => p.Selected = User.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));
-            
+
             BindRegion();
-            
+
             txtFirstName.Text = User.FirstName;
             txtLastName.Text = User.LastName;
             txtEmail.Text = User.Email;
@@ -217,7 +219,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             txtConfirmPass.Attributes.Add("Value", User.LoginPass);
 
             chkIsActive.Checked = User.IsActive;
-            cmbRole.SelectedValue = User.RoleId.ToString();
+            cmbRole.SelectedValue = User.Role.ToString();
         }
         #endregion
 
@@ -258,6 +260,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
 
-        
+
     }
 }

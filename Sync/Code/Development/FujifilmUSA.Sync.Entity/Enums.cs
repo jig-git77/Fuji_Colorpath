@@ -1,4 +1,5 @@
-﻿namespace FujifilmUSA.Sync.Entity
+﻿using System.ComponentModel;
+namespace FujifilmUSA.Sync.Entity
 {
     public enum ELeftMenuItemLevel
     {
@@ -91,6 +92,11 @@
         Gray_50 = 29,
         Gray_75 = 30
     }
-
+    public enum ERolePermission
+    {
+        [Description("Manage License")]
+        ManageLicense,
+        
+    }
 
 }

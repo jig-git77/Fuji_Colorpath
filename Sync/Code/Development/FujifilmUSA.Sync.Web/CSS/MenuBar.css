@@ -4,6 +4,7 @@
         position: relative;
         height: 30px;
         text-align: center;
+        left: -10px;
     }
     .dock-container
     {
@@ -24,7 +25,6 @@
     .dock-item img
     {
         border: none;
-        margin: 5px 10px 0px;
         width: 100%;
     }
     .dock-item span
@@ -39,7 +39,7 @@
         width: 100%;
         bottom: 0px;
         position: absolute;
-        left: 0px;
+        left: -10px;
     }
     .dock-container2
     {

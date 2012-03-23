@@ -77,13 +77,26 @@
     <Content Include="BranchManagement.aspx" />
     <Content Include="AddBranchManagement.aspx" />
     <Content Include="AddUserManagement.aspx" />
+    <Content Include="AddDeviceManagement.aspx" />
+    <Content Include="AddDeviceFamily.aspx" />
+    <Content Include="DeviceManagement.aspx" />
     <Content Include="Images\checked_checkbox.gif" />
     <Content Include="Images\MarkerRed_Circle.gif" />
+    <Content Include="Images\small-branch-manage-icon-s.gif" />
+    <Content Include="Images\small-company-manage-icon-s.gif" />
+    <Content Include="Images\small-device-manage-icon-s.gif" />
+    <Content Include="Images\small-license-manage-icon.gif" />
+    <Content Include="Images\small-sourceprofile-manage-icon.gif" />
+    <Content Include="Images\small-syncmeasurementdevice-icon.png" />
+    <Content Include="Images\small-user-manage-icon-s.gif" />
     <Content Include="Images\uncheck_checkbox.gif" />
     <Content Include="JQuery\jquery-1.7.1.min.js" />
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="UserControl\AddUserManagement.ascx" />
+    <Content Include="UserControl\AddDeviceManagement.ascx" />
+    <Content Include="UserControl\AddDeviceFamily.ascx" />
+    <Content Include="UserControl\DeviceManagement.ascx" />
     <Content Include="UserControl\UserManagement.ascx" />
     <Content Include="UserManagement.aspx" />
     <Content Include="CSS\MenuBar.css" />
@@ -364,12 +377,54 @@
     <Compile Include="AddUserManagement.aspx.designer.cs">
       <DependentUpon>AddUserManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddDeviceManagement.aspx.cs">
+      <DependentUpon>AddDeviceManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceManagement.aspx.designer.cs">
+      <DependentUpon>AddDeviceManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddDeviceFamily.aspx.cs">
+      <DependentUpon>AddDeviceFamily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceFamily.aspx.designer.cs">
+      <DependentUpon>AddDeviceFamily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceManagement.aspx.cs">
+      <DependentUpon>DeviceManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeviceManagement.aspx.designer.cs">
+      <DependentUpon>DeviceManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.designer.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceManagement.ascx.cs">
+      <DependentUpon>AddDeviceManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceManagement.ascx.designer.cs">
+      <DependentUpon>AddDeviceManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceFamily.ascx.cs">
+      <DependentUpon>AddDeviceFamily.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceFamily.ascx.designer.cs">
+      <DependentUpon>AddDeviceFamily.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DeviceManagement.ascx.cs">
+      <DependentUpon>DeviceManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DeviceManagement.ascx.designer.cs">
+      <DependentUpon>DeviceManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\UserManagement.ascx.cs">
       <DependentUpon>UserManagement.ascx</DependentUpon>

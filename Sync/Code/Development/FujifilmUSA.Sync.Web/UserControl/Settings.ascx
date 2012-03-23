@@ -71,7 +71,7 @@
             <tr>
                 <td align="center" valign="bottom" style= "width: 150px;" >
                     <asp:LinkButton ID="lbtnDeviceManagement" runat="server" ToolTip="Device Management"
-                        PostBackUrl="~/CompanyManagement.aspx">
+                        PostBackUrl="~/DeviceManagement.aspx">
                         <div>
                             <asp:Image ID="imgDeviceManagement" runat="server" AlternateText="Device Management"
                                 ImageUrl="~/Images/device-manage-icon.png" ToolTip="Device Management" /></div>

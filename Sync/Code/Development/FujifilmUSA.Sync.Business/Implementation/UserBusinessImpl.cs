@@ -26,7 +26,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                        LoginPass = DataReader.ReadString(x, "LoginPass"),
                        LastName = DataReader.ReadString(x, "LastName"),
                        FirstName = DataReader.ReadString(x, "FirstName"),
-                       RoleId = DataReader.ReadByte(x, "RoleId"),
+                       Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
                        Email = DataReader.ReadString(x, "Email"),
                        RegionId = DataReader.ReadByte(x, "RegionId"),
                        LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
@@ -53,21 +53,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                        LastName = DataReader.ReadString(x, "LastName"),
                        FirstName = DataReader.ReadString(x, "FirstName"),
                        Email = DataReader.ReadString(x, "Email"),
-                       RoleId = DataReader.ReadByte(x, "RoleId"),
+                       Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
                        RegionId = DataReader.ReadByte(x, "RegionId"),
                        LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
                        LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
                        IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                       Region = new Region() { 
-                                                RegionId = DataReader.ReadByte(x, "RegionId"),
-                                                RegionName = DataReader.ReadString(x, "Region") 
-                                             },
-                       UserCompanies = new UserCompany()    { 
-                                                                UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
-                                                                CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                UserId = DataReader.ReadInt(x, "UserId"),
-                                                                Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") } 
-                                                            },
+                       Region = new Region()
+                       {
+                           RegionId = DataReader.ReadByte(x, "RegionId"),
+                           RegionName = DataReader.ReadString(x, "Region")
+                       },
+                       UserCompanies = new UserCompany()
+                       {
+                           UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
+                           CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                           UserId = DataReader.ReadInt(x, "UserId"),
+                           Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") }
+                       },
                        UserBranches = BranchList(dsUser.Tables[1])
                    }).ToList();
             }
@@ -76,20 +78,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         private List<UserBranch> BranchList(DataTable dt)
         {
-           return dt.AsEnumerable().
-                                     Select(x => new UserBranch()
-                                     {
-                                         UserBranchId = DataReader.ReadShort(x, "UserBranchId"),
-                                         UserId = DataReader.ReadInt(x, "UserId"),
-                                         BranchId = DataReader.ReadInt(x, "BranchId"),
-                                         Branch = new Branch () 
-                                                    { 
-                                                        BranchId = DataReader.ReadInt(x, "BranchId"), 
-                                                        BranchName = DataReader.ReadString(x, "BranchName"), 
-                                                        CompanyId =DataReader.ReadInt(x, "CompanyId"),
-                                                        IsActive = DataReader.ReadBoolean(x, "IsActive")
-                                                    }
-                                     }).ToList();
+            return dt.AsEnumerable().
+                                      Select(x => new UserBranch()
+                                      {
+                                          UserBranchId = DataReader.ReadShort(x, "UserBranchId"),
+                                          UserId = DataReader.ReadInt(x, "UserId"),
+                                          BranchId = DataReader.ReadInt(x, "BranchId"),
+                                          Branch = new Branch()
+                                                     {
+                                                         BranchId = DataReader.ReadInt(x, "BranchId"),
+                                                         BranchName = DataReader.ReadString(x, "BranchName"),
+                                                         CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                         IsActive = DataReader.ReadBoolean(x, "IsActive")
+                                                     }
+                                      }).ToList();
         }
 
         public int InsertUser(User user)
@@ -102,14 +104,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
 					                                                                                            ,user.LastName
 					                                                                                            ,user.FirstName
 					                                                                                            ,user.Email
-					                                                                                            ,user.RoleId
+					                                                                                            ,user.Role
 					                                                                                            ,user.RegionId
 					                                                                                            ,user.LastModifiedUserId
 					                                                                                            ,user.IsActive
                                                                                                                 ,user.UserCompanies.CompanyId
                                                                                                                 ,branchIds
                                                                                                 });
-            
+
             return returnValue;
         }
 
@@ -124,7 +126,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 					                                                                                            ,user.LastName
 					                                                                                            ,user.FirstName
 					                                                                                            ,user.Email
-					                                                                                            ,user.RoleId
+					                                                                                            ,user.Role
 					                                                                                            ,user.RegionId
 					                                                                                            ,user.LastModifiedUserId
 					                                                                                            ,user.IsActive

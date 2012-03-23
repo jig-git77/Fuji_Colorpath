@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> RegionList();
         Dictionary<int, string> UserRoleList();
         Dictionary<int, string> RegionListByCompnay(int companyId);
+        Dictionary<int, string> DeviceFamilyList();
     }
 }

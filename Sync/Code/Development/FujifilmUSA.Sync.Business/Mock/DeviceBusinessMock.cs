@@ -13,6 +13,32 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Device>();
         }
 
+        public List<Device> DeviceList()
+        {
+            return new List<Device>();
+        }
+
+        public int InsertDevice(Device device)
+        {
+            return 0;
+        }
+
+        public int UpdateDevice(Device device)
+        {
+            return 0;
+        }
+
+        public bool DeleteDevice(int deviceId)
+        {
+            return false;
+        }
+
+        public int InsertDeviceFamily(DeviceFamily deviceFamily)
+        {
+            return 0;
+        }
+
+
         #endregion
     }
 }

@@ -259,6 +259,12 @@ namespace FujifilmUSA.Sync.Common
             ucControl.Page.ClientScript.RegisterClientScriptBlock(ucControl.GetType(), "UniqueKey", string.Format("window.parent.location='{0}';", url), true);
         }
 
-
+        public static string Fields_Marked_With_Are_Required
+        {
+            get
+            {
+                return "<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>";
+            }
+        }
     }
 }

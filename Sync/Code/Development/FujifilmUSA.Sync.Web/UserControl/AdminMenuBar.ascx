@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminMenuBar.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AdminMenuBar" %>
     
-<link href="CSS/MenuBar.css" rel="stylesheet" type="text/css" />
-<script src="JS/MenuBar.js" type="text/javascript"></script>
-<script src="JS/jquery.js" type="text/javascript"></script>
+<link href="CSS/MenuBar.css?version=4" rel="stylesheet" type="text/css" />
+<script src="JS/MenuBar.js?version=4" type="text/javascript"></script>
+<script src="JS/jquery.js?version=4" type="text/javascript"></script>
 
   
 <script type="text/javascript">
