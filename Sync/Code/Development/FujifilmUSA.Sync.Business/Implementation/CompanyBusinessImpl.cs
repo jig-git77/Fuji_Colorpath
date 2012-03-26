@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int InsertCompany(Company company)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertCompany]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertCompany]", new object[]{
                                                                                                                 company.CompanyName,
                                                                                                                 company.BrandId,
                                                                                                                 company.RegionId,
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int UpdateCompnay(Company company)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateCompany]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateCompany]", new object[]{
                                                                                                                 company.CompanyId,
                                                                                                                 company.CompanyName,
                                                                                                                 company.BrandId,
@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public bool DeleteCompany(int companyId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteCompany]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteCompany]", new object[]{
              companyId
             });
             return true;
@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Company> GetCompanies()
         {
             var companies = new List<Company>();
-            var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetCompanies]");
+            var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanies]");
             if (dscompanies != null && dscompanies.Tables.Count > 0 && dscompanies.Tables[0].Rows.Count > 0)
             {
                 companies = dscompanies.Tables[0].AsEnumerable().

@@ -82,6 +82,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
+    <Compile Include="Implementation\LicenseBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
     <Compile Include="Implementation\MiscDataBusinessImpl.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Implementation\DeviceBusinessImpl.cs" />
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
+    <Compile Include="Interface\ILicenseBusiness.cs" />
     <Compile Include="Interface\IBranchBusiness.cs" />
     <Compile Include="Interface\ICompanyBusiness.cs" />
     <Compile Include="Interface\IMeasurementBusiness.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Messages\MeasurementDataResponse.cs" />
     <Compile Include="Mock\BranchBusinessImpl.cs" />
     <Compile Include="Mock\CompanyBusinessImpl.cs" />
+    <Compile Include="Mock\LicenseBusinessMock.cs" />
     <Compile Include="Mock\MeasurementBusinessMock.cs" />
     <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />
     <Compile Include="Mock\MiscDataBusinessMock.cs" />

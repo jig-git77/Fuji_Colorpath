@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public User UserLogin(string userName, string password)
         {
             var objUser = new User();
-            var dsUser = DataAccessFactory.Instance.GetDsResult("[uspGetUser]", new object[] { userName, password });
+            var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetUser]", new object[] { userName, password });
 
             if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
             {
@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<User> GetUsers(int userId)
         {
             var objUsers = new List<User>();
-            var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetUsers]", new object[] { userId });
+            var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetUsers]", new object[] { userId });
 
             if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
             {
@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             int returnValue = 0;
             string branchIds = GetBranchIds(user.UserBranches);
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertUser]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertUser]", new object[]{
                                                                                                                 user.LoginId
 					                                                                                            ,user.LoginPass
 					                                                                                            ,user.LastName
@@ -121,7 +121,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             int returnValue = 0;
             string branchIds = GetBranchIds(user.UserBranches);
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateUser]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateUser]", new object[]{
                                                                                                                  user.UserId
                                                                                                                 ,user.LoginId
 					                                                                                            ,user.LoginPass
@@ -150,7 +150,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public bool DeleteUser(int userId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteUser]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteUser]", new object[]{
              userId
             });
             return true;

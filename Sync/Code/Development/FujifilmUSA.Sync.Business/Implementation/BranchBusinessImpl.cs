@@ -16,10 +16,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int InsertBranch(Branch branch)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertBranch]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertBranch]", new object[]{
+                                                                                                                branch.CompanyId,
                                                                                                                 branch.BranchName,
                                                                                                                 branch.Location ,
-                                                                                                                branch.CompanyId,
                                                                                                                 branch.IsActive 
                                                                                                 });
             return returnValue;
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int UpdateBranch(Branch branch)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateBranch]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateBranch]", new object[]{
                                                                                                                 branch.BranchId,     
                                                                                                                 branch.BranchName,
                                                                                                                 branch.Location,
@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public bool DeleteBranch(int companyId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteBranch]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteBranch]", new object[]{
              companyId
             });
             return true;
@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Branch> GetBranches()
         {
             var branches = new List<Branch>();
-            var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetBranches]");
+            var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]");
             if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
             {
                 branches = dsbranches.Tables[0].AsEnumerable().

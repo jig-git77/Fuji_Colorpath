@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Device> DeviceListById(int companyId, int branchId)
         {
             var objDeviceList = new List<Device>();
-            var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[uspGetDeviceList]", new object[] { companyId, branchId });
+            var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[GetDeviceList]", new object[] { companyId, branchId });
             if (dsDeviceList != null && dsDeviceList.Tables.Count > 0 && dsDeviceList.Tables[0].Rows.Count > 0)
             {
                 DeviceFamily objDeviceFamily = new DeviceFamily();
@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Device> DeviceList()
         {
             var objDeviceList = new List<Device>();
-            var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetDevices]");
+            var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CP].[GetDevices]");
             if (dsDeviceList != null && dsDeviceList.Tables.Count > 0 && dsDeviceList.Tables[0].Rows.Count > 0)
             {
                 objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int InsertDevice(Device device)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertDevice]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertDevice]", new object[]{
                                                                                                                 device.LicenseId,
                                                                                                                 device.DeviceName,
                                                                                                                 device.DeviceFamily.DeviceFamilyId,
@@ -92,7 +92,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int UpdateDevice(Device device)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateDevice]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateDevice]", new object[]{
                                                                                                                 device.DeviceId,     
                                                                                                                 device.LicenseId,
                                                                                                                 device.DeviceName,
@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public bool DeleteDevice(int deviceId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteDevice]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteDevice]", new object[]{
              deviceId
             });
             return true;
@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int InsertDeviceFamily(DeviceFamily deviceFamily)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertDeviceFamily]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertDeviceFamily]", new object[]{
                                                                                                                 deviceFamily.DeviceFamilyDesc,
                                                                                                                 deviceFamily.IsActive,
                                                                                                 });

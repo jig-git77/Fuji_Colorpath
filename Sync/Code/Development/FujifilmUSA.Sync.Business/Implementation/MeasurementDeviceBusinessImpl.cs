@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
       public int InsertMeasurementDevice(MeasurementDevice measurementdevice)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertMeasurementDevice]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertMeasurementDevice]", new object[]{
                                                                                                                 measurementdevice.LicenseId,
                                                                                                                 measurementdevice.SerialNumber,
                                                                                                                 measurementdevice.InstrumentTypeId,
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
       public int UpdateMeasurementDevice(MeasurementDevice measurementdevice)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateMeasurementDevice]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateMeasurementDevice]", new object[]{
                                                                                                                 measurementdevice.MeasurementDeviceId,
                                                                                                                 measurementdevice.LicenseId,
                                                                                                                 measurementdevice.SerialNumber,
@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
       public bool DeleteMeasurementDevice(int measurementdeviceId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteMeasurementDevice]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteMeasurementDevice]", new object[]{
              measurementdeviceId
             });
             return true;
@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
       public List<MeasurementDevice> GetMeasurementDevices()
         {
             var MeasurementDevices = new List<MeasurementDevice>();
-            var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetMeasurementDevices]");
+            var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[GetMeasurementDevices]");
             if (dsmeasurementdevice != null && dsmeasurementdevice.Tables.Count > 0 && dsmeasurementdevice.Tables[0].Rows.Count > 0)
             {
                 MeasurementDevices = dsmeasurementdevice.Tables[0].AsEnumerable().
@@ -70,7 +70,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
       public MeasurementDevice GetMeasurementDevice(int iMeasurementDeviceID)
       {
           var MeasurementDevices = new MeasurementDevice();
-          var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetMeasurementDevice]",new object[]{iMeasurementDeviceID});
+          var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[GetMeasurementDevice]",new object[]{iMeasurementDeviceID});
           if (dsmeasurementdevice != null && dsmeasurementdevice.Tables.Count > 0 && dsmeasurementdevice.Tables[0].Rows.Count > 0)
           {
               MeasurementDevices = dsmeasurementdevice.Tables[0].AsEnumerable().

@@ -79,7 +79,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int DeleteProject(int projectId)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[uspDeleteProject]",
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteProject]",
                                                      new object[] { projectId });
             return returnValue;
         }

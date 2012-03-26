@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> BranchList(int companyId)
         {
             var dstBranchList = new Dictionary<int, string>();
-            var dsBranchList = DataAccessFactory.Instance.GetDsResult("[uspGetCompany]",
+            var dsBranchList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]",
                                                                     new object[] { companyId });
             if (dsBranchList != null && dsBranchList.Tables.Count > 0)
             {
@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> CompanyList()
         {
             var dstCompanyList = new Dictionary<int, string>();
-            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[uspGetCompany]", new object[] { 0 });
+            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]", new object[] { 0 });
             if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
             {
 
@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> SourceProfileByCompany(int companyId)
         {
             var dsSourceProfileList = new Dictionary<int, string>();
-            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[uspGetSourceProfileByCompany]", new object[] { companyId });
+            var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfileByCompany]", new object[] { companyId });
             if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
             {
                 dsSourceProfileList = (dsCompanyList.Tables[0].AsEnumerable().Select(
@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> RegionList()
         {
             var dstRegionList = new Dictionary<int, string>();
-            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRegion]");
+            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
             if (dsRegion != null && dsRegion.Tables.Count > 0)
             {
                 dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
@@ -79,7 +79,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> RegionListByCompnay(int companyId)
         {
             var dstRegionList = new Dictionary<int, string>();
-            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRegionByCompany]", new object[] { companyId } );
+            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegionByCompany]", new object[] { companyId } );
             if (dsRegion != null && dsRegion.Tables.Count > 0)
             {
                 dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
@@ -95,7 +95,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> UserRoleList()
         {
             var dstUserRoleList = new Dictionary<int, string>();
-            var dsUserRole = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRoles]");
+            var dsUserRole = DataAccessFactory.Instance.GetDsResult("[CP].[GetRoles]");
             if (dsUserRole != null && dsUserRole.Tables.Count > 0)
             {
                 dstUserRoleList = (dsUserRole.Tables[0].AsEnumerable().Select(
@@ -112,7 +112,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> LicenseList(int branchId)
         {
             var dstLicenseList = new Dictionary<int, string>();
-            var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetLicenses]",
+            var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicenses]",
                                                                     new object[] { branchId });
             if (dsLicenseList != null && dsLicenseList.Tables.Count > 0)
             {
@@ -129,7 +129,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> DeviceFamilyList()
         {
             var dstDeviceFamilyList = new Dictionary<int, string>();
-            var dsDeviceFamilyList = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetDeviceFamilys]");
+            var dsDeviceFamilyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetDeviceFamilys]");
             if (dsDeviceFamilyList != null && dsDeviceFamilyList.Tables.Count > 0)
             {
                 dstDeviceFamilyList = (dsDeviceFamilyList.Tables[0].AsEnumerable().Select(
@@ -145,7 +145,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> InstrumentTypeList()
         {
             var dstInstrumentTypeList = new Dictionary<int, string>();
-            var dsInstrumentTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[uspInstrumentType]", new object[] {  });
+            var dsInstrumentTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[InstrumentType]", new object[] {  });
             if (dsInstrumentTypeList != null && dsInstrumentTypeList.Tables.Count > 0)
             {
 
@@ -157,6 +157,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     })).ToDictionary(InstrumentType => InstrumentType.Value, InstrumentType => InstrumentType.Text);
             }
             return dstInstrumentTypeList;
+        }
+
+        public Dictionary<int, string> LicenseTypeList()
+        {
+            var licenseTypeList = new Dictionary<int, string>();
+            var dsLicenseTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicenseType]");
+            if (dsLicenseTypeList != null && dsLicenseTypeList.Tables.Count > 0)
+            {
+                licenseTypeList = (dsLicenseTypeList.Tables[0].AsEnumerable().Select(
+                    licensetype => new
+                    {
+                        Value = DataReader.ReadInt(licensetype, "LicenseTypeID"),
+                        Text = DataReader.ReadString(licensetype, "LicenseType")
+                    })).ToDictionary(licensetype => licensetype.Value, licensetype => licensetype.Text);
+            }
+            return licenseTypeList;
         }
 
         #endregion

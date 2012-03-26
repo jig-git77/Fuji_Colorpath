@@ -123,7 +123,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[uspUpdateMeasurementByAnalyzeChart]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CPSync4D].[UpdateMeasurementByAnalyzeChart]", new object[]{
                                                                                                                 measurement.MeasurementId,     
                                                                                                                 measurement.IsUsed
                                                                                                  });

@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> RegionList()
         {
             var dstRegionList = new Dictionary<int, string>();
-            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetRegion]");
+            var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
             if (dsRegion != null && dsRegion.Tables.Count > 0)
             {
                 dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int InsertSourceProfiel(SourceProfile SourceProfile)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspInsertSourceProfile]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertSourceProfile]", new object[]{
                                                                                                                 SourceProfile.RegionId,
                                                                                                                 SourceProfile.CompanyId,
                                                                                                                 SourceProfile.ProfileName,
@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public int UpdateSourceProfile(SourceProfile SourceProfile)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspUpdateourceProfile]", new object[]{
+            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateourceProfile]", new object[]{
                                                                                                                 SourceProfile.SourceProfileId,
                                                                                                                 SourceProfile.RegionId,
                                                                                                                 SourceProfile.CompanyId,
@@ -59,7 +59,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public bool DeleteSourceProfile(int SourceProfileId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[uspDeleteSourceProfile]", new object[]{
+            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteSourceProfile]", new object[]{
              SourceProfileId
             });
             return true;
@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<SourceProfile> GetSourceProfiles()
         {
             var SourceProfiles = new List<SourceProfile>();
-            var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetSourceProfiles]");
+            var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfiles]");
             if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
             {
                 SourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public SourceProfile GetSourceProfile(int iSourceProfileID)
         {
             var SourceProfiles = new SourceProfile();
-            var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[uspGetSourceProfile]", new object[] { iSourceProfileID });
+            var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { iSourceProfileID });
             if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
             {
                 SourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
