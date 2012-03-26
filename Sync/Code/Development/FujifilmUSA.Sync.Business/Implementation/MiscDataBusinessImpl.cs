@@ -145,7 +145,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public Dictionary<int, string> InstrumentTypeList()
         {
             var dstInstrumentTypeList = new Dictionary<int, string>();
-            var dsInstrumentTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[InstrumentType]", new object[] {  });
+            var dsInstrumentTypeList = DataAccessFactory.Instance.GetDsResult("[CP].[GetInstrumentType]", new object[] { });
             if (dsInstrumentTypeList != null && dsInstrumentTypeList.Tables.Count > 0)
             {
 
