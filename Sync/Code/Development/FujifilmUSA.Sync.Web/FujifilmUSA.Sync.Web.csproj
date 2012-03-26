@@ -343,6 +343,9 @@
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Chart\AnalyzeChartManager.cs" />
     <Compile Include="App_GlobalResources\ResourceMessages.Designer.cs">
       <AutoGen>True</AutoGen>

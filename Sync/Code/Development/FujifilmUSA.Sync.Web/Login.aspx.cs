@@ -11,7 +11,7 @@ namespace FujifilmUSA.Sync.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.Form.DefaultButton = ucLogin1.btnLoginId; 
+            this.Form.DefaultButton = ucLogin1.btnLoginId;
         }
     }
 }
