@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Business;
+﻿using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -15,41 +11,46 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterBranchManagement(IViewBranchManagement viewBranchManagement)
         {
-            this._viewBranchManagement = viewBranchManagement;
+            _viewBranchManagement = viewBranchManagement;
         }
         public PresenterBranchManagement(IViewAddBranchManagement viewAddBranchManagement)
         {
-            this._viewAddBranchManagement = viewAddBranchManagement;
+            _viewAddBranchManagement = viewAddBranchManagement;
         }
 
-        public void GetBranchs()
+        public void GetBranches()
         {
-            var task = BusinessFactory<IBranchBusiness>.CreateObject();
-            _viewBranchManagement.BranchList = task.GetBranches();
+            var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
+            branchBusiness.ErrorOccured += _viewBranchManagement.ErrorOccured;
+            _viewBranchManagement.BranchList = branchBusiness.GetBranches();
         }
 
         public void InsertBranch()
         {
-            var task = BusinessFactory<IBranchBusiness>.CreateObject();
-            task.InsertBranch(_viewAddBranchManagement.Branch);
+            var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
+            branchBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            branchBusiness.InsertBranch(_viewAddBranchManagement.Branch);
         }
 
         public void UpdateBranch()
         {
-            var task = BusinessFactory<IBranchBusiness>.CreateObject();
-            task.UpdateBranch(_viewAddBranchManagement.Branch);
+            var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
+            branchBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            branchBusiness.UpdateBranch(_viewAddBranchManagement.Branch);
         }
 
         public void DeleteBranch()
         {
-            var task = BusinessFactory<IBranchBusiness>.CreateObject();
-            task.DeleteBranch(_viewBranchManagement.Branch.BranchId);
+            var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
+            branchBusiness.ErrorOccured += _viewBranchManagement.ErrorOccured;
+            branchBusiness.DeleteBranch(_viewBranchManagement.Branch.BranchId);
         }
 
         public void GetCompanies()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddBranchManagement.Compnaies = task.CompanyList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            _viewAddBranchManagement.Compnaies = miscDataBusiness.GetCompanyList();
         }
 
     }

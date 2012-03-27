@@ -247,19 +247,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> UserRoleList { get; set; }
         #endregion
 
+        #region IViewError Members
 
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion
     }
 }

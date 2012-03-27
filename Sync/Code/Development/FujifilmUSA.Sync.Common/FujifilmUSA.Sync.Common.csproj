@@ -92,14 +92,10 @@
   <ItemGroup>
     <Compile Include="DataReader.cs" />
     <Compile Include="ExportFile.cs" />
-    <Compile Include="LogManager.cs" />
     <Compile Include="ResourceManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LoggingDatabase.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">

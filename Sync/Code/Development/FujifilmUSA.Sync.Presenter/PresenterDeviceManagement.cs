@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
 
@@ -16,68 +12,74 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterDeviceManagement(IViewDeviceManagement viewDeviceManagement)
         {
-            this._viewDeviceManagement = viewDeviceManagement;
+            _viewDeviceManagement = viewDeviceManagement;
         }
         public PresenterDeviceManagement(IViewAddDeviceManagement viewAddDeviceManagement)
         {
-            this._viewAddDeviceManagement = viewAddDeviceManagement;
+            _viewAddDeviceManagement = viewAddDeviceManagement;
         }
         public PresenterDeviceManagement(IViewAddDeviceFamilyManagement viewAddDeviceFamilyManagement)
         {
-            this._viewAddDeviceFamilyManagement = viewAddDeviceFamilyManagement;
+            _viewAddDeviceFamilyManagement = viewAddDeviceFamilyManagement;
         }
-
 
         public void GetDevices()
         {
-            var task = BusinessFactory<IDeviceBusiness>.CreateObject();
-            _viewDeviceManagement.DeviceList = task.DeviceList();
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewDeviceManagement.ErrorOccured;
+            _viewDeviceManagement.DeviceList = deviceBusiness.GetDeviceList();
         }
 
         public void InsertDevice()
         {
-            var task = BusinessFactory<IDeviceBusiness>.CreateObject();
-            task.InsertDevice(_viewAddDeviceManagement.Device);
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            deviceBusiness.InsertDevice(_viewAddDeviceManagement.Device);
         }
         public void InsertDeviceFamily()
         {
-            var task = BusinessFactory<IDeviceBusiness>.CreateObject();
-            task.InsertDeviceFamily(_viewAddDeviceFamilyManagement.DeviceFamily);
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewAddDeviceFamilyManagement.ErrorOccured;
+            deviceBusiness.InsertDeviceFamily(_viewAddDeviceFamilyManagement.DeviceFamily);
         }
 
         public void UpdateDevice()
         {
-            var task = BusinessFactory<IDeviceBusiness>.CreateObject();
-            task.UpdateDevice(_viewAddDeviceManagement.Device);
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            deviceBusiness.UpdateDevice(_viewAddDeviceManagement.Device);
         }
 
         public void DeleteDevice()
         {
-            var task = BusinessFactory<IDeviceBusiness>.CreateObject();
-            task.DeleteDevice(_viewDeviceManagement.Device.DeviceId);
-
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewDeviceManagement.ErrorOccured;
+            deviceBusiness.DeleteDevice(_viewDeviceManagement.Device.DeviceId);
         }
 
         public void GetCompanies()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddDeviceManagement.Compnaies = task.CompanyList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            _viewAddDeviceManagement.Compnaies = miscDataBusiness.GetCompanyList();
         }
         public void GetBranches()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddDeviceManagement.Branches = task.BranchList(_viewAddDeviceManagement.CompanyId);
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            _viewAddDeviceManagement.Branches = miscDataBusiness.GetBranchList(_viewAddDeviceManagement.CompanyId);
         }
         public void GetLicenses()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddDeviceManagement.Licenses = task.LicenseList(_viewAddDeviceManagement.BranchId);
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            _viewAddDeviceManagement.Licenses = miscDataBusiness.GetLicenseList(_viewAddDeviceManagement.BranchId);
         }
         public void GetDeviceFamilyList()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddDeviceManagement.DeviceFamilyList = task.DeviceFamilyList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            _viewAddDeviceManagement.DeviceFamilyList = miscDataBusiness.GetDeviceFamilyList();
         }
-
     }
 }

@@ -2,7 +2,6 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 
-
 namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterSourceProfile
@@ -11,51 +10,56 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterSourceProfile(IViewSourceProfile viewSourceProfile)
         {
-            this._viewSourceProfile = viewSourceProfile;
+            _viewSourceProfile = viewSourceProfile;
         }
 
         public void CompanyList()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewSourceProfile.CompanyList = task.CompanyList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            _viewSourceProfile.CompanyList = miscDataBusiness.GetCompanyList();
         }
 
         public void RegionList()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            _viewSourceProfile.RegionList = task.RegionList();
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            _viewSourceProfile.RegionList = sourceProfileBusiness.GetRegionList();
         }
 
         public void GetSourceProfiles()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            _viewSourceProfile.SourceProfiles = task.GetSourceProfiles();
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            _viewSourceProfile.SourceProfiles = sourceProfileBusiness.GetSourceProfiles();
         }
 
         public void GetSourceProfile()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            _viewSourceProfile.SourceProfile = task.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            _viewSourceProfile.SourceProfile = sourceProfileBusiness.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
         }
 
         public void InsertSourceProfile()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            task.InsertSourceProfiel(_viewSourceProfile.SourceProfile);
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            sourceProfileBusiness.InsertSourceProfile(_viewSourceProfile.SourceProfile);
         }
 
         public void UpdateSourceProfile()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            task.UpdateSourceProfile(_viewSourceProfile.SourceProfile);
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            sourceProfileBusiness.UpdateSourceProfile(_viewSourceProfile.SourceProfile);
         }
 
         public void DeleteSourceProfile()
         {
-            var task = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-            task.DeleteSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            sourceProfileBusiness.DeleteSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
         }
-
-
     }
 }

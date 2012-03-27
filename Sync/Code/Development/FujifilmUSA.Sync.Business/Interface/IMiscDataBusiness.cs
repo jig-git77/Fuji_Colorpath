@@ -4,15 +4,15 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IMiscDataBusiness : ITaskBase
     {
-        Dictionary<int, string> BranchList(int companyId);
-        Dictionary<int, string> CompanyList();
-        Dictionary<int, string> LicenseList(int branchId);
-        Dictionary<int, string> InstrumentTypeList();
-        Dictionary<int, string> SourceProfileByCompany(int companyId);
-        Dictionary<int, string> RegionList();
-        Dictionary<int, string> UserRoleList();
-        Dictionary<int, string> RegionListByCompnay(int companyId);
-        Dictionary<int, string> DeviceFamilyList();
-        Dictionary<int, string> LicenseTypeList();
+        Dictionary<int, string> GetBranchList(int companyId);
+        Dictionary<int, string> GetCompanyList();
+        Dictionary<int, string> GetLicenseList(int branchId);
+        Dictionary<int, string> GetInstrumentTypeList();
+        Dictionary<int, string> GetSourceProfileByCompany(int companyId);
+        Dictionary<int, string> GetRegionList();
+        Dictionary<int, string> GetUserRoleList();
+        Dictionary<int, string> GetRegionListByCompany(int companyId);
+        Dictionary<int, string> GetDeviceFamilyList();
+        Dictionary<int, string> GetLicenseTypeList();
     }
 }

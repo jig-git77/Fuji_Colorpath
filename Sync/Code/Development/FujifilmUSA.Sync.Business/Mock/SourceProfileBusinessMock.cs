@@ -8,12 +8,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region ISourceProfileBusiness Members
 
-        public Dictionary<int, string> RegionList()
+        public Dictionary<int, string> GetRegionList()
         {
             return new Dictionary<int, string>();
         }
 
-        public int InsertSourceProfiel(SourceProfile SourceProfile)
+        public int InsertSourceProfile(SourceProfile SourceProfile)
         {
             return 0;
         }
@@ -40,7 +40,10 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         #endregion
 
+        #region ITaskBase Members
 
-        
+        public event ErrorHandler ErrorOccured;
+
+        #endregion
     }
 }

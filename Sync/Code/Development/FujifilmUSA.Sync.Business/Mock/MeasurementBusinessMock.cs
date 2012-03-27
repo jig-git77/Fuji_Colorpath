@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Entity;
@@ -33,6 +32,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
+
         #endregion
     }
 }

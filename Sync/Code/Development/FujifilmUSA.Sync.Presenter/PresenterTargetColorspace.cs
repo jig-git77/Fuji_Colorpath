@@ -10,13 +10,14 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterTargetColorspace(IViewTargetColorspace viewTargetColorspace)
         {
-            this._viewTargetColorspace = viewTargetColorspace;
+            _viewTargetColorspace = viewTargetColorspace;
         }
 
         public void GetSourceProfile()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewTargetColorspace.SourceProfile = task.GetSourceProfileList();
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.SourceProfile = projectBusiness.GetSourceProfileList();
         }
 
     }

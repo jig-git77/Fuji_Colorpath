@@ -173,5 +173,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> DeviceListById { get; set; }
         #endregion
 
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

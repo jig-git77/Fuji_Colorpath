@@ -1,10 +1,10 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Logging;
+﻿using System;
 
-namespace FujifilmUSA.Sync.Common
+namespace FujifilmUSA.Sync.Business
 {
     public class LogManager
     {
-        public static void WriteLog(string logMessage)
+        public static void WriteLog(Exception e, BusinessHandlerRequest request)
         {
             //Logger.Write(new LogEntry()
             //                 {

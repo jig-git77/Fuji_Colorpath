@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewTargetColorspace
+    public interface IViewTargetColorspace : IViewError
     {
         List<SourceProfile> SourceProfile { get; set; }
     }

@@ -29,5 +29,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return false;
         }
         #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
+
+        #endregion
     }
 }

@@ -106,7 +106,6 @@
     <Compile Include="ViewInterface\IViewSourceProfile.cs" />
     <Compile Include="ViewInterface\IViewUserManagement.cs" />
     <Compile Include="ViewInterface\IViewAddBranchManagement.cs" />
-    <Compile Include="ViewInterface\IViewAddMeasurementDevice.cs" />
     <Compile Include="ViewInterface\IViewBranchManagement.cs" />
     <Compile Include="ViewInterface\IViewAddCompanyManagement.cs" />
     <Compile Include="ViewInterface\IViewAnalyze.cs" />
@@ -124,10 +123,11 @@
     <Compile Include="ViewInterface\IViewSaveWindow.cs" />
     <Compile Include="ViewInterface\IViewTargetColorspace.cs" />
     <Compile Include="PresenterSourceProfile.cs" />
+    <Compile Include="ViewInterface\ViewBase\IViewError.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewInterface\ViewBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
       <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>

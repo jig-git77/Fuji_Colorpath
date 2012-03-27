@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="ErrorDelegate.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
     <Compile Include="Implementation\LicenseBusinessImpl.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="LogManager.cs" />
     <Compile Include="Messages\MeasurementDataResponse.cs" />
     <Compile Include="Mock\BranchBusinessImpl.cs" />
     <Compile Include="Mock\CompanyBusinessImpl.cs" />
@@ -190,6 +192,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ProfilerService\Profiler.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LoggingDatabase.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 
@@ -97,6 +94,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];
         }
+
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

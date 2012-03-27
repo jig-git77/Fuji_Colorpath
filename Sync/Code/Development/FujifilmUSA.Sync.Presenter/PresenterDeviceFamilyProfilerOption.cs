@@ -10,13 +10,14 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterDeviceFamilyProfilerOption(IViewDeviceFamilyProfilerOption viewDeviceFamilyProfilerOption)
         {
-            this._viewDeviceFamilyProfilerOption = viewDeviceFamilyProfilerOption;
+            _viewDeviceFamilyProfilerOption = viewDeviceFamilyProfilerOption;
         }
 
         public void GetDeviceFamilyProfilerOption()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewDeviceFamilyProfilerOption.ProfileOption = task.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId);
         }
     }
 }

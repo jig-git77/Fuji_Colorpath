@@ -216,4 +216,226 @@
   <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected user?</value>
   </data>
+  <data name="Error_CloseOptimizeRun" xml:space="preserve">
+    <value>Error occured while closing optimizing current run. Please contact your administrator.</value>
+  </data>
+  <data name="Error_CreateInitialDestinationAndDeviceLinkProfiles" xml:space="preserve">
+    <value>Error occured while creating initial device link profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_CreateOptimizeRun" xml:space="preserve">
+    <value>Error occured while creating optimize run. Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteBranch" xml:space="preserve">
+    <value>Error occured while deleting branch. Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteCompany" xml:space="preserve">
+    <value>Error occured while deleting company. Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteDevice" xml:space="preserve">
+    <value>Error occured while deleting device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteLicense" xml:space="preserve">
+    <value>Error occured while deleting license.Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteMeasurementDevice" xml:space="preserve">
+    <value>Error occured while deleting measurement device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteProject" xml:space="preserve">
+    <value>Error occured while deleting project. Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteSourceProfile" xml:space="preserve">
+    <value>Error occured while deleting source profile.Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteUser" xml:space="preserve">
+    <value>Error occured while deleting user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
+    <value>Error occured while retrieving measurement data related to analyze chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetBranches" xml:space="preserve">
+    <value>Error occured while retrieving branch list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetBranchList" xml:space="preserve">
+    <value>Error occured while retrieving branch list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartPreviewOnProjectId" xml:space="preserve">
+    <value>Error occured while retrieving chart preview. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetCompanies" xml:space="preserve">
+    <value>Error occured while retrieving company list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetCompanyList" xml:space="preserve">
+    <value>Error occured while retrieving company list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDestinationProfile" xml:space="preserve">
+    <value>Error occured while retrieving destination profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDeviceFamilyList" xml:space="preserve">
+    <value>Error occured while retrieving device families. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDeviceFamilyProfilerOptionPreset" xml:space="preserve">
+    <value>Error occured while retrieving device family profiler option presets. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDeviceLinkProfile" xml:space="preserve">
+    <value>Error occured while retrieving device link profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDeviceList" xml:space="preserve">
+    <value>Error occured while retrieving device list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetDeviceListById" xml:space="preserve">
+    <value>Error occured while retrieving device information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetIlluminantList" xml:space="preserve">
+    <value>Error occured while retrieving illuminant list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetInstrumentTypeList" xml:space="preserve">
+    <value>Error occured while retrieving instrument type list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLastOptimizedDlp" xml:space="preserve">
+    <value>Error occured while retrieving last optimized device link profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLicenseList" xml:space="preserve">
+    <value>Error occured while retrieving licenses. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLicenses" xml:space="preserve">
+    <value>Error occured while retrieving licence list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLicenseTypeList" xml:space="preserve">
+    <value>Error occured while retrieving license type list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurementData" xml:space="preserve">
+    <value>Error occured while retrieving measurement data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurementDevice" xml:space="preserve">
+    <value>Error occured while retrieving measurement device information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurementDeviceList" xml:space="preserve">
+    <value>Error occured while retrieving measurement device list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurementDevices" xml:space="preserve">
+    <value>Error occured while retrieving measurement device list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurements" xml:space="preserve">
+    <value>Error occured while retrieving measurement list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
+    <value>Error occured while retrieving measurements. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetObserverTypeList" xml:space="preserve">
+    <value>Error occured while retrieving observer type list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetPrintConditionPreviewData" xml:space="preserve">
+    <value>Error occured while retrieving project preview data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetProjectDetail" xml:space="preserve">
+    <value>Error occured while retrieving project detail. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetProjectOption" xml:space="preserve">
+    <value>Error occured while retrieving project options. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetProjectsByDeviceId" xml:space="preserve">
+    <value>Error occured while retrieving project list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceChartData" xml:space="preserve">
+    <value>Error occured while retrieving reference chart data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceChartTypeImage" xml:space="preserve">
+    <value>Error occured while retrieving reference chart image data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceChartTypeList" xml:space="preserve">
+    <value>Error occured while retrieving reference chart type list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetRegionList" xml:space="preserve">
+    <value>Error occured while retrieving region list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetRegionListByCompany" xml:space="preserve">
+    <value>Error occured while retrieving regions by company. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetRegions" xml:space="preserve">
+    <value>Error occured while retrieving region list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSourceProfile" xml:space="preserve">
+    <value>Error occured while retrieving source profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSourceProfileByCompany" xml:space="preserve">
+    <value>Error occured while retrieving source profiles. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSourceProfileInformation" xml:space="preserve">
+    <value>Error occured while retrieving source profile information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSourceProfileList" xml:space="preserve">
+    <value>Error occured while retrieving source profiles. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSourceProfiles" xml:space="preserve">
+    <value>Error occured while retrieving source profile list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetUserRoleList" xml:space="preserve">
+    <value>Error occured while retrieving user roles. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetUsers" xml:space="preserve">
+    <value>Error occured while retrieving users list. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertBranch" xml:space="preserve">
+    <value>Error occured while inserting branch. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertCompany" xml:space="preserve">
+    <value>Error occured while inserting company. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertDevice" xml:space="preserve">
+    <value>Error occured while inserting device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertDeviceFamily" xml:space="preserve">
+    <value>Error occured while inserting device family.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertLicense" xml:space="preserve">
+    <value>Error occured while inserting license.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertLicenseType" xml:space="preserve">
+    <value>Error occured while inserting license type.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertMeasurementDevice" xml:space="preserve">
+    <value>Error occured while inserting measurement device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertSourceProfile" xml:space="preserve">
+    <value>Error occured while inserting source profile.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertUser" xml:space="preserve">
+    <value>Error occured while inserting user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_OptimizeDeviceLinkProfile" xml:space="preserve">
+    <value>Error occured while optimizing device link profile. Please contact your administrator.</value>
+  </data>
+  <data name="Error_SaveMeasurement" xml:space="preserve">
+    <value>Error occured while saving measurement. Please contact your administrator.</value>
+  </data>
+  <data name="Error_SaveProject" xml:space="preserve">
+    <value>Error occured while saving project. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateBranch" xml:space="preserve">
+    <value>Error occured while updating branch. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateCompany" xml:space="preserve">
+    <value>Error occured while updating company. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateDevice" xml:space="preserve">
+    <value>Error occured while updating device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateLicense" xml:space="preserve">
+    <value>Error occured while updating license.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateMeasurementByAnalyzeChart" xml:space="preserve">
+    <value>Error occured while updating measurement(isused flag).Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateMeasurementDevice" xml:space="preserve">
+    <value>Error occured while updating measurement device.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateSourceProfile" xml:space="preserve">
+    <value>Error occured while updating source profile.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateUser" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UserLogin" xml:space="preserve">
+    <value>Error occured while validating username/password.</value>
+  </data>
 </root>

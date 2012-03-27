@@ -44,5 +44,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<int> MeasurementIds { get; set; }
         public Entity.Project Project { get; set; }
         #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, Entity.ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -6,11 +6,11 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface ISourceProfileBusiness : ITaskBase
     {
-        Dictionary<int, string> RegionList();
-        int InsertSourceProfiel(SourceProfile SourceProfile);
-        int UpdateSourceProfile(SourceProfile SourceProfile);
-        bool DeleteSourceProfile(int SourceProfileId);
+        Dictionary<int, string> GetRegionList();
+        int InsertSourceProfile(SourceProfile sourceProfile);
+        int UpdateSourceProfile(SourceProfile sourceProfile);
+        bool DeleteSourceProfile(int sourceProfileId);
         List<SourceProfile> GetSourceProfiles();
-        SourceProfile GetSourceProfile(int iSourceProfileID);
+        SourceProfile GetSourceProfile(int sourceProfileId);
     }
 }

@@ -168,9 +168,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region IViewSourceProfile Members
-        public int SourceProfileID { get; set; }
-        public int RegionID { get; set; }
-        public int CompanyID { get; set; }
+        public int SourceProfileId { get; set; }
+        public int RegionId { get; set; }
+        public int CompanyId { get; set; }
         public string ProfileName { get; set; }
         public string ProfileDesc { get; set; }
         public byte[] Profile { get; set; }
@@ -181,6 +181,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> RegionList { get; set; }
         #endregion
 
+        #region IViewError Members
 
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

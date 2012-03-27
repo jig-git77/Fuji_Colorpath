@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewPluginDataService
+    public interface IViewPluginDataService : IViewError
     {
         Measurement Measurement { get; set; }
         int ProjectId { get; set; }

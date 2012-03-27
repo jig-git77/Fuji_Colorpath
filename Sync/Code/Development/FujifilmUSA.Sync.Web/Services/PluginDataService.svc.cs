@@ -52,5 +52,14 @@ namespace FujifilmUSA.Sync.Web.Services
         public int OptimizeRunId { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
         #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using FujifilmUSA.Sync.Business.Interface;
-using System.Data;
-using FujifilmUSA.Sync.DataAccess;
-using FujifilmUSA.Sync.Common;
-using System;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
@@ -37,6 +32,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new MeasurementDevice();
         }
+
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

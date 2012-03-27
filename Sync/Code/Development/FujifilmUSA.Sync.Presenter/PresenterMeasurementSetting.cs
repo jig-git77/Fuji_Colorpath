@@ -10,37 +10,42 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterMeasurementSetting(IViewMeasurementSetting viewMeasurementSetting)
         {
-            this._viewMeasurementSetting = viewMeasurementSetting;
+            _viewMeasurementSetting = viewMeasurementSetting;
         }
 
         public void GetObserverType()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewMeasurementSetting.Observer = task.GetObserverTypeList();
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.Observer = projectBusiness.GetObserverTypeList();
         }
 
         public void GetIlluminant()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewMeasurementSetting.Illumin = task.GetIlluminantList();
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.Illumin = projectBusiness.GetIlluminantList();
         }
 
         public void GetMeasurementDevice()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewMeasurementSetting.Measurement = task.GetMeasurementDeviceList(_viewMeasurementSetting.deviceId);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.Measurement = projectBusiness.GetMeasurementDeviceList(_viewMeasurementSetting.DeviceId);
         }
 
         public void GetReferenceChartType()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewMeasurementSetting.ReferenceChartType = task.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceID);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.ReferenceChartType = projectBusiness.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceId);
         }
 
         public void GetReferenceChartTypeImage()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewMeasurementSetting.ReferenceChartTypeImage = task.GetReferenceChartTypeImage(_viewMeasurementSetting.ReferenceChartTypeId);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.ReferenceChartTypeImage = projectBusiness.GetReferenceChartTypeImage(_viewMeasurementSetting.ReferenceChartTypeId);
         }
 
     }

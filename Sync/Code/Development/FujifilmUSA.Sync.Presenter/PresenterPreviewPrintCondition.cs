@@ -10,18 +10,19 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterPreviewPrintCondition(IViewPreviewPrintCondition viewPreviewPrintCondition)
         {
-            this._viewPreviewPrintCondition = viewPreviewPrintCondition;
+            _viewPreviewPrintCondition = viewPreviewPrintCondition;
         }
 
         public void GetPreviewPrintCondition()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewPreviewPrintCondition.Data = task.GetPrintConditionPreviewData(
-                                _viewPreviewPrintCondition.MeasurementDeviceId.Value,
-                                _viewPreviewPrintCondition.IlluminantID,
-                                _viewPreviewPrintCondition.ObserverTypeID,
-                                _viewPreviewPrintCondition.ReferenceChartTypeId,
-                                _viewPreviewPrintCondition.DeviceFamilyProfilerOptionID);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPreviewPrintCondition.ErrorOccured;
+            _viewPreviewPrintCondition.Data = projectBusiness.GetPrintConditionPreviewData(
+                _viewPreviewPrintCondition.MeasurementDeviceId.Value,
+                _viewPreviewPrintCondition.IlluminantId,
+                _viewPreviewPrintCondition.ObserverTypeId,
+                _viewPreviewPrintCondition.ReferenceChartTypeId,
+                _viewPreviewPrintCondition.DeviceFamilyProfilerOptionId);
         }
     }
 }

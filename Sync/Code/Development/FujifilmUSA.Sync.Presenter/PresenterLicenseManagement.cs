@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Business;
+﻿using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -16,62 +12,68 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterLicenseManagement(IViewLicenseManagement viewLicenseManagement)
         {
-            this._viewLicenseManagement = viewLicenseManagement;
+            _viewLicenseManagement = viewLicenseManagement;
         }
         public PresenterLicenseManagement(IViewAddLicenseManagement viewAddLicenseManagement)
         {
-            this._viewAddLicenseManagement = viewAddLicenseManagement;
+            _viewAddLicenseManagement = viewAddLicenseManagement;
         }
         public PresenterLicenseManagement(IViewAddLicenseTypeManagement viewAddLicenseTypeManagement)
         {
-            this._viewAddLicenseTypeManagement = viewAddLicenseTypeManagement;
+            _viewAddLicenseTypeManagement = viewAddLicenseTypeManagement;
         }
-
 
         public void GetLicense()
         {
-            var task = BusinessFactory<ILicenseBusiness>.CreateObject();
-            _viewLicenseManagement.LicenseList = task.GetLicense();
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewLicenseManagement.ErrorOccured;
+            _viewLicenseManagement.LicenseList = licenseBusiness.GetLicenses();
         }
 
         public void InsertLicense()
         {
-            var task = BusinessFactory<ILicenseBusiness>.CreateObject();
-            task.InsertLicense(_viewAddLicenseManagement.License);
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            licenseBusiness.InsertLicense(_viewAddLicenseManagement.License);
         }
         public void InsertLicenseType()
         {
-            var task = BusinessFactory<ILicenseBusiness>.CreateObject();
-            task.InsertLicenseType(_viewAddLicenseTypeManagement.LicenseType);
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewAddLicenseTypeManagement.ErrorOccured;
+            licenseBusiness.InsertLicenseType(_viewAddLicenseTypeManagement.LicenseType);
         }
 
         public void UpdateLicense()
         {
-            var task = BusinessFactory<ILicenseBusiness>.CreateObject();
-            task.UpdateLicense(_viewAddLicenseManagement.License);
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            licenseBusiness.UpdateLicense(_viewAddLicenseManagement.License);
         }
 
         public void DeleteLicense()
         {
-            var task = BusinessFactory<ILicenseBusiness>.CreateObject();
-            task.DeleteLicense(_viewLicenseManagement.License.LicenseId);
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewLicenseManagement.ErrorOccured;
+            licenseBusiness.DeleteLicense(_viewLicenseManagement.License.LicenseId);
         }
 
         public void GetCompanies()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddLicenseManagement.Compnaies = task.CompanyList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            _viewAddLicenseManagement.Compnaies = miscDataBusiness.GetCompanyList();
         }
         public void GetBranches()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddLicenseManagement.Branches = task.BranchList(_viewAddLicenseManagement.CompanyId);
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            _viewAddLicenseManagement.Branches = miscDataBusiness.GetBranchList(_viewAddLicenseManagement.CompanyId);
         }
         public void GetLicenseType()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddLicenseManagement.LicenseTypes = task.LicenseTypeList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            _viewAddLicenseManagement.LicenseTypes = miscDataBusiness.GetLicenseTypeList();
         }
-
     }
 }

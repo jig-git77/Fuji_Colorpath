@@ -30,5 +30,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewSaveWindow Members
         public Project Project { get; set; }
         #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

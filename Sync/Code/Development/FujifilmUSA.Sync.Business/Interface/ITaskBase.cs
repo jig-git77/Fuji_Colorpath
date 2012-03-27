@@ -2,6 +2,6 @@
 {
     public interface ITaskBase
     {
-        
+        event ErrorHandler ErrorOccured;
     }
 }

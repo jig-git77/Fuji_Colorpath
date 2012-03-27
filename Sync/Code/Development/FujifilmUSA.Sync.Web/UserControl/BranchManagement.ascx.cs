@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void GetBranches()
         {
             BranchList = new List<Branch>();
-            _presenterBranchManagement.GetBranchs();
+            _presenterBranchManagement.GetBranches();
         }
         private void BindBranches()
         {
@@ -108,5 +108,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int,string>  Compnaies{ get; set; }
         #endregion
 
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

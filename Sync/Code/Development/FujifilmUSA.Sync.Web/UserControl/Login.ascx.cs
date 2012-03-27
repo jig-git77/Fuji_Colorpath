@@ -89,5 +89,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string Password { get; set; }
         public User CurrentUser { get; set; }
         #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

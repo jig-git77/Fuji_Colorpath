@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAnalyze
+    public interface IViewAnalyze : IViewError
     {
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }
         List<int> MeasurementIds { get; set; }
-
-        //For Anaylze Chart
-        List<Entity.Measurement> lstMeasurement { get; set; }
+        List<Entity.Measurement> Measurements { get; set; }
         Entity.Measurement Measurement { get; set; }
     }
 }

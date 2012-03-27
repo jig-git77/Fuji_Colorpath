@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using FujifilmUSA.Sync.Business;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -19,6 +16,7 @@ namespace FujifilmUSA.Sync.Presenter
         public void CreateDestinationAndDlp()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.
                 CreateInitialDestinationAndDeviceLinkProfiles(
                     _viewAnalyze.ProjectId,
@@ -29,21 +27,22 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void GetMeasurementsOnRunId()
         {
-            var task = BusinessFactory<IMeasurementBusiness>.CreateObject();
-            _viewAnalyze.MeasurementIds = task.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Select(x => x.MeasurementId).ToList();
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Select(x => x.MeasurementId).ToList();
         }
 
         public void GetAnalyzeChartMeasurement()
         {
-            var measurementbusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
-            _viewAnalyze.lstMeasurement = measurementbusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId);
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId);
         }
         public int UpdateMeasurementByAnalyzeChart()
         {
-            var measurementbusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
-            return measurementbusiness.UpdateMeasurementByAnalyzeChart(_viewAnalyze.Measurement);
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            return measurementBusiness.UpdateMeasurementByAnalyzeChart(_viewAnalyze.Measurement);
         }
-
-
     }
 }

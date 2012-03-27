@@ -71,5 +71,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewTargetColorspace Members
         public List<SourceProfile> SourceProfile { get; set; }
         #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

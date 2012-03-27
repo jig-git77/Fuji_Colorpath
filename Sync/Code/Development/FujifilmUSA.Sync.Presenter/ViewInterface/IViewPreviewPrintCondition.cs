@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FujifilmUSA.Sync.Entity;
+﻿using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewPreviewPrintCondition
+    public interface IViewPreviewPrintCondition : IViewError
     {
-        int DeviceFamilyProfilerOptionID { get; set; }
-        short IlluminantID { get; set; }
-        short ObserverTypeID { get; set; }
+        int DeviceFamilyProfilerOptionId { get; set; }
+        short IlluminantId { get; set; }
+        short ObserverTypeId { get; set; }
         short ReferenceChartTypeId { get; set; }
         short? MeasurementDeviceId { get; set; }
         Dictionary<string, string> Data { get; set; }

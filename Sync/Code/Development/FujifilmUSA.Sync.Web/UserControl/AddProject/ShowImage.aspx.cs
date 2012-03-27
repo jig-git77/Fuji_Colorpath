@@ -60,12 +60,21 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #region IViewMeasurementSetting Members
         public List<Illuminant> Illumin { get; set; }
         public List<ObserverType> Observer { get; set; }
-        public int deviceId { get; set; }
+        public int DeviceId { get; set; }
         public Dictionary<int, string> Measurement { get; set; }
-        public int MeasurementDeviceID { get; set; }
+        public int MeasurementDeviceId { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }
         public int ReferenceChartTypeId { get; set; }
+        #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

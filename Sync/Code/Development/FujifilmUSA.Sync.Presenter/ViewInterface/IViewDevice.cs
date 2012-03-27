@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewDevice
+    public interface IViewDevice : IViewError
     {
         int TaskeroUserId { get; set; }
         int RoleId { get; set; }
@@ -19,7 +16,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> CompanyList { get; set; }
         Dictionary<int, string> LicenseList { get; set; }
         Dictionary<int, string> InstrumentTypeList { get; set; }
-        List<Device> DeviceListById{ get; set; }
+        List<Device> DeviceListById { get; set; }
 
     }
 }

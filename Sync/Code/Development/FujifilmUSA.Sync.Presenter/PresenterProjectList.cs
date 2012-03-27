@@ -8,34 +8,30 @@ namespace FujifilmUSA.Sync.Presenter
     {
         private readonly IViewProjectList _viewProjectList;
 
-
         public PresenterProjectList(IViewProjectList viewProjectList)
         {
-            this._viewProjectList = viewProjectList;
+            _viewProjectList = viewProjectList;
         }
 
         public void GetSourceProfileByCompany()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewProjectList.SourceProfile = task.SourceProfileByCompany(_viewProjectList.CompanyId);
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            _viewProjectList.SourceProfile = miscDataBusiness.GetSourceProfileByCompany(_viewProjectList.CompanyId);
         }
 
         public void GetProjectListByDeviceId()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewProjectList.Projects = task.GetProjectsByDeviceId(_viewProjectList.Project.DeviceId);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.Project.DeviceId);
         }
 
         public void DeleteProject()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            task.DeleteProject(_viewProjectList.Project.ProjectId);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
+            projectBusiness.DeleteProject(_viewProjectList.Project.ProjectId);
         }
-
-        //public void GetDeviceFamilyProfilerOptionPreset()
-        //{
-        //    var task = BusinessFactory<IProjectBusiness>.CreateObject();
-        //    _viewProjectList.SourceProfile = task.GetDeviceFamilyProfilerOptionPreset();
-        //}
     }
 }

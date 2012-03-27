@@ -8,12 +8,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDeviceBusiness Members
 
-        public List<Device> DeviceListById(int companyId, int branchId)
+        public List<Device> GetDeviceListById(int companyId, int branchId)
         {
             return new List<Device>();
         }
 
-        public List<Device> DeviceList()
+        public List<Device> GetDeviceList()
         {
             return new List<Device>();
         }
@@ -38,6 +38,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

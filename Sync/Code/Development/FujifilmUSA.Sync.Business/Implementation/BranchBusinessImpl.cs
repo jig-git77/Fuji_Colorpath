@@ -4,67 +4,106 @@ using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
-using System;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    public class BranchBusinessImpl :  IBranchBusiness
+    public class BranchBusinessImpl : IBranchBusiness
     {
         #region  ICompnayBusiness Members
 
         public int InsertBranch(Branch branch)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[InsertBranch]", new object[]{
-                                                                                                                branch.CompanyId,
-                                                                                                                branch.BranchName,
-                                                                                                                branch.Location ,
-                                                                                                                branch.IsActive 
-                                                                                                });
+            Common.
+                ImplementBusinessLogic(
+                    () =>
+                    {
+                        returnValue = DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CP].[InsertBranch]",
+                                new object[]
+                                        {
+                                            branch.CompanyId,
+                                            branch.BranchName,
+                                            branch.Location,
+                                            branch.IsActive
+                                        });
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertBranch"));
             return returnValue;
         }
 
         public int UpdateBranch(Branch branch)
         {
             int returnValue = 0;
-            returnValue = DataAccessFactory.Instance.ExecuteProcedure("[CP].[UpdateBranch]", new object[]{
-                                                                                                                branch.BranchId,     
-                                                                                                                branch.BranchName,
-                                                                                                                branch.Location,
-                                                                                                                branch.CompanyId,
-                                                                                                                branch.IsActive,
-                                                                                                 });
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateBranch]",
+                            new object[]
+                                    {
+                                        branch.BranchId,
+                                        branch.BranchName,
+                                        branch.Location,
+                                        branch.CompanyId,
+                                        branch.IsActive,
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateBranch"));
             return returnValue;
         }
 
         public bool DeleteBranch(int companyId)
         {
-            DataAccessFactory.Instance.ExecuteProcedure("[CP].[DeleteBranch]", new object[]{
-             companyId
-            });
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "[CP].[DeleteBranch]",
+                        new object[]
+                            {
+                                companyId
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteBranch"));
             return true;
         }
 
         public List<Branch> GetBranches()
         {
             var branches = new List<Branch>();
-            var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]");
-            if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
-            {
-                branches = dsbranches.Tables[0].AsEnumerable().
-                    Select(x => new Branch()
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]");
+                    if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
                     {
-                        BranchId = DataReader.ReadInt(x, "BranchId"),
-                        BranchName = DataReader.ReadString(x, "BranchName"),
-                        Location = DataReader.ReadString(x, "BranchName"),
-                        CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                        Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") },
-                        IsActive = DataReader.ReadBoolean(x, "IsActive")
-                    }).ToList();
-            }
+                        branches = dsbranches.Tables[0].AsEnumerable().
+                            Select(x => new Branch()
+                                            {
+                                                BranchId = DataReader.ReadInt(x, "BranchId"),
+                                                BranchName = DataReader.ReadString(x, "BranchName"),
+                                                Location = DataReader.ReadString(x, "BranchName"),
+                                                CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+                                                IsActive = DataReader.ReadBoolean(x, "IsActive")
+                                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetBranches"));
             return branches;
         }
+
+        #endregion
+
+        #region ITaskBase Members
+
+        public event ErrorHandler ErrorOccured;
 
         #endregion
     }

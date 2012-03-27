@@ -59,10 +59,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindMesurementChart()
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            lstMeasurement = new List<Entity.Measurement>();
+            Measurements = new List<Entity.Measurement>();
             _presenterAnalyze.GetAnalyzeChartMeasurement();
 
-            AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, lstMeasurement);
+            AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, Measurements);
             manager.CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value);
             manager.BindChart();
             hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
@@ -101,9 +101,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<int> MeasurementIds { get; set; }
 
-        public List<Entity.Measurement> lstMeasurement { get; set; }
+        public List<Entity.Measurement> Measurements { get; set; }
 
         public Entity.Measurement Measurement { get; set; }
+
+        #endregion
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

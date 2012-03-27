@@ -1,11 +1,12 @@
-﻿using System;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
+﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
+
 namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterPluginDataService
     {
         private readonly IViewPluginDataService _viewPluginDataService;
+
         public PresenterPluginDataService(IViewPluginDataService viewPluginDataService)
         {
             _viewPluginDataService = viewPluginDataService;
@@ -13,20 +14,23 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void SaveMeasurement()
         {
-            var task = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
-            task.SaveMeasurement(_viewPluginDataService.Measurement);
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement);
         }
 
         public void GetReferenceChartData()
         {
-            var task = Business.BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewPluginDataService.ReferenceChartData = task.GetReferenceChartData(_viewPluginDataService.ProjectId);
+            var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.ReferenceChartData = projectBusiness.GetReferenceChartData(_viewPluginDataService.ProjectId);
         }
 
         public void GetMeasurementsOnRunId()
         {
-            var task = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
-            _viewPluginDataService.Measurements = task.GetMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.Measurements = measurementBusiness.GetMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
         }
     }
 }

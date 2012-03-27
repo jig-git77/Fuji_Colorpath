@@ -15,41 +15,46 @@ namespace FujifilmUSA.Sync.Presenter
 
         public PresenterCompanyManagement(IViewCompanyManagement viewCompanyManagement)
         {
-            this._viewCompanyManagement = viewCompanyManagement;
+            _viewCompanyManagement = viewCompanyManagement;
         }
         public PresenterCompanyManagement(IViewAddCompanyManagement viewAddCompanyManagement)
         {
-            this._viewAddCompanyManagement = viewAddCompanyManagement;
+            _viewAddCompanyManagement = viewAddCompanyManagement;
         }
 
         public void GetCompanies()
         {
-            var task = BusinessFactory<ICompanyBusiness>.CreateObject();
-            _viewCompanyManagement.CompanyList = task.GetCompanies();
+            var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
+            companyBusiness.ErrorOccured += _viewCompanyManagement.ErrorOccured;
+            _viewCompanyManagement.CompanyList = companyBusiness.GetCompanies();
         }
 
         public void InsertCompany()
         {
-            var task = BusinessFactory<ICompanyBusiness>.CreateObject();
-            task.InsertCompany(_viewAddCompanyManagement.Company);
+            var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
+            companyBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
+            companyBusiness.InsertCompany(_viewAddCompanyManagement.Company);
         }
 
         public void UpdateCompnay()
         {
-            var task = BusinessFactory<ICompanyBusiness>.CreateObject();
-            task.UpdateCompnay(_viewAddCompanyManagement.Company);
+            var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
+            companyBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
+            companyBusiness.UpdateCompnay(_viewAddCompanyManagement.Company);
         }
 
         public void DeleteCompany()
         {
-            var task = BusinessFactory<ICompanyBusiness>.CreateObject();
-            task.DeleteCompany(_viewCompanyManagement.Company.CompanyId);
+            var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
+            companyBusiness.ErrorOccured += _viewCompanyManagement.ErrorOccured;
+            companyBusiness.DeleteCompany(_viewCompanyManagement.Company.CompanyId);
         }
 
         public void GetRegions()
         {
-            var task = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            _viewAddCompanyManagement.RegionList = task.RegionList();
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
+            _viewAddCompanyManagement.RegionList = miscDataBusiness.GetRegionList();
         }
 
     }

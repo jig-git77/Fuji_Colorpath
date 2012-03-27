@@ -6,7 +6,7 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterSaveWindow
     {
-        private IViewSaveWindow _viewSaveWindow;
+        private readonly IViewSaveWindow _viewSaveWindow;
 
         public PresenterSaveWindow(IViewSaveWindow viewSaveWindow)
         {
@@ -15,8 +15,9 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void SaveProject()
         {
-            var task = BusinessFactory<IProjectBusiness>.CreateObject();
-            _viewSaveWindow.Project = task.SaveProject(_viewSaveWindow.Project);
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+            _viewSaveWindow.Project = projectBusiness.SaveProject(_viewSaveWindow.Project);
         }
     }
 }

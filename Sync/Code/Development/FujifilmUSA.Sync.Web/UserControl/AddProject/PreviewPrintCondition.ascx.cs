@@ -33,9 +33,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
 
-            DeviceFamilyProfilerOptionID = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionID;
-            IlluminantID = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
-            ObserverTypeID = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
+            DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionID;
+            IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
+            ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
@@ -50,9 +50,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #region IViewPreviewPrintCondition Members
-        public int DeviceFamilyProfilerOptionID { get; set; }
-        public short IlluminantID { get; set; }
-        public short ObserverTypeID { get; set; }
+        public int DeviceFamilyProfilerOptionId { get; set; }
+        public short IlluminantId { get; set; }
+        public short ObserverTypeId { get; set; }
         public short ReferenceChartTypeId { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public Dictionary<string, string> Data { get; set; }
@@ -64,6 +64,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         //    ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();                                    
         //}
 
-        
+
+
+        #region IViewError Members
+
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

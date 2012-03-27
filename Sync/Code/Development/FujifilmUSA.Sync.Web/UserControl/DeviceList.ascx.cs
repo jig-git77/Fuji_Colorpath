@@ -133,12 +133,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> DeviceListById { get; set; }
         #endregion
 
-    }
 
-    public class MockDeviceName
-    {
-        //public string DeviceName { get; set; }
-    }
+        #region IViewError Members
 
+        public void ErrorOccured(object sender, ErrorArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
 }
 
