@@ -469,6 +469,7 @@
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.designer.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>
@@ -531,6 +532,7 @@
     </Compile>
     <Compile Include="UserControl\SourceProfileManagement.ascx.cs">
       <DependentUpon>SourceProfileManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\SourceProfileManagement.ascx.designer.cs">
       <DependentUpon>SourceProfileManagement.ascx</DependentUpon>
