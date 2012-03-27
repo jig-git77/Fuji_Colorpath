@@ -25,7 +25,8 @@
             <tr>
                 <td align="center" valign="bottom" style="width:150px;">
                         <asp:LinkButton ID="lbtnCompanyManagement" runat="server" ToolTip="Company Management"
-                            PostBackUrl="~/CompanyManagement.aspx">
+                            PostBackUrl="~/CompanyManagement.aspx" 
+                            onclick="lbtnCompanyManagement_Click">
                             <div>
                                 <asp:Image ID="Image1" runat="server" AlternateText="Company Management" ImageUrl="~/Images/company-manage-icon.png"
                                     ToolTip="Company Management" /></div>
@@ -36,7 +37,7 @@
                 </td>
                 <td align="center" valign="bottom" style="width:150px;">
                         <asp:LinkButton ID="lbtnBranchManagement" runat="server" ToolTip="Branch Management"
-                            PostBackUrl="~/BranchManagement.aspx">
+                            PostBackUrl="~/BranchManagement.aspx" onclick="lbtnBranchManagement_Click">
                             <div>
                                 <asp:Image ID="Image2" runat="server" AlternateText="Branch Management" ImageUrl="~/Images/branch-manage-icon.png"
                                     ToolTip="Branch Management" /></div>
@@ -47,7 +48,9 @@
                         <img alt="" src="Images/admin-icon-divider.png">
                 </td>
                 <td align="center" valign="bottom" style="width:150px;">
-                        <asp:LinkButton ID="lbtnUserManagement" runat="server" ToolTip="User Management" PostBackUrl="~/UserManagement.aspx" >
+                        <asp:LinkButton ID="lbtnUserManagement" runat="server" 
+                            ToolTip="User Management" PostBackUrl="~/UserManagement.aspx" 
+                            onclick="lbtnUserManagement_Click" >
                             <div>
                                 <asp:Image ID="Image3" runat="server" AlternateText="User Management" ImageUrl="~/Images/user-manage-icon.png"
                                     ToolTip="User Management" /></div>
@@ -57,7 +60,8 @@
                         <img alt="" src="Images/admin-icon-divider.png">
                 </td>
                 <td align="center" valign="bottom" style="width:150px;">
-                        <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" PostBackUrl="~/SourceProfileManagement.aspx">
+                        <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" 
+                            PostBackUrl="~/SourceProfileManagement.aspx" onclick="lbtnSourceProfile_Click">
                             <div>
                                 <asp:Image ID="imgSoruceProfile" runat="server" AlternateText="Soruce Profile" ImageUrl="~/Images/sourceprofile.png"
                                     ToolTip="Soruce Profile" /></div>
@@ -71,7 +75,7 @@
             <tr>
                 <td align="center" valign="bottom" style= "width: 150px;" >
                     <asp:LinkButton ID="lbtnDeviceManagement" runat="server" ToolTip="Device Management"
-                        PostBackUrl="~/DeviceManagement.aspx">
+                        PostBackUrl="~/DeviceManagement.aspx" onclick="lbtnDeviceManagement_Click">
                         <div>
                             <asp:Image ID="imgDeviceManagement" runat="server" AlternateText="Device Management"
                                 ImageUrl="~/Images/device-manage-icon.png" ToolTip="Device Management" /></div>
@@ -81,8 +85,8 @@
                     <img alt="" src="Images/admin-icon-divider.png">
                 </td>
                 <td align="center" valign="bottom" style= "width: 150px;" >
-                    <asp:LinkButton ID="lbtnLicenseManagement" runat="server" ToolTip="License Management"
-                        PostBackUrl="~/BranchManagement.aspx">
+                    <asp:LinkButton ID="lbtnLicenseManagement" runat="server" 
+                        ToolTip="License Management" onclick="lbtnLicenseManagement_Click">
                         <div>
                             <asp:Image ID="imgLicenseManagement" runat="server" AlternateText="License Management"
                                 ImageUrl="~/Images/dongle-manage.png" ToolTip="License Management" /></div>
@@ -93,7 +97,8 @@
                 </td>
                 <td align="center" valign="bottom" style= "width: 150px;" >
                     <asp:LinkButton ID="lnkMeasurementDevice" runat="server" ToolTip="Measurement Device"
-                        PostBackUrl="~/MeasurementDeviceList.aspx">
+                        PostBackUrl="~/MeasurementDeviceList.aspx" 
+                        onclick="lnkMeasurementDevice_Click">
                         <div>
                             <asp:Image ID="imgMeasurementDevice" runat="server" AlternateText="Measurement Device"
                                 ImageUrl="~/Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></div>

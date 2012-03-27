@@ -80,6 +80,29 @@
     <Content Include="AddUserManagement.aspx" />
     <Content Include="AddDeviceManagement.aspx" />
     <Content Include="AddDeviceFamily.aspx" />
+    <Content Include="AddLicenseType.aspx" />
+    <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="JQuery\jquery.ui.core.js" />
+    <Content Include="JQuery\jquery.ui.datepicker.js" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="JQuery\datepicker-themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="JQuery\datepicker-themes\base\jquery.ui.all.css" />
+    <Content Include="JQuery\datepicker-themes\base\jquery.ui.base.css" />
+    <Content Include="JQuery\datepicker-themes\base\jquery.ui.core.css" />
+    <Content Include="JQuery\datepicker-themes\base\jquery.ui.datepicker.css" />
+    <Content Include="JQuery\datepicker-themes\base\jquery.ui.theme.css" />
+    <Content Include="LicenseManagement.aspx" />
     <Content Include="DeviceManagement.aspx" />
     <Content Include="Images\checked_checkbox.gif" />
     <Content Include="Images\MarkerRed_Circle.gif" />
@@ -97,6 +120,12 @@
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
+    <Content Include="UserControl\AddDeviceManagement.ascx" />
+    <Content Include="UserControl\AddDeviceFamily.ascx" />
+    <Content Include="UserControl\AddLicenseType.ascx" />
+    <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\LicenseManagement.ascx" />
+    <Content Include="UserControl\DeviceManagement.ascx" />
     <Content Include="UserControl\UserManagement.ascx" />
     <Content Include="UserManagement.aspx" />
     <Content Include="CSS\MenuBar.css" />
@@ -387,12 +416,96 @@
     <Compile Include="AddUserManagement.aspx.designer.cs">
       <DependentUpon>AddUserManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddDeviceManagement.aspx.cs">
+      <DependentUpon>AddDeviceManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceManagement.aspx.designer.cs">
+      <DependentUpon>AddDeviceManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddDeviceFamily.aspx.cs">
+      <DependentUpon>AddDeviceFamily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceFamily.aspx.designer.cs">
+      <DependentUpon>AddDeviceFamily.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddLicenseType.aspx.cs">
+      <DependentUpon>AddLicenseType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddLicenseType.aspx.designer.cs">
+      <DependentUpon>AddLicenseType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddLicenseManagement.aspx.cs">
+      <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddLicenseManagement.aspx.designer.cs">
+      <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LicenseManagement.aspx.cs">
+      <DependentUpon>LicenseManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LicenseManagement.aspx.designer.cs">
+      <DependentUpon>LicenseManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceManagement.aspx.cs">
+      <DependentUpon>DeviceManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeviceManagement.aspx.designer.cs">
+      <DependentUpon>DeviceManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.designer.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceManagement.ascx.cs">
+      <DependentUpon>AddDeviceManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceManagement.ascx.designer.cs">
+      <DependentUpon>AddDeviceManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceFamily.ascx.cs">
+      <DependentUpon>AddDeviceFamily.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceFamily.ascx.designer.cs">
+      <DependentUpon>AddDeviceFamily.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddLicenseType.ascx.cs">
+      <DependentUpon>AddLicenseType.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddLicenseType.ascx.designer.cs">
+      <DependentUpon>AddLicenseType.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddLicenseManagement.ascx.cs">
+      <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
+      <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LicenseManagement.ascx.cs">
+      <DependentUpon>LicenseManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LicenseManagement.ascx.designer.cs">
+      <DependentUpon>LicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DeviceManagement.ascx.cs">
+      <DependentUpon>DeviceManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DeviceManagement.ascx.designer.cs">
+      <DependentUpon>DeviceManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\UserManagement.ascx.cs">
       <DependentUpon>UserManagement.ascx</DependentUpon>
@@ -856,7 +969,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

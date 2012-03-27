@@ -1,0 +1,173 @@
+﻿using System;
+using System.Web.UI.WebControls;
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
+
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Collections.Generic;
+
+
+namespace FujifilmUSA.Sync.Web.UserControl
+{
+    public partial class AddLicenseManagement : System.Web.UI.UserControl, IViewAddLicenseManagement 
+    {
+        private PresenterLicenseManagement _presenterLicenseManagement;
+        #region Declaration
+        private int LId
+        {
+            get {
+                return (ViewState["LicenseID"] != null && !string.IsNullOrEmpty(ViewState["LicenseID"].ToString())) ? Convert.ToInt32(ViewState["LicenseID"]) : 0; 
+                }
+            set { ViewState["LicenseID"] = value.ToString(); }
+        }
+        #endregion
+
+        #region Page Events
+        protected override void OnInit(EventArgs e)
+        {
+            _presenterLicenseManagement = new PresenterLicenseManagement(this);
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            if (Page.IsPostBack) return;
+
+            BindCompnay();
+            BindLicenseType();
+            BindBranch();
+            if (Request.QueryString["LicenseId"] == null) //Add New Compnay 
+            {
+            }
+            else //Edit Device
+            {
+                SetLicense(
+                    Convert.ToInt32(Request.QueryString["LicenseID"]),
+                    Request.QueryString["LicenseDesc"],
+                    Request.QueryString["ActivationDate"],
+                    Request.QueryString["ExpirationDate"],
+                    Convert.ToInt32(Request.QueryString["BranchId"]),
+                    Convert.ToInt32(Request.QueryString["CompanyId"].ToString()),
+                    Convert.ToInt32(Request.QueryString["LicenseTypeID"]),
+                    Convert.ToBoolean(Request.QueryString["IsActive"]));
+            }
+        }
+        #endregion
+
+        #region Methods
+        private void BindLicenseType()
+        {
+            cmbLicenseType.Items.Clear();
+            LicenseTypes = new Dictionary<int, string>();
+            _presenterLicenseManagement.GetLicenseType();
+            cmbLicenseType.DataTextField = "Value";
+            cmbLicenseType.DataValueField = "Key";
+            cmbLicenseType.DataSource = LicenseTypes;
+            cmbLicenseType.DataBind();
+            cmbLicenseType.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
+        }
+        private void BindCompnay()
+        {
+            cmbCompany.Items.Clear();
+            Compnaies = new Dictionary<int, string>();
+            _presenterLicenseManagement.GetCompanies();
+            cmbCompany.DataTextField = "Value";
+            cmbCompany.DataValueField = "Key";
+            cmbCompany.DataSource = Compnaies;
+            cmbCompany.DataBind();
+            cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
+        }
+        private void BindBranch()
+        {
+            cmbBranch.Items.Clear();
+            if (cmbCompany.SelectedIndex != 0 && cmbCompany.SelectedValue != null)
+            {
+                Branches = new Dictionary<int, string>();
+                CompanyId = Convert.ToInt32(cmbCompany.SelectedValue);
+                _presenterLicenseManagement.GetBranches();
+                cmbBranch.DataTextField = "Value";
+                cmbBranch.DataValueField = "Key";
+                cmbBranch.DataSource = Branches;
+                cmbBranch.DataBind();
+            }
+            cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", string.Empty));
+        }
+       
+        private void SaveDevice()
+        {
+            if(cmbCompany.SelectedIndex == 0)
+            {
+                ucStatusbar.DisplayMessage("Please select compnay.", false);
+                return;
+            }
+            if (cmbBranch.SelectedIndex == 0)
+            {
+                ucStatusbar.DisplayMessage("Please select branch.", false);
+                return;
+            }
+            if (cmbLicenseType.SelectedIndex == 0)
+            {
+                ucStatusbar.DisplayMessage("Please select license type.", false);
+                return;
+            }
+
+           License = new License()
+                         {
+                                Branch =  new Branch()
+                                              {
+                                                  BranchId = Convert.ToInt32(cmbBranch.SelectedValue)
+                                              }
+                                ,ActivationDate = Convert.ToDateTime(txtActivationDate.Text)
+                                ,ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text)
+                                ,LicenseDesc = txtLicenseDescription.Text
+                                ,LicenseTypeId = Convert.ToInt16(cmbLicenseType.SelectedValue)
+                                ,IsActive =chkIsActive.Checked
+                         };
+            if (LId == 0) // Add New Compnay
+            {
+               _presenterLicenseManagement.InsertLicense();
+            }
+            else // Edit New Compnay
+            {
+                License.LicenseId = LId;
+                _presenterLicenseManagement.UpdateLicense();
+            }
+            Response.Redirect("LicenseManagement.aspx");
+        }
+        private void SetLicense(int licenseId, string licenseDescription, string activationDate, string expirationDate, int branchId, int compnayId, int licenseTypeId, bool isActive)
+        {
+            LId = licenseId;
+            cmbCompany.SelectedValue = compnayId.ToString();
+            BindBranch();
+            cmbBranch.SelectedValue = branchId.ToString();
+            cmbLicenseType.SelectedValue = licenseTypeId.ToString();
+            txtLicenseDescription.Text = licenseDescription;
+            txtActivationDate.Text = Convert.ToDateTime(activationDate).ToString("MM/dd/yyyy");
+            txtExpirationDate.Text = Convert.ToDateTime(expirationDate).ToString("MM/dd/yyyy");
+            chkIsActive.Checked = isActive;
+
+        }
+        #endregion
+
+        #region Control Events
+        protected void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BindBranch();
+        }
+        protected void lbtnSave_Click(object sender, EventArgs e)
+        {
+            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            SaveDevice();
+        }
+        #endregion
+
+        #region Implement Interface
+        public License License { get; set; }
+        public Dictionary<int, string> LicenseTypes { get; set; }
+        public int CompanyId { get; set; }
+        public Dictionary<int, string> Compnaies { get; set; }
+        public Dictionary<int, string> Branches { get; set; }
+        #endregion
+
+    }
+}
