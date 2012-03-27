@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
             BindCompnay();
@@ -97,17 +97,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if(cmbCompany.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select compnay.", false);
+                ucAdminStatusbar.DisplayMessage("Please select compnay.", false);
                 return;
             }
             if (cmbBranch.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select branch.", false);
+                ucAdminStatusbar.DisplayMessage("Please select branch.", false);
                 return;
             }
             if (cmbLicenseType.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select license type.", false);
+                ucAdminStatusbar.DisplayMessage("Please select license type.", false);
                 return;
             }
 
@@ -156,7 +156,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveDevice();
         }
         #endregion

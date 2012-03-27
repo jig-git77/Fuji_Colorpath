@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddLicenseManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddLicenseManagement" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 
 <link rel="stylesheet" href="JQuery/datepicker-themes/base/jquery.ui.all.css">
 <script type="text/javascript" src="JQuery/jquery.ui.core.js"></script>
@@ -26,7 +26,7 @@
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
-       <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
+       <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>

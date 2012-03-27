@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDeviceManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDeviceManagement" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -13,7 +13,7 @@
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
-       <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
+       <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>

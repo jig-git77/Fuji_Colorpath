@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddSourceProfile.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.AddSourceProfile" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -10,7 +10,7 @@
     <div class="clear">
     </div>
     <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
+        <ucAdminStatusbar:AdminStatusbar ID="AdminStatusbar1" runat="server" Visible="false" />
     </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="conditional">

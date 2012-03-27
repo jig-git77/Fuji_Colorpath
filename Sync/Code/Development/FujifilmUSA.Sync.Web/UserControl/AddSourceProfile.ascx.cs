@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Statusbar1.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            AdminStatusbar1.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SessionManager.CheckLogin();
 
 
