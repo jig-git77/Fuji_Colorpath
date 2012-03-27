@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddUserManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddUserManagement" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <script language="javascript">
     function ShowPassWord() {
         var txtPassWord = document.getElementById("<%= txtPassWord.ClientID %>");
@@ -46,7 +46,7 @@
                 <table cellpadding="0" cellspacing="10" width="97%">
                     <tr>
                         <td colspan="2">
-                            <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
+                            <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
                         </td>
                     </tr>
                     <tr>

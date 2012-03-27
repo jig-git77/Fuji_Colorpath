@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required,true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required,true);
             if (!Page.IsPostBack)
             {
                 BindCompnay();
@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveCompnay();
         }
         #endregion

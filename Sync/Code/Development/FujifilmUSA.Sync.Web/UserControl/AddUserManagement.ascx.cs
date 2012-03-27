@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-                ucStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
+                ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
                 BindCompnay();
                 BindRole();
                 if (Request.QueryString["UserId"] == null) //Add New Compnay 
@@ -133,35 +133,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbCompanyName.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select company.", false);
+                ucAdminStatusbar.DisplayMessage("Please select company.", false);
                 return;
             }
             if (!chkUserBranch.Items.Cast<ListItem>().ToList().Any(p => p.Selected))
             {
-                ucStatusbar.DisplayMessage("Please select branch.", false);
+                ucAdminStatusbar.DisplayMessage("Please select branch.", false);
                 return;
             }
 
             if (txtPassWord.Text.Equals(string.Empty))
             {
-                ucStatusbar.DisplayMessage("Please select password.", false);
+                ucAdminStatusbar.DisplayMessage("Please select password.", false);
                 return;
             }
             if (txtConfirmPass.Text.Equals(string.Empty))
             {
-                ucStatusbar.DisplayMessage("Please select confirm password.", false);
+                ucAdminStatusbar.DisplayMessage("Please select confirm password.", false);
                 return;
             }
 
             if (!txtPassWord.Text.Equals(txtConfirmPass.Text, StringComparison.CurrentCultureIgnoreCase))
             {
-                ucStatusbar.DisplayMessage("Password and Comfirm Password are not same.", false);
+                ucAdminStatusbar.DisplayMessage("Password and Comfirm Password are not same.", false);
                 return;
             }
 
             if (cmbRole.SelectedIndex == 0)
             {
-                ucStatusbar.DisplayMessage("Please select role.", false);
+                ucAdminStatusbar.DisplayMessage("Please select role.", false);
                 return;
             }
 
@@ -226,14 +226,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
+            ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
             BindBranch();
             AssingeBranch();
             BindRegion();
         }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
+            ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
             SaveCompnay();
         }
         #endregion

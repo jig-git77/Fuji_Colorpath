@@ -120,6 +120,7 @@
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
+    <Content Include="UserControl\AdminStatusbar.ascx" />
     <Content Include="UserControl\AddDeviceManagement.ascx" />
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
@@ -464,6 +465,13 @@
     </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.designer.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AdminStatusbar.ascx.cs">
+      <DependentUpon>AdminStatusbar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AdminStatusbar.ascx.designer.cs">
+      <DependentUpon>AdminStatusbar.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddDeviceManagement.ascx.cs">
       <DependentUpon>AddDeviceManagement.ascx</DependentUpon>
