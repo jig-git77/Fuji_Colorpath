@@ -467,6 +467,12 @@
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AddSourceProfile.ascx.cs">
+      <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddSourceProfile.ascx.designer.cs">
+      <DependentUpon>AddSourceProfile.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\AddUserManagement.ascx.cs">
       <DependentUpon>AddUserManagement.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -991,7 +997,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
