@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true" CodeBehind="SourceProfileManagement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.SourceProfileManagement" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true"
+ CodeBehind="SourceProfileManagement.aspx.cs" Inherits="FujifilmUSA.Sync.Web.SourceProfileManagement" %>
 <%@ Register Src="~/UserControl/SourceProfileManagement.ascx" TagName="SourceProfile" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
