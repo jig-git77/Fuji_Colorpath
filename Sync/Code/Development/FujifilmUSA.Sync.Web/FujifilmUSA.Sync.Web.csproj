@@ -82,6 +82,7 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
     <Content Include="JQuery\jquery.ui.datepicker.js" />
     <Content Include="JQuery\datepicker-themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -125,6 +126,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\SessionEnd.ascx" />
     <Content Include="UserControl\LicenseManagement.ascx" />
     <Content Include="UserControl\DeviceManagement.ascx" />
     <Content Include="UserControl\SourceProfileManagement.ascx" />
@@ -446,6 +448,13 @@
     <Compile Include="AddLicenseManagement.aspx.designer.cs">
       <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SessionEnd.aspx.cs">
+      <DependentUpon>SessionEnd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionEnd.aspx.designer.cs">
+      <DependentUpon>SessionEnd.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LicenseManagement.aspx.cs">
       <DependentUpon>LicenseManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -515,6 +524,13 @@
     </Compile>
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\SessionEnd.ascx.cs">
+      <DependentUpon>SessionEnd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\SessionEnd.ascx.designer.cs">
+      <DependentUpon>SessionEnd.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\LicenseManagement.ascx.cs">
       <DependentUpon>LicenseManagement.ascx</DependentUpon>

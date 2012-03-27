@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class OperationSelection : System.Web.UI.Page
+    public partial class OperationSelection : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

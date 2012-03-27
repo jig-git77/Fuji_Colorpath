@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -10,53 +9,106 @@ namespace FujifilmUSA.Sync.Web
     {
         protected override void OnLoad(EventArgs e)
         {
-            //IsLogin();
-            //IsRoll();
+            IsLogin();
+            IsRoll();
+            ValidSession();
             base.OnLoad(e);
         }
 
 
         private void ValidSession()
         {
-            //if (Common.SessionManager.Instance.CurrentNavigation == FujifilmUSA.Sync.Entity.ELeftMenuItemLevel.Home)
-            //    HttpContext.Current.Response.Redirect("DeviceList.ascx"); // Redirect to main page.
-
-
-            //if (GetType().BaseType == typeof(OperationSelection) && GetType().BaseType == typeof(ProjectList) && GetType().BaseType == typeof(AddProject))
-            //{
-            //    if (Common.SessionManager.Instance.CurrentOperation == FujifilmUSA.Sync.Entity.EOperation.None)
-            //        HttpContext.Current.Response.Redirect("DeviceList.ascx"); // Redirect to Main Page.
-            //}
-
-
             //if (GetType().BaseType == typeof(ProjectList))
             //{
-            //    if (Common.SessionManager.Instance.CurrentOperation == FujifilmUSA.Sync.Entity.EOperation.None)
-            //        HttpContext.Current.Response.Redirect("DeviceList.ascx"); // Redirect to Main Page.
+            //    Common.SessionManager.Instance.CurrentDevice = null;
             //}
+            if (GetType().BaseType == typeof(Index))
+            {
+            }
+            if (GetType().BaseType == typeof(OperationSelection))
+            {
+                ValidDevice();
+            }
+            if (GetType().BaseType == typeof(ProjectList) || GetType().BaseType == typeof(PopupClosePrintCondition) || GetType().BaseType == typeof(PopupOpenPrintCondition))
+            {
+                ValidDevice();
+                ValidOpration();
+            }
+            if (GetType().BaseType == typeof(AddProduct) || GetType().BaseType == typeof(PopupSaveProject))
+            {
+                ValidDevice();
+                ValidOpration();
+            }
+            if (GetType().BaseType == typeof(Measurement))
+            {
+                ValidDevice();
+                ValidOpration();
+                ValidProject();
+            }
+            if (GetType().BaseType == typeof(Analyze) || GetType().BaseType == typeof(PopupConfirmSave))
+            {
+                ValidDevice();
+                ValidOpration();
+                ValidProject();
+                ValidOptimizeRun();
+            }
+            if (GetType().BaseType == typeof(Export))
+            {
+                ValidDevice();
+                ValidOpration();
+                ValidProject();
+                ValidOptimizeRun();
+            }
 
-            //if (((System.Web.UI.Page)(this)).GetType().BaseType == typeof(Export))
-            //{
-            //    if (Common.SessionManager.Instance.CurrentProject == null)
-            //        HttpContext.Current.Response.Redirect("ProjectList.aspx");
-            //}
+        }
 
-            //if (Common.SessionManager.Instance.CurrentOptimizeRun == null)
-            //    HttpContext.Current.Response.Redirect("ProjectList.aspx");
-
-           
-            
+        private void ValidDevice()
+        {
+            if (Common.SessionManager.Instance.CurrentDevice == null)
+            {
+                Common.SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+                Common.SessionManager.Instance.CurrentOperation = EOperation.None;
+                Response.RedirectPermanent("SessionEnd.aspx");
+            }
+        }
+        private void ValidOpration()
+        {
+            if (Common.SessionManager.Instance.CurrentOperation == FujifilmUSA.Sync.Entity.EOperation.None)
+            {
+                Common.SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+                Common.SessionManager.Instance.CurrentOperation = EOperation.None;
+                Response.RedirectPermanent("SessionEnd.aspx");
+            }
+        }
+        private void ValidProject()
+        {
+            if (Common.SessionManager.Instance.CurrentProject == null)
+            {
+                Common.SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+                Common.SessionManager.Instance.CurrentOperation = EOperation.None;
+                Response.RedirectPermanent("SessionEnd.aspx");
+            }
+        }
+        private void ValidOptimizeRun()
+        {
+            if (Common.SessionManager.Instance.CurrentOptimizeRun == null)
+            {
+                Common.SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+                Common.SessionManager.Instance.CurrentOperation = EOperation.None;
+                Response.RedirectPermanent("SessionEnd.aspx");
+            }
         }
 
 
-        public static void IsLogin()
+
+        public void IsLogin()
         {
             if (SessionManager.Instance.CurrentUser == null)
             {
                 HttpContext.Current.Response.Redirect("Login.aspx");
             }
         }
-        public static void IsRoll()
+        public void IsRoll()
         {
             if (SessionManager.Instance.CurrentUser.Role == null)
             {
