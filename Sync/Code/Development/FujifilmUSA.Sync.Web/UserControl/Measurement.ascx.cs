@@ -11,7 +11,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Measurement : System.Web.UI.UserControl
+    public partial class Measurement : BaseControl
     {
         #region Declaration
         public string AddMeasurement_DeleteMeasurement_Confirmation

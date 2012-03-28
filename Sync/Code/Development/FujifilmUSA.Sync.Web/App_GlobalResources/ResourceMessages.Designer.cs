@@ -934,7 +934,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid login entered.
+        ///   Looks up a localized string similar to Username/Password is invalid..
         /// </summary>
         internal static string Login_InvalidLogin {
             get {

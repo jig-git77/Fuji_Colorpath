@@ -12,7 +12,7 @@ using System.Drawing.Imaging;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
-    public partial class ShowImage : System.Web.UI.Page, IViewMeasurementSetting
+    public partial class ShowImage : BasePage, IViewMeasurementSetting
     {
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
@@ -46,7 +46,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         #endregion
 
-
         private void RenderImage(byte[] image)
         {
             MemoryStream stream = new MemoryStream();
@@ -55,7 +54,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             System.Web.HttpContext.Current.Response.ContentType = "image/gif";
             bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Gif);
         }
-
 
         #region IViewMeasurementSetting Members
         public List<Illuminant> Illumin { get; set; }

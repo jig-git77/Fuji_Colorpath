@@ -14,7 +14,7 @@ using System.IO;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddSourceProfile : System.Web.UI.UserControl, IViewSourceProfile
+    public partial class AddSourceProfile : BaseControl, IViewSourceProfile
     {
 
         #region "Declaration"
@@ -179,15 +179,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<SourceProfile> SourceProfiles { get; set; }
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

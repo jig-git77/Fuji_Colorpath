@@ -7,7 +7,7 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class OpenPrintCondition : System.Web.UI.UserControl, IViewOpenPrintCondition
+    public partial class OpenPrintCondition : BaseControl, IViewOpenPrintCondition
     {
         private PresenterOpenPrintCondition _presenterOpenPrintCondition;
         protected void Page_Init(object sender, EventArgs e)
@@ -35,15 +35,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewOpenPrintCondition Members
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

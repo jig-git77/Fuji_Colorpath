@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
@@ -10,10 +7,9 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 
-
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DeviceList : System.Web.UI.UserControl, IViewDevice
+    public partial class DeviceList : BaseControl, IViewDevice
     {
         #region "Declaration"
         private PresenterDevice _presenterdevice;
@@ -80,7 +76,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             BindDeviceList();
-            //rgDeviceList.DataSource = DeviceListById;
         }
         #endregion
 
@@ -88,17 +83,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindCompanyDropDown()
         {
             _presenterdevice.CompanyList();
-            cmbCompany.DataSource = CompanyList;
-            cmbCompany.DataBind();
-            cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbCompany.DataSource = CompanyList;
+                cmbCompany.DataBind();
+                cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
+            }
         }
         private void BindBranchDropDown(int companyId)
         {
             this.CompanyId = companyId;
             _presenterdevice.BranchList();
-            cmbBranch.DataSource = BranchList;
-            cmbBranch.DataBind();
-            cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbBranch.DataSource = BranchList;
+                cmbBranch.DataBind();
+                cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+            }
         }
 
         private void BindDeviceList()
@@ -112,7 +113,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 this.BranchId = int.Parse(cmbBranch.SelectedValue);
 
                 _presenterdevice.DeviceListById();
-                rgDeviceList.DataSource = DeviceListById;
+                if (!IsErrorOccured)
+                {
+                    rgDeviceList.DataSource = DeviceListById;
+                }
             }
 
         }
@@ -132,16 +136,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
         #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
-

@@ -12,7 +12,7 @@ using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddMeasurementDevice : System.Web.UI.UserControl, IViewDevice
+    public partial class AddMeasurementDevice : BaseControl, IViewDevice
     {
 
         #region "Declaration"
@@ -171,16 +171,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> LicenseList { get; set; }
         public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

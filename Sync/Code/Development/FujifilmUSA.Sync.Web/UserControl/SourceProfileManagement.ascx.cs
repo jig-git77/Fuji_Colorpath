@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 
-
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SourceProfileManagement : System.Web.UI.UserControl,IViewSourceProfile
+    public partial class SourceProfileManagement : BaseControl, IViewSourceProfile
     {
 
         #region Declaration
@@ -83,7 +78,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-
         #region IViewSourceProfile Members
         public int SourceProfileId { get; set; }
         public int RegionId { get; set; }
@@ -96,15 +90,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<SourceProfile> SourceProfiles { get; set; }
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

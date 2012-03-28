@@ -16,7 +16,10 @@ namespace FujifilmUSA.Sync.Business
                 LogManager.WriteLog(e, request);
                 if (request.Handler != null)
                 {
-                    request.Handler(request.TaskBase, new ErrorArgs(e.Message));
+                    request.Handler(
+                        request.TaskBase,
+                        new ErrorArgs(
+                            FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage(request.UserFriendlyMessage)));
                 }
                 else
                 {

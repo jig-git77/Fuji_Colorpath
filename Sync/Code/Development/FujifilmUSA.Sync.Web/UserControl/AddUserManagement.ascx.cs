@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddUserManagement : System.Web.UI.UserControl, IViewAddUserManagement
+    public partial class AddUserManagement : BaseControl, IViewAddUserManagement
     {
         private PresenterUserManagement _presenterUserManagement;
 
@@ -245,15 +245,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> Branchs { get; set; }
         public Dictionary<int, string> Regions { get; set; }
         public Dictionary<int, string> UserRoleList { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

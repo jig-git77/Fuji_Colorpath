@@ -4,7 +4,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProjectDescription : System.Web.UI.UserControl
+    public partial class ProjectDescription : BaseControl
     {
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)

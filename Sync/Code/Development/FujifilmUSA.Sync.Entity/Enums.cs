@@ -121,6 +121,4 @@ namespace FujifilmUSA.Sync.Entity
         [Description("Manage User")]
         ManageUser
     }
-
-
 }

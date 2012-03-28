@@ -5,7 +5,7 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class LeftMenuItem : System.Web.UI.UserControl
+    public partial class LeftMenuItem : BaseControl
     {
         #region Declaration
         public ELeftMenuItemLevel ItemLevel { get; set; }

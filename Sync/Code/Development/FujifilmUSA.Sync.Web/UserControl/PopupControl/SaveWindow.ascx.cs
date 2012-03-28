@@ -7,7 +7,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SaveWindow : System.Web.UI.UserControl, IViewSaveWindow
+    public partial class SaveWindow : BaseControl, IViewSaveWindow
     {
         private PresenterSaveWindow _presenterSaveWindow;
         protected void Page_Init(object sender, EventArgs e)
@@ -29,15 +29,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewSaveWindow Members
         public Project Project { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddLicenseType : System.Web.UI.UserControl, IViewAddLicenseTypeManagement
+    public partial class AddLicenseType : BaseControl, IViewAddLicenseTypeManagement
     {
         private PresenterLicenseManagement _presenterLicenseManagement;
         
@@ -46,20 +46,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Implement Interface
         public LicenseType LicenseType { get; set; }
-        #endregion
-
-
-
-
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

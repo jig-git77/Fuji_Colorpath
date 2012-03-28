@@ -3,7 +3,7 @@ using System;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class MeasurementCommon : System.Web.UI.UserControl
+    public partial class MeasurementCommon : BaseControl
     {
         #region Declaration
         public string AddMeasurement_DeleteMeasurement_Confirmation

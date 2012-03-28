@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddDeviceFamily : System.Web.UI.UserControl,IViewAddDeviceFamilyManagement
+    public partial class AddDeviceFamily : BaseControl, IViewAddDeviceFamilyManagement
     {
         private PresenterDeviceManagement _presenterDeviceManagement;
         
@@ -48,16 +48,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Implement Interface
         public DeviceFamily DeviceFamily { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

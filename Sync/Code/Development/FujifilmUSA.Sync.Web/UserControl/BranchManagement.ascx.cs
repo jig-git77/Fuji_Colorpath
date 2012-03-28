@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class BranchManagement : System.Web.UI.UserControl, IViewBranchManagement
+    public partial class BranchManagement : BaseControl, IViewBranchManagement
     {
         private PresenterBranchManagement _presenterBranchManagement;
 
@@ -106,16 +106,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Branch Branch { get; set; }
         public List<Branch> BranchList { get; set; } 
         public Dictionary<int,string>  Compnaies{ get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

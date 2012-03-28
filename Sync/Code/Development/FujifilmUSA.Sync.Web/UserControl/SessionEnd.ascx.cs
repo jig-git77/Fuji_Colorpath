@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SessionEnd : System.Web.UI.UserControl
+    public partial class SessionEnd : BaseControl
     {
         #region "Control Event"
         protected void likIndex_Click(object sender, EventArgs e)

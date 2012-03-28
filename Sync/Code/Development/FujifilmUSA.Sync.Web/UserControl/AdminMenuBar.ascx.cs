@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AdminMenuBar : System.Web.UI.UserControl
+    public partial class AdminMenuBar : BaseControl
     {
         #region "Page Events"
         #endregion

@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DeviceManagement : System.Web.UI.UserControl,IViewDeviceManagement
+    public partial class DeviceManagement : BaseControl, IViewDeviceManagement
     {
         private PresenterDeviceManagement _presenterDeviceManagement;
 
@@ -112,15 +112,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Implement Interface
         public Device Device { get; set; }
         public List<Device> DeviceList { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

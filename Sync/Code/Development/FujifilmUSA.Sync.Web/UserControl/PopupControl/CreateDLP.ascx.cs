@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class CreateDLP : System.Web.UI.UserControl
+    public partial class CreateDLP : BaseControl
     {
     }
 }

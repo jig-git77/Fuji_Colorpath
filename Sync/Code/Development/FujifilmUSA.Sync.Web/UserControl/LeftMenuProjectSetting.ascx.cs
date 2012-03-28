@@ -5,7 +5,7 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class LeftMenuProjectSetting : System.Web.UI.UserControl
+    public partial class LeftMenuProjectSetting : BaseControl
     {
         protected void Page_PreRender(object sender, EventArgs e)
         {

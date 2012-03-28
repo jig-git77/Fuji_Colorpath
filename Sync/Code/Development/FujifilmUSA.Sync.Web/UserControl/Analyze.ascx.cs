@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Analyze : System.Web.UI.UserControl, IViewAnalyze
+    public partial class Analyze : BaseControl, IViewAnalyze
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
@@ -104,15 +104,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.Measurement> Measurements { get; set; }
 
         public Entity.Measurement Measurement { get; set; }
-
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
     }

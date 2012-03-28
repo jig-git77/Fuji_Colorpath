@@ -4,17 +4,16 @@ using FujifilmUSA.Sync.Entity;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
-
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProjectList : System.Web.UI.UserControl, IViewProjectList
+    public partial class ProjectList : BaseControl, IViewProjectList
     {
+        #region Variable Declaration
         private PresenterProjectList _presenterProjectList;
-        #region "Declaration"
-        public string ProjectList_DeleteProject_Confirmation
+        public string ProjectListDeleteProjectConfirmation
         {
             get
             {
@@ -23,8 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region "Page Events"
-
+        #region Page Events
         protected override void OnInit(EventArgs e)
         {
             _presenterProjectList = new PresenterProjectList(this);
@@ -51,8 +49,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
         }
-
-        //Grid Events
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
             if (e.CommandName == "Delete" && e.CommandArgument != null)
@@ -64,7 +60,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             GetSourceProfiles();
             GetProjectList();
-            rgProjectList.DataSource = Projects;
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
@@ -110,8 +105,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblStandard.Text = SourceProfile[project.SourceProfile.SourceProfileId];
             }
         }
-
-        //Print Standard Rad Combobox event     
         protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
         {
             var combo = sender as RadComboBox;
@@ -128,15 +121,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Method
-
-        //private void BindSearchSyncRunStatus(RadComboBox SyncRunStatus)
-        //{
-        //    //Dictionary<int, string> dic = Utilities.GetEnumDropdown<ECPSyncRunStatus>();
-        //    //SyncRunStatus.DataSource = dic;
-        //    //SyncRunStatus.DataTextField = "Value";
-        //    //SyncRunStatus.DataValueField = "Key";
-        //    //SyncRunStatus.DataBind();
-        //}
         private void GetSourceProfiles()
         {
             CompanyId = 1;
@@ -162,14 +146,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return DateTime.Parse(dateValue);
             }
         }
-
         private void BindProject()
         {
             GetSourceProfiles();
             GetProjectList();
-            rgProjectList.DataSource = Projects;
             rgProjectList.DataBind();
-
         }
         private void GetProjectList()
         {
@@ -177,15 +158,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Projects = new List<Project>();
             Project.DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterProjectList.GetProjectListByDeviceId();
+            rgProjectList.DataSource = Projects;
         }
-
         private void DeleteProject(int projectId)
         {
             Project = new Entity.Project { ProjectId = projectId };
             _presenterProjectList.DeleteProject();
         }
-
-
         #endregion
 
         #region IViewProjectList Members
@@ -196,16 +175,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
         public int ProjectId { get; set; }
         #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
-
 }

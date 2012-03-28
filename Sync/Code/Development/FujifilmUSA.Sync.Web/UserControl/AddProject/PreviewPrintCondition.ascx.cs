@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class PreviewPrintCondition : System.Web.UI.UserControl,IViewPreviewPrintCondition
+    public partial class PreviewPrintCondition : BaseControl, IViewPreviewPrintCondition
     {
         #region "Declaration"
         private PresenterPreviewPrintCondition _presenterPreviewPrintCondition;
@@ -56,23 +56,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public Dictionary<string, string> Data { get; set; }
-        #endregion
-
-        //protected void lnkbtnSavePrintCondition_Click(object sender, EventArgs e)
-        //{
-        //    SessionManager.Instance.CurrentNavigation = LeftMenuItemLevel.Save;
-        //    ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();                                    
-        //}
-
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

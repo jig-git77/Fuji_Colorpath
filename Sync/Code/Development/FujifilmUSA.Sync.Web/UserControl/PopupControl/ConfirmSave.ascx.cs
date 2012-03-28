@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ConfirmSave : System.Web.UI.UserControl, IViewConfirmSave
+    public partial class ConfirmSave : BaseControl, IViewConfirmSave
     {
         private PresenterConfirmSave _presenterConfirmSave;
 

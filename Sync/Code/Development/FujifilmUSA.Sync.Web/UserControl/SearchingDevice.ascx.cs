@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class SearchingDevice : System.Web.UI.UserControl
+    public partial class SearchingDevice : BaseControl
     {
         public event EventHandler MySearching;
 

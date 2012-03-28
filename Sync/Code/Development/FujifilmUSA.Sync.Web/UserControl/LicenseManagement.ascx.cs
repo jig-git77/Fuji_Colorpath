@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class LicenseManagement : System.Web.UI.UserControl, IViewLicenseManagement
+    public partial class LicenseManagement : BaseControl, IViewLicenseManagement
     {
         private PresenterLicenseManagement _presenterLicenseManagement;
 
@@ -140,16 +140,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Implement Interface
         public License License { get; set; }
         public List<License> LicenseList { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

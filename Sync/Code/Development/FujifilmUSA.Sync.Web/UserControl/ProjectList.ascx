@@ -7,7 +7,7 @@
     TagPrefix="uc" %>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteProject() {
-        if (confirm('<%= ProjectList_DeleteProject_Confirmation %>'))
+        if (confirm('<%= ProjectListDeleteProjectConfirmation %>'))
             return true;
         else
             return false;

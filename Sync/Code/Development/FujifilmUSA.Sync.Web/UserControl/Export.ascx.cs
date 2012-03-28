@@ -7,7 +7,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Export : System.Web.UI.UserControl, IViewExport
+    public partial class Export : BaseControl, IViewExport
     {
         private PresenterExport _presenterExport;
         public string AddMeasurement_DeleteMeasurement_Confirmation
@@ -72,15 +72,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public byte[] SourceProfile { get; set; }
         public Project Project { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

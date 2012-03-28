@@ -5,7 +5,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class LeftMenu : System.Web.UI.UserControl
+    public partial class LeftMenu : BaseControl
     {
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)

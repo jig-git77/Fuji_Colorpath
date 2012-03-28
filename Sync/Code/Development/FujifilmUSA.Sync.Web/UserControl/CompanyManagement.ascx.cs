@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class CompanyManagement : System.Web.UI.UserControl,IViewCompanyManagement
+    public partial class CompanyManagement : BaseControl, IViewCompanyManagement
     {
         private PresenterCompanyManagement _presenterCompanyManagement;
         #region Declaration
@@ -99,16 +99,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Implement Interface
         public Company Company { get; set; }
         public List<Company> CompanyList { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

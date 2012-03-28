@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProfilerOptions : System.Web.UI.UserControl, IViewDeviceFamilyProfilerOption
+    public partial class ProfilerOptions : BaseControl, IViewDeviceFamilyProfilerOption
     {
         #region "Declaration"
         //private PresenterProjectList _presenterProjectList;
@@ -78,15 +78,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtProfileDescription.Text = ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue).ProfilerOptionsDesc;
             }
         }
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

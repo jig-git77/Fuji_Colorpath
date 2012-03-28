@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddCompanyManagement : System.Web.UI.UserControl, IViewAddCompanyManagement
+    public partial class AddCompanyManagement : BaseControl, IViewAddCompanyManagement
     {
         private PresenterCompanyManagement _presenterCompanyManagement;
         
@@ -100,16 +100,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Implement Interface
         public Company Company { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

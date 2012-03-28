@@ -3,7 +3,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Pagging : System.Web.UI.UserControl
+    public partial class Pagging : BaseControl
     {
         public delegate void PaggingPreRender(object sender, EventArgs e);
         public event EventHandler MyPreRender;

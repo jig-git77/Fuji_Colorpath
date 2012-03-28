@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ModelWindowContainer : System.Web.UI.UserControl
+    public partial class ModelWindowContainer : BaseControl
     {
         #region Declaration
         public int ModelControlId

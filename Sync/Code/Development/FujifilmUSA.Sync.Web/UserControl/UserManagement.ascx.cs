@@ -13,7 +13,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class UserManagement : System.Web.UI.UserControl, IViewUserManagement
+    public partial class UserManagement : BaseControl, IViewUserManagement
     {
         private PresenterUserManagement _presenterUserManagement;
 
@@ -103,15 +103,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public User User { get; set; }
         public List<User> UserList { get; set; }
         public Dictionary<int, string> Compnaies { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

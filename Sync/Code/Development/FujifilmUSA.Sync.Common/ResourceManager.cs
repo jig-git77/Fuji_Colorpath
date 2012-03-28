@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.UI;
-using System.Web;
+﻿using System.Web;
 namespace FujifilmUSA.Sync.Common
 {
     public class ResourceManager
@@ -15,11 +10,8 @@ namespace FujifilmUSA.Sync.Common
         /// <returns>Resource message of the key provided. If no resource message or key is available, it will return no message available</returns>
         public static string GetResourceMessage(string keyName)
         {
-            object message = HttpContext.GetGlobalResourceObject("ResourceMessages", keyName);
-            if (message == null)
-                return "No resouce message available";
-            else
-                return message.ToString();            
+            var message = HttpContext.GetGlobalResourceObject("ResourceMessages", keyName);
+            return message == null ? "No resouce message available" : message.ToString();
         }
     }
 }

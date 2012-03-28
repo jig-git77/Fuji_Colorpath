@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class TargetColorSpace : System.Web.UI.UserControl, IViewTargetColorspace
+    public partial class TargetColorSpace : BaseControl, IViewTargetColorspace
     {
 
         #region "Declaration"
@@ -70,15 +70,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewTargetColorspace Members
         public List<SourceProfile> SourceProfile { get; set; }
-        #endregion
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

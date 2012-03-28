@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Footer : System.Web.UI.UserControl
+    public partial class Footer : BaseControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

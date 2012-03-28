@@ -8,7 +8,7 @@ using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Settings : System.Web.UI.UserControl
+    public partial class Settings : BaseControl
     {
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)

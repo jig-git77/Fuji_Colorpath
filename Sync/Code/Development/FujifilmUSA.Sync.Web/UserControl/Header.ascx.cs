@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class Header : System.Web.UI.UserControl
+    public partial class Header : BaseControl
     {
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)

@@ -7,11 +7,13 @@ namespace FujifilmUSA.Sync.Web
 {
     public class BasePage : System.Web.UI.Page
     {
+        public bool IsErrorOccured { get; set; }
         protected override void OnLoad(EventArgs e)
         {
             IsLogin();
             SessionAudit();
             base.OnLoad(e);
+            IsErrorOccured = false;
         }
 
         private void SessionAudit()

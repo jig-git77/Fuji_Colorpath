@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddLicenseManagement : System.Web.UI.UserControl, IViewAddLicenseManagement
+    public partial class AddLicenseManagement : BaseControl, IViewAddLicenseManagement
     {
         private PresenterLicenseManagement _presenterLicenseManagement;
         #region Declaration
@@ -167,16 +167,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int CompanyId { get; set; }
         public Dictionary<int, string> Compnaies { get; set; }
         public Dictionary<int, string> Branches { get; set; }
-        #endregion
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

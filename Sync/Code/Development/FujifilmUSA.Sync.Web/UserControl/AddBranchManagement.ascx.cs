@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class AddBranchManagement : System.Web.UI.UserControl, IViewAddBranchManagement
+    public partial class AddBranchManagement : BaseControl, IViewAddBranchManagement
     {
         private PresenterBranchManagement _presenterBranchManagement;
         
@@ -104,18 +104,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Implement Interface
         public Branch Branch { get; set; }
         public Dictionary<int, string> Compnaies { get; set; }
-        #endregion
-
-
-
-
-        #region IViewError Members
-
-        public void ErrorOccured(object sender, ErrorArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

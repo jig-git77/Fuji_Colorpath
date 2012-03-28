@@ -525,6 +525,9 @@
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\BaseControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\SessionEnd.ascx.cs">
       <DependentUpon>SessionEnd.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1015,7 +1018,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProjectSettingsContainer : System.Web.UI.UserControl
+    public partial class ProjectSettingsContainer : BaseControl
     {
         protected void Page_Init(object sender, EventArgs e)
         {
