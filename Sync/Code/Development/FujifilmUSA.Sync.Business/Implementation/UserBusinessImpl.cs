@@ -28,7 +28,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                     LoginPass = DataReader.ReadString(x, "LoginPass"),
                                                     LastName = DataReader.ReadString(x, "LastName"),
                                                     FirstName = DataReader.ReadString(x, "FirstName"),
-                                                    Role = new Role() {RoleId = DataReader.ReadByte(x, "RoleId")},
+                                                    Role = new Role()
+                                                               {
+                                                                    RoleId = DataReader.ReadByte(x, "RoleId"),
+                                                                    RolePermissions = GetRolePermissions(dsUser.Tables[1])
+                                                               },
                                                     Email = DataReader.ReadString(x, "Email"),
                                                     RegionId = DataReader.ReadByte(x, "RegionId"),
                                                     LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
@@ -40,6 +44,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
             return objUser;
         }
+        private static List<RolePermission> GetRolePermissions(DataTable dt)
+        {
+            var permissions = dt.AsEnumerable().
+                 Select(x => new RolePermission()
+                 {
+                     Permission = (ERolePermission)DataReader.ReadInt(x, "PermissionID"),
+                     Allow = DataReader.ReadBoolean(x, "Allow") 
+                 }).ToList();
+            return permissions;
+        }
+
 
         public List<User> GetUsers(int userId)
         {

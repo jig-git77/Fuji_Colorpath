@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true" 
 CodeBehind="SessionEnd.aspx.cs" 
 Inherits="FujifilmUSA.Sync.Web.SessionEnd" %>
 <%@ Register Src="~/UserControl/SessionEnd.ascx" TagName="SessionEnd" TagPrefix="uc" %>

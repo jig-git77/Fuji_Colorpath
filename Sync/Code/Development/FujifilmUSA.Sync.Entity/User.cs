@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 namespace FujifilmUSA.Sync.Entity
 {
     public class User
@@ -20,6 +21,16 @@ namespace FujifilmUSA.Sync.Entity
 
         public List<UserLicense> UserLicenses { get; set; }
         public List<UserBranch> UserBranches { get; set; }
+
+        public bool HasPermission<T>(T t)
+        {
+            if (this.Role != null && this.Role.RoleId == 0)
+                return true;
+            if (this.Role != null && this.Role.RolePermissions != null && this.Role.RolePermissions.Count > 0)
+                return this.Role.RolePermissions.Any(p => p.Permission.Equals(t) && p.Allow);
+            else
+                return false;
+        }
 
         //Get Multiple Branchs
         public string BranchName

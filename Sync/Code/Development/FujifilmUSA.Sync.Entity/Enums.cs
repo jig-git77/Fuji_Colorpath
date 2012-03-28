@@ -96,7 +96,31 @@ namespace FujifilmUSA.Sync.Entity
     {
         [Description("Manage License")]
         ManageLicense,
-        
+
+        [Description("Manage Region")]
+        ManageRegion,
+
+        [Description("Manage Measurement Device")]
+        ManageMeasurementDevice,
+
+        [Description("Manage Company")]
+        ManageCompany,
+
+        [Description("Manage Branch")]
+        ManageBranch,
+
+        [Description("Manage Device")]
+        ManageDevice,
+
+        [Description("Create Delete Project")]
+        CreateDeleteProject,
+
+        [Description("Modify Project")]
+        ModifyProject,
+
+        [Description("Manage User")]
+        ManageUser
     }
+
 
 }

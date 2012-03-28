@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class AddDeviceManagement : System.Web.UI.Page
+    public partial class AddDeviceManagement : BasePage 
     {
         protected void Page_Load(object sender, EventArgs e)
         {

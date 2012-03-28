@@ -1,32 +1,25 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SessionEnd.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SessionEnd" %>
-<div class="contant_top">
+<script type="text/javascript" language="javascript">
+        function pageLoad() {
+                 $('#dock').hide();
+            }
+</script>
+<div class="admin_top">
     &nbsp;</div>
-<div class="contant_middle">
+<div class="admin_middle">
     <div class="head">
-        <div>
-            <table>
-                <tr>
-                    <td style="width: 98%">
-                        <h1>
-                            Session End</h1>
-                    </td>
-                    <td valign="top" style="width: 50px">
-                        <asp:LinkButton ID="likIndex" runat="server" class="button" OnClick="likIndex_Click">
-            <span>Index</span>
-                        </asp:LinkButton>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <h1>Session</h1>
     </div>
     <div class="clear">
     </div>
-    <div>
-            <h1>Current Session is End....</h1>
-    </div>
-    <div class="clear">
+    <div style="margin-left: 20px;">
+        <div style=" font-size: 14px;">
+                Session has been unexpectadly abandoned. Please click here to go back to  <asp:LinkButton ID="LinkButton1" runat="server" OnClick="likIndex_Click"><span style="font-weight:bold;">home page.</span></asp:LinkButton>
+            </div>
     </div>
 </div>
-<div class="contant_bottom">
+<div class="admin_bottom">
     &nbsp;</div>
+<div class="clear">
+</div>
