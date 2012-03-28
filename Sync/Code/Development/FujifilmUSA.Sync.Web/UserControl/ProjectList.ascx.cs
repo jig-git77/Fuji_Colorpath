@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
-                BindProject();
+                //GetProjectList();
             }
         }
         #endregion
@@ -58,60 +58,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            GetSourceProfiles();
             GetProjectList();
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
-            var project = e.Item.DataItem as Entity.Project;
-            if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
+            var project = e.Item.DataItem as Project;
+            if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
+
+            var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
+            var imgStatus = e.Item.FindControl("imgStatus") as Image;
+            if (imgStatus == null || btnSelect == null) return;
+            imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
+            switch (project.Status)
             {
-                var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
-                var imgStatus = e.Item.FindControl("imgStatus") as Image;
-                if (imgStatus != null)
-                {
-                    switch (project.Status)
-                    {
-                        case EOptimizeRunStatus.Open:
-                            if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                            imgStatus.ToolTip = EOptimizeRunStatus.Open.ToString();
-                            imgStatus.AlternateText = EOptimizeRunStatus.Open.ToString();
-                            break;
-                        case EOptimizeRunStatus.Closed:
-                            if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectName + "')");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                            imgStatus.ToolTip = EOptimizeRunStatus.Closed.ToString();
-                            imgStatus.AlternateText = EOptimizeRunStatus.Closed.ToString();
-                            break;
-                        case EOptimizeRunStatus.Certify:
-                            if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                            imgStatus.ToolTip = EOptimizeRunStatus.Certify.ToString();
-                            imgStatus.AlternateText = EOptimizeRunStatus.Certify.ToString();
-                            break;
-                        case EOptimizeRunStatus.NotUsed:
-                            if (btnSelect != null)
-                                btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/no_image.png");
-                            break;
-                    }
-                }
-                var lblStandard = e.Item.FindControl("lblStandard") as Label;
-                if (lblStandard != null && SourceProfile.ContainsKey(project.SourceProfile.SourceProfileId))
-                    lblStandard.Text = SourceProfile[project.SourceProfile.SourceProfileId];
+                case EOptimizeRunStatus.Open:
+                    btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                    break;
+                case EOptimizeRunStatus.Closed:
+                    btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                    break;
+                case EOptimizeRunStatus.Certify:
+                    btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                    break;
             }
         }
         protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
         {
             var combo = sender as RadComboBox;
             if (combo == null) return;
-
             GetSourceProfiles();
-            BindSearchPrintStandardType(combo);
+            foreach (var profile in SourceProfile)
+            {
+                combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
+            }
             combo.SelectedValue = hdSelectedSourceProfileId.Value;
         }
         protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -123,16 +105,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Method
         private void GetSourceProfiles()
         {
+            //TODO: SessionManager.Instance.CurrentUser.UserCompany.CompanyId;
             CompanyId = 1;
             SourceProfile = new Dictionary<int, string>();
             _presenterProjectList.GetSourceProfileByCompany();
-        }
-        private void BindSearchPrintStandardType(RadComboBox cmbSearchPrintStandardType)
-        {
-            foreach (var profile in SourceProfile)
-            {
-                cmbSearchPrintStandardType.Items.Add(new RadComboBoxItem(profile.Value.ToString(), profile.Key.ToString()));
-            }
         }
         protected DateTime? FillterCreatedDateDate(GridItem item)
         {
@@ -140,40 +116,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 return new DateTime?();
             }
-            else
-            {
-                var dateValue = item.OwnerTableView.GetColumn("CreateDate").CurrentFilterValue.Split(' ')[0];
-                return DateTime.Parse(dateValue);
-            }
-        }
-        private void BindProject()
-        {
-            GetSourceProfiles();
-            GetProjectList();
-            rgProjectList.DataBind();
+            var dateValue = item.OwnerTableView.GetColumn("CreateDate").CurrentFilterValue.Split(' ')[0];
+            return DateTime.Parse(dateValue);
         }
         private void GetProjectList()
         {
-            Project = new Entity.Project();
             Projects = new List<Project>();
-            Project.DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterProjectList.GetProjectListByDeviceId();
-            rgProjectList.DataSource = Projects;
+            if (!IsErrorOccured)
+            {
+                rgProjectList.DataSource = Projects;
+            }
         }
         private void DeleteProject(int projectId)
         {
-            Project = new Entity.Project { ProjectId = projectId };
+            ProjectId = projectId;
             _presenterProjectList.DeleteProject();
         }
         #endregion
 
         #region IViewProjectList Members
         public List<Project> Projects { get; set; }
-        public Project Project { get; set; }
         public int CompanyId { get; set; }
         public Dictionary<int, string> SourceProfile { get; set; }
-        public Dictionary<int, string> ProfilerOptionsPreset { get; set; }
         public int ProjectId { get; set; }
+        public int DeviceId { get; set; }
         #endregion
     }
 }

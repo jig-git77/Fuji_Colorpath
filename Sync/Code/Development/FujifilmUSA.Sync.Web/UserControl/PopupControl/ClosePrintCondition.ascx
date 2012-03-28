@@ -1,29 +1,27 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
+    <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript" type="text/javascript">
+    function CloseReOptimize() {
+        var oWindow = GetProjectInformationRadWindow();
+        GetProjectInformationRadWindow().close();
+        return false;
+    }
 
-  <script language="javascript" type="text/javascript">
-      function CloseReOptimize() {
-          var oWindow = GetProjectInformationRadWindow();
-          GetProjectInformationRadWindow().close();
-          //window.parent.location = "Measurement.aspx?ProjectName=''"
-          return false;
-      }
-   
-      function CloseClosePrintConditionWindow() {
-          var oWindow = GetProjectInformationRadWindow();
-          GetProjectInformationRadWindow().close();
-          return false;
-      }
+    function CloseClosePrintConditionWindow() {
+        var oWindow = GetProjectInformationRadWindow();
+        GetProjectInformationRadWindow().close();
+        return false;
+    }
 
-      function GetProjectInformationRadWindow() {
-          var oWindow = null;
-          if (window.radWindow) oWindow = window.radWindow;
-          else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
-          return oWindow;
-      }
+    function GetProjectInformationRadWindow() {
+        var oWindow = null;
+        if (window.radWindow) oWindow = window.radWindow;
+        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+        return oWindow;
+    }
 
 </script>
-
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
@@ -36,6 +34,11 @@
                             <td>
                                 <div>
                                     <table>
+                                        <tr>
+                                            <td>
+                                                <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" />
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td class="Content" style="line-height: 24px;">
                                                 <asp:Label ID="lblClosePrintConditionMessage" runat="server"></asp:Label>
@@ -50,7 +53,7 @@
                         <tr>
                             <td align="left">
                                 <div class="buttonleft" style="padding-left: 3px">
-                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript: CloseReOptimize(); return true;" OnClick="lbtnReOptimize_Click">
+                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnReOptimize_Click">
                 <span>Re Optimize</span>
                                     </asp:LinkButton>
                                 </div>

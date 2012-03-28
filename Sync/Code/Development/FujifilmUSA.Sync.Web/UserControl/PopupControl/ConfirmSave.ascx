@@ -88,17 +88,3 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
-<%--<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" DisplayAfter="1"
-            AssociatedUpdatePanelID="upCreateDLP">
-            <ProgressTemplate>
-                <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
-                    VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
-                </AjaxToolkit:AlwaysVisibleControlExtender>
-                <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
-                    z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-                </div>
-                <div id="divUpdateCreateDLP" runat="server" style="color: #000; position: absolute; z-index: 1010">
-                    <uc:CreateDLP runat="server" ID="ucCreateDLP" />
-                </div>
-            </ProgressTemplate>
-</asp:UpdateProgress>--%>

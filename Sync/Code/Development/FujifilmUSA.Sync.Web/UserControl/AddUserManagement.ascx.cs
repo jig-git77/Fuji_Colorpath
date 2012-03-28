@@ -167,7 +167,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
             User = new User();
-            User.UserCompanies = new UserCompany() { CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue) };
+            User.UserCompany = new UserCompany() { CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue) };
             User.UserBranches = new List<UserBranch>();
             chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).ForEach(p => User.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(p.Value) }));
 
@@ -202,7 +202,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             User.UserId = UId = userId;
             _presenterUserManagement.GetUserById();
 
-            cmbCompanyName.SelectedValue = User.UserCompanies.CompanyId.ToString();
+            cmbCompanyName.SelectedValue = User.UserCompany.CompanyId.ToString();
 
             BindBranch();
             chkUserBranch.Items.Cast<ListItem>().ToList().ForEach(p => p.Selected = User.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));

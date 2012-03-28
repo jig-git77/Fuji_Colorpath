@@ -24,14 +24,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
-            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.Project.DeviceId);
+            _viewProjectList.Projects = projectBusiness.GetProjectsByDeviceId(_viewProjectList.DeviceId);
         }
 
         public void DeleteProject()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewProjectList.ErrorOccured;
-            projectBusiness.DeleteProject(_viewProjectList.Project.ProjectId);
+            projectBusiness.DeleteProject(_viewProjectList.ProjectId);
         }
     }
 }

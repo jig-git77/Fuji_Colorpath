@@ -92,7 +92,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                 RegionId = DataReader.ReadByte(x, "RegionId"),
                                                                 RegionName = DataReader.ReadString(x, "Region")
                                                             },
-                                               UserCompanies = new UserCompany()
+                                               UserCompany = new UserCompany()
                                                                    {
                                                                        UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
                                                                        CompanyId = DataReader.ReadInt(x, "CompanyId"),
@@ -154,7 +154,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.RegionId
                                         , user.LastModifiedUserId
                                         , user.IsActive
-                                        , user.UserCompanies.CompanyId
+                                        , user.UserCompany.CompanyId
                                         , branchIds
                                     });
                     },
@@ -185,7 +185,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.RegionId
                                         , user.LastModifiedUserId
                                         , user.IsActive
-                                        , user.UserCompanies.CompanyId
+                                        , user.UserCompany.CompanyId
                                         , branchIds
                                     });
                     },

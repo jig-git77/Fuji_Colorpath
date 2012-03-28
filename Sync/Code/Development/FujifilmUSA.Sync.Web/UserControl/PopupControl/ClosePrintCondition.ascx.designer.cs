@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class ClosePrintCondition {
         
         /// <summary>
+        /// ucStatusbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar ucStatusbar;
+        
+        /// <summary>
         /// lblClosePrintConditionMessage control.
         /// </summary>
         /// <remarks>

@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Entity
         public int LastModifiedUserId { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public bool IsActive { get; set; }
-        public UserCompany UserCompanies { get; set; }
+        public UserCompany UserCompany { get; set; }
         public Region Region { get; set; }
 
         public List<UserLicense> UserLicenses { get; set; }

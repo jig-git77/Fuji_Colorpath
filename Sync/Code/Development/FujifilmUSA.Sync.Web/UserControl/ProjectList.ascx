@@ -20,11 +20,10 @@
         oWindow.show(); 
         return false;
     }
-    function ShowClosePrintConditionWindow(projectName) {
-        var msg = 'Options for ' + projectName + ' Print Condition';
-        jQuery("span[id$='lblClosePrintConditionMessage']").html(msg);
-        var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
-        oWnd.show();
+    function ShowClosePrintConditionWindow(projectId, projectName) {
+        var oWindow;
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName, "ClosePrintConditionWindow");
+        oWindow.show();
         return false;
     }
 </script>
@@ -179,7 +178,7 @@
                                     SortExpression="SourceProfileId"
                                     >
                                     <ItemTemplate>
-                                        <asp:Label ID="lblStandard" runat="server" Text="" />
+                                        <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
                                     </ItemTemplate>
                                     <FilterTemplate>
                                         <telerik:RadComboBox ID="RadComboBoxPrintStandard" 
@@ -195,7 +194,6 @@
                                                 <telerik:RadComboBoxItem Text="All" />
                                             </Items>    
                                         </telerik:RadComboBox>
-
                                         <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
                                             <script type="text/javascript">
                                                 function PrintStandardIndexChanged(sender, args) {
@@ -276,7 +274,7 @@
                                     UniqueName="Delete">
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
-                                            ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:ConfirmDeleteProject();" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
+                                            ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteProject();" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                             CommandName="Delete" />
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
@@ -299,8 +297,7 @@
                 Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" ShowContentDuringLoad="false"
-                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" NavigateUrl="~/PopupClosePrintCondition.aspx"
-                Behavior="Close, Move">
+                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
