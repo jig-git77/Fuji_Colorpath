@@ -14,6 +14,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             SessionManager.CheckLogin();
+
+            //role base permission
+            tdCompnay.Visible = ((BasePage)this.Page).HasManageCompanyPermission;
+            tdBranch.Visible = ((BasePage)this.Page).HasManageBranchPermission;
+            tdUser.Visible = ((BasePage)this.Page).HasManageUserPermission;
+            tdSourceProfile.Visible = ((BasePage)this.Page).HasManageSourceProfilePermission;
+            tdDevice.Visible = ((BasePage)this.Page).HasManageDevicePermission;
+            tdLicense.Visible = ((BasePage)this.Page).HasManageLicensePermission;
+            tdMeasurementDevice.Visible = ((BasePage)this.Page).HasManageMeasurementDevicePermission;
+
+            ////seperator image 
+            divCompnaySeprator.Visible = (tdCompnay.Visible && tdBranch.Visible);
+            divBranchSeprator.Visible = (tdBranch.Visible && tdUser.Visible);
+            divUserSeprator.Visible = (tdUser.Visible && tdSourceProfile.Visible);
+
+            divDeviceSeprator.Visible = (tdDevice.Visible && tdLicense.Visible);
+            divLicenseSeprator.Visible = (tdLicense.Visible && tdMeasurementDevice.Visible);
+            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible;
         }
         #endregion
 

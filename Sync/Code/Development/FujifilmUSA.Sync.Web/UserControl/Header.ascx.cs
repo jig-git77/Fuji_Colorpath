@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lbtnSettings.Visible = BasePage.HasAdminRolePermission;
         }
         #endregion
 

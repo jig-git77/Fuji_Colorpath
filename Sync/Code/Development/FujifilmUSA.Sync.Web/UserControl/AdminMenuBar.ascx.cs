@@ -13,6 +13,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AdminMenuBar : BaseControl
     {
         #region "Page Events"
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            SessionManager.CheckLogin();
+
+            //role base permission
+            lbtnCompany.Visible = ((BasePage)this.Page).HasManageCompanyPermission;
+            lbtnBranch.Visible = ((BasePage)this.Page).HasManageBranchPermission;
+            lbtnUser.Visible = ((BasePage)this.Page).HasManageUserPermission;
+            lbtnSourceProfile.Visible = ((BasePage)this.Page).HasManageSourceProfilePermission;
+            lbtnDevice.Visible = ((BasePage)this.Page).HasManageDevicePermission;
+            ltnLicense.Visible = ((BasePage)this.Page).HasManageLicensePermission;
+            lbtnMeasurementDevice.Visible = ((BasePage)this.Page).HasManageMeasurementDevicePermission;
+        }
         #endregion
 
         #region "Control Events"

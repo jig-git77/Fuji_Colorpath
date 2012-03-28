@@ -82,6 +82,7 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="Permission.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
     <Content Include="JQuery\jquery.ui.datepicker.js" />
@@ -126,6 +127,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
     <Content Include="UserControl\LicenseManagement.ascx" />
     <Content Include="UserControl\DeviceManagement.ascx" />
@@ -448,6 +450,13 @@
     <Compile Include="AddLicenseManagement.aspx.designer.cs">
       <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Permission.aspx.cs">
+      <DependentUpon>Permission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Permission.aspx.designer.cs">
+      <DependentUpon>Permission.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -527,6 +536,13 @@
     </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Permission.ascx.cs">
+      <DependentUpon>Permission.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Permission.ascx.designer.cs">
+      <DependentUpon>Permission.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\SessionEnd.ascx.cs">
       <DependentUpon>SessionEnd.ascx</DependentUpon>
@@ -1018,7 +1034,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

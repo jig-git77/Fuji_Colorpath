@@ -95,30 +95,35 @@ namespace FujifilmUSA.Sync.Entity
     public enum ERolePermission
     {
         [Description("Manage License")]
-        ManageLicense,
+        ManageLicense = 1,
 
         [Description("Manage Region")]
-        ManageRegion,
+        ManageRegion =2,
 
         [Description("Manage Measurement Device")]
-        ManageMeasurementDevice,
+        ManageMeasurementDevice =3,
 
         [Description("Manage Company")]
-        ManageCompany,
+        ManageCompany =4,
 
         [Description("Manage Branch")]
-        ManageBranch,
+        ManageBranch =5,
 
         [Description("Manage Device")]
-        ManageDevice,
+        ManageDevice =6,
 
         [Description("Create Delete Project")]
-        CreateDeleteProject,
+        CreateDeleteProject =7,
 
         [Description("Modify Project")]
-        ModifyProject,
+        ModifyProject = 8,
 
         [Description("Manage User")]
-        ManageUser
+        ManageUser = 9,
+
+        [Description("Manage SourceProfile")]
+        ManageSourceProfile = 10
+          
+
     }
 }

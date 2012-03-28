@@ -10,7 +10,7 @@
 <header>
     <section id="header">
         <div class="logo"><a href="Index.aspx"><img src="images/logo.png" alt=""></a></div>
-        <div class="setting"><a href="Settings.aspx">&nbsp;</a></div>
+        <div class="setting"><a id="lbtnSettings" runat="server" href="~/Settings.aspx">&nbsp;</a></div>
     </section>
 </header>
 <!--End Header-->

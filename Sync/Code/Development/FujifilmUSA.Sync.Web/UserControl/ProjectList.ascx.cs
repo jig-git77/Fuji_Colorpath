@@ -22,6 +22,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        public void SetAddProjectVisibility()
+        {
+            lbtnCreateNewPrintCondition.Visible = false;
+        }
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -34,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
                 //GetProjectList();
             }
+            lbtnCreateNewPrintCondition.Visible = ((BasePage)this.Page).HasCreateDeleteProjectPermission;
         }
         #endregion
 
