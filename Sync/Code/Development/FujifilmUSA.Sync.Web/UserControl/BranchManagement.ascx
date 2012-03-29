@@ -166,7 +166,7 @@
                                                         ToolTip="Delete Branch" 
                                                         AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript:ConfirmDeleteBranch();"
+                                                        OnClientClick="javascript:return ConfirmDeleteBranch();"
                                                         CommandArgument ='<%# Eval("BranchID") %>'
                                                         CommandName="Delete" />
                                      </div>

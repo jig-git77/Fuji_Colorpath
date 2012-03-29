@@ -71,10 +71,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var imgStatus = e.Item.FindControl("imgStatus") as Image;
             if (imgStatus == null || btnSelect == null) return;
             imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
+
+            int days = (DateTime.Now - project.CreateDate).Days; 
+             
             switch (project.Status)
             {
                 case EOptimizeRunStatus.Open:
-                    btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
+                    btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "','" + days + "','" + project.DlpNo   +"')");
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
                     break;
                 case EOptimizeRunStatus.Closed:

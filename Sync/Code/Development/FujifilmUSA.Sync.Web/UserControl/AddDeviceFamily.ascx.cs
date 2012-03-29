@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                    IsActive = chkIsActive.Checked
                                };
             _presenterDeviceManagement.InsertDeviceFamily();
-            Response.Redirect("BranchManagement.aspx");
+            Response.Redirect("DeviceManagement.aspx");
         }
         #endregion
 

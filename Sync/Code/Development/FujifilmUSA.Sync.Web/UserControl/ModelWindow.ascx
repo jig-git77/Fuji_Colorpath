@@ -34,6 +34,7 @@
                     id="RadModelWindow" 
                     runat="server"
                     showcontentduringload="false"
+                    VisibleStatusbar ="false"
                     behaviors="Close, Move" Behavior="Close, Move"
                     >
                     

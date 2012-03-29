@@ -226,7 +226,7 @@
                                                         ToolTip="Delete User" 
                                                         AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript: ConfirmDeleteUser()"
+                                                        OnClientClick="javascript:return ConfirmDeleteUser()"
                                                         CommandArgument ='<%# Eval("UserId") %>'    
                                                         CommandName="Delete" />
                                      </div>

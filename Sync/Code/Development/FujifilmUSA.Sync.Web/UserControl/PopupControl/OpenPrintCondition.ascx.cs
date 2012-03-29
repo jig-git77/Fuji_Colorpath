@@ -4,7 +4,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
-
+using System.Text;
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class OpenPrintCondition : BaseControl, IViewOpenPrintCondition
@@ -17,10 +17,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblOpenPrintConditionMessage.Text =
-                string.Format(
-                    "Current {0} is open and has been inactive for 2.5 days.</br>Confirm which DLP is used in your workflow. </br> In order to continue optimizing this DLP your workflow must be using {1}",
-                    Request.QueryString["ProjectName"], Request.QueryString["ProjectName"]);
+            var sb = new StringBuilder();
+            sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+            sb.Append("</br>");
+            sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " + Request.QueryString["ProjectName"] + " DLP " + (Convert.ToInt32(Request.QueryString["DlpNo"]) - 1) + " \" .");
+            lblOpenPrintConditionMessage.Text = sb.ToString();
         }
 
         protected void lbtnContinue_Click(object sender, EventArgs e)

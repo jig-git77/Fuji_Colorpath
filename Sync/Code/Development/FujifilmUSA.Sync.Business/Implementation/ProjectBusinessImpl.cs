@@ -90,6 +90,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                                DlpNo = DataReader.ReadInt(x, "DLPNO"),
                                                 SourceProfile = new SourceProfile()
                                                                     {
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),

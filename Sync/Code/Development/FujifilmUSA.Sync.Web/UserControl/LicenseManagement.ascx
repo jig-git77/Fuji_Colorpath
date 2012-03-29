@@ -211,7 +211,7 @@
                                                         ToolTip="Delete License" 
                                                         AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript:ConfirmDeleteLicense();"
+                                                        OnClientClick="javascript:return ConfirmDeleteLicense();"
                                                         CommandArgument ='<%# Eval("LicenseID") %>'
                                                         CommandName="Delete" />
                                      </div>

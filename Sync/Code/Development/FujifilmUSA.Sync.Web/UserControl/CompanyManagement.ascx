@@ -130,7 +130,7 @@
                                     <div style="float:left;" >
                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Company" AlternateText="Delete"
                                         ImageUrl="../Images/delete_icon.png" 
-                                        OnClientClick="javascript:ConfirmDeleteCompany();"
+                                        OnClientClick="javascript:return ConfirmDeleteCompany();"
                                         CommandArgument ='<%# Eval("CompanyId") %>'
                                         CommandName="Delete" />
                                      </div>

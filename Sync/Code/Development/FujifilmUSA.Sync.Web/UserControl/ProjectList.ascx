@@ -14,9 +14,9 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId, projectName) {
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpNo) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpNo=" + DlpNo, "OpenPrintConditionWindow");
         oWindow.show(); 
         return false;
     }
@@ -293,10 +293,10 @@
     </div>
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
-            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" ShowContentDuringLoad="false"
+            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" VisibleStatusbar ="false"  ShowContentDuringLoad="false"
                 Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
-            <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" ShowContentDuringLoad="false"
+            <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar ="false" ShowContentDuringLoad="false"
                 Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
         </Windows>

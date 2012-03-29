@@ -143,11 +143,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Device = new Device {DeviceId = deviceId};
             _presenterDeviceManagement.GetDevice();  
             DId = deviceId;
-            cmbCompany.SelectedValue = Device.DeviceId.ToString();
+            cmbCompany.SelectedValue = Device.License.Branch.Company.CompanyId.ToString();
             BindBranch();
-            cmbBranch.SelectedValue = Device.DeviceId.ToString();
+            cmbBranch.SelectedValue = Device.License.Branch.BranchId.ToString();
             BindLicenses();
-            cmbLicense.SelectedValue = Device.LicenseId.ToString();
+            cmbLicense.SelectedValue = Device.License.LicenseId.ToString();
 
             txtDeviceName.Text = Device.DeviceName;
             cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();

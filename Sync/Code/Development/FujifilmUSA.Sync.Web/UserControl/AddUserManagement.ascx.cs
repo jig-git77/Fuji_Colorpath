@@ -204,7 +204,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             txtConfirmPass.Attributes.Add("Value", User.LoginPass);
 
             chkIsActive.Checked = User.IsActive;
-            cmbRole.SelectedValue = User.Role.ToString();
+            cmbRole.SelectedValue = User.Role.RoleId.ToString();
         }
         #endregion
 

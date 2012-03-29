@@ -206,7 +206,7 @@
                                                         ToolTip="Delete Device" 
                                                         AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript:ConfirmDeleteDevice();"
+                                                        OnClientClick="javascript:return ConfirmDeleteDevice();"
                                                         CommandArgument ='<%# Eval("DeviceID") %>'
                                                         CommandName="Delete" />
                                      </div>

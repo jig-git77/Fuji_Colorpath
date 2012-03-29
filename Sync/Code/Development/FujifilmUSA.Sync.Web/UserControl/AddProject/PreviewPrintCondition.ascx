@@ -260,7 +260,7 @@
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
-        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" VisibleStatusbar ="false" ShowContentDuringLoad="false"
             Title="Download Chart" Width="730" Height="400" Behaviors="Close, Move" Behavior="Close, Move"
             NavigateUrl="~/PopupSaveProject.aspx">
         </telerik:RadWindow>

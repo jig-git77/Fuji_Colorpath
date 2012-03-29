@@ -253,7 +253,7 @@
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
-        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false" VisibleStatusbar ="false"
             Title="Confirm Save" Width="718" Height="275" Behavior="Close, Move" NavigateUrl="~/PopupConfirmSave.aspx">
         </telerik:RadWindow>
     </Windows>
