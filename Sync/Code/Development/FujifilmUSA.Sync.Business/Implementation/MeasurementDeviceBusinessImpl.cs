@@ -72,35 +72,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<MeasurementDevice> GetMeasurementDevices()
+        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId)
         {
             var measurementDevices = new List<MeasurementDevice>();
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[GetMeasurementDevices]");
-                    if (dsmeasurementdevice != null && dsmeasurementdevice.Tables.Count > 0 && dsmeasurementdevice.Tables[0].Rows.Count > 0)
-                    {
-                        measurementDevices = dsmeasurementdevice.Tables[0].AsEnumerable().
-                            Select(x => new MeasurementDevice()
-                                            {
-                                                MeasurementDeviceId = DataReader.ReadShort(x, "MeasurementDeviceID"),
-                                                CompanyName = DataReader.ReadString(x, "CompanyName"),
-                                                BranchName = DataReader.ReadString(x, "BranchName"),
-                                                LicenseType = DataReader.ReadString(x, "LicenseType"),
-                                                SerialNumber = DataReader.ReadString(x, "SerialNumber"),
-                                                InstrumentType = new InstrumentType() { InstrumentName = DataReader.ReadString(x, "InstrumentType") },
-                                                IsActive = DataReader.ReadBoolean(x, "IsActive")
-                                            }).ToList();
-                    }
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDevices"));
-            return measurementDevices;
-        }
-
-        public MeasurementDevice GetMeasurementDevice(int measurementDeviceId)
-        {
-            var measurementDevices = new MeasurementDevice();
             Common.ImplementBusinessLogic(
                 () =>
                     {
@@ -118,7 +92,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                     SerialNumber = DataReader.ReadString(x, "SerialNumber"),
                                                     InstrumentType = new InstrumentType() {InstrumentTypeId = (short) DataReader.ReadInt(x, "InstrumentTypeID")},
                                                     IsActive = DataReader.ReadBoolean(x, "IsActive")
-                                                }).SingleOrDefault();
+                                                }).ToList();
                         }
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDevice"));

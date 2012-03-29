@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -31,14 +32,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.SourceProfiles = sourceProfileBusiness.GetSourceProfiles();
+            _viewSourceProfile.SourceProfiles = sourceProfileBusiness.GetSourceProfile(0);
         }
 
         public void GetSourceProfile()
         {
             var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.SourceProfile = sourceProfileBusiness.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
+            _viewSourceProfile.SourceProfile = sourceProfileBusiness.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId).FirstOrDefault();
         }
 
         public void InsertSourceProfile()

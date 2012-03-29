@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface IUserBusiness : ITaskBase
     {
         User UserLogin(string userName, string password);
-        List<User> GetUsers(int userId);
+        List<User> GetUser(int userId);
         int InsertUser(User user);
         int UpdateUser(User user);
         bool DeleteUser(int userId);

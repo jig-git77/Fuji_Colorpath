@@ -36,19 +36,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SessionManager.CheckLogin();
-            if (!IsPostBack)
-            {
-                BindCompanyDropDown();
-                BindInstrumentTypeDropDown();
-                if (Request.QueryString["MeasurementDeviceId"] == null) 
-                {
-                }
-                else
-                {
-                    LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
-                }
-            }
+            if (IsPostBack) return;
+
+            BindCompanyDropDown();
+            BindInstrumentTypeDropDown();
+            if (Request.QueryString["MeasurementDeviceId"] != null)
+                LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
+            
+
         }
         
         #endregion
@@ -81,6 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             MeasurementDevice = new MeasurementDevice();
             MeasurementDevice.LicenseId = Convert.ToInt32(cmbLicenseType.SelectedValue);
             MeasurementDevice.SerialNumber = txtSerialNumber.Text.Trim();
@@ -143,8 +141,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadMeasurementDevice(int iMeasurementDeviceId)
         {
-            MeasurementDevice = new MeasurementDevice();
-            MeasurementDevice.MeasurementDeviceId =(short)iMeasurementDeviceId;
+            MeasurementDevice = new MeasurementDevice
+                                    {
+                                        MeasurementDeviceId = (short) iMeasurementDeviceId
+                                    };
             _presenterdevice.GetMeasurementDevice();
             hdnMeasurementDeviceId.Value =Convert.ToString(iMeasurementDeviceId);
             cmbCompanyName.SelectedValue = Convert.ToString(MeasurementDevice.CompanyId);

@@ -38,21 +38,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AdminStatusbar1.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SessionManager.CheckLogin();
+            if (IsPostBack) return;
 
+            Page.Form.Attributes.Add("enctype", "multipart/form-data");
+            BindCompanyDropDown();
+            BindRegionDropDown();
+            
+            if (Request.QueryString["SourceProfileId"] != null) 
+                LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
 
-            if (!IsPostBack)
-            {
-                Page.Form.Attributes.Add("enctype", "multipart/form-data");
-
-                BindCompanyDropDown();
-                BindRegionDropDown();
-                if (Request.QueryString["SourceProfileId"] != null)
-                {
-                    LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
-                }
-            }
         }
 
         #endregion
@@ -85,6 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
             SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
@@ -154,8 +151,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadSourceProfile(int iSourceProfileId)
         {
-            SourceProfile = new SourceProfile();
-            SourceProfile.SourceProfileId = (short)iSourceProfileId;
+            SourceProfile = new SourceProfile {SourceProfileId = (short) iSourceProfileId};
             _presentersourceprofile.GetSourceProfile();
             hdnSourceProfileID.Value = Convert.ToString(iSourceProfileId);
             cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);

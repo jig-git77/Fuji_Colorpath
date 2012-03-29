@@ -56,7 +56,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public List<User> GetUsers(int userId)
+        public List<User> GetUser(int userId)
         {
             var objUsers = new List<User>();
             Common.ImplementBusinessLogic(

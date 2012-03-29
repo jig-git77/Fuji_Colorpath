@@ -89,14 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     Device.DeviceId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddDeviceManagement.aspx?DeviceID=" + Device.DeviceId
-                                            + "&DeviceName=" + item.GetDataKeyValue("DeviceName").ToString()
-                                            + "&LicenseID=" + item.GetDataKeyValue("LicenseID").ToString()
-                                            + "&DeviceFamilyID=" + item.GetDataKeyValue("DeviceFamily.DeviceFamilyID").ToString()
-                                            + "&CompanyId=" + item.GetDataKeyValue("License.Branch.Company.CompanyId").ToString()
-                                            + "&BranchId=" + item.GetDataKeyValue("License.Branch.BranchId").ToString()
-                                            + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
-                                            );
+                    Response.Redirect("AddDeviceManagement.aspx?DeviceID=" + Device.DeviceId);
                     break;
             }
         }

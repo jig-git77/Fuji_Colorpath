@@ -33,22 +33,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required,true);
-            if (!Page.IsPostBack)
-            {
-                BindCompnay();
-                if (Request.QueryString["CompanyId"] == null) //Add New Compnay 
-                {
-                }
-                else //Edit Compnay
-                {
-                    SetBranch(
-                              Convert.ToInt32(Request.QueryString["BranchId"]),
-                              Request.QueryString["BranchName"].ToString(),
-                              Request.QueryString["Location"].ToString(),
-                              Convert.ToInt32(Request.QueryString["CompanyID"]),
-                              Convert.ToBoolean(Request.QueryString["IsActive"]));
-                }
-            }
+            if (Page.IsPostBack) return;
+            
+            BindCompnay();
+            if (Request.QueryString["BranchId"] != null)
+                SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
+        
         }
         #endregion
 
@@ -83,13 +73,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             Response.Redirect("BranchManagement.aspx");
         }
-        private void SetBranch(int branchId,string branchName,string location,int compnayId,bool isActive)
+        private void SetBranch(int branchId)
         {
+            Branch = new Branch {BranchId = branchId};
+            _presenterBranchManagement.GetBranch(); 
+
             BId = branchId;
-            txtBranchName.Text = branchName;
-            txtLocation.Text = location;
-            cmbCompanyName.SelectedValue = compnayId.ToString();
-            chkIsActive.Checked = isActive;
+            txtBranchName.Text = Branch.BranchName;
+            txtLocation.Text = Branch.Location;
+            cmbCompanyName.SelectedValue = Branch.CompanyId.ToString();
+            chkIsActive.Checked = Branch.IsActive;
         }
         #endregion
 

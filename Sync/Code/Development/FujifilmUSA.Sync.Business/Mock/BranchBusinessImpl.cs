@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<Branch> GetBranches()
+        public List<Branch> GetBranch(int branchId)
         {
             return new List<Branch>();
         }
@@ -35,5 +35,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+     
     }
 }

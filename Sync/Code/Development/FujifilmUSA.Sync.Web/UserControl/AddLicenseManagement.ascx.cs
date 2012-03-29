@@ -36,21 +36,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindCompnay();
             BindLicenseType();
             BindBranch();
-            if (Request.QueryString["LicenseId"] == null) //Add New Compnay 
-            {
-            }
-            else //Edit Device
-            {
-                SetLicense(
-                    Convert.ToInt32(Request.QueryString["LicenseID"]),
-                    Request.QueryString["LicenseDesc"],
-                    Request.QueryString["ActivationDate"],
-                    Request.QueryString["ExpirationDate"],
-                    Convert.ToInt32(Request.QueryString["BranchId"]),
-                    Convert.ToInt32(Request.QueryString["CompanyId"].ToString()),
-                    Convert.ToInt32(Request.QueryString["LicenseTypeID"]),
-                    Convert.ToBoolean(Request.QueryString["IsActive"]));
-            }
+            if (Request.QueryString["LicenseId"] != null)
+                SetLicense(Convert.ToInt32(Request.QueryString["LicenseID"]));
+          
         }
         #endregion
 
@@ -134,17 +122,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             Response.Redirect("LicenseManagement.aspx");
         }
-        private void SetLicense(int licenseId, string licenseDescription, string activationDate, string expirationDate, int branchId, int compnayId, int licenseTypeId, bool isActive)
+        private void SetLicense(int licenseId)
         {
-            LId = licenseId;
-            cmbCompany.SelectedValue = compnayId.ToString();
+            License = new License {LicenseId = licenseId};
+            _presenterLicenseManagement.GetLicens();
+            LId = License.LicenseId;
+            cmbCompany.SelectedValue = License.Branch.CompanyId.ToString();
             BindBranch();
-            cmbBranch.SelectedValue = branchId.ToString();
-            cmbLicenseType.SelectedValue = licenseTypeId.ToString();
-            txtLicenseDescription.Text = licenseDescription;
-            txtActivationDate.Text = Convert.ToDateTime(activationDate).ToString("MM/dd/yyyy");
-            txtExpirationDate.Text = Convert.ToDateTime(expirationDate).ToString("MM/dd/yyyy");
-            chkIsActive.Checked = isActive;
+            cmbBranch.SelectedValue = License.BranchId.ToString();
+            cmbLicenseType.SelectedValue = License.LicenseTypeId.ToString();
+            txtLicenseDescription.Text = License.LicenseDesc;
+            txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("MM/dd/yyyy");
+            txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("MM/dd/yyyy");
+            chkIsActive.Checked = License.IsActive;
 
         }
         #endregion

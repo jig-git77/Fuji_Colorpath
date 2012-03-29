@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
@@ -22,11 +19,18 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAddCompanyManagement = viewAddCompanyManagement;
         }
 
+        public void GetCompany()
+        {
+            var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
+            companyBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
+            _viewAddCompanyManagement.Company = companyBusiness.GetCompany(_viewAddCompanyManagement.Company.CompanyId).FirstOrDefault();
+        }
+
         public void GetCompanies()
         {
             var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
             companyBusiness.ErrorOccured += _viewCompanyManagement.ErrorOccured;
-            _viewCompanyManagement.CompanyList = companyBusiness.GetCompanies();
+            _viewCompanyManagement.CompanyList = companyBusiness.GetCompany(0);
         }
 
         public void InsertCompany()

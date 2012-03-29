@@ -9,13 +9,10 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <ucAdminStatusbar:AdminStatusbar ID="AdminStatusbar1" runat="server" Visible="false" />
-    </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="conditional">
        <ContentTemplate>
-       
+        <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>

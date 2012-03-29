@@ -84,12 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case "Edit":
                     Branch.BranchId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId
-                                            + "&BranchName=" + item.GetDataKeyValue("BranchName").ToString()
-                                            + "&Location=" + item.GetDataKeyValue("Location").ToString()
-                                            + "&CompanyID=" +  item.GetDataKeyValue("CompanyID").ToString()
-                                            + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
-                                            );  
+                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId);  
                     break;
             }
         }

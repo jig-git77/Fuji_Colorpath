@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -22,8 +23,16 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
             branchBusiness.ErrorOccured += _viewBranchManagement.ErrorOccured;
-            _viewBranchManagement.BranchList = branchBusiness.GetBranches();
+            _viewBranchManagement.BranchList = branchBusiness.GetBranch(0);
         }
+
+        public void GetBranch()
+        {
+            var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
+            branchBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            _viewAddBranchManagement.Branch = branchBusiness.GetBranch(_viewAddBranchManagement.Branch.BranchId).FirstOrDefault();
+        }
+
 
         public void InsertBranch()
         {

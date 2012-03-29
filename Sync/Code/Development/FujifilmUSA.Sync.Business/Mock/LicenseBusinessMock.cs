@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDeviceBusiness Members
 
-        public List<License> GetLicenses()
+        public List<License> GetLicense(int licenseId)
         {
             return new List<License>();
         }
@@ -32,6 +32,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
+        
+        
 
         #endregion
 
@@ -40,5 +42,6 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
     }
 }

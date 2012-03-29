@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -51,14 +52,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.MeasurementDevices = measurementDeviceBusiness.GetMeasurementDevices();
+            _viewDevice.MeasurementDevices = measurementDeviceBusiness.GetMeasurementDevice(0);
         }
 
         public void GetMeasurementDevice()
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.MeasurementDevice = measurementDeviceBusiness.GetMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId);
+            _viewDevice.MeasurementDevice = measurementDeviceBusiness.GetMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId).FirstOrDefault();
         }
 
         public void InsertMeasurementDevice()

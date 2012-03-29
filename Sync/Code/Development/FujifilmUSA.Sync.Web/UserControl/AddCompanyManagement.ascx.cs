@@ -23,7 +23,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -32,20 +31,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            if (!Page.IsPostBack)
-            {
-                BindRegion();
-                if (Request.QueryString["CompanyId"] == null) //Add New Compnay 
-                {
-                }
-                else //Edit Compnay
-                {
-                    SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]), 
-                                Request.QueryString["CompanyName"].ToString(), 
-                                Convert.ToInt32(Request.QueryString["RegionId"]),
-                                Convert.ToBoolean(Request.QueryString["IsActive"]));
-                }
-            }
+            if (Page.IsPostBack) return;
+
+            BindRegion();
+            if (Request.QueryString["CompanyId"] != null)
+                SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]));
+         
         }
         #endregion
 
@@ -62,10 +53,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void SaveCompnay()
         {
-            Company = new Company();
-            Company.CompanyName = txtCompanyName.Text;
-            Company.IsActive = chkIsActive.Checked;
-            Company.RegionId = Convert.ToByte(cmbRegionName.SelectedValue);
+            Company = new Company()
+                          {
+                                 CompanyName = txtCompanyName.Text
+                                ,IsActive = chkIsActive.Checked
+                                ,RegionId = Convert.ToByte(cmbRegionName.SelectedValue)
+                          };
+            
             if (CId == 0) // Add New Compnay
             {
                 _presenterCompanyManagement.InsertCompany();
@@ -80,12 +74,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
         }
-        private void SetCompnay(int compnayId,string companyName, int regionId,bool isActive)
+        private void SetCompnay(int compnayId)
         {
+            Company = new Company {CompanyId = compnayId};
+            _presenterCompanyManagement.GetCompany();
+  
             CId = compnayId;
-            txtCompanyName.Text = companyName;
-            cmbRegionName.SelectedValue = regionId.ToString();
-            chkIsActive.Checked = isActive;
+            txtCompanyName.Text = Company.CompanyName;
+            cmbRegionName.SelectedValue = Company.RegionId.ToString();
+            chkIsActive.Checked = Company.IsActive;
         }
         #endregion
 

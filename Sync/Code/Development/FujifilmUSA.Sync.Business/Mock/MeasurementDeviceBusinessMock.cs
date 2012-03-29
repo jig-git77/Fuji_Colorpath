@@ -23,14 +23,9 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<MeasurementDevice> GetMeasurementDevices()
+        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId)
         {
             return new List<MeasurementDevice>();
-        }
-
-        public MeasurementDevice GetMeasurementDevice(int iMeasurementDeviceID)
-        {
-            return new MeasurementDevice();
         }
 
         #endregion
@@ -40,5 +35,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+       
     }
 }

@@ -48,9 +48,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             new object[]
                                     {
                                         branch.BranchId,
+                                        branch.CompanyId,
                                         branch.BranchName,
                                         branch.Location,
-                                        branch.CompanyId,
                                         branch.IsActive,
                                     });
                 },
@@ -74,13 +74,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<Branch> GetBranches()
+        public List<Branch> GetBranch(int branchId)
         {
             var branches = new List<Branch>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]");
+                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]", new object[] { branchId });
                     if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
                     {
                         branches = dsbranches.Tables[0].AsEnumerable().
@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             {
                                                 BranchId = DataReader.ReadInt(x, "BranchId"),
                                                 BranchName = DataReader.ReadString(x, "BranchName"),
-                                                Location = DataReader.ReadString(x, "BranchName"),
+                                                Location = DataReader.ReadString(x, "Location"),
                                                 CompanyId = DataReader.ReadInt(x, "CompanyId"),
                                                 Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") },
                                                 IsActive = DataReader.ReadBoolean(x, "IsActive")

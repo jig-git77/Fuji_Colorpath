@@ -1,6 +1,8 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
+using System.Linq;
+
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -27,7 +29,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewDeviceManagement.ErrorOccured;
-            _viewDeviceManagement.DeviceList = deviceBusiness.GetDeviceList();
+            _viewDeviceManagement.DeviceList = deviceBusiness.GetDevice(0);
+        }
+
+        public void GetDevice()
+        {
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+            _viewAddDeviceManagement.Device = deviceBusiness.GetDevice(_viewAddDeviceManagement.Device.DeviceId).FirstOrDefault();
         }
 
         public void InsertDevice()

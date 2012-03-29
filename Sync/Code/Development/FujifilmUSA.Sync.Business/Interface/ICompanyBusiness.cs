@@ -11,6 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int InsertCompany(Company company);
         int UpdateCompnay(Company company);
         bool DeleteCompany(int companyId);
-        List<Company> GetCompanies();
+        List<Company> GetCompany(int compnayId);
     }
 }

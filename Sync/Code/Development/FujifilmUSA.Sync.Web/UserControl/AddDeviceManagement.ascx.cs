@@ -37,20 +37,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
-            if (Request.QueryString["DeviceID"] == null) //Add New Compnay 
-            {
-            }
-            else //Edit Device
-            {
-                SetDevice(
-                    Convert.ToInt32(Request.QueryString["DeviceID"]),
-                    Request.QueryString["DeviceName"].ToString(),
-                    Convert.ToInt32(Request.QueryString["DeviceFamilyID"]),
-                    Convert.ToInt32(Request.QueryString["BranchId"]),
-                    Convert.ToInt32(Request.QueryString["CompanyId"]),
-                    Convert.ToInt32(Request.QueryString["LicenseID"]),
-                    Convert.ToBoolean(Request.QueryString["IsActive"]));
-            }
+            if (Request.QueryString["DeviceID"] != null)
+                SetDevice(Convert.ToInt32(Request.QueryString["DeviceID"]));
         }
         #endregion
 
@@ -150,18 +138,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             Response.Redirect("DeviceManagement.aspx");
         }
-        private void SetDevice(int deviceId, string deviceName, int deviceFamilyId, int branchId, int compnayId, int licenseId, bool isActive)
+        private void SetDevice(int deviceId)
         {
+            Device = new Device {DeviceId = deviceId};
+            _presenterDeviceManagement.GetDevice();  
             DId = deviceId;
-            cmbCompany.SelectedValue = compnayId.ToString();
+            cmbCompany.SelectedValue = Device.DeviceId.ToString();
             BindBranch();
-            cmbBranch.SelectedValue = branchId.ToString();
+            cmbBranch.SelectedValue = Device.DeviceId.ToString();
             BindLicenses();
-            cmbLicense.SelectedValue = licenseId.ToString();
+            cmbLicense.SelectedValue = Device.LicenseId.ToString();
 
-            txtDeviceName.Text = deviceName;
-            cmbDeviceFamily.SelectedValue = deviceFamilyId.ToString();
-            chkIsActive.Checked = isActive;
+            txtDeviceName.Text = Device.DeviceName;
+            cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
+            chkIsActive.Checked = Device.IsActive;
 
         }
         #endregion

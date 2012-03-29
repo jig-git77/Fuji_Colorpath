@@ -13,30 +13,26 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public int InsertSourceProfile(SourceProfile SourceProfile)
+        public int InsertSourceProfile(SourceProfile sourceProfile)
         {
             return 0;
         }
 
-        public int UpdateSourceProfile(SourceProfile SourceProfile)
+        public int UpdateSourceProfile(SourceProfile sourceProfile)
         {
             return 0;
         }
 
-        public bool DeleteSourceProfile(int SourceProfileId)
+        public bool DeleteSourceProfile(int sourceProfileId)
         {
             return true;
         }
 
-        public List<SourceProfile> GetSourceProfiles()
+        public List<SourceProfile> GetSourceProfile(int sourceProfileId)
         {
            return new List<SourceProfile>();
         }
 
-        public SourceProfile GetSourceProfile(int iSourceProfileID)
-        {
-            return new SourceProfile();
-        }
 
         #endregion
 

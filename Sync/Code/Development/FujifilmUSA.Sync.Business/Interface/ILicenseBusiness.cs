@@ -5,7 +5,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface ILicenseBusiness : ITaskBase
     {
-        List<License> GetLicenses();
+        List<License> GetLicense(int licenseId);
         int InsertLicense(License license);
         int UpdateLicense(License license);
         bool DeleteLicense(int licenseId);

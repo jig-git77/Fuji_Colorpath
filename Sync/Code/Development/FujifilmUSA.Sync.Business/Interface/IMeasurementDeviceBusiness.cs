@@ -11,7 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
        int InsertMeasurementDevice(MeasurementDevice measurementDevice);
        int UpdateMeasurementDevice(MeasurementDevice measurementDevice);
        bool DeleteMeasurementDevice(int measurementDeviceId);
-       List<MeasurementDevice> GetMeasurementDevices();
-       MeasurementDevice GetMeasurementDevice(int measurementDeviceId);
+       List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId);
     }
 }

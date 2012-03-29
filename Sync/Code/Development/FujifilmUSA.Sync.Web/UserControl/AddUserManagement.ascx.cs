@@ -24,17 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             set { ViewState["UserId"] = value.ToString(); }
         }
-        private string SelectedBranch
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ViewState["SelectedBranch"].ToString()) ? ViewState["SelectedBranch"].ToString() : string.Empty;
-            }
-            set
-            {
-                ViewState["SelectedBranch"] = value;
-            }
-        }
+     
         #endregion
 
 
@@ -45,18 +35,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            if (Page.IsPostBack) return;
+
+            BindCompnay();
+            BindRole();
+            if (Request.QueryString["UserId"] != null)
             {
-                ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
-                BindCompnay();
-                BindRole();
-                if (Request.QueryString["UserId"] == null) //Add New Compnay 
-                {
-                }
-                else //Edit Compnay
-                {
-                    SetUser(Convert.ToInt32(Request.QueryString["UserId"]));
-                }
+                SetUser(Convert.ToInt32(Request.QueryString["UserId"]));
             }
         }
         #endregion
@@ -103,7 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (UId != 0)
             {
                 User.UserId = UId;
-                _presenterUserManagement.GetUserById();
+                _presenterUserManagement.GetUser();
                 foreach (ListItem branch in chkUserBranch.Items)
                 {
                     branch.Selected = User.UserBranches.Any(p => p.BranchId.Equals(Convert.ToInt32(branch.Value)));
@@ -198,9 +184,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void SetUser(int userId)
         {
-            User = new Entity.User();
-            User.UserId = UId = userId;
-            _presenterUserManagement.GetUserById();
+            User = new User {UserId = UId = userId};
+            _presenterUserManagement.GetUser();
 
             cmbCompanyName.SelectedValue = User.UserCompany.CompanyId.ToString();
 
@@ -226,14 +211,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             BindBranch();
             AssingeBranch();
             BindRegion();
         }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage("<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>", true);
+            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveCompnay();
         }
         #endregion

@@ -50,6 +50,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         company.CompanyName,
                                         company.BrandId,
                                         company.RegionId,
+                                        company.IsActive 
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateCompany"));
@@ -71,13 +72,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<Company> GetCompanies()
+        public List<Company> GetCompany(int companyId)
         {
             var companies = new List<Company>();
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanies]");
+                        var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanies]",new object[] { companyId} );
                         if (dscompanies != null && dscompanies.Tables.Count > 0 && dscompanies.Tables[0].Rows.Count > 0)
                         {
                             companies = dscompanies.Tables[0].AsEnumerable().

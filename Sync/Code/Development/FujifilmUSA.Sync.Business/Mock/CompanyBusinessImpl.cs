@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<Company> GetCompanies()
+        public List<Company> GetCompany(int compnayId)
         {
             return new List<Company>();
         }
@@ -35,5 +35,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+      
     }
 }

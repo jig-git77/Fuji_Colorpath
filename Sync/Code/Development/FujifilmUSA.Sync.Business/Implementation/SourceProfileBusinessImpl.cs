@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstRegionList;
         }
 
-        public int InsertSourceProfile(SourceProfile SourceProfile)
+        public int InsertSourceProfile(SourceProfile sourceProfile)
         {
             int returnValue = 0;
             Common.ImplementBusinessLogic(
@@ -45,19 +45,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 "[CP].[InsertSourceProfile]",
                                 new object[]
                                     {
-                                        SourceProfile.RegionId,
-                                        SourceProfile.CompanyId,
-                                        SourceProfile.ProfileName,
-                                        SourceProfile.ProfileDesc,
-                                        SourceProfile.Profile,
-                                        SourceProfile.IsUsed
+                                        sourceProfile.RegionId,
+                                        sourceProfile.CompanyId,
+                                        sourceProfile.ProfileName,
+                                        sourceProfile.ProfileDesc,
+                                        sourceProfile.Profile,
+                                        sourceProfile.IsUsed
                                     });
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertSourceProfile"));
             return returnValue;
         }
 
-        public int UpdateSourceProfile(SourceProfile SourceProfile)
+        public int UpdateSourceProfile(SourceProfile sourceProfile)
         {
             int returnValue = 0;
             Common.ImplementBusinessLogic(
@@ -69,13 +69,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 "[CP].[UpdateourceProfile]",
                                 new object[]
                                     {
-                                        SourceProfile.SourceProfileId,
-                                        SourceProfile.RegionId,
-                                        SourceProfile.CompanyId,
-                                        SourceProfile.ProfileName,
-                                        SourceProfile.ProfileDesc,
-                                        SourceProfile.Profile,
-                                        SourceProfile.IsUsed
+                                        sourceProfile.SourceProfileId,
+                                        sourceProfile.RegionId,
+                                        sourceProfile.CompanyId,
+                                        sourceProfile.ProfileName,
+                                        sourceProfile.ProfileDesc,
+                                        sourceProfile.Profile,
+                                        sourceProfile.IsUsed
                                     });
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSourceProfile"));
@@ -122,9 +122,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return sourceProfiles;
         }
 
-        public SourceProfile GetSourceProfile(int sourceProfileId)
+        public List<SourceProfile> GetSourceProfile(int sourceProfileId)
         {
-            var sourceProfiles = new SourceProfile();
+            var sourceProfiles = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
                 () =>
                     {
@@ -141,7 +141,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                     Region = new Region() {RegionId = (short) DataReader.ReadInt(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region")},
                                                     IsUsed = DataReader.ReadBoolean(x, "IsUsed")
 
-                                                }).SingleOrDefault();
+                                                }).ToList();
                         }
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileInformation"));

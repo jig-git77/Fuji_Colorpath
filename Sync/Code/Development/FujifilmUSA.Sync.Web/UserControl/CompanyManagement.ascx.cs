@@ -73,11 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Company.CompanyId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item; 
                     int RegionId =  Convert.ToInt32(item.GetDataKeyValue("RegionId").ToString());   
-                    Response.Redirect("AddCompanyManagement.aspx?CompanyId=" + Company.CompanyId 
-                                            + "&CompanyName=" +  item.GetDataKeyValue("CompanyName").ToString()
-                                            + "&RegionId=" + item.GetDataKeyValue("RegionId").ToString()
-                                            + "&IsActive=" + item.GetDataKeyValue("IsActive").ToString()
-                                            );  
+                    Response.Redirect("AddCompanyManagement.aspx?CompanyId=" + Company.CompanyId);  
                     break;
             }
         }

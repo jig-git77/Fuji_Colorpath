@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Device>();
         }
 
-        public List<Device> GetDeviceList()
+        public List<Device> GetDevice(int deviceId)
         {
             return new List<Device>();
         }
@@ -46,5 +46,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+       
     }
 }

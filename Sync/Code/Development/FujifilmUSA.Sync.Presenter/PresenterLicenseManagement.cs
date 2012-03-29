@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -27,7 +28,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
             licenseBusiness.ErrorOccured += _viewLicenseManagement.ErrorOccured;
-            _viewLicenseManagement.LicenseList = licenseBusiness.GetLicenses();
+            _viewLicenseManagement.LicenseList = licenseBusiness.GetLicense(0);
+        }
+
+        public void GetLicens()
+        {
+            var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+            licenseBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
+            _viewAddLicenseManagement.License = licenseBusiness.GetLicense(_viewAddLicenseManagement.License.LicenseId).FirstOrDefault();
         }
 
         public void InsertLicense()
