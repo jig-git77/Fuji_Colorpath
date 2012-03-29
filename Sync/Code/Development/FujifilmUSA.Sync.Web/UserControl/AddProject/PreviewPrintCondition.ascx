@@ -42,8 +42,7 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>
-                                            Description</label>
+                                        <label>Description</label>
                                     </div>
                                     <div style="float: right">
                                     </div>
@@ -55,7 +54,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span>Media: </span>
+                                            <span style="font-weight:bold;">Media: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
@@ -63,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Colorant: </span>
+                                            <span style="font-weight:bold;">Colorant: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
@@ -71,7 +70,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Rip Settings: </span>
+                                            <span style="font-weight:bold;">Rip Settings: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
@@ -79,7 +78,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Notes: </span>
+                                            <span style="font-weight:bold;">Notes: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
@@ -87,7 +86,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Technician Name: </span>
+                                            <span style="font-weight:bold;">Technician Name: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblTechnicianName" runat="server" Text=""></asp:Label>
@@ -127,7 +126,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span>Measurement Device: </span>
+                                            <span style="font-weight:bold;">Measurement Device: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblMeasurementDevice" runat="server" Text=""></asp:Label>
@@ -135,7 +134,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Illuminant: </span>
+                                            <span style="font-weight:bold;">Illuminant: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblIlluminant" runat="server" Text=""></asp:Label>
@@ -143,7 +142,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span>Observer: </span>
+                                            <span style="font-weight:bold;">Observer: </span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
@@ -183,19 +182,23 @@
                             </div>
                             <div id="Div2" style="padding-left: 10px">
                                 <table>
-                                    <tr>
+                                    <tr style =" line-height : 16px;">
                                         <td>
-                                            <span>Selected Presets: </span>
+                                            <span style="font-weight:bold;" >Selected Presets: </span>
                                         </td>
-                                        <td>
+                                    </tr>
+                                     <tr>
+                                        <td style ="padding-left : 20px;" >
                                             <asp:Label ID="lblSelectedPresets" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <span>Preset Description: </span>
+                                        <td style =" line-height : 16px;">
+                                            <span style="font-weight:bold;">Preset Description: </span>
                                         </td>
-                                        <td>
+                                    </tr>
+                                     <tr>
+                                        <td style ="padding-left : 20px;">
                                             <asp:Label ID="lblPresetDescription" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
@@ -231,7 +234,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span>Alignment Chart:</span> &nbsp
+                                            <span style="font-weight:bold;">Alignment Chart:</span> &nbsp
                                         </td>
                                         <td>
                                             <asp:Label ID="lblAlignmentChart" runat="server" Text=""></asp:Label>

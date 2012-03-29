@@ -125,12 +125,6 @@
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td>
-                                <label>
-                                    Select Presses</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
                                 <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                                     AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"

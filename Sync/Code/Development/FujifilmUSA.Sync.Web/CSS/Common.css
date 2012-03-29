@@ -1357,7 +1357,7 @@ height:10px;
 /**** Override Header and contain css ***/
 .formDevice
 {
-    background: url(../Images/line.png) repeat-x bottom left;
+    /* background: url(../Images/line.png) repeat-x bottom left; */
     margin: 0px 20px 0 23px;
     padding-bottom: 0px;
     line-height: 34px;
