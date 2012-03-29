@@ -241,7 +241,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnProjectId"));
-            return (data == null) ? null : (byte[])data;
+            return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 
         public byte[] GetSourceProfile(int projectId)
@@ -260,7 +260,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfile"));
-            return (data == null) ? null : (byte[])data;
+            return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 
         public byte[] GetDestinationProfile(int projectId)
@@ -279,7 +279,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDestinationProfile"));
-            return (data == null) ? null : (byte[])data;
+            return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 
         public byte[] GetLastOptimizedDlp(int projectId)
@@ -298,7 +298,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizedDlp"));
-            return (data == null) ? null : (byte[])data;
+            return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 
         public Project SaveProject(Project project)

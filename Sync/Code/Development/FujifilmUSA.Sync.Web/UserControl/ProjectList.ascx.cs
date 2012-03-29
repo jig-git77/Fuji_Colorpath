@@ -22,23 +22,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        public void SetAddProjectVisibility()
-        {
-            lbtnCreateNewPrintCondition.Visible = false;
-        }
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
             _presenterProjectList = new PresenterProjectList(this);
+            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
+            {
+                lbtnCreateNewPrintCondition.Visible = false;
+            }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
-                //GetProjectList();
             }
-            lbtnCreateNewPrintCondition.Visible = ((BasePage)this.Page).HasCreateDeleteProjectPermission;
         }
         #endregion
 
@@ -69,7 +67,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             var project = e.Item.DataItem as Project;
             if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
-
             var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
             var imgStatus = e.Item.FindControl("imgStatus") as Image;
             if (imgStatus == null || btnSelect == null) return;
@@ -88,6 +85,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     btnSelect.Attributes.Add("onclick", "javascript: return false;");
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
                     break;
+            }
+            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
+            {
+                var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
+                if (imgDelete != null)
+                {
+                    imgDelete.Visible = false;
+                }
             }
         }
         protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)

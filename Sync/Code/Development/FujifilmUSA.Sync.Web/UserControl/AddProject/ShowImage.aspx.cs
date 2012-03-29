@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using FujifilmUSA.Sync.Entity;
-using FujifilmUSA.Sync.Common;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using FujifilmUSA.Sync.Presenter;
-using System.Web.UI.WebControls;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
@@ -16,7 +13,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
     {
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
-        private string vsIsPostBack = "_IsPostBack";
         #endregion
 
         #region "Page Events"
@@ -33,8 +29,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             if (Request.QueryString["id"] != null)
             {
                 ReferenceChartTypeId = Convert.ToInt32(Request.QueryString["id"]);
-               _presenterMeasurementSetting.GetReferenceChartTypeImage();
-               image = ReferenceChartTypeImage;
+                _presenterMeasurementSetting.GetReferenceChartTypeImage();
+                image = ReferenceChartTypeImage;
             }
 
             if (image != null)
@@ -46,14 +42,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         #endregion
 
-        private void RenderImage(byte[] image)
+        #region Methods
+        private static void RenderImage(byte[] image)
         {
-            MemoryStream stream = new MemoryStream();
+            var stream = new MemoryStream();
             stream.Write(image, 0, image.Length);
-            Bitmap bitmap = new Bitmap(stream);
+            var bitmap = new Bitmap(stream);
             System.Web.HttpContext.Current.Response.ContentType = "image/gif";
             bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Gif);
         }
+        #endregion
 
         #region IViewMeasurementSetting Members
         public List<Illuminant> Illumin { get; set; }
@@ -70,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         public void ErrorOccured(object sender, ErrorArgs e)
         {
-            throw new NotImplementedException();
+            //Do nothing...
         }
 
         #endregion

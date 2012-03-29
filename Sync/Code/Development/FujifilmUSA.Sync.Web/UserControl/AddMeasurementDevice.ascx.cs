@@ -37,15 +37,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            SessionManager.CheckLogin();
-            if (IsPostBack) return;
-
+            if (!IsPostBack)
+{
             BindCompanyDropDown();
             BindInstrumentTypeDropDown();
             if (Request.QueryString["MeasurementDeviceId"] != null)
                 LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
-            
-
+            }
         }
         
         #endregion

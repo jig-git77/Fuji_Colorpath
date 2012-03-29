@@ -10,7 +10,7 @@
 namespace FujifilmUSA.Sync.Web {
     
     
-    public partial class AddProduct {
+    public partial class AddProject {
         
         /// <summary>
         /// ucProjectSettingsContainer control.

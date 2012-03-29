@@ -237,6 +237,31 @@ function scan(scanner, colorspace, chart) {
     }
 
     if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
+
+        //------------------Preview chart---------------//                             
+
+        var canvas = document.getElementById("Canvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        var chartWidth = parseInt(jQuery("[id*='Canvas']").width());
+        var chartHeight = parseInt(jQuery("[id*='Canvas']").height());
+
+        var columnCount = chart["NumberOfColumns"];
+        var rowCount = chart["NumberOfRows"];
+        var cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
+        cellSize = Math.round(cellSize - 0.5);
+
+        var result = chart["RefBase"];
+        var samples = result.length;
+
+        context.globalAlpha = 0.2; //--------------Make transparant background----------//
+
+        DrawChart(result, cellSize, columnCount, 0, samples, samples, "Preview");       //---Call DrawChart() function to draw chart for preview on canvas-----//    
+
+        context.globalAlpha = 1.0; //--------------Make regular background----------//
+
+        //----------------Scan code start----//     
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
@@ -248,6 +273,12 @@ function scan(scanner, colorspace, chart) {
         }
     }
     else {
+
+        //-----------------Preview chart for i1-Pro----------------//
+        var canvas = document.getElementById("Canvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
@@ -277,17 +308,24 @@ function scan(scanner, colorspace, chart) {
 
 
         if (row != 1) {
-            area["H"] = (((h / row) / 2) / 2) + '';           
+
+            //--------Fuji 150 Patch chart----------//
+            area["H"] = (((h / row) / 2) / 2) + '';
             distance["R"] = (((h / row) / 2) / 2) + '';
+
+            area["W"] = ((w / col) / 2) + '';
+            distance["C"] = ((w / col) / 2) + '';
         }
         else {
-            area["H"] = 20;  
-            distance["R"] = 1;
-        }
-        
 
-        area["W"] = ((w / col) / 2) + '';
-        distance["C"] = ((w / col) / 2) + '';
+            //---------ISO 24 Patch chart----------//
+            area["H"] = 20;
+            distance["R"] = 1;
+
+            area["W"] = ((w / col) / 2) - 1 + '';       // Have to do 1 minus because it doesn't fit in canvas width for last cell
+            distance["C"] = ((w / col) / 2) - 1 + '';   // Have to do 1 minus because it doesn't fit in canvas width for last cell
+        }
+
 
         var noOfCells = chart["Size"];
         var drawCells = 0;
@@ -298,53 +336,42 @@ function scan(scanner, colorspace, chart) {
         for (i = 0; i < row; i++) {
             y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
             x1 = 0;
+
             for (j = 0; j < col; j++) {
 
                 if (noOfCells > drawCells) {
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
                     var xx1 = startPosition + x1;
-                    var yy1 = startPosition + y1;                    
-                    //var jg2 = new jsGraphics("Canvas");
-                    var jg2 = new jsGraphics(document.getElementById("Canvas").id); 
+                    var yy1 = startPosition + y1;
+
+                    //var jg2 = new jsGraphics(document.getElementById("Canvas").id);
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
-                    jg2.setColor(rgbx);
-                    jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-                    jg2.paint();
+
+                    context.fillStyle = rgbx;
+                    context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+
+                    //jg2.setColor(rgbx);
+                    //jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+                    //jg2.paint();
+
                     drawCells++;
                     cId++;
-//                    if (cId < 149)
-//                        cId++;
-//                    else
-//                        cId = 0;
+
                 }
 
             }
         }
-
-
-
-
-        //        var jg = new jsGraphics("Canvas");    // Use the "Canvas" div for drawing
-        //        //alert(jg.style);
-        //        var x = 0;
-        //        var y = 0;
-        //        for (var cursample = 0; cursample < chart["RefBase"].length; cursample++) {
-        //            var rgbx = chart["RefBase"][cursample]["HTMLColor"];
-        //            jg.setColor(rgbx);
-        //            jg.fillRect(x * 20, y * 20, 20, 10);
-        //            x++;
-        //            if (x >= chart["NumberOfColumns"]) {
-        //                x = 0;
-        //                y++;
-        //            }
-        //        }
-        //        jg.paint();
     }
 }
 
 function refreshCanvas() {
-    jQuery("[id*='Canvas']").empty();
+    // jQuery("[id*='Canvas']").empty();
+
+    var canvas = document.getElementById("Canvas");
+    var context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
+
 // This function takes the current saved chart data and uploads it to
 // the server as a json string, then pops up the result.
 function upload() {

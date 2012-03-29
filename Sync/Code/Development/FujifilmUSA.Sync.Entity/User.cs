@@ -5,6 +5,10 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class User
     {
+        public User()
+        {
+            Role = new Role();
+        }
         public int UserId { get; set; }
         public string LoginId { get; set; }
         public string LoginPass { get; set; }
@@ -22,14 +26,26 @@ namespace FujifilmUSA.Sync.Entity
         public List<UserLicense> UserLicenses { get; set; }
         public List<UserBranch> UserBranches { get; set; }
 
-        public bool HasPermission<T>(T t)
+        public bool HasPermission(ERolePermission rolePermission)
         {
-            if (this.Role != null && this.Role.RoleId == 0)
-                return true;
-            if (this.Role != null && this.Role.RolePermissions != null && this.Role.RolePermissions.Count > 0)
-                return this.Role.RolePermissions.Any(p => p.Permission.Equals(t) && p.Allow);
-            else
-                return false;
+            if (Role.RoleId == 0) return true;
+            if (Role.RolePermissions.Count == 0) return false;
+            return Role.RolePermissions.Any(x => x.Permission == rolePermission && x.Allow);
+        }
+
+        public bool HasAdminPermission()
+        {
+            if (Role.RoleId == 0) return true;
+            if (Role.RoleId == 0 || Role.RolePermissions.Count == 0) return false;
+            return Role.RolePermissions.Where(x =>
+                                              (x.Permission == ERolePermission.ManageBranch && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageCompany && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageDevice && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageLicense && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageMeasurementDevice && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageRegion && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageSourceProfile && x.Allow) ||
+                                              (x.Permission == ERolePermission.ManageUser && x.Allow)).Count() > 0;
         }
 
         //Get Multiple Branchs

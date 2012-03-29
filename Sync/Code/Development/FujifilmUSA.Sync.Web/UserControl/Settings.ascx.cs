@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -13,16 +14,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
-
             //role base permission
-            tdCompnay.Visible = ((BasePage)this.Page).HasManageCompanyPermission;
-            tdBranch.Visible = ((BasePage)this.Page).HasManageBranchPermission;
-            tdUser.Visible = ((BasePage)this.Page).HasManageUserPermission;
-            tdSourceProfile.Visible = ((BasePage)this.Page).HasManageSourceProfilePermission;
-            tdDevice.Visible = ((BasePage)this.Page).HasManageDevicePermission;
-            tdLicense.Visible = ((BasePage)this.Page).HasManageLicensePermission;
-            tdMeasurementDevice.Visible = ((BasePage)this.Page).HasManageMeasurementDevicePermission;
+            tdCompnay.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
+            tdBranch.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageBranch);
+            tdUser.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUser);
+            tdSourceProfile.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+            tdDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
+            tdLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
+            tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
 
             ////seperator image 
             divCompnaySeprator.Visible = (tdCompnay.Visible && tdBranch.Visible);

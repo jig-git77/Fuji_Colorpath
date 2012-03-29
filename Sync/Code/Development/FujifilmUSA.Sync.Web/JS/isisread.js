@@ -10,18 +10,7 @@ function presentChartDialogiSis(scanner, chart, query) {
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
 }
-var area = new Object();
-area["W"] = 0;
-area["H"] = 0;
 
-var distance = new Object();
-distance["R"] = 0;
-distance["C"] = 0;
-
-var drawCells = 0;
-var cId = 0;
-var x1 = 0;
-var y1 = 0;
 
 function presentScanDoneiSis(scanner, mychart, final) {
     // Before we finalize the request, get all the values from
@@ -53,6 +42,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var samples = results.length;
     var width = mychart["NumberOfColumns"];
     var expected = mychart["NumberOfRows"] * width;
+
     if (results.length != expected) {
         MeasurementDialog("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");
         if (typeof final == "string") {
@@ -63,60 +53,167 @@ function presentScanDoneiSis(scanner, mychart, final) {
         return;
     }
 
+    // From here on down, we are done with the reading of the strips.
+    // We can now present the final results to the user.
+
+    // Lets draw our sampled colors over the top of the displayed
+    // image.
+
+    prog["Prompt"] = "Reading progress " + samples + " samples";
+    jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
+
     for (ind = 0; ind < samples; ind++) {
+        //---------------Code to paint last row on canvas-------------------//
+        if (ind == end) {
+
+            //------Call just one time to print last row
+            DrawChart(results, cellSize, columnCount, ind, samples, samples, "");
+        }
+
+        //-----------Code to add all measurement patches in DB-----------------------//
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
+
         mpatch = new Patch();
+        mpatch.SampleName = mychart["ReferencePatch"][ind]["SampleName"];
         mpatch.CiexyzX = XYZResults["X"].toFixed(2);
         mpatch.CiexyzY = XYZResults["Y"].toFixed(2);
         mpatch.CiexyzZ = XYZResults["Z"].toFixed(2);
         mpatch.CielabL = LABResults["L"].toFixed(2);
         mpatch.CielabA = LABResults["A"].toFixed(2);
         mpatch.CielabB = LABResults["B"].toFixed(2);
-        mpatch.SampleName = mychart["ReferencePatch"][ind]["SampleName"];
-        mpatch.PatchTypeID = mychart["ReferencePatch"][ind]["PatchTypeID"];
+       
         MeasuredPatches.push(mpatch);
     }
+
+    x = 0;
+    y = 0;
+
+    //
+    // Add an upload button and canvas
+    //
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
     jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
+
+    // We have to make one more call to the library.  The 
+    // calibrate itself ran in a non-browser thread.  We need
+    // the browser thread to join with the calibrate thread to
+    // keep the process state tidy.
+
     if (typeof final == "string") {
         eval(final);
     } else if (typeof final == "object") {
         final();
     }
 }
+
+
+//----------Global Variables Declaration for "presentProgressiSis" function-------------//
+var start = 0;
+var end = 0;
+var x = 0;
+var y = 0;
+var prog = new Object();
+var chartWidth, chartHeight, columnCount, rowCount, cellSize = 0;
+var cursample = 0;
+var countglobal = 0;
+var srgb;
+var rgbx;
+var canvas;
+var context;    
+
+
 function presentProgressiSis(scanner, mychart) {
     console.log("In presentProgress");
+
     var result = mychart["Result"];
     var samples = result.length;
-    var prog = new Object();
-    var chartWidth = parseInt(jQuery("[id*='Canvas']").width());
-    var chartHeight = parseInt(jQuery("[id*='Canvas']").height());
-    var columnCount = mychart["NumberOfColumns"];
-    var rowCount = mychart["NumberOfRows"];
-    var cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
-    prog["Prompt"] = "Reading progress " + samples + " samples";
-    prog["Answers"] = "NONE";
-    jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
-    var jg = new jsGraphics(document.getElementById("Canvas").id);
-    var cursample = 0;
-    var x = 0;
-    var y = 0;
-    for (cursample = 0; cursample < samples; cursample++) {
-        var srgb = result[cursample]["sRGB"];
-        var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
-        jg.setColor(rgbx);
-        jg.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-        jg.paint();
+
+
+    if (start == 0) {                                               //Start: ---by Dhruti: code to avoid loop starts from 0 everytime
+        end = samples;
+
+        chartWidth = parseInt(jQuery("[id*='Canvas']").width());
+        chartHeight = parseInt(jQuery("[id*='Canvas']").height());
+
+        columnCount = mychart["NumberOfColumns"];
+        rowCount = mychart["NumberOfRows"];
+        cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
+        cellSize = Math.round(cellSize - 0.5);
+
+        prog["Answers"] = "NONE";
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+    }
+
+    else {
+        start = end;
+        end = samples;
+    }                                                               //End
+
+    //-----------Call DrawChart function to paint the chart on canvas-------------------//
+    DrawChart(result, cellSize, columnCount, start, end, samples, "");
+    start = 1;
+
+    return "OK";
+}
+
+function DrawChart(result, cellSize, columnCount, startpoint, endpoint, samples, camefrom) {
+
+    if (camefrom != "Preview") {
+        prog["Prompt"] = "Reading progress " + samples + " samples";
+        jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
+    }
+
+    //-------------Create Instance of Canvas---------------//
+    canvas = document.getElementById("Canvas");
+    context = canvas.getContext("2d");
+
+    var avg = "";
+
+    // alert("x is: " + x + " y is: " + y + " startpoint is: " + startpoint + " end point is: " + endpoint);
+
+    for (cursample = startpoint; cursample < endpoint; cursample++) {
+
+        if (camefrom == "Preview") {
+
+            if (cursample == 0) {              //-----------Just for when something wrong happens and stop chart reading in middle, start from 1st row---------//
+                x = 0;
+                y = 0;
+                start = 0;
+            }
+
+            rgbx = result[cursample]["HTMLColor"];
+
+            context.fillStyle = rgbx;
+            context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        }
+        else {
+
+            //alert("x is: " + x + " y is: " + y + " cellSize is: " + cellSize + " start pointX is: " + x * cellSize + " end pointY is: " + y * cellSize);
+
+            srgb = result[cursample]["sRGB"];
+
+            rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+
+            context.fillStyle = rgbx;
+            context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        }
+
         x++;
+
         if (x >= columnCount) {
             x = 0;
             y++;
         }
-
     }
-    return "OK";
+
+
+    if (camefrom == "Preview") {
+        x = 0;                      //----It will make chart redrawn from 1st point on "Canvas"-----//
+        y = 0;
+    }
 }
+
+

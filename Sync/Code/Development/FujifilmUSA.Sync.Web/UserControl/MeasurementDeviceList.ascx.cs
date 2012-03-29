@@ -33,7 +33,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
             if (!Page.IsPostBack)
             {
                 BindMeasurementDeviceList();

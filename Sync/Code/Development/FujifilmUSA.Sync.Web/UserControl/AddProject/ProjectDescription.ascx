@@ -9,7 +9,7 @@
         OnClick="lnkbtnPrintDescription_Click">
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
-            Traget ColorSpace</span></asp:LinkButton>
+            Target ColorSpace</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />

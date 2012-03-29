@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
-using System.Web.Security;
-
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -15,16 +9,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
-
             //role base permission
-            lbtnCompany.Visible = ((BasePage)this.Page).HasManageCompanyPermission;
-            lbtnBranch.Visible = ((BasePage)this.Page).HasManageBranchPermission;
-            lbtnUser.Visible = ((BasePage)this.Page).HasManageUserPermission;
-            lbtnSourceProfile.Visible = ((BasePage)this.Page).HasManageSourceProfilePermission;
-            lbtnDevice.Visible = ((BasePage)this.Page).HasManageDevicePermission;
-            ltnLicense.Visible = ((BasePage)this.Page).HasManageLicensePermission;
-            lbtnMeasurementDevice.Visible = ((BasePage)this.Page).HasManageMeasurementDevicePermission;
+            lbtnCompany.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
+            lbtnBranch.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageBranch);
+            lbtnUser.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUser);
+            lbtnSourceProfile.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+            lbtnDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
+            ltnLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
+            lbtnMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
         }
         #endregion
 

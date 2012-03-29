@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System;
 namespace FujifilmUSA.Sync.Entity
 {
+    [Serializable]
     public class Region
     {
         public short RegionId { get; set; }

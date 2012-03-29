@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Common;
 using System.Web.Security;
-
+using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -15,11 +10,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbtnSettings.Visible = BasePage.HasAdminRolePermission;
+            if (!IsPostBack)
+            {
+                lbtnSettings.Visible = SessionManager.Instance.CurrentUser.HasAdminPermission();
+            }
         }
         #endregion
 
         #region "Control Events"
+        protected void imgbtnLogo_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentOptimizeRun = null;
+            SessionManager.Instance.CurrentProject = null;
+            SessionManager.Instance.CurrentDevice = null;
+            SessionManager.Instance.CurrentOperation = EOperation.None;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
+            Response.RedirectPermanent("Index.aspx");
+        }
+
         protected void lbtnLogout_Click(object sender, EventArgs e)
         {
             if (SessionManager.Instance.CurrentUser != null)

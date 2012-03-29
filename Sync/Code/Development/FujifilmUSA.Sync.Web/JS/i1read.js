@@ -110,6 +110,7 @@ var drawCells = 0;
 var cId = 0;
 var x1 = 0;
 var y1 = 0;
+
 function presentScanDonei1(scanner, mychart, final) {
     /* chirag put logic to return if lengh of measurepatch = total patches so far*/
     //if (mychart["Size"] == MeasuredPatches.length) return;
@@ -233,16 +234,25 @@ function presentScanDonei1(scanner, mychart, final) {
     row = mychart["NumberOfRows"];
 
     if (row != 1) {
+
+        //--------Fuji 150 Patch chart----------//
         area["H"] = (((h / row) / 2) / 2) + '';
         distance["R"] = (((h / row) / 2) / 2) + '';
+
+        area["W"] = ((w / col) / 2) + '';
+        distance["C"] = ((w / col) / 2) + '';
     }
     else {
+
+        //---------ISO 24 Patch chart----------//
         area["H"] = 20;
         distance["R"] = 1;
-    }        
-    
-    area["W"] = ((w / col) / 2) + '';
-    distance["C"] = ((w / col) / 2) + '';
+
+        area["W"] = ((w / col) / 2) - 1 + '';       // Have to do 1 minus because it doesn't fit in canvas width for last cell
+        distance["C"] = ((w / col) / 2) - 1 + '';   // Have to do 1 minus because it doesn't fit in canvas width for last cell
+    }
+
+
     var noOfCells = mychart["Size"];
     if (y1 == 0) {
         y1 = parseInt(area["H"]);
@@ -251,20 +261,26 @@ function presentScanDonei1(scanner, mychart, final) {
 
     x1 = 0;
     col = results.length;
-    for (j = 0; j < col; j++) {        
-        if (noOfCells > drawCells) {            
+    for (j = 0; j < col; j++) {
+        if (noOfCells > drawCells) {
             x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
             var xx1 = startPosition + x1;
             var yy1 = startPosition + y1;
 
-            //var jg2 = new jsGraphics("Canvas");
-            var jg2 = new jsGraphics(document.getElementById("Canvas").id);
-            var srgb = results[j]["sRGB"];            
-            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);            
-            jg2.setColor(rgbx);
-            jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-            jg2.paint();
+            //var jg2 = new jsGraphics(document.getElementById("Canvas").id);
+            var canvas = document.getElementById("Canvas");
+            var context = canvas.getContext("2d");
+
+            var srgb = results[j]["sRGB"];
+            var rgbx = "#" + dec2hex(srgb["R"]) + dec2hex(srgb["G"]) + dec2hex(srgb["B"]);
+
+            context.fillStyle = rgbx;
+            context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+
+            //jg2.setColor(rgbx);
+            //jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
+            //jg2.paint();
             drawCells++;
         }
     }
@@ -323,5 +339,6 @@ function presentProgressi1(scanner, mychart) {
     prog["Answers"] = "NONE";
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
+
     return "OK";
 }

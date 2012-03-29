@@ -106,7 +106,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceLinkProfile"));
-            return data == null ? null : (byte[])data;
+            return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 
         public List<Measurement> GetMeasurements(int optimizeRunId)

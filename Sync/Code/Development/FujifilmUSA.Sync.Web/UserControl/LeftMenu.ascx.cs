@@ -10,7 +10,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
-            SessionManager.CheckLogin();
             CreateLeftMenuList();
         }
         public void Page_PreRender(Object o, EventArgs e)

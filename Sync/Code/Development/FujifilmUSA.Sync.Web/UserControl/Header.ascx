@@ -9,7 +9,10 @@
 <!--Start Header-->
 <header>
     <section id="header">
-        <div class="logo"><a href="Index.aspx"><img src="images/logo.png" alt=""></a></div>
+        <div class="logo">
+        <asp:ImageButton runat="server" ID="imgbtnLogo" OnClick="imgbtnLogo_Click" ImageUrl="~/Images/logo.png" />
+        <%--<a href="Index.aspx"><img src="images/logo.png" alt=""></a>--%>
+        </div>
         <div class="setting"><a id="lbtnSettings" runat="server" href="~/Settings.aspx">&nbsp;</a></div>
     </section>
 </header>

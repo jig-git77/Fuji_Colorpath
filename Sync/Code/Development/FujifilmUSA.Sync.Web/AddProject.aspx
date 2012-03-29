@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProject.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AddProduct"
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProject.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AddProject"
     MasterPageFile="~/MainMaster.Master" EnableEventValidation="false" %>
 
 <%@ Register Src="~/UserControl/AddProject/ProjectSettingsContainer.ascx" TagName="ProjectSettingsContainer" TagPrefix="uc1" %>

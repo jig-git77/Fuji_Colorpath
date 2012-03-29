@@ -39,16 +39,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            SessionManager.CheckLogin();
-            if (IsPostBack) return;
+            if (IsPostBack)
+            {
+                Page.Form.Attributes.Add("enctype", "multipart/form-data");
+                BindCompanyDropDown();
+                BindRegionDropDown();
 
-            Page.Form.Attributes.Add("enctype", "multipart/form-data");
-            BindCompanyDropDown();
-            BindRegionDropDown();
-            
-            if (Request.QueryString["SourceProfileId"] != null) 
-                LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
-
+                if (Request.QueryString["SourceProfileId"] != null)
+                    LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
+            }
         }
 
         #endregion
