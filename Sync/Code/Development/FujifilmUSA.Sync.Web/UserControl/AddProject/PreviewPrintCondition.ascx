@@ -54,40 +54,45 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Media: </span>
+                                            <span style="font-weight:bold;">Media </span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Colorant: </span>
+                                            <span style="font-weight:bold;">Colorant</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Rip Settings: </span>
+                                            <span style="font-weight:bold;">Rip Settings</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Notes: </span>
+                                            <span style="font-weight:bold;">Notes</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Technician Name: </span>
+                                            <span style="font-weight:bold;">Technician Name</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblTechnicianName" runat="server" Text=""></asp:Label>
                                         </td>
@@ -126,24 +131,27 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Measurement Device: </span>
+                                            <span style="font-weight:bold;">Measurement Device</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblMeasurementDevice" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Illuminant: </span>
+                                            <span style="font-weight:bold;">Illuminant</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblIlluminant" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Observer: </span>
+                                            <span style="font-weight:bold;">Observer</span>
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
                                         </td>
@@ -234,8 +242,9 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Alignment Chart:</span> &nbsp
+                                            <span style="font-weight:bold;">Alignment Chart</span> &nbsp
                                         </td>
+                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
                                         <td>
                                             <asp:Label ID="lblAlignmentChart" runat="server" Text=""></asp:Label>
                                         </td>
