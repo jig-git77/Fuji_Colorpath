@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-                rgSourceProfile.ItemCommand+=rgSourceProfile_ItemCommand;
+                rgSourceProfile.ItemCommand += rgSourceProfile_ItemCommand;
                 BindSourceProfileList();
             }
         }
@@ -42,8 +42,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void BindSourceProfileList()
         {
             _presentersourceprofile.GetSourceProfiles();
-            rgSourceProfile.DataSource = SourceProfiles;
-            rgSourceProfile.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgSourceProfile.DataSource = SourceProfiles;
+                rgSourceProfile.DataBind();
+            }
         }
 
         #endregion
@@ -66,7 +69,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgSourceProfile_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             _presentersourceprofile.GetSourceProfiles();
-            rgSourceProfile.DataSource = SourceProfiles;
+            if (!IsErrorOccured)
+            {
+                rgSourceProfile.DataSource = SourceProfiles;
+            }
         }
 
         protected void likAdd_Click(object sender, EventArgs e)

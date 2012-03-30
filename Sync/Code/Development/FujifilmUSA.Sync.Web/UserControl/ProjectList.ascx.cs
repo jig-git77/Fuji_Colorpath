@@ -72,12 +72,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (imgStatus == null || btnSelect == null) return;
             imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
 
-            int days = (DateTime.Now - project.CreateDate).Days; 
-             
+            int days = (DateTime.Now - project.CreateDate).Days;
+
             switch (project.Status)
             {
                 case EOptimizeRunStatus.Open:
-                    btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "','" + days + "','" + project.DlpNo   +"')");
+                    btnSelect.Attributes.Add("onclick", "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "','" + days + "','" + project.DlpNo + "')");
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
                     break;
                 case EOptimizeRunStatus.Closed:
@@ -103,11 +103,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var combo = sender as RadComboBox;
             if (combo == null) return;
             GetSourceProfiles();
-            foreach (var profile in SourceProfile)
+            if (!IsErrorOccured)
             {
-                combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
+                foreach (var profile in SourceProfile)
+                {
+                    combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
+                }
+                combo.SelectedValue = hdSelectedSourceProfileId.Value;
             }
-            combo.SelectedValue = hdSelectedSourceProfileId.Value;
         }
         protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
         {

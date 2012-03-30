@@ -9,8 +9,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddDeviceFamily : BaseControl, IViewAddDeviceFamilyManagement
     {
         private PresenterDeviceManagement _presenterDeviceManagement;
-        
-        
+
+
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -31,6 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                    IsActive = chkIsActive.Checked
                                };
             _presenterDeviceManagement.InsertDeviceFamily();
+            if (IsErrorOccured) return;
             Response.Redirect("DeviceManagement.aspx");
         }
         #endregion

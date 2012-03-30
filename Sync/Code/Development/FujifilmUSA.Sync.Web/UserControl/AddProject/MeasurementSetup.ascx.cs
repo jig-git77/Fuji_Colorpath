@@ -69,11 +69,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetMeasurementDevice();
-            cmbMeasurementDevice.DataValueField = "Key";
-            cmbMeasurementDevice.DataTextField = "Value";
-            cmbMeasurementDevice.DataSource = Measurement;
-            cmbMeasurementDevice.DataBind();
-            cmbMeasurementDevice_SelectedIndexChanged(null, null);
+            if (!IsErrorOccured)
+            {
+                cmbMeasurementDevice.DataValueField = "Key";
+                cmbMeasurementDevice.DataTextField = "Value";
+                cmbMeasurementDevice.DataSource = Measurement;
+                cmbMeasurementDevice.DataBind();
+                cmbMeasurementDevice_SelectedIndexChanged(null, null);
+            }
         }
 
         private void BindIlluminant()
@@ -81,10 +84,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (cmbIlluminant.DataSource != null) return;
 
             _presenterMeasurementSetting.GetIlluminant();
-            cmbIlluminant.DataValueField = "IlluminantID";
-            cmbIlluminant.DataTextField = "IlluminantType";
-            cmbIlluminant.DataSource = Illumin;
-            cmbIlluminant.DataBind();
+            if (!IsErrorOccured)
+            {
+                cmbIlluminant.DataValueField = "IlluminantID";
+                cmbIlluminant.DataTextField = "IlluminantType";
+                cmbIlluminant.DataSource = Illumin;
+                cmbIlluminant.DataBind();
+            }
         }
 
         private void BindObserverType()
@@ -92,26 +98,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (cmbObserver.DataSource != null) return;
 
             _presenterMeasurementSetting.GetObserverType();
-            cmbObserver.DataValueField = "ObserverTypeID";
-            cmbObserver.DataTextField = "Type";
-            cmbObserver.DataSource = Observer;
-            cmbObserver.DataBind();
+            if (!IsErrorOccured)
+            {
+                cmbObserver.DataValueField = "ObserverTypeID";
+                cmbObserver.DataTextField = "Type";
+                cmbObserver.DataSource = Observer;
+                cmbObserver.DataBind();
+            }
         }
 
         private void BindAlignmentChart()
         {
             MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
             _presenterMeasurementSetting.GetReferenceChartType();
-            cmbAlignmentChart.DataValueField = "ReferenceChartTypeID";
-            cmbAlignmentChart.DataTextField = "ChartName";
-            cmbAlignmentChart.DataSource = ReferenceChartType;
-            cmbAlignmentChart.DataBind();
-            cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbAlignmentChart.DataValueField = "ReferenceChartTypeID";
+                cmbAlignmentChart.DataTextField = "ChartName";
+                cmbAlignmentChart.DataSource = ReferenceChartType;
+                cmbAlignmentChart.DataBind();
+                cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+            }
         }
 
         private void DisplayChartImage()
         {
-            imgChart.ImageUrl = "ShowImage.aspx?id="+ Convert.ToString(cmbAlignmentChart.SelectedValue);
+            imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);
         }
         #endregion
 

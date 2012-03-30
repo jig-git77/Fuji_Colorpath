@@ -13,12 +13,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
     {
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
+        public bool IsErrorOccured;
         #endregion
 
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
             _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
+            IsErrorOccured = false;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,7 +32,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             {
                 ReferenceChartTypeId = Convert.ToInt32(Request.QueryString["id"]);
                 _presenterMeasurementSetting.GetReferenceChartTypeImage();
-                image = ReferenceChartTypeImage;
+                if (!IsErrorOccured)
+                {
+                    image = ReferenceChartTypeImage;
+                }
             }
 
             if (image != null)
@@ -68,7 +73,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         public void ErrorOccured(object sender, ErrorArgs e)
         {
-            //Do nothing...
+            IsErrorOccured = true;
         }
 
         #endregion

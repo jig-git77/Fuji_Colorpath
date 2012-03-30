@@ -13,13 +13,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddBranchManagement : BaseControl, IViewAddBranchManagement
     {
         private PresenterBranchManagement _presenterBranchManagement;
-        
+
         #region Declaration
         private int BId
         {
-            get {
-                return (ViewState["BranchId"] != null && !string.IsNullOrEmpty(ViewState["BranchId"].ToString())) ? Convert.ToInt32(ViewState["BranchId"]) : 0; 
-                }
+            get
+            {
+                return (ViewState["BranchId"] != null && !string.IsNullOrEmpty(ViewState["BranchId"].ToString())) ? Convert.ToInt32(ViewState["BranchId"]) : 0;
+            }
             set { ViewState["BranchId"] = value.ToString(); }
         }
         #endregion
@@ -32,13 +33,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required,true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
-            
+
             BindCompnay();
             if (Request.QueryString["BranchId"] != null)
                 SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
-        
+
         }
         #endregion
 
@@ -47,11 +48,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Compnaies = new Dictionary<int, string>();
             _presenterBranchManagement.GetCompanies();
-            cmbCompanyName.DataTextField = "Value";
-            cmbCompanyName.DataValueField = "Key";
-            cmbCompanyName.DataSource = Compnaies;
-            cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0,new ListItem("--Select--",string.Empty));
+            if (!IsErrorOccured)
+            {
+                cmbCompanyName.DataTextField = "Value";
+                cmbCompanyName.DataValueField = "Key";
+                cmbCompanyName.DataSource = Compnaies;
+                cmbCompanyName.DataBind();
+                cmbCompanyName.Items.Insert(0, new ListItem("--Select--", string.Empty));
+            }
         }
         private void SaveCompnay()
         {
@@ -65,24 +69,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (BId == 0) // Add New Compnay
             {
                 _presenterBranchManagement.InsertBranch();
+                if (IsErrorOccured) return;
             }
             else // Edit New Compnay
             {
                 Branch.BranchId = BId;
                 _presenterBranchManagement.UpdateBranch();
+                if (IsErrorOccured) return;
             }
             Response.Redirect("BranchManagement.aspx");
         }
         private void SetBranch(int branchId)
         {
-            Branch = new Branch {BranchId = branchId};
-            _presenterBranchManagement.GetBranch(); 
-
-            BId = branchId;
-            txtBranchName.Text = Branch.BranchName;
-            txtLocation.Text = Branch.Location;
-            cmbCompanyName.SelectedValue = Branch.CompanyId.ToString();
-            chkIsActive.Checked = Branch.IsActive;
+            Branch = new Branch { BranchId = branchId };
+            _presenterBranchManagement.GetBranch();
+            if (!IsErrorOccured)
+            {
+                BId = branchId;
+                txtBranchName.Text = Branch.BranchName;
+                txtLocation.Text = Branch.Location;
+                cmbCompanyName.SelectedValue = Branch.CompanyId.ToString();
+                chkIsActive.Checked = Branch.IsActive;
+            }
         }
         #endregion
 

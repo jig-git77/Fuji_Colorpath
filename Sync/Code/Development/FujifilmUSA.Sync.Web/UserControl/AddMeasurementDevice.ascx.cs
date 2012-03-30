@@ -89,12 +89,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (hdnMeasurementDeviceId.Value == "0")
             {
                 _presenterdevice.InsertMeasurementDevice();
+                if (IsErrorOccured) return;
                 Response.Redirect("MeasurementDeviceList.aspx");
             }
             else
             {
                 MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(hdnMeasurementDeviceId.Value);
                 _presenterdevice.UpdateMeasurementDevice();
+                if (IsErrorOccured) return;
                 Response.Redirect("MeasurementDeviceList.aspx");
             }
         }
@@ -106,35 +108,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindCompanyDropDown()
         {
             _presenterdevice.CompanyList();
-            cmbCompanyName.DataSource = CompanyList;
-            cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbCompanyName.DataSource = CompanyList;
+                cmbCompanyName.DataBind();
+                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+            }
         }
 
         private void BindBranchDropDown(int companyId)
         {
             this.CompanyId = companyId;
             _presenterdevice.BranchList();
-            cmbBranch.DataSource = BranchList;
-            cmbBranch.DataBind();
-            cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbBranch.DataSource = BranchList;
+                cmbBranch.DataBind();
+                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", "0"));
+            }
         }
 
         private void BindLicenseDropDown(int branchId)
         {
             this.BranchId = branchId;
             _presenterdevice.LicenseList();
-            cmbLicenseType.DataSource = LicenseList;
-            cmbLicenseType.DataBind();
-            cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbLicenseType.DataSource = LicenseList;
+                cmbLicenseType.DataBind();
+                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", "0"));
+            }
         }
 
         private void BindInstrumentTypeDropDown()
         {
             _presenterdevice.InstrumentTypeList();
-            cmbInstrumentType.DataSource = InstrumentTypeList;
-            cmbInstrumentType.DataBind();
-            cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbInstrumentType.DataSource = InstrumentTypeList;
+                cmbInstrumentType.DataBind();
+                cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", "0"));
+            }
         }
 
         private void LoadMeasurementDevice(int iMeasurementDeviceId)
@@ -144,15 +158,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                         MeasurementDeviceId = (short)iMeasurementDeviceId
                                     };
             _presenterdevice.GetMeasurementDevice();
-            hdnMeasurementDeviceId.Value = Convert.ToString(iMeasurementDeviceId);
-            cmbCompanyName.SelectedValue = Convert.ToString(MeasurementDevice.CompanyId);
-            BindBranchDropDown(Convert.ToInt32(cmbCompanyName.SelectedValue));
-            cmbBranch.SelectedValue = Convert.ToString(MeasurementDevice.BranchId);
-            BindLicenseDropDown(Convert.ToInt32(cmbBranch.SelectedValue));
-            cmbLicenseType.SelectedValue = Convert.ToString(MeasurementDevice.LicenseId);
-            cmbInstrumentType.SelectedValue = Convert.ToString(MeasurementDevice.InstrumentType.InstrumentTypeId);
-            txtSerialNumber.Text = MeasurementDevice.SerialNumber;
-            chkIsActive.Checked = (MeasurementDevice.IsActive == true ? true : false);
+            if (!IsErrorOccured)
+            {
+                hdnMeasurementDeviceId.Value = Convert.ToString(iMeasurementDeviceId);
+                cmbCompanyName.SelectedValue = Convert.ToString(MeasurementDevice.CompanyId);
+                BindBranchDropDown(Convert.ToInt32(cmbCompanyName.SelectedValue));
+                cmbBranch.SelectedValue = Convert.ToString(MeasurementDevice.BranchId);
+                BindLicenseDropDown(Convert.ToInt32(cmbBranch.SelectedValue));
+                cmbLicenseType.SelectedValue = Convert.ToString(MeasurementDevice.LicenseId);
+                cmbInstrumentType.SelectedValue = Convert.ToString(MeasurementDevice.InstrumentType.InstrumentTypeId);
+                txtSerialNumber.Text = MeasurementDevice.SerialNumber;
+                chkIsActive.Checked = (MeasurementDevice.IsActive == true ? true : false);
+            }
         }
 
         #endregion

@@ -46,14 +46,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
             _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
-            //CurrentDlp = null;
-            if (CurrentDlp != null)
+            if (!IsErrorOccured)
             {
-                Utilities.DownloadFile(CurrentDlp, "Profile.icc");
-            }
-            else
-            {
-                fujiStatusbar.DisplayMessage("Sorry!There is no dlp to download", false);
+                //CurrentDlp = null;
+                if (CurrentDlp != null)
+                {
+                    Utilities.DownloadFile(CurrentDlp, "Profile.icc");
+                }
+                else
+                {
+                    fujiStatusbar.DisplayMessage("Sorry!There is no dlp to download", false);
+                }
             }
         }
 

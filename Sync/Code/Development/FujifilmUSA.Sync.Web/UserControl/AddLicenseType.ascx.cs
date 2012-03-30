@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddLicenseType : BaseControl, IViewAddLicenseTypeManagement
     {
         private PresenterLicenseManagement _presenterLicenseManagement;
-        
+
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -29,9 +29,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             LicenseType = new LicenseType()
                                {
-                                   Type =   txtLicenseType.Text
+                                   Type = txtLicenseType.Text
                                };
             _presenterLicenseManagement.InsertLicenseType();
+            if (IsErrorOccured) return;
             Response.Redirect("LicenseManagement.aspx");
         }
         #endregion

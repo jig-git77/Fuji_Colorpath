@@ -89,15 +89,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SourceProfile.ProfileDesc = txtProfileDescription.Text;
             //if (fuProfile.HasFile)
             //{
-                //string strFileName = System.IO.Path.GetFullPath(fuProfile.PostedFile.FileName);
-                //string strFileName = Server.MapPath(fuProfile.FileName);
-                //HttpPostedFile sourcefile = Request.Files;
-                //Byte[] data = new Byte[sourcefile.ContentLength];
+            //string strFileName = System.IO.Path.GetFullPath(fuProfile.PostedFile.FileName);
+            //string strFileName = Server.MapPath(fuProfile.FileName);
+            //HttpPostedFile sourcefile = Request.Files;
+            //Byte[] data = new Byte[sourcefile.ContentLength];
             //}
-            
+
             //SourceProfile.Profile= fuProfile.FileBytes;
             //SourceProfile.Profile = File.ReadAllBytes(fuProfile.
-            
+
             HttpPostedFile objHttpPostedFile = fuProfile.PostedFile;
             int ContentLength = objHttpPostedFile.ContentLength;
             SourceProfile.Profile = new byte[ContentLength];
@@ -105,11 +105,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (hdnSourceProfileID.Value == "0")
             {
                 _presentersourceprofile.InsertSourceProfile();
+                if (IsErrorOccured) return;
                 Response.Redirect("SourceProfileManagement.aspx");
             }
             else
             {
                 _presentersourceprofile.UpdateSourceProfile();
+                if (IsErrorOccured) return;
                 Response.Redirect("SourceProfileManagement.aspx");
             }
 
@@ -122,17 +124,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindCompanyDropDown()
         {
             _presentersourceprofile.CompanyList();
-            cmbCompanyName.DataSource = CompanyList;
-            cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbCompanyName.DataSource = CompanyList;
+                cmbCompanyName.DataBind();
+                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+            }
         }
 
         private void BindRegionDropDown()
         {
             _presentersourceprofile.RegionList();
-            cmbRegion.DataSource = RegionList;
-            cmbRegion.DataBind();
-            cmbRegion.Items.Insert(0, new ListItem("-- Select Region --", "0"));
+            if (!IsErrorOccured)
+            {
+                cmbRegion.DataSource = RegionList;
+                cmbRegion.DataBind();
+                cmbRegion.Items.Insert(0, new ListItem("-- Select Region --", "0"));
+            }
         }
 
         public byte[] FileToByteArray(string _FileName)
@@ -150,14 +158,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void LoadSourceProfile(int iSourceProfileId)
         {
-            SourceProfile = new SourceProfile {SourceProfileId = (short) iSourceProfileId};
+            SourceProfile = new SourceProfile { SourceProfileId = (short)iSourceProfileId };
             _presentersourceprofile.GetSourceProfile();
-            hdnSourceProfileID.Value = Convert.ToString(iSourceProfileId);
-            cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);
-            cmbRegion.SelectedValue = Convert.ToString(SourceProfile.Region.RegionId);
-            txtSourceProfile.Text = SourceProfile.ProfileName;
-            txtProfileDescription.Text = SourceProfile.ProfileDesc;
-            chkIsActive.Checked = (SourceProfile.IsUsed == true ? true : false);
+            if (!IsErrorOccured)
+            {
+                hdnSourceProfileID.Value = Convert.ToString(iSourceProfileId);
+                cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);
+                cmbRegion.SelectedValue = Convert.ToString(SourceProfile.Region.RegionId);
+                txtSourceProfile.Text = SourceProfile.ProfileName;
+                txtProfileDescription.Text = SourceProfile.ProfileDesc;
+                chkIsActive.Checked = (SourceProfile.IsUsed == true ? true : false);
+            }
         }
 
         #endregion

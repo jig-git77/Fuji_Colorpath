@@ -21,21 +21,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterConfirmSave.GetMeasurementsOnRunId();
-            _presenterConfirmSave.OptimizeDlp();
-
-            _presenterConfirmSave.GetProjectDetail();
-            SessionManager.Instance.CurrentProject = Project;
-            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-            Utilities.PopupWindowsRedirect(this, "Export.aspx");
+            if (!IsErrorOccured)
+            {
+                _presenterConfirmSave.OptimizeDlp();
+                if (!IsErrorOccured)
+                {
+                    _presenterConfirmSave.GetProjectDetail();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                        Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                    }
+                }
+            }
         }
 
         protected void lbtnYes_Click(object sender, EventArgs e)
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterConfirmSave.CloseOptimizeRun();
-            SessionManager.Instance.CurrentProject = null;
-            SessionManager.Instance.CurrentOptimizeRun = null;
-            Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentProject = null;
+                SessionManager.Instance.CurrentOptimizeRun = null;
+                Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+            }
         }
 
         #region IViewConfirmSave Members

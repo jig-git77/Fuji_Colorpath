@@ -132,12 +132,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             this.CompanyId = companyId;
             _presenterdevice.BranchList();
-            if (branches != null)
-            {
-                BranchList = BranchList.Where(x => branches.Where(y => y.BranchId == x.Key).Count() > 0).ToDictionary(x => x.Key, x => x.Value);
-            }
             if (!IsErrorOccured)
             {
+                if (branches != null)
+                {
+                    BranchList = BranchList.Where(x => branches.Where(y => y.BranchId == x.Key).Count() > 0).ToDictionary(x => x.Key, x => x.Value);
+                }
                 this.CompanyId = Convert.ToInt32(cmbCompany.SelectedValue);
                 _presenterdevice.BranchList();
                 if (!IsErrorOccured)
@@ -155,7 +155,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 rgDeviceList.DataSource = DeviceListById;
-                
+
             }
         }
 

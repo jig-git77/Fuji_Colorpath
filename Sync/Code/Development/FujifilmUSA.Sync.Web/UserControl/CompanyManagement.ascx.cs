@@ -41,8 +41,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public void BindCompanies()
         {
-            rgCompany.DataSource = CompanyList;
-            rgCompany.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgCompany.DataSource = CompanyList;
+                rgCompany.DataBind();
+            }
         }
         #endregion
 
@@ -61,22 +64,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgCompany.MasterTableView.FilterExpression = string.Empty;
                     rgCompany.MasterTableView.Rebind();
                     break;
-                case "Delete" :
-                    Company.CompanyId = Convert.ToInt32(e.CommandArgument);   
+                case "Delete":
+                    Company.CompanyId = Convert.ToInt32(e.CommandArgument);
                     _presenterCompanyManagement.DeleteCompany();
                     break;
                 case "Edit":
                     Company.CompanyId = Convert.ToInt32(e.CommandArgument);
-                    GridDataItem item = (GridDataItem)e.Item; 
-                    int RegionId =  Convert.ToInt32(item.GetDataKeyValue("RegionId").ToString());   
-                    Response.Redirect("AddCompanyManagement.aspx?CompanyId=" + Company.CompanyId);  
+                    GridDataItem item = (GridDataItem)e.Item;
+                    int RegionId = Convert.ToInt32(item.GetDataKeyValue("RegionId").ToString());
+                    Response.Redirect("AddCompanyManagement.aspx?CompanyId=" + Company.CompanyId);
                     break;
             }
         }
         protected void rgCompany_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetCompanies();
-            rgCompany.DataSource = CompanyList;
+            if (!IsErrorOccured)
+            {
+                rgCompany.DataSource = CompanyList;
+            }
         }
         protected void rgCompany_ItemDataBound(object sender, GridItemEventArgs e)
         {

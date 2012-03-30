@@ -50,8 +50,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindUsers()
         {
             GetUsers();
-            rgUser.DataSource = UserList;
-            rgUser.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgUser.DataSource = UserList;
+                rgUser.DataBind();
+            }
         }
 
         
@@ -92,7 +95,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgUser_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetUsers();
-            rgUser.DataSource = UserList;
+            if (!IsErrorOccured)
+            {
+                rgUser.DataSource = UserList;
+            }
         }
       
 

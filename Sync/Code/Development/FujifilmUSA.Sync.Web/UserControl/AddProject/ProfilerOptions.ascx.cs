@@ -35,12 +35,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 DeviceFamilyId = SessionManager.Instance.CurrentDevice.DeviceFamily.DeviceFamilyId;
                 _presenterDeviceFamilyProfilerOption.GetDeviceFamilyProfilerOption();
-                cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
-                cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
-                ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
-                cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
-                cmbSelectedPresets.DataBind();
-                cmbSelectedPresets_SelectedIndexChanged(null, null);
+                if (!IsErrorOccured)
+                {
+                    cmbSelectedPresets.DataValueField = "DeviceFamilyProfilerOptionID";
+                    cmbSelectedPresets.DataTextField = "ProfilerOptionsName";
+                    ViewState[_vsDeviceFamilyProfilerOption] = ProfileOption;
+                    cmbSelectedPresets.DataSource = ViewState[_vsDeviceFamilyProfilerOption];
+                    cmbSelectedPresets.DataBind();
+                    cmbSelectedPresets_SelectedIndexChanged(null, null);
+                }
             }
         }
         #endregion
@@ -51,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
             SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
             var familyPreset =
-                ((List<DeviceFamilyProfilerOption>) ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
                     x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
             familyPreset.ProfilerOptionPresets.ForEach(x =>
                                                        SessionManager.Instance.CurrentProject.ProjectOption.

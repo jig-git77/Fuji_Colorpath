@@ -38,11 +38,11 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId);
         }
-        public int UpdateMeasurementByAnalyzeChart()
+        public void UpdateMeasurementByAnalyzeChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            return measurementBusiness.UpdateMeasurementByAnalyzeChart(_viewAnalyze.Measurement);
+            measurementBusiness.UpdateMeasurementByAnalyzeChart(_viewAnalyze.Measurement);
         }
     }
 }

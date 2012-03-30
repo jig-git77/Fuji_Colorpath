@@ -50,8 +50,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindBranches()
         {
             GetBranches();
-            rgBranch.DataSource = BranchList;
-            rgBranch.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgBranch.DataSource = BranchList;
+                rgBranch.DataBind();
+            }
         }
         #endregion
 
@@ -65,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Branch = new Entity.Branch();
             switch (e.CommandName)
             {
-                case "Filter" :
+                case "Filter":
                     break;
                 case "ClearFilter":
                     foreach (GridColumn column in rgBranch.MasterTableView.Columns)
@@ -76,30 +79,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgBranch.MasterTableView.FilterExpression = string.Empty;
                     rgBranch.MasterTableView.Rebind();
                     break;
-                case "Delete" :
+                case "Delete":
                     Branch.BranchId = Convert.ToInt32(e.CommandArgument);
                     _presenterBranchManagement.DeleteBranch();
                     break;
                 case "Edit":
                     Branch.BranchId = Convert.ToInt32(e.CommandArgument);
                     GridDataItem item = (GridDataItem)e.Item;
-                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId);  
+                    Response.Redirect("AddBranchManagement.aspx?BranchId=" + Branch.BranchId);
                     break;
             }
         }
         protected void rgBranch_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetBranches();
-            rgBranch.DataSource = BranchList;
+            if (!IsErrorOccured)
+            {
+                rgBranch.DataSource = BranchList;
+            }
         }
-      
 
-         #endregion
+
+        #endregion
 
         #region Implement Interface
         public Branch Branch { get; set; }
-        public List<Branch> BranchList { get; set; } 
-        public Dictionary<int,string>  Compnaies{ get; set; }
+        public List<Branch> BranchList { get; set; }
+        public Dictionary<int, string> Compnaies { get; set; }
         #endregion
     }
 }

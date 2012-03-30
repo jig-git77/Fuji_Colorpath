@@ -36,13 +36,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-              BindBranches();
+                BindBranches();
             }
         }
         #endregion
 
         #region Methods
-       
+
         private void GetDevices()
         {
             DeviceList = new List<Device>();
@@ -51,8 +51,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindBranches()
         {
             GetDevices();
-            rgDevice.DataSource = DeviceList;
-            rgDevice.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgDevice.DataSource = DeviceList;
+                rgDevice.DataBind();
+            }
         }
         #endregion
 
@@ -95,11 +98,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgDevice_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetDevices();
-            rgDevice.DataSource = DeviceList;
+            if (!IsErrorOccured)
+            {
+                rgDevice.DataSource = DeviceList;
+            }
         }
-      
 
-         #endregion
+
+        #endregion
 
         #region Implement Interface
         public Device Device { get; set; }

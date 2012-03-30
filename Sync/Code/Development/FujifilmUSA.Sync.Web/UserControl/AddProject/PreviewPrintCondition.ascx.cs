@@ -39,14 +39,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
-
-            lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
-            lblIlluminant.Text = Data["illuminantId"];
-            lblObserver.Text = Data["observerTypeId"];
-            lblAlignmentChart.Text = Data["referenceChartTypeId"];
-            lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
-            lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
-            imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
+            if (!IsErrorOccured)
+            {
+                lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
+                lblIlluminant.Text = Data["illuminantId"];
+                lblObserver.Text = Data["observerTypeId"];
+                lblAlignmentChart.Text = Data["referenceChartTypeId"];
+                lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
+                lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
+            }
         }
 
         #region IViewPreviewPrintCondition Members

@@ -61,14 +61,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             Measurements = new List<Entity.Measurement>();
             _presenterAnalyze.GetAnalyzeChartMeasurement();
-
-            AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, Measurements);
-            manager.CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value);
-            manager.BindChart();
-            hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
-
+            if (!IsErrorOccured)
+            {
+                AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, Measurements);
+                manager.CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value);
+                manager.BindChart();
+                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+            }
         }
-        
+
         #endregion
 
         #region Control Events
@@ -81,15 +82,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Measurement.IsUsed = hdChartCheckBox.Checked;
                 _presenterAnalyze.UpdateMeasurementByAnalyzeChart();
             }
-            BindMesurementChart();
+            if (!IsErrorOccured)
+            {
+                BindMesurementChart();
+            }
         }
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterAnalyze.GetMeasurementsOnRunId();
-            _presenterAnalyze.CreateDestinationAndDlp();
-            Response.Redirect("Export.aspx");
+            if (!IsErrorOccured)
+            {
+                _presenterAnalyze.CreateDestinationAndDlp();
+                if (!IsErrorOccured)
+                {
+                    Response.Redirect("Export.aspx");
+                }
+            }
         }
         #endregion
 

@@ -35,34 +35,49 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.CreateOptimizeRun();
-            _presenterExport.GetProjectDetail();
-            SessionManager.Instance.CurrentProject = Project;
-            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-            Response.Redirect("Measurement.aspx");
+            if (!IsErrorOccured)
+            {
+                _presenterExport.GetProjectDetail();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    Response.Redirect("Measurement.aspx");
+                }
+            }
         }
 
         protected void lbtnDownLoadDLP_Click(object sender, EventArgs e)
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterExport.GetDeviceLinkProfile();
-            if (DeviceLinkProfile != null)
-                Utilities.DownloadFile(DeviceLinkProfile, "Profile.icc");
+            if (!IsErrorOccured)
+            {
+                if (DeviceLinkProfile != null)
+                    Utilities.DownloadFile(DeviceLinkProfile, "Profile.icc");
+            }
         }
 
         protected void lbtnDownLoadChart_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.GetChartPreview();
-            if (ChartPreview != null)
-                Utilities.DownloadFile(ChartPreview, "chart.jpg");
+            if (!IsErrorOccured)
+            {
+                if (ChartPreview != null)
+                    Utilities.DownloadFile(ChartPreview, "chart.jpg");
+            }
         }
 
         protected void lbtnDownloadSourceICC_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.GetSourceProfile();
-            if (SourceProfile != null)
-                Utilities.DownloadFile(SourceProfile, "SourceProfile.icc");
+            if (!IsErrorOccured)
+            {
+                if (SourceProfile != null)
+                    Utilities.DownloadFile(SourceProfile, "SourceProfile.icc");
+            }
         }
 
         #region IViewExport Members

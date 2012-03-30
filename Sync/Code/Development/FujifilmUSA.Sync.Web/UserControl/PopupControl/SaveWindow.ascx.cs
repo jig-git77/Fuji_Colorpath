@@ -21,10 +21,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
-            SessionManager.Instance.CurrentProject = Project;
-            SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-            Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentProject = Project;
+                SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+            }
         }
 
         #region IViewSaveWindow Members

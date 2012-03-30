@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-              BindLicense();
+                BindLicense();
             }
         }
         #endregion
@@ -51,8 +51,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindLicense()
         {
             GetLicense();
-            rgLicense.DataSource = LicenseList;
-            rgLicense.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgLicense.DataSource = LicenseList;
+                rgLicense.DataBind();
+            }
         }
 
         protected DateTime? FillterActivationDate(GridItem item)
@@ -130,11 +133,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgLicense_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             GetLicense();
-            rgLicense.DataSource = LicenseList;
+            if (!IsErrorOccured)
+            {
+                rgLicense.DataSource = LicenseList;
+            }
         }
-      
 
-         #endregion
+
+        #endregion
 
         #region Implement Interface
         public License License { get; set; }

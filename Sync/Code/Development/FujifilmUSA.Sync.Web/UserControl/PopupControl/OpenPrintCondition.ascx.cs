@@ -28,9 +28,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
             _presenterOpenPrintCondition.GetProjectDetail();
-            SessionManager.Instance.CurrentProject = Project;
-            SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-            Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentProject = Project;
+                SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+            }
         }
 
         #region IViewOpenPrintCondition Members

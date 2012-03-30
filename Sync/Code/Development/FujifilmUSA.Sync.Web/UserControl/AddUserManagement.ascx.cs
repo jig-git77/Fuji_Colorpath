@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             set { ViewState["UserId"] = value.ToString(); }
         }
-     
+
         #endregion
 
 
@@ -53,21 +53,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Compnaies = new Dictionary<int, string>();
             _presenterUserManagement.GetCompanies();
-            cmbCompanyName.DataTextField = "Value";
-            cmbCompanyName.DataValueField = "Key";
-            cmbCompanyName.DataSource = Compnaies;
-            cmbCompanyName.DataBind();
-            cmbCompanyName.Items.Insert(0, new ListItem("--Select Company--", ""));
+            if (!IsErrorOccured)
+            {
+                cmbCompanyName.DataTextField = "Value";
+                cmbCompanyName.DataValueField = "Key";
+                cmbCompanyName.DataSource = Compnaies;
+                cmbCompanyName.DataBind();
+                cmbCompanyName.Items.Insert(0, new ListItem("--Select Company--", ""));
+            }
         }
         private void BindRole()
         {
             UserRoleList = new Dictionary<int, string>();
             _presenterUserManagement.GetUserRole();
-            cmbRole.DataTextField = "Value";
-            cmbRole.DataValueField = "Key";
-            cmbRole.DataSource = UserRoleList;
-            cmbRole.DataBind();
-            cmbRole.Items.Insert(0, new ListItem("--Select Role--", ""));
+            if (!IsErrorOccured)
+            {
+                cmbRole.DataTextField = "Value";
+                cmbRole.DataValueField = "Key";
+                cmbRole.DataSource = UserRoleList;
+                cmbRole.DataBind();
+                cmbRole.Items.Insert(0, new ListItem("--Select Role--", ""));
+            }
         }
         private void BindBranch()
         {
@@ -77,10 +83,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Branchs = new Dictionary<int, string>();
                 CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
                 _presenterUserManagement.GetBranchByCompany();
-                chkUserBranch.DataTextField = "Value";
-                chkUserBranch.DataValueField = "Key";
-                chkUserBranch.DataSource = Branchs;
-                chkUserBranch.DataBind();
+                if (!IsErrorOccured)
+                {
+                    chkUserBranch.DataTextField = "Value";
+                    chkUserBranch.DataValueField = "Key";
+                    chkUserBranch.DataSource = Branchs;
+                    chkUserBranch.DataBind();
+                }
             }
         }
         private void AssingeBranch()
@@ -90,9 +99,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 User.UserId = UId;
                 _presenterUserManagement.GetUser();
-                foreach (ListItem branch in chkUserBranch.Items)
+                if (!IsErrorOccured)
                 {
-                    branch.Selected = User.UserBranches.Any(p => p.BranchId.Equals(Convert.ToInt32(branch.Value)));
+                    foreach (ListItem branch in chkUserBranch.Items)
+                    {
+                        branch.Selected = User.UserBranches.Any(p => p.BranchId.Equals(Convert.ToInt32(branch.Value)));
+                    }
                 }
             }
         }
@@ -104,10 +116,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Regions = new Dictionary<int, string>();
                 CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
                 _presenterUserManagement.GetRegionByCompany();
-                cmbRegion.DataTextField = "Value";
-                cmbRegion.DataValueField = "Key";
-                cmbRegion.DataSource = Regions;
-                cmbRegion.DataBind();
+                if (!IsErrorOccured)
+                {
+                    cmbRegion.DataTextField = "Value";
+                    cmbRegion.DataValueField = "Key";
+                    cmbRegion.DataSource = Regions;
+                    cmbRegion.DataBind();
+                }
             }
             else
             {
@@ -174,37 +189,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (UId == 0) // Add New Compnay
             {
                 _presenterUserManagement.InsertUser();
+                if (IsErrorOccured) return;
             }
             else // Edit New Compnay
             {
                 User.UserId = UId;
                 _presenterUserManagement.UpdateUser();
+                if (IsErrorOccured) return;
             }
             Response.Redirect("UserManagement.aspx");
         }
         private void SetUser(int userId)
         {
-            User = new User {UserId = UId = userId};
+            User = new User { UserId = UId = userId };
             _presenterUserManagement.GetUser();
+            if (!IsErrorOccured)
+            {
+                cmbCompanyName.SelectedValue = User.UserCompany.CompanyId.ToString();
 
-            cmbCompanyName.SelectedValue = User.UserCompany.CompanyId.ToString();
+                BindBranch();
+                chkUserBranch.Items.Cast<ListItem>().ToList().ForEach(p => p.Selected = User.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));
 
-            BindBranch();
-            chkUserBranch.Items.Cast<ListItem>().ToList().ForEach(p => p.Selected = User.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));
+                BindRegion();
 
-            BindRegion();
+                txtFirstName.Text = User.FirstName;
+                txtLastName.Text = User.LastName;
+                txtEmail.Text = User.Email;
+                txtUserName.Text = User.LoginId;
+                txtPassWord.Text = txtConfirmPass.Text = User.LoginPass;
 
-            txtFirstName.Text = User.FirstName;
-            txtLastName.Text = User.LastName;
-            txtEmail.Text = User.Email;
-            txtUserName.Text = User.LoginId;
-            txtPassWord.Text = txtConfirmPass.Text = User.LoginPass;
+                txtPassWord.Attributes.Add("Value", User.LoginPass);
+                txtConfirmPass.Attributes.Add("Value", User.LoginPass);
 
-            txtPassWord.Attributes.Add("Value", User.LoginPass);
-            txtConfirmPass.Attributes.Add("Value", User.LoginPass);
-
-            chkIsActive.Checked = User.IsActive;
-            cmbRole.SelectedValue = User.Role.RoleId.ToString();
+                chkIsActive.Checked = User.IsActive;
+                cmbRole.SelectedValue = User.Role.RoleId.ToString();
+            }
         }
         #endregion
 

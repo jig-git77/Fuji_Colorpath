@@ -16,9 +16,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Declaration
         private int DId
         {
-            get {
-                return (ViewState["DeviceID"] != null && !string.IsNullOrEmpty(ViewState["DeviceID"].ToString())) ? Convert.ToInt32(ViewState["DeviceID"]) : 0; 
-                }
+            get
+            {
+                return (ViewState["DeviceID"] != null && !string.IsNullOrEmpty(ViewState["DeviceID"].ToString())) ? Convert.ToInt32(ViewState["DeviceID"]) : 0;
+            }
             set { ViewState["DeviceID"] = value.ToString(); }
         }
         #endregion
@@ -47,23 +48,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             cmbDeviceFamily.Items.Clear();
             DeviceFamilyList = new Dictionary<int, string>();
+
             _presenterDeviceManagement.GetDeviceFamilyList();
-            cmbDeviceFamily.DataTextField = "Value";
-            cmbDeviceFamily.DataValueField = "Key";
-            cmbDeviceFamily.DataSource = DeviceFamilyList;
-            cmbDeviceFamily.DataBind();
-            cmbDeviceFamily.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
+            if (!IsErrorOccured)
+            {
+                cmbDeviceFamily.DataTextField = "Value";
+                cmbDeviceFamily.DataValueField = "Key";
+                cmbDeviceFamily.DataSource = DeviceFamilyList;
+                cmbDeviceFamily.DataBind();
+                cmbDeviceFamily.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
+            }
         }
         private void BindCompnay()
         {
             cmbCompany.Items.Clear();
             Compnaies = new Dictionary<int, string>();
+
             _presenterDeviceManagement.GetCompanies();
-            cmbCompany.DataTextField = "Value";
-            cmbCompany.DataValueField = "Key";
-            cmbCompany.DataSource = Compnaies;
-            cmbCompany.DataBind();
-            cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
+            if (!IsErrorOccured)
+            {
+                cmbCompany.DataTextField = "Value";
+                cmbCompany.DataValueField = "Key";
+                cmbCompany.DataSource = Compnaies;
+                cmbCompany.DataBind();
+                cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
+            }
         }
         private void BindBranch()
         {
@@ -72,11 +81,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Branches = new Dictionary<int, string>();
                 CompanyId = Convert.ToInt32(cmbCompany.SelectedValue);
+
                 _presenterDeviceManagement.GetBranches();
-                cmbBranch.DataTextField = "Value";
-                cmbBranch.DataValueField = "Key";
-                cmbBranch.DataSource = Branches;
-                cmbBranch.DataBind();
+                if (!IsErrorOccured)
+                {
+                    cmbBranch.DataTextField = "Value";
+                    cmbBranch.DataValueField = "Key";
+                    cmbBranch.DataSource = Branches;
+                    cmbBranch.DataBind();
+                }
             }
             cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", string.Empty));
         }
@@ -87,17 +100,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 Licenses = new Dictionary<int, string>();
                 BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
+
                 _presenterDeviceManagement.GetLicenses();
-                cmbLicense.DataTextField = "Value";
-                cmbLicense.DataValueField = "Key";
-                cmbLicense.DataSource = Licenses;
-                cmbLicense.DataBind();
+                if (!IsErrorOccured)
+                {
+                    cmbLicense.DataTextField = "Value";
+                    cmbLicense.DataValueField = "Key";
+                    cmbLicense.DataSource = Licenses;
+                    cmbLicense.DataBind();
+                }
             }
             cmbLicense.Items.Insert(0, new ListItem("--Select License--", string.Empty));
         }
         private void SaveDevice()
         {
-            if(cmbCompany.SelectedIndex == 0)
+            if (cmbCompany.SelectedIndex == 0)
             {
                 fujiStatusbar.DisplayMessage("Please select compnay.", false);
                 return;
@@ -122,37 +139,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Device = new Device()
                          {
                              DeviceName = txtDeviceName.Text,
-                             LicenseId = (int) licenseId,
+                             LicenseId = (int)licenseId,
                              DeviceFamily =
-                                 new DeviceFamily() {DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue)},
+                                 new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
                              IsActive = chkIsActive.Checked
                          };
             if (DId == 0) // Add New Compnay
             {
-               _presenterDeviceManagement.InsertDevice();
+                _presenterDeviceManagement.InsertDevice();
+                if (IsErrorOccured) return;
             }
             else // Edit New Compnay
             {
                 Device.DeviceId = DId;
                 _presenterDeviceManagement.UpdateDevice();
+                if (IsErrorOccured) return;
             }
             Response.Redirect("DeviceManagement.aspx");
         }
         private void SetDevice(int deviceId)
         {
-            Device = new Device {DeviceId = deviceId};
-            _presenterDeviceManagement.GetDevice();  
-            DId = deviceId;
-            cmbCompany.SelectedValue = Device.License.Branch.Company.CompanyId.ToString();
-            BindBranch();
-            cmbBranch.SelectedValue = Device.License.Branch.BranchId.ToString();
-            BindLicenses();
-            cmbLicense.SelectedValue = Device.License.LicenseId.ToString();
+            Device = new Device { DeviceId = deviceId };
+            _presenterDeviceManagement.GetDevice();
+            if (!IsErrorOccured)
+            {
+                DId = deviceId;
+                cmbCompany.SelectedValue = Device.License.Branch.Company.CompanyId.ToString();
+                BindBranch();
+                cmbBranch.SelectedValue = Device.License.Branch.BranchId.ToString();
+                BindLicenses();
+                cmbLicense.SelectedValue = Device.License.LicenseId.ToString();
 
-            txtDeviceName.Text = Device.DeviceName;
-            cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
-            chkIsActive.Checked = Device.IsActive;
-
+                txtDeviceName.Text = Device.DeviceName;
+                cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
+                chkIsActive.Checked = Device.IsActive;
+            }
         }
         #endregion
 

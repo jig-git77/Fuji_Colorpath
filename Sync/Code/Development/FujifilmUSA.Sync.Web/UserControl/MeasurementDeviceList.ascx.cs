@@ -45,8 +45,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void BindMeasurementDeviceList()
         {
             _presenterdevice.GetMeasurementDevices();
-            rgMeasurementDevice.DataSource = MeasurementDevices;
-            rgMeasurementDevice.DataBind();
+            if (!IsErrorOccured)
+            {
+                rgMeasurementDevice.DataSource = MeasurementDevices;
+                rgMeasurementDevice.DataBind();
+            }
         }
 
         #endregion
@@ -55,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgMeasurementDevice_ItemCommand(object sender, GridCommandEventArgs e)
         {
             MeasurementDevice = new Entity.MeasurementDevice();
-            MeasurementDevice.MeasurementDeviceId =(short)Convert.ToInt32(e.CommandArgument);
+            MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(e.CommandArgument);
             switch (e.CommandName)
             {
                 case "Delete":
@@ -69,7 +72,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgMeasurementDevice_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             _presenterdevice.GetMeasurementDevices();
-            rgMeasurementDevice.DataSource = MeasurementDevices;
+            if (!IsErrorOccured)
+            {
+                rgMeasurementDevice.DataSource = MeasurementDevices;
+            }
         }
 
         protected void likAdd_Click(object sender, EventArgs e)
