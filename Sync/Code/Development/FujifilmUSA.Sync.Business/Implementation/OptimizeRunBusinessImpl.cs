@@ -108,13 +108,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         optimizeRunId
                                     });
-                    if(data == null || data == DBNull.Value)
+                    if (data == null || data == DBNull.Value)
                     {
                         throw new Exception("Device link profile not found for runId: " + optimizeRunId);
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceLinkProfile"));
-            return data == DBNull.Value ? null : (byte[]) data;
+            return data == DBNull.Value ? null : (byte[])data;
         }
 
         public List<Measurement> GetMeasurements(int optimizeRunId)
@@ -203,6 +203,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                       endDateTime
                                   }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+        }
+
+        public bool DeleteMeasurement(int measurementId)
+        {
+            int affectedRow = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    affectedRow = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "CPSync4D.DeleteMeasurement",
+                            new object[]
+                                    {
+                                        measurementId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+            return (affectedRow > 0);
         }
 
         #endregion

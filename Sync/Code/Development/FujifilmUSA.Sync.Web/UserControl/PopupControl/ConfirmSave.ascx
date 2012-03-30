@@ -51,7 +51,7 @@
                     <table cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="font-weight: bold;">
-                                Optimize : &nbsp
+                                Close:&nbsp;
                             </td>
                             <td>
                                 <p style="padding-top: 7px;">
@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                             <td style="font-weight: bold;">
-                                Close : &nbsp
+                                Optimize:&nbsp;
                             </td>
                             <td>
                                 <p style="padding-top: 7px;">

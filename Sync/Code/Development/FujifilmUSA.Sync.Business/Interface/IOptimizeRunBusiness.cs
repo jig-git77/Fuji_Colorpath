@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetMeasurements(int optimizeRunId);
         void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds);
         void CloseOptimizeRun(int optimizeRunId, int status, DateTime endDateTime);
+        bool DeleteMeasurement(int measurementId);
     }
 }

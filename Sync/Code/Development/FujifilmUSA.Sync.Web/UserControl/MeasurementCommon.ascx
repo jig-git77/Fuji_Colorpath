@@ -155,7 +155,7 @@
                            type="image" 
                             onclick="javascript:return ConfirmDeleteMeasurement(this);" 
                             alt="Delete"
-                            src="Images/delete_icon.png" title="Delete Project" 
+                            src="Images/delete_icon.png" title="Delete Measurement" 
                             id="imgbtnDelete"
                             name=" ${MeasurementId}"
                             >

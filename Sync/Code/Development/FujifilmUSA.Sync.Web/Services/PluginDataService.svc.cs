@@ -45,19 +45,29 @@ namespace FujifilmUSA.Sync.Web.Services
             return Measurements;
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "DeleteMeasurement/{measurementId}")]
+        [OperationContract]
+        public bool DeleteMeasurement(string measurementId)
+        {
+            MeasurementId = Convert.ToInt32(measurementId);
+            var presenter = new PresenterPluginDataService(this);
+            return presenter.DeleteMeasurement();
+        }
+
         #region IViewPluginDataService Members
         public Entity.Measurement Measurement { get; set; }
         public int ProjectId { get; set; }
         public ReferenceChartData ReferenceChartData { get; set; }
         public int OptimizeRunId { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
+        public int MeasurementId { get; set; }
         #endregion
 
         #region IViewError Members
 
         public void ErrorOccured(object sender, ErrorArgs e)
         {
-            throw new NotImplementedException();
+            //Do nothing in the service...
         }
 
         #endregion

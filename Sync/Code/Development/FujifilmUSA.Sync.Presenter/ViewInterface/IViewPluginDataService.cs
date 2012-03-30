@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         ReferenceChartData ReferenceChartData { get; set; }
         int OptimizeRunId { get; set; }
         List<Measurement> Measurements { get; set; }
+        int MeasurementId { get; set; }
     }
 }

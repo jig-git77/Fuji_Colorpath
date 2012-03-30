@@ -39,6 +39,11 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
+        public bool DeleteMeasurement(int measurementId)
+        {
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members
