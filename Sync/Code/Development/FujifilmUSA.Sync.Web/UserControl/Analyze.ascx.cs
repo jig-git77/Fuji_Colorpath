@@ -94,10 +94,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
-            System.Threading.Thread.Sleep(5000);
-            //InjectScript.Text = "<script type='text/javascript'>GetRadWindow().Close()</" + "script>";
-            return;
-
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterAnalyze.GetMeasurementsOnRunId();

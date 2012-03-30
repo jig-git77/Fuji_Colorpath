@@ -48,19 +48,16 @@
     });
 </script>
 <script type="text/javascript" language="javascript">
-    function GetRadWindow() {
-        var oWindow = null;
-        if (window.radWindow) oWindow = window.radWindow;
-        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
-        return oWindow;
-    }
+ 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
         if ("<%= IsNewDlp %>" == "True") {
             return true;
         }
         else {
-            return true;
+            var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+            oWnd.show();
+            return false;
         }
     }
 </script>
@@ -68,10 +65,22 @@
     .Alpha
     {
         filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-        background-color: #4AB097 !important;
+        background-color: #FFF !important;
         opacity: 100;
         mozopacity: 100;
     }
+       .UpdateProgressBackground1
+        {
+            z-index: 3003;
+            position: fixed;
+            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+            width: 100% ;
+            height: 100% ;
+            top: 0px;
+            left: 0px;
+            opacity: .4;
+            mozopacity: .4;
+        }
 </style>
 <div class="contant_top">
     &nbsp;</div>
@@ -193,16 +202,20 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upCreateDLP"
+    <asp:UpdateProgress ID="updateProgress" runat="server"  DynamicLayout="true" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
         <ProgressTemplate>
-            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
-                VerticalSide="Top" TargetControlID="updateProgress" HorizontalOffset="325" VerticalOffset="210"
+            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center" 
+                VerticalSide="Middle"  TargetControlID="updateProgress" HorizontalOffset="325" VerticalOffset="210"
                 runat="server">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-            <div id="divUpdateCreateDLP" class="Alpha" runat="server">
+             <div class="UpdateProgressBackground1" style="position: fixed; left: 0px; top: 0px;
+                z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+             </div>
+             <div id="divUpdateCreateDLP" class="Alpha" runat="server">
                 <uc:CreateDLP runat="server" ID="ucCreateDLP" />
-            </div>
+             </div>
+          
         </ProgressTemplate>
     </asp:UpdateProgress>
     <div class="listDevice" style="margin-left: 10px;">
