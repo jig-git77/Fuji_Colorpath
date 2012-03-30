@@ -38,30 +38,30 @@
                     <Columns>
                         <telerik:GridTemplateColumn UniqueName="CompanyName" AllowFiltering="true" HeaderText="Company Name"
                             DataField="CompanyName" SortExpression="CompanyName" AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" ShowFilterIcon="false">
+                            CurrentFilterFunction="Contains" ShowFilterIcon="false" ItemStyle-Width="100px" >
                             <ItemTemplate>
-                                <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' Width="150px" />
+                                <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' Width="100px" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn UniqueName="BranchName" AllowFiltering="true" HeaderText="Branch Name"
                             DataField="BranchName" SortExpression="BranchName" AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" ShowFilterIcon="false">
+                            CurrentFilterFunction="Contains" ShowFilterIcon="false" ItemStyle-Width="100px" >
                             <ItemTemplate>
-                                <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
+                                <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' Width="100px" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn UniqueName="LicenseType" AllowFiltering="true" HeaderText="License Type"
                             DataField="LicenseType" SortExpression="LicenseType" AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" ShowFilterIcon="false">
+                            CurrentFilterFunction="Contains" ShowFilterIcon="false"  ItemStyle-Width="100px" >
                             <ItemTemplate>
-                                <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
+                                <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' Width="100px" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn UniqueName="SerialNumber" AllowFiltering="true" HeaderText="Serial Number"
                             DataField="SerialNumber" SortExpression="SerialNumber" AutoPostBackOnFilter="true"
                             CurrentFilterFunction="Contains" ShowFilterIcon="false">
                             <ItemTemplate>
-                                <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>' />
+                                <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>' Width="100px" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn UniqueName="InstrumentType" AllowFiltering="true" HeaderText="Instrument Type"
