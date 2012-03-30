@@ -49,6 +49,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                 imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
             }
+
+            if (SessionManager.Instance.CurrentProject != null)
+            {
+                if(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+                {
+                    lnkbtnSavePrintCondition.Attributes.Add("OnClick", "javascript:return false;");
+                }
+                else
+                {
+                    lnkbtnSavePrintCondition.Attributes.Add("OnClick", "javascript:ShowConfirmSaveWindow();return false;");
+                }
+            }
+
         }
 
         #region IViewPreviewPrintCondition Members

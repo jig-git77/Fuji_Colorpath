@@ -18,7 +18,7 @@
     <h1 id="hTitle" runat="server">
         New Print Condition - Save Print Condition
     </h1>
-    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClientClick=" javascript:ShowConfirmSaveWindow();return false;">
+    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" >
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
             Comfirm Save</span></asp:LinkButton>

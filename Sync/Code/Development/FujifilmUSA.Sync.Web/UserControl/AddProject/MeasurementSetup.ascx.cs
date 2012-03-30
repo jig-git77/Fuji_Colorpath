@@ -30,6 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindIlluminant();
                 BindObserverType();
                 ViewState[vsIsPostBack] = true;
+                LoadProjectInfoFromSession();
             }
         }
         #endregion
@@ -63,6 +64,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+
+        private void LoadProjectInfoFromSession()
+        {
+            if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MeasurementSetting != null)
+            {
+                  cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
+                  cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
+                  cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
+                  cmbMeasurementDevice_SelectedIndexChanged(null,null);
+                  cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId.ToString();
+                  cmbAlignmentChart_SelectedIndexChanged(null,null);
+
+                cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =
+                  !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
+                   );
+            }
+        }
+
         private void BindMeasurementDevice()
         {
             if (cmbMeasurementDevice.DataSource != null) return;

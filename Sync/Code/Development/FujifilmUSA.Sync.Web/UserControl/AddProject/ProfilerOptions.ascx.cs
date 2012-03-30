@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             BindPresets();
+            LoadProjectInfoFromSession();      
         }
         #endregion
 
@@ -44,6 +45,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbSelectedPresets.DataBind();
                     cmbSelectedPresets_SelectedIndexChanged(null, null);
                 }
+            }
+        }
+        private void LoadProjectInfoFromSession()
+        {
+            if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
+            {
+                cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
+                cmbSelectedPresets_SelectedIndexChanged(null, null);
+                cmbSelectedPresets.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
+                                              SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
             }
         }
         #endregion

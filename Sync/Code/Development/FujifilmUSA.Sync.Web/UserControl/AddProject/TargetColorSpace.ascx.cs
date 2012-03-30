@@ -26,7 +26,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            BindProfileSource();
+                BindProfileSource();
+                LoadProjectInfoFromSession();
         }
         #endregion
 
@@ -52,7 +53,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Method
-
+        private void LoadProjectInfoFromSession()
+        {
+            if (SessionManager.Instance.CurrentProject.SourceProfile != null)
+            {
+                cmbSourceProfile.SelectedValue = SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId.ToString();
+                cmbSourceProfile_SelectedIndexChanged(null, null);
+                cmbSourceProfile.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+            }
+        }
         private void BindProfileSource()
         {
             if (ViewState[_vsSourceProfile] != null) return;

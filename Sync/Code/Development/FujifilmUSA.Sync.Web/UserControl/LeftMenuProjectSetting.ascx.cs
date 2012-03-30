@@ -39,10 +39,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkSave.Enabled = true;
             }
             if (SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
-                SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0 &&
-                SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
+                SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
+                )
             {
-                lnkMeasure.Enabled = lnkAnalyze.Enabled = lnkDownload.Enabled = true;
+                lnkMeasure.Enabled = true;
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
+                {
+                    lnkAnalyze.Enabled = lnkDownload.Enabled = true;
+                }
             }
 
             lnkDescription.Font.Bold =
