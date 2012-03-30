@@ -259,9 +259,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         projectId
                                     });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Source profile not found for projectId: " + projectId);
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfile"));
-            return (data == null || data == DBNull.Value) ? null : (byte[])data;
+            return data == DBNull.Value ? null : (byte[])data;
         }
 
         public byte[] GetDestinationProfile(int projectId)
@@ -278,9 +282,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         projectId
                                     });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("destination profile not found for projectId: " + projectId);
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDestinationProfile"));
-            return (data == null || data == DBNull.Value) ? null : (byte[])data;
+            return data == DBNull.Value ? null : (byte[])data;
         }
 
         public byte[] GetLastOptimizedDlp(int projectId)
@@ -297,9 +305,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         projectId
                                     });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Last optimized device link profile not found for projectId: " + projectId);
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizedDlp"));
-            return (data == null || data == DBNull.Value) ? null : (byte[])data;
+            return data == DBNull.Value ? null : (byte[])data;
         }
 
         public Project SaveProject(Project project)
@@ -490,15 +502,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var measurementDevice = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
-                                                                                         new object[] {deviceId});
-                        measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
-                            Select(x =>
-                                   new KeyValuePair<int, string>(
-                                       DataReader.ReadInt(x, "MeasurementDeviceID"),
-                                       DataReader.ReadString(x, "MeasurementDevi"))).ToDictionary(x => x.Key, x => x.Value);
-                    },
+                {
+                    var dsMeasurementDevice = DataAccessFactory.Instance.GetDsResult("CP.GetMeasurementDeviceList",
+                                                                                     new object[] { deviceId });
+                    measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
+                        Select(x =>
+                               new KeyValuePair<int, string>(
+                                   DataReader.ReadInt(x, "MeasurementDeviceID"),
+                                   DataReader.ReadString(x, "MeasurementDevi"))).ToDictionary(x => x.Key, x => x.Value);
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDeviceList"));
             return measurementDevice;
         }
@@ -508,19 +520,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId });
+                    if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
-                        var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] {measurementDeviceId});
-                        if (dsPresetList != null && dsPresetList.Tables.Count > 0)
-                        {
-                            presetList = dsPresetList.Tables[0].AsEnumerable().Select(
-                                x => new ReferenceChartType()
-                                         {
-                                             ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
-                                             ChartName = DataReader.ReadString(x, "ChartName"),
-                                             ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
-                                         }).ToList();
-                        }
-                    },
+                        presetList = dsPresetList.Tables[0].AsEnumerable().Select(
+                            x => new ReferenceChartType()
+                                     {
+                                         ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeID"),
+                                         ChartName = DataReader.ReadString(x, "ChartName"),
+                                         ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
+                                     }).ToList();
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartTypeList"));
             return presetList;
         }
@@ -530,9 +542,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var data = new Dictionary<string, string>();
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        var dsPreviewData = DataAccessFactory.Instance.GetDsResult("CP.GetPreviewPrintDetail",
-                                                                                   new object[]
+                {
+                    var dsPreviewData = DataAccessFactory.Instance.GetDsResult("CP.GetPreviewPrintDetail",
+                                                                               new object[]
                                                                                        {
                                                                                            MeasurementDeviceId,
                                                                                            illuminantId,
@@ -541,29 +553,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                            deviceFamilyProfilerOptionId
                                                                                        });
 
-                        if (dsPreviewData.Tables[0].Rows.Count > 0)
-                        {
-                            data.Add("MeasurementDeviceId", dsPreviewData.Tables[0].Rows[0]["MeasurementDevice"].ToString());
+                    if (dsPreviewData.Tables[0].Rows.Count > 0)
+                    {
+                        data.Add("MeasurementDeviceId", dsPreviewData.Tables[0].Rows[0]["MeasurementDevice"].ToString());
 
-                        }
-                        if (dsPreviewData.Tables[1].Rows.Count > 0)
-                        {
-                            data.Add("illuminantId", dsPreviewData.Tables[1].Rows[0]["IlluminantType"].ToString());
-                        }
-                        if (dsPreviewData.Tables[2].Rows.Count > 0)
-                        {
-                            data.Add("observerTypeId", dsPreviewData.Tables[2].Rows[0]["ObserverType"].ToString());
-                        }
-                        if (dsPreviewData.Tables[3].Rows.Count > 0)
-                        {
-                            data.Add("referenceChartTypeId", dsPreviewData.Tables[3].Rows[0]["ChartName"].ToString());
-                        }
-                        if (dsPreviewData.Tables[4].Rows.Count > 0)
-                        {
-                            data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsName"].ToString());
-                            data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsDesc"].ToString());
-                        }
-                    },
+                    }
+                    if (dsPreviewData.Tables[1].Rows.Count > 0)
+                    {
+                        data.Add("illuminantId", dsPreviewData.Tables[1].Rows[0]["IlluminantType"].ToString());
+                    }
+                    if (dsPreviewData.Tables[2].Rows.Count > 0)
+                    {
+                        data.Add("observerTypeId", dsPreviewData.Tables[2].Rows[0]["ObserverType"].ToString());
+                    }
+                    if (dsPreviewData.Tables[3].Rows.Count > 0)
+                    {
+                        data.Add("referenceChartTypeId", dsPreviewData.Tables[3].Rows[0]["ChartName"].ToString());
+                    }
+                    if (dsPreviewData.Tables[4].Rows.Count > 0)
+                    {
+                        data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsName"].ToString());
+                        data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsDesc"].ToString());
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintConditionPreviewData"));
             return data;
         }
@@ -573,22 +585,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
             byte[] imageByte = null;
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartImage", new object[] { referenceChartTypeId });
+                    if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
-                        var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartImage", new object[] {referenceChartTypeId});
-                        if (dsPresetList != null && dsPresetList.Tables.Count > 0)
-                        {
-                            var rec = dsPresetList.Tables[0].AsEnumerable().Select(
-                                x => new ReferenceChartType()
-                                         {
-                                             ChartPreview = DataReader.ReadByteArray(x, "ChartPreview")
+                        var rec = dsPresetList.Tables[0].AsEnumerable().Select(
+                            x => new ReferenceChartType()
+                                     {
+                                         ChartPreview = DataReader.ReadByteArray(x, "ChartPreview")
 
-                                         }).SingleOrDefault();
-                            if (rec != null)
-                            {
-                                imageByte = rec.ChartPreview;
-                            }
+                                     }).SingleOrDefault();
+                        if (rec != null)
+                        {
+                            imageByte = rec.ChartPreview;
                         }
-                    },
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartTypeImage"));
             return imageByte;
         }

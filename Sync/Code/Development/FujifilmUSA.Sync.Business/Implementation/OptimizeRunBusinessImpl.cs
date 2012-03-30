@@ -75,16 +75,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateDestinationAndDeviceLinkProfile(request);
+                        if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
+                        {
+                            throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
+                        }
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure(
                                 "CPSync4D.UpdateInitialDestinationAndDlp",
                                 new object[]
-                                        {
-                                            optimizeRunId,
-                                            response.DestinationProfile.ProfileData,
-                                            response.DeviceLinkProfile.ProfileData
-                                        });
+                                    {
+                                        optimizeRunId,
+                                        response.DestinationProfile.ProfileData,
+                                        response.DeviceLinkProfile.ProfileData
+                                    });
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
@@ -104,9 +108,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         optimizeRunId
                                     });
+                    if(data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Device link profile not found for runId: " + optimizeRunId);
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceLinkProfile"));
-            return (data == null || data == DBNull.Value) ? null : (byte[])data;
+            return data == DBNull.Value ? null : (byte[]) data;
         }
 
         public List<Measurement> GetMeasurements(int optimizeRunId)
@@ -170,6 +178,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     using (var client = new ProfilerClient())
                     {
                         var response = client.OptimizeDeviceLinkProfile(request);
+                        if (response.OptimizedProfile.ProfileData == null)
+                        {
+                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId);
+                        }
                         DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
                                                                     new object[] { optimizeRunId, response.OptimizedProfile.ProfileData });
                     }
