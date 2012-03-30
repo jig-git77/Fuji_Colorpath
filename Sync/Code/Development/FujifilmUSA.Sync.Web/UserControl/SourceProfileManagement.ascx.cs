@@ -55,13 +55,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgSourceProfile_ItemCommand(object sender, GridCommandEventArgs e)
         {
             SourceProfile = new Entity.SourceProfile();
-            SourceProfile.SourceProfileId = (short)Convert.ToInt32(e.CommandArgument);
             switch (e.CommandName)
             {
+                case "ClearFilter":
+                    foreach (GridColumn column in rgSourceProfile.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgSourceProfile.MasterTableView.FilterExpression = string.Empty;
+                    rgSourceProfile.MasterTableView.Rebind();
+                    break;
                 case "Delete":
+                    SourceProfile.SourceProfileId = (short)Convert.ToInt32(e.CommandArgument);
                     _presentersourceprofile.DeleteSourceProfile();
                     break;
                 case "Edit":
+                    SourceProfile.SourceProfileId = (short)Convert.ToInt32(e.CommandArgument);
                     Response.Redirect("AddSourceProfile.aspx?SourceProfileId=" + SourceProfile.SourceProfileId);
                     break;
             }

@@ -135,8 +135,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Select(x => new SourceProfile()
                                                 {
                                                     SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"),
-                                                    ProfileName = DataReader.ReadString(x, "ProfileDesc"),
-                                                    ProfileDesc = DataReader.ReadString(x, "ProfileName"),
+                                                    ProfileName = DataReader.ReadString(x, "ProfileName"),
+                                                    ProfileDesc = DataReader.ReadString(x, "ProfileDesc"),
                                                     Company = new Company() {CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName")},
                                                     Region = new Region() {RegionId = (short) DataReader.ReadInt(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region")},
                                                     IsUsed = DataReader.ReadBoolean(x, "IsUsed")

@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompanyName.Items.Insert(0, new ListItem("--Select--", string.Empty));
             }
         }
-        private void SaveCompnay()
+        private void SaveBranch()
         {
             Branch = new Branch
                          {
@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            SaveCompnay();
+            SaveBranch();
         }
         #endregion
 

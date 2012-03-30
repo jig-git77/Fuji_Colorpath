@@ -58,13 +58,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgMeasurementDevice_ItemCommand(object sender, GridCommandEventArgs e)
         {
             MeasurementDevice = new Entity.MeasurementDevice();
-            MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(e.CommandArgument);
             switch (e.CommandName)
             {
+                case "Filter":
+                    break;
+                case "ClearFilter":
+                    foreach (GridColumn column in rgMeasurementDevice.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgMeasurementDevice.MasterTableView.FilterExpression = string.Empty;
+                    rgMeasurementDevice.MasterTableView.Rebind();
+                    break;
                 case "Delete":
+                    MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(e.CommandArgument);
                     _presenterdevice.DeleteMeasurementDevice();
                     break;
                 case "Edit":
+                    MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(e.CommandArgument);
                     Response.Redirect("AddMeasurementDevice.aspx?MeasurementDeviceId=" + MeasurementDevice.MeasurementDeviceId);
                     break;
             }

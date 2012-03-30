@@ -1,6 +1,43 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SourceProfileManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SourceProfileManagement" %>
 <%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
+<style type="text/css">
+    div.RadGrid .rgRow
+    {
+        background: #F7F7F7;
+    }
+    div.RadGrid .rgAltRow
+    {
+        background: #F7F7F7;
+    }
+    .rgPager table
+    {
+        border-top: 0px;
+        border-bottom: 1px solid #000000;
+        border-spacing: 1pt;
+        width: 100%;
+    }
+    .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
+    {
+        color: #003CA9;
+    }
+    .RadGrid_Default td.rgPagerCell
+    {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #828282 #EEEEEE #EEEEEE;
+        border-style: solid;
+        border-width: 0px 0 0px 0px;
+    }
+    .RadGrid_Default .rgRow td, .RadGrid_Default .rgAltRow td, .RadGrid_Default .rgEditRow td, .RadGrid_Default .rgFooter td
+    {
+        border-style: none;
+        border-width: 0 0 1px;
+    }
+</style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteSourceProfile() {
         if (confirm('<%= SourceProfileManagement_DeleteSourceProfile_Confirmation %>'))
@@ -26,64 +63,129 @@
     <div style="margin-left: 10px; margin-right: 15px;">
         <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     </div>
+    <div style="margin-left: 10px;">
     <asp:UpdatePanel ID="testPanel" runat="server">
         <ContentTemplate>
-            <telerik:RadGrid ID="rgSourceProfile" ShowHeader="true" AllowFilteringByColumn="true"
-                AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
-                EnableLinqExpressions="false" OnNeedDataSource="rgSourceProfile_NeedDataSource"
-                OnItemCommand="rgSourceProfile_ItemCommand" Width="98%" HeaderStyle-Font-Bold="true">
+            <telerik:RadGrid 
+                ID="rgSourceProfile" 
+                ShowHeader="true" 
+                AllowFilteringByColumn="true"
+                AllowSorting="false" 
+                AllowPaging="True" 
+                PageSize="5" 
+                runat="server" 
+                AutoGenerateColumns="False"
+                EnableLinqExpressions="false" 
+                OnNeedDataSource="rgSourceProfile_NeedDataSource"
+                OnItemCommand="rgSourceProfile_ItemCommand" 
+                Width="98%" 
+                HeaderStyle-Font-Bold="true"
+                 >
+
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+
                 <MasterTableView DataKeyNames="SourceProfileID">
                     <Columns>
-                        <telerik:GridTemplateColumn UniqueName="ProfileName" AllowFiltering="true" HeaderText="Profile Name"
-                            DataField="ProfileName" SortExpression="ProfileName" AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" ShowFilterIcon="false">
+
+                        <telerik:GridTemplateColumn 
+                            UniqueName="ProfileName" 
+                            HeaderText="Profile Name"
+                            DataField="ProfileName" 
+                            SortExpression="ProfileName" 
+                            ShowFilterIcon="false"
+                            FilterControlWidth="290"
+                            HeaderStyle-Width ="290" 
+                            AllowFiltering="true" 
+                            AutoPostBackOnFilter="true"
+                            CurrentFilterFunction="Contains" 
+                            >
                             <ItemTemplate>
-                                <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileDesc") %>' Width="100px" />
+                                <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>'/>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn UniqueName="ProfileDesc" AllowFiltering="true" HeaderText="Profile Description"
-                            DataField="ProfileDesc" SortExpression="ProfileDesc" AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" ShowFilterIcon="false">
+
+                        <telerik:GridTemplateColumn 
+                            UniqueName="ProfileDesc" 
+                            AllowFiltering="true" 
+                            HeaderText="Profile Description"
+                            DataField="ProfileDesc" 
+                            SortExpression="ProfileDesc" 
+                            AutoPostBackOnFilter="true"
+                            CurrentFilterFunction="Contains" 
+                            ShowFilterIcon="false"
+                            FilterControlWidth="290"
+                            HeaderStyle-Width ="290">
                             <ItemTemplate>
-                                <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileName") %>' Width="350px" />
+                                    <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileDesc") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn UniqueName="Profile" AllowFiltering="true" HeaderText="Profile"
-                            DataField="" SortExpression="" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
-                            ShowFilterIcon="false">
+                        
+                        <telerik:GridTemplateColumn 
+                            UniqueName="Profile" 
+                            AllowFiltering="false" 
+                            HeaderText="Profile"
+                            DataField="" 
+                            SortExpression="" 
+                            HeaderStyle-Width ="70"
+                            FilterControlWidth="70"
+                            >
                             <ItemTemplate>
-                                <asp:Label ID="lblProfile" runat="server" Text="Click Me!" Font-Bold="true" Width="150px" />
+                                <asp:Label ID="lblProfile" runat="server" Text="Click Me!" Font-Bold="true" />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn DataField="IsActive" AllowFiltering="true" HeaderText="Active"
-                            UniqueName="IsActive" SortExpression="IsActive" FilterControlWidth="100" ItemStyle-Wrap="true">
-                            <ItemTemplate>
-                                <asp:Label ID="lblIsActive" runat="server" Text='<%# Convert.ToString(Eval("IsUsed")) %>' />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn DataField="SourceProfileID" AllowFiltering="false" HeaderText="Edit"
-                            UniqueName="Edit">
-                            <ItemTemplate>
-                                <asp:ImageButton ID="imgbtnUpdate" runat="server" ToolTip="Edit Source Profile" AlternateText="Edit"
-                                    ImageUrl="../Images/edit_icon.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
-                                    CommandName="Edit" />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn DataField="SourceProfileID" AllowFiltering="false" HeaderText="Delete"
-                            UniqueName="Delete">
-                            <ItemTemplate>
-                                <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Source Profile"
-                                    AlternateText="Delete" ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSourceProfile();"
-                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
-                                    CommandName="Delete" />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn 
+                                UniqueName="IsActive" 
+                                AllowFiltering="false" 
+                                HeaderText="IsActive?"
+                                DataField="IsActive" 
+                                HeaderStyle-Width ="40"
+                                FilterControlWidth="40"
+                                ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                        <telerik:GridTemplateColumn 
+                                DataField="SourceProfileID" 
+                                AllowFiltering="true" 
+                                HeaderText=""
+                                UniqueName="Edit">
+                                <FilterTemplate>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
+                                                    <span> Clear Fillter </span>
+                                    </asp:LinkButton>
+                                </FilterTemplate>
+                                <ItemTemplate>
+                                    <div>
+                                        <center>
+                                            <div style="width: 45px;">
+                                                <div style="float: left; padding-right: 10px;">
+                                                      <asp:ImageButton ID="imgbtnUpdate" runat="server" ToolTip="Edit Source Profile" AlternateText="Edit"
+                                                        ImageUrl="../Images/edit_icon.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
+                                                        CommandName="Edit" />
+                                                </div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Source Profile"
+                                                        AlternateText="Delete" ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSourceProfile();"
+                                                        CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
+                                                        CommandName="Delete" />
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </div>
+                                        </center>
+                                    </div>
+                                </ItemTemplate>
+                         </telerik:GridTemplateColumn>
+                        
                     </Columns>
                 </MasterTableView>
             </telerik:RadGrid>
         </ContentTemplate>
     </asp:UpdatePanel>
+    </div>
 </div>
 <div class="admin_bottom">
     &nbsp;</div>
