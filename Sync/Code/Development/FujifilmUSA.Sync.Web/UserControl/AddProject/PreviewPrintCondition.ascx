@@ -27,7 +27,7 @@
     <div class="clear">
     </div>
 </div>
-<div class="listDevice" style="margin-left: 10px">
+<div class="listDevice" style="margin-left: 18px">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     <table cellpadding="0" cellspacing="10" border="0">
         <tr>
@@ -116,7 +116,7 @@
                         &nbsp;</div>
                 </div>
             </td>
-            <td style="width: 10px">
+            <td style="width: 0px">
             </td>
             <td valign="top" style="width: 320px">
                 <div style="display: block;">
@@ -182,7 +182,7 @@
                 </div>
             </td>
         </tr>
-        <tr style="height: 10px">
+        <tr style="height: 0px">
         </tr>
         <tr>
             <td valign="top">
@@ -235,7 +235,7 @@
                         &nbsp;</div>
                 </div>
             </td>
-            <td style="width: 10px">
+            <td style="width: 0px">
             </td>
             <td valign="top">
                 <div style="display: block;">

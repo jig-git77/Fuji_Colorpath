@@ -1505,6 +1505,7 @@ height:10px;
 {
     background: url(../Images/section_smallbox_bg.png) repeat-y top left;
     overflow: hidden;
+    height : 320px;
 }
 .section_small_middle .combopart
 {

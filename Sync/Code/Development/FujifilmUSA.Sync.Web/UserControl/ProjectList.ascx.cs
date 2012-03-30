@@ -54,9 +54,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
-            if (e.CommandName == "Delete" && e.CommandArgument != null)
+            switch (e.CommandName)
             {
-                DeleteProject(Convert.ToInt32(e.CommandArgument));
+                case "Delete":
+                    if (e.CommandArgument != null)
+                    {
+                        DeleteProject(Convert.ToInt32(e.CommandArgument));
+                    }
+                    break;
+                case "ClearFilter":
+                    foreach (GridColumn column in rgProjectList.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgProjectList.MasterTableView.FilterExpression = string.Empty;
+                    rgProjectList.MasterTableView.Rebind();
+                    break;
             }
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -98,24 +112,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
-        {
-            var combo = sender as RadComboBox;
-            if (combo == null) return;
-            GetSourceProfiles();
-            if (!IsErrorOccured)
-            {
-                foreach (var profile in SourceProfile)
-                {
-                    combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
-                }
-                combo.SelectedValue = hdSelectedSourceProfileId.Value;
-            }
-        }
-        protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            hdSelectedSourceProfileId.Value = e.Value;
-        }
+        //protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
+        //{
+        //    var combo = sender as RadComboBox;
+        //    if (combo == null) return;
+        //    GetSourceProfiles();
+        //    if (!IsErrorOccured)
+        //    {
+        //        foreach (var profile in SourceProfile)
+        //        {
+        //            combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
+        //        }
+        //        combo.SelectedValue = hdSelectedSourceProfileId.Value;
+        //    }
+        //}
+        //protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
+        //{
+        //    hdSelectedSourceProfileId.Value = e.Value;
+        //}
         #endregion
 
         #region Method
