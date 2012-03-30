@@ -1,19 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SaveWindow.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SaveWindow" %>
- 
- <script language="javascript" type="text/javascript">
-     function Close() {
-            var oWindow = GetProjectInformationRadWindow();
-            GetProjectInformationRadWindow().close();
-            return false;
-        }
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript" type="text/javascript">
+    function Close() {
+        var oWindow = GetProjectInformationRadWindow();
+        GetProjectInformationRadWindow().close();
+        return false;
+    }
 
-        function GetProjectInformationRadWindow() {
-            var oWindow = null;
-            if (window.radWindow) oWindow = window.radWindow;
-            else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
-            return oWindow;
-        } 
+    function GetProjectInformationRadWindow() {
+        var oWindow = null;
+        if (window.radWindow) oWindow = window.radWindow;
+        else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
+        return oWindow;
+    } 
 
 </script>
 <div class="listDevice" style="margin-left: 10px">
@@ -25,6 +25,9 @@
                         &nbsp;</div>
                     <div class="section_middle">
                         <div class="combopart">
+                            <div>
+                                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                            </div>
                             <div class="header">
                                 <div class="content">
                                     <div style="float: left;" class="text">
@@ -132,7 +135,7 @@
         </tr>
         <tr>
             <td>
-             <div class="buttonright" style=" padding-left: 3px">
+                <div class="buttonright" style="padding-left: 3px">
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
                         CssClass="gray_bt">
                                         <span>
@@ -140,8 +143,8 @@
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
-                    <asp:LinkButton ID="lbtnSave" runat="server" ValidationGroup="vgSaveWindows"
-                        CssClass="gray_bt" onclick="lbtnSave_Click">
+                    <asp:LinkButton ID="lbtnSave" runat="server" ValidationGroup="vgSaveWindows" CssClass="gray_bt"
+                        OnClick="lbtnSave_Click">
                     <span> Save </span>
                     </asp:LinkButton>
                 </div>

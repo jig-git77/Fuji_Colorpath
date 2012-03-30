@@ -1,10 +1,7 @@
 ﻿using System;
-using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using System.Collections.Generic;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -21,7 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
         }
         #endregion
 
@@ -41,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SaveDeviceFamily();
         }
         #endregion

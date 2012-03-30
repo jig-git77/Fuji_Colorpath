@@ -9,11 +9,11 @@
         //alert(lblPassWord.value);
         return false;
     }
-    
+
     function ValidateChkList(source, arguments) {
         arguments.IsValid = IsCheckBoxChecked() ? true : false;
     }
-    
+
     function IsCheckBoxChecked() {
         var isChecked = false;
         var list = document.getElementById('<%= chkUserBranch.ClientID %>');
@@ -46,7 +46,7 @@
                 <table cellpadding="0" cellspacing="10" width="97%">
                     <tr>
                         <td colspan="2">
-                            <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
+                            <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         </td>
                     </tr>
                     <tr>
@@ -133,8 +133,8 @@
                                                             </asp:CheckBoxList>
                                                         </div>
                                                         <div style="float: left">
-                                                             <asp:CustomValidator ID="cvBranch" ClientValidationFunction="ValidateChkList"
-                                                                runat="server" ValidationGroup="vgAddUser" >
+                                                            <asp:CustomValidator ID="cvBranch" ClientValidationFunction="ValidateChkList" runat="server"
+                                                                ValidationGroup="vgAddUser">
                                                                   <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -150,7 +150,7 @@
                                             <div class="tooltip_bottom_right">
                                             </div>
                                         </div>
-                                                             </asp:CustomValidator>
+                                                            </asp:CustomValidator>
                                                         </div>
                                                         <div class="clear">
                                                         </div>

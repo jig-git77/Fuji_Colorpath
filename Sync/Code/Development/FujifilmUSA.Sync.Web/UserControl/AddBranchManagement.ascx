@@ -22,7 +22,7 @@
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
-        <ucAdminStatusbar:AdminStatusbar ID="ucAdminStatusbar" runat="server" Visible="false" />
+        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="0" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>

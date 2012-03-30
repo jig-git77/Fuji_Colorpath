@@ -38,15 +38,15 @@
         border-width: 0 0 1px;
     }
 </style>
-<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server" >
-        <script type="text/javascript" language="javascript">
-         function ConfirmDeleteDevice() {
+<telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+    <script type="text/javascript" language="javascript">
+        function ConfirmDeleteDevice() {
             if (confirm('<%= DeviceManagement_DeleteDevice_Confirmation %>'))
                 return true;
             else
                 return false;
-           }
-        </script>
+        }
+    </script>
 </telerik:RadCodeBlock>
 <div class="admin_top">
     &nbsp;</div>
@@ -59,8 +59,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add Device</span>
         </asp:LinkButton>
-        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" 
-            onclick="lbtnAddDeviceFamily_Click" >
+        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" OnClick="lbtnAddDeviceFamily_Click">
             <span>
                 <asp:Image ID="Image1" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add Device Family</span>
@@ -69,159 +68,97 @@
     <div class="clear">
     </div>
     <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     </div>
     <div style="margin-left: 10px;">
-     <asp:UpdatePanel runat="server">
+        <asp:UpdatePanel runat="server">
             <ContentTemplate>
-            <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
-        <telerik:RadGrid ID="rgDevice" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
-            AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
-            OnNeedDataSource="rgDevice_NeedDataSource" OnItemCommand="rgDevice_ItemCommand"
-             Width="98%" HeaderStyle-Font-Bold="true" >
-            <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-            <MasterTableView DataKeyNames="DeviceID,DeviceName,LicenseID,DeviceFamily.DeviceFamilyID,License.Branch.BranchId,License.Branch.Company.CompanyId,License.BranchId,IsActive">
-                <Columns>
-                    <telerik:GridTemplateColumn 
-                        DataField="DeviceName" 
-                        AllowFiltering="true" 
-                        HeaderText="Device Name"
-                        UniqueName="DeviceName" 
-                        SortExpression="DeviceName" 
-                        FilterControlWidth="120"
-                        ItemStyle-Wrap="true" 
-                        CurrentFilterFunction="Contains" 
-                        ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true"
-                        >
-                        <ItemTemplate>
-                            <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                        DataField="DeviceFamily.DeviceFamilyDesc" 
-                        AllowFiltering="true" 
-                        HeaderText="DeviceFamily Desc"
-                        UniqueName="DeviceFamilyDesc" 
-                        SortExpression="DeviceFamily.DeviceFamilyDesc" 
-                        FilterControlWidth="120"
-                        ItemStyle-Wrap="true" 
-                        CurrentFilterFunction="Contains" 
-                        ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true">
-                        <ItemTemplate>
-                            <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                        DataField="License.LicenseType.Type" 
-                        AllowFiltering="true" 
-                        HeaderText="License Type"
-                        UniqueName="LicenseType" 
-                        SortExpression="License.LicenseType.Type" 
-                        FilterControlWidth="120"
-                        ItemStyle-Wrap="true" 
-                        CurrentFilterFunction="Contains" 
-                        ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true"
-                        DataType="System.String"
-                        >
-                        <ItemTemplate>
-                            <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("License.LicenseType.Type") %>' />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                        DataField="License.Branch.Company.CompanyName" 
-                        AllowFiltering="true" 
-                        HeaderText="Company Name"
-                        UniqueName="CompanyName" 
-                        SortExpression="License.Branch.Company.CompanyName" 
-                        FilterControlWidth="120"
-                        ItemStyle-Wrap="true" 
-                        CurrentFilterFunction="Contains" 
-                        ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true"
-                        DataType="System.String"
-                        >
-                        <ItemTemplate>
-                            <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                        DataField="License.Branch.BranchName" 
-                        AllowFiltering="true" 
-                        HeaderText="Branch Name"
-                        UniqueName="BranchName" 
-                        SortExpression="License.Branch.BranchName" 
-                        FilterControlWidth="120"
-                        ItemStyle-Wrap="true" 
-                        CurrentFilterFunction="Contains" 
-                        ShowFilterIcon="false"
-                        AutoPostBackOnFilter="true"
-                        DataType="System.String"
-                        >
-                        <ItemTemplate>
-                            <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                                    UniqueName="IsActive" 
-                                    AllowFiltering="false" 
-                                    HeaderText="IsActive?"
-                                    DataField="IsActive" 
-                                    ItemStyle-HorizontalAlign="Center"  
-                                    >
-                                    <ItemTemplate>
-                                        <asp:Image ID="imgIsActive"  runat="server" ImageUrl=<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%> />
-                                        
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn 
-                        DataField="DeviceID" 
-                        AllowFiltering="true" 
-                        HeaderText=""
-                        UniqueName="Edit">
-                        <FilterTemplate>
-                                 <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
+                <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
+                <telerik:RadGrid ID="rgDevice" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
+                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
+                    OnNeedDataSource="rgDevice_NeedDataSource" OnItemCommand="rgDevice_ItemCommand"
+                    Width="98%" HeaderStyle-Font-Bold="true">
+                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                    <MasterTableView DataKeyNames="DeviceID,DeviceName,LicenseID,DeviceFamily.DeviceFamilyID,License.Branch.BranchId,License.Branch.Company.CompanyId,License.BranchId,IsActive">
+                        <Columns>
+                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
+                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120"
+                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
+                                AutoPostBackOnFilter="true">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="DeviceFamily.DeviceFamilyDesc" AllowFiltering="true"
+                                HeaderText="DeviceFamily Desc" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
+                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
+                                ShowFilterIcon="false" AutoPostBackOnFilter="true">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="License.LicenseType.Type" AllowFiltering="true"
+                                HeaderText="License Type" UniqueName="LicenseType" SortExpression="License.LicenseType.Type"
+                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
+                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("License.LicenseType.Type") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="License.Branch.Company.CompanyName" AllowFiltering="true"
+                                HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
+                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
+                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="License.Branch.BranchName" AllowFiltering="true"
+                                HeaderText="Branch Name" UniqueName="BranchName" SortExpression="License.Branch.BranchName"
+                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
+                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
+                                DataField="IsActive" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="DeviceID" AllowFiltering="true" HeaderText=""
+                                UniqueName="Edit">
+                                <FilterTemplate>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
                                                     <span> Clear Fillter </span>
-                                </asp:LinkButton>
-                        </FilterTemplate>
-                        <ItemTemplate>
-                        
-                            
-                            <div>
-                                <center>
-                                <div style="width: 45px;">     
-                                    <div style="float:left; padding-right: 10px;">
-                                         <asp:ImageButton ID="imgbtnEdit" 
-                                                        runat="server" 
-                                                        ToolTip="Edit Device" 
-                                                        AlternateText="Edit"
-                                                        ImageUrl="../Images/edit_icon.png" 
-                                                        CommandArgument ='<%# Eval("DeviceID") %>'
+                                    </asp:LinkButton>
+                                </FilterTemplate>
+                                <ItemTemplate>
+                                    <div>
+                                        <center>
+                                            <div style="width: 45px;">
+                                                <div style="float: left; padding-right: 10px;">
+                                                    <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Device" AlternateText="Edit"
+                                                        ImageUrl="../Images/edit_icon.png" CommandArgument='<%# Eval("DeviceID") %>'
                                                         CommandName="Edit" />
+                                                </div>
+                                                <div style="float: left;">
+                                                    <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Device" AlternateText="Delete"
+                                                        ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteDevice();"
+                                                        CommandArgument='<%# Eval("DeviceID") %>' CommandName="Delete" />
+                                                </div>
+                                                <div class="clear">
+                                                </div>
+                                            </div>
+                                        </center>
                                     </div>
-                                    <div style="float:left;" >
-                                       <asp:ImageButton ID="imgbtnDelete" runat="server" 
-                                                        ToolTip="Delete Device" 
-                                                        AlternateText="Delete"
-                                                        ImageUrl="../Images/delete_icon.png" 
-                                                        OnClientClick="javascript:return ConfirmDeleteDevice();"
-                                                        CommandArgument ='<%# Eval("DeviceID") %>'
-                                                        CommandName="Delete" />
-                                     </div>
-                                    <div class="clear"></div>
-                            </div>
-                            </center>
-                            </div>
-
-                         
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                </Columns>
-            </MasterTableView>
-        </telerik:RadGrid>
-        </ContentTemplate>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </ContentTemplate>
         </asp:UpdatePanel>
     </div>
 </div>

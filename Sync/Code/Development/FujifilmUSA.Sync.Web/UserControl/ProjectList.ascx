@@ -17,7 +17,7 @@
     function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpNo) {
         var oWindow;
         oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpNo=" + DlpNo, "OpenPrintConditionWindow");
-        oWindow.show(); 
+        oWindow.show();
         return false;
     }
     function ShowClosePrintConditionWindow(projectId, projectName) {
@@ -37,13 +37,6 @@
         oWnd.close();
     }
 </script>
-  <script type='text/javascript'>
-    //Code for resize of left menu bar
-//      $(".listDevice").bind("resize", function () {
-//          alert('Test');
-//      });
-	</script>
-
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -96,208 +89,169 @@
     <div class="clear">
     </div>
     <div class="formDeviceNoLine" style="display: none;">
-        <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
         <div class="clear">
         </div>
     </div>
     <div class="listDevice" style="margin-left: 15px;">
-          <asp:UpdatePanel ID="testPanel" runat="server">
+        <asp:UpdatePanel ID="testPanel" runat="server">
             <ContentTemplate>
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tr id="trListHeader" runat="server">
-                <td>
-                    <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" 
-                        AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
-                        EnableLinqExpressions="False" OnNeedDataSource="rgProjectList_NeedDataSource"
-                        OnItemCommand="rgProjectList_ItemCommand" OnItemDataBound="rgProjectList_ItemDataBound"
-                        Width="100%" CellSpacing="0" GridLines="None" 
-                        >
-                        <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                        <MasterTableView DataKeyNames="ProjectId">
-                            <Columns>
-                                <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="false" HeaderText=""
-                                    UniqueName="Select" SortExpression="ProjectId" FilterControlWidth="50">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
-                                            ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                            CommandName="Select" />
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn 
-                                    UniqueName="Status" 
-                                    AllowFiltering="true" 
-                                    HeaderText="Status"
-                                    DataField="Status" 
-                                    >
-                                    <ItemTemplate>
-                                        <asp:Image ID="imgStatus" runat="server" />
-                                    </ItemTemplate>
-                                    <FilterTemplate>
-                                        <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="true" runat="server"
-                                            OnClientSelectedIndexChanged="StatusIndexChanged" AutoPostBack="false" Width="50"
-                                            DropDownWidth="70" SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>' >
-                                            <Items>
-                                                <telerik:RadComboBoxItem Text="ALL" />
-                                                <telerik:RadComboBoxItem Text="Open" Value="Open" />
-                                                <telerik:RadComboBoxItem Text="Closed" Value="Closed" />
-                                                <telerik:RadComboBoxItem Text="Certify" Value="Certify" />
-                                                <telerik:RadComboBoxItem Text="NotUsed" Value="NotUsed" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-                                        <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
-                                            <script type="text/javascript">
-                                                function StatusIndexChanged(sender, args) {
-                                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                    tableView.filter("Status", args.get_item().get_value(), "EqualTo");
-                                                }
-                                            </script>
-                                        </telerik:RadScriptBlock>
-                                    </FilterTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn 
-                                    DataField="ProjectName" 
-                                    AllowFiltering="true" 
-                                    HeaderText="Project Name"
-                                    UniqueName="ProjectName" 
-                                    SortExpression="ProjectName" 
-                                    FilterControlWidth="100"
-                                    ItemStyle-Wrap="true" 
-                                    CurrentFilterFunction="Contains"
-                                    ShowFilterIcon="false"
-                                    AutoPostBackOnFilter="true"
-                                      >
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn 
-                                    UniqueName="SourceProfileId" 
-                                    DataField="SourceProfileId"
-                                    AllowFiltering="true" 
-                                    HeaderText="Standard" 
-                                    SortExpression="SourceProfileId"
-                                    >
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
-                                    </ItemTemplate>
-                                    <FilterTemplate>
-                                        <telerik:RadComboBox ID="RadComboBoxPrintStandard" 
-                                            AppendDataBoundItems="true" runat="server"
-                                            OnClientSelectedIndexChanged="PrintStandardIndexChanged" 
-                                            AutoPostBack="false"
-                                            Width="100" 
-                                            DropDownWidth="150" 
-                                            OnPreRender= "RadComboBoxPrintStandard_PreRender"
-                                            OnSelectedIndexChanged= "RadComboBoxPrintStandard_SelectedIndexChanged"
-                                            >
-                                            <Items>
-                                                <telerik:RadComboBoxItem Text="All" />
-                                            </Items>    
-                                        </telerik:RadComboBox>
-                                        <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
-                                            <script type="text/javascript">
-                                                function PrintStandardIndexChanged(sender, args) {
-                                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                    tableView.filter("SourceProfileId", args.get_item().get_value(), "EqualTo");
-                                                }
-                                            </script>
-                                        </telerik:RadScriptBlock>
-                                    </FilterTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn 
-                                    DataField="PrintCondition.Media" 
-                                    AllowFiltering="true" 
-                                    HeaderText="Media"
-                                    UniqueName="Media" 
-                                    SortExpression="PrintCondition.Media" 
-                                    FilterControlWidth="80"
-                                    CurrentFilterFunction="Contains"
-                                    ShowFilterIcon="false"
-                                    AutoPostBackOnFilter="true"
-                                    >
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>' />
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn 
-                                    DataField="PrintCondition.Colorant" 
-                                    AllowFiltering="true" 
-                                    HeaderText="Colorant"
-                                    UniqueName="Colorant" 
-                                    SortExpression="PrintCondition.Colorant" 
-                                    FilterControlWidth="80"
-                                    CurrentFilterFunction="Contains"
-                                    ShowFilterIcon="false"
-                                    AutoPostBackOnFilter="true"
-                                    >
-                                    <ItemTemplate>
-                                        <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                                <telerik:GridBoundColumn UniqueName="CreateDate" DataField="CreateDate" 
-                                HeaderText="Last Active"
-                                    DataFormatString="{0:MM/dd/yy hh:mm}" HeaderStyle-Width="100px">
-                                    <FilterTemplate>
-                                        <telerik:RadDatePicker ID="LastActivePicker" runat="server" Width="100px" ClientEvents-OnDateSelected="DateSelected"
-                                            DbSelectedDate='<%# FillterCreatedDateDate(Container) %>' />
-                                        <telerik:RadScriptBlock ID="RadScriptBlock3" runat="server">
-                                            <script type="text/javascript">
-                                                function DateSelected(sender, args) {
-                                                    var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                    var date = FormatSelectedDate(sender);
-                                                    if (date != '') {
-                                                        var nextDate = FormatNextDate(sender);
-                                                        tableView.filter("CreateDate", date + " " + nextDate, "Between");
-                                                    }
-                                                    else
-                                                        tableView.filter("CreateDate", date, "EqualTo");
-                                                }
-                                                function FormatSelectedDate(picker) {
-                                                    var date = picker.get_selectedDate();
-                                                    var dateInput = picker.get_dateInput();
-                                                    var formattedDate = dateInput.get_dateFormatInfo().FormatDate(date, dateInput.get_displayDateFormat());
-                                                    return formattedDate;
-                                                }
-                                                function FormatNextDate(picker) {
-                                                    var date = picker.get_selectedDate();
-                                                    var nextDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-                                                    var dateInput = picker.get_dateInput();
-                                                    var formattedDate = dateInput.get_dateFormatInfo().FormatDate(nextDate, dateInput.get_displayDateFormat());
-                                                    return formattedDate;
-                                                }
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tr id="trListHeader" runat="server">
+                        <td>
+                            <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
+                                PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                                OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand"
+                                OnItemDataBound="rgProjectList_ItemDataBound" Width="100%" CellSpacing="0" GridLines="None">
+                                <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                                <MasterTableView DataKeyNames="ProjectId">
+                                    <Columns>
+                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="false" HeaderText=""
+                                            UniqueName="Select" SortExpression="ProjectId" FilterControlWidth="50">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
+                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
+                                                    CommandName="Select" />
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn UniqueName="Status" AllowFiltering="true" HeaderText="Status"
+                                            DataField="Status">
+                                            <ItemTemplate>
+                                                <asp:Image ID="imgStatus" runat="server" />
+                                            </ItemTemplate>
+                                            <FilterTemplate>
+                                                <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="true" runat="server"
+                                                    OnClientSelectedIndexChanged="StatusIndexChanged" AutoPostBack="false" Width="50"
+                                                    DropDownWidth="70" SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>'>
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem Text="ALL" />
+                                                        <telerik:RadComboBoxItem Text="Open" Value="Open" />
+                                                        <telerik:RadComboBoxItem Text="Closed" Value="Closed" />
+                                                        <telerik:RadComboBoxItem Text="Certify" Value="Certify" />
+                                                        <telerik:RadComboBoxItem Text="NotUsed" Value="NotUsed" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                                <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
+                                                    <script type="text/javascript">
+                                                        function StatusIndexChanged(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            tableView.filter("Status", args.get_item().get_value(), "EqualTo");
+                                                        }
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                            </FilterTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn DataField="ProjectName" AllowFiltering="true" HeaderText="Project Name"
+                                            UniqueName="ProjectName" SortExpression="ProjectName" FilterControlWidth="100"
+                                            ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
+                                            AutoPostBackOnFilter="true">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn UniqueName="SourceProfileId" DataField="SourceProfileId"
+                                            AllowFiltering="true" HeaderText="Standard" SortExpression="SourceProfileId">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
+                                            </ItemTemplate>
+                                            <FilterTemplate>
+                                                <telerik:RadComboBox ID="RadComboBoxPrintStandard" AppendDataBoundItems="true" runat="server"
+                                                    OnClientSelectedIndexChanged="PrintStandardIndexChanged" AutoPostBack="false"
+                                                    Width="100" DropDownWidth="150" OnPreRender="RadComboBoxPrintStandard_PreRender"
+                                                    OnSelectedIndexChanged="RadComboBoxPrintStandard_SelectedIndexChanged">
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem Text="All" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                                <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
+                                                    <script type="text/javascript">
+                                                        function PrintStandardIndexChanged(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            tableView.filter("SourceProfileId", args.get_item().get_value(), "EqualTo");
+                                                        }
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                            </FilterTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn DataField="PrintCondition.Media" AllowFiltering="true"
+                                            HeaderText="Media" UniqueName="Media" SortExpression="PrintCondition.Media" FilterControlWidth="80"
+                                            CurrentFilterFunction="Contains" ShowFilterIcon="false" AutoPostBackOnFilter="true">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>' />
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn DataField="PrintCondition.Colorant" AllowFiltering="true"
+                                            HeaderText="Colorant" UniqueName="Colorant" SortExpression="PrintCondition.Colorant"
+                                            FilterControlWidth="80" CurrentFilterFunction="Contains" ShowFilterIcon="false"
+                                            AutoPostBackOnFilter="true">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn UniqueName="CreateDate" DataField="CreateDate" HeaderText="Last Active"
+                                            DataFormatString="{0:MM/dd/yy hh:mm}" HeaderStyle-Width="100px">
+                                            <FilterTemplate>
+                                                <telerik:RadDatePicker ID="LastActivePicker" runat="server" Width="100px" ClientEvents-OnDateSelected="DateSelected"
+                                                    DbSelectedDate='<%# FillterCreatedDateDate(Container) %>' />
+                                                <telerik:RadScriptBlock ID="RadScriptBlock3" runat="server">
+                                                    <script type="text/javascript">
+                                                        function DateSelected(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            var date = FormatSelectedDate(sender);
+                                                            if (date != '') {
+                                                                var nextDate = FormatNextDate(sender);
+                                                                tableView.filter("CreateDate", date + " " + nextDate, "Between");
+                                                            }
+                                                            else
+                                                                tableView.filter("CreateDate", date, "EqualTo");
+                                                        }
+                                                        function FormatSelectedDate(picker) {
+                                                            var date = picker.get_selectedDate();
+                                                            var dateInput = picker.get_dateInput();
+                                                            var formattedDate = dateInput.get_dateFormatInfo().FormatDate(date, dateInput.get_displayDateFormat());
+                                                            return formattedDate;
+                                                        }
+                                                        function FormatNextDate(picker) {
+                                                            var date = picker.get_selectedDate();
+                                                            var nextDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+                                                            var dateInput = picker.get_dateInput();
+                                                            var formattedDate = dateInput.get_dateFormatInfo().FormatDate(nextDate, dateInput.get_displayDateFormat());
+                                                            return formattedDate;
+                                                        }
                                                
-                                            </script>
-                                        </telerik:RadScriptBlock>
-                                    </FilterTemplate>
-                                </telerik:GridBoundColumn>
-                                <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="false" HeaderText=""
-                                    UniqueName="Delete">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
-                                            ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteProject();" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                            CommandName="Delete" />
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
-                            </Columns>
-                        </MasterTableView>
-                       
-                    </telerik:RadGrid>
-                    <asp:HiddenField ID="hdSelectedSourceProfileId" runat="server" Value="0" />
-                </td>
-            </tr>
-        </table>
-        </ContentTemplate>
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                            </FilterTemplate>
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="false" HeaderText=""
+                                            UniqueName="Delete">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
+                                                    ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteProject();"
+                                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>' CommandName="Delete" />
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                            <asp:HiddenField ID="hdSelectedSourceProfileId" runat="server" Value="0" />
+                        </td>
+                    </tr>
+                </table>
+            </ContentTemplate>
         </asp:UpdatePanel>
     </div>
     <div class="clear">
     </div>
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
-            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" VisibleStatusbar ="false"  ShowContentDuringLoad="false"
-                Title="Open Print Condition" Width="715" Height="280" Behaviors="Close, Move" Behavior="Close, Move">
+            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Open Print Condition" Width="715" Height="280"
+                Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
-            <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar ="false" ShowContentDuringLoad="false"
-                Title="Close Print Condition" Width="715" Height="200" Behaviors="Close, Move" Behavior="Close, Move">
+            <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Close Print Condition" Width="715" Height="200"
+                Behaviors="Close, Move" Behavior="Close, Move">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>

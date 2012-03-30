@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (IsPostBack)
             {
                 Page.Form.Attributes.Add("enctype", "multipart/form-data");
@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
             SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);

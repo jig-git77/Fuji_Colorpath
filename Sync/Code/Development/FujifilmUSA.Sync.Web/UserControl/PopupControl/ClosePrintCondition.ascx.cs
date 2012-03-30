@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                ucStatusbar.DisplayMessage("Sorry!There is no dlp to download", false);
+                fujiStatusbar.DisplayMessage("Sorry!There is no dlp to download", false);
             }
         }
 

@@ -40,6 +40,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
+        /// fujiStatusbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
+        
+        /// <summary>
         /// lbtnDownLoadDLP control.
         /// </summary>
         /// <remarks>

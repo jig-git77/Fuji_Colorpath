@@ -77,12 +77,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                     {
-                        ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
+                        fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
                     }
                 }
                 else
                 {
-                    ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
+                    fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
                 }
             }
         }

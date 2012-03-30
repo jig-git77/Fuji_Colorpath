@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddLicenseManagement {
         
         /// <summary>
-        /// ucAdminStatusbar control.
+        /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar ucAdminStatusbar;
+        protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
         
         /// <summary>
         /// trListHeader control.

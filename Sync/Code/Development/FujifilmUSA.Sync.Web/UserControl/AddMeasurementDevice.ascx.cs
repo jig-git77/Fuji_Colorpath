@@ -28,28 +28,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region "Page Events"
-       
+
         protected override void OnInit(EventArgs e)
         {
             _presenterdevice = new PresenterDevice(this);
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (!IsPostBack)
-{
-            BindCompanyDropDown();
-            BindInstrumentTypeDropDown();
-            if (Request.QueryString["MeasurementDeviceId"] != null)
-                LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
+            {
+                BindCompanyDropDown();
+                BindInstrumentTypeDropDown();
+                if (Request.QueryString["MeasurementDeviceId"] != null)
+                    LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
             }
         }
-        
+
         #endregion
 
         #region Control events
-       
+
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBranch.Items.Clear();
@@ -76,7 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            ucAdminStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             MeasurementDevice = new MeasurementDevice();
             MeasurementDevice.LicenseId = Convert.ToInt32(cmbLicenseType.SelectedValue);
             MeasurementDevice.SerialNumber = txtSerialNumber.Text.Trim();
@@ -85,7 +85,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MeasurementDevice.IsActive = true;
             else
                 MeasurementDevice.IsActive = false;
-            
+
             if (hdnMeasurementDeviceId.Value == "0")
             {
                 _presenterdevice.InsertMeasurementDevice();
@@ -93,7 +93,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                MeasurementDevice.MeasurementDeviceId =(short)Convert.ToInt32(hdnMeasurementDeviceId.Value);
+                MeasurementDevice.MeasurementDeviceId = (short)Convert.ToInt32(hdnMeasurementDeviceId.Value);
                 _presenterdevice.UpdateMeasurementDevice();
                 Response.Redirect("MeasurementDeviceList.aspx");
             }
@@ -110,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompanyName.DataBind();
             cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
         }
-        
+
         private void BindBranchDropDown(int companyId)
         {
             this.CompanyId = companyId;
@@ -119,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbBranch.DataBind();
             cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", "0"));
         }
-        
+
         private void BindLicenseDropDown(int branchId)
         {
             this.BranchId = branchId;
@@ -128,7 +128,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbLicenseType.DataBind();
             cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", "0"));
         }
-        
+
         private void BindInstrumentTypeDropDown()
         {
             _presenterdevice.InstrumentTypeList();
@@ -141,10 +141,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             MeasurementDevice = new MeasurementDevice
                                     {
-                                        MeasurementDeviceId = (short) iMeasurementDeviceId
+                                        MeasurementDeviceId = (short)iMeasurementDeviceId
                                     };
             _presenterdevice.GetMeasurementDevice();
-            hdnMeasurementDeviceId.Value =Convert.ToString(iMeasurementDeviceId);
+            hdnMeasurementDeviceId.Value = Convert.ToString(iMeasurementDeviceId);
             cmbCompanyName.SelectedValue = Convert.ToString(MeasurementDevice.CompanyId);
             BindBranchDropDown(Convert.ToInt32(cmbCompanyName.SelectedValue));
             cmbBranch.SelectedValue = Convert.ToString(MeasurementDevice.BranchId);
@@ -152,7 +152,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbLicenseType.SelectedValue = Convert.ToString(MeasurementDevice.LicenseId);
             cmbInstrumentType.SelectedValue = Convert.ToString(MeasurementDevice.InstrumentType.InstrumentTypeId);
             txtSerialNumber.Text = MeasurementDevice.SerialNumber;
-            chkIsActive.Checked = (MeasurementDevice.IsActive==true? true:false);
+            chkIsActive.Checked = (MeasurementDevice.IsActive == true ? true : false);
         }
 
         #endregion

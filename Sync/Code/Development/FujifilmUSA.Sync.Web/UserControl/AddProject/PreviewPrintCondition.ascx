@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PreviewPrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.PreviewPrintCondition" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%--<%@ Register Src="~/UserControl/PopupControl/SaveWindow.ascx" TagName="SaveWindow"
-    TagPrefix="uc" %>--%>
 <script type="text/javascript" language="javascript">
     function ShowConfirmSaveWindow() {
         var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
@@ -30,7 +28,7 @@
     </div>
 </div>
 <div class="listDevice" style="margin-left: 10px">
-    <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     <table cellpadding="0" cellspacing="10" border="0">
         <tr>
             <td valign="top" style="width: 320px">
@@ -42,7 +40,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>Description</label>
+                                        <label>
+                                            Description</label>
                                     </div>
                                     <div style="float: right">
                                     </div>
@@ -54,45 +53,55 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Media </span>
+                                            <span style="font-weight: bold;">Media </span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Colorant</span>
+                                            <span style="font-weight: bold;">Colorant</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Rip Settings</span>
+                                            <span style="font-weight: bold;">Rip Settings</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Notes</span>
+                                            <span style="font-weight: bold;">Notes</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Technician Name</span>
+                                            <span style="font-weight: bold;">Technician Name</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblTechnicianName" runat="server" Text=""></asp:Label>
                                         </td>
@@ -131,27 +140,33 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Measurement Device</span>
+                                            <span style="font-weight: bold;">Measurement Device</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblMeasurementDevice" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Illuminant</span>
+                                            <span style="font-weight: bold;">Illuminant</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblIlluminant" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Observer</span>
+                                            <span style="font-weight: bold;">Observer</span>
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
                                         </td>
@@ -190,23 +205,23 @@
                             </div>
                             <div id="Div2" style="padding-left: 10px">
                                 <table>
-                                    <tr style =" line-height : 16px;">
+                                    <tr style="line-height: 16px;">
                                         <td>
-                                            <span style="font-weight:bold;" >Selected Presets: </span>
+                                            <span style="font-weight: bold;">Selected Presets: </span>
                                         </td>
                                     </tr>
-                                     <tr>
-                                        <td style ="padding-left : 20px;" >
+                                    <tr>
+                                        <td style="padding-left: 20px;">
                                             <asp:Label ID="lblSelectedPresets" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style =" line-height : 16px;">
-                                            <span style="font-weight:bold;">Preset Description: </span>
+                                        <td style="line-height: 16px;">
+                                            <span style="font-weight: bold;">Preset Description: </span>
                                         </td>
                                     </tr>
-                                     <tr>
-                                        <td style ="padding-left : 20px;">
+                                    <tr>
+                                        <td style="padding-left: 20px;">
                                             <asp:Label ID="lblPresetDescription" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
@@ -242,16 +257,18 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight:bold;">Alignment Chart</span> &nbsp
+                                            <span style="font-weight: bold;">Alignment Chart</span> &nbsp
                                         </td>
-                                        <td style= "width: 10px;"> <span style="font-weight:bold;">:</span> </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblAlignmentChart" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                           <%-- <asp:TextBox ID="txtChartPriview" runat="server" Width="96%" Height="200px" Style="margin-left: 10px;"
+                                            <%-- <asp:TextBox ID="txtChartPriview" runat="server" Width="96%" Height="200px" Style="margin-left: 10px;"
                                                 TextMode="MultiLine" Enabled="false" ReadOnly="true" Text="chart priview">
                                             </asp:TextBox>--%>
                                             <asp:Image ID="imgChart" runat="server" Width="96%" Height="200px" />
@@ -272,9 +289,9 @@
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
-        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" VisibleStatusbar ="false" ShowContentDuringLoad="false"
-            Title="Download Chart" Width="730" Height="400" Behaviors="Close, Move" Behavior="Close, Move"
-            NavigateUrl="~/PopupSaveProject.aspx">
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Download Chart" Width="730" Height="400"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupSaveProject.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

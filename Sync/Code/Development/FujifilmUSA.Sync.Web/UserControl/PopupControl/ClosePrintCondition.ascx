@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
-    <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script language="javascript" type="text/javascript">
     function CloseReOptimize() {
         var oWindow = GetProjectInformationRadWindow();
@@ -36,7 +36,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <ucStatusbar:Statusbar ID="ucStatusbar" runat="server" />
+                                                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" />
                                             </td>
                                         </tr>
                                         <tr>

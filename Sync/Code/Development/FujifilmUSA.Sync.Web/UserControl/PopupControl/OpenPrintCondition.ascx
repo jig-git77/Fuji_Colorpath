@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OpenPrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition" %>
-  
-  <script language="javascript" type="text/javascript">
-      function CloseOpenPrintConditionWindow() {
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript" type="text/javascript">
+    function CloseOpenPrintConditionWindow() {
         var oWindow = GetProjectInformationRadWindow();
         GetProjectInformationRadWindow().close();
         return false;
@@ -22,6 +22,9 @@
     <div class="section_middle">
         <div class="combopart">
             <div style="padding: 5px;" id="cotainer">
+                <div>
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                </div>
                 <div class="OpenPrintCondition">
                     <table width="650px">
                         <tr>

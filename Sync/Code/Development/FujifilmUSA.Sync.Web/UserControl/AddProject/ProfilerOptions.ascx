@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="listDevice" style="margin-left: 10px;">
-    <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     <table cellpadding="0" cellspacing="10" border="0" width="97%">
         <tr id="trListHeader" runat="server">
             <td>
@@ -45,9 +45,8 @@
                                             <span>Selected Presets:</span>
                                         </td>
                                         <td style="width: 450px">
-                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" Width="200px" 
-                                                CssClass="select" DataValueField="Key" DataTextField="Value" 
-                                                onselectedindexchanged="cmbSelectedPresets_SelectedIndexChanged">
+                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" Width="200px" CssClass="select"
+                                                DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

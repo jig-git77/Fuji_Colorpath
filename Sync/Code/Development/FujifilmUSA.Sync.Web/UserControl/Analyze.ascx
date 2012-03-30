@@ -53,16 +53,18 @@
         <div class="Information_divAnalyze">
             <asp:UpdatePanel ID="upCreateDLP" runat="server">
                 <ContentTemplate>
-                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" 
-                        onclick="lbtnDownloadAndSaveDLP_Click" OnClientClick="return ChooseRadWindow();">
-                        <span><asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />Download DLP</span> &nbsp;
+                    <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
+                        OnClientClick="return ChooseRadWindow();">
+                        <span>
+                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />Download
+                            DLP</span> &nbsp;
                     </asp:LinkButton>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
     </div>
     <div class="listDevice" style="margin-left: 10px;">
-        <uc:Statusbar ID="ucStatusbar" runat="server" Visible="false" />
+        <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
         <table cellpadding="0" cellspacing="10" border="0" width="97%">
             <tr id="trListHeader" runat="server">
                 <td>
@@ -85,70 +87,70 @@
                                 </div>
                                 <div style="border-style: None; padding: 5px">
                                     <center>
-                                    <script type="text/javascript" language="javascript">
-                                        function ClickOnPoint(MeasurementID) {
-                                            var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                            hdCheckBoxChange.value = "0";
-                                            var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
-                                            obj1.value = MeasurementID;
-                                            document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                        }
-                                        function ClickOnCheckBox(MeasurementID, checkedValue) {
-                                            var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                            hdCheckBoxChange.value = "1";
-                                            var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
-                                            obj1.value = MeasurementID;
-                                            var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
-                                            chekcBox.checked = checkedValue == "True" ? true : false;
-                                            document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                        } 
-                                    </script>
-                                    <asp:Chart ID="chartAnalyze" runat="server" Width="650px" Height="250px" BackGradientType="Center"
-                                        BackGradientEndColor="#DFDFDF" BorderlineColor="#808080" BorderlineWidth="1"
-                                        BorderlineDashStyle="Solid">
-                                        <Series>
-                                            <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                        </Series>
-                                        <ChartAreas>
-                                            <asp:ChartArea Name="ChartArea1">
-                                                <Position Height="99" Width="99" X="0" Y="0" />
-                                                <AxisY Enabled="True" Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto">
-                                                    <MajorGrid LineColor="Beige" />
-                                                </AxisY>
-                                                <AxisX Interval="1" TitleFont="Verdana, 5pt" Title="M">
-                                                    <MajorGrid LineColor="Beige" />
-                                                </AxisX>
-                                            </asp:ChartArea>
-                                        </ChartAreas>
-                                    </asp:Chart>
-                                    <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
-                                    <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
-                                        Style="display: none;" />
-                                    <asp:CheckBox ID="hdChartCheckBox" runat="server" Checked="false" Style="display: none;" />
-                                    <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
+                                        <script type="text/javascript" language="javascript">
+                                            function ClickOnPoint(MeasurementID) {
+                                                var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                                hdCheckBoxChange.value = "0";
+                                                var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
+                                                obj1.value = MeasurementID;
+                                                document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                            }
+                                            function ClickOnCheckBox(MeasurementID, checkedValue) {
+                                                var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                                hdCheckBoxChange.value = "1";
+                                                var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
+                                                obj1.value = MeasurementID;
+                                                var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
+                                                chekcBox.checked = checkedValue == "True" ? true : false;
+                                                document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                            } 
+                                        </script>
+                                        <asp:Chart ID="chartAnalyze" runat="server" Width="650px" Height="250px" BackGradientType="Center"
+                                            BackGradientEndColor="#DFDFDF" BorderlineColor="#808080" BorderlineWidth="1"
+                                            BorderlineDashStyle="Solid">
+                                            <Series>
+                                                <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                                <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                    BorderWidth="2">
+                                                </asp:Series>
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                    <Position Height="99" Width="99" X="0" Y="0" />
+                                                    <AxisY Enabled="True" Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto">
+                                                        <MajorGrid LineColor="Beige" />
+                                                    </AxisY>
+                                                    <AxisX Interval="1" TitleFont="Verdana, 5pt" Title="M">
+                                                        <MajorGrid LineColor="Beige" />
+                                                    </AxisX>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                        <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+                                        <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
+                                            Style="display: none;" />
+                                        <asp:CheckBox ID="hdChartCheckBox" runat="server" Checked="false" Style="display: none;" />
+                                        <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
                                     </center>
                                 </div>
                                 <div class="clear">
@@ -253,8 +255,9 @@
 </div>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
     <Windows>
-        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false" VisibleStatusbar ="false"
-            Title="Confirm Save" Width="718" Height="275" Behavior="Close, Move" NavigateUrl="~/PopupConfirmSave.aspx">
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+            VisibleStatusbar="false" Title="Confirm Save" Width="718" Height="275" Behavior="Close, Move"
+            NavigateUrl="~/PopupConfirmSave.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>

@@ -11,7 +11,7 @@
             Profiler Options</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
-    <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     <div class="clear">
     </div>
 </div>

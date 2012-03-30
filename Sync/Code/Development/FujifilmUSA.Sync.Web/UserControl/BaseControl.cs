@@ -18,10 +18,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public virtual void ErrorOccured(object sender, Entity.ErrorArgs e)
         {
             IsErrorOccured = true;
-            var ctrlStatusBar = FindControl("ucStatusbar1") as Statusbar;
+            var ctrlStatusBar = FindControl("fujiStatusbar");
             if (ctrlStatusBar != null)
             {
-                ctrlStatusBar.DisplayMessage(e.ErrorMessage, false);
+                if (ctrlStatusBar.GetType().BaseType == typeof(Statusbar))
+                {
+                    ((Statusbar)ctrlStatusBar).DisplayMessage(e.ErrorMessage, false);
+                }
+                else if (ctrlStatusBar.GetType().BaseType == typeof(AdminStatusbar))
+                {
+                    ((AdminStatusbar)ctrlStatusBar).DisplayMessage(e.ErrorMessage, false);
+                }
             }
         }
 

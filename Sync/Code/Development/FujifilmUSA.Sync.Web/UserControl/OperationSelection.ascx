@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OperationSelection.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OperationSelection" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -28,7 +27,6 @@
                 </div>--%>
             </div>
             <div>
-                <ucStatusbar:Statusbar ID="ucStatusbar1" runat="server" Visible="false" />
                 <div class="formSelection">    
                    <asp:LinkButton ID="lbtnColorValidation" runat="server" ValidationGroup="vgDestination"
                     CssClass="disable_big_bt" OnClientClick="return false;" >

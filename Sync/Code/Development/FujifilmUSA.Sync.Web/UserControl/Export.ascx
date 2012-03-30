@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Export.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Export" %>
-<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
-    TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <div class="contant_top">
 </div>
 <div class="contant_middle">
@@ -17,6 +16,11 @@
     </div>
     <div class="listDevice" style="margin-left: 15px;">
         <table cellpadding="0" cellspacing="5" border="0">
+            <tr id="tr0">
+                <td>
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                </td>
+            </tr>
             <tr id="tr1">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
@@ -43,8 +47,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadDLP" runat="server" CssClass="gray_bt" 
-                                                        onclick="lbtnDownLoadDLP_Click">
+                                                    <asp:LinkButton ID="lbtnDownLoadDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadDLP_Click">
                                                     <span>Download DLP</span>
                                                     </asp:LinkButton>
                                                     <%--<asp:LinkButton ID="lbtnDLPFileName" runat="server">
@@ -59,8 +62,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadChart" runat="server" CssClass="gray_bt" 
-                                                        onclick="lbtnDownLoadChart_Click">
+                                                    <asp:LinkButton ID="lbtnDownLoadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadChart_Click">
                                                     <span>Download Chart</span>
                                                     </asp:LinkButton>
                                                     <%--<asp:LinkButton ID="lbtnChartFileName" runat="server">
@@ -106,8 +108,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt" 
-                                                        onclick="lbtnDownloadSourceICC_Click">
+                                                    <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadSourceICC_Click">
                                                     <span>Download Source ICC</span>
                                                     </asp:LinkButton>
                                                     <%--<asp:LinkButton ID="lbtnDownloadSourceICCFileName" runat="server">

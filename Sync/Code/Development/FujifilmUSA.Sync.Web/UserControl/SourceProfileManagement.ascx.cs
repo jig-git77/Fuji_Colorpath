@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
-                rgSourceProfile.ItemCommand+=new GridCommandEventHandler(rgSourceProfile_ItemCommand);
+                rgSourceProfile.ItemCommand+=rgSourceProfile_ItemCommand;
                 BindSourceProfileList();
             }
         }

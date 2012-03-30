@@ -1,5 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchingDevice.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.SearchingDevice" %>
-
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchingDevice.ascx.cs"
+    Inherits="FujifilmUSA.Sync.Web.UserControl.SearchingDevice" %>
 <script type="text/javascript"> 
 //<![CDATA[
     var theForm = document.forms['form1'];
@@ -7,7 +7,7 @@
         theForm = document.form1;
     }
 
-    
+
 
     function __doPostBack(eventTarget, eventArgument) {
         if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
@@ -16,7 +16,7 @@
             theForm.submit();
         }
     }
-//]]>
+    //]]>
     // __doPostBack(<%=lbtnSearchDevice.UniqueID %>,\'\')
 </script>
 <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
@@ -24,18 +24,17 @@
 <div class="SearchList">
     <table cellpadding="0" cellspacing="0">
         <tr>
-            <td style="width: 100px;"> 
-                <label style="font-size:18px;">Search</label>
+            <td style="width: 100px;">
+                <label style="font-size: 18px;">
+                    Search</label>
             </td>
             <td style="width: 100px;">
-                
-                <asp:TextBox ID="txtDeviceName" MaxLength="50"  Font-Size="18px" 
-                    runat="server" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="txtDeviceName" MaxLength="50" Font-Size="18px" runat="server" Width="300px"></asp:TextBox>
             </td>
             <td style="width: 100px;">
-                <asp:LinkButton ID="lbtnSearchDevice" runat="server" ToolTip="Search Device" 
-                    onclick="lbtnSearchDevice_Click">
-                    <span> <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/Search.png" /></span>
+                <asp:LinkButton ID="lbtnSearchDevice" runat="server" ToolTip="Search Device" OnClick="lbtnSearchDevice_Click">
+                    <span>
+                        <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/Search.png" /></span>
                 </asp:LinkButton>
             </td>
             <td style="width: 100%;">

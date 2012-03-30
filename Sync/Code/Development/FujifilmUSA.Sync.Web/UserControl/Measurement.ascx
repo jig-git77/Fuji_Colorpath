@@ -1,22 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
-<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
-    TagPrefix="uc" %>
-<%--<script type="text/javascript">
-    jQuery(document).ready(
-    function () {
-
-        //Controlling Analyze button - If HasMeasurement = true do postback, else no postback
-        jQuery('#<%= btnAnalyze.ClientID %>').click(
-            function () {
-                return true;
-                //                if (jQuery("input[id*='hdHasMeasurement']").val() > 0)
-                //                    return true;
-                //                else
-                //                    return false;
-            });
-    });
-</script>--%>
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon" TagPrefix="uc" %>
 <div class="contant_top">
 </div>
 <div class="contant_middle">

@@ -87,7 +87,7 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="formDevice">
-                    <ucStatusbar:Statusbar ID="Statusbar1" runat="server" Visible="false" />
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
                     <table cellpadding="0" cellspacing="0" border="0" width="97%">
                         <tr id="tr2" runat="server">
                             <td>
@@ -111,8 +111,8 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true"
-                                                CssClass="select" Width="180px">
+                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true" CssClass="select"
+                                                Width="180px">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

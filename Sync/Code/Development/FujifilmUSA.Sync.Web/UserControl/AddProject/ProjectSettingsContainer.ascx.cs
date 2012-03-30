@@ -10,11 +10,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             LoadProjectSettingControls();
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         public void LoadProjectSettingControls()
         {
             ph.Controls.Clear();
@@ -54,36 +49,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
         }
-
-        //switch (Convert.ToString(Request.QueryString["Stage"]))
-        //   {
-        //       case "1":
-        //           hTitle.InnerText = "New Print Condition - Description";
-        //           lbtnCreateNewPrintCondition.ValidationGroup = "vgDescription";
-        //           lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Traget ColorSpace<span>";
-        //           break;
-        //       case "2":
-        //           hTitle.InnerText = "New Print Condition - Target Colorspace";
-        //           lbtnCreateNewPrintCondition.ValidationGroup = "";
-        //           lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Profiler Options<span>";
-        //           break;
-        //       case "3":
-        //           hTitle.InnerText = "New Print Condition - Profiler Options";
-        //           lbtnCreateNewPrintCondition.ValidationGroup = "";
-        //           lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Measurement Setup<span>";
-        //           break;
-        //       case "4":
-        //           hTitle.InnerText = "New Print Condition - Measurement Setup";
-        //           lbtnCreateNewPrintCondition.ValidationGroup = "vgMeasurementSetup";
-        //           lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Comfirm Save<span>";
-        //           break;
-        //       case "5":
-        //           hTitle.InnerText = "New Print Condition - Save Print Condition";
-        //           lbtnCreateNewPrintCondition.ValidationGroup = "";
-        //           lbtnCreateNewPrintCondition.Text = "<span><img id='imgAdd' src='Images/new_project_icon.png'/>Save<span>";
-        //           lbtnCreateNewPrintCondition.Attributes.Add("onclick", "javascript: return OpenInformationBox('" + ResolveUrl("~/PrintCondition.aspx?ModelControlId=3") + "')");
-        //           break;
-
-        //   }
     }
 }
