@@ -5,10 +5,17 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class User
     {
+        #region Ctor
         public User()
         {
             Role = new Role();
+            Region = new Region();
+            UserCompany = new UserCompany();
+            UserBranches = new List<UserBranch>();
         }
+        #endregion
+
+        #region Public Properties
         public int UserId { get; set; }
         public string LoginId { get; set; }
         public string LoginPass { get; set; }
@@ -22,17 +29,16 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsActive { get; set; }
         public UserCompany UserCompany { get; set; }
         public Region Region { get; set; }
-
-        public List<UserLicense> UserLicenses { get; set; }
         public List<UserBranch> UserBranches { get; set; }
+        #endregion
 
+        #region extension Methods
         public bool HasPermission(ERolePermission rolePermission)
         {
             if (Role.RoleId == 0) return true;
             if (Role.RolePermissions.Count == 0) return false;
             return Role.RolePermissions.Any(x => x.Permission == rolePermission && x.Allow);
         }
-
         public bool HasAdminPermission()
         {
             if (Role.RoleId == 0) return true;
@@ -47,9 +53,15 @@ namespace FujifilmUSA.Sync.Entity
                                               (x.Permission == ERolePermission.ManageSourceProfile && x.Allow) ||
                                               (x.Permission == ERolePermission.ManageUser && x.Allow)).Count() > 0;
         }
-
-        //Get Multiple Branchs
-        public string BranchName
+        public bool HasProjectPermission()
+        {
+            if (Role.RoleId == 0) return true;
+            if (Role.RoleId == 0 || Role.RolePermissions.Count == 0) return false;
+            return Role.RolePermissions.Where(x =>
+                                              (x.Permission == ERolePermission.CreateDeleteProject && x.Allow) ||
+                                              (x.Permission == ERolePermission.ModifyProject && x.Allow)).Count() > 0;
+        }
+        public string BranchNames
         {
             get
             {
@@ -65,5 +77,6 @@ namespace FujifilmUSA.Sync.Entity
                 return branchName;
             }
         }
+        #endregion
     }
 }

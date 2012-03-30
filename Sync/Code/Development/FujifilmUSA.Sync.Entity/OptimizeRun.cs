@@ -14,7 +14,6 @@ namespace FujifilmUSA.Sync.Entity
         public byte[] DeviceLinkProfile { get; set; }
         public int? MasterRunId { get; set; }
         public bool? IsUsed { get; set; }
-        //public List<Measurement> Measurements { get; set; }
         public bool HasMeasurements { get; set; }
         public bool HasProfile { get; set; }
     }

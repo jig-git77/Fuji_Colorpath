@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
 
-            DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionID;
+            DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
             IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
             ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId;

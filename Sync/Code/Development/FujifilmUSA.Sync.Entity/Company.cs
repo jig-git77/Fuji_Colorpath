@@ -10,9 +10,6 @@ namespace FujifilmUSA.Sync.Entity
         public int? BrandId { get; set; }
         public short RegionId { get; set; }
         public bool IsActive { get; set; }
-        public List<SourceProfile> SourceProfiles { get; set; }
-        public List<Branch> Branches { get; set; }
-        public List<UserCompany> UserCompanies { get; set; }
         public Region Region { get; set; }
     }
 }

@@ -6,6 +6,5 @@ namespace FujifilmUSA.Sync.Entity
         public int UserId { get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
-        public User User { get; set; }
     }
 }

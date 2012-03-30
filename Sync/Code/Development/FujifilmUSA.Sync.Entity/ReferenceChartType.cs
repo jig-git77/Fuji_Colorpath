@@ -12,7 +12,6 @@ namespace FujifilmUSA.Sync.Entity
         public short ProjectTypeId { get; set; }
         public byte[] ChartPreview { get; set; }
         public bool? IsUsed { get; set; }
-        public List<ChartSetting> ChartSettings { get; set; }
         public List<ReferenceChart> ReferenceCharts { get; set; }
     }
 }

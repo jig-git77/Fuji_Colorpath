@@ -438,6 +438,9 @@
   <data name="Error_UserLogin" xml:space="preserve">
     <value>Error occured while validating username/password.</value>
   </data>
+  <data name="Error_NoPermission" xml:space="preserve">
+    <value>User credentials are validated but user doesn't have any permission.</value>
+  </data>
   <data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected license?</value>
   </data>

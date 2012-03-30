@@ -826,6 +826,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User credentials are validated but user doesn&apos;t have any permission..
+        /// </summary>
+        internal static string Error_NoPermission {
+            get {
+                return ResourceManager.GetString("Error_NoPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while optimizing device link profile. Please contact your administrator..
         /// </summary>
         internal static string Error_OptimizeDeviceLinkProfile {

@@ -19,16 +19,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region "Page Events"
-
         protected override void OnInit(EventArgs e)
         {
             _presenterlogin = new PresenterLogin(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentUser != null)
-                Response.Redirect("Index.aspx");
-
+            //if (SessionManager.Instance.CurrentUser != null)
+            //    Response.Redirect("Index.aspx");
             if (!IsPostBack)
             {
                 if ((Request.Cookies["SyncFujiLogin"] == null || Request.Cookies["SyncFujiLogin"].Value == "") &&
@@ -57,10 +55,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentUser = CurrentUser;
                     if (chkRememberMe.Checked == true)
                     {
-                        var objCookie = new HttpCookie("SyncFujiLogin") {Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20)};
+                        var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
                         Response.SetCookie(objCookie);
 
-                        objCookie = new HttpCookie("SyncFujiPass") {Value = Password, Expires = System.DateTime.Now.AddDays(20)};
+                        objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
                         Response.SetCookie(objCookie);
                     }
                     else
@@ -69,7 +67,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiPass"].Value = "";
                     }
                     FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                    Response.Redirect("Index.aspx");
+                    if (SessionManager.Instance.CurrentUser.HasProjectPermission())
+                    {
+                        Response.Redirect("Index.aspx");
+                    }
+                    else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
+                    {
+                        Response.Redirect("Settings.aspx");
+                    }
+                    else
+                    {
+                        ucStatusbar1.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
+                    }
                 }
                 else
                 {

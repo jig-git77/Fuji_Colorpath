@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System;
 namespace FujifilmUSA.Sync.Entity
 {
@@ -8,7 +7,7 @@ namespace FujifilmUSA.Sync.Entity
         public short RegionId { get; set; }
         public string RegionName { get; set; }
         public bool IsActive { get; set; }
-        public List<SourceProfile> SourceProfiles { get; set; }
-        public List<Company> Companies { get; set; }
+        //public List<SourceProfile> SourceProfiles { get; set; }
+        //public List<Company> Companies { get; set; }
     }
 }

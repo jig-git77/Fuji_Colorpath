@@ -12,8 +12,6 @@ namespace FujifilmUSA.Sync.Entity
         public string ProfileDesc { get; set; }
         public byte[] Profile { get; set; }
         public bool IsUsed { get; set; }
-        //public List<Project> Projects { get; set; }
-        //public List<ReferenceLab> ReferenceLABs { get; set; }
         public Company Company { get; set; }
         public Region Region { get; set; }
     }

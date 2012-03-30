@@ -13,101 +13,109 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         public User UserLogin(string userName, string password)
         {
-            var objUser = new User();
+            var user = new User();
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetUser]", new object[] {userName, password});
+                        var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]", new object[] {userName, password});
                         if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                         {
-                            objUser = dsUser.Tables[0].AsEnumerable().
-                                Select(x => new User()
+                            user = new User()
+                                       {
+                                           UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
+                                           LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
+                                           LoginPass = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginPass"),
+                                           LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
+                                           FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
+                                           Role = new Role()
+                                                      {
+                                                          RoleId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RoleId"),
+                                                      },
+                                           Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
+                                           RegionId = DataReader.ReadByte(dsUser.Tables[0].Rows[0], "RegionId"),
+                                           LastModifiedUserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "LastModifiedUserId"),
+                                           LastModifiedDate = DataReader.ReadDate(dsUser.Tables[0].Rows[0], "LastModifiedDate"),
+                                           IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive")
+                                       };
+                            user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
+                                Select(x => new RolePermission()
                                                 {
-                                                    UserId = DataReader.ReadInt(x, "UserId"),
-                                                    LoginId = DataReader.ReadString(x, "LoginId"),
-                                                    LoginPass = DataReader.ReadString(x, "LoginPass"),
-                                                    LastName = DataReader.ReadString(x, "LastName"),
-                                                    FirstName = DataReader.ReadString(x, "FirstName"),
-                                                    Role = new Role()
-                                                               {
-                                                                    RoleId = DataReader.ReadByte(x, "RoleId"),
-                                                                    RolePermissions = GetRolePermissions(dsUser.Tables[1])
-                                                               },
-                                                    Email = DataReader.ReadString(x, "Email"),
-                                                    RegionId = DataReader.ReadByte(x, "RegionId"),
-                                                    LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
-                                                    LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
-                                                    IsActive = DataReader.ReadBoolean(x, "IsActive")
-                                                }).FirstOrDefault();
+                                                    Permission = (ERolePermission) DataReader.ReadInt(x, "PermissionID"),
+                                                    Allow = DataReader.ReadBoolean(x, "Allow")
+                                                }).ToList();
+                            if (dsUser.Tables[2].Rows.Count > 0)
+                            {
+                                user.UserCompany = new UserCompany()
+                                                       {
+                                                           CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID")
+                                                       };
+                            }
+                            if (dsUser.Tables[3].Rows.Count > 0)
+                            {
+                                user.UserBranches = dsUser.Tables[3].AsEnumerable().
+                                    Select(x => new UserBranch()
+                                                    {
+                                                        BranchId = DataReader.ReadInt(x, "BranchID")
+                                                    }).ToList();
+                            }
                         }
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
-            return objUser;
+            return user;
         }
-        private static List<RolePermission> GetRolePermissions(DataTable dt)
-        {
-            var permissions = dt.AsEnumerable().
-                 Select(x => new RolePermission()
-                 {
-                     Permission = (ERolePermission)DataReader.ReadInt(x, "PermissionID"),
-                     Allow = DataReader.ReadBoolean(x, "Allow") 
-                 }).ToList();
-            return permissions;
-        }
-
 
         public List<User> GetUser(int userId)
         {
             var objUsers = new List<User>();
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        var dsUser = DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                "[CP].[GetUsers]",
-                                new object[]
+                {
+                    var dsUser = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CP].[GetUsers]",
+                            new object[]
                                     {
                                         userId
                                     });
-                        if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
-                        {
-                            objUsers = dsUser.Tables[0].AsEnumerable().
-                                Select(x =>
-                                       new User()
-                                           {
-                                               UserId = DataReader.ReadInt(x, "UserId"),
-                                               LoginId = DataReader.ReadString(x, "LoginId"),
-                                               LoginPass = DataReader.ReadString(x, "LoginPass"),
-                                               LastName = DataReader.ReadString(x, "LastName"),
-                                               FirstName = DataReader.ReadString(x, "FirstName"),
-                                               Email = DataReader.ReadString(x, "Email"),
-                                               Role = new Role() {RoleId = DataReader.ReadByte(x, "RoleId")},
-                                               RegionId = DataReader.ReadByte(x, "RegionId"),
-                                               LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
-                                               LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
-                                               IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                               Region = new Region()
-                                                            {
-                                                                RegionId = DataReader.ReadByte(x, "RegionId"),
-                                                                RegionName = DataReader.ReadString(x, "Region")
-                                                            },
-                                               UserCompany = new UserCompany()
-                                                                   {
-                                                                       UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
-                                                                       CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                       UserId = DataReader.ReadInt(x, "UserId"),
-                                                                       Company =
-                                                                           new Company()
-                                                                               {
-                                                                                   CompanyId = DataReader.ReadInt(x, "CompanyId"),
-                                                                                   CompanyName = DataReader.ReadString(x, "CompanyName")
-                                                                               }
-                                                                   },
-                                               UserBranches = GetBranchList(DataReader.ReadInt(x, "UserId"), dsUser.Tables[1])
-                                           }).ToList();
-                        }
-                    },
+                    if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
+                    {
+                        objUsers = dsUser.Tables[0].AsEnumerable().
+                            Select(x =>
+                                   new User()
+                                       {
+                                           UserId = DataReader.ReadInt(x, "UserId"),
+                                           LoginId = DataReader.ReadString(x, "LoginId"),
+                                           LoginPass = DataReader.ReadString(x, "LoginPass"),
+                                           LastName = DataReader.ReadString(x, "LastName"),
+                                           FirstName = DataReader.ReadString(x, "FirstName"),
+                                           Email = DataReader.ReadString(x, "Email"),
+                                           Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
+                                           RegionId = DataReader.ReadByte(x, "RegionId"),
+                                           LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
+                                           LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
+                                           IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                           Region = new Region()
+                                                        {
+                                                            RegionId = DataReader.ReadByte(x, "RegionId"),
+                                                            RegionName = DataReader.ReadString(x, "Region")
+                                                        },
+                                           UserCompany = new UserCompany()
+                                                               {
+                                                                   UserCompanyId = DataReader.ReadInt(x, "UserCompanyId"),
+                                                                   CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                                   UserId = DataReader.ReadInt(x, "UserId"),
+                                                                   Company =
+                                                                       new Company()
+                                                                           {
+                                                                               CompanyId = DataReader.ReadInt(x, "CompanyId"),
+                                                                               CompanyName = DataReader.ReadString(x, "CompanyName")
+                                                                           }
+                                                               },
+                                           UserBranches = GetBranchList(DataReader.ReadInt(x, "UserId"), dsUser.Tables[1])
+                                       }).ToList();
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUsers"));
             return objUsers;
         }
@@ -137,13 +145,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        string branchIds = GetBranchIds(user.UserBranches);
-                        returnValue = DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "[CP].[InsertUser]",
-                                new object[]
+                {
+                    string branchIds = GetBranchIds(user.UserBranches);
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertUser]",
+                            new object[]
                                     {
                                         user.LoginId
                                         , user.LoginPass
@@ -157,7 +165,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.UserCompany.CompanyId
                                         , branchIds
                                     });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
             return returnValue;
         }
@@ -167,13 +175,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        string branchIds = GetBranchIds(user.UserBranches);
-                        returnValue = DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "[CP].[UpdateUser]",
-                                new object[]
+                {
+                    string branchIds = GetBranchIds(user.UserBranches);
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateUser]",
+                            new object[]
                                     {
                                         user.UserId
                                         , user.LoginId
@@ -188,7 +196,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.UserCompany.CompanyId
                                         , branchIds
                                     });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
             return returnValue;
         }

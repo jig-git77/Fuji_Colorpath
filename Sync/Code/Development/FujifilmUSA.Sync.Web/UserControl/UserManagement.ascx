@@ -176,7 +176,7 @@
                         AutoPostBackOnFilter="true"
                         >
                         <ItemTemplate>
-                            <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
+                            <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchNames") %>' />
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                   

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 namespace FujifilmUSA.Sync.Entity
 {
     public class Branch
@@ -9,9 +8,6 @@ namespace FujifilmUSA.Sync.Entity
         public string Location { get; set; }
         public bool IsActive { get; set; }
         public short UserBranchId { get; set; }
-
-        public List<License> Licenses { get; set; }
-        public List<UserBranch> UserBranches { get; set; }
         public Company Company { get; set; }
     }
 }

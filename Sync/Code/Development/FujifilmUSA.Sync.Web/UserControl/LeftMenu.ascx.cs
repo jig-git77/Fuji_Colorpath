@@ -101,6 +101,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
                 ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
                 ph.Controls.Add(ctrlItem);
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                 foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                 {
                     if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)

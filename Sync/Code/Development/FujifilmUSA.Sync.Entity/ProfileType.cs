@@ -5,6 +5,5 @@ namespace FujifilmUSA.Sync.Entity
     {
         public short ProfileTypeId { get; set; }
         public string Type { get; set; }
-        public List<ProjectOption> ProjectOptions { get; set; }
     }
 }

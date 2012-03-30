@@ -14,7 +14,6 @@ namespace FujifilmUSA.Sync.Entity
         public string BranchName { get; set; }
         public int LicenseTypeId { get; set; }
         public string LicenseType { get; set; }
-        
         public MeasurementSetting MeasurementSettings { get; set; }
         public InstrumentType InstrumentType { get; set; }
     }

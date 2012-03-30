@@ -92,7 +92,7 @@
                         <tr id="tr2" runat="server">
                             <td>
                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                    <tr>
+                                    <tr runat="server" id="trCompany">
                                         <td class="DeviceListFirstTD">
                                             <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
                                             &nbsp; :
@@ -104,7 +104,7 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr runat="server" id="trBranch">
                                         <td class="DeviceListFirstTD">
                                             <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
                                             &nbsp :

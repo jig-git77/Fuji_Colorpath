@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Method
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionID = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
+            SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
             SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
             var familyPreset =
                 ((List<DeviceFamilyProfilerOption>) ViewState[_vsDeviceFamilyProfilerOption]).Single(
