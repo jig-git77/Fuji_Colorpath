@@ -28,7 +28,7 @@
                                     <table width="100%">
                                         <tr>
                                             <td class="Content" style="width: 100%; text-align: center; line-height: 24px;">
-                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/process.gif" />
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/processbar.gif" />
                                             </td>
                                         </tr>
                                     </table>

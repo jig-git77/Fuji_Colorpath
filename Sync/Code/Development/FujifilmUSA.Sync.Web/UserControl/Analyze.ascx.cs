@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Collections.Generic;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -27,6 +28,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public string UpdateProgressClientID
+        {
+            get { return ((UpdateProgress) Page.Master.FindControl("UpdateProgress")).ClientID; }
+        } 
         #endregion
 
         #region Page Method
@@ -89,6 +94,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
+            System.Threading.Thread.Sleep(5000);
+            //InjectScript.Text = "<script type='text/javascript'>GetRadWindow().Close()</" + "script>";
+            return;
+
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterAnalyze.GetMeasurementsOnRunId();
