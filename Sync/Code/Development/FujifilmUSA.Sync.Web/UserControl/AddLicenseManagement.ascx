@@ -254,7 +254,7 @@
                                                     >
                                                     <span> Save </span>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/DeviceManagement.aspx">
+                                                <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/LicenseManagement.aspx">
                                                     <span> Cancel </span>
                                                 </asp:LinkButton>
                                             </div>
