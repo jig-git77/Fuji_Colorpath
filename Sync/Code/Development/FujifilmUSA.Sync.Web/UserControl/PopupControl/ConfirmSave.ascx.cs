@@ -4,6 +4,7 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using System.Collections.Generic;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -14,6 +15,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterConfirmSave = new PresenterConfirmSave(this);
+        }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            
         }
 
         protected void lbtnOptimize_Click(object sender, EventArgs e)

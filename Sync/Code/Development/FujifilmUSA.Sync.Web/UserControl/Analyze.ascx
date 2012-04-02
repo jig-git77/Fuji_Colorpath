@@ -3,8 +3,6 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/ConfirmSave.ascx" TagName="ConfirmSave"
-    TagPrefix="uc" %>
 <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
@@ -61,27 +59,6 @@
         }
     }
 </script>
-<style type="text/css">
-    .Alpha
-    {
-        filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-        background-color: #FFF !important;
-        opacity: 100;
-        mozopacity: 100;
-    }
-       .UpdateProgressBackground1
-        {
-            z-index: 3003;
-            position: fixed;
-            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-            width: 100% ;
-            height: 100% ;
-            top: 0px;
-            left: 0px;
-            opacity: .4;
-            mozopacity: .4;
-        }
-</style>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -209,13 +186,20 @@
                 VerticalSide="Middle"  TargetControlID="updateProgress" HorizontalOffset="325" VerticalOffset="210"
                 runat="server">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-             <div class="UpdateProgressBackground1" style="position: fixed; left: 0px; top: 0px;
+             <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+                <div style="height: 30%;" > &nbsp;</div>
+                <div>
+                    <div style="float:left;width:25%"> &nbsp;</div>
+                    <div >
+                        <div  style="float:left;background-color: #FFF !important;" >
+                            <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+                        </div>
+                    </div>
+                    <div style="float:left;width:25%">&nbsp;</div>
+                </div>
+                <div style="height: 30%;">&nbsp;</div>
              </div>
-             <div id="divUpdateCreateDLP" class="Alpha" runat="server">
-                <uc:CreateDLP runat="server" ID="ucCreateDLP" />
-             </div>
-          
         </ProgressTemplate>
     </asp:UpdateProgress>
     <div class="listDevice" style="margin-left: 10px;">
@@ -311,21 +295,15 @@
     <div class="clear">
     </div>
 </div>
-<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
-    <Windows>
-        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-            VisibleStatusbar="false" Title="Confirm Save" Width="718" Height="275" Behavior="Close, Move"
-            NavigateUrl="~/PopupConfirmSave.aspx">
-        </telerik:RadWindow>
-        <%--<telerik:RadWindow ID="CreateDLP" runat="server" ShowContentDuringLoad="false"
-            VisibleStatusbar="false" Title="Create DLP" Width="718" Height="275" Behavior="Move">
-            <ContentTemplate>
-                 <uc:CreateDLP runat="server" ID="ucCreateDLP" />
-            </ContentTemplate> 
-        </telerik:RadWindow>--%>
-    </Windows>
-</telerik:RadWindowManager>
 <div class="contant_bottom">
     &nbsp;</div>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
 <asp:Label ID="InjectScript" runat="server" Width="410px"></asp:Label>
+    <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+            <Windows>
+                <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+                    VisibleStatusbar="false" Title="Confirm Save" Width="718" Height="275" Behavior="Close, Move"
+                    NavigateUrl="~/PopupConfirmSave.aspx">
+                </telerik:RadWindow>
+            </Windows>
+        </telerik:RadWindowManager>

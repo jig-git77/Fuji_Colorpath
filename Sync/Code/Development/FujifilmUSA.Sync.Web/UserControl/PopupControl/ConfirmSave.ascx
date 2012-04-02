@@ -2,7 +2,12 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
+    TagPrefix="uc" %>
 <script type="text/javascript" language="javascript">
+
+
+
     //Click on Close Button
     function CloseConfirmSaveWindow() {
         var oWindow = GetProjectInformationRadWindow();
@@ -16,8 +21,9 @@
         else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
         return oWindow;
     }
+
 </script>
-<div style="display: block; margin: 10px;" class="contantbox tabcontant">
+<div id="divConfirmSave" style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
     <div class="section_middle">
@@ -32,9 +38,14 @@
                     </div>
                     <div class="text" style="float: right">
                         <div class="buttonright" style="padding-left: 3px">
-                            <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click">
-                        <span> No, Optimize </span>
-                            </asp:LinkButton>
+                            <asp:UpdatePanel ID="upOptimize" runat="server">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript:Click_On_Optimize();"
+                                        OnClick="lbtnOptimize_Click">
+                                                <span> No, Optimize </span>
+                                    </asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                         <div class="buttonright">
                             <asp:LinkButton ID="lbtnYes" runat="server" CssClass="gray_bt" OnClick="lbtnYes_Click">
@@ -89,3 +100,16 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
+<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upOptimize"
+    DisplayAfter="50">
+    <ProgressTemplate>
+        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
+            VerticalSide="Top" TargetControlID="updateProgress" 
+            runat="server">
+        </AjaxToolkit:AlwaysVisibleControlExtender>
+        <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px; top: 0px;
+            z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+            <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+        </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>
