@@ -2,14 +2,6 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddBranchManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 
-<script type="text/javascript" language="javascript">
-    $(document).ready(function () {
-
-        $('#DropDowlList1').val(1)
-
-    });
-</script>
-
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
