@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
 
         #region "Declaration"
-        private string _vsSourceProfile = "vsSourceProfile";
+        private const string _vsSourceProfile = "vsSourceProfile";
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
 
@@ -26,8 +26,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (ViewState[_vsSourceProfile] == null)
+            {
                 BindProfileSource();
                 LoadProjectInfoFromSession();
+            }
         }
         #endregion
 
@@ -59,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbSourceProfile.SelectedValue = SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId.ToString();
                 cmbSourceProfile_SelectedIndexChanged(null, null);
-                cmbSourceProfile.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+                //cmbSourceProfile.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
             }
         }
         private void BindProfileSource()

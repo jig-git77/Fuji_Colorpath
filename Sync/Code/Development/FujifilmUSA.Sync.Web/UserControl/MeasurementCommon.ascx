@@ -125,6 +125,7 @@
 <asp:HiddenField ID="hdProjectId" runat="server" />
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
+<asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
@@ -280,14 +281,14 @@
                         json[i].MeasurementDate = date;
                     }
                     if (json.length > 0) {
-                        jQuery("input[id*='hdHasMeasurement']").val(json.length);
+                        jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
                     }
                     else {
-                        jQuery("input[id*='hdHasMeasurement']").val('0');
+                        jQuery("input[id*='hdHasMeasurement']").val('false');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
                     }

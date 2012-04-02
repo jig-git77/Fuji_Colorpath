@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
                         lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
                         lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
+                        lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
                     }
                     else
                     {
@@ -75,9 +76,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ELeftMenuItemLevel.OptimizeRun:
                     SessionManager.Instance.CurrentOptimizeRun = this.CurrentRun;
                     Response.Redirect(
-                        CurrentRun.Status == EOptimizeRunStatus.Open
-                            ? "Measurement.aspx"
-                            : "Analyze.aspx");
+                        CurrentRun.HasMeasurements
+                            ? "Analyze.aspx"
+                            : "Measurement.aspx");
                     break;
             }
         }

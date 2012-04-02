@@ -6,6 +6,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class MeasurementCommon : BaseControl
     {
         #region Declaration
+
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
             get
@@ -22,6 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.ReferenceChartTypeId.ToString();
+                hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
             }
         }
     }

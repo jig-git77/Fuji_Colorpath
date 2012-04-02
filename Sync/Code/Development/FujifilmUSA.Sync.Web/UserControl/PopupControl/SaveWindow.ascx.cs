@@ -15,22 +15,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
+                {
+                    txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
+                }
+            }
+        }
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
-
-            Project = SStorage = SessionManager.Instance.CurrentProject;
+            Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
+
             if (!IsErrorOccured)
             {
-                Project.PrintCondition = SStorage.PrintCondition;
-                Project.SourceProfile = SStorage.SourceProfile;
-                Project.ProjectOption = SStorage.ProjectOption; 
-                Project.DeviceFamilyProfilerOptionId = SStorage.DeviceFamilyProfilerOptionId;
-                Project.MeasurementSetting = SStorage.MeasurementSetting;
-
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
@@ -40,7 +43,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewSaveWindow Members
         public Project Project { get; set; }
-        public Project SStorage { get; set; }
         #endregion
     }
 }

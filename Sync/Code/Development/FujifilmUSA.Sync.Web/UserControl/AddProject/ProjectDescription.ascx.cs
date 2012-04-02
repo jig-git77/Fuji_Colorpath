@@ -35,9 +35,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtRipSetting.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
                 txtNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
                 txtTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
-                txtMedia.Enabled = txtColorant.Enabled = txtRipSetting.Enabled = txtNotes.Enabled = txtTechnicianName.Enabled =
-                !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
-                );
+                //txtMedia.Enabled = txtColorant.Enabled = txtRipSetting.Enabled = txtNotes.Enabled = txtTechnicianName.Enabled =
+                //!(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
+                //);
             }
         }
 

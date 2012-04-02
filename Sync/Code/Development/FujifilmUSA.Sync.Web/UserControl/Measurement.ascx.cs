@@ -22,8 +22,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
+                                   ? string.Format("Measure - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName)
+                                   : string.Format("New Print Condition - Measure (No DLP)");
             }
-            header.InnerText = Request.QueryString["ProjectName"] != null ? string.Format("Measure - {0}.icc", Request.QueryString["ProjectName"]) : string.Format("New Print Condition - Measure (No DLP)");
         }
 
         #endregion
@@ -31,13 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString["ProjectName"] != null)
-            {
-                Response.Redirect("Analyze.aspx?ProjectName=" + Request.QueryString["ProjectName"]);
-            }
-            else
-                Response.Redirect("Analyze.aspx");
-
+            Response.Redirect("Analyze.aspx");
         }
         #endregion
 

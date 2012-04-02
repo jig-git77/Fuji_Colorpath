@@ -10,6 +10,7 @@
 
     //Click on Close Button
     function CloseConfirmSaveWindow() {
+        alert('a');
         var oWindow = GetProjectInformationRadWindow();
         GetProjectInformationRadWindow().close();
         return false;
@@ -40,8 +41,7 @@
                         <div class="buttonright" style="padding-left: 3px">
                             <asp:UpdatePanel ID="upOptimize" runat="server">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClientClick="javascript:Click_On_Optimize();"
-                                        OnClick="lbtnOptimize_Click">
+                                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click">
                                                 <span> No, Optimize </span>
                                     </asp:LinkButton>
                                 </ContentTemplate>

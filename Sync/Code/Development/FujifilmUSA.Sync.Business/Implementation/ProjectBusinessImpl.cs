@@ -41,21 +41,49 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                                                 ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
+                                                SourceProfile = new SourceProfile()
+                                                                    {
+                                                                        SourceProfileId = DataReader.ReadShort(x, "SourceProfileID")
+                                                                    },
+                                                DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "BaseDeviceFamilyProfilerOption")
                                             }).FirstOrDefault();
-
-                        project.OptimizeRuns = dsProject.Tables[1].AsEnumerable().
+                        if (dsProject.Tables[1].Rows.Count > 0)
+                        {
+                            project.PrintCondition =
+                                new PrintCondition()
+                                    {
+                                        Media = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Media"),
+                                        Colorant = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Colorant"),
+                                        RipSettings = DataReader.ReadString(dsProject.Tables[1].Rows[0], "RipSettings"),
+                                        TechnicianName = DataReader.ReadString(dsProject.Tables[1].Rows[0], "TechnicianName"),
+                                        Notes = DataReader.ReadString(dsProject.Tables[1].Rows[0], "Notes"),
+                                    };
+                        }
+                        if (dsProject.Tables[2].Rows.Count > 0)
+                        {
+                            project.MeasurementSetting =
+                                new MeasurementSetting()
+                                    {
+                                        ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
+                                        Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
+                                        UvIncluded = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "UVIncluded"),
+                                        MeasurementDeviceId = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID")
+                                    };
+                        }
+                        project.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
                             Select(x => new OptimizeRun()
-                                            {
-                                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                                RunName = DataReader.ReadString(x, "RunName"),
-                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
-                                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
-                                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
-                                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
-                                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
-                                                HasProfile = DataReader.ReadBoolean(x, "HasProfile")
-                                            }).ToList();
+                            {
+                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                RunName = DataReader.ReadString(x, "RunName"),
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
+                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                HasProfile = DataReader.ReadBoolean(x, "HasProfile")
+                            }).ToList();
+
                         if (project.OptimizeRuns.Count() == 1)
                         {
                             project.IsNewlyCreated = true;
@@ -316,22 +344,66 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public Project SaveProject(Project project)
         {
-            var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var projectOptions = new XElement("ProjectOptions",
-                                                      project.ProjectOption.
-                                                          Select(x =>
-                                                                 new XElement("ProjectOption",
-                                                                              new XAttribute("ProfileTypeID", x.ProfileTypeId),
-                                                                              new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
-                                                                              new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
-                                                                     )).ToList());
-                    DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure("CPSync4D.CreateProject",
-                                         new List<Parameters>()
+            var savedProject = new Project();
+            if (project.ProjectId > 0)
+            {
+                #region Update Project
+                Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        var projectOptions = new XElement("ProjectOptions",
+                                                          project.ProjectOption.
+                                                              Select(x =>
+                                                                     new XElement("ProjectOption",
+                                                                                  new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                  new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
+                                                                                  new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                         )).ToList());
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSync4D.UpdateProject",
+                                             new object[]
+                                                 {
+                                                     project.ProjectId,
+                                                     project.SourceProfile.SourceProfileId,
+                                                     project.ProjectName,
+                                                     project.PrintCondition.Media,
+                                                     project.PrintCondition.Colorant,
+                                                     project.PrintCondition.RipSettings,
+                                                     project.PrintCondition.TechnicianName,
+                                                     project.PrintCondition.Notes,
+                                                     project.MeasurementSetting.ObserverType,
+                                                     project.MeasurementSetting.Illuminant,
+                                                     project.MeasurementSetting.UvIncluded,
+                                                     project.MeasurementSetting.MeasurementDeviceId,
+                                                     project.MeasurementSetting.ReferenceChartTypeId,
+                                                     project.DeviceFamilyProfilerOptionId,
+                                                     projectOptions.ToString()
+                                                 });
+                        savedProject = GetProjectDetail(project.ProjectId);
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
+                #endregion
+            }
+            else
+            {
+                #region Insert Project
+                var outParam = new Parameters() { ParameterName = "@ProjectID", Type = DbType.Int32 };
+                Common.ImplementBusinessLogic(
+                    () =>
+                    {
+                        var projectOptions = new XElement("ProjectOptions",
+                                                          project.ProjectOption.
+                                                              Select(x =>
+                                                                     new XElement("ProjectOption",
+                                                                                  new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                  new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
+                                                                                  new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                         )).ToList());
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure("CPSync4D.CreateProject",
+                                             new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
                                                      new Parameters() {ParameterName = "@SourceProfileID", Type = DbType.Int32, Value = project.SourceProfile.SourceProfileId},
@@ -357,23 +429,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
+                                                     new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
                                                      new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()}
                                                  },
-                                         new List<Parameters>()
+                                             new List<Parameters>()
                                                  {
                                                      outParam
                                                  });
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
-            if (outParam.Value != null)
-            {
-                var projectId = Convert.ToInt32(outParam.Value);
-                return GetProjectDetail(projectId);
+                    },
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
+                if (outParam.Value != null)
+                {
+                    var projectId = Convert.ToInt32(outParam.Value);
+                    savedProject = GetProjectDetail(projectId);
+                }
+                #endregion
             }
-            else
-            {
-                return new Project();
-            }
+            return savedProject;
         }
 
         public ReferenceChartData GetReferenceChartData(int projectId)

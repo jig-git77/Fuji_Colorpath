@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
-            _viewConfirmSave.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewConfirmSave.OptimizeRunId).Select(x => x.MeasurementId).ToList();
+            _viewConfirmSave.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewConfirmSave.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
         }
 
         public void GetProjectDetail()

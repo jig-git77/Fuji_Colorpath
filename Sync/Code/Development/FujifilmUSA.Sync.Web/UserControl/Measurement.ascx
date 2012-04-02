@@ -1,6 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
-<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
+    TagPrefix="uc" %>
+<script language="javascript">
+    function AllowToAnalyze() {
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
+            alert(jQuery("input[id$=hdHasMeasurement]").val());
+            if (jQuery("input[id$=hdHasMeasurement]").val() == 'true')
+                return true;
+            else
+                return false;
+        }
+        return true;
+    }
+</script>
 <div class="contant_top">
 </div>
 <div class="contant_middle">
@@ -8,7 +21,8 @@
         <h1 id="header" runat="server">
             Measurement</h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click">
+            <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
+                OnClientClick="return AllowToAnalyze();">
                 <span>
                     <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
                     Analyze</span>

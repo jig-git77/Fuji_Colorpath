@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region "Declaration"
         //private PresenterProjectList _presenterProjectList;
-        private string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
+        private const string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         #endregion
 
@@ -53,8 +53,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
                 cmbSelectedPresets_SelectedIndexChanged(null, null);
-                cmbSelectedPresets.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
-                                              SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+                //cmbSelectedPresets.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
+                //                              SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
             }
         }
         #endregion

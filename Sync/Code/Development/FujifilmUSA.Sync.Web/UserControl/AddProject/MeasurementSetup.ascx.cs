@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
-        private string vsIsPostBack = "_IsPostBack";
+        private const string vsIsPostBack = "_IsPostBack";
         #endregion
 
         #region "Page Events"
@@ -69,16 +69,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MeasurementSetting != null)
             {
-                  cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
-                  cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
-                  cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
-                  cmbMeasurementDevice_SelectedIndexChanged(null,null);
-                  cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId.ToString();
-                  cmbAlignmentChart_SelectedIndexChanged(null,null);
+                cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
+                cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
+                cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
+                cmbMeasurementDevice_SelectedIndexChanged(null, null);
+                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId.ToString();
+                cmbAlignmentChart_SelectedIndexChanged(null, null);
 
-                cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =
-                  !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
-                   );
+                //cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =
+                //  !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
+                //   );
             }
         }
 
@@ -128,6 +128,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindAlignmentChart()
         {
+            if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue)) return;
             MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
             _presenterMeasurementSetting.GetReferenceChartType();
             if (!IsErrorOccured)

@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Select(x => x.MeasurementId).ToList();
+            _viewAnalyze.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
         }
 
         public void GetAnalyzeChartMeasurement()
