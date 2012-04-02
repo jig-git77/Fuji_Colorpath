@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business
     {
         public static void WriteLog(Exception e, BusinessHandlerRequest request)
         {
-            var errorHandlingBusiness = BusinessFactory<IErrorHandlingBusiness>.CreateObject();
+            var errorHandlingBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             errorHandlingBusiness.
                 InsertAppErrorLog(
                     new AppErrorLog()

@@ -68,6 +68,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -83,7 +84,7 @@
     <Compile Include="ErrorDelegate.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
-    <Compile Include="Implementation\ErrorHandlingBusinessImpl.cs" />
+    <Compile Include="Implementation\MiscBusinessImpl.cs" />
     <Compile Include="Implementation\LicenseBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementBusinessImpl.cs" />
     <Compile Include="Implementation\MeasurementDeviceBusinessImpl.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="Implementation\DeviceBusinessImpl.cs" />
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
-    <Compile Include="Interface\IErrorHandlingBusiness.cs" />
+    <Compile Include="Interface\IMiscBusiness.cs" />
     <Compile Include="Interface\ILicenseBusiness.cs" />
     <Compile Include="Interface\IBranchBusiness.cs" />
     <Compile Include="Interface\ICompanyBusiness.cs" />
@@ -106,11 +107,12 @@
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="LoginSecurity.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="Messages\MeasurementDataResponse.cs" />
     <Compile Include="Mock\BranchBusinessImpl.cs" />
     <Compile Include="Mock\CompanyBusinessImpl.cs" />
-    <Compile Include="Mock\ErrorHandlingBusinessMock.cs" />
+    <Compile Include="Mock\MiscBusinessMock.cs" />
     <Compile Include="Mock\LicenseBusinessMock.cs" />
     <Compile Include="Mock\MeasurementBusinessMock.cs" />
     <Compile Include="Mock\MeasurementDeviceBusinessMock.cs" />

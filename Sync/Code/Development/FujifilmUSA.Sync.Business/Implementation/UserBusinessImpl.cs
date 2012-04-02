@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]", new object[] {userName, password});
+                        var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]", new object[] {userName, LoginSecurity.Encrypt(password)});
                         if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                         {
                             user = new User()

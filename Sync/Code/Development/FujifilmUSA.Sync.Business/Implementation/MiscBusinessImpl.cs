@@ -1,10 +1,11 @@
-﻿using FujifilmUSA.Sync.Business.Interface;
+﻿using System;
+using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.DataAccess;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
-    public class ErrorHandlingBusinessImpl : IErrorHandlingBusiness
+    public class MiscBusinessImpl : IMiscBusiness
     {
         #region IErrorHandlingBusiness Members
 
@@ -24,6 +25,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             errorLog.UserId
                         });
             return returnValue;
+        }
+
+        public string EncryptPassword(string password, string key)
+        {
+            return LoginSecurity.Encrypt(password, key);
+        }
+
+        public string DecryptPassword(string encryptedpassword, string key)
+        {
+            return LoginSecurity.Decrypt(encryptedpassword, key);
         }
 
         #endregion
