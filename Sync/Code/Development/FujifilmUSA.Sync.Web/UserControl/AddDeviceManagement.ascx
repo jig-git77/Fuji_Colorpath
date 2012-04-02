@@ -6,23 +6,23 @@
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            Add Device Management</h1>
+            Device Management</h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
-       <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-        <table cellpadding="0" cellspacing="0" border="0" width="97%">
-            <tr id="trListHeader" runat="server">
-                <td>
-                    <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None">
-                        <table>
+            <center>
+                <fieldset style="width: 60%;">
+                    <legend><asp:Label ID="lblHeader" runat ="server" Text ="Add Device Family" ></asp:Label> </legend>
+                    <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <table>
                             <tr>
                                 <td>
-                                    <span style="font-weight:bold;">Company Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td>&nbsp;:&nbsp;</td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbCompany" runat="server"  Width="400px" 
@@ -54,10 +54,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">Branch Name: &nbsp<span style="color: Red;">*</span> </span>
+                                <td>
+                                    <span style="font-weight:bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td style="width: 400px">
+                                <td>&nbsp;:&nbsp;</td>
+                                <td >
                                     <div style="float: left;">
                                          <asp:DropDownList ID="cmbBranch" runat="server"  Width="400px" 
                                              CssClass="select" AutoPostBack="true" onselectedindexchanged="cmbBranch_SelectedIndexChanged">
@@ -88,10 +89,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">License Name: &nbsp<span style="color: Red;">*</span> </span>
+                                <td>
+                                    <span style="font-weight:bold;">License Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td style="width: 400px">
+                                <td>&nbsp;:&nbsp;</td>
+                                <td>
                                     <div style="float: left;">
                                          <asp:DropDownList ID="cmbLicense" runat="server"  Width="400px" CssClass="select">
                                         </asp:DropDownList>
@@ -121,10 +123,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">Device Name: &nbsp<span style="color: Red;">*</span> </span>
+                                <td>
+                                    <span style="font-weight:bold;">Device Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td style="width: 400px">
+                                <td>&nbsp;:&nbsp;</td>
+                                <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtDeviceName" runat="server" MaxLength="50" Width="400px" Height="19px" ></asp:TextBox>
                                     </div>
@@ -153,10 +156,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">Device Family: &nbsp<span style="color: Red;">*</span> </span>
+                                <td >
+                                    <span style="font-weight:bold;">Device Family<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td style="width: 400px">
+                                <td>&nbsp;:&nbsp;</td>
+                                <td >
                                     <div style="float: left;">
                                          <asp:DropDownList ID="cmbDeviceFamily" runat="server"  Width="400px" CssClass="select">
                                         </asp:DropDownList>
@@ -186,10 +190,11 @@
                                 </td>
                             </tr>
                               <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">Is Active ?: &nbsp &nbsp</span>
+                                <td >
+                                    <span style="font-weight:bold;">Is Active? </span>
                                 </td>
-                                <td style="width: 400px">
+                                <td>&nbsp;:&nbsp;</td>
+                                <td >
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat ="server" />
                                     </div>
@@ -200,6 +205,7 @@
                             <tr>
                                 <td>
                                 </td>
+                                <td></td>
                                 <td>
                                         <div class="text" >
                                             <div style="padding-left: 3px;">
@@ -220,10 +226,8 @@
                                 </td>
                             </tr>
                         </table>
-                    </asp:Panel>
-                </td>
-            </tr>
-        </table>
+                </fieldset>
+            </center>
         </ContentTemplate>
         </asp:UpdatePanel>
     </div>

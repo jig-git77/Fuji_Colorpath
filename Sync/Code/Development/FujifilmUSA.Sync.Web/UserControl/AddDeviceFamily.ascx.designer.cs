@@ -13,31 +13,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddDeviceFamily {
         
         /// <summary>
+        /// lblHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHeader;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
-        
-        /// <summary>
-        /// trListHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trListHeader;
-        
-        /// <summary>
-        /// panelAddProjectDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelAddProjectDescription;
+        protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
         
         /// <summary>
         /// txtDeviceFamilyName control.

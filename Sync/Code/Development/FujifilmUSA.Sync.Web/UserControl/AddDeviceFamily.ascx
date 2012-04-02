@@ -1,28 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddDeviceFamily.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddDeviceFamily" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            Add Device Family</h1>
+            Device Management</h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
        <asp:UpdatePanel runat="server">
        <ContentTemplate>
-       <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-        <table cellpadding="0" cellspacing="0" border="0" width="97%">
-            <tr id="trListHeader" runat="server">
-                <td>
-                    <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None">
+            <center>
+                <fieldset style="width: 60%;">
+                    <legend><asp:Label ID="lblHeader" runat ="server" Text ="Add Device Family" ></asp:Label> </legend>
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
                                 <td>
-                                    <span style="font-weight:bold;">Device Family Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Device Family Name<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtDeviceFamilyName" runat="server" MaxLength="25" Width="400px" Height="19px" ></asp:TextBox>
@@ -52,10 +53,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight:bold;">Is Active ?: &nbsp &nbsp</span>
+                                <td>
+                                    <span style="font-weight:bold;">Is Active?</span>
                                 </td>
-                                <td style="width: 400px">
+                                <td> <b> &nbsp;:&nbsp;</b></td>
+                                <td>
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat ="server" />
                                     </div>
@@ -66,6 +68,7 @@
                             <tr>
                                 <td>
                                 </td>
+                                <td></td>
                                 <td>
                                         <div class="text" >
                                             <div style="padding-left: 3px;">
@@ -86,10 +89,8 @@
                                 </td>
                             </tr>
                         </table>
-                    </asp:Panel>
-                </td>
-            </tr>
-        </table>
+                </fieldset>
+            </center>
         </ContentTemplate>
         </asp:UpdatePanel>
     </div>
