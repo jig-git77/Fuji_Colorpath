@@ -14,7 +14,8 @@
         <ucLogin:Login ID="ucLogin1" runat="server" />
     </div>
     <div id="footer">
-        <img alt="" src="Images/powerby_logo.png">
+        <b> © 2012 FUJIFILM North America Corporation - Graphic Systems Division </b><br><br>
+	    <img alt="" src="Images/logo_Fujifilm.png">
     </div>
     </form>
 </body>

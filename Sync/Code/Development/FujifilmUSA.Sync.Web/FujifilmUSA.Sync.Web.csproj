@@ -83,6 +83,7 @@
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
     <Content Include="Images\clear-fillter.png" />
+    <Content Include="Images\logo_Fujifilm.png" />
     <Content Include="Permission.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
@@ -1035,7 +1036,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
