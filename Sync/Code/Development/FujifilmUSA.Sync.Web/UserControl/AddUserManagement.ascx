@@ -36,56 +36,29 @@
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            Add User Management</h1>
+            User Management</h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <table cellpadding="0" cellspacing="10" width="97%">
+                    <table cellpadding="0" cellspacing="0" style=" width:98%;">
                     <tr>
                         <td colspan="2">
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         </td>
                     </tr>
                     <tr>
-                        <td class="admin_header" style="background-color: #CBF8ED; border: 1px; border-style: solid;
-                            border-color: Gray;">
-                            <div class="header">
-                                <div class="content">
-                                    <div class="text" style="float: left;">
-                                        <span>Personal Information</span>
-                                    </div>
-                                    <div style="float: right">
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="admin_header" style="background-color: #CBF8ED; border: 1px; border-style: solid;
-                            border-color: Gray;">
-                            <div class="header">
-                                <div class="content">
-                                    <div class="text" style="float: left;">
-                                        <span>Access Type</span>
-                                    </div>
-                                    <div style="float: right">
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
+                        <td>
+                        <fieldset><legend><asp:Label ID="lblHeader" runat ="server" Text ="Add User" ></asp:Label> </legend>
+                        <table cellpadding="0" cellspacing="3">
+                            <tr>
                         <td valign="top" style="width: 50%;">
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tr id="trListHeader" runat="server">
-                                    <td>
-                                        <asp:Panel ID="panelAddProjectDescription" runat="server" BorderStyle="None">
-                                            <table>
+                           <center>
+                                <fieldset >
+                                    <legend>Personal Information</legend>
+                                      <table>
                                                 <tr>
                                                     <td style="width: 140px;">
                                                         <span style="font-weight: bold;">Company Name: &nbsp<span style="color: Red;">*</span>
@@ -433,13 +406,14 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </asp:Panel>
-                                    </td>
-                                </tr>
-                            </table>
+                               </fieldset>
+                            </center>
                         </td>
                         <td valign="top" style="width: 50%;">
-                            <table cellpadding="0" cellspacing="0" border="0">
+                            <center>
+                                <fieldset >
+                                    <legend>Access Type</legend>
+                                        <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="width: 140px;">
                                         <span style="font-weight: bold;">Role: &nbsp;<span style="color: Red;">*</span>
@@ -475,16 +449,22 @@
                                     </td>
                                 </tr>
                             </table>
+                                </fieldset>
+                            </center>
                         </td>
                     </tr>
-                    <tr>
+                            <tr>
                         <td colspan="2">
                             &nbsp;
                         </td>
                     </tr>
-                    <tr>
+                        </table>
+                        </fieldset>
+                        </td>
+                    </tr>
+                    <tr >
                         <td align="center" colspan="2">
-                            <div style="padding-left: 3px;">
+                            <div style="margin-top:10px;padding-left: 3px;">
                                 <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" OnClientClick="javascript:ValidCompany()"
                                     OnClick="lbtnSave_Click" ValidationGroup="vgAddUser">
                                                     <span> Save </span>
@@ -495,9 +475,11 @@
                             </div>
                         </td>
                     </tr>
-                </table>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+                    </table>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+       
+      
     </div>
 </div>
 <div class="admin_bottom">

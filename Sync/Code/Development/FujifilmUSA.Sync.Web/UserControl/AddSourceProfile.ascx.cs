@@ -39,15 +39,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            if (!IsPostBack)
-            {
-                Page.Form.Attributes.Add("enctype", "multipart/form-data");
-                BindCompanyDropDown();
-                BindRegionDropDown();
+            lblHeader.Text = "Add Source Profile";
+            if (IsPostBack) return;
+            
+            Page.Form.Attributes.Add("enctype", "multipart/form-data");
+            BindCompanyDropDown();
+            BindRegionDropDown();
 
-                if (Request.QueryString["SourceProfileId"] != null)
-                    LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
+            if (Request.QueryString["SourceProfileId"] != null)
+            {
+                lblHeader.Text = "Edit Source Profile";
+                LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
             }
+
+
         }
 
         #endregion

@@ -1,13 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminStatusbar.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AdminStatusbar" %>
-<div class="statusbar" style="margin: 0px">
-    <div class="top">
-        &nbsp;</div>
-    <div class="middle" runat="server" id="tblMessage">
-        <asp:Label ID="lblMessage" runat="server" Text="" Style="font-weight: bold;"></asp:Label>
-        &nbsp;
-        <br />
+
+<div id="adminstatusbar">
+    <div id="tblMessage" class="innerdiv" runat="server" >
+            <asp:Label ID="lblMessage" runat="server" Text="" Style="font-weight: bold;"></asp:Label>
     </div>
-    <div class="bottom">
-        &nbsp;</div>
 </div>
+<div class="clear"></div>

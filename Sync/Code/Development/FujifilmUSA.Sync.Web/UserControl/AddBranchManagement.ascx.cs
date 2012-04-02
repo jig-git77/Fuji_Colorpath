@@ -36,9 +36,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
+            lblHeader.Text = "Add Branch"; 
             BindCompnay();
             if (Request.QueryString["BranchId"] != null)
+            {
                 SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
+                lblHeader.Text = "Edit Branch"; 
+            }
 
         }
         #endregion

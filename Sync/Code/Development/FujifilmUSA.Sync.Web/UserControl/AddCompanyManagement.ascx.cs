@@ -34,10 +34,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
+            lblHeader.Text = "Add Company";
             BindRegion();
             if (Request.QueryString["CompanyId"] != null)
+            {
                 SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]));
-
+                lblHeader.Text = "Edit Company";
+            }
         }
         #endregion
 

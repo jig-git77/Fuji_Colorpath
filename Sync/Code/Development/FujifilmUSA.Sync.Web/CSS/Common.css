@@ -1673,3 +1673,43 @@ height:10px;
         }
         
 /*******************************/
+
+
+/************** admin status bar css *****************/
+#adminstatusbar {
+	width:96%;
+	float:left;
+	margin:3px;
+	border:1.5px solid #7AB6A1;
+	background:#FFF;
+	padding: 3px;
+
+    border-radius: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	
+}
+#adminstatusbar .innerdiv {
+     padding: 3px;
+     text-align:left; 
+     line-height:18px;
+}
+
+/************** admin side field set *****************/
+.admin_middle fieldset
+{
+                        border:solid 1px #ddd; 
+                        margin:0; 
+                        padding:10px; 
+                        text-align:left;
+                        
+                        -moz-border-radius: 4px;
+                        -khtml-border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        border-radius: 4px;
+                        
+ }
+.admin_middle fieldset legend{margin:0 0 0 43%; padding:0; font-weight:bold; }
+/*******************************/
+

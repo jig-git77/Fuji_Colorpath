@@ -13,6 +13,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddBranchManagement {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
+        /// lblHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHeader;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
@@ -20,24 +38,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
-        
-        /// <summary>
-        /// trListHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trListHeader;
-        
-        /// <summary>
-        /// panelAddProjectDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelAddProjectDescription;
         
         /// <summary>
         /// cmbCompanyName control.
