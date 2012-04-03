@@ -5,7 +5,6 @@
 <script language="javascript">
     function AllowToAnalyze() {
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
-            alert(jQuery("input[id$=hdHasMeasurement]").val());
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'true')
                 return true;
             else

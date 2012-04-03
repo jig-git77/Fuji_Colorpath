@@ -67,16 +67,15 @@
         z-index: 3003;
         position: fixed !important;
         filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
-        background-color: #e8e8ea !important;
+        background-color: #dddddd !important;
         width: 100% !important;
         height: 100% !important;
         top: 0px;
         left: 0px;
         opacity: .1;
         mozopacity: .1;
-    } 
+    }
     /***************************/
-
 </style>
 <div>
     <div class="info_form">
@@ -105,10 +104,16 @@
         <div class="color_pallate_head">
             Colorbar</div>
         <div class="color_pallate_middle">
+            <div id='divProgressImageMaster' style="display: none;">
+                <div style="width:200px;text-align:center;margin-left:150px;">
+                    <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;" /><br />
+                    <br />
+                    Uploading Measurement...<div class="clear">
+                    </div>
+                </div>
+            </div>
             <div class="color_bar">
                 <canvas id="Canvas" height="350" width="630"></canvas>
-                <%--<canvas id="Canvas" style="position: relative; height: 350px; width: 630px; overflow: visible;">
-                </canvas>--%>
             </div>
         </div>
         <div class="color_pallate_bottom">
@@ -198,9 +203,6 @@
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
     }
     jQuery(document).ready(function () {
-
-        LoadProgressBrowserWindow();
-
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
             return false;
@@ -274,17 +276,15 @@
             success:
                 function (response) {
                     bindMeasurementData();
-                    //MeasurementDialog("Response From Server', 'measurement added successfully", "Successfully saved");
-                    jQuery.growlUI('Response From Server', 'measurement added successfully', 1000);
+                    StopProgressBrowserWindow();
                 },
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                    StopProgressBrowserWindow();
                     MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
                 }
-            });
-        
-        StopProgressBrowserWindow();
+        });
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
@@ -372,7 +372,7 @@
         var winWidth;
         var winHeight;
         winWidth = (window.screen.width / 2);
-        winHeight = (window.screen.height / 2) - 50;
+        winHeight = (window.screen.height / 2);
 
         divProgressImage.style.left = winWidth + 'px';
         divProgressImage.style.top = winHeight + 'px';
@@ -385,13 +385,6 @@
 
 
 </script>
- <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
-        position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
-    </div>
-    <div id='divProgressImageMaster' style="position: fixed; top: 75px; left: 150px;
-        display: none;">
-        <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle;
-            margin: 2px;" /><br />
-        <br />
-        Loading...
-    </div> 
+<div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
+    position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
+</div>
