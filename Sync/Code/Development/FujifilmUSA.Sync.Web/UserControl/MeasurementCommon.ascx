@@ -198,6 +198,9 @@
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
     }
     jQuery(document).ready(function () {
+
+        LoadProgressBrowserWindow();
+
         jQuery("[id*='btnCalibrate']").click(function () {
             calibrateDevice(g_ScannerList[0]);
             return false;
@@ -281,8 +284,7 @@
                 }
             });
         
-        win.document.getElementById('divBackgroundProgressMaster').hide();
-        win.document.getElementById('divProgressImageMaster').hide();
+        StopProgressBrowserWindow();
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
@@ -361,42 +363,25 @@
 
     /************ Progress bar ***************/
     function LoadProgressBrowserWindow() {
-        var win = GetRadWindow();
-        if (win) {
-            var win = win.BrowserWindow;
-        }
-        else {
-            win = this;
-        }
-        var divBackgroundProgress = win.document.getElementById('divBackgroundProgressMaster');
-        var divProgressImage = win.document.getElementById('divProgressImageMaster');
-        LoadProgressBar(divBackgroundProgress, divProgressImage, win);
+        var divBackgroundProgress = document.getElementById('divBackgroundProgressMaster');
+        var divProgressImage = document.getElementById('divProgressImageMaster');
+
+        divBackgroundProgress.style.display = 'block';
+        divProgressImage.style.display = 'block';
+
+        var winWidth;
+        var winHeight;
+        winWidth = (window.screen.width / 2);
+        winHeight = (window.screen.height / 2) - 50;
+
+        divProgressImage.style.left = winWidth + 'px';
+        divProgressImage.style.top = winHeight + 'px';
+
     }
-
-
-    function LoadProgressBar(divBackgroundProgress, divProgressImage, win) {
-
-        if (divBackgroundProgress && divProgressImage) {
-            divBackgroundProgress.style.display = 'block';
-            divProgressImage.style.display = 'block';
-            var winWidth = 0, winHeight = 0;
-            if (typeof (win.innerWidth) == 'number') {
-                //Non-IE
-                winWidth = win.innerWidth;
-                winHeight = win.innerHeight;
-            } else if (win.document.documentElement && (win.document.documentElement.clientWidth || win.document.documentElement.clientHeight)) {
-                //IE 6+ in 'standards compliant mode'
-                winWidth = win.document.documentElement.clientWidth;
-                winHeight = win.document.documentElement.clientHeight;
-            } else if (win.document.body && (win.document.body.clientWidth || win.document.body.clientHeight)) {
-                //IE 4 compatible
-                winWidth = win.document.body.clientWidth;
-                winHeight = win.document.body.clientHeight;
-            }
-            divProgressImage.style.left = (winWidth / 2) - 21 + 'px';
-            divProgressImage.style.top = (winHeight / 2) - 21 + 'px';
-        }
-    } 
+    function StopProgressBrowserWindow() {
+        jQuery("[id*='divBackgroundProgressMaster']").hide();
+        jQuery("[id*='divProgressImageMaster']").hide();
+    }
 
 
 </script>
