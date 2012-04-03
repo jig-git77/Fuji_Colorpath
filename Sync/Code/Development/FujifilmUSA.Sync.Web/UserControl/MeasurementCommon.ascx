@@ -60,6 +60,23 @@
         width: 40em;
         height: 10em;
     }
+    
+    /************ Progress bar ***************/
+    .UpdateProgressBackground
+    {
+        z-index: 3003;
+        position: fixed !important;
+        filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=10);
+        background-color: #e8e8ea !important;
+        width: 100% !important;
+        height: 100% !important;
+        top: 0px;
+        left: 0px;
+        opacity: .1;
+        mozopacity: .1;
+    } 
+    /***************************/
+
 </style>
 <div>
     <div class="info_form">
@@ -222,6 +239,10 @@
         });
     }
     function saveMeasurement() {
+
+        // Load progress bar
+        LoadProgressBrowserWindow();
+
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
         var MeasurementDateTime = dt1.toMSJSON();
@@ -258,7 +279,10 @@
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                     MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
                 }
-        });
+            });
+        
+        win.document.getElementById('divBackgroundProgressMaster').hide();
+        win.document.getElementById('divProgressImageMaster').hide();
         OnCancel();
         refreshCanvas();
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
@@ -333,4 +357,56 @@
         var value = new Date(parseInt(jsonDate.substr(6)));
         return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear() + " " + value.toLocaleTimeString();
     }
+
+
+    /************ Progress bar ***************/
+    function LoadProgressBrowserWindow() {
+        var win = GetRadWindow();
+        if (win) {
+            var win = win.BrowserWindow;
+        }
+        else {
+            win = this;
+        }
+        var divBackgroundProgress = win.document.getElementById('divBackgroundProgressMaster');
+        var divProgressImage = win.document.getElementById('divProgressImageMaster');
+        LoadProgressBar(divBackgroundProgress, divProgressImage, win);
+    }
+
+
+    function LoadProgressBar(divBackgroundProgress, divProgressImage, win) {
+
+        if (divBackgroundProgress && divProgressImage) {
+            divBackgroundProgress.style.display = 'block';
+            divProgressImage.style.display = 'block';
+            var winWidth = 0, winHeight = 0;
+            if (typeof (win.innerWidth) == 'number') {
+                //Non-IE
+                winWidth = win.innerWidth;
+                winHeight = win.innerHeight;
+            } else if (win.document.documentElement && (win.document.documentElement.clientWidth || win.document.documentElement.clientHeight)) {
+                //IE 6+ in 'standards compliant mode'
+                winWidth = win.document.documentElement.clientWidth;
+                winHeight = win.document.documentElement.clientHeight;
+            } else if (win.document.body && (win.document.body.clientWidth || win.document.body.clientHeight)) {
+                //IE 4 compatible
+                winWidth = win.document.body.clientWidth;
+                winHeight = win.document.body.clientHeight;
+            }
+            divProgressImage.style.left = (winWidth / 2) - 21 + 'px';
+            divProgressImage.style.top = (winHeight / 2) - 21 + 'px';
+        }
+    } 
+
+
 </script>
+ <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
+        position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
+    </div>
+    <div id='divProgressImageMaster' style="position: fixed; top: 75px; left: 150px;
+        display: none;">
+        <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle;
+            margin: 2px;" /><br />
+        <br />
+        Loading...
+    </div> 
