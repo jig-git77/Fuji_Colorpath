@@ -267,5 +267,15 @@ namespace FujifilmUSA.Sync.Common
                 return "<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>";
             }
         }
+
+        public static int PageSize
+        {
+            get
+            {
+                return 10;
+            }
+        }
+
+
     }
 }

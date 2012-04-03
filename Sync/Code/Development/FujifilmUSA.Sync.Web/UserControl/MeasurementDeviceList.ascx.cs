@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            rgMeasurementDevice.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
                 BindMeasurementDeviceList();

@@ -34,12 +34,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
+            lblHeader.Text = "Add Device";
             BindCompnay();
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
             if (Request.QueryString["DeviceID"] != null)
+            {
+                lblHeader.Text = "Edit Device";
                 SetDevice(Convert.ToInt32(Request.QueryString["DeviceID"]));
+            }
         }
         #endregion
 

@@ -31,6 +31,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presenterCompanyManagement = new PresenterCompanyManagement(this);
         }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            rgCompany.PageSize = Common.Utilities.PageSize;
+        }
         #endregion
 
         #region Methods

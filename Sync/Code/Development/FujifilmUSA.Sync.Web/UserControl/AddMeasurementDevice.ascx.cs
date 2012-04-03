@@ -37,12 +37,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            if (!IsPostBack)
+            if (IsPostBack) return;
+            
+            BindCompanyDropDown();
+            BindInstrumentTypeDropDown();
+            lblHeader.Text = "Add Measurement Device";
+            if (Request.QueryString["MeasurementDeviceId"] != null)
             {
-                BindCompanyDropDown();
-                BindInstrumentTypeDropDown();
-                if (Request.QueryString["MeasurementDeviceId"] != null)
-                    LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
+                lblHeader.Text = "Edit Measurement Device";
+                LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
             }
         }
 

@@ -29,6 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            rgSourceProfile.PageSize = Common.Utilities.PageSize;
             if (!Page.IsPostBack)
             {
                 rgSourceProfile.ItemCommand += rgSourceProfile_ItemCommand;

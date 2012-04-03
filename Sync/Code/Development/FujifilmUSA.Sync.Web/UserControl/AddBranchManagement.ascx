@@ -7,7 +7,7 @@
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            Add Branch Management</h1>
+            Branch Management</h1>
     </div>
     <div class="clear">
     </div>
@@ -57,7 +57,7 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Branch Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td> <b>&nbsp;:&nbsp;</b></td>
                                 <td align="left">
@@ -90,7 +90,7 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Location: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Location<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td> <b>&nbsp;:&nbsp;</b></td>
                                 <td align="left">
@@ -123,7 +123,7 @@
                             </tr>
                               <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Is Active ?: &nbsp &nbsp</span>
+                                    <span style="font-weight:bold;">Is Active?</span>
                                 </td>
                                 <td> <b>&nbsp;:&nbsp;</b></td>
                                 <td align="left" >

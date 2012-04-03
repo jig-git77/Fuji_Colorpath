@@ -15,7 +15,7 @@
        <ContentTemplate>
             <center>
                 <fieldset style="width: 60%;">
-                    <legend><asp:Label ID="lblHeader" runat ="server" Text ="Add Device Family" ></asp:Label> </legend>
+                    <legend><asp:Label ID="lblHeader" runat ="server" Text ="Add Device" ></asp:Label> </legend>
                     <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                     <table>
                             <tr>

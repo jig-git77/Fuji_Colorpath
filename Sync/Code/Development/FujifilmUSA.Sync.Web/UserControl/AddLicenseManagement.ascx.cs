@@ -37,9 +37,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindCompnay();
             BindLicenseType();
             BindBranch();
+            lblHeader.Text = "Add License";
             if (Request.QueryString["LicenseId"] != null)
+            {
+                lblHeader.Text = "Edit License";
                 SetLicense(Convert.ToInt32(Request.QueryString["LicenseID"]));
-
+            }
         }
         #endregion
 
