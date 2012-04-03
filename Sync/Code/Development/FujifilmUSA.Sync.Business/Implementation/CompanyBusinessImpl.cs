@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class CompanyBusinessImpl : ICompanyBusiness
     {
-        #region  ICompnayBusiness Members
+        #region  IcompanyBusiness Members
 
         public int InsertCompany(Company company)
         {
@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public int UpdateCompnay(Company company)
+        public int UpdateCompany(Company company)
         {
             int returnValue = 0;
             Common.ImplementBusinessLogic(

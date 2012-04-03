@@ -37,6 +37,20 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+        .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -74,7 +88,7 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
-                <telerik:RadGrid ID="rgDevice" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
+                <telerik:RadGrid ID="rgDevice" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgDevice_NeedDataSource" OnItemCommand="rgDevice_ItemCommand"
                     Width="98%" HeaderStyle-Font-Bold="true">
@@ -82,57 +96,61 @@
                     <MasterTableView DataKeyNames="DeviceID,DeviceName,LicenseID,DeviceFamily.DeviceFamilyID,License.Branch.BranchId,License.Branch.Company.CompanyId,License.BranchId,IsActive">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
-                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120" HeaderStyle-Width ="120" 
+                                ItemStyle-Wrap="true" ShowFilterIcon="true"
+                                >
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceFamily.DeviceFamilyDesc" AllowFiltering="true"
                                 HeaderText="DeviceFamily Desc" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
-                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
-                                ShowFilterIcon="false" AutoPostBackOnFilter="true">
+                                FilterControlWidth="100" HeaderStyle-Width ="100"  ItemStyle-Wrap="true" 
+                                ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.LicenseType.Type" AllowFiltering="true"
                                 HeaderText="License Type" UniqueName="LicenseType" SortExpression="License.LicenseType.Type"
-                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
-                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                FilterControlWidth="120" HeaderStyle-Width ="120"  ItemStyle-Wrap="true" 
+                                ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("License.LicenseType.Type") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.Branch.Company.CompanyName" AllowFiltering="true"
                                 HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
-                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
-                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                FilterControlWidth="120" HeaderStyle-Width ="120"  ItemStyle-Wrap="true" 
+                                ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.Branch.BranchName" AllowFiltering="true"
                                 HeaderText="Branch Name" UniqueName="BranchName" SortExpression="License.Branch.BranchName"
-                                FilterControlWidth="120" ItemStyle-Wrap="true" CurrentFilterFunction="Contains"
-                                ShowFilterIcon="false" AutoPostBackOnFilter="true" DataType="System.String">
+                                FilterControlWidth="100" HeaderStyle-Width ="100"  ItemStyle-Wrap="true" 
+                                ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
-                                DataField="IsActive" ItemStyle-HorizontalAlign="Center">
+                                DataField="IsActive" ItemStyle-HorizontalAlign="Center"  FilterControlWidth="40" HeaderStyle-Width ="40" >
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceID" AllowFiltering="true" HeaderText=""
-                                UniqueName="Edit">
+                                UniqueName="Edit"  FilterControlWidth="70" HeaderStyle-Width ="70">
                                 <FilterTemplate>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
-                                                    <span> Clear Fillter </span>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server"  ToolTip ="Clear Fillter" CommandName="ClearFilter">
+                                                    <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
                                     </asp:LinkButton>
+                                    </center>
                                 </FilterTemplate>
                                 <ItemTemplate>
                                     <div>

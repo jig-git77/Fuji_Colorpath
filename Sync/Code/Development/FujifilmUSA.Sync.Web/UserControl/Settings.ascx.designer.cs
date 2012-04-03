@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class Settings {
         
         /// <summary>
-        /// tdCompnay control.
+        /// tdcompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdCompnay;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdcompany;
         
         /// <summary>
         /// lbtnCompanyManagement control.
@@ -40,13 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// divCompnaySeprator control.
+        /// divcompanySeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCompnaySeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divcompanySeprator;
         
         /// <summary>
         /// tdBranch control.

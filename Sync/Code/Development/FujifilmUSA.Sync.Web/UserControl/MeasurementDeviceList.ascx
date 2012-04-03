@@ -37,6 +37,21 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+    
+        .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
 </style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteMeasurementDevice() {
@@ -68,7 +83,7 @@
     <asp:UpdatePanel ID="testPanel" runat="server">
         <ContentTemplate>
             <telerik:RadGrid ID="rgMeasurementDevice" ShowHeader="true" AllowFilteringByColumn="true"
-                AllowSorting="false" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
+                AllowSorting="true" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                 EnableLinqExpressions="false" OnNeedDataSource="rgMeasurementDevice_NeedDataSource"
                 OnItemCommand="rgMeasurementDevice_ItemCommand" Width="98%"
                 HeaderStyle-Font-Bold="true"  >
@@ -81,11 +96,9 @@
                             HeaderText="Company Name"
                             DataField="CompanyName" 
                             SortExpression="CompanyName" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false" 
-                            FilterControlWidth="140"
-                            HeaderStyle-Width ="140" 
+                            ShowFilterIcon="true" 
+                            FilterControlWidth="130"
+                            HeaderStyle-Width ="130" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
@@ -97,11 +110,9 @@
                             HeaderText="Branch Name"
                             DataField="BranchName" 
                             SortExpression="BranchName" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false" 
-                            FilterControlWidth="140"
-                            HeaderStyle-Width ="140" 
+                            ShowFilterIcon="true" 
+                            FilterControlWidth="130"
+                            HeaderStyle-Width ="130" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
@@ -113,11 +124,9 @@
                             HeaderText="License Type"
                             DataField="LicenseType" 
                             SortExpression="LicenseType" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false"  
-                            FilterControlWidth="140"
-                            HeaderStyle-Width ="140" 
+                            ShowFilterIcon="true"  
+                            FilterControlWidth="130"
+                            HeaderStyle-Width ="130" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
@@ -129,9 +138,7 @@
                             HeaderText="Serial Number"
                             DataField="SerialNumber" 
                             SortExpression="SerialNumber" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false"
+                            ShowFilterIcon="true"
                             FilterControlWidth="100"
                             HeaderStyle-Width ="100" >
                             <ItemTemplate>
@@ -144,9 +151,7 @@
                             HeaderText="Instrument Type"
                             DataField="InstrumentType.InstrumentName" 
                             SortExpression="InstrumentType.InstrumentName" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false"
+                            ShowFilterIcon="true"
                             FilterControlWidth="70"
                             HeaderStyle-Width ="70" 
                             >
@@ -170,15 +175,19 @@
                         </telerik:GridTemplateColumn>
 
 
-                           <telerik:GridTemplateColumn 
+                        <telerik:GridTemplateColumn 
                                 DataField="BranchID" 
                                 AllowFiltering="true" 
                                 HeaderText=""
                                 UniqueName="Edit">
                                 <FilterTemplate>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
-                                                    <span> Clear Fillter </span>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter" CommandName="ClearFilter">
+                                                  <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
                                     </asp:LinkButton>
+                                    </center>
                                 </FilterTemplate>
                                 <ItemTemplate>
                                     <div>

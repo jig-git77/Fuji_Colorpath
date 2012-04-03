@@ -37,6 +37,20 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+        .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
 </style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteSourceProfile() {
@@ -70,7 +84,7 @@
                 ID="rgSourceProfile" 
                 ShowHeader="true" 
                 AllowFilteringByColumn="true"
-                AllowSorting="false" 
+                AllowSorting="true" 
                 AllowPaging="True" 
                 PageSize="5" 
                 runat="server" 
@@ -92,12 +106,10 @@
                             HeaderText="Profile Name"
                             DataField="ProfileName" 
                             SortExpression="ProfileName" 
-                            ShowFilterIcon="false"
+                            ShowFilterIcon="true"
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290" 
                             AllowFiltering="true" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>'/>
@@ -110,9 +122,7 @@
                             HeaderText="Profile Description"
                             DataField="ProfileDesc" 
                             SortExpression="ProfileDesc" 
-                            AutoPostBackOnFilter="true"
-                            CurrentFilterFunction="Contains" 
-                            ShowFilterIcon="false"
+                            ShowFilterIcon="true"
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290">
                             <ItemTemplate>
@@ -153,9 +163,13 @@
                                 HeaderText=""
                                 UniqueName="Edit">
                                 <FilterTemplate>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
-                                                    <span> Clear Fillter </span>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" CommandName="ClearFilter">
+                                                    <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
                                     </asp:LinkButton>
+                                    </center>
                                 </FilterTemplate>
                                 <ItemTemplate>
                                     <div>

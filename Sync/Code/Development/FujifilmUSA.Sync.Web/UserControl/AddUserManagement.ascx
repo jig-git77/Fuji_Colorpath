@@ -2,13 +2,19 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddUserManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <script language="javascript">
-    function ShowPassWord() {
-        var txtPassWord = document.getElementById("<%= txtPassWord.ClientID %>");
-        var lblPassWord = document.getElementById("<%= lblPassWord.ClientID %>");
-        lblPassWord.innerHTML = txtPassWord.value;
-        //alert(lblPassWord.value);
-        return false;
-    }
+//    function ShowPassWord() {
+//        if (jQuery("input[id*=txtPassWord]").attr('type') == 'password')
+//            jQuery("input[id*=txtPassWord]").attr('type', 'text');
+//        else
+//            jQuery("input[id*=txtPassWord]").attr('type', 'password');
+
+//        if (jQuery("input[id*=txtConfirmPass]").attr('type') == 'password')
+//            jQuery("input[id*=txtConfirmPass]").attr('type', 'text');
+//        else
+//            jQuery("input[id*=txtConfirmPass]").attr('type', 'password');
+
+//        return false;
+//    }
 
     function ValidateChkList(source, arguments) {
         arguments.IsValid = IsCheckBoxChecked() ? true : false;
@@ -28,6 +34,10 @@
             }
         }
         return isChecked;
+    }
+
+    function ChangePassWordTextBoxType() {
+        
     }
 
 </script>
@@ -74,7 +84,7 @@
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
-                                                                    <asp:RequiredFieldValidator ID="rfvCompnayName" runat="server" Display="Dynamic"
+                                                                    <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                                                         ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddUser">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
@@ -387,8 +397,8 @@
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div style="float: left;">
-                                                                    <asp:LinkButton ID="lbtnShow" runat="server" OnClientClick="javascript:ShowPassWord(); return false;"
-                                                                        CssClass="gray_bt">
+                                                                    <asp:LinkButton ID="lbtnShow" runat="server" CssClass="gray_bt" 
+                                                                        onclick="lbtnShow_Click">
                                                                     <span> Show Password </span>
                                                                     </asp:LinkButton>
                                                                 </div>

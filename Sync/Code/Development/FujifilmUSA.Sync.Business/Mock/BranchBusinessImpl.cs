@@ -6,7 +6,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 {
     public class BranchBusinessImpl  : IBranchBusiness
     {
-        #region  ICompnayBusiness Members
+        #region  IcompanyBusiness Members
 
         public int InsertBranch(Branch branch)
         {

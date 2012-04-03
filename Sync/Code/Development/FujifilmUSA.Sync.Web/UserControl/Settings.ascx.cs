@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             //role base permission
-            tdCompnay.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
+            tdcompany.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
             tdBranch.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageBranch);
             tdUser.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUser);
             tdSourceProfile.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
 
             ////seperator image 
-            divCompnaySeprator.Visible = (tdCompnay.Visible && tdBranch.Visible);
+            divcompanySeprator.Visible = (tdcompany.Visible && tdBranch.Visible);
             divBranchSeprator.Visible = (tdBranch.Visible && tdUser.Visible);
             divUserSeprator.Visible = (tdUser.Visible && tdSourceProfile.Visible);
 

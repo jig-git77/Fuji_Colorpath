@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack) return;
 
             lblHeader.Text = "Add Device";
-            BindCompnay();
+            Bindcompany();
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
@@ -63,7 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbDeviceFamily.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
             }
         }
-        private void BindCompnay()
+        private void Bindcompany()
         {
             cmbCompany.Items.Clear();
             Compnaies = new Dictionary<int, string>();
@@ -148,12 +148,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                  new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
                              IsActive = chkIsActive.Checked
                          };
-            if (DId == 0) // Add New Compnay
+            if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
                 if (IsErrorOccured) return;
             }
-            else // Edit New Compnay
+            else // Edit New company
             {
                 Device.DeviceId = DId;
                 _presenterDeviceManagement.UpdateDevice();

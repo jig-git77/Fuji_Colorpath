@@ -9,8 +9,8 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface ICompanyBusiness : ITaskBase
     {
         int InsertCompany(Company company);
-        int UpdateCompnay(Company company);
+        int UpdateCompany(Company company);
         bool DeleteCompany(int companyId);
-        List<Company> GetCompany(int compnayId);
+        List<Company> GetCompany(int companyId);
     }
 }

@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void lbtnDownLoadCurrentDLP_Click(object sender, EventArgs e)
+        protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
             _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();

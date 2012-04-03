@@ -33,7 +33,7 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvCompnayName" runat="server" Display="Dynamic"
+                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">

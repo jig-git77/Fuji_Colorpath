@@ -124,7 +124,7 @@
                                             <div class="tooltip_top_right">
                                             </div>
                                             <div class="tooltip_inside">
-                                                Please provide colorant name.
+                                                Please provide rip settings.
                                             </div>
                                             <div class="tooltip_bottom_left">
                                             </div>

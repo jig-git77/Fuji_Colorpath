@@ -37,6 +37,20 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+        .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -68,7 +82,7 @@
     <div style="margin-left: 10px;">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <telerik:RadGrid ID="rgCompany" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
+                <telerik:RadGrid ID="rgCompany" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgCompany_NeedDataSource" OnItemCommand="rgCompany_ItemCommand"
                     OnItemDataBound="rgCompany_ItemDataBound" Width="98%" HeaderStyle-Font-Bold="true">
@@ -77,16 +91,15 @@
                         <Columns>
                             <telerik:GridTemplateColumn DataField="CompanyName" AllowFiltering="true" HeaderText="Company Name"
                                 UniqueName="CompanyName" SortExpression="CompanyName" FilterControlWidth="300"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                ItemStyle-Wrap="true" ShowFilterIcon="true"
+                                >
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Region.RegionName" AllowFiltering="true" HeaderText="Region Name"
                                 UniqueName="RegionName" SortExpression="Region.RegionName" FilterControlWidth="200"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                ItemStyle-Wrap="true" ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblRegionName" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                                 </ItemTemplate>
@@ -100,9 +113,13 @@
                             <telerik:GridTemplateColumn DataField="CompanyId" AllowFiltering="true" HeaderText=""
                                 UniqueName="Edit" HeaderStyle-Width="100">
                                 <FilterTemplate>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="Fillter">
-                                                    <span> Clear Fillter </span>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"  CommandName="Fillter">
+                                                    <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
                                     </asp:LinkButton>
+                                    </center>
                                 </FilterTemplate>
                                 <ItemTemplate>
                                     <div>

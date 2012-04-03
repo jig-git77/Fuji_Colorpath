@@ -47,7 +47,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadDLP_Click">
+                                                    <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadDLP_Click">
                                                     <span>Download DLP</span>
                                                     </asp:LinkButton>
                                                     <%--<asp:LinkButton ID="lbtnDLPFileName" runat="server">
@@ -62,7 +62,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownLoadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadChart_Click">
+                                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
                                                     <span>Download Chart</span>
                                                     </asp:LinkButton>
                                                     <%--<asp:LinkButton ID="lbtnChartFileName" runat="server">

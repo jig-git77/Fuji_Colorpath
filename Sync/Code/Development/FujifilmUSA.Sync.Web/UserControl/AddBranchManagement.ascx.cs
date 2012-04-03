@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack) return;
 
             lblHeader.Text = "Add Branch"; 
-            BindCompnay();
+            Bindcompany();
             if (Request.QueryString["BranchId"] != null)
             {
                 SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
-        private void BindCompnay()
+        private void Bindcompany()
         {
             Compnaies = new Dictionary<int, string>();
             _presenterBranchManagement.GetCompanies();
@@ -70,12 +70,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                              CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue),
                              IsActive = chkIsActive.Checked
                          };
-            if (BId == 0) // Add New Compnay
+            if (BId == 0) // Add New company
             {
                 _presenterBranchManagement.InsertBranch();
                 if (IsErrorOccured) return;
             }
-            else // Edit New Compnay
+            else // Edit New company
             {
                 Branch.BranchId = BId;
                 _presenterBranchManagement.UpdateBranch();

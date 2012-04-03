@@ -73,6 +73,23 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+    
+    
+    .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
+    
 </style>
 <div class="contant_top">
     &nbsp;</div>
@@ -99,11 +116,22 @@
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr id="trListHeader" runat="server">
                         <td>
-                            <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
-                                PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                                OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand"
+                            <telerik:RadGrid 
+                                ID="rgProjectList" 
+                                AllowFilteringByColumn="True" 
+                                AllowPaging="True"
+                                PageSize="5" 
+                                runat="server" 
+                                AutoGenerateColumns="False" 
+                                EnableLinqExpressions="False"
+                                OnNeedDataSource="rgProjectList_NeedDataSource" 
+                                OnItemCommand="rgProjectList_ItemCommand"
                                 OnItemDataBound="rgProjectList_ItemDataBound" 
-                                 Width="100%" CellSpacing="0" GridLines="None">
+                                Width="100%" 
+                                CellSpacing="0" 
+                                GridLines="None"
+                                AllowSorting ="true" 
+                                  >
                                 <HeaderStyle Font-Bold="true" />
                                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                                 <MasterTableView DataKeyNames="ProjectId">
@@ -154,12 +182,11 @@
                                             HeaderText="Project Name"
                                             UniqueName="ProjectName" 
                                             SortExpression="ProjectName" 
-                                            HeaderStyle-Width ="100"
-                                            FilterControlWidth="100"
+                                            HeaderStyle-Width ="80"
+                                            FilterControlWidth="80"
                                             ItemStyle-Wrap="true" 
-                                            CurrentFilterFunction="Contains" 
-                                            ShowFilterIcon="false"
-                                            AutoPostBackOnFilter="true">
+                                            ShowFilterIcon="true"
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
                                             </ItemTemplate>
@@ -170,12 +197,11 @@
                                             DataField="SourceProfile.ProfileName"
                                             AllowFiltering="true" 
                                             HeaderText="Standard" 
-                                            HeaderStyle-Width ="100"
-                                            FilterControlWidth="100"
+                                            HeaderStyle-Width ="80"
+                                            FilterControlWidth="80"
                                             SortExpression="SourceProfile.ProfileName"
-                                            CurrentFilterFunction="Contains" 
-                                            ShowFilterIcon="false" 
-                                            AutoPostBackOnFilter="true">
+                                            ShowFilterIcon="true" 
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
                                             </ItemTemplate>
@@ -204,11 +230,10 @@
                                             HeaderText="Media" 
                                             UniqueName="Media" 
                                             SortExpression="PrintCondition.Media" 
-                                            FilterControlWidth="80"
-                                            HeaderStyle-Width ="80"
-                                            CurrentFilterFunction="Contains" 
-                                            ShowFilterIcon="false" 
-                                            AutoPostBackOnFilter="true">
+                                            FilterControlWidth="60"
+                                            HeaderStyle-Width ="60"
+                                             ShowFilterIcon="true" 
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>' />
                                             </ItemTemplate>
@@ -219,11 +244,10 @@
                                             HeaderText="Colorant" 
                                             UniqueName="Colorant" 
                                             SortExpression="PrintCondition.Colorant"
-                                            FilterControlWidth="80" 
-                                            HeaderStyle-Width ="80"
-                                            CurrentFilterFunction="Contains" 
-                                            ShowFilterIcon="false"
-                                            AutoPostBackOnFilter="true">
+                                            FilterControlWidth="60" 
+                                            HeaderStyle-Width ="60"
+                                            ShowFilterIcon="true"
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
                                             </ItemTemplate>

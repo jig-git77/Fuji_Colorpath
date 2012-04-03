@@ -49,13 +49,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.DropDownList cmbCompanyName;
         
         /// <summary>
-        /// rfvCompnayName control.
+        /// rfvcompanyName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCompnayName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvcompanyName;
         
         /// <summary>
         /// cmbRegion control.

@@ -37,6 +37,21 @@
         border-style: none;
         border-width: 0 0 1px;
     }
+    
+        .RadGrid_Default .rgRow .rgSorted {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted {
+            background-color: #F7F7F7;
+            border-bottom-color: #F7F7F7;
+    }
+
+    .RadGrid_Default th.rgSorted 
+    {
+            background-color: #F1F1F1;
+            background-position: 0px;
+    }
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -72,7 +87,7 @@
             <ContentTemplate>
                 <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
-                <telerik:RadGrid ID="rgLicense" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="false"
+                <telerik:RadGrid ID="rgLicense" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgLicense_NeedDataSource" OnItemCommand="rgLicense_ItemCommand"
                     Width="98%" HeaderStyle-Font-Bold="true">
@@ -80,60 +95,62 @@
                     <MasterTableView DataKeyNames="LicenseID,Branch.CompanyId,Branch.BranchId,LicenseTypeId,LicenseDesc,ActivationDate,ExpirationDate,IsActive">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="LicenseDesc" AllowFiltering="true" HeaderText="License Desc"
-                                UniqueName="LicenseDesc" SortExpression="LicenseDesc" FilterControlWidth="120"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                UniqueName="LicenseDesc" SortExpression="LicenseDesc" FilterControlWidth="110" HeaderStyle-Width ="110"
+                                ItemStyle-Wrap="true" ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseDesc" runat="server" Text='<%# Eval("LicenseDesc") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="LicenseType.Type" AllowFiltering="true" HeaderText="License Type"
-                                UniqueName="LicenseType" SortExpression="LicenseType.Type" FilterControlWidth="100"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                UniqueName="LicenseType" SortExpression="LicenseType.Type" FilterControlWidth="90" HeaderStyle-Width ="90"
+                                ItemStyle-Wrap="true"  ShowFilterIcon="true"
+                                >
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType.Type") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
-                                SortExpression="ActivationDate" UniqueName="ActivationDate" CurrentFilterFunction="StartsWith"
-                                AutoPostBackOnFilter="true" Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="false" FilterControlWidth="100">
+                                SortExpression="ActivationDate" UniqueName="ActivationDate" Display="true" DataFormatString="{0:yyyy-MM-dd}"
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
                             <telerik:GridDateTimeColumn DataField="ExpirationDate" HeaderText="Expiration Date"
-                                SortExpression="ExpirationDate" UniqueName="ExpirationDate" CurrentFilterFunction="StartsWith"
-                                AutoPostBackOnFilter="true" Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="false" FilterControlWidth="100">
+                                SortExpression="ExpirationDate" UniqueName="ExpirationDate" 
+                                Display="true" DataFormatString="{0:yyyy-MM-dd}"
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
                             <telerik:GridNumericColumn DataField="NumOfDevice" AllowFiltering="true" HeaderText="Total Devices"
-                                UniqueName="NumOfDevice" SortExpression="NumOfDevice" FilterControlWidth="50"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                UniqueName="NumOfDevice" SortExpression="NumOfDevice" FilterControlWidth="40" HeaderStyle-Width ="40"
+                                ItemStyle-Wrap="true"  ShowFilterIcon="true"
+                                >
                                 <HeaderStyle HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Right" Width="50" />
+                                <ItemStyle HorizontalAlign="Center"  />
                             </telerik:GridNumericColumn>
                             <telerik:GridTemplateColumn DataField="Branch.BranchName" AllowFiltering="true" HeaderText="Branch Name"
-                                UniqueName="BranchName" SortExpression="Branch.BranchName" FilterControlWidth="100"
-                                ItemStyle-Wrap="true" CurrentFilterFunction="Contains" ShowFilterIcon="false"
-                                AutoPostBackOnFilter="true">
+                                UniqueName="BranchName" SortExpression="Branch.BranchName" FilterControlWidth="80" HeaderStyle-Width ="80"
+                                ItemStyle-Wrap="true"  ShowFilterIcon="true"
+                                >
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("Branch.BranchName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
-                                DataField="IsActive" ItemStyle-HorizontalAlign="Center">
+                                DataField="IsActive" ItemStyle-HorizontalAlign="Center" FilterControlWidth="40" HeaderStyle-Width ="40">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="LicenseID" AllowFiltering="true" HeaderText=""
-                                UniqueName="Edit">
+                                UniqueName="Edit" FilterControlWidth="70" HeaderStyle-Width ="70">
                                 <FilterTemplate>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
-                                                    <span> Clear Fillter </span>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" CommandName="ClearFilter">
+                                                    <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
                                     </asp:LinkButton>
+                                    </center>
                                 </FilterTemplate>
                                 <ItemTemplate>
                                     <div>

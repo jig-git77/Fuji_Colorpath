@@ -40,11 +40,11 @@ namespace FujifilmUSA.Sync.Presenter
             companyBusiness.InsertCompany(_viewAddCompanyManagement.Company);
         }
 
-        public void UpdateCompnay()
+        public void UpdateCompany()
         {
             var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
             companyBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
-            companyBusiness.UpdateCompnay(_viewAddCompanyManagement.Company);
+            companyBusiness.UpdateCompany(_viewAddCompanyManagement.Company);
         }
 
         public void DeleteCompany()

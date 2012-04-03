@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
-            BindCompnay();
+            Bindcompany();
             BindLicenseType();
             BindBranch();
             lblHeader.Text = "Add License";
@@ -61,7 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbLicenseType.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
             }
         }
-        private void BindCompnay()
+        private void Bindcompany()
         {
             cmbCompany.Items.Clear();
             Compnaies = new Dictionary<int, string>();
@@ -130,12 +130,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                  ,
                               IsActive = chkIsActive.Checked
                           };
-            if (LId == 0) // Add New Compnay
+            if (LId == 0) // Add New company
             {
                 _presenterLicenseManagement.InsertLicense();
                 if (IsErrorOccured) return;
             }
-            else // Edit New Compnay
+            else // Edit New company
             {
                 License.LicenseId = LId;
                 _presenterLicenseManagement.UpdateLicense();

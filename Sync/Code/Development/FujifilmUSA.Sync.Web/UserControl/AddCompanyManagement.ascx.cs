@@ -18,9 +18,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (ViewState["CompnayId"] != null && !string.IsNullOrEmpty(ViewState["CompnayId"].ToString())) ? Convert.ToInt32(ViewState["CompnayId"]) : 0;
+                return (ViewState["companyId"] != null && !string.IsNullOrEmpty(ViewState["companyId"].ToString())) ? Convert.ToInt32(ViewState["companyId"]) : 0;
             }
-            set { ViewState["CompnayId"] = value.ToString(); }
+            set { ViewState["companyId"] = value.ToString(); }
         }
         #endregion
 
@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindRegion();
             if (Request.QueryString["CompanyId"] != null)
             {
-                SetCompnay(Convert.ToInt32(Request.QueryString["CompanyId"]));
+                Setcompany(Convert.ToInt32(Request.QueryString["CompanyId"]));
                 lblHeader.Text = "Edit Company";
             }
         }
@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRegionName.Items.Insert(0, new ListItem("--Select--", string.Empty));
             }
         }
-        private void SaveCompnay()
+        private void Savecompany()
         {
             Company = new Company()
                           {
@@ -69,29 +69,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                               RegionId = Convert.ToByte(cmbRegionName.SelectedValue)
                           };
 
-            if (CId == 0) // Add New Compnay
+            if (CId == 0) // Add New company
             {
                 _presenterCompanyManagement.InsertCompany();
                 if (IsErrorOccured) return;
                 Response.Redirect("CompanyManagement.aspx");
             }
-            else // Edit New Compnay
+            else // Edit New company
             {
                 Company.CompanyId = CId;
-                _presenterCompanyManagement.UpdateCompnay();
+                _presenterCompanyManagement.UpdateCompany();
                 if (IsErrorOccured) return;
                 Response.Redirect("CompanyManagement.aspx");
             }
 
 
         }
-        private void SetCompnay(int compnayId)
+        private void Setcompany(int companyId)
         {
-            Company = new Company { CompanyId = compnayId };
+            Company = new Company { CompanyId = companyId };
             _presenterCompanyManagement.GetCompany();
             if (!IsErrorOccured)
             {
-                CId = compnayId;
+                CId = companyId;
                 txtCompanyName.Text = Company.CompanyName;
                 cmbRegionName.SelectedValue = Company.RegionId.ToString();
                 chkIsActive.Checked = Company.IsActive;
@@ -103,7 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            SaveCompnay();
+            Savecompany();
         }
         #endregion
 

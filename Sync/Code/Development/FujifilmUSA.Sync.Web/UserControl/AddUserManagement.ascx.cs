@@ -39,7 +39,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack) return;
 
             lblHeader.Text = "Add User";
-            BindCompnay();
+            Bindcompany();
             BindRole();
             if (Request.QueryString["UserId"] != null)
             {
@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Methods
 
-        private void BindCompnay()
+        private void Bindcompany()
         {
             Compnaies = new Dictionary<int, string>();
             _presenterUserManagement.GetCompanies();
@@ -132,7 +132,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void SaveCompnay()
+        private void Savecompany()
         {
             if (cmbCompanyName.SelectedIndex == 0)
             {
@@ -188,12 +188,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
 
-            if (UId == 0) // Add New Compnay
+            if (UId == 0) // Add New company
             {
                 _presenterUserManagement.InsertUser();
                 if (IsErrorOccured) return;
             }
-            else // Edit New Compnay
+            else // Edit New company
             {
                 User.UserId = UId;
                 _presenterUserManagement.UpdateUser();
@@ -230,6 +230,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
+        protected void lbtnShow_Click(object sender, EventArgs e)
+        {
+            if (txtPassWord.TextMode.Equals(TextBoxMode.Password))
+                txtPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.SingleLine;
+            else
+                txtPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.Password;
+        }
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
@@ -240,7 +247,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            SaveCompnay();
+            Savecompany();
         }
         #endregion
 
@@ -252,5 +259,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> Regions { get; set; }
         public Dictionary<int, string> UserRoleList { get; set; }
         #endregion
+
+       
     }
 }

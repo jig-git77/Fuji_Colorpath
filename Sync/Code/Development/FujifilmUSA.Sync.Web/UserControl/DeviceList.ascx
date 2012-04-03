@@ -125,18 +125,28 @@
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td>
-                                <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
-                                    AllowSorting="false" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                    EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                                    OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
+                                <telerik:RadGrid ID="rgDeviceList" 
+                                    ShowHeader="true" 
+                                    AllowFilteringByColumn="true"
+                                    AllowSorting="false" 
+                                    AllowPaging="True" 
+                                    runat="server" 
+                                    AutoGenerateColumns="False"
+                                    EnableLinqExpressions="false" 
+                                    OnNeedDataSource="rgDeviceList_NeedDataSource"
+                                    OnItemCommand="rgDeviceList_ItemCommand" 
+                                    Width="670px">
                                     <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                                     <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc">
                                         <Columns>
-                                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText=""
+                                            <telerik:GridTemplateColumn 
+                                                DataField="DeviceName" 
+                                                AllowFiltering="true" 
+                                                HeaderText="DeviceName"
                                                 UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
-                                                AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" ShowFilterIcon="false">
+                                                AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" ShowFilterIcon="true">
                                                 <ItemTemplate>
                                                     <div class="product_list">
                                                         <ul>

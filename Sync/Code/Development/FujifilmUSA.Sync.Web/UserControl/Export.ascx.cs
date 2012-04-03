@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void lbtnDownLoadDLP_Click(object sender, EventArgs e)
+        protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterExport.GetDeviceLinkProfile();
@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void lbtnDownLoadChart_Click(object sender, EventArgs e)
+        protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             _presenterExport.GetChartPreview();

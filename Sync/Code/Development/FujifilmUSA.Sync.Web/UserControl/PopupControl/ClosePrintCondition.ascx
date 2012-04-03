@@ -58,8 +58,8 @@
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnDownLoadCurrentDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownLoadCurrentDLP_Click">
-                    <span>DownLoad Current DLP</span>
+                                    <asp:LinkButton ID="lbtnDownloadCurrentDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadCurrentDLP_Click">
+                    <span>Download Current DLP</span>
                                     </asp:LinkButton>
                                 </div>
                                 <%--<div class="buttonleft">

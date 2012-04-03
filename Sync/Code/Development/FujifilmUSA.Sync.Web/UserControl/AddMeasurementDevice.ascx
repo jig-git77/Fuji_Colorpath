@@ -33,7 +33,7 @@
                                         <asp:HiddenField ID="hdnMeasurementDeviceId" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvCompnayName" runat="server" Display="Dynamic"
+                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">

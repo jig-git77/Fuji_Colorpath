@@ -49,22 +49,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
         
         /// <summary>
-        /// lbtnDownLoadDLP control.
+        /// lbtnDownloadDLP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDownLoadDLP;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadDLP;
         
         /// <summary>
-        /// lbtnDownLoadChart control.
+        /// lbtnDownloadChart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDownLoadChart;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadChart;
         
         /// <summary>
         /// lbtnDownloadSourceICC control.

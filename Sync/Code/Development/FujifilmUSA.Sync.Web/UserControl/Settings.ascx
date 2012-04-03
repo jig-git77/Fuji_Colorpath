@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <td style=" float:left;" >
-                    <div id="tdCompnay" runat ="server"  align="center" style="width:150px;float:left;">
+                    <div id="tdcompany" runat ="server"  align="center" style="width:150px;float:left;">
                         <asp:LinkButton ID="lbtnCompanyManagement" runat="server" ToolTip="Company Management"
                             PostBackUrl="~/CompanyManagement.aspx" 
                             onclick="lbtnCompanyManagement_Click">
@@ -33,7 +33,7 @@
                                     ToolTip="Company Management" /></div>
                             Company Management</asp:LinkButton>
                 </div>
-                <div id="divCompnaySeprator" runat ="server" align="center" valign="bottom" style="float:left;">
+                <div id="divcompanySeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                         <img alt="" src="Images/admin-icon-divider.png">
                 </div>
                     <div id="tdBranch" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
