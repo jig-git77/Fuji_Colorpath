@@ -205,7 +205,7 @@
     <value>Yes</value>
   </data>
   <data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected compnay?</value>
+    <value>Are you sure you want to delete selected company?</value>
   </data>
   <data name="BranchManagement_DeleteBranch_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected branch?</value>

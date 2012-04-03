@@ -84,7 +84,7 @@
                                             <div class="tooltip_top_right">
                                             </div>
                                             <div class="tooltip_inside">
-                                                Please select compnay.
+                                                Please select company.
                                             </div>
                                             <div class="tooltip_bottom_left">
                                             </div>
@@ -402,7 +402,7 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:CheckBox ID="chkIsActive" runat="server" />
+                                                                    <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
                                                                 </div>
                                                                 <div class="clear">
                                                                 </div>
@@ -463,8 +463,7 @@
                     <tr>
                         <td align="center" colspan="2">
                             <div style="margin-top: 10px; padding-left: 3px;">
-                                <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" OnClientClick="javascript:ValidCompany()"
-                                    OnClick="lbtnSave_Click" ValidationGroup="vgAddUser">
+                                <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" OnClick="lbtnSave_Click" ValidationGroup="vgAddUser">
                                                     <span> Save </span>
                                 </asp:LinkButton>
                                 <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/UserManagement.aspx">

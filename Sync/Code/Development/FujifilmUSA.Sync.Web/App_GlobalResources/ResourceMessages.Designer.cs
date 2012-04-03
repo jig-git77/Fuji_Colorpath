@@ -187,7 +187,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete selected compnay?.
+        ///   Looks up a localized string similar to Are you sure you want to delete selected company?.
         /// </summary>
         internal static string CompanyManagement_DeleteCompany_Confirmation {
             get {

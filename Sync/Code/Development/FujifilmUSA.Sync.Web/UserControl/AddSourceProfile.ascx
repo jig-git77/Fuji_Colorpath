@@ -43,7 +43,7 @@
                                             <div class="tooltip_top_right">
                                             </div>
                                             <div class="tooltip_inside">
-                                                Please select compnay.
+                                                Please select company.
                                             </div>
                                             <div class="tooltip_bottom_left">
                                             </div>
@@ -78,7 +78,7 @@
                                             <div class="tooltip_top_right">
                                             </div>
                                             <div class="tooltip_inside">
-                                                Please select compnay.
+                                                Please select company.
                                             </div>
                                             <div class="tooltip_bottom_left">
                                             </div>
@@ -181,7 +181,7 @@
                                 <td><b>&nbsp;:&nbsp;</b> </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat="server" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
                                     </div>
                                     <div class="clear">
                                     </div>

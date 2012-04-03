@@ -99,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbCompany.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select compnay.", false);
+                fujiStatusbar.DisplayMessage("Please select company.", false);
                 return;
             }
             if (cmbBranch.SelectedIndex == 0)

@@ -59,7 +59,7 @@
                                 <td> <b> &nbsp;:&nbsp;</b></td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat ="server" />
+                                        <asp:CheckBox ID="chkIsActive" runat ="server" Checked="true" />
                                     </div>
                                     <div class="clear">
                                     </div>
