@@ -40,6 +40,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (IsPostBack) return;
             
             BindCompanyDropDown();
+            cmbCompanyName_SelectedIndexChanged(null, null);
+            cmbBranch_SelectedIndexChanged(null, null);
             BindInstrumentTypeDropDown();
             lblHeader.Text = "Add Measurement Device";
             if (Request.QueryString["MeasurementDeviceId"] != null)
@@ -61,8 +63,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindBranchDropDown(int.Parse(cmbCompanyName.SelectedValue));
             }
             else
-                cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-
+                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", ""));
+            cmbBranch_SelectedIndexChanged(null, null);
         }
 
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,7 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindLicenseDropDown(int.Parse(cmbBranch.SelectedValue));
             }
             else
-                cmbLicenseType.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", ""));
 
         }
 
@@ -115,7 +117,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbCompanyName.DataSource = CompanyList;
                 cmbCompanyName.DataBind();
-                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", ""));
             }
         }
 
@@ -127,7 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
-                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", "0"));
+                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", ""));
             }
         }
 
@@ -139,7 +141,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbLicenseType.DataSource = LicenseList;
                 cmbLicenseType.DataBind();
-                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", "0"));
+                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", ""));
             }
         }
 
@@ -150,7 +152,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbInstrumentType.DataSource = InstrumentTypeList;
                 cmbInstrumentType.DataBind();
-                cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", "0"));
+                cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", ""));
             }
         }
 

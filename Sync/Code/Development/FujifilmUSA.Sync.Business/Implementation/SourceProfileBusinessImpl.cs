@@ -97,56 +97,50 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<SourceProfile> GetSourceProfiles()
-        {
-            var sourceProfiles = new List<SourceProfile>();
-            Common.ImplementBusinessLogic(
-                () =>
-                    {
-                        var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfiles]");
-                        if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
-                        {
-                            sourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
-                                Select(x => new SourceProfile()
-                                                {
-                                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"),
-                                                    ProfileName = DataReader.ReadString(x, "ProfileDesc"),
-                                                    ProfileDesc = DataReader.ReadString(x, "ProfileName"),
-                                                    Company = new Company() {CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName")},
-                                                    Region = new Region() {RegionId = (short) DataReader.ReadInt(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region")},
-                                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                                }).ToList();
-                        }
-                    },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfiles"));
-            return sourceProfiles;
-        }
-
         public List<SourceProfile> GetSourceProfile(int sourceProfileId)
         {
             var sourceProfiles = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] {sourceProfileId});
+                        var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { sourceProfileId });
                         if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
                         {
                             sourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
                                 Select(x => new SourceProfile()
                                                 {
                                                     SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"),
+                                                    RegionId = DataReader.ReadShort(x, "RegionId"),
+                                                    CompanyId = DataReader.ReadShort(x, "CompanyId"),
                                                     ProfileName = DataReader.ReadString(x, "ProfileName"),
                                                     ProfileDesc = DataReader.ReadString(x, "ProfileDesc"),
-                                                    Company = new Company() {CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName")},
-                                                    Region = new Region() {RegionId = (short) DataReader.ReadInt(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region")},
-                                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-
+                                                    Profile = DataReader.ReadByteArray(x, "Profile"),
+                                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                                    Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+                                                    Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") }
                                                 }).ToList();
                         }
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileInformation"));
             return sourceProfiles;
         }
+
+        public byte[] GetIccProfileBySourceProfile(int sourceProfileId)
+        {
+            byte[] iccProfile = null;
+
+                Common.ImplementBusinessLogic(
+                () =>
+                    {
+                        var dsIccProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetICCSourceProfile]", new object[] { sourceProfileId });
+                        iccProfile = dsIccProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "Profile")).FirstOrDefault();
+                    },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetICCSourceProfile"));
+
+            return iccProfile;
+        }
+
+
         #endregion
 
         #region ITaskBase Members

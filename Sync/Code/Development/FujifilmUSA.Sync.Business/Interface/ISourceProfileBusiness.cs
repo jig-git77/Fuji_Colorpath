@@ -11,5 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateSourceProfile(SourceProfile sourceProfile);
         bool DeleteSourceProfile(int sourceProfileId);
         List<SourceProfile> GetSourceProfile(int sourceProfileId);
+        byte[] GetIccProfileBySourceProfile(int sourceProfileId);
     }
 }

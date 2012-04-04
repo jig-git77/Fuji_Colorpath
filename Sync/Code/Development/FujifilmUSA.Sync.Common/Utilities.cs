@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Threading;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -15,8 +16,8 @@ namespace FujifilmUSA.Sync.Common
         /// FileContent As Byte Array (Do not save on disk)
         /// </summary>
         /// <param name="fileContent">Content of the File as byte array</param>
-        /// <param name="FileName">FileName</param>
-        public static void DownloadFile(byte[] fileContent, string FileName)
+        /// <param name="fileName">FileName</param>
+        public static void DownloadFile(byte[] fileContent, string fileName)
         {
             try
             {
@@ -27,10 +28,11 @@ namespace FujifilmUSA.Sync.Common
                 System.Web.HttpContext.Current.Response.ClearHeaders();
                 System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
                 //Content Disposition forces file download instead of opening in the browser
-                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + FileName);
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
                 try
                 {
+
                     System.Web.HttpContext.Current.Response.End();
                 }
                 catch
@@ -38,22 +40,22 @@ namespace FujifilmUSA.Sync.Common
                     //do nothing for thread abort exception
                 }
             }
-            catch (Exception Exc)
+            catch (ThreadAbortException Exc)
             { string str = Exc.Message; }
         }
 
-        public static void DownlaodFile(string FolderPath, string FileName, string ShowOnDialogName)
+        public static void DownlaodFile(string folderPath, string fileName, string showOnDialogName)
         {
             try
             {
                 //========== Download File ==========//
-                System.IO.FileStream fs = System.IO.File.OpenRead(FolderPath + FileName);
+                System.IO.FileStream fs = System.IO.File.OpenRead(folderPath + fileName);
                 byte[] data = new byte[fs.Length];
                 fs.Read(data, 0, (int)fs.Length);
                 System.Web.HttpContext.Current.Response.Clear();
                 System.Web.HttpContext.Current.Response.ClearHeaders();
                 System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
-                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + ShowOnDialogName);
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + showOnDialogName);
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
                 fs.Close();
                 System.Web.HttpContext.Current.Response.End();

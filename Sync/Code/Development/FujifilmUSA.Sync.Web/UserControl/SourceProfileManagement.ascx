@@ -78,8 +78,8 @@
         <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
     </div>
     <div style="margin-left: 10px;">
-    <asp:UpdatePanel ID="testPanel" runat="server">
-        <ContentTemplate>
+    <%--<asp:UpdatePanel ID="testPanel" runat="server">
+        <ContentTemplate>--%>
             <telerik:RadGrid 
                 ID="rgSourceProfile" 
                 ShowHeader="true" 
@@ -140,7 +140,13 @@
                             FilterControlWidth="70"
                             >
                             <ItemTemplate>
-                                <asp:Label ID="lblProfile" runat="server" Text="Click Me!" Font-Bold="true" />
+                                <asp:LinkButton ID="lbtnProfile" runat="server" ToolTip ="Download source profile" 
+                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
+                                    CommandName="SourceProfile">
+                                  <span>
+                                     Click Me!
+                                  </span>
+                                </asp:LinkButton>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
 
@@ -197,8 +203,11 @@
                     </Columns>
                 </MasterTableView>
             </telerik:RadGrid>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+       <%-- </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="lbtnProfile" />
+        </Triggers>
+    </asp:UpdatePanel>--%>
     </div>
 </div>
 <div class="admin_bottom">

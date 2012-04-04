@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Entity
         public string FirstName { get; set; }
         public string Email { get; set; }
         public Role Role { get; set; }
-        public byte? RegionId { get; set; }
+        public short RegionId { get; set; }
         public int LastModifiedUserId { get; set; }
         public DateTime LastModifiedDate { get; set; }
         public bool IsActive { get; set; }

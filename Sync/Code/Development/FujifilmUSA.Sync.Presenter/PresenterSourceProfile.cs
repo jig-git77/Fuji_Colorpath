@@ -62,5 +62,12 @@ namespace FujifilmUSA.Sync.Presenter
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
             sourceProfileBusiness.DeleteSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
         }
+        public void GetIccProfileBySourceProfile()
+        {
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
+            _viewSourceProfile.SourceProfile.Profile = sourceProfileBusiness.GetIccProfileBySourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId);
+        }
+
     }
 }

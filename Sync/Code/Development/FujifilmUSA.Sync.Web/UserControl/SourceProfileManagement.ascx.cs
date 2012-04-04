@@ -58,6 +58,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SourceProfile = new Entity.SourceProfile();
             switch (e.CommandName)
             {
+                case "SourceProfile":
+                    SourceProfile.SourceProfileId = Convert.ToInt16(e.CommandArgument);
+                    _presentersourceprofile.GetIccProfileBySourceProfile();
+                    Utilities.DownloadFile(SourceProfile.Profile, "Profile.icc");                        
+                    break;
                 case "ClearFilter":
                     foreach (GridColumn column in rgSourceProfile.MasterTableView.Columns)
                     {

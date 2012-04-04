@@ -32,7 +32,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
            return new List<SourceProfile>();
         }
-
+         public byte[] GetIccProfileBySourceProfile(int sourceProfileId)
+         {
+             return null;
+         }
 
         #endregion
 

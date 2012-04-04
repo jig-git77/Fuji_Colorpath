@@ -447,4 +447,7 @@
   <data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected source profile?</value>
   </data>
+  <data name="Error_GetICCSourceProfile" xml:space="preserve">
+    <value>Error occured while get source profile.Please contact your administrator.</value>
+  </data>
 </root>

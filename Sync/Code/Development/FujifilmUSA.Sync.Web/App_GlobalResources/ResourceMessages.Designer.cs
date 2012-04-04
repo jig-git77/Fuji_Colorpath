@@ -475,6 +475,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while get source profile.Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetICCSourceProfile {
+            get {
+                return ResourceManager.GetString("Error_GetICCSourceProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while retrieving illuminant list. Please contact your administrator..
         /// </summary>
         internal static string Error_GetIlluminantList {

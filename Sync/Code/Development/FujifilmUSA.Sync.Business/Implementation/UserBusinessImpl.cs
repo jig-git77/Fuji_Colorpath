@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                       RoleId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RoleId"),
                                                   },
                                        Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
-                                       RegionId = DataReader.ReadByte(dsUser.Tables[0].Rows[0], "RegionId"),
+                                       RegionId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RegionId"),
                                        LastModifiedUserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "LastModifiedUserId"),
                                        LastModifiedDate = DataReader.ReadDate(dsUser.Tables[0].Rows[0], "LastModifiedDate"),
                                        IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive")
@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            FirstName = DataReader.ReadString(x, "FirstName"),
                                            Email = DataReader.ReadString(x, "Email"),
                                            Role = new Role() { RoleId = DataReader.ReadByte(x, "RoleId") },
-                                           RegionId = DataReader.ReadByte(x, "RegionId"),
+                                           RegionId = DataReader.ReadShort(x, "RegionId"),
                                            LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
                                            LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),

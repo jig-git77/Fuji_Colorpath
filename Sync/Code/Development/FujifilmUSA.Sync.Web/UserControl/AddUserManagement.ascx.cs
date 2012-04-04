@@ -27,7 +27,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-
         #region Page Events
         protected override void OnInit(EventArgs e)
         {
@@ -171,12 +170,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             User = new User();
             User.UserCompany = new UserCompany() { CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue) };
+            if (cmbRegion.SelectedValue  != null)
+                User.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
+
             User.UserBranches = new List<UserBranch>();
             chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).ForEach(p => User.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(p.Value) }));
-
-            if (cmbRegion.SelectedIndex != 0)
-                User.RegionId = Convert.ToByte(cmbRegion.SelectedValue);
-
             User.FirstName = txtFirstName.Text;
             User.LastName = txtLastName.Text;
             User.Email = txtEmail.Text;
