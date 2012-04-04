@@ -99,14 +99,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
                     break;
                 case ECurrentProjectStatus.Edit:
-                    break;
-                case ECurrentProjectStatus.Run:
                     ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
                     ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
                     ph.Controls.Add(ctrlItem);
                     
                     ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
+                    
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
+                    foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
+                    {
+                        if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                        {
+                            var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                            ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
+                            ctrlProjItem.ItemName = item.RunName;
+                            ctrlProjItem.CurrentRun = item;
+                            ph.Controls.Add(ctrlProjItem);
+                        }
+                    }
+                    break;
+                case ECurrentProjectStatus.Run:
+                    ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                    ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
+                    ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
+                    ph.Controls.Add(ctrlItem);
                     
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)

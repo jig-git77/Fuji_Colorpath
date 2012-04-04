@@ -35,7 +35,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case ELeftMenuItemLevel.Project:
                     imgItem.ImageUrl = "../images/print_icon.png";
-                    lnkItem.Enabled = false;
                     break;
             }
             lnkItem.Text = ItemName;
@@ -66,7 +65,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ELeftMenuItemLevel.Project:
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
-                    Response.Redirect("ProjectList.aspx");
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                    Response.Redirect("AddProject.aspx");
                     break;
             }
         }

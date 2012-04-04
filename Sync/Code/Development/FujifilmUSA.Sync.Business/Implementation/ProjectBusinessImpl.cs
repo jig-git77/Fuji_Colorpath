@@ -71,7 +71,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ReferenceChartTypeId = project.ReferenceChartTypeId
                                     };
                         }
-                        project.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
+                        if (dsProject.Tables[3].Rows.Count > 0)
+                        {
+                            project.ProjectOption = dsProject.Tables[3].AsEnumerable().
+                                Select(x => new ProjectOption()
+                                                {
+                                                    ProfileTypeId = DataReader.ReadShort(x, "ProfileTypeID"),
+                                                    ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
+                                                    ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue"),
+                                                }).ToList();
+                        }
+                        project.OptimizeRuns = dsProject.Tables[4].AsEnumerable().
                             Select(x => new OptimizeRun()
                             {
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
