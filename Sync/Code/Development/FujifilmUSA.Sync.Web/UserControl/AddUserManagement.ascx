@@ -74,9 +74,10 @@
                                                     <table>
                                                         <tr>
                                                             <td style="width: 140px;">
-                                                                <span style="font-weight: bold;">Company Name: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:DropDownList ID="cmbCompanyName" runat="server" Width="270px" AutoPostBack="true"
@@ -109,9 +110,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Branch Name: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left; line-height: 18px; overflow-y: scroll; height: 70px; border-width: 1px;
                                                                     border-style: solid; width: 270px">
@@ -144,9 +146,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Region: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Region<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:DropDownList ID="cmbRegion" Enabled="false" runat="server" Width="270px" CssClass="select">
@@ -179,9 +182,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">First Name: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">First Name<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtFirstName" runat="server" MaxLength="30" Width="270px" Height="19px"></asp:TextBox>
@@ -212,9 +216,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Last Name: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Last Name<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtLastName" runat="server" MaxLength="30" Width="270px" Height="19px"></asp:TextBox>
@@ -245,9 +250,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Email: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Email<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtEmail" runat="server" MaxLength="30" Width="270px" Height="19px"></asp:TextBox>
@@ -296,9 +302,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">User Name: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">User Name<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtUserName" runat="server" MaxLength="50" Width="270px" Height="19px"></asp:TextBox>
@@ -329,9 +336,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">PassWord: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">PassWord<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtPassWord" runat="server" TextMode="Password" MaxLength="40" Width="100px"
@@ -367,9 +375,10 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Confirm Password: &nbsp<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Confirm Password<span style="color: Red;">*</span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password"
@@ -408,8 +417,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <span style="font-weight: bold;">Is Active ?: &nbsp &nbsp</span>
+                                                                <span style="font-weight: bold;">Is Active?</span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
@@ -429,9 +439,10 @@
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
                                                             <td style="width: 140px;">
-                                                                <span style="font-weight: bold;">Role: &nbsp;<span style="color: Red;">*</span>
+                                                                <span style="font-weight: bold;">Role<span style="color: Red;">*</<span>
                                                                 </span>
                                                             </td>
+                                                            <td><b>&nbsp;:&nbsp;</b> </td>
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:DropDownList ID="cmbRole" runat="server" CssClass="select" Width="270px">

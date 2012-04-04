@@ -22,8 +22,9 @@
                         <table>
                             <tr>
                                 <td>
-                                    <span>Company Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value"
@@ -58,8 +59,9 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Branch Name: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
@@ -93,8 +95,9 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>License Type: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">License Type<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbLicenseType" runat="server" DataValueField="Key" DataTextField="Value"
@@ -127,8 +130,9 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Serial Number: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Serial Number<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px"></asp:TextBox>
@@ -159,8 +163,9 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Instrument Type: &nbsp<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;">Instrument Type<span style="color: Red;">*</span> </span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left">
                                         <asp:DropDownList ID="cmbInstrumentType" runat="server" DataValueField="Key" DataTextField="Value"
@@ -193,8 +198,9 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span>Is Active ?: &nbsp &nbsp</span>
+                                    <span style="font-weight:bold;">Is Active?</span>
                                 </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
@@ -206,6 +212,7 @@
                             <tr>
                                 <td>
                                 </td>
+                                <td></td>
                                 <td>
                                     <div class="text">
                                         <div style="padding-left: 3px;">
