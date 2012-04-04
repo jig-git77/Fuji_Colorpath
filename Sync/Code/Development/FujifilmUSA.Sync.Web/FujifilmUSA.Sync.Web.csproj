@@ -82,8 +82,15 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="Images\branch-management.png" />
     <Content Include="Images\clear-fillter.png" />
+    <Content Include="Images\company-management.png" />
+    <Content Include="Images\device-management.png" />
+    <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\sourceprofile-management.png" />
+    <Content Include="Images\syncmeasurementdevice-management.png" />
+    <Content Include="Images\user-management.png" />
     <Content Include="Permission.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
@@ -110,13 +117,6 @@
     <Content Include="DeviceManagement.aspx" />
     <Content Include="Images\checked_checkbox.gif" />
     <Content Include="Images\MarkerRed_Circle.gif" />
-    <Content Include="Images\small-branch-manage-icon-s.gif" />
-    <Content Include="Images\small-company-manage-icon-s.gif" />
-    <Content Include="Images\small-device-manage-icon-s.gif" />
-    <Content Include="Images\small-license-manage-icon.gif" />
-    <Content Include="Images\small-sourceprofile-manage-icon.gif" />
-    <Content Include="Images\small-syncmeasurementdevice-icon.png" />
-    <Content Include="Images\small-user-manage-icon-s.gif" />
     <Content Include="Images\uncheck_checkbox.gif" />
     <Content Include="JQuery\jquery-1.7.1.min.js" />
     <Content Include="JS\jquery.js" />
@@ -1036,7 +1036,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

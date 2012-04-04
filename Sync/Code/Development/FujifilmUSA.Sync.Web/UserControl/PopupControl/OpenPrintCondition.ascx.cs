@@ -18,7 +18,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             var sb = new StringBuilder();
-            sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+            if (Convert.ToInt32(Request.QueryString["days"]) <= 0)
+                sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open.");
+            else
+                sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+            
             sb.Append("</br>");
             sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " + Request.QueryString["ProjectName"] + " DLP " + (Convert.ToInt32(Request.QueryString["DlpNo"]) - 1) + " \" .");
             lblOpenPrintConditionMessage.Text = sb.ToString();

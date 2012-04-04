@@ -88,7 +88,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
 
             int days = (DateTime.Now - project.CreateDate).Days;
-
+          
             switch (project.Status)
             {
                 case EOptimizeRunStatus.Open:

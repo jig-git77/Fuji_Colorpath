@@ -17,18 +17,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var dstRegionList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
+                    if (dsRegion != null && dsRegion.Tables.Count > 0)
                     {
-                        var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
-                        if (dsRegion != null && dsRegion.Tables.Count > 0)
-                        {
-                            dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
-                                region => new
-                                              {
-                                                  Value = DataReader.ReadInt(region, "RegionID"),
-                                                  Text = DataReader.ReadString(region, "Region")
-                                              })).ToDictionary(region => region.Value, region => region.Text);
-                        }
-                    },
+                        dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
+                            region => new
+                                          {
+                                              Value = DataReader.ReadInt(region, "RegionID"),
+                                              Text = DataReader.ReadString(region, "Region")
+                                          })).ToDictionary(region => region.Value, region => region.Text);
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegions"));
             return dstRegionList;
         }
@@ -38,12 +38,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        returnValue = DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "[CP].[InsertSourceProfile]",
-                                new object[]
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertSourceProfile]",
+                            new object[]
                                     {
                                         sourceProfile.RegionId,
                                         sourceProfile.CompanyId,
@@ -52,7 +52,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.Profile,
                                         sourceProfile.IsUsed
                                     });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertSourceProfile"));
             return returnValue;
         }
@@ -62,12 +62,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        returnValue = DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "[CP].[UpdateourceProfile]",
-                                new object[]
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateourceProfile]",
+                            new object[]
                                     {
                                         sourceProfile.SourceProfileId,
                                         sourceProfile.RegionId,
@@ -77,7 +77,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.Profile,
                                         sourceProfile.IsUsed
                                     });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSourceProfile"));
             return returnValue;
         }
@@ -102,25 +102,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var sourceProfiles = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { sourceProfileId });
+                    if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
                     {
-                        var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { sourceProfileId });
-                        if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
-                        {
-                            sourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
-                                Select(x => new SourceProfile()
-                                                {
-                                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"),
-                                                    RegionId = DataReader.ReadShort(x, "RegionId"),
-                                                    CompanyId = DataReader.ReadShort(x, "CompanyId"),
-                                                    ProfileName = DataReader.ReadString(x, "ProfileName"),
-                                                    ProfileDesc = DataReader.ReadString(x, "ProfileDesc"),
-                                                    Profile = DataReader.ReadByteArray(x, "Profile"),
-                                                    IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                    Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
-                                                    Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") }
-                                                }).ToList();
-                        }
-                    },
+                        sourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().
+                            Select(x => new SourceProfile()
+                                            {
+                                                SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"),
+                                                RegionId = DataReader.ReadShort(x, "RegionId"),
+                                                CompanyId = DataReader.ReadShort(x, "CompanyId"),
+                                                ProfileName = DataReader.ReadString(x, "ProfileName"),
+                                                ProfileDesc = DataReader.ReadString(x, "ProfileDesc"),
+                                                Profile = DataReader.ReadByteArray(x, "Profile"),
+                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                                Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyID"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+                                                Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") }
+                                            }).ToList();
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileInformation"));
             return sourceProfiles;
         }
@@ -129,13 +129,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             byte[] iccProfile = null;
 
-                Common.ImplementBusinessLogic(
-                () =>
-                    {
-                        var dsIccProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetICCSourceProfile]", new object[] { sourceProfileId });
-                        iccProfile = dsIccProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "Profile")).FirstOrDefault();
-                    },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetICCSourceProfile"));
+            Common.ImplementBusinessLogic(
+            () =>
+            {
+                var dsIccProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetICCSourceProfile]", new object[] { sourceProfileId });
+                iccProfile = dsIccProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "Profile")).FirstOrDefault();
+            },
+            new BusinessHandlerRequest(this, ErrorOccured, "Error_GetICCSourceProfile"));
 
             return iccProfile;
         }

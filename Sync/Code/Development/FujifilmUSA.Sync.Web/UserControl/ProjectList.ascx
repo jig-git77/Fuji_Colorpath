@@ -334,13 +334,13 @@
     </div>
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
-            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Open Print Condition" Width="715" Height="280"
-                Behaviors="Close, Move" Behavior="Close, Move">
+            <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" IconUrl="" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Open Print Condition" Width="715" Height="250"
+                Behaviors="Move" Behavior="Move">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
                 ShowContentDuringLoad="false" Title="Close Print Condition" Width="715" Height="200"
-                Behaviors="Close, Move" Behavior="Close, Move">
+                Behaviors="Move" Behavior="Move">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>

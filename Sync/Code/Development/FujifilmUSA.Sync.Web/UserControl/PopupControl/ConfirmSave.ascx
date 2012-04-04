@@ -1,16 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmSave.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="uc" %>
 <script type="text/javascript" language="javascript">
 
-    
-
     //Click on Close Button
     function CloseConfirmSaveWindow() {
-        alert('a');
         var oWindow = GetProjectInformationRadWindow();
         GetProjectInformationRadWindow().close();
         return false;
@@ -24,6 +21,7 @@
     }
 
 </script>
+<uc:Statusbar ID="fujiStatusbar" runat="server" />
 <div id="divConfirmSave" style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
@@ -31,9 +29,6 @@
         <div class="combopart">
             <div class="header">
                 <div class="content">
-                    <div>
-                        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                    </div>
                     <div class="text" style="float: left">
                         Are you satisfied with the results?
                     </div>
@@ -87,7 +82,7 @@
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseConfirmSaveWindow(); return true;"
                         CssClass="gray_bt">
                                         <span>
-                                            Close </span>
+                                            Cancel </span>
                     </asp:LinkButton>
                 </div>
                 <div class="clear">

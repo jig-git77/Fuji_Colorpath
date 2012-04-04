@@ -48,7 +48,7 @@
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseOpenPrintConditionWindow(); return false;"
                                         CssClass="gray_bt">
                                         <span>
-                                            Close </span>
+                                            Cancel </span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonright">

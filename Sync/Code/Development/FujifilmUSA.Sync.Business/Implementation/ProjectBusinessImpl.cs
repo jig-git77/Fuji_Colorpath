@@ -41,6 +41,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                                                 ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
+                                                DlpNo = DataReader.ReadInt(x, "DLPNO"),
                                                 SourceProfile = new SourceProfile()
                                                                     {
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileID")

@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PopUpMaster.Master" 
+﻿<%@ Page Language="C#" MasterPageFile="~/PopUpMaster.Master" 
 AutoEventWireup="true" 
 CodeBehind="PopupClosePrintCondition.aspx.cs" 
-Inherits="FujifilmUSA.Sync.Web.PopupClosePrintCondition" %>
+Inherits="FujifilmUSA.Sync.Web.PopupClosePrintCondition" 
+Title="Close Print Condition" %>
 <%@ Register Src="~/UserControl/PopupControl/ClosePrintCondition.ascx" 
 TagName="ClosePrintCondition" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

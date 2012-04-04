@@ -46,12 +46,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
             }
+            
             header.InnerText = IsNewDlp
                                    ? string.Format("New Print Condition - Analyze (No DLP)")
-                                   : string.Format("Analyze - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                                   : string.Format("Analyze - {0} DLP {1}.icc", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo);
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
-                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>Save<span>";
+                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
             if (!Page.IsPostBack)
             {
                 BindMesurementChart();
