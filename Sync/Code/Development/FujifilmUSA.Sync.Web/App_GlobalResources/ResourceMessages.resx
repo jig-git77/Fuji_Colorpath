@@ -258,7 +258,7 @@
   <data name="Error_GetBranchList" xml:space="preserve">
     <value>Error occured while retrieving branch list. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetChartPreviewOnProjectId" xml:space="preserve">
+  <data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
     <value>Error occured while retrieving chart preview. Please contact your administrator.</value>
   </data>
   <data name="Error_GetCompanies" xml:space="preserve">

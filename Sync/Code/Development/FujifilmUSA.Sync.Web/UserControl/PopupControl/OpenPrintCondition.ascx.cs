@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                 if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
                 {
                     Utilities.PopupWindowsRedirect(this, "Analyze.aspx");

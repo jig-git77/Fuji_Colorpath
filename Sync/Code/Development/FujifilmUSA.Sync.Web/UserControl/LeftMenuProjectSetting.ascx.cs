@@ -85,6 +85,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkDownload.Font.Bold = true;
                     break;
             }
+
+            if(SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit)
+            {
+                lnkMeasure.Visible = false;
+                lnkAnalyze.Visible = false;
+            }
         }
         protected void lnkItem_Click(object sender, EventArgs e)
         {

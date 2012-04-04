@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                          {
                                                              DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
                                                              IsUsed = true,
-                                                             IsNewlyCreated = true
+                                                             CurrentDisplayStatus = ECurrentProjectStatus.New
                                                          };
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
             Response.Redirect("AddProject.aspx");
@@ -113,24 +113,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        //protected void RadComboBoxPrintStandard_PreRender(object sender, EventArgs e)
-        //{
-        //    var combo = sender as RadComboBox;
-        //    if (combo == null) return;
-        //    GetSourceProfiles();
-        //    if (!IsErrorOccured)
-        //    {
-        //        foreach (var profile in SourceProfile)
-        //        {
-        //            combo.Items.Add(new RadComboBoxItem(profile.Value, profile.Key.ToString()));
-        //        }
-        //        combo.SelectedValue = hdSelectedSourceProfileId.Value;
-        //    }
-        //}
-        //protected void RadComboBoxPrintStandard_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
-        //{
-        //    hdSelectedSourceProfileId.Value = e.Value;
-        //}
         #endregion
 
         #region Method

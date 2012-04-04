@@ -22,10 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsNewDlp
         {
-            get
-            {
-                return SessionManager.Instance.CurrentProject.IsNewlyCreated;
-            }
+            get { return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1; }
         }
 
         public string UpdateProgressClientID

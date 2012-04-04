@@ -18,8 +18,8 @@ namespace FujifilmUSA.Sync.Entity
         public List<ProjectOption> ProjectOption { get; set; }
         public SourceProfile SourceProfile { get; set; }
         public int DeviceFamilyProfilerOptionId { get; set; }
-        public bool IsNewlyCreated { set; get; }
+        public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
         public EOptimizeRunStatus Status { get; set; }
-        public int ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
     }
 }

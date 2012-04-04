@@ -96,34 +96,29 @@ namespace FujifilmUSA.Sync.Entity
     {
         [Description("Manage License")]
         ManageLicense = 1,
-
         [Description("Manage Region")]
-        ManageRegion =2,
-
+        ManageRegion = 2,
         [Description("Manage Measurement Device")]
-        ManageMeasurementDevice =3,
-
+        ManageMeasurementDevice = 3,
         [Description("Manage Company")]
-        ManageCompany =4,
-
+        ManageCompany = 4,
         [Description("Manage Branch")]
-        ManageBranch =5,
-
+        ManageBranch = 5,
         [Description("Manage Device")]
-        ManageDevice =6,
-
+        ManageDevice = 6,
         [Description("Create Delete Project")]
-        CreateDeleteProject =7,
-
+        CreateDeleteProject = 7,
         [Description("Modify Project")]
         ModifyProject = 8,
-
         [Description("Manage User")]
         ManageUser = 9,
-
         [Description("Manage SourceProfile")]
         ManageSourceProfile = 10
-          
-
+    }
+    public enum ECurrentProjectStatus
+    {
+        New = 0,
+        Edit = 1,
+        Run = 2,
     }
 }

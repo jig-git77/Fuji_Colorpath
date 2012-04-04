@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 
@@ -14,7 +15,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.Home:
@@ -61,6 +61,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ELeftMenuItemLevel.Operation:
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
+                    Response.Redirect("ProjectList.aspx");
+                    break;
+                case ELeftMenuItemLevel.Project:
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     Response.Redirect("ProjectList.aspx");
                     break;
             }

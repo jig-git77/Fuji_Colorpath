@@ -41,11 +41,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     switch (((LeftMenuProjectItem)ph.Controls[i]).ItemLevel)
                     {
                         case ELeftMenuItemLevel.ProjectSetup:
-                            if (SessionManager.Instance.CurrentProject == null || !SessionManager.Instance.CurrentProject.IsNewlyCreated)
+                            if (SessionManager.Instance.CurrentProject == null ||
+                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
                         case ELeftMenuItemLevel.OptimizeRun:
-                            if (SessionManager.Instance.CurrentProject == null || SessionManager.Instance.CurrentProject.IsNewlyCreated)
+                            if (SessionManager.Instance.CurrentProject == null ||
+                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
                         default:
@@ -85,34 +87,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject == null) return;
 
 
-            if (SessionManager.Instance.CurrentProject.IsNewlyCreated)
+            switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
-                ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-                ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
-                ctrlItem.ItemName = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)
-                                        ? "New Print Condition"
-                                        : SessionManager.Instance.CurrentProject.ProjectName;
-                ph.Controls.Add(ctrlItem);
-                ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
-            }
-            else
-            {
-                ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-                ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
-                ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
-                ph.Controls.Add(ctrlItem);
-                if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
-                foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
-                {
-                    if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                case ECurrentProjectStatus.New:
+                    ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                    ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
+                    ctrlItem.ItemName = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)
+                                            ? "New Print Condition"
+                                            : SessionManager.Instance.CurrentProject.ProjectName;
+                    ph.Controls.Add(ctrlItem);
+                    ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
+                    break;
+                case ECurrentProjectStatus.Edit:
+                    break;
+                case ECurrentProjectStatus.Run:
+                    ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                    ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
+                    ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
+                    ph.Controls.Add(ctrlItem);
+                    
+                    ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
+                    
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
+                    foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
-                        var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                        ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
-                        ctrlProjItem.ItemName = item.RunName;
-                        ctrlProjItem.CurrentRun = item;
-                        ph.Controls.Add(ctrlProjItem);
+                        if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                        {
+                            var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
+                            ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
+                            ctrlProjItem.ItemName = item.RunName;
+                            ctrlProjItem.CurrentRun = item;
+                            ph.Controls.Add(ctrlProjItem);
+                        }
                     }
-                }
+                    break;
             }
         }
         #endregion

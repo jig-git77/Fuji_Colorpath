@@ -16,5 +16,6 @@ namespace FujifilmUSA.Sync.Entity
         public bool? IsUsed { get; set; }
         public bool HasMeasurements { get; set; }
         public bool HasProfile { get; set; }
+        public KeyValuePair<short, string> ReferenceChartType { get; set; }
     }
 }

@@ -31,23 +31,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         });
                     if (dsProject.Tables[0].Rows.Count > 0)
                     {
-                        project = dsProject.Tables[0].AsEnumerable().
-                            Select(x => new Project()
-                                            {
-                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                                ProjectName = DataReader.ReadString(x, "ProjectName"),
-                                                CreateDate = DataReader.ReadDate(x, "CreateDate"),
-                                                CurrDlpId = DataReader.ReadInt(x, "CurrDLPID"),
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
-                                                ReferenceChartTypeId = DataReader.ReadInt(x, "ReferenceChartTypeId"),
-                                                DlpNo = DataReader.ReadInt(x, "DLPNO"),
-                                                SourceProfile = new SourceProfile()
-                                                                    {
-                                                                        SourceProfileId = DataReader.ReadShort(x, "SourceProfileID")
-                                                                    },
-                                                DeviceFamilyProfilerOptionId = DataReader.ReadInt(x, "BaseDeviceFamilyProfilerOption")
-                                            }).FirstOrDefault();
+                        project = new Project()
+                                      {
+                                          ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjectID"),
+                                          ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
+                                          CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
+                                          CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
+                                          IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
+                                          Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
+                                          ReferenceChartTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ReferenceChartTypeId"),
+                                          DlpNo = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DLPNO"),
+                                          SourceProfile = new SourceProfile()
+                                                              {
+                                                                  SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID")
+                                                              },
+                                          DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption")
+                                      };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
                             project.PrintCondition =
@@ -68,7 +67,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
                                         Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
                                         UvIncluded = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "UVIncluded"),
-                                        MeasurementDeviceId = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID")
+                                        MeasurementDeviceId = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
+                                        ReferenceChartTypeId = project.ReferenceChartTypeId
                                     };
                         }
                         project.OptimizeRuns = dsProject.Tables[3].AsEnumerable().
@@ -82,13 +82,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
                                 MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
                                 HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
-                                HasProfile = DataReader.ReadBoolean(x, "HasProfile")
+                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
+                                ReferenceChartType = new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"), DataReader.ReadString(x, "ChartName"))
                             }).ToList();
 
-                        if (project.OptimizeRuns.Count() == 1)
-                        {
-                            project.IsNewlyCreated = true;
-                        }
+                        project.CurrentDisplayStatus =
+                            project.OptimizeRuns.Count() == 1
+                                ? ECurrentProjectStatus.New
+                                : ECurrentProjectStatus.Run;
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectDetail"));
@@ -255,7 +256,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public byte[] GetChartPreviewOnProjectId(int projectId)
+        public byte[] GetChartPreviewOnOptimizeRunId(int optimizeRunId)
         {
             var data = new object();
             Common.ImplementBusinessLogic(
@@ -264,13 +265,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     data = DataAccessFactory.
                         Instance.
                         GetScalar(
-                            "CPSync4D.GetChartPreviewOnProjectId",
+                            "CPSync4D.GetChartPreviewOnOptimizeRunId",
                             new object[]
                                     {
-                                        projectId
+                                        optimizeRunId
                                     });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnProjectId"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnOptimizeRunId"));
             return (data == null || data == DBNull.Value) ? null : (byte[])data;
         }
 

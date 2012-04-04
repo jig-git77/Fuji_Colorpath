@@ -3,6 +3,7 @@ using System.Linq;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -36,6 +37,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                         Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
                     }
                 }

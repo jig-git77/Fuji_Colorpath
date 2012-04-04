@@ -8,7 +8,7 @@
                 <asp:LinkButton runat="server" ID="lnkMeasurement" Text="Measurement" OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
-                <asp:LinkButton runat="server" ID="lnkAnalyse" Text="Analyze"  OnClick="lnkItem_Click"></asp:LinkButton>
+                <asp:LinkButton runat="server" ID="lnkAnalyse" Text="Analyze" OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
                 <asp:LinkButton runat="server" ID="lnkDownload" Text="Download" OnClick="lnkItem_Click"></asp:LinkButton>

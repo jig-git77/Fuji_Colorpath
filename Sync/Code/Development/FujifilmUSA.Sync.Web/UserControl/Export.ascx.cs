@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterExport.GetChartPreview();
             if (!IsErrorOccured)
             {

@@ -29,8 +29,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<SourceProfile>();
         }
-        
-        public byte[] GetChartPreviewOnProjectId(int projectId)
+
+        public byte[] GetChartPreviewOnOptimizeRunId(int optimizeRunId)
         {
             return new byte[1];
         }
