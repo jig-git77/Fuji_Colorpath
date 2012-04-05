@@ -62,11 +62,11 @@
                     <span>Download Current DLP</span>
                                     </asp:LinkButton>
                                 </div>
-                                <%--<div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt">
+                                <div class="buttonleft">
+                                    <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt" OnClick="lbtnViewLastAnalysis_Click">
                 <span>View Last Analysis</span>
                                     </asp:LinkButton>
-                                </div>--%>
+                                </div>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseClosePrintConditionWindow(); return false;"
                                         CssClass="gray_bt">

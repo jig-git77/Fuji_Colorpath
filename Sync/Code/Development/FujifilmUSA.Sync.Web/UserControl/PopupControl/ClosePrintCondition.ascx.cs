@@ -44,6 +44,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lbtnViewLastAnalysis_Click(object sender, EventArgs e)
+        {
+            if (Request.QueryString["ProjectId"] != null)
+            {
+                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterClosePrintCondition.GetProjectDetail();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                }
+            }
+        }
+
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);

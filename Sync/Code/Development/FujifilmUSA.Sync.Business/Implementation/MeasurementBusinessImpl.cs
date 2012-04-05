@@ -94,6 +94,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<Measurement> GetMeasurementsOnRunId(int optimizeRunId)
         {
             var measurements = new List<Measurement>();
+            measurements.Add(new Measurement() { MeasurementName = "test1", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test2", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test3", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test4", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test5", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test6", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test7", MeasurementDate = DateTime.Now });
+            measurements.Add(new Measurement() { MeasurementName = "test8", MeasurementDate = DateTime.Now });
+            return measurements;
             Common.ImplementBusinessLogic(
                 () =>
                 {
