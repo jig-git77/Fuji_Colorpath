@@ -39,7 +39,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
                                           IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
                                           Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
-                                          ReferenceChartTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ReferenceChartTypeId"),
                                           DlpNo = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DLPNO"),
                                           SourceProfile = new SourceProfile()
                                                               {
@@ -67,8 +66,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
                                         Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
                                         UvIncluded = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "UVIncluded"),
-                                        MeasurementDeviceId = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
-                                        ReferenceChartTypeId = project.ReferenceChartTypeId
+                                        MeasurementDeviceId =
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
+                                        ReferenceChartType = new KeyValuePair<short, string>(
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
+                                            DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName"))
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -266,7 +268,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public byte[] GetChartPreviewOnOptimizeRunId(int optimizeRunId)
+        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId)
         {
             var data = new object();
             Common.ImplementBusinessLogic(
@@ -275,10 +277,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     data = DataAccessFactory.
                         Instance.
                         GetScalar(
-                            "CPSync4D.GetChartPreviewOnOptimizeRunId",
+                            "CP.GetChartPreviewOnReferenceChartTypeId",
                             new object[]
                                     {
-                                        optimizeRunId
+                                        referenceChartTypeId
                                     });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnOptimizeRunId"));
@@ -388,7 +390,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.Illuminant,
                                                      project.MeasurementSetting.UvIncluded,
                                                      project.MeasurementSetting.MeasurementDeviceId,
-                                                     project.MeasurementSetting.ReferenceChartTypeId,
+                                                     project.MeasurementSetting.ReferenceChartType,
                                                      project.DeviceFamilyProfilerOptionId,
                                                      projectOptions.ToString()
                                                  });
@@ -438,7 +440,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters()
                                                          {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
                                                      new Parameters()
-                                                         {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartTypeId},
+                                                         {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartType},
                                                      new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
@@ -662,31 +664,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintConditionPreviewData"));
             return data;
-        }
-
-        public byte[] GetReferenceChartTypeImage(int referenceChartTypeId)
-        {
-            byte[] imageByte = null;
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartImage", new object[] { referenceChartTypeId });
-                    if (dsPresetList != null && dsPresetList.Tables.Count > 0)
-                    {
-                        var rec = dsPresetList.Tables[0].AsEnumerable().Select(
-                            x => new ReferenceChartType()
-                                     {
-                                         ChartPreview = DataReader.ReadByteArray(x, "ChartPreview")
-
-                                     }).SingleOrDefault();
-                        if (rec != null)
-                        {
-                            imageByte = rec.ChartPreview;
-                        }
-                    }
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartTypeImage"));
-            return imageByte;
         }
 
         #endregion

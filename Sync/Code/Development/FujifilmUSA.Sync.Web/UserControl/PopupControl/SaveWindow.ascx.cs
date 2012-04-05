@@ -15,6 +15,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
+
+        #region "Control Events"
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,9 +42,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
             }
         }
+        protected void lbtnDownloadChart_Click(object sender, EventArgs e)
+        {
+            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+            {
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                _presenterSaveWindow.GetChartPreview();
+                if (!IsErrorOccured)
+                {
+                    if (ChartPreview != null)
+                        Utilities.DownloadFile(ChartPreview, string.Format("{0}.jpg", SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value));
+                }
+            }
+            else
+            {
+                fujiStatusbar.DisplayMessage("Download chart is not available", true);
+            }
+        }
+        #endregion
 
         #region IViewSaveWindow Members
+        public int ReferenceChartTypeId { get; set; }
+        public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         #endregion
+
+
+
+
+
+
+
+        
+
     }
 }

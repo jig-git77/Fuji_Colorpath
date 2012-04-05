@@ -1,9 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmSave.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
-<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
-    TagPrefix="uc" %>
+
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+<%@ Register TagPrefix="uc" TagName="Statusbar" Src="~/UserControl/Statusbar.ascx" %>
+
 <script type="text/javascript" language="javascript">
 
     //Click on Close Button
@@ -21,8 +22,15 @@
     }
 
 </script>
-<uc:Statusbar ID="fujiStatusbar" runat="server" />
-<div id="divConfirmSave" style="display: block; margin: 10px;" class="contantbox tabcontant">
+
+<div id="divConfirmSave" style="display: block; margin: 3px;" class="contantbox tabcontant">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <div style=" padding-bottom: 3px;" >
+                    <uc:Statusbar ID="fujiStatusbar" runat="server" />
+                    </div>
+                </ContentTemplate>
+    </asp:UpdatePanel>   
     <div class="section_top">
         &nbsp;</div>
     <div class="section_middle">
@@ -39,6 +47,7 @@
                                     <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click">
                                                 <span> No, Optimize </span>
                                     </asp:LinkButton>
+                                    
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -96,7 +105,7 @@
         &nbsp;</div>
 </div>
 <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upOptimize"
-    DisplayAfter="50">
+    DisplayAfter="50" >
     <ProgressTemplate>
         <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
             VerticalSide="Top" TargetControlID="updateProgress" 
@@ -104,7 +113,9 @@
         </AjaxToolkit:AlwaysVisibleControlExtender>
         <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px; top: 0px;
             z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-            <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+            <div style="margin: 10px 0px 10px 3px;">
+            <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
+            </div>
         </div>
     </ProgressTemplate>
 </asp:UpdateProgress>

@@ -19,5 +19,13 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
             _viewSaveWindow.Project = projectBusiness.SaveProject(_viewSaveWindow.Project);
         }
+
+        public void GetChartPreview()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+            _viewSaveWindow.ChartPreview = projectBusiness.GetChartPreviewOnReferenceChartTypeId(_viewSaveWindow.ReferenceChartTypeId);
+        }
+
     }
 }

@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
             IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
             ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
-            ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId;
+            ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
             if (!IsErrorOccured)

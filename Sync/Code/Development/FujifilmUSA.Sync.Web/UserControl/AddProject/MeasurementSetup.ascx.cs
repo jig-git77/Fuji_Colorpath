@@ -45,8 +45,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue),
                         ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
                         MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
-                        ReferenceChartTypeId = Convert.ToInt16(cmbAlignmentChart.SelectedValue)
+                        ReferenceChartType =
+                            new KeyValuePair<short, string>(Convert.ToInt16(cmbAlignmentChart.SelectedValue),
+                                                            cmbAlignmentChart.SelectedItem.Text)
                     };
+
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
@@ -73,7 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
                 cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartTypeId.ToString();
+                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
 
                 //cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =

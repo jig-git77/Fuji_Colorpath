@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -12,13 +13,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         private PresenterConfirmSave _presenterConfirmSave;
 
+        public string DLPMessage
+        {
+            get
+            {
+                return string.Format("Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+            }
+            
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterConfirmSave = new PresenterConfirmSave(this);
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            
+            ((Label)((System.Web.UI.UserControl)updateProgress.FindControl("ucCreateDLP")).FindControl("lblMessage")).Text = DLPMessage;
         }
 
         protected void lbtnOptimize_Click(object sender, EventArgs e)

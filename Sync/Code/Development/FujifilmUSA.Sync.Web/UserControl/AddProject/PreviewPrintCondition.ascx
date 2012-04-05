@@ -21,7 +21,7 @@
     <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClientClick="javascript:ShowConfirmSaveWindow();return false;">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
-            Comfirm Save</span></asp:LinkButton>
+            Save</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">

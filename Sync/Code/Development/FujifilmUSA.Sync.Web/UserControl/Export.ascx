@@ -50,9 +50,6 @@
                                                     <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadDLP_Click">
                                                     <span>Download DLP</span>
                                                     </asp:LinkButton>
-                                                    <%--<asp:LinkButton ID="lbtnDLPFileName" runat="server">
-                                                    <span>Komori LS 40 test DLP 000.icc</span>
-                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -65,9 +62,6 @@
                                                     <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
                                                     <span>Download Chart</span>
                                                     </asp:LinkButton>
-                                                    <%--<asp:LinkButton ID="lbtnChartFileName" runat="server">
-                                                    <span>Sync 500</span>
-                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -103,17 +97,13 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <span>Download Source ICC:</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadSourceICC_Click">
-                                                    <span>Download Source ICC</span>
+                                                    <span>Download Destination ICC</span>
                                                     </asp:LinkButton>
-                                                    <%--<asp:LinkButton ID="lbtnDownloadSourceICCFileName" runat="server">
-                                                    <span>Komori LS 40 test.icc</span>
-                                                    </asp:LinkButton>--%>
                                                 </td>
                                             </tr>
                                         </tbody>

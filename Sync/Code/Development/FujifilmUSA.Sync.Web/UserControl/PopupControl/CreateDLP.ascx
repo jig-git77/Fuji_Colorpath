@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CreateDLP.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.CreateDLP" %>
-<div style="display: block; margin: 10px;" class="contantbox tabcontant">
+
+
+
+<div style="display: block; margin: 0px;" class="contantbox tabcontant">
     <div class="section_top">
         &nbsp;</div>
     <div class="section_middle">
@@ -43,8 +46,10 @@
                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/info_icon.png" />
                                 </div>
                                 <div style="float: left; padding-left: 5px; padding-top: 3px;">
-                                    Once optimization is complete, apply DLP 000 to workflow and repaint the Sync 500
-                                    patch chart.
+                                    <asp:Label ID="lblMessage" 
+                                        runat="server" 
+                                        Text="" 
+                                        ></asp:Label>
                                 </div>
                                 <div class="clear">
                                 </div>

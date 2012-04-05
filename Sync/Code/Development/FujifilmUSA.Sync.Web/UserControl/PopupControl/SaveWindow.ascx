@@ -113,11 +113,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="lbtnTargetColorSpace" runat="server" CssClass="gray_bt">
+                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
+                                                    onclick="lbtnDownloadChart_Click">
                                         <span>DawnLoad Chart</span>
-                                                </asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnFileName" runat="server">
-                                        <span>Sync 500</span>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -139,7 +137,7 @@
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
                         CssClass="gray_bt">
                                         <span>
-                                            Close </span>
+                                            Cancel </span>
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">

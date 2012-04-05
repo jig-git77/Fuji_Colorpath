@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace FujifilmUSA.Sync.Entity
 {
     public class MeasurementSetting
@@ -12,6 +13,6 @@ namespace FujifilmUSA.Sync.Entity
         public string UvIncludedName { get; set; }
         public string DensityType { get; set; }
         public short? MeasurementDeviceId { get; set; }
-        public short ReferenceChartTypeId { get; set; }
+        public KeyValuePair<short,string> ReferenceChartType { get; set; }
     }
 }

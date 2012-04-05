@@ -20,6 +20,5 @@ namespace FujifilmUSA.Sync.Entity
         public int DeviceFamilyProfilerOptionId { get; set; }
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
         public EOptimizeRunStatus Status { get; set; }
-        public short ReferenceChartTypeId { get; set; }
     }
 }

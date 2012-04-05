@@ -9,7 +9,7 @@
         CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" />
-            Preview</span></asp:LinkButton>
+            Review Selections</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -91,6 +91,15 @@
                                         </td>
                                         <td>
                                             <asp:DropDownList ID="cmbObserver" runat="server" Width="200px" CssClass="select">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr id="trUVSettings" runat="server" >
+                                        <td>
+                                            <span>UV Settings:</span>
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" CssClass="select">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

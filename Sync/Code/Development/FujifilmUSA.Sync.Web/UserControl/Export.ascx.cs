@@ -28,6 +28,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                header.InnerText = string.Format("Export - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                 
             }
         }
 
@@ -54,18 +56,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (DeviceLinkProfile != null)
-                    Utilities.DownloadFile(DeviceLinkProfile, "Profile.icc");
+                    Utilities.DownloadFile(DeviceLinkProfile, string.Format("{0} DLP {1}.icc", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo));
             }
         }
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;
             _presenterExport.GetChartPreview();
             if (!IsErrorOccured)
             {
                 if (ChartPreview != null)
-                    Utilities.DownloadFile(ChartPreview, "chart.jpg");
+                    Utilities.DownloadFile(ChartPreview, string.Format("{0}.jpg", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value));
+            }
+            else
+            {
+                fujiStatusbar.DisplayMessage("Download chart is not available", true);
             }
         }
 
@@ -76,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (SourceProfile != null)
-                    Utilities.DownloadFile(SourceProfile, "SourceProfile.icc");
+                    Utilities.DownloadFile(SourceProfile, string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName));
             }
         }
 
@@ -87,6 +93,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public byte[] SourceProfile { get; set; }
         public Project Project { get; set; }
+        public int ReferenceChartTypeId { get; set; }
         #endregion
+
+
+        
     }
 }

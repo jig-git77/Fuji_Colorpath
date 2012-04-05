@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -28,7 +29,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string UpdateProgressClientID
         {
             get { return ((UpdateProgress) Page.Master.FindControl("UpdateProgress")).ClientID; }
-        } 
+        }
+
+        public string DLPMessage
+        {
+            get
+            {
+                return string.Format("Once optimization is complete, apply DLP 000 to workflow and repaint the {0} patch chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+            }
+        }
         #endregion
 
         #region Page Method
@@ -41,6 +50,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
+
+                //Set sync patch
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
             }
             

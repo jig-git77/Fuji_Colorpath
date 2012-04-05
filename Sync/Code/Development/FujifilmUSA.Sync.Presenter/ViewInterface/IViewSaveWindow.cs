@@ -4,6 +4,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewSaveWindow : IViewError
     {
+        int ReferenceChartTypeId { get; set; }
+        byte[] ChartPreview { get; set; }
         Project Project { get; set; }
     }
 }

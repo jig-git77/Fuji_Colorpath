@@ -193,7 +193,7 @@
                     <div style="float:left;width:25%"> &nbsp;</div>
                     <div >
                         <div  style="float:left;background-color: #FFF !important;" >
-                            <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+                            <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
                         </div>
                     </div>
                     <div style="float:left;width:25%">&nbsp;</div>
@@ -302,7 +302,7 @@
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
             <Windows>
                 <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-                    VisibleStatusbar="false"  Title="Choose Next Action" Width="718" Height="275" Behavior="Move"
+                    VisibleStatusbar="false"  Title="Choose Next Action" Width="702" Height="250" Behavior="Move"
                     NavigateUrl="~/PopupConfirmSave.aspx">
                 </telerik:RadWindow>
             </Windows>

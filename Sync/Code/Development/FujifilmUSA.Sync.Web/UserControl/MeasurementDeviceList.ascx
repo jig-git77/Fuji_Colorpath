@@ -97,8 +97,8 @@
                             DataField="CompanyName" 
                             SortExpression="CompanyName" 
                             ShowFilterIcon="true" 
-                            FilterControlWidth="130"
-                            HeaderStyle-Width ="130" 
+                            FilterControlWidth="120"
+                            HeaderStyle-Width ="120" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
@@ -111,8 +111,8 @@
                             DataField="BranchName" 
                             SortExpression="BranchName" 
                             ShowFilterIcon="true" 
-                            FilterControlWidth="130"
-                            HeaderStyle-Width ="130" 
+                            FilterControlWidth="120"
+                            HeaderStyle-Width ="120" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
@@ -125,8 +125,8 @@
                             DataField="LicenseType" 
                             SortExpression="LicenseType" 
                             ShowFilterIcon="true"  
-                            FilterControlWidth="130"
-                            HeaderStyle-Width ="130" 
+                            FilterControlWidth="120"
+                            HeaderStyle-Width ="120" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
