@@ -15,7 +15,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
-
         #region "Control Events"
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -38,8 +37,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                {
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                }
+                else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                {
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                }
+                else
+                {
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                    Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                }
             }
         }
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
@@ -66,14 +78,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         #endregion
-
-
-
-
-
-
-
-        
-
     }
 }

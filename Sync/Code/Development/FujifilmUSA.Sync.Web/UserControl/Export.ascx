@@ -101,7 +101,8 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadSourceICC" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadSourceICC_Click">
+                                                    <asp:LinkButton ID="lbtnDownloadDestinationICC" runat="server" CssClass="gray_bt"
+                                                        OnClick="lbtnDownloadDestinationICC_Click">
                                                     <span>Download Destination ICC</span>
                                                     </asp:LinkButton>
                                                 </td>

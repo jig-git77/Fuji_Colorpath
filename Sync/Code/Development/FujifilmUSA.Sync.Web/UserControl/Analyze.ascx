@@ -53,9 +53,14 @@
             return true;
         }
         else {
-            var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
-            oWnd.show();
-            return false;
+            if ("<%= IsDlpCreated %>" == "True") {
+                return true;
+            }
+            else {
+                var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+                oWnd.show();
+                return false;
+            }
         }
     }
 </script>

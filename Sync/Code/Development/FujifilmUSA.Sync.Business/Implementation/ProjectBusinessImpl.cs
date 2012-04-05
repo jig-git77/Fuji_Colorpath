@@ -390,7 +390,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.Illuminant,
                                                      project.MeasurementSetting.UvIncluded,
                                                      project.MeasurementSetting.MeasurementDeviceId,
-                                                     project.MeasurementSetting.ReferenceChartType,
+                                                     project.MeasurementSetting.ReferenceChartType.Key,
                                                      project.DeviceFamilyProfilerOptionId,
                                                      projectOptions.ToString()
                                                  });
@@ -440,7 +440,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters()
                                                          {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
                                                      new Parameters()
-                                                         {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartType},
+                                                         {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartType.Key},
                                                      new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},

@@ -88,8 +88,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if(SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Edit)
             {
-                lnkMeasure.Visible = false;
-                lnkAnalyze.Visible = false;
+                lnkMeasure.Enabled = false;
+                lnkAnalyze.Enabled = false;
             }
         }
         protected void lnkItem_Click(object sender, EventArgs e)

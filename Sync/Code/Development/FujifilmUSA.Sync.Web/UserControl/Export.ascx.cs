@@ -29,7 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                 header.InnerText = string.Format("Export - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                 
+                lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
             }
         }
 
@@ -75,10 +75,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void lbtnDownloadSourceICC_Click(object sender, EventArgs e)
+        protected void lbtnDownloadDestinationICC_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            _presenterExport.GetSourceProfile();
+            _presenterExport.GetDestinationProfile();
             if (!IsErrorOccured)
             {
                 if (SourceProfile != null)

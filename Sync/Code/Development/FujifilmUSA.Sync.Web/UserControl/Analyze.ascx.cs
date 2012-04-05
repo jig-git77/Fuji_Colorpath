@@ -26,6 +26,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get { return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1; }
         }
 
+        public bool IsDlpCreated
+        {
+            get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
+        }
+
         public string UpdateProgressClientID
         {
             get { return ((UpdateProgress) Page.Master.FindControl("UpdateProgress")).ClientID; }
@@ -103,15 +108,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
-            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            _presenterAnalyze.GetMeasurementsOnRunId();
-            if (!IsErrorOccured)
+            if (IsDlpCreated)
             {
-                _presenterAnalyze.CreateDestinationAndDlp();
+                Response.Redirect("Export.aspx");
+            }
+            else
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    Response.Redirect("Export.aspx");
+                    _presenterAnalyze.CreateDestinationAndDlp();
+                    if (!IsErrorOccured)
+                    {
+                        Response.Redirect("Export.aspx");
+                    }
                 }
             }
         }

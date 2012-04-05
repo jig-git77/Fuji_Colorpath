@@ -101,7 +101,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ? Convert.ToInt32(EUVIncludedMode.UV).ToString()
                         : Convert.ToInt32(EUVIncludedMode.UVCut).ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.ToString();
+                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
 
                 //cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =

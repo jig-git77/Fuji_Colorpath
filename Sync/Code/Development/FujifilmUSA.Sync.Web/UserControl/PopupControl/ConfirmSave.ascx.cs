@@ -17,9 +17,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.Format("Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+                return string.Format(
+                    "Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.",
+                    SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo,
+                    ((SessionManager.Instance.CurrentOptimizeRun != null)
+                         ? SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value
+                         : string.Empty));
             }
-            
         }
 
         protected void Page_Init(object sender, EventArgs e)
@@ -28,7 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            ((Label)((System.Web.UI.UserControl)updateProgress.FindControl("ucCreateDLP")).FindControl("lblMessage")).Text = DLPMessage;
+            ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
         }
 
         protected void lbtnOptimize_Click(object sender, EventArgs e)

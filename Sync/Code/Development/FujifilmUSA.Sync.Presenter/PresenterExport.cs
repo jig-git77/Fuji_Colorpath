@@ -25,11 +25,11 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
             _viewExport.ChartPreview = projectBusiness.GetChartPreviewOnReferenceChartTypeId(_viewExport.ReferenceChartTypeId);
         }
-        public void GetSourceProfile()
+        public void GetDestinationProfile()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
-            _viewExport.SourceProfile = projectBusiness.GetSourceProfile(_viewExport.ProjectId);
+            _viewExport.SourceProfile = projectBusiness.GetDestinationProfile(_viewExport.ProjectId);
         }
         public void CreateOptimizeRun()
         {

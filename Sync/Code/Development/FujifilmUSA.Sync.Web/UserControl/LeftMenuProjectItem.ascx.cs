@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (lnkItem != null)
                 {
                     SessionManager.Instance.CurrentOptimizeRun = this.CurrentRun;
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                     if (lnkItem.ID == "lnkMeasurement")
                     {
                         Response.Redirect("Measurement.aspx");
@@ -71,6 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkRunName_Click(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.OptimizeRun:
