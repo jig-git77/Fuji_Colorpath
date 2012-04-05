@@ -53,10 +53,12 @@ namespace FujifilmUSA.Sync.Entity
         ANSIT = 6
     }
 
-    public enum EIlluminationMode
+    public enum EUVIncludedMode
     {
-        UV = 1,           //UV Included
-        UVCut = 2         //No UV i.e. UVCut
+        [Description("UV Cut")]
+        UVCut = 0,
+        [Description("UV Included")]
+        UV = 1
     }
 
     public enum CPPatchType
@@ -121,4 +123,11 @@ namespace FujifilmUSA.Sync.Entity
         Edit = 1,
         Run = 2,
     }
+    public enum EInstrumentType
+    {
+        None = 0,
+        i1Pro = 1,
+        i1Sis = 2
+    }
+
 }

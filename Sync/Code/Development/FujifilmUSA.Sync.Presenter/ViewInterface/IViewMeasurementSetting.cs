@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Illuminant> Illumin { get; set; }
         List<ObserverType> Observer { get; set; }
         int DeviceId { get; set; }
-        Dictionary<int, string> Measurement { get; set; }
+        List<MeasurementDevice> MeasurementDevices { get; set; }
         int MeasurementDeviceId { get; set; }
         List<ReferenceChartType> ReferenceChartType { get; set; }
         int ReferenceChartTypeId { get; set; }

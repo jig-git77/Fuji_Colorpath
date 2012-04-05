@@ -14,6 +14,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
+
+        private Dictionary<int, EInstrumentType> MeasurementDevicesView
+        {
+            get
+            {
+                if (ViewState["vsMeasurementDevice"] == null)
+                    return new Dictionary<int, EInstrumentType>();
+                else
+                    return (Dictionary<int, EInstrumentType>)ViewState["vsMeasurementDevice"];
+            }
+            set
+            {
+                ViewState["vsMeasurementDevice"] = value;
+            }
+        }
+
         #endregion
 
         #region "Page Events"
@@ -24,8 +40,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (ViewState[vsIsPostBack] == null)
             {
+                BindUVSettings();
                 BindMeasurementDevice();
                 BindIlluminant();
                 BindObserverType();
@@ -47,7 +65,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
                         ReferenceChartType =
                             new KeyValuePair<short, string>(Convert.ToInt16(cmbAlignmentChart.SelectedValue),
-                                                            cmbAlignmentChart.SelectedItem.Text)
+                                                            cmbAlignmentChart.SelectedItem.Text),
+                        UvIncluded =
+                            cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false
                     };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
@@ -57,6 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbMeasurementDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindAlignmentChart();
+            SetUVSettings();
         }
 
         protected void cmbAlignmentChart_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,6 +96,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
                 cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
+                cmbUVSettings.SelectedValue =
+                    SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
+                        ? Convert.ToInt32(EUVIncludedMode.UV).ToString()
+                        : Convert.ToInt32(EUVIncludedMode.UVCut).ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
                 cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
@@ -93,10 +118,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterMeasurementSetting.GetMeasurementDevice();
             if (!IsErrorOccured)
             {
-                cmbMeasurementDevice.DataValueField = "Key";
-                cmbMeasurementDevice.DataTextField = "Value";
-                cmbMeasurementDevice.DataSource = Measurement;
+                cmbMeasurementDevice.DataValueField = "MeasurementDeviceId";
+                cmbMeasurementDevice.DataTextField = "SerialNumber";
+                cmbMeasurementDevice.DataSource = MeasurementDevices;
                 cmbMeasurementDevice.DataBind();
+                MeasurementDevicesView = MeasurementDevices.Select(x => new KeyValuePair<int, EInstrumentType>(
+                                                                            x.MeasurementDeviceId,
+                                                                            (EInstrumentType)
+                                                                            Enum.Parse(typeof(EInstrumentType),
+                                                                                       x.InstrumentTypeId.ToString()))).
+                    ToDictionary(x => x.Key, x => x.Value);
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
             }
         }
@@ -148,13 +179,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);
         }
+
+        private void BindUVSettings()
+        {
+            cmbUVSettings.DataValueField = "Key";
+            cmbUVSettings.DataTextField = "Value";
+            cmbUVSettings.DataSource = Common.Utilities.GetEnumDropdown<EUVIncludedMode>();
+            cmbUVSettings.DataBind();
+        }
+
+        private void SetUVSettings()
+        {
+            if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue) || MeasurementDevicesView == null)
+            {
+                trUVSettings.Visible = false;
+                return;
+            }
+            trUVSettings.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] ==
+                                    EInstrumentType.i1Sis);
+        }
+
         #endregion
 
         #region IViewMeasurementSetting Members
         public List<Illuminant> Illumin { get; set; }
         public List<ObserverType> Observer { get; set; }
         public int DeviceId { get; set; }
-        public Dictionary<int, string> Measurement { get; set; }
+        public List<MeasurementDevice> MeasurementDevices { get; set; }
         public int MeasurementDeviceId { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }

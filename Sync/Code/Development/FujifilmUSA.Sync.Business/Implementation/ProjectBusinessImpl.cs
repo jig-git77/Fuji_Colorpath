@@ -490,7 +490,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                         ObserverTypeName =
                                                                                             DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType"),
                                                                                         UvIncludedName =
-                                                                                            uvIncluded ? EIlluminationMode.UV.ToString() : EIlluminationMode.UVCut.ToString(),
+                                                                                            uvIncluded ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString(),
                                                                                         DensityType = EDensityType.ANSIT.ToString()
                                                                                     }
                                                       };
@@ -583,9 +583,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstObserverTypeList;
         }
 
-        public Dictionary<int, string> GetMeasurementDeviceList(int deviceId)
+        public List<MeasurementDevice> GetMeasurementDeviceList(int deviceId)
         {
-            var measurementDevice = new Dictionary<int, string>();
+            var measurementDevice = new List<MeasurementDevice>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -593,9 +593,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                      new object[] { deviceId });
                     measurementDevice = dsMeasurementDevice.Tables[0].AsEnumerable().
                         Select(x =>
-                               new KeyValuePair<int, string>(
-                                   DataReader.ReadInt(x, "MeasurementDeviceID"),
-                                   DataReader.ReadString(x, "MeasurementDevi"))).ToDictionary(x => x.Key, x => x.Value);
+                               new MeasurementDevice()
+                                   {
+                                       MeasurementDeviceId = DataReader.ReadShort(x, "MeasurementDeviceID"),
+                                       InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                       InstrumentType = new InstrumentType()
+                                                            {
+                                                                InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                                                InstrumentName = DataReader.ReadString(x, "InstrumentName")
+                                                            },
+                                       SerialNumber = DataReader.ReadString(x, "MeasurementDevi")
+                                   }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementDeviceList"));
             return measurementDevice;
