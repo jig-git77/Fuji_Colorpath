@@ -184,7 +184,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             cmbUVSettings.DataValueField = "Key";
             cmbUVSettings.DataTextField = "Value";
-            cmbUVSettings.DataSource = Common.Utilities.GetEnumDropdown<EUVIncludedMode>();
+            cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>();
             cmbUVSettings.DataBind();
         }
 

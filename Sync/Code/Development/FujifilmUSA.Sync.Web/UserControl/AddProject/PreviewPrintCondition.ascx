@@ -171,6 +171,17 @@
                                             <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
+                                    <tr id="trUVSettings" runat="server">
+                                        <td>
+                                            <span style="font-weight: bold;">UV Settings:</span>
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblUVSettings" runat="server" Text=""></asp:Label>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="clear">

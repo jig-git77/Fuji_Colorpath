@@ -67,7 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (ChartPreview != null)
-                    Utilities.DownloadFile(ChartPreview, string.Format("{0}.jpg", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value));
+                    Utilities.DownloadFile(ChartPreview, string.Format("{0}", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value), ".jpg");
             }
             else
             {

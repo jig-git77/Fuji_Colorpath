@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Threading;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -17,7 +19,7 @@ namespace FujifilmUSA.Sync.Common
         /// </summary>
         /// <param name="fileContent">Content of the File as byte array</param>
         /// <param name="fileName">FileName</param>
-        public static void DownloadFile(byte[] fileContent, string fileName)
+        public static void DownloadFile(byte[] fileContent, string fileName, string format = null)
         {
             try
             {
@@ -26,7 +28,14 @@ namespace FujifilmUSA.Sync.Common
 
                 System.Web.HttpContext.Current.Response.Clear();
                 System.Web.HttpContext.Current.Response.ClearHeaders();
-                System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                if (string.IsNullOrEmpty(format))
+                {
+                    System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Response.ContentType = ReturnExtension(format);
+                }
                 //Content Disposition forces file download instead of opening in the browser
                 System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
@@ -42,6 +51,33 @@ namespace FujifilmUSA.Sync.Common
             }
             catch (ThreadAbortException Exc)
             { string str = Exc.Message; }
+        }
+        private static string ReturnExtension(string fileExtension)
+        {
+            switch (fileExtension)
+            {
+                case ".txt":
+                    return "text/plain";
+                case ".doc":
+                    return "application/ms-word";
+                case ".xls":
+                    return "application/vnd.ms-excel";
+                case ".gif":
+                    return "image/gif";
+                case ".jpg":
+                case "jpeg":
+                    return "image/jpeg";
+                case ".bmp":
+                    return "image/bmp";
+                case ".wav":
+                    return "audio/wav";
+                case ".ppt":
+                    return "application/mspowerpoint";
+                case ".dwg":
+                    return "image/vnd.dwg";
+                default:
+                    return "application/octet-stream";
+            }
         }
 
         public static void DownlaodFile(string folderPath, string fileName, string showOnDialogName)
@@ -255,13 +291,22 @@ namespace FujifilmUSA.Sync.Common
         {
             return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => Enum.GetName(typeof(T), value));
         }
+        public static Dictionary<int, string> GetEnumDescriptionAttributeDropdown<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => ((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description);
+        }
 
-        public static void PopupWindowsRedirect(UserControl ucControl,string url)
+        public static string GetEnumDescriptionAttributeValue(Enum value)
+        {
+            return ((DescriptionAttribute)Attribute.GetCustomAttribute(value.GetType().GetField(Enum.GetName(value.GetType(), value)), typeof(DescriptionAttribute))).Description;
+        }
+
+        public static void PopupWindowsRedirect(UserControl ucControl, string url)
         {
             ucControl.Page.ClientScript.RegisterClientScriptBlock(ucControl.GetType(), "UniqueKey", string.Format("window.parent.location='{0}';", url), true);
         }
 
-        
+
         public static string Fields_Marked_With_Are_Required
         {
             get
