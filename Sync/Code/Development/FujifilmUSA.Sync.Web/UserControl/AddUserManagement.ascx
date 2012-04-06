@@ -1,21 +1,96 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddUserManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddUserManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
+
+<script type="text/javascript">
+
+    
+
+    // Custome Validator to valid password
+    function ValidPassword(source, arguments) {
+        arguments.IsValid = IsValidPassWord();
+    }
+    function IsValidPassWord() {
+        var password = jQuery("input[id*='txtPassWord']").val();
+        var noofchar = /^.*(?=.{1,6}).*$/;
+        var checkspace = /\s/;
+
+        if (true == checkspace.test(password)) {
+            jQuery("span[id*='spanPassWord']").html("Spaces are not allowed.");
+            return false;
+        }
+        if (false == noofchar.test(password)) {
+            jQuery("span[id*='spanPassWord']").html("Must be 6 char in password");
+            return false;
+        }
+        return true;
+    }
+
+    // Custome Validator to valid confirm password and match password and confirm password
+    function ConfirmPassWordPassword(source, arguments) {
+        var flag = true;
+        flag = IsValidConfirmPassWord();
+        if (flag == false) {
+            arguments.IsValid = false;
+            return;
+        }
+        if (jQuery("input[id*='txtPassWord']").val() != (jQuery("input[id*='txtConfirmPass']").val())) 
+        {
+            jQuery("span[id*='spanConfirmPassWord']").html("Password and comfirm password are not same.");
+            arguments.IsValid = false;
+            return;
+        }
+        arguments.IsValid = true;
+    }
+    function IsValidConfirmPassWord() {
+        var password = jQuery("input[id*='txtConfirmPass']").val();
+        var noofchar = /^.*(?=.{1,6}).*$/;
+        var checkspace = /\s/;
+
+        if (true == checkspace.test(password)) {
+            jQuery("span[id*='spanConfirmPassWord']").html("Spaces are not allowed.");
+            return false;
+        }
+        if (false == noofchar.test(password)) {
+            jQuery("span[id*='spanConfirmPassWord']").html("Must be 6 char in comfirm password");
+            return false;
+        }
+        return true;
+    }
+
+
+    function passwordcheck() {
+        var password = jQuery("input[id*='txtPassWord']").val();
+        var best = /^.*(?=.{1,})(?=.*[A-Z])(?=.*[\d])(?=.*[\W]).*$/;
+        var strong = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\d]))|((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\W_]))|((?=[a-zA-Z\d\W_]*[\d])(?=[a-zA-Z\d\W_]*[\W_])))[a-zA-Z\d\W_]*$/;
+        var weak = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(?=[a-zA-Z\d\W_]*[A-Z]|[a-zA-Z\d\W_]*[\d]|[a-zA-Z\d\W_]*[\W_])[a-zA-Z\d\W_]*$/;
+        var bad = /^((^[a-z]{1,}$)|(^[A-Z]{1,}$)|(^[\d]{1,}$)|(^[\W_]{1,}$))$/;
+
+        if (best.test(password)) {
+            //green
+            jQuery("span[id*='lblPassWord']").css('background-color', 'green');
+            jQuery("span[id*='lblPassWord']").html("best");
+        }
+        else if (strong.test(password)) {
+            //yellow
+            jQuery("span[id*='lblPassWord']").css('background-color', 'yellow');
+            jQuery("span[id*='lblPassWord']").html("Strong");
+        }
+        else if (weak.test(password) == true && bad.test(password) == false) {
+            //orange
+            jQuery("span[id*='lblPassWord']").css('background-color', 'orange');
+            jQuery("span[id*='lblPassWord']").html("weak");
+        }
+        else if (bad.test(password)) {
+            //red
+            jQuery("span[id*='lblPassWord']").css('background-color', 'red');
+            jQuery("span[id*='lblPassWord']").html("Bad");
+        }
+    }
+</script>
+
+
 <script language="javascript">
-//    function ShowPassWord() {
-//        if (jQuery("input[id*=txtPassWord]").attr('type') == 'password')
-//            jQuery("input[id*=txtPassWord]").attr('type', 'text');
-//        else
-//            jQuery("input[id*=txtPassWord]").attr('type', 'password');
-
-//        if (jQuery("input[id*=txtConfirmPass]").attr('type') == 'password')
-//            jQuery("input[id*=txtConfirmPass]").attr('type', 'text');
-//        else
-//            jQuery("input[id*=txtConfirmPass]").attr('type', 'password');
-
-//        return false;
-//    }
-
     function ValidateChkList(source, arguments) {
         arguments.IsValid = IsCheckBoxChecked() ? true : false;
     }
@@ -36,9 +111,7 @@
         return isChecked;
     }
 
-    function ChangePassWordTextBoxType() {
-        
-    }
+  
 
 </script>
 <div class="admin_top">
@@ -343,31 +416,23 @@
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtPassWord" runat="server" TextMode="Password" MaxLength="40" Width="100px"
-                                                                        Height="19px"></asp:TextBox>
+                                                                        Height="19px" onkeyup="javascript:passwordcheck()" ></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left;">
                                                                     &nbsp; &nbsp;
-                                                                    <asp:Label ID="lblPassWord" runat="server" CssClass="showpassword" Text=""></asp:Label>
+                                                                    <span ID="lblPassWord" class="showpassword" Text=""></span>
                                                                 </div>
                                                                 <div style="float: left">
-                                                                    <asp:RequiredFieldValidator ID="rfvPassWord" runat="server" Display="Dynamic" ControlToValidate="txtPassWord"
-                                                                        ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide password.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
-                                                                    </asp:RequiredFieldValidator>
+                                                                    <asp:CustomValidator ID="cvPassWord" ClientValidationFunction="ValidPassword" runat="server" ValidationGroup="vgAddUser">
+                                                                            <div class="tooltip_round_box" style="width: 200px;">
+                                                                            <div class="tooltip_arrow" style="margin-top: -3px;">&nbsp;</div>
+                                                                            <div class="tooltip_top_left"></div>
+                                                                            <div class="tooltip_top_right"></div>
+                                                                            <div class="tooltip_inside"><span id='spanPassWord'>Please provide password.</span></div>
+                                                                            <div class="tooltip_bottom_left"></div>
+                                                                            <div class="tooltip_bottom_right"></div>
+                                                                            </div>
+                                                                     </asp:CustomValidator>
                                                                 </div>
                                                                 <div class="clear">
                                                                 </div>
@@ -386,24 +451,17 @@
                                                                 </div>
                                                                 <div style="float: left">
                                                                     &nbsp;
-                                                                    <asp:RequiredFieldValidator ID="rfvConfirmPass" runat="server" Display="Dynamic"
-                                                                        ControlToValidate="txtConfirmPass" ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide confirm password.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
-                                                                    </asp:RequiredFieldValidator>
+                                                                     <asp:CustomValidator ID="cvConfirmPassword" ClientValidationFunction="ConfirmPassWordPassword" runat="server" ValidationGroup="vgAddUser">
+                                                                            <div class="tooltip_round_box" style="width: 200px;">
+                                                                            <div class="tooltip_arrow" style="margin-top: -3px;">&nbsp;</div>
+                                                                            <div class="tooltip_top_left"></div>
+                                                                            <div class="tooltip_top_right"></div>
+                                                                            <div class="tooltip_inside"><span id='spanConfirmPassWord'>Please provide confirm password.</span></div>
+                                                                            <div class="tooltip_bottom_left"></div>
+                                                                            <div class="tooltip_bottom_right"></div>
+                                                                            </div>
+                                                                     </asp:CustomValidator>
+
                                                                 </div>
                                                                 <div style="float: left;">
                                                                     <asp:LinkButton ID="lbtnShow" runat="server" CssClass="gray_bt" 
@@ -496,7 +554,8 @@
                 </table>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>
+   
+</div>
 </div>
 <div class="admin_bottom">
     &nbsp;</div>

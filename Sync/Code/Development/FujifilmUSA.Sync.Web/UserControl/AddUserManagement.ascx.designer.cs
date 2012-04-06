@@ -175,22 +175,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtPassWord;
         
         /// <summary>
-        /// lblPassWord control.
+        /// cvPassWord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPassWord;
-        
-        /// <summary>
-        /// rfvPassWord control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPassWord;
+        protected global::System.Web.UI.WebControls.CustomValidator cvPassWord;
         
         /// <summary>
         /// txtConfirmPass control.
@@ -202,13 +193,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPass;
         
         /// <summary>
-        /// rfvConfirmPass control.
+        /// cvConfirmPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvConfirmPass;
+        protected global::System.Web.UI.WebControls.CustomValidator cvConfirmPassword;
         
         /// <summary>
         /// lbtnShow control.
