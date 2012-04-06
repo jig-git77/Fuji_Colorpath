@@ -15,9 +15,8 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-        .equal_height
-        {
-        }
+        
+        
         .UpdateProgressBackground
         {
             z-index: 3003;
@@ -32,6 +31,13 @@
             mozopacity: .4;
         }
     </style>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            if ($('#contant').height() > $('#sidebar').height()) {
+                $('#sidebar').height($('#contant').height() - 18);
+            }
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">

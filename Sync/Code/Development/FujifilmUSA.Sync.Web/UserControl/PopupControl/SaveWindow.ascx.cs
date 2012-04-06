@@ -64,6 +64,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     if (ChartPreview != null)
                         Utilities.DownloadFile(ChartPreview, string.Format("{0}", SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value), ".jpg");
+                    else
+                        fujiStatusbar.DisplayMessage("Download chart is not available", true);
                 }
             }
             else

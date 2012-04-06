@@ -49,11 +49,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                 imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
             }
-
-            trUVSettings.Visible = (((EInstrumentType)MeasurementDeviceId) == EInstrumentType.i1Sis);
+            trUVSettings.Visible = lblMeasurementDevice.Text.Contains(
+             Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis));
             lblUVSettings.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
-                        ? Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UV)
-                        : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
+                                    ? Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UV)
+                                    : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
         }
 
         #region IViewPreviewPrintCondition Members

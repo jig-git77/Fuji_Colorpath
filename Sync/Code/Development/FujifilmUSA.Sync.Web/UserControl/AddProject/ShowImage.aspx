@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <img src="../../Images/admin_box_top.png"
     </div>
     </form>
 </body>

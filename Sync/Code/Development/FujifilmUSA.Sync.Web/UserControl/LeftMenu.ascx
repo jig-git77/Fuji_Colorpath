@@ -4,12 +4,10 @@
 <%@ Reference Control="~/UserControl/LeftMenuProjectSetting.ascx" %>
 <div class="sidebar_top">
     &nbsp;</div>
-<div class="sidebar_middle" id="divLeftmenu" runat="server">
-    <ul>
-        <asp:PlaceHolder runat="server" ID="ph"></asp:PlaceHolder>
-    </ul>
-</div>
-<div class="clear">
-</div>
+    <div class="sidebar_middle" id="divLeftmenu" runat="server" >
+            <ul>
+                <asp:PlaceHolder runat="server" ID="ph"></asp:PlaceHolder>
+            </ul>
+        </div>
 <div class="sidebar_bottom">
     &nbsp;</div>

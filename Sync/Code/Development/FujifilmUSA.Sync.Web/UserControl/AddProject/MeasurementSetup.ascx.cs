@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
+        
 
         private Dictionary<int, EInstrumentType> MeasurementDevicesView
         {
@@ -173,11 +174,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbAlignmentChart.DataBind();
                 cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
             }
+            DisplayChartImage();
         }
 
         private void DisplayChartImage()
         {
-            imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);
+            if (Convert.ToInt32(cmbAlignmentChart.SelectedValue) <= 0)
+            {
+                imgChart.ImageUrl = ResolveUrl("../../Images/chart_preview.png");
+            }
+            else
+            {
+                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);    
+            }
+            
         }
 
         private void BindUVSettings()

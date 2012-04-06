@@ -6,6 +6,7 @@ using System.IO;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System.Net;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
@@ -14,6 +15,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #region "Declaration"
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         public bool IsErrorOccured;
+        private const string NoImageUrl = "Images/no_chart_preview.png";
+        //private const string NoPreviewImageUrl = @"Images/chart_preview.png";
         #endregion
 
         #region "Page Events"
@@ -26,16 +29,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         protected void Page_Load(object sender, EventArgs e)
         {
             byte[] image = null;
-
-            //Get the client Image
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] == null)
             {
-                ReferenceChartTypeId = Convert.ToInt32(Request.QueryString["id"]);
-                _presenterMeasurementSetting.GetReferenceChartTypeImage();
-                if (!IsErrorOccured)
-                {
-                    image = ReferenceChartTypeImage;
-                }
+                Response.End();
+                return;
+            }
+
+            ReferenceChartTypeId = Convert.ToInt32(Request.QueryString["id"]);
+            _presenterMeasurementSetting.GetReferenceChartTypeImage();
+            if (!IsErrorOccured)
+            {
+                image = ReferenceChartTypeImage;
             }
 
             if (image != null)
@@ -48,6 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #endregion
 
         #region Methods
+
         private static void RenderImage(byte[] image)
         {
             var stream = new MemoryStream();
@@ -56,6 +61,23 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             System.Web.HttpContext.Current.Response.ContentType = "image/gif";
             bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Gif);
         }
+
+        //public void DownloadImageFromUrl(string imageUrl)
+        //{
+        //    Image image = null;
+        //    var webRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
+        //    webRequest.AllowWriteStreamBuffering = true;
+        //    webRequest.Timeout = 30000;
+        //    var webResponse = webRequest.GetResponse();
+        //    var stream = webResponse.GetResponseStream();
+        //    if (stream != null) image = Image.FromStream(stream);
+        //    webResponse.Close();
+        //    if (image != null)
+        //    {
+        //        image.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Gif);
+        //    }
+        //}
+
         #endregion
 
         #region IViewMeasurementSetting Members

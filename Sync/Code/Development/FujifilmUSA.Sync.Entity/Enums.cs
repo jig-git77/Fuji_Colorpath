@@ -126,7 +126,11 @@ namespace FujifilmUSA.Sync.Entity
     public enum EInstrumentType
     {
         None = 0,
+
+        [Description("i1-Pro")]
         i1Pro = 1,
+
+        [Description("i1-Sis")]
         i1Sis = 2
     }
 

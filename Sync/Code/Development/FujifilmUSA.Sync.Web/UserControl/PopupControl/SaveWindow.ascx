@@ -20,13 +20,18 @@
     <table cellpadding="0" cellspacing="10" width="100%">
         <tr>
             <td>
+                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">
                         &nbsp;</div>
                     <div class="section_middle">
                         <div class="combopart">
                             <div>
-                                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                                
                             </div>
                             <div class="header">
                                 <div class="content">
