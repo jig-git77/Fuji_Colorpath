@@ -191,13 +191,13 @@
                 VerticalSide="Middle"  TargetControlID="updateProgress" HorizontalOffset="325" VerticalOffset="210"
                 runat="server">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-             <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
+             <div class="UpdateProgressBackgroundWithMaxOpacity" style="position: fixed; left: 0px; top: 0px;
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
                 <div style="height: 30%;" > &nbsp;</div>
                 <div>
                     <div style="float:left;width:25%"> &nbsp;</div>
                     <div >
-                        <div  style="float:left;background-color: #FFF !important;" >
+                        <div  style="float:left;" >
                             <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
                         </div>
                     </div>

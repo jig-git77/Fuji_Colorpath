@@ -1677,6 +1677,21 @@ height:10px;
             left: 0px;
             background-color: #D0D0D0 !important;
         }
+  .UpdateProgressBackgroundWithMaxOpacity
+        {
+            z-index: 3003;
+            position: fixed;
+            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+            width: 100% ;
+            height: 100% ;
+            top: 0px;
+            left: 0px;
+            opacity: .9;
+            mozopacity: .9;
+            background-color: #D0D0D0 !important;
+        }
+               
+        
         
 /*******************************/
 
