@@ -54,6 +54,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
+        public  Dictionary<int, string> GetCompaniesByRegion(int regionId)
+        {
+            return new Dictionary<int, string>();
+        }
+
         #endregion
 
         #region ITaskBase Members

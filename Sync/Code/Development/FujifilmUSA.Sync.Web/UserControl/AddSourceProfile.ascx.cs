@@ -43,9 +43,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (IsPostBack) return;
             
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
-            BindCompanyDropDown();
             BindRegionDropDown();
-
+            cmbRegion_SelectedIndexChanged(null, null);
             if (Request.QueryString["SourceProfileId"] != null)
             {
                 lblHeader.Text = "Edit Source Profile";
@@ -59,30 +58,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Control events
 
-        protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cmbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //cmbBranch.Items.Clear();
-            //if (cmbCompanyName.SelectedIndex != 0)
-            //{
-            //    BindBranchDropDown(int.Parse(cmbCompanyName.SelectedValue));
-            //}
-            //else
-            //    cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-
+            BindCompanyDropDown();
         }
-
-        protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //cmbLicenseType.Items.Clear();
-            //if (cmbBranch.SelectedIndex != 0)
-            //{
-            //    BindLicenseDropDown(int.Parse(cmbBranch.SelectedValue));
-            //}
-            //else
-            //    cmbLicenseType.Items.Insert(0, new ListItem("-- Select --", "0"));
-
-        }
-
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
@@ -121,20 +100,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
         }
-
         #endregion
 
         #region Method
 
         private void BindCompanyDropDown()
         {
-            _presentersourceprofile.CompanyList();
-            if (!IsErrorOccured)
+            cmbCompanyName.Items.Clear();
+            if(cmbRegion.SelectedValue != "0")
             {
-                cmbCompanyName.DataSource = CompanyList;
-                cmbCompanyName.DataBind();
-                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+                RegionId = Convert.ToInt32(cmbRegion.SelectedValue);
+                _presentersourceprofile.GetCompaniesByRegion();
+                if (!IsErrorOccured)
+                {
+                    cmbCompanyName.DataSource = CompanyList;
+                    cmbCompanyName.DataBind();
+                }
             }
+            cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
         }
 
         private void BindRegionDropDown()
@@ -168,8 +151,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 hdnSourceProfileID.Value = Convert.ToString(iSourceProfileId);
-                cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);
                 cmbRegion.SelectedValue = Convert.ToString(SourceProfile.Region.RegionId);
+                cmbRegion_SelectedIndexChanged(null, null);
+                cmbCompanyName.SelectedValue = Convert.ToString(SourceProfile.Company.CompanyId);
                 txtSourceProfile.Text = SourceProfile.ProfileName;
                 txtProfileDescription.Text = SourceProfile.ProfileDesc;
                 chkIsActive.Checked = (SourceProfile.IsUsed == true ? true : false);
@@ -191,5 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> RegionList { get; set; }
         #endregion
+
+      
     }
 }

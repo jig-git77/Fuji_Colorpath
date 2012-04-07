@@ -20,21 +20,21 @@
                         </legend>
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
-                            <tr>
+                          <tr>
                                 <td>
-                                    <span>Company Name<span style="color: Red;">*</span> </span>
+                                    <span>Region<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td><b>&nbsp;:&nbsp;</b> </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value"
-                                            OnSelectedIndexChanged="cmbCompanyName_SelectedIndexChanged" AutoPostBack="true"
-                                            CssClass="select" Width="200px">
+                                        <asp:DropDownList ID="cmbRegion" runat="server" DataValueField="Key" DataTextField="Value"
+                                            CssClass="select" Width="200px" AutoPostBack="true"
+                                            onselectedindexchanged="cmbRegion_SelectedIndexChanged">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile">
+                                        <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
+                                            ForeColor="Red" ValidationGroup="vgSourceProfile">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -58,18 +58,18 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>Region<span style="color: Red;">*</span> </span>
+                                    <span>Company Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td><b>&nbsp;:&nbsp;</b></td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbRegion" runat="server" DataValueField="Key" DataTextField="Value"
+                                        <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value" 
                                             CssClass="select" Width="200px">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
-                                            ForeColor="Red" ValidationGroup="vgSourceProfile">
+                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
+                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>

@@ -102,6 +102,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionList"));
             return dstRegionList;
         }
+
+        public Dictionary<int, string> GetCompaniesByRegion(int regionId)
+        {
+            var dstCompnayList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsCompnay = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanyByRegion]", new object[] { regionId });
+                    if (dsCompnay != null && dsCompnay.Tables.Count > 0)
+                    {
+                        dstCompnayList = (dsCompnay.Tables[0].AsEnumerable().Select(
+                            region => new
+                            {
+                                Value = DataReader.ReadInt(region, "CompanyID"),
+                                Text = DataReader.ReadString(region, "CompanyName")
+                            })).ToDictionary(region => region.Value, region => region.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionListByCompany"));
+            return dstCompnayList;
+        }
+
         public Dictionary<int, string> GetRegionListByCompany(int companyId)
         {
             var dstRegionList = new Dictionary<int, string>();

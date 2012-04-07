@@ -14,11 +14,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewSourceProfile = viewSourceProfile;
         }
 
-        public void CompanyList()
+        public void GetCompaniesByRegion()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.CompanyList = miscDataBusiness.GetCompanyList();
+            _viewSourceProfile.CompanyList = miscDataBusiness.GetCompaniesByRegion(_viewSourceProfile.RegionId);
         }
 
         public void RegionList()
