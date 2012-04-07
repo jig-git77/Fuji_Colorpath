@@ -17,12 +17,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.Format(
-                    "Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.",
-                    SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo,
-                    ((SessionManager.Instance.CurrentOptimizeRun != null)
-                         ? SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value
-                         : string.Empty));
+                return
+                    (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
+                        ? string.Format(
+                            "Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.",
+                            SessionManager.Instance.CurrentProject.ProjectName,
+                            SessionManager.Instance.CurrentProject.DlpNo,
+                            SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value)
+                        : string.Empty;
             }
         }
 

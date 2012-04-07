@@ -117,35 +117,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public List<Measurement> GetMeasurements(int optimizeRunId)
-        {
-            var measurements = new List<Measurement>();
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                "CPSync4D.GetMeasurementsByOptimizeRunID",
-                                new object[]
-                                        {
-                                            optimizeRunId
-                                        });
-                    measurements = dsMeasurements.Tables[0].AsEnumerable().
-                        Select(x => new Measurement()
-                                        {
-                                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                            OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                        }).ToList();
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurements"));
-            return measurements;
-        }
-
         public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
         {
             Common.ImplementBusinessLogic(
@@ -222,6 +193,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
             return (affectedRow > 0);
+        }
+
+        public int GetLastOptimizeRunId(int projectId)
+        {
+            int optimizeRunId = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                    {
+                        optimizeRunId =
+                            Convert.ToInt32(
+                                DataAccessFactory.
+                                    Instance.
+                                    GetScalar(
+                                        "CPSync4D.GetLastOptimizeRunId",
+                                        new object[]
+                                            {
+                                                projectId
+                                            }));
+                    },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizeRunId"));
+            return optimizeRunId;
         }
 
         #endregion

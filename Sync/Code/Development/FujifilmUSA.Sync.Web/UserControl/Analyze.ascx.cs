@@ -108,7 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
-            if (IsDlpCreated)
+            if (!IsNewDlp && IsDlpCreated)
             {
                 Response.Redirect("Export.aspx");
             }
@@ -122,6 +122,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
                     {
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         Response.Redirect("Export.aspx");
                     }
                 }

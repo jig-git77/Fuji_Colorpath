@@ -56,7 +56,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (DeviceLinkProfile != null)
-                    Utilities.DownloadFile(DeviceLinkProfile, string.Format("{0} DLP {1}.icc", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo));
+                    Utilities.DownloadFile(DeviceLinkProfile,
+                                           string.Format("{0} {1} DLP {2}.icc",
+                                                         SessionManager.Instance.CurrentDevice.DeviceName,
+                                                         SessionManager.Instance.CurrentProject.ProjectName,
+                                                         SessionManager.Instance.CurrentProject.DlpNo.GetValueOrDefault().ToString("000")));
             }
         }
 
@@ -84,7 +88,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (SourceProfile != null)
-                    Utilities.DownloadFile(SourceProfile, string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName));
+                    Utilities.DownloadFile(SourceProfile,
+                                           string.Format("{0} {1}.icc",
+                                                         SessionManager.Instance.CurrentDevice.DeviceName,
+                                                         SessionManager.Instance.CurrentProject.ProjectName));
             }
         }
 

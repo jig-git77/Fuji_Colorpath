@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements = true;
             Response.Redirect("Analyze.aspx");
         }
         #endregion

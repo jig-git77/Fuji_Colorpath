@@ -24,11 +24,6 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
-        public List<Measurement> GetMeasurements(int optimizeRunId)
-        {
-            return new List<Measurement>();
-        }
-
         public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
         {
 
@@ -42,6 +37,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public bool DeleteMeasurement(int measurementId)
         {
             return true;
+        }
+
+        public int GetLastOptimizeRunId(int projectId)
+        {
+            return 0;
         }
 
         #endregion

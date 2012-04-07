@@ -29,16 +29,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Request.QueryString["ProjectId"] != null)
             {
                 ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-                _presenterClosePrintCondition.CreateOptimizeRun();
+                _presenterClosePrintCondition.ReOptimizeDeviceLinkProfile();
                 if (!IsErrorOccured)
                 {
-                    _presenterClosePrintCondition.GetProjectDetail();
+                    _presenterClosePrintCondition.CreateOptimizeRun();
                     if (!IsErrorOccured)
                     {
-                        SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                        Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                        _presenterClosePrintCondition.GetProjectDetail();
+                        if (!IsErrorOccured)
+                        {
+                            SessionManager.Instance.CurrentProject = Project;
+                            SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                            Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                        }
                     }
                 }
             }

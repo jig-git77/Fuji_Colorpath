@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Entity;
 using System;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -34,6 +35,29 @@ namespace FujifilmUSA.Sync.Presenter
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
             _viewClosePrintCondition.CurrentDlp = projectBusiness.GetLastOptimizedDlp(_viewClosePrintCondition.ProjectId);
+        }
+
+        public void ReOptimizeDeviceLinkProfile()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+            var lastOptimizeRunId = optimizeRunBusiness.GetLastOptimizeRunId(_viewClosePrintCondition.ProjectId);
+            optimizeRunBusiness.ErrorOccured -= _viewClosePrintCondition.ErrorOccured;
+
+            if (lastOptimizeRunId > 0)
+            {
+                var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+                measurementBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+                var measurementIds = measurementBusiness.GetMeasurementsOnRunId(lastOptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
+                measurementBusiness.ErrorOccured -= _viewClosePrintCondition.ErrorOccured;
+
+                if (measurementIds.Count > 0)
+                {
+                    optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+                    optimizeRunBusiness.
+                        OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds);
+                }
+            }
         }
     }
 }

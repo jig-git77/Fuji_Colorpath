@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Common
         {
             try
             {
+                //fileName = fileName.Replace(" ", "_");
                 //========== Download File ==========//
                 byte[] data = fileContent;
 
@@ -37,7 +38,7 @@ namespace FujifilmUSA.Sync.Common
                     System.Web.HttpContext.Current.Response.ContentType = ReturnExtension(format);
                 }
                 //Content Disposition forces file download instead of opening in the browser
-                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=\"" + fileName + "\"");
                 System.Web.HttpContext.Current.Response.BinaryWrite(data);
                 try
                 {
