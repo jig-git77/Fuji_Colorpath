@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
 <script language="javascript" type="text/javascript">
     function CloseReOptimize() {
         var oWindow = GetProjectInformationRadWindow();
@@ -53,9 +55,13 @@
                         <tr>
                             <td align="left">
                                 <div class="buttonleft" style="padding-left: 3px">
+                                    <asp:UpdatePanel ID="upReOptimize" runat="server">
+                                        <ContentTemplate>
                                     <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnReOptimize_Click">
                 <span>Re Optimize</span>
                                     </asp:LinkButton>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </div>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnDownloadCurrentDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadCurrentDLP_Click">
@@ -87,3 +93,20 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
+<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upReOptimize"
+    DisplayAfter="50" >
+    <ProgressTemplate>
+        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
+            VerticalSide="Top" TargetControlID="updateProgress" 
+            runat="server">
+        </AjaxToolkit:AlwaysVisibleControlExtender>
+        <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px; top: 0px;
+            z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+            <div style="margin: 10px 0px 10px 3px;">
+                <center>
+                    <uc:CreateDLP runat="server" ID="ucCreateDLP" />
+                </center>
+            </div>
+        </div>
+    </ProgressTemplate>
+</asp:UpdateProgress>

@@ -339,7 +339,7 @@
                 Behaviors="Move" Behavior="Move">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Close Print Condition" Width="715" Height="200"
+                ShowContentDuringLoad="false" Title="Close Print Condition" Width="715" Height="230"
                 Behaviors="Move" Behavior="Move">
             </telerik:RadWindow>
         </Windows>
@@ -347,3 +347,4 @@
 </div>
 <div class="contant_bottom">
     &nbsp;</div>
+        
