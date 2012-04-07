@@ -230,10 +230,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnShow_Click(object sender, EventArgs e)
         {
-            if (txtPassWord.TextMode.Equals(TextBoxMode.Password))
-                txtPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.SingleLine;
+            if (txtPassWord.TextMode == Telerik.Web.UI.InputMode.Password)
+            {
+                txtPassWord.TextMode = txtConfirmPass.TextMode = Telerik.Web.UI.InputMode.SingleLine;
+            }
             else
-                txtPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.Password;
+            {
+                txtPassWord.TextMode = txtConfirmPass.TextMode = Telerik.Web.UI.InputMode.Password;
+            }
         }
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)
         {
