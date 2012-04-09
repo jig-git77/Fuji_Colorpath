@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 dlpIndex = Convert.ToInt32(dlpSplits[dlpSplits.Length - 1].Split('.')[0]);
             }
             var sb = new StringBuilder();
-            if (Convert.ToInt32(Request.QueryString["days"]) <= 0)
+            if (Convert.ToDecimal(Request.QueryString["days"]) <= 0)
                 sb.Append("Current Run " + dlpIndex + " is open.");
             else
                 sb.Append("Current Run " + dlpIndex + " is open and has been inactive for " + Request.QueryString["days"] + " days.");

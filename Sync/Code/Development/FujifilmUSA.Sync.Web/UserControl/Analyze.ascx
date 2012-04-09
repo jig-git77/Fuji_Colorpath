@@ -191,11 +191,11 @@
                 VerticalSide="Middle" TargetControlID="updateProgress" HorizontalOffset="325"
                 VerticalOffset="210" runat="server">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-            <%--<div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
+            <div style="background: #CCC !important;">
+                <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
+            </div>
+            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; left: 0px; top: 0px;
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-            </div>--%>
-            <div id="divUpdate" class="UpdateProgressBackgroundWithNoOpacity" style="position: absolute; z-index: 1010">
-                <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<% =DLPMessage %>' />
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
