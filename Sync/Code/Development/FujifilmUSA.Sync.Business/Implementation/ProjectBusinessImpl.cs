@@ -39,7 +39,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
                                           IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
                                           Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
-                                          DlpNo = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "DLPNO"),
                                           SourceProfile = new SourceProfile()
                                                               {
                                                                   SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID")
@@ -98,6 +97,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ReferenceChartType = new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"), DataReader.ReadString(x, "ChartName"))
                             }).ToList();
 
+                        int index = 0;
+                        project.OptimizeRuns.ForEach(x =>
+                                                         {
+                                                             x.DlpName = string.Format("{0} DLP {1}.icc",
+                                                                                       project.ProjectName,
+                                                                                       index++.ToString("000"));
+                                                         });
+                        if (project.CurrDlpId > 0)
+                        {
+                            project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
+                        }
                         project.CurrentDisplayStatus =
                             project.OptimizeRuns.Count() == 1
                                 ? ECurrentProjectStatus.New
@@ -132,7 +142,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                DlpNo = DataReader.ReadInt(x, "DLPNO"),
+                                                //DlpNo = DataReader.ReadInt(x, "DLPNO"),
                                                 SourceProfile = new SourceProfile()
                                                                     {
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),

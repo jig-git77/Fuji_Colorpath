@@ -17,14 +17,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            int dlpIndex = 0;
+            var dlpSplits = Request.QueryString["DlpName"].Split(' ');
+            if(dlpSplits[dlpSplits.Length-1].Contains(".icc"))
+            {
+                dlpIndex = Convert.ToInt32(dlpSplits[dlpSplits.Length - 1].Split('.')[0]);
+            }
             var sb = new StringBuilder();
             if (Convert.ToInt32(Request.QueryString["days"]) <= 0)
-                sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open.");
+                sb.Append("Current Run " + dlpIndex + " is open.");
             else
-                sb.Append("Current Run " + Convert.ToInt32(Request.QueryString["DlpNo"]) + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+                sb.Append("Current Run " + dlpIndex + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
             
             sb.Append("</br>");
-            sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " + Request.QueryString["ProjectName"] + " DLP " + (Convert.ToInt32(Request.QueryString["DlpNo"]) - 1) + " \" .");
+            sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " + Request.QueryString["DlpName"] + " \" .");
             lblOpenPrintConditionMessage.Text = sb.ToString();
         }
 
@@ -36,7 +42,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                //SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                 Utilities.PopupWindowsRedirect(this,
                                                SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                                    ? "Analyze.aspx"

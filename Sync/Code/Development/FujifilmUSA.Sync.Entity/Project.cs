@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 namespace FujifilmUSA.Sync.Entity
 {
-    public class Project
+    public partial class Project
     {
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
         public byte[] DestinationProfile { get; set; }
         public string ProjectName { get; set; }
         public DateTime CreateDate { get; set; }
-        public int? CurrDlpId { get; set; }
-        public int? DlpNo { get; set; }
+        public int CurrDlpId { get; set; }
+        public string CurrentDlpName { get; set; }
         public bool IsUsed { get; set; }
         public MeasurementSetting MeasurementSetting { get; set; }
         public List<OptimizeRun> OptimizeRuns { get; set; }

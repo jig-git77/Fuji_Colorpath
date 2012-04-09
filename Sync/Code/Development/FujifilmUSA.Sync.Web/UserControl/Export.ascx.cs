@@ -56,11 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (DeviceLinkProfile != null)
-                    Utilities.DownloadFile(DeviceLinkProfile,
-                                           string.Format("{0} {1} DLP {2}.icc",
-                                                         SessionManager.Instance.CurrentDevice.DeviceName,
-                                                         SessionManager.Instance.CurrentProject.ProjectName,
-                                                         SessionManager.Instance.CurrentProject.DlpNo.GetValueOrDefault().ToString("000")));
+                    Utilities.DownloadFile(DeviceLinkProfile, SessionManager.Instance.CurrentOptimizeRun.DlpName);
             }
         }
 

@@ -3,7 +3,7 @@ using System;
 
 namespace FujifilmUSA.Sync.Entity
 {
-    [Serializable]
+    //[Serializable]
     public class Illuminant
     {
         public short IlluminantId { get; set; }

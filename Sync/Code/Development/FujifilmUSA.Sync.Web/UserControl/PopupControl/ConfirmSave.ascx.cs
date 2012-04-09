@@ -20,9 +20,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(
-                            "Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.",
-                            SessionManager.Instance.CurrentProject.ProjectName,
-                            SessionManager.Instance.CurrentProject.DlpNo,
+                            "Once optimization is complete, apply {0} to workflow and repaint the {1} chart.",
+                            SessionManager.Instance.CurrentOptimizeRun.DlpName,
                             SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value)
                         : string.Empty;
             }

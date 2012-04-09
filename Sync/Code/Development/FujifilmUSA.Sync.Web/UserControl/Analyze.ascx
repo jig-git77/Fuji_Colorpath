@@ -46,7 +46,7 @@
     });
 </script>
 <script type="text/javascript" language="javascript">
- 
+
     //According to new or old Project open rad window
     function ChooseRadWindow() {
         if ("<%= IsNewDlp %>" == "True") {
@@ -184,27 +184,19 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdateProgress ID="updateProgress" runat="server"  DynamicLayout="true" AssociatedUpdatePanelID="upCreateDLP"
+    <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
         <ProgressTemplate>
-            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center" 
-                VerticalSide="Middle"  TargetControlID="updateProgress" HorizontalOffset="325" VerticalOffset="210"
-                runat="server">
+            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                VerticalSide="Middle" TargetControlID="updateProgress" HorizontalOffset="325"
+                VerticalOffset="210" runat="server">
             </AjaxToolkit:AlwaysVisibleControlExtender>
-             <div class="UpdateProgressBackgroundWithMaxOpacity" style="position: fixed; left: 0px; top: 0px;
+            <%--<div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
-                <div style="height: 30%;" > &nbsp;</div>
-                <div>
-                    <div style="float:left;width:25%"> &nbsp;</div>
-                    <div >
-                        <div  style="float:left;" >
-                            <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
-                        </div>
-                    </div>
-                    <div style="float:left;width:25%">&nbsp;</div>
-                </div>
-                <div style="height: 30%;">&nbsp;</div>
-             </div>
+            </div>--%>
+            <div id="divUpdate" class="UpdateProgressBackgroundWithNoOpacity" style="position: absolute; z-index: 1010">
+                <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<% =DLPMessage %>' />
+            </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
     <div class="listDevice" style="margin-left: 10px;">
@@ -304,11 +296,11 @@
     &nbsp;</div>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
 <asp:Label ID="InjectScript" runat="server" Width="410px"></asp:Label>
-    <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
-            <Windows>
-                <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
-                    VisibleStatusbar="false"  Title="Choose Next Action" Width="702" Height="250" Behavior="Move"
-                    NavigateUrl="~/PopupConfirmSave.aspx">
-                </telerik:RadWindow>
-            </Windows>
-        </telerik:RadWindowManager>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+    <Windows>
+        <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
+            VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
+            Behavior="Move" NavigateUrl="~/PopupConfirmSave.aspx">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>

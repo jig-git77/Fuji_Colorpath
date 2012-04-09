@@ -14,9 +14,9 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpNo) {
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpNo=" + DlpNo, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName, "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }

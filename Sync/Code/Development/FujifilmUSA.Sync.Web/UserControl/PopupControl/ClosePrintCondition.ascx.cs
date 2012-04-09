@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -13,7 +14,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Declare Variable"
         private PresenterClosePrintCondition _presenterClosePrintCondition;
         #endregion
-
 
         #region "Event"
         protected void Page_Init(object sender, EventArgs e)
@@ -36,8 +36,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured && Project != null)
                 {
                     ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        "Once optimization is complete, apply {0} DLP {1}.icc to workflow and repaint the {2} patch chart.",
-                        Project.ProjectName, Project.DlpNo,
+                        "Once optimization is complete, apply {0} to workflow and repaint the {1} chart.",
+                        Project.OptimizeRuns.Last().DlpName,
                         ((Project.OptimizeRuns != null)
                              ? Project.OptimizeRuns.Last().ReferenceChartType.Value
                              : string.Empty));
@@ -61,7 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             SessionManager.Instance.CurrentProject = Project;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                             SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                            Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
                         }
                     }
                 }

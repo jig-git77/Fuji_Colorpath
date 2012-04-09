@@ -33,14 +33,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string UpdateProgressClientID
         {
-            get { return ((UpdateProgress) Page.Master.FindControl("UpdateProgress")).ClientID; }
+            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
         }
 
         public string DLPMessage
         {
             get
             {
-                return string.Format("Once optimization is complete, apply DLP 000 to workflow and repaint the {0} patch chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+                return string.Format("Once optimization is complete, apply DLP 000 to workflow and repaint the {0} chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
             }
         }
         #endregion
@@ -55,14 +55,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-
-                //Set sync patch
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
             }
-            
+
             header.InnerText = IsNewDlp
                                    ? string.Format("New Print Condition - Analyze (No DLP)")
-                                   : string.Format("Analyze - {0} DLP {1}.icc", SessionManager.Instance.CurrentProject.ProjectName, SessionManager.Instance.CurrentProject.DlpNo);
+                                   : string.Format("Analyze - {0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
