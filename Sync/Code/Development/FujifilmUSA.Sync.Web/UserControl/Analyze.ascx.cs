@@ -67,6 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!Page.IsPostBack)
             {
                 BindMesurementChart();
+                ((Label) updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
             }
         }
         #endregion

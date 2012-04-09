@@ -156,7 +156,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                             Colorant = DataReader.ReadString(x, "Colorant"),
                                                             RipSettings = DataReader.ReadString(x, "RipSettings")
                                                         },
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus")
+                                                Status = (EOptimizeRunStatus) DataReader.ReadInt(x, "ProjStatus"),
+                                                CurrentDlpName = String.Format("{0} DLP {1}.icc",
+                                                                               DataReader.ReadString(x, "ProjectName"),
+                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
                                             }).ToList();
                     }
                 },
