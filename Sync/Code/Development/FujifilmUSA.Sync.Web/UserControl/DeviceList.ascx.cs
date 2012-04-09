@@ -108,7 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                            ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
                                                                                    }
                                                             };
-                Response.Redirect("OperationSelection.aspx");
+                Response.RedirectPermanent("OperationSelection.aspx");
             }
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)

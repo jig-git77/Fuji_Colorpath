@@ -3,7 +3,7 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="ucCreateDLP" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
+
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -174,6 +174,9 @@
                     </table>
                 </div>
             </ContentTemplate>
+            <Triggers>
+                <asp:PostBackTrigger ControlID="rgDeviceList" />
+            </Triggers>
         </asp:UpdatePanel>
     </div>
     <div class="clear">
