@@ -52,6 +52,32 @@
             background-color: #F1F1F1;
             background-position: 0px;
     }
+    
+     .breakWord120
+     {
+            max-width: 120px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+      .breakWord100
+     {
+            max-width: 100px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+      .breakWord70
+     {
+            max-width: 70px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+    
 </style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteMeasurementDevice() {
@@ -99,6 +125,7 @@
                             ShowFilterIcon="true" 
                             FilterControlWidth="120"
                             HeaderStyle-Width ="120" 
+                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
@@ -113,6 +140,7 @@
                             ShowFilterIcon="true" 
                             FilterControlWidth="120"
                             HeaderStyle-Width ="120" 
+                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
@@ -127,6 +155,7 @@
                             ShowFilterIcon="true"  
                             FilterControlWidth="120"
                             HeaderStyle-Width ="120" 
+                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
@@ -140,7 +169,9 @@
                             SortExpression="SerialNumber" 
                             ShowFilterIcon="true"
                             FilterControlWidth="100"
-                            HeaderStyle-Width ="100" >
+                            HeaderStyle-Width ="100"
+                            ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
+                            >
                             <ItemTemplate>
                                 <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>'/>
                             </ItemTemplate>
@@ -153,7 +184,8 @@
                             SortExpression="InstrumentType.InstrumentName" 
                             ShowFilterIcon="true"
                             FilterControlWidth="70"
-                            HeaderStyle-Width ="70" 
+                            HeaderStyle-Width ="70"
+                            ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblInstrumentType" runat="server" Text='<%# Eval("InstrumentType.InstrumentName") %>' />

@@ -91,6 +91,29 @@
         background-color: #F1F1F1;
         background-position: 0px;
     }
+    
+     .breakWord80
+     {
+            max-width: 80px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     
+     .breakWord60
+     {
+            max-width: 60px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     
+     
+     
+
+    
 </style>
 <div class="contant_top">
     &nbsp;</div>
@@ -162,14 +185,19 @@
                                             </FilterTemplate>
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="ProjectName" AllowFiltering="true" HeaderText="Project Name"
-                                            UniqueName="ProjectName" SortExpression="ProjectName" HeaderStyle-Width="80"
-                                            FilterControlWidth="80" ItemStyle-Wrap="true" ShowFilterIcon="true">
+                                            UniqueName="ProjectName" SortExpression="ProjectName" 
+                                            ShowFilterIcon="true"
+                                            FilterControlWidth="80" 
+                                            ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true"
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn UniqueName="SourceProfile" DataField="SourceProfile.ProfileName"
-                                            AllowFiltering="true" HeaderText="Standard" HeaderStyle-Width="80" FilterControlWidth="80"
+                                            AllowFiltering="true" HeaderText="Standard" 
+                                            FilterControlWidth="80"
+                                            ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true"
                                             SortExpression="SourceProfile.ProfileName" ShowFilterIcon="true">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
@@ -194,15 +222,24 @@
                                             </FilterTemplate>--%>
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="PrintCondition.Media" AllowFiltering="true"
-                                            HeaderText="Media" UniqueName="Media" SortExpression="PrintCondition.Media" FilterControlWidth="60"
-                                            HeaderStyle-Width="60" ShowFilterIcon="true">
+                                            HeaderText="Media" UniqueName="Media" SortExpression="PrintCondition.Media" 
+                                            ShowFilterIcon="true"
+                                            FilterControlWidth="60"
+                                            ItemStyle-CssClass="breakWord60" 
+                                            ItemStyle-Width="60" 
+                                            ItemStyle-Wrap="true">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>' />
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn DataField="PrintCondition.Colorant" AllowFiltering="true"
+                                        <telerik:GridTemplateColumn 
+                                            DataField="PrintCondition.Colorant" AllowFiltering="true"
                                             HeaderText="Colorant" UniqueName="Colorant" SortExpression="PrintCondition.Colorant"
-                                            FilterControlWidth="60" HeaderStyle-Width="60" ShowFilterIcon="true">
+                                            ShowFilterIcon="true"
+                                            FilterControlWidth="60"
+                                            ItemStyle-CssClass="breakWord60" 
+                                            ItemStyle-Width="60"
+                                            >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
                                             </ItemTemplate>
@@ -243,7 +280,8 @@
                                             </FilterTemplate>
                                         </telerik:GridBoundColumn>
                                         <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="true" HeaderText=""
-                                            HeaderStyle-Width="40" UniqueName="Delete">
+                                            HeaderStyle-Width="40" UniqueName="Delete"
+                                            >
                                             <FilterTemplate>
                                                 <%-- <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
                                                         <span> Clear Fillter </span>

@@ -51,6 +51,24 @@
             background-color: #F1F1F1;
             background-position: 0px;
     }
+    .breakWord200
+     {
+            max-width: 200px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+    .breakWord300
+     {
+            max-width: 300px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     
+    
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -91,7 +109,8 @@
                         <Columns>
                             <telerik:GridTemplateColumn DataField="CompanyName" AllowFiltering="true" HeaderText="Company Name"
                                 UniqueName="CompanyName" SortExpression="CompanyName" FilterControlWidth="300"
-                                ItemStyle-Wrap="true" ShowFilterIcon="true"
+                                ShowFilterIcon="true"
+                                ItemStyle-CssClass="breakWord300" ItemStyle-Width="300" ItemStyle-Wrap="true"
                                 >
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
@@ -99,7 +118,9 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Region.RegionName" AllowFiltering="true" HeaderText="Region Name"
                                 UniqueName="RegionName" SortExpression="Region.RegionName" FilterControlWidth="200"
-                                ItemStyle-Wrap="true" ShowFilterIcon="true">
+                                ShowFilterIcon="true"
+                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
+                                >
                                 <ItemTemplate>
                                     <asp:Label ID="lblRegionName" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                                 </ItemTemplate>

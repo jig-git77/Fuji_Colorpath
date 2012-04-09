@@ -51,6 +51,16 @@
             background-color: #F1F1F1;
             background-position: 0px;
     }
+    
+     .breakWord290
+     {
+            max-width: 290px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+    
 </style>
 <script type="text/javascript" language="javascript">
     function ConfirmDeleteSourceProfile() {
@@ -110,6 +120,7 @@
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290" 
                             AllowFiltering="true" 
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" 
                             >
                             <ItemTemplate>
                                 <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>'/>
@@ -124,7 +135,8 @@
                             SortExpression="ProfileDesc" 
                             ShowFilterIcon="true"
                             FilterControlWidth="290"
-                            HeaderStyle-Width ="290">
+                            HeaderStyle-Width ="290"
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" >
                             <ItemTemplate>
                                     <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileDesc") %>' />
                             </ItemTemplate>

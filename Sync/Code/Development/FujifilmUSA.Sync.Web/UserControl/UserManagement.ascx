@@ -53,6 +53,31 @@
             background-position: 0px;
     }
     
+     .breakWord120
+     {
+            max-width: 120px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     .breakWord100
+     {
+            max-width: 100px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     .breakWord70
+     {
+            max-width: 70px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+    
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -95,28 +120,32 @@
                     <MasterTableView DataKeyNames="UserId">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="LoginId" AllowFiltering="true" HeaderText="User Name"
-                                UniqueName="LoginId" SortExpression="LoginId" FilterControlWidth="100" HeaderStyle-Width ="100"  ItemStyle-Wrap="true"
+                                UniqueName="LoginId" SortExpression="LoginId" FilterControlWidth="100" HeaderStyle-Width ="100"  
+                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true" 
                                 ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblLoginId" runat="server" Text='<%# Eval("LoginId") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="FirstName" AllowFiltering="true" HeaderText="First Name"
-                                UniqueName="FirstName" SortExpression="FirstName" FilterControlWidth="70" HeaderStyle-Width ="70"  ItemStyle-Wrap="true"
+                                UniqueName="FirstName" SortExpression="FirstName" FilterControlWidth="70" HeaderStyle-Width ="70"  
+                                 ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
                                  ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblFirstName" runat="server" Text='<%# Eval("FirstName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="LastName" AllowFiltering="true" HeaderText="Last Name"
-                                UniqueName="LastName" SortExpression="LastName" FilterControlWidth="70" HeaderStyle-Width ="70"  ItemStyle-Wrap="true"
+                                UniqueName="LastName" SortExpression="LastName" FilterControlWidth="70" HeaderStyle-Width ="70"  
+                                ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
                                 ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblLastName" runat="server" Text='<%# Eval("LastName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Email" AllowFiltering="true" HeaderText="Email"
-                                UniqueName="Email" SortExpression="Email" FilterControlWidth="120" HeaderStyle-Width ="120"  ItemStyle-Wrap="true"
+                                UniqueName="Email" SortExpression="Email" FilterControlWidth="120" HeaderStyle-Width ="120"  
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true" 
                                 ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>' />
@@ -124,7 +153,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="UserCompanies.Company.CompanyName" AllowFiltering="true"
                                 HeaderText="company" UniqueName="companyName" SortExpression="UserCompanies.Company.CompanyName"
-                                FilterControlWidth="70" HeaderStyle-Width ="70"  ItemStyle-Wrap="true" 
+                                FilterControlWidth="70" HeaderStyle-Width ="70"  
+                                ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
                                 ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblcompanyName" runat="server" Text='<%# Eval("UserCompany.Company.CompanyName") %>' />
@@ -132,7 +162,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="BranchNames" AllowFiltering="true" HeaderText="Branch"
                                 UniqueName="BranchName" SortExpression="BranchNames" FilterControlWidth="70" HeaderStyle-Width ="70" 
-                                ItemStyle-Wrap="true" ShowFilterIcon="true">
+                                ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
+                                ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchNames") %>' />
                                 </ItemTemplate>

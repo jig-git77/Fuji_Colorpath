@@ -51,6 +51,24 @@
             background-color: #F1F1F1;
             background-position: 0px;
     }
+    .breakWord120
+     {
+            max-width: 120px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     .breakWord100
+     {
+            max-width: 100px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+    
+    
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -97,7 +115,8 @@
                         <Columns>
                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
                                 UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120" HeaderStyle-Width ="120" 
-                                ItemStyle-Wrap="true" ShowFilterIcon="true"
+                                ShowFilterIcon="true"
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                                 >
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
@@ -105,7 +124,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceFamily.DeviceFamilyDesc" AllowFiltering="true"
                                 HeaderText="DeviceFamily Desc" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
-                                FilterControlWidth="100" HeaderStyle-Width ="100"  ItemStyle-Wrap="true" 
+                                FilterControlWidth="100" HeaderStyle-Width ="100"  
+                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" >
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
@@ -113,7 +133,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.LicenseType.Type" AllowFiltering="true"
                                 HeaderText="License Type" UniqueName="LicenseType" SortExpression="License.LicenseType.Type"
-                                FilterControlWidth="120" HeaderStyle-Width ="120"  ItemStyle-Wrap="true" 
+                                FilterControlWidth="120" HeaderStyle-Width ="120"  
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("License.LicenseType.Type") %>' />
@@ -121,7 +142,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.Branch.Company.CompanyName" AllowFiltering="true"
                                 HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
-                                FilterControlWidth="120" HeaderStyle-Width ="120"  ItemStyle-Wrap="true" 
+                                FilterControlWidth="120" HeaderStyle-Width ="120"  
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
@@ -129,7 +151,8 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.Branch.BranchName" AllowFiltering="true"
                                 HeaderText="Branch Name" UniqueName="BranchName" SortExpression="License.Branch.BranchName"
-                                FilterControlWidth="100" HeaderStyle-Width ="100"  ItemStyle-Wrap="true" 
+                                FilterControlWidth="100" HeaderStyle-Width ="100"  
+                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
