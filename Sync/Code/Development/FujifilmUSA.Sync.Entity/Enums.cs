@@ -94,6 +94,18 @@ namespace FujifilmUSA.Sync.Entity
         Gray_50 = 29,
         Gray_75 = 30
     }
+    public enum ERole
+    {
+        SystemAdmin = 0,
+        LicenseAdmin = 1,
+        WebsiteAdmin = 2,
+        RegionAdmin = 3,
+        CompanyAdmin = 4,
+        BranchAdmin = 5,
+        SiteUser = 6,
+        PrintBuyer = 7
+    }
+
     public enum ERolePermission
     {
         [Description("Manage License")]

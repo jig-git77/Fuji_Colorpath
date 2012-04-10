@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -57,6 +59,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public  Dictionary<int, string> GetCompaniesByRegion(int regionId)
         {
             return new Dictionary<int, string>();
+        }
+
+        public List<Region> GetAllRegions()
+        {
+            return new List<Region>();
         }
 
         #endregion

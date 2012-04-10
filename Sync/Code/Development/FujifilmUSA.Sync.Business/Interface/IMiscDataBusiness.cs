@@ -11,7 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetSourceProfileByCompany(int companyId);
         Dictionary<int, string> GetRegionList();
         Dictionary<int, string> GetUserRoleList();
-        Dictionary<int, string> GetRegionListByCompany(int companyId);
         Dictionary<int, string> GetDeviceFamilyList();
         Dictionary<int, string> GetLicenseTypeList();
         Dictionary<int, string> GetCompaniesByRegion(int regionId);

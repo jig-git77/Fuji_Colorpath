@@ -30,21 +30,21 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.User = userBusiness.GetUser(_viewAddUserManagement.User.UserId).FirstOrDefault();
+            _viewAddUserManagement.UserInformation = userBusiness.GetUser(_viewAddUserManagement.UserInformation.UserId).FirstOrDefault();
         }
 
         public void InsertUser()
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            userBusiness.InsertUser(_viewAddUserManagement.User);
+            userBusiness.InsertUser(_viewAddUserManagement.UserInformation);
         }
 
         public void UpdateUser()
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            userBusiness.UpdateUser(_viewAddUserManagement.User);
+            userBusiness.UpdateUser(_viewAddUserManagement.UserInformation);
         }
 
         public void DeleteUser()
@@ -54,25 +54,18 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.DeleteUser(_viewUserManagement.User.UserId);
         }
 
-        public void GetCompanies()
-        {
-            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Compnaies = miscDataBusiness.GetCompanyList();
-        }
-
         public void GetBranchByCompany()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Branchs = miscDataBusiness.GetBranchList(_viewAddUserManagement.CompanyId);
+            _viewAddUserManagement.Branches = miscDataBusiness.GetBranchList(_viewAddUserManagement.CompanyId);
         }
 
-        public void GetRegionByCompany()
+        public void GetRegions()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Regions = miscDataBusiness.GetRegionListByCompany(_viewAddUserManagement.CompanyId);
+            _viewAddUserManagement.Regions = miscDataBusiness.GetRegionList();
         }
 
         public void GetUserRole()
@@ -80,6 +73,13 @@ namespace FujifilmUSA.Sync.Presenter
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
             _viewAddUserManagement.UserRoleList = miscDataBusiness.GetUserRoleList();
+        }
+
+        public void GetCompaniesByRegion()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
+            _viewAddUserManagement.Companies = miscDataBusiness.GetCompaniesByRegion(_viewAddUserManagement.RegionId);
         }
     }
 }

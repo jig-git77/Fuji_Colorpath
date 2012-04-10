@@ -8,11 +8,12 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewAddUserManagement : IViewError
     {
-        User User { get; set; }
+        User UserInformation { get; set; }
         int CompanyId { get; set; }
-        Dictionary<int, string> Compnaies { get; set; }
-        Dictionary<int, string> Branchs { get; set; }
+        Dictionary<int, string> Companies { get; set; }
+        Dictionary<int, string> Branches { get; set; }
         Dictionary<int, string> Regions { get; set; }
         Dictionary<int, string> UserRoleList { get; set; }
+        int RegionId { get; set; }
     }
 }

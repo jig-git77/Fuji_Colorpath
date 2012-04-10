@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
 using System.Data;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -122,6 +124,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionListByCompany"));
             return dstCompnayList;
+        }
+
+        public List<Region> GetAllRegions()
+        {
+            var regions = new List<Region>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetAllRegions]");
+                    if (dsRegion != null && dsRegion.Tables.Count > 0)
+                    {
+                        regions = dsRegion.Tables[0].AsEnumerable().Select(
+                            region => new Region()
+                                          {
+                                              RegionId = DataReader.ReadShort(region, "RegionID"),
+                                              RegionName = DataReader.ReadString(region, "Region")
+                                          }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAllRegions"));
+            return regions;
         }
 
         public Dictionary<int, string> GetRegionListByCompany(int companyId)

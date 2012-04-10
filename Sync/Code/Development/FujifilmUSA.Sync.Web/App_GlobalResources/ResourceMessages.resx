@@ -453,4 +453,7 @@
   <data name="Error_GetLastOptimizeRunId" xml:space="preserve">
     <value>Error occured while getting Last optimize run Id.Please contact your administrator.</value>
   </data>
+  <data name="Error_GetAllRegions" xml:space="preserve">
+    <value>Error occured while retrieving regions.Please contact your administrator.</value>
+  </data>
 </root>

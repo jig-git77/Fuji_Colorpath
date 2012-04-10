@@ -203,10 +203,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         private static string GetBranchIds(IEnumerable<UserBranch> userBranches)
         {
-            return userBranches.Aggregate(new StringBuilder(),
-                                 (sb, v) => sb.Append(v.BranchId).Append(","),
-                                 sb => { if (0 < sb.Length) sb.Length--; return sb.ToString(); });
-
+            return string.Join(",", userBranches.Select(x => x.BranchId).ToList());
         }
 
         public bool DeleteUser(int userId)

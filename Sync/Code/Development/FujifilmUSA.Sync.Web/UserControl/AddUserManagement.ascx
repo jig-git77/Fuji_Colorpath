@@ -10,7 +10,7 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        if ('<%= UId %>' <= 0) {
+        if ('<%= UserId %>' <= 0) {
             jQuery("input[id*='txtAdminUserName']").val('');
             jQuery("input[id*='txtAdminPassWord']").val('');
         }
@@ -435,7 +435,7 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbRole" runat="server" CssClass="select" Width="270px">
+                                                                    <asp:DropDownList ID="cmbRole" AutoPostBack="true" runat="server" CssClass="select" Width="270px" OnSelectedIndexChanged="cmbRole_SelectedIndexChanged">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
@@ -462,7 +462,44 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr runat="server" id="trRegion">
+                                                            <td>
+                                                                <span style="font-weight: bold;">Region<span style="color: Red;">*</span> </span>
+                                                            </td>
+                                                            <td>
+                                                                <b>&nbsp;:&nbsp;</b>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left;">
+                                                                    <asp:DropDownList ID="cmbRegion" AutoPostBack="true" runat="server" Width="270px" CssClass="select" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
+                                                                        <asp:ListItem Text="--Select Region--" Value="0"></asp:ListItem>
+                                                                    </asp:DropDownList>
+                                                                </div>
+                                                                <div style="float: left">
+                                                                    <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
+                                                                        ForeColor="Red" ValidationGroup="vgAddUser">
+                                            <div class="tooltip_round_box" style="width: 200px;">
+                                            <div class="tooltip_arrow" style="margin-top: -3px;">
+                                                &nbsp;</div>
+                                            <div class="tooltip_top_left">
+                                            </div>
+                                            <div class="tooltip_top_right">
+                                            </div>
+                                            <div class="tooltip_inside">
+                                                Please select region.
+                                            </div>
+                                            <div class="tooltip_bottom_left">
+                                            </div>
+                                            <div class="tooltip_bottom_right">
+                                            </div>
+                                        </div>
+                                                                    </asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server" id="trCompany">
                                                             <td style="width: 140px;">
                                                                 <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                                                 </span>
@@ -472,13 +509,13 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbCompanyName" runat="server" Width="270px" AutoPostBack="true"
-                                                                        CssClass="select" OnSelectedIndexChanged="cmbCompanyName_SelectedIndexChanged">
+                                                                    <asp:DropDownList ID="cmbCompany" runat="server" Width="270px" AutoPostBack="true"
+                                                                        CssClass="select" OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
-                                                                        ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddUser">
+                                                                        ControlToValidate="cmbCompany" ForeColor="Red" ValidationGroup="vgAddUser">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
                                                 &nbsp;</div>
@@ -500,7 +537,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr runat="server" id="trBranch">
                                                             <td>
                                                                 <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                                             </td>
@@ -532,43 +569,6 @@
                                             </div>
                                         </div>
                                                                     </asp:CustomValidator>
-                                                                </div>
-                                                                <div class="clear">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <span style="font-weight: bold;">Region<span style="color: Red;">*</span> </span>
-                                                            </td>
-                                                            <td>
-                                                                <b>&nbsp;:&nbsp;</b>
-                                                            </td>
-                                                            <td>
-                                                                <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbRegion" Enabled="false" runat="server" Width="270px" CssClass="select">
-                                                                        <asp:ListItem Text="--Select Region--" Value="0"></asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                                <div style="float: left">
-                                                                    <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
-                                                                        ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select region.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
-                                                                    </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
                                                                 </div>
