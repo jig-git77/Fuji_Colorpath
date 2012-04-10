@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterUserManagement _presenterUserManagement;
 
         #region Declaration
-        private int UId
+        public int UId
         {
             get
             {
@@ -24,7 +24,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             set { ViewState["UserId"] = value.ToString(); }
         }
-
         #endregion
 
         #region Page Events
@@ -144,7 +143,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return;
             }
 
-            if (txtPassWord.Text.Equals(string.Empty))
+            if (txtAdminPassWord.Text.Equals(string.Empty))
             {
                 fujiStatusbar.DisplayMessage("Please select password.", false);
                 return;
@@ -155,7 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return;
             }
 
-            if (!txtPassWord.Text.Equals(txtConfirmPass.Text, StringComparison.CurrentCultureIgnoreCase))
+            if (!txtAdminPassWord.Text.Equals(txtConfirmPass.Text, StringComparison.CurrentCultureIgnoreCase))
             {
                 fujiStatusbar.DisplayMessage("Password and Comfirm Password are not same.", false);
                 return;
@@ -178,8 +177,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             User.FirstName = txtFirstName.Text;
             User.LastName = txtLastName.Text;
             User.Email = txtEmail.Text;
-            User.LoginId = txtUserName.Text;
-            User.LoginPass = txtPassWord.Text;
+            User.LoginId = txtAdminUserName.Text;
+            User.LoginPass = txtAdminPassWord.Text;
             User.IsActive = chkIsActive.Checked;
             User.LastModifiedUserId = SessionManager.Instance.CurrentUser.UserId;
             User.Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) };
@@ -215,11 +214,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtFirstName.Text = User.FirstName;
                 txtLastName.Text = User.LastName;
                 txtEmail.Text = User.Email;
-                txtUserName.Text = User.LoginId;
-                txtPassWord.Text = txtConfirmPass.Text = User.LoginPass;
-
-                txtPassWord.Attributes.Add("Value", User.LoginPass);
+                txtAdminUserName.Text = User.LoginId;
+                txtAdminPassWord.Text = txtConfirmPass.Text = User.LoginPass;
+                txtAdminPassWord.Attributes.Add("Value", User.LoginPass);
                 txtConfirmPass.Attributes.Add("Value", User.LoginPass);
+
 
                 chkIsActive.Checked = User.IsActive;
                 cmbRole.SelectedValue = User.Role.RoleId.ToString();
@@ -230,13 +229,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnShow_Click(object sender, EventArgs e)
         {
-            if (txtPassWord.TextMode == Telerik.Web.UI.InputMode.Password)
+            if (txtAdminPassWord.TextMode == TextBoxMode.Password)
             {
-                txtPassWord.TextMode = txtConfirmPass.TextMode = Telerik.Web.UI.InputMode.SingleLine;
+                txtAdminPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.SingleLine;
             }
             else
             {
-                txtPassWord.TextMode = txtConfirmPass.TextMode = Telerik.Web.UI.InputMode.Password;
+                string password = txtAdminPassWord.Text;
+                string confirmpassword = txtConfirmPass.Text;
+                txtAdminPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.Password;
+                txtAdminPassWord.Attributes.Add("Value", password);
+                txtConfirmPass.Attributes.Add("Value", confirmpassword);
+                
             }
         }
         protected void cmbCompanyName_SelectedIndexChanged(object sender, EventArgs e)

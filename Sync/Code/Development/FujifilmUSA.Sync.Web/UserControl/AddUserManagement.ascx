@@ -2,22 +2,34 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddUserManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
+
+
+<style type="text/css">
+ 
+</style>
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        if ('<%= UId %>' <= 0) {
+            jQuery("input[id*='txtAdminUserName']").val('');
+            jQuery("input[id*='txtAdminPassWord']").val('');
+        }
+    });
+
     // Custome Validator to valid password
     function ValidPassword(source, arguments) {
         arguments.IsValid = IsValidPassWord();
     }
     function IsValidPassWord() {
-        var password = jQuery("input[id*='txtPassWord']").val();
-        var noofchar = /^.*(?=.{1,6}).*$/;
+        var password = jQuery("input[id*='txtAdminPassWord']").val();
         var checkspace = /\s/;
 
         if (true == checkspace.test(password)) {
             jQuery("span[id*='spanPassWord']").html("Spaces are not allowed.");
             return false;
         }
-        if (false == noofchar.test(password)) {
-            jQuery("span[id*='spanPassWord']").html("Must be 6 char in password");
+        if (password.length < 4) {
+            jQuery("span[id*='spanPassWord']").html("Must be 4 char in password");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             return false;
         }
         return true;
@@ -31,7 +43,7 @@
             arguments.IsValid = false;
             return;
         }
-        if (jQuery("input[id*='txtPassWord']").val() != (jQuery("input[id*='txtConfirmPass']").val())) {
+        if (jQuery("input[id*='txtAdminPassWord']").val() != (jQuery("input[id*='txtConfirmPass']").val())) {
             jQuery("span[id*='spanConfirmPassWord']").html("Password and comfirm password are not same.");
             arguments.IsValid = false;
             return;
@@ -40,47 +52,66 @@
     }
     function IsValidConfirmPassWord() {
         var password = jQuery("input[id*='txtConfirmPass']").val();
-        var noofchar = /^.*(?=.{1,6}).*$/;
+        var noofchar = /^.*(?=.{1,4}).*$/;
         var checkspace = /\s/;
 
         if (true == checkspace.test(password)) {
             jQuery("span[id*='spanConfirmPassWord']").html("Spaces are not allowed.");
             return false;
         }
-        if (false == noofchar.test(password)) {
-            jQuery("span[id*='spanConfirmPassWord']").html("Must be 6 char in comfirm password");
+        if (password.length < 4) {
+            jQuery("span[id*='spanConfirmPassWord']").html("Must be 4 char in comfirm password");
             return false;
         }
         return true;
     }
-    function passwordcheck() {
-        var password = jQuery("input[id*='txtPassWord']").val();
-        var best = /^.*(?=.{1,})(?=.*[A-Z])(?=.*[\d])(?=.*[\W]).*$/;
-        var strong = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\d]))|((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\W_]))|((?=[a-zA-Z\d\W_]*[\d])(?=[a-zA-Z\d\W_]*[\W_])))[a-zA-Z\d\W_]*$/;
-        var weak = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(?=[a-zA-Z\d\W_]*[A-Z]|[a-zA-Z\d\W_]*[\d]|[a-zA-Z\d\W_]*[\W_])[a-zA-Z\d\W_]*$/;
-        var bad = /^((^[a-z]{1,}$)|(^[A-Z]{1,}$)|(^[\d]{1,}$)|(^[\W_]{1,}$))$/;
 
-        if (best.test(password)) {
-            //green
-            jQuery("span[id*='lblPassWord']").css('background-color', 'green');
-            jQuery("span[id*='lblPassWord']").html("best");
+
+    function passwordcheck() {
+        var password = jQuery("input[id*='txtAdminPassWord']").val();
+        var Excellent = /^.*(?=.{1,})(?=.*[A-Z])(?=.*[\d])(?=.*[\W]).*$/;
+        var strong = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\d]))|((?=[a-zA-Z\d\W_]*[A-Z])(?=[a-zA-Z\d\W_]*[\W_]))|((?=[a-zA-Z\d\W_]*[\d])(?=[a-zA-Z\d\W_]*[\W_])))[a-zA-Z\d\W_]*$/;
+        var Average = /^[a-zA-Z\d\W_]*(?=[a-zA-Z\d\W_]{1,})(?=[a-zA-Z\d\W_]*[A-Z]|[a-zA-Z\d\W_]*[\d]|[a-zA-Z\d\W_]*[\W_])[a-zA-Z\d\W_]*$/;
+        var Weak = /^((^[a-z]{1,}$)|(^[A-Z]{1,}$)|(^[\d]{1,}$)|(^[\W_]{1,}$))$/;
+
+
+        if (password.length == 0) {
+            $("span[id*='CustomIndicator']").css("display", "none");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass();
+            return;
+        }
+
+        if (Excellent.test(password)) {
+            $("span[id*='CustomIndicator']").css("display", "inline");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("Excellent");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L5");
         }
         else if (strong.test(password)) {
-            //yellow
-            jQuery("span[id*='lblPassWord']").css('background-color', 'yellow');
-            jQuery("span[id*='lblPassWord']").html("Strong");
+            $("span[id*='CustomIndicator']").css("display", "inline");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("Strong");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L4");
         }
-        else if (weak.test(password) == true && bad.test(password) == false) {
-            //orange
-            jQuery("span[id*='lblPassWord']").css('background-color', 'orange');
-            jQuery("span[id*='lblPassWord']").html("weak");
+        else if (Average.test(password) == true && bad.test(password) == false) {
+            $("span[id*='CustomIndicator']").css("display", "inline");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("Average");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L3");
         }
-        else if (bad.test(password)) {
-            //red
-            jQuery("span[id*='lblPassWord']").css('background-color', 'red');
-            jQuery("span[id*='lblPassWord']").html("Bad");
+        else if (Weak.test(password)) {
+            $("span[id*='CustomIndicator']").css("display", "inline");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("Weak");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L2");
         }
+        else {
+            $("span[id*='CustomIndicator']").css("display", "inline ");
+            jQuery("span[id*='PasswordRepeatedIndicator']").html("Very Poor");
+            $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L1");
+        }
+
     }
+
+
+
 </script>
 <script type="text/javascript" language="javascript">
     function ValidateChkList(source, arguments) {
@@ -103,46 +134,6 @@
         return isChecked;
     }
 </script>
-<style type="text/css">
-    .Base
-    {
-        background-color: Gray;
-        color: Rad;
-        font-family: Arial;
-        font-size: 12px;
-        font-style: normal;
-    }
-    .L1
-    {
-        font-size: 12px;
-        font-weight: bold;
-        color: RED;
-    }
-    .L2
-    {
-        font-size: 12px;
-        font-weight: bold;
-        color: Yellow;
-    }
-    .L3
-    {
-        font-size: 12px;
-        font-weight: bold;
-        color: ORANGE;
-    }
-    .L4
-    {
-        font-size: 12px;
-        font-weight: bold;
-        color: #93FF9E;
-    }
-    .L5
-    {
-        font-size: 12px;
-        font-weight: bold;
-        color: White;
-    }
-</style>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -306,10 +297,10 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="50" Width="270px" Height="19px"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtAdminUserName" runat="server" MaxLength="50" Width="270px" Height="19px"></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left">
-                                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtUserName"
+                                                                    <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtAdminUserName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
                                             <div class="tooltip_round_box" style="width: 200px;">
                                             <div class="tooltip_arrow" style="margin-top: -3px;">
@@ -341,15 +332,20 @@
                                                             </td>
                                                             <td>
                                                                 <div>
-                                                                    <telerik:RadTextBox ID="txtPassWord" Width="100px" runat="server" Height="19px" TextMode="Password">
+                                                                    <asp:TextBox ID="txtAdminPassWord" 
+                                                                        Width="100px" 
+                                                                        MaxLength="30" 
+                                                                        runat="server" 
+                                                                        Height="19px" 
+                                                                        TextMode="Password" 
+                                                                        onkeydown="javascript:passwordcheck()" 
+                                                                        ></asp:TextBox>
+<%--                                                                    <telerik:RadTextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px" TextMode="Password">
                                                                         <PasswordStrengthSettings ShowIndicator="true" TextStrengthDescriptions="Very Poor;Weak;Average;Strong;Excellent"
                                                                             IndicatorElementBaseStyle="Base" TextStrengthDescriptionStyles="L0;L1;L2;L3;L4"
                                                                             IndicatorElementID="CustomIndicator" />
                                                                     </telerik:RadTextBox>
-                                                                    <span id="CustomIndicator"></span><span id="PasswordRepeatedIndicator" class="Base L0">
-                                                                    </span>
-                                                                    <%--                                                                    <asp:TextBox ID="txtPassWord" runat="server" TextMode="Password" MaxLength="40" Width="100px"
-                                                                        Height="19px" onkeyup="javascript:passwordcheck()"></asp:TextBox>--%>
+--%>                                                                <span id="CustomIndicator" class="Base"><span id="PasswordRepeatedIndicator"></span></span>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:CustomValidator ID="cvPassWord" ClientValidationFunction="ValidPassword" runat="server"
@@ -378,11 +374,10 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <%--                                                                    <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password"
-                                                                        Width="100px" Height="19px"></asp:TextBox>--%>
-                                                                    <telerik:RadTextBox ID="txtConfirmPass" Width="100px" runat="server" Height="19px"
+                                                                     <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password" Width="100px" Height="19px"></asp:TextBox>
+                                                                    <%--<telerik:RadTextBox ID="txtConfirmPass" Width="100px" MaxLength="30" runat="server" Height="19px"
                                                                         TextMode="Password">
-                                                                    </telerik:RadTextBox>
+                                                                    </telerik:RadTextBox>--%>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     &nbsp;

@@ -24,7 +24,6 @@ img
 {
     border: 0px;
     vertical-align: top;
-   
 }
 ul, li
 {
@@ -281,7 +280,6 @@ label
     background: url(../Images/sidebar_box_bg.png) repeat-y top left;
     width: 187px;
     min-height: 780px;
-    
 }
 /***Contant**/
 #contant
@@ -357,7 +355,7 @@ label
 #contant .head .buttonLeft
 {
     background: url(../Images/contant_box_haed_bt_left.png) no-repeat top left;
-    float: left ;
+    float: left;
     color: #000000;
     text-align: center;
     font-size: 13px;
@@ -459,7 +457,7 @@ label
     display: block;
 }
 #menu li a
-{    
+{
     /*padding:0 5px;*/
     color: #010101;
     font-size: 13px;
@@ -483,7 +481,7 @@ label
 
 .mytext
 {
-       float: left;
+    float: left;
     line-height: 18px;
     margin-left: 2px;
     padding-left: 2px;
@@ -542,8 +540,8 @@ label
 }
 
 .addprojectleftmenu
-{	
-   padding: 7px 0 6px 30px;
+{
+    padding: 7px 0 6px 30px;
 }
 
 /**footer**/
@@ -593,13 +591,12 @@ label
     cursor: pointer;
 }
 #login_box .remember_me
-{    
-   
+{
     width: 388px;
-    height: 47px;    
-    display: block;    
+    height: 47px;
+    display: block;
     font-size: 20px;
-    color: #83a99d;          
+    color: #83a99d;
 }
 #login_box .login_bt:hover
 {
@@ -608,11 +605,11 @@ label
 /****product  page ***/
 .product_list_table
 {
-    border: solid 1px #9e9e9e;     
+    border: solid 1px #9e9e9e;
     border-collapse: collapse;
-    line-height: 30px; 
-    width:100%;
-    margin-left:10px;
+    line-height: 30px;
+    width: 100%;
+    margin-left: 10px;
 }
 
 .product_list_table th
@@ -622,7 +619,7 @@ label
     border-left: solid 1px #9e9e9e;
     color: #525252;
     font-size: 16px;
-    text-align:center;
+    text-align: center;
 }
 .product_list_table td
 {
@@ -632,7 +629,6 @@ label
     font-size: 14px;
     font-weight: bold;
     border-top: solid 1px #9e9e9e;
-   
 }
 .product_list_table td:first-child
 {
@@ -641,22 +637,22 @@ label
 .product_list_table tr.blue
 {
     background: #ebfffa;
-    color: #367b6a; 
+    color: #367b6a;
 }
 .product_list_table tr.blue a
 {
-    color: #367b6a !important; 
+    color: #367b6a !important;
     text-decoration: none !important;
 }
 .product_list_table tr.purpal
 {
     background: #ebf4ff;
-    color: #3f6798;    
+    color: #3f6798;
 }
 .product_list_table tr.purpal a
-{    
+{
     color: #3f6798 !important;
-    text-decoration: none !important;       
+    text-decoration: none !important;
 }
 .product_list_table tr.green
 {
@@ -665,14 +661,14 @@ label
 }
 .product_list_table tr td select
 {
-    width:94%;
-    margin : 2px;
+    width: 94%;
+    margin: 2px;
 }
 .product_list_table tr td input
 {
     height: 20px;
-    width:94%;
-    margin : 2px;
+    width: 94%;
+    margin: 2px;
 }
 
 
@@ -683,7 +679,7 @@ label
     padding-bottom: 0px;
 }
 #contant .add_form label
-{ 
+{
     width: 93px;
     text-align: right;
     display: block;
@@ -822,8 +818,7 @@ label
 {
     padding: 11px 16px;
     border-left: solid 1px #dcdcdc;
-    border-collapse: collapse;
-    /*font-size: 14px;*/
+    border-collapse: collapse; /*font-size: 14px;*/
     font-weight: bold;
     border-top: solid 1px #9e9e9e;
     color: #000000;
@@ -870,7 +865,7 @@ label
     float: left;
     height: 30px;
     margin-bottom: 20px;
-    padding-left:5px; 
+    padding-left: 5px;
 }
 #contant .info_form .float_r
 {
@@ -898,8 +893,7 @@ label
 }
 .color_pallate .color_pallate_middle
 {
-    background: url(../Images/color_palette_box_bg.png) repeat-y top left;
-    /* padding-left: 1px;*/
+    background: url(../Images/color_palette_box_bg.png) repeat-y top left; /* padding-left: 1px;*/
 }
 .color_pallate .color_pallate_middle .color_bar
 {
@@ -998,14 +992,16 @@ label
     color: Black;
 }
 */
-.RadTabStrip .rtsLevel1 .rtsLI .rtsAfter {
+.RadTabStrip .rtsLevel1 .rtsLI .rtsAfter
+{
     /*background-position: 0 -78px;*/
-    background-image:none !important;
+    background-image: none !important;
 }
 
-.RadTabStrip .rtsLevel1 .rtsLink {
+.RadTabStrip .rtsLevel1 .rtsLink
+{
     /*background-position: 0 -52px;*/
-    background-image:none !important;
+    background-image: none !important;
 }
 
 
@@ -1021,8 +1017,7 @@ label
 .ProjectListtd1
 {
     text-align: left;
-    width:132px;
-    /*width: 90px;*/
+    width: 132px; /*width: 90px;*/
 }
 .ProjectListtd2
 {
@@ -1043,158 +1038,237 @@ label
 
 
 .no_data_found
-{     
+{
     padding-left: 15px;
     padding-top: 5px;
 }
 
-.error{
-	background:url(../images/error_left.png) no-repeat top left;
-	color:#F00;
-	display:block;
-	text-align:left;
-	height:38px;
-	line-height:38px;
-	padding-left:14px;
-	margin-bottom:20px;
-	}
-.error span{
-	background:url(../images/error_right.png) no-repeat top right;
-	display:block;
-	}
-.error span strong{
-	background:url(../images/error.png) no-repeat 0 10px;
-	padding-left:24px;
-	display:block;
-	}
+.error
+{
+    background: url(../images/error_left.png) no-repeat top left;
+    color: #F00;
+    display: block;
+    text-align: left;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 14px;
+    margin-bottom: 20px;
+}
+.error span
+{
+    background: url(../images/error_right.png) no-repeat top right;
+    display: block;
+}
+.error span strong
+{
+    background: url(../images/error.png) no-repeat 0 10px;
+    padding-left: 24px;
+    display: block;
+}
 
-	
+
 /* mesurement information status bar */
-.mesurementStatusbar{
-width:672px;
-margin-bottom: 20px;
-
+.mesurementStatusbar
+{
+    width: 672px;
+    margin-bottom: 20px;
 }
-.mesurementStatusbar .top{
-background:url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
-height:10px;
-}
-
-.mesurementStatusbar .middle{
-    background:url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
-    padding:0px 5px 0px 5px;
+.mesurementStatusbar .top
+{
+    background: url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
+    height: 10px;
 }
 
-.mesurementStatusbar .bottom{
-background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
-height:10px;
-}	
+.mesurementStatusbar .middle
+{
+    background: url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
+    padding: 0px 5px 0px 5px;
+}
+
+.mesurementStatusbar .bottom
+{
+    background: url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
+    height: 10px;
+}
 
 /* status bar information */
-.statusbar{
-width:672px;
-margin-bottom: 20px;
-line-height:14px;
-text-align:left;
-
+.statusbar
+{
+    width: 672px;
+    margin-bottom: 20px;
+    line-height: 14px;
+    text-align: left;
 }
-.statusbar .top{
-background:url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
-height:10px;
-}
-
-.statusbar .middle{
-    background:url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
-    padding:0px 5px 0px 5px;
+.statusbar .top
+{
+    background: url(../images/mesurementStatusbar_box_top.png) no-repeat top left;
+    height: 10px;
 }
 
-.statusbar .bottom{
-background:url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
-height:10px;
-}	
+.statusbar .middle
+{
+    background: url(../images/mesurementStatusbar_box_middle.png) repeat-y top left;
+    padding: 0px 5px 0px 5px;
+}
+
+.statusbar .bottom
+{
+    background: url(../images/mesurementStatusbar_box_bottom.png) no-repeat top left;
+    height: 10px;
+}
 
 /* login Error Information */
-.login_eror .statusbar{
-width:388px;
-margin-bottom: 20px;
+.login_eror .statusbar
+{
+    width: 388px;
+    margin-bottom: 20px;
 }
-.login_eror .statusbar .top{
-background:url(../images/login_eror_top.png) no-repeat top left;
-height:10px;
-}
-
-.login_eror .statusbar .middle{
-    background:url(../images/login_eror_middle.png) repeat-y top left;
-    padding:0px 5px 0px 5px;
+.login_eror .statusbar .top
+{
+    background: url(../images/login_eror_top.png) no-repeat top left;
+    height: 10px;
 }
 
-.login_eror .statusbar .bottom{
-background:url(../images/login_eror_bottom.png) no-repeat top left;
-height:10px;
-}	
+.login_eror .statusbar .middle
+{
+    background: url(../images/login_eror_middle.png) repeat-y top left;
+    padding: 0px 5px 0px 5px;
+}
+
+.login_eror .statusbar .bottom
+{
+    background: url(../images/login_eror_bottom.png) no-repeat top left;
+    height: 10px;
+}
 
 
 
-	
-		
-	
-.PluginStatus{
-	background:url(../images/error_left.png) no-repeat top left;
-	color:#F00;
-	display:block;
-	text-align:left;
-	padding-left:14px;
-	margin-bottom:15px;
-	}
-.PluginStatus span{
-	background:url(../images/error_right.png) no-repeat top right;
-	display:block;
-	}
-	
-#confirm {display:none;}
+
+
+
+.PluginStatus
+{
+    background: url(../images/error_left.png) no-repeat top left;
+    color: #F00;
+    display: block;
+    text-align: left;
+    padding-left: 14px;
+    margin-bottom: 15px;
+}
+.PluginStatus span
+{
+    background: url(../images/error_right.png) no-repeat top right;
+    display: block;
+}
+
+#confirm
+{
+    display: none;
+}
 
 /* Overlay */
-#confirm-overlay {background-color:#eee; cursor:wait;}
+#confirm-overlay
+{
+    background-color: #eee;
+    cursor: wait;
+}
 
 /* Container */
-#confirm-container {height:140px; width:420px; font: 16px/22px 'Trebuchet MS', Verdana, Arial; text-align:left; background:#fff; border:2px solid #3A9977;}
-#confirm-container .header {height:30px; line-height:30px; width:100%; background:#3A9977; color:#fff; font-weight:bold;}
-#confirm-container .header span {padding-left:8px;}
-#confirm-container .message {color:#333; font-size:14px; margin:0; padding:12px 4px 12px 8px;}
-#confirm-container .buttons {line-height:26px; width:160px; float:right; padding:10px 8px 0;} 
-#confirm-container .buttons div {float:right; margin-left:4px; width:70px; height:26px; color:#666; font-weight:bold; text-align:center; background:url(../images/button.gif) repeat-x; border:1px solid #bbb; cursor:pointer;} 
-#confirm-container a.modal-close,
-#confirm-container a.modal-close:link,
-#confirm-container a.modal-close:active,
-#confirm-container a.modal-close:visited {text-decoration:none; font-weight:bold; position:absolute; right:10px; top:2px; color:#fff;}
-#confirm-container a.modal-close:hover {color:#ccc;}
+#confirm-container
+{
+    height: 140px;
+    width: 420px;
+    font: 16px/22px 'Trebuchet MS' , Verdana, Arial;
+    text-align: left;
+    background: #fff;
+    border: 2px solid #3A9977;
+}
+#confirm-container .header
+{
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    background: #3A9977;
+    color: #fff;
+    font-weight: bold;
+}
+#confirm-container .header span
+{
+    padding-left: 8px;
+}
+#confirm-container .message
+{
+    color: #333;
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 4px 12px 8px;
+}
+#confirm-container .buttons
+{
+    line-height: 26px;
+    width: 160px;
+    float: right;
+    padding: 10px 8px 0;
+}
+#confirm-container .buttons div
+{
+    float: right;
+    margin-left: 4px;
+    width: 70px;
+    height: 26px;
+    color: #666;
+    font-weight: bold;
+    text-align: center;
+    background: url(../images/button.gif) repeat-x;
+    border: 1px solid #bbb;
+    cursor: pointer;
+}
+#confirm-container a.modal-close, #confirm-container a.modal-close:link, #confirm-container a.modal-close:active, #confirm-container a.modal-close:visited
+{
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    color: #fff;
+}
+#confirm-container a.modal-close:hover
+{
+    color: #ccc;
+}
 
 
 /***admin page - start***/
-#contant.admin{ width:918px;}
-.admin_top{
-	background:url(../images/admin_box_top.png) no-repeat top left;
-	height:9px;
+#contant.admin
+{
+    width: 918px;
 }
-.admin_bottom{
-	background:url(../images/admin_box_bottom.png) no-repeat top left;
-	height:10px;
+.admin_top
+{
+    background: url(../images/admin_box_top.png) no-repeat top left;
+    height: 9px;
 }
-.admin_middle{
-	background:url(../images/admin_box_bg.png) repeat-y top left;
-	min-height:781px;
-		
-	}
-#contant.admin .head{
-	background:url(../images/admin_box_haed_bg.png) no-repeat top left;
-	height:34px;
-	width:890px;
-	margin:0 0 0 3px;
-	position:relative;
-	top:-7px;
-	padding:0 0 0 17px;
-	line-height:34px;
-	}
+.admin_bottom
+{
+    background: url(../images/admin_box_bottom.png) no-repeat top left;
+    height: 10px;
+}
+.admin_middle
+{
+    background: url(../images/admin_box_bg.png) repeat-y top left;
+    min-height: 781px;
+}
+#contant.admin .head
+{
+    background: url(../images/admin_box_haed_bg.png) no-repeat top left;
+    height: 34px;
+    width: 890px;
+    margin: 0 0 0 3px;
+    position: relative;
+    top: -7px;
+    padding: 0 0 0 17px;
+    line-height: 34px;
+}
 /***admin page - end***/
 
 /****product  page ***/
@@ -1202,8 +1276,8 @@ height:10px;
 {
     margin: 17px auto 0 auto;
     width: 854px; /*border: solid 1px #9e9e9e;     border-collapse: collapse;*/
-    border: solid 1px #9e9e9e;     border-collapse: collapse;
-    
+    border: solid 1px #9e9e9e;
+    border-collapse: collapse;
 }
 
 .admin_list_table th
@@ -1230,22 +1304,22 @@ height:10px;
 .admin_list_table tr.blue
 {
     background: #ebfffa;
-    color: #367b6a; 
+    color: #367b6a;
 }
 .admin_list_table tr.blue a
 {
-    color: #367b6a !important; 
+    color: #367b6a !important;
     text-decoration: none !important;
 }
 .admin_list_table tr.purpal
 {
     background: #ebf4ff;
-    color: #3f6798;    
+    color: #3f6798;
 }
 .admin_list_table tr.purpal a
-{    
+{
     color: #3f6798 !important;
-    text-decoration: none !important;       
+    text-decoration: none !important;
 }
 .admin_list_table tr.green
 {
@@ -1258,8 +1332,8 @@ height:10px;
 /**** addmeasurementCommon usercontrol ***/
 .txtMeasurementName
 {
-    width:178px;
-    Height:19px;
+    width: 178px;
+    height: 19px;
 }
 
 
@@ -1270,22 +1344,22 @@ height:10px;
 {
     margin: 17px auto 0 auto;
     width: 654px; /*border: solid 1px #9e9e9e;     border-collapse: collapse;*/
-    border: solid 1px #9e9e9e;     border-collapse: collapse;
-    
+    border: solid 1px #9e9e9e;
+    border-collapse: collapse;
 }
 
 /**** Pagging Header ***/
 .PaggingHeader table
 {
-    margin-left:10px;
+    margin-left: 10px;
     border: 1px solid #9E9E9E;
-    width:99%;
+    width: 99%;
 }
 .PaggingHeader table td
 {
     background: url(../Images/product_list_table_head.png) repeat-x top left;
     padding: 3px;
-    text-align:left;
+    text-align: left;
     color: #525252;
     font-size: 16px;
     line-height: 16px;
@@ -1293,22 +1367,22 @@ height:10px;
 .PaggingHeader table tr.blue
 {
     background: #ebfffa;
-    color: #367b6a; 
+    color: #367b6a;
 }
 .PaggingHeader table tr.blue a
 {
-    color: #367b6a !important; 
+    color: #367b6a !important;
     text-decoration: none !important;
 }
 .PaggingHeader table tr.purpal
 {
     background: #ebf4ff;
-    color: #3f6798;    
+    color: #3f6798;
 }
 .PaggingHeader table tr.purpal a
-{    
+{
     color: #3f6798 !important;
-    text-decoration: none !important;       
+    text-decoration: none !important;
 }
 .PaggingHeader table tr.green
 {
@@ -1321,14 +1395,14 @@ height:10px;
 /**** SearchList ***/
 .SearchList table
 {
-    margin-left:10px;
+    margin-left: 10px;
     border: 1px solid #9E9E9E;
-    width:99%;
+    width: 99%;
 }
 .SearchList table td
 {
     padding: 3px;
-    text-align:left;
+    text-align: left;
     color: #525252;
     font-size: 16px;
     line-height: 16px;
@@ -1336,22 +1410,22 @@ height:10px;
 .SearchList table tr.blue
 {
     background: #ebfffa;
-    color: #367b6a; 
+    color: #367b6a;
 }
 .SearchList table tr.blue a
 {
-    color: #367b6a !important; 
+    color: #367b6a !important;
     text-decoration: none !important;
 }
 .SearchList table tr.purpal
 {
     background: #ebf4ff;
-    color: #3f6798;    
+    color: #3f6798;
 }
 .SearchList table tr.purpal a
-{    
+{
     color: #3f6798 !important;
-    text-decoration: none !important;       
+    text-decoration: none !important;
 }
 .SearchList table tr.green
 {
@@ -1380,35 +1454,52 @@ height:10px;
 /** big button css **/
 .formSelection
 {
-    float:left;
+    float: left;
     margin: 0px 20px 0 23px;
     padding-bottom: 0px;
 }
-.big_bt{
-	background:url(../images/big_bt_left.png) no-repeat top left	;
-	display:inline-block;
-	height:68px;
-	line-height:68px;
-	padding-left:9px;
-
-	}
-.big_bt span{background:url(../images/big_bt_right.png) no-repeat top right; display:block; padding:0 25px 4px 18px; font-size:16px; color:#fff; font-weight:bold;
+.big_bt
+{
+    background: url(../images/big_bt_left.png) no-repeat top left;
+    display: inline-block;
+    height: 68px;
+    line-height: 68px;
+    padding-left: 9px;
 }
-.big_bt:hover{
-	background:url(../images/big_bt_left_hover.png) no-repeat top left	;
-	
-	}
-.big_bt:hover span{background:url(../images/big_bt_right_hover.png) no-repeat top right;}
+.big_bt span
+{
+    background: url(../images/big_bt_right.png) no-repeat top right;
+    display: block;
+    padding: 0 25px 4px 18px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+}
+.big_bt:hover
+{
+    background: url(../images/big_bt_left_hover.png) no-repeat top left;
+}
+.big_bt:hover span
+{
+    background: url(../images/big_bt_right_hover.png) no-repeat top right;
+}
 
-.disable_big_bt{
-	 background:url(../images/big_bt_left_disable.png) no-repeat top left	;
-	display:inline-block;
-	height:68px;
-	line-height:68px;
-	padding-left:9px;
-
-	}
-.disable_big_bt span{background:url(../images/big_bt_right_disable.png) no-repeat top right; display:block; padding:0 25px 4px 18px; font-size:16px; color:#fff; font-weight:bold;
+.disable_big_bt
+{
+    background: url(../images/big_bt_left_disable.png) no-repeat top left;
+    display: inline-block;
+    height: 68px;
+    line-height: 68px;
+    padding-left: 9px;
+}
+.disable_big_bt span
+{
+    background: url(../images/big_bt_right_disable.png) no-repeat top right;
+    display: block;
+    padding: 0 25px 4px 18px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
 }
 /************************/
 
@@ -1424,36 +1515,36 @@ height:10px;
 /**** Open Print Condition ***/
 .OpenPrintCondition
 {
-    margin-left:10px;
+    margin-left: 10px;
 }
 .divImage
 {
-    float: left; 
-    margin-top:10px; 
-    margin-right:23px;
+    float: left;
+    margin-top: 10px;
+    margin-right: 23px;
 }
 .Content
 {
-    margin-top:0; 
-    margin-bottom: 23px; 
-    float: left; 
-    line-height:34px;
+    margin-top: 0;
+    margin-bottom: 23px;
+    float: left;
+    line-height: 34px;
 }
 .buttonright
 {
-    float: right; 
+    float: right;
     padding-left: 23px;
 }
 .buttonleft
 {
-    float: left;  
+    float: left;
     padding-left: 18px;
 }
 /**************************/
 
 .drawLine
 {
-	background:url(../images/big_bt_left.png) no-repeat top left	;
+    background: url(../images/big_bt_left.png) no-repeat top left;
 }
 
 /**************************/
@@ -1477,22 +1568,21 @@ height:10px;
 .section_middle .combopart .header
 {
     background: url(../Images/section_line_bg.png) repeat-x bottom left;
-    padding:5px;
+    padding: 5px;
     line-height: 24px;
 }
 .section_middle .combopart .header .content
 {
-    padding: -20px 5px 50px 5px; 
+    padding: -20px 5px 50px 5px;
 }
 .section_middle .combopart .header .content .text
 {
     font-weight: bold;
     font-size: 14px;
-    
 }
 .section_middle .combopart .area
 {
-    padding:5px;
+    padding: 5px;
 }
 .section_bottom
 {
@@ -1511,7 +1601,7 @@ height:10px;
 {
     background: url(../Images/section_smallbox_bg.png) repeat-y top left;
     overflow: hidden;
-    height : 320px;
+    height: 320px;
 }
 .section_small_middle .combopart
 {
@@ -1521,22 +1611,21 @@ height:10px;
 .section_small_middle .combopart .header
 {
     background: url(../Images/section_line_bg.png) repeat-x bottom left;
-    padding:5px;
+    padding: 5px;
     line-height: 24px;
 }
 .section_small_middle .combopart .header .content
 {
-    padding: -20px 5px 50px 5px; 
+    padding: -20px 5px 50px 5px;
 }
 .section_small_middle .combopart .header .content .text
 {
     font-weight: bold;
     font-size: 14px;
-    
 }
 .section_small_middle .combopart .area
 {
-    padding:5px;
+    padding: 5px;
 }
 .section_small_bottom
 {
@@ -1548,58 +1637,58 @@ height:10px;
 
 /**** Validation ToolTip ***/
 .tooltip_round_box
-    {
-        position: absolute;
-        padding-left: 17px;
-        z-index: 1;
-        line-height:16px;
-    }
-    .tooltip_arrow
-    {
-        background: url(../Images/tooltip_arrow.png) no-repeat top left;
-        width: 18px;
-        height: 25px;
-        position: absolute;
-        left: 0;
-        top: 8px;
-        z-index: 5;
-    }
-    .tooltip_top_left, .tooltip_bottom_left
-    {
-        margin-right: 9px;
-    }
-    .tooltip_top_left, .tooltip_top_right, .tooltip_bottom_left, .tooltip_bottom_right
-    {
-        background-image: url(../Images/tooltip_corner.png);
-        font-size: 2px;
-        height: 9px;
-    }
-    .tooltip_top_right
-    {
-        background-position: 100% 0;
-    }
-    .tooltip_top_right, .tooltip_bottom_right
-    {
-        margin-left: 9px;
-        margin-top: -9px;
-    }
-    .tooltip_bottom_left
-    {
-        background-position: 0 -9px;
-    }
-    .tooltip_bottom_right
-    {
-        background-position: 100% -9px;
-    }
-    .tooltip_inside
-    {
-        background: none repeat scroll 0 0 #fff;
-        border-left: 1px solid #b5d4e8;
-        border-right: 1px solid #b5d4e8;
-        color: Red;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+{
+    position: absolute;
+    padding-left: 17px;
+    z-index: 1;
+    line-height: 16px;
+}
+.tooltip_arrow
+{
+    background: url(../Images/tooltip_arrow.png) no-repeat top left;
+    width: 18px;
+    height: 25px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+    z-index: 5;
+}
+.tooltip_top_left, .tooltip_bottom_left
+{
+    margin-right: 9px;
+}
+.tooltip_top_left, .tooltip_top_right, .tooltip_bottom_left, .tooltip_bottom_right
+{
+    background-image: url(../Images/tooltip_corner.png);
+    font-size: 2px;
+    height: 9px;
+}
+.tooltip_top_right
+{
+    background-position: 100% 0;
+}
+.tooltip_top_right, .tooltip_bottom_right
+{
+    margin-left: 9px;
+    margin-top: -9px;
+}
+.tooltip_bottom_left
+{
+    background-position: 0 -9px;
+}
+.tooltip_bottom_right
+{
+    background-position: 100% -9px;
+}
+.tooltip_inside
+{
+    background: none repeat scroll 0 0 #fff;
+    border-left: 1px solid #b5d4e8;
+    border-right: 1px solid #b5d4e8;
+    color: Red;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 /**************************/
 
 
@@ -1608,7 +1697,8 @@ height:10px;
 {
 }
 
-.checkListBox label {
+.checkListBox label
+{
     font-size: 12px;
     height: 12px;
     margin-left: 4px;
@@ -1616,8 +1706,9 @@ height:10px;
     padding-top: 1px;
     vertical-align: top;
 }
-.checkListBox input {
-   vertical-align: middle;
+.checkListBox input
+{
+    vertical-align: middle;
 }
 
 /***********************/
@@ -1625,113 +1716,149 @@ height:10px;
 /**** Admin module sub header ***/
 .admin_header .header
 {
-    padding:5px;
+    padding: 5px;
     line-height: 24px;
 }
 .admin_header .header .content
 {
-    padding: -20px 5px 50px 5px; 
+    padding: -20px 5px 50px 5px;
 }
 .admin_header .header .content .text
 {
     color: Gray;
     font-weight: bold;
     font-size: 14px;
-    
 }
 /*******************************/
-.showpassword 
+.showpassword
 {
-        background-color: #EEEEEE;
-        font-weight: bold;
-        text-align:center;
-        padding: 3px 3px 3px 3px;
-        top: 10px;
-        min-width: 90px;
-        border-radius: 3px 3px 3px 3px;
-        opacity: 0.9;
+    background-color: #EEEEEE;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 3px 3px 3px;
+    top: 10px;
+    min-width: 90px;
+    border-radius: 3px 3px 3px 3px;
+    opacity: 0.9;
 }
 
 /************** Download DLP window css *****************/
- .UpdateProgressBackground
-        {
-            z-index: 3003;
-            position: fixed;
-            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-            width: 100% ;
-            height: 100% ;
-            top: 0px;
-            left: 0px;
-            opacity: .9;
-            mozopacity: .9;
-            background-color: #D0D0D0 !important;
-        }
- .UpdateProgressBackgroundWithNoOpacity
-        {
-            z-index: 3003;
-            position: fixed;
-            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-            width: 100% ;
-            height: 100% ;
-            top: 0px;
-            left: 0px;
-            background-color: #D0D0D0 !important;
-        }
-  
-  .UpdateProgressBackgroundLessOptimize
-        {
-            z-index: 3003;
-            position: fixed;
-            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
-            width: 100% ;
-            height: 100% ;
-            top: 0px;
-            left: 0px;
-            opacity: .3;
-            mozopacity: .3;
-            background-color: #D0D0D0 !important;
-        }
-        
+.UpdateProgressBackground
+{
+    z-index: 3003;
+    position: fixed;
+    filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: .9;
+    mozopacity: .9;
+    background-color: #D0D0D0 !important;
+}
+.UpdateProgressBackgroundWithNoOpacity
+{
+    z-index: 3003;
+    position: fixed;
+    filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #D0D0D0 !important;
+}
+
+.UpdateProgressBackgroundLessOptimize
+{
+    z-index: 3003;
+    position: fixed;
+    filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: .3;
+    mozopacity: .3;
+    background-color: #D0D0D0 !important;
+}
+
 /*******************************/
 
 
 /************** admin status bar css *****************/
-#adminstatusbar {
-	width:96%;
-	float:left;
-	margin:3px;
-	border:1.5px solid #7AB6A1;
-	background:#FFF;
-	padding: 3px;
-
+#adminstatusbar
+{
+    width: 96%;
+    float: left;
+    margin: 3px;
+    border: 1.5px solid #7AB6A1;
+    background: #FFF;
+    padding: 3px;
     border-radius: 5px;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
     -webkit-border-radius: 5px;
-	
 }
-#adminstatusbar .innerdiv {
-     padding: 3px;
-     text-align:left; 
-     line-height:18px;
+#adminstatusbar .innerdiv
+{
+    padding: 3px;
+    text-align: left;
+    line-height: 18px;
 }
 
 /************** admin side field set *****************/
 .admin_middle fieldset
 {
-                        border:solid 1px #ddd; 
-                        margin:0; 
-                        padding:10px; 
-                        text-align:left;
-                        
-                       
-                        -moz-border-radius: 4px;
-                         border-radius: 4px;
-                        -khtml-border-radius: 4px;
-                        -webkit-border-radius: 4px;
-                       
-                        
- }
-.admin_middle fieldset legend{margin:0 0 0 43%; padding:0; font-weight:bold; }
+    border: solid 1px #ddd;
+    margin: 0;
+    padding: 10px;
+    text-align: left;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+.admin_middle fieldset legend
+{
+    margin: 0 0 0 43%;
+    padding: 0;
+    font-weight: bold;
+}
 /*******************************/
 
+/***************** User Admin show password **********************/
+.Base
+{
+    background-color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 3px 3px 3px 3px;
+    top: 10px;
+    min-width: 90px;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 12px;
+    font-weight: bold;
+    display:none;
+}
+
+.L1
+{
+    color: RED;
+}
+.L2
+{
+    color: Yellow;
+}
+.L3
+{
+    color: ORANGE;
+}
+.L4
+{
+    color: #93FF9E;
+}
+.L5
+{
+    color: White;
+}
+/*****************************************************************/
