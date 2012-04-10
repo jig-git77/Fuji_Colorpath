@@ -153,8 +153,7 @@
                                                             <li>
                                                                 <div class="left">
                                                                     <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
-                                                                        CommandName="Select">
-                                                                                    <span><%# Eval("DeviceName")%></span>
+                                                                        CommandName="Select" Text='<%# Eval("DeviceName")%>'>
                                                                     </asp:LinkButton>
                                                                 </div>
                                                                 <div class="clear">
@@ -175,7 +174,7 @@
                 </div>
             </ContentTemplate>
             <Triggers>
-                <asp:PostBackTrigger ControlID="rgDeviceList" />
+                <%--<asp:PostBackTrigger ControlID="rgDeviceList" />--%>
             </Triggers>
         </asp:UpdatePanel>
     </div>
