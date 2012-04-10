@@ -37,30 +37,30 @@
         border-style: none;
         border-width: 0 0 1px;
     }
-        .RadGrid_Default .rgRow .rgSorted {
+    .RadGrid_Default .rgRow .rgSorted
+    {
         background-color: #F7F7F7;
         border-bottom-color: #F7F7F7;
     }
-    .RadGrid_Default .rgAltRow .rgSorted {
-            background-color: #F7F7F7;
-            border-bottom-color: #F7F7F7;
-    }
-
-    .RadGrid_Default th.rgSorted 
+    .RadGrid_Default .rgAltRow .rgSorted
     {
-            background-color: #F1F1F1;
-            background-position: 0px;
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
     }
-     .breakWord200
-     {
-            max-width: 200px !important;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-            vertical-align: top;
-            line-height: 15px;
-     }
-     
-     
+    
+    .RadGrid_Default th.rgSorted
+    {
+        background-color: #F1F1F1;
+        background-position: 0px;
+    }
+    .breakWord200
+    {
+        max-width: 200px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
 </style>
 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
     <script type="text/javascript" language="javascript">
@@ -86,12 +86,12 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-    </div>
     <div style="margin-left: 10px;">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <div style="margin-left: 10px; margin-right: 15px;">
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="true" />
+                </div>
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
                 <telerik:RadGrid ID="rgBranch" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
@@ -101,40 +101,31 @@
                     <MasterTableView DataKeyNames="BranchID,CompanyID,BranchName,Location,IsActive">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="BranchName" AllowFiltering="true" HeaderText="Branch Name"
-                                UniqueName="BranchName" SortExpression="BranchName" 
-                                FilterControlWidth="200"
-                                HeaderStyle-Width ="200"
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true"
-                                >
+                                UniqueName="BranchName" SortExpression="BranchName" FilterControlWidth="200"
+                                HeaderStyle-Width="200" ItemStyle-CssClass="breakWord200" ItemStyle-Width="200"
+                                ItemStyle-Wrap="true" ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Location" AllowFiltering="true" HeaderText="Location"
-                                UniqueName="Location" SortExpression="Location" 
-                                HeaderStyle-Width ="200"
-                                FilterControlWidth="200" 
+                                UniqueName="Location" SortExpression="Location" HeaderStyle-Width="200" FilterControlWidth="200"
                                 ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLocation" runat="server" Text='<%# Eval("Location") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Company.CompanyName" AllowFiltering="true"
                                 HeaderText="CompanyName" UniqueName="CompanyName" SortExpression="Company.CompanyName"
-                                HeaderStyle-Width ="200"
-                                FilterControlWidth="200" 
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true"  DataType="System.String">
+                                HeaderStyle-Width="200" FilterControlWidth="200" ItemStyle-CssClass="breakWord200"
+                                ItemStyle-Width="200" ItemStyle-Wrap="true" ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
-                                HeaderStyle-Width ="70"
-                                 FilterControlWidth="70"
-                                DataField="IsActive" ItemStyle-HorizontalAlign="Center">
+                                HeaderStyle-Width="70" FilterControlWidth="70" DataField="IsActive" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>
@@ -143,11 +134,11 @@
                                 UniqueName="Edit">
                                 <FilterTemplate>
                                     <center>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter" CommandName="ClearFilter">
-                                                    <span>
-                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
-                                                    </span>
-                                    </asp:LinkButton>
+                                        <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter" CommandName="ClearFilter">
+                                            <span>
+                                                <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                            </span>
+                                        </asp:LinkButton>
                                     </center>
                                 </FilterTemplate>
                                 <ItemTemplate>

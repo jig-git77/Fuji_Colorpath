@@ -52,7 +52,7 @@
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                                    <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px" MaxLength="30"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"

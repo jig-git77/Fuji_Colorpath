@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementDevice.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementDevice" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
+
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -135,7 +137,7 @@
                                 <td><b>&nbsp;:&nbsp;</b></td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px" MaxLength="20" onkeypress="return CheckNumeric(event)" ></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSerialNumber" runat="server" Display="Dynamic"

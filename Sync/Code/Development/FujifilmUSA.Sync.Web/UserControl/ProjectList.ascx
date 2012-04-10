@@ -170,8 +170,6 @@
                                                         <telerik:RadComboBoxItem Text="ALL" />
                                                         <telerik:RadComboBoxItem Text="Open" Value="Open" />
                                                         <telerik:RadComboBoxItem Text="Closed" Value="Closed" />
-                                                        <telerik:RadComboBoxItem Text="Certify" Value="Certify" />
-                                                        <telerik:RadComboBoxItem Text="NotUsed" Value="NotUsed" />
                                                     </Items>
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">

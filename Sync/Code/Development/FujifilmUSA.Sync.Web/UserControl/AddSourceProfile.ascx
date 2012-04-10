@@ -98,7 +98,7 @@
                                 <td><b>&nbsp;:&nbsp;</b> </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" Height="19px"></asp:TextBox>
                                         <asp:HiddenField ID="hdnSourceProfileID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
@@ -132,7 +132,7 @@
                                 <td><b>&nbsp;:&nbsp;</b> </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtProfileDescription" runat="server" Width="300px" Height="50px"
+                                        <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="150" Width="300px" Height="50px"
                                             TextMode="MultiLine"></asp:TextBox>
                                     </div>
                                     <div style="float: left">

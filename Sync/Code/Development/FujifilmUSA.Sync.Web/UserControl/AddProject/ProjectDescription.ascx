@@ -46,7 +46,7 @@
                                     </td>
                                     <td>
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                            <asp:TextBox ID="txtMedia" runat="server" Width="200px" Height="19px" MaxLength="50"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
@@ -78,7 +78,7 @@
                                     </td>
                                     <td>
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtColorant" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                            <asp:TextBox ID="txtColorant" runat="server" Width="200px" Height="19px" MaxLength="50  "></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvColorant" runat="server" Display="Dynamic" ControlToValidate="txtColorant"
@@ -111,7 +111,7 @@
                                     </td>
                                     <td>
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtRipSetting" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                            <asp:TextBox ID="txtRipSetting" runat="server" Width="200px" Height="19px" MaxLength="50"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvRipSetting" runat="server" Display="Dynamic" ControlToValidate="txtRipSetting"
@@ -142,7 +142,7 @@
                                         <span>Notes:</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtNotes" runat="server" Width="300px" Height="100px" TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox ID="txtNotes" runat="server" Width="300px" Height="100px" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -150,7 +150,7 @@
                                         <span>Technician Name:</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtTechnicianName" runat="server" Width="200px" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtTechnicianName" runat="server" Width="200px" Height="19px" MaxLength="30"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>

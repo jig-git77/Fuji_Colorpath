@@ -101,10 +101,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
                     break;
-                case EOptimizeRunStatus.Certify:
-                    btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                    break;
+                //case EOptimizeRunStatus.Certify:
+                //    btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                //    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                //    break;
             }
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {

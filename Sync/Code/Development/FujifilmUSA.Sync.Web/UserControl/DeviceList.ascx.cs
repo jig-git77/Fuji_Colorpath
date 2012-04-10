@@ -94,9 +94,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
         {
-            if (e.CommandName == "Select")
+            switch (e.CommandName)
             {
-                SessionManager.Instance.CurrentDevice = new Device()
+                case "Filter":
+                        CompanyId = SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0
+                                ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
+                                : Convert.ToInt32(cmbCompany.SelectedValue);
+                        BranchId =  Convert.ToInt32(cmbBranch.SelectedValue);
+                     break;
+                case "Select":
+                      SessionManager.Instance.CurrentDevice = new Device()
                                                             {
                                                                 DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
                                                                 DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
@@ -108,8 +115,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                                            ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
                                                                                    }
                                                             };
-                Response.RedirectPermanent("OperationSelection.aspx");
+                    Response.RedirectPermanent("OperationSelection.aspx");
+                    break;
             }
+
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {

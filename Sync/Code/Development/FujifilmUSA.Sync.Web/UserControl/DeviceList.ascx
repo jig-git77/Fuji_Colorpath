@@ -145,8 +145,11 @@
                                                 DataField="DeviceName" 
                                                 AllowFiltering="true" 
                                                 HeaderText="DeviceName"
-                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
-                                                AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" ShowFilterIcon="true">
+                                                UniqueName="DeviceName" 
+                                                SortExpression="DeviceName" 
+                                                FilterControlWidth="200px"
+                                                ShowFilterIcon="true"
+                                                >
                                                 <ItemTemplate>
                                                     <div class="product_list">
                                                         <ul>
