@@ -41,7 +41,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             lblHeader.Text = "Add Source Profile";
             if (IsPostBack) return;
-            
+
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
             BindRegionDropDown();
             cmbRegion_SelectedIndexChanged(null, null);
@@ -67,8 +67,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
-            SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.RegionId = (short)Convert.ToInt32(cmbRegion.SelectedValue);
+            if (Convert.ToInt32(cmbCompanyName.SelectedValue) > 0)
+                SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.ProfileName = txtSourceProfile.Text.Trim();
             SourceProfile.ProfileDesc = txtProfileDescription.Text;
             //if (fuProfile.HasFile)
@@ -107,7 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindCompanyDropDown()
         {
             cmbCompanyName.Items.Clear();
-            if(cmbRegion.SelectedValue != "0")
+            if (cmbRegion.SelectedValue != "0")
             {
                 RegionId = Convert.ToInt32(cmbRegion.SelectedValue);
                 _presentersourceprofile.GetCompaniesByRegion();
@@ -176,6 +177,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> RegionList { get; set; }
         #endregion
 
-      
+
     }
 }

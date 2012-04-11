@@ -150,7 +150,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="UserCompanies.Company.CompanyName" AllowFiltering="true"
-                                HeaderText="company" UniqueName="companyName" SortExpression="UserCompanies.Company.CompanyName"
+                                HeaderText="Company" UniqueName="companyName" SortExpression="UserCompanies.Company.CompanyName"
                                 FilterControlWidth="70" HeaderStyle-Width ="70"  
                                 ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
                                 ShowFilterIcon="true" >

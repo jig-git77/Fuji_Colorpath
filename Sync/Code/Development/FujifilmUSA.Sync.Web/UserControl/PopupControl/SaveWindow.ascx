@@ -107,7 +107,7 @@
                                         <tr>
                                             <td>
                                                 <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
-                                        <span>DawnLoad Chart</span>
+                                        <span>Dawnload Chart</span>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
