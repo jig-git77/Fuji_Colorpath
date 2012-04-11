@@ -98,7 +98,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),
                                            Region = new Region()
                                                         {
-                                                            RegionId = DataReader.ReadByte(x, "RegionId"),
+                                                            RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
                                                             RegionName = DataReader.ReadString(x, "Region")
                                                         },
                                            UserCompany = new UserCompany()

@@ -42,7 +42,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (Request.QueryString["UserId"] != null)
                 {
                     lblHeader.Text = "Edit User";
-                    SetUser(Convert.ToInt32(Request.QueryString["UserId"]));
+                    UserId = Convert.ToInt32(Request.QueryString["UserId"]);
+                    SetUser();
                 }
             }
         }
@@ -141,7 +142,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-
         private void SaveUser()
         {
             //if (cmbCompany.SelectedIndex == 0)
@@ -211,23 +211,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     UserInformation.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
                     break;
                 case ERole.CompanyAdmin:
-                    //UserInformation.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
                     UserInformation.UserCompany = new UserCompany() { CompanyId = Convert.ToInt16(cmbCompany.SelectedValue) };
                     break;
                 case ERole.BranchAdmin:
-                    //UserInformation.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
                     UserInformation.UserCompany = new UserCompany() { CompanyId = Convert.ToInt16(cmbCompany.SelectedValue) };
                     selectedBranchIds = chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).Select(x => x.Value).ToList();
                     selectedBranchIds.ForEach(x => UserInformation.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(x) }));
                     break;
                 case ERole.SiteUser:
-                    //UserInformation.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
                     UserInformation.UserCompany = new UserCompany() { CompanyId = Convert.ToInt16(cmbCompany.SelectedValue) };
                     selectedBranchIds = chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).Select(x => x.Value).ToList();
                     selectedBranchIds.ForEach(x => UserInformation.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(x) }));
                     break;
                 case ERole.PrintBuyer:
-                    //UserInformation.RegionId = Convert.ToInt16(cmbRegion.SelectedValue);
                     UserInformation.UserCompany = new UserCompany() { CompanyId = Convert.ToInt16(cmbCompany.SelectedValue) };
                     selectedBranchIds = chkUserBranch.Items.Cast<ListItem>().ToList().FindAll(p => p.Selected).Select(x => x.Value).ToList();
                     selectedBranchIds.ForEach(x => UserInformation.UserBranches.Add(new UserBranch() { BranchId = Convert.ToInt32(x) }));
@@ -248,35 +244,77 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             Response.Redirect("UserManagement.aspx");
         }
-
-        private void SetUser(int userId)
+        private void SetUser()
         {
-            UserInformation = new User { UserId = UserId = userId };
+            UserInformation = new User { UserId = UserId };
             _presenterUserManagement.GetUser();
             if (!IsErrorOccured)
             {
-                cmbCompany.SelectedValue = UserInformation.UserCompany.CompanyId.ToString();
-
-                BindBranch();
-                chkUserBranch.Items.Cast<ListItem>().ToList().ForEach(p => p.Selected = UserInformation.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));
-
-                BindRegion();
-
                 txtFirstName.Text = UserInformation.FirstName;
                 txtLastName.Text = UserInformation.LastName;
                 txtEmail.Text = UserInformation.Email;
                 txtAdminUserName.Text = UserInformation.LoginId;
                 txtAdminPassWord.Text = txtConfirmPass.Text = UserInformation.LoginPass;
-
                 txtAdminPassWord.Attributes.Add("Value", UserInformation.LoginPass);
                 txtConfirmPass.Attributes.Add("Value", UserInformation.LoginPass);
-
                 chkIsActive.Checked = UserInformation.IsActive;
                 cmbRole.SelectedValue = UserInformation.Role.RoleId.ToString();
+                cmbRole_SelectedIndexChanged(null, null);
+
+                ManageRoleBaseUI();
+
+                var role = (ERole)Enum.Parse(typeof(ERole), cmbRole.SelectedItem.Text.Replace(" ", "").Trim());
+                switch (role)
+                {
+                    case ERole.SystemAdmin:
+                        //nothing to set
+                        break;
+                    case ERole.LicenseAdmin:
+                        //nothing to set
+                        break;
+                    case ERole.WebsiteAdmin:
+                        //nothing to set
+                        break;
+                    case ERole.RegionAdmin:
+                        if (UserInformation.RegionId > 0)
+                        {
+                            cmbRegion.SelectedValue = UserInformation.RegionId.ToString();
+                            cmbRegion_SelectedIndexChanged(null, null);
+                        }
+                        break;
+                    case ERole.CompanyAdmin:
+                        if (UserInformation.Region != null && UserInformation.Region.RegionId > 0)
+                        {
+                            cmbRegion.SelectedValue = UserInformation.Region.RegionId.ToString();
+                            cmbRegion_SelectedIndexChanged(null, null);
+                        }
+                        if (UserInformation.UserCompany != null && UserInformation.UserCompany.CompanyId > 0)
+                        {
+                            cmbCompany.SelectedValue = UserInformation.UserCompany.CompanyId.ToString();
+                            cmbCompany_SelectedIndexChanged(null, null);
+                        }
+                        break;
+                    case ERole.BranchAdmin:
+                    case ERole.SiteUser:
+                    case ERole.PrintBuyer:
+                        if (UserInformation.Region != null && UserInformation.Region.RegionId > 0)
+                        {
+                            cmbRegion.SelectedValue = UserInformation.Region.RegionId.ToString();
+                            cmbRegion_SelectedIndexChanged(null, null);
+                        }
+                        if (UserInformation.UserCompany != null && UserInformation.UserCompany.CompanyId > 0)
+                        {
+                            cmbCompany.SelectedValue = UserInformation.UserCompany.CompanyId.ToString();
+                            cmbCompany_SelectedIndexChanged(null, null);
+                        }
+                        if (UserInformation.UserBranches != null && UserInformation.UserBranches.Count > 0)
+                            chkUserBranch.Items.Cast<ListItem>().ToList().
+                                ForEach(p => p.Selected = UserInformation.UserBranches.Any(u => u.BranchId.Equals(Convert.ToInt32(p.Value))));
+                        break;
+                }
             }
         }
-
-        private void ManageRegionCompanyBranchOnRoleSelection()
+        private void ManageRoleBaseUI()
         {
             trRegion.Visible = trCompany.Visible = trBranch.Visible = true;
             cmbRegion.Enabled = cmbCompany.Enabled = chkUserBranch.Enabled = true;
@@ -313,19 +351,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-
         #endregion
 
         #region Control Events
         protected void cmbRole_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindRegion();
-            ManageRegionCompanyBranchOnRoleSelection();
+            ManageRoleBaseUI();
         }
+
         protected void cmbRegion_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindCompanies();
         }
+
         protected void lbtnShow_Click(object sender, EventArgs e)
         {
             if (txtAdminPassWord.TextMode == TextBoxMode.Password)
@@ -346,6 +385,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             BindBranch();
         }
+
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SaveUser();
