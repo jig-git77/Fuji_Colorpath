@@ -49,6 +49,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvcompany;
         
         /// <summary>
+        /// rfvCompanyContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvCompanyContainer;
+        
+        /// <summary>
         /// cmbBranch control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBranch;
+        
+        /// <summary>
+        /// rfvBranchContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvBranchContainer;
         
         /// <summary>
         /// cmbLicenseType control.
@@ -85,6 +103,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLicenseType;
         
         /// <summary>
+        /// rfvLicenseTypeContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvLicenseTypeContainer;
+        
+        /// <summary>
         /// txtLicenseDescription control.
         /// </summary>
         /// <remarks>
@@ -101,6 +128,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLicenseDescription;
+        
+        /// <summary>
+        /// rfvLDContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvLDContainer;
         
         /// <summary>
         /// txtActivationDate control.
@@ -121,6 +157,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvActivationDate;
         
         /// <summary>
+        /// rfvActivateContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvActivateContainer;
+        
+        /// <summary>
         /// txtExpirationDate control.
         /// </summary>
         /// <remarks>
@@ -137,6 +182,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvExpirationDate;
+        
+        /// <summary>
+        /// rfvExpiraDateContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvExpiraDateContainer;
         
         /// <summary>
         /// chkIsActive control.

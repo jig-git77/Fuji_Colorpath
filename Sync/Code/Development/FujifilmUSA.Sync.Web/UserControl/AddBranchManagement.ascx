@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddBranchManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddBranchManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
-
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer" TagPrefix="ucValidationContainer" %>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -17,135 +17,104 @@
                 <ContentTemplate>
                     <center>
                         <fieldset style="width: 60%;">
-                            <legend><asp:Label ID="lblHeader" runat ="server" Text ="Add Branch" ></asp:Label> </legend>
+                            <legend>
+                                <asp:Label ID="lblHeader" runat="server" Text="Add Branch"></asp:Label>
+                            </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                                <table>
-                            <tr>
-                                <td align="right">
-                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
-                                </td>
-                                <td> <b>&nbsp;: &nbsp;</b></td>
-                                <td align="left">
-                                    <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompanyName" runat="server"  Width="400px" CssClass="select">
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbCompanyName" ForeColor="Red"  ValidationGroup="vgAddBranch">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
+                            <table>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;: &nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="cmbCompanyName" runat="server" Width="400px" CssClass="select">
+                                            </asp:DropDownList>
                                         </div>
-                                        </asp:RequiredFieldValidator>
-                                       
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <span style="font-weight:bold;">Branch Name<span style="color: Red;">*</span> </span>
-                                </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
-                                <td align="left">
-                                    <div style="float: left;">
-                                        <asp:TextBox ID="txtBranchName" runat="server" MaxLength="50" Width="400px" Height="19px" ></asp:TextBox>
-                                    </div>
-                                    <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtBranchName" ForeColor="Red" ValidationGroup="vgAddBranch">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide branch name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
+                                                ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddBranch">
+                                                <ucValidationContainer:ValidationContainer ID="rfvcCompanyContainer" runat="server"
+                                                    ValidationMsg="Please select company." Size="200" />
+                                            </asp:RequiredFieldValidator>
                                         </div>
-                                        </asp:RequiredFieldValidator>
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="right">
-                                    <span style="font-weight:bold;">Location<span style="color: Red;">*</span> </span>
-                                </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
-                                <td align="left">
-                                    <div style="float: left;">
-                                        <asp:TextBox ID="txtLocation" runat="server" MaxLength="50" Width="400px" Height="19px" ></asp:TextBox>
-                                    </div>
-                                    <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtLocation" ForeColor="Red" ValidationGroup="vgAddBranch">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide location.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
+                                        <div class="clear">
                                         </div>
-                                        </asp:RequiredFieldValidator>
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </td>
-                            </tr>
-                              <tr>
-                                <td align="right">
-                                    <span style="font-weight:bold;">Is Active?</span>
-                                </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
-                                <td align="left" >
-                                    <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat ="server" Checked="true" />
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                </td>
-                                <td></td>
-                                <td align="left">
-                                        <div class="text" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:TextBox ID="txtBranchName" runat="server" MaxLength="50" Width="400px" Height="19px"></asp:TextBox>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic" ControlToValidate="txtBranchName"
+                                                ForeColor="Red" ValidationGroup="vgAddBranch">
+                                                <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
+                                                    ValidationMsg="Please provide branch name." Size="200" />
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;">Location<span style="color: Red;">*</span> </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:TextBox ID="txtLocation" runat="server" MaxLength="50" Width="400px" Height="19px"></asp:TextBox>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic" ControlToValidate="txtLocation"
+                                                ForeColor="Red" ValidationGroup="vgAddBranch">
+                                                <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                    ValidationMsg="Please provide location." Size="200" />
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;">Is Active?</span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td align="left">
+                                        <div class="text">
                                             <div style="padding-left: 3px;">
-                                                <asp:LinkButton ID="lbtnSave" 
-                                                    runat="server" 
-                                                    CssClass="gray_bt"
-                                                    ValidationGroup="vgAddBranch" onclick="lbtnSave_Click" 
-                                                    >
+                                                <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddBranch"
+                                                    OnClick="lbtnSave_Click">
                                                     <span> Save </span>
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/BranchManagement.aspx">
@@ -155,15 +124,14 @@
                                         </div>
                                         <div class="clear">
                                         </div>
-                                </td>
-                            </tr>
-                        </table>
-                            </fieldset>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
                     </center>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </center>
-
     </div>
 </div>
 <div class="admin_bottom">

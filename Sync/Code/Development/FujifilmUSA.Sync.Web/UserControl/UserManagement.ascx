@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UserManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.UserManagement" %>
-<%@ Register TagName="Statusbar" TagPrefix="ucStatusbar" Src="Statusbar.ascx" %>
+<%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -105,12 +105,10 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px; margin-right: 15px;">
-        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-    </div>
     <div style="margin-left: 10px;">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
                 <telerik:RadGrid ID="rgUser" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"

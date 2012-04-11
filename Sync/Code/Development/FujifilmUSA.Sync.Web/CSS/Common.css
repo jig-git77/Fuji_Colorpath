@@ -1638,7 +1638,7 @@ label
 /**** Validation ToolTip ***/
 .tooltip_round_box
 {
-    position: absolute;
+    position: fixed;
     padding-left: 17px;
     z-index: 1;
     line-height: 16px;

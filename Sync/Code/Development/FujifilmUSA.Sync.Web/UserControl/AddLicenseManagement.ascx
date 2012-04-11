@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddLicenseManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddLicenseManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <link rel="stylesheet" href="JQuery/datepicker-themes/base/jquery.ui.all.css">
 <script type="text/javascript" src="JQuery/jquery.ui.core.js"></script>
 <script type="text/javascript" src="JQuery/jquery.ui.datepicker.js"></script>
@@ -35,7 +37,9 @@
                                     <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
@@ -45,21 +49,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompany" runat="server" Display="Dynamic" ControlToValidate="cmbCompany"
                                             ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
+                                                ValidationMsg="Please select company." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -68,10 +59,11 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span>
-                                    </span>
+                                    <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbBranch" runat="server" Width="400px" CssClass="select">
@@ -80,21 +72,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
                                             ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select branch.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
+                                                ValidationMsg="Please select branch." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -106,7 +85,9 @@
                                     <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbLicenseType" runat="server" Width="400px" CssClass="select">
@@ -115,21 +96,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbLicenseType" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select license type.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvLicenseTypeContainer" runat="server"
+                                                ValidationMsg="Please select license type." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -141,7 +109,9 @@
                                     <span style="font-weight: bold;">License Description<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtLicenseDescription" runat="server" MaxLength="50" Width="400px"
@@ -150,21 +120,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicenseDescription" runat="server" Display="Dynamic"
                                             ControlToValidate="txtLicenseDescription" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide license description.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvLDContainer" runat="server" ValidationMsg="Please provide license description."
+                                                Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -176,7 +133,9 @@
                                     <span style="font-weight: bold;">Activation Date<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtActivationDate" runat="server" OnKeyPress="javascript: return false;"
@@ -185,21 +144,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvActivationDate" runat="server" Display="Dynamic"
                                             ControlToValidate="txtActivationDate" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select activation date.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvActivateContainer" runat="server"
+                                                ValidationMsg="Please select activation date." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -211,7 +157,9 @@
                                     <span style="font-weight: bold;">Expiration Date<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtExpirationDate" runat="server" OnKeyPress="javascript: return false;"
@@ -220,21 +168,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvExpirationDate" runat="server" Display="Dynamic"
                                             ControlToValidate="txtExpirationDate" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select expiration date.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
+                                                ValidationMsg="Please select expiration date." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -245,7 +180,9 @@
                                 <td style="width: 130px">
                                     <span style="font-weight: bold;">Is Active?</span>
                                 </td>
-                                <td> <b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
@@ -257,7 +194,8 @@
                             <tr>
                                 <td>
                                 </td>
-                                <td></td>
+                                <td>
+                                </td>
                                 <td>
                                     <div class="text">
                                         <div style="padding-left: 3px;">

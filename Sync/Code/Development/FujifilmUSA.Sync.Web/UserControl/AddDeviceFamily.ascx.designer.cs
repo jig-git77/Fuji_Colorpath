@@ -49,6 +49,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDeviceFamilyName;
         
         /// <summary>
+        /// Validationcontainer1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer Validationcontainer1;
+        
+        /// <summary>
         /// chkIsActive control.
         /// </summary>
         /// <remarks>

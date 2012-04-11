@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SaveWindow.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.SaveWindow" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <script language="javascript" type="text/javascript">
     function Close() {
         var oWindow = GetProjectInformationRadWindow();
@@ -31,7 +33,6 @@
                     <div class="section_middle">
                         <div class="combopart">
                             <div>
-                                
                             </div>
                             <div class="header">
                                 <div class="content">
@@ -57,21 +58,8 @@
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
                                                         ControlToValidate="txtProjectName" ForeColor="Red" ValidationGroup="vgSaveWindows">
-                                                      <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide project name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                        <ucValidationContainer:ValidationContainer ID="rfvProjectContainer" runat="server"
+                                                            ValidationMsg="Please provide project name." Size="200" />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                                 <div class="clear">
@@ -118,8 +106,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
-                                                    onclick="lbtnDownloadChart_Click">
+                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
                                         <span>DawnLoad Chart</span>
                                                 </asp:LinkButton>
                                             </td>

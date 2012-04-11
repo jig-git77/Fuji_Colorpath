@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectDescription.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProjectDescription" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <div class="head">
     <h1 id="hTitle" runat="server">
         New Print Condition - Description
@@ -51,21 +53,8 @@
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
                                                 ForeColor="Red" ValidationGroup="vgDescription">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide media name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                <ucValidationContainer:ValidationContainer ID="rfvcMediaContainer" runat="server"
+                                                    ValidationMsg="Please provide media name." Size="200" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -83,22 +72,8 @@
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvColorant" runat="server" Display="Dynamic" ControlToValidate="txtColorant"
                                                 ForeColor="Red" ValidationGroup="vgDescription">
-                                      <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide colorant name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
-                                    
+                                                <ucValidationContainer:ValidationContainer ID="rfvColorantContainer" runat="server"
+                                                    ValidationMsg="Please provide colorant name." Size="200" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -116,21 +91,8 @@
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvRipSetting" runat="server" Display="Dynamic" ControlToValidate="txtRipSetting"
                                                 ForeColor="Red" ValidationGroup="vgDescription">
-                                     <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide rip settings.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                <ucValidationContainer:ValidationContainer ID="rfvRipSettingsContainer" runat="server"
+                                                    ValidationMsg="Please provide rip settings." Size="200" />
                                             </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
@@ -142,7 +104,8 @@
                                         <span>Notes:</span>
                                     </td>
                                     <td>
-                                        <asp:TextBox ID="txtNotes" runat="server" Width="300px" Height="100px" TextMode="MultiLine" MaxLength="500"></asp:TextBox>
+                                        <asp:TextBox ID="txtNotes" runat="server" Width="300px" Height="100px" TextMode="MultiLine"
+                                            MaxLength="500"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>

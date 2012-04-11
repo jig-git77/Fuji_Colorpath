@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddSourceProfile.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddSourceProfile" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -20,36 +22,24 @@
                         </legend>
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
-                          <tr>
+                            <tr>
                                 <td>
                                     <span>Region<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbRegion" runat="server" DataValueField="Key" DataTextField="Value"
-                                            CssClass="select" Width="200px" AutoPostBack="true"
-                                            onselectedindexchanged="cmbRegion_SelectedIndexChanged">
+                                            CssClass="select" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
-                                            ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            ForeColor="Red" ValidationGroup="vgSourceProfile" InitialValue="0">
+                                            <ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
+                                                ValidationMsg="Please select region." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -60,31 +50,20 @@
                                 <td>
                                     <span>Company Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value" 
-                                            CssClass="select" Width="200px">
+                                        <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value"
+                                            CssClass="select" Width="200px" >
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile" InitialValue="0" >
+                                            <ucValidationContainer:ValidationContainer ID="rfvCompanyuContainer" runat="server"
+                                                ValidationMsg="Please select company." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -95,7 +74,9 @@
                                 <td>
                                     <span>Profile Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" Height="19px"></asp:TextBox>
@@ -104,21 +85,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSourceProfile" runat="server" Display="Dynamic"
                                             ControlToValidate="txtSourceProfile" ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please Source Profile.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
+                                                ValidationMsg="Please provide source profile name." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -129,11 +97,13 @@
                                 <td>
                                     <span>Profile Description:</span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="150" Width="300px" Height="50px"
-                                            TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="150" Width="300px"
+                                            Height="50px" TextMode="MultiLine"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                     </div>
@@ -145,7 +115,9 @@
                                 <td style="width: 130px">
                                     <span>Profile<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:FileUpload ID="fuProfile" runat="server" />
@@ -153,21 +125,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvProfile" runat="server" Display="Dynamic" ControlToValidate="fuProfile"
                                             ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please Profile File.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
+                                                ValidationMsg="Please provide source profile file." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -178,7 +137,9 @@
                                 <td style="width: 130px">
                                     <span>Is Used?</span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b> </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
@@ -190,9 +151,10 @@
                             <tr>
                                 <td>
                                 </td>
-                                <td></td>
                                 <td>
-                                <div class="text">
+                                </td>
+                                <td>
+                                    <div class="text">
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgSourceProfile"
                                                 OnClick="lbtnSave_Click">

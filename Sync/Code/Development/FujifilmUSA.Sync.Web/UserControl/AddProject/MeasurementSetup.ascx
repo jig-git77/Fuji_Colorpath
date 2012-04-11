@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementSetup.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer" TagPrefix="ucValidationContainer" %>
 <div class="head">
     <h1 id="hTitle" runat="server">
         New Print Condition - Measurement Setup
@@ -43,27 +44,15 @@
                                         </td>
                                         <td>
                                             <div style="float: left;">
-                                                <asp:DropDownList ID="cmbMeasurementDevice" AutoPostBack="true" runat="server" Width="200px" OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged" CssClass="select">
+                                                <asp:DropDownList ID="cmbMeasurementDevice" AutoPostBack="true" runat="server" Width="200px"
+                                                    OnSelectedIndexChanged="cmbMeasurementDevice_SelectedIndexChanged" CssClass="select">
                                                 </asp:DropDownList>
                                             </div>
                                             <div style="float: left">
                                                 <asp:RequiredFieldValidator ID="rfvMeasurementDevice" runat="server" Display="Dynamic"
                                                     ControlToValidate="cmbMeasurementDevice" ForeColor="Red" ValidationGroup="vgMeasurementSetup">
-                                              <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select measurement device.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                    <ucvalidationcontainer:validationcontainer id="rfvcMeasurementDeviceContainer" runat="server"
+                                                        validationmsg="Please select measurement device." size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
@@ -94,7 +83,7 @@
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
-                                    <tr id="trUVSettings" runat="server" >
+                                    <tr id="trUVSettings" runat="server">
                                         <td>
                                             <span>UV Settings:</span>
                                         </td>
@@ -136,36 +125,23 @@
                                 <table cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                         <td>
-                                             <span>Alignment Chart:<span style="color: Red;">&nbsp*</span> </span>
+                                            <span>Alignment Chart:<span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                         <td>
                                             <div style="float: left;">
-                                                <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true" OnSelectedIndexChanged="cmbAlignmentChart_SelectedIndexChanged">
+                                                <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select"
+                                                    AutoPostBack="true" OnSelectedIndexChanged="cmbAlignmentChart_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                             <div style="float: left">
                                                 <asp:RequiredFieldValidator ID="rfvAlignmentChart" runat="server" Display="Dynamic"
-                                                    ControlToValidate="cmbAlignmentChart" ForeColor="Red" InitialValue ="0" ValidationGroup="vgMeasurementSetup">
-                                              <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select alignment chart.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                    ControlToValidate="cmbAlignmentChart" ForeColor="Red" InitialValue="0" ValidationGroup="vgMeasurementSetup">
+                                                     <ucvalidationcontainer:validationcontainer id="rfvcAlignmentChartContainer" runat="server"
+                                                        validationmsg="Please select alignment chart." size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
                                             </div>
-
                                         </td>
                                     </tr>
                                     <tr>

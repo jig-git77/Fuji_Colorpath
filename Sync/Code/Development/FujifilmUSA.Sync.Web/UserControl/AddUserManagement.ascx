@@ -2,10 +2,10 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddUserManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
-
-
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <style type="text/css">
- 
+    
 </style>
 <script type="text/javascript">
 
@@ -29,7 +29,7 @@
             return false;
         }
         if (password.length < 4) {
-            jQuery("span[id*='spanPassWord']").html("Must be 4 char in password");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            jQuery("span[id*='spanPassWord']").html("Must be 4 char in password");
             return false;
         }
         return true;
@@ -179,21 +179,8 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" Display="Dynamic" ControlToValidate="txtFirstName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide first name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvFirstNameContainer" runat="server"
+                                                                            ValidationMsg="Please provide first name." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -214,21 +201,8 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvLastName" runat="server" Display="Dynamic" ControlToValidate="txtLastName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide last name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvLastNameContainer" runat="server"
+                                                                            ValidationMsg="Please provide last name." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -249,39 +223,13 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" Display="Dynamic" ControlToValidate="txtEmail"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide email-address.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvEmailContainer" runat="server"
+                                                                            ValidationMsg="Please provide email-address." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                     <asp:RegularExpressionValidator ID="revEmail" ControlToValidate="txtEmail" Display="Dynamic"
                                                                         runat="server" ForeColor="Red" ValidationGroup="vgAddUser" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
-                                                                  <div class="tooltip_round_box" style="width: 230px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please enter proper email-address.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="revEmailContainer" runat="server"
+                                                                            ValidationMsg="Please enter proper email-address." Size="200" />
                                                                     </asp:RegularExpressionValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -302,21 +250,8 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtAdminUserName"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please provide user name.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvUserNameContainer" runat="server"
+                                                                            ValidationMsg="Please provide user name." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -332,20 +267,16 @@
                                                             </td>
                                                             <td>
                                                                 <div>
-                                                                    <asp:TextBox ID="txtAdminPassWord" 
-                                                                        Width="100px" 
-                                                                        MaxLength="30" 
-                                                                        runat="server" 
-                                                                        Height="19px" 
-                                                                        TextMode="Password" 
-                                                                        onkeydown="javascript:passwordcheck()" 
-                                                                        ></asp:TextBox>
-<%--                                                                    <telerik:RadTextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px" TextMode="Password">
+                                                                    <asp:TextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px"
+                                                                        TextMode="Password" onkeydown="javascript:passwordcheck()"></asp:TextBox>
+                                                                    <%--                                                                    <telerik:RadTextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px" TextMode="Password">
                                                                         <PasswordStrengthSettings ShowIndicator="true" TextStrengthDescriptions="Very Poor;Weak;Average;Strong;Excellent"
                                                                             IndicatorElementBaseStyle="Base" TextStrengthDescriptionStyles="L0;L1;L2;L3;L4"
                                                                             IndicatorElementID="CustomIndicator" />
                                                                     </telerik:RadTextBox>
---%>                                                                <span id="CustomIndicator" class="Base"><span id="PasswordRepeatedIndicator"></span></span>
+                                                                    --%>
+                                                                    <span id="CustomIndicator" class="Base"><span id="PasswordRepeatedIndicator"></span>
+                                                                    </span>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:CustomValidator ID="cvPassWord" ClientValidationFunction="ValidPassword" runat="server"
@@ -374,7 +305,8 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                     <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password" Width="100px" Height="19px"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password"
+                                                                        Width="100px" Height="19px"></asp:TextBox>
                                                                     <%--<telerik:RadTextBox ID="txtConfirmPass" Width="100px" MaxLength="30" runat="server" Height="19px"
                                                                         TextMode="Password">
                                                                     </telerik:RadTextBox>--%>
@@ -435,27 +367,15 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbRole" AutoPostBack="true" runat="server" CssClass="select" Width="270px" OnSelectedIndexChanged="cmbRole_SelectedIndexChanged">
+                                                                    <asp:DropDownList ID="cmbRole" AutoPostBack="true" runat="server" CssClass="select"
+                                                                        Width="270px" OnSelectedIndexChanged="cmbRole_SelectedIndexChanged">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvRole" runat="server" ControlToValidate="cmbRole"
                                                                         Display="Dynamic" ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select role.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvRoleContainer" runat="server" ValidationMsg="Please select role."
+                                                                            Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -471,28 +391,16 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:DropDownList ID="cmbRegion" AutoPostBack="true" runat="server" Width="270px" CssClass="select" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
+                                                                    <asp:DropDownList ID="cmbRegion" AutoPostBack="true" runat="server" Width="270px"
+                                                                        CssClass="select" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
                                                                         <asp:ListItem Text="--Select Region--" Value="0"></asp:ListItem>
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
                                                                         ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select region.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
+                                                                            ValidationMsg="Please select region." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -516,21 +424,8 @@
                                                                 <div style="float: left">
                                                                     <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                                                         ControlToValidate="cmbCompany" ForeColor="Red" ValidationGroup="vgAddUser">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
+                                                                            ValidationMsg="Please select company." Size="200" />
                                                                     </asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="clear">
@@ -553,21 +448,8 @@
                                                                 <div style="float: left">
                                                                     <asp:CustomValidator ID="cvBranch" ClientValidationFunction="ValidateChkList" runat="server"
                                                                         ValidationGroup="vgAddUser">
-                                                                  <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select branch.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                                                        <ucValidationContainer:ValidationContainer ID="cvBranchContainer" runat="server"
+                                                                            ValidationMsg="Please select branch." Size="200" />
                                                                     </asp:CustomValidator>
                                                                 </div>
                                                                 <div class="clear">

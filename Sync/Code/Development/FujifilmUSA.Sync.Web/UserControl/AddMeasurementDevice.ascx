@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddMeasurementDevice.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddMeasurementDevice" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
-
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
@@ -17,16 +18,19 @@
             <ContentTemplate>
                 <center>
                     <fieldset style="width: 60%;">
-                        <legend style=" margin-left:40% !important;">
+                        <legend style="margin-left: 40% !important;">
                             <asp:Label ID="lblHeader" runat="server" Text="Add Measurement Device"></asp:Label>
                         </legend>
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
                                 <td>
-                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
+                                    </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value"
@@ -38,21 +42,8 @@
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select company.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvCompnayContainer" runat="server"
+                                                ValidationMsg="Please select company." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -61,9 +52,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight:bold;">Branch Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
@@ -71,24 +64,11 @@
                                             AutoPostBack="true">
                                         </asp:DropDownList>
                                     </div>
-                                   <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbBranch" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select branch.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                    <div style="float: left">
+                                        <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
+                                            ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
+                                            <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
+                                                ValidationMsg="Please select branch." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -97,33 +77,23 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight:bold;">License Type<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
+                                    </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbLicenseType" runat="server" DataValueField="Key" DataTextField="Value"
                                             CssClass="select" Width="200px">
                                         </asp:DropDownList>
                                     </div>
-                                  <div style="float: left">
+                                    <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbLicenseType" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select license type.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
+                                                ValidationMsg="Please select license type." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -132,31 +102,22 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight:bold;">Serial Number<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;">Serial Number<span style="color: Red;">*</span>
+                                    </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px" MaxLength="20" onkeypress="return CheckNumeric(event)" ></asp:TextBox>
+                                        <asp:TextBox ID="txtSerialNumber" runat="server" Width="200px" Height="19px" MaxLength="20"
+                                            onkeypress="return CheckNumeric(event)"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSerialNumber" runat="server" Display="Dynamic"
                                             ControlToValidate="txtSerialNumber" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please Serial Number.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvSerialNumberContainer" runat="server"
+                                                ValidationMsg="Please provide serial number." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -165,33 +126,23 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight:bold;">Instrument Type<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;">Instrument Type<span style="color: Red;">*</span>
+                                    </span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left">
                                         <asp:DropDownList ID="cmbInstrumentType" runat="server" DataValueField="Key" DataTextField="Value"
                                             CssClass="select" Width="200px">
                                         </asp:DropDownList>
                                     </div>
-                                      <div style="float: left">
+                                    <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvInstrumentType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbInstrumentType" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
-                                            <div class="tooltip_round_box" style="width: 200px;">
-                                            <div class="tooltip_arrow" style="margin-top: -3px;">
-                                                &nbsp;</div>
-                                            <div class="tooltip_top_left">
-                                            </div>
-                                            <div class="tooltip_top_right">
-                                            </div>
-                                            <div class="tooltip_inside">
-                                                Please select instrument type.
-                                            </div>
-                                            <div class="tooltip_bottom_left">
-                                            </div>
-                                            <div class="tooltip_bottom_right">
-                                            </div>
-                                        </div>
+                                            <ucValidationContainer:ValidationContainer ID="rfvInstrumentContainer" runat="server"
+                                                ValidationMsg="Please select instrument type." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -200,9 +151,11 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight:bold;">Is Active?</span>
+                                    <span style="font-weight: bold;">Is Active?</span>
                                 </td>
-                                <td><b>&nbsp;:&nbsp;</b></td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
                                         <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
@@ -214,7 +167,8 @@
                             <tr>
                                 <td>
                                 </td>
-                                <td></td>
+                                <td>
+                                </td>
                                 <td>
                                     <div class="text">
                                         <div style="padding-left: 3px;">

@@ -131,6 +131,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
     <Content Include="UserControl\LicenseManagement.ascx" />
@@ -309,7 +310,6 @@
     <Content Include="JS\wz_jsgraphics.js" />
     <Content Include="Login.aspx" />
     <Content Include="OperationSelection.aspx" />
-    <Content Include="PrintCondition.aspx" />
     <Content Include="ProjectList.aspx" />
     <Content Include="UserControl\AddMeasurementDevice.ascx" />
     <Content Include="UserControl\AddProject\ShowImage.aspx" />
@@ -333,22 +333,18 @@
     <Content Include="UserControl\PopupControl\SaveWindow.ascx" />
     <Content Include="UserControl\AddProject\PreviewPrintCondition.ascx" />
     <Content Include="UserControl\AddProject\MeasurementSetup.ascx" />
-    <Content Include="UserControl\ModelWindowContainer.ascx" />
     <Content Include="UserControl\Login.ascx" />
     <Content Include="UserControl\PopupControl\ClosePrintCondition.ascx" />
     <Content Include="UserControl\AddProject\ProjectDescription.ascx" />
     <Content Include="UserControl\AddProject\ProjectSettingsContainer.ascx" />
     <Content Include="UserControl\AddProject\ProfilerOptions.ascx" />
     <Content Include="UserControl\AddProject\TargetColorSpace.ascx" />
-    <Content Include="UserControl\ModelWindow.ascx" />
     <Content Include="UserControl\PopupControl\OpenPrintCondition.ascx" />
     <Content Include="UserControl\Footer.ascx" />
     <Content Include="UserControl\Header.ascx" />
     <Content Include="UserControl\DeviceList.ascx" />
-    <Content Include="UserControl\Pagging.ascx" />
     <Content Include="UserControl\ProjectList.ascx" />
     <Content Include="UserControl\OperationSelection.ascx" />
-    <Content Include="UserControl\SearchingDevice.ascx" />
     <Content Include="UserControl\Statusbar.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -541,6 +537,13 @@
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\ValidationContainer.ascx.cs">
+      <DependentUpon>ValidationContainer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ValidationContainer.ascx.designer.cs">
+      <DependentUpon>ValidationContainer.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\Permission.ascx.cs">
       <DependentUpon>Permission.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -697,13 +700,6 @@
     </Compile>
     <Compile Include="PopUpMaster.Master.designer.cs">
       <DependentUpon>PopUpMaster.Master</DependentUpon>
-    </Compile>
-    <Compile Include="PrintCondition.aspx.cs">
-      <DependentUpon>PrintCondition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PrintCondition.aspx.designer.cs">
-      <DependentUpon>PrintCondition.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProjectList.aspx.cs">
       <DependentUpon>ProjectList.aspx</DependentUpon>
@@ -867,13 +863,6 @@
     <Compile Include="UserControl\AddProject\MeasurementSetup.ascx.designer.cs">
       <DependentUpon>MeasurementSetup.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\ModelWindowContainer.ascx.cs">
-      <DependentUpon>ModelWindowContainer.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\ModelWindowContainer.ascx.designer.cs">
-      <DependentUpon>ModelWindowContainer.ascx</DependentUpon>
-    </Compile>
     <Compile Include="UserControl\Login.ascx.cs">
       <DependentUpon>Login.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -916,13 +905,6 @@
     <Compile Include="UserControl\AddProject\TargetColorSpace.ascx.designer.cs">
       <DependentUpon>TargetColorSpace.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\ModelWindow.ascx.cs">
-      <DependentUpon>ModelWindow.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\ModelWindow.ascx.designer.cs">
-      <DependentUpon>ModelWindow.ascx</DependentUpon>
-    </Compile>
     <Compile Include="UserControl\PopupControl\OpenPrintCondition.ascx.cs">
       <DependentUpon>OpenPrintCondition.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -951,13 +933,6 @@
     <Compile Include="UserControl\DeviceList.ascx.designer.cs">
       <DependentUpon>DeviceList.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Pagging.ascx.cs">
-      <DependentUpon>Pagging.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\Pagging.ascx.designer.cs">
-      <DependentUpon>Pagging.ascx</DependentUpon>
-    </Compile>
     <Compile Include="UserControl\ProjectList.ascx.cs">
       <DependentUpon>ProjectList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -971,13 +946,6 @@
     </Compile>
     <Compile Include="UserControl\OperationSelection.ascx.designer.cs">
       <DependentUpon>OperationSelection.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\SearchingDevice.ascx.cs">
-      <DependentUpon>SearchingDevice.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\SearchingDevice.ascx.designer.cs">
-      <DependentUpon>SearchingDevice.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\Statusbar.ascx.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
