@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Entity;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -71,6 +72,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.LicenseTypeId
                                         , license.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
+                    }
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLicense"));
             return returnValue;
@@ -97,6 +103,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.LicenseTypeId
                                         , license.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLicense"));
             return returnValue;
@@ -131,6 +141,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         licenseType.Type,
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicenseType" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLicenseType"));
             return returnValue;

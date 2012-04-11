@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.DataAccess;
 using System.Data;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -52,6 +53,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.Profile,
                                         sourceProfile.IsUsed
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertSourceProfile" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertSourceProfile"));
             return returnValue;
@@ -77,6 +82,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         sourceProfile.Profile,
                                         sourceProfile.IsUsed
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertSourceProfile" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSourceProfile"));
             return returnValue;

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 using FujifilmUSA.Sync.Business.Interface;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
@@ -30,6 +32,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             branch.Location,
                                             branch.IsActive
                                         });
+                        if(returnValue == -1)
+                        {
+                            throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertBranch" };
+                        }
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertBranch"));
             return returnValue;
@@ -53,6 +59,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         branch.Location,
                                         branch.IsActive,
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertBranch" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateBranch"));
             return returnValue;

@@ -82,6 +82,7 @@
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="ErrorDelegate.cs" />
+    <Compile Include="CustomExceptions\DuplicateException.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
     <Compile Include="Implementation\MiscBusinessImpl.cs" />

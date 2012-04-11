@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Entity;
 using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -103,6 +104,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDevice" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDevice"));
             return returnValue;
@@ -126,6 +131,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDevice" };
+                    }
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDevice"));
             return returnValue;
@@ -161,6 +171,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         deviceFamily.DeviceFamilyDesc,
                                         deviceFamily.IsActive,
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDeviceFamily" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamily"));
             return returnValue;

@@ -1,5 +1,6 @@
 ﻿using System;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business
 {
@@ -10,6 +11,21 @@ namespace FujifilmUSA.Sync.Business
             try
             {
                 action();
+            }
+            catch (DuplicateException e)
+            {
+                //LogManager.WriteLog(e, request);
+                if (request.Handler != null)
+                {
+                    request.Handler(
+                        request.TaskBase,
+                        new ErrorArgs(
+                            FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage(e.UserFriendlyMessage)));
+                }
+                else
+                {
+                    throw;
+                }
             }
             catch (Exception e)
             {

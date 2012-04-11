@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using System.Collections.Generic;
 using System.Text;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -165,6 +166,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.UserCompany.CompanyId
                                         , branchIds
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertUser" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
             return returnValue;
@@ -196,6 +201,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.UserCompany.CompanyId
                                         , branchIds
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertUser" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
             return returnValue;

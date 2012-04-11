@@ -5,6 +5,7 @@ using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Business.CustomExceptions;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -29,6 +30,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.InstrumentTypeId,
                                         measurementdevice.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertMeasurementDevice" };
+                    }
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertMeasurementDevice"));
             return returnValue;
@@ -52,6 +58,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.InstrumentTypeId,
                                         measurementdevice.IsActive
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertMeasurementDevice" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMeasurementDevice"));
             return returnValue;
