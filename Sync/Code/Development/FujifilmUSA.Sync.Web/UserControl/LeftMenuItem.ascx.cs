@@ -26,15 +26,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Device;
                     break;
                 case ELeftMenuItemLevel.Operation:
-                    imgItem.ImageUrl = "../images/print_icon.png";
+                    imgItem.ImageUrl = "../images/dlp_optimization.png";
                     lnkItem.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Operation;
                     break;
                 case ELeftMenuItemLevel.ProjectSetup:
-                    imgItem.ImageUrl = "../images/print_icon.png";
+                    imgItem.ImageUrl = "../images/project.png";
                     lnkItem.Enabled = false;
                     break;
                 case ELeftMenuItemLevel.Project:
-                    imgItem.ImageUrl = "../images/print_icon.png";
+                    imgItem.ImageUrl = "../images/project.png";
                     break;
             }
             lnkItem.Text = ItemName;

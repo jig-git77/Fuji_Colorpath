@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web
         public Chart AnalyzeChart { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
         public int CurrentMeasurementID { get; set; }
-
+        public string MeasurementName { get; set; }
         //======== Data Point Index ==========//
         int[] PatchTypeID = new int[8];
         public void BindChart()
@@ -61,8 +61,9 @@ namespace FujifilmUSA.Sync.Web
                 AddCheckBox(i, p);
                 i++;
             });
-
+            
         }
+
         private void SetGraphWidth()
         {
             //========== Check Measurement Count ==========//
@@ -95,6 +96,8 @@ namespace FujifilmUSA.Sync.Web
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.FromArgb(200, 255, 0, 0);
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerImage = "Images/MarkerRed_Circle.gif";  // Set red circle point image.
+                // property for bind measurement name in header chart
+                MeasurementName = measurementName;
             }
             {
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;

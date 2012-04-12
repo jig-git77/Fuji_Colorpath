@@ -5,7 +5,7 @@
 <div class="contant_middle">
     <div class="head">
         <h1 id="header" runat="server">
-            Export</h1>
+            Download</h1>
         <div class="Information_divAnalyze">
             <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" OnClick="lbtnMeasure_Click">
                 <span>

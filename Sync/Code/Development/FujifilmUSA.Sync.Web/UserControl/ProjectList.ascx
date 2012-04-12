@@ -182,7 +182,7 @@
                                                 </telerik:RadScriptBlock>
                                             </FilterTemplate>
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn DataField="ProjectName" AllowFiltering="true" HeaderText="Project Name"
+                                        <telerik:GridTemplateColumn DataField="ProjectName" AllowFiltering="true" HeaderText="Name"
                                             UniqueName="ProjectName" SortExpression="ProjectName" 
                                             ShowFilterIcon="true"
                                             FilterControlWidth="80" 

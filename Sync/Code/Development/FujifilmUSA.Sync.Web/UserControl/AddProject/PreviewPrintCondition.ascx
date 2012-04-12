@@ -16,7 +16,7 @@
 </script>
 <div class="head">
     <h1 id="hTitle" runat="server">
-        New Print Condition - Save Print Condition
+        New Print Condition - Review Selections
     </h1>
     <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClientClick="javascript:ShowConfirmSaveWindow();return false;">
         <span>

@@ -1585,6 +1585,12 @@ label
     font-weight: bold;
     font-size: 14px;
 }
+.section_middle .combopart .header .content .textright
+{
+    font-weight: bold;
+    font-size: 12px;
+}
+
 .section_middle .combopart .area
 {
     padding: 5px;

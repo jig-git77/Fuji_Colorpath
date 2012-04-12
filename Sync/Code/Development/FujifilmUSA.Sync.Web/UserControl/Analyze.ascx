@@ -94,9 +94,9 @@
                                         <div class="header">
                                             <div class="content">
                                                 <div class="text" style="float: left">
-                                                    Analyze Measurement : Sheet_01
+                                                    Analyze Measurement : <asp:Label ID="lblMeasurementName"  style=" font-size:12px !important;"  runat="server"></asp:Label> 
                                                 </div>
-                                                <div class="text" style="float: right">
+                                                <div class="textright" style="float:right;">
                                                     Analyze Average Of Measurements
                                                 </div>
                                                 <div class="clear">
@@ -155,10 +155,10 @@
                                                     <ChartAreas>
                                                         <asp:ChartArea Name="ChartArea1">
                                                             <Position Height="99" Width="99" X="0" Y="0" />
-                                                            <AxisY Enabled="True" Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto">
+                                                            <AxisY Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto">
                                                                 <MajorGrid LineColor="Beige" />
                                                             </AxisY>
-                                                            <AxisX Interval="1" TitleFont="Verdana, 5pt" Title="M">
+                                                            <AxisX Interval="1" TitleFont="Verdana, 8pt" Title="M">
                                                                 <MajorGrid LineColor="Beige" />
                                                             </AxisX>
                                                         </asp:ChartArea>

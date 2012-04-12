@@ -25,6 +25,9 @@
 
 </script>
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
+    <div style=" margin-bottom: 3px;">
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server"  Visible="false"/>
+    </div>
     <div class="section_top">
         &nbsp;</div>
     <div class="section_middle">
@@ -36,11 +39,6 @@
                             <td>
                                 <div>
                                     <table>
-                                        <tr>
-                                            <td>
-                                                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" />
-                                            </td>
-                                        </tr>
                                         <tr>
                                             <td class="Content" style="line-height: 24px;">
                                                 <asp:Label ID="lblClosePrintConditionMessage" runat="server"></asp:Label>

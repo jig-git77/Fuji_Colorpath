@@ -81,10 +81,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAnalyze.GetAnalyzeChartMeasurement();
             if (!IsErrorOccured)
             {
-                AnalyzeChartManager manager = new AnalyzeChartManager(chartAnalyze, Measurements);
-                manager.CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value);
+                var manager = new AnalyzeChartManager(chartAnalyze, Measurements)
+                {
+                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
+                };
                 manager.BindChart();
-                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+                lblMeasurementName.Text = manager.MeasurementName;
+                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();                    
             }
         }
 

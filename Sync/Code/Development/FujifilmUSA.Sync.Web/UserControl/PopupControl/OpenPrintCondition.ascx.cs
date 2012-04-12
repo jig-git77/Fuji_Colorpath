@@ -30,7 +30,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 sb.Append("Current Run " + dlpIndex + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
 
             sb.Append("</br>");
-            sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " + Request.QueryString["DlpName"] + " \" .");
+            sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " +
+                      Request.QueryString["DlpName"].Replace(".icc", "") + " \" .");
             lblOpenPrintConditionMessage.Text = sb.ToString();
         }
 

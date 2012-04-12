@@ -30,7 +30,7 @@
     .dock-item span
     {
         display: none;
-        padding-left: 20px;
+        
     }
     
     /* dock2 - bottom */
@@ -75,18 +75,19 @@
     }
     .overlapobject span
     {
-        margin-left: -10px;
         position:relative;
+        border-radius: 3px 3px 3px 3px;
         z-index:1;
         background-color: #EEEEEE;
         font-weight: bold;
-        border-radius: 3px 3px 3px 3px;
         text-align:center;
         padding: 3px 3px 3px 3px;
-        position: relative;
-        top: 10px;
         min-width: 90px;
+        top: 3px;
+        margin-left: -24px;
         opacity: 0.9;
+        mozopacity: 0.9;
+        
     }
     .overlapobject img
     {

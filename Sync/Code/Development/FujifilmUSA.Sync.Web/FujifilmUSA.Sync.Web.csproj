@@ -86,10 +86,12 @@
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\company-management.png" />
+    <Content Include="Images\dlp_optimization.png" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\project.png" />
     <Content Include="Images\sourceprofile-management.png" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\user-management.png" />

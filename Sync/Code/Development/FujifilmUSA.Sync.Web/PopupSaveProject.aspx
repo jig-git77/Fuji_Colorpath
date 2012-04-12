@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PopUpMaster.Master" 
+﻿<%@ Page Title="Save Print Condition And Download Chart" Language="C#" MasterPageFile="~/PopUpMaster.Master" 
 AutoEventWireup="true" 
 CodeBehind="PopupSaveProject.aspx.cs" 
 Inherits="FujifilmUSA.Sync.Web.PopupSaveProject" %>

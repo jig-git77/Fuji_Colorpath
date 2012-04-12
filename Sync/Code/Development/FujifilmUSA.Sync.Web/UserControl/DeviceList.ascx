@@ -3,7 +3,6 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
     TagPrefix="ucCreateDLP" %>
-
 <style type="text/css">
     div.RadGrid .rgRow
     {
@@ -51,13 +50,41 @@
         font: 14px "Arial";
         text-decoration: none;
     }
-    .rgHeader
-    {
-        display: none;
-    }
+    
     .RadGrid_Default .rgRow a, .RadGrid_Default .rgAltRow a, .RadGrid_Default .rgEditRow a, .RadGrid_Default tr.rgEditRow a, .RadGrid_Default tr.rgHoveredRow a, .RadGrid_Default tr.rgActiveRow a, .RadGrid_Default .rgFooter a, .RadGrid_Default .rgEditForm a
     {
         color: #003CA9;
+    }
+    
+    .RadGrid .rgPagerLabel, .RadGrid .rgPager .RadComboBox, .RadGrid .rgPager .RadInput
+    {
+        color: black;
+        margin: 0 4px 0 0;
+        vertical-align: top;
+    }
+       .RadGrid_Default .rgRow .rgSorted
+    {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    .RadGrid_Default .rgAltRow .rgSorted
+    {
+        background-color: #F7F7F7;
+        border-bottom-color: #F7F7F7;
+    }
+    
+    .RadGrid_Default th.rgSorted
+    {
+        background-color: #F1F1F1;
+        background-position: 0px;
+    }
+     .breakWord200
+    {
+        max-width: 200px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
     }
 </style>
 <div class="contant_top">
@@ -125,31 +152,19 @@
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td>
-                                <telerik:RadGrid ID="rgDeviceList" 
-                                    ShowHeader="true" 
-                                    AllowFilteringByColumn="true"
-                                    AllowSorting="false" 
-                                    AllowPaging="True" 
-                                    runat="server" 
-                                    AutoGenerateColumns="False"
-                                    EnableLinqExpressions="false" 
-                                    OnNeedDataSource="rgDeviceList_NeedDataSource"
-                                    OnItemCommand="rgDeviceList_ItemCommand" 
-                                    Width="670px">
+                                <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
+                                    AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
+                                    OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
                                     <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                                    <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
                                     <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc">
                                         <Columns>
-                                            <telerik:GridTemplateColumn 
-                                                DataField="DeviceName" 
-                                                AllowFiltering="true" 
-                                                HeaderText="DeviceName"
-                                                UniqueName="DeviceName" 
-                                                SortExpression="DeviceName" 
-                                                FilterControlWidth="200px"
-                                                ShowFilterIcon="true"
-                                                >
+                                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
+                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
+                                                ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
                                                 <ItemTemplate>
                                                     <div class="product_list">
                                                         <ul>

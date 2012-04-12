@@ -66,7 +66,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             var ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = ELeftMenuItemLevel.Home;
-            ctrlItem.ItemName = "Home";
+            ctrlItem.ItemName = "Fujifilm Graphics Systems";
             ctrlItem.ID = "_Home";
             ph.Controls.Add(ctrlItem);
 

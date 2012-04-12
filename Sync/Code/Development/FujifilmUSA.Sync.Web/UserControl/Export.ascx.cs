@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                header.InnerText = string.Format("Export - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                header.InnerText = string.Format("Download - {0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
             }
         }
@@ -53,10 +53,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             _presenterExport.GetDeviceLinkProfile();
+
             if (!IsErrorOccured)
             {
                 if (DeviceLinkProfile != null)
-                    Utilities.DownloadFile(DeviceLinkProfile, SessionManager.Instance.CurrentOptimizeRun.DlpName);
+                    Utilities.DownloadFile(DeviceLinkProfile, string.Format("{0} {1}", SessionManager.Instance.CurrentDevice.DeviceName, SessionManager.Instance.CurrentOptimizeRun.DlpName));
             }
         }
 

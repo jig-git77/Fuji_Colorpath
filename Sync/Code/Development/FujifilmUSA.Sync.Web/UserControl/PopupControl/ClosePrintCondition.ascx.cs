@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                lblClosePrintConditionMessage.Text = string.Format("Options for {0} print condition", Request.QueryString["ProjectName"]);
+                lblClosePrintConditionMessage.Text = string.Format("Options for \"{0}\" print condition", Request.QueryString["ProjectName"]);
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)

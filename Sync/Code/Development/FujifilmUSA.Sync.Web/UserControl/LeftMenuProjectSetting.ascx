@@ -11,7 +11,7 @@
                     OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
-                <asp:LinkButton runat="server" ID="lnkProfilerOption" Text="3. Profiler Option" style="padding: 7px 0 6px 30px;"  OnClick="lnkItem_Click"></asp:LinkButton>
+                <asp:LinkButton runat="server" ID="lnkProfilerOption" Text="3. Profiler Options" style="padding: 7px 0 6px 30px;"  OnClick="lnkItem_Click"></asp:LinkButton>
             </li>
             <li>
                 <asp:LinkButton runat="server" ID="lnkMeasurementSetup" Text="4. Measurement Setup" style="padding: 7px 0 6px 30px;" 
