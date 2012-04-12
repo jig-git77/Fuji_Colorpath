@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
                 header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-                                   ? string.Format("Measure - {0}.icc", SessionManager.Instance.CurrentProject.ProjectName)
+                                   ? string.Format("Measure - {0}", SessionManager.Instance.CurrentProject.CurrentDlpName)
                                    : string.Format("New Print Condition - Measure (No DLP)");
             }
         }
