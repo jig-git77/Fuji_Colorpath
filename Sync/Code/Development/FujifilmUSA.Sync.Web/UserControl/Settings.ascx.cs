@@ -24,13 +24,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
 
             ////seperator image 
-            divcompanySeprator.Visible = (tdcompany.Visible && tdBranch.Visible);
-            divBranchSeprator.Visible = (tdBranch.Visible && tdUser.Visible);
-            divUserSeprator.Visible = (tdUser.Visible && tdSourceProfile.Visible);
-
-            divDeviceSeprator.Visible = (tdDevice.Visible && tdLicense.Visible);
-            divLicenseSeprator.Visible = (tdLicense.Visible && tdMeasurementDevice.Visible);
+            divcompanySeprator.Visible = tdcompany.Visible;
+            divBranchSeprator.Visible = tdBranch.Visible;
+            divUserSeprator.Visible = tdUser.Visible;
+           
+            divDeviceSeprator.Visible = tdDevice.Visible;
+            divLicenseSeprator.Visible = tdLicense.Visible;
             divMeasurementSeprator.Visible = tdMeasurementDevice.Visible;
+
         }
         #endregion
 

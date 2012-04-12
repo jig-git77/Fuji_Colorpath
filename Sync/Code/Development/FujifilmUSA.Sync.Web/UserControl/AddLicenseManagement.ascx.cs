@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbLicenseType.DataValueField = "Key";
                 cmbLicenseType.DataSource = LicenseTypes;
                 cmbLicenseType.DataBind();
-                cmbLicenseType.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
+                cmbLicenseType.Items.Insert(0, new ListItem("--Select License Type--", string.Empty));
             }
         }
         private void Bindcompany()
