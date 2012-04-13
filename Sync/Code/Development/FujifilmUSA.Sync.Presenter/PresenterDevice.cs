@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.BranchList = miscDataBusiness.GetBranchList(_viewDevice.CompanyId,_viewDevice.CurrentUserId);
+            _viewDevice.BranchList = miscDataBusiness.GetBranchList(_viewDevice.CompanyId, _viewDevice.CurrentUserId);
         }
 
         public void LicenseList()
@@ -45,7 +45,8 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.DeviceListById = deviceBusiness.GetDeviceListById(_viewDevice.CompanyId, _viewDevice.BranchId);
+            _viewDevice.DeviceListById = deviceBusiness.GetDeviceListById(_viewDevice.CompanyId, _viewDevice.BranchId,
+                                                                          _viewDevice.CurrentUserId);
         }
 
         public void GetMeasurementDevices()

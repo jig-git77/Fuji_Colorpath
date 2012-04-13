@@ -66,13 +66,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiLogin"].Value = "";
                         Response.Cookies["SyncFujiPass"].Value = "";
                     }
-                    FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                    
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
                     {
+                        FormsAuthentication.RedirectFromLoginPage(UserName, false);
                         Response.Redirect("Index.aspx");
                     }
                     else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
                     {
+                        FormsAuthentication.RedirectFromLoginPage(UserName, false);
                         Response.Redirect("Settings.aspx");
                     }
                     else

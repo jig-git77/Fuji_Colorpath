@@ -5,7 +5,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IDeviceBusiness : ITaskBase
     {
-        List<Device> GetDeviceListById(int companyId, int branchId);
+        List<Device> GetDeviceListById(int companyId, int branchId,int currentUserId);
         List<Device> GetDevice(int deviceId,int currentUserId);
         int InsertDevice(Device device);
         int UpdateDevice(Device device);

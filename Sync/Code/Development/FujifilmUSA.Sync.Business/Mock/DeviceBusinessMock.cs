@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IDeviceBusiness Members
 
-        public List<Device> GetDeviceListById(int companyId, int branchId)
+        public List<Device> GetDeviceListById(int companyId, int branchId,int currentUserId)
         {
             return new List<Device>();
         }

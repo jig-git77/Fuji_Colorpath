@@ -27,33 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-                if (SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
-                {
-                    trCompany.Visible = false;
-                    if (SessionManager.Instance.CurrentUser.UserBranches.Count > 0)
-                    {
-                        if (SessionManager.Instance.CurrentUser.UserBranches.Count == 1)
-                        {
-                            trBranch.Visible = false;
-                            CompanyId = SessionManager.Instance.CurrentUser.UserCompany.CompanyId;
-                            BranchId = SessionManager.Instance.CurrentUser.UserBranches.First().BranchId;
-                        }
-                        else
-                        {
-                            BindBranchDropDown(
-                                SessionManager.Instance.CurrentUser.UserCompany.CompanyId,
-                                SessionManager.Instance.CurrentUser.UserBranches);
-                        }
-                    }
-                    else
-                    {
-                        BindBranchDropDown(SessionManager.Instance.CurrentUser.UserCompany.CompanyId);
-                    }
-                }
-                else
-                {
-                    BindCompanyDropDown();
-                }
+                BindCompanyDropDown();
             }
         }
         #endregion
@@ -62,59 +36,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbBranch.Items.Clear();
-            //if (cmbCompany.SelectedIndex != 0)
-            {
-                BindBranchDropDown(int.Parse(cmbCompany.SelectedValue));
-                //if (cmbCompany.SelectedIndex > 0 && cmbBranch.SelectedIndex > 0)
-                {
-                    CompanyId = Convert.ToInt32(cmbCompany.SelectedValue);
-                    BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
-                    rgDeviceList.Rebind();
-                    //BindDeviceList();
-                }
-            }
-            if (cmbCompany.SelectedIndex == 0)
-            {
-                cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
-            }
-            //rgDeviceList.Visible = cmbCompany.SelectedIndex != 0;
+            BindBranchDropDown();
         }
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (cmbCompany.SelectedIndex > 0 && cmbBranch.SelectedIndex > 0)
-            {
-
-                CompanyId = SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0
-                                ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
-                                : Convert.ToInt32(cmbCompany.SelectedValue);
-                BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
-                rgDeviceList.Rebind();
-                //BindDeviceList();
-            }
+            rgDeviceList.Rebind();
         }
         protected void rgDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
         {
             switch (e.CommandName)
             {
                 case "Filter":
-                        CompanyId = SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0
-                                ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
-                                : Convert.ToInt32(cmbCompany.SelectedValue);
-                        BranchId =  Convert.ToInt32(cmbBranch.SelectedValue);
-                     break;
+                    CompanyId = SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0
+                            ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
+                            : Convert.ToInt32(cmbCompany.SelectedValue);
+                    BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
+                    break;
                 case "Select":
-                      SessionManager.Instance.CurrentDevice = new Device()
-                                                            {
-                                                                DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
-                                                                DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
-                                                                DeviceFamily = new DeviceFamily()
-                                                                                   {
-                                                                                       DeviceFamilyId =
-                                                                                           Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
-                                                                                       DeviceFamilyDesc =
-                                                                                           ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
-                                                                                   }
-                                                            };
+                    SessionManager.Instance.CurrentDevice = new Device()
+                                                          {
+                                                              DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
+                                                              DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
+                                                              DeviceFamily = new DeviceFamily()
+                                                                                 {
+                                                                                     DeviceFamilyId =
+                                                                                         Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
+                                                                                     DeviceFamilyDesc =
+                                                                                         ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
+                                                                                 }
+                                                          };
                     Response.RedirectPermanent("OperationSelection.aspx");
                     break;
             }
@@ -122,6 +72,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
+            CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
+            BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
             BindDeviceList();
         }
         #endregion
@@ -136,29 +88,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataBind();
             }
             cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
+            cmbCompany_SelectedIndexChanged(null, null);
         }
-        private void BindBranchDropDown(int companyId, IEnumerable<UserBranch> branches = null)
+        private void BindBranchDropDown()
         {
-
-            this.CompanyId = companyId;
+            this.CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue)
+                                 ? 0
+                                 : Convert.ToInt32(cmbCompany.SelectedValue);
             _presenterdevice.BranchList();
             if (!IsErrorOccured)
             {
-                if (branches != null)
-                {
-                    BranchList = BranchList.Where(x => branches.Where(y => y.BranchId == x.Key).Count() > 0).ToDictionary(x => x.Key, x => x.Value);
-                }
-                this.CompanyId = Convert.ToInt32(cmbCompany.SelectedValue);
-                _presenterdevice.BranchList();
-                if (!IsErrorOccured)
-                {
-                    cmbBranch.DataSource = BranchList;
-                    cmbBranch.DataBind();
-                }
+                cmbBranch.DataSource = BranchList;
+                cmbBranch.DataBind();
             }
             cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+            cmbBranch_SelectedIndexChanged(null, null);
         }
-
         private void BindDeviceList()
         {
             _presenterdevice.DeviceListById();
@@ -168,7 +113,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
         }
-
         #endregion
 
         #region IViewDevice Members
