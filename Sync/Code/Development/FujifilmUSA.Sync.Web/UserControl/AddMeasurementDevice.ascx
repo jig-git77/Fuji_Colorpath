@@ -77,7 +77,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px">
-                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;">License Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -93,7 +93,7 @@
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
                                             ControlToValidate="cmbLicenseType" ForeColor="Red" ValidationGroup="vgAddMeasurementDevice">
                                             <ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
-                                                ValidationMsg="Please select license type." Size="200" />
+                                                ValidationMsg="Please select license name." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
