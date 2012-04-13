@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewSourceProfile : IViewError
+    public interface IViewSourceProfile : IViewBase
     {
         int SourceProfileId { get; set; }
         int RegionId { get; set; }

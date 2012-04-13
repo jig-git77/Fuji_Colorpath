@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
@@ -22,7 +21,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     var dsBranchList = DataAccessFactory.
                         Instance.
                         GetDsResult(
-                            "[CP].[GetCompany]",
+                            "[CP].[GetBranchByCompany]",
                             new object[]
                                     {
                                         companyId
@@ -47,10 +46,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]", new object[] { 0 });
+                    var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]");
                     if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
                     {
-
                         dstCompanyList = (dsCompanyList.Tables[0].AsEnumerable().Select(
                             company => new
                                            {
@@ -145,27 +143,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAllRegions"));
             return regions;
-        }
-
-        public Dictionary<int, string> GetRegionListByCompany(int companyId)
-        {
-            var dstRegionList = new Dictionary<int, string>();
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegionByCompany]", new object[] { companyId });
-                    if (dsRegion != null && dsRegion.Tables.Count > 0)
-                    {
-                        dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
-                            region => new
-                                          {
-                                              Value = DataReader.ReadInt(region, "RegionID"),
-                                              Text = DataReader.ReadString(region, "Region")
-                                          })).ToDictionary(region => region.Value, region => region.Text);
-                    }
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionListByCompany"));
-            return dstRegionList;
         }
 
         public Dictionary<int, string> GetUserRoleList()

@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAnalyze : IViewError
+    public interface IViewAnalyze : IViewBase
     {
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }

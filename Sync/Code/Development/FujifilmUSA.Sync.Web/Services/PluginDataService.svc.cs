@@ -63,7 +63,9 @@ namespace FujifilmUSA.Sync.Web.Services
         public int MeasurementId { get; set; }
         #endregion
 
-        #region IViewError Members
+        #region IViewBase Members
+
+        public int CurrentUserId { get; set; }
 
         public void ErrorOccured(object sender, ErrorArgs e)
         {

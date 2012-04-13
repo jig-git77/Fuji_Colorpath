@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewConfirmSave : IViewError
+    public interface IViewConfirmSave : IViewBase
     {
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }

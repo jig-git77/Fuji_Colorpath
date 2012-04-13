@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewMeasurementSetting : IViewError
+    public interface IViewMeasurementSetting : IViewBase
     {
         List<Illuminant> Illumin { get; set; }
         List<ObserverType> Observer { get; set; }

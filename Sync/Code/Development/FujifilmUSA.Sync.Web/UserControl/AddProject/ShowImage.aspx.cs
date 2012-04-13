@@ -91,7 +91,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int ReferenceChartTypeId { get; set; }
         #endregion
 
-        #region IViewError Members
+        #region IViewBase Members
+
+        public int CurrentUserId { get; set; }
 
         public void ErrorOccured(object sender, ErrorArgs e)
         {

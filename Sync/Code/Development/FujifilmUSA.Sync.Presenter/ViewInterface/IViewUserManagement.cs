@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewUserManagement : IViewError
+    public interface IViewUserManagement : IViewBase
     {
         User User { get; set; }
         List<User> UserList { get; set; }

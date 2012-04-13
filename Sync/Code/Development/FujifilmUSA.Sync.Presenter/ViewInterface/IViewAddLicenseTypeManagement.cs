@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddLicenseTypeManagement : IViewError
+    public interface IViewAddLicenseTypeManagement : IViewBase
     {
         LicenseType LicenseType { get; set; }
     }

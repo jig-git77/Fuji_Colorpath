@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewOpenPrintCondition : IViewError
+    public interface IViewOpenPrintCondition : IViewBase
     {
         int ProjectId { get; set; }
         Project Project { get; set; }

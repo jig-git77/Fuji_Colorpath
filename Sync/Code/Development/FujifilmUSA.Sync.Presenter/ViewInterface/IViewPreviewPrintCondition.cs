@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewPreviewPrintCondition : IViewError
+    public interface IViewPreviewPrintCondition : IViewBase
     {
         int DeviceFamilyProfilerOptionId { get; set; }
         short IlluminantId { get; set; }

@@ -125,7 +125,7 @@
     <Compile Include="ViewInterface\IViewSaveWindow.cs" />
     <Compile Include="ViewInterface\IViewTargetColorspace.cs" />
     <Compile Include="PresenterSourceProfile.cs" />
-    <Compile Include="ViewInterface\ViewBase\IViewError.cs">
+    <Compile Include="ViewInterface\ViewBase\IViewBase.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

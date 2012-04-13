@@ -1,9 +1,10 @@
 ﻿using System;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public abstract class BaseControl : System.Web.UI.UserControl, IViewError
+    public abstract class BaseControl : System.Web.UI.UserControl, IViewBase
     {
         public bool IsErrorOccured { get; set; }
 
@@ -13,7 +14,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             base.OnInit(e);
         }
 
-        #region IViewError Members
+        protected override void OnLoad(EventArgs e)
+        {
+            if (SessionManager.Instance.CurrentUser != null)
+            {
+                CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+            }
+            base.OnLoad(e);
+        }
+        #region IViewBase Members
+
+        public int CurrentUserId { get; set; }
 
         public virtual void ErrorOccured(object sender, Entity.ErrorArgs e)
         {

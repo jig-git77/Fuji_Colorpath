@@ -37,16 +37,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-
         public  Dictionary<int, string> GetUserRoleList()
         {
             return new Dictionary<int, string>();
         }
-        public Dictionary<int, string> GetRegionListByCompany(int companyId)
-        {
-            return new Dictionary<int, string>();
-        }
-
+        
         public Dictionary<int, string> GetDeviceFamilyList()
         {
             return new Dictionary<int, string>();

@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddCompanyManagement : IViewError
+    public interface IViewAddCompanyManagement : IViewBase
     {
         Company Company { get; set; }
         Dictionary<int, string> RegionList { get; set; }

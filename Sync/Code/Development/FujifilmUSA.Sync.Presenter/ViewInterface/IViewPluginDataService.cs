@@ -3,7 +3,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewPluginDataService : IViewError
+    public interface IViewPluginDataService : IViewBase
     {
         Measurement Measurement { get; set; }
         int ProjectId { get; set; }

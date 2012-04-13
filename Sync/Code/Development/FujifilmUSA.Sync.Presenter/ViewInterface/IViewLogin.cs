@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewLogin : IViewError
+    public interface IViewLogin : IViewBase
     {
         string UserName { get; set; }
         string Password { get; set; }

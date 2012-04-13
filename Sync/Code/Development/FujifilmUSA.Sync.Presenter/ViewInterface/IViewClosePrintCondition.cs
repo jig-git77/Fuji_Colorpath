@@ -2,7 +2,7 @@
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewClosePrintCondition : IViewError
+    public interface IViewClosePrintCondition : IViewBase
     {
         int ProjectId { get; set; }
         byte[] CurrentDlp { get; set; }

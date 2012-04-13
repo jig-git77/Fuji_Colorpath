@@ -6,7 +6,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
-    public interface IViewAddDeviceManagement : IViewError
+    public interface IViewAddDeviceManagement : IViewBase
     {
         Device Device { get; set; }
         int CompanyId { get; set; }
