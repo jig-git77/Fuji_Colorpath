@@ -18,28 +18,28 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.CompanyList = miscDataBusiness.GetCompaniesByRegion(_viewSourceProfile.RegionId);
+            _viewSourceProfile.CompanyList = miscDataBusiness.GetCompaniesByRegion(_viewSourceProfile.RegionId, _viewSourceProfile.CurrentUserId);
         }
 
         public void RegionList()
         {
             var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.RegionList = sourceProfileBusiness.GetRegionList();
+            _viewSourceProfile.RegionList = sourceProfileBusiness.GetRegionList(_viewSourceProfile.CurrentUserId);
         }
 
         public void GetSourceProfiles()
         {
             var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.SourceProfiles = sourceProfileBusiness.GetSourceProfile(0);
+            _viewSourceProfile.SourceProfiles = sourceProfileBusiness.GetSourceProfile(0, _viewSourceProfile.CurrentUserId);
         }
 
         public void GetSourceProfile()
         {
             var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
             sourceProfileBusiness.ErrorOccured += _viewSourceProfile.ErrorOccured;
-            _viewSourceProfile.SourceProfile = sourceProfileBusiness.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId).FirstOrDefault();
+            _viewSourceProfile.SourceProfile = sourceProfileBusiness.GetSourceProfile(_viewSourceProfile.SourceProfile.SourceProfileId, _viewSourceProfile.CurrentUserId).FirstOrDefault();
         }
 
         public void InsertSourceProfile()

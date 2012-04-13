@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
-            _viewTargetColorspace.SourceProfile = projectBusiness.GetSourceProfileList();
+            _viewTargetColorspace.SourceProfile = projectBusiness.GetSourceProfileList(_viewTargetColorspace.CurrentUserId);
         }
 
     }

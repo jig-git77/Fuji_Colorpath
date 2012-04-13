@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IDeviceBusiness Members
 
-        public List<License> GetLicense(int licensesId)
+        public List<License> GetLicense(int licensesId,int currentUserId)
         {
             var objLicenseList = new List<License>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicense]", new object[] { licensesId });
+                    var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicense]", new object[] { licensesId,currentUserId });
                     if (dsLicenseList != null && dsLicenseList.Tables.Count > 0 && dsLicenseList.Tables[0].Rows.Count > 0)
                     {
                         objLicenseList = dsLicenseList.Tables[0].AsEnumerable().

@@ -23,14 +23,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
             companyBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
-            _viewAddCompanyManagement.Company = companyBusiness.GetCompany(_viewAddCompanyManagement.Company.CompanyId).FirstOrDefault();
+            _viewAddCompanyManagement.Company = companyBusiness.GetCompany(_viewAddCompanyManagement.Company.CompanyId, _viewAddCompanyManagement.CurrentUserId).FirstOrDefault();
         }
 
         public void GetCompanies()
         {
             var companyBusiness = BusinessFactory<ICompanyBusiness>.CreateObject();
             companyBusiness.ErrorOccured += _viewCompanyManagement.ErrorOccured;
-            _viewCompanyManagement.CompanyList = companyBusiness.GetCompany(0);
+            _viewCompanyManagement.CompanyList = companyBusiness.GetCompany(0, _viewCompanyManagement.CurrentUserId);
         }
 
         public void InsertCompany()
@@ -58,7 +58,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddCompanyManagement.ErrorOccured;
-            _viewAddCompanyManagement.RegionList = miscDataBusiness.GetRegionList();
+            _viewAddCompanyManagement.RegionList = miscDataBusiness.GetRegionList(_viewAddCompanyManagement.CurrentUserId);
         }
 
     }

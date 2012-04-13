@@ -212,7 +212,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectOptions;
         }
 
-        public List<SourceProfile> GetSourceProfileList()
+        public List<SourceProfile> GetSourceProfileList(int currentUserId)
         {
             var dstSourceList = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
@@ -223,7 +223,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 "CPSync4D.GetSourceProfileList",
-                                new object[] { });
+                                new object[] { currentUserId });
                     if (dsSourceList != null && dsSourceList.Tables.Count > 0)
                     {
                         dstSourceList = (dsSourceList.Tables[0].AsEnumerable().Select(

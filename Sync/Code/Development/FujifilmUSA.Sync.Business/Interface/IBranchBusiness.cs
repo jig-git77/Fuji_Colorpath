@@ -11,6 +11,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int InsertBranch(Branch branch);
         int UpdateBranch(Branch branch);
         bool DeleteBranch(int branchId);
-        List<Branch> GetBranch(int branchId);
+        List<Branch> GetBranch(int branchId,int currentUserId);
     }
 }

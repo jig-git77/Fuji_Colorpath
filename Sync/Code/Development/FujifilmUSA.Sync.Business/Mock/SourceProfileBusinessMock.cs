@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region ISourceProfileBusiness Members
 
-        public Dictionary<int, string> GetRegionList()
+        public Dictionary<int, string> GetRegionList(int currentUserId)
         {
             return new Dictionary<int, string>();
         }
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<SourceProfile> GetSourceProfile(int sourceProfileId)
+        public List<SourceProfile> GetSourceProfile(int sourceProfileId,int currentUserId)
         {
            return new List<SourceProfile>();
         }

@@ -39,13 +39,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objDeviceList;
         }
 
-        public List<Device> GetDevice(int deviceId)
+        public List<Device> GetDevice(int deviceId,int currentUserId)
         {
             var objDeviceList = new List<Device>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CP].[GetDevices]", new object[] { deviceId });
+                    var dsDeviceList = DataAccessFactory.Instance.GetDsResult("[CP].[GetDevices]", new object[] { deviceId, currentUserId });
                     if (dsDeviceList != null && dsDeviceList.Tables.Count > 0 && dsDeviceList.Tables[0].Rows.Count > 0)
                     {
                         objDeviceList = dsDeviceList.Tables[0].AsEnumerable().

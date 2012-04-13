@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.BranchList = miscDataBusiness.GetBranchList(_viewDevice.CompanyId);
+            _viewDevice.BranchList = miscDataBusiness.GetBranchList(_viewDevice.CompanyId,_viewDevice.CurrentUserId);
         }
 
         public void LicenseList()
@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.CompanyList = miscDataBusiness.GetCompanyList();
+            _viewDevice.CompanyList = miscDataBusiness.GetCompanyList(_viewDevice.CurrentUserId);
         }
 
         public void DeviceListById()
@@ -52,14 +52,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.MeasurementDevices = measurementDeviceBusiness.GetMeasurementDevice(0);
+            _viewDevice.MeasurementDevices = measurementDeviceBusiness.GetMeasurementDevice(0, _viewDevice.CurrentUserId);
         }
 
         public void GetMeasurementDevice()
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();
             measurementDeviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
-            _viewDevice.MeasurementDevice = measurementDeviceBusiness.GetMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId).FirstOrDefault();
+            _viewDevice.MeasurementDevice = measurementDeviceBusiness.GetMeasurementDevice(_viewDevice.MeasurementDevice.MeasurementDeviceId, _viewDevice.CurrentUserId).FirstOrDefault();
         }
 
         public void InsertMeasurementDevice()

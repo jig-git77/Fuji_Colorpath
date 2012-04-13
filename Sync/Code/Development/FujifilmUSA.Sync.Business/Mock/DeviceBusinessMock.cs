@@ -13,7 +13,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Device>();
         }
 
-        public List<Device> GetDevice(int deviceId)
+        public List<Device> GetDevice(int deviceId,int currentUserId)
         {
             return new List<Device>();
         }

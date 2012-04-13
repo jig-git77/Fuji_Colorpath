@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new User();
         }
-        public List<User> GetUser(int userId)
+        public List<User> GetUser(int userId,int currentUserId)
         {
             return new List<User>();
         }

@@ -28,14 +28,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
             licenseBusiness.ErrorOccured += _viewLicenseManagement.ErrorOccured;
-            _viewLicenseManagement.LicenseList = licenseBusiness.GetLicense(0);
+            _viewLicenseManagement.LicenseList = licenseBusiness.GetLicense(0, _viewLicenseManagement.CurrentUserId);
         }
 
         public void GetLicens()
         {
             var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
             licenseBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
-            _viewAddLicenseManagement.License = licenseBusiness.GetLicense(_viewAddLicenseManagement.License.LicenseId).FirstOrDefault();
+            _viewAddLicenseManagement.License = licenseBusiness.GetLicense(_viewAddLicenseManagement.License.LicenseId, _viewAddLicenseManagement.CurrentUserId).FirstOrDefault();
         }
 
         public void InsertLicense()
@@ -69,13 +69,13 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
-            _viewAddLicenseManagement.Compnaies = miscDataBusiness.GetCompanyList();
+            _viewAddLicenseManagement.Compnaies = miscDataBusiness.GetCompanyList(_viewAddLicenseManagement.CurrentUserId);
         }
         public void GetBranches()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
-            _viewAddLicenseManagement.Branches = miscDataBusiness.GetBranchList(_viewAddLicenseManagement.CompanyId);
+            _viewAddLicenseManagement.Branches = miscDataBusiness.GetBranchList(_viewAddLicenseManagement.CompanyId, _viewAddLicenseManagement.CurrentUserId);
         }
         public void GetLicenseType()
         {

@@ -46,7 +46,7 @@
                                         </td>
                                         <td style="width: 450px">
                                             <asp:DropDownList ID="cmbSelectedPresets" runat="server" Width="200px" CssClass="select"
-                                                DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
+                                                DataValueField="Key" DataTextField="Value" AutoPostBack="true" OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

@@ -9,12 +9,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IMiscDataBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int companyId)
+        public Dictionary<int, string> GetBranchList(int companyId, int currentUserId)
         {
             return new Dictionary<int, string>();
         }
 
-        public Dictionary<int, string> GetCompanyList()
+        public Dictionary<int, string> GetCompanyList(int currentUserId)
         {
             return new Dictionary<int, string>();
         }
@@ -27,7 +27,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public Dictionary<int, string> GetRegionList()
+        public Dictionary<int, string> GetRegionList(int currentUserId)
         {
             return new Dictionary<int, string>();
         }
@@ -37,7 +37,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public  Dictionary<int, string> GetUserRoleList()
+        public  Dictionary<int, string> GetUserRoleList(int currentUserId)
         {
             return new Dictionary<int, string>();
         }
@@ -51,7 +51,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<int, string>();
         }
 
-        public  Dictionary<int, string> GetCompaniesByRegion(int regionId)
+        public  Dictionary<int, string> GetCompaniesByRegion(int regionId,int currentUserId)
         {
             return new Dictionary<int, string>();
         }

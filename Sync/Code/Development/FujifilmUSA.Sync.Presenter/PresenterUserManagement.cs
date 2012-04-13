@@ -23,14 +23,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewUserManagement.ErrorOccured;
-            _viewUserManagement.UserList = userBusiness.GetUser(0);
+            _viewUserManagement.UserList = userBusiness.GetUser(0, _viewUserManagement.CurrentUserId);
         }
 
         public void GetUser()
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.UserInformation = userBusiness.GetUser(_viewAddUserManagement.UserInformation.UserId).FirstOrDefault();
+            _viewAddUserManagement.UserInformation = userBusiness.GetUser(_viewAddUserManagement.UserInformation.UserId, _viewAddUserManagement.CurrentUserId).FirstOrDefault();
         }
 
         public void InsertUser()
@@ -58,28 +58,28 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Branches = miscDataBusiness.GetBranchList(_viewAddUserManagement.CompanyId);
+            _viewAddUserManagement.Branches = miscDataBusiness.GetBranchList(_viewAddUserManagement.CompanyId,_viewAddUserManagement.CurrentUserId);
         }
 
         public void GetRegions()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Regions = miscDataBusiness.GetRegionList();
+            _viewAddUserManagement.Regions = miscDataBusiness.GetRegionList(_viewAddUserManagement.CurrentUserId);
         }
 
         public void GetUserRole()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.UserRoleList = miscDataBusiness.GetUserRoleList();
+            _viewAddUserManagement.UserRoleList = miscDataBusiness.GetUserRoleList(_viewAddUserManagement.CurrentUserId);
         }
 
         public void GetCompaniesByRegion()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.Companies = miscDataBusiness.GetCompaniesByRegion(_viewAddUserManagement.RegionId);
+            _viewAddUserManagement.Companies = miscDataBusiness.GetCompaniesByRegion(_viewAddUserManagement.RegionId, _viewAddUserManagement.CurrentUserId);
         }
     }
 }

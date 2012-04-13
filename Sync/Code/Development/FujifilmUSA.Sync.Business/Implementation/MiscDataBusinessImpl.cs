@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IMiscDataBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int companyId)
+        public Dictionary<int, string> GetBranchList(int companyId,int currentUserId)
         {
             var dstBranchList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
@@ -24,7 +24,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[CP].[GetBranchByCompany]",
                             new object[]
                                     {
-                                        companyId
+                                        companyId,
+                                        currentUserId
                                     });
                     if (dsBranchList != null && dsBranchList.Tables.Count > 0)
                     {
@@ -40,13 +41,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstBranchList;
         }
 
-        public Dictionary<int, string> GetCompanyList()
+        public Dictionary<int, string> GetCompanyList(int currentUserId)
         {
             var dstCompanyList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]");
+                    var dsCompanyList = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompany]", new object[] { currentUserId });
                     if (dsCompanyList != null && dsCompanyList.Tables.Count > 0)
                     {
                         dstCompanyList = (dsCompanyList.Tables[0].AsEnumerable().Select(
@@ -82,13 +83,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dsSourceProfileList;
         }
 
-        public Dictionary<int, string> GetRegionList()
+        public Dictionary<int, string> GetRegionList(int currentUserId)
         {
             var dstRegionList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
+                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]", new object[] { currentUserId });
                     if (dsRegion != null && dsRegion.Tables.Count > 0)
                     {
                         dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
@@ -103,13 +104,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstRegionList;
         }
 
-        public Dictionary<int, string> GetCompaniesByRegion(int regionId)
+        public Dictionary<int, string> GetCompaniesByRegion(int regionId,int currentUserId)
         {
             var dstCompnayList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsCompnay = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanyByRegion]", new object[] { regionId });
+                    var dsCompnay = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanyByRegion]", new object[] { regionId, currentUserId });
                     if (dsCompnay != null && dsCompnay.Tables.Count > 0)
                     {
                         dstCompnayList = (dsCompnay.Tables[0].AsEnumerable().Select(
@@ -145,13 +146,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return regions;
         }
 
-        public Dictionary<int, string> GetUserRoleList()
+        public Dictionary<int, string> GetUserRoleList(int currentUserId)
         {
             var dstUserRoleList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsUserRole = DataAccessFactory.Instance.GetDsResult("[CP].[GetRoles]");
+                    var dsUserRole = DataAccessFactory.Instance.GetDsResult("[CP].[GetRoles]", new object[] { currentUserId });
                     if (dsUserRole != null && dsUserRole.Tables.Count > 0)
                     {
                         dstUserRoleList = (dsUserRole.Tables[0].AsEnumerable().Select(

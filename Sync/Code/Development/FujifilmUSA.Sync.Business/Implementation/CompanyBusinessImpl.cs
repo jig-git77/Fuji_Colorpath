@@ -81,13 +81,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<Company> GetCompany(int companyId)
+        public List<Company> GetCompany(int companyId,int currentUserId)
         {
             var companies = new List<Company>();
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanies]",new object[] { companyId} );
+                        var dscompanies = DataAccessFactory.Instance.GetDsResult("[CP].[GetCompanies]", new object[] { companyId, currentUserId });
                         if (dscompanies != null && dscompanies.Tables.Count > 0 && dscompanies.Tables[0].Rows.Count > 0)
                         {
                             companies = dscompanies.Tables[0].AsEnumerable().

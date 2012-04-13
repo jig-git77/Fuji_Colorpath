@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region ISourceProfileBusiness Members
 
-        public Dictionary<int, string> GetRegionList()
+        public Dictionary<int, string> GetRegionList(int currentUserId)
         {
             var dstRegionList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]");
+                    var dsRegion = DataAccessFactory.Instance.GetDsResult("[CP].[GetRegion]", new object[] { currentUserId });
                     if (dsRegion != null && dsRegion.Tables.Count > 0)
                     {
                         dstRegionList = (dsRegion.Tables[0].AsEnumerable().Select(
@@ -106,13 +106,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<SourceProfile> GetSourceProfile(int sourceProfileId)
+        public List<SourceProfile> GetSourceProfile(int sourceProfileId,int currentUserId)
         {
             var sourceProfiles = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { sourceProfileId });
+                    var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { sourceProfileId, currentUserId });
                     if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0 && dsSourceProfile.Tables[0].Rows.Count > 0)
                     {
                         sourceProfiles = dsSourceProfile.Tables[0].AsEnumerable().

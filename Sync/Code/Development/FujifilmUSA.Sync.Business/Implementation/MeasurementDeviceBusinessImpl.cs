@@ -82,13 +82,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId)
+        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId,int currentUserId)
         {
             var measurementDevices = new List<MeasurementDevice>();
             Common.ImplementBusinessLogic(
                 () =>
                     {
-                        var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[GetMeasurementDevice]", new object[] {measurementDeviceId});
+                        var dsmeasurementdevice = DataAccessFactory.Instance.GetDsResult("[CP].[GetMeasurementDevice]", new object[] {measurementDeviceId,currentUserId});
                         if (dsmeasurementdevice != null && dsmeasurementdevice.Tables.Count > 0 && dsmeasurementdevice.Tables[0].Rows.Count > 0)
                         {
                             measurementDevices = dsmeasurementdevice.Tables[0].AsEnumerable().

@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return user;
         }
 
-        public List<User> GetUser(int userId)
+        public List<User> GetUser(int userId,int currentUserId)
         {
             var objUsers = new List<User>();
             Common.ImplementBusinessLogic(
@@ -77,7 +77,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             "[CP].[GetUsers]",
                             new object[]
                                     {
-                                        userId
+                                        userId,currentUserId
                                     });
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {

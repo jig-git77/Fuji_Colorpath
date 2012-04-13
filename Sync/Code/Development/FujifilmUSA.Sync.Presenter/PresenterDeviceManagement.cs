@@ -29,14 +29,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewDeviceManagement.ErrorOccured;
-            _viewDeviceManagement.DeviceList = deviceBusiness.GetDevice(0);
+            _viewDeviceManagement.DeviceList = deviceBusiness.GetDevice(0, _viewDeviceManagement.CurrentUserId);
         }
 
         public void GetDevice()
         {
             var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
             deviceBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
-            _viewAddDeviceManagement.Device = deviceBusiness.GetDevice(_viewAddDeviceManagement.Device.DeviceId).FirstOrDefault();
+            _viewAddDeviceManagement.Device = deviceBusiness.GetDevice(_viewAddDeviceManagement.Device.DeviceId, _viewAddDeviceManagement.CurrentUserId).FirstOrDefault();
         }
 
         public void InsertDevice()
@@ -70,13 +70,13 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
-            _viewAddDeviceManagement.Compnaies = miscDataBusiness.GetCompanyList();
+            _viewAddDeviceManagement.Compnaies = miscDataBusiness.GetCompanyList(_viewAddDeviceManagement.CurrentUserId);
         }
         public void GetBranches()
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
-            _viewAddDeviceManagement.Branches = miscDataBusiness.GetBranchList(_viewAddDeviceManagement.CompanyId);
+            _viewAddDeviceManagement.Branches = miscDataBusiness.GetBranchList(_viewAddDeviceManagement.CompanyId, _viewAddDeviceManagement.CurrentUserId);
         }
         public void GetLicenses()
         {

@@ -84,13 +84,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<Branch> GetBranch(int branchId)
+        public List<Branch> GetBranch(int branchId,int currentUserId)
         {
             var branches = new List<Branch>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]", new object[] { branchId });
+                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetBranches]", new object[] { branchId, currentUserId });
                     if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
                     {
                         branches = dsbranches.Tables[0].AsEnumerable().

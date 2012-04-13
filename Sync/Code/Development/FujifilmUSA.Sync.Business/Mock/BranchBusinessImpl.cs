@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<Branch> GetBranch(int branchId)
+        public List<Branch> GetBranch(int branchId,int currentUserId)
         {
             return new List<Branch>();
         }

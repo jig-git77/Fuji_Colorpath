@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId)
+        public List<MeasurementDevice> GetMeasurementDevice(int measurementDeviceId,int currentUserId)
         {
             return new List<MeasurementDevice>();
         }
