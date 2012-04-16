@@ -155,7 +155,7 @@
                                 <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                                     AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                                    OnItemCommand="rgDeviceList_ItemCommand" Width="670px">
+                                    OnItemCommand="rgDeviceList_ItemCommand" Width="675px">
                                     <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
