@@ -27,7 +27,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <div style=" padding-bottom: 3px;" >
-                    <uc:Statusbar ID="fujiStatusbar" runat="server" />
+                    <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
                     </div>
                 </ContentTemplate>
     </asp:UpdatePanel>   
