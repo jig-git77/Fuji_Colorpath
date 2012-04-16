@@ -92,11 +92,11 @@
                                 <div class="section_middle">
                                     <div class="combopart">
                                         <div class="header">
-                                            <div class="content">
-                                                <div class="text" style="float: left">
+                                            <div class="contentanalyze">
+                                                <div class="text" style="font-weight: bold;font-size: 14px; float: left">
                                                     Analyze Measurement : <asp:Label ID="lblMeasurementName"  style=" font-size:12px !important;"  runat="server"></asp:Label> 
                                                 </div>
-                                                <div class="textright" style="float:right;">
+                                                <div class="textright" style="font-weight: bold;font-size: 12px; float:right;">
                                                     Analyze Average Of Measurements
                                                 </div>
                                                 <div class="clear">

@@ -1591,6 +1591,22 @@ label
     font-size: 12px;
 }
 
+.section_middle .combopart .header .contentanalyze
+{
+    padding: -20px 5px 0px 5px;
+}
+.section_middle .combopart .header .contentanalyze .text
+{
+    font-weight: bold;
+    font-size: 14px;
+}
+.section_middle .combopart .header .contentanalyze .textright
+{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
 .section_middle .combopart .area
 {
     padding: 5px;
