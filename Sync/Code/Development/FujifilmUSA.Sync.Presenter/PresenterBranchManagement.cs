@@ -23,14 +23,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
             branchBusiness.ErrorOccured += _viewBranchManagement.ErrorOccured;
-            _viewBranchManagement.BranchList = branchBusiness.GetBranch(0,_viewBranchManagement.CurrentUserId);
+            _viewBranchManagement.BranchList = branchBusiness.GetBranch(0, _viewBranchManagement.CurrentUserId);
         }
 
         public void GetBranch()
         {
             var branchBusiness = BusinessFactory<IBranchBusiness>.CreateObject();
             branchBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
-            _viewAddBranchManagement.Branch = branchBusiness.GetBranch(_viewAddBranchManagement.Branch.BranchId,_viewBranchManagement.CurrentUserId).FirstOrDefault();
+            _viewAddBranchManagement.Branch = branchBusiness.GetBranch(_viewAddBranchManagement.Branch.BranchId, _viewAddBranchManagement.CurrentUserId).FirstOrDefault();
         }
 
 
