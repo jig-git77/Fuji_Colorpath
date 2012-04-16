@@ -37,9 +37,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             cmbBranch.Items.Clear();
             BindBranchDropDown();
+            CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
+            BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
         }
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
+            BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
             rgDeviceList.Rebind();
         }
         protected void rgDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
@@ -72,8 +76,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
-            BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
+
             BindDeviceList();
         }
         #endregion
