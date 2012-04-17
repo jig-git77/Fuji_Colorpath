@@ -1874,3 +1874,24 @@ label
     color: White;
 }
 /*****************************************************************/
+
+/*******************Collepsable panel *********************/
+.collapsibleContainerTitle
+{
+    cursor:pointer !important;
+}
+.expanded
+    {
+        width:18px;
+        float: left;
+        background: url(../Images/expanded.png) no-repeat center;
+    }
+    .collapsed
+    {
+        width:18px;
+        float: left;
+        background: url(../Images/collapsed.png) no-repeat center;
+    }
+
+/*****************************************************************/
+

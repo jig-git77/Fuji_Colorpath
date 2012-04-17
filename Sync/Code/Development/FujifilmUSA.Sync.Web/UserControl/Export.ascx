@@ -1,5 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Export.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Export" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function () {
+        $("div[id*='divAdvancedDownloadsHeader']").click
+        (
+                function () {
+                    var $panel = $("div[id*='divAdvancedDownloadsContian']");
+                    var $img = $("div[id*='imgHeader']");
+                    $panel.slideToggle(500);
+                    if ($img.hasClass('expanded')) {
+                        $img.addClass('collapsed').removeClass('expanded');
+                    }
+                    else {
+                        $img.addClass('expanded').removeClass('collapsed');
+                    }
+                    return false;
+                }
+        );
+        
+        var $panel = $("div[id*='divAdvancedDownloadsContian']");
+        $panel.slideToggle(0);
+
+    });
+</script>
+
 <div class="contant_top">
 </div>
 <div class="contant_middle">
@@ -83,16 +107,17 @@
                             &nbsp;</div>
                         <div class="section_middle">
                             <div class="combopart">
-                                <div class="header">
+                                <div id="divAdvancedDownloadsHeader" class="header collapsibleContainerTitle">
                                     <div class="content">
-                                        <div class="text" style="float: left">
+                                        <div class="text collapsibleContainerTitle" style="float: left">
+                                            <div id="imgHeader" class="expanded">&nbsp;</div>
                                             Advanced Downloads
                                         </div>
                                         <div class="clear">
                                         </div>
                                     </div>
                                 </div>
-                                <div style="border-style: None; padding: 5px">
+                                <div id="divAdvancedDownloadsContian" style="border-style: None; padding: 5px">
                                     <table>
                                         <tbody>
                                             <tr>

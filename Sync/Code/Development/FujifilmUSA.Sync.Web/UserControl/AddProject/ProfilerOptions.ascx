@@ -1,6 +1,27 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProfilerOptions.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProfilerOptions" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function () {
+        $("div[id*='accordion']").click
+        (
+                function () {
+                    var $panel = $("div[id*='panelAdvancedOptions']");
+                    var $img = $("div[id*='imgHeader']");
+                    $panel.slideToggle(500);
+                    if ($img.hasClass('expanded')) {
+                        $img.addClass('collapsed').removeClass('expanded');
+                    }
+                    else {
+                        $img.addClass('expanded').removeClass('collapsed');
+                    }
+                    return false;
+                }
+        );
+        var $panel = $("div[id*='panelAdvancedOptions']");
+        $panel.slideToggle(0);
+    });
+</script>
 <div class="head">
     <h1 id="hTitle" runat="server">
         New Print Condition - Profiler Options
@@ -80,14 +101,14 @@
                         &nbsp;</div>
                     <div class="section_middle">
                         <div class="combopart">
-                            <div class="header">
+                            <div id="accordion" class="header collapsibleContainerTitle">
                                 <div class="content">
                                     <div class="text">
                                         <div style="float: left">
                                         </div>
                                         <div style="float: left;">
-                                            <label>
-                                                Advanced Options</label>
+                                            <div id="imgHeader" class="expanded">&nbsp;</div>
+                                            <label class="collapsibleContainerTitle">Advanced Options</label>
                                         </div>
                                         <div class="clear">
                                         </div>

@@ -85,8 +85,10 @@
     <Content Include="Images\branch-management.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
+    <Content Include="Images\collapsed.png" />
     <Content Include="Images\company-management.png" />
     <Content Include="Images\dlp_optimization.png" />
+    <Content Include="Images\expanded.png" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
@@ -1011,7 +1013,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
