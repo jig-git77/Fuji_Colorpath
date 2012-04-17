@@ -6,6 +6,7 @@ namespace FujifilmUSA.Sync.Business
 {
     public class Common
     {
+        internal static string ProfileDescriptionKey = "Description";
         public static void ImplementBusinessLogic(Action action, BusinessHandlerRequest request)
         {
             try

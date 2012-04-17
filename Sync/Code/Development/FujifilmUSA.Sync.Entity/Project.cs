@@ -11,6 +11,7 @@ namespace FujifilmUSA.Sync.Entity
         public DateTime CreateDate { get; set; }
         public int CurrDlpId { get; set; }
         public string CurrentDlpName { get; set; }
+        public string ProposedDlpName { get; set; }
         public bool IsUsed { get; set; }
         public MeasurementSetting MeasurementSetting { get; set; }
         public List<OptimizeRun> OptimizeRuns { get; set; }

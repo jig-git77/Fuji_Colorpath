@@ -110,6 +110,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public Entity.Project Project { get; set; }
 
+        public string ProfileDescription { get; set; }
+        
         #endregion
     }
 }

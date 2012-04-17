@@ -43,6 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterConfirmSave.GetMeasurementsOnRunId();
             if (!IsErrorOccured)
             {
+                ProfileDescription = SessionManager.Instance.CurrentProject.ProposedDlpName;
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
                 {
@@ -74,6 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int OptimizeRunId { get; set; }
         public List<int> MeasurementIds { get; set; }
         public Entity.Project Project { get; set; }
+        public string ProfileDescription { get; set; }
         #endregion
     }
 }

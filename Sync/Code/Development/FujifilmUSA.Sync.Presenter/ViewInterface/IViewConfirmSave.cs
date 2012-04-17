@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int OptimizeRunId { get; set; }
         List<int> MeasurementIds { get; set; }
         Project Project { get; set; }
+        string ProfileDescription { get; set; }
     }
 }

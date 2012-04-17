@@ -9,5 +9,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<int> MeasurementIds { get; set; }
         List<Entity.Measurement> Measurements { get; set; }
         Entity.Measurement Measurement { get; set; }
+        string DestinationProfileDescription { get; set; }
+        string DlpDescription { get; set; }
     }
 }

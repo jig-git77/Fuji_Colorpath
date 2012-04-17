@@ -107,6 +107,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         if (project.CurrDlpId > 0)
                         {
                             project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
+                            project.ProposedDlpName = project.OptimizeRuns.Last().DlpName;
                         }
                         project.CurrentDisplayStatus =
                             project.OptimizeRuns.Count() == 1

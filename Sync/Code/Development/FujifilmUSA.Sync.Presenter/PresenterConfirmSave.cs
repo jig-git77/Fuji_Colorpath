@@ -18,7 +18,8 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
-            optimizeRunBusiness.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds);
+            optimizeRunBusiness.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds,
+                                                          _viewConfirmSave.ProfileDescription);
         }
 
         public void GetMeasurementsOnRunId()

@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
-        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription)
         {
 
         }
@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
-        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description)
         {
 
         }

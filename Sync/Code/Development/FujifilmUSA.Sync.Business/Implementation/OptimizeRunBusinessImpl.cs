@@ -32,7 +32,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
         }
 
-        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -65,12 +65,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         request.DestinationProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
+                    request.DestinationProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
 
                     var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
                     foreach (KeyValuePair<string, string> option in dlpOptions)
                     {
                         request.DlpOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
+                    request.DlpOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
                     using (var client = new ProfilerClient())
                     {
@@ -117,7 +119,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds)
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -140,11 +142,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     request.DCSData = measurementDataResponse.DcsData;
 
                     var options = BusinessFactory<IProjectBusiness>.CreateObject().
-                        GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+                        GetProjectOption(projectId, EProfileType.OptimizeDlp);
                     foreach (KeyValuePair<string, string> option in options)
                     {
                         request.Options.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
+                    request.Options.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = description });
 
                     using (var client = new ProfilerClient())
                     {
@@ -200,18 +203,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int optimizeRunId = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        optimizeRunId =
-                            Convert.ToInt32(
-                                DataAccessFactory.
-                                    Instance.
-                                    GetScalar(
-                                        "CPSync4D.GetLastOptimizeRunId",
-                                        new object[]
+                {
+                    optimizeRunId =
+                        Convert.ToInt32(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "CPSync4D.GetLastOptimizeRunId",
+                                    new object[]
                                             {
                                                 projectId
                                             }));
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizeRunId"));
             return optimizeRunId;
         }

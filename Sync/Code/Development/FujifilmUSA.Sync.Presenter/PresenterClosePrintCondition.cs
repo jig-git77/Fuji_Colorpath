@@ -53,9 +53,15 @@ namespace FujifilmUSA.Sync.Presenter
 
                 if (measurementIds.Count > 0)
                 {
+                    //To get current dlp name to pass as description...
+                    var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+                    projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+                    var project = projectBusiness.GetProjectDetail(_viewClosePrintCondition.ProjectId);
+                    projectBusiness.ErrorOccured -= _viewClosePrintCondition.ErrorOccured;
+
                     optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
                     optimizeRunBusiness.
-                        OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds);
+                        OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds, project.ProposedDlpName);
                 }
             }
         }

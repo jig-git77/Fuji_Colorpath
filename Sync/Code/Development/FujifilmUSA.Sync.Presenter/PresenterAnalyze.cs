@@ -21,7 +21,9 @@ namespace FujifilmUSA.Sync.Presenter
                 CreateInitialDestinationAndDeviceLinkProfiles(
                     _viewAnalyze.ProjectId,
                     _viewAnalyze.OptimizeRunId,
-                    _viewAnalyze.MeasurementIds);
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    _viewAnalyze.DlpDescription);
 
         }
 
