@@ -92,7 +92,7 @@
                                 <div class="section_middle">
                                     <div class="combopart">
                                         <div class="header">
-                                            <div class="contentanalyze">
+                                            <div class="content">
                                                 <div class="text" style="font-weight: bold;font-size: 14px; float: left">
                                                     Analyze Measurement : <asp:Label ID="lblMeasurementName"  style=" font-size:12px !important;"  runat="server"></asp:Label> 
                                                 </div>

@@ -1578,7 +1578,7 @@ label
 }
 .section_middle .combopart .header .content
 {
-    padding: -20px 5px 50px 5px;
+    padding: -20px 5px 0px 5px;
 }
 .section_middle .combopart .header .content .text
 {
@@ -1586,21 +1586,6 @@ label
     font-size: 14px;
 }
 .section_middle .combopart .header .content .textright
-{
-    font-weight: bold;
-    font-size: 12px;
-}
-
-.section_middle .combopart .header .contentanalyze
-{
-    padding: -20px 5px 0px 5px;
-}
-.section_middle .combopart .header .contentanalyze .text
-{
-    font-weight: bold;
-    font-size: 14px;
-}
-.section_middle .combopart .header .contentanalyze .textright
 {
     font-weight: bold;
     font-size: 12px;
