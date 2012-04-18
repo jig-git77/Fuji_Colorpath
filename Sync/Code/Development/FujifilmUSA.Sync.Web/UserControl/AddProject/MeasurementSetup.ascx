@@ -146,7 +146,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">
-                                            <asp:Image ID="imgChart" runat="server" Width="600px" Height="450px" />
+                                            <asp:Image ID="imgChart" runat="server" />
                                         </td>
                                     </tr>
                                 </table>

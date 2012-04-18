@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<SourceProfile>();
         }
 
-        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId)
+        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId, string source)
         {
             return new byte[1];
         }

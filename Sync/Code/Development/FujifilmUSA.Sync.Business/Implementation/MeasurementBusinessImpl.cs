@@ -185,6 +185,36 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int optimizeRunId)
+        {
+            var measurements = new List<MeasurementPatch_AvgDelta>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetMeasurementDeltasByOptimizeRunID",
+                                new object[] { optimizeRunId });
+                    measurements = dsMeasurements.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new MeasurementPatch_AvgDelta()
+                        {
+                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            //OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                            Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),
+                            Avg_ΔE94 = DataReader.ReadDecimal(x, "Avg_ΔE94"),
+                            Avg_ΔE2000 = DataReader.ReadDecimal(x, "Avg_ΔE2000")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsDeltaOnRunId"));
+            return measurements;
+        }
+
         #endregion
 
         #region ITaskBase Members

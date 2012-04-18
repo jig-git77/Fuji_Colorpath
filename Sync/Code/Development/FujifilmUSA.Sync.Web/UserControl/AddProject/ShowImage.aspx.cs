@@ -58,8 +58,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             var stream = new MemoryStream();
             stream.Write(image, 0, image.Length);
             var bitmap = new Bitmap(stream);
-            System.Web.HttpContext.Current.Response.ContentType = "image/gif";
-            bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Gif);
+            System.Web.HttpContext.Current.Response.ContentType = "image/jpg";
+            bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);
         }
 
         //public void DownloadImageFromUrl(string imageUrl)

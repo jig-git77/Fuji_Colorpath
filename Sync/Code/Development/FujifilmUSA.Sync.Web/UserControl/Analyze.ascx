@@ -93,10 +93,11 @@
                                     <div class="combopart">
                                         <div class="header">
                                             <div class="content">
-                                                <div class="text" style="font-weight: bold;font-size: 14px; float: left">
-                                                    Analyze Measurement : <asp:Label ID="lblMeasurementName"  style=" font-size:12px !important;"  runat="server"></asp:Label> 
+                                                <div class="text" style="font-weight: bold; font-size: 14px; float: left">
+                                                    Analyze Measurement :
+                                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
                                                 </div>
-                                                <div class="textright" style="font-weight: bold;font-size: 12px; float:right;">
+                                                <div class="textright" style="font-weight: bold; font-size: 12px; float: right;">
                                                     Analyze Average Of Measurements
                                                 </div>
                                                 <div class="clear">
@@ -194,8 +195,8 @@
             <div style="background: #CCC !important;">
                 <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
             </div>
-            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; left: 0px; top: 0px;
-                z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+            <div class="UpdateProgressBackgroundLessOptimize" style="position: fixed; left: 0px;
+                top: 0px; z-index: 1000; width: 100%; height: 100%;" unselectable="on">
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
@@ -231,6 +232,66 @@
                                                 <asp:ListItem Text="Idealliance Digital Chart" Value="Idealliance Digital Chart"></asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">
+                                         <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder">
+                                            <LayoutTemplate>
+                                                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >
+                                                    <thead>
+                                                      <tr>
+                                                            <th style="font-size:13px;" >
+                                                                ID
+                                                            </th>
+                                                            <th style="font-size:13px;" >
+                                                                Measurement Name
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Upload Date
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Average ΔE
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Average ΔE94
+                                                            </th>
+                                                             <th style="font-size:13px;">
+                                                                Average ΔE2000
+                                                            </th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
+                                                    </tbody>
+                                                </table>
+                                            </LayoutTemplate>
+                                            <EmptyDataTemplate>
+                                                <div class="no_data_found">No records available</div>
+                                            </EmptyDataTemplate>
+                                            <ItemTemplate>
+                                                <tr class="purpal">
+                                                    <td align="center">
+                                                        <asp:Label ID="lblMeasurementID" runat="server" Text='<%#Eval("MeasurementID") %>'></asp:Label>
+                                                    </td>
+                                                     <td align="center">
+                                                        <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
+                                                    </td>
+                                                    <td align="center" >
+                                                        <asp:Label ID="lblMeasurementDate" runat="server" Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>'></asp:Label>
+                                                    </td>
+                                                     <td align="center">
+                                                        <asp:Label ID="lblAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
+                                                    </td>
+                                                     <td align="center">
+                                                        <asp:Label ID="lblAvg_ΔE94" runat="server" Text='<%#Eval("Avg_ΔE94") %>'></asp:Label>
+                                                    </td>
+                                                     <td align="center">
+                                                        <asp:Label ID="lblAvg_ΔE2000" runat="server" Text='<%#Eval("Avg_ΔE2000") %>'></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:ListView>
+                                    </td>
                                     </tr>
                                 </table></div>
         <div class="clear"></div>

@@ -28,9 +28,15 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Measurement>();
         }
+
         public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
         {
             return 0;
+        }
+
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int optimizeRunId)
+        {
+            return new List<MeasurementPatch_AvgDelta>();
         }
         #endregion
 

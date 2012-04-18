@@ -68,6 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindMesurementChart();
                 ((Label) updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
+                BindAvgDelta();
             }
         }
         #endregion
@@ -89,6 +90,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblMeasurementName.Text = manager.MeasurementName;
                 hdMeasurement.Value = manager.CurrentMeasurementID.ToString();                    
             }
+        }
+
+        private void BindAvgDelta()    //-------Dhruti's code for Avg Delta display
+        {
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
+            _presenterAnalyze.GetAvgDeltaMeasurement();
+            grdMeasurement.DataSource = MeasurementsDelta;
+            grdMeasurement.DataBind();
         }
 
         #endregion
@@ -158,6 +168,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DestinationProfileDescription { get; set; }
 
         public string DlpDescription { get; set; }
+
+        public List<MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
 
         #endregion
     }

@@ -282,24 +282,32 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId)
+        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId, string source)
         {
             var data = new object();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    data = DataAccessFactory.
-                        Instance.
-                        GetScalar(
-                            "CP.GetChartPreviewOnReferenceChartTypeId",
-                            new object[]
+                    if (source == "Preview")
+                    {
+                        data = DataAccessFactory.Instance.GetDsResult("CP.GetChartPreviewOnReferenceChartTypeId",
+                                new object[]
                                     {
                                         referenceChartTypeId
-                                    });
+                                    }).Tables[0].Rows[0][0];
+                    }
+                    else if (source == "Download")
+                    {
+                        data = DataAccessFactory.Instance.GetDsResult("CP.GetChartPreviewOnReferenceChartTypeId",
+                                new object[]
+                                    {
+                                        referenceChartTypeId
+                                    }).Tables[1].Rows[0][0];
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnOptimizeRunId"));
             return (data == null || data == DBNull.Value) ? null : (byte[])data;
-        }
+        }  
 
         public byte[] GetSourceProfile(int projectId)
         {

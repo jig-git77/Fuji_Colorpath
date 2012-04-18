@@ -278,11 +278,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">
-                                            <%-- <asp:TextBox ID="txtChartPriview" runat="server" Width="96%" Height="200px" Style="margin-left: 10px;"
-                                                TextMode="MultiLine" Enabled="false" ReadOnly="true" Text="chart priview">
-                                            </asp:TextBox>--%>
-                                            <asp:Image ID="imgChart" runat="server" Width="96%" Height="200px" />
+                                        <td colspan="3">
+                                            <asp:Image ID="imgChart" runat="server" Width="76%" Height="200px" />
                                         </td>
                                     </tr>
                                 </table>
