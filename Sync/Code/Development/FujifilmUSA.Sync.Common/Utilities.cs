@@ -76,30 +76,11 @@ namespace FujifilmUSA.Sync.Common
                     return "application/mspowerpoint";
                 case ".dwg":
                     return "image/vnd.dwg";
+                case ".pdf":
+                    return "application/pdf";
                 default:
                     return "application/octet-stream";
             }
-        }
-
-        public static void DownlaodFile(string folderPath, string fileName, string showOnDialogName)
-        {
-            try
-            {
-                //========== Download File ==========//
-                System.IO.FileStream fs = System.IO.File.OpenRead(folderPath + fileName);
-                byte[] data = new byte[fs.Length];
-                fs.Read(data, 0, (int)fs.Length);
-                System.Web.HttpContext.Current.Response.Clear();
-                System.Web.HttpContext.Current.Response.ClearHeaders();
-                System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
-                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + showOnDialogName);
-                System.Web.HttpContext.Current.Response.BinaryWrite(data);
-                fs.Close();
-                System.Web.HttpContext.Current.Response.End();
-                //System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest();
-            }
-            catch (Exception Exc)
-            { string str = Exc.Message; }
         }
         #endregion
 

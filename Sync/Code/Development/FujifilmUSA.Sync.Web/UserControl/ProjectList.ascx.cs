@@ -88,24 +88,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
             imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
 
             var days = (DateTime.Now - project.CreateDate).TotalDays;
-            
-            switch (project.Status)
-            {
-                case EOptimizeRunStatus.Open:
-                    btnSelect.Attributes.Add("onclick",
-                                             "javascript: return ShowOpenPrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "','" + Math.Round(days, 1) +
-                                             "','" + project.CurrentDlpName + "')");
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                    break;
-                case EOptimizeRunStatus.Closed:
-                    btnSelect.Attributes.Add("onclick", "javascript: return ShowClosePrintConditionWindow('" + project.ProjectId + "','" + project.ProjectName + "')");
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                    break;
-                //case EOptimizeRunStatus.Certify:
-                //    btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                //    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                //    break;
-            }
+
+
+                switch (project.Status)
+                {
+                    case EOptimizeRunStatus.Open:
+                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                        {
+                            btnSelect.Attributes.Add("onclick",
+                                                     "javascript: return ShowOpenPrintConditionWindow('" +
+                                                     project.ProjectId + "','" + project.ProjectName + "','" +
+                                                     Math.Round(days, 1) +
+                                                     "','" + project.CurrentDlpName + "')");
+                        }
+                        else
+                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                        break;
+                    case EOptimizeRunStatus.Closed:
+                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                        {
+                            btnSelect.Attributes.Add("onclick",
+                                                     "javascript: return ShowClosePrintConditionWindow('" +
+                                                     project.ProjectId + "','" + project.ProjectName + "')");
+                        }
+                        else
+                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                        break;
+                    //case EOptimizeRunStatus.Certify:
+                    //    btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                    //    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                    //    break;
+                }
+
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
