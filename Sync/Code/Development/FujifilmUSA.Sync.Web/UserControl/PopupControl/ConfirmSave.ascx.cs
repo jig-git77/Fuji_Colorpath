@@ -43,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterConfirmSave.GetMeasurementsOnRunId();
             if (!IsErrorOccured)
             {
-                ProfileDescription = SessionManager.Instance.CurrentProject.ProposedDlpName;
+                ProfileDescription = SessionManager.Instance.CurrentDevice.DeviceName + " " + SessionManager.Instance.CurrentProject.ProposedDlpName;
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
                 {

@@ -49,6 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Request.QueryString["ProjectId"] != null)
             {
                 ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                DeviceName = SessionManager.Instance.CurrentDevice.DeviceName;
                 _presenterClosePrintCondition.ReOptimizeDeviceLinkProfile();
                 if (!IsErrorOccured)
                 {
@@ -110,7 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public Entity.Project Project { get; set; }
 
-        public string ProfileDescription { get; set; }
+        public string DeviceName { get; set; }
         
         #endregion
     }

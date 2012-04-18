@@ -7,6 +7,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         byte[] CurrentDlp { get; set; }
         Project Project { get; set; }
-        string ProfileDescription { get; set; }
+        string DeviceName { get; set; }
     }
 }

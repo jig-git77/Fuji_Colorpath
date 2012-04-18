@@ -61,7 +61,8 @@ namespace FujifilmUSA.Sync.Presenter
 
                     optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
                     optimizeRunBusiness.
-                        OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds, project.ProposedDlpName);
+                        OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds,
+                                                  _viewClosePrintCondition.DeviceName + " " + project.ProposedDlpName);
                 }
             }
         }

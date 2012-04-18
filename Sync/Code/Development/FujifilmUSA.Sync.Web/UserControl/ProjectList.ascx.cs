@@ -26,7 +26,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenterProjectList = new PresenterProjectList(this);
-            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
+
+            if (SessionManager.Instance.CurrentUser != null && !SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
                 lbtnCreateNewPrintCondition.Visible = false;
             }
