@@ -72,20 +72,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.ProfileName = txtSourceProfile.Text.Trim();
             SourceProfile.ProfileDesc = txtProfileDescription.Text;
-            //if (fuProfile.HasFile)
-            //{
-            //string strFileName = System.IO.Path.GetFullPath(fuProfile.PostedFile.FileName);
-            //string strFileName = Server.MapPath(fuProfile.FileName);
-            //HttpPostedFile sourcefile = Request.Files;
-            //Byte[] data = new Byte[sourcefile.ContentLength];
-            //}
+            
+            //Read source profile from file
+            if (fuProfile.PostedFile != null)
+            {
+                if (fuProfile.PostedFile.ContentLength > 0)
+                {
+                    HttpPostedFile objHttpPostedFile = fuProfile.PostedFile;
+                    int intContentlength = objHttpPostedFile.ContentLength;
+                    var bytImage = new Byte[intContentlength];
+                    objHttpPostedFile.InputStream.Read(bytImage, 0, intContentlength);
+                    SourceProfile.Profile = bytImage;
+                }
+            }
 
-            //SourceProfile.Profile= fuProfile.FileBytes;
-            //SourceProfile.Profile = File.ReadAllBytes(fuProfile.
-
-            HttpPostedFile objHttpPostedFile = fuProfile.PostedFile;
-            int ContentLength = objHttpPostedFile.ContentLength;
-            SourceProfile.Profile = new byte[ContentLength];
             SourceProfile.IsUsed = chkIsActive.Checked;
             if (hdnSourceProfileID.Value == "0")
             {

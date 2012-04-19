@@ -39,12 +39,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                {
-                    returnValue = DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure(
-                            "[CP].[InsertSourceProfile]",
-                            new object[]
+                    {
+                        returnValue = DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CP].[InsertSourceProfile]",
+                                new object[]
                                     {
                                         sourceProfile.RegionId,
                                         sourceProfile.CompanyId,
@@ -106,7 +106,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
-        public List<SourceProfile> GetSourceProfile(int sourceProfileId,int currentUserId)
+        public List<SourceProfile> GetSourceProfile(int sourceProfileId, int currentUserId)
         {
             var sourceProfiles = new List<SourceProfile>();
             Common.ImplementBusinessLogic(
