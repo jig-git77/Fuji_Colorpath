@@ -67,7 +67,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             SourceProfile = new SourceProfile();
             SourceProfile.SourceProfileId = (short)Convert.ToInt32(hdnSourceProfileID.Value);
-            SourceProfile.RegionId = (short)Convert.ToInt32(cmbRegion.SelectedValue);
+            if (Convert.ToInt32(cmbRegion.SelectedValue) > 0)
+                SourceProfile.RegionId = (short)Convert.ToInt32(cmbRegion.SelectedValue);
             if (Convert.ToInt32(cmbCompanyName.SelectedValue) > 0)
                 SourceProfile.CompanyId = Convert.ToInt32(cmbCompanyName.SelectedValue);
             SourceProfile.ProfileName = txtSourceProfile.Text.Trim();

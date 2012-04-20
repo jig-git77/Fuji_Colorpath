@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured && Project != null)
                 {
                     ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        "Once optimization is complete, apply {0} to workflow and repaint the {1} chart.",
+                        "Once optimization is complete, apply {0} to workflow and reprint the {1} chart.",
                         Project.OptimizeRuns.Last().DlpName,
                         ((Project.OptimizeRuns != null)
                              ? Project.OptimizeRuns.Last().ReferenceChartType.Value

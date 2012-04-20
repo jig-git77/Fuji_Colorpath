@@ -72,11 +72,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.LicenseTypeId
                                         , license.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
-                    }
-
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLicense"));
             return returnValue;
@@ -103,10 +98,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.LicenseTypeId
                                         , license.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
-                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLicense"));
             return returnValue;

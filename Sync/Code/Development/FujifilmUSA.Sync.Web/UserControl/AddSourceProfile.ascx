@@ -45,11 +45,11 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
+                                       <%-- <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
                                             ForeColor="Red" ValidationGroup="vgSourceProfile" InitialValue="0">
                                             <ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
                                                 ValidationMsg="Please select region." Size="200" />
-                                        </asp:RequiredFieldValidator>
+                                        </asp:RequiredFieldValidator>--%>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -69,18 +69,11 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <asp:CustomValidator ID="cvCompanyName" ClientValidationFunction="IsRegionSelected" runat="server"
+                                        <%--<asp:CustomValidator ID="cvCompanyName" ClientValidationFunction="IsRegionSelected" runat="server"
                                             ValidationGroup="vgSourceProfile">
                                             <ucValidationContainer:ValidationContainer ID="rfvCompanyuContainer" runat="server"
                                                 ValidationMsg="Please select company." Size="200" />
-                                        </asp:CustomValidator>
-
-<%--                                        <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgSourceProfile"
-                                            InitialValue="0">
-                                        </asp:RequiredFieldValidator>--%>
-
-
+                                        </asp:CustomValidator>--%>
                                     </div>
                                     <div class="clear">
                                     </div>

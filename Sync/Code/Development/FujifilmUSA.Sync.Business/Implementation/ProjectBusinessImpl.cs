@@ -509,8 +509,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     {
                                                                                         IlluminantName =
                                                                                             DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
-                                                                                        ObserverTypeName =
-                                                                                            DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType"),
+                                                                                        ObserverTypeName = Utilities.GetValueFromDescription<EObserverType>(DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
                                                                                         UvIncludedName =
                                                                                             uvIncluded ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString(),
                                                                                         DensityType = EDensityType.ANSIT.ToString()

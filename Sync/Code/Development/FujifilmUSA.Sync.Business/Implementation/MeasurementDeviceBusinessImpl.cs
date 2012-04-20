@@ -30,11 +30,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.InstrumentTypeId,
                                         measurementdevice.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertMeasurementDevice" };
-                    }
-
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertMeasurementDevice"));
             return returnValue;
@@ -58,10 +53,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.InstrumentTypeId,
                                         measurementdevice.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertMeasurementDevice" };
-                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMeasurementDevice"));
             return returnValue;

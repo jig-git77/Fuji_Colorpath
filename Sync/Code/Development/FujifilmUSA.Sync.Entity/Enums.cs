@@ -61,6 +61,14 @@ namespace FujifilmUSA.Sync.Entity
         UV = 1
     }
 
+    public enum EObserverType
+    {
+        [Description("2°")]
+        TwoDegree = 0,
+        [Description("10°")]
+        TenDegree = 1
+    }
+
     public enum CPPatchType
     {
         Cyan = 1,

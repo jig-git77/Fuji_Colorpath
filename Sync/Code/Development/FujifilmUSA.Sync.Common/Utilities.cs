@@ -273,6 +273,27 @@ namespace FujifilmUSA.Sync.Common
         {
             return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => Enum.GetName(typeof(T), value));
         }
+        public static string GetValueFromDescription<T>(string description)
+        {
+            var type = typeof(T);
+            foreach (var field in type.GetFields())
+            {
+                var attribute = Attribute.GetCustomAttribute(field,typeof(DescriptionAttribute)) as DescriptionAttribute;
+                if (attribute != null)
+                {
+                    if (attribute.Description == description)
+                        return field.GetValue(null).ToString();
+                }
+                else
+                {
+                    if (field.Name == description)
+                        return field.GetValue(null).ToString();
+                }
+            }
+            return string.Empty;
+        }
+
+
         public static Dictionary<int, string> GetEnumDescriptionAttributeDropdown<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => ((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description);

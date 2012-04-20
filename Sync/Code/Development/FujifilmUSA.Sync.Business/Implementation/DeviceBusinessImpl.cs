@@ -109,10 +109,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDevice" };
-                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDevice"));
             return returnValue;
@@ -136,11 +132,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive
                                     });
-                    if (returnValue == -1)
-                    {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDevice" };
-                    }
-
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDevice"));
             return returnValue;

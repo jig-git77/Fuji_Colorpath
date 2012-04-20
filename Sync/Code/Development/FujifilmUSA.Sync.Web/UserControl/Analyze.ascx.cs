@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.Format("Once optimization is complete, apply DLP 000 to workflow and repaint the {0} chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+                return string.Format("Once optimization is complete, apply DLP 000 to workflow and reprint the {0} chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
             }
         }
         #endregion

@@ -6,7 +6,7 @@ namespace FujifilmUSA.Sync.Entity
     public class SourceProfile
     {
         public short SourceProfileId { get; set; }
-        public short RegionId { get; set; }
+        public short? RegionId { get; set; }
         public int? CompanyId { get; set; }
         public string ProfileName { get; set; }
         public string ProfileDesc { get; set; }
