@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 namespace FujifilmUSA.Sync.Entity
 {
     public class License
     {
+        public License()
+        {
+            LicenseType = new List<ELicenseType>();
+        }
         public int LicenseId { get; set; }
         public int BranchId { get; set; }
         public DateTime ActivationDate { get; set; }
@@ -13,6 +19,6 @@ namespace FujifilmUSA.Sync.Entity
         public short LicenseTypeId { get; set; }
         public bool IsActive { get; set; }
         public Branch Branch { get; set; }
-        public LicenseType LicenseType { get; set; }
+        public List<ELicenseType> LicenseType { get; set; }
     }
 }

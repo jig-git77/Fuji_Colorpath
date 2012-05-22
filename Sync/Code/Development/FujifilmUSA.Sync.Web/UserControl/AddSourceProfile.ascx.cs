@@ -152,6 +152,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presentersourceprofile.GetSourceProfile();
             if (!IsErrorOccured)
             {
+                cmbRegion.Enabled = false;
+                cmbCompanyName.Enabled = false;              
+                rfvProfile.ValidationGroup = "a";
+
                 hdnSourceProfileID.Value = Convert.ToString(iSourceProfileId);
                 cmbRegion.SelectedValue = Convert.ToString(SourceProfile.Region.RegionId);
                 cmbRegion_SelectedIndexChanged(null, null);

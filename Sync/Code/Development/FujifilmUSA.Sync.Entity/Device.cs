@@ -3,6 +3,11 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class Device
     {
+        public Device()
+        {
+            LicenseTypeProject = new Dictionary<ELicenseType, int>();
+        }
+
         public int DeviceId { get; set; }
         public int LicenseId { get; set; }
         public string DeviceName { get; set; }
@@ -10,5 +15,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsActive { get; set; }
         public DeviceFamily DeviceFamily { get; set; }
         public License License { get; set; }
+        public string BranchName { get; set; }
+        public Dictionary<ELicenseType,int> LicenseTypeProject { get; set; }
     }
 }

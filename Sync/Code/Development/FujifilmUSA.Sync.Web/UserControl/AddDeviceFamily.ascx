@@ -23,7 +23,7 @@
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Device Family Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -47,7 +47,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Is Active?</span>
                                 </td>
                                 <td>

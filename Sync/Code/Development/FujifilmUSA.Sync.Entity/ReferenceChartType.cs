@@ -11,7 +11,10 @@ namespace FujifilmUSA.Sync.Entity
         public short InstrumentTypeId { get; set; }
         public short ProjectTypeId { get; set; }
         public byte[] ChartPreview { get; set; }
+        public byte[] OriginalChart { get; set; }
         public bool? IsUsed { get; set; }
         public List<ReferenceChart> ReferenceCharts { get; set; }
+        public InstrumentType InstrumentType { get; set; }
+        public ProjectType ProjectType { get; set; }
     }
 }

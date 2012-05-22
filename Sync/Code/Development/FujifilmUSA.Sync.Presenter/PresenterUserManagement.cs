@@ -81,5 +81,12 @@ namespace FujifilmUSA.Sync.Presenter
             miscDataBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
             _viewAddUserManagement.Companies = miscDataBusiness.GetCompaniesByRegion(_viewAddUserManagement.RegionId, _viewAddUserManagement.CurrentUserId);
         }
+
+        public void SendEmailToUser()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
+            userBusiness.SendEmailToUser(_viewAddUserManagement.UserInformation, _viewAddUserManagement.UpdateType);
+        }
     }
 }

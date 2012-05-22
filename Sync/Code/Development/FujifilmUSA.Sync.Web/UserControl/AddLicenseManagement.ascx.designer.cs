@@ -85,33 +85,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvBranchContainer;
         
         /// <summary>
-        /// cmbLicenseType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbLicenseType;
-        
-        /// <summary>
-        /// rfvLicenseType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLicenseType;
-        
-        /// <summary>
-        /// rfvLicenseTypeContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvLicenseTypeContainer;
-        
-        /// <summary>
         /// txtLicenseDescription control.
         /// </summary>
         /// <remarks>
@@ -130,13 +103,49 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLicenseDescription;
         
         /// <summary>
-        /// rfvLDContainer control.
+        /// rfvcLicenseDescriptionContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvLDContainer;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcLicenseDescriptionContainer;
+        
+        /// <summary>
+        /// chkSync1D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSync1D;
+        
+        /// <summary>
+        /// chkDlp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkDlp;
+        
+        /// <summary>
+        /// chkInk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkInk;
+        
+        /// <summary>
+        /// chkVarification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkVarification;
         
         /// <summary>
         /// txtActivationDate control.

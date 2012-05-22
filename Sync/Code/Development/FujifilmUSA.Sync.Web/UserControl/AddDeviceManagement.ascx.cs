@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using FujifilmUSA.Sync.Common;
+using System.Linq;
 using FujifilmUSA.Sync.Entity;
-
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
@@ -12,6 +11,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddDeviceManagement : BaseControl, IViewAddDeviceManagement
     {
+        public string ELicenseSync1DText { get; set; }
+        public string ELicenseDlpText { get; set; }
+        public string ELicenseInkOptimizationText { get; set; }
+        public string ELicenseVarificationText { get; set; }
+
         private PresenterDeviceManagement _presenterDeviceManagement;
         #region Declaration
         private int DId
@@ -32,6 +36,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+            ELicenseSync1DText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
+            ELicenseDlpText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
+            ELicenseInkOptimizationText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
+            ELicenseVarificationText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
+
             if (Page.IsPostBack) return;
 
             lblHeader.Text = "Add Device";
@@ -39,6 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindDeviceFamily();
             BindBranch();
             BindLicenses();
+            
             if (Request.QueryString["DeviceID"] != null)
             {
                 lblHeader.Text = "Edit Device";
@@ -112,10 +122,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbLicense.DataValueField = "Key";
                     cmbLicense.DataSource = Licenses;
                     cmbLicense.DataBind();
+                    if (cmbLicense.Items.Count == 0)
+                    {
+                        fujiStatusbar.DisplayMessage("No license found for this branch!", false);
+                        txtSync1D.Enabled = false;
+                        txtDlp.Enabled = false;
+                        txtInkOpt.Enabled = false;
+                        txtVarification.Enabled = false;
+                    }
+                    else
+                    {
+                        cmbLicense.SelectedIndex = 0;
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtVarification.Text = "0";
+                        txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
+                        txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
+                        txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
+                        txtVarification.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Verification).Count() > 0);
+                    }
                 }
             }
-            cmbLicense.Items.Insert(0, new ListItem("--Select License--", string.Empty));
         }
+
         private void SaveDevice()
         {
             if (cmbCompany.SelectedIndex == 0)
@@ -126,11 +153,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (cmbBranch.SelectedIndex == 0)
             {
                 fujiStatusbar.DisplayMessage("Please select branch.", false);
-                return;
-            }
-            if (cmbLicense.SelectedIndex == 0)
-            {
-                fujiStatusbar.DisplayMessage("Please select license.", false);
                 return;
             }
             if (cmbDeviceFamily.SelectedIndex == 0)
@@ -148,6 +170,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                  new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
                              IsActive = chkIsActive.Checked
                          };
+
+            if (txtSync1D.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.Sync1D, Convert.ToInt32(txtSync1D.Text));
+            if (txtDlp.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.DLP, Convert.ToInt32(txtDlp.Text));
+            if (txtInkOpt.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));
+            if (txtVarification.Enabled)
+                Device.LicenseTypeProject.Add(ELicenseType.Verification, Convert.ToInt32(txtVarification.Text));
+
             if (DId == 0) // Add New company
             {
                 _presenterDeviceManagement.InsertDevice();
@@ -177,6 +209,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtDeviceName.Text = Device.DeviceName;
                 cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
                 chkIsActive.Checked = Device.IsActive;
+                //txtNoOfProjects.Text = Device.NoOfProjects.ToString();
             }
         }
         #endregion
@@ -213,6 +246,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public Dictionary<int, string> DeviceFamilyList { get; set; }
 
+        public License License { get; set; }
         #endregion
     }
 }

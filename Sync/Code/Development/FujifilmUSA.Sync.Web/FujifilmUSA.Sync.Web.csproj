@@ -71,8 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Activity_PrintCondition.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
+    <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
+    <Content Include="ApplicationError.aspx" />
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
     <Content Include="BranchManagement.aspx" />
@@ -82,22 +85,35 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="GlobalActivation.aspx" />
+    <Content Include="GlobalMaster.Master" />
     <Content Include="Images\branch-management.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\collapsed.png" />
     <Content Include="Images\company-management.png" />
+    <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\dlp_optimization.png" />
     <Content Include="Images\expanded.png" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\Profile-Management.png" />
     <Content Include="Images\project.png" />
+    <Content Include="Images\Project_Close_1.png" />
+    <Content Include="Images\Reference-Chart.jpg" />
     <Content Include="Images\sourceprofile-management.png" />
+    <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\user-management.png" />
+    <Content Include="PDFReports\Sync DLP Report.pdf" />
     <Content Include="Permission.aspx" />
+    <Content Include="PopupOpenForgotPassword.aspx" />
+    <Content Include="ProfileManagement.aspx" />
+    <Content Include="ProjectMaxLimit.aspx" />
+    <Content Include="ReferenceChartManagement.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
     <Content Include="JQuery\jquery.ui.datepicker.js" />
@@ -128,6 +144,8 @@
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
+    <Content Include="UserControl\Activity_PrintCondition.ascx" />
+    <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
     <Content Include="UserControl\AdminStatusbar.ascx" />
@@ -135,6 +153,12 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\GlobalActivation.ascx" />
+    <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
+    <Content Include="UserControl\ProfileManagement.ascx" />
+    <Content Include="UserControl\ProjectMaxLimit.ascx" />
+    <Content Include="UserControl\ReferenceChartManagement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
@@ -361,12 +385,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity_PrintCondition.aspx.cs">
+      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity_PrintCondition.aspx.designer.cs">
+      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AddMeasurementDevice.aspx.designer.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddReferenceChart.aspx.cs">
+      <DependentUpon>AddReferenceChart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddReferenceChart.aspx.designer.cs">
+      <DependentUpon>AddReferenceChart.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddSourceProfile.aspx.cs">
       <DependentUpon>AddSourceProfile.aspx</DependentUpon>
@@ -381,6 +419,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationError.aspx.cs">
+      <DependentUpon>ApplicationError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationError.aspx.designer.cs">
+      <DependentUpon>ApplicationError.aspx</DependentUpon>
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -454,12 +499,58 @@
     <Compile Include="AddLicenseManagement.aspx.designer.cs">
       <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalActivation.aspx.cs">
+      <DependentUpon>GlobalActivation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GlobalActivation.aspx.designer.cs">
+      <DependentUpon>GlobalActivation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalMaster.Master.cs">
+      <DependentUpon>GlobalMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GlobalMaster.Master.designer.cs">
+      <DependentUpon>GlobalMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="Permission.aspx.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupOpenForgotPassword.aspx.cs">
+      <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupOpenForgotPassword.aspx.designer.cs">
+      <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileManagement.aspx.cs">
+      <DependentUpon>ProfileManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileManagement.aspx.designer.cs">
+      <DependentUpon>ProfileManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectMaxLimit.aspx.cs">
+      <DependentUpon>ProjectMaxLimit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectMaxLimit.aspx.designer.cs">
+      <DependentUpon>ProjectMaxLimit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReferenceChartManagement.aspx.cs">
+      <DependentUpon>ReferenceChartManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReferenceChartManagement.aspx.designer.cs">
+      <DependentUpon>ReferenceChartManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
@@ -488,6 +579,20 @@
     </Compile>
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Activity_PrintCondition.ascx.cs">
+      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Activity_PrintCondition.ascx.designer.cs">
+      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChart.ascx.cs">
+      <DependentUpon>AddReferenceChart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddReferenceChart.ascx.designer.cs">
+      <DependentUpon>AddReferenceChart.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddSourceProfile.ascx.cs">
       <DependentUpon>AddSourceProfile.ascx</DependentUpon>
@@ -538,8 +643,50 @@
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\ApplicationError.ascx.cs">
+      <DependentUpon>ApplicationError.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ApplicationError.ascx.designer.cs">
+      <DependentUpon>ApplicationError.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\GlobalActivation.ascx.cs">
+      <DependentUpon>GlobalActivation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\GlobalActivation.ascx.designer.cs">
+      <DependentUpon>GlobalActivation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ForgotPassword.ascx.cs">
+      <DependentUpon>ForgotPassword.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ForgotPassword.ascx.designer.cs">
+      <DependentUpon>ForgotPassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProfileManagement.ascx.cs">
+      <DependentUpon>ProfileManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProfileManagement.ascx.designer.cs">
+      <DependentUpon>ProfileManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ProjectMaxLimit.ascx.cs">
+      <DependentUpon>ProjectMaxLimit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ProjectMaxLimit.ascx.designer.cs">
+      <DependentUpon>ProjectMaxLimit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ReferenceChartManagement.ascx.cs">
+      <DependentUpon>ReferenceChartManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ReferenceChartManagement.ascx.designer.cs">
+      <DependentUpon>ReferenceChartManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ValidationContainer.ascx.cs">
       <DependentUpon>ValidationContainer.ascx</DependentUpon>
@@ -1001,7 +1148,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51741</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

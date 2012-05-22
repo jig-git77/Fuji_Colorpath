@@ -3,9 +3,12 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Telerik.Web.UI;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -31,6 +34,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get { return SessionManager.Instance.CurrentOptimizeRun.HasProfile; }
         }
 
+        public string CreateDLPUpdateProgressClientID
+        {
+            get { return updateProgress.ClientID; }
+        }
         public string UpdateProgressClientID
         {
             get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
@@ -58,18 +65,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
             }
 
-            header.InnerText = IsNewDlp
-                                   ? string.Format("New Print Condition - Analyze (No DLP)")
-                                   : string.Format("Analyze - {0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
+            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+            {
+                header.InnerText = "New Print Condition - Analyze (No DLP)";
+            }
+            else
+            {
+                header.InnerText = string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
+            }
+            //header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
+            //    ? string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName)
+            //    : string.Format("New Print Condition - Analyze (No DLP)");
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
-                                              ? "<span><img id='imgAdd' src='Images/export.png'/>Download DLP<span>"
+                                              ? "<span><img id='imgAdd' src='Images/export.png'/>Create DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
             if (!Page.IsPostBack)
             {
+                if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                {
+                    //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
+                    lbtnDownloadAndSaveDLP.Visible = false;
+                }
                 BindMesurementChart();
-                ((Label) updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
+                ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
                 BindAvgDelta();
             }
+            BindMesurementChart();
         }
         #endregion
 
@@ -87,23 +108,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
                 };
                 manager.BindChart();
+
                 lblMeasurementName.Text = manager.MeasurementName;
-                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();                    
+
+                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+
+                //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+                GridPatchDetails.Rebind();
             }
         }
 
-        private void BindAvgDelta()    //-------Dhruti's code for Avg Delta display
+        private void BindAvgDelta()    //------Code for Avg Delta display on "Summary" Tab
         {
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
-            _presenterAnalyze.GetAvgDeltaMeasurement();
-            grdMeasurement.DataSource = MeasurementsDelta;
-            grdMeasurement.DataBind();
+            try
+            {
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
+                _presenterAnalyze.GetAvgDeltaMeasurement();
+                grdMeasurement.DataSource = MeasurementsDelta;
+                grdMeasurement.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public void ConfigureExport()
+        {
+            GridPatchDetails.ExportSettings.ExportOnlyData = true;
+            GridPatchDetails.ExportSettings.IgnorePaging = true;
+            GridPatchDetails.ExportSettings.OpenInNewWindow = true;
+
+            GridPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
 
         #endregion
 
         #region Control Events
+
         protected void hdChartButton_Click(object sender, EventArgs e)
         {
             if (Convert.ToInt32(hdCheckBoxChange.Value) == 1)
@@ -111,6 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Measurement = new Entity.Measurement();
                 Measurement.MeasurementId = Convert.ToInt32(hdMeasurement.Value);
                 Measurement.IsUsed = hdChartCheckBox.Checked;
+
                 _presenterAnalyze.UpdateMeasurementByAnalyzeChart();
             }
             if (!IsErrorOccured)
@@ -118,6 +162,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMesurementChart();
             }
         }
+
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
             if (!IsNewDlp && IsDlpCreated)
@@ -131,16 +176,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    DestinationProfileDescription = string.Format("{0} {1}.icc", SessionManager.Instance.CurrentDevice.DeviceName,
-                                                                  SessionManager.Instance.CurrentProject.ProjectName);
+                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                     if (string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.CurrentDlpName))
                     {
-                        DlpDescription = string.Format("{0} {1}.icc", SessionManager.Instance.CurrentDevice.DeviceName,
-                                                       string.Format("{0} DLP 000", SessionManager.Instance.CurrentProject.ProjectName));
+                        DlpDescription = string.Format("{0}.icc", string.Format("{0} DLP 000", SessionManager.Instance.CurrentProject.ProjectName));
                     }
                     else
                     {
-                        DlpDescription = string.Format("{0} {1}", SessionManager.Instance.CurrentDevice.DeviceName, SessionManager.Instance.CurrentProject.CurrentDlpName);
+                        DlpDescription = string.Format("{0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
                     }
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
@@ -151,6 +194,51 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
+
+        protected void GridPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            try
+            {
+                MeasurementId = 0;
+                if (hdMeasurement.Value != "")
+                {
+                    MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
+
+                    OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                    PatchDetails = new List<Entity.MeasurementPatchDetails>();
+                    _presenterAnalyze.GetPatchDetailsofMeasurement();
+                    GridPatchDetails.DataSource = PatchDetails;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected void GridPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+
+                Label lbl_HTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
+                lbl_HTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HtmlColor").ToString());
+            }
+        }
+
+        protected void btn_Excel_Click(object sender, EventArgs e)
+        {
+            ConfigureExport();
+            GridPatchDetails.MasterTableView.ExportToExcel();
+        }
+
+        protected void btn_CSV_Click(object sender, EventArgs e)
+        {
+            ConfigureExport();
+            GridPatchDetails.MasterTableView.ExportToCSV();
+        }
+
         #endregion
 
         #region IViewAnalyze Members
@@ -171,6 +259,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
 
+        public List<MeasurementPatchDetails> PatchDetails { get; set; }
+
+        public int MeasurementId { get; set; }
+
         #endregion
+
+        protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
+        {
+
+            byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/PDFReports/Sync DLP Report.pdf"));
+            Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
+        }
+
     }
 }

@@ -12,8 +12,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class ProfilerOptions : BaseControl, IViewDeviceFamilyProfilerOption
     {
         #region "Declaration"
-        //private PresenterProjectList _presenterProjectList;
         private const string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
+        private const string _vsProfileRendering = "vsProfileRendering";
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         #endregion
 
@@ -24,12 +24,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            BindProfileRenderings();
             BindPresets();
-            LoadProjectInfoFromSession();      
+            LoadProjectInfoFromSession();
         }
         #endregion
 
         #region Method
+        private void BindProfileRenderings()
+        {
+            if (ViewState[_vsProfileRendering] == null)
+            {
+                cmbRendering.DataValueField = "Key";
+                cmbRendering.DataTextField = "Value";
+                cmbRendering.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EProfileRendering>();
+                cmbRendering.DataBind();
+            }
+        }
         private void BindPresets()
         {
             if (ViewState[_vsDeviceFamilyProfilerOption] == null)
@@ -59,7 +70,157 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Method
+        #region Control Events
+        protected void cmbSelectedPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClearAdvancedOptionsControls();
+            if (ViewState[_vsDeviceFamilyProfilerOption] != null)
+            {
+                var familyOption =
+                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+
+                txtProfileDescription.Text = familyOption.ProfilerOptionsDesc;
+                familyOption.
+                    ProfilerOptionPresets.Where(x => x.ProfileTypeId == Convert.ToInt32(EProfileType.DeviceLinkProfile)).ToList().
+                    ForEach(x =>
+                                {
+                                    var option = (EProfilerOption)Enum.Parse(typeof(EProfilerOption), x.ProfilerOption.ProfilerOptionId.ToString());
+                                    switch (option)
+                                    {
+                                        case EProfilerOption.Rendering:
+                                            cmbRendering.SelectedValue = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.InkMax:
+                                            txtBlackPointCustom.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.InkTotal:
+                                            txtMaxInk.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.BlackGeneration:
+                                            rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtMode.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.BlackStart:
+                                            rdsBlackStart.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtBlackStart.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.BlackWidth:
+                                            rdsBlackWidth.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtBlackWidth.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.DLExceptions:
+                                            #region Profiler Exceptions
+
+                                            var exception = (EProfilerException)Enum.Parse(typeof(EProfilerException), x.ProfilerOptionValue);
+                                            if (exception > 0)
+                                            {
+                                                if ((exception & EProfilerException.Triplex) == EProfilerException.Triplex)
+                                                {
+                                                    chkTriplex.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.Duplex) == EProfilerException.Duplex)
+                                                {
+                                                    chkDuplex.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureGray) == EProfilerException.PureGray)
+                                                {
+                                                    chkGray.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureBlack) == EProfilerException.PureBlack)
+                                                {
+                                                    chk100Black.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureCMY) == EProfilerException.PureCMY)
+                                                {
+                                                    chk100CMY.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureRGB) == EProfilerException.PureRGB)
+                                                {
+                                                    chk100RGB.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.MaxCMY) == EProfilerException.MaxCMY)
+                                                {
+                                                    chkMaxCMY.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.MaxRGB) == EProfilerException.MaxRGB)
+                                                {
+                                                    chkMaxRGB.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PurePrimaries) == EProfilerException.PurePrimaries)
+                                                {
+                                                    chkPrimaries.Checked = true;
+                                                    chkPC.Checked = true;
+                                                    chkPM.Checked = true;
+                                                    chkPY.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureSecondaries) == EProfilerException.PureSecondaries)
+                                                {
+                                                    chkSecondaries.Checked = true;
+                                                    chkSCM.Checked = true;
+                                                    chkSCY.Checked = true;
+                                                    chkSMY.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.BlackOverprint) == EProfilerException.BlackOverprint)
+                                                {
+                                                    chkBlackOverPrint.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.ClipToEdge) == EProfilerException.ClipToEdge)
+                                                {
+                                                    chkBorderClipping.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.PureWhite) == EProfilerException.PureWhite)
+                                                {
+                                                    chkWhite.Checked = true;
+                                                }
+                                                if ((exception & EProfilerException.FullBlack) == EProfilerException.FullBlack)
+                                                {
+                                                    chk400Black.Checked = true;
+                                                }
+                                            }
+                                            break;
+
+                                            #endregion
+                                        case EProfilerOption.DLExceptionRange:
+                                            rdsRange.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            txtRange.Text = x.ProfilerOptionValue;
+                                            break;
+                                        case EProfilerOption.ProfileType:
+                                        case EProfilerOption.ProfileSize:
+                                        case EProfilerOption.ProfileFormat:
+                                        case EProfilerOption.PerceptualCompression2:
+                                        case EProfilerOption.PerceptualCompressionMergeFactor:
+                                        case EProfilerOption.MeasurementCorrection:
+                                        case EProfilerOption.BrightenerCorrection:
+                                        case EProfilerOption.AdaptionType:
+                                        case EProfilerOption.WhiteXYZCorrection:
+                                        case EProfilerOption.GridA2B0:
+                                        case EProfilerOption.GridA2B1:
+                                        case EProfilerOption.GridA2B2:
+                                        case EProfilerOption.GridB2A0:
+                                        case EProfilerOption.GridB2A1:
+                                        case EProfilerOption.GridB2A2:
+                                        case EProfilerOption.GridGamut:
+                                        case EProfilerOption.DLBypassBlack:
+                                        case EProfilerOption.DLOptimizationLimit:
+                                        case EProfilerOption.DLOptimizeExceptions:
+                                        case EProfilerOption.DLOptimizeInkRange:
+                                        case EProfilerOption.DLApplyInkSave:
+                                        case EProfilerOption.DLReplaceCMY:
+                                        case EProfilerOption.DLAddBlack:
+                                        case EProfilerOption.DLAddCMY:
+                                        case EProfilerOption.DLType:
+                                        case EProfilerOption.Flags:
+                                        case EProfilerOption.Attributes0:
+                                        case EProfilerOption.Attributes1:
+                                        case EProfilerOption.SaveProfilerInfo:
+                                        case EProfilerOption.SaveProfilerData:
+                                        case EProfilerOption.Version:
+                                            break;
+                                    }
+                                });
+            }
+        }
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
@@ -80,17 +241,46 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Methods
+        private void ClearAdvancedOptionsControls()
+        {
+            cmbRendering.SelectedValue = "-1";
+            txtBlackPointCustom.Text = string.Empty;
+            txtMaxInk.Text = string.Empty;
+            rdsMode.Value = rdsMode.MinimumValue;
+            txtMode.Text = string.Empty;
+            rdsBlackStart.Value = rdsBlackStart.MinimumValue;
+            txtBlackStart.Text = string.Empty;
+            rdsBlackWidth.Value = rdsBlackWidth.MinimumValue;
+            txtBlackWidth.Text = string.Empty;
+            chkTriplex.Checked =
+                chkDuplex.Checked =
+                chkGray.Checked =
+                chk100Black.Checked =
+                chk100CMY.Checked =
+                chk100RGB.Checked =
+                chkMaxCMY.Checked =
+                chkMaxRGB.Checked =
+                chkPrimaries.Checked =
+                chkPC.Checked =
+                chkPM.Checked =
+                chkPY.Checked =
+                chkSecondaries.Checked =
+                chkSCM.Checked =
+                chkSCY.Checked =
+                chkSMY.Checked =
+                chkBlackOverPrint.Checked =
+                chkBorderClipping.Checked =
+                chkWhite.Checked =
+                chk400Black.Checked = false;
+            rdsRange.Value = rdsRange.MinimumValue;
+            txtRange.Text = string.Empty;
+        }
+        #endregion
+
         #region IViewDeviceFamilyProfilerOption Members
         public short DeviceFamilyId { get; set; }
         public List<DeviceFamilyProfilerOption> ProfileOption { get; set; }
         #endregion
-
-        protected void cmbSelectedPresets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ViewState[_vsDeviceFamilyProfilerOption] != null)
-            {
-                txtProfileDescription.Text = ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue).ProfilerOptionsDesc;
-            }
-        }
     }
 }

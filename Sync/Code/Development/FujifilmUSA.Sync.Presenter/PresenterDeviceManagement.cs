@@ -83,6 +83,14 @@ namespace FujifilmUSA.Sync.Presenter
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
             _viewAddDeviceManagement.Licenses = miscDataBusiness.GetLicenseList(_viewAddDeviceManagement.BranchId);
+
+            if (_viewAddDeviceManagement.Licenses.Count == 1)
+            {
+                var licenseBusiness = BusinessFactory<ILicenseBusiness>.CreateObject();
+                licenseBusiness.ErrorOccured += _viewAddDeviceManagement.ErrorOccured;
+                _viewAddDeviceManagement.License =
+                    licenseBusiness.GetLicense(_viewAddDeviceManagement.Licenses.First().Key, _viewAddDeviceManagement.CurrentUserId).FirstOrDefault();
+            }
         }
         public void GetDeviceFamilyList()
         {

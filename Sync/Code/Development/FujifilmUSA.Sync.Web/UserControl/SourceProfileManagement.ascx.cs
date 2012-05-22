@@ -59,9 +59,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (e.CommandName)
             {
                 case "SourceProfile":
+                    string ProfileName = e.Item.OwnerTableView.DataKeyValues[e.Item.ItemIndex]["ProfileName"] + ".icc";
                     SourceProfile.SourceProfileId = Convert.ToInt16(e.CommandArgument);
                     _presentersourceprofile.GetIccProfileBySourceProfile();
-                    Utilities.DownloadFile(SourceProfile.Profile, "Profile.icc");                        
+                    Utilities.DownloadFile(SourceProfile.Profile, ProfileName);                        
                     break;
                 case "ClearFilter":
                     foreach (GridColumn column in rgSourceProfile.MasterTableView.Columns)

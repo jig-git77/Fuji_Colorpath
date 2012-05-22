@@ -106,7 +106,7 @@
 
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
 
-                <MasterTableView DataKeyNames="SourceProfileID">
+                <MasterTableView DataKeyNames="SourceProfileID,ProfileName">
                     <Columns>
 
                         <telerik:GridTemplateColumn 
@@ -200,7 +200,7 @@
                                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Source Profile"
                                                         AlternateText="Delete" ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSourceProfile();"
                                                         CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
-                                                        CommandName="Delete" />
+                                                        CommandName="Delete" Visible="false" />
                                                 </div>
                                                 <div class="clear">
                                                 </div>

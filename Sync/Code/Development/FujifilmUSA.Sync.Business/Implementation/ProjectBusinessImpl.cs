@@ -41,7 +41,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
                                           SourceProfile = new SourceProfile()
                                                               {
-                                                                  SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID")
+                                                                  SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
+                                                                  ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
                                                               },
                                           DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption")
                                       };
@@ -100,9 +101,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         int index = 0;
                         project.OptimizeRuns.ForEach(x =>
                                                          {
+                                                             x.LastDlpName = (index == 0) ? string.Empty : project.OptimizeRuns[index - 1].DlpName;
                                                              x.DlpName = string.Format("{0} DLP {1}.icc",
                                                                                        project.ProjectName,
                                                                                        index++.ToString("000"));
+
                                                          });
                         if (project.CurrDlpId > 0)
                         {
@@ -119,7 +122,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return project;
         }
 
-        public List<Project> GetProjectsByDeviceId(int deviceId)
+        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             var objProjectList = new List<Project>();
             Common.ImplementBusinessLogic(
@@ -132,7 +135,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 "CPSync4D.GetProjectList",
                                 new object[]
                                         {
-                                            deviceId
+                                            deviceId, LicenseTypeID
                                         });
                     if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
                     {
@@ -143,7 +146,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                //DlpNo = DataReader.ReadInt(x, "DLPNO"),
+                                                LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
+                                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                                HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
                                                 SourceProfile = new SourceProfile()
                                                                     {
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
@@ -157,7 +162,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                             Colorant = DataReader.ReadString(x, "Colorant"),
                                                             RipSettings = DataReader.ReadString(x, "RipSettings")
                                                         },
-                                                Status = (EOptimizeRunStatus) DataReader.ReadInt(x, "ProjStatus"),
+                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                                                 CurrentDlpName = String.Format("{0} DLP {1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
@@ -307,7 +312,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartPreviewOnOptimizeRunId"));
             return (data == null || data == DBNull.Value) ? null : (byte[])data;
-        }  
+        }
 
         public byte[] GetSourceProfile(int projectId)
         {
@@ -466,7 +471,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
-                                                     new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()}
+                                                     new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()},
+                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = project.LicenseTypeID}
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -560,6 +566,33 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartData"));
             return chartData;
+        }
+
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, Guid tempProjectId)
+        {
+            var outParam = new Parameters() { ParameterName = "@TempProjectId", Size = 16, Type = DbType.Guid };
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure("CPSync4D.GetTempProjectInfoGuid",
+                                           new List<Parameters>()
+                                               {
+                                                   new Parameters() {ParameterName = "@ProjectName", Type = DbType.String, Size = 30, Value = projectName},
+                                                   new Parameters() {ParameterName = "@Media", Type = DbType.String, Size = 30, Value = media},
+                                                   new Parameters() {ParameterName = "@Colorant", Type = DbType.String, Size = 30, Value = colorant},
+                                                   new Parameters() {ParameterName = "@RipSettings", Type = DbType.String, Size = 30, Value = ripSettings},
+                                                   new Parameters() {ParameterName = "@TempProjectIdIN", Type = DbType.Guid, Size = 16, Value = tempProjectId}
+                                               },
+                                           new List<Parameters>()
+                                               {
+                                                   outParam
+                                               }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_StoreTempararyProjectInformation"));
+            if (outParam.Value != null)
+            {
+                tempProjectId = Guid.Parse(outParam.Value.ToString());
+            }
+            return tempProjectId;
         }
 
         public List<Illuminant> GetIlluminantList()

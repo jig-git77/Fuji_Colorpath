@@ -2,6 +2,7 @@
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddBranchManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer" TagPrefix="ucValidationContainer" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -22,6 +23,31 @@
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                             <table>
+                                 <tr>
+                                <td align="right">
+                                     <span style="font-weight: bold;">Region<span style="color: Red;">*</span>
+                                        </span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td>
+                                    <div style="float: left;">
+                                        <asp:DropDownList ID="cmbRegion" runat="server" DataValueField="Key" DataTextField="Value"
+                                            CssClass="select" Width="400px" AutoPostBack="true" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div style="float: left">
+                                        <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
+                                            ForeColor="Red" ValidationGroup="vgAddBranch" InitialValue="0">
+                                            <ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
+                                                ValidationMsg="Please select region." Size="200" />     
+                                        </asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                                </tr>
                                 <tr>
                                     <td align="right">
                                         <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
@@ -39,8 +65,7 @@
                                             <asp:RequiredFieldValidator ID="rfvcompanyName" runat="server" Display="Dynamic"
                                                 ControlToValidate="cmbCompanyName" ForeColor="Red" ValidationGroup="vgAddBranch">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcCompanyContainer" runat="server"
-                                                    ValidationMsg="Please select company." Size="200" />
-                                            </asp:RequiredFieldValidator>
+                                                    ValidationMsg="Please select company." Size="200" /></asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -61,8 +86,7 @@
                                             <asp:RequiredFieldValidator ID="rfvBranchName" runat="server" Display="Dynamic" ControlToValidate="txtBranchName"
                                                 ForeColor="Red" ValidationGroup="vgAddBranch">
                                                 <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
-                                                    ValidationMsg="Please provide branch name." Size="200" />
-                                            </asp:RequiredFieldValidator>
+                                                    ValidationMsg="Please provide branch name." Size="200" /> </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -83,8 +107,25 @@
                                             <asp:RequiredFieldValidator ID="rfvLocation" runat="server" Display="Dynamic" ControlToValidate="txtLocation"
                                                 ForeColor="Red" ValidationGroup="vgAddBranch">
                                                 <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                    ValidationMsg="Please provide location." Size="200" />
-                                            </asp:RequiredFieldValidator>
+                                                    ValidationMsg="Please provide location." Size="200" /> </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;">Support ID</span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:TextBox ID="txtSupportID" runat="server" MaxLength="50" Width="400px" Height="19px" onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                        </div>
+                                        <div style="float: left">
+                                           
                                         </div>
                                         <div class="clear">
                                         </div>

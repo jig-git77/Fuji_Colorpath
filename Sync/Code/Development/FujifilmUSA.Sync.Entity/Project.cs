@@ -21,5 +21,8 @@ namespace FujifilmUSA.Sync.Entity
         public int DeviceFamilyProfilerOptionId { get; set; }
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
         public EOptimizeRunStatus Status { get; set; }
+        public int LicenseTypeID { get; set; }
+        public int TotalRuns { get; set; }
+        public bool HasDLP { get; set; }
     }
 }

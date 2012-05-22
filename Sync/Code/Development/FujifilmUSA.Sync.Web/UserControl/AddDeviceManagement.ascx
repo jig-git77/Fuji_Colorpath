@@ -3,6 +3,7 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<script src="JS/CommonFunctions.js?version=4" type="text/javascript"></script>
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -23,7 +24,7 @@
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -48,7 +49,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
@@ -71,8 +72,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
+                            <tr style="display: none;">
+                                <td align="right">
                                     <span style="font-weight: bold;">License Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -96,7 +97,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Device Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
@@ -118,7 +119,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Device Family<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -142,7 +143,99 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">No. of Projects<span style="color: Red;">*</span>
+                                    </span>
+                                </td>
                                 <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                    <div style="line-height: 30px; overflow-y: scroll; height: 130px; border-width: 1px;
+                                                                    border-style: solid; width: 220px">
+                                    <table width="100%">
+                                        <tr>
+                                            <td style="width:130px;">
+                                                <span>
+                                                    <%=ELicenseSync1DText%> : </span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtSync1D" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvSync1D" runat="server" Display="Dynamic" ControlToValidate="txtSync1D"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
+                                                        <ucValidationContainer:ValidationContainer ID="rfvNoOfProjectsContainer" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <%=ELicenseDlpText%> : </span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtDlp" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
+                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseInkOptimizationText%> : </span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtInkOpt" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvInkOpt" runat="server" Display="Dynamic" ControlToValidate="txtInkOpt"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
+                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer3" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <%=ELicenseVarificationText%> : </span>
+                                            </td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txtVarification" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfvVarification" runat="server" Display="Dynamic"
+                                                        ControlToValidate="txtVarification" ForeColor="Red" ValidationGroup="vgAddDevice">
+                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr> 
+                                    </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
                                     <span style="font-weight: bold;">Is Active? </span>
                                 </td>
                                 <td>

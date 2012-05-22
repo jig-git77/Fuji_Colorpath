@@ -99,19 +99,27 @@
                     <MasterTableView DataKeyNames="BranchID,CompanyID,BranchName,Location,IsActive">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="BranchName" AllowFiltering="true" HeaderText="Branch Name"
-                                UniqueName="BranchName" SortExpression="BranchName" FilterControlWidth="200"
-                                HeaderStyle-Width="200" ItemStyle-CssClass="breakWord200" ItemStyle-Width="200"
+                                UniqueName="BranchName" SortExpression="BranchName" FilterControlWidth="150"
+                                HeaderStyle-Width="150" ItemStyle-CssClass="breakWord200" ItemStyle-Width="150"
                                 ItemStyle-Wrap="true" ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Location" AllowFiltering="true" HeaderText="Location"
-                                UniqueName="Location" SortExpression="Location" HeaderStyle-Width="200" FilterControlWidth="200"
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
+                                UniqueName="Location" SortExpression="Location" HeaderStyle-Width="100" FilterControlWidth="100"
+                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="100" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLocation" runat="server" Text='<%# Eval("Location") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                              <telerik:GridTemplateColumn DataField="SupportID" AllowFiltering="true" HeaderText="SupportID"
+                                UniqueName="SupportID" SortExpression="SupportID" HeaderStyle-Width="50" FilterControlWidth="50"
+                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="50" ItemStyle-Wrap="true"
+                                ShowFilterIcon="true">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSupportID" runat="server" Text='<%# Eval("SupportID") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Company.CompanyName" AllowFiltering="true"
@@ -120,6 +128,14 @@
                                 ItemStyle-Width="200" ItemStyle-Wrap="true" ShowFilterIcon="true" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                             <telerik:GridTemplateColumn DataField="Region.RegionName" AllowFiltering="true"
+                                HeaderText="Region" UniqueName="Region" SortExpression="Region.RegionName"
+                                HeaderStyle-Width="50" FilterControlWidth="50" ItemStyle-CssClass="breakWord200"
+                                ItemStyle-Width="50" ItemStyle-Wrap="true" ShowFilterIcon="true" DataType="System.String">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblRegion" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"

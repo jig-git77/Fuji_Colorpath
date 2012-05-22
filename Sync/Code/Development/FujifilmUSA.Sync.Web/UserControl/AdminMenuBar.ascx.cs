@@ -10,13 +10,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             //role base permission
-            lbtnCompany.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
-            lbtnBranch.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageBranch);
-            lbtnUser.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUser);
-            lbtnSourceProfile.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
-            lbtnDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
-            ltnLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
-            lbtnMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
+            if (SessionManager.Instance.CurrentUser != null)
+            {
+                lbtnCompany.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageCompany);
+                lbtnBranch.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageBranch);
+                lbtnUser.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageUser);
+                lbtnSourceProfile.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+                lbtnDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
+                ltnLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
+                lbtnMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
+                //lbtnRefChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+            }
         }
         #endregion
 
@@ -57,6 +61,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnMeasurementDevice_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("MeasurementDeviceList.aspx");
+        }
+
+        protected void lbtnRefChart_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ReferenceChartManagement.aspx");
+        }
+        protected void lbtProfileMgmt_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ProfileManagement.aspx");
         }
     }
 }

@@ -36,8 +36,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
-            lblHeader.Text = "Add Branch"; 
-            Bindcompany();
+            lblHeader.Text = "Add Branch";
+            BindRegionDropDown();
             if (Request.QueryString["BranchId"] != null)
             {
                 SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
@@ -48,34 +48,53 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+
+        private void BindRegionDropDown()
+        {
+            _presenterBranchManagement.RegionList();
+            if (!IsErrorOccured)
+            {
+                cmbRegion.DataSource = RegionList;
+                cmbRegion.DataBind();
+                cmbRegion.Items.Insert(0, new ListItem("-- Select Region --", "0"));
+            }
+        }
+
         private void Bindcompany()
         {
-            Compnaies = new Dictionary<int, string>();
-            _presenterBranchManagement.GetCompanies();
+            Companies = new Dictionary<int, string>();
+            RegionId = Convert.ToInt32(cmbRegion.SelectedValue);
+            _presenterBranchManagement.GetCompaniesByRegion();
             if (!IsErrorOccured)
             {
                 cmbCompanyName.DataTextField = "Value";
                 cmbCompanyName.DataValueField = "Key";
-                cmbCompanyName.DataSource = Compnaies;
+                cmbCompanyName.DataSource = Companies;
                 cmbCompanyName.DataBind();
                 cmbCompanyName.Items.Insert(0, new ListItem("--Select--", string.Empty));
             }
         }
         private void SaveBranch()
         {
+            int SupportID = 1;
+            if (txtSupportID.Text != "")
+            {
+                SupportID = Convert.ToInt32(txtSupportID.Text);
+            }
             Branch = new Branch
                          {
                              BranchName = txtBranchName.Text,
                              Location = txtLocation.Text,
                              CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue),
+                             SupportID= SupportID,
                              IsActive = chkIsActive.Checked
                          };
-            if (BId == 0) // Add New company
+            if (BId == 0) // Add New branch
             {
                 _presenterBranchManagement.InsertBranch();
                 if (IsErrorOccured) return;
             }
-            else // Edit New company
+            else // Edit New branch
             {
                 Branch.BranchId = BId;
                 _presenterBranchManagement.UpdateBranch();
@@ -92,13 +111,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BId = branchId;
                 txtBranchName.Text = Branch.BranchName;
                 txtLocation.Text = Branch.Location;
+                cmbRegion.SelectedValue = Convert.ToString(Branch.Region.RegionId);
+                cmbRegion_SelectedIndexChanged(null, null);
                 cmbCompanyName.SelectedValue = Branch.CompanyId.ToString();
                 chkIsActive.Checked = Branch.IsActive;
+                txtSupportID.Text = Branch.SupportID.ToString();               
             }
         }
         #endregion
 
         #region Control Events
+
+        protected void cmbRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Bindcompany();
+        }
+
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
@@ -108,7 +136,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Implement Interface
         public Branch Branch { get; set; }
-        public Dictionary<int, string> Compnaies { get; set; }
+        public Dictionary<int, string> Companies { get; set; }
+        public Dictionary<int, string> RegionList { get; set; }
+        public int RegionId { get; set; }
         #endregion
+
+      
     }
 }

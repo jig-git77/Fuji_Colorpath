@@ -18,11 +18,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region "Control Events"
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (!IsPostBack)
             {
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
                 {
                     txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
+                    Page.Title = "Save As";
                 }
             }
         }
@@ -30,6 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
 

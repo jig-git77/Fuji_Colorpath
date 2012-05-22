@@ -9,12 +9,12 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IOptimizeRunBusiness Members
 
-        public void CreateOptimizeRun(int projectId, int status, int closeStatus, DateTime startDateTime)
+        public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
         {
 
         }
 
-        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription)
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
 
         }
@@ -24,12 +24,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
-        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description)
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
         {
 
         }
 
-        public void CloseOptimizeRun(int optimizeRunId, int status, DateTime endDateTime)
+        public void CloseOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
         {
 
         }
@@ -42,6 +42,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         public int GetLastOptimizeRunId(int projectId)
         {
             return 0;
+        }
+
+        public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, string RunStatus)
+        {
+
+        }
+
+        public string GetLastRunStatus(int OptimizeRunID)
+        {
+            return "";
         }
 
         #endregion

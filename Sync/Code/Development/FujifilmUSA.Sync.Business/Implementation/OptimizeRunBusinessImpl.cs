@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IOptimizeRunBusiness Members
 
-        public void CreateOptimizeRun(int projectId, int status, int closeStatus, DateTime startDateTime)
+        public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -25,14 +25,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         new object[]
                             {
                                 projectId,
-                                status,
-                                closeStatus,
+                                status,                               
                                 startDateTime
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
         }
 
-        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription)
+        public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, string RunStatus)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "CPSync4D.DeleteOptimizeRun",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                ProjectID,
+                                MasterRunID,
+                                RunStatus
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
+        }
+
+        public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -89,7 +106,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         optimizeRunId,
                                         response.DestinationProfile.ProfileData,
-                                        response.DeviceLinkProfile.ProfileData
+                                        response.DeviceLinkProfile.ProfileData,
+                                        status,
+                                        endDateTime
                                     });
                     }
                 },
@@ -119,7 +138,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description)
+        public void OptimizeDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string description, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -157,13 +176,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId);
                         }
                         DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
-                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData });
+                                                                    new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeDeviceLinkProfile"));
         }
 
-        public void CloseOptimizeRun(int optimizeRunId, int status, DateTime endDateTime)
+        public void CloseOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () => DataAccessFactory.
@@ -173,6 +192,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               new object[]
                                   {
                                       optimizeRunId,
+                                      ProjectId,
+                                      MasterRunId,
                                       status,
                                       endDateTime
                                   }),
@@ -218,6 +239,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizeRunId"));
             return optimizeRunId;
         }
+
+
+        public string GetLastRunStatus(int OptimizeRunId)
+        {
+            string LastRunStatus = "";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    LastRunStatus =
+                        Convert.ToString(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "CPSync4D.GetLastRunStatus",
+                                    new object[]
+                                            {
+                                                OptimizeRunId
+                                            }));
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
+            return LastRunStatus;
+        }
+
 
         #endregion
 

@@ -2,7 +2,6 @@
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Linq;
-
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Collections.Generic;
@@ -13,6 +12,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddUserManagement : BaseControl, IViewAddUserManagement
     {
         #region Declaration
+
+        private const string ResetPasswordText = "Reset Password";
+        private const string ActivateUserText = "Activate User Again";
         private PresenterUserManagement _presenterUserManagement;
         public int UserId
         {
@@ -44,6 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lblHeader.Text = "Edit User";
                     UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                     SetUser();
+                }
+                else
+                {
+                    trPasswordReset.Visible = false;
                 }
             }
         }
@@ -126,65 +132,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        private void AssingeBranch()
-        {
-            UserInformation = new Entity.User();
-            if (UserId != 0)
-            {
-                UserInformation.UserId = UserId;
-                _presenterUserManagement.GetUser();
-                if (!IsErrorOccured)
-                {
-                    foreach (ListItem branch in chkUserBranch.Items)
-                    {
-                        branch.Selected = UserInformation.UserBranches.Any(p => p.BranchId.Equals(Convert.ToInt32(branch.Value)));
-                    }
-                }
-            }
-        }
         private void SaveUser()
         {
-            //if (cmbCompany.SelectedIndex == 0)
-            //{
-            //    fujiStatusbar.DisplayMessage("Please select company.", false);
-            //    return;
-            //}
-            //if (!chkUserBranch.Items.Cast<ListItem>().ToList().Any(p => p.Selected))
-            //{
-            //    fujiStatusbar.DisplayMessage("Please select branch.", false);
-            //    return;
-            //}
-
-            //if (txtAdminPassWord.Text.Equals(string.Empty))
-            //{
-            //    fujiStatusbar.DisplayMessage("Please select password.", false);
-            //    return;
-            //}
-            //if (txtConfirmPass.Text.Equals(string.Empty))
-            //{
-            //    fujiStatusbar.DisplayMessage("Please select confirm password.", false);
-            //    return;
-            //}
-
-            //if (!txtAdminPassWord.Text.Equals(txtConfirmPass.Text, StringComparison.CurrentCultureIgnoreCase))
-            //{
-            //    fujiStatusbar.DisplayMessage("Password and Comfirm Password are not same.", false);
-            //    return;
-            //}
-
-            //if (cmbRole.SelectedIndex == 0)
-            //{
-            //    fujiStatusbar.DisplayMessage("Please select role.", false);
-            //    return;
-            //}
-
             UserInformation = new User
                                   {
                                       FirstName = txtFirstName.Text.Trim(),
                                       LastName = txtLastName.Text.Trim(),
                                       Email = txtEmail.Text.Trim(),
                                       LoginId = txtAdminUserName.Text.Trim(),
-                                      LoginPass = txtAdminPassWord.Text.Trim(),
                                       IsActive = chkIsActive.Checked,
                                       LastModifiedUserId = SessionManager.Instance.CurrentUser.UserId,
                                       Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) },
@@ -254,12 +209,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtLastName.Text = UserInformation.LastName;
                 txtEmail.Text = UserInformation.Email;
                 txtAdminUserName.Text = UserInformation.LoginId;
-                txtAdminPassWord.Text = txtConfirmPass.Text = UserInformation.LoginPass;
-                txtAdminPassWord.Attributes.Add("Value", UserInformation.LoginPass);
-                txtConfirmPass.Attributes.Add("Value", UserInformation.LoginPass);
                 chkIsActive.Checked = UserInformation.IsActive;
                 cmbRole.SelectedValue = UserInformation.Role.RoleId.ToString();
                 cmbRole_SelectedIndexChanged(null, null);
+                lnkPasswordReset.Text = UserInformation.IsActivated ? ResetPasswordText : ActivateUserText;
+                lnkPasswordReset.Attributes.Add("authKey", UserInformation.AuthenticationKey.ToString());
 
                 ManageRoleBaseUI();
 
@@ -365,22 +319,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindCompanies();
         }
 
-        protected void lbtnShow_Click(object sender, EventArgs e)
-        {
-            if (txtAdminPassWord.TextMode == TextBoxMode.Password)
-            {
-                txtAdminPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.SingleLine;
-            }
-            else
-            {
-                string password = txtAdminPassWord.Text;
-                string confirmpassword = txtConfirmPass.Text;
-                txtAdminPassWord.TextMode = txtConfirmPass.TextMode = TextBoxMode.Password;
-                txtAdminPassWord.Attributes.Add("Value", password);
-                txtConfirmPass.Attributes.Add("Value", confirmpassword);
-            }
-        }
-
         protected void cmbCompany_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindBranch();
@@ -389,6 +327,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SaveUser();
+        }
+
+        protected void lnkPasswordReset_Click(object sender, EventArgs e)
+        {
+            UserInformation = new User { UserId = UserId };
+            _presenterUserManagement.GetUser();
+            if (!IsErrorOccured)
+            {
+                UpdateType = UserInformation.IsActivated ? UserAuthenticationUpdateType.ForceReSet : UserAuthenticationUpdateType.FirstTimeSet;
+                _presenterUserManagement.SendEmailToUser();
+                if (!IsErrorOccured)
+                {
+                    fujiStatusbar.DisplayMessage("Email has been sent to user!", false);
+                }
+            }
         }
         #endregion
 
@@ -400,6 +353,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> Regions { get; set; }
         public Dictionary<int, string> UserRoleList { get; set; }
         public int RegionId { get; set; }
+        public UserAuthenticationUpdateType UpdateType { get; set; }
         #endregion
     }
 }

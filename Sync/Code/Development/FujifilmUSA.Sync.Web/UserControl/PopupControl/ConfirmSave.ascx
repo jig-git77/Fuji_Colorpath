@@ -21,6 +21,16 @@
         return oWindow;
     }
 
+    function CheckOptRunLimit() {
+         if(jQuery("input[id*='hdOptRunLimit']").val() >= <%= ConfigurationSettings.AppSettings["OptimizeRunLimit"] %>)
+            {
+                alert("You reach your limit of adding Optimization Runs, Now you have to certify this run.");
+                return false;
+            }
+            else
+                return true;
+   }
+
 </script>
 
 <div id="divConfirmSave" style="display: block; margin: 3px;" class="contantbox tabcontant">
@@ -44,7 +54,7 @@
                         <div class="buttonright" style="padding-left: 3px">
                             <asp:UpdatePanel ID="upOptimize" runat="server">
                                 <ContentTemplate>
-                                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click">
+                                    <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click" OnClientClick="javascript: return CheckOptRunLimit();">
                                                 <span> No, Optimize </span>
                                     </asp:LinkButton>
                                     
@@ -53,7 +63,7 @@
                         </div>
                         <div class="buttonright">
                             <asp:LinkButton ID="lbtnYes" runat="server" CssClass="gray_bt" OnClick="lbtnYes_Click">
-                <span> Yes, Close </span>
+                <span> Yes, Certify </span>
                             </asp:LinkButton>
                         </div>
                     </div>
@@ -66,11 +76,11 @@
                     <table cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="font-weight: bold;">
-                                Close:&nbsp;
+                                Certify:&nbsp;
                             </td>
                             <td>
                                 <p style="padding-top: 7px;">
-                                    Close sets the state of this DLP to Closed and is considered a confirmation that
+                                    Certify sets the state of this DLP to Certified and is considered a confirmation that
                                     your are satisfied with the colormatch.
                                 </p>
                             </td>
@@ -119,3 +129,5 @@
         </div>
     </ProgressTemplate>
 </asp:UpdateProgress>
+
+<asp:HiddenField ID="hdOptRunLimit" runat="server" Value="0" />

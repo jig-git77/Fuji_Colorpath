@@ -2,6 +2,8 @@
 using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using System;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter
 {
@@ -23,15 +25,16 @@ namespace FujifilmUSA.Sync.Presenter
                     _viewAnalyze.OptimizeRunId,
                     _viewAnalyze.MeasurementIds,
                     _viewAnalyze.DestinationProfileDescription,
-                    _viewAnalyze.DlpDescription);
-
+                    _viewAnalyze.DlpDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed), 
+                    DateTime.Now);
         }
 
         public void GetMeasurementsOnRunId()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
+            _viewAnalyze.MeasurementIds = measurementBusiness.GetMeasurementsOnRunId(_viewAnalyze.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();           
         }
 
         public void GetAnalyzeChartMeasurement()
@@ -53,6 +56,13 @@ namespace FujifilmUSA.Sync.Presenter
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.OptimizeRunId);
+        }
+
+        public void GetPatchDetailsofMeasurement()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.PatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.OptimizeRunId,_viewAnalyze.MeasurementId);
         }
     }
 }

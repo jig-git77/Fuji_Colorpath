@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> SourceProfile { get; set; }
         int DeviceId { get; set; }
         int ProjectId { get; set; }
+        int LicenseTypeID { get; set; }
     }
 }

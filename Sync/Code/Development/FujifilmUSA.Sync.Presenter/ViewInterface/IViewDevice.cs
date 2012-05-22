@@ -17,6 +17,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> LicenseList { get; set; }
         Dictionary<int, string> InstrumentTypeList { get; set; }
         List<Device> DeviceListById { get; set; }
-
+        Device SelectedDevice { get; set; }
+        int DeviceId { get; set; }     
     }
 }

@@ -38,6 +38,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<MeasurementPatch_AvgDelta>();
         }
+
+        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId)
+        {
+            return new List<MeasurementPatchDetails>();
+        }
+
         #endregion
 
         #region ITaskBase Members

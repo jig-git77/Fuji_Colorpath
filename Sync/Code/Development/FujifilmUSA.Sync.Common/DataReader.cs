@@ -401,6 +401,31 @@ namespace FujifilmUSA.Sync.Common
 			}
 			return dRetVal;
 		}
+
+        /// <summary>
+        /// To read a guid column value from datarow.
+        /// </summary>
+        /// <param name="objRow"></param>
+        /// <param name="columnName"></param>
+        /// <returns>double</returns>
+        public static Guid ReadGuid(DataRow objRow, string columnName)
+        {
+            var dRetVal = new Guid();
+            try
+            {
+
+                if (objRow.IsNull(columnName))
+                    return dRetVal;
+                else
+                    dRetVal = Guid.Parse(objRow[columnName].ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dRetVal;
+        }
+
 		/// <summary>
 		/// Verify for a DBNull in the parameter list  and change it to null.
 		/// </summary>

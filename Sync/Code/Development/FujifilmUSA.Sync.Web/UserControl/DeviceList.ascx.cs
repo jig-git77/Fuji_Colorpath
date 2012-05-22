@@ -27,7 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-                BindCompanyDropDown();
+                BindCompanyDropDown();              
             }
         }
         #endregion
@@ -57,18 +57,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
                     break;
                 case "Select":
-                    SessionManager.Instance.CurrentDevice = new Device()
-                                                          {
-                                                              DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
-                                                              DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
-                                                              DeviceFamily = new DeviceFamily()
-                                                                                 {
-                                                                                     DeviceFamilyId =
-                                                                                         Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
-                                                                                     DeviceFamilyDesc =
-                                                                                         ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
-                                                                                 }
-                                                          };
+
+                    DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId"));
+                    CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+                    _presenterdevice.DeviceListByDeviceId();
+
+                    SessionManager.Instance.CurrentDevice = SelectedDevice;
+                        //new Device()
+                        //                                  {
+                        //                                      DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
+                        //                                      DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
+                        //                                      DeviceFamily = new DeviceFamily()
+                        //                                                         {
+                        //                                                             DeviceFamilyId =
+                        //                                                                 Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
+                        //                                                             DeviceFamilyDesc =
+                        //                                                                 ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
+                        //                                                         },
+                        //                                    LicenseTypeProject=DeviceListById
+                        //                                  };
+                    SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
                     Response.RedirectPermanent("OperationSelection.aspx");
                     break;
             }
@@ -76,12 +84,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-
             BindDeviceList();
         }
         #endregion
 
         #region Method
+
         private void BindCompanyDropDown()
         {
             _presenterdevice.CompanyList();
@@ -91,22 +99,40 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataBind();
             }
             cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
+
+            if (!Page.IsPostBack)
+            {
+                if (SessionManager.Instance.CurrentUser.UserCompany != null && SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
+                {
+                    cmbCompany.SelectedValue = SessionManager.Instance.CurrentUser.UserCompany.CompanyId.ToString();
+                }
+            }
             cmbCompany_SelectedIndexChanged(null, null);
         }
+
         private void BindBranchDropDown()
         {
-            this.CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue)
-                                 ? 0
-                                 : Convert.ToInt32(cmbCompany.SelectedValue);
+            this.CompanyId = 
+                            string.IsNullOrEmpty(cmbCompany.SelectedValue)? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             _presenterdevice.BranchList();
-            if (!IsErrorOccured)
+            if (!IsErrorOccured)            
             {
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
             }
             cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+
+            if (CompanyId > 0)
+            {
+                if (SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count > 0 && SessionManager.Instance.CurrentUser.UserBranches[0].BranchId > 0)
+                {
+                    cmbBranch.SelectedValue = SessionManager.Instance.CurrentUser.UserBranches[0].BranchId.ToString();
+                }
+            }
+
             cmbBranch_SelectedIndexChanged(null, null);
         }
+
         private void BindDeviceList()
         {
             _presenterdevice.DeviceListById();
@@ -130,6 +156,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> LicenseList { get; set; }
         public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
+        public int DeviceId { get; set; }
+        public Device SelectedDevice { get; set; }
         #endregion
     }
 }

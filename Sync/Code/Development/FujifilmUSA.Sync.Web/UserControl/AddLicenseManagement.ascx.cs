@@ -12,8 +12,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddLicenseManagement : BaseControl, IViewAddLicenseManagement
     {
-        private PresenterLicenseManagement _presenterLicenseManagement;
         #region Declaration
+        private PresenterLicenseManagement _presenterLicenseManagement;
         private int LId
         {
             get
@@ -49,17 +49,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         private void BindLicenseType()
         {
-            cmbLicenseType.Items.Clear();
-            LicenseTypes = new Dictionary<int, string>();
-            _presenterLicenseManagement.GetLicenseType();
-            if (!IsErrorOccured)
-            {
-                cmbLicenseType.DataTextField = "Value";
-                cmbLicenseType.DataValueField = "Key";
-                cmbLicenseType.DataSource = LicenseTypes;
-                cmbLicenseType.DataBind();
-                cmbLicenseType.Items.Insert(0, new ListItem("--Select License Type--", string.Empty));
-            }
+            chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
+            chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
+            chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
+            chkVarification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
         }
         private void Bindcompany()
         {
@@ -107,9 +100,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage("Please select branch.", false);
                 return;
             }
-            if (cmbLicenseType.SelectedIndex == 0)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkVarification.Checked)
             {
-                fujiStatusbar.DisplayMessage("Please select license type.", false);
+                fujiStatusbar.DisplayMessage("Please select any one license type.", false);
                 return;
             }
 
@@ -118,18 +111,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                               Branch = new Branch()
                                             {
                                                 BranchId = Convert.ToInt32(cmbBranch.SelectedValue)
-                                            }
-                                 ,
-                              ActivationDate = Convert.ToDateTime(txtActivationDate.Text)
-                                 ,
-                              ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text)
-                                 ,
-                              LicenseDesc = txtLicenseDescription.Text
-                                 ,
-                              LicenseTypeId = Convert.ToInt16(cmbLicenseType.SelectedValue)
-                                 ,
+                                            },
+                              ActivationDate = Convert.ToDateTime(txtActivationDate.Text),
+                              ExpirationDate = Convert.ToDateTime(txtExpirationDate.Text),
+                              LicenseDesc = txtLicenseDescription.Text,
                               IsActive = chkIsActive.Checked
                           };
+            if (chkSync1D.Checked)
+                License.LicenseType.Add(ELicenseType.Sync1D);
+            if (chkDlp.Checked)
+                License.LicenseType.Add(ELicenseType.DLP);
+            if (chkInk.Checked)
+                License.LicenseType.Add(ELicenseType.InkOptimization);
+            if (chkVarification.Checked)
+                License.LicenseType.Add(ELicenseType.Verification);
+
             if (LId == 0) // Add New company
             {
                 _presenterLicenseManagement.InsertLicense();
@@ -153,7 +149,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.SelectedValue = License.Branch.CompanyId.ToString();
                 BindBranch();
                 cmbBranch.SelectedValue = License.BranchId.ToString();
-                cmbLicenseType.SelectedValue = License.LicenseTypeId.ToString();
+                License.LicenseType.ForEach(x=>
+                                                {
+                                                    switch (x)
+                                                    {
+                                                        case ELicenseType.Sync1D:
+                                                            chkSync1D.Checked = true;
+                                                            break;
+                                                        case ELicenseType.DLP:
+                                                            chkDlp.Checked = true;
+                                                            break;
+                                                        case ELicenseType.InkOptimization:
+                                                            chkInk.Checked = true;
+                                                            break;
+                                                        case ELicenseType.Verification:
+                                                            chkVarification.Checked = true;
+                                                            break;
+                                                    }
+                                                });
                 txtLicenseDescription.Text = License.LicenseDesc;
                 txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("MM/dd/yyyy");
                 txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("MM/dd/yyyy");
@@ -176,7 +189,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Implement Interface
         public License License { get; set; }
-        public Dictionary<int, string> LicenseTypes { get; set; }
         public int CompanyId { get; set; }
         public Dictionary<int, string> Compnaies { get; set; }
         public Dictionary<int, string> Branches { get; set; }

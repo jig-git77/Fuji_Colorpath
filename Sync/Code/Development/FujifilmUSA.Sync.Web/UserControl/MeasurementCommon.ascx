@@ -148,6 +148,7 @@
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
+<asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
@@ -214,6 +215,11 @@
                     MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
+                if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ConfigurationSettings.AppSettings["MeasurementsLimit"] %>)
+                {
+                    MeasurementDialog("You reach your limit of adding measurements in one Optimization Run", "Limit Reach");
+                    return false;
+                }
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
@@ -277,6 +283,7 @@
                 function (response) {
                     bindMeasurementData();
                     StopProgressBrowserWindow();
+                    jQuery("[id*='lblMessage']").html("Status : " + "Measurement uploaded successfully.");
                 },
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
@@ -312,6 +319,7 @@
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
+                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//                       
                     }
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');

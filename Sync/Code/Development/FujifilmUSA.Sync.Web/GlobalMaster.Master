@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GlobalMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.GlobalMaster" %>
+
+<%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+
+<!DOCTYPE html>
+<html>
+
+<head id="Head1" runat="server">
+    <title>Fujifilm Color Path</title>
+    <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
+    <script src="JS/html5.js?version=4" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <section id="bodyWrapper"> 
+  <!--Start PageWrapper-->
+  <div class="curve_top">&nbsp;</div>
+    <section id="pageWrapper">
+         <header>
+            <section id="header">
+                <div class="logo">
+                    <a href="Login.aspx"><asp:Image runat="server" ID="imgLogo" ImageUrl="~/Images/logo.png" /></a> 
+               </div>        
+            </section>
+        </header>
+    <section id="containar">
+ 
+      <section id="contant" class="admin">
+          <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+      </section>
+      <div class="clear"></div>
+    </section>
+  </section>
+  <div class="curve_bottom">&nbsp;</div>
+  <!--End PageWrapper--> 
+  <uc1:Footer ID="ucFooter" runat="server" />
+</section>
+    </form>
+</body>
+</html>

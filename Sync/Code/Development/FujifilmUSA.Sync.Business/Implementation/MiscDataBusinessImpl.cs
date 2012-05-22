@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IMiscDataBusiness Members
 
-        public Dictionary<int, string> GetBranchList(int companyId,int currentUserId)
+        public Dictionary<int, string> GetBranchList(int companyId, int currentUserId)
         {
             var dstBranchList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dstRegionList;
         }
 
-        public Dictionary<int, string> GetCompaniesByRegion(int regionId,int currentUserId)
+        public Dictionary<int, string> GetCompaniesByRegion(int regionId, int currentUserId)
         {
             var dstCompnayList = new Dictionary<int, string>();
             Common.ImplementBusinessLogic(
@@ -252,6 +252,79 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLicenseTypeList"));
             return licenseTypeList;
+        }
+
+        public Dictionary<int, string> GetProjectTypeList()
+        {
+            var dstProjectTypeList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectTypeList = DataAccessFactory.Instance.GetDsResult("CP.GetProjectType");
+                    if (dsProjectTypeList != null && dsProjectTypeList.Tables.Count > 0)
+                    {
+                        dstProjectTypeList = (dsProjectTypeList.Tables[0].AsEnumerable().Select(
+                            projectType => new
+                            {
+                                Value = DataReader.ReadInt(projectType, "ProjectTypeID"),
+                                Text = DataReader.ReadString(projectType, "ProjectType")
+                            })).
+                            ToDictionary(projectType => projectType.Value, projectType => projectType.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTypeList"));
+            return dstProjectTypeList;
+        }
+
+        public Dictionary<int, string> GetSecurityQuestions()
+        {
+            var dstSecurityQuestionList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsSecurityQuestionList = DataAccessFactory.Instance.GetDsResult("CP.GetSecurityQuestions");
+                    if (dsSecurityQuestionList != null && dsSecurityQuestionList.Tables.Count > 0)
+                    {
+                        dstSecurityQuestionList = (dsSecurityQuestionList.Tables[0].AsEnumerable().Select(
+                            securityQuestion => new
+                            {
+                                Value = DataReader.ReadInt(securityQuestion, "SecurityQuestionId"),
+                                Text = DataReader.ReadString(securityQuestion, "SecurityQuestion")
+                            })).
+                            ToDictionary(projectType => projectType.Value, projectType => projectType.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTypeList"));
+            return dstSecurityQuestionList;
+        }
+
+        public List<Activity> GetPrintActivities(int RegionID)
+        {
+            var PrintActivities = new List<Activity>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsbranches = DataAccessFactory.Instance.GetDsResult("[CP].[GetPrintActivities]", new object[] { RegionID });
+                    if (dsbranches != null && dsbranches.Tables.Count > 0 && dsbranches.Tables[0].Rows.Count > 0)
+                    {
+                        PrintActivities = dsbranches.Tables[0].AsEnumerable().
+                            Select(x => new Activity()
+                            {
+                                CompanyID = DataReader.ReadInt(x, "CompanyID"),
+                                CompanyName = DataReader.ReadString(x, "CompanyName"),
+                                BranchID = DataReader.ReadInt(x, "BranchID"),
+                                BranchName = DataReader.ReadString(x, "BranchName"),
+                                UserName = DataReader.ReadString(x, "UserName"),
+                                PrintCondCreate = DataReader.ReadInt(x, "PrintCondCreate"),
+                                PrintCondDelete = DataReader.ReadInt(x, "PrintCondDelete"),
+                                UploadMeasure = DataReader.ReadInt(x, "UploadMeasure"),
+                                CreateDLP = DataReader.ReadInt(x, "CreateDLP"),
+                                OptDLP = DataReader.ReadInt(x, "OptDLP")
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintActivities"));
+            return PrintActivities;
         }
 
         #endregion

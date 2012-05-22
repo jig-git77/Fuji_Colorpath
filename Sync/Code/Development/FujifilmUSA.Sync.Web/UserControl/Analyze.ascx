@@ -11,7 +11,13 @@
         var updateProgress = $get('<%= UpdateProgressClientID %>');
         var postBackElement = args.get_postBackElement();
         if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>') {
-            updateProgress.control._associatedUpdatePanelId = 'dummyId';
+            if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next") {
+                updateProgress.control._associatedUpdatePanelId = null;
+                $get('<%= updateProgress.ClientID %>').control._associatedUpdatePanelId = 'dummyId';
+            }
+            else {
+                updateProgress.control._associatedUpdatePanelId = 'dummyId';
+            }
         }
         else {
             updateProgress.control._associatedUpdatePanelId = null;
@@ -77,112 +83,107 @@
                         OnClientClick="return ChooseRadWindow();">
                         <span>
                             <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" />
-                            Download DLP</span> &nbsp;
+                            Create DLP</span> &nbsp;
                     </asp:LinkButton>
                 </div>
             </div>
             <div class="listDevice" style="margin-left: 10px;">
                 <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                <table cellpadding="0" cellspacing="10" border="0" width="97%">
-                    <tr id="trListHeader" runat="server">
-                        <td>
-                            <div style="display: block;" class="contantbox tabcontant">
-                                <div class="section_top">
-                                    &nbsp;</div>
-                                <div class="section_middle">
-                                    <div class="combopart">
-                                        <div class="header">
-                                            <div class="content">
-                                                <div class="text" style="font-weight: bold; font-size: 14px; float: left">
-                                                    Analyze Measurement :
-                                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
-                                                </div>
-                                                <div class="textright" style="font-weight: bold; font-size: 12px; float: right;">
-                                                    Analyze Average Of Measurements
-                                                </div>
-                                                <div class="clear">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="border-style: None; padding: 5px">
-                                            <center>
-                                                <script type="text/javascript" language="javascript">
-                                                    function ClickOnPoint(MeasurementID) {
-                                                        var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                                        hdCheckBoxChange.value = "0";
-                                                        var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
-                                                        obj1.value = MeasurementID;
-                                                        document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                                    }
-                                                    function ClickOnCheckBox(MeasurementID, checkedValue) {
-                                                        var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                                        hdCheckBoxChange.value = "1";
-                                                        var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
-                                                        obj1.value = MeasurementID;
-                                                        var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
-                                                        chekcBox.checked = checkedValue == "True" ? true : false;
-                                                        document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                                    } 
-                                                </script>
-                                                <asp:Chart ID="chartAnalyze" runat="server" Width="650px" Height="250px" BackGradientType="Center"
-                                                    BackGradientEndColor="#DFDFDF" BorderlineColor="#808080" BorderlineWidth="1"
-                                                    BorderlineDashStyle="Solid">
-                                                    <Series>
-                                                        <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                        <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                            BorderWidth="2">
-                                                        </asp:Series>
-                                                    </Series>
-                                                    <ChartAreas>
-                                                        <asp:ChartArea Name="ChartArea1">
-                                                            <Position Height="99" Width="99" X="0" Y="0" />
-                                                            <AxisY Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto">
-                                                                <MajorGrid LineColor="Beige" />
-                                                            </AxisY>
-                                                            <AxisX Interval="1" TitleFont="Verdana, 8pt" Title="M">
-                                                                <MajorGrid LineColor="Beige" />
-                                                            </AxisX>
-                                                        </asp:ChartArea>
-                                                    </ChartAreas>
-                                                </asp:Chart>
-                                                <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
-                                                <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
-                                                    Style="display: none;" />
-                                                <asp:CheckBox ID="hdChartCheckBox" runat="server" Checked="false" Style="display: none;" />
-                                                <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
-                                            </center>
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="section_bottom">
-                                    &nbsp;</div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
             </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
+                <tr id="trListHeader" runat="server">
+                    <td>
+                        <div style="display: block;" class="contantbox tabcontant">
+                            <div class="Analyze_head">
+                                <div class="text" style="font-weight: bold; font-size: 14px; float: left">
+                                    Analyze Measurement :
+                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="section_middle">
+                                <center>
+                                    <script type="text/javascript" language="javascript">
+                                        function ClickOnPoint(MeasurementID) {
+                                            var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                            hdCheckBoxChange.value = "0";
+                                            var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
+                                            obj1.value = MeasurementID;
+                                            document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                        }
+                                        function ClickOnCheckBox(MeasurementID, checkedValue, checkCount) {
+                                            if (checkCount <= 1 && checkedValue == "False") {
+                                                alert("Atleast one measurement should be checked");
+                                                return false;
+                                            }
+                                            else {
+                                                var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                                hdCheckBoxChange.value = "1";
+                                                var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
+                                                obj1.value = MeasurementID;
+                                                var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
+                                                chekcBox.checked = checkedValue == "True" ? true : false;
+                                                document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                            }
+                                        } 
+                                    </script>
+                                    <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="#F0F0F0"
+                                        BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
+                                        AntiAliasing="All" BorderlineColor="#B0B0B0" BorderlineWidth="1" BorderlineDashStyle="Solid">                                         
+                                        <Series>
+                                            <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                            <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                                BorderWidth="2">
+                                            </asp:Series>
+                                        </Series>
+                                        <ChartAreas>
+                                            <asp:ChartArea Name="ChartArea1" BackColor="Transparent" BackSecondaryColor="White"
+                                                ShadowColor="Transparent">
+                                                <Position Height="99" Width="99" X="0" Y="0" />
+                                                <AxisY Title="&Delta; E" TitleFont="Verdana, 8pt" Interval="Auto" IsLabelAutoFit="false">
+                                                    <MajorGrid LineColor="#D8D8D8 " />
+                                                </AxisY>
+                                                <AxisX Interval="1" TitleFont="Verdana, 5pt" IsLabelAutoFit="false">
+                                                    <MajorGrid LineColor="#D8D8D8 " />
+                                                    <LabelStyle Angle="0" />
+                                                </AxisX>
+                                            </asp:ChartArea>
+                                        </ChartAreas>
+                                    </asp:Chart>
+                                    <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+                                    <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
+                                        Style="display: none;" />
+                                    <asp:CheckBox ID="hdChartCheckBox" runat="server" Checked="false" Style="display: none;" />
+                                    <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
+                                </center>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upCreateDLP"
@@ -208,27 +209,27 @@
         <section class="inner_tab">
             <ul class="tabs">
                 <li><span><a href="#tab1">Summary</a></span></li>
-                <li><span><a href="#tab2">Chart</a></span></li>                                
-                <li><span><a href="#tab2">Ink Paper</a></span></li>                                
-                <li><span><a href="#tab2">Gray</a></span></li>                                
-                <li><span><a href="#tab2">Patch Deatils</a></span></li>                                
+                <li><span><a href="#tab2">Report</a></span></li>                                
+                <li><span><a href="#tab3">Ink Paper</a></span></li>                                
+                <li><span><a href="#tab4">Gray</a></span></li>                                
+                <li><span><a href="#tab5">Patch Details</a></span></li>                                
             </ul>
             <div class="clear"></div>
         </section>
 
 
-        <section id="tab1" class="contantbox tabcontant hideclass" >
+  <section id="tab1" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
            <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" > 
           <table cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td>
+                                    <tr id="tr1" runat="server" visible="false">
+                                        <td style="width:100px;">
                                             <span>Selected Metric: &nbsp </span>
                                         </td>
                                         <td>
-                                            <asp:DropDownList ID="cmbSelectedMetric" runat="server" Width="200px" CssClass="select">
+                                            <asp:DropDownList ID="cmbSelectedMetric" runat="server" Width="50%" CssClass="select">
                                                 <asp:ListItem Text="Idealliance Digital Chart" Value="Idealliance Digital Chart"></asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
@@ -239,10 +240,7 @@
                                             <LayoutTemplate>
                                                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >
                                                     <thead>
-                                                      <tr>
-                                                            <th style="font-size:13px;" >
-                                                                ID
-                                                            </th>
+                                                      <tr>                                                         
                                                             <th style="font-size:13px;" >
                                                                 Measurement Name
                                                             </th>
@@ -269,10 +267,7 @@
                                                 <div class="no_data_found">No records available</div>
                                             </EmptyDataTemplate>
                                             <ItemTemplate>
-                                                <tr class="purpal">
-                                                    <td align="center">
-                                                        <asp:Label ID="lblMeasurementID" runat="server" Text='<%#Eval("MeasurementID") %>'></asp:Label>
-                                                    </td>
+                                                <tr class="Gray">                                                  
                                                      <td align="center">
                                                         <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
                                                     </td>
@@ -293,59 +288,151 @@
                                         </asp:ListView>
                                     </td>
                                     </tr>
-                                </table></div>
-        <div class="clear"></div>
+                                </table>
         </div>
-        
-       
-    </div>
-    
+        <div class="clear"></div>
+        </div>  
+    </div>    
     <div class="tab_bottom">
         &nbsp;</div>
     </section>
+
     <section id="tab2" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
-     
+            <table cellpadding="0" cellspacing="0" width="100%">
+                                    <tr runat="server">                                       
+                                        <td>
+                                        
+                                          <asp:ImageButton ID="ImgBtn_Report" runat="server" 
+                                                ImageUrl="../Images/Sync DLP Report_preview.jpg" onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report"></asp:ImageButton>
+                                        </td>
+                                    </tr>                                   
+                                </table>
         </div>
         <div class="clear"></div>
         </div>                            	
         </div>
         <div class="tab_bottom">&nbsp;</div>
-        </section>
-    <section id="tab3" class="contantbox tabcontant hideclass">
+   </section>
+    
+   <section id="tab3" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart"><asp:HiddenField ID="HiddenField1" runat="server" Value="0"/>  
-        <div class="float_l" style="padding-left: 10px;" >Ink Paper</div>
+        <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" >
+       
+        </div>
         <div class="clear"></div>
         </div>                            	
         </div>
         <div class="tab_bottom">&nbsp;</div>
-        </section>
-    <section id="tab4" class="contantbox tabcontant hideclass">
+  </section>
+    
+   <section id="tab4" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart"><asp:HiddenField ID="HiddenField2" runat="server" Value="0"/>  
-        <div class="float_l" style="padding-left: 10px;" >Gray</div>
+        <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" >
+    
+        </div>
         <div class="clear"></div>
         </div>                            	
         </div>
         <div class="tab_bottom">&nbsp;</div>
-        </section>
-    <section id="tab5" class="contantbox tabcontant hideclass">
+  </section>
+
+  <section id="tab5" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart"><asp:HiddenField ID="HiddenField3" runat="server" Value="0"/>  
-        <div class="float_l" style="padding-left: 10px;" >Patch Deatils</div>
+           <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" > 
+           
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+              <ContentTemplate>         
+           
+            <table cellpadding="0" cellspacing="0" width="100%"> 
+               <tr>
+                <td align="right">
+                    <asp:Button ID="btn_Excel" CssClass="button" Width="150px" Text="Export to Excel" runat="server" onclick="btn_Excel_Click" Visible="false"></asp:Button>                   
+                    <asp:Button ID="btn_CSV" CssClass="button" Width="150px" Text="Export to CSV" runat="server" onclick="btn_CSV_Click"></asp:Button>                   
+                </td>
+               </tr>                            
+               <tr>
+                <td>   
+                    <telerik:RadGrid ID="GridPatchDetails" ShowHeader="true"  AllowSorting="true" Width="650px"
+                    AllowPaging="True"  runat="server" AutoGenerateColumns="false" EnableLinqExpressions="false" 
+                    OnNeedDataSource="GridPatchDetails_NeedDataSource" OnItemDataBound="GridPatchDetails_ItemDataBound" HeaderStyle-Font-Bold="true">
+                    
+                     <ClientSettings>
+                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="True" FrozenColumnsCount="6">
+                        </Scrolling>
+                     </ClientSettings>
+
+                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                    <MasterTableView DataKeyNames="HtmlColor">
+                        <Columns>
+                            <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
+                                DataField="HtmlColor" >
+                                <ItemTemplate>         
+                                    <asp:Label ID="lbl_HTML" runat="server" Text="" Height="14px" Width="30px"></asp:Label>                                   
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>                         
+
+                            <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" SortExpression="SampleId" >
+                            </telerik:GridBoundColumn>                       
+                            <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" SortExpression="CmykC" >
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" SortExpression="CmykM" >
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" SortExpression="CmykY" >
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" SortExpression="CmykK" >
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" SortExpression="ΔE94">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000" SortExpression="ΔE2000">
+                            </telerik:GridBoundColumn> 
+                            <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*" SortExpression="TargetL">
+                            </telerik:GridBoundColumn>
+                             <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" SortExpression="CielabL">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*" SortExpression="Targeta">
+                            </telerik:GridBoundColumn>
+                             <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" SortExpression="CielabA">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*" SortExpression="Targetb">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" SortExpression="CielabB">
+                            </telerik:GridBoundColumn>     
+                                                   
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+
+                 </td>
+                </tr>
+            </table>
+            
+         </ContentTemplate> 
+         <Triggers>
+                <asp:PostBackTrigger ControlID="btn_Excel" />               
+                <asp:PostBackTrigger ControlID="btn_CSV" />                
+         </Triggers>        
+       </asp:UpdatePanel>
+
+       </div>
         <div class="clear"></div>
-</div>                            	
-</div>
-        <div class="tab_bottom">&nbsp;</div>
-        </section>
+        </div>  
+    </div>    
+    <div class="tab_bottom">
+        &nbsp;</div>
     </section>
+  </section>
                 </td>
             </tr>
         </table>

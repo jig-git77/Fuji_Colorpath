@@ -12,6 +12,9 @@ namespace FujifilmUSA.Sync.Common
         private const string _optimizeRunSession = "OptimizeRunSession";
         private const string _navigationSession = "NavigationSession";
         private const string _operationSession = "OperationSession";
+        private const string _branchNameSession = "BranchNameSession";
+        private const string _ProjLimitSession = "ProjectLimitSession";
+
         #endregion
 
         #region Singleton
@@ -129,6 +132,38 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_operationSession] = value;
+            }
+        }
+
+        public string CurrentBranchName
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_branchNameSession] != null)
+                {
+                    return HttpContext.Current.Session[_branchNameSession].ToString();
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_branchNameSession] = value;
+            }
+        }
+
+        public int CurrentProjLimit
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_ProjLimitSession] != null)
+                {
+                    return System.Convert.ToInt32(HttpContext.Current.Session[_ProjLimitSession].ToString());
+                }
+                return 0;
+            }
+            set
+            {
+                HttpContext.Current.Session[_ProjLimitSession] = value;
             }
         }
         #endregion

@@ -16,18 +16,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            int dlpIndex = 0;
-            var dlpSplits = Request.QueryString["DlpName"].Split(' ');
-            if (dlpSplits[dlpSplits.Length - 1].Contains(".icc"))
+        {        
+            int RunNum = 0;
+
+            if (Request.QueryString["TotalRuns"] != null && Request.QueryString["TotalRuns"].Length > 0)
             {
-                dlpIndex = Convert.ToInt32(dlpSplits[dlpSplits.Length - 1].Split('.')[0]) + 1;
+                RunNum = Convert.ToInt32(Request.QueryString["TotalRuns"]) - 1;
             }
+            
             var sb = new StringBuilder();
             if (Convert.ToDecimal(Request.QueryString["days"]) <= 0)
-                sb.Append("Current Run " + dlpIndex + " is open.");
+                sb.Append("Current Run " + RunNum + " is open.");
             else
-                sb.Append("Current Run " + dlpIndex + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+                sb.Append("Current Run " + RunNum + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
 
             sb.Append("</br>");
             if (Request.QueryString["DlpName"].Contains("-001"))
@@ -55,6 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                                    ? "Analyze.aspx"
                                                    : "Measurement.aspx");
+               
             }
         }
 

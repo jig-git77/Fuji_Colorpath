@@ -30,6 +30,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             branch.CompanyId,
                                             branch.BranchName,
                                             branch.Location,
+                                            branch.SupportID,
                                             branch.IsActive
                                         });
                         if(returnValue == -1)
@@ -57,6 +58,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         branch.CompanyId,
                                         branch.BranchName,
                                         branch.Location,
+                                        branch.SupportID,
                                         branch.IsActive,
                                     });
                     if (returnValue == -1)
@@ -101,6 +103,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 Location = DataReader.ReadString(x, "Location"),
                                                 CompanyId = DataReader.ReadInt(x, "CompanyId"),
                                                 Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") },
+                                                Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") },
+                                                SupportID = DataReader.ReadInt(x, "SupportID"),
                                                 IsActive = DataReader.ReadBoolean(x, "IsActive")
                                             }).ToList();
                     }

@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -38,6 +39,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
+                lblTitle.Text = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
+              
             }
         }
         #endregion
@@ -45,14 +48,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject = new Project()
-                                                         {
-                                                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
-                                                             IsUsed = true,
-                                                             CurrentDisplayStatus = ECurrentProjectStatus.New
-                                                         };
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
-            Response.Redirect("AddProject.aspx");
+            if (Convert.ToInt32(Hidden_TotalProjects.Value) >= SessionManager.Instance.CurrentProjLimit)
+            {
+                //--------------Project Limit reach, so can not create more projects under this Device now-------//  
+                Response.Redirect("ProjectMaxLimit.aspx");
+            }
+            else
+            {
+                //------------Create new Project under this Device-----------------//
+                SessionManager.Instance.CurrentProject = new Project()
+                                                             {
+                                                                 DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                                                                 IsUsed = true,
+                                                                 CurrentDisplayStatus = ECurrentProjectStatus.New
+                                                             };
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+                Response.Redirect("AddProject.aspx");
+            }
         }
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
@@ -77,7 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            GetProjectList();
+            GetProjectList();           
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
@@ -100,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                      "javascript: return ShowOpenPrintConditionWindow('" +
                                                      project.ProjectId + "','" + project.ProjectName + "','" +
                                                      Math.Round(days, 1) +
-                                                     "','" + project.CurrentDlpName + "')");
+                                                     "','" + project.CurrentDlpName + "','" + project.TotalRuns + "')");
                         }
                         else
                             btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -115,7 +127,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                         else
                             btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                            if (!project.HasDLP)
+                            {
+                                imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+                                imgStatus.ToolTip = imgStatus.AlternateText = "Certify";
+                            }
                         break;
                     //case EOptimizeRunStatus.Certify:
                     //    btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -155,11 +172,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Projects = new List<Project>();
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
             _presenterProjectList.GetProjectListByDeviceId();
             if (!IsErrorOccured)
             {
                 rgProjectList.DataSource = Projects;
             }
+            Hidden_TotalProjects.Value = Projects.Count.ToString();
         }
         private void DeleteProject(int projectId)
         {
@@ -174,6 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> SourceProfile { get; set; }
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
+        public int LicenseTypeID { get; set; }
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 
@@ -13,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Project();
         }
 
-        public List<Project> GetProjectsByDeviceId(int deviceId)
+        public List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID)
         {
             return new List<Project>();
         }
@@ -58,6 +59,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public ReferenceChartData GetReferenceChartData(int projectId)
         {
             return new ReferenceChartData();
+        }
+
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, Guid tempProjectId)
+        {
+            return new Guid();
         }
 
         public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)

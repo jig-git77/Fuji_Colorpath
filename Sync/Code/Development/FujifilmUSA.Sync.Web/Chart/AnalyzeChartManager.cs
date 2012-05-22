@@ -19,49 +19,65 @@ namespace FujifilmUSA.Sync.Web
         public Chart AnalyzeChart { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
         public int CurrentMeasurementID { get; set; }
+
         public string MeasurementName { get; set; }
+
         //======== Data Point Index ==========//
         int[] PatchTypeID = new int[8];
         public void BindChart()
         {
-            SetGraphWidth();
+            //SetGraphWidth();
             SetLast();
 
+            foreach (Series series in AnalyzeChart.Series)
+            {
+                series.Points.Clear();
+            }
             int i = 0;
-            Measurements.ForEach(p => {
-                p.MeasurementPatches.ForEach(x => {
+            Measurements.ForEach(p =>
+            {
+                p.MeasurementPatches.ForEach(x =>
+                {
                     switch (x.MeasurementPatchId)
                     {
                         case (int)CPPatchType.Cyan:
-                            AddPoint(0, x, i, p.MeasurementName);
+                            x.HtmlColor = "#00FFFF";
+                            AddPoint(0, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Magenta:
-                            AddPoint(1, x, i, p.MeasurementName);
+                            x.HtmlColor = "#FF00FF";
+                            AddPoint(1, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Yellow:
-                            AddPoint(2, x, i, p.MeasurementName);
+                            x.HtmlColor = "#FFFF00";
+                            AddPoint(2, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Black:
-                            AddPoint(3, x, i, p.MeasurementName);
+                            x.HtmlColor = "#000000";
+                            AddPoint(3, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Overprint_Red:
-                            AddPoint(4, x, i, p.MeasurementName);
+                            x.HtmlColor = "#FF0000";
+                            AddPoint(4, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Overprint_Green:
-                            AddPoint(5, x, i, p.MeasurementName);
+                            x.HtmlColor = "#008000";
+                            AddPoint(5, x, i, p.MeasurementName, p.IsUsed);
                             break;
                         case (int)CPPatchType.Overprint_Blue:
-                            AddPoint(6, x, i, p.MeasurementName);
+                            x.HtmlColor = "#0000FF";
+                            AddPoint(6, x, i, p.MeasurementName, p.IsUsed);
                             break;
-                        case (int)CPPatchType.Triplet_Solid_Gray:
-                            AddPoint(7, x, i, p.MeasurementName);
+                        case (int)CPPatchType.Paper:
+                            x.HtmlColor = "#FFFFFF";
+                            AddPoint(7, x, i, p.MeasurementName, p.IsUsed);
                             break;
                     }
                 });
-                AddCheckBox(i, p);
+                AddCheckBox(i, p, Measurements.Where(x => x.IsUsed).Count());
                 i++;
             });
-            
+
         }
 
         private void SetGraphWidth()
@@ -78,13 +94,14 @@ namespace FujifilmUSA.Sync.Web
             if (Measurements != null && Measurements.Count > 0)
                 if (CurrentMeasurementID == 0)
                     CurrentMeasurementID = Measurements[Measurements.Count - 1].MeasurementId;
+
         }
-        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementNo, string measurementName)
+        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementNo, string measurementName, bool IsUsed)
         {
             int index = PatchTypeID[seriesId];
 
             AnalyzeChart.Series["Series" + seriesId].ChartType = SeriesChartType.Spline;  // Set series type 
-            AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementNo + 1, measurementPatch.Δe.ToString()); // Add XY point
+            AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementNo + 1, measurementPatch.Δe2000.ToString()); // Add XY point
             AnalyzeChart.Series["Series" + seriesId].Color = ColorTranslator.FromHtml(measurementPatch.HtmlColor); // Set HTML color to series         
             AnalyzeChart.Series["Series" + seriesId].Points[index].ToolTip = measurementName;
 
@@ -94,11 +111,13 @@ namespace FujifilmUSA.Sync.Web
             if (CurrentMeasurementID != 0 && CurrentMeasurementID == measurementPatch.MeasurementId) // Check current selected point
             {
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;
-                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.FromArgb(200, 255, 0, 0);
-                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerImage = "Images/MarkerRed_Circle.gif";  // Set red circle point image.
+                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = ColorTranslator.FromHtml(measurementPatch.HtmlColor);
+                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Circle;
+
                 // property for bind measurement name in header chart
                 MeasurementName = measurementName;
             }
+            else
             {
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Gray;
@@ -106,13 +125,13 @@ namespace FujifilmUSA.Sync.Web
             }
             PatchTypeID[seriesId]++;
         }
-        private void AddCheckBox(int i, Entity.Measurement measurement)
+        private void AddCheckBox(int i, Entity.Measurement measurement, int isUsedCount)
         {
             //========= Put check or uncheck check box and call javascript function for rebind chart ===/
             var c = new CustomLabel(i + 1, i + 1 + 0.001, "", 1, LabelMarkStyle.None)
                         {
                             Image = measurement.IsUsed ? "Images/checked_checkbox.gif" : "Images/uncheck_checkbox.gif",
-                            ImageMapAreaAttributes = "onclick=\"ClickOnCheckBox('" + measurement.MeasurementId + "','" + !measurement.IsUsed + "');\""
+                            ImageMapAreaAttributes = "onclick=\"ClickOnCheckBox('" + measurement.MeasurementId + "','" + !measurement.IsUsed + "'," + isUsedCount + ");\""
                         };
             AnalyzeChart.ChartAreas["ChartArea1"].AxisX.CustomLabels.Add(c); // Add Custom Label
 

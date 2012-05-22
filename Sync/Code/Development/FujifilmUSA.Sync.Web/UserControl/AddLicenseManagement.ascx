@@ -26,18 +26,18 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <center>
-                    <fieldset style="width: 60%;">
+                    <fieldset style="width: 70%;">
                         <legend>
                             <asp:Label ID="lblHeader" runat="server" Text="Add License"></asp:Label>
                         </legend>
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                        <table>
+                        <table width="100%">
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
-                                <td>
+                                <td style="width:8px;">
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td>
@@ -58,7 +58,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
@@ -81,31 +81,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
-                                    </span>
-                                </td>
-                                <td>
-                                    <b>&nbsp;:&nbsp;</b>
-                                </td>
-                                <td style="width: 400px">
-                                    <div style="float: left;">
-                                        <asp:DropDownList ID="cmbLicenseType" runat="server" Width="400px" CssClass="select">
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbLicenseType" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvLicenseTypeContainer" runat="server"
-                                                ValidationMsg="Please select license type." Size="200" />
-                                        </asp:RequiredFieldValidator>
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">License Description<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -118,10 +94,10 @@
                                             Height="19px"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
-                                        <asp:RequiredFieldValidator ID="rfvLicenseDescription" runat="server" Display="Dynamic"
+                                    <asp:RequiredFieldValidator ID="rfvLicenseDescription" runat="server" Display="Dynamic"
                                             ControlToValidate="txtLicenseDescription" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvLDContainer" runat="server" ValidationMsg="Please provide license description."
-                                                Size="200" />
+                                            <ucValidationContainer:ValidationContainer ID="rfvcLicenseDescriptionContainer" runat="server"
+                                                ValidationMsg="Please provide license description." Size="200" />
                                         </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
@@ -129,7 +105,28 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 400px">
+                                    <div style="float: left;">
+                                        <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox"/>
+                                        <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox"/>
+                                        <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox"/>
+                                        <asp:CheckBox runat="server" ID="chkVarification" CssClass="checkListBox"/>
+                                    </div>
+                                    <div style="float: left">
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Activation Date<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -153,7 +150,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Expiration Date<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -177,7 +174,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Is Active?</span>
                                 </td>
                                 <td>

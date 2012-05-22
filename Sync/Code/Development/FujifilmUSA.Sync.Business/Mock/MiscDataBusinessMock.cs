@@ -61,6 +61,20 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Region>();
         }
 
+        public Dictionary<int, string> GetProjectTypeList()
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public Dictionary<int, string> GetSecurityQuestions()
+        {
+            return new Dictionary<int, string>();
+        }
+
+        public List<Activity> GetPrintActivities(int RegionID)
+        {
+            return new List<Activity>();
+        }
         #endregion
 
         #region ITaskBase Members

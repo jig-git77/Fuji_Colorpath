@@ -128,16 +128,7 @@
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
                                 </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="License.LicenseType.Type" AllowFiltering="true"
-                                HeaderText="License Type" UniqueName="LicenseType" SortExpression="License.LicenseType.Type"
-                                FilterControlWidth="120" HeaderStyle-Width ="120"  
-                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" DataType="System.String">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("License.LicenseType.Type") %>' />
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
+                            </telerik:GridTemplateColumn>                                                      
                             <telerik:GridTemplateColumn DataField="License.Branch.Company.CompanyName" AllowFiltering="true"
                                 HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
                                 FilterControlWidth="120" HeaderStyle-Width ="120"  

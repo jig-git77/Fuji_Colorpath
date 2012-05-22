@@ -30,9 +30,11 @@
                         <tr>
                             <td>
                                 <div>
-                                    <table>
+                                    <table width="100%">
                                         <tr>
-                                            <td class="Content" style="line-height: 24px;">
+                                            <td class="Content" style="line-height: 24px; width:100%;">
+                                                <asp:Image ID="Image10" runat="server" ImageUrl="~/Images/info_icon.png" 
+                                                    SkinID=" " />
                                                 <asp:Label ID="lblOpenPrintConditionMessage" runat="server"></asp:Label>
                                             </td>
                                         </tr>
@@ -53,7 +55,7 @@
                                 </div>
                                 <div class="buttonright">
                                     <asp:LinkButton ID="lbtnContinue" runat="server" CssClass="gray_bt" OnClick="lbtnContinue_Click">
-                <span> Continue </span>
+                                         <span> Continue </span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="clear">

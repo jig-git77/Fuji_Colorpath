@@ -111,7 +111,39 @@
                 <div id="divMeasurementSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png">
                 </div>
+                  <div id="tdReferenceChart" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                    <asp:LinkButton ID="lnkRefChart" runat="server" ToolTip="Reference Chart"
+                        PostBackUrl="~/ReferenceChartManagement.aspx" onclick="lnkRefChart_Click" >
+                       
+                        <div>
+                            <asp:Image ID="imgRefChart" runat="server" AlternateText="Reference Chart"
+                                ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Reference Chart" /></div>
+                        Reference Chart
+                    </asp:LinkButton>
+                </div>
+              
                 </td>
+            </tr>
+            <tr>
+                <td style="height:50px;">
+                </td>
+            </tr>
+            <tr>
+                <td style=" float:left;" >
+                     <div id="tdProfileManagement" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                       <asp:LinkButton ID="lnkProfileMgmt" runat="server" ToolTip="Profile Management"
+                        PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click"  >                       
+                        <div>
+                            <asp:Image ID="Image4" runat="server" AlternateText="Profile Management"
+                                ImageUrl="~/Images/Profile-Management.png" ToolTip="Profile Management"  Width="70px" Height="70px"/></div>
+                        Profile Management
+                    </asp:LinkButton>
+                </div>
+                <div>
+                     <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Activity Management"
+                        PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" Visible="false"/>             
+                </div>
+                </td>               
             </tr>
         </table>
 

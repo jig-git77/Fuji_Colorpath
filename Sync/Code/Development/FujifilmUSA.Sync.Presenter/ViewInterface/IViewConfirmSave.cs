@@ -7,8 +7,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }
+        int MasterRunId { get; set; }
         List<int> MeasurementIds { get; set; }
         Project Project { get; set; }
         string ProfileDescription { get; set; }
+        string LastRunStatus { get; set; }
     }
 }

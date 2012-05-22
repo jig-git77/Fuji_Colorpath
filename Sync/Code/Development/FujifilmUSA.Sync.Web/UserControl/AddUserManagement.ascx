@@ -258,7 +258,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <%--<tr>
                                                             <td>
                                                                 <span style="font-weight: bold;">PassWord<span style="color: Red;">*</span> </span>
                                                             </td>
@@ -269,12 +269,6 @@
                                                                 <div>
                                                                     <asp:TextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px"
                                                                         TextMode="Password" onkeydown="javascript:passwordcheck()"></asp:TextBox>
-                                                                    <%--                                                                    <telerik:RadTextBox ID="txtAdminPassWord" Width="100px" MaxLength="30" runat="server" Height="19px" TextMode="Password">
-                                                                        <PasswordStrengthSettings ShowIndicator="true" TextStrengthDescriptions="Very Poor;Weak;Average;Strong;Excellent"
-                                                                            IndicatorElementBaseStyle="Base" TextStrengthDescriptionStyles="L0;L1;L2;L3;L4"
-                                                                            IndicatorElementID="CustomIndicator" />
-                                                                    </telerik:RadTextBox>
-                                                                    --%>
                                                                     <span id="CustomIndicator" class="Base"><span id="PasswordRepeatedIndicator"></span>
                                                                     </span>
                                                                 </div>
@@ -307,9 +301,6 @@
                                                                 <div style="float: left;">
                                                                     <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="40" TextMode="Password"
                                                                         Width="100px" Height="19px"></asp:TextBox>
-                                                                    <%--<telerik:RadTextBox ID="txtConfirmPass" Width="100px" MaxLength="30" runat="server" Height="19px"
-                                                                        TextMode="Password">
-                                                                    </telerik:RadTextBox>--%>
                                                                 </div>
                                                                 <div style="float: left">
                                                                     &nbsp;
@@ -333,7 +324,7 @@
                                                                 <div class="clear">
                                                                 </div>
                                                             </td>
-                                                        </tr>
+                                                        </tr>--%>
                                                         <tr>
                                                             <td>
                                                                 <span style="font-weight: bold;">Is Active?</span>
@@ -344,6 +335,20 @@
                                                             <td>
                                                                 <div style="float: left;">
                                                                     <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr runat="server" id="trPasswordReset">
+                                                            <td>
+                                                            </td>
+                                                            <td>
+                                                                <b>&nbsp;&nbsp;</b>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left;">
+                                                                    <asp:LinkButton ID="lnkPasswordReset" runat="server" OnClick="lnkPasswordReset_Click" />
                                                                 </div>
                                                                 <div class="clear">
                                                                 </div>

@@ -20,8 +20,7 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
             optimizeRun.CreateOptimizeRun(
                 _viewClosePrintCondition.ProjectId,
-                Convert.ToInt32(EOptimizeRunStatus.Open),
-                Convert.ToInt32(EOptimizeRunStatus.Closed),
+                Convert.ToInt32(EOptimizeRunStatus.Open),              
                 DateTime.Now);
         }
         public void GetProjectDetail()
@@ -62,7 +61,7 @@ namespace FujifilmUSA.Sync.Presenter
                     optimizeRunBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
                     optimizeRunBusiness.
                         OptimizeDeviceLinkProfile(_viewClosePrintCondition.ProjectId, lastOptimizeRunId, measurementIds,
-                                                  _viewClosePrintCondition.DeviceName + " " + project.ProposedDlpName);
+                                                  _viewClosePrintCondition.DeviceName + " " + project.ProposedDlpName, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
                 }
             }
         }

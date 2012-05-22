@@ -86,6 +86,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             MeasurementDevice.LicenseId = Convert.ToInt32(cmbLicenseType.SelectedValue);
             MeasurementDevice.SerialNumber = txtSerialNumber.Text.Trim();
             MeasurementDevice.InstrumentTypeId = (short)(Convert.ToInt32(cmbInstrumentType.SelectedValue));
+            MeasurementDevice.Description = txtDescription.Text;
             if (chkIsActive.Checked == true)
                 MeasurementDevice.IsActive = true;
             else
@@ -143,6 +144,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbLicenseType.DataBind();
                 cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", ""));
             }
+            if (cmbLicenseType.Items.Count > 1)
+            {
+                cmbLicenseType.SelectedIndex = 1;
+            }
         }
 
         private void BindInstrumentTypeDropDown()
@@ -174,6 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbInstrumentType.SelectedValue = Convert.ToString(MeasurementDevice.InstrumentType.InstrumentTypeId);
                 txtSerialNumber.Text = MeasurementDevice.SerialNumber;
                 chkIsActive.Checked = (MeasurementDevice.IsActive == true ? true : false);
+                txtDescription.Text = MeasurementDevice.Description.ToString();
             }
         }
 
@@ -191,6 +197,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> LicenseList { get; set; }
         public Dictionary<int, string> InstrumentTypeList { get; set; }
         public List<Device> DeviceListById { get; set; }
+        public int DeviceId { get; set; }
+        public Device SelectedDevice { get; set; }
         #endregion
     }
 }

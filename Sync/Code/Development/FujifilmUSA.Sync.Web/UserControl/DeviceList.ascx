@@ -150,6 +150,11 @@
                 </div>
                 <div class="listDevice">
                     <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td class="Top_Grn_Header">
+                            <h3> Select Press </h3>
+                        </td>
+                    </tr>
                         <tr>
                             <td>
                                 <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
@@ -160,7 +165,7 @@
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                                     <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
-                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc">
+                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc,BranchName">
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
                                                 UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"

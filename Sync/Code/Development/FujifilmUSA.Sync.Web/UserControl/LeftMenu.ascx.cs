@@ -66,7 +66,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             var ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = ELeftMenuItemLevel.Home;
-            ctrlItem.ItemName = "Fujifilm Graphics Systems";
+            if (SessionManager.Instance.CurrentBranchName != null)
+            {
+                ctrlItem.ItemName = SessionManager.Instance.CurrentBranchName;
+            }
+            else if (SessionManager.Instance.CurrentUser != null && SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count == 1)
+            {
+                ctrlItem.ItemName = SessionManager.Instance.CurrentUser.UserBranches[0].Branch.BranchName;
+                SessionManager.Instance.CurrentBranchName = SessionManager.Instance.CurrentUser.UserBranches[0].Branch.BranchName;
+            }
+            else if (SessionManager.Instance.CurrentUser != null && SessionManager.Instance.CurrentUser.UserCompany != null && SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
+            {
+                ctrlItem.ItemName = SessionManager.Instance.CurrentUser.UserCompany.Company.CompanyName;
+            }
+            else
+            {
+                ctrlItem.ItemName = "Home";
+            }
             ctrlItem.ID = "_Home";
             ph.Controls.Add(ctrlItem);
 
@@ -80,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentOperation == EOperation.None) return;
             ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation;
-            ctrlItem.ItemName = "DLP Optimization";
+            ctrlItem.ItemName = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
             ctrlItem.ID = "_Operation";
             ph.Controls.Add(ctrlItem);
 
@@ -103,9 +119,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
                     ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
                     ph.Controls.Add(ctrlItem);
-                    
+
                     ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));
-                    
+
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
@@ -124,7 +140,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.Project;
                     ctrlItem.ItemName = SessionManager.Instance.CurrentProject.ProjectName;
                     ph.Controls.Add(ctrlItem);
-                    
+
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {

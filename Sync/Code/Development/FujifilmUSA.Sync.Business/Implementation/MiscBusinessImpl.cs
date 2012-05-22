@@ -27,15 +27,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        public string EncryptPassword(string password, string key)
-        {
-            return LoginSecurity.Encrypt(password, key);
-        }
+        //public string EncryptPassword(string password, string key)
+        //{
+        //    return LoginSecurity.Encrypt(password, key);
+        //}
 
-        public string DecryptPassword(string encryptedpassword, string key)
-        {
-            return LoginSecurity.Decrypt(encryptedpassword, key);
-        }
+        //public string DecryptPassword(string encryptedpassword, string key)
+        //{
+        //    return LoginSecurity.Decrypt(encryptedpassword, key);
+        //}
 
         #endregion
 

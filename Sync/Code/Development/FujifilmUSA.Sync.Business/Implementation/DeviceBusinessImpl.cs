@@ -6,6 +6,7 @@ using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Business.CustomExceptions;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -25,7 +26,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                           companyId, branchId,
                                                                                           currentUserId
                                                                                       });
-                    if (dsDeviceList != null && dsDeviceList.Tables.Count > 0 && dsDeviceList.Tables[0].Rows.Count > 0)
+                    if (dsDeviceList != null && dsDeviceList.Tables.Count == 2 && dsDeviceList.Tables[0].Rows.Count > 0)
                     {
                         objDeviceList = dsDeviceList.Tables[0].AsEnumerable().
                             Select(x => new Device()
@@ -36,8 +37,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                    {
                                                                        DeviceFamilyId = DataReader.ReadShort(x, "DeviceFamilyID"),
                                                                        DeviceFamilyDesc = DataReader.ReadString(x, "DeviceFamilyDesc")
-                                                                   }
+                                                                   },
+                                                BranchName = DataReader.ReadString(x, "BranchName")
                                             }).ToList();
+                        if (dsDeviceList.Tables[1].Rows.Count > 0)
+                        {
+                            var licenseDetails = dsDeviceList.Tables[1].
+                                AsEnumerable().
+                                Select(x => new
+                                                {
+                                                    DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                                    licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
+                                                    NumOfProject = DataReader.ReadInt(x, "NumOfProject")
+                                                }).ToList();
+                            objDeviceList.ForEach(x =>
+                                                      {
+                                                          if (licenseDetails.Where(y => y.DeviceId == x.DeviceId).Count() > 0)
+                                                          {
+                                                              licenseDetails.Where(y => y.DeviceId == x.DeviceId).ToList().
+                                                                  ForEach(z =>
+                                                                          x.LicenseTypeProject.Add(
+                                                                              (ELicenseType)System.Enum.Parse(typeof(ELicenseType), z.licenseTypeId.ToString()),
+                                                                              z.NumOfProject));
+                                                          }
+                                                      });
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceListById"));
@@ -70,10 +94,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            License = new License()
                                                          {
                                                              LicenseId = DataReader.ReadInt(x, "LicenseId"),
-                                                             LicenseType = new LicenseType()
-                                                                               {
-                                                                                   Type = DataReader.ReadString(x, "LicenseType"),
-                                                                               },
                                                              Branch = new Branch()
                                                                           {
                                                                               BranchId = DataReader.ReadInt(x, "BranchId"),
@@ -86,6 +106,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                           }
                                                          }
                                        }).ToList();
+
+                        if (dsDeviceList.Tables[1].Rows.Count > 0)
+                        {
+                            var licenseDetails = dsDeviceList.Tables[1].
+                                AsEnumerable().
+                                Select(x => new
+                                {
+                                    DeviceId = DataReader.ReadInt(x, "DeviceID"),
+                                    licenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
+                                    NumOfProject = DataReader.ReadInt(x, "NumOfProject")
+                                }).ToList();
+                            objDeviceList.ForEach(x =>
+                            {
+                                if (licenseDetails.Where(y => y.DeviceId == x.DeviceId).Count() > 0)
+                                {
+                                    licenseDetails.Where(y => y.DeviceId == x.DeviceId).ToList().
+                                        ForEach(z =>
+                                                x.LicenseTypeProject.Add(
+                                                    (ELicenseType)System.Enum.Parse(typeof(ELicenseType), z.licenseTypeId.ToString()),
+                                                    z.NumOfProject));
+                                }
+                            });
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceList"));
@@ -97,19 +140,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                {
-                    returnValue = DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure(
-                            "[CP].[InsertDevice]",
-                            new object[]
+                    {
+                        var licenseDetails = new XElement("LicenseDetails",
+                                                          device.LicenseTypeProject.
+                                                              Select(x =>
+                                                                     new XElement("LicenseDetail",
+                                                                                  new XAttribute("LicenseTypeID", System.Convert.ToInt32(x.Key)),
+                                                                                  new XAttribute("NumOfProject", x.Value)
+                                                                         )).ToList());
+
+                        returnValue = DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CP].[InsertDevice]",
+                                new object[]
                                     {
                                         device.LicenseId,
                                         device.DeviceName,
                                         device.DeviceFamily.DeviceFamilyId,
-                                        device.IsActive
+                                        device.IsActive,
+                                        licenseDetails.ToString()
                                     });
-                },
+                    },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDevice"));
             return returnValue;
         }
@@ -119,20 +171,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                {
-                    returnValue = DataAccessFactory.
-                        Instance.
-                        ExecuteProcedure(
-                            "[CP].[UpdateDevice]",
-                            new object[]
+                    {
+                        var licenseDetails = new XElement("LicenseDetails",
+                                                          device.LicenseTypeProject.
+                                                              Select(x =>
+                                                                     new XElement("LicenseDetail",
+                                                                                  new XAttribute("LicenseTypeID", System.Convert.ToInt32(x.Key)),
+                                                                                  new XAttribute("NumOfProject", x.Value)
+                                                                         )).ToList());
+
+                        returnValue = DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CP].[UpdateDevice]",
+                                new object[]
                                     {
                                         device.DeviceId,
                                         device.LicenseId,
                                         device.DeviceName,
                                         device.DeviceFamily.DeviceFamilyId,
-                                        device.IsActive
+                                        device.IsActive,
+                                        licenseDetails.ToString()
                                     });
-                },
+                    },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDevice"));
             return returnValue;
         }

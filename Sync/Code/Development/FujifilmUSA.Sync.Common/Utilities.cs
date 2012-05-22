@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -278,7 +279,7 @@ namespace FujifilmUSA.Sync.Common
             var type = typeof(T);
             foreach (var field in type.GetFields())
             {
-                var attribute = Attribute.GetCustomAttribute(field,typeof(DescriptionAttribute)) as DescriptionAttribute;
+                var attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
                 if (attribute != null)
                 {
                     if (attribute.Description == description)
@@ -326,6 +327,9 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-
+        public EProfilerException GetProfilerException(string exception)
+        {
+            return (EProfilerException) Enum.Parse(typeof (EProfilerException), exception);
+        }
     }
 }

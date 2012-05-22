@@ -155,7 +155,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                              MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
                                                                              MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
                                                                              HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                                                             Δe = DataReader.ReadDecimal(y, "ΔE"),
+                                                                             Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
                                                                          }).ToList();
                                              });
                 },
@@ -215,6 +215,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
+        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId)
+        {
+            var PatchDetails = new List<MeasurementPatchDetails>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetPatchDetailsByOptimizeRunID",
+                                new object[] { optimizeRunId, MeasurementId });
+                    PatchDetails = dsMeasurements.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new MeasurementPatchDetails()
+                        {
+                            SampleId = DataReader.ReadInt(x, "SampleID"),                          
+                            HtmlColor = DataReader.ReadString(x, "HTMLColor"),
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"), 
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"), 
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE"),
+                            ΔE94 = DataReader.ReadDecimal(x, "ΔE94"),
+                            ΔE2000 = DataReader.ReadDecimal(x, "ΔE2000")
+                        }).ToList();
+                  
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurementOnRunId"));
+            return PatchDetails;
+        }
         #endregion
 
         #region ITaskBase Members

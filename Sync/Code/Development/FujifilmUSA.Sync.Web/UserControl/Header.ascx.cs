@@ -12,7 +12,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                lbtnSettings.Visible = SessionManager.Instance.CurrentUser.HasAdminPermission();
+                if (SessionManager.Instance.CurrentUser != null)
+                    lbtnSettings.Visible = SessionManager.Instance.CurrentUser.HasAdminPermission();
             }
         }
         #endregion

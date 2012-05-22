@@ -145,21 +145,7 @@
                                 <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn 
-                            UniqueName="LicenseType" 
-                            AllowFiltering="true" 
-                            HeaderText="License Type"
-                            DataField="LicenseType" 
-                            SortExpression="LicenseType" 
-                            ShowFilterIcon="true"  
-                            FilterControlWidth="120"
-                            HeaderStyle-Width ="120" 
-                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                            >
-                            <ItemTemplate>
-                                <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType") %>' />
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
+                       
                         <telerik:GridTemplateColumn 
                             UniqueName="SerialNumber" 
                             AllowFiltering="true" 
@@ -175,6 +161,7 @@
                                 <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>'/>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
+                        
                         <telerik:GridTemplateColumn 
                             UniqueName="InstrumentType" 
                             AllowFiltering="true" 
@@ -190,7 +177,21 @@
                                 <asp:Label ID="lblInstrumentType" runat="server" Text='<%# Eval("InstrumentType.InstrumentName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        
+                         <telerik:GridTemplateColumn 
+                            UniqueName="Description" 
+                            AllowFiltering="true" 
+                            HeaderText="Description"
+                            DataField="Description" 
+                            SortExpression="Description" 
+                            ShowFilterIcon="true"  
+                            FilterControlWidth="120"
+                            HeaderStyle-Width ="120" 
+                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
+                            >
+                            <ItemTemplate>
+                                <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
                                 UniqueName="IsActive" 
                                 AllowFiltering="false" 
@@ -254,11 +255,3 @@
     &nbsp;</div>
 <div class="clear">
 </div>
-<%--                    <td align="left"><asp:Label ID="lblCompanyName" runat="server" Text='<%#Eval("CompanyName") %>'></asp:Label></td>
-                    <td align="left"><asp:Label ID="lblBranchName" runat="server" Text='<%#Eval("BranchName") %>'></asp:Label></td>
-                    <td align="left"><asp:Label ID="lblSerialNumber" runat="server" Text='<%#Eval("SerialNumber") %>'></asp:Label></td>
-                    <td align="left"><asp:Label ID="lblMeasuremntDeviceType" runat="server" Text='<%#Eval("MeasurementDeviceTypeDetail.DeviceTypeName") %>'></asp:Label></td>
-                    <td align="left"><asp:Label ID="lblIsActive" runat="server" Text='<%#DisplayIsActiveCustomValue(Eval("IsActive")) %>'></asp:Label></td>
-                    <td align="center"><asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit MeasurementDevice" AlternateText="Edit" ImageUrl="../Images/edit_icon.png" CommandName="EditMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' /></td>                    
-                    <td align="center"><asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete MeasurementDevice" AlternateText="Delete" ImageUrl="../Images/delete_icon.png" CommandName="DeleteMeasurementDevice" CommandArgument='<%# Eval("MeasurementDeviceId") %>' OnClientClick="return ConfirmDeleteProject()" /></td>                    
---%>

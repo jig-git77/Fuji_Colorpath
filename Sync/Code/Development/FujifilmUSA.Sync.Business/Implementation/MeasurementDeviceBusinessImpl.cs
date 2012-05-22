@@ -28,6 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.LicenseId,
                                         measurementdevice.SerialNumber,
                                         measurementdevice.InstrumentTypeId,
+                                        measurementdevice.Description,
                                         measurementdevice.IsActive
                                     });
                 },
@@ -51,6 +52,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementdevice.LicenseId,
                                         measurementdevice.SerialNumber,
                                         measurementdevice.InstrumentTypeId,
+                                        measurementdevice.Description,
                                         measurementdevice.IsActive
                                     });
                 },
@@ -91,10 +93,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                     BranchId = DataReader.ReadInt(x, "BranchID"),
                                                     BranchName = DataReader.ReadString(x, "BranchName"),
                                                     LicenseId = DataReader.ReadInt(x, "LicenseID"),
-                                                    LicenseTypeId = DataReader.ReadInt(x, "LicenseTypeID"),
-                                                    LicenseType = DataReader.ReadString(x, "LicenseType"),
+                                                    //LicenseTypeId = DataReader.ReadInt(x, "LicenseTypeID"),
+                                                    //LicenseType = DataReader.ReadString(x, "LicenseType"),
                                                     SerialNumber = DataReader.ReadString(x, "SerialNumber"),
                                                     InstrumentType = new InstrumentType() { InstrumentTypeId = (short)DataReader.ReadInt(x, "InstrumentTypeID"), InstrumentName = DataReader.ReadString(x, "InstrumentType") },
+                                                    Description = DataReader.ReadString(x, "Description"),
                                                     IsActive = DataReader.ReadBoolean(x, "IsActive")
                                                 }).ToList();
                         }
@@ -121,6 +124,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 LicenseType = DataReader.ReadString(x, "LicenseType"),
                                 SerialNumber = DataReader.ReadString(x, "SerialNumber"),
                                 InstrumentType = new InstrumentType() { InstrumentName = DataReader.ReadString(x, "InstrumentType") },
+                                Description = DataReader.ReadString(x, "Description"),
                                 IsActive = DataReader.ReadBoolean(x, "IsActive")
                             }).ToList();
                     }

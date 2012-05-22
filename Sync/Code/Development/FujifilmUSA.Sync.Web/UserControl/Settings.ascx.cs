@@ -22,6 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
             tdLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
             tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
+            //tdReferenceChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
 
             ////seperator image 
             divcompanySeprator.Visible = tdcompany.Visible;
@@ -30,8 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
            
             divDeviceSeprator.Visible = tdDevice.Visible;
             divLicenseSeprator.Visible = tdLicense.Visible;
-            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible;
-
+            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible;           
         }
         #endregion
 
@@ -64,8 +64,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("MeasurementDeviceList.aspx");
         }
-
-
-
+        protected void lnkRefChart_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ReferenceChartManagement.aspx");
+        }
+        protected void lnkProfileMgmt_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ProfileManagement.aspx");
+        }
     }
 }

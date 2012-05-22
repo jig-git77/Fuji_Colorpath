@@ -20,36 +20,59 @@
         </div>
         <div class="clear">
         </div>
-        <div class="ContainerClass">
-            <div>
-                <%--<label>Select An Option Below:</label>
-                <div class="clear">
-                </div>--%>
-            </div>
-            <div>
-                <div class="formSelection">    
-                   <asp:LinkButton ID="lbtnColorValidation" runat="server" ValidationGroup="vgDestination"
-                    CssClass="disable_big_bt" OnClientClick="return false;" >
-                    <span>
-                        Color Validation </span>
-                </asp:LinkButton>
-                </div>
-                <div class="formSelection">
-                <asp:LinkButton ID="lbtnDLPOptimization" runat="server" ValidationGroup="vgDestination"
-                    CssClass="big_bt" OnClick="lbtnDLPOptimization_Click">
-                    <span>
-                        DLP Optimization </span>
-                </asp:LinkButton>
-                </div>
-                <div class="formSelection">
-                <asp:LinkButton ID="lbtAligmentCurves" runat="server" ValidationGroup="vgDestination"
-                    CssClass="disable_big_bt" OnClientClick="return false;" >
-                    <span>
-                        Aligment Curves </span>
-                </asp:LinkButton>
-                </div>
-            </div>
+      
+        <div class="ContainerClass">           
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                <tr>
+                    <td>
+                       <asp:LinkButton ID="lbtAligmentCurves" runat="server" ValidationGroup="vgDestination"
+                            CssClass="disable_big_bt" OnClientClick="return false;" >
+                            <span id="spanAligmentCurves" runat="server">
+                                Alignment Curves
+                            </span>
+                        </asp:LinkButton>
+                        <input id="Hidden_AligmentCurves" type="hidden" runat="server" value="0"/>
+                    </td>
+                    <td>
+                         <asp:LinkButton ID="lbtnDLPOptimization" runat="server" ValidationGroup="vgDestination"
+                            CssClass="disable_big_bt" OnClick="lbtnDLPOptimization_Click" OnClientClick="return false;">
+                             <span id="spanDLPOptimization" runat="server">
+                                DLP Optimization
+                            </span>
+                        </asp:LinkButton>
+                        <input id="Hidden_DLPOptimization" type="hidden" runat="server" value="0"/>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="lbtInkOptimization" runat="server" ValidationGroup="vgDestination"
+                            CssClass="disable_big_bt" onclick="lbtInkOptimization_Click" OnClientClick="return false;">
+                             <span id="spanInkOptimization" runat="server">
+                                Ink Optimization
+                            </span>
+                        </asp:LinkButton>
+                        <input id="Hidden_InkOptimization" type="hidden" runat="server" value="0"/>
+                    </td>
+                </tr>
+                 <tr align="center">
+                    <td colspan="3">  
+                        <br />
+                    </td>
+                 </tr>
+                <tr>
+                    <td></td>
+                    <td>                       
+                        <asp:LinkButton ID="lbtnColorValidation" runat="server" ValidationGroup="vgDestination"
+                        CssClass="disable_big_bt" OnClientClick="return false;" >
+                            <span id="spanColorValidation" runat="server">
+                            Color Validation
+                            </span>
+                        </asp:LinkButton>       
+                        <input id="Hidden_ColorValidation" type="hidden" runat="server" value="0"/>         
+                    </td>
+                    <td></td>
+                </tr>
+            </table>           
         </div>
+       
     </div>
     <div class="clear">
     </div>

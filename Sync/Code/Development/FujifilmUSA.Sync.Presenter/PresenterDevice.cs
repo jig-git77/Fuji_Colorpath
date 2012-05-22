@@ -49,6 +49,13 @@ namespace FujifilmUSA.Sync.Presenter
                                                                           _viewDevice.CurrentUserId);
         }
 
+        public void DeviceListByDeviceId()
+        {
+            var deviceBusiness = BusinessFactory<IDeviceBusiness>.CreateObject();
+            deviceBusiness.ErrorOccured += _viewDevice.ErrorOccured;
+            _viewDevice.SelectedDevice = deviceBusiness.GetDevice(_viewDevice.DeviceId, _viewDevice.CurrentUserId).FirstOrDefault();
+        }
+
         public void GetMeasurementDevices()
         {
             var measurementDeviceBusiness = BusinessFactory<IMeasurementDeviceBusiness>.CreateObject();

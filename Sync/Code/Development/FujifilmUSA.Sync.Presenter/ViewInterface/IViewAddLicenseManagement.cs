@@ -12,6 +12,5 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int CompanyId { get; set; }
         Dictionary<int, string> Compnaies { get; set; }
         Dictionary<int, string> Branches { get; set; }
-        Dictionary<int, string> LicenseTypes { get; set; }
     }
 }

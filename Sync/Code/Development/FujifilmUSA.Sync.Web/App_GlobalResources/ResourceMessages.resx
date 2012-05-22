@@ -442,7 +442,7 @@
     <value>User credentials are validated but user doesn't have any permission.</value>
   </data>
   <data name="LicenseManagement_DeleteLicense_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete selected license?</value>
+    <value>Are you sure you want to delete selected license? It will delete all your related devices, measurement devices and projects. Do you really want to delete everything?</value>
   </data>
   <data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected source profile?</value>
@@ -469,7 +469,7 @@
     <value>Device family already exists with same name.</value>
   </data>
   <data name="Duplicate_InsertLicense" xml:space="preserve">
-    <value>License already exists with same name.</value>
+    <value>License already exists with same branch.</value>
   </data>
   <data name="Duplicate_InsertLicenseType" xml:space="preserve">
     <value>License type already exists with same name.</value>
@@ -483,7 +483,31 @@
   <data name="Duplicate_InsertUser" xml:space="preserve">
     <value>User already exists with same name.</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value />
+  <data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
+    <value>Value conversion failed on row {0}.</value>
+  </data>
+  <data name="Error_ReferenceChart_ColumnCountNotMatch" xml:space="preserve">
+    <value>Column counts are not matched with desired format.</value>
+  </data>
+  <data name="Error_ReferenceChart_ColumnCountNotMatchOnRow" xml:space="preserve">
+    <value>Column counts are not matched on row {0} with desired format.</value>
+  </data>
+  <data name="Error_ReferenceChart_ColumnEmptyValueOnRow" xml:space="preserve">
+    <value>Value can not be for value in row {0}.</value>
+  </data>
+  <data name="Error_ReferenceChart_ColumnNamesNotMatch" xml:space="preserve">
+    <value>Column names are not matched with desired format.</value>
+  </data>
+  <data name="Error_CreateReferenceChart" xml:space="preserve">
+    <value>Error occured while saving reference chart data.Please contact your administrator.</value>
+  </data>
+  <data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
+    <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart/ reference data(c,m,y,k)</value>
+  </data>
+  <data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
+    <value>Error occured while checking source profile and chart relationship. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertReferenceLabData" xml:space="preserve">
+    <value>Error occured while inserting reference lab data. Please contact your administrator.</value>
   </data>
 </root>

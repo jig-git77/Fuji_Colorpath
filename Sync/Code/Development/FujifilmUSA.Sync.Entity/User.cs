@@ -30,6 +30,10 @@ namespace FujifilmUSA.Sync.Entity
         public UserCompany UserCompany { get; set; }
         public Region Region { get; set; }
         public List<UserBranch> UserBranches { get; set; }
+        public Guid AuthenticationKey { get; set; }
+        public bool IsActivated { get; set; }
+        public int SecurityQuestionId { get; set; }
+        public string SecurityAnswer { get; set; }
         #endregion
 
         #region extension Methods

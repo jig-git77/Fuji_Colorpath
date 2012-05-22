@@ -66,6 +66,16 @@
             <img src="Images/syncmeasurementdevice-management.png" style="position:relative;z-index:1; " alt="Measurement Device" />
             <span> Measurement Device </span>
       </asp:LinkButton>
+      <asp:LinkButton ID="lbtnRefChart" runat="server" 
+           CssClass="dock-item overlapobject" onclick="lbtnRefChart_Click">
+            <img src="Images/Reference-Chart.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
+            <span> Reference Chart </span>
+      </asp:LinkButton>
+      <asp:LinkButton ID="lbtProfileMgmt" runat="server" 
+           CssClass="dock-item overlapobject" onclick="lbtProfileMgmt_Click">
+            <img src="Images/Profile-Management.png" style="position:relative;z-index:1; " alt="Profile Management" />
+            <span> Profile Management </span>
+      </asp:LinkButton>
   </div> 
 </div>
 </div>

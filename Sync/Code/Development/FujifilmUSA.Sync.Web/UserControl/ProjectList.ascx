@@ -14,9 +14,9 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName) {
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns, "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -120,7 +120,8 @@
 <div class="contant_middle">
     <div class="head">
         <h1>
-            DLP Optimization</h1>
+            <asp:Label ID="lblTitle" runat="server" Text="Project List"></asp:Label>
+            </h1>
         <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button"
             ValidationGroup="vgDestination" OnClick="lbtnCreateNewPrintCondition_Click">
             <span>
@@ -137,7 +138,7 @@
     <div class="listDevice" style="margin-left: 15px;">
         <asp:UpdatePanel ID="testPanel" runat="server">
             <ContentTemplate>
-                <table cellpadding="0" cellspacing="0" border="0">
+                <table cellpadding="0" cellspacing="0" border="0">                   
                     <tr id="trListHeader" runat="server">
                         <td>
                             <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
@@ -169,7 +170,7 @@
                                                     <Items>
                                                         <telerik:RadComboBoxItem Text="ALL" />
                                                         <telerik:RadComboBoxItem Text="Open" Value="Open" />
-                                                        <telerik:RadComboBoxItem Text="Closed" Value="Closed" />
+                                                        <telerik:RadComboBoxItem Text="Closed" Value="Closed" />                                                      
                                                     </Items>
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
@@ -312,15 +313,16 @@
     <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" IconUrl="" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Open Print Condition" Width="715" Height="250"
-                Behaviors="Move" Behavior="Move">
+                ShowContentDuringLoad="false" Title="Open Print Condition" Width="720" Height="220"
+                Behaviors="Move" >
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Close Print Condition" Width="715" Height="230"
-                Behaviors="Move" Behavior="Move">
+                ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
+                Behaviors="Move" >
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
+    <input id="Hidden_TotalProjects" type="hidden" runat="server" value="0" />
 </div>
 <div class="contant_bottom">
     &nbsp;</div>

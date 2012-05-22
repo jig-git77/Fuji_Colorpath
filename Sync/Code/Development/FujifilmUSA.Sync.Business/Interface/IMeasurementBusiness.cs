@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId);
         int UpdateMeasurementByAnalyzeChart(Measurement measurement);
         List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int optimizeRunId);
+        List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId);
     }
 }

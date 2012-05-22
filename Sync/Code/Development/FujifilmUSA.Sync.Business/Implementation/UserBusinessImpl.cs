@@ -5,27 +5,31 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Common;
 using System.Collections.Generic;
-using System.Text;
 using FujifilmUSA.Sync.Business.CustomExceptions;
+using System;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class UserBusinessImpl : IUserBusiness
     {
-        public User UserLogin(string userName, string password)
+        public User UserLogin(string userName, string password, UserType userType)
         {
             var user = new User();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]", new object[] { userName, LoginSecurity.Encrypt(password) });
+                    if (userType == UserType.XmfColorOrganizerUser)
+                    {
+                        password = Encryption.CryptHelper.Decrypt(password, Common.XmfColorOrganizerEncryptionKey);
+                    }
+                    var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
+                                                                        new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });
                     if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
                     {
                         user = new User()
                                    {
                                        UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
                                        LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
-                                       LoginPass = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginPass"),
                                        LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
                                        FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
                                        Role = new Role()
@@ -36,7 +40,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        RegionId = DataReader.ReadShort(dsUser.Tables[0].Rows[0], "RegionId"),
                                        LastModifiedUserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "LastModifiedUserId"),
                                        LastModifiedDate = DataReader.ReadDate(dsUser.Tables[0].Rows[0], "LastModifiedDate"),
-                                       IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive")
+                                       IsActive = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActive"),
+                                       AuthenticationKey = DataReader.ReadGuid(dsUser.Tables[0].Rows[0], "AuthenticationKey"),
+                                       SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionID"),
+                                       SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
+                                       IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
                                    };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -48,7 +56,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             user.UserCompany = new UserCompany()
                                                    {
-                                                       CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID")
+                                                       CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
+                                                       Company = new Company()
+                                                                     {
+                                                                         CompanyId = DataReader.ReadInt(dsUser.Tables[2].Rows[0], "CompanyID"),
+                                                                         CompanyName = DataReader.ReadString(dsUser.Tables[2].Rows[0], "CompanyName")
+                                                                     }
                                                    };
                         }
                         if (dsUser.Tables[3].Rows.Count > 0)
@@ -56,7 +69,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             user.UserBranches = dsUser.Tables[3].AsEnumerable().
                                 Select(x => new UserBranch()
                                                 {
-                                                    BranchId = DataReader.ReadInt(x, "BranchID")
+                                                    BranchId = DataReader.ReadInt(x, "BranchID"),
+                                                    Branch = new Branch()
+                                                                 {
+                                                                     BranchId = DataReader.ReadInt(x, "BranchID"),
+                                                                     BranchName = DataReader.ReadString(x, "BranchName")
+                                                                 }
                                                 }).ToList();
                         }
                     }
@@ -65,7 +83,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return user;
         }
 
-        public List<User> GetUser(int userId,int currentUserId)
+        public List<User> GetUser(int userId, int currentUserId)
         {
             var objUsers = new List<User>();
             Common.ImplementBusinessLogic(
@@ -87,7 +105,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        {
                                            UserId = DataReader.ReadInt(x, "UserId"),
                                            LoginId = DataReader.ReadString(x, "LoginId"),
-                                           LoginPass = LoginSecurity.Decrypt(DataReader.ReadString(x, "LoginPass")),
+                                           //LoginPass = LoginSecurity.Decrypt(DataReader.ReadString(x, "LoginPass")),
                                            LastName = DataReader.ReadString(x, "LastName"),
                                            FirstName = DataReader.ReadString(x, "FirstName"),
                                            Email = DataReader.ReadString(x, "Email"),
@@ -96,6 +114,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            LastModifiedUserId = DataReader.ReadInt(x, "LastModifiedUserId"),
                                            LastModifiedDate = DataReader.ReadDate(x, "LastModifiedDate"),
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                           AuthenticationKey = DataReader.ReadGuid(x, "AuthenticationKey"),
+                                           SecurityQuestionId = DataReader.ReadInt(x, "SecurityQuestionID"),
+                                           SecurityAnswer = DataReader.ReadString(x, "SecurityAnswer"),
+                                           IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
                                            Region = new Region()
                                                         {
                                                             RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
@@ -147,6 +169,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
+                    user.AuthenticationKey = Guid.NewGuid();
+                    user.IsActivated = false;
                     string branchIds = GetBranchIds(user.UserBranches);
                     returnValue = DataAccessFactory.
                         Instance.
@@ -155,7 +179,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             new object[]
                                     {
                                         user.LoginId
-                                        , LoginSecurity.Encrypt(user.LoginPass)
+                                        , LoginSecurity.GetDefaultEncryptedPassword()
                                         , user.LastName
                                         , user.FirstName
                                         , user.Email
@@ -165,10 +189,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.IsActive
                                         , user.UserCompany.CompanyId
                                         , branchIds
+                                        , user.AuthenticationKey
+                                        , user.IsActivated
                                     });
                     if (returnValue == -1)
                     {
                         throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertUser" };
+                    }
+                    else
+                    {
+                        LogManager.SendUserCreatedEmail(user);
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
@@ -190,7 +220,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                         user.UserId
                                         , user.LoginId
-                                        , LoginSecurity.Encrypt(user.LoginPass)
+                                        //, LoginSecurity.Encrypt(user.LoginPass)
                                         , user.LastName
                                         , user.FirstName
                                         , user.Email
@@ -230,11 +260,157 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return true;
         }
 
+        public User GetUserAuthenticationInformation(Guid authenticationKey)
+        {
+            var user = new User();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetUserAuthenticationInformation]",
+                                                                        new object[] { authenticationKey });
+                    if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
+                    {
+                        user = new User()
+                                   {
+                                       UserId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserId"),
+                                       LoginId = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LoginId"),
+                                       LastName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LastName"),
+                                       FirstName = DataReader.ReadString(dsUser.Tables[0].Rows[0], "FirstName"),
+                                       Email = DataReader.ReadString(dsUser.Tables[0].Rows[0], "Email"),
+                                       IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
+                                       SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionId"),
+                                       SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
+                                       AuthenticationKey = authenticationKey
+                                   };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
+            return user;
+        }
+
+        public int UpdateUserAuthenticationInformation(User user, UserAuthenticationUpdateType updateType)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    user.IsActivated = true;
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateUserAuthenticationInformation]",
+                            new object[]
+                                    {
+                                        user.AuthenticationKey
+                                        , user.SecurityQuestionId
+                                        , user.SecurityAnswer
+                                        , LoginSecurity.EncryptPasswords(user.LoginPass)
+                                        , user.IsActivated
+                                        , Convert.ToInt32(updateType)
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
+            return returnValue;
+        }
+
+        public User UpdatePreResetPasswordInformation(string loginId)
+        {
+            var user = new User { LoginId = loginId, AuthenticationKey = Guid.NewGuid() };
+            var isActivatedOutParam = new Parameters() { ParameterName = "@IsActivated", Type = DbType.Boolean };
+            var emailOutParam = new Parameters() { ParameterName = "@Email", Size = 50, Type = DbType.String };
+            var isExistsOutParam = new Parameters() { ParameterName = "@IsExists", Type = DbType.Boolean };
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "[CP].[UpdatePreResetPasswordInformation]",
+                              new List<Parameters>()
+                                  {
+                                      new Parameters() {ParameterName = "@LoginID", Size = 30, Type = DbType.String, Value = user.LoginId},
+                                      new Parameters() {ParameterName = "@AuthenticationKey",Size = 16,Type = DbType.Guid, Value = user.AuthenticationKey},
+                                  },
+                              new List<Parameters>()
+                                  {
+                                      isActivatedOutParam,
+                                      emailOutParam,
+                                      isExistsOutParam
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
+            if (Convert.ToBoolean(isExistsOutParam.Value))
+            {
+                user.IsActivated = Convert.ToBoolean(isActivatedOutParam.Value);
+                if (user.IsActivated)
+                {
+                    user.Email = emailOutParam.Value.ToString();
+                    LogManager.SendPasswordResetEmail(user);
+                }
+            }
+            return user;
+        }
+
+        public int UpdatePassword(int loginId, string password)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdatePassword]",
+                            new object[]
+                                    {
+                                        loginId, LoginSecurity.EncryptPasswords(password)
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+            return returnValue;
+        }
+
+        public int UpdateSecurityInformation(int loginId, int securityQuestionId, string securityAnswer)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateSecurityInformation]",
+                            new object[]
+                                    {
+                                        loginId, securityQuestionId, securityAnswer
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+            return returnValue;
+        }
+
+        public void SendEmailToUser(User user, UserAuthenticationUpdateType updateType)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    switch (updateType)
+                    {
+                        case UserAuthenticationUpdateType.FirstTimeSet:
+                            LogManager.SendUserCreatedEmail(user);
+                            break;
+                        case UserAuthenticationUpdateType.Reset:
+                            LogManager.SendPasswordResetEmail(user);
+                            break;
+                        case UserAuthenticationUpdateType.ForceReSet:
+                            LogManager.SendPasswordForceResetEmail(user);
+                            break;
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+        }
+
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;
 
         #endregion
     }
-
 }

@@ -35,10 +35,14 @@ namespace FujifilmUSA.Sync.DataAccess
         {
             get
             {
-#if Development
+#if Local
+                return ConfigurationManager.ConnectionStrings["LocalConnection"].ConnectionString;
+#elif Jay_Local
+                return ConfigurationManager.ConnectionStrings["Jay_LocalConnection"].ConnectionString;
+#elif Dev
                 return ConfigurationManager.ConnectionStrings["DevConnection"].ConnectionString;
-#elif Stage
-                return ConfigurationManager.ConnectionStrings["StageConnection"].ConnectionString;
+#elif Production
+                return ConfigurationManager.ConnectionStrings["ProductionConnection"].ConnectionString;
 #endif
             }
         }

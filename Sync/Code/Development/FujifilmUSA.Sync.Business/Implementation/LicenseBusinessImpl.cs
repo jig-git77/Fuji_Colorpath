@@ -6,6 +6,7 @@ using System.Data;
 using FujifilmUSA.Sync.DataAccess;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Business.CustomExceptions;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -13,14 +14,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IDeviceBusiness Members
 
-        public List<License> GetLicense(int licensesId,int currentUserId)
+        public List<License> GetLicense(int licensesId, int currentUserId)
         {
             var objLicenseList = new List<License>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicense]", new object[] { licensesId,currentUserId });
-                    if (dsLicenseList != null && dsLicenseList.Tables.Count > 0 && dsLicenseList.Tables[0].Rows.Count > 0)
+                    var dsLicenseList = DataAccessFactory.Instance.GetDsResult("[CP].[GetLicense]", new object[] { licensesId, currentUserId });
+                    if (dsLicenseList != null && dsLicenseList.Tables.Count == 2 && dsLicenseList.Tables[0].Rows.Count > 0)
                     {
                         objLicenseList = dsLicenseList.Tables[0].AsEnumerable().
                             Select(x =>
@@ -32,13 +33,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            ExpirationDate = DataReader.ReadDate(x, "ExpirationDate"),
                                            NumOfDevice = DataReader.ReadShort(x, "NumOfDevice"),
                                            LicenseDesc = DataReader.ReadString(x, "LicenseDesc"),
-                                           LicenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),
-                                           LicenseType = new LicenseType()
-                                                             {
-                                                                 LicenseTypeId = DataReader.ReadShort(x, "LicenseTypeID"),
-                                                                 Type = DataReader.ReadString(x, "LicenseType")
-                                                             },
                                            Branch = new Branch()
                                                         {
                                                             BranchId = DataReader.ReadInt(x, "BranchId"),
@@ -46,6 +41,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                             CompanyId = DataReader.ReadInt(x, "CompanyId")
                                                         }
                                        }).ToList();
+
+                        if (dsLicenseList.Tables[1].Rows.Count > 0)
+                        {
+                            var licenseDetail = dsLicenseList.Tables[1].AsEnumerable().
+                                Select(x => new
+                                                {
+                                                    LicenseID = DataReader.ReadInt(x, "LicenseID"),
+                                                    LicenseTypeID = DataReader.ReadShort(x, "LicenseTypeID"),
+                                                }).ToList();
+
+                            objLicenseList.
+                                ForEach(lic =>
+                                            {
+                                                if (licenseDetail.Where(x => x.LicenseID == lic.LicenseId).Count() > 0)
+                                                {
+                                                    licenseDetail.Where(x => x.LicenseID == lic.LicenseId).ToList().
+                                                        ForEach(
+                                                            type =>
+                                                            lic.LicenseType.Add((ELicenseType)System.Enum.Parse(typeof(ELicenseType), type.LicenseTypeID.ToString())));
+                                                }
+                                            });
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLicenses"));
@@ -58,6 +75,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
+                    var licenseDetails = new XElement("LicenseDetails",
+                                                      license.LicenseType.
+                                                          Select(x =>
+                                                                 new XElement("LicenseDetail",
+                                                                              new XAttribute("LicenseTypeID", System.Convert.ToInt32(x))
+                                                                     )).ToList());
+
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
@@ -69,9 +93,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
-                                        , license.LicenseTypeId
                                         , license.IsActive
+                                        , licenseDetails.ToString()
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLicense"));
             return returnValue;
@@ -83,6 +111,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
+                    var licenseDetails = new XElement("LicenseDetails",
+                                                      license.LicenseType.
+                                                          Select(x =>
+                                                                 new XElement("LicenseDetail",
+                                                                              new XAttribute("LicenseTypeID", System.Convert.ToInt32(x))
+                                                                     )).ToList());
+
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
@@ -95,9 +130,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , license.ExpirationDate
                                         , license.NumOfDevice
                                         , license.LicenseDesc
-                                        , license.LicenseTypeId
                                         , license.IsActive
+                                        , licenseDetails.ToString()
                                     });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLicense"));
             return returnValue;

@@ -59,8 +59,20 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
             miscDataBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
-            _viewAddBranchManagement.Compnaies = miscDataBusiness.GetCompanyList(_viewAddBranchManagement.CurrentUserId);
+            _viewAddBranchManagement.Companies = miscDataBusiness.GetCompanyList(_viewAddBranchManagement.CurrentUserId);
         }
 
+        public void RegionList()
+        {
+            var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+            sourceProfileBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            _viewAddBranchManagement.RegionList = sourceProfileBusiness.GetRegionList(_viewAddBranchManagement.CurrentUserId);
+        }
+        public void GetCompaniesByRegion()
+        {
+            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
+            miscDataBusiness.ErrorOccured += _viewAddBranchManagement.ErrorOccured;
+            _viewAddBranchManagement.Companies = miscDataBusiness.GetCompaniesByRegion(_viewAddBranchManagement.RegionId, _viewAddBranchManagement.CurrentUserId);
+        }
     }
 }

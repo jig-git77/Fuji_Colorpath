@@ -77,11 +77,5 @@ namespace FujifilmUSA.Sync.Presenter
             miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
             _viewAddLicenseManagement.Branches = miscDataBusiness.GetBranchList(_viewAddLicenseManagement.CompanyId, _viewAddLicenseManagement.CurrentUserId);
         }
-        public void GetLicenseType()
-        {
-            var miscDataBusiness = BusinessFactory<IMiscDataBusiness>.CreateObject();
-            miscDataBusiness.ErrorOccured += _viewAddLicenseManagement.ErrorOccured;
-            _viewAddLicenseManagement.LicenseTypes = miscDataBusiness.GetLicenseTypeList();
-        }
     }
 }

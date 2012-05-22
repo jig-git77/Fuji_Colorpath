@@ -24,7 +24,7 @@
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
-                                <td>
+                                <td align="right">
                                     <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -51,7 +51,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
@@ -76,7 +76,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">License Name<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -101,7 +101,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Serial Number<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -125,7 +125,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Instrument Type<span style="color: Red;">*</span>
                                     </span>
                                 </td>
@@ -149,8 +149,28 @@
                                     </div>
                                 </td>
                             </tr>
+                             <tr>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight: bold;">Description
+                                    </span>
+                                </td>
+                                <td>
+                                    <b>&nbsp;:&nbsp;</b>
+                                </td>
+                                <td style="width: 400px">
+                                    <div style="float: left;">
+                                        <asp:TextBox ID="txtDescription" runat="server" Width="200px" Height="19px" MaxLength="100">
+                                           </asp:TextBox>
+                                    </div>
+                                    <div style="float: left">
+                                      
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
-                                <td style="width: 130px">
+                                <td style="width: 130px" align="right">
                                     <span style="font-weight: bold;">Is Active?</span>
                                 </td>
                                 <td>

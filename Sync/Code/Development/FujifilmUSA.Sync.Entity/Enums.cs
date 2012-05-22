@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System;
 namespace FujifilmUSA.Sync.Entity
 {
     public enum ELeftMenuItemLevel
@@ -29,10 +30,16 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EOperation
     {
+        [Description("Project List")]
         None = 0,
-        ColorValidation = 1,
+        [Description("Alignment Curves")]
+        AligmentCurves = 1,
+        [Description("DLP Optimization")]
         DlpOptimization = 2,
-        AligmentCurves = 3
+        [Description("Ink Optimization")]
+        InkOptimization = 3,
+        [Description("Color Validation")]
+        ColorValidation = 4
     }
 
     public enum EProfileType
@@ -154,4 +161,154 @@ namespace FujifilmUSA.Sync.Entity
         i1Sis = 2
     }
 
+    public enum EProfilerOption
+    {
+        ProfileType = 1,
+        ProfileSize = 2,
+        ProfileFormat = 3,
+        Rendering = 4,
+        PerceptualCompression2 = 5,
+        PerceptualCompressionMergeFactor = 6,
+        MeasurementCorrection = 7,
+        BrightenerCorrection = 8,
+        AdaptionType = 9,
+        WhiteXYZCorrection = 10,
+        GridA2B0 = 11,
+        GridA2B1 = 12,
+        GridA2B2 = 13,
+        GridB2A0 = 14,
+        GridB2A1 = 15,
+        GridB2A2 = 16,
+        GridGamut = 17,
+        InkMax = 18,
+        InkTotal = 19,
+        BlackGeneration = 20,
+        BlackStart = 21,
+        BlackWidth = 22,
+        DLType = 23,
+        DLExceptions = 24,
+        DLBypassBlack = 25,
+        DLExceptionRange = 26,
+        DLOptimizationLimit = 27,
+        DLOptimizeExceptions = 28,
+        DLOptimizeInkRange = 29,
+        DLApplyInkSave = 30,
+        DLReplaceCMY = 31,
+        DLAddBlack = 32,
+        DLAddCMY = 33,
+        Flags = 34,
+        Attributes0 = 35,
+        Attributes1 = 36,
+        SaveProfilerInfo = 37,
+        SaveProfilerData = 38,
+        Version = 39
+    }
+
+    [Flags]
+    public enum EProfilerException
+    {
+        PureBlack = 1,
+        BlackOverprint = 2,
+        LinearizeGray = 4,
+        PureGray = 8,
+        PureCMY = 16,
+        PurePrimaries = 32,
+        PureRGB = 64,
+        PureWhite = 128,
+        Duplex = 256,
+        Triplex = 512,
+        FullBlack = 1024,
+        PurifyColor = 2048,
+        PureSecondaries = 4096,
+        LimitPrimaries = 8192,
+        PreserveZeroBlack = 16384,
+        ClipToEdge = 65536,
+        TriplexBelowTAC = 32768,
+        FilterException = 524288,
+        PureCyan = 1048576,
+        PureMagenta = 2097152,
+        PureYellow = 4194304,
+        PureMY = 8388608,
+        PureCY = 16777216,
+        PureCM = 33554432,
+        MaxCMY = 67108864,
+        MaxRGB = 134217728
+    }
+    public enum EProfileRendering
+    {
+        [Description("Perceptual")]
+        icPerceptual = 0,
+
+        [Description("Relative")]
+        icRelativeColorimetric = 1,
+
+        [Description("Saturation")]
+        icSaturation = 2,
+
+        [Description("Absolute")]
+        icAbsoluteColorimetric = 3,
+
+        [Description("BlackCompensation")]
+        eCLBlackCompensationRI = 10,
+
+        [Description("AbsolutePerceptual")]
+        eCLAbsolutePerceptualRI = 11,
+
+        [Description("AbsLightenerCompensation")]
+        eCLAbsLightenerCompensationRI = 12,
+
+        [Description("GamutCompression")]
+        eCLGamutCompressionRI = 13,
+
+        [Description("PerceptualCompression")]
+        eCLPerceptualCompressionRI = 14,
+
+        [Description("RelativeCompression")]
+        eCLRelativeCompressionRI = 15,
+
+        [Description("AbsoluteCompression")]
+        eCLAbsoluteCompressionRI = 16,
+
+        [Description("pRelative")]
+        eCLRelativeRI = 17,
+
+        [Description("pAbsolute")]
+        eCLAbsoluteRI = 18,
+
+        [Description("RelativeLightness")]
+        eCLRelativeLightness = 19,
+
+        [Description("MinBlackCompression")]
+        eCLMinimumBlackCompressionRI = 26,
+
+        [Description("MinWhiteCompression")]
+        eCLMinimumWhiteCompressionRI = 27,
+
+        [Description("MinCompression")]
+        eCLMinimumCompressionRI = 28
+    }
+    public enum UserAuthenticationUpdateType
+    {
+        FirstTimeSet = 0,
+        Reset = 1,
+        ForceReSet = 2
+    }
+
+    public enum ELicenseType
+    {
+        [Description("Alignment Curves")]
+        Sync1D = 1,
+        [Description("DLP Optimization")]
+        DLP = 2,
+        [Description("Ink Optimization")]
+        InkOptimization = 3,
+        [Description("Color Validation")]
+        Verification = 4
+    }
+
+    public enum UserType
+    {
+        WebSiteUser = 0,
+        XmfColorOrganizerUser = 1
+    }
 }

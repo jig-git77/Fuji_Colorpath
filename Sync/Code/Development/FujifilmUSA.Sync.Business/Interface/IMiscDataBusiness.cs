@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
@@ -14,5 +15,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetDeviceFamilyList();
         Dictionary<int, string> GetLicenseTypeList();
         Dictionary<int, string> GetCompaniesByRegion(int regionId,int currentUserId);
+        Dictionary<int, string> GetProjectTypeList();
+        Dictionary<int, string> GetSecurityQuestions();
+        List<Activity> GetPrintActivities(int RegionID);
     }
 }

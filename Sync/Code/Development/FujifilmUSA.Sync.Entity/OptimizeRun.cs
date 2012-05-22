@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Entity
         public bool HasProfile { get; set; }
         public KeyValuePair<short, string> ReferenceChartType { get; set; }
         public string DlpName { get; set; }
+        public string LastDlpName { get; set; }
     }
 }

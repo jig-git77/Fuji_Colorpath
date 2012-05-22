@@ -15,5 +15,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Dictionary<int, string> Regions { get; set; }
         Dictionary<int, string> UserRoleList { get; set; }
         int RegionId { get; set; }
+        UserAuthenticationUpdateType UpdateType { get; set; }
     }
 }

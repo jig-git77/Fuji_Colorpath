@@ -101,7 +101,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add License</span>
         </asp:LinkButton>
-        <asp:LinkButton ID="lbtnAddLicenseType" runat="server" class="button" OnClick="lbtnAddLicenseType_Click">
+        <asp:LinkButton ID="lbtnAddLicenseType" runat="server" class="button" OnClick="lbtnAddLicenseType_Click" Visible="false">
             <span>
                 <asp:Image ID="Image1" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add License Type</span>
@@ -120,24 +120,16 @@
                     Width="98%" HeaderStyle-Font-Bold="true">
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="LicenseID,Branch.CompanyId,Branch.BranchId,LicenseTypeId,LicenseDesc,ActivationDate,ExpirationDate,IsActive">
-                        <Columns>
+                        <Columns>                         
                             <telerik:GridTemplateColumn DataField="LicenseDesc" AllowFiltering="true" HeaderText="License Desc"
-                                UniqueName="LicenseDesc" SortExpression="LicenseDesc" FilterControlWidth="110" HeaderStyle-Width ="110"
-                                ItemStyle-CssClass="breakWord110" ItemStyle-Width="110" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true">
+                                UniqueName="LicenseDesc" SortExpression="LicenseDesc" FilterControlWidth="90" HeaderStyle-Width ="90"
+                                ItemStyle-CssClass="breakWord90" ItemStyle-Width="90" ItemStyle-Wrap="true"
+                                ShowFilterIcon="true">                               
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseDesc" runat="server" Text='<%# Eval("LicenseDesc") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="LicenseType.Type" AllowFiltering="true" HeaderText="License Type"
-                                UniqueName="LicenseType" SortExpression="LicenseType.Type" FilterControlWidth="90" HeaderStyle-Width ="90"
-                                ItemStyle-CssClass="breakWord90" ItemStyle-Width="90" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true"
-                                >
-                                <ItemTemplate>
-                                    <asp:Label ID="lblLicenseType" runat="server" Text='<%# Eval("LicenseType.Type") %>' />
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
+
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
                                 SortExpression="ActivationDate" UniqueName="ActivationDate" Display="true" DataFormatString="{0:yyyy-MM-dd}"
                                 ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
@@ -149,12 +141,10 @@
                                 ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
+
                             <telerik:GridNumericColumn DataField="NumOfDevice" AllowFiltering="true" HeaderText="Total Devices"
-                                UniqueName="NumOfDevice" SortExpression="NumOfDevice" FilterControlWidth="40" HeaderStyle-Width ="40"
-                                ItemStyle-Wrap="true"  ShowFilterIcon="true"
-                                >
-                                <HeaderStyle HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center"  />
+                                UniqueName="NumOfDevice" SortExpression="NumOfDevice" FilterControlWidth="100" HeaderStyle-Width ="100"
+                                ItemStyle-Wrap="true"  ShowFilterIcon="true">  
                             </telerik:GridNumericColumn>
                             <telerik:GridTemplateColumn DataField="Branch.BranchName" AllowFiltering="true" HeaderText="Branch Name"
                                 UniqueName="BranchName" SortExpression="Branch.BranchName" FilterControlWidth="80" HeaderStyle-Width ="80"

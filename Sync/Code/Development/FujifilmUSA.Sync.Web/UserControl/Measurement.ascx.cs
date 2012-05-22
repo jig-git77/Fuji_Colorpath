@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 
@@ -22,9 +23,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-                                   ? string.Format("Measure - {0}", SessionManager.Instance.CurrentProject.CurrentDlpName)
-                                   : string.Format("New Print Condition - Measure (No DLP)");
+                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                {
+                    header.InnerText = "New Print Condition - Measure (No DLP)";
+                }
+                else
+                {
+                    header.InnerText = string.Format("Measure - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
+                }
+                //header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
+                //                   ? string.Format("Measure - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName)
+                //                   : string.Format("New Print Condition - Measure (No DLP)");
             }
         }
 

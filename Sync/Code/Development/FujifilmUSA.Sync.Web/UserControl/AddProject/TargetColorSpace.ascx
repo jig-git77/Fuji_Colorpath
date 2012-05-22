@@ -26,7 +26,7 @@
                                 <span>Source Profile:</span>
                             </td>
                             <td style="width: 450px">
-                                <asp:DropDownList ID="cmbSourceProfile" runat="server" Width="200px" CssClass="select"
+                                <asp:DropDownList ID="cmbSourceProfile" runat="server" CssClass="select"
                                     DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"
                                     AutoPostBack="true">
                                 </asp:DropDownList>
@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="115%" Height="200px"
+                                <asp:TextBox ID="txtProfileDescription" runat="server" Width="115%" Height="100px"
                                     TextMode="MultiLine" Enabled="false" ReadOnly="true"></asp:TextBox>
                             </td>
                         </tr>

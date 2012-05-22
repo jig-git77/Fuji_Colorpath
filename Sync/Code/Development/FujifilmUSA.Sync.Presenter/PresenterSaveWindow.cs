@@ -15,6 +15,24 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void SaveProject()
         {
+            #region code for source profile and referencechart relation in referenceLab
+
+            var referenceChartBusiness = BusinessFactory<IReferenceChartBusiness>.CreateObject();
+            referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+            var referenceChartData = referenceChartBusiness.GetReferenceChartForLabCalculation(_viewSaveWindow.Project.SourceProfile.SourceProfileId,
+                                                                                               _viewSaveWindow.Project.MeasurementSetting.ReferenceChartType.Key);
+            if (referenceChartData.Count > 0)
+            {
+                var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+                sourceProfileBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+                var profile = sourceProfileBusiness.GetIccProfileBySourceProfile(_viewSaveWindow.Project.SourceProfile.SourceProfileId);
+
+                referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, _viewSaveWindow.Project.SourceProfile.SourceProfileId);
+            }
+
+            #endregion
+
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
             _viewSaveWindow.Project = projectBusiness.SaveProject(_viewSaveWindow.Project);

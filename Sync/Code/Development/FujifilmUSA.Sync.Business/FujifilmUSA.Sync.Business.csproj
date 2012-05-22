@@ -34,38 +34,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Development|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Development\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\FujifilmUSA.Sync.Business.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;f:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;f:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Stage|AnyCPU'">
-    <OutputPath>bin\Stage\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\FujifilmUSA.Sync.Business.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;f:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;f:\Program Files\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -93,6 +61,9 @@
     <Compile Include="Implementation\OptimizeRunBusinessImpl.cs" />
     <Compile Include="Implementation\ProjectBusinessImpl.cs" />
     <Compile Include="Implementation\DeviceBusinessImpl.cs" />
+    <Compile Include="Implementation\ReferenceChartBusinessImpl.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
     <Compile Include="Interface\IMiscBusiness.cs" />
@@ -105,6 +76,7 @@
     <Compile Include="Interface\IMiscDataBusiness.cs" />
     <Compile Include="Interface\IProjectBusiness.cs" />
     <Compile Include="Interface\IDeviceBusiness.cs" />
+    <Compile Include="Interface\IReferenceChartBusiness.cs" />
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
@@ -121,6 +93,7 @@
     <Compile Include="Mock\OptimizeRunBusinessMock.cs" />
     <Compile Include="Mock\ProjectBusinessMock.cs" />
     <Compile Include="Mock\DeviceBusinessMock.cs" />
+    <Compile Include="Mock\ReferenceChartBusinessMock.cs" />
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +107,10 @@
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Encryption\FujifilmUSA.Sync.Encryption.csproj">
+      <Project>{909C21BE-547A-4F06-BA7B-71351E4AE0FD}</Project>
+      <Name>FujifilmUSA.Sync.Encryption</Name>
     </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>

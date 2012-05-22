@@ -39,12 +39,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        returnValue = DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure(
-                                "[CP].[InsertSourceProfile]",
-                                new object[]
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertSourceProfile]",
+                            new object[]
                                     {
                                         sourceProfile.RegionId,
                                         sourceProfile.CompanyId,
@@ -71,7 +71,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     returnValue = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
-                            "[CP].[UpdateourceProfile]",
+                            "[CP].[UpdateSourceProfile]",
                             new object[]
                                     {
                                         sourceProfile.SourceProfileId,

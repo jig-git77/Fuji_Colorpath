@@ -1,5 +1,42 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Login" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<script type="text/javascript">
+    function createCookie(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    function areCookiesEnabled() {
+        var r = false;
+        createCookie("testing", "Hello", 1);
+        if (readCookie("testing") != null) {
+            r = true;
+            eraseCookie("testing");
+        }
+        return r;
+    }
+</script>
 <script language="javascript">
     function blurControl(obj, text) {
         if (jQuery(obj).val() == '') {
@@ -9,6 +46,20 @@
     function focusControl(obj, text) {
         if (jQuery(obj).val() == text)
         { jQuery(obj).val(''); }
+    }
+</script>
+<script type="text/javascript" language="javascript">
+    function ShowOpenForgotPasswordWindow() {
+        var oWindow;
+        oWindow = window.radopen("PopupOpenForgotPassword.aspx", "OpenForgotPasswordWindow");
+        oWindow.show();
+        return false;
+    }
+</script>
+<script language="javascript" type="text/javascript">
+    function CloseOpenForgotPasswordWindow() {
+        var oWnd = $find("<%= OpenForgotPasswordWindow.ClientID %>");
+        oWnd.close();
     }
 </script>
 <div id="login_box">
@@ -29,6 +80,8 @@
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
                 onfocus="javascript:focusControl(this,'Password');" Text="Password" TextMode="Password"></asp:TextBox>
             <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text=" Remember me!" />
+            <asp:LinkButton ID="lnkForgotPassword" runat="server" Text="Forgot Password!" OnClientClick="return ShowOpenForgotPasswordWindow();"></asp:LinkButton>
+            &nbsp;
             <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" />
         </div>
         <div class="clear">
@@ -37,9 +90,20 @@
     <div class="curve_bottom">
         &nbsp;</div>
 </div>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+    <Windows>
+        <telerik:RadWindow ID="OpenForgotPasswordWindow" runat="server" IconUrl="" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Forgot Password!" Width="730" Height="230"
+            Behaviors="Move, Close">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
 <script language="javascript">
 
     jQuery(document).ready(function () {
+        if (!areCookiesEnabled()) {
+            alert("Your browser's cookie functionality is turned off. Please turn it on.");
+        }
         if (jQuery("[id*='txtPassword']").val() == '') {
             jQuery("[id*='txtPassword']").val('Password');
         }

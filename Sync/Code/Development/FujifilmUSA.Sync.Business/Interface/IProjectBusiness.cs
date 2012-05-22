@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Interface
     public interface IProjectBusiness : ITaskBase
     {
         Project GetProjectDetail(int projectId);
-        List<Project> GetProjectsByDeviceId(int deviceId);
+        List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID);
         int DeleteProject(int projectId);
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
         List<SourceProfile> GetSourceProfileList(int currentUserId);
@@ -25,6 +25,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetLastOptimizedDlp(int projectId);
         Project SaveProject(Project project);
         ReferenceChartData GetReferenceChartData(int projectId);
-
+        Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, Guid tempProjectId);
     }
 }

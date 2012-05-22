@@ -25,6 +25,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 lblClosePrintConditionMessage.Text = string.Format("Options for \"{0}\" print condition", Request.QueryString["ProjectName"]);
+                
+                //----------------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
+                if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) == 3)
+                {
+                    lbtnReOptimize.Visible = false;
+                }
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -50,7 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
                 DeviceName = SessionManager.Instance.CurrentDevice.DeviceName;
-                //_presenterClosePrintCondition.ReOptimizeDeviceLinkProfile();
+               
                 if (!IsErrorOccured)
                 {
                     _presenterClosePrintCondition.CreateOptimizeRun();
@@ -79,6 +85,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                    {
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+                    }
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                     Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
                 }

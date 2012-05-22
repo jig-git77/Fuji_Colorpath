@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Entity;
@@ -45,6 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void bntLogin_Click(object sender, EventArgs e)
         {
+            //FormsAuthentication.
             UserName = txtUserName.Text.Trim();
             Password = txtPassword.Text.Trim();
             _presenterlogin.UserLogin();
@@ -70,6 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
                     {
                         FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                        
                         Response.Redirect("Index.aspx");
                     }
                     else if (SessionManager.Instance.CurrentUser.HasAdminPermission())

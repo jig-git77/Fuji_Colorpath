@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Business;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Presenter
@@ -16,7 +17,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
             userBusiness.ErrorOccured += _viewLogin.ErrorOccured;
-            _viewLogin.CurrentUser = userBusiness.UserLogin(_viewLogin.UserName, _viewLogin.Password);
+            _viewLogin.CurrentUser = userBusiness.UserLogin(_viewLogin.UserName, _viewLogin.Password, UserType.WebSiteUser);
         }
     }
 }

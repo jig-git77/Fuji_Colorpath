@@ -32,8 +32,8 @@
                         <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
                         <table>
                             <tr>
-                                <td>
-                                    <span>Region<span style="color: Red;">*</span> </span>
+                                <td align="right">
+                                    <span style="font-weight:bold;">Region<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -56,8 +56,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span>Company Name<span style="color: Red;">*</span> </span>
+                                <td align="right">
+                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -80,8 +80,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span>Profile Name<span style="color: Red;">*</span> </span>
+                                <td align="right">
+                                    <span style="font-weight:bold;">Profile Name<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -103,8 +103,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span>Profile Description:</span>
+                                <td align="right">
+                                    <span style="font-weight:bold;">Profile Description:</span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -121,8 +121,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span>Profile<span style="color: Red;">*</span> </span>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight:bold;">Profile<span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -136,15 +136,15 @@
                                             ForeColor="Red" ValidationGroup="vgSourceProfile">
                                             <ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
                                                 ValidationMsg="Please provide source profile file." Size="200" />
-                                        </asp:RequiredFieldValidator>
+                                        </asp:RequiredFieldValidator>     
                                     </div>
                                     <div class="clear">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 130px">
-                                    <span>Is Used?</span>
+                                <td style="width: 130px" align="right">
+                                    <span style="font-weight:bold;">Is Used?</span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
