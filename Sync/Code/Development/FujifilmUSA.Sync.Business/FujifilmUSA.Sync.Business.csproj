@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
