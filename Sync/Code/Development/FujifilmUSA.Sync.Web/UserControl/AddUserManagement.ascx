@@ -461,6 +461,32 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                         <tr runat="server" id="tr_User_Type">
+                                                            <td style="width: 140px;">
+                                                                <span style="font-weight: bold;">User Type<span style="color: Red;">*</span>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <b>&nbsp;:&nbsp;</b>
+                                                            </td>
+                                                            <td>
+                                                                <div style="float: left;">
+                                                                    <asp:DropDownList ID="cmbUserType" runat="server" Width="270px" CssClass="select">
+                                                                        <asp:ListItem Selected="True" Value="0">Website User</asp:ListItem>
+                                                                        <asp:ListItem Value="1">XMF User</asp:ListItem>
+                                                                    </asp:DropDownList>
+                                                                </div>
+                                                                <div style="float: left">
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
+                                                                        ControlToValidate="cmbCompany" ForeColor="Red" ValidationGroup="vgAddUser">
+                                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                                            ValidationMsg="Please select company." Size="200" />
+                                                                    </asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </fieldset>
                                             </center>

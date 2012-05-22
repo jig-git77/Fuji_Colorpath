@@ -118,6 +118,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            SecurityQuestionId = DataReader.ReadInt(x, "SecurityQuestionID"),
                                            SecurityAnswer = DataReader.ReadString(x, "SecurityAnswer"),
                                            IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
+                                           UserType = DataReader.ReadInt(x, "UserType"),
                                            Region = new Region()
                                                         {
                                                             RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
@@ -191,6 +192,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , branchIds
                                         , user.AuthenticationKey
                                         , user.IsActivated
+                                        , user.UserType
                                     });
                     if (returnValue == -1)
                     {
@@ -230,6 +232,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.IsActive
                                         , user.UserCompany.CompanyId
                                         , branchIds
+                                        , user.UserType
                                     });
                     if (returnValue == -1)
                     {

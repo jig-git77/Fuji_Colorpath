@@ -145,7 +145,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                       Role = new Role() { RoleId = Convert.ToInt16(cmbRole.SelectedValue) },
                                       UserCompany = new UserCompany(),
                                       UserBranches = new List<UserBranch>(),
-                                      RegionId = 0
+                                      RegionId = 0,
+                                      UserType = Convert.ToInt16(cmbUserType.SelectedItem.Value)
                                   };
 
             #region Set Role related information to user object
@@ -186,12 +187,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             #endregion
 
-            if (UserId == 0) // Add New company
+            if (UserId == 0) // Add New user
             {
                 _presenterUserManagement.InsertUser();
                 if (IsErrorOccured) return;
             }
-            else // Edit New company
+            else // Edit New user
             {
                 UserInformation.UserId = UserId;
                 _presenterUserManagement.UpdateUser();
@@ -214,7 +215,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRole_SelectedIndexChanged(null, null);
                 lnkPasswordReset.Text = UserInformation.IsActivated ? ResetPasswordText : ActivateUserText;
                 lnkPasswordReset.Attributes.Add("authKey", UserInformation.AuthenticationKey.ToString());
-
+                cmbUserType.SelectedValue = UserInformation.UserType.ToString();
+                
                 ManageRoleBaseUI();
 
                 var role = (ERole)Enum.Parse(typeof(ERole), cmbRole.SelectedItem.Text.Replace(" ", "").Trim());

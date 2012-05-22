@@ -34,6 +34,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsActivated { get; set; }
         public int SecurityQuestionId { get; set; }
         public string SecurityAnswer { get; set; }
+        public int UserType { get; set; }
         #endregion
 
         #region extension Methods

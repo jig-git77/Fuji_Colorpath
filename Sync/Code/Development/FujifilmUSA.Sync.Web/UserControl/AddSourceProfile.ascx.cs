@@ -88,13 +88,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             SourceProfile.IsUsed = chkIsActive.Checked;
-            if (hdnSourceProfileID.Value == "0")
+            if (hdnSourceProfileID.Value == "0")        //-------Add Source Profile
             {
                 _presentersourceprofile.InsertSourceProfile();
                 if (IsErrorOccured) return;
                 Response.Redirect("SourceProfileManagement.aspx");
             }
-            else
+            else                                        //-------Edit Source Profile
             {
                 _presentersourceprofile.UpdateSourceProfile();
                 if (IsErrorOccured) return;

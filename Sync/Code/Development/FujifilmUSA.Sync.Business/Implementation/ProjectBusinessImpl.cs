@@ -99,9 +99,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
 
                         int index = 0;
+                        string LastDLPName = "";
                         project.OptimizeRuns.ForEach(x =>
                                                          {
-                                                             x.LastDlpName = (index == 0) ? string.Empty : project.OptimizeRuns[index - 1].DlpName;
+                                                             if (index > 0)
+                                                             {
+                                                                 LastDLPName = project.ProjectName + " DLP " + project.OptimizeRuns[index - 1].EndDateTime.Value.Month + project.OptimizeRuns[index - 1].EndDateTime.Value.Day + " " + project.OptimizeRuns[index - 1].EndDateTime.Value.Hour + project.OptimizeRuns[index - 1].EndDateTime.Value.Minute + ".icc";
+                                                                 if (index > 1)
+                                                                 {
+                                                                     if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Closed && !project.OptimizeRuns[index - 1].HasProfile)
+                                                                     {
+                                                                         LastDLPName = project.ProjectName + " DLP " + project.OptimizeRuns[index - 2].EndDateTime.Value.Month + project.OptimizeRuns[index - 2].EndDateTime.Value.Day + " " + project.OptimizeRuns[index - 2].EndDateTime.Value.Hour + project.OptimizeRuns[index - 2].EndDateTime.Value.Minute + ".icc";  //----If last run is certify run, then get DLP of its previous run----//
+                                                                     }
+                                                                 }
+                                                             }
+                                                             x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
                                                              x.DlpName = string.Format("{0} DLP {1}.icc",
                                                                                        project.ProjectName,
                                                                                        index++.ToString("000"));
