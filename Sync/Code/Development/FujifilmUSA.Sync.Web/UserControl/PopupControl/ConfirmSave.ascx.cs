@@ -19,11 +19,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
+                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP " + System.DateTime.Now.Month + System.DateTime.Now.Day + " " + System.DateTime.Now.Hour + System.DateTime.Now.Minute + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(
                             "Once optimization is complete, apply {0} to workflow and reprint the {1} chart.",
-                            SessionManager.Instance.CurrentOptimizeRun.DlpName,
+                            DLPName,
                             SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value)
                         : string.Empty;
             }
