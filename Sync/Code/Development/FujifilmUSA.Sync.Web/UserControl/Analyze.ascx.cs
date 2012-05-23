@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
+        public DateTime EndDate;
         public string AddMeasurementDeleteMeasurementConfirmation
         {
             get
@@ -47,7 +48,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return string.Format("Once optimization is complete, apply DLP 000 to workflow and reprint the {0} chart.", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
+                return string.Format("Once optimization is complete, apply {0} to workflow and reprint the {1} chart.", DLPName, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
             }
         }
         #endregion
@@ -73,9 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 header.InnerText = string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
             }
-            //header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-            //    ? string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName)
-            //    : string.Format("New Print Condition - Analyze (No DLP)");
+            
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Create DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Methods
+        #region Methods        
 
         private void BindMesurementChart()
         {
@@ -185,9 +185,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         DlpDescription = string.Format("{0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
                     }
+
+                    EndDate = System.DateTime.Now;
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
                     {
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         Response.Redirect("Export.aspx");
                     }

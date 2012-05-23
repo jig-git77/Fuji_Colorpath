@@ -104,12 +104,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          {
                                                              if (index > 0)
                                                              {
-                                                                 LastDLPName = project.ProjectName + " DLP " + project.OptimizeRuns[index - 1].EndDateTime.Value.Month + project.OptimizeRuns[index - 1].EndDateTime.Value.Day + " " + project.OptimizeRuns[index - 1].EndDateTime.Value.Hour + project.OptimizeRuns[index - 1].EndDateTime.Value.Minute + ".icc";
+                                                                 LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") + ".icc";
                                                                  if (index > 1)
                                                                  {
                                                                      if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Closed && !project.OptimizeRuns[index - 1].HasProfile)
                                                                      {
-                                                                         LastDLPName = project.ProjectName + " DLP " + project.OptimizeRuns[index - 2].EndDateTime.Value.Month + project.OptimizeRuns[index - 2].EndDateTime.Value.Day + " " + project.OptimizeRuns[index - 2].EndDateTime.Value.Hour + project.OptimizeRuns[index - 2].EndDateTime.Value.Minute + ".icc";  //----If last run is certify run, then get DLP of its previous run----//
+                                                                         LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString("00") + ".icc";  //----If last run is certify run, then get DLP of its previous run----//
                                                                      }
                                                                  }
                                                              }

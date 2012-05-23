@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                header.InnerText = string.Format("Download - {0}", SessionManager.Instance.CurrentProject.ProjectName + " DLP " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute + ".icc");
+                header.InnerText = string.Format("Download - {0}", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);                
             }
         }
@@ -56,7 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string DLPName = SessionManager.Instance.CurrentOptimizeRun.DlpName;
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
-                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day + " " + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute;
+                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
             }
             if (!IsErrorOccured)
             {

@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP " + System.DateTime.Now.Month + System.DateTime.Now.Day + " " + System.DateTime.Now.Hour + System.DateTime.Now.Minute + ".icc";
+                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(

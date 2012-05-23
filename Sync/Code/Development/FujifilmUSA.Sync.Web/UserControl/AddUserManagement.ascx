@@ -365,7 +365,7 @@
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
                                                             <td style="width: 140px;">
-                                                                <span style="font-weight: bold;">Role<span style="color: Red;">*</<span> </span>
+                                                                <span style="font-weight: bold;">Role<span style="color: Red;">*</span>
                                                             </td>
                                                             <td>
                                                                 <b>&nbsp;:&nbsp;</b>

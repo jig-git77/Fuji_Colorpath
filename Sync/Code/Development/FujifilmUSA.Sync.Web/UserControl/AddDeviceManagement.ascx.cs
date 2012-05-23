@@ -133,7 +133,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtVarification.Text = "0";
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtVarification.Text = "0";                        
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
                         txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
@@ -209,7 +209,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtDeviceName.Text = Device.DeviceName;
                 cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
                 chkIsActive.Checked = Device.IsActive;
-                //txtNoOfProjects.Text = Device.NoOfProjects.ToString();
+
+                //-----------In Edit Device page, put MaxProjects value from DB----------------//
+                foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)
+                {
+                    string key = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key);
+                    int val = item.Value;
+
+                    if (item.Key.ToString() == "Sync1D")
+                    {
+                       txtSync1D.Text = val.ToString();
+                    }
+                    else if (item.Key.ToString() == "DLP")
+                    {
+                        txtDlp.Text = val.ToString();
+                    }
+                    else if (item.Key.ToString() == "InkOptimization")
+                    {
+                        txtInkOpt.Text = val.ToString();
+                    }
+                    else if (item.Key.ToString() == "Verification")
+                    {
+                        txtVarification.Text = val.ToString();
+                    }
+                }
             }
         }
         #endregion

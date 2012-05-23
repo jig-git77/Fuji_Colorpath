@@ -67,9 +67,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lnkMeasurement.Visible = false;
                             }
                             else
-                            {
+                            {                             
                                 //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
-                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2)
+                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 && SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed)
                                 {
                                     btnRunDelete.Visible = false;
                                 }
