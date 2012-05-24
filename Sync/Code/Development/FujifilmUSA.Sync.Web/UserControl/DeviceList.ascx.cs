@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web.UI;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
@@ -29,6 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();              
             }
+           
         }
         #endregion
 
@@ -39,11 +41,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindBranchDropDown();
             CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
+            ViewState["CompanyId"] = CompanyId;
+            ViewState["BranchId"] = BranchId;
         }
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
+            ViewState["CompanyId"] = CompanyId;
+            ViewState["BranchId"] = BranchId;
             rgDeviceList.Rebind();
         }
         protected void rgDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
@@ -55,36 +61,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
                             : Convert.ToInt32(cmbCompany.SelectedValue);
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
+                    break;              
+                case "Sort":
+                    RadToolTipManager1.TargetControls.Clear();
                     break;
-                case "Select":
-
-                    DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId"));
-                    CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
-                    _presenterdevice.DeviceListByDeviceId();
-
-                    SessionManager.Instance.CurrentDevice = SelectedDevice;
-                        //new Device()
-                        //                                  {
-                        //                                      DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId")),
-                        //                                      DeviceName = ((GridDataItem)e.Item).GetDataKeyValue("DeviceName").ToString(),
-                        //                                      DeviceFamily = new DeviceFamily()
-                        //                                                         {
-                        //                                                             DeviceFamilyId =
-                        //                                                                 Convert.ToInt16(((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyId")),
-                        //                                                             DeviceFamilyDesc =
-                        //                                                                 ((GridDataItem)e.Item).GetDataKeyValue("DeviceFamily.DeviceFamilyDesc").ToString()
-                        //                                                         },
-                        //                                    LicenseTypeProject=DeviceListById
-                        //                                  };
-                    SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
-                    Response.RedirectPermanent("OperationSelection.aspx");
+                case "Page":
+                    RadToolTipManager1.TargetControls.Clear();
                     break;
             }
+        }      
 
+        protected void rgDeviceList_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
+            {
+                Control target = e.Item.FindControl("lbtnSelectDevice");
+                if (!Object.Equals(target, null))
+                {
+                    if (!Object.Equals(this.RadToolTipManager1, null))
+                    {
+                        //Add the button (target) id to the tooltip manager
+                        this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);                      
+
+                        SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
+                    }
+                }
+            }
         }
+
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            BindDeviceList();
+            CompanyId = Convert.ToInt32(ViewState["CompanyId"]);
+            BranchId = Convert.ToInt32(ViewState["BranchId"]);
+            BindDeviceList();           
         }
         #endregion
 
@@ -142,6 +151,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
         }
+
+        protected void OnAjaxUpdate(object sender, ToolTipUpdateEventArgs args)
+        {
+            this.UpdateToolTip(args.Value, args.UpdatePanel);
+        }
+        private void UpdateToolTip(string elementID, UpdatePanel panel)
+        {
+            Control ctrl = Page.LoadControl("UserControl/OperationSelection.ascx");
+            panel.ContentTemplateContainer.Controls.Add(ctrl);
+            OperationSelection details = (OperationSelection)ctrl;
+            details.DeviceId = Convert.ToInt32(elementID);
+        }
+
         #endregion
 
         #region IViewDevice Members

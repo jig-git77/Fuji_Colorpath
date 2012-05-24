@@ -1457,13 +1457,13 @@ label
 .formDevice
 {
     /* background: url(../Images/line.png) repeat-x bottom left; */
-    margin: 0px 20px 0 23px;
+    margin: 0px 20px 0 20px;
     padding-bottom: 0px;
     line-height: 34px;
 }
 .listDevice
 {
-    margin: 10px 20px 0 23px;
+    margin: 10px 20px 0 20px;
     padding-bottom: 10px;
     line-height: 34px;
 }
@@ -2033,4 +2033,19 @@ label
      margin: 0;
 
 }
-/***************************************/
+
+/************DeviceList : Popup menu***************/
+.popup{  left:0px; top:0px; width:240px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
+.popup ul{ margin:0 0 0 6px;}
+.popup li{ line-height:43px; padding-bottom:-2px;}
+
+.disable_Popup_bt{color:#C0C0C0; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;  }
+.disable_Popup_bt :hover{color:#C0C0C0; display:block;}
+
+.Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:5px 0 0 0; }
+.Popup_bt_last{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:-1px 0 0 0; }
+
+.Popup_bt :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:left -44px;  }
+
+.Popup_bt_first :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 5px; }
+.Popup_bt_last :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }

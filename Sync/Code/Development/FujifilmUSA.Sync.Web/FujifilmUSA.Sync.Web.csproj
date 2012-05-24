@@ -100,6 +100,8 @@
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\popup-bg.png" />
+    <Content Include="Images\popup-over.png" />
     <Content Include="Images\Profile-Management.png" />
     <Content Include="Images\project.png" />
     <Content Include="Images\Project_Close_1.png" />
@@ -1160,7 +1162,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

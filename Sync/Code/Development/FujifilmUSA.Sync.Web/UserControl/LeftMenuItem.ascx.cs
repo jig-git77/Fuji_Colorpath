@@ -53,10 +53,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Response.Redirect("Index.aspx");
                     break;
                 case ELeftMenuItemLevel.Device:
+                    //SessionManager.Instance.CurrentOperation = EOperation.None;
+                    //SessionManager.Instance.CurrentProject = null;
+                    //SessionManager.Instance.CurrentOptimizeRun = null;
+
+                    SessionManager.Instance.CurrentBranchName = null;
+                    SessionManager.Instance.CurrentDevice = null;
                     SessionManager.Instance.CurrentOperation = EOperation.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
-                    Response.Redirect("OperationSelection.aspx");
+                    Response.Redirect("Index.aspx");
                     break;
                 case ELeftMenuItemLevel.Operation:
                     SessionManager.Instance.CurrentProject = null;
