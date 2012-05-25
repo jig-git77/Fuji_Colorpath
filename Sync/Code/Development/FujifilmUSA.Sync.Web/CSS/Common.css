@@ -2064,3 +2064,24 @@ div.RadToolTip_Default table.rtWrapper td.rtWrapperContent {
 div.RadToolTip_Default table.rtWrapper td.rtWrapperTopLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopCenter, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperTopLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperTopRight, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomRight, div.RadToolTip_Default table.rtShadow td.rtWrapperTopCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomCenter, div.RadToolTip_Default a.rtCloseButton {
     background-image: none !important;
 }
+
+/******************Download List Style*******************/
+.Download_list
+{
+    /* margin: 36px 26px 0 23px; commented by Jayesh */
+    overflow: hidden;
+}
+.Download_list li
+{
+    background: url(../Images/download_list_bg.png) no-repeat top left;
+    width: 660px;
+    height: 35px;
+    margin-bottom: 11px;
+}
+.Download_list li .left
+{
+    float: left;
+    margin: 10px 0 0 23px;
+    color: #5e5e5e;
+    font-size: 18px;
+}

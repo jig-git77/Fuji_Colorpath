@@ -85,6 +85,7 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
@@ -95,6 +96,9 @@
     <Content Include="Images\company-management.png" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\dlp_optimization.png" />
+    <Content Include="Images\download-icon-small.png" />
+    <Content Include="Images\download-icon.png" />
+    <Content Include="Images\download_list_bg.png" />
     <Content Include="Images\expanded.png" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
@@ -156,6 +160,7 @@
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
@@ -501,6 +506,13 @@
     <Compile Include="AddLicenseManagement.aspx.designer.cs">
       <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DownloadSoftwares.aspx.cs">
+      <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadSoftwares.aspx.designer.cs">
+      <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
       <SubType>Code</SubType>
@@ -654,6 +666,13 @@
     </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DownloadSoftwares.ascx.cs">
+      <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DownloadSoftwares.ascx.designer.cs">
+      <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\GlobalActivation.ascx.cs">
       <DependentUpon>GlobalActivation.ascx</DependentUpon>
@@ -1162,7 +1181,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

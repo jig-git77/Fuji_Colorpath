@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class ConfirmSave : BaseControl, IViewConfirmSave
     {
         private PresenterConfirmSave _presenterConfirmSave;
+        public DateTime EndDate;
 
         public string DLPMessage
         {
@@ -91,7 +92,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterConfirmSave.GetMeasurementsOnRunId();
             if (!IsErrorOccured)
             {
-                ProfileDescription = SessionManager.Instance.CurrentProject.ProposedDlpName;
+                EndDate = System.DateTime.Now;
+                ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
                 {

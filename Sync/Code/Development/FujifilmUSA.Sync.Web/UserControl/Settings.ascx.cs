@@ -22,16 +22,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
             tdLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
             tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
-            //tdReferenceChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+            tdReferenceChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart);
 
             ////seperator image 
-            divcompanySeprator.Visible = tdcompany.Visible;
-            divBranchSeprator.Visible = tdBranch.Visible;
-            divUserSeprator.Visible = tdUser.Visible;
-           
-            divDeviceSeprator.Visible = tdDevice.Visible;
-            divLicenseSeprator.Visible = tdLicense.Visible;
-            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible;           
+            divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
+            divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
+            divProfileManagementSeprator.Visible = tdProfileManagement.Visible && tdUser.Visible;
+            divLicenseSeprator.Visible = tdLicense.Visible && tdProfileManagement.Visible;
+
+            divMeasurementSeprator.Visible = tdMeasurementDevice.Visible && tdDevice.Visible;
+            divDownloadSeprator.Visible = tdDownload.Visible && tdMeasurementDevice.Visible;
+            divRefChartSeparator.Visible = tdReferenceChart.Visible && tdDownload.Visible;
+            divSourceProfileSeprator.Visible = tdSourceProfile.Visible && tdReferenceChart.Visible;                    
         }
         #endregion
 
@@ -71,6 +73,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkProfileMgmt_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("ProfileManagement.aspx");
+        }
+        protected void lnkDownload_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("DownloadSoftwares.aspx");
         }
     }
 }

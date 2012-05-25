@@ -81,9 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!Object.Equals(this.RadToolTipManager1, null))
                     {
                         //Add the button (target) id to the tooltip manager
-                        this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);                      
-
-                        SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
+                        this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);   
                     }
                 }
             }

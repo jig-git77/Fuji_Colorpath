@@ -41,10 +41,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            this.lbl_Title.Text = "Device ID is: " + DeviceId;
-
-
-           // SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
+            this.lbl_Title.Text = "Device ID is: " + DeviceId;          
 
             DeviceId = Convert.ToInt32(DeviceId);
             CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
@@ -52,16 +49,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             SessionManager.Instance.CurrentDevice = SelectedDevice;
 
+            SessionManager.Instance.CurrentBranchName = SelectedDevice.License.Branch.BranchName.ToString();
+
             //------------Give by default stylesheet classes----------//
-            lbtAligmentCurves.CssClass = "disable_Popup_bt";
-            lbtnDLPOptimization.CssClass = "disable_Popup_bt";
-            lbtInkOptimization.CssClass = "disable_Popup_bt";
-            lbtnColorValidation.CssClass = "disable_Popup_bt";
+            //lbtAligmentCurves.CssClass = "disable_Popup_bt";
+            //lbtnDLPOptimization.CssClass = "disable_Popup_bt";
+            //lbtInkOptimization.CssClass = "disable_Popup_bt";
+            //lbtnColorValidation.CssClass = "disable_Popup_bt";
+            //lbtnICCProfiling.CssClass = "disable_Popup_bt";
+
+            lbtAligmentCurves.CssClass = "Popup_bt_first";
+            lbtnDLPOptimization.CssClass = "Popup_bt";
+            lbtInkOptimization.CssClass = "Popup_bt";
+            lbtnColorValidation.CssClass = "Popup_bt";
+            lbtnICCProfiling.CssClass = "Popup_bt_last";
 
             //--------Start code for applying enabled buttons stylesheet classes----------//
             if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
             {
-
                 foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                 {
                     string key = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key);

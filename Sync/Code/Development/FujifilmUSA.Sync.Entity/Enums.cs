@@ -142,7 +142,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("Manage User")]
         ManageUser = 9,
         [Description("Manage SourceProfile")]
-        ManageSourceProfile = 10
+        ManageSourceProfile = 10,
+        [Description("Manage ReferenceChart")]
+        ManageReferenceChart = 11
     }
     public enum ECurrentProjectStatus
     {

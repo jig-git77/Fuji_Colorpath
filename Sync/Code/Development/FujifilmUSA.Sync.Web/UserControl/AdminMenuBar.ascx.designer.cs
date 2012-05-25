@@ -40,22 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnUser;
         
         /// <summary>
-        /// lbtnSourceProfile control.
+        /// lbtProfileMgmt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnSourceProfile;
-        
-        /// <summary>
-        /// lbtnDevice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDevice;
+        protected global::System.Web.UI.WebControls.LinkButton lbtProfileMgmt;
         
         /// <summary>
         /// ltnLicense control.
@@ -67,6 +58,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton ltnLicense;
         
         /// <summary>
+        /// lbtnDevice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDevice;
+        
+        /// <summary>
         /// lbtnMeasurementDevice control.
         /// </summary>
         /// <remarks>
@@ -74,6 +74,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnMeasurementDevice;
+        
+        /// <summary>
+        /// lbtDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtDownload;
         
         /// <summary>
         /// lbtnRefChart control.
@@ -85,12 +94,12 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnRefChart;
         
         /// <summary>
-        /// lbtProfileMgmt control.
+        /// lbtnSourceProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtProfileMgmt;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnSourceProfile;
     }
 }

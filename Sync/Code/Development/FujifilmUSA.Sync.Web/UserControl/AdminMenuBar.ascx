@@ -45,37 +45,42 @@
             <img src="Images/user-management.png" style="position:relative;z-index:1; " alt="User" />
             <span> User </span>
       </asp:LinkButton>
-      <asp:LinkButton ID="lbtnSourceProfile" runat="server" 
-          CssClass="dock-item overlapobject" onclick="lbtnSourceProfile_Click" >
-            <img src="Images/sourceprofile-management.png" style="position:relative;z-index:1; " alt="Source Profile" />
-            <span> Source Profile </span>
-      </asp:LinkButton>
-      <asp:LinkButton ID="lbtnDevice" runat="server" 
-          CssClass="dock-item overlapobject" PostBackUrl="~/DeviceManagement.aspx" 
-          onclick="lbtnDevice_Click">
-            <img src="Images/device-management.png" style="position:relative;z-index:1; " alt="Device" />
-            <span> Device </span>
+      <asp:LinkButton ID="lbtProfileMgmt" runat="server" 
+           CssClass="dock-item overlapobject" onclick="lbtProfileMgmt_Click">
+            <img src="Images/Profile-Management.png" style="position:relative;z-index:1; " alt="Profile Management" />
+            <span> Profile Management </span>
       </asp:LinkButton>
       <asp:LinkButton ID="ltnLicense" runat="server" 
           CssClass="dock-item overlapobject" onclick="ltnLicense_Click">
             <img src="Images/license-management.png" style="position:relative;z-index:1; " alt="License" />
             <span> License </span>
-      </asp:LinkButton>
+      </asp:LinkButton>      
+      <asp:LinkButton ID="lbtnDevice" runat="server" 
+          CssClass="dock-item overlapobject" PostBackUrl="~/DeviceManagement.aspx" 
+          onclick="lbtnDevice_Click">
+            <img src="Images/device-management.png" style="position:relative;z-index:1; " alt="Device" />
+            <span> Device </span>
+      </asp:LinkButton>      
       <asp:LinkButton ID="lbtnMeasurementDevice" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnMeasurementDevice_Click">
             <img src="Images/syncmeasurementdevice-management.png" style="position:relative;z-index:1; " alt="Measurement Device" />
             <span> Measurement Device </span>
+      </asp:LinkButton>
+      <asp:LinkButton ID="lbtDownload" runat="server" 
+           CssClass="dock-item overlapobject" onclick="lbtDownload_Click">
+            <img src="Images/download-icon-small.png" style="position:relative;z-index:1; " alt="Download" />
+            <span> Download </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnRefChart" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtnRefChart_Click">
             <img src="Images/Reference-Chart.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
             <span> Reference Chart </span>
       </asp:LinkButton>
-      <asp:LinkButton ID="lbtProfileMgmt" runat="server" 
-           CssClass="dock-item overlapobject" onclick="lbtProfileMgmt_Click">
-            <img src="Images/Profile-Management.png" style="position:relative;z-index:1; " alt="Profile Management" />
-            <span> Profile Management </span>
-      </asp:LinkButton>
+      <asp:LinkButton ID="lbtnSourceProfile" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnSourceProfile_Click" >
+            <img src="Images/sourceprofile-management.png" style="position:relative;z-index:1; " alt="Source Profile" />
+            <span> Source Profile </span>
+      </asp:LinkButton>      
   </div> 
 </div>
 </div>

@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDevice);
                 ltnLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
                 lbtnMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
-                //lbtnRefChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+                lbtnRefChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart);
             }
         }
         #endregion
@@ -70,6 +70,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtProfileMgmt_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("ProfileManagement.aspx");
+        }
+        protected void lbtDownload_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("DownloadSoftwares.aspx");
         }
     }
 }

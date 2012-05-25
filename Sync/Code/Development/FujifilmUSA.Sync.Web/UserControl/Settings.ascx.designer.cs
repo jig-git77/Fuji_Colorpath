@@ -40,13 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// divcompanySeprator control.
+        /// divBranchSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divcompanySeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBranchSeprator;
         
         /// <summary>
         /// tdBranch control.
@@ -76,13 +76,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
-        /// divBranchSeprator control.
+        /// divUserSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBranchSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserSeprator;
         
         /// <summary>
         /// tdUser control.
@@ -112,76 +112,49 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
-        /// divUserSeprator control.
+        /// divProfileManagementSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divUserSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfileManagementSeprator;
         
         /// <summary>
-        /// tdSourceProfile control.
+        /// tdProfileManagement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdSourceProfile;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdProfileManagement;
         
         /// <summary>
-        /// lbtnSourceProfile control.
+        /// lnkProfileMgmt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnSourceProfile;
+        protected global::System.Web.UI.WebControls.LinkButton lnkProfileMgmt;
         
         /// <summary>
-        /// imgSoruceProfile control.
+        /// Image4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgSoruceProfile;
+        protected global::System.Web.UI.WebControls.Image Image4;
         
         /// <summary>
-        /// tdDevice control.
+        /// divLicenseSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdDevice;
-        
-        /// <summary>
-        /// lbtnDeviceManagement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnDeviceManagement;
-        
-        /// <summary>
-        /// imgDeviceManagement control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgDeviceManagement;
-        
-        /// <summary>
-        /// divDeviceSeprator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDeviceSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLicenseSeprator;
         
         /// <summary>
         /// tdLicense control.
@@ -211,13 +184,40 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgLicenseManagement;
         
         /// <summary>
-        /// divLicenseSeprator control.
+        /// tdDevice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLicenseSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdDevice;
+        
+        /// <summary>
+        /// lbtnDeviceManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtnDeviceManagement;
+        
+        /// <summary>
+        /// imgDeviceManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgDeviceManagement;
+        
+        /// <summary>
+        /// divMeasurementSeprator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMeasurementSeprator;
         
         /// <summary>
         /// tdMeasurementDevice control.
@@ -247,13 +247,49 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgMeasurementDevice;
         
         /// <summary>
-        /// divMeasurementSeprator control.
+        /// divDownloadSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMeasurementSeprator;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDownloadSeprator;
+        
+        /// <summary>
+        /// tdDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdDownload;
+        
+        /// <summary>
+        /// lnkDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDownload;
+        
+        /// <summary>
+        /// Image5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image5;
+        
+        /// <summary>
+        /// divRefChartSeparator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRefChartSeparator;
         
         /// <summary>
         /// tdReferenceChart control.
@@ -283,31 +319,40 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgRefChart;
         
         /// <summary>
-        /// tdProfileManagement control.
+        /// divSourceProfileSeprator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdProfileManagement;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSourceProfileSeprator;
         
         /// <summary>
-        /// lnkProfileMgmt control.
+        /// tdSourceProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkProfileMgmt;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tdSourceProfile;
         
         /// <summary>
-        /// Image4 control.
+        /// lbtnSourceProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image4;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnSourceProfile;
+        
+        /// <summary>
+        /// imgSoruceProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSoruceProfile;
         
         /// <summary>
         /// LinkButton1 control.

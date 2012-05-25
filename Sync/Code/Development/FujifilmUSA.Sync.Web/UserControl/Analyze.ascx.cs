@@ -176,17 +176,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                    if (string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.CurrentDlpName))
-                    {
-                        DlpDescription = string.Format("{0}.icc", string.Format("{0} DLP 000", SessionManager.Instance.CurrentProject.ProjectName));
-                    }
-                    else
-                    {
-                        DlpDescription = string.Format("{0}", SessionManager.Instance.CurrentProject.CurrentDlpName);
-                    }
-
                     EndDate = System.DateTime.Now;
+                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName); 
+                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
                     {

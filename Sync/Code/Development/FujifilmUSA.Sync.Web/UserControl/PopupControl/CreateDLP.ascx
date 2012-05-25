@@ -42,14 +42,14 @@
                         </tr>
                         <tr>
                             <td align="left">
-                                <div style="float: left;">
+                                <%--<div style="float: left;">
                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/info_icon.png" />
-                                </div>
+                                </div>--%>
                                 <div style="float: left; padding-left: 5px; padding-top: 3px;">
                                     <asp:Label ID="lblMessage" 
                                         runat="server" 
-                                        Text="" 
-                                        ></asp:Label>
+                                        Text="" >
+                                    </asp:Label>
                                 </div>
                                 <div class="clear">
                                 </div>
