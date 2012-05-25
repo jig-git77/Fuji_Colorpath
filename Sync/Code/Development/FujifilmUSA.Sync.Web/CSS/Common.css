@@ -2035,11 +2035,11 @@ label
 }
 
 /************DeviceList : Popup menu***************/
-.popup{  left:0px; top:0px; width:240px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
-.popup ul{ margin:0 0 0 6px;}
+.popup{  left:0px; top:0px; width:260px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
+.popup ul{ margin:0 0 0 25px;}
 .popup li{ line-height:43px; padding-bottom:-2px;}
 
-.disable_Popup_bt{color:#C0C0C0; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;  }
+.disable_Popup_bt{color:#C0C0C0; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;margin:15 0 0 0;  }
 .disable_Popup_bt :hover{color:#C0C0C0; display:block;}
 
 .Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:5px 0 0 0; }
@@ -2049,3 +2049,18 @@ label
 
 .Popup_bt_first :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 5px; }
 .Popup_bt_last :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }
+
+div.RadToolTip_Default table.rtWrapper td.rtWrapperLeftMiddle, div.RadToolTip_Default table.rtWrapper td.rtWrapperRightMiddle, div.RadToolTip_Default table.rtShadow td.rtWrapperLeftMiddle, div.RadToolTip_Default table.rtShadow td.rtWrapperRightMiddle {
+    background-image: none !important;
+}
+div.RadToolTip_Default div.rtCallout {
+    background-image: none !important;
+}
+
+div.RadToolTip_Default table.rtWrapper td.rtWrapperContent {
+    background-color: transparent !important;
+}
+
+div.RadToolTip_Default table.rtWrapper td.rtWrapperTopLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopCenter, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperTopLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperTopRight, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomRight, div.RadToolTip_Default table.rtShadow td.rtWrapperTopCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomCenter, div.RadToolTip_Default a.rtCloseButton {
+    background-image: none !important;
+}

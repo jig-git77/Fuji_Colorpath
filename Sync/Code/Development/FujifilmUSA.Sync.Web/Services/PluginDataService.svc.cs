@@ -54,6 +54,13 @@ namespace FujifilmUSA.Sync.Web.Services
             return presenter.DeleteMeasurement();
         }
 
+        //[WebInvoke(Method = "POST", UriTemplate = "LogActivityTime/{userId}")]
+        //[OperationContract]
+        //public void LogActivityTime(string userId)
+        //{
+        //    LoginRestriction.LogActivityTime(Convert.ToInt32(userId));
+        //}
+
         #region IViewPluginDataService Members
         public Entity.Measurement Measurement { get; set; }
         public int ProjectId { get; set; }

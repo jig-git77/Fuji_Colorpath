@@ -76,7 +76,9 @@
     <Compile Include="Interface\IMiscDataBusiness.cs" />
     <Compile Include="Interface\IProjectBusiness.cs" />
     <Compile Include="Interface\IDeviceBusiness.cs" />
-    <Compile Include="Interface\IReferenceChartBusiness.cs" />
+    <Compile Include="Interface\IReferenceChartBusiness.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
@@ -93,7 +95,9 @@
     <Compile Include="Mock\OptimizeRunBusinessMock.cs" />
     <Compile Include="Mock\ProjectBusinessMock.cs" />
     <Compile Include="Mock\DeviceBusinessMock.cs" />
-    <Compile Include="Mock\ReferenceChartBusinessMock.cs" />
+    <Compile Include="Mock\ReferenceChartBusinessMock.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Mock\SourceProfileBusinessMock.cs" />
     <Compile Include="Mock\UserBusinessImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
