@@ -1,0 +1,13 @@
+﻿using FujifilmUSA.Sync.Entity;
+
+namespace FujifilmUSA.Sync.Presenter.ViewInterface
+{
+    public interface IViewLeftMenuProjectItem : IViewBase
+    {
+        int ProjectId { get; set; }
+        Project Project { get; set; }
+        int OptimizeRunID { get; set; }
+        int MasterRunID { get; set; }
+        string RunStatus { get; set; }
+    }
+}
