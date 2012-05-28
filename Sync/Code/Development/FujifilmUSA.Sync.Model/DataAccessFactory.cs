@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.DataAccess
             return Database.ExecuteXmlReader(command);
         }
 
-        
+
 
         public void ExecuteProcedureWithTransaction(List<Action> actions)
         {

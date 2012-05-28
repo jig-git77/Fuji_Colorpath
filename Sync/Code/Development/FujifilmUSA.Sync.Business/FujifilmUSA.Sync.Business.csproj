@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="BusinessFactory.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="ErrorDelegate.cs" />

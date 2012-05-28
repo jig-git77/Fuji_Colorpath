@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommon.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
+<%@ Import Namespace="FujifilmUSA.Sync.Business" %>
 <script src="JS/wz_jsgraphics.js?version=4" type="text/javascript"></script>
 <script src="jQuery/json2.js?version=4" type="text/javascript"></script>
 <script src="jQuery/jquery-blockUI.js?version=4" type="text/javascript"></script>
@@ -215,7 +216,7 @@
                     MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
                     return false;
                 }
-                if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ConfigurationSettings.AppSettings["MeasurementsLimit"] %>)
+                if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
                 {
                     MeasurementDialog("You reach your limit of adding measurements in one Optimization Run", "Limit Reach");
                     return false;

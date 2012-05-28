@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Business
             var errorHandlingBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             errorHandlingBusiness.InsertAppErrorLog(appErrorLog);
 
-            if (Common.SendEmailNotificationOnError)
+            if (ApplicationConfiguration.Instance.SendEmailNotificationOnError)
             {
                 SendEmail errorEmail = SendErrorEmail;
                 errorEmail.BeginInvoke(appErrorLog, null, null);
@@ -35,11 +35,11 @@ namespace FujifilmUSA.Sync.Business
         {
             var errorMessage = new MailMessage
                                    {
-                                       Subject = Common.SendEmailNotificationOnErrorSubject,
+                                       Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
                                        IsBodyHtml = true,
                                        Body = log.ExMessage + "</br>" + log.ExStackTracke + "</br>" + log.TimeStamp
                                    };
-            errorMessage.To.Add(Common.SendEmailNotificationOnErrorTo);
+            errorMessage.To.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(errorMessage);
         }
@@ -53,10 +53,10 @@ namespace FujifilmUSA.Sync.Business
                                   Body =
                                       string.Format("Welcome {0} {1},</br>Please click on the link below to set your password and other required information.</br>{2}",
                                                     user.FirstName, user.LastName,
-                                                    string.Format(Common.PasswordSetLink, user.AuthenticationKey))
+                                                    string.Format(ApplicationConfiguration.Instance.PasswordSetLink, user.AuthenticationKey))
                               };
             message.To.Add(user.Email);
-            message.Bcc.Add(Common.SendEmailNotificationOnErrorTo);
+            message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(message);
         }
@@ -70,10 +70,10 @@ namespace FujifilmUSA.Sync.Business
                 Body =
                     string.Format("Welcome {0} {1},</br>Please click on the link below to reset your password.</br>{2}",
                                   user.FirstName, user.LastName,
-                                  string.Format(Common.PasswordReSetLink, user.AuthenticationKey))
+                                  string.Format(ApplicationConfiguration.Instance.PasswordReSetLink, user.AuthenticationKey))
             };
             message.To.Add(user.Email);
-            message.Bcc.Add(Common.SendEmailNotificationOnErrorTo);
+            message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(message);
         }
@@ -87,10 +87,10 @@ namespace FujifilmUSA.Sync.Business
                 Body =
                     string.Format("Welcome {0} {1},</br>Please click on the link below to reset your password.</br>{2}",
                                   user.FirstName, user.LastName,
-                                  string.Format(Common.PasswordForceReSetLink, user.AuthenticationKey))
+                                  string.Format(ApplicationConfiguration.Instance.PasswordForceReSetLink, user.AuthenticationKey))
             };
             message.To.Add(user.Email);
-            message.Bcc.Add(Common.SendEmailNotificationOnErrorTo);
+            message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(message);
         }

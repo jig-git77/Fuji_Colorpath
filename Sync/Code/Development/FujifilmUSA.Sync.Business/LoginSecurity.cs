@@ -7,7 +7,7 @@ namespace FujifilmUSA.Sync.Business
     internal class LoginSecurity
     {
         internal static string ErrorCode = "Wrong Input";
-        private static readonly string _fujiKey = ConfigurationManager.AppSettings["EncryptionKey"];
+        private static readonly string _fujiKey = ApplicationConfiguration.Instance.EncryptionKey;
 
         public static string GetDefaultEncryptedPassword()
         {

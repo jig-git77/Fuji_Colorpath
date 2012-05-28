@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     if (userType == UserType.XmfColorOrganizerUser)
                     {
-                        password = Encryption.CryptHelper.Decrypt(password, Common.XmfColorOrganizerEncryptionKey);
+                        password = Encryption.CryptHelper.Decrypt(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
                     }
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
                                                                         new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });
