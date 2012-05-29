@@ -52,17 +52,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentBranchName = SelectedDevice.License.Branch.BranchName.ToString();
 
             //------------Give by default stylesheet classes----------//
-            //lbtAligmentCurves.CssClass = "disable_Popup_bt";
-            //lbtnDLPOptimization.CssClass = "disable_Popup_bt";
-            //lbtInkOptimization.CssClass = "disable_Popup_bt";
-            //lbtnColorValidation.CssClass = "disable_Popup_bt";
-            //lbtnICCProfiling.CssClass = "disable_Popup_bt";
+            lbtAligmentCurves.CssClass = "disable_Popup_bt";
+            lbtnDLPOptimization.CssClass = "disable_Popup_bt";
+            lbtInkOptimization.CssClass = "disable_Popup_bt";
+            lbtnColorValidation.CssClass = "disable_Popup_bt";
+            lbtnICCProfiling.CssClass = "disable_Popup_bt";
 
-            lbtAligmentCurves.CssClass = "Popup_bt_first";
-            lbtnDLPOptimization.CssClass = "Popup_bt";
-            lbtInkOptimization.CssClass = "Popup_bt";
-            lbtnColorValidation.CssClass = "Popup_bt";
-            lbtnICCProfiling.CssClass = "Popup_bt_last";
+            //lbtAligmentCurves.CssClass = "Popup_bt_first";
+            //lbtnDLPOptimization.CssClass = "Popup_bt";
+            //lbtInkOptimization.CssClass = "Popup_bt";
+            //lbtnColorValidation.CssClass = "Popup_bt";
+            //lbtnICCProfiling.CssClass = "Popup_bt_last";
 
             //--------Start code for applying enabled buttons stylesheet classes----------//
             if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
