@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Business
         private string _passwordForceReSetLink;
         private int _optimizeRunLimit;
         private int _measurementsLimit;
+        private string _webSiteLink;
         #endregion
 
         private ApplicationConfiguration()
@@ -75,6 +76,9 @@ namespace FujifilmUSA.Sync.Business
                                                                   break;
                                                               case "MEASUREMENTSLIMIT":
                                                                   _measurementsLimit = Convert.ToInt32(x.Value);
+                                                                  break;
+                                                              case "WEBSITELINK":
+                                                                  _webSiteLink = x.Value;
                                                                   break;
                                                           }
                                                       });
@@ -157,6 +161,13 @@ namespace FujifilmUSA.Sync.Business
             get
             {
                 return _measurementsLimit;
+            }
+        }
+        public string WebSiteLink
+        {
+            get
+            {
+                return _webSiteLink;
             }
         }
         #endregion

@@ -348,7 +348,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTemplate"));
 
-            dslTemplate[1] = dslTemplate[1].Replace("##WebSiteLink##", FujifilmUSA.Sync.Business.Common.WebSiteLink);
+            dslTemplate[1] = dslTemplate[1].Replace("##WebSiteLink##", ApplicationConfiguration.Instance.WebSiteLink);
             return dslTemplate;
         }
 
