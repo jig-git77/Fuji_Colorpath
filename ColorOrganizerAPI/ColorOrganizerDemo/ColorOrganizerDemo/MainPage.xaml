@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ColorOrganizerDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:lib="clr-namespace:ColorOrganizerDemoLib;assembly=ColorOrganizerDemoLib"
+    xmlns:views="clr-namespace:ColorOrganizerDemoLib.Views;assembly=ColorOrganizerDemoLib"
+    mc:Ignorable="d"
+    d:DesignHeight="727"
+    d:DesignWidth="1024">
+<Grid x:Name="LayoutRoot">
+        <Border BorderBrush="Black"
+                BorderThickness="1">
+            <views:DesignerView />
+        </Border>
+    </Grid>
+</UserControl>

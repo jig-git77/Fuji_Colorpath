@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorOrganizerDemo", "ColorOrganizerDemo\ColorOrganizerDemo.csproj", "{BDF6E999-2F21-40A9-A8F2-2F5E1BC254D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorOrganizerDemo.Web", "ColorOrganizerDemo.Web\ColorOrganizerDemo.Web.csproj", "{F74DE95B-F423-4317-A434-B1319CA2E426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorOrganizerDemoLib", "ColorOrganizerDemoLib\ColorOrganizerDemoLib.csproj", "{B4876279-3976-437F-94AA-D00F290D8220}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ColorOrganizerDemo.Web\\ColorOrganizerDemo.Web.csproj
+		SccProjectName1 = ColorOrganizerDemo.Web
+		SccLocalPath1 = ColorOrganizerDemo.Web
+		SccProjectUniqueName2 = ColorOrganizerDemo\\ColorOrganizerDemo.csproj
+		SccProjectName2 = ColorOrganizerDemo
+		SccLocalPath2 = ColorOrganizerDemo
+		SccProjectUniqueName3 = ColorOrganizerDemoLib\\ColorOrganizerDemoLib.csproj
+		SccProjectName3 = ColorOrganizerDemoLib
+		SccLocalPath3 = ColorOrganizerDemoLib
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDF6E999-2F21-40A9-A8F2-2F5E1BC254D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF6E999-2F21-40A9-A8F2-2F5E1BC254D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF6E999-2F21-40A9-A8F2-2F5E1BC254D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF6E999-2F21-40A9-A8F2-2F5E1BC254D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F74DE95B-F423-4317-A434-B1319CA2E426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F74DE95B-F423-4317-A434-B1319CA2E426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F74DE95B-F423-4317-A434-B1319CA2E426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F74DE95B-F423-4317-A434-B1319CA2E426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4876279-3976-437F-94AA-D00F290D8220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4876279-3976-437F-94AA-D00F290D8220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4876279-3976-437F-94AA-D00F290D8220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4876279-3976-437F-94AA-D00F290D8220}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
