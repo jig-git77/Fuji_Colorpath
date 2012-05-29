@@ -46,15 +46,18 @@ namespace FujifilmUSA.Sync.Business
 
         public static void SendUserCreatedEmail(User user)
         {
+            var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.UserCreatedEmail);
             var message = new MailMessage
-                              {
-                                  Subject = "Welcome to ColorPath",
-                                  IsBodyHtml = true,
-                                  Body =
-                                      string.Format("Welcome {0} {1},</br>Please click on the link below to set your password and other required information.</br>{2}",
-                                                    user.FirstName, user.LastName,
-                                                    string.Format(ApplicationConfiguration.Instance.PasswordSetLink, user.AuthenticationKey))
-                              };
+            {
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_WelcomeToColorPath"),
+                IsBodyHtml = true,
+                Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
+                                          string.Format(
+                                              dicTemplate[(int)Entity.Template.UserCreatedEmail],
+                                              user.FirstName, user.LastName,
+                                              string.Format(ApplicationConfiguration.Instance.PasswordSetLink,
+                                                            user.AuthenticationKey)))
+            };
             message.To.Add(user.Email);
             message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
@@ -63,14 +66,15 @@ namespace FujifilmUSA.Sync.Business
 
         public static void SendPasswordResetEmail(User user)
         {
+            var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.PasswordResetEmail);
             var message = new MailMessage
             {
-                Subject = "ColorPath - Reset your password",
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_ResetYourPassword"),
                 IsBodyHtml = true,
-                Body =
-                    string.Format("Welcome {0} {1},</br>Please click on the link below to reset your password.</br>{2}",
-                                  user.FirstName, user.LastName,
-                                  string.Format(ApplicationConfiguration.Instance.PasswordReSetLink, user.AuthenticationKey))
+                Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
+                                                            string.Format(
+                                                                dicTemplate[(int)Entity.Template.PasswordResetEmail],
+                                                                user.FirstName, user.LastName, string.Format(ApplicationConfiguration.Instance.PasswordReSetLink, user.AuthenticationKey)))
             };
             message.To.Add(user.Email);
             message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
@@ -80,15 +84,17 @@ namespace FujifilmUSA.Sync.Business
 
         public static void SendPasswordForceResetEmail(User user)
         {
+            var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.PasswordResetEmail);
             var message = new MailMessage
             {
-                Subject = "ColorPath - Reset your password",
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_ResetYourPassword"),
                 IsBodyHtml = true,
-                Body =
-                    string.Format("Welcome {0} {1},</br>Please click on the link below to reset your password.</br>{2}",
-                                  user.FirstName, user.LastName,
-                                  string.Format(ApplicationConfiguration.Instance.PasswordForceReSetLink, user.AuthenticationKey))
+                Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
+                                                            string.Format(
+                                                                dicTemplate[(int)Entity.Template.PasswordResetEmail],
+                                                                user.FirstName, user.LastName, string.Format(ApplicationConfiguration.Instance.PasswordReSetLink, user.AuthenticationKey)))
             };
+
             message.To.Add(user.Email);
             message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();

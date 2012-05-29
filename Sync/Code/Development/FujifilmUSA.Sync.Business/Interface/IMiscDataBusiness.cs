@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         Dictionary<int, string> GetProjectTypeList();
         Dictionary<int, string> GetSecurityQuestions();
         List<Activity> GetPrintActivities(int RegionID);
+        Dictionary<int, string> GetTemplate(int templateID);
     }
 }

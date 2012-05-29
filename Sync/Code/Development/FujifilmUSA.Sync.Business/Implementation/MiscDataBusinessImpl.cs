@@ -327,6 +327,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PrintActivities;
         }
 
+        public Dictionary<int, string> GetTemplate(int templateID)
+        {
+            var dslTemplate = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsTemplate = DataAccessFactory.Instance.GetDsResult("[CP].[GetTemplate]", new object[] { templateID });
+                    if (dsTemplate != null && dsTemplate.Tables.Count > 0)
+                    {
+                        dslTemplate = (dsTemplate.Tables[0].AsEnumerable().Select(
+                            template => new
+                            {
+                                Value = DataReader.ReadInt(template, "TemplateID"),
+                                Text = DataReader.ReadString(template, "Content")
+                            })).
+                            ToDictionary(projectType => projectType.Value, projectType => projectType.Text);
+
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTemplate"));
+
+            dslTemplate[1] = dslTemplate[1].Replace("##WebSiteLink##", FujifilmUSA.Sync.Business.Common.WebSiteLink);
+            return dslTemplate;
+        }
+
         #endregion
 
         #region ITaskBase Members

@@ -313,4 +313,12 @@ namespace FujifilmUSA.Sync.Entity
         WebSiteUser = 0,
         XmfColorOrganizerUser = 1
     }
+
+    public enum Template
+    {
+        Base = 1,
+        UserCreatedEmail = 2,
+        PasswordResetEmail = 3,
+    }
+
 }

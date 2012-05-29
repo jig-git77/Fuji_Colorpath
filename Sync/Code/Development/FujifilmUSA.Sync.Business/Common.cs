@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.CustomExceptions;
 
@@ -7,7 +8,8 @@ namespace FujifilmUSA.Sync.Business
     public class Common
     {
         internal static string ProfileDescriptionKey = "Description";
-        
+        internal static string WebSiteLink = ConfigurationManager.AppSettings["WebSiteLink"];
+
         public static void ImplementBusinessLogic(Action action, BusinessHandlerRequest request)
         {
             try

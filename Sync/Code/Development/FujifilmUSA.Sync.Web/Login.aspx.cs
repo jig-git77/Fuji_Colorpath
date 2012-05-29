@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 using System.Text;
+using Image = System.Web.UI.WebControls.Image;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -15,5 +17,6 @@ namespace FujifilmUSA.Sync.Web
         {
             this.Form.DefaultButton = ucLogin1.btnLoginId;
         }
+       
     }
 }

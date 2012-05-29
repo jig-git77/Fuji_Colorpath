@@ -75,6 +75,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Activity>();
         }
+
+        public Dictionary<int, string> GetTemplate(int templateID)
+        {
+            return new Dictionary<int, string>();
+        }
+
         #endregion
 
         #region ITaskBase Members

@@ -510,4 +510,13 @@
   <data name="Error_InsertReferenceLabData" xml:space="preserve">
     <value>Error occured while inserting reference lab data. Please contact your administrator.</value>
   </data>
+  <data name="Email_Subject_ResetYourPassword" xml:space="preserve">
+    <value>ColorPath - Reset your password</value>
+  </data>
+  <data name="Email_Subject_WelcomeToColorPath" xml:space="preserve">
+    <value>Welcome to ColorPath</value>
+  </data>
+  <data name="Error_GetTemplate" xml:space="preserve">
+    <value>Error occured while retrieving template. Please contact your administrator.</value>
+  </data>
 </root>
