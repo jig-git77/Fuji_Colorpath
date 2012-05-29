@@ -51,6 +51,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -60,19 +62,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Sync4DService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelManager.cs" />
     <Compile Include="ViewModels\DesignerViewModel.cs" />
+    <Compile Include="ViewModels\SelectDeviceViewModel.cs" />
     <Compile Include="ViewModels\StartICCProfileViewModel.cs" />
     <Compile Include="Views\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectDeviceView.xaml.cs">
+      <DependentUpon>SelectDeviceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartICCProfileView.xaml.cs">
       <DependentUpon>StartICCProfileView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DesignerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectDeviceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -80,6 +97,64 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.GetDeviceListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.GetProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.GetProjectInformationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4DService.wsdl" />
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Sync4DService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Sync4DService\Sync4D.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Sync4DService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Sync4DService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Sync4DService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

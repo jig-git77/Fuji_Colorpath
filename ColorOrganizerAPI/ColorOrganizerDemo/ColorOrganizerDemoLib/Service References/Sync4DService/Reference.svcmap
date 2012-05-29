@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6cd5e47c-58ce-4ae1-b10c-da548a44766f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/ColorOrganizerService/sync4d.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="61724442-9d21-4f79-ab4d-a791dd39f6da" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="6b643abe-acef-48ca-9105-6cdda895d24b" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="c29e622d-4ba2-444d-b6d7-050f620a4f01" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="3261d82a-96f8-4a38-abfb-0ed095e6f615" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="7e4e5d1a-76a6-4876-ba8a-1cfa02865fda" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?wsdl" />
+    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="1aa08242-2911-43c0-a526-5cf11d217bdc" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?disco" />
+    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="f77f18f4-43d7-41e7-b8ae-cb08959c52a4" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="29bc2b62-ee05-4f23-b80e-d29ce0537d73" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
+    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="bf536eaa-7133-4e70-b9f7-08db2c81a881" SourceId="1" SourceUrl="http://localhost/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -6,5 +6,8 @@
     xmlns:view="clr-namespace:ColorOrganizerDemoLib.Views"
     mc:Ignorable="d"
     d:DesignHeight="300" d:DesignWidth="400">
-    <view:StartICCProfileView DataContext="{Binding StartIccProfile}"></view:StartICCProfileView>
+    <Grid>
+        <view:SelectDeviceView DataContext="{Binding SelectDevice}" Visibility="{Binding SelectDeviceViewVisibility,Mode=TwoWay}"></view:SelectDeviceView>
+        <view:StartICCProfileView DataContext="{Binding StartIccProfile}" Visibility="{Binding StartIccProfileViewVisibility,Mode=TwoWay}"></view:StartICCProfileView>
+    </Grid>
 </UserControl>
