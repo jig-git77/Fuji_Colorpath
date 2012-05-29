@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5f8db848-ac21-4dff-8d84-0b2b4323e575" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1425/Sync4D.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="4393bfce-b9ba-4c62-9d97-ad54aeb1d7f0" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?disco" />
+    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="8c383bcc-cc8b-4d29-ab8b-54a838f721ca" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="e8f9216f-3110-4c54-9177-d2a60148e391" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="6fdd4dcb-5297-4eb4-ba9c-1b20b700db79" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd0" />
+    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="f65a292a-ba61-4249-b328-8b8049c2bde6" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd1" />
+    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="31ccb67a-72d1-4ffc-a919-52b0855fbda0" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="d0df2880-9153-4ecd-b8ac-1e991956d261" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?wsdl" />
+    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="bab5eca9-8dc4-4508-9f80-591dce4d59fd" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="3424c08a-a4d1-436e-9343-bf765fef7ccd" SourceId="1" SourceUrl="http://localhost:1425/Sync4D.svc?xsd=xsd5" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
