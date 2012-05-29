@@ -15,7 +15,7 @@
     <li id="menu6">
     <table cellpadding="0" cellspacing="0" width="100%" >
         <tr id="TR_Run" runat="server">
-            <td style="width:90%;">
+            <td style="width:100%;">
                     <asp:LinkButton runat="server" ID="lnkRunName" OnClick="lnkRunName_Click"></asp:LinkButton>                
             </td>
             <td align="left">              

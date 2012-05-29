@@ -88,7 +88,7 @@
                 <telerik:RadGrid ID="rgDownload" ShowHeader="true" AllowSorting="true"
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgDownload_NeedDataSource" Width="75%" HeaderStyle-Font-Bold="true">
-                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                    <PagerStyle Position="Top" AlwaysVisible="false" Font-Size="Small" />
                     <MasterTableView DataKeyNames="DownloadId,DownloadName">
                         <Columns>                             
                             <telerik:GridTemplateColumn DataField="DownloadName" HeaderText="Software Name"
@@ -98,7 +98,7 @@
                                                 <ul>
                                                     <li>
                                                         <div class="left">
-                                                            <a href="#">
+                                                            <a href='<%# Eval("DownloadPath") %>'>
                                                                 <asp:Label ID="lblDownloadName" runat="server" Text='<%# Eval("DownloadName") %>' />
                                                             </a>
                                                         </div>

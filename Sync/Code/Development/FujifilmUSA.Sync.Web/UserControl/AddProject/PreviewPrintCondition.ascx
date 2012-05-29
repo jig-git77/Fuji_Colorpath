@@ -105,6 +105,17 @@
                                         <td>
                                             <asp:Label ID="lblTechnicianName" runat="server" Text=""></asp:Label>
                                         </td>
+                                    </tr>                                   
+                                    <tr>
+                                        <td>
+                                            <span style="font-weight: bold;">Source Profile</span>    
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblSourceProfile" runat="server" Text=""></asp:Label>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>

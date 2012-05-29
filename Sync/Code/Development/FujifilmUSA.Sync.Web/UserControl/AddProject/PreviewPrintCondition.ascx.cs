@@ -32,13 +32,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
+            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
 
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
             IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
             ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
-            _presenterPreviewPrintCondition.GetPreviewPrintCondition();
+            _presenterPreviewPrintCondition.GetPreviewPrintCondition();           
             if (!IsErrorOccured)
             {
                 lblMeasurementDevice.Text = Data["MeasurementDeviceId"];

@@ -30,52 +30,57 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             DataTable dt = new DataTable();
             dt.Columns.Add(new DataColumn("DownloadId", typeof(int)));
-            dt.Columns.Add(new DataColumn("DownloadName", typeof(string)));            
+            dt.Columns.Add(new DataColumn("DownloadName", typeof(string)));
+            dt.Columns.Add(new DataColumn("DownloadPath", typeof(string)));  
 
             DataRow dr = dt.NewRow();
             dr["DownloadId"] = "1";
-            dr["DownloadName"] = "Colorpath Verified (CPV) Installer - Mac";            
+            dr["DownloadName"] = "Colorpath Installer - Mac";
+            dr["DownloadPath"] = "Download/Colorpath MacPlugin Installer.zip";
             dt.Rows.Add(dr);
 
             DataRow dr1 = dt.NewRow();
             dr1["DownloadId"] = "2";
-            dr1["DownloadName"] = "Colorpath Verified (CPV) Installer - PC";            
+            dr1["DownloadName"] = "Colorpath Installer - PC";
+            dr1["DownloadPath"] = "Download/Colorpath PCPlugin Installer.zip";
             dt.Rows.Add(dr1);
 
-            DataRow dr2 = dt.NewRow();
-            dr2["DownloadId"] = "3";
-            dr2["DownloadName"] = "Taskero Display (ER) Installer - Mac";            
-            dt.Rows.Add(dr2);
+            //DataRow dr2 = dt.NewRow();
+            //dr2["DownloadId"] = "3";
+            //dr2["DownloadName"] = "Taskero Display (ER) Installer - Mac";
+            //dr2["DownloadPath"] = "Download/3";
+            //dt.Rows.Add(dr2);
 
-            DataRow dr3 = dt.NewRow();
-            dr3["DownloadId"] = "4";
-            dr3["DownloadName"] = "Taskero Display (ER) Installer - PC";   
-            dt.Rows.Add(dr3);
+            //DataRow dr3 = dt.NewRow();
+            //dr3["DownloadId"] = "4";
+            //dr3["DownloadName"] = "Taskero Display (ER) Installer - PC";
+            //dr3["DownloadPath"] = "Download/4";
+            //dt.Rows.Add(dr3);
 
-            DataRow dr4 = dt.NewRow();
-            dr4["DownloadId"] = "5";
-            dr4["DownloadName"] = "TempRH Installer - PC";
-            dt.Rows.Add(dr4);
+            //DataRow dr4 = dt.NewRow();
+            //dr4["DownloadId"] = "5";
+            //dr4["DownloadName"] = "TempRH Installer - PC";
+            //dt.Rows.Add(dr4);
 
-            DataRow dr5 = dt.NewRow();
-            dr5["DownloadId"] = "6";
-            dr5["DownloadName"] = "ITX-PDCSII Colorpath Verified Installation";
-            dt.Rows.Add(dr5);
+            //DataRow dr5 = dt.NewRow();
+            //dr5["DownloadId"] = "6";
+            //dr5["DownloadName"] = "ITX-PDCSII Colorpath Verified Installation";
+            //dt.Rows.Add(dr5);
 
-            DataRow dr6 = dt.NewRow();
-            dr6["DownloadId"] = "7";
-            dr6["DownloadName"] = "ColorpathXF Installer";
-            dt.Rows.Add(dr6);
+            //DataRow dr6 = dt.NewRow();
+            //dr6["DownloadId"] = "7";
+            //dr6["DownloadName"] = "ColorpathXF Installer";
+            //dt.Rows.Add(dr6);
 
-            DataRow dr7 = dt.NewRow();
-            dr7["DownloadId"] = "8";
-            dr7["DownloadName"] = "Taskero ColorTuner";
-            dt.Rows.Add(dr7);
+            //DataRow dr7 = dt.NewRow();
+            //dr7["DownloadId"] = "8";
+            //dr7["DownloadName"] = "Taskero ColorTuner";
+            //dt.Rows.Add(dr7);
 
-            DataRow dr8 = dt.NewRow();
-            dr8["DownloadId"] = "9";
-            dr8["DownloadName"] = "Taskero ColorGATE Client";
-            dt.Rows.Add(dr8);
+            //DataRow dr8 = dt.NewRow();
+            //dr8["DownloadId"] = "9";
+            //dr8["DownloadName"] = "Taskero ColorGATE Client";
+            //dt.Rows.Add(dr8);
 
             return dt;
         }

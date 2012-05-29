@@ -536,7 +536,7 @@ label
 
 #menu2 li a:hover
 {
-    background: url(../Images/menu_arrow.png) no-repeat 36px center #e9e9e9; 
+    background: url(../Images/menu_arrow.png) no-repeat 36px right #e9e9e9;  /*just replace center with right, and it removes the gray hover effects from run name */
 }
 #menu2 li .submenu li a
 {
