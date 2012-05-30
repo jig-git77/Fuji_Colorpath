@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI;
 using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
 using Telerik.Web.UI;
@@ -28,9 +29,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-                BindCompanyDropDown();              
+                BindCompanyDropDown();
             }
-           
+
         }
         #endregion
 
@@ -61,29 +62,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ? SessionManager.Instance.CurrentUser.UserCompany.CompanyId
                             : Convert.ToInt32(cmbCompany.SelectedValue);
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
-                    break;              
+                    break;
                 case "Sort":
-                    RadToolTipManager1.TargetControls.Clear();
+                    //RadToolTipManager1.TargetControls.Clear();
                     break;
                 case "Page":
-                    RadToolTipManager1.TargetControls.Clear();
+                    //RadToolTipManager1.TargetControls.Clear();
                     break;
             }
-        }      
+        }
 
         protected void rgDeviceList_ItemDataBound(object sender, GridItemEventArgs e)
         {
             if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
             {
-                Control target = e.Item.FindControl("lbtnSelectDevice");
-                if (!Object.Equals(target, null))
-                {
-                    if (!Object.Equals(this.RadToolTipManager1, null))
-                    {
-                        //Add the button (target) id to the tooltip manager
-                        this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);   
-                    }
-                }
+                //var target = (Panel)e.Item.FindControl("divSelectDevice");
+                //target.Attributes.Add("onmouseover", "SetToolTipShow("+target.ClientID+")");
+                //target.Attributes.Add("onmouseout", "SetToolTipHide(" + target.ClientID + ")");
+                //if (!Object.Equals(target, null))
+                //{
+                //    //if (!Object.Equals(this.RadToolTipManager1, null))
+                //    //{
+                //    //    //Add the button (target) id to the tooltip manager
+                //    //    this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);   
+                //    //}
+                //}
             }
         }
 
@@ -91,7 +94,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             CompanyId = Convert.ToInt32(ViewState["CompanyId"]);
             BranchId = Convert.ToInt32(ViewState["BranchId"]);
-            BindDeviceList();           
+            BindDeviceList();
+            //ScriptManager.RegisterStartupScript(rgDeviceList, rgDeviceList.GetType(), "SetToolTip", "<script>SetToolTip();</script>", false);
         }
         #endregion
 
@@ -119,10 +123,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindBranchDropDown()
         {
-            this.CompanyId = 
-                            string.IsNullOrEmpty(cmbCompany.SelectedValue)? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
+            this.CompanyId =
+                            string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             _presenterdevice.BranchList();
-            if (!IsErrorOccured)            
+            if (!IsErrorOccured)
             {
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
@@ -150,17 +154,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void OnAjaxUpdate(object sender, ToolTipUpdateEventArgs args)
-        {
-            this.UpdateToolTip(args.Value, args.UpdatePanel);
-        }
-        private void UpdateToolTip(string elementID, UpdatePanel panel)
-        {
-            Control ctrl = Page.LoadControl("UserControl/OperationSelection.ascx");
-            panel.ContentTemplateContainer.Controls.Add(ctrl);
-            OperationSelection details = (OperationSelection)ctrl;
-            details.DeviceId = Convert.ToInt32(elementID);
-        }
+        //protected void OnAjaxUpdate(object sender, ToolTipUpdateEventArgs args)
+        //{
+        //    this.UpdateToolTip(sender,args.Value, args.UpdatePanel);
+        //}
+        //private void UpdateToolTip(object sender,string elementID, UpdatePanel panel)
+        //{
+        //    Control ctrl = Page.LoadControl("UserControl/OperationSelection.ascx");
+        //    panel.ContentTemplateContainer.Controls.Add(ctrl);
+        //    OperationSelection details = (OperationSelection)ctrl;
+        //    details.DeviceId = Convert.ToInt32(elementID);
+        //    ((RadToolTipManager)sender).OffsetY = -10;
+        //}
 
         #endregion
 

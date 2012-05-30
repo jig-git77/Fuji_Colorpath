@@ -41,63 +41,57 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            this.lbl_Title.Text = "Device ID is: " + DeviceId;          
-
             DeviceId = Convert.ToInt32(DeviceId);
             CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
             _presenterdevice.DeviceListByDeviceId();
 
-            SessionManager.Instance.CurrentDevice = SelectedDevice;
+            //SessionManager.Instance.CurrentDevice = SelectedDevice;
+            //SessionManager.Instance.CurrentBranchName = SelectedDevice.License.Branch.BranchName.ToString();
 
-            SessionManager.Instance.CurrentBranchName = SelectedDevice.License.Branch.BranchName.ToString();
-
-            //------------Give by default stylesheet classes----------//
-            //lbtAligmentCurves.CssClass = "disable_Popup_bt";
-            //lbtnDLPOptimization.CssClass = "disable_Popup_bt";
-            //lbtInkOptimization.CssClass = "disable_Popup_bt";
-            //lbtnColorValidation.CssClass = "disable_Popup_bt";
-            //lbtnICCProfiling.CssClass = "disable_Popup_bt";
-
-            lbtAligmentCurves.CssClass = "Popup_bt_first";
-            lbtnDLPOptimization.CssClass = "Popup_bt";
-            lbtInkOptimization.CssClass = "Popup_bt";
-            lbtnColorValidation.CssClass = "Popup_bt";
-            lbtnICCProfiling.CssClass = "Popup_bt_last";
+            //lbtAligmentCurves.CssClass = "Popup_bt_first";
+            //lbtnDLPOptimization.CssClass = "Popup_bt";
+            //lbtInkOptimization.CssClass = "Popup_bt";
+            //lbtnColorValidation.CssClass = "Popup_bt";
+            //lbtnICCProfiling.CssClass = "Popup_bt_last";
 
             //--------Start code for applying enabled buttons stylesheet classes----------//
-            if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
+            if (SelectedDevice.LicenseTypeProject.Count > 0)
             {
                 foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                 {
                     string key = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key);
                     int val = item.Value;
 
+                    switch (item.Key)
+                    {
+                            
+                    }
                     if (item.Key.ToString() == "Sync1D")
                     {
                         spanAligmentCurves.InnerText = key;
                         lbtAligmentCurves.CssClass = "Popup_bt_first";
-                        lbtAligmentCurves.OnClientClick = "";
+                        lbtAligmentCurves.OnClientClick = "return true;";
                         Hidden_AligmentCurves.Value = val.ToString();
                     }
                     else if (item.Key.ToString() == "DLP")
                     {
                         spanDLPOptimization.InnerText = key;
                         lbtnDLPOptimization.CssClass = "Popup_bt";
-                        lbtnDLPOptimization.OnClientClick = "";
+                        lbtnDLPOptimization.OnClientClick = "return true";
                         Hidden_DLPOptimization.Value = val.ToString();
                     }
                     else if (item.Key.ToString() == "InkOptimization")
                     {
                         spanInkOptimization.InnerText = key;
                         lbtInkOptimization.CssClass = "Popup_bt";
-                        lbtInkOptimization.OnClientClick = "";
+                        lbtInkOptimization.OnClientClick = "return true";
                         Hidden_InkOptimization.Value = val.ToString();
                     }
                     else if (item.Key.ToString() == "Verification")
                     {
                         spanColorValidation.InnerText = key;
                         lbtnColorValidation.CssClass = "Popup_bt";
-                        lbtnColorValidation.OnClientClick = "";
+                        lbtnColorValidation.OnClientClick = "return true";
                         Hidden_ColorValidation.Value = val.ToString();
                     }
                     //Response.Write(key.ToString() + "     " + val.ToString() +"<br/>");
@@ -127,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
 
-        #region IViewDevice Members   
+        #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
         public int CompanyId { get; set; }

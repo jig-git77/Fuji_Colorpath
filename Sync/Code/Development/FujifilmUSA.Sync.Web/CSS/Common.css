@@ -2035,9 +2035,14 @@ label
 }
 
 /************DeviceList : Popup menu***************/
+
+/************DeviceList : Popup menu***************/
 .popup{  left:0px; top:0px; width:260px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
-.popup ul{ margin:0 0 0 25px;}
-.popup li{ line-height:43px; padding-bottom:-2px;}
+.popup ul{ margin:5px 0 0 25px;}
+.popup li{ line-height:43px; padding-bottom:-1px;}
+.popup li.first a:hover{background-position:0 0;}
+.popup li.last a:hover{background-position:0 -176px;}
+
 
 .disable_Popup_bt{color:#C0C0C0; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;margin:15 0 0 0;  }
 .disable_Popup_bt :hover{color:#C0C0C0; display:block;}
@@ -2045,25 +2050,12 @@ label
 .Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:5px 0 0 0; }
 .Popup_bt_last{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:-1px 0 0 0; }
 
+
 .Popup_bt :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:left -44px;  }
-
 .Popup_bt_first :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 5px; }
-.Popup_bt_last :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }
-
-div.RadToolTip_Default table.rtWrapper td.rtWrapperLeftMiddle, div.RadToolTip_Default table.rtWrapper td.rtWrapperRightMiddle, div.RadToolTip_Default table.rtShadow td.rtWrapperLeftMiddle, div.RadToolTip_Default table.rtShadow td.rtWrapperRightMiddle {
-    background-image: none !important;
-}
-div.RadToolTip_Default div.rtCallout {
-    background-image: none !important;
+.Popup_bt_last :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  
 }
 
-div.RadToolTip_Default table.rtWrapper td.rtWrapperContent {
-    background-color: transparent !important;
-}
-
-div.RadToolTip_Default table.rtWrapper td.rtWrapperTopLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomRight, div.RadToolTip_Default table.rtWrapper td.rtWrapperTopCenter, div.RadToolTip_Default table.rtWrapper td.rtWrapperBottomCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperTopLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperTopRight, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomLeft, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomRight, div.RadToolTip_Default table.rtShadow td.rtWrapperTopCenter, div.RadToolTip_Default table.rtShadow td.rtWrapperBottomCenter, div.RadToolTip_Default a.rtCloseButton {
-    background-image: none !important;
-}
 
 /******************Download List Style*******************/
 .Download_list
