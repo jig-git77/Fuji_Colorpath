@@ -66,40 +66,50 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
 
-            if (hdnRefChartID.Value == "0")
+            if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
-                if (ViewState[vsChartData] != null && fucUploadChartPreview.UploadedFiles.Count > 0 && fucUploadOriginalChart.UploadedFiles.Count > 0)
+                if (fucUploadOriginalChart.UploadedFiles.Count > 0)
                 {
-                    ReferenceChartType.ReferenceCharts = ((List<ReferenceChartImportData>)ViewState[vsChartData]).
-                                                             Select(x => new ReferenceChart()
-                                                             {
-                                                                 SampleId = x.SampleId,
-                                                                 SampleName = x.SampleName,
-                                                                 CmykC = x.CmykC,
-                                                                 CmykM = x.CmykM,
-                                                                 CmykY = x.CmykY,
-                                                                 CmykK = x.CmykK
-                                                             }).ToList();
                     var memoryStream = new MemoryStream();
                     fucUploadOriginalChart.UploadedFiles[0].InputStream.CopyTo(memoryStream);
                     ReferenceChartType.OriginalChart = memoryStream.ToArray();
-
-                    memoryStream = new MemoryStream();
+                }
+                if (fucUploadChartPreview.UploadedFiles.Count > 0)
+                {
+                    var memoryStream = new MemoryStream();
                     fucUploadChartPreview.UploadedFiles[0].InputStream.CopyTo(memoryStream);
                     ReferenceChartType.ChartPreview = memoryStream.ToArray();
+                }
 
-                    _presenterAddReferenceChart.SaveReferenceChart();
-                    Response.Redirect("ReferenceChartManagement.aspx");
+                if (hdnRefChartID.Value == "0")
+                {
+                    if (ViewState[vsChartData] != null)
+                    {
+                        ReferenceChartType.ReferenceCharts = ((List<ReferenceChartImportData>)ViewState[vsChartData]).
+                                                                 Select(x => new ReferenceChart()
+                                                                 {
+                                                                     SampleId = x.SampleId,
+                                                                     SampleName = x.SampleName,
+                                                                     CmykC = x.CmykC,
+                                                                     CmykM = x.CmykM,
+                                                                     CmykY = x.CmykY,
+                                                                     CmykK = x.CmykK
+                                                                 }).ToList();
+
+
+                        _presenterAddReferenceChart.SaveReferenceChart();
+                        Response.Redirect("ReferenceChartManagement.aspx");
+                    }
                 }
                 else
                 {
-                    fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_MissingUploadFile"), false);
+                    _presenterAddReferenceChart.UpdateReferenceChart();
+                    Response.Redirect("ReferenceChartManagement.aspx");
                 }
             }
             else
             {
-                _presenterAddReferenceChart.UpdateReferenceChart();
-                Response.Redirect("ReferenceChartManagement.aspx");
+                fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_MissingUploadFile"), false);
             }
         }
 
@@ -265,10 +275,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAddReferenceChart.GetReferenceChartDetails();
             if (!IsErrorOccured)
             {
-                //cmbRegion.Enabled = false;
-                //cmbCompanyName.Enabled = false;
-                //rfvProfile.ValidationGroup = "a";
-
                 hdnRefChartID.Value = Convert.ToString(RefChartId);
                 txtChartName.Text = ReferenceChartType.ChartName.ToString();
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
@@ -276,6 +282,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
                 cmbProjectType.SelectedValue = Convert.ToString(ReferenceChartType.ProjectType.ProjectTypeId);
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
+
+             
+                Hidden_ChartPreview.Value = ReferenceChartType.ChartPreview.Length.ToString();
+                Hidden_OriginalChart.Value = ReferenceChartType.OriginalChart.Length.ToString();
+            
+
+                //var memoryStream = new MemoryStream();
+               
+                //byte[] org = memoryStream.ToArray();
+                //org = ReferenceChartType.OriginalChart;
+                //fucUploadOriginalChart.UploadedFiles[0].InputStream.CopyTo(memoryStream);
             }
         }
 

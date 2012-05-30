@@ -156,7 +156,7 @@
                             <td align="left">
                                 <div style="float: left;">
                                     <telerik:RadAsyncUpload runat="server" ID="fucUploadChartPreview" MultipleFileSelection="Disabled"
-                                        MaxFileInputsCount="1" PostbackTriggers="lbtnSave" AllowedFileExtensions="*.gif|*.jpg|*.jpeg|*.png|*.tif" >
+                                        MaxFileInputsCount="1" PostbackTriggers="lbtnSave"  >
                                     </telerik:RadAsyncUpload>
                                     <%--<asp:FileUpload ID="fucUploadChartPreview" runat="server" />--%>
                                 </div>
@@ -182,7 +182,7 @@
                             <td align="left">
                                 <div style="float: left;">
                                     <telerik:RadAsyncUpload runat="server" ID="fucUploadOriginalChart" MultipleFileSelection="Disabled"
-                                        MaxFileInputsCount="1" PostbackTriggers="lbtnSave" AllowedFileExtensions="*.pdf">
+                                        MaxFileInputsCount="1" PostbackTriggers="lbtnSave" >
                                     </telerik:RadAsyncUpload>
                                     <%--<asp:FileUpload ID="fucUploadOriginalChart" runat="server" />--%>
                                 </div>
@@ -324,6 +324,8 @@
                                         <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/ReferenceChartManagement.aspx">
                                                     <span> Cancel </span>
                                         </asp:LinkButton>
+                                        <input id="Hidden_OriginalChart" type="hidden" value="0" runat="server" />
+                                        <input id="Hidden_ChartPreview" type="hidden" value="0" runat="server" />
                                     </div>
                                 </div>
                                 <div class="clear">

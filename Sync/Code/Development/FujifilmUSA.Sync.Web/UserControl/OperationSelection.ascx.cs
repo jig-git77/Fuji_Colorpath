@@ -32,6 +32,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
             spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);
 
+           
+
             if (LicenseTypeProject != null)
             {
                 lbtnAligmentCurves.Enabled =
@@ -41,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnICCProfiling.Enabled = false;
 
                 foreach (KeyValuePair<ELicenseType, int> license in LicenseTypeProject)
-                {
+                {                   
                     switch (license.Key)
                     {
                         case ELicenseType.Sync1D:

@@ -244,7 +244,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
         private void ClearAdvancedOptionsControls()
         {
-            cmbRendering.SelectedValue = "-1";
+            cmbRendering.SelectedValue = "0";
             txtBlackPointCustom.Text = string.Empty;
             txtMaxInk.Text = string.Empty;
             rdsMode.Value = rdsMode.MinimumValue;

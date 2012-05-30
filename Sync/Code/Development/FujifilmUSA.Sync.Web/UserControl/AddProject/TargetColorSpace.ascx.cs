@@ -40,6 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.SourceProfile = new SourceProfile
             {
                 SourceProfileId = Convert.ToInt16(cmbSourceProfile.SelectedValue),
+                ProfileName = cmbSourceProfile.SelectedItem.Text,
             };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;

@@ -167,8 +167,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
                                     ProjectTypeName = DataReader.ReadString(x, "ProjectType")
                                 },
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
+                                OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")    
 
                             }).ToList();
                     }
@@ -192,10 +193,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.ReferenceChartTypeId,
                                         referenceChartType.ChartName,
                                         referenceChartType.NumOfRows,
-                                        referenceChartType.NumOfCols,
-                                        referenceChartType.ProjectTypeId,
+                                        referenceChartType.NumOfCols,                                       
                                         referenceChartType.InstrumentTypeId,
-                                        referenceChartType.IsUsed
+                                         referenceChartType.ProjectTypeId,
+                                        referenceChartType.IsUsed,
+                                        referenceChartType.ChartPreview,
+                                        referenceChartType.OriginalChart
                                     });
                     if (returnValue == -1)
                     {
