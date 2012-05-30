@@ -93,7 +93,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ctrlItem.ID = "_Device";
             ph.Controls.Add(ctrlItem);
 
-            if (SessionManager.Instance.CurrentOperation == EOperation.None) return;
+            if (SessionManager.Instance.CurrentOperation == ELicenseType.None) return;
             ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
             ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation;
             ctrlItem.ItemName = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);

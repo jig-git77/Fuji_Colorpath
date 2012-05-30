@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class OperationSelection {
         
         /// <summary>
-        /// lbtAligmentCurves control.
+        /// lbtnAligmentCurves control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtAligmentCurves;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnAligmentCurves;
         
         /// <summary>
         /// spanAligmentCurves control.
@@ -49,13 +49,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanDLPOptimization;
         
         /// <summary>
-        /// lbtInkOptimization control.
+        /// lbtnInkOptimization control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtInkOptimization;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnInkOptimization;
         
         /// <summary>
         /// spanInkOptimization control.
@@ -101,50 +101,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanICCProfiling;
-        
-        /// <summary>
-        /// Hidden_AligmentCurves control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_AligmentCurves;
-        
-        /// <summary>
-        /// Hidden_DLPOptimization control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_DLPOptimization;
-        
-        /// <summary>
-        /// Hidden_InkOptimization control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_InkOptimization;
-        
-        /// <summary>
-        /// Hidden_ColorValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_ColorValidation;
-        
-        /// <summary>
-        /// Hidden_ICCProfiling control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_ICCProfiling;
     }
 }

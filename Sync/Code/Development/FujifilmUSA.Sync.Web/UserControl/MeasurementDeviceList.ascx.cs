@@ -110,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> LicenseList { get; set; }
         public Dictionary<int, string> InstrumentTypeList { get; set; }
-        public List<Device> DeviceListById { get; set; }
+        public List<Device> Devices { get; set; }
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
         #endregion

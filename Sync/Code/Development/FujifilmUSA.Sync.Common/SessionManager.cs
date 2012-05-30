@@ -119,15 +119,15 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-        public EOperation CurrentOperation
+        public ELicenseType CurrentOperation
         {
             get
             {
                 if (HttpContext.Current.Session[_operationSession] != null)
                 {
-                    return (EOperation)System.Enum.Parse(typeof(EOperation), HttpContext.Current.Session[_operationSession].ToString());
+                    return (ELicenseType)System.Enum.Parse(typeof(ELicenseType), HttpContext.Current.Session[_operationSession].ToString());
                 }
-                return EOperation.None;
+                return ELicenseType.None;
             }
             set
             {

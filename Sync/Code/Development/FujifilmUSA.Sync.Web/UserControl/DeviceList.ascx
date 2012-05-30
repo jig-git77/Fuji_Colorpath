@@ -26,10 +26,7 @@
             }).mouseout(function () { $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").hide(); });
 
         });
-        alert('Load');
      }
-    
-
 
     //------------------------------------------
     function InToolTip(divOperationSelection) {
@@ -204,7 +201,7 @@
                             AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                             EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
                             OnItemCommand="rgDeviceList_ItemCommand" Width="675px" OnItemDataBound="rgDeviceList_ItemDataBound">
-                            <ClientSettings Selecting-AllowRowSelect="true" EnablePostBackOnRowClick="true">
+                            <ClientSettings Selecting-AllowRowSelect="true">
                             </ClientSettings>
                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                             <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
@@ -247,20 +244,20 @@
                 <telerik:AjaxSetting AjaxControlID="rgDeviceList">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <%--<telerik:AjaxUpdatedControl ControlID="RadToolTipManager1" />--%>
+
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="cmbCompany" EventName="OnSelectedIndexChanged">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <%--<telerik:AjaxUpdatedControl ControlID="RadToolTipManager1" />--%>
+                        
                         <telerik:AjaxUpdatedControl ControlID="cmbBranch" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="cmbBranch" EventName="OnSelectedIndexChanged">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <%--<telerik:AjaxUpdatedControl ControlID="RadToolTipManager1" />--%>
+
                     </UpdatedControls>
                 </telerik:AjaxSetting>
             </AjaxSettings>

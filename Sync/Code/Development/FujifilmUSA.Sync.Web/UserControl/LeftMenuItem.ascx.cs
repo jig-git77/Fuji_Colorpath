@@ -47,19 +47,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ELeftMenuItemLevel.Home:
                     SessionManager.Instance.CurrentBranchName = null;
                     SessionManager.Instance.CurrentDevice = null;
-                    SessionManager.Instance.CurrentOperation = EOperation.None;
+                    SessionManager.Instance.CurrentOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("Index.aspx");
                     break;
                 case ELeftMenuItemLevel.Device:
-                    //SessionManager.Instance.CurrentOperation = EOperation.None;
-                    //SessionManager.Instance.CurrentProject = null;
-                    //SessionManager.Instance.CurrentOptimizeRun = null;
-
                     SessionManager.Instance.CurrentBranchName = null;
                     SessionManager.Instance.CurrentDevice = null;
-                    SessionManager.Instance.CurrentOperation = EOperation.None;
+                    SessionManager.Instance.CurrentOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("Index.aspx");
@@ -73,7 +69,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
-                    //SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
                     Response.Redirect("AddProject.aspx");
                     break;
             }

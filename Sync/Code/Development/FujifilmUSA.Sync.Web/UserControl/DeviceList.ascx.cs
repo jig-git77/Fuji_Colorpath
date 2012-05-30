@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Linq;
-using System.Web.UI;
 using System.Collections.Generic;
-using System.Web.UI.HtmlControls;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
-using Telerik.Web.UI;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -31,7 +29,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
             }
-
         }
         #endregion
 
@@ -63,12 +60,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             : Convert.ToInt32(cmbCompany.SelectedValue);
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
                     break;
-                case "Sort":
-                    //RadToolTipManager1.TargetControls.Clear();
-                    break;
-                case "Page":
-                    //RadToolTipManager1.TargetControls.Clear();
-                    break;
             }
         }
 
@@ -76,17 +67,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
             {
-                //var target = (Panel)e.Item.FindControl("divSelectDevice");
-                //target.Attributes.Add("onmouseover", "SetToolTipShow("+target.ClientID+")");
-                //target.Attributes.Add("onmouseout", "SetToolTipHide(" + target.ClientID + ")");
-                //if (!Object.Equals(target, null))
-                //{
-                //    //if (!Object.Equals(this.RadToolTipManager1, null))
-                //    //{
-                //    //    //Add the button (target) id to the tooltip manager
-                //    //    this.RadToolTipManager1.TargetControls.Add(target.ClientID, (e.Item as GridDataItem).GetDataKeyValue("DeviceId").ToString(), true);   
-                //    //}
-                //}
+                var ctrlOperationSelection = e.Item.FindControl("operationSelection") as OperationSelection;
+                if (ctrlOperationSelection != null)
+                {
+                    var dvc = (Device) e.Item.DataItem;
+                    if (dvc != null)
+                    {
+                        ctrlOperationSelection.LicenseTypeProject = dvc.LicenseTypeProject;
+                    }
+                }
             }
         }
 
@@ -95,7 +84,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             CompanyId = Convert.ToInt32(ViewState["CompanyId"]);
             BranchId = Convert.ToInt32(ViewState["BranchId"]);
             BindDeviceList();
-            //ScriptManager.RegisterStartupScript(rgDeviceList, rgDeviceList.GetType(), "SetToolTip", "<script>SetToolTip();</script>", false);
         }
         #endregion
 
@@ -149,23 +137,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterdevice.DeviceListById();
             if (!IsErrorOccured)
             {
-                rgDeviceList.DataSource = DeviceListById;
-
+                rgDeviceList.DataSource = Devices;
             }
         }
-
-        //protected void OnAjaxUpdate(object sender, ToolTipUpdateEventArgs args)
-        //{
-        //    this.UpdateToolTip(sender,args.Value, args.UpdatePanel);
-        //}
-        //private void UpdateToolTip(object sender,string elementID, UpdatePanel panel)
-        //{
-        //    Control ctrl = Page.LoadControl("UserControl/OperationSelection.ascx");
-        //    panel.ContentTemplateContainer.Controls.Add(ctrl);
-        //    OperationSelection details = (OperationSelection)ctrl;
-        //    details.DeviceId = Convert.ToInt32(elementID);
-        //    ((RadToolTipManager)sender).OffsetY = -10;
-        //}
 
         #endregion
 
@@ -180,7 +154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> CompanyList { get; set; }
         public Dictionary<int, string> LicenseList { get; set; }
         public Dictionary<int, string> InstrumentTypeList { get; set; }
-        public List<Device> DeviceListById { get; set; }
+        public List<Device> Devices { get; set; }
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
         #endregion

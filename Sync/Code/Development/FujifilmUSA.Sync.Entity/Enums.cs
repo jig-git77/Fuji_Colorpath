@@ -28,19 +28,19 @@ namespace FujifilmUSA.Sync.Entity
         //NotUsed = 4
     }
 
-    public enum EOperation
-    {
-        [Description("Project List")]
-        None = 0,
-        [Description("Alignment Curves")]
-        AligmentCurves = 1,
-        [Description("DLP Optimization")]
-        DlpOptimization = 2,
-        [Description("Ink Optimization")]
-        InkOptimization = 3,
-        [Description("Color Validation")]
-        ColorValidation = 4
-    }
+    //public enum EOperation
+    //{
+    //    [Description("Project List")]
+    //    None = 0,
+    //    [Description("Alignment Curves")]
+    //    AligmentCurves = 1,
+    //    [Description("DLP Optimization")]
+    //    DlpOptimization = 2,
+    //    [Description("Ink Optimization")]
+    //    InkOptimization = 3,
+    //    [Description("Color Validation")]
+    //    ColorValidation = 4
+    //}
 
     public enum EProfileType
     {
@@ -298,6 +298,8 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum ELicenseType
     {
+        [Description("INVALID")]
+        None = 0,
         [Description("Alignment Curves")]
         Sync1D = 1,
         [Description("DLP Optimization")]
@@ -305,7 +307,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("Ink Optimization")]
         InkOptimization = 3,
         [Description("Color Validation")]
-        Verification = 4
+        Verification = 4,
+        [Description("ICC Profiling")]
+        IccProfiling = 5
     }
 
     public enum UserType

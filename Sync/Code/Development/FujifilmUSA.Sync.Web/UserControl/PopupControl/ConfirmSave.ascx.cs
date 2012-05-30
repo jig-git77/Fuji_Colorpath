@@ -60,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdOptRunLimit.Value = TotalOptRuns.ToString();
 
                 //----------------If CurrentOperation = 3 (Ink Optimization), then they can not create optimize runs, they has to close run at 1st run--------------------//
-                if (SessionManager.Instance.CurrentOperation == EOperation.InkOptimization)
+                if (SessionManager.Instance.CurrentOperation == ELicenseType.InkOptimization)
                 {
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2)
                     {

@@ -1,139 +1,131 @@
 ﻿using System;
+using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class OperationSelection : BaseControl, IViewDevice
+    public partial class OperationSelection : BaseControl, IViewOperationSelection
     {
         #region "Declaration"
-        private PresenterDevice _presenterdevice;
-
-        public int DeviceId
-        {
-            get
-            {
-                if (ViewState["DeviceId"] == null)
-                {
-                    return 0;
-                }
-                return (int)ViewState["DeviceId"];
-            }
-            set
-            {
-
-                ViewState["DeviceId"] = value;
-
-            }
-        }
+        private PresenterOperationSelection _presenterOperationSelection;
+        private const string _vsDeviceId = "_DeviceId";
+        public Dictionary<ELicenseType, int> LicenseTypeProject { get; set; }
 
         #endregion
 
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
-            _presenterdevice = new PresenterDevice(this);
-        }              
+            _presenterOperationSelection = new PresenterOperationSelection(this);
+        }
 
         protected override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender(e);
-            DeviceId = Convert.ToInt32(DeviceId);
-            CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
-            _presenterdevice.DeviceListByDeviceId();
+            spanAligmentCurves.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
+            spanDLPOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
+            spanInkOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
+            spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
+            spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);
 
-            //SessionManager.Instance.CurrentDevice = SelectedDevice;
-            //SessionManager.Instance.CurrentBranchName = SelectedDevice.License.Branch.BranchName.ToString();
-
-            //lbtAligmentCurves.CssClass = "Popup_bt_first";
-            //lbtnDLPOptimization.CssClass = "Popup_bt";
-            //lbtInkOptimization.CssClass = "Popup_bt";
-            //lbtnColorValidation.CssClass = "Popup_bt";
-            //lbtnICCProfiling.CssClass = "Popup_bt_last";
-
-            //--------Start code for applying enabled buttons stylesheet classes----------//
-            if (SelectedDevice.LicenseTypeProject.Count > 0)
+            if (LicenseTypeProject != null)
             {
-                foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
+                lbtnAligmentCurves.Enabled =
+                    lbtnDLPOptimization.Enabled =
+                    lbtnInkOptimization.Enabled =
+                    lbtnColorValidation.Enabled =
+                    lbtnICCProfiling.Enabled = false;
+
+                foreach (KeyValuePair<ELicenseType, int> license in LicenseTypeProject)
                 {
-                    string key = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key);
-                    int val = item.Value;
-
-                    switch (item.Key)
+                    switch (license.Key)
                     {
-                            
+                        case ELicenseType.Sync1D:
+                            lbtnAligmentCurves.Enabled = true;
+                            break;
+                        case ELicenseType.DLP:
+                            lbtnDLPOptimization.Enabled = true;
+                            break;
+                        case ELicenseType.InkOptimization:
+                            lbtnInkOptimization.Enabled = true;
+                            break;
+                        case ELicenseType.Verification:
+                            lbtnColorValidation.Enabled = true;
+                            break;
+                        case ELicenseType.IccProfiling:
+                            lbtnICCProfiling.Enabled = true;
+                            break;
                     }
-                    if (item.Key.ToString() == "Sync1D")
-                    {
-                        spanAligmentCurves.InnerText = key;
-                        lbtAligmentCurves.CssClass = "Popup_bt_first";
-                        lbtAligmentCurves.OnClientClick = "return true;";
-                        Hidden_AligmentCurves.Value = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "DLP")
-                    {
-                        spanDLPOptimization.InnerText = key;
-                        lbtnDLPOptimization.CssClass = "Popup_bt";
-                        lbtnDLPOptimization.OnClientClick = "return true";
-                        Hidden_DLPOptimization.Value = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "InkOptimization")
-                    {
-                        spanInkOptimization.InnerText = key;
-                        lbtInkOptimization.CssClass = "Popup_bt";
-                        lbtInkOptimization.OnClientClick = "return true";
-                        Hidden_InkOptimization.Value = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "Verification")
-                    {
-                        spanColorValidation.InnerText = key;
-                        lbtnColorValidation.CssClass = "Popup_bt";
-                        lbtnColorValidation.OnClientClick = "return true";
-                        Hidden_ColorValidation.Value = val.ToString();
-                    }
-                    //Response.Write(key.ToString() + "     " + val.ToString() +"<br/>");
                 }
-            }
-        }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-           
+                lbtnAligmentCurves.CssClass = lbtnAligmentCurves.Enabled ? "Popup_bt_first" : "disable_Popup_bt";
+                lbtnDLPOptimization.CssClass = lbtnDLPOptimization.Enabled ? "Popup_bt" : "disable_Popup_bt";
+                lbtnInkOptimization.CssClass = lbtnInkOptimization.Enabled ? "Popup_bt" : "disable_Popup_bt";
+                lbtnColorValidation.CssClass = lbtnColorValidation.Enabled ? "Popup_bt" : "disable_Popup_bt";
+                lbtnICCProfiling.CssClass = lbtnICCProfiling.Enabled ? "Popup_bt_last" : "disable_Popup_bt";
+
+            }
         }
 
         #endregion
 
-        protected void lbtnDLPOptimization_Click(object sender, EventArgs e)
+        #region Control Events
+        protected void lbtn_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentOperation = EOperation.DlpOptimization;
-            SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_DLPOptimization.Value);
-            Response.Redirect("~/ProjectList.aspx");
+            _presenterOperationSelection.GetDeviceById();
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentDevice = Device;
+                var lnkButton = (LinkButton)sender;
+                switch (lnkButton.ID.ToUpper())
+                {
+                    case "LBTNALIGMENTCURVES":
+                        SessionManager.Instance.CurrentOperation = ELicenseType.Sync1D;
+                        break;
+                    case "LBTNDLPOPTIMIZATION":
+                        SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                        break;
+                    case "LBTNINKOPTIMIZATION":
+                        SessionManager.Instance.CurrentOperation = ELicenseType.InkOptimization;
+                        break;
+                    case "LBTNCOLORVALIDATION":
+                        SessionManager.Instance.CurrentOperation = ELicenseType.Verification;
+                        break;
+                    case "LBTNICCPROFILING":
+                        SessionManager.Instance.CurrentOperation = ELicenseType.IccProfiling;
+                        break;
+                }
+                SessionManager.Instance.CurrentProjLimit = Device.LicenseTypeProject.Single(x => x.Key == SessionManager.Instance.CurrentOperation).Value;
+                Response.RedirectPermanent("~/ProjectList.aspx");
+            }
         }
 
-        protected void lbtInkOptimization_Click(object sender, EventArgs e)
+        #endregion
+
+        #region IViewOperationSelection Members
+
+        public int DeviceId
         {
-            SessionManager.Instance.CurrentOperation = EOperation.InkOptimization;
-            SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_InkOptimization.Value);
-            Response.Redirect("~/ProjectList.aspx");
+            get
+            {
+                if (ViewState[_vsDeviceId] == null)
+                {
+                    return 0;
+                }
+                return (int)ViewState[_vsDeviceId];
+            }
+            set
+            {
+                ViewState[_vsDeviceId] = value;
+            }
         }
 
+        public Device Device { get; set; }
 
-        #region IViewDevice Members
-        public int TaskeroUserId { get; set; }
-        public int RoleId { get; set; }
-        public int CompanyId { get; set; }
-        public int BranchId { get; set; }
-        public MeasurementDevice MeasurementDevice { get; set; }
-        public List<MeasurementDevice> MeasurementDevices { get; set; }
-        public Dictionary<int, string> BranchList { get; set; }
-        public Dictionary<int, string> CompanyList { get; set; }
-        public Dictionary<int, string> LicenseList { get; set; }
-        public Dictionary<int, string> InstrumentTypeList { get; set; }
-        public List<Device> DeviceListById { get; set; }      
-        public Device SelectedDevice { get; set; }
         #endregion
     }
 }
