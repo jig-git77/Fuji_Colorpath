@@ -68,11 +68,19 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModelManager.cs" />
+    <Compile Include="ViewModels\ChartPrintViewModel.cs" />
     <Compile Include="ViewModels\DesignerViewModel.cs" />
     <Compile Include="ViewModels\SelectDeviceViewModel.cs" />
     <Compile Include="ViewModels\StartICCProfileViewModel.cs" />
+    <Compile Include="ViewModels\WebHostViewModel.cs" />
+    <Compile Include="Views\ChartPrintView.xaml.cs">
+      <DependentUpon>ChartPrintView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DesignerView.xaml.cs">
       <DependentUpon>DesignerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HtmlHost.xaml.cs">
+      <DependentUpon>HtmlHost.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectDeviceView.xaml.cs">
       <DependentUpon>SelectDeviceView.xaml</DependentUpon>
@@ -80,20 +88,35 @@
     <Compile Include="Views\StartICCProfileView.xaml.cs">
       <DependentUpon>StartICCProfileView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WebHostView.xaml.cs">
+      <DependentUpon>WebHostView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ChartPrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DesignerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HtmlHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SelectDeviceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StartICCProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WebHostView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Login" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script type="text/javascript">
+    function SendMessageToParent() {
+        var bx = document.getElementById('<%=txtUserName.ClientID %>');
+        if (bx != null && window.parent != null) {
+            window.parent.postMessage(bx.value, "http://www.softwebdemo.com/Softweb/ColorOrganizerDemo");
+        }
+        return true;
+    }
     function createCookie(name, value, days) {
         var expires;
         if (days) {
@@ -82,7 +89,7 @@
             <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text=" Remember me!" />
             <asp:LinkButton ID="lnkForgotPassword" runat="server" Text="Forgot Password!" OnClientClick="return ShowOpenForgotPasswordWindow();"></asp:LinkButton>
             &nbsp;
-            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" />
+            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" OnClientClick="return SendMessageToParent();" />
         </div>
         <div class="clear">
         </div>
