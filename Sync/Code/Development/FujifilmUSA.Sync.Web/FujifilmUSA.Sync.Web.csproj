@@ -114,7 +114,7 @@
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\user-management.png" />
-    <Content Include="JS\wz_tooltip.js" />
+    <Content Include="JS\jquery.tools.min.js" />
     <Content Include="PDFReports\Sync DLP Report.pdf" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />

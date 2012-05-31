@@ -5,7 +5,7 @@
     TagPrefix="ucCreateDLP" %>
 <%@ Register Src="~/UserControl/OperationSelection.ascx" TagName="OperationSelection"
     TagPrefix="ucOperationSelection" %>
-<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+<script src="JS/jquery.tools.min.js"></script>
 <script type="text/javascript" language="javascript">
     jQuery(document).ready(function () {
         $("[id*='lbtnSelectDevice']").each(function () {
