@@ -7,70 +7,32 @@
     TagPrefix="ucOperationSelection" %>
 
 <script src="JS/wz_tooltip.js?version=4" type="text/javascript"></script>
+<%--<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>--%>
 
 <script type="text/javascript" language="javascript">
     jQuery(document).ready(function () {
-        SetToolTip();
-    });
-//    function pageLoad() {
-//        SetToolTip();
-//    }
-    
-    function SetToolTip() {
-//        var startTop = 0;
-//        var i = 0;
-//        var j = 0;
-//        var toffset = $("[id*='tblDeviceList']").offset();
-//        startTop = toffset.top;
-
-//        var intPo = 0;
-
         $("[id*='lbtnSelectDevice']").each(function () {
-            //            var moffset = $("[MDeviceId*=" + $(this).attr("DeviceId") + "]").offset();
-            //            //alert (startTop - moffset.top);
-
-
-            //            var offset = $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").offset();
-            //            var left = ($(this).text().length * 6) + 140;
-
-            //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").offset({ top: startTop, left: left });
-
             $(this).mouseover(function () {
-                //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").show();
                 DisplayToolTip($("[TDeviceId*=" + $(this).attr("DeviceId") + "]"));
             }).mouseout(function () {
                 HideTip();
-                //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").hide();
             });
         });
-     }
+    });
 
      function DisplayToolTip(divId) {
          data = $(divId).html();
-         Tip(data, TITLE, 'Harshad Patel');
+         Tip(data, HEIGHT, 229, WIDTH, 260, ABOVE, true, OFFSETY, -115, STICKY, true, BGCOLOR, '', BORDERWIDTH, 0, DURATION, 3000);
      }
 
      function HideTip() {
-         bShowToolTip = false;
          UnTip();
-     } 
-
-
-
-    //------------------------------------------
-    function InToolTip(divOperationSelection) {
-        $(divOperationSelection).show();
-    };
-
-    function outToolTip(divOperationSelection) {
-        $(divOperationSelection).hide();  
-    };
+     }
 </script>
 <style type="text/css">
     .tooltipDiv
     {
         position: absolute;
-      
     }
     
     div.RadGrid .rgRow
@@ -244,17 +206,16 @@
                                                 <ul>
                                                     <li>
                                                         <div class="left">
-                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" DeviceId='<%# Eval("DeviceId")%>' Text='<%# Eval("DeviceName")%>'
-                                                                 OnClientClick="return false;">
+                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" DeviceId='<%# Eval("DeviceId")%>'
+                                                                Text='<%# Eval("DeviceName")%>' OnClientClick="return false;">
                                                             </asp:LinkButton>
                                                         </div>
                                                         <div class="clear">
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </asp:panel>
-                                            <div id="divOperationSelection" TDeviceId='<%# Eval("DeviceId")%>' class="tooltipDiv"
-                                                style="display: none;" onmouseout="outToolTip(this)" onmouseover="InToolTip(this)" >
+                                            </asp:Panel>
+                                            <div id="divOperationSelection" tdeviceid='<%# Eval("DeviceId")%>' class="tooltipDiv" style="display: none;">
                                                 <ucOperationSelection:OperationSelection ID="operationSelection" runat="server" DeviceId='<%# Eval("DeviceId")%>' />
                                             </div>
                                             <div class="clear">
@@ -273,20 +234,17 @@
                 <telerik:AjaxSetting AjaxControlID="rgDeviceList">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="cmbCompany" EventName="OnSelectedIndexChanged">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        
                         <telerik:AjaxUpdatedControl ControlID="cmbBranch" />
                     </UpdatedControls>
                 </telerik:AjaxSetting>
                 <telerik:AjaxSetting AjaxControlID="cmbBranch" EventName="OnSelectedIndexChanged">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-
                     </UpdatedControls>
                 </telerik:AjaxSetting>
             </AjaxSettings>
