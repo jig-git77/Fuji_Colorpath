@@ -82,6 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 SessionManager.Instance.CurrentDevice = Device;
+                SessionManager.Instance.CurrentBranchName = SessionManager.Instance.CurrentDevice.License.Branch.BranchName;
                 var lnkButton = (LinkButton)sender;
                 switch (lnkButton.ID.ToUpper())
                 {

@@ -175,9 +175,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                             RipSettings = DataReader.ReadString(x, "RipSettings")
                                                         },
                                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
-                                                CurrentDlpName = String.Format("{0} DLP {1}.icc",
+                                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
-                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
+                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000")) 
+                                                                               : String.Format("{0} DLP{1}.icc",
+                                                                               DataReader.ReadString(x, "ProjectName"),
+                                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00"))
+                                                                               
                                             }).ToList();
                     }
                 },
