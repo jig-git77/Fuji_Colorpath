@@ -114,6 +114,7 @@
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\user-management.png" />
+    <Content Include="JS\wz_tooltip.js" />
     <Content Include="PDFReports\Sync DLP Report.pdf" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
@@ -1185,7 +1186,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

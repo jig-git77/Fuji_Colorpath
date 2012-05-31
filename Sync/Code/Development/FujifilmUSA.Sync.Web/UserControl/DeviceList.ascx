@@ -5,28 +5,57 @@
     TagPrefix="ucCreateDLP" %>
 <%@ Register Src="~/UserControl/OperationSelection.ascx" TagName="OperationSelection"
     TagPrefix="ucOperationSelection" %>
+
+<script src="JS/wz_tooltip.js?version=4" type="text/javascript"></script>
+
 <script type="text/javascript" language="javascript">
     jQuery(document).ready(function () {
         SetToolTip();
     });
-    function pageLoad() {
-        SetToolTip();
-    }
+//    function pageLoad() {
+//        SetToolTip();
+//    }
+    
     function SetToolTip() {
+//        var startTop = 0;
+//        var i = 0;
+//        var j = 0;
+//        var toffset = $("[id*='tblDeviceList']").offset();
+//        startTop = toffset.top;
+
+//        var intPo = 0;
+
         $("[id*='lbtnSelectDevice']").each(function () {
+            //            var moffset = $("[MDeviceId*=" + $(this).attr("DeviceId") + "]").offset();
+            //            //alert (startTop - moffset.top);
 
-            var offset = $(this).offset();
-            var top = offset.top - 270;
-            var left = ($(this).text().length * 5) + 140;
 
-            $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").offset({ top: top, left: left });
+            //            var offset = $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").offset();
+            //            var left = ($(this).text().length * 6) + 140;
+
+            //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").offset({ top: startTop, left: left });
 
             $(this).mouseover(function () {
-                $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").show();
-            }).mouseout(function () { $("[TDeviceId*=" + $(this).attr("DeviceId") + "]").hide(); });
-
+                //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").show();
+                DisplayToolTip($("[TDeviceId*=" + $(this).attr("DeviceId") + "]"));
+            }).mouseout(function () {
+                HideTip();
+                //$("[TDeviceId*=" + $(this).attr("DeviceId") + "]").hide();
+            });
         });
      }
+
+     function DisplayToolTip(divId) {
+         data = $(divId).html();
+         Tip(data, TITLE, 'Harshad Patel');
+     }
+
+     function HideTip() {
+         bShowToolTip = false;
+         UnTip();
+     } 
+
+
 
     //------------------------------------------
     function InToolTip(divOperationSelection) {
@@ -187,7 +216,7 @@
             </table>
         </div>
         <div class="listDevice">
-            <table cellpadding="0" cellspacing="0" border="0">
+            <table id="tblDeviceList" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <td class="Top_Grn_Header">
                         <h3>
@@ -211,7 +240,7 @@
                                         UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
                                         ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
                                         <ItemTemplate>
-                                            <asp:panel id="divSelectDevice" runat="server" class="product_list" DeviceId='<%# Eval("DeviceId")%>'  >
+                                            <asp:panel id="divSelectDevice" runat="server" class="product_list" MDeviceId='<%# Eval("DeviceId")%>'  >
                                                 <ul>
                                                     <li>
                                                         <div class="left">
