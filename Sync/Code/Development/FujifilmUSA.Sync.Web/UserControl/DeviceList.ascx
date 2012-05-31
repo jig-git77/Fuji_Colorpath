@@ -5,36 +5,22 @@
     TagPrefix="ucCreateDLP" %>
 <%@ Register Src="~/UserControl/OperationSelection.ascx" TagName="OperationSelection"
     TagPrefix="ucOperationSelection" %>
-
-<script src="JS/wz_tooltip.js?version=4" type="text/javascript"></script>
-<%--<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>--%>
-
+<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 <script type="text/javascript" language="javascript">
     jQuery(document).ready(function () {
         $("[id*='lbtnSelectDevice']").each(function () {
-            $(this).mouseover(function () {
-                DisplayToolTip($("[TDeviceId*=" + $(this).attr("DeviceId") + "]"));
-            }).mouseout(function () {
-                HideTip();
+            $(this).tooltip({
+                tip: $("[TDeviceId*=" + $(this).attr("DeviceId") + "]"),
+                position: 'center center',
+                offset: [-43,30],
+                effect: 'fade',
+                fadeOutSpeed: 200,
+                predelay: 500,
             });
         });
     });
-
-     function DisplayToolTip(divId) {
-         data = $(divId).html();
-         Tip(data, HEIGHT, 229, WIDTH, 260, ABOVE, true, OFFSETY, -115, STICKY, true, BGCOLOR, '', BORDERWIDTH, 0, DURATION, 3000);
-     }
-
-     function HideTip() {
-         UnTip();
-     }
 </script>
 <style type="text/css">
-    .tooltipDiv
-    {
-        position: absolute;
-    }
-    
     div.RadGrid .rgRow
     {
         background: #F7F7F7;
@@ -202,7 +188,7 @@
                                         UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
                                         ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
                                         <ItemTemplate>
-                                            <asp:panel id="divSelectDevice" runat="server" class="product_list" MDeviceId='<%# Eval("DeviceId")%>'  >
+                                            <asp:Panel ID="divSelectDevice" runat="server" class="product_list" MDeviceId='<%# Eval("DeviceId")%>'>
                                                 <ul>
                                                     <li>
                                                         <div class="left">
@@ -215,7 +201,7 @@
                                                     </li>
                                                 </ul>
                                             </asp:Panel>
-                                            <div id="divOperationSelection" tdeviceid='<%# Eval("DeviceId")%>' class="tooltipDiv" style="display: none;">
+                                            <div id="divOperationSelection" tdeviceid='<%# Eval("DeviceId")%>' class="tooltip">
                                                 <ucOperationSelection:OperationSelection ID="operationSelection" runat="server" DeviceId='<%# Eval("DeviceId")%>' />
                                             </div>
                                             <div class="clear">
@@ -229,7 +215,7 @@
                 </tr>
             </table>
         </div>
-        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
             <AjaxSettings>
                 <telerik:AjaxSetting AjaxControlID="rgDeviceList">
                     <UpdatedControls>
@@ -248,7 +234,7 @@
                     </UpdatedControls>
                 </telerik:AjaxSetting>
             </AjaxSettings>
-        </telerik:RadAjaxManager>
+        </telerik:RadAjaxManager>--%>
         <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
         </telerik:RadAjaxLoadingPanel>
         <%--  <telerik:RadToolTipManager ID="RadToolTipManager1" OffsetY="-10" HideEvent="LeaveToolTip"

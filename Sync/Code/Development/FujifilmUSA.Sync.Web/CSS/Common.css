@@ -486,11 +486,9 @@ label
     margin-left: 2px;
     padding-left: 2px;
     width: 130px;
-    
     word-break: hyphenate !important;
     word-wrap: break-word !important;
     vertical-align: top;
-    
 }
 
 #menu2
@@ -525,18 +523,18 @@ label
     padding: 7px 0 6px 46px;
 }
 #menu2 li input
-{      
+{
     padding-left: 10px;
     color: #010101;
     font-size: 13px;
-    border-bottom: solid 1px #dadada;  
+    border-bottom: solid 1px #dadada;
     display: block;
-    padding: 7px 0 6px 1px;  
+    padding: 7px 0 6px 1px;
 }
 
 #menu2 li a:hover
 {
-    background: url(../Images/menu_arrow.png) no-repeat 36px right #e9e9e9;  /*just replace center with right, and it removes the gray hover effects from run name */
+    background: url(../Images/menu_arrow.png) no-repeat 36px right #e9e9e9; /*just replace center with right, and it removes the gray hover effects from run name */
 }
 #menu2 li .submenu li a
 {
@@ -811,7 +809,7 @@ label
 }
 .tabcontant .combopart label
 {
-     /*float: left;*/
+    /*float: left;*/
     margin-right: 12px;
 }
 .tabcontant .combopart .select
@@ -1864,7 +1862,7 @@ label
     border-radius: 3px 3px 3px 3px;
     font-size: 12px;
     font-weight: bold;
-    display:none;
+    display: none;
 }
 
 .L1
@@ -1892,20 +1890,20 @@ label
 /*******************Collepsable panel *********************/
 .collapsibleContainerTitle
 {
-    cursor:pointer !important;
+    cursor: pointer !important;
 }
 .expanded
-    {
-        width:18px;
-        float: left;
-        background: url(../Images/expanded.png) no-repeat center;
-    }
-    .collapsed
-    {
-        width:18px;
-        float: left;
-        background: url(../Images/collapsed.png) no-repeat center;
-    }
+{
+    width: 18px;
+    float: left;
+    background: url(../Images/expanded.png) no-repeat center;
+}
+.collapsed
+{
+    width: 18px;
+    float: left;
+    background: url(../Images/collapsed.png) no-repeat center;
+}
 
 /*****************************************************************/
 
@@ -1925,11 +1923,11 @@ label
 
 .Top_Grn_Header
 {
-    background-color:#66CDAA; 
-    padding-left:5px;
-    border-top:1px Solid Gray; 
-    border-left:1px Solid Gray; 
-    border-right:1px Solid Gray;
+    background-color: #66CDAA;
+    padding-left: 5px;
+    border-top: 1px Solid Gray;
+    border-left: 1px Solid Gray;
+    border-right: 1px Solid Gray;
 }
 
 
@@ -1947,13 +1945,11 @@ label
 
 /*************Dhruti - Make background of Runs in left panel as a group with same color***********************/
 
-#menu7 
+#menu7
 {
-   
     margin: 1;
     padding: 0;
-  
-      background:#B0B0B0;
+    background: #B0B0B0;
 }
 #menu7 li
 {
@@ -1961,9 +1957,8 @@ label
     margin: 0;
     padding: 0;
     display: block;
-    
-      margin: 1;
-      background:#B0B0B0;
+    margin: 1;
+    background: #B0B0B0;
 }
 #menu7 li span
 {
@@ -1974,9 +1969,8 @@ label
     border-bottom: solid 1px #dadada;
     display: block;
     padding: 7px 0 6px 60x;
-    
-      margin: 1;
-      background:#B0B0B0;
+    margin: 1;
+    background: #B0B0B0;
 }
 #menu7 li a
 {
@@ -1987,70 +1981,118 @@ label
     border-bottom: solid 1px #dadada;
     display: block;
     padding: 7px 0 6px 46px;
-    
-      margin: 1;
-      background:#B0B0B0;
+    margin: 1;
+    background: #B0B0B0;
 }
 #menu7 li input
-{      
+{
     padding-left: 10px;
     color: #010101;
     font-size: 13px;
-    border-bottom: solid 1px #dadada;  
+    border-bottom: solid 1px #dadada;
     display: block;
-    padding: 7px 0 6px 1px;  
-    
-      margin: 1;
+    padding: 7px 0 6px 1px;
+    margin: 1;
 }
 
 #menu7 li a:hover
 {
-    background: url(../Images/menu_arrow.png) no-repeat 36px center #e9e9e9; 
-      
-      margin: 1;
+    background: url(../Images/menu_arrow.png) no-repeat 36px center #e9e9e9;
+    margin: 1;
 }
 #menu7 li .submenu li a
 {
     background: red;
     padding: 7px 0 6px 60px;
-    
-     margin: 0;
-
+    margin: 0;
 }
 #menu7 li .submenu li a:hover
 {
     background: red;
     padding: 7px 0 6px 60px;
-    
-     margin: 0;
-    
+    margin: 0;
 }
 #menu7 li .submenu li.active a
 {
     background: red;
     font-weight: bold;
-    
-     margin: 0;
-
+    margin: 0;
 }
 
 /************DeviceList : Popup menu***************/
-.popup{ position:absolute; left:0px; top:0px; width:260px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
-.popup ul{ margin:5px 0 0 25px;}
-.popup li{ line-height:44px;}
+.popup
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 260px;
+    height: 229px;
+    background: url(../images/popup-bg.png) 0 0 no-repeat;
+}
+.popup ul
+{
+    margin: 5px 0 0 25px;
+}
+.popup li
+{
+    line-height: 44px;
+}
 
-.Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/44px Arial, Helvetica, sans-serif; display:block;  }
-.Popup_bt_last{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;  }
+.Popup_bt, .Popup_bt_first
+{
+    color: #000;
+    font: normal 18px/44px Arial, Helvetica, sans-serif;
+    display: block;
+}
+.Popup_bt_last
+{
+    color: #000;
+    font: normal 18px/43px Arial, Helvetica, sans-serif;
+    display: block;
+}
 
-.disable_Popup_bt, .disable_Popup_bt a{color:#C0C0C0 !important; font:normal 18px/44px Arial, Helvetica, sans-serif; display:block; }
-a.disable_Popup_bt:hover{color:#C0C0C0; display:block;}
+.disable_Popup_bt, .disable_Popup_bt a
+{
+    color: #C0C0C0 !important;
+    font: normal 18px/44px Arial, Helvetica, sans-serif;
+    display: block;
+}
+a.disable_Popup_bt:hover
+{
+    color: #C0C0C0;
+    display: block;
+}
 
-a.Popup_bt:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:left -44px;  }
+a.Popup_bt:hover
+{
+    color: #fff !important;
+    background-image: url(../images/popup-over.png);
+    background-repeat: no-repeat;
+    display: block;
+    background-position: left -44px;
+}
 
-a.Popup_bt_first:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 0px; }
-a.Popup_bt_last:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }
+a.Popup_bt_first:hover
+{
+    color: #fff !important;
+    background-image: url(../images/popup-over.png);
+    background-repeat: no-repeat;
+    display: block;
+    background-position: 0px 0px;
+}
+a.Popup_bt_last:hover
+{
+    color: #fff !important;
+    background-image: url(../images/popup-over.png);
+    background-repeat: no-repeat;
+    display: block;
+    background-position: 0 -176px;
+}
 
-.Popup_bt span, .Popup_bt_first span, .Popup_bt_last span, .disable_Popup_bt span {display:block;  }
+.Popup_bt span, .Popup_bt_first span, .Popup_bt_last span, .disable_Popup_bt span
+{
+    display: block;
+}
 
 /******************Download List Style*******************/
 .Download_list
@@ -2071,4 +2113,12 @@ a.Popup_bt_last:hover{color:#fff !important; background-image:url(../images/popu
     margin: 10px 0 0 23px;
     color: #5e5e5e;
     font-size: 18px;
+}
+
+/* tooltip styling. by default the element to be styled is .tooltip  */
+.tooltip
+{
+    display: none;
+    height: 229px;
+    width: 260px;
 }
