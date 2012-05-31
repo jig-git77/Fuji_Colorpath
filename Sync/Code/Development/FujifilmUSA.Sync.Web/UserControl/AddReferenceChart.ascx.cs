@@ -135,7 +135,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             }
                             columns.ToList().ForEach(x => x = x.Trim());
                             if (!columns[0].Equals("SampleID", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[1].Equals("SAMPLENAME", StringComparison.CurrentCultureIgnoreCase) ||
+                                !columns[1].Equals("SAMPLE_NAME", StringComparison.CurrentCultureIgnoreCase) ||
                                 !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
                                 !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
                                 !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||

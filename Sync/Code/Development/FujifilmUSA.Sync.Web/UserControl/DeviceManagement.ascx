@@ -91,7 +91,7 @@
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add Device</span>
         </asp:LinkButton>
-        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" OnClick="lbtnAddDeviceFamily_Click">
+        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" OnClick="lbtnAddDeviceFamily_Click" Visible="false">
             <span>
                 <asp:Image ID="Image1" runat="server" ImageUrl="../Images/new_project_icon.png" />
                 Add Device Family</span>
