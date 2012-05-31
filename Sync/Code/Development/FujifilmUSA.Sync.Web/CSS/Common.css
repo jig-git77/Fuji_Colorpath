@@ -2034,31 +2034,23 @@ label
 
 }
 
-/*************************   POP UP CSS START 24-05-2012   ***************************/
-/*.popup{ position:absolute; left:50%; top:50%; width:260px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
-.popup ul{ margin:5px 0 0 25px;}
-.popup li{ line-height:43px; padding-bottom:1px;}
-.popup li a{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; padding-left:12px;}
-.popup li a:hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; background-position:0 -44px; display:block;}
-.popup li.first a:hover{background-position:0 0;}
-.popup li.last a:hover{background-position:0 -176px;}*/
-
 /************DeviceList : Popup menu***************/
 .popup{ position:absolute; left:0px; top:0px; width:260px; height:229px; background:url(../images/popup-bg.png) 0 0 no-repeat;}
 .popup ul{ margin:5px 0 0 25px;}
-.popup li{ line-height:43px; padding-bottom:-1px;}
+.popup li{ line-height:44px;}
 
-.disable_Popup_bt, .disable_Popup_bt a{color:#C0C0C0; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;margin:15 0 0 0;  }
-.disable_Popup_bt :hover{color:#C0C0C0; display:block;}
+.Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/44px Arial, Helvetica, sans-serif; display:block;  }
+.Popup_bt_last{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block;  }
 
-.Popup_bt, .Popup_bt_first{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:5px 0 0 0; }
-.Popup_bt_last{color:#000; font:normal 18px/43px Arial, Helvetica, sans-serif; display:block; margin:-1px 0 0 0; }
+.disable_Popup_bt, .disable_Popup_bt a{color:#C0C0C0 !important; font:normal 18px/44px Arial, Helvetica, sans-serif; display:block; }
+a.disable_Popup_bt:hover{color:#C0C0C0; display:block;}
 
-.Popup_bt :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:left -44px;  }
+a.Popup_bt:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:left -44px;  }
 
-.Popup_bt_first :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 5px; }
-.Popup_bt_last :hover{color:#fff; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }
+a.Popup_bt_first:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0px 0px; }
+a.Popup_bt_last:hover{color:#fff !important; background-image:url(../images/popup-over.png); background-repeat:no-repeat; display:block; background-position:0 -176px;  }
 
+.Popup_bt span, .Popup_bt_first span, .Popup_bt_last span, .disable_Popup_bt span {display:block;  }
 
 /******************Download List Style*******************/
 .Download_list
