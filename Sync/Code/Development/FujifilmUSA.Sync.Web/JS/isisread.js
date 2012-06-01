@@ -66,6 +66,15 @@ function presentScanDoneiSis(scanner, mychart, final) {
         //---------------Code to paint last row on canvas-------------------//
         if (ind == end) {
 
+            if (cellSize == 0) {    //----For "Fuji 40 Chart" of iSis (has only 2 row, so directly goes to this function without assigning cellsize in presentProgressiSis())
+                    chartWidth = parseInt(jQuery("[id*='Canvas']").width());
+                    chartHeight = parseInt(jQuery("[id*='Canvas']").height());
+
+                    columnCount = mychart["NumberOfColumns"];
+                    rowCount = mychart["NumberOfRows"];
+                    cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
+                    cellSize = Math.round(cellSize - 0.5);
+            }
             //------Call just one time to print last row
             DrawChart(results, cellSize, columnCount, ind, samples, samples, "");
         }
