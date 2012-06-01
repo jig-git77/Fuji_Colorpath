@@ -314,11 +314,11 @@
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" IconUrl="" VisibleStatusbar="false"
                 ShowContentDuringLoad="false" Title="Open Print Condition" Width="720" Height="220"
-                Behaviors="Move" >
+                Behaviors="Move,Close" >
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
                 ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
-                Behaviors="Move" >
+                Behaviors="Move,Close" >
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>

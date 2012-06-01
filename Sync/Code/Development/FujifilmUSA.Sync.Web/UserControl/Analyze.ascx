@@ -448,7 +448,7 @@
     <Windows>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
             VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
-            Behavior="Move" NavigateUrl="~/PopupConfirmSave.aspx">
+            Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx">
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
