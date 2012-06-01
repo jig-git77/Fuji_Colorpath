@@ -19,8 +19,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DLPMessage
         {
             get
-            {
-                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
+            {               
+                string DLPName = Hidden_ProjectName.Value + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(
@@ -43,7 +43,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {                
+            {
+                Hidden_ProjectName.Value = SessionManager.Instance.CurrentProject.ProjectName;
                 //-----------------Checking the Optimization Run limit set in web.config file, when user hits on "No, Optimize" button-------------//
                 int i, TotalOptRuns = 0;
                 for (i = SessionManager.Instance.CurrentProject.OptimizeRuns.Count - 2; i > 0; i--)

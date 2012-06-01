@@ -67,6 +67,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnClose;
         
         /// <summary>
+        /// Hidden_ProjectName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_ProjectName;
+        
+        /// <summary>
         /// updateProgress control.
         /// </summary>
         /// <remarks>

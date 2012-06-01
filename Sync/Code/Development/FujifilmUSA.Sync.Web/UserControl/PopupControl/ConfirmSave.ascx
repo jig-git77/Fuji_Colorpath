@@ -104,6 +104,7 @@
                     </asp:LinkButton>
                 </div>
                 <div class="clear">
+                    <input id="Hidden_ProjectName" type="hidden" runat="server" value="" />
                 </div>
             </div>
             <div class="clear">
