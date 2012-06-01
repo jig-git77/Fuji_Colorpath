@@ -109,7 +109,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_MissingUploadFile"), false);
+                if (hdnRefChartID.Value == "0")   ///-----------Missing message for Add Chart
+                {
+                    fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_MissingUploadFile"), false);
+                }
+                else                             ///-----------Missing message for Edit Chart
+                {
+                    fujiStatusbar.DisplayMessage(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_MissingEditFile"), false);
+                }
             }
         }
 
@@ -275,6 +282,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAddReferenceChart.GetReferenceChartDetails();
             if (!IsErrorOccured)
             {
+                Tr_UploadData.Visible = false;
                 hdnRefChartID.Value = Convert.ToString(RefChartId);
                 txtChartName.Text = ReferenceChartType.ChartName.ToString();
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
@@ -283,16 +291,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbProjectType.SelectedValue = Convert.ToString(ReferenceChartType.ProjectType.ProjectTypeId);
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
 
-             
-                Hidden_ChartPreview.Value = ReferenceChartType.ChartPreview.Length.ToString();
-                Hidden_OriginalChart.Value = ReferenceChartType.OriginalChart.Length.ToString();
-            
+                if (ReferenceChartType.ChartPreview != null)
+                {
+                    Hidden_ChartPreview.Value = ReferenceChartType.ChartPreview.Length.ToString();
+                }
+                if (ReferenceChartType.OriginalChart != null)
+                {
+                    Hidden_OriginalChart.Value = ReferenceChartType.OriginalChart.Length.ToString();
+                }
 
-                //var memoryStream = new MemoryStream();
-               
-                //byte[] org = memoryStream.ToArray();
-                //org = ReferenceChartType.OriginalChart;
-                //fucUploadOriginalChart.UploadedFiles[0].InputStream.CopyTo(memoryStream);
             }
         }
 

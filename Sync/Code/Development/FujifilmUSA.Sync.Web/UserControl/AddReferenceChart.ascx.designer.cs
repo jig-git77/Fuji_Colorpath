@@ -193,6 +193,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadAsyncUpload fucUploadOriginalChart;
         
         /// <summary>
+        /// Tr_UploadData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_UploadData;
+        
+        /// <summary>
         /// fucUploadChartData control.
         /// </summary>
         /// <remarks>

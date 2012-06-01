@@ -504,6 +504,9 @@
   <data name="Error_ReferenceChart_MissingUploadFile" xml:space="preserve">
     <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart/ reference data(c,m,y,k)</value>
   </data>
+  <data name="Error_ReferenceChart_MissingEditFile" xml:space="preserve">
+    <value>You are missing of uploading neccessary data. Please check wheather you have upload chart preview image/ original chart</value>
+  </data>
   <data name="Error_GetReferenceChartForLabCalculation" xml:space="preserve">
     <value>Error occured while checking source profile and chart relationship. Please contact your administrator.</value>
   </data>
