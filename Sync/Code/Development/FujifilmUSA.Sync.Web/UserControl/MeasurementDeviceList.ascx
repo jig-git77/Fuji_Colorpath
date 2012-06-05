@@ -116,102 +116,56 @@
                 <MasterTableView DataKeyNames="MeasurementDeviceId">
                     <Columns>
                         <telerik:GridTemplateColumn 
-                            UniqueName="CompanyName" 
-                            AllowFiltering="true" 
-                            HeaderText="Company Name"
-                            DataField="CompanyName" 
-                            SortExpression="CompanyName" 
-                            ShowFilterIcon="true" 
-                            FilterControlWidth="120"
-                            HeaderStyle-Width ="120" 
-                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                            >
+                            UniqueName="CompanyName" AllowFiltering="true" HeaderText="Company Name" DataField="CompanyName" SortExpression="CompanyName" 
+                            ShowFilterIcon="true" FilterControlWidth="120" HeaderStyle-Width ="120" ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">                           
                             <ItemTemplate>
                                 <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
-                            UniqueName="BranchName" 
-                            AllowFiltering="true" 
-                            HeaderText="Branch Name"
-                            DataField="BranchName" 
-                            SortExpression="BranchName" 
-                            ShowFilterIcon="true" 
-                            FilterControlWidth="120"
-                            HeaderStyle-Width ="120" 
-                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                            >
+                            UniqueName="BranchName" AllowFiltering="true" HeaderText="Branch Name" DataField="BranchName" SortExpression="BranchName" 
+                            ShowFilterIcon="true" FilterControlWidth="120" HeaderStyle-Width ="120" ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                 <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                        
                         <telerik:GridTemplateColumn 
-                            UniqueName="SerialNumber" 
-                            AllowFiltering="true" 
-                            HeaderText="Serial Number"
-                            DataField="SerialNumber" 
-                            SortExpression="SerialNumber" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="100"
-                            HeaderStyle-Width ="100"
-                            ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
-                            >
+                            UniqueName="SerialNumber" AllowFiltering="true" HeaderText="Serial Number" DataField="SerialNumber" SortExpression="SerialNumber" 
+                            ShowFilterIcon="true" FilterControlWidth="90" HeaderStyle-Width ="90" ItemStyle-CssClass="breakWord70" ItemStyle-Width="90" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                 <asp:Label ID="lblSerialNumber" runat="server" Text='<%# Eval("SerialNumber") %>'/>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         
                         <telerik:GridTemplateColumn 
-                            UniqueName="InstrumentType" 
-                            AllowFiltering="true" 
-                            HeaderText="Instrument Type"
-                            DataField="InstrumentType.InstrumentName" 
-                            SortExpression="InstrumentType.InstrumentName" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="70"
-                            HeaderStyle-Width ="70"
-                            ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
-                            >
+                            UniqueName="InstrumentType" AllowFiltering="true" HeaderText="Instrument Type" DataField="InstrumentType.InstrumentName" SortExpression="InstrumentType.InstrumentName" 
+                            ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                 <asp:Label ID="lblInstrumentType" runat="server" Text='<%# Eval("InstrumentType.InstrumentName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                          <telerik:GridTemplateColumn 
-                            UniqueName="Description" 
-                            AllowFiltering="true" 
-                            HeaderText="Description"
-                            DataField="Description" 
-                            SortExpression="Description" 
-                            ShowFilterIcon="true"  
-                            FilterControlWidth="120"
-                            HeaderStyle-Width ="120" 
-                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                            >
+                            UniqueName="Description" AllowFiltering="true" HeaderText="Description" DataField="Description" SortExpression="Description" 
+                            ShowFilterIcon="true"  FilterControlWidth="120" HeaderStyle-Width ="120" ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                 <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
-                                UniqueName="IsActive" 
-                                AllowFiltering="false" 
-                                HeaderText="IsActive?"
-                                DataField="IsActive" 
-                                ItemStyle-HorizontalAlign="Center"
-                                FilterControlWidth="40"
-                                HeaderStyle-Width ="40" 
-                                >
+                                UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?" DataField="IsActive" 
+                                ItemStyle-HorizontalAlign="Center" FilterControlWidth="40" HeaderStyle-Width ="40">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>
                         </telerik:GridTemplateColumn>
-
-
                         <telerik:GridTemplateColumn 
-                                DataField="BranchID" 
-                                AllowFiltering="true" 
-                                HeaderText=""
-                                UniqueName="Edit">
+                                DataField="BranchID" AllowFiltering="true" HeaderText="" UniqueName="Edit">
                                 <FilterTemplate>
                                     <center>
                                     <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter" CommandName="ClearFilter">
@@ -243,7 +197,6 @@
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-
                     </Columns>
                 </MasterTableView>
             </telerik:RadGrid>

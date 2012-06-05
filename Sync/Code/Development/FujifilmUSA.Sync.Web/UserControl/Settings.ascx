@@ -61,12 +61,12 @@
                         <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                  <div id="tdProfileManagement" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                       <asp:LinkButton ID="lnkProfileMgmt" runat="server" ToolTip="Profile Management"
+                       <asp:LinkButton ID="lnkProfileMgmt" runat="server" ToolTip="My Settings"
                         PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click"  >                       
                         <div>
-                            <asp:Image ID="Image4" runat="server" AlternateText="Profile Management"
-                                ImageUrl="~/Images/Profile-Management.png" ToolTip="Profile Management"  Width="70px" Height="80px"/></div>
-                        Profile Management
+                            <asp:Image ID="Image4" runat="server" AlternateText="My Settings"
+                                ImageUrl="~/Images/Profile-Management.png" ToolTip="My Settings"  Width="70px" Height="80px"/></div>
+                        My Settings
                     </asp:LinkButton>
                 </div>
                 <div id="divLicenseSeprator" runat ="server" align="center" valign="bottom" style="float:left;">

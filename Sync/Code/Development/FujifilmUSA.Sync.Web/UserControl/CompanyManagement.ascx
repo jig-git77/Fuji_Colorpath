@@ -107,18 +107,16 @@
                         <Columns>
                             <telerik:GridTemplateColumn DataField="CompanyName" AllowFiltering="true" HeaderText="Company Name"
                                 UniqueName="CompanyName" SortExpression="CompanyName" FilterControlWidth="300"
-                                ShowFilterIcon="true"
-                                ItemStyle-CssClass="breakWord300" ItemStyle-Width="300" ItemStyle-Wrap="true"
-                                >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                                ItemStyle-CssClass="breakWord300" ItemStyle-Width="300" ItemStyle-Wrap="true">                              
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("CompanyName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Region.RegionName" AllowFiltering="true" HeaderText="Region Name"
                                 UniqueName="RegionName" SortExpression="Region.RegionName" FilterControlWidth="200"
-                                ShowFilterIcon="true"
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true"
-                                >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="200" ItemStyle-Wrap="true">                                
                                 <ItemTemplate>
                                     <asp:Label ID="lblRegionName" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                                 </ItemTemplate>
@@ -160,13 +158,7 @@
                                         </center>
                                     </div>
                                 </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <%--<telerik:GridTemplateColumn DataField="CompanyId" AllowFiltering="false" HeaderText=""
-                        UniqueName="Delete">
-                        <ItemTemplate>
-                          
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>--%>
+                            </telerik:GridTemplateColumn>                          
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>

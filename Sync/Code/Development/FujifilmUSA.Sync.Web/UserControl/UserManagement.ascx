@@ -120,7 +120,7 @@
                             <telerik:GridTemplateColumn DataField="LoginId" AllowFiltering="true" HeaderText="User Name"
                                 UniqueName="LoginId" SortExpression="LoginId" FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true" 
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLoginId" runat="server" Text='<%# Eval("LoginId") %>' />
                                 </ItemTemplate>
@@ -128,7 +128,7 @@
                             <telerik:GridTemplateColumn DataField="FirstName" AllowFiltering="true" HeaderText="First Name"
                                 UniqueName="FirstName" SortExpression="FirstName" FilterControlWidth="70" HeaderStyle-Width ="70"  
                                  ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
-                                 ShowFilterIcon="true" >
+                                 ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblFirstName" runat="server" Text='<%# Eval("FirstName") %>' />
                                 </ItemTemplate>
@@ -136,7 +136,7 @@
                             <telerik:GridTemplateColumn DataField="LastName" AllowFiltering="true" HeaderText="Last Name"
                                 UniqueName="LastName" SortExpression="LastName" FilterControlWidth="70" HeaderStyle-Width ="70"  
                                 ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLastName" runat="server" Text='<%# Eval("LastName") %>' />
                                 </ItemTemplate>
@@ -144,16 +144,16 @@
                             <telerik:GridTemplateColumn DataField="Email" AllowFiltering="true" HeaderText="Email"
                                 UniqueName="Email" SortExpression="Email" FilterControlWidth="120" HeaderStyle-Width ="120"  
                                 ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true" 
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="UserCompanies.Company.CompanyName" AllowFiltering="true"
-                                HeaderText="Company" UniqueName="companyName" SortExpression="UserCompanies.Company.CompanyName"
+                            <telerik:GridTemplateColumn DataField="UserCompany.Company.CompanyName" AllowFiltering="true"
+                                HeaderText="Company" UniqueName="companyName" SortExpression="UserCompany.Company.CompanyName"
                                 FilterControlWidth="70" HeaderStyle-Width ="70"  
                                 ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblcompanyName" runat="server" Text='<%# Eval("UserCompany.Company.CompanyName") %>' />
                                 </ItemTemplate>
@@ -161,7 +161,7 @@
                             <telerik:GridTemplateColumn DataField="BranchNames" AllowFiltering="true" HeaderText="Branch"
                                 UniqueName="BranchName" SortExpression="BranchNames" FilterControlWidth="70" HeaderStyle-Width ="70" 
                                 ItemStyle-CssClass="breakWord70" ItemStyle-Width="70" ItemStyle-Wrap="true" 
-                                ShowFilterIcon="true">
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchNames") %>' />
                                 </ItemTemplate>

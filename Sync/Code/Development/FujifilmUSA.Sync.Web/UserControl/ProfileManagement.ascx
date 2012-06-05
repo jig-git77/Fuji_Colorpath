@@ -110,7 +110,7 @@
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
         <h1>
-            Profile Management</h1>
+            My Settings</h1>
     </div>
     <div class="clear">
     </div>

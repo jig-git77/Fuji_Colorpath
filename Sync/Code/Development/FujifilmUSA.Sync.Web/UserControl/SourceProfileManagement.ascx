@@ -118,8 +118,7 @@
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290" 
                             AllowFiltering="true" 
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" 
-                            >
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                 <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>'/>
                             </ItemTemplate>
@@ -134,7 +133,7 @@
                             ShowFilterIcon="true"
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290"
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" >
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                     <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileDesc") %>' />
                             </ItemTemplate>

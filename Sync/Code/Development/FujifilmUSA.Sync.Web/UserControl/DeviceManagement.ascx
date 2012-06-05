@@ -113,18 +113,17 @@
                         <Columns>
                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
                                 UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120" HeaderStyle-Width ="120" 
-                                ShowFilterIcon="true"
-                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                                >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true">                              
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceFamily.DeviceFamilyDesc" AllowFiltering="true"
-                                HeaderText="DeviceFamily Desc" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
+                                HeaderText="Device Family Name" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
                                 FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" >
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
                                 </ItemTemplate>
@@ -133,7 +132,7 @@
                                 HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
                                 FilterControlWidth="120" HeaderStyle-Width ="120"  
                                 ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" DataType="System.String">
+                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
                                 </ItemTemplate>
@@ -142,7 +141,7 @@
                                 HeaderText="Branch Name" UniqueName="BranchName" SortExpression="License.Branch.BranchName"
                                 FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" DataType="System.String">
+                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
                                 </ItemTemplate>

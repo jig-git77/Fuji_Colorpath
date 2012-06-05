@@ -88,135 +88,63 @@
     <asp:UpdatePanel ID="testPanel" runat="server">
         <ContentTemplate>
             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-            <telerik:RadGrid 
-                ID="rgRefChart" 
-                ShowHeader="true" 
-                AllowFilteringByColumn="true"
-                AllowSorting="true" 
-                AllowPaging="True" 
-                PageSize="5" 
-                runat="server" 
-                AutoGenerateColumns="False"
-                EnableLinqExpressions="false" 
-                OnNeedDataSource="rgRefChart_NeedDataSource"
-                OnItemCommand="rgRefChart_ItemCommand" 
-                Width="98%" 
-                HeaderStyle-Font-Bold="true"
-                 >
-
+            <telerik:RadGrid ID="rgRefChart" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
+                EnableLinqExpressions="false" OnNeedDataSource="rgRefChart_NeedDataSource" OnItemCommand="rgRefChart_ItemCommand" Width="98%" HeaderStyle-Font-Bold="true">
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-
                 <MasterTableView DataKeyNames="ReferenceChartTypeId,ChartName">
                     <Columns>
-
                         <telerik:GridTemplateColumn 
-                            UniqueName="ChartName" 
-                            HeaderText="Chart Name"
-                            DataField="ChartName" 
-                            SortExpression="ChartName" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="150"
-                            HeaderStyle-Width ="150" 
-                            AllowFiltering="true" 
-                            ItemStyle-Width="150" ItemStyle-Wrap="true" >                            
+                            UniqueName="ChartName" HeaderText="Chart Name" DataField="ChartName" SortExpression="ChartName" ShowFilterIcon="true" FilterControlWidth="150"
+                            HeaderStyle-Width ="150" AllowFiltering="true" ItemStyle-Width="150" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">                            
                             <ItemTemplate>
                                 <asp:Label ID="lblChartName" runat="server" Text='<%# Eval("ChartName") %>'/>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-
                         <telerik:GridTemplateColumn 
-                            UniqueName="NumOfRows" 
-                            AllowFiltering="true" 
-                            HeaderText="Num Of Rows"
-                            DataField="NumOfRows" 
-                            SortExpression="NumOfRows" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="70"
-                            HeaderStyle-Width ="70"
-                            ItemStyle-Width="70" ItemStyle-Wrap="true" >
+                            UniqueName="NumOfRows" AllowFiltering="true" HeaderText="Num Of Rows" DataField="NumOfRows" SortExpression="NumOfRows" 
+                            ShowFilterIcon="true" FilterControlWidth="70" HeaderStyle-Width ="70" ItemStyle-Width="70" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
                             <ItemTemplate>
                                     <asp:Label ID="lblNumOfRows" runat="server" Text='<%# Eval("NumOfRows") %>' />
                             </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        
+                        </telerik:GridTemplateColumn>                        
                          <telerik:GridTemplateColumn 
-                            UniqueName="NumOfCols" 
-                            AllowFiltering="true" 
-                            HeaderText="Num Of Cols"
-                            DataField="NumOfCols" 
-                            SortExpression="NumOfCols" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="70"
-                            HeaderStyle-Width ="70"
-                            ItemStyle-Width="70" ItemStyle-Wrap="true" >
+                            UniqueName="NumOfCols" AllowFiltering="true" HeaderText="Num Of Cols" DataField="NumOfCols" SortExpression="NumOfCols" 
+                            ShowFilterIcon="true" FilterControlWidth="70" HeaderStyle-Width ="70" ItemStyle-Width="70" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
                             <ItemTemplate>
                                     <asp:Label ID="lblNumOfCols" runat="server" Text='<%# Eval("NumOfCols") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn 
-                            UniqueName="TotalPatches" 
-                            AllowFiltering="true" 
-                            HeaderText="Total Patches"
-                            DataField="TotalPatches" 
-                            SortExpression="TotalPatches" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="70"
-                            HeaderStyle-Width ="70"
-                            ItemStyle-Width="70" ItemStyle-Wrap="true" >
+                            UniqueName="TotalPatches" AllowFiltering="true" HeaderText="Total Patches" DataField="TotalPatches" SortExpression="TotalPatches" 
+                            ShowFilterIcon="true" FilterControlWidth="70" HeaderStyle-Width ="70" ItemStyle-Width="70" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
                             <ItemTemplate>
                                     <asp:Label ID="lblTotalPatches" runat="server" Text='<%# Eval("TotalPatches") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-
                          <telerik:GridTemplateColumn 
-                            UniqueName="InstrumentName" 
-                            AllowFiltering="true" 
-                            HeaderText="Instrument Name"
-                            DataField="InstrumentType.InstrumentName" 
-                            SortExpression="InstrumentType.InstrumentName" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="90"
-                            HeaderStyle-Width ="90"
-                            ItemStyle-Width="90" ItemStyle-Wrap="true" >
+                            UniqueName="InstrumentName" AllowFiltering="true" HeaderText="Instrument Name" DataField="InstrumentType.InstrumentName" SortExpression="InstrumentType.InstrumentName" 
+                            ShowFilterIcon="true" FilterControlWidth="90" HeaderStyle-Width ="90" ItemStyle-Width="90" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                     <asp:Label ID="lblInstrumentName" runat="server" Text='<%# Eval("InstrumentType.InstrumentName") %>' />
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-
                          <telerik:GridTemplateColumn 
-                            UniqueName="ProjectTypeName" 
-                            AllowFiltering="true" 
-                            HeaderText="Project Type"
-                            DataField="ProjectType.ProjectTypeName" 
-                            SortExpression="ProjectType.ProjectTypeName" 
-                            ShowFilterIcon="true"
-                            FilterControlWidth="70"
-                            HeaderStyle-Width ="70"
-                            ItemStyle-Width="70" ItemStyle-Wrap="true" >
+                            UniqueName="ProjectTypeName" AllowFiltering="true" HeaderText="Project Type" DataField="ProjectType.ProjectTypeName" SortExpression="ProjectType.ProjectTypeName" 
+                            ShowFilterIcon="true" FilterControlWidth="70" HeaderStyle-Width ="70" ItemStyle-Width="70" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                             <ItemTemplate>
                                     <asp:Label ID="lblProjectTypeName" runat="server" Text='<%# Eval("ProjectType.ProjectTypeName") %>' />
                             </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                     
+                        </telerik:GridTemplateColumn>                     
                         <telerik:GridTemplateColumn 
-                                UniqueName="IsActive" 
-                                AllowFiltering="false" 
-                                HeaderText="IsActive?"
-                                DataField="IsActive" 
-                                HeaderStyle-Width ="40"
-                                FilterControlWidth="40"
-                                ItemStyle-HorizontalAlign="Center">
+                                UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?" DataField="IsActive" HeaderStyle-Width ="40"
+                                FilterControlWidth="40" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-
                             <telerik:GridTemplateColumn 
-                                DataField="ReferenceChartTypeId" 
-                                AllowFiltering="true" 
-                                HeaderText=""
-                                UniqueName="Edit" HeaderStyle-Width ="40">
+                                DataField="ReferenceChartTypeId" AllowFiltering="true" HeaderText="" UniqueName="Edit" HeaderStyle-Width ="40">
                                 <FilterTemplate>
                                     <center>
                                     <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" CommandName="ClearFilter">
@@ -240,8 +168,7 @@
                                         </center>
                                     </div>
                                 </ItemTemplate>
-                         </telerik:GridTemplateColumn>
-                       
+                         </telerik:GridTemplateColumn>                       
                     </Columns>
                 </MasterTableView>
             </telerik:RadGrid>

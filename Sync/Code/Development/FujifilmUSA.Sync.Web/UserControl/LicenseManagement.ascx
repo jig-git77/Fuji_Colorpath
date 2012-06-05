@@ -124,7 +124,7 @@
                             <telerik:GridTemplateColumn DataField="LicenseDesc" AllowFiltering="true" HeaderText="License Desc"
                                 UniqueName="LicenseDesc" SortExpression="LicenseDesc" FilterControlWidth="90" HeaderStyle-Width ="90"
                                 ItemStyle-CssClass="breakWord90" ItemStyle-Width="90" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true">                               
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">                               
                                 <ItemTemplate>
                                     <asp:Label ID="lblLicenseDesc" runat="server" Text='<%# Eval("LicenseDesc") %>' />
                                 </ItemTemplate>
@@ -132,25 +132,24 @@
 
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
                                 SortExpression="ActivationDate" UniqueName="ActivationDate" Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThan">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
                             <telerik:GridDateTimeColumn DataField="ExpirationDate" HeaderText="Expiration Date"
                                 SortExpression="ExpirationDate" UniqueName="ExpirationDate" 
                                 Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100">
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThan">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
 
                             <telerik:GridNumericColumn DataField="NumOfDevice" AllowFiltering="true" HeaderText="Total Devices"
                                 UniqueName="NumOfDevice" SortExpression="NumOfDevice" FilterControlWidth="100" HeaderStyle-Width ="100"
-                                ItemStyle-Wrap="true"  ShowFilterIcon="true">  
+                                ItemStyle-Wrap="true"  ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">  
                             </telerik:GridNumericColumn>
                             <telerik:GridTemplateColumn DataField="Branch.BranchName" AllowFiltering="true" HeaderText="Branch Name"
                                 UniqueName="BranchName" SortExpression="Branch.BranchName" FilterControlWidth="80" HeaderStyle-Width ="80"
                                 ShowFilterIcon="true"
-                                ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true"
-                                >
+                                ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("Branch.BranchName") %>' />
                                 </ItemTemplate>
