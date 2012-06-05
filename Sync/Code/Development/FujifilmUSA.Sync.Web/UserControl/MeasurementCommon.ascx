@@ -78,13 +78,19 @@
     }
     /***************************/
 </style>
+<script language="javascript" type="text/javascript">
+    function playSound(soundfile) {
+        document.getElementById("dummy").innerHTML =
+ "<embed src=\"" + soundfile + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
+    }
+ </script>
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name"></asp:Label>
             &nbsp; : &nbsp;&nbsp;
             <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px">
-            </asp:TextBox>
+            </asp:TextBox>         
         </div>
         <div class="float_r">
             <span>
@@ -152,6 +158,7 @@
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
+<span id="dummy"></span>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
           <tr>
                 <th scope="col">

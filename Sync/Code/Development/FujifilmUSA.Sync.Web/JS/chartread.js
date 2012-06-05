@@ -381,6 +381,9 @@ function upload() {
 // From here on down is the modal window code.
 var _rulesAdded = false;
 function OnCancel() {
+    jQuery("[id*='lblMessage']").css('color', 'Black');
+    jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     //g_Question["Result"] = 'CANCEL';
     //var cancelstat = plugin().queryDone(g_Question);

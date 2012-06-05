@@ -40,7 +40,7 @@ function presentCalibrateDone(scanner, msg, final) {
         }
         else {
             jQuery("[id*='lblMessage']").css('color', 'Black');
-            jQuery("[id*='lblMessage']").html("Status : Calibration Successful.");
+            jQuery("[id*='lblMessage']").html("Status : Calibration Successful, Click on 'Measure Chart' button.");
             jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
             jQuery("[id*='btnCancelMeasurement']").css('display', '');
         }
@@ -127,6 +127,8 @@ function presentScanDonei1(scanner, mychart, final) {
         // error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
             MeasurementDialog(mychart["Result"], "Error");
+            //--------Play "Error - Not Matched" sound--------//
+            playSound('Download/Error.wav');
         }
         if (typeof final == "string") {
             eval(final);
@@ -159,6 +161,9 @@ function presentScanDonei1(scanner, mychart, final) {
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
         if (results.length != mychart["NumberOfColumns"]) {
             MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
+            //--------Play "Error - Not Matched" sound--------//
+            playSound('Download/Error.wav');
+
             if (typeof final == "string") {
                 eval(final);
             } else if (typeof final == "object") {
@@ -326,6 +331,9 @@ function presentScanDonei1(scanner, mychart, final) {
         x1 = 0;
         y1 = 0;
     }
+
+    //--------Play "OK - Passed" sound--------//
+    playSound('Download/Done.wav');
 }
 function presentProgressi1(scanner, mychart) {
     console.log("In presentProgress");

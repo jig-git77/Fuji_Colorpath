@@ -86,6 +86,8 @@
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
+    <Content Include="Download\Done.wav" />
+    <Content Include="Download\Error.wav" />
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
@@ -1186,7 +1188,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
