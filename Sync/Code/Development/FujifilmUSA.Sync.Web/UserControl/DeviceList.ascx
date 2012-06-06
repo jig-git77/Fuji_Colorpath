@@ -128,93 +128,96 @@
     <div class="clear">
     </div>
     <div>
-        <div class="formDevice">
-            <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
-            <table cellpadding="0" cellspacing="0" border="0" width="97%">
-                <tr id="tr2" runat="server">
-                    <td>
-                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                            <tr runat="server" id="trCompany">
-                                <td class="DeviceListFirstTD">
-                                    <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
-                                    &nbsp; :
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
-                                        OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true"
-                                        CssClass="select" Width="180px">
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                            <tr runat="server" id="trBranch">
-                                <td class="DeviceListFirstTD">
-                                    <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
-                                    &nbsp :
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                        OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true" CssClass="select"
-                                        Width="180px">
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="listDevice">
-            <table id="tblDeviceList" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                    <td class="Top_Grn_Header">
-                        <h3>
-                            Select Press
-                        </h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
-                            AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                            EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                            OnItemCommand="rgDeviceList_ItemCommand" Width="675px" >
-                            <ClientSettings Selecting-AllowRowSelect="true">
-                            </ClientSettings>
-                            <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                            <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
-                            <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc,BranchName">
-                                <Columns>
-                                    <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
-                                        UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
-                                        ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
-                                        <ItemTemplate>
-                                            <asp:Panel ID="divSelectDevice" runat="server" class="product_list">
-                                                <ul>
-                                                    <li>
-                                                        <div class="left">
-                                                                    <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
-                                                                        CommandName="Select" Text='<%# Eval("DeviceName")%>'>
-                                                                    </asp:LinkButton>
+          <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+
+                <div class="formDevice">
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <table cellpadding="0" cellspacing="0" border="0" width="97%">
+                        <tr id="tr2" runat="server">
+                            <td>
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr runat="server" id="trCompany">
+                                        <td class="DeviceListFirstTD">
+                                            <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
+                                            &nbsp; :
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
+                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true"
+                                                CssClass="select" Width="180px">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr runat="server" id="trBranch">
+                                        <td class="DeviceListFirstTD">
+                                            <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
+                                            &nbsp :
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
+                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true" CssClass="select"
+                                                Width="180px">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="listDevice">
+                    <table id="tblDeviceList" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td class="Top_Grn_Header">
+                                <h3>
+                                    Select Press
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
+                                    AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
+                                    OnItemCommand="rgDeviceList_ItemCommand" Width="675px" >
+                                    <ClientSettings Selecting-AllowRowSelect="true">
+                                    </ClientSettings>
+                                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
+                                    <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
+                                    <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc,BranchName">
+                                        <Columns>
+                                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
+                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
+                                                ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
+                                                <ItemTemplate>
+                                                    <asp:Panel ID="divSelectDevice" runat="server" class="product_list">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="left">
+                                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
+                                                                                CommandName="Select" Text='<%# Eval("DeviceName")%>'>
+                                                                            </asp:LinkButton>
+                                                                        </div>
+                                                                <div class="clear">
                                                                 </div>
-                                                        <div class="clear">
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </asp:Panel>
-                                           <div class="clear">
-                                            </div>
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                                                            </li>
+                                                        </ul>
+                                                    </asp:Panel>
+                                                    <div class="clear">
+                                                    </div>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                        </Columns>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
        
-        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
-        </telerik:RadAjaxLoadingPanel>
+           </ContentTemplate>           
+        </asp:UpdatePanel>      
     
     </div>
     <div class="clear">
