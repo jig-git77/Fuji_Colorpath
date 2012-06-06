@@ -23,7 +23,8 @@
         </div>
       
         <div class="ContainerClass">     
-             <table cellpadding="0" cellspacing="0" style="width: 100%;">
+             <table cellpadding="0" cellspacing="0" style="margin-left:8px;">
+              <tr style="height:10px;"></tr>
                  <tr align="center">
                     <td>
                         <asp:LinkButton ID="lbtnAligmentCurves" runat="server" CssClass="disable_big_bt" OnClick="lbtn_Click" Width="250px">
@@ -68,6 +69,7 @@
                          <input id="Hidden_ICCProfiling" type="hidden" runat="server" value="0"/>         
                    </td>
                 </tr>
+                <tr style="height:10px;"></tr>
             </table>               
 
     </div>

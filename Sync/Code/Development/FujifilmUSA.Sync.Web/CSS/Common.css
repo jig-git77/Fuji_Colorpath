@@ -953,6 +953,8 @@ label
 .ContainerClass
 {
     margin-top: 17px;
+    background: url(../images/roundedcornr_bg.png) no-repeat top left;
+    margin-left:200px;
 }
 .Width100percent
 {
@@ -1479,8 +1481,8 @@ label
 {
     background: url(../images/big_bt_left.png) no-repeat top left;
     display: inline-block;
-    height: 68px;
-    line-height: 68px;
+    height: 40px;
+    line-height: 40px;
     padding-left: 9px;
 }
 .big_bt span
@@ -1505,8 +1507,8 @@ label
 {
     background: url(../images/big_bt_left_disable.png) no-repeat top left;
     display: inline-block;
-    height: 68px;
-    line-height: 68px;
+    height: 40px;
+    line-height: 40px;
     padding-left: 9px;
 }
 .disable_big_bt span
