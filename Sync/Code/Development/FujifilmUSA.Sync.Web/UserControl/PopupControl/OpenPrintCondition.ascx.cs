@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " +
-                          Request.QueryString["DlpName"].Replace(".icc", "") + " \" .");    
+                          Request.QueryString["DlpName"]);    
             }
             
             lblOpenPrintConditionMessage.Text = sb.ToString();

@@ -177,7 +177,7 @@
                         <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
                             AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                             EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                            OnItemCommand="rgDeviceList_ItemCommand" Width="675px" OnItemDataBound="rgDeviceList_ItemDataBound">
+                            OnItemCommand="rgDeviceList_ItemCommand" Width="675px" >
                             <ClientSettings Selecting-AllowRowSelect="true">
                             </ClientSettings>
                             <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
@@ -188,23 +188,20 @@
                                         UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
                                         ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
                                         <ItemTemplate>
-                                            <asp:Panel ID="divSelectDevice" runat="server" class="product_list" MDeviceId='<%# Eval("DeviceId")%>'>
+                                            <asp:Panel ID="divSelectDevice" runat="server" class="product_list">
                                                 <ul>
                                                     <li>
                                                         <div class="left">
-                                                            <asp:LinkButton ID="lbtnSelectDevice" runat="server" DeviceId='<%# Eval("DeviceId")%>'
-                                                                Text='<%# Eval("DeviceName")%>' OnClientClick="return false;">
-                                                            </asp:LinkButton>
-                                                        </div>
+                                                                    <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
+                                                                        CommandName="Select" Text='<%# Eval("DeviceName")%>'>
+                                                                    </asp:LinkButton>
+                                                                </div>
                                                         <div class="clear">
                                                         </div>
                                                     </li>
                                                 </ul>
                                             </asp:Panel>
-                                            <div id="divOperationSelection" tdeviceid='<%# Eval("DeviceId")%>' class="tooltip">
-                                                <ucOperationSelection:OperationSelection ID="operationSelection" runat="server" DeviceId='<%# Eval("DeviceId")%>' />
-                                            </div>
-                                            <div class="clear">
+                                           <div class="clear">
                                             </div>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
@@ -215,32 +212,10 @@
                 </tr>
             </table>
         </div>
-        <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-            <AjaxSettings>
-                <telerik:AjaxSetting AjaxControlID="rgDeviceList">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-                <telerik:AjaxSetting AjaxControlID="cmbCompany" EventName="OnSelectedIndexChanged">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                        <telerik:AjaxUpdatedControl ControlID="cmbBranch" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-                <telerik:AjaxSetting AjaxControlID="cmbBranch" EventName="OnSelectedIndexChanged">
-                    <UpdatedControls>
-                        <telerik:AjaxUpdatedControl ControlID="rgDeviceList" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    </UpdatedControls>
-                </telerik:AjaxSetting>
-            </AjaxSettings>
-        </telerik:RadAjaxManager>--%>
+       
         <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
         </telerik:RadAjaxLoadingPanel>
-        <%--  <telerik:RadToolTipManager ID="RadToolTipManager1" OffsetY="-10" HideEvent="LeaveToolTip"
-                                        runat="server" OnAjaxUpdate="OnAjaxUpdate" RelativeTo="Element"
-                                        Position="MiddleRight"  BackColor="#C0C0C0" Animation="Fade">
-                               </telerik:RadToolTipManager>--%>
+    
     </div>
     <div class="clear">
     </div>

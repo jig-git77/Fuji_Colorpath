@@ -9,67 +9,66 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class OperationSelection : BaseControl, IViewOperationSelection
-    {
-        #region "Declaration"
-        private PresenterOperationSelection _presenterOperationSelection;
-        private const string _vsDeviceId = "_DeviceId";
-        public Dictionary<ELicenseType, int> LicenseTypeProject { get; set; }
-
-        #endregion
-
+    public partial class OperationSelection : BaseControl
+    {       
         #region "Page Events"
-        protected override void OnInit(EventArgs e)
+       
+        protected void Page_Load(object sender, EventArgs e)
         {
-            _presenterOperationSelection = new PresenterOperationSelection(this);
-        }
-
-        protected override void OnPreRender(EventArgs e)
-        {
-            spanAligmentCurves.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
-            spanDLPOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
-            spanInkOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-            spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
-            spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);
-
-           
-
-            if (LicenseTypeProject != null)
+         if (!IsPostBack)
             {
-                lbtnAligmentCurves.Enabled =
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
+                lblDeviceName.Text = SessionManager.Instance.CurrentDevice.DeviceName;           
+
+                spanAligmentCurves.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
+                spanDLPOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
+                spanInkOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
+                spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
+                spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);
+
+                if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
+                {
+                    lbtnAligmentCurves.Enabled =
                     lbtnDLPOptimization.Enabled =
                     lbtnInkOptimization.Enabled =
                     lbtnColorValidation.Enabled =
                     lbtnICCProfiling.Enabled = false;
 
-                foreach (KeyValuePair<ELicenseType, int> license in LicenseTypeProject)
-                {                   
-                    switch (license.Key)
+                    foreach (KeyValuePair<ELicenseType, int> license in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                     {
-                        case ELicenseType.Sync1D:
-                            lbtnAligmentCurves.Enabled = true;
-                            break;
-                        case ELicenseType.DLP:
-                            lbtnDLPOptimization.Enabled = true;
-                            break;
-                        case ELicenseType.InkOptimization:
-                            lbtnInkOptimization.Enabled = true;
-                            break;
-                        case ELicenseType.Verification:
-                            lbtnColorValidation.Enabled = true;
-                            break;
-                        case ELicenseType.IccProfiling:
-                            lbtnICCProfiling.Enabled = true;
-                            break;
+                        int val = license.Value;
+
+                         switch (license.Key)
+                         {
+                             case ELicenseType.Sync1D:
+                                 lbtnAligmentCurves.Enabled = true;
+                                 Hidden_AligmentCurves.Value = val.ToString();
+                                 break;
+                             case ELicenseType.DLP:
+                                 lbtnDLPOptimization.Enabled = true;
+                                 Hidden_DLPOptimization.Value = val.ToString();
+                                 break;
+                             case ELicenseType.InkOptimization:
+                                 lbtnInkOptimization.Enabled = true;
+                                 Hidden_InkOptimization.Value = val.ToString();
+                                 break;
+                             case ELicenseType.Verification:
+                                 lbtnColorValidation.Enabled = true;
+                                 Hidden_ColorValidation.Value = val.ToString();
+                                 break;
+                             case ELicenseType.IccProfiling:
+                                 lbtnICCProfiling.Enabled = true;
+                                 Hidden_ICCProfiling.Value = val.ToString();
+                                 break;
+                         }
                     }
+
+                    lbtnAligmentCurves.CssClass = lbtnAligmentCurves.Enabled ? "big_bt" : "disable_big_bt";
+                    lbtnDLPOptimization.CssClass = lbtnDLPOptimization.Enabled ? "big_bt" : "disable_big_bt";
+                    lbtnInkOptimization.CssClass = lbtnInkOptimization.Enabled ? "big_bt" : "disable_big_bt";
+                    lbtnColorValidation.CssClass = lbtnColorValidation.Enabled ? "big_bt" : "disable_big_bt";
+                    lbtnICCProfiling.CssClass = lbtnICCProfiling.Enabled ? "big_bt" : "disable_big_bt";
                 }
-
-                lbtnAligmentCurves.CssClass = lbtnAligmentCurves.Enabled ? "Popup_bt_first" : "disable_Popup_bt";
-                lbtnDLPOptimization.CssClass = lbtnDLPOptimization.Enabled ? "Popup_bt" : "disable_Popup_bt";
-                lbtnInkOptimization.CssClass = lbtnInkOptimization.Enabled ? "Popup_bt" : "disable_Popup_bt";
-                lbtnColorValidation.CssClass = lbtnColorValidation.Enabled ? "Popup_bt" : "disable_Popup_bt";
-                lbtnICCProfiling.CssClass = lbtnICCProfiling.Enabled ? "Popup_bt_last" : "disable_Popup_bt";
-
             }
         }
 
@@ -77,59 +76,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Control Events
         protected void lbtn_Click(object sender, EventArgs e)
-        {
-            _presenterOperationSelection.GetDeviceById();
+        {           
             if (!IsErrorOccured)
-            {
-                SessionManager.Instance.CurrentDevice = Device;
-                SessionManager.Instance.CurrentBranchName = SessionManager.Instance.CurrentDevice.License.Branch.BranchName;
+            {             
                 var lnkButton = (LinkButton)sender;
                 switch (lnkButton.ID.ToUpper())
                 {
                     case "LBTNALIGMENTCURVES":
                         SessionManager.Instance.CurrentOperation = ELicenseType.Sync1D;
+                        SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_AligmentCurves.Value);
                         break;
                     case "LBTNDLPOPTIMIZATION":
                         SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                        SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_DLPOptimization.Value);
                         break;
                     case "LBTNINKOPTIMIZATION":
                         SessionManager.Instance.CurrentOperation = ELicenseType.InkOptimization;
+                        SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_InkOptimization.Value);
                         break;
                     case "LBTNCOLORVALIDATION":
                         SessionManager.Instance.CurrentOperation = ELicenseType.Verification;
+                        SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ColorValidation.Value);
                         break;
                     case "LBTNICCPROFILING":
                         SessionManager.Instance.CurrentOperation = ELicenseType.IccProfiling;
+                        SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ICCProfiling.Value);
                         break;
-                }
-                SessionManager.Instance.CurrentProjLimit = Device.LicenseTypeProject.Single(x => x.Key == SessionManager.Instance.CurrentOperation).Value;
+                }              
                 Response.RedirectPermanent("~/ProjectList.aspx");
             }
         }
 
         #endregion
-
-        #region IViewOperationSelection Members
-
-        public int DeviceId
-        {
-            get
-            {
-                if (ViewState[_vsDeviceId] == null)
-                {
-                    return 0;
-                }
-                return (int)ViewState[_vsDeviceId];
-            }
-            set
-            {
-                ViewState[_vsDeviceId] = value;
-            }
-        }
-
-        public Device Device { get; set; }
-
-        #endregion
+     
     }
 }
 

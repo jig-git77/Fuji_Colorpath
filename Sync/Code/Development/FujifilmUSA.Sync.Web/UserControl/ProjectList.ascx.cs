@@ -122,7 +122,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             btnSelect.Attributes.Add("onclick",
                                                      "javascript: return ShowClosePrintConditionWindow('" +
-                                                     project.ProjectId + "','" + project.ProjectName + "')");
+                                                     project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
                         }
                         else
                             btnSelect.Attributes.Add("onclick", "javascript: return false;");

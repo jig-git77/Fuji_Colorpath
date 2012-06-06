@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
+using Telerik.Web.UI;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
-using FujifilmUSA.Sync.Presenter.ViewInterface;
-using Telerik.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -60,25 +60,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             : Convert.ToInt32(cmbCompany.SelectedValue);
                     BranchId = Convert.ToInt32(cmbBranch.SelectedValue);
                     break;
+                case "Select":
+
+                    DeviceId = Convert.ToInt32(((GridDataItem)e.Item).GetDataKeyValue("DeviceId"));
+                    CurrentUserId = SessionManager.Instance.CurrentUser.UserId;
+                    _presenterdevice.DeviceListByDeviceId();
+
+                    SessionManager.Instance.CurrentDevice = SelectedDevice;
+                 
+                    SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
+                    Response.RedirectPermanent("OperationSelection.aspx");
+                    break;
             }
         }
-
-        protected void rgDeviceList_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            if (e.Item.ItemType == GridItemType.Item || e.Item.ItemType == GridItemType.AlternatingItem)
-            {
-                var ctrlOperationSelection = e.Item.FindControl("operationSelection") as OperationSelection;
-                if (ctrlOperationSelection != null)
-                {
-                    var dvc = (Device) e.Item.DataItem;
-                    if (dvc != null)
-                    {
-                        ctrlOperationSelection.LicenseTypeProject = dvc.LicenseTypeProject;
-                    }
-                }
-            }
-        }
-
+        
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             CompanyId = Convert.ToInt32(ViewState["CompanyId"]);
@@ -144,6 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region IViewDevice Members
+        #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
         public int CompanyId { get; set; }
@@ -157,6 +153,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> Devices { get; set; }
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
+        #endregion
         #endregion
     }
 }

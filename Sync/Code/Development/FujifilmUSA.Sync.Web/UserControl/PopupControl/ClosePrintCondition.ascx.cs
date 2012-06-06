@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) == 3)
                 {
                     lbtnReOptimize.Visible = false;
-                }
+                }               
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -96,6 +96,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
+            string DLPName = "Profile.icc";
+            if (Request.QueryString["DlpName"] != null)
+            {
+                DLPName = Request.QueryString["DlpName"].ToString();
+            }
+
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
             _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
             if (!IsErrorOccured)
@@ -103,7 +109,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //CurrentDlp = null;
                 if (CurrentDlp != null)
                 {
-                    Utilities.DownloadFile(CurrentDlp, "Profile.icc");
+                    Utilities.DownloadFile(CurrentDlp, DLPName);
                 }
                 else
                 {

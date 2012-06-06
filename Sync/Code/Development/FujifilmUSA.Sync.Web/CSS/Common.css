@@ -2020,6 +2020,7 @@ label
 }
 
 /************DeviceList : Popup menu***************/
+/*
 .popup
 {
     position: absolute;
@@ -2093,6 +2094,7 @@ a.Popup_bt_last:hover
 {
     display: block;
 }
+*/
 
 /******************Download List Style*******************/
 .Download_list
