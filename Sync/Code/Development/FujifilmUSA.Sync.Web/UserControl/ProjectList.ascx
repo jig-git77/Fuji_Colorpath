@@ -187,8 +187,7 @@
                                             UniqueName="ProjectName" SortExpression="ProjectName" 
                                             ShowFilterIcon="true"
                                             FilterControlWidth="80" 
-                                            ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true"
-                                            >
+                                            ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' />
                                             </ItemTemplate>
@@ -197,28 +196,10 @@
                                             AllowFiltering="true" HeaderText="Standard" 
                                             FilterControlWidth="80"
                                             ItemStyle-CssClass="breakWord80" ItemStyle-Width="80" ItemStyle-Wrap="true"
-                                            SortExpression="SourceProfile.ProfileName" ShowFilterIcon="true">
+                                            SortExpression="SourceProfile.ProfileName" ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>' />
-                                            </ItemTemplate>
-                                            <%--  <FilterTemplate>
-                                                <telerik:RadComboBox ID="RadComboBoxPrintStandard" AppendDataBoundItems="true" runat="server"
-                                                    OnClientSelectedIndexChanged="PrintStandardIndexChanged" AutoPostBack="false"
-                                                    Width="100" DropDownWidth="150" OnPreRender="RadComboBoxPrintStandard_PreRender"
-                                                    OnSelectedIndexChanged="RadComboBoxPrintStandard_SelectedIndexChanged">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem Text="All" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
-                                                <telerik:RadScriptBlock ID="RadScriptBlock2" runat="server">
-                                                    <script type="text/javascript">
-                                                        function PrintStandardIndexChanged(sender, args) {
-                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                            tableView.filter("SourceProfileId", args.get_item().get_value(), "EqualTo");
-                                                        }
-                                                    </script>
-                                                </telerik:RadScriptBlock>
-                                            </FilterTemplate>--%>
+                                            </ItemTemplate>                                           
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="PrintCondition.Media" AllowFiltering="true"
                                             HeaderText="Media" UniqueName="Media" SortExpression="PrintCondition.Media" 
@@ -226,7 +207,7 @@
                                             FilterControlWidth="60"
                                             ItemStyle-CssClass="breakWord60" 
                                             ItemStyle-Width="60" 
-                                            ItemStyle-Wrap="true">
+                                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>' />
                                             </ItemTemplate>
@@ -237,8 +218,7 @@
                                             ShowFilterIcon="true"
                                             FilterControlWidth="60"
                                             ItemStyle-CssClass="breakWord60" 
-                                            ItemStyle-Width="60"
-                                            >
+                                            ItemStyle-Width="60" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
                                             </ItemTemplate>
