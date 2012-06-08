@@ -40,8 +40,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FujifilmUSA.Sync.Encryption">
-      <HintPath>..\..\Reference\FujifilmUSA.Sync.Encryption.dll</HintPath>
+    <Reference Include="Service.Common.Encryption">
+      <HintPath>..\..\..\..\..\..\Projects\Fujifilm\Reference\Service.Common.Encryption.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

@@ -7,6 +7,7 @@ using FujifilmUSA.Sync.Common;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.CustomExceptions;
 using System;
+using Service.Common.Encryption;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -20,7 +21,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 {
                     if (userType == UserType.XmfColorOrganizerUser)
                     {
-                        password = Encryption.CryptHelper.Decrypt(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
+                        password = CryptHelper.DecryptString(password, ApplicationConfiguration.Instance.XmfColorOrganizerEncryptionKey);
                     }
                     var dsUser = DataAccessFactory.Instance.GetDsResult("[CP].[GetLoginInformation]",
                                                                         new object[] { userName, LoginSecurity.EncryptPasswords(password), Convert.ToInt32(userType) });

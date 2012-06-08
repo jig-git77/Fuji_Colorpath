@@ -17,20 +17,23 @@
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Start ICC Profile Creation" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,5,5"></TextBlock>
-                <Button Grid.Column="1" Content="Next ->" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5"></Button>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="&lt;- Previous" Name="btnPrevious" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5" Command="{Binding PreviousButtonCommand}"></Button>
+                    <Button Content="Next -&gt;" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5" Command="{Binding NextButtonCommand}" IsEnabled="{Binding IsNextButtonEnable}"></Button>
+                </StackPanel>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="15,10,15,20" BorderBrush="Black" BorderThickness="1">
             <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left">
-                <RadioButton GroupName="profile" Name="rbCreate" Content="Create a new ICC Profile" Margin="20,15,5,7" IsChecked="{Binding SelectedProfileMode}"></RadioButton>
+                <RadioButton GroupName="profile" Name="rbCreate" Content="Create a new ICC Profile" Margin="20,15,5,7" IsChecked="{Binding IsNewIccProfile,Mode=TwoWay}"></RadioButton>
                 <StackPanel Orientation="Horizontal" Margin="40,7,5,7">
                     <TextBlock Text="ICC Profile Name:" Margin="10,5,5,5"></TextBlock>
-                    <TextBox Name="txtProfileName" Width="200" Margin="10,5,5,5" IsEnabled="{Binding ElementName=rbCreate,Path=IsChecked}"></TextBox>
+                    <TextBox Name="txtProfileName" Width="200" Margin="10,5,5,5" IsEnabled="{Binding ElementName=rbCreate,Path=IsChecked}" Text="{Binding NewProfileName,Mode=TwoWay}"></TextBox>
                 </StackPanel>
                 <RadioButton GroupName="profile" Name="rbExisting" Content="Restart the existing project" Margin="20,15,5,7"></RadioButton>
                 <StackPanel Orientation="Horizontal" Margin="40,7,5,7">
                     <TextBlock Text="ICC Profile Name:" Margin="10,5,5,5"></TextBlock>
-                    <ComboBox Name="cmbProfileName" Width="200" Margin="10,5,5,5" IsEnabled="{Binding ElementName=rbExisting,Path=IsChecked}"></ComboBox>
+                    <ComboBox Name="cmbProfileName" Width="200" Margin="10,5,5,5" IsEnabled="{Binding ElementName=rbExisting,Path=IsChecked}" ItemsSource="{Binding IccProfiles}" DisplayMemberPath="IccProfileName" SelectedValue="{Binding SelectedIccProfile,Mode=TwoWay}"></ComboBox>
                 </StackPanel>
             </StackPanel>
         </Border>

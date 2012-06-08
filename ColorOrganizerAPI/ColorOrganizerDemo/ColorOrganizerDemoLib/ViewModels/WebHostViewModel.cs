@@ -11,11 +11,11 @@ using System.Windows.Shapes;
 
 namespace ColorOrganizerDemoLib.ViewModels
 {
-    public class WebHostViewModel
+    public class WebHostViewModel : BaseVM
     {
         public WebHostViewModel()
         {
-            
+            PreviousButtonCommand.Executed += (sender, e) => PassToParent(EControl.ChartPrint);
         }
     }
 }

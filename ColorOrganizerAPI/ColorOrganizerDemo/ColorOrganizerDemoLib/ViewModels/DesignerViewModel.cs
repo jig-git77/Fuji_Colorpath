@@ -4,26 +4,44 @@ namespace ColorOrganizerDemoLib.ViewModels
 {
     public class DesignerViewModel
     {
-        public enum EControl
-        {
-            StartICCProfile,
-            SelectDevice,
-            ChartPrint,
-            WebHost
-        }
-
         public DesignerViewModel()
         {
-            StartIccProfileViewVisibility = Visibility.Collapsed;
-            SelectDeviceViewVisibility = Visibility.Collapsed;
-            ChartPrintViewVisibility = Visibility.Collapsed;
-            WebHostViewVisibility = Visibility.Collapsed;
+            SelectDevice = new SelectDeviceViewModel()
+                               {
+                                   PassToParent = GetAtParent,
+                                   Parent = this
+                               };
+            StartIccProfile = new StartICCProfileViewModel()
+                                  {
+                                      PassToParent = GetAtParent,
+                                      Parent = this
+                                  };
+            ChartPrint = new ChartPrintViewModel()
+                             {
+                                 PassToParent = GetAtParent,
+                                 Parent = this
+                             };
+            WebHost = new WebHostViewModel()
+                          {
+                              PassToParent = GetAtParent,
+                              Parent = this
+                          };
 
             SetCurrentControl(EControl.SelectDevice);
-            SelectDevice = new SelectDeviceViewModel();
-            StartIccProfile = new StartICCProfileViewModel();
-            ChartPrint = new ChartPrintViewModel();
-            WebHost = new WebHostViewModel();
+
+            //Silverlight.Extensions.MVVM.Bindings.PropertyNotificationBinding.Create(
+            //    () => SelectDevice.SelectedDevice,
+            //    () => ChartPrint.SelectedDevice);
+
+            //Silverlight.Extensions.MVVM.Bindings.PropertyNotificationBinding.Create(
+            //    () => StartIccProfile.SelectedIccProfile,
+            //    () => ChartPrint.SelectedIccProfile);
+        }
+
+        public void GetAtParent(EControl command)
+        {
+            StartIccProfile.CurrentStatus = SelectDevice.CurrentStatus = ChartPrint.CurrentStatus = WebHost.CurrentStatus = Visibility.Collapsed;
+            SetCurrentControl(command);
         }
 
         public StartICCProfileViewModel StartIccProfile { get; set; }
@@ -31,27 +49,21 @@ namespace ColorOrganizerDemoLib.ViewModels
         public ChartPrintViewModel ChartPrint { get; set; }
         public WebHostViewModel WebHost { get; set; }
 
-        public Visibility StartIccProfileViewVisibility { get; set; }
-        public Visibility SelectDeviceViewVisibility { get; set; }
-        public Visibility ChartPrintViewVisibility { get; set; }
-        public Visibility WebHostViewVisibility { get; set; }
-
         private void SetCurrentControl(EControl control)
         {
-
             switch (control)
             {
                 case EControl.StartICCProfile:
-                    StartIccProfileViewVisibility = Visibility.Visible;
+                    StartIccProfile.CurrentStatus = Visibility.Visible;
                     break;
                 case EControl.SelectDevice:
-                    SelectDeviceViewVisibility = Visibility.Visible;
+                    SelectDevice.CurrentStatus = Visibility.Visible;
                     break;
                 case EControl.ChartPrint:
-                    ChartPrintViewVisibility = Visibility.Visible;
+                    ChartPrint.CurrentStatus = Visibility.Visible;
                     break;
                 case EControl.WebHost:
-                    WebHostViewVisibility = Visibility.Visible;
+                    WebHost.CurrentStatus = Visibility.Visible;
                     break;
             }
         }

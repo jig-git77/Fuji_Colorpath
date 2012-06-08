@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaultContracts", "FaultContracts\FaultContracts.csproj", "{62A6C7B8-9839-47E2-A159-B113DA072B2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encryption", "Encryption\Encryption.csproj", "{DFD92926-174B-4205-80F2-CFA5544638BA}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
 		SccLocalPath0 = .
@@ -27,6 +29,9 @@ Global
 		SccProjectUniqueName4 = MessageContracts\\MessageContracts.csproj
 		SccProjectName4 = MessageContracts
 		SccLocalPath4 = MessageContracts
+		SccProjectUniqueName5 = Encryption\\Encryption.csproj
+		SccProjectName5 = Encryption
+		SccLocalPath5 = Encryption
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +82,16 @@ Global
 		{62A6C7B8-9839-47E2-A159-B113DA072B2E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{62A6C7B8-9839-47E2-A159-B113DA072B2E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{62A6C7B8-9839-47E2-A159-B113DA072B2E}.Release|x86.ActiveCfg = Release|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DFD92926-174B-4205-80F2-CFA5544638BA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

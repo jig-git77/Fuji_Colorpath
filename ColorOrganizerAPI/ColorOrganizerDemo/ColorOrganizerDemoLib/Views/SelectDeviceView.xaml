@@ -17,11 +17,13 @@
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Select Devices" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,5,5"></TextBlock>
-                <Button Grid.Column="1" Content="Next ->" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5"></Button>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Next -&gt;" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5" Command="{Binding NextButtonCommand}" IsEnabled="{Binding IsNextButtonEnable}"></Button>
+                </StackPanel>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="15,10,15,20" BorderBrush="Black" BorderThickness="1">
-            <ListBox ItemsSource="{Binding DeviceList}" SelectedItem="{Binding SelectedDevice,Mode=TwoWay}">
+            <ListBox ItemsSource="{Binding DeviceList,Mode=TwoWay}" SelectedItem="{Binding SelectedDevice,Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

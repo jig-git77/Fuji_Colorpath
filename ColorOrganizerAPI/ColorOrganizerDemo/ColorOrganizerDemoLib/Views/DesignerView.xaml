@@ -6,10 +6,10 @@
     xmlns:view="clr-namespace:ColorOrganizerDemoLib.Views"
     mc:Ignorable="d"
     d:DesignHeight="600" d:DesignWidth="800">
-    <Grid>
-        <view:SelectDeviceView DataContext="{Binding SelectDevice}" Visibility="Collapsed"/>
-        <view:StartICCProfileView DataContext="{Binding StartIccProfile}" Visibility="Collapsed"/>
-        <view:ChartPrintView DataContext="{Binding ChartPrint}" Visibility="Collapsed"/>
-        <view:WebHostView DataContext="{Binding WebHost}" Visibility="Visible"/>
+    <Grid x:Name="MyGrid">
+        <view:SelectDeviceView DataContext="{Binding SelectDevice}" Visibility="{Binding CurrentStatus,Mode=TwoWay}"/>
+        <view:StartICCProfileView DataContext="{Binding StartIccProfile}" Visibility="{Binding CurrentStatus,Mode=TwoWay}"/>
+        <view:ChartPrintView DataContext="{Binding ChartPrint}" Visibility="{Binding CurrentStatus,Mode=TwoWay}"/>
+        <view:WebHostView DataContext="{Binding WebHost}" Visibility="{Binding CurrentStatus,Mode=TwoWay}"/>
     </Grid>
 </UserControl>

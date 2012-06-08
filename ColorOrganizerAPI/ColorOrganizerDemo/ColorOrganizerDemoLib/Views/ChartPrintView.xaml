@@ -17,7 +17,10 @@
                     <ColumnDefinition Width="50*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Print Chart" FontSize="20" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,5,5,5"></TextBlock>
-                <Button Grid.Column="1" Content="Next ->" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5"></Button>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="&lt;- Previous" Name="btnPrevious" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5" Command="{Binding PreviousButtonCommand}"></Button>
+                    <Button Content="Next -&gt;" Name="btnNext" HorizontalAlignment="Right" Margin="15,10,15,10" Padding="15,5,15,5" Command="{Binding NextButtonCommand}"></Button>
+                </StackPanel>
             </Grid>
         </Border>
         <Border Grid.Row="1" Margin="15,10,15,20" BorderBrush="Black" BorderThickness="1">
@@ -37,13 +40,13 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Device" Margin="15,5,0,5"></TextBlock>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="N/A" Name="lblDeviceName" Margin="15,5,0,5"></TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Name="lblDeviceName" Margin="15,5,0,5" Text="{Binding Parent.SelectDevice.SelectedDevice.DeviceName}"></TextBlock>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Media Type" Margin="15,5,0,5"></TextBlock>
-                            <ComboBox Grid.Row="1" Grid.Column="1" Width="200" Name="cmbMediaType" Margin="15,5,0,5" HorizontalAlignment="Left"></ComboBox>
+                            <ComboBox Grid.Row="1" Grid.Column="1" Width="200" Name="cmbMediaType" Margin="15,5,0,5" HorizontalAlignment="Left" ItemsSource="{Binding Media}" SelectedValue="{Binding SelectedMedia,Mode=TwoWay}"></ComboBox>
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Resolution" Margin="15,5,0,5"></TextBlock>
-                            <ComboBox Grid.Row="2" Grid.Column="1" Width="200" Name="cmbResolution" Margin="15,5,0,5" HorizontalAlignment="Left"></ComboBox>
+                            <ComboBox Grid.Row="2" Grid.Column="1" Width="200" Name="cmbResolution" Margin="15,5,0,5" HorizontalAlignment="Left" ItemsSource="{Binding Colorant}" SelectedValue="{Binding SelectedColorant,Mode=TwoWay}"></ComboBox>
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="BaseLine" Margin="15,5,0,5"></TextBlock>
-                            <ComboBox Grid.Row="3" Grid.Column="1" Width="200" Name="cmbBaseLine" Margin="15,5,0,5" HorizontalAlignment="Left"></ComboBox>
+                            <ComboBox Grid.Row="3" Grid.Column="1" Width="200" Name="cmbBaseLine" Margin="15,5,0,5" HorizontalAlignment="Left" ItemsSource="{Binding RipSetting}" SelectedValue="{Binding SelectedRipSetting,Mode=TwoWay}"></ComboBox>
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -66,9 +69,9 @@
                             </Grid.RowDefinitions>
                             <RadioButton Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Name="rbPreInstalledChart" GroupName="ChartSelection" Content="Select from pre-installed charts" Margin="15,5,0,5" IsChecked="True"></RadioButton>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="Colorimeter" Margin="15,5,0,5"></TextBlock>
-                            <ComboBox Grid.Row="1" Grid.Column="2" Width="200" Name="cmbColorimeter" Margin="15,5,0,5" HorizontalAlignment="Left"></ComboBox>
+                            <ComboBox Grid.Row="1" Grid.Column="2" Width="200" Name="cmbColorimeter" Margin="15,5,0,5" HorizontalAlignment="Left" ItemsSource="{Binding MeasurementDevices}" SelectedValue="{Binding SelectedMeasurementDevice, Mode=TwoWay}"></ComboBox>
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="Chart" Margin="15,5,0,5"></TextBlock>
-                            <ComboBox Grid.Row="2" Grid.Column="2" Width="200" Name="cmbChart" Margin="15,5,0,5" HorizontalAlignment="Left"></ComboBox>
+                            <ComboBox Grid.Row="2" Grid.Column="2" Width="200" Name="cmbChart" Margin="15,5,0,5" HorizontalAlignment="Left" ItemsSource="{Binding FilteredChartList}" DisplayMemberPath="ChartName" SelectedValue="{Binding SelectedChart,Mode=TwoWay}"></ComboBox>
                             <RadioButton Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Name="rbFileChart" GroupName="ChartSelection" Content="Select from chart file" Margin="15,5,0,5" IsChecked="False"></RadioButton>
                             <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                                 <TextBox Text="MyICCProfileChart.pdf" IsEnabled="{Binding ElementName=rbFileChart,Path=IsChecked}" Width="300" Margin="15,5,0,5"></TextBox>

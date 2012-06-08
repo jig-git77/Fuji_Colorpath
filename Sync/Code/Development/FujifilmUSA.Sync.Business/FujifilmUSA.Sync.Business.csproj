@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Service.Common.Encryption">
+      <HintPath>..\..\..\..\Reference\Service.Common.Encryption.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -112,10 +115,6 @@
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FujifilmUSA.Sync.Encryption\FujifilmUSA.Sync.Encryption.csproj">
-      <Project>{909C21BE-547A-4F06-BA7B-71351E4AE0FD}</Project>
-      <Name>FujifilmUSA.Sync.Encryption</Name>
     </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>

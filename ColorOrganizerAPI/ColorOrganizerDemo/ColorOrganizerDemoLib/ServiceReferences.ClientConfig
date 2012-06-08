@@ -1,17 +1,17 @@
 ﻿<configuration>
-    <system.serviceModel>
-        <bindings>
-            <basicHttpBinding>
-                <binding name="BasicHttpBinding_ISync4DServiceContract" maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
-                    <security mode="None" />
-                </binding>
-            </basicHttpBinding>
-        </bindings>
-        <client>
-            <endpoint address="http://localhost/ColorOrganizerService/Sync4D.svc"
-                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
-                contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
-        </client>
-    </system.serviceModel>
+  <system.serviceModel>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="BasicHttpBinding_ISync4DServiceContract" maxBufferSize="2147483647"
+            maxReceivedMessageSize="2147483647">
+          <security mode="None" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://localhost/ColorOrganizerService/sync4d.svc"
+          binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
+          contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
+    </client>
+  </system.serviceModel>
 </configuration>

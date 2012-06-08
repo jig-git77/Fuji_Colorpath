@@ -4,6 +4,7 @@ using System.Configuration;
 using System.ServiceModel;
 using System.Windows;
 using ServiceDemo.Sync4DService;
+using Service.Common.Encryption;
 
 namespace ServiceDemo
 {
@@ -35,7 +36,7 @@ namespace ServiceDemo
         private void btnCallService_Click(object sender, RoutedEventArgs e)
         {
             _userName = txtUserName.Text;
-            _userPassword = FujifilmUSA.Sync.Encryption.CryptHelper.Encrypt(txtPassword.Password, ConfigurationManager.AppSettings["XmfColorOrganizerEncryptionKey"]);
+            _userPassword = CryptHelper.EncryptString(txtPassword.Password, ConfigurationManager.AppSettings["XmfColorOrganizerEncryptionKey"]);
             using (var client = new Sync4DServiceContractClient())
             {
                 try
@@ -50,7 +51,7 @@ namespace ServiceDemo
                                                                                  {
                                                                                      UserName = _userName,
                                                                                      UserPassword = _userPassword,
-                                                                                     SecurityToken = _securityToken
+                                                                                     //SecurityToken = _securityToken
                                                                                  });
                             dgResult.ItemsSource = getDeviceListresponse.Devices;
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getDeviceListresponse.Message.Message, getDeviceListresponse.Count);

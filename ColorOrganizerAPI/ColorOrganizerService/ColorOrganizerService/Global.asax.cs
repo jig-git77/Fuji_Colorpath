@@ -22,7 +22,7 @@ namespace FujifilmUSA.ColorOrganizerService
         {
             HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             HttpContext.Current.Response.Cache.SetNoStore();
-            EnableCrossDomainAjaxCall();
+            //EnableCrossDomainAjaxCall();
         }
 
         private static void EnableCrossDomainAjaxCall()

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Service.Common.Encryption;
 using Service.Common.FaultContracts;
 using Service.Common.MessageContracts;
 using System;
@@ -21,7 +22,7 @@ namespace Service.Common.Business
                 var decryptVal = string.Empty;
                 try
                 {
-                    decryptVal = FujifilmUSA.Sync.Encryption.CryptHelper.Decrypt(request.SecurityToken, ConfigurationManager.AppSettings["TokenKey"]);
+                    decryptVal = CryptHelper.DecryptString(request.SecurityToken, ConfigurationManager.AppSettings["TokenKey"]);
                 }
                 catch (Exception)
                 {
@@ -63,7 +64,7 @@ namespace Service.Common.Business
                 string resultString = string.Empty;
                 try
                 {
-                    resultString = FujifilmUSA.Sync.Encryption.CryptHelper.Encrypt(Convert.ToInt32(group) + Guid.NewGuid().ToString(), ConfigurationManager.AppSettings["TokenKey"]);
+                    resultString = CryptHelper.EncryptString(Convert.ToInt32(group) + Guid.NewGuid().ToString(), ConfigurationManager.AppSettings["TokenKey"]);
                 }
                 catch (Exception)
                 {
