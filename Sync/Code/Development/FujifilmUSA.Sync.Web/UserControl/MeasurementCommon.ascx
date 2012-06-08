@@ -220,7 +220,7 @@
             if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Measure Chart') {
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
-                    MeasurementDialog("Please enter measurement name that is at least three characters long.", "Error");
+                    MeasurementDialog("Please enter measurement name that is at least 4 characters long.", "Error");
                     return false;
                 }
                 if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)

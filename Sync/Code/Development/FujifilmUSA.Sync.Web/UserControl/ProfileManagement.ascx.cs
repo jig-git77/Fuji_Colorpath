@@ -24,7 +24,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-            {
+            {              
+                lblUserName.Text = SessionManager.Instance.CurrentUser.LoginId;
                 GetSecurityQuestions();
             }
         }

@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool IsActive { get; set; }
         public short UserBranchId { get; set; }
         public Company Company { get; set; }
-        public int SupportID { get; set; }
+        public string SupportID { get; set; }
         public Region Region { get; set; }
     }
 }

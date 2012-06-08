@@ -14,6 +14,24 @@
         return false;
     }
 </script>
+<style type="text/css">
+  .breakWord100
+    {
+        max-width: 100px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        
+        line-height: 15px;
+    }
+    .breakWord90
+    {
+        max-width: 90px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+       
+        line-height: 15px;
+    }
+</style>
 <div class="head">
     <h1 id="hTitle" runat="server">
         New Print Condition - Review Selections
@@ -50,71 +68,72 @@
                                 </div>
                             </div>
                             <div id="panelDescription" style="padding-left: 10px">
-                                <table>
+                              
+                                <table width="300px">
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Media </span>
                                         </td>
-                                        <td style="width: 10px;">
+                                        <td  style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
+                                        <td class="breakWord100">
+                                            <asp:Label ID="lblMedia" runat="server" Text="" ></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Colorant</span>
                                         </td>
-                                        <td style="width: 10px;">
+                                        <td  style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
+                                        <td class="breakWord100">
+                                            <asp:Label ID="lblColorant" runat="server" Text="" ></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Rip Settings</span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
+                                        <td class="breakWord100">
+                                            <asp:Label ID="lblRipSettings" runat="server" Text="" ></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Notes</span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
+                                        <td class="breakWord100">
+                                            <asp:Label ID="lblNotes" runat="server" Text="" ></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Technician Name</span>
                                         </td>
-                                        <td style="width: 10px;">
+                                        <td  style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblTechnicianName" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblTechnicianName" runat="server" Text="" CssClass="breakWord100"></asp:Label>
                                         </td>
                                     </tr>                                   
                                     <tr>
-                                        <td>
+                                        <td class="breakWord90">
                                             <span style="font-weight: bold;">Source Profile</span>    
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblSourceProfile" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblSourceProfile" runat="server" Text="" CssClass="breakWord100"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>

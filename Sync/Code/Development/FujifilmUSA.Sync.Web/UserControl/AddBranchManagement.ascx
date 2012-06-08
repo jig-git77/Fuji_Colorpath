@@ -122,7 +122,8 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtSupportID" runat="server" MaxLength="50" Width="400px" Height="19px" onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                            <asp:TextBox ID="txtSupportID" runat="server" MaxLength="30" Width="400px" 
+                                                Height="19px"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                            

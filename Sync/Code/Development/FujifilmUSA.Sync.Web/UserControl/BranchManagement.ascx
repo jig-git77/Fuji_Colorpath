@@ -53,9 +53,25 @@
         background-color: #F1F1F1;
         background-position: 0px;
     }
-    .breakWord200
+    .breakWord150
     {
-        max-width: 200px !important;
+        max-width: 150px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
+    .breakWord130
+    {
+        max-width: 130px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
+    .breakWord100
+    {
+        max-width: 100px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
         vertical-align: top;
@@ -99,24 +115,24 @@
                     <MasterTableView DataKeyNames="BranchID,CompanyID,BranchName,Location,IsActive">
                         <Columns>
                             <telerik:GridTemplateColumn DataField="BranchName" AllowFiltering="true" HeaderText="Branch Name"
-                                UniqueName="BranchName" SortExpression="BranchName" FilterControlWidth="150"
-                                HeaderStyle-Width="150" ItemStyle-CssClass="breakWord200" ItemStyle-Width="150"
+                                UniqueName="BranchName" SortExpression="BranchName" FilterControlWidth="130"
+                                HeaderStyle-Width="130" ItemStyle-CssClass="breakWord130" ItemStyle-Width="130"
                                 ItemStyle-Wrap="true" ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("BranchName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Location" AllowFiltering="true" HeaderText="Location"
-                                UniqueName="Location" SortExpression="Location" HeaderStyle-Width="100" FilterControlWidth="100"
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="100" ItemStyle-Wrap="true"
+                                UniqueName="Location" SortExpression="Location" HeaderStyle-Width="90" FilterControlWidth="90"
+                                ItemStyle-CssClass="breakWord130" ItemStyle-Width="90" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblLocation" runat="server" Text='<%# Eval("Location") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                               <telerik:GridTemplateColumn DataField="SupportID" AllowFiltering="true" HeaderText="SupportID"
-                                UniqueName="SupportID" SortExpression="SupportID" HeaderStyle-Width="50" FilterControlWidth="50"
-                                ItemStyle-CssClass="breakWord200" ItemStyle-Width="50" ItemStyle-Wrap="true"
+                                UniqueName="SupportID" SortExpression="SupportID" HeaderStyle-Width="70" FilterControlWidth="70"
+                                ItemStyle-CssClass="breakWord100" ItemStyle-Width="70" ItemStyle-Wrap="true"
                                 ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSupportID" runat="server" Text='<%# Eval("SupportID") %>' />
@@ -124,7 +140,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Company.CompanyName" AllowFiltering="true"
                                 HeaderText="CompanyName" UniqueName="CompanyName" SortExpression="Company.CompanyName"
-                                HeaderStyle-Width="200" FilterControlWidth="200" ItemStyle-CssClass="breakWord200"
+                                HeaderStyle-Width="200" FilterControlWidth="200" ItemStyle-CssClass="breakWord150"
                                 ItemStyle-Width="200" ItemStyle-Wrap="true" ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("Company.CompanyName") %>' />
@@ -132,14 +148,14 @@
                             </telerik:GridTemplateColumn>
                              <telerik:GridTemplateColumn DataField="Region.RegionName" AllowFiltering="true"
                                 HeaderText="Region" UniqueName="Region" SortExpression="Region.RegionName"
-                                HeaderStyle-Width="50" FilterControlWidth="50" ItemStyle-CssClass="breakWord200"
+                                HeaderStyle-Width="50" FilterControlWidth="50" ItemStyle-CssClass="breakWord150"
                                 ItemStyle-Width="50" ItemStyle-Wrap="true" ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" DataType="System.String">
                                 <ItemTemplate>
                                     <asp:Label ID="lblRegion" runat="server" Text='<%# Eval("Region.RegionName") %>' />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
-                                HeaderStyle-Width="70" FilterControlWidth="70" DataField="IsActive" ItemStyle-HorizontalAlign="Center">
+                                HeaderStyle-Width="50" FilterControlWidth="50" DataField="IsActive" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
                                 </ItemTemplate>

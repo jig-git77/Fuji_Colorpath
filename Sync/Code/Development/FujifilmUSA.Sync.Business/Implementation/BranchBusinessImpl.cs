@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 CompanyId = DataReader.ReadInt(x, "CompanyId"),
                                                 Company = new Company() { CompanyId = DataReader.ReadInt(x, "CompanyId"), CompanyName = DataReader.ReadString(x, "CompanyName") },
                                                 Region = new Region() { RegionId = DataReader.ReadShort(x, "RegionId"), RegionName = DataReader.ReadString(x, "Region") },
-                                                SupportID = DataReader.ReadInt(x, "SupportID"),
+                                                SupportID = DataReader.ReadString(x, "SupportID"),
                                                 IsActive = DataReader.ReadBoolean(x, "IsActive")
                                             }).ToList();
                     }

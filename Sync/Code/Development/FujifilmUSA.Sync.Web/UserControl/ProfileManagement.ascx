@@ -127,6 +127,17 @@
                             <table>
                                 <tr>
                                     <td align="right">
+                                        <span style="font-weight: bold;">User Name </span>
+                                    </td>
+                                    <td>
+                                          <b>&nbsp;:&nbsp;</b>   
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="lblUserName" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
                                         <span style="font-weight: bold;">New Password<span style="color: Red;">*</span>
                                         </span>
                                     </td>
@@ -135,14 +146,14 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtNewPassword" Width="200px" MaxLength="25" runat="server" Height="19px"
-                                            TextMode="Password" onkeydown="javascript:passwordcheck()"></asp:TextBox>
-                                        <span id="CustomIndicator" class="Base"><span id="PasswordRepeatedIndicator"></span>
-                                        </span>
+                                            <asp:TextBox ID="txtNewPassword" runat="server" Height="19px" MaxLength="25" 
+                                                onkeydown="javascript:passwordcheck()" TextMode="Password" Width="200px"></asp:TextBox>
+                                            <span ID="CustomIndicator" class="Base"><span ID="PasswordRepeatedIndicator">
+                                            </span></span>
                                         </div>
                                         <div style="float: left">
-                                            <asp:CustomValidator ID="cvPassWord" ClientValidationFunction="ValidPassword" runat="server"
-                                                ValidationGroup="vgChangePassword">
+                                            <asp:CustomValidator ID="cvPassWord" runat="server" 
+                                                ClientValidationFunction="ValidPassword" ValidationGroup="vgChangePassword">
                                                     <div class="tooltip_round_box" style=" margin-top: 0px; margin-left: 0px; width: 250px;">
                                                     <div class="tooltip_arrow" style="margin-top: -3px;">&nbsp;</div>
                                                     <div class="tooltip_top_left"></div>

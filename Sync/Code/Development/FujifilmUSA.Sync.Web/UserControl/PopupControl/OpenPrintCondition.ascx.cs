@@ -33,7 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             sb.Append("</br>");
             if (Request.QueryString["DlpName"].Contains("-001"))
             {
-                sb.Append("Currently there is no DLP exists.");
+                sb.Append("Currently there is no DLP.");
             }
             else
             {

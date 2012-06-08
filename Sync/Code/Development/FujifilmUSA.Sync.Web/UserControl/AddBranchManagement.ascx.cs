@@ -75,18 +75,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         private void SaveBranch()
-        {
-            int SupportID = 1;
-            if (txtSupportID.Text != "")
-            {
-                SupportID = Convert.ToInt32(txtSupportID.Text);
-            }
+        {            
             Branch = new Branch
                          {
                              BranchName = txtBranchName.Text,
                              Location = txtLocation.Text,
                              CompanyId = Convert.ToByte(cmbCompanyName.SelectedValue),
-                             SupportID= SupportID,
+                             SupportID= txtSupportID.Text,
                              IsActive = chkIsActive.Checked
                          };
             if (BId == 0) // Add New branch
@@ -115,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRegion_SelectedIndexChanged(null, null);
                 cmbCompanyName.SelectedValue = Branch.CompanyId.ToString();
                 chkIsActive.Checked = Branch.IsActive;
-                txtSupportID.Text = Branch.SupportID.ToString();               
+                txtSupportID.Text = Branch.SupportID;         
             }
         }
         #endregion
