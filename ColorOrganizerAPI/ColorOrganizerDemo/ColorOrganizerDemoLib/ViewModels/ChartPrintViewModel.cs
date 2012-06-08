@@ -129,32 +129,33 @@ namespace ColorOrganizerDemoLib.ViewModels
         private void InsertProjectInformationAndRedirect()
         {
             var client = new Sync4DServiceContractClient("BasicHttpBinding_ISync4DServiceContract");
-            client.StoreTempProjectInformationCompleted += delegate(object sender, StoreTempProjectInformationCompletedEventArgs e)
-            {
-                if (e.Error == null)
-                {
-                    if (e.Result != null)
-                    {
-                        Common.ProjectInfoId = e.Result.ProjectInfoId;
-                        PassToParent(EControl.WebHost);
-                    }
-                }
-                else
-                {
-                    //e.Error
-                }
-            };
-            client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
-                                                        {
-                                                            SecurityToken = Common.SecurityToken,
-                                                            UserName = Common.UserName,
-                                                            UserPassword = Common.GetEncryptPassword(),
-                                                            ProjectInfoId = Common.ProjectInfoId,
-                                                            Colorant = SelectedColorant,
-                                                            Media = SelectedMedia,
-                                                            RipSettings = SelectedRipSetting,
-                                                            ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName
-                                                        });
+            PassToParent(EControl.WebHost);
+            //client.StoreTempProjectInformationCompleted += delegate(object sender, StoreTempProjectInformationCompletedEventArgs e)
+            //{
+            //    if (e.Error == null)
+            //    {
+            //        if (e.Result != null)
+            //        {
+            //            Common.ProjectInfoId = e.Result.ProjectInfoId;
+            //            PassToParent(EControl.WebHost);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //e.Error
+            //    }
+            //};
+            //client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
+            //                                            {
+            //                                                SecurityToken = Common.SecurityToken,
+            //                                                UserName = Common.UserName,
+            //                                                UserPassword = Common.GetEncryptPassword(),
+            //                                                ProjectInfoId = Common.ProjectInfoId,
+            //                                                Colorant = SelectedColorant,
+            //                                                Media = SelectedMedia,
+            //                                                RipSettings = SelectedRipSetting,
+            //                                                ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName
+            //                                            });
         }
         private void GetChartList()
         {

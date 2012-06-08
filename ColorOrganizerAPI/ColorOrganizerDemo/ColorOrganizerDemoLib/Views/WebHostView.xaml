@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:ColorOrganizerDemoLib.Views"
+    xmlns:hh="clr-namespace:Divelements.SilverlightTools;assembly=Divelements.SilverlightTools"
     mc:Ignorable="d"
     d:DesignHeight="800" d:DesignWidth="800">
     <Grid>
@@ -26,11 +27,15 @@
         </Border>
         <TextBlock Name="lblStatus" Grid.Row="1" Margin="15,5,5,5" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold"></TextBlock>
         <Border Grid.Row="2" Margin="15,10,15,20">
-                <view:HtmlHost x:Name="HtmlHostCtrl"
+            <hh:HtmlHost x:Name="HtmlHostCtrl"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                           SourceUri="http://www.softwebdemo.com/softweb/FujiSync4D/Login.aspx" Visibility="{Binding CurrentStatus}"></hh:HtmlHost>
+                <!--<view:HtmlHost x:Name="HtmlHostCtrl"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             HostDiv="htmlHost"
-                            Url="http://www.softwebdemo.com/softweb/FujiSync4D/Login.aspx" Visibility="{Binding CurrentStatus}"></view:HtmlHost>
+                            Url="http://www.softwebdemo.com/softweb/FujiSync4D/Login.aspx" Visibility="{Binding CurrentStatus}"></view:HtmlHost>-->
         </Border>
     </Grid>
 </UserControl>
