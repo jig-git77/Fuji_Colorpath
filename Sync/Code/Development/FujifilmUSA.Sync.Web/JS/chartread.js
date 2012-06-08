@@ -302,19 +302,33 @@ function scan(scanner, colorspace, chart) {
 
         var w = parseInt(jQuery("[id*='Canvas']").width());
         var h = parseInt(jQuery("[id*='Canvas']").height());
-        var startPosition = 1;
+        var startPosition = 0;
         col = chart["NumberOfColumns"];
         row = chart["NumberOfRows"];
 
+        if (row >= 20 && row <= 40) {
+            h = h * 2;
+        }
+        else if (row >= 66) {
+            h = h * 3;
+        }
+        else {
+            h = h - 50;
+        }
+        jQuery("[id*='Canvas']").height(h);
+        jQuery("[id*='Canvas']").width(w);
+
+        alert(jQuery("[id*='Canvas']").height());
 
         if (row != 1) {
 
             //--------Fuji 150 Patch chart----------//
-            area["H"] = (((h / row) / 2) / 2) + '';
-            distance["R"] = (((h / row) / 2) / 2) + '';
+            area["H"] = (((h / row) / 2) - 0.5) + '';     
+            distance["R"] = (((h / row) / 2)+1) + '';
 
             area["W"] = ((w / col) / 2) + '';
             distance["C"] = ((w / col) / 2) + '';
+            alert(area["H"]);
         }
         else {
 
@@ -334,15 +348,16 @@ function scan(scanner, colorspace, chart) {
         var y1 = 0;
 
         for (i = 0; i < row; i++) {
-            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+            
             x1 = 0;
 
             for (j = 0; j < col; j++) {
 
                 if (noOfCells > drawCells) {
-                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
+                   
                     var xx1 = startPosition + x1;
                     var yy1 = startPosition + y1;
+                    x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
                     //var jg2 = new jsGraphics(document.getElementById("Canvas").id);
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
@@ -360,6 +375,7 @@ function scan(scanner, colorspace, chart) {
                 }
 
             }
+            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
         }
     }
 }
