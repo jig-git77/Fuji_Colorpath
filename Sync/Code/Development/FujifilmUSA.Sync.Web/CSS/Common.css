@@ -917,7 +917,7 @@ label
     padding: 11px 15px 4px 15px;
     height:350px;
     width:630px;
-    overflow:scroll;
+    overflow:scroll; 
 }
 .color_pallate .color_pallate_bottom
 {

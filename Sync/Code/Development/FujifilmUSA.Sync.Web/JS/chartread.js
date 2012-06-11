@@ -300,35 +300,40 @@ function scan(scanner, colorspace, chart) {
         distance["R"] = 0;
         distance["C"] = 0;
 
+        var canvas = document.getElementsByTagName('Canvas')[0];
+        canvas.height = 350;        //---Assign original height back
+
         var w = parseInt(jQuery("[id*='Canvas']").width());
         var h = parseInt(jQuery("[id*='Canvas']").height());
         var startPosition = 0;
         col = chart["NumberOfColumns"];
         row = chart["NumberOfRows"];
 
+        if (row < 20) {
+            h = h - 50;
+        }
         if (row >= 20 && row <= 40) {
             h = h * 2;
         }
-        else if (row >= 66) {
-            h = h * 3;
+        else if (row > 40 && row <= 50) {
+            h = h * 5;           
         }
         else {
-            h = h - 50;
+            h = h * 6;       
         }
-        jQuery("[id*='Canvas']").height(h);
-        jQuery("[id*='Canvas']").width(w);
-
-        alert(jQuery("[id*='Canvas']").height());
+       
+        canvas.width = w;       //---Assign new height & width
+        canvas.height = h;    
 
         if (row != 1) {
 
-            //--------Fuji 150 Patch chart----------//
-            area["H"] = (((h / row) / 2) - 0.5) + '';     
-            distance["R"] = (((h / row) / 2)+1) + '';
+            //--------Fuji 150 or more big chart----------//
+          
+            area["H"] = ((h / row) / 2) - 1;          
+            distance["R"] = ((h / row) / 2) + 1;
 
             area["W"] = ((w / col) / 2) + '';
-            distance["C"] = ((w / col) / 2) + '';
-            alert(area["H"]);
+            distance["C"] = ((w / col) / 2) + '';     
         }
         else {
 
@@ -348,35 +353,28 @@ function scan(scanner, colorspace, chart) {
         var y1 = 0;
 
         for (i = 0; i < row; i++) {
-            
-            x1 = 0;
+
+            x1 = 0;        
 
             for (j = 0; j < col; j++) {
 
                 if (noOfCells > drawCells) {
-                   
+
                     var xx1 = startPosition + x1;
                     var yy1 = startPosition + y1;
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-
-                    //var jg2 = new jsGraphics(document.getElementById("Canvas").id);
+                
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
 
                     context.fillStyle = rgbx;
                     context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-
-                    //jg2.setColor(rgbx);
-                    //jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-                    //jg2.paint();
-
+                 
                     drawCells++;
                     cId++;
-
                 }
-
             }
-            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
-        }
+            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"]);          
+        }      
     }
 }
 

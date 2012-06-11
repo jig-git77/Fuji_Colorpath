@@ -231,30 +231,18 @@ function presentScanDonei1(scanner, mychart, final) {
         next = idx + 1;
     }
 
-
     var w = parseInt(jQuery("[id*='Canvas']").width());
     var h = parseInt(jQuery("[id*='Canvas']").height());
     var startPosition = 0;
     col = mychart["NumberOfColumns"];
     row = mychart["NumberOfRows"];
 
-    if (row >= 20 && row <= 40) {
-        h = h * 2;
-    }
-    else if (row >= 66) {
-        h = h * 3;
-    }
-    else {
-        h = h - 50;
-    }
-    jQuery("[id*='Canvas']").height(h);
-    jQuery("[id*='Canvas']").width(w);   
 
     if (row != 1) {
 
-        //--------Fuji 150 Patch chart----------//
-        area["H"] = (((h / row) / 2) - 0.5) + '';
-        distance["R"] = ((((h / row) / 2) / 2) + 1) + '';
+        //--------Fuji 150 or more big chart----------//
+        area["H"] = ((h / row) / 2) - 1;
+        distance["R"] = ((h / row) / 2) + 1;
 
         area["W"] = ((w / col) / 2) + '';
         distance["C"] = ((w / col) / 2) + '';
@@ -286,8 +274,7 @@ function presentScanDonei1(scanner, mychart, final) {
             var yy1 = startPosition + y1;
 
             x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-
-            //var jg2 = new jsGraphics(document.getElementById("Canvas").id);
+        
             var canvas = document.getElementById("Canvas");
             var context = canvas.getContext("2d");
 
@@ -296,15 +283,12 @@ function presentScanDonei1(scanner, mychart, final) {
 
             context.fillStyle = rgbx;
             context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-
-            //jg2.setColor(rgbx);
-            //jg2.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-            //jg2.paint();
+        
             drawCells++;
         }
     }
 
-    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"] * 2);
+    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"]);
 
     //
     // Now ask for the next strip, if we were not at the end
