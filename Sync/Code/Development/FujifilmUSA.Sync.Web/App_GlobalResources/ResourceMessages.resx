@@ -463,7 +463,7 @@
     <value>Company already exists with same name.</value>
   </data>
   <data name="Duplicate_InsertDevice" xml:space="preserve">
-    <value>Device already exists with same name.</value>
+    <value>Device already exists with same name under this branch.</value>
   </data>
   <data name="Duplicate_InsertDeviceFamily" xml:space="preserve">
     <value>Device family already exists with same name.</value>
@@ -481,7 +481,7 @@
     <value>Source profile already exists with same name.</value>
   </data>
   <data name="Duplicate_InsertUser" xml:space="preserve">
-    <value>User already exists with same name.</value>
+    <value>User already exists with same email / username.</value>
   </data>
   <data name="Error_ReferenceChart_ColumnConvertFailedOnRow" xml:space="preserve">
     <value>Value conversion failed on row {0}.</value>

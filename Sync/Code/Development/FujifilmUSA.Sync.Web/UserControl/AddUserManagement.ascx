@@ -477,11 +477,7 @@
                                                                     </asp:DropDownList>
                                                                 </div>
                                                                 <div style="float: left">
-                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic"
-                                                                        ControlToValidate="cmbCompany" ForeColor="Red" ValidationGroup="vgAddUser">
-                                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
-                                                                            ValidationMsg="Please select company." Size="200" />
-                                                                    </asp:RequiredFieldValidator>
+                                                                  
                                                                 </div>
                                                                 <div class="clear">
                                                                 </div>

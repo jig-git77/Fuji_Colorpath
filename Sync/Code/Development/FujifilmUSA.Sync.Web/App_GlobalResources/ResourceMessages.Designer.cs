@@ -277,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Device already exists with same name..
+        ///   Looks up a localized string similar to Device already exists with same name under this branch..
         /// </summary>
         internal static string Duplicate_InsertDevice {
             get {
@@ -331,7 +331,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User already exists with same name..
+        ///   Looks up a localized string similar to User already exists with same email / username..
         /// </summary>
         internal static string Duplicate_InsertUser {
             get {
