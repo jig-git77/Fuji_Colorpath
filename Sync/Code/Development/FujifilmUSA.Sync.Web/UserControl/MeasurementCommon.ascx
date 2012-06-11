@@ -156,7 +156,6 @@
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
-<asp:HiddenField ID="hdReferenceChart" runat="server"  Value="0" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
@@ -204,16 +203,9 @@
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
         load();   //first you have to load the plugin
         ListDevices();
-        GetRefChartData();
-       // LoadCanvasSize();
+        GetRefChartData();      
     }
-    function LoadCanvasSize()
-    {
-       if(jQuery("input[id$=hdReferenceChart]").val().contains('1650'))
-       {
-            jQuery("[id*='Canvas']").height(2100);
-       }
-    }
+    
     function GetRefChartData() {
         jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
         var ReferenceChartTypeId = '';

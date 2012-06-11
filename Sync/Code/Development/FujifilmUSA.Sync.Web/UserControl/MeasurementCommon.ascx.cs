@@ -21,10 +21,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
-                //hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key.ToString();
-                hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
-                hdReferenceChart.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value;
+                hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();               
+                hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();                
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
             }
         }
