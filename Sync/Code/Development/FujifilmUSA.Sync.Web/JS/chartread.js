@@ -308,11 +308,11 @@ function scan(scanner, colorspace, chart) {
         var startPosition = 0;
         col = chart["NumberOfColumns"];
         row = chart["NumberOfRows"];
-
+      
         if (row < 20) {
             h = h - 50;
         }
-        if (row >= 20 && row <= 40) {
+        else if (row >= 20 && row <= 40) {
             h = h * 2;
         }
         else if (row > 40 && row <= 50) {
@@ -323,8 +323,8 @@ function scan(scanner, colorspace, chart) {
         }
        
         canvas.width = w;       //---Assign new height & width
-        canvas.height = h;    
-
+        canvas.height = h;
+      
         if (row != 1) {
 
             //--------Fuji 150 or more big chart----------//
