@@ -39,7 +39,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
-                lblTitle.Text = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);              
+                lblTitle.Text = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
+                ViewState["ProjectLimit"] = 0;
             }
         }
         #endregion
@@ -47,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(Hidden_TotalProjects.Value) >= SessionManager.Instance.CurrentProjLimit)
+            if (Convert.ToInt32(ViewState["ProjectLimit"]) >= SessionManager.Instance.CurrentProjLimit)
             {
                 //--------------Project Limit reach, so can not create more projects under this Device now-------//  
                 Response.Redirect("ProjectMaxLimit.aspx");
@@ -73,6 +74,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (e.CommandArgument != null)
                     {
                         DeleteProject(Convert.ToInt32(e.CommandArgument));
+                        rgProjectList.MasterTableView.Rebind();
                     }
                     break;
                 case "ClearFilter":
@@ -176,8 +178,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 rgProjectList.DataSource = Projects;
-            }
-            Hidden_TotalProjects.Value = Projects.Count.ToString();
+            }        
+            ViewState["ProjectLimit"] = Projects.Count;   //------Store the total projects to check ProjectLimit counter--------//
         }
         private void DeleteProject(int projectId)
         {
