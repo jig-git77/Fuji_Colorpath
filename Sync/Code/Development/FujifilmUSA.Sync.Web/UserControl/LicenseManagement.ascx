@@ -132,13 +132,13 @@
 
                             <telerik:GridDateTimeColumn DataField="ActivationDate" HeaderText="Activation Date"
                                 SortExpression="ActivationDate" UniqueName="ActivationDate" Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThan">
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
                             <telerik:GridDateTimeColumn DataField="ExpirationDate" HeaderText="Expiration Date"
                                 SortExpression="ExpirationDate" UniqueName="ExpirationDate" 
                                 Display="true" DataFormatString="{0:yyyy-MM-dd}"
-                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThan">
+                                ShowFilterIcon="true" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
                                 <ItemStyle HorizontalAlign="Left" Width="100" />
                             </telerik:GridDateTimeColumn>
 
