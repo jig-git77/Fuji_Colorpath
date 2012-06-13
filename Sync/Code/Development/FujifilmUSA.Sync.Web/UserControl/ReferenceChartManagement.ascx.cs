@@ -35,6 +35,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindRefChartList();
             }
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //------------Apply default CurrentFilterFunction for "NumOfRows", "NumOfCols", "TotalPatches" columns of rgRefChart RadGrid-----------------//
+            rgRefChart.Columns[1].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+            rgRefChart.Columns[2].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+            rgRefChart.Columns[3].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+
+        }
         #endregion
 
         #region Methods

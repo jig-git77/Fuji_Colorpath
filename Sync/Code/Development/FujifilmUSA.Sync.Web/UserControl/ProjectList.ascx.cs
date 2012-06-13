@@ -43,6 +43,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ViewState["ProjectLimit"] = 0;
             }
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //------------Apply default CurrentFilterFunction for "CreateDate" column of rgProjectList RadGrid-----------------//
+            rgProjectList.Columns[6].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+
+        }
         #endregion
 
         #region Control events

@@ -58,14 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
-        }
-
-        protected void Page_PreRender(object sender, EventArgs e)
-        {
-            //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
-            //GridPatchDetails.Columns[2].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
-          
-        }
+        }       
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -262,9 +255,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             GridPatchDetails.MasterTableView.ExportToCSV();
         }
 
-        #endregion
-   
-
         protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
         {
 
@@ -272,6 +262,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
         }
 
+        #endregion   
 
         #region IViewAnalyze Members
 

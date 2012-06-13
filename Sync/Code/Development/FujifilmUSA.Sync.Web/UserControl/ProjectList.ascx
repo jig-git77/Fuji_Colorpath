@@ -223,44 +223,14 @@
                                                 <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>' />
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridBoundColumn UniqueName="CreateDate" DataField="CreateDate" HeaderText="Last Active"
-                                            DataFormatString="{0:MM/dd/yy hh:mm}" HeaderStyle-Width="100">
-                                            <FilterTemplate>
-                                                <telerik:RadDatePicker ID="LastActivePicker" runat="server" Width="100px" ClientEvents-OnDateSelected="DateSelected"
-                                                    DbSelectedDate='<%# FillterCreatedDateDate(Container) %>' />
-                                                <telerik:RadScriptBlock ID="RadScriptBlock3" runat="server">
-                                                    <script type="text/javascript">
-                                                        function DateSelected(sender, args) {
-                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                            var date = FormatSelectedDate(sender);
-                                                            if (date != '') {
-                                                                var nextDate = FormatNextDate(sender);
-                                                                tableView.filter("CreateDate", date + " " + nextDate, "Between");
-                                                            }
-                                                            else
-                                                                tableView.filter("CreateDate", date, "EqualTo");
-                                                        }
-                                                        function FormatSelectedDate(picker) {
-                                                            var date = picker.get_selectedDate();
-                                                            var dateInput = picker.get_dateInput();
-                                                            var formattedDate = dateInput.get_dateFormatInfo().FormatDate(date, dateInput.get_displayDateFormat());
-                                                            return formattedDate;
-                                                        }
-                                                        function FormatNextDate(picker) {
-                                                            var date = picker.get_selectedDate();
-                                                            var nextDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-                                                            var dateInput = picker.get_dateInput();
-                                                            var formattedDate = dateInput.get_dateFormatInfo().FormatDate(nextDate, dateInput.get_displayDateFormat());
-                                                            return formattedDate;
-                                                        }
-                                               
-                                                    </script>
-                                                </telerik:RadScriptBlock>
-                                            </FilterTemplate>
-                                        </telerik:GridBoundColumn>
+                                        <telerik:GridDateTimeColumn DataField="CreateDate" HeaderText="Last Active"
+                                                SortExpression="CreateDate" UniqueName="CreateDate" Display="true" DataFormatString="{0:MM/dd/yy hh:mm}"
+                                                ShowFilterIcon="false" FilterControlWidth="100" HeaderStyle-Width ="100" AutoPostBackOnFilter="true" CurrentFilterFunction="GreaterThanOrEqualTo">
+                                                <ItemStyle HorizontalAlign="Left" Width="100" />
+                                       </telerik:GridDateTimeColumn>
+                                       
                                         <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="true" HeaderText=""
-                                            HeaderStyle-Width="40" UniqueName="Delete"
-                                            >
+                                            HeaderStyle-Width="40" UniqueName="Delete">                                           
                                             <FilterTemplate>
                                                 <%-- <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="gray_bt" CommandName="ClearFilter">
                                                         <span> Clear Fillter </span>

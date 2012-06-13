@@ -40,6 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindLicense();
             }
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //------------Apply default CurrentFilterFunction for "NumOfDevice" column of rgLicense RadGrid-----------------//
+            rgLicense.Columns[3].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+
+        }
         #endregion
 
         #region Methods
