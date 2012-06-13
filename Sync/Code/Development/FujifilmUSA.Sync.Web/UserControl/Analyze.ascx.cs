@@ -60,6 +60,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAnalyze = new PresenterAnalyze(this);
         }
 
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
+            //GridPatchDetails.Columns[2].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
+          
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -223,6 +230,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void GridPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)
+        {        
+            switch (e.CommandName)
+            {
+                case "Fillter":
+                    foreach (GridColumn column in GridPatchDetails.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    GridPatchDetails.MasterTableView.FilterExpression = string.Empty;
+                    GridPatchDetails.MasterTableView.Rebind();
+                    break;
+
+                case "Filter":          //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
+                    ((Pair)e.CommandArgument).First = "GreaterThanOrEqualTo";
+                    break;
+            }
+        }
+
         protected void btn_Excel_Click(object sender, EventArgs e)
         {
             ConfigureExport();
@@ -236,6 +263,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #endregion
+   
+
+        protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
+        {
+
+            byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/PDFReports/Sync DLP Report.pdf"));
+            Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
+        }
+
 
         #region IViewAnalyze Members
 
@@ -260,13 +296,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int MeasurementId { get; set; }
 
         #endregion
-
-        protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
-        {
-
-            byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/PDFReports/Sync DLP Report.pdf"));
-            Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
-        }
 
     }
 }

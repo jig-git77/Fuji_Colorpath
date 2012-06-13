@@ -363,8 +363,8 @@
                <tr>
                 <td>   
                     <telerik:RadGrid ID="GridPatchDetails" ShowHeader="true"  AllowSorting="true" Width="650px"
-                    AllowPaging="True"  runat="server" AutoGenerateColumns="false" EnableLinqExpressions="false" 
-                    OnNeedDataSource="GridPatchDetails_NeedDataSource" OnItemDataBound="GridPatchDetails_ItemDataBound" HeaderStyle-Font-Bold="true">
+                    AllowPaging="True"  runat="server" AutoGenerateColumns="false" EnableLinqExpressions="false"  AllowFilteringByColumn="true" 
+                    OnNeedDataSource="GridPatchDetails_NeedDataSource" OnItemDataBound="GridPatchDetails_ItemDataBound" HeaderStyle-Font-Bold="true" OnItemCommand="GridPatchDetails_ItemCommand">
                     
                      <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="True" FrozenColumnsCount="6">
@@ -375,41 +375,53 @@
                     <MasterTableView DataKeyNames="HtmlColor">
                         <Columns>
                             <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
-                                DataField="HtmlColor" >
+                                DataField="HtmlColor" AllowFiltering="true">
+                                
+                                 <FilterTemplate>
+                                    <center>
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"  CommandName="Fillter">
+                                                    <span>
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                    </span>
+                                    </asp:LinkButton>
+                                    </center>
+                                </FilterTemplate>
                                 <ItemTemplate>         
                                     <asp:Label ID="lbl_HTML" runat="server" Text="" Height="14px" Width="30px"></asp:Label>                                   
                                 </ItemTemplate>
+                                
                             </telerik:GridTemplateColumn>                         
 
-                            <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" SortExpression="SampleId" >
+                            <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" SortExpression="SampleId" AllowFiltering="false" UniqueName="SampleId">
                             </telerik:GridBoundColumn>                       
-                            <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" SortExpression="CmykC" >
+                            <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" SortExpression="CmykC" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="CmykC" DataType="System.Int32">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" SortExpression="CmykM" >
+                            <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" SortExpression="CmykM" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="CmykM" DataType="System.Int32">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" SortExpression="CmykY" >
+                            <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" SortExpression="CmykY" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="CmykY" DataType="System.Int32">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" SortExpression="CmykK" >
+                            <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" SortExpression="CmykK" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="CmykK" DataType="System.Int32">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE">
+                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" SortExpression="ΔE94">
+                            <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" SortExpression="ΔE94" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000" SortExpression="ΔE2000">
+                            <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000" SortExpression="ΔE2000" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn> 
-                            <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*" SortExpression="TargetL">
+                            <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*" SortExpression="TargetL" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                             <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" SortExpression="CielabL">
+                             <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" SortExpression="CielabL" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*" SortExpression="Targeta">
+                            <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*" SortExpression="Targeta" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                             <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" SortExpression="CielabA">
+                             <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" SortExpression="CielabA" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*" SortExpression="Targetb">
+                            <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*" SortExpression="Targetb" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" SortExpression="CielabB">
+                            <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" SortExpression="CielabB" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>     
-                                                   
+                            
+                                                
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
