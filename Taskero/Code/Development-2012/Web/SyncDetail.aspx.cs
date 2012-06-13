@@ -2471,9 +2471,10 @@ public partial class SyncDetail : PageBase
                 DataTable DT_CPSyncPressRunCurve = new DataTable();
                 DT_CPSyncPressRunCurve = (DataTable)Fuji.Common.Sessions.GetSession("DTCurvesDataExportView");
 
-                if (DdlCurveType.SelectedValue == "1" || DdlCurveType.SelectedValue == "5" || DdlCurveType.SelectedValue == "10")
+                //--------(Dhruti adds code for "ColorGate-TVI" new option)---------------------//
+                if (DdlCurveType.SelectedValue == "1" || DdlCurveType.SelectedValue == "5" || DdlCurveType.SelectedValue == "10" || DdlCurveType.SelectedValue == "100")
                 {
-                    #region Create file and download txt file for 1%,5% and 10%
+                    #region Create file and download txt file for 1%,5% and 10% and ColorGate-TVI
                     System.IO.StreamWriter sw;
                     sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurvesFile.txt");
                     sw.WriteLine("BEGIN_DATA_FORMAT");
@@ -2790,22 +2791,56 @@ public partial class SyncDetail : PageBase
                 if (!Directory.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile")))
                     Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile"));
 
-                System.IO.StreamWriter sw;
-                sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurveDelta.txt");
-                sw.WriteLine("BEGIN_DATA_FORMAT");
-                sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
-                sw.WriteLine("END_DATA_FORMAT");
-                sw.WriteLine("BEGIN_DATA");
-                for (int i = 0; i < DT_CurveDelta.Rows.Count; i++)
+                if (DdlCurveType.SelectedValue != "100")
                 {
-                    sw.WriteLine(DT_CurveDelta.Rows[i]["ReferenceNo"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_K"].ToString());
+                    //---------------For all Curve Types except ColorGate-TVI-------------------//
+                    System.IO.StreamWriter sw;
+                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurveDelta.txt");
+                    sw.WriteLine("BEGIN_DATA_FORMAT");
+                    sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    sw.WriteLine("END_DATA_FORMAT");
+                    sw.WriteLine("BEGIN_DATA");
+                    for (int i = 0; i < DT_CurveDelta.Rows.Count; i++)
+                    {
+                        sw.WriteLine(DT_CurveDelta.Rows[i]["ReferenceNo"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CurveDelta.Rows[i]["CMYK_K"].ToString());
+                    }
+                    sw.WriteLine("END_DATA");
+                    sw.Close();
+
+                    Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurveDelta.txt", Sessions.UserID + "_CurveDelta.txt");
+
                 }
-                sw.WriteLine("END_DATA");
-                sw.Close();
+                else
+                {
 
-                Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurveDelta.txt", Sessions.UserID + "_CurveDelta.txt");
+                    //-------For curvetype=100-------Make .ctvx XML file for ColorGate-TVI (Dhruti's Code)-------------------//
 
 
+                    //-----------------Pass few parameters in "" marks to .ctvx xml file------------------//
+                    string str0 = "\"" + "1.0" + "\"";
+                    string str1 = "\"" + "UTF-8" + "\"";
+                    string str2 = "\"" + "urn:schemas-colorgate-com:tonalvalues" + "\"";
+                    string str3 = "\"" + "1" + "\"";
+
+                    //-----------------Make .ctvx xml file------------------//
+                    System.IO.StreamWriter sw3;
+                    sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurveDelta.ctvx");
+                    sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
+                    sw3.WriteLine("<TonalValues xmlns=" + str2 + ">");
+
+                    if (DT_CurveDelta.Rows.Count > 19)
+                    {
+                        sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[2]["CMYK_K"].ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[5]["CMYK_K"].ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[10]["CMYK_K"].ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[15]["CMYK_K"].ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[18]["CMYK_K"].ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[2]["CMYK_C"].ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[5]["CMYK_C"].ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[10]["CMYK_C"].ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[15]["CMYK_C"].ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[18]["CMYK_C"].ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[2]["CMYK_M"].ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[5]["CMYK_M"].ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[10]["CMYK_M"].ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[15]["CMYK_M"].ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[18]["CMYK_M"].ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[2]["CMYK_Y"].ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[5]["CMYK_Y"].ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[10]["CMYK_Y"].ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[15]["CMYK_Y"].ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CurveDelta.Rows[18]["CMYK_Y"].ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                    }
+                    sw3.WriteLine("</TonalValues>");
+                    sw3.Close();
+
+                    Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurveDelta.ctvx", Sessions.UserID + "_CurveDelta.ctvx");
+
+                }
             }
 
 

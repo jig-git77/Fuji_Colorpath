@@ -2611,6 +2611,7 @@
                                                                                                                 <asp:ListItem Text="Rampage" Value="15"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="XMF" Value="25"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
+                                                                                                                <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
                                                                                                                 <%--  <asp:ListItem Text="&#916;Ref" Value="65"></asp:ListItem>--%>
                                                                                                             </asp:DropDownList>
                                                                                                             &nbsp;&nbsp;
