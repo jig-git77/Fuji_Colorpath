@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           })).ToDictionary(region => region.Value, region => region.Text);
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegions"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionList"));
             return dstRegionList;
         }
 
@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertSourceProfile" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateSourceProfile" };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSourceProfile"));
@@ -130,7 +130,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             }).ToList();
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileInformation"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfile"));
             return sourceProfiles;
         }
 
@@ -144,7 +144,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 var dsIccProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetICCSourceProfile]", new object[] { sourceProfileId });
                 iccProfile = dsIccProfile.Tables[0].AsEnumerable().Select(x => DataReader.ReadByteArray(x, "Profile")).FirstOrDefault();
             },
-            new BusinessHandlerRequest(this, ErrorOccured, "Error_GetICCSourceProfile"));
+            new BusinessHandlerRequest(this, ErrorOccured, "Error_GetIccProfileBySourceProfile"));
 
             return iccProfile;
         }

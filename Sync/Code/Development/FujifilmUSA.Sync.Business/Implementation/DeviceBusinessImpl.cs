@@ -131,7 +131,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         }
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceList"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDevice"));
             return objDeviceList;
         }
 
@@ -199,7 +199,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                         if (returnValue == -1)
                         {
-                            throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDevice" };
+                            throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateDevice" };
                         }
                     },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateDevice"));

@@ -121,7 +121,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             })).ToDictionary(region => region.Value, region => region.Text);
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetRegionListByCompany"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCompaniesByRegion"));
             return dstCompnayList;
         }
 
@@ -294,7 +294,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             ToDictionary(projectType => projectType.Value, projectType => projectType.Text);
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTypeList"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSecurityQuestions"));
             return dstSecurityQuestionList;
         }
 

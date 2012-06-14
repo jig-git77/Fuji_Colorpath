@@ -215,7 +215,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         measurementId
                                     });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMeasurement"));
             return (affectedRow > 0);
         }
 

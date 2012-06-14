@@ -117,65 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddDestinationProfile_AlignmentChart_Required" xml:space="preserve">
-    <value>Please select alignment chart</value>
-  </data>
-  <data name="AddDestinationProfile_DestinationProfileName_Required" xml:space="preserve">
-    <value>Please provide destination profile name</value>
-  </data>
-  <data name="AddDestinationProfile_DeviceType_Required" xml:space="preserve">
-    <value>Please select device type</value>
-  </data>
-  <data name="AddMeasurementDevice_BranchName_Required" xml:space="preserve">
-    <value>Please select branch name</value>
-  </data>
-  <data name="AddMeasurementDevice_CompanyName_Required" xml:space="preserve">
-    <value>Please select company name</value>
-  </data>
-  <data name="AddMeasurementDevice_DongleSerialNo_Required" xml:space="preserve">
-    <value>Please select dongle</value>
-  </data>
-  <data name="AddMeasurementDevice_SerialNo_Required" xml:space="preserve">
-    <value>Please provide serial number</value>
-  </data>
   <data name="AddMeasurement_DeleteMeasurement_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected measurement?</value>
-  </data>
-  <data name="AddProject_DestinationProfile_Required" xml:space="preserve">
-    <value>Please select destination profile</value>
-  </data>
-  <data name="AddProject_DLP_Required" xml:space="preserve">
-    <value>Please select DLP</value>
-  </data>
-  <data name="AddProject_ProjectName_Required" xml:space="preserve">
-    <value>Please provide project name</value>
-  </data>
-  <data name="AddProject_SourceProfile_Required" xml:space="preserve">
-    <value>Please select source profile</value>
-  </data>
-  <data name="AddProject_Update_Message" xml:space="preserve">
-    <value>Project details updated sucessfully</value>
-  </data>
-  <data name="DestinationProfile_DeleteDestinationProfile_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected destination profile?</value>
-  </data>
-  <data name="DestinationProfile_IsUse_False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="DestinationProfile_IsUse_True" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="DeviceLinkProfile_IsUse_False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="DeviceLinkProfile_IsUse_True" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="DLP_DeleteDestinationProfile_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected DLP profile?</value>
-  </data>
-  <data name="Duplicate_MeasurementDevice_SerialNo" xml:space="preserve">
-    <value>Duplicate serial number</value>
   </data>
   <data name="Login_InvalidLogin" xml:space="preserve">
     <value>Username/Password is invalid.</value>
@@ -183,26 +126,8 @@
   <data name="MeasurementDeviceList_DeleteMeasurementDevice_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected measurement device?</value>
   </data>
-  <data name="MeasurementDeviceList_IsActive_False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="MeasurementDeviceList_IsActive_True" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="Measurement_SerialNo_Duplicate" xml:space="preserve">
-    <value>Duplicate Serial Number</value>
-  </data>
   <data name="ProjectList_DeleteProject_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete all information of selected Project?</value>
-  </data>
-  <data name="SourceProfile_DeleteSourceProfile_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete all information of selected source profile?</value>
-  </data>
-  <data name="SourceProfile_IsUse_False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="SourceProfile_IsUse_True" xml:space="preserve">
-    <value>Yes</value>
   </data>
   <data name="CompanyManagement_DeleteCompany_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected company?</value>
@@ -252,7 +177,7 @@
   <data name="Error_GetAnalyzeChartMeasurement" xml:space="preserve">
     <value>Error occured while retrieving measurement data related to analyze chart. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetBranches" xml:space="preserve">
+  <data name="Error_GetBranch" xml:space="preserve">
     <value>Error occured while retrieving branch list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetBranchList" xml:space="preserve">
@@ -261,7 +186,7 @@
   <data name="Error_GetChartPreviewOnOptimizeRunId" xml:space="preserve">
     <value>Error occured while retrieving chart preview. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetCompanies" xml:space="preserve">
+  <data name="Error_GetCompany" xml:space="preserve">
     <value>Error occured while retrieving company list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetCompanyList" xml:space="preserve">
@@ -279,7 +204,7 @@
   <data name="Error_GetDeviceLinkProfile" xml:space="preserve">
     <value>Error occured while retrieving device link profile. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetDeviceList" xml:space="preserve">
+  <data name="Error_GetDevice" xml:space="preserve">
     <value>Error occured while retrieving device list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetDeviceListById" xml:space="preserve">
@@ -297,7 +222,7 @@
   <data name="Error_GetLicenseList" xml:space="preserve">
     <value>Error occured while retrieving licenses. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetLicenses" xml:space="preserve">
+  <data name="Error_GetLicense" xml:space="preserve">
     <value>Error occured while retrieving licence list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetLicenseTypeList" xml:space="preserve">
@@ -314,9 +239,6 @@
   </data>
   <data name="Error_GetMeasurementDevices" xml:space="preserve">
     <value>Error occured while retrieving measurement device list. Please contact your administrator.</value>
-  </data>
-  <data name="Error_GetMeasurements" xml:space="preserve">
-    <value>Error occured while retrieving measurement list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetMeasurementsOnRunId" xml:space="preserve">
     <value>Error occured while retrieving measurements. Please contact your administrator.</value>
@@ -339,16 +261,13 @@
   <data name="Error_GetReferenceChartData" xml:space="preserve">
     <value>Error occured while retrieving reference chart data. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetReferenceChartTypeImage" xml:space="preserve">
-    <value>Error occured while retrieving reference chart image data. Please contact your administrator.</value>
-  </data>
   <data name="Error_GetReferenceChartTypeList" xml:space="preserve">
     <value>Error occured while retrieving reference chart type list. Please contact your administrator.</value>
   </data>
   <data name="Error_GetRegionList" xml:space="preserve">
     <value>Error occured while retrieving region list. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetRegionListByCompany" xml:space="preserve">
+  <data name="Error_GetCompaniesByRegion" xml:space="preserve">
     <value>Error occured while retrieving regions by company. Please contact your administrator.</value>
   </data>
   <data name="Error_GetRegions" xml:space="preserve">
@@ -366,13 +285,10 @@
   <data name="Error_GetSourceProfileList" xml:space="preserve">
     <value>Error occured while retrieving source profiles. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetSourceProfiles" xml:space="preserve">
-    <value>Error occured while retrieving source profile list. Please contact your administrator.</value>
-  </data>
   <data name="Error_GetUserRoleList" xml:space="preserve">
     <value>Error occured while retrieving user roles. Please contact your administrator.</value>
   </data>
-  <data name="Error_GetUsers" xml:space="preserve">
+  <data name="Error_GetUser" xml:space="preserve">
     <value>Error occured while retrieving users list. Please contact your administrator.</value>
   </data>
   <data name="Error_InsertBranch" xml:space="preserve">
@@ -447,7 +363,7 @@
   <data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected source profile?</value>
   </data>
-  <data name="Error_GetICCSourceProfile" xml:space="preserve">
+  <data name="Error_GetIccProfileBySourceProfile" xml:space="preserve">
     <value>Error occured while get source profile.Please contact your administrator.</value>
   </data>
   <data name="Error_GetLastOptimizeRunId" xml:space="preserve">
@@ -513,13 +429,94 @@
   <data name="Error_InsertReferenceLabData" xml:space="preserve">
     <value>Error occured while inserting reference lab data. Please contact your administrator.</value>
   </data>
-  <data name="Email_Subject_ResetYourPassword" xml:space="preserve">
+  <data name="Email_Subject_SendPasswordResetEmail" xml:space="preserve">
     <value>ColorPath - Reset your password</value>
   </data>
-  <data name="Email_Subject_WelcomeToColorPath" xml:space="preserve">
+  <data name="Email_Subject_SendUserCreatedEmail" xml:space="preserve">
     <value>Welcome to ColorPath</value>
   </data>
   <data name="Error_GetTemplate" xml:space="preserve">
     <value>Error occured while retrieving template. Please contact your administrator.</value>
+  </data>
+  <data name="Duplicate_UpdateBranch" xml:space="preserve">
+    <value>Branch already exists with same name.</value>
+  </data>
+  <data name="Duplicate_UpdateCompany" xml:space="preserve">
+    <value>Company already exists with same name.</value>
+  </data>
+  <data name="Duplicate_UpdateDevice" xml:space="preserve">
+    <value>Device already exists with same name under this branch.</value>
+  </data>
+  <data name="Duplicate_UpdateLicense" xml:space="preserve">
+    <value>License already exists with same branch.</value>
+  </data>
+  <data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
+    <value>Source profile already exists with same name.</value>
+  </data>
+  <data name="Duplicate_UpdateUser" xml:space="preserve">
+    <value>User already exists with same email / username.</value>
+  </data>
+  <data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">
+    <value>ColorPath - Reset your password</value>
+  </data>
+  <data name="Error_DeleteMeasurement" xml:space="preserve">
+    <value>Error occured while closing optimizing current run. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetAvgDeltaMeasurement" xml:space="preserve">
+    <value>Error occured while retrieving measurement information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetPatchDetailsofMeasurement" xml:space="preserve">
+    <value>Error occured while retrieving measurement information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetProjectTypeList" xml:space="preserve">
+    <value>Error occured while retrieving project type information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceCharts" xml:space="preserve">
+    <value>Error occured while retrieving reference chart information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetReferenceChartsForXmf" xml:space="preserve">
+    <value>Error occured while retrieving reference chart information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetSecurityQuestions" xml:space="preserve">
+    <value>Error occured while retrieving user information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetUserAuthenticationInformation" xml:space="preserve">
+    <value>Error occured while validating username/password.</value>
+  </data>
+  <data name="Error_SendEmailToUser" xml:space="preserve">
+    <value>Error occured while inserting user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdatePassword" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdatePreResetPasswordInformation" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateSecurityInformation" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateUserAuthenticationInformation" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
+  <data name="Error_DeleteOptimizeRun" xml:space="preserve">
+    <value>Error occured while deleting optimize run.Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetApplicationConfigurations" xml:space="preserve">
+    <value>Error occured while retrieving application configuration data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetLastRunStatus" xml:space="preserve">
+    <value>Error occured while retrieving status data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetPrintActivities" xml:space="preserve">
+    <value>Error occured while retrieving print data. Please contact your administrator.</value>
+  </data>
+  <data name="Error_StoreTempararyProjectInformation" xml:space="preserve">
+    <value>Error occured while inserting project information. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateReferenceChart" xml:space="preserve">
+    <value>Error occured while updating reference chart. Please contact your administrator.</value>
+  </data>
+  <data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
+    <value>Reference chart already exists with same name.</value>
   </data>
 </root>

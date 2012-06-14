@@ -211,7 +211,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Avg_ΔE2000 = DataReader.ReadDecimal(x, "Avg_ΔE2000")
                         }).ToList();
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsDeltaOnRunId"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAvgDeltaMeasurement"));
             return measurements;
         }
 
@@ -250,7 +250,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         }).ToList();
                   
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurementOnRunId"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return PatchDetails;
         }
         #endregion

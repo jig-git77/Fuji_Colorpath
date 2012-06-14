@@ -174,7 +174,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenecChartInformation"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceCharts"));
             return ReferenceCharts;
         }
 
@@ -202,7 +202,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertReferenceChart" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateReferenceChart" };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateReferenceChart"));
@@ -241,7 +241,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             }).ToList();
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "GetReferenceChartsForXmf"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
             return referenceCharts;
         }
 

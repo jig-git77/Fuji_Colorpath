@@ -63,10 +63,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertBranch" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateBranch" };
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateBranch"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Duplicate_UpdateBranch"));
             return returnValue;
         }
 
@@ -109,7 +109,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             }).ToList();
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetBranches"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetBranch"));
             return branches;
         }
 

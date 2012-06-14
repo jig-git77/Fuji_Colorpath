@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Business
             var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.UserCreatedEmail);
             var message = new MailMessage
             {
-                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_WelcomeToColorPath"),
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_SendUserCreatedEmail"),
                 IsBodyHtml = true,
                 Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
                                           string.Format(
@@ -69,7 +69,7 @@ namespace FujifilmUSA.Sync.Business
             var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.PasswordResetEmail);
             var message = new MailMessage
             {
-                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_ResetYourPassword"),
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_SendPasswordResetEmail"),
                 IsBodyHtml = true,
                 Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
                                                             string.Format(
@@ -87,7 +87,7 @@ namespace FujifilmUSA.Sync.Business
             var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate((int)Entity.Template.PasswordResetEmail);
             var message = new MailMessage
             {
-                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_ResetYourPassword"),
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_SendPasswordForceResetEmail"),
                 IsBodyHtml = true,
                 Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##",
                                                             string.Format(

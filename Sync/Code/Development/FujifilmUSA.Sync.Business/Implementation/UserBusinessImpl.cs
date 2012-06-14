@@ -141,7 +141,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        }).ToList();
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUsers"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUser"));
             return objUsers;
         }
 
@@ -237,7 +237,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertUser" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateUser" };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
@@ -288,7 +288,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                    };
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_UserLogin"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUserAuthenticationInformation"));
             return user;
         }
 
@@ -313,7 +313,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , Convert.ToInt32(updateType)
                                     });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUserAuthenticationInformation"));
             return returnValue;
         }
 
@@ -339,7 +339,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                       emailOutParam,
                                       isExistsOutParam
                                   }),
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateUser"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdatePreResetPasswordInformation"));
             if (Convert.ToBoolean(isExistsOutParam.Value))
             {
                 user.IsActivated = Convert.ToBoolean(isActivatedOutParam.Value);
@@ -367,7 +367,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         loginId, LoginSecurity.EncryptPasswords(password)
                                     });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdatePassword"));
             return returnValue;
         }
 
@@ -386,7 +386,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         loginId, securityQuestionId, securityAnswer
                                     });
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateSecurityInformation"));
             return returnValue;
         }
 
@@ -408,7 +408,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             break;
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertUser"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SendEmailToUser"));
         }
 
         #region ITaskBase Members

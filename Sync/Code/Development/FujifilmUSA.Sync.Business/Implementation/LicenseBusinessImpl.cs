@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         }
                     }
                 },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLicenses"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLicense"));
             return objLicenseList;
         }
 
@@ -135,7 +135,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertLicense" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateLicense" };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLicense"));

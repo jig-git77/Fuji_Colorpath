@@ -59,7 +59,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     });
                     if (returnValue == -1)
                     {
-                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertCompany" };
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdateCompany" };
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateCompany"));
@@ -102,7 +102,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 }).ToList();
                         }
                     },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCompanies"));
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetCompany"));
             return companies;
         }
 
