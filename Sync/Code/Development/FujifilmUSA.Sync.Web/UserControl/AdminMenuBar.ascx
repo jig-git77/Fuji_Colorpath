@@ -73,7 +73,7 @@
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnRefChart" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtnRefChart_Click">
-            <img src="Images/Reference-Chart.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
+            <img src="Images/Reference-Chart-management.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
             <span> Reference Chart </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnSourceProfile" runat="server" 

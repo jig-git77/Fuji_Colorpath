@@ -114,6 +114,7 @@
     <Content Include="Images\Profile-Management.png" />
     <Content Include="Images\project.png" />
     <Content Include="Images\Project_Close_1.png" />
+    <Content Include="Images\Reference-Chart-management.jpg" />
     <Content Include="Images\Reference-Chart.jpg" />
     <Content Include="Images\roundedcornr_bg.png" />
     <Content Include="Images\sourceprofile-management.png" />
@@ -1195,7 +1196,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

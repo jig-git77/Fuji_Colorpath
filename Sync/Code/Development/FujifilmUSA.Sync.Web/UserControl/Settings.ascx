@@ -65,7 +65,7 @@
                         PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click"  >                       
                         <div>
                             <asp:Image ID="Image4" runat="server" AlternateText="My Settings"
-                                ImageUrl="~/Images/Profile-Management.png" ToolTip="My Settings"  Width="70px" Height="80px"/></div>
+                                ImageUrl="~/Images/Profile-Management.png" ToolTip="My Settings" /></div>
                         My Settings
                     </asp:LinkButton>
                 </div>
