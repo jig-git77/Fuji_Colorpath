@@ -86,7 +86,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementDevice>();
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, string ChartDisplayType)
         {
             return new List<ReferenceChartType>();
         }

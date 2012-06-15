@@ -165,6 +165,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue)) return;
             MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
+
+            ChartDisplayType = "Profile Chart";                      //------------If we are in initial project setup-------------//
+            if (SessionManager.Instance.CurrentProject != null)
+            {
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.First().HasProfile)
+                {
+                    ChartDisplayType = "Optimization Chart";            //---------------If we are in optimization run--------------//
+                }
+                else
+                {
+                    ChartDisplayType = "Profile Chart";                 //------------If we are in initial project setup-------------//
+                }
+            }
+
             _presenterMeasurementSetting.GetReferenceChartType();
             if (!IsErrorOccured)
             {
@@ -220,6 +234,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }
         public int ReferenceChartTypeId { get; set; }
+        public string ChartDisplayType { get; set; }
         #endregion
     }
 }

@@ -89,6 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }
         public int ReferenceChartTypeId { get; set; }
+        public string ChartDisplayType { get; set; }
         #endregion
 
         #region IViewBase Members

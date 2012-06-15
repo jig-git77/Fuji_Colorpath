@@ -13,5 +13,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<ReferenceChartType> ReferenceChartType { get; set; }
         int ReferenceChartTypeId { get; set; }
         byte[] ReferenceChartTypeImage { get; set; }
+        string ChartDisplayType { get; set; }
     }
 }
