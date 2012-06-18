@@ -145,6 +145,28 @@
                                 </div>
                             </td>
                         </tr>
+                         <tr>
+                            <td align="right">
+                                <span style="font-weight: bold;">Chart Type<span style="color: Red;">*</span>
+                                </span>
+                            </td>
+                            <td>
+                                <b>&nbsp;: &nbsp;</b>
+                            </td>
+                            <td align="left">
+                                <div style="float: left;">
+                                    <asp:DropDownList ID="cmbChartDisplayType" runat="server" Width="400px" CssClass="select">
+                                       <asp:ListItem Selected="True" Text="Profile Chart" Value="Profile Chart"></asp:ListItem>
+                                       <asp:ListItem Text="Optimization Chart" Value="Optimization Chart"></asp:ListItem>                                      
+                                    </asp:DropDownList>
+                                </div>
+                                <div style="float: left">
+                                    
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </td>
+                        </tr>
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;">Upload Chart Preview (only image)<span style="color: Red;">*</span>
@@ -199,7 +221,7 @@
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
                             <td align="right">
-                                <span style="font-weight: bold;">Upload Chart Data (C,M,Y,K)<span style="color: Red;">*</span>
+                                <span style="font-weight: bold;">Upload Chart Data (C,M,Y,K, HTML_RGB)<span style="color: Red;">*</span>
                                 </span>
                             </td>
                             <td>
@@ -295,6 +317,13 @@
                                                 ShowFilterIcon="true">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKK" runat="server" Text='<%# Eval("CMYKK") %>' />
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn DataField="HTMLColor" AllowFiltering="true" HeaderText="HTML RGB"
+                                                UniqueName="HTMLColor" SortExpression="HTMLColor" ItemStyle-CssClass="breakWord200"
+                                                ItemStyle-Wrap="true" ShowFilterIcon="true">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblHTMLColor" runat="server" Text='<%# Eval("HTMLColor") %>' />
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <%--<telerik:GridTemplateColumn DataField="PatchTypeId" AllowFiltering="true" HeaderText="Patch Type"

@@ -175,6 +175,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcInstrumentTypeContainer;
         
         /// <summary>
+        /// cmbChartDisplayType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbChartDisplayType;
+        
+        /// <summary>
         /// fucUploadChartPreview control.
         /// </summary>
         /// <remarks>

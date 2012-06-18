@@ -32,7 +32,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("CMYK_C", x.CmykC),
                                                                                   new XAttribute("CMYK_M", x.CmykM),
                                                                                   new XAttribute("CMYK_Y", x.CmykY),
-                                                                                  new XAttribute("CMYK_K", x.CmykK)
+                                                                                  new XAttribute("CMYK_K", x.CmykK),
+                                                                                  new XAttribute("HTMLColor", x.HtmlColor)
                                                                          )).ToList());
 
                     returnValue = DataAccessFactory.
@@ -47,6 +48,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.ChartPreview,
                                                                                     referenceChartType.OriginalChart,
                                                                                     referenceChartType.IsUsed,
+                                                                                    referenceChartType.ChartDisplayType,
                                                                                     referenceChartData.ToString()
                                                                                 });
                 },
@@ -168,6 +170,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ProjectTypeName = DataReader.ReadString(x, "ProjectType")
                                 },
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                ChartDisplayType = DataReader.ReadString(x, "ChartDisplayType"),
                                 ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
                                 OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")    
 
@@ -195,8 +198,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.NumOfRows,
                                         referenceChartType.NumOfCols,                                       
                                         referenceChartType.InstrumentTypeId,
-                                         referenceChartType.ProjectTypeId,
+                                        referenceChartType.ProjectTypeId,
                                         referenceChartType.IsUsed,
+                                        referenceChartType.ChartDisplayType,
                                         referenceChartType.ChartPreview,
                                         referenceChartType.OriginalChart
                                     });

@@ -73,7 +73,9 @@
             </table>               
 
     </div>
-       
+      <%-- <div>
+            <asp:Image ID="ImageMenu" runat="server" ImageUrl="~/Images/contentbox.png" />
+       </div>--%>
     </div>
     <div class="clear">
     </div>

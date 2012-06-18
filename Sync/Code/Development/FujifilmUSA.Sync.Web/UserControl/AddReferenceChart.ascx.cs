@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public decimal CmykM { get; set; }
         public decimal CmykY { get; set; }
         public decimal CmykK { get; set; }
+        public string HTMLColor { get; set; }
     }
 
     public partial class AddReferenceChart : BaseControl, IViewAddReferenceChart
@@ -65,6 +66,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
             ReferenceChartType.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
+            ReferenceChartType.ChartDisplayType = cmbChartDisplayType.SelectedItem.Value;
 
             if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
@@ -93,7 +95,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                      CmykC = x.CmykC,
                                                                      CmykM = x.CmykM,
                                                                      CmykY = x.CmykY,
-                                                                     CmykK = x.CmykK
+                                                                     CmykK = x.CmykK,
+                                                                     HtmlColor = x.HTMLColor
                                                                  }).ToList();
 
 
@@ -136,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             #region Check Column Names
                             var columns = sr.ReadLine().Split(',');
-                            if (columns.Length != 6)
+                            if (columns.Length != 7)
                             {
                                 throw new Exception(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatch"));
                             }
@@ -146,7 +149,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 !columns[2].Equals("CMYK_C", StringComparison.CurrentCultureIgnoreCase) ||
                                 !columns[3].Equals("CMYK_M", StringComparison.CurrentCultureIgnoreCase) ||
                                 !columns[4].Equals("CMYK_Y", StringComparison.CurrentCultureIgnoreCase) ||
-                                !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase))
+                                !columns[5].Equals("CMYK_K", StringComparison.CurrentCultureIgnoreCase) ||
+                                !columns[6].Equals("HTML_RGB", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 throw new Exception(FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnNamesNotMatch"));
                             }
@@ -155,7 +159,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else
                         {
                             var dataRow = sr.ReadLine().Split(',');
-                            if (dataRow.Length != 6)
+                            if (dataRow.Length != 7)
                             {
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnCountNotMatchOnRow"), rows));
                             }
@@ -224,6 +228,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnConvertFailedOnRow"), rows));
                             }
 
+                            //HTMLColor
+                            if (!string.IsNullOrEmpty(dataRow[6]))
+                            {
+                                chartDataRow.HTMLColor = dataRow[6];
+                            }
+                            else
+                            {
+                                throw new Exception(string.Format(Common.ResourceManager.GetResourceMessage("Error_ReferenceChart_ColumnEmptyValueOnRow"), rows));
+                            }
                             //PatchTypeId
                             //TODO: Need to calculate patch type Id
 
@@ -290,6 +303,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
                 cmbProjectType.SelectedValue = Convert.ToString(ReferenceChartType.ProjectType.ProjectTypeId);
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
+                cmbChartDisplayType.SelectedValue = ReferenceChartType.ChartDisplayType;
 
                 if (ReferenceChartType.ChartPreview != null)
                 {

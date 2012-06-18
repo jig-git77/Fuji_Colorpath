@@ -16,5 +16,6 @@ namespace FujifilmUSA.Sync.Entity
         public List<ReferenceChart> ReferenceCharts { get; set; }
         public InstrumentType InstrumentType { get; set; }
         public ProjectType ProjectType { get; set; }
+        public string ChartDisplayType { get; set; }
     }
 }

@@ -47,7 +47,7 @@
       </asp:LinkButton>
       <asp:LinkButton ID="lbtProfileMgmt" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtProfileMgmt_Click">
-            <img src="Images/Profile-Management.png" style="position:relative;z-index:1; " alt="My Settings" />
+            <img src="Images/Profile-Management-icon.png" style="position:relative;z-index:1; " alt="My Settings" />
             <span> My Settings </span>
       </asp:LinkButton>
       <asp:LinkButton ID="ltnLicense" runat="server" 
