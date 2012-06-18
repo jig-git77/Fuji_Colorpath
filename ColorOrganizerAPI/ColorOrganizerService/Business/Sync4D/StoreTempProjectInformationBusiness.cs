@@ -29,6 +29,9 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                     request.Media,
                                                     request.Colorant,
                                                     request.RipSettings,
+                                                    request.MeasurementDeviceTypeId,
+                                                    request.ChartId,
+                                                    request.ProjectId,
                                                     request.ProjectInfoId);
 
                                                 response.Count = 1;

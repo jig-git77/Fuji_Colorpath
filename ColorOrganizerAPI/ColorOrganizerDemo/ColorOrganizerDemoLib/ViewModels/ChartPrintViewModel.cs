@@ -53,31 +53,6 @@ namespace ColorOrganizerDemoLib.ViewModels
             GetChartList();
         }
 
-        //private IccProfile _selectedIccProfile;
-        //public IccProfile SelectedIccProfile
-        //{
-        //    get { return _selectedIccProfile; }
-        //    set
-        //    {
-        //        _selectedIccProfile = value;
-        //        RaisePropertyChanged("SelectedIccProfile");
-        //    }
-        //}
-
-        //private Device _selectedDevice;
-        //public Device SelectedDevice
-        //{
-        //    get
-        //    {
-        //        return _selectedDevice;
-        //    }
-        //    set
-        //    {
-        //        _selectedDevice = value;
-        //        RaisePropertyChanged("SelectedDevice");
-        //    }
-        //}
-
         public string SelectedMedia { get; set; }
         public string SelectedColorant { get; set; }
         public string SelectedRipSetting { get; set; }
@@ -129,33 +104,64 @@ namespace ColorOrganizerDemoLib.ViewModels
         private void InsertProjectInformationAndRedirect()
         {
             var client = new Sync4DServiceContractClient("BasicHttpBinding_ISync4DServiceContract");
-            PassToParent(EControl.WebHost);
-            //client.StoreTempProjectInformationCompleted += delegate(object sender, StoreTempProjectInformationCompletedEventArgs e)
-            //{
-            //    if (e.Error == null)
-            //    {
-            //        if (e.Result != null)
-            //        {
-            //            Common.ProjectInfoId = e.Result.ProjectInfoId;
-            //            PassToParent(EControl.WebHost);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        //e.Error
-            //    }
-            //};
-            //client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
-            //                                            {
-            //                                                SecurityToken = Common.SecurityToken,
-            //                                                UserName = Common.UserName,
-            //                                                UserPassword = Common.GetEncryptPassword(),
-            //                                                ProjectInfoId = Common.ProjectInfoId,
-            //                                                Colorant = SelectedColorant,
-            //                                                Media = SelectedMedia,
-            //                                                RipSettings = SelectedRipSetting,
-            //                                                ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName
-            //                                            });
+            client.StoreTempProjectInformationCompleted += delegate(object sender, StoreTempProjectInformationCompletedEventArgs e)
+            {
+                if (e.Error == null)
+                {
+                    if (e.Result != null)
+                    {
+                        if (this.Parent.StartIccProfile.SelectedIccProfile.ProjectId > 0)
+                            Common.EditProjectInfoId = e.Result.ProjectInfoId;
+                        else
+                            Common.AddProjectInfoId = e.Result.ProjectInfoId;
+
+                        this.Parent.WebHost.RedirectUrl =
+                            String.Format(
+                                "{0}/COProcessRequest.ashx?action={1}&uid={2}&pwd={3}&projinfoid={4}&deviceid={5}",
+                                Common.FujiWebSite,
+                                ((this.Parent.StartIccProfile.SelectedIccProfile.ProjectId > 0) ? "edit" : "add"),
+                                Common.UserName,
+                                Common.GetEncryptPassword(),
+                                (this.Parent.StartIccProfile.SelectedIccProfile.ProjectId > 0) ? Common.EditProjectInfoId : Common.AddProjectInfoId,
+                                this.Parent.SelectDevice.SelectedDevice.DeviceId);
+                        PassToParent(EControl.WebHost);
+                    }
+                }
+                else
+                {
+                    //e.Error
+                }
+            };
+
+            if (this.Parent.StartIccProfile.SelectedIccProfile.ProjectId > 0)
+            {
+                client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
+                                                            {
+                                                                SecurityToken = Common.SecurityToken,
+                                                                UserName = Common.UserName,
+                                                                UserPassword = Common.GetEncryptPassword(),
+                                                                ProjectInfoId = Common.EditProjectInfoId,
+                                                                ChartId = SelectedChart.ChartId,
+                                                                MeasurementDeviceTypeId = Convert.ToInt32(SelectedMeasurementDevice),
+                                                                ProjectId = this.Parent.StartIccProfile.SelectedIccProfile.ProjectId
+                                                            });
+            }
+            else
+            {
+                client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
+                                                            {
+                                                                SecurityToken = Common.SecurityToken,
+                                                                UserName = Common.UserName,
+                                                                UserPassword = Common.GetEncryptPassword(),
+                                                                ProjectInfoId = Common.AddProjectInfoId,
+                                                                Colorant = SelectedColorant,
+                                                                Media = SelectedMedia,
+                                                                RipSettings = SelectedRipSetting,
+                                                                MeasurementDeviceTypeId = Convert.ToInt32(SelectedMeasurementDevice),
+                                                                ChartId = SelectedChart.ChartId,
+                                                                ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName
+                                                            });
+            }
         }
         private void GetChartList()
         {

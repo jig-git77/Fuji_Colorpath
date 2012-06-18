@@ -14,9 +14,19 @@ namespace ColorOrganizerDemo
 {
     public partial class MainPage : UserControl
     {
-        public MainPage()
+        public Dictionary<string, string> InitParameters { get; set; }
+
+        public MainPage(Dictionary<string,string> initParameters = null)
         {
+            InitParameters = initParameters;
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(MainPage_Loaded);    
         }
+
+        void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            designerView.InitParameters = InitParameters;
+        }
+
     }
 }

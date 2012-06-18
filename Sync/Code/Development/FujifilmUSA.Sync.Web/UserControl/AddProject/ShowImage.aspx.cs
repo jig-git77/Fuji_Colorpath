@@ -6,7 +6,6 @@ using System.IO;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
-using System.Net;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
@@ -35,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 return;
             }
 
-            ReferenceChartTypeId = Convert.ToInt32(Request.QueryString["id"]);
+            ReferenceChartTypeId = Convert.ToInt16(Request.QueryString["id"]);
             _presenterMeasurementSetting.GetReferenceChartTypeImage();
             if (!IsErrorOccured)
             {
@@ -88,7 +87,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int MeasurementDeviceId { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }
-        public int ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
         public string ChartDisplayType { get; set; }
         #endregion
 

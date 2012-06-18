@@ -3,8 +3,14 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script type="text/javascript" language="javascript">
     function ShowConfirmSaveWindow() {
-        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
-        oWnd.show();
+        if ('<%= IsXmfUser %>'.toLowerCase() == 'true') {
+            return true;
+        }
+        else {
+            var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+            oWnd.show();
+            return false;
+        }
     }
 </script>
 <script language="javascript" type="text/javascript">
@@ -15,12 +21,11 @@
     }
 </script>
 <style type="text/css">
-  .breakWord100
+    .breakWord100
     {
         max-width: 100px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
-        
         line-height: 15px;
     }
     .breakWord90
@@ -28,7 +33,6 @@
         max-width: 90px !important;
         word-break: break-all !important;
         word-wrap: break-word !important;
-       
         line-height: 15px;
     }
 </style>
@@ -36,10 +40,15 @@
     <h1 id="hTitle" runat="server">
         New Print Condition - Review Selections
     </h1>
-    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClientClick="javascript:ShowConfirmSaveWindow();return false;">
+    <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClick="lnkbtnSavePrintCondition_Click"
+        OnClientClick="javascript:return ShowConfirmSaveWindow();">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
             Save</span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
+        <span>
+            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Search.png" />
+            Measurement Setup</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -68,28 +77,27 @@
                                 </div>
                             </div>
                             <div id="panelDescription" style="padding-left: 10px">
-                              
                                 <table width="300px">
                                     <tr>
                                         <td class="breakWord90">
                                             <span style="font-weight: bold;">Media </span>
                                         </td>
-                                        <td  style="width: 10px;">
+                                        <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblMedia" runat="server" Text="" ></asp:Label>
+                                            <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
                                             <span style="font-weight: bold;">Colorant</span>
                                         </td>
-                                        <td  style="width: 10px;">
+                                        <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblColorant" runat="server" Text="" ></asp:Label>
+                                            <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -100,7 +108,7 @@
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblRipSettings" runat="server" Text="" ></asp:Label>
+                                            <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,23 +119,23 @@
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblNotes" runat="server" Text="" ></asp:Label>
+                                            <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
                                             <span style="font-weight: bold;">Technician Name</span>
                                         </td>
-                                        <td  style="width: 10px;">
+                                        <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblTechnicianName" runat="server" Text="" CssClass="breakWord100"></asp:Label>
                                         </td>
-                                    </tr>                                   
+                                    </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Source Profile</span>    
+                                            <span style="font-weight: bold;">Source Profile</span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>

@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementSetup.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementSetup" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
-<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer" TagPrefix="ucValidationContainer" %>
+<%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
+    TagPrefix="ucValidationContainer" %>
 <div class="head">
     <h1 id="hTitle" runat="server">
         New Print Condition - Measurement Setup
@@ -11,6 +12,15 @@
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" />
             Review Selections</span></asp:LinkButton>
+    <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" OnClick="lbtnMeasure_Click">
+        <span>
+            <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/analyze.png" />
+            Measure</span>
+    </asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnProfilerOptions" runat="server" CssClass="button" OnClick="lnkbtnProfilerOptions_Click">
+        <span>
+            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Profiler Options</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -51,8 +61,8 @@
                                             <div style="float: left">
                                                 <asp:RequiredFieldValidator ID="rfvMeasurementDevice" runat="server" Display="Dynamic"
                                                     ControlToValidate="cmbMeasurementDevice" ForeColor="Red" ValidationGroup="vgMeasurementSetup">
-                                                    <ucvalidationcontainer:validationcontainer id="rfvcMeasurementDeviceContainer" runat="server"
-                                                        validationmsg="Please select measurement device." size="200" />
+                                                    <ucValidationContainer:ValidationContainer ID="rfvcMeasurementDeviceContainer" runat="server"
+                                                        ValidationMsg="Please select measurement device." Size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
@@ -136,8 +146,8 @@
                                             <div style="float: left">
                                                 <asp:RequiredFieldValidator ID="rfvAlignmentChart" runat="server" Display="Dynamic"
                                                     ControlToValidate="cmbAlignmentChart" ForeColor="Red" InitialValue="0" ValidationGroup="vgMeasurementSetup">
-                                                     <ucvalidationcontainer:validationcontainer id="rfvcAlignmentChartContainer" runat="server"
-                                                        validationmsg="Please select alignment chart." size="200" />
+                                                    <ucValidationContainer:ValidationContainer ID="rfvcAlignmentChartContainer" runat="server"
+                                                        ValidationMsg="Please select alignment chart." Size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
@@ -146,7 +156,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">
-                                            <asp:Image ID="imgChart" runat="server"/>
+                                            <asp:Image ID="imgChart" runat="server" />
                                         </td>
                                     </tr>
                                 </table>

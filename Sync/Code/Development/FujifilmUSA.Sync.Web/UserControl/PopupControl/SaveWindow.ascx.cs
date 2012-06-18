@@ -79,7 +79,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region IViewSaveWindow Members
-        public int ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         #endregion

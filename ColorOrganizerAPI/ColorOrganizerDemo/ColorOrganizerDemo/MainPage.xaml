@@ -11,7 +11,7 @@
 <Grid x:Name="LayoutRoot">
         <Border BorderBrush="Black"
                 BorderThickness="1">
-            <views:DesignerView />
+            <views:DesignerView Name="designerView" />
         </Border>
     </Grid>
 </UserControl>

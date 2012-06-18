@@ -102,10 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] ChartPreview { get; set; }
         public byte[] SourceProfile { get; set; }
         public Project Project { get; set; }
-        public int ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
         #endregion
-
-
-        
     }
 }

@@ -22,8 +22,6 @@
         font-size: 12px;
     }
 </style>
-
-
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
         $("div[id*='accordion']").click
@@ -54,6 +52,10 @@
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Measurement Setup</span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnTargetColorSpace" runat="server" CssClass="button" OnClick="lnkbtnTargetColorSpace_Click">
+        <span>
+            <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Target ColorSpace</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -90,9 +92,8 @@
                                             <span>Selected Presets:</span>
                                         </td>
                                         <td style="width: 450px">
-                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" CssClass="select"
-                                                DataValueField="Key" DataTextField="Value" AutoPostBack="true" 
-                                                OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
+                                            <asp:DropDownList ID="cmbSelectedPresets" runat="server" CssClass="select" DataValueField="Key"
+                                                DataTextField="Value" AutoPostBack="true" OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
@@ -104,8 +105,7 @@
                                     <tr>
                                         <td colspan="2">
                                             <asp:TextBox ID="txtProfileDescription" runat="server" Width="120%" Height="100px"
-                                                TextMode="MultiLine" Enabled="false" ReadOnly="true" 
-                                                Text="This preset is best used for analog devices ……"></asp:TextBox>
+                                                TextMode="MultiLine" Enabled="false" ReadOnly="true" Text="This preset is best used for analog devices ……"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -143,12 +143,11 @@
                                 </div>
                             </div>
                             <asp:Panel ID="panelAdvancedOptions" Style="padding: 1px" runat="server" BorderStyle="None"
-                                Width="100%" Enabled="false">    
-
+                                Width="100%" Enabled="false">
                                 <table cellpadding="0" cellspacing="10" border="0">
                                     <tr>
-                                        <td valign="top" style="width: 320px;padding-right:0px;">
-                                            <div style="padding-bottom:10px">
+                                        <td valign="top" style="width: 320px; padding-right: 0px;">
+                                            <div style="padding-bottom: 10px">
                                                 <div class="section_small_top">
                                                     &nbsp;</div>
                                                 <div class="section_small_middle" style="height: 70px">
@@ -169,8 +168,8 @@
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <span>Rendering:&nbsp; </span>
-                                                                    &nbsp;</td>
+                                                                        <span>Rendering:&nbsp; </span>&nbsp;
+                                                                    </td>
                                                                     <td>
                                                                         <asp:DropDownList runat="server" ID="cmbRendering">
                                                                         </asp:DropDownList>
@@ -273,7 +272,7 @@
                                                     &nbsp;</div>
                                             </div>
                                         </td>
-                                        <td valign="top" style="width: 320px;" >
+                                        <td valign="top" style="width: 320px;">
                                             <div style="display: block;">
                                                 <div class="section_small_top">
                                                     &nbsp;</div>
@@ -294,8 +293,8 @@
                                                         <div id="panelExceptions" style="padding-left: 10px">
                                                             <table width="100%" class="checkboxFont" cellpadding="0" cellspacing="0">
                                                                 <tr>
-                                                                    <td class="style1">                                                                     
-                                                                            <asp:CheckBox ID="chkTriplex" runat="server" Text="  Triplex" />                                                                        
+                                                                    <td class="style1">
+                                                                        <asp:CheckBox ID="chkTriplex" runat="server" Text="  Triplex" />
                                                                     </td>
                                                                     <td>
                                                                         <asp:CheckBox runat="server" ID="chkDuplex" Text="  Duplex" />
@@ -326,16 +325,16 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="style1" colspan="2" >
+                                                                    <td class="style1" colspan="2">
                                                                         <asp:CheckBox ID="chkPrimaries" runat="server" Text="  Primaries" />
-                                                                    </td>                                                                  
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="style1" colspan="2">                                                                       
-                                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                                       
-                                                                            <asp:CheckBox ID="chkPC" runat="server" Text="  C" />
-                                                                            <asp:CheckBox ID="chkPM" runat="server" Text="  M" />
-                                                                            <asp:CheckBox ID="chkPY" runat="server" Text="  Y" />                                                                     
+                                                                    <td class="style1" colspan="2">
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <asp:CheckBox ID="chkPC" runat="server" Text="  C" />
+                                                                        <asp:CheckBox ID="chkPM" runat="server" Text="  M" />
+                                                                        <asp:CheckBox ID="chkPY" runat="server" Text="  Y" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -344,11 +343,11 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="style1" colspan="2">   
-                                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                                                      
-                                                                            <asp:CheckBox ID="chkSMY" runat="server" Text="  MY" />
-                                                                            <asp:CheckBox ID="chkSCY" runat="server" Text="  CY" />
-                                                                            <asp:CheckBox ID="chkSCM" runat="server" Text="  CM" />                                                                       
+                                                                    <td class="style1" colspan="2">
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <asp:CheckBox ID="chkSMY" runat="server" Text="  MY" />
+                                                                        <asp:CheckBox ID="chkSCY" runat="server" Text="  CY" />
+                                                                        <asp:CheckBox ID="chkSCM" runat="server" Text="  CM" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>

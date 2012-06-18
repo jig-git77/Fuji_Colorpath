@@ -75,7 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 header.InnerText = string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
             }
-            
+
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Create DLP<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Methods        
+        #region Methods
 
         private void BindMesurementChart()
         {
@@ -177,7 +177,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     EndDate = System.DateTime.Now;
-                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName); 
+                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                     DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
 
                     _presenterAnalyze.CreateDestinationAndDlp();
@@ -185,7 +185,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
-                        Response.Redirect("Export.aspx");
+                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                        {
+                            Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                        }
+                        else
+                        {
+                            Response.Redirect("Export.aspx");
+                        }
                     }
                 }
             }

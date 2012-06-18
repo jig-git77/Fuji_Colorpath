@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DLPMessage
         {
             get
-            {               
+            {
                 string DLPName = Hidden_ProjectName.Value + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         break;
                     }
-                }               
+                }
                 hdOptRunLimit.Value = TotalOptRuns.ToString();
 
                 //----------------If CurrentOperation = 3 (Ink Optimization), then they can not create optimize runs, they has to close run at 1st run--------------------//
@@ -104,7 +104,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                        ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
+                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId",
+                                                                string.Format("window.parent.location='COTransferSiteControl.aspx?projectid={0}&id={1}';",
+                                                                              SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()), true);
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
+                        }
                     }
                 }
             }
@@ -121,7 +130,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentProject = null;
                 SessionManager.Instance.CurrentOptimizeRun = null;
-                Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+                if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                {
+                    Utilities.PopupWindowsRedirect(this, string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", ProjectId, Guid.NewGuid()));
+                }
+                else
+                {
+                    Utilities.PopupWindowsRedirect(this, "ProjectList.aspx");
+                }
             }
         }
 
@@ -132,8 +148,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<int> MeasurementIds { get; set; }
         public Entity.Project Project { get; set; }
         public string ProfileDescription { get; set; }
-        public string LastRunStatus { get; set; }       
+        public string LastRunStatus { get; set; }
         #endregion
-        
+
     }
 }

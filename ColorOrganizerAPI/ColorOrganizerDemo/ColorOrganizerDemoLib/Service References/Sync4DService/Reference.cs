@@ -273,15 +273,34 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         "Contracts")]
     public partial class StoreTempProjectInformationRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
         
+        private int ChartIdField;
+        
         private string ColorantField;
         
+        private int MeasurementDeviceTypeIdField;
+        
         private string MediaField;
+        
+        private int ProjectIdField;
         
         private System.Guid ProjectInfoIdField;
         
         private string ProjectNameField;
         
         private string RipSettingsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChartId {
+            get {
+                return this.ChartIdField;
+            }
+            set {
+                if ((this.ChartIdField.Equals(value) != true)) {
+                    this.ChartIdField = value;
+                    this.RaisePropertyChanged("ChartId");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Colorant {
@@ -297,6 +316,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MeasurementDeviceTypeId {
+            get {
+                return this.MeasurementDeviceTypeIdField;
+            }
+            set {
+                if ((this.MeasurementDeviceTypeIdField.Equals(value) != true)) {
+                    this.MeasurementDeviceTypeIdField = value;
+                    this.RaisePropertyChanged("MeasurementDeviceTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Media {
             get {
                 return this.MediaField;
@@ -305,6 +337,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 if ((object.ReferenceEquals(this.MediaField, value) != true)) {
                     this.MediaField = value;
                     this.RaisePropertyChanged("Media");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProjectId {
+            get {
+                return this.ProjectIdField;
+            }
+            set {
+                if ((this.ProjectIdField.Equals(value) != true)) {
+                    this.ProjectIdField = value;
+                    this.RaisePropertyChanged("ProjectId");
                 }
             }
         }

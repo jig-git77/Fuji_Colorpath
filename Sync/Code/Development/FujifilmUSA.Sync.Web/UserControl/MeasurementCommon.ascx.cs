@@ -6,7 +6,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class MeasurementCommon : BaseControl
     {
         #region Declaration
-
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
             get
@@ -14,6 +13,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
+
+        public int JsRandomNumber { get { return 4; } }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)

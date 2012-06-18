@@ -14,7 +14,6 @@ namespace ColorOrganizerDemo
 {
     public partial class App : Application
     {
-
         public App()
         {
             this.Startup += this.Application_Startup;
@@ -26,7 +25,12 @@ namespace ColorOrganizerDemo
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.RootVisual = new MainPage();
+            var prms = new Dictionary<string, string>();
+            if (e.InitParams.ContainsKey("FujiUSAWebSource"))
+            {
+                prms.Add("FujiUSAWebSource", e.InitParams["FujiUSAWebSource"]);
+            }
+            this.RootVisual = new MainPage(prms);
         }
 
         private void Application_Exit(object sender, EventArgs e)

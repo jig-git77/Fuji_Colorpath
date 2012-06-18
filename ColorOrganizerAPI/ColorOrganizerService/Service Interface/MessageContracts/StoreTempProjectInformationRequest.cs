@@ -21,5 +21,14 @@ namespace FujifilmUSA.ColorOrganizerService.MessageContracts
 
         [DataMember]
         public string RipSettings { get; set; }
+
+        [DataMember]
+        public int MeasurementDeviceTypeId { get; set; }
+
+        [DataMember]
+        public int ChartId { get; set; }
+
+        [DataMember]
+        public int ProjectId { get; set; }
     }
 }

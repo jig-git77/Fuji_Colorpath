@@ -177,11 +177,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
                                                 CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
-                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000")) 
+                                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
                                                                                : String.Format("{0} DLP{1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00"))
-                                                                               
+
                                             }).ToList();
                     }
                 },
@@ -303,7 +303,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId, string source)
+        public byte[] GetChartPreviewOnReferenceChartTypeId(short referenceChartTypeId, string source)
         {
             var data = new object();
             Common.ImplementBusinessLogic(
@@ -584,7 +584,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return chartData;
         }
 
-        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, Guid tempProjectId)
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId)
         {
             var outParam = new Parameters() { ParameterName = "@TempProjectId", Size = 16, Type = DbType.Guid };
             Common.ImplementBusinessLogic(
@@ -597,6 +597,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                    new Parameters() {ParameterName = "@Media", Type = DbType.String, Size = 30, Value = media},
                                                    new Parameters() {ParameterName = "@Colorant", Type = DbType.String, Size = 30, Value = colorant},
                                                    new Parameters() {ParameterName = "@RipSettings", Type = DbType.String, Size = 30, Value = ripSettings},
+                                                   new Parameters() {ParameterName = "@MeasurementDeviceTypeId", Type = DbType.Int32, Size = 4, Value = measurementDeviceTypeId},
+                                                   new Parameters() {ParameterName = "@ChartId", Type = DbType.Int32, Size = 4, Value = chartId},
+                                                   new Parameters() {ParameterName = "@ProjectId", Type = DbType.Int32, Size = 4, Value = projectId},
                                                    new Parameters() {ParameterName = "@TempProjectIdIN", Type = DbType.Guid, Size = 16, Value = tempProjectId}
                                                },
                                            new List<Parameters>()
@@ -609,6 +612,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 tempProjectId = Guid.Parse(outParam.Value.ToString());
             }
             return tempProjectId;
+        }
+
+        public TempProjectInfo GetTempProjectInfo(Guid tempProjectId)
+        {
+            var projectInfo = new TempProjectInfo();
+            Common.ImplementBusinessLogic(
+                () =>
+                    {
+                        var dsProjectInfo = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetTempProjectInfo", new object[] {tempProjectId});
+                        if (dsProjectInfo.Tables[0].Rows.Count > 0)
+                        {
+                            projectInfo.TempProjectId = tempProjectId;
+                            projectInfo.ProjectName = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "ProjectName");
+                            projectInfo.Media = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Media");
+                            projectInfo.Colorant = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Colorant");
+                            projectInfo.RipSettings = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "RipSettings");
+                            projectInfo.MeasurementDeviceTypeId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "MeasurementDeviceTypeId");
+                            projectInfo.ChartId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ChartId");
+                            projectInfo.ProjectId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ProjectId");
+                        }
+                    },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTempProjectInfo"));
+            return projectInfo;
         }
 
         public List<Illuminant> GetIlluminantList()

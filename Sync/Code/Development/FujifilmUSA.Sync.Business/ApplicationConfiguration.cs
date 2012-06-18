@@ -24,10 +24,13 @@ namespace FujifilmUSA.Sync.Business
         private int _optimizeRunLimit;
         private int _measurementsLimit;
         private string _webSiteLink;
+        private string _silverlightPostUrl;
         #endregion
 
         private ApplicationConfiguration()
         {
+            //TODO: put below entry in database configuration table...
+            _silverlightPostUrl = Utilities.ReadConfigValue("SilverlightPostUrl");
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -170,100 +173,10 @@ namespace FujifilmUSA.Sync.Business
                 return _webSiteLink;
             }
         }
-        #endregion
-
-        #region Commented Code
-        //public string UserBusiness
-        //{
-        //    get
-        //    {
-        //        return _userBusiness;
-        //    }
-        //}
-        //public string MiscDataBusiness
-        //{
-        //    get
-        //    {
-        //        return _miscDataBusiness;
-        //    }
-        //}
-        //public string ProjectBusiness
-        //{
-        //    get
-        //    {
-        //        return _projectBusiness;
-        //    }
-        //}
-        //public string DeviceBusiness
-        //{
-        //    get
-        //    {
-        //        return _deviceBusiness;
-        //    }
-        //}
-        //public string CompanyBusiness
-        //{
-        //    get
-        //    {
-        //        return _companyBusiness;
-        //    }
-        //}
-        //public string MeasurementBusiness
-        //{
-        //    get
-        //    {
-        //        return _measurementBusiness;
-        //    }
-        //}
-        //public string MeasurementDeviceBusiness
-        //{
-        //    get
-        //    {
-        //        return _measurementDeviceBusiness;
-        //    }
-        //}
-        //public string OptimizeRunBusiness
-        //{
-        //    get
-        //    {
-        //        return _optimizeRunBusiness;
-        //    }
-        //}
-        //public string BranchBusiness
-        //{
-        //    get
-        //    {
-        //        return _branchBusiness;
-        //    }
-        //}
-        //public string SourceProfileBusiness
-        //{
-        //    get
-        //    {
-        //        return _sourceProfileBusiness;
-        //    }
-        //}
-        //public string LicenseBusiness
-        //{
-        //    get
-        //    {
-        //        return _licenseBusiness;
-        //    }
-        //}
-        //public string MiscBusiness
-        //{
-        //    get
-        //    {
-        //        return _miscBusiness;
-        //    }
-        //}
-        //public string ReferenceChartBusiness
-        //{
-        //    get
-        //    {
-        //        return _referenceChartBusiness;
-        //    }
-        //}
+        public string SilverlightPostUrl
+        {
+            get { return _silverlightPostUrl; }
+        }
         #endregion
 
         #region ITaskBase Members

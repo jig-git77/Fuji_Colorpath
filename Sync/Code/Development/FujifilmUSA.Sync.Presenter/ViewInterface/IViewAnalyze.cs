@@ -14,6 +14,5 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
         List<Entity.MeasurementPatchDetails> PatchDetails { get; set; }
         int MeasurementId { get; set; }
-       
     }
 }

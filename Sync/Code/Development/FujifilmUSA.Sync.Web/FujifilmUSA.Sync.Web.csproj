@@ -79,6 +79,9 @@
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="ApplicationError.aspx" />
+    <Content Include="COAddProject.aspx" />
+    <Content Include="COAnalyze.aspx" />
+    <Content Include="COMeasurement.aspx" />
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
     <Content Include="BranchManagement.aspx" />
@@ -88,6 +91,7 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="COTransferSiteControl.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
@@ -168,6 +172,7 @@
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\COTransferSiteControl.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
@@ -451,6 +456,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="COAddProject.aspx.cs">
+      <DependentUpon>COAddProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COAddProject.aspx.designer.cs">
+      <DependentUpon>COAddProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COAnalyze.aspx.cs">
+      <DependentUpon>COAnalyze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COAnalyze.aspx.designer.cs">
+      <DependentUpon>COAnalyze.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ColorOrganizer\ColorOrganizerRequestProcessor.cs" />
+    <Compile Include="COMaster.Master.cs">
+      <DependentUpon>COMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COMaster.Master.designer.cs">
+      <DependentUpon>COMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="COMeasurement.aspx.cs">
+      <DependentUpon>COMeasurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COMeasurement.aspx.designer.cs">
+      <DependentUpon>COMeasurement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CompanyManagement.aspx.cs">
       <DependentUpon>CompanyManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -513,6 +547,16 @@
     </Compile>
     <Compile Include="AddLicenseManagement.aspx.designer.cs">
       <DependentUpon>AddLicenseManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COProcessRequest.ashx.cs">
+      <DependentUpon>COProcessRequest.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="COTransferSiteControl.aspx.cs">
+      <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COTransferSiteControl.aspx.designer.cs">
+      <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
     </Compile>
     <Compile Include="DownloadSoftwares.aspx.cs">
       <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
@@ -674,6 +718,13 @@
     </Compile>
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COTransferSiteControl.ascx.cs">
+      <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COTransferSiteControl.ascx.designer.cs">
+      <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>
@@ -1174,6 +1225,12 @@
   <ItemGroup>
     <Content Include="Download\Colorpath MacPlugin Installer.zip" />
     <Content Include="Download\Colorpath PCPlugin Installer.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="COMaster.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="COProcessRequest.ashx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

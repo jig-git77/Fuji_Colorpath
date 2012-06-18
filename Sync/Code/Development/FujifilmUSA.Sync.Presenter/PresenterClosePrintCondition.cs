@@ -10,10 +10,12 @@ namespace FujifilmUSA.Sync.Presenter
     public class PresenterClosePrintCondition
     {
         private readonly IViewClosePrintCondition _viewClosePrintCondition;
+
         public PresenterClosePrintCondition(IViewClosePrintCondition viewClosePrintCondition)
         {
             _viewClosePrintCondition = viewClosePrintCondition;
         }
+
         public void CreateOptimizeRun()
         {
             var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
@@ -23,12 +25,14 @@ namespace FujifilmUSA.Sync.Presenter
                 Convert.ToInt32(EOptimizeRunStatus.Open),              
                 DateTime.Now);
         }
+
         public void GetProjectDetail()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
             _viewClosePrintCondition.Project = projectBusiness.GetProjectDetail(_viewClosePrintCondition.ProjectId);
         }
+
         public void GetCurrentDeviceLinkProfile()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();

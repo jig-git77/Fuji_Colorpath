@@ -17,5 +17,16 @@ namespace ColorOrganizerDemoLib.ViewModels
         {
             PreviousButtonCommand.Executed += (sender, e) => PassToParent(EControl.ChartPrint);
         }
+
+        private string _redirectUrl;
+        public string RedirectUrl
+        {
+            get { return _redirectUrl; }
+            set
+            {
+                _redirectUrl = value;
+                RaisePropertyChanged("RedirectUrl");
+            }
+        }
     }
 }

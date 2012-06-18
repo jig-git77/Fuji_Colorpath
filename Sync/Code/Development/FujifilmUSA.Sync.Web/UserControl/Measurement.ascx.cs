@@ -31,9 +31,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = string.Format("Measure - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
                 }
-                //header.InnerText = (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
-                //                   ? string.Format("Measure - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName)
-                //                   : string.Format("New Print Condition - Measure (No DLP)");
             }
         }
 
@@ -43,8 +40,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements = true;
-            Response.Redirect("Analyze.aspx");
+            Response.Redirect(
+                SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser)
+                    ? string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid())
+                    : "Analyze.aspx");
         }
+
         #endregion
 
     }

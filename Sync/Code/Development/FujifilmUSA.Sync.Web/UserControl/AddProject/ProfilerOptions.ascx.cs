@@ -12,6 +12,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class ProfilerOptions : BaseControl, IViewDeviceFamilyProfilerOption
     {
         #region "Declaration"
+        public bool IsXmfNewProject
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                        SessionManager.Instance.CurrentProject.ProjectId == 0);
+            }
+        }
+
         private const string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
         private const string _vsProfileRendering = "vsProfileRendering";
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
@@ -24,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
             BindProfileRenderings();
             BindPresets();
             LoadProjectInfoFromSession();
@@ -221,6 +231,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 });
             }
         }
+
+        protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
+
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);

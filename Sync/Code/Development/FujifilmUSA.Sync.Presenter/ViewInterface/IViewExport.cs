@@ -6,7 +6,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         int ProjectId { get; set; }
         int OptimizeRunId { get; set; }
-        int ReferenceChartTypeId { get; set; }
+        short ReferenceChartTypeId { get; set; }
         byte[] DeviceLinkProfile { get; set; }
         byte[] ChartPreview { get; set; }
         byte[] SourceProfile { get; set; }

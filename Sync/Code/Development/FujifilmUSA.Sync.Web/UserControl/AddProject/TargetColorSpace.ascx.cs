@@ -5,15 +5,21 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
-using System.Web.UI.WebControls;
-
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class TargetColorSpace : BaseControl, IViewTargetColorspace
     {
-
         #region "Declaration"
+        public bool IsXmfNewProject
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                        SessionManager.Instance.CurrentProject.ProjectId == 0);
+            }
+        }
+
         private const string _vsSourceProfile = "vsSourceProfile";
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
@@ -26,6 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lnkbtnProjectDescription.Visible = IsXmfNewProject;
             if (ViewState[_vsSourceProfile] == null)
             {
                 BindProfileSource();
@@ -35,6 +42,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
+        protected void lnkbtnProjectDescription_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
+
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.SourceProfile = new SourceProfile

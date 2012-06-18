@@ -30,8 +30,8 @@
             <hh:HtmlHost x:Name="HtmlHostCtrl"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                           SourceUri="http://www.softwebdemo.com/softweb/FujiSync4D/Login.aspx" Visibility="{Binding CurrentStatus}"></hh:HtmlHost>
-                <!--<view:HtmlHost x:Name="HtmlHostCtrl"
+                            SourceUri="{Binding RedirectUrl,Mode=TwoWay}" Visibility="{Binding CurrentStatus}"></hh:HtmlHost>
+            <!--<view:HtmlHost x:Name="HtmlHostCtrl"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             HostDiv="htmlHost"

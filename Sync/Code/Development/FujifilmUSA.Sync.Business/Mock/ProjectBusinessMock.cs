@@ -5,7 +5,7 @@ using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
-    public class ProjectBusinessMock:IProjectBusiness
+    public class ProjectBusinessMock : IProjectBusiness
     {
         #region IProjectBusiness Members
 
@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<SourceProfile>();
         }
 
-        public byte[] GetChartPreviewOnReferenceChartTypeId(int referenceChartTypeId, string source)
+        public byte[] GetChartPreviewOnReferenceChartTypeId(short referenceChartTypeId, string source)
         {
             return new byte[1];
         }
@@ -61,9 +61,14 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new ReferenceChartData();
         }
 
-        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, Guid tempProjectId)
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId)
         {
             return new Guid();
+        }
+
+        public TempProjectInfo GetTempProjectInfo(Guid tempProjectId)
+        {
+            return new TempProjectInfo();
         }
 
         public List<DeviceFamilyProfilerOption> GetDeviceFamilyProfilerOptionPreset(short deviceFamilyId)

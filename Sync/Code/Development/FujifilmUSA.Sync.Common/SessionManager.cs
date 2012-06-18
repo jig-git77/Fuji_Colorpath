@@ -13,7 +13,8 @@ namespace FujifilmUSA.Sync.Common
         private const string _navigationSession = "NavigationSession";
         private const string _operationSession = "OperationSession";
         private const string _branchNameSession = "BranchNameSession";
-        private const string _ProjLimitSession = "ProjectLimitSession";
+        private const string _projLimitSession = "ProjectLimitSession";
+        private const string _colorOrgRequest = "ColorOrgRequest";
 
         #endregion
 
@@ -155,17 +156,34 @@ namespace FujifilmUSA.Sync.Common
         {
             get
             {
-                if (HttpContext.Current.Session[_ProjLimitSession] != null)
+                if (HttpContext.Current.Session[_projLimitSession] != null)
                 {
-                    return System.Convert.ToInt32(HttpContext.Current.Session[_ProjLimitSession].ToString());
+                    return System.Convert.ToInt32(HttpContext.Current.Session[_projLimitSession].ToString());
                 }
                 return 0;
             }
             set
             {
-                HttpContext.Current.Session[_ProjLimitSession] = value;
+                HttpContext.Current.Session[_projLimitSession] = value;
             }
         }
+
+        public TempProjectInfo CurrentColorOrgRequest
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_colorOrgRequest] != null)
+                {
+                    return (TempProjectInfo)HttpContext.Current.Session[_colorOrgRequest];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_colorOrgRequest] = value;
+            }
+        }
+
         #endregion
     }
 }

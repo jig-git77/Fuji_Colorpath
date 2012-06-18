@@ -54,7 +54,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim()
             };
-
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }

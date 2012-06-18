@@ -5,24 +5,81 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
-using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class PreviewPrintCondition : BaseControl, IViewPreviewPrintCondition
+    public partial class PreviewPrintCondition : BaseControl, IViewPreviewPrintCondition,IViewSaveWindow
     {
         #region "Declaration"
+        public bool IsXmfNewProject
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                        SessionManager.Instance.CurrentProject.ProjectId == 0);
+            }
+        }
+
         private PresenterPreviewPrintCondition _presenterPreviewPrintCondition;
+        private PresenterSaveWindow _presenterSaveWindow;
+        public bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
         #endregion
 
         protected override void OnInit(EventArgs e)
         {
             _presenterPreviewPrintCondition = new PresenterPreviewPrintCondition(this);
+            _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lnkbtnMeasurementSetup.Visible = IsXmfNewProject;
             LoadRecord();
+        }
+
+        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
+
+        protected void lnkbtnSavePrintCondition_Click(object sender, EventArgs e)
+        {
+            if(IsXmfUser)
+            {
+                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+                SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+                Project = SessionManager.Instance.CurrentProject;
+                _presenterSaveWindow.SaveProject();
+
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                        Response.Redirect("Export.aspx");
+                    }
+                    else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                        Response.Redirect(string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid()));
+                    }
+                    else
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                        Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
+                    }
+                }
+            }
         }
 
         protected void LoadRecord()
@@ -64,6 +121,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public Dictionary<string, string> Data { get; set; }
+        #endregion
+
+        #region IViewSaveWindow Members
+        public byte[] ChartPreview { get; set; }
+        public Project Project { get; set; }
         #endregion
     }
 }

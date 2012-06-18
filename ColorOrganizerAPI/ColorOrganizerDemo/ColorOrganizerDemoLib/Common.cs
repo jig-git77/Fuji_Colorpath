@@ -8,7 +8,9 @@ namespace ColorOrganizerDemoLib
         private const string _xmfColorOrganizerEncryptionKey = "!Fuji$XMF_CO!";
         public const string UserName = "jayparikh";
         private const string _password = "fuji";
-        public static Guid ProjectInfoId;
+        public static Guid AddProjectInfoId;
+        public static Guid EditProjectInfoId;
+        public static string FujiWebSite;
 
         public static string GetEncryptPassword()
         {

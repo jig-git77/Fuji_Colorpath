@@ -1,18 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommon.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
-<script src="JS/wz_jsgraphics.js?version=4" type="text/javascript"></script>
-<script src="jQuery/json2.js?version=4" type="text/javascript"></script>
-<script src="jQuery/jquery-blockUI.js?version=4" type="text/javascript"></script>
-<script src="jQuery/wtooltip.min.js?version=4" type="text/javascript"></script>
-<script src="JS/excanvas.js?version=4" type="text/javascript"></script>
-<script src="JS/chartread.js?version=4" type="text/javascript"></script>
-<script src="JS/i1read.js?version=4" type="text/javascript"></script>
-<script src="JS/isisread.js?version=4" type="text/javascript"></script>
-<script src="JS/WebComm.js?version=4" type="text/javascript"></script>
-<script src="jQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
-<script src="jQuery/jquery.tmpl.js?version=4" type="text/javascript"></script>
-<script src="JQuery/jquery.simplemodal.js?version=4" type="text/javascript"></script>
+<script src="JS/wz_jsgraphics.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/json2.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/jquery-blockUI.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/wtooltip.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/excanvas.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/chartread.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/i1read.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/isisread.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/WebComm.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <style type="text/css">
     .my_rectangle
     {
@@ -83,14 +83,14 @@
         document.getElementById("dummy").innerHTML =
  "<embed src=\"" + soundfile + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
     }
- </script>
+</script>
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name"></asp:Label>
             &nbsp; : &nbsp;&nbsp;
             <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px">
-            </asp:TextBox>         
+            </asp:TextBox>
         </div>
         <div class="float_r">
             <span>
@@ -112,7 +112,7 @@
             Colorbar</div>
         <div class="color_pallate_middle">
             <div id='divProgressImageMaster' style="display: none;">
-                <div style="width:200px;text-align:center;margin-left:150px;">
+                <div style="width: 200px; text-align: center; margin-left: 150px;">
                     <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;" /><br />
                     <br />
                     Uploading Measurement...<div class="clear">

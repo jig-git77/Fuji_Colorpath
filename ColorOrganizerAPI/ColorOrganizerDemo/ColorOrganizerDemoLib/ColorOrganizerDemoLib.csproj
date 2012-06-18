@@ -165,35 +165,33 @@
     <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Sync4DService\Sync4D.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4D6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Sync4DService\Sync4DService.wsdl" />
+    <None Include="Service References\Sync4DService\Sync4D1.disco" />
     <Content Include="ServiceReferences.ClientConfig" />
+    <None Include="Service References\Sync4DService\Sync4D7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D71.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D72.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D73.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D74.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D75.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4D76.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Sync4DService\Sync4DService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\Sync4DService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\Sync4DService\Sync4D.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\Sync4DService\configuration91.svcinfo" />

@@ -15,8 +15,11 @@ namespace ColorOrganizerDemoLib.Views
 {
     public partial class DesignerView : UserControl
     {
+        public Dictionary<string, string> InitParameters { get; set; }
+
         public DesignerView()
         {
+            Common.FujiWebSite = InitParameters.Single(x => x.Key.Equals("FujiUSAWebSource")).Value;
             InitializeComponent();
             DataContext = new DesignerViewModel();
         }

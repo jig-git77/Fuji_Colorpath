@@ -46,6 +46,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionID"),
                                        SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
                                        IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
+                                       UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType")
                                    };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()

@@ -12,10 +12,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class MeasurementSetup : BaseControl, IViewMeasurementSetting
     {
         #region "Declaration"
+        public bool IsXmfNewProject
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                        SessionManager.Instance.CurrentProject.ProjectId == 0);
+            }
+        }
+
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
-        
-
         private Dictionary<int, EInstrumentType> MeasurementDevicesView
         {
             get
@@ -41,6 +48,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lnkbtnProfilerOptions.Visible = IsXmfNewProject;
+            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                SessionManager.Instance.CurrentProject.ProjectId > 0)
+            {
+                lbtnMeasure.Visible = true;
+                lnkbtnMeasurementSetup.Visible = false;
+            }
+            else
+            {
+                lbtnMeasure.Visible = false;
+                lnkbtnMeasurementSetup.Visible = true;
+            }
 
             if (ViewState[vsIsPostBack] == null)
             {
@@ -55,6 +74,62 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
+        
+        protected void lbtnMeasure_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentProject.MeasurementSetting =
+                new MeasurementSetting()
+                {
+                    Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue),
+                    ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
+                    MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
+                    ReferenceChartType =
+                        new KeyValuePair<short, string>(Convert.ToInt16(cmbAlignmentChart.SelectedValue),
+                                                        cmbAlignmentChart.SelectedItem.Text),
+                    UvIncluded =
+                        cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false
+                };
+
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+            Project = SessionManager.Instance.CurrentProject;
+            _presenterMeasurementSetting.SaveProject();
+
+            if (!IsErrorOccured)
+            {
+                switch (SessionManager.Instance.CurrentProject.Status)
+                {
+                    case EOptimizeRunStatus.Open:
+                        SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                        Response.Redirect(string.Format(
+                            SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                ? "COAnalyze.aspx?id={0}"
+                                : "COMeasurement.aspx?id={0}", Guid.NewGuid()));
+                        break;
+                    case EOptimizeRunStatus.Closed:
+                        ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                        _presenterMeasurementSetting.CreateOptimizeRun();
+                        if (!IsErrorOccured)
+                        {
+                            _presenterMeasurementSetting.GetProjectDetail();
+                            if (!IsErrorOccured)
+                            {
+                                SessionManager.Instance.CurrentProject = Project;
+                                SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                                SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                                Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
 
         protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
         {
@@ -104,10 +179,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
                 cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
-
-                //cmbIlluminant.Enabled = cmbObserver.Enabled = cmbMeasurementDevice.Enabled =cmbAlignmentChart.Enabled =
-                //  !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0
-                //   );
             }
         }
 
@@ -117,6 +188,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetMeasurementDevice();
+            if (SessionManager.Instance.CurrentColorOrgRequest != null)
+            {
+                MeasurementDevices = MeasurementDevices.
+                    Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).
+                    ToList();
+            }
             if (!IsErrorOccured)
             {
                 cmbMeasurementDevice.DataValueField = "MeasurementDeviceId";
@@ -188,6 +265,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbAlignmentChart.DataBind();
                 cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
             }
+            if (SessionManager.Instance.CurrentColorOrgRequest != null)
+            {
+                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                cmbAlignmentChart.Enabled = false;
+            }
             DisplayChartImage();
         }
 
@@ -199,9 +281,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);    
+                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);
             }
-            
+
         }
 
         private void BindUVSettings()
@@ -233,7 +315,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int MeasurementDeviceId { get; set; }
         public List<ReferenceChartType> ReferenceChartType { get; set; }
         public byte[] ReferenceChartTypeImage { get; set; }
-        public int ReferenceChartTypeId { get; set; }
+        public short ReferenceChartTypeId { get; set; }
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
         public string ChartDisplayType { get; set; }
         #endregion
     }

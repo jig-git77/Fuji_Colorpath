@@ -9,6 +9,10 @@
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Profiler Options</span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnProjectDescription" runat="server" CssClass="button" OnClick="lnkbtnProjectDescription_Click">
+        <span>
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
+            Description</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
@@ -26,8 +30,8 @@
                                 <span>Source Profile:</span>
                             </td>
                             <td style="width: 450px">
-                                <asp:DropDownList ID="cmbSourceProfile" runat="server" CssClass="select"
-                                    DataValueField="Key" DataTextField="Value" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"
+                                <asp:DropDownList ID="cmbSourceProfile" runat="server" CssClass="select" DataValueField="Key"
+                                    DataTextField="Value" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"
                                     AutoPostBack="true">
                                 </asp:DropDownList>
                             </td>

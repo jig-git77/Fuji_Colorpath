@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Measurement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.Measurement" %>
+<meta http-equiv="Cache-Control" content="no-cache" />
 <%@ Register Src="~/UserControl/MeasurementCommon.ascx" TagName="MeasurementCommon"
     TagPrefix="uc" %>
 <script language="javascript">

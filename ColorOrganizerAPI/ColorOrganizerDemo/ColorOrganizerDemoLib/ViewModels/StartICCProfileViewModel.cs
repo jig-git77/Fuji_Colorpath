@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using GalaSoft.MvvmLight;
 using ColorOrganizerDemoLib.Models;
 using System.Collections.ObjectModel;
+using ColorOrganizerDemoLib.Sync4DService;
 
 namespace ColorOrganizerDemoLib.ViewModels
 {
@@ -20,19 +21,13 @@ namespace ColorOrganizerDemoLib.ViewModels
         {
             IsNewIccProfile = true;
             SelectedIccProfile = new IccProfile();
-            IccProfiles = new ObservableCollection<IccProfile>()
-                              {
-                                  new IccProfile() {ProjectId = 1, IccProfileName = "Profile 1"},
-                                  new IccProfile() {ProjectId = 2, IccProfileName = "Profile 2"},
-                                  new IccProfile() {ProjectId = 3, IccProfileName = "Profile 3"}
-                              };
             NextButtonCommand.Executed += (sender, e) => PassToParent(EControl.ChartPrint);
             PreviousButtonCommand.Executed += (sender, e) => PassToParent(EControl.SelectDevice);
         }
 
         public bool IsNextButtonEnable
         {
-            get { return (SelectedIccProfile != null && !string.IsNullOrEmpty(SelectedIccProfile.IccProfileName)); }
+            get { return (SelectedIccProfile != null && (!string.IsNullOrEmpty(SelectedIccProfile.IccProfileName) || SelectedIccProfile.ProjectId > 0)); }
         }
 
         private IccProfile _selectedIccProfile;
@@ -44,6 +39,20 @@ namespace ColorOrganizerDemoLib.ViewModels
                 _selectedIccProfile = value;
                 RaisePropertyChanged("SelectedIccProfile");
                 RaisePropertyChanged("IsNextButtonEnable");
+            }
+        }
+
+        private string _existingProjectId;
+        public string ExistingProjectId
+        {
+            get { return _existingProjectId; }
+            set
+            {
+                _existingProjectId = value;
+                SelectedIccProfile = new IccProfile()
+                                         {
+                                             ProjectId = Convert.ToInt32(value)
+                                         };
             }
         }
 
@@ -60,8 +69,6 @@ namespace ColorOrganizerDemoLib.ViewModels
                                          };
             }
         }
-
-        public ObservableCollection<IccProfile> IccProfiles { get; set; }
 
         private bool _isNewIccProfile;
         public bool IsNewIccProfile

@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="COMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.COMaster" %>
+
+<%@ Register Src="~/UserControl/LeftMenu.ascx" TagName="LeftMenu" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControl/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Fujifilm Color Path</title>
+    <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
+    <script src="JS/html5.js?version=4" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        .UpdateProgressBackground
+        {
+            z-index: 3003;
+            position: fixed;
+            filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
+            background-color: #555555 !important;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            opacity: .4;
+            mozopacity: .4;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+
+            equal_height();
+            window.onmousemove = equal_height;
+            window.onmousedown = equal_height;
+            window.onkeydown = equal_height;
+
+            //adding the event listerner for Mozilla
+            if (window.addEventListener)
+                document.addEventListener('DOMMouseScroll', equal_height, false);
+
+            //for IE/OPERA etc
+            document.onmousewheel = equal_height;
+
+        });
+
+
+        function equal_height() {
+            $("div[id*='LeftMenu2']").height($('#contant').height() - 18);
+        }
+
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <asp:UpdateProgress ID="UpdateProgress" runat="server" DynamicLayout="true" DisplayAfter="50">
+        <ProgressTemplate>
+            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
+            </AjaxToolkit:AlwaysVisibleControlExtender>
+            <div class="UpdateProgressBackground" style="position: fixed; left: 0px; top: 0px;
+                z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+            </div>
+            <div id="divUpdate" style="color: #000; position: absolute; z-index: 1010">
+                <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
+    <section id="bodyWrapper"> 
+    <section id="contant" class="equal_height">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+      </section>
+      <div class="clear"></div>
+
+  <%--<!--Start PageWrapper-->
+  <div class="curve_top">&nbsp;</div>
+  <section id="pageWrapper"> 
+  	<uc1:Header ID="ucHeader" runat="server" />  
+    <section id="containar">
+    <section id="sidebar" class="equal_height" >
+        	    <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
+      </section>
+      <section id="contant" class="equal_height">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+      </section>
+      <div class="clear"></div>
+    </section>
+  </section>
+  <div class="curve_bottom">&nbsp;</div>
+  <!--End PageWrapper--> 
+  <uc1:Footer ID="ucFooter" runat="server" />--%>
+
+</section>
+    </form>
+</body>
+</html>
