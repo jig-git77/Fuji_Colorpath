@@ -86,7 +86,7 @@
             <param name="windowless" value="true" />
             <param name="autoUpgrade" value="true" />
             <param name="onLoad" value="pluginLoaded" />
-            <param name="initParams" value="FujiUSAWebSource=http://dev.taskero.com/ColorPathDev/Login.aspx" />
+            <param name="initParams" value="FujiUSAWebSource=http://dev.taskero.com/ColorPathDev" />
             <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration: none">
                 <img src="http://go.microsoft.com/fwlink/?LinkId=161376" alt="Get Microsoft Silverlight"
                     style="border-style: none" />
