@@ -20,13 +20,10 @@ namespace ColorOrganizerDemo
         {
             InitParameters = initParameters;
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);    
+            this.Loaded += delegate
+                               {
+                                   designerView.InitParameters = InitParameters;
+                               };
         }
-
-        void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            designerView.InitParameters = InitParameters;
-        }
-
     }
 }

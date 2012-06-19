@@ -15,11 +15,19 @@ namespace ColorOrganizerDemoLib.Views
 {
     public partial class DesignerView : UserControl
     {
-        public Dictionary<string, string> InitParameters { get; set; }
+        private Dictionary<string, string> _initParameters;
+        public Dictionary<string, string> InitParameters
+        {
+            get { return _initParameters; }
+            set
+            {
+                _initParameters = value;
+                Common.FujiWebSite = _initParameters.Single(x => x.Key.Equals("FujiUSAWebSource")).Value;
+            }
+        }
 
         public DesignerView()
         {
-            Common.FujiWebSite = InitParameters.Single(x => x.Key.Equals("FujiUSAWebSource")).Value;
             InitializeComponent();
             DataContext = new DesignerViewModel();
         }
