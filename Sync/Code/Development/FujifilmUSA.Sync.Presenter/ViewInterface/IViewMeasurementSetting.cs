@@ -16,6 +16,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         int ProjectId { get; set; }
         Project Project { get; set; }
-        string ChartDisplayType { get; set; }
+        int ChartDisplayType { get; set; }
     }
 }

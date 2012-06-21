@@ -44,6 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindProjectTypeList();
                 BindInstrumentTypeList();
+                BindRefChartDisplayType();
 
                 if (Request.QueryString["RefChartId"] != null)
                 {
@@ -66,7 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
             ReferenceChartType.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
-            ReferenceChartType.ChartDisplayType = cmbChartDisplayType.SelectedItem.Value;
+            ReferenceChartType.ChartDisplayType = Convert.ToInt32(cmbChartDisplayType.SelectedItem.Value);
 
             if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
@@ -267,6 +268,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+
+        private void BindRefChartDisplayType()
+        {
+            cmbChartDisplayType.Items.Clear();         
+            cmbChartDisplayType.Items.Insert(0, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.ProfileChart), Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString()));
+            cmbChartDisplayType.Items.Insert(1, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.OptimizationChart), Convert.ToInt32(EReferenceChartDisType.OptimizationChart).ToString()));
+        }
+
         private void BindProjectTypeList()
         {
             _presenterAddReferenceChart.GetProjectTypeList();
@@ -303,7 +312,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
                 cmbProjectType.SelectedValue = Convert.ToString(ReferenceChartType.ProjectType.ProjectTypeId);
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
-                cmbChartDisplayType.SelectedValue = ReferenceChartType.ChartDisplayType;
+                cmbChartDisplayType.SelectedValue = ReferenceChartType.ChartDisplayType.ToString();
 
                 if (ReferenceChartType.ChartPreview != null)
                 {

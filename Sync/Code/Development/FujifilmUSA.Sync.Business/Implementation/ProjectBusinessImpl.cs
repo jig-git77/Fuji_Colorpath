@@ -38,7 +38,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
                                           CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
                                           IsUsed = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "IsUsed"),
-                                          Status = (EOptimizeRunStatus)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
+                                          Status = (ERefChartDisplayType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjStatus"),
                                           SourceProfile = new SourceProfile()
                                                               {
                                                                   SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
@@ -89,7 +89,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                                 RunName = DataReader.ReadString(x, "RunName"),
                                 ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
+                                Status = (ERefChartDisplayType)DataReader.ReadInt(x, "Status"),
                                 StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
                                 EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
                                 MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
@@ -107,7 +107,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                  LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") + ".icc";
                                                                  if (index > 1)
                                                                  {
-                                                                     if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Closed && !project.OptimizeRuns[index - 1].HasProfile)
+                                                                     if (project.OptimizeRuns[index - 1].Status == ERefChartDisplayType.Closed && !project.OptimizeRuns[index - 1].HasProfile)
                                                                      {
                                                                          LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString("00") + ".icc";  //----If last run is certify run, then get DLP of its previous run----//
                                                                      }
@@ -174,7 +174,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                             Colorant = DataReader.ReadString(x, "Colorant"),
                                                             RipSettings = DataReader.ReadString(x, "RipSettings")
                                                         },
-                                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                                Status = (ERefChartDisplayType)DataReader.ReadInt(x, "ProjStatus"),
                                                 CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
@@ -484,7 +484,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                          {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
                                                      new Parameters()
                                                          {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = project.MeasurementSetting.ReferenceChartType.Key},
-                                                     new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(EOptimizeRunStatus.Open)},
+                                                     new Parameters() {ParameterName = "@Status", Type = DbType.Int32, Value = Convert.ToInt32(ERefChartDisplayType.Open)},
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
                                                      new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()},
@@ -705,7 +705,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevice;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, string ChartDisplayType)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(

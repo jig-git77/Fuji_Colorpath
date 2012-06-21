@@ -99,14 +99,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 switch (SessionManager.Instance.CurrentProject.Status)
                 {
-                    case EOptimizeRunStatus.Open:
+                    case ERefChartDisplayType.Open:
                         SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                         Response.Redirect(string.Format(
                             SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                 ? "COAnalyze.aspx?id={0}"
                                 : "COMeasurement.aspx?id={0}", Guid.NewGuid()));
                         break;
-                    case EOptimizeRunStatus.Closed:
+                    case ERefChartDisplayType.Closed:
                         ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                         _presenterMeasurementSetting.CreateOptimizeRun();
                         if (!IsErrorOccured)
@@ -243,20 +243,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue)) return;
             MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
 
-            ChartDisplayType = "Profile Chart";                      //------------If we are in initial project setup-------------//
+            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);                     //------------If we are in initial project setup-------------//
             if (SessionManager.Instance.CurrentProject != null)
             {
                 if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.First().HasProfile)
                 {
-                    ChartDisplayType = "Optimization Chart";            //---------------If we are in optimization run--------------//
+                    ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);              //---------------If we are in optimization run--------------//
                 }
                 else
                 {
-                    ChartDisplayType = "Profile Chart";                 //------------If we are in initial project setup-------------//
+                    ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);                  //------------If we are in initial project setup-------------//
                 }
             }
 
-            ChartDisplayType = "Optimization Chart";   //--------By default, just till fix silverlight issue
+           // ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);     //--------By default, just till fix silverlight issue
 
             _presenterMeasurementSetting.GetReferenceChartType();
             if (!IsErrorOccured)
@@ -320,7 +320,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        public string ChartDisplayType { get; set; }
+        public int ChartDisplayType { get; set; }
         #endregion
     }
 }

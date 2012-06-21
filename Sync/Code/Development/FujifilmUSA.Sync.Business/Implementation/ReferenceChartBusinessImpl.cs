@@ -170,7 +170,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     ProjectTypeName = DataReader.ReadString(x, "ProjectType")
                                 },
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                ChartDisplayType = DataReader.ReadString(x, "ChartDisplayType"),
+                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType"),
                                 ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
                                 OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")    
 

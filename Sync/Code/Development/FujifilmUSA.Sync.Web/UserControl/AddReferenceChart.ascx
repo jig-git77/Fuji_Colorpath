@@ -155,9 +155,7 @@
                             </td>
                             <td align="left">
                                 <div style="float: left;">
-                                    <asp:DropDownList ID="cmbChartDisplayType" runat="server" Width="400px" CssClass="select">
-                                       <asp:ListItem Selected="True" Text="Profile Chart" Value="Profile Chart"></asp:ListItem>
-                                       <asp:ListItem Text="Optimization Chart" Value="Optimization Chart"></asp:ListItem>                                      
+                                    <asp:DropDownList ID="cmbChartDisplayType" runat="server" Width="400px" CssClass="select">                                                                   
                                     </asp:DropDownList>
                                 </div>
                                 <div style="float: left">

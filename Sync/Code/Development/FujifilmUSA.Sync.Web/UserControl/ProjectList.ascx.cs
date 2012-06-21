@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 switch (project.Status)
                 {
-                    case EOptimizeRunStatus.Open:
+                    case ERefChartDisplayType.Open:
                         if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
                         {
                             btnSelect.Attributes.Add("onclick",
@@ -126,7 +126,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             btnSelect.Attributes.Add("onclick", "javascript: return false;");
                         imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
                         break;
-                    case EOptimizeRunStatus.Closed:
+                    case ERefChartDisplayType.Closed:
                         if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
                         {
                             btnSelect.Attributes.Add("onclick",

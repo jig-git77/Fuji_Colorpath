@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Entity
         OptimizeRun = 14
     }
 
-    public enum EOptimizeRunStatus
+    public enum ERefChartDisplayType
     {
         Open = 1,
         Closed = 2,
@@ -325,4 +325,11 @@ namespace FujifilmUSA.Sync.Entity
         PasswordResetEmail = 3,
     }
 
+    public enum EReferenceChartDisType
+    {
+        [Description("Profile Chart")]
+        ProfileChart = 1,
+        [Description("Optimization Chart")]
+        OptimizationChart = 2
+    }
 }

@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
             optimizeRunBusiness.OptimizeDeviceLinkProfile(_viewConfirmSave.ProjectId, _viewConfirmSave.OptimizeRunId, _viewConfirmSave.MeasurementIds,
-                                                          _viewConfirmSave.ProfileDescription, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
+                                                          _viewConfirmSave.ProfileDescription, Convert.ToInt32(ERefChartDisplayType.Closed), DateTime.Now);
         }
 
         public void GetMeasurementsOnRunId()
@@ -40,14 +40,14 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
-            optimizeRunBusiness.CreateOptimizeRun(_viewConfirmSave.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
+            optimizeRunBusiness.CreateOptimizeRun(_viewConfirmSave.ProjectId, Convert.ToInt32(ERefChartDisplayType.Open), DateTime.Now);
         }
 
         public void CloseOptimizeRun()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
-            optimizeRunBusiness.CloseOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
+            optimizeRunBusiness.CloseOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(ERefChartDisplayType.Closed), DateTime.Now);
         }
 
         public void GetLastRunStatus()
