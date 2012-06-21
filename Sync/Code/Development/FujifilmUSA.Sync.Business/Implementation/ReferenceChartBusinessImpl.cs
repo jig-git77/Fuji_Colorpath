@@ -230,8 +230,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
                                 NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
                                 TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
-                                ChartPreview = DataReader.ReadByteArray(x,"ChartPreview"),
-                                OriginalChart = DataReader.ReadByteArray(x,"OriginalChart"),
+                                //ChartPreview = DataReader.ReadByteArray(x,"ChartPreview"),
+                               // OriginalChart = DataReader.ReadByteArray(x,"OriginalChart"),
                                 InstrumentType = new InstrumentType()
                                 {
                                     InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),

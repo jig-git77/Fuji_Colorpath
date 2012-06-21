@@ -73,8 +73,68 @@
             </table>               
 
     </div>
-      <%-- <div>
-            <asp:Image ID="ImageMenu" runat="server" ImageUrl="~/Images/contentbox.png" />
+       <%--<div style="margin-top: -17px;  background: url(../images/contentbox2.png) no-repeat top left; margin-left:200px;">
+           
+             <table cellpadding="0" cellspacing="0"  style="margin-left:65px;">
+             <tr style="height:125px;"></tr>
+
+            
+                 <tr>
+                    <td>
+                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="Disable_Opt" Width="250px" Enabled="false">
+                            <span id="span1" runat="server" style="padding-left: 12px; ">
+                                Alignment Curves
+                            </span>
+                        </asp:LinkButton>
+                         <input id="Hidden1" type="hidden" runat="server" value="0"/>
+                     </td>
+                </tr>
+                <tr style="height:10px;"></tr>
+                <tr>
+                    <td>
+                        <asp:LinkButton ID="LinkButton3" runat="server" CssClass="Enable_Opt" Width="250px">
+                            <span id="span2" runat="server" style="padding-left: 12px; ">
+                                DLP Optimization
+                            </span>
+                        </asp:LinkButton>
+                         <input id="Hidden2" type="hidden" runat="server" value="0"/>
+                     </td>
+                </tr>
+                <tr style="height:7px;"></tr>
+                <tr>
+                    <td>
+                        <asp:LinkButton ID="LinkButton4" runat="server" CssClass="Enable_Opt" Width="250px">
+                            <span id="span3" runat="server" style="padding-left: 12px;">
+                                Ink Optimization
+                            </span>
+                        </asp:LinkButton>
+                         <input id="Hidden3" type="hidden" runat="server" value="0"/>
+                    </td>
+                 </tr>
+                 <tr style="height:4px;"></tr>
+                 <tr>                 
+                    <td>
+                        <asp:LinkButton ID="LinkButton5" runat="server" CssClass="Disable_Opt" Width="250px" Enabled="false">
+                            <span id="span4" runat="server" style="padding-left: 12px; ">
+                                Color Validation
+                            </span>
+                        </asp:LinkButton>
+                         <input id="Hidden4" type="hidden" runat="server" value="0"/>         
+                    </td>
+                </tr>
+                <tr style="height:10px;"></tr>
+                <tr>
+                    <td>
+                        <asp:LinkButton ID="LinkButton6" runat="server" CssClass="Disable_Opt" Width="250px" Enabled="false">
+                            <span id="span5" runat="server" style="padding-left: 12px;">
+                                ICC Profiling
+                            </span>
+                        </asp:LinkButton>
+                         <input id="Hidden5" type="hidden" runat="server" value="0"/>         
+                   </td>
+                </tr>
+                <tr style="height:10px;"></tr>
+            </table>               
        </div>--%>
     </div>
     <div class="clear">

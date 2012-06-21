@@ -256,6 +256,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
 
+            ChartDisplayType = "Optimization Chart";   //--------By default, just till fix silverlight issue
+
             _presenterMeasurementSetting.GetReferenceChartType();
             if (!IsErrorOccured)
             {
