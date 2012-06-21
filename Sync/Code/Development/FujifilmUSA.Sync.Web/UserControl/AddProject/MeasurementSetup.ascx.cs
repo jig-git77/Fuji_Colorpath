@@ -256,7 +256,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
 
-           // ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);     //--------By default, just till fix silverlight issue
+            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);     //--------By default, just till fix silverlight issue
 
             _presenterMeasurementSetting.GetReferenceChartType();
             if (!IsErrorOccured)

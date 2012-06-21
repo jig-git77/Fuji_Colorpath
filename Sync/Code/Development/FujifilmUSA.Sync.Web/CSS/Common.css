@@ -354,18 +354,19 @@ label
 
 #contant .head .buttonLeft
 {
-    background: url(../Images/contant_box_haed_bt_left.png) no-repeat top left;
-    float: left;
+    background: url(../Images/contant_box_haed_bt_left_Rev.png) no-repeat top left;
+    float: right;
     color: #000000;
     text-align: center;
     font-size: 13px;
     margin: 5px 4px 0 0;
     line-height: 24px;
-    padding-left: 8px;
+    padding-left: 16px;
 }
 #contant .head .buttonLeft span
 {
-    background: url(../Images/contant_box_haed_bt_right.png) no-repeat top right;
+    
+    background: url(../Images/contant_box_haed_bt_right_Rev.png) no-repeat top right;
     display: block;
     padding: 0 15px 0 5px;
 }
@@ -376,11 +377,11 @@ label
 }
 #contant .head .buttonLeft:hover
 {
-    background: url(../Images/contant_box_haed_bt_left_hover.png) no-repeat top left;
+   background: url(../Images/contant_box_haed_bt_left_hover_Rev.png) no-repeat top left;
 }
 #contant .head .buttonLeft:hover span
 {
-    background: url(../Images/contant_box_haed_bt_right_hover.png) no-repeat top right;
+    background: url(../Images/contant_box_haed_bt_right_hover_Rev.png) no-repeat top right;
 }
 
 

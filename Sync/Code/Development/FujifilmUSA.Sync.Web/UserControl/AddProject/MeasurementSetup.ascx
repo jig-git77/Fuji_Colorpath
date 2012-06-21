@@ -17,7 +17,7 @@
             <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/analyze.png" />
             Measure</span>
     </asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnProfilerOptions" runat="server" CssClass="button" OnClick="lnkbtnProfilerOptions_Click">
+    <asp:LinkButton ID="lnkbtnProfilerOptions" runat="server" CssClass="buttonLeft" OnClick="lnkbtnProfilerOptions_Click">
         <span>
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Profiler Options</span></asp:LinkButton>

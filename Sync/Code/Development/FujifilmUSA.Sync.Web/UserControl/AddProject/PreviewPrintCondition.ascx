@@ -45,7 +45,7 @@
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
             Save</span></asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="buttonLeft" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Search.png" />
             Measurement Setup</span></asp:LinkButton>

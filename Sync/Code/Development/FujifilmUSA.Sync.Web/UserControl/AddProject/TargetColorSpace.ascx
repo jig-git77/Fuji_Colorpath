@@ -9,7 +9,7 @@
         <span>
             <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Profiler Options</span></asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnProjectDescription" runat="server" CssClass="button" OnClick="lnkbtnProjectDescription_Click">
+    <asp:LinkButton ID="lnkbtnProjectDescription" runat="server" CssClass="buttonLeft" OnClick="lnkbtnProjectDescription_Click">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
             Description</span></asp:LinkButton>
