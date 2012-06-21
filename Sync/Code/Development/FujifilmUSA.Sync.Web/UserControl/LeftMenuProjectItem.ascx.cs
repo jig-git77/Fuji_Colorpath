@@ -31,6 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             lnkRunName.Text = ItemName;
 
+          
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.OptimizeRun:
@@ -79,6 +80,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
                     {
+                        lnkMeasurement.ForeColor = System.Drawing.Color.Black;
+                        lnkAnalyse.ForeColor = System.Drawing.Color.Black;
+                        lnkDownload.ForeColor = System.Drawing.Color.Black;
+
                         ulSubMenu.Visible = true;
                         lnkRunName.Font.Bold = true;
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
@@ -88,6 +93,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkDownload.Enabled = CurrentRun.HasProfile;
                         lnkAddRun.Font.Underline = true;
                         lnkAddRun.ForeColor = System.Drawing.Color.Blue;
+
+                        if ((SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure) && !CurrentRun.HasMeasurements)
+                        {
+                            lnkAnalyse.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                        else
+                        {                         
+                            if (!CurrentRun.HasProfile)
+                            {                             
+                                lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                            }
+                        }
                     }
                     else
                     {

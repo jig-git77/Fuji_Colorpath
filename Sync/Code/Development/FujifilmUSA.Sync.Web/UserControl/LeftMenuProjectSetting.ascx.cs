@@ -64,27 +64,132 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 case ELeftMenuItemLevel.Description:
                     lnkDescription.Font.Bold = true;
+                    lnkDescription.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkTargetColorSpace.ForeColor = System.Drawing.Color.Silver;
+                        lnkProfilerOption.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkSave.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.TargetColorSpace:
                     lnkTargetColorSpace.Font.Bold = true;
+                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkProfilerOption.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkSave.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.ProfilerOption:
                     lnkProfilerOption.Font.Bold = true;
+                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkSave.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.MeasurementSetup:
                     lnkMeasurementSetup.Font.Bold = true;
+                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkSave.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.Save:
                     lnkSave.Font.Bold = true;
+                    lnkSave.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.Measure:
                     lnkMeasure.Font.Bold = true;
+                    lnkMeasure.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
                     break;
                 case ELeftMenuItemLevel.Analyze:
                     lnkAnalyze.Font.Bold = true;
+                    lnkAnalyze.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                    {
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
                     break;
                 case ELeftMenuItemLevel.Download:
                     lnkDownload.Font.Bold = true;
+                    lnkDownload.ForeColor = System.Drawing.Color.Black;
                     break;
             }
 
