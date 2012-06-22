@@ -9,7 +9,7 @@
       </basicHttpBinding>
     </bindings>
     <client>
-      <endpoint address="http://dev.taskero.com/Services/ColorPathSync4D_Demo/Profiler.svc"
+      <endpoint address="http://dev.taskero.com/Services/ColorOrganizerService/Sync4D.svc"
           binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
           contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
     </client>

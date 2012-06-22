@@ -54,8 +54,12 @@
     <Reference Include="Divelements.SilverlightTools">
       <HintPath>..\..\..\Reference\Divelements.SilverlightTools.dll</HintPath>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras.SL5, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e7f91b7703710fe7, processorArchitecture=MSIL" />
-    <Reference Include="GalaSoft.MvvmLight.SL5, Version=0.0.0.0, Culture=neutral, PublicKeyToken=c114982fcf1a3a2e, processorArchitecture=MSIL" />
+    <Reference Include="GalaSoft.MvvmLight.Extras.SL5">
+      <HintPath>..\..\..\Reference\GalaSoft.MvvmLight.Extras.SL5.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.SL5">
+      <HintPath>..\..\..\Reference\GalaSoft.MvvmLight.SL5.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Service.Common.Encryption">
       <HintPath>..\..\..\Reference\Service.Common.Encryption.dll</HintPath>
