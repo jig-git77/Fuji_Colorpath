@@ -24,13 +24,13 @@ namespace FujifilmUSA.Sync.Business
         private int _optimizeRunLimit;
         private int _measurementsLimit;
         private string _webSiteLink;
-        private string _silverlightPostUrl;
+        //private string _silverlightPostUrl;
         #endregion
 
         private ApplicationConfiguration()
         {
             //TODO: put below entry in database configuration table...
-            _silverlightPostUrl = Utilities.ReadConfigValue("SilverlightPostUrl");
+            //_silverlightPostUrl = Utilities.ReadConfigValue("SilverlightPostUrl");
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -173,10 +173,10 @@ namespace FujifilmUSA.Sync.Business
                 return _webSiteLink;
             }
         }
-        public string SilverlightPostUrl
-        {
-            get { return _silverlightPostUrl; }
-        }
+        //public string SilverlightPostUrl
+        //{
+        //    get { return _silverlightPostUrl; }
+        //}
         #endregion
 
         #region ITaskBase Members

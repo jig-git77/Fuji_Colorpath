@@ -91,6 +91,7 @@
           <xs:element minOccurs="0" name="ProjectInfoId" type="ser:guid" />
           <xs:element minOccurs="0" name="ProjectName" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="RipSettings" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SilverlightPostUrl" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

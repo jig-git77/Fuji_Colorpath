@@ -7,6 +7,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewCOTransferSiteControl : IViewBase
     {
-        string SilverlightPostUrl { get; set; }
+        //string SilverlightPostUrl { get; set; }
     }
 }

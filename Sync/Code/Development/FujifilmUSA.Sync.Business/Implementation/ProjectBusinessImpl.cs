@@ -584,7 +584,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return chartData;
         }
 
-        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId)
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl)
         {
             var outParam = new Parameters() { ParameterName = "@TempProjectId", Size = 16, Type = DbType.Guid };
             Common.ImplementBusinessLogic(
@@ -600,7 +600,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                    new Parameters() {ParameterName = "@MeasurementDeviceTypeId", Type = DbType.Int32, Size = 4, Value = measurementDeviceTypeId},
                                                    new Parameters() {ParameterName = "@ChartId", Type = DbType.Int32, Size = 4, Value = chartId},
                                                    new Parameters() {ParameterName = "@ProjectId", Type = DbType.Int32, Size = 4, Value = projectId},
-                                                   new Parameters() {ParameterName = "@TempProjectIdIN", Type = DbType.Guid, Size = 16, Value = tempProjectId}
+                                                   new Parameters() {ParameterName = "@SilverlightPostUrl", Type = DbType.String, Size = 200, Value = silverlightPostUrl},
+                                                   new Parameters() {ParameterName = "@TempProjectIdIN", Type = DbType.Guid, Size = 16, Value = tempProjectId},
                                                },
                                            new List<Parameters>()
                                                {
@@ -619,20 +620,21 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var projectInfo = new TempProjectInfo();
             Common.ImplementBusinessLogic(
                 () =>
+                {
+                    var dsProjectInfo = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetTempProjectInfo", new object[] { tempProjectId });
+                    if (dsProjectInfo.Tables[0].Rows.Count > 0)
                     {
-                        var dsProjectInfo = DataAccessFactory.Instance.GetDsResult("CPSync4D.GetTempProjectInfo", new object[] {tempProjectId});
-                        if (dsProjectInfo.Tables[0].Rows.Count > 0)
-                        {
-                            projectInfo.TempProjectId = tempProjectId;
-                            projectInfo.ProjectName = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "ProjectName");
-                            projectInfo.Media = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Media");
-                            projectInfo.Colorant = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Colorant");
-                            projectInfo.RipSettings = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "RipSettings");
-                            projectInfo.MeasurementDeviceTypeId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "MeasurementDeviceTypeId");
-                            projectInfo.ChartId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ChartId");
-                            projectInfo.ProjectId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ProjectId");
-                        }
-                    },
+                        projectInfo.TempProjectId = tempProjectId;
+                        projectInfo.ProjectName = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "ProjectName");
+                        projectInfo.Media = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Media");
+                        projectInfo.Colorant = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Colorant");
+                        projectInfo.RipSettings = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "RipSettings");
+                        projectInfo.MeasurementDeviceTypeId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "MeasurementDeviceTypeId");
+                        projectInfo.ChartId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ChartId");
+                        projectInfo.ProjectId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ProjectId");
+                        projectInfo.SilverlightPostUrl = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "SilverlightPostUrl");
+                    }
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTempProjectInfo"));
             return projectInfo;
         }

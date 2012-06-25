@@ -133,6 +133,13 @@ namespace ColorOrganizerDemoLib.ViewModels
                 }
             };
 
+            var domainUrl = string.Empty;
+            if (System.Windows.Browser.HtmlPage.Document != null)
+            {
+                var urlParts = System.Windows.Browser.HtmlPage.Document.DocumentUri.AbsoluteUri.Split('/');
+                domainUrl = string.Join("/", urlParts, 0, urlParts.Length - 1);
+            }
+
             if (this.Parent.StartIccProfile.SelectedIccProfile.ProjectId > 0)
             {
                 client.StoreTempProjectInformationAsync(new StoreTempProjectInformationRequest()
@@ -143,7 +150,8 @@ namespace ColorOrganizerDemoLib.ViewModels
                                                                 ProjectInfoId = Common.EditProjectInfoId,
                                                                 ChartId = SelectedChart.ChartId,
                                                                 MeasurementDeviceTypeId = Convert.ToInt32(SelectedMeasurementDevice),
-                                                                ProjectId = this.Parent.StartIccProfile.SelectedIccProfile.ProjectId
+                                                                ProjectId = this.Parent.StartIccProfile.SelectedIccProfile.ProjectId,
+                                                                SilverlightPostUrl = domainUrl
                                                             });
             }
             else
@@ -159,10 +167,12 @@ namespace ColorOrganizerDemoLib.ViewModels
                                                                 RipSettings = SelectedRipSetting,
                                                                 MeasurementDeviceTypeId = Convert.ToInt32(SelectedMeasurementDevice),
                                                                 ChartId = SelectedChart.ChartId,
-                                                                ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName
+                                                                ProjectName = Parent.StartIccProfile.SelectedIccProfile.IccProfileName,
+                                                                SilverlightPostUrl = domainUrl
                                                             });
             }
         }
+
         private void GetChartList()
         {
             ChartList = new ObservableCollection<ReferenceChart>();

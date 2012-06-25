@@ -32,7 +32,8 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                     request.MeasurementDeviceTypeId,
                                                     request.ChartId,
                                                     request.ProjectId,
-                                                    request.ProjectInfoId);
+                                                    request.ProjectInfoId,
+                                                    request.SilverlightPostUrl);
 
                                                 response.Count = 1;
                                                 response.Message = Common.GetSuccessMessage();

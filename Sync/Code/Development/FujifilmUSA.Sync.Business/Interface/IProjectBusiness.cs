@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetLastOptimizedDlp(int projectId);
         Project SaveProject(Project project);
         ReferenceChartData GetReferenceChartData(int projectId);
-        Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId);
+        Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl);
         TempProjectInfo GetTempProjectInfo(Guid tempProjectId);
     }
 }

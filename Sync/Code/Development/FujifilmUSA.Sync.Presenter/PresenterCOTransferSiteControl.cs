@@ -16,9 +16,9 @@ namespace FujifilmUSA.Sync.Presenter
             _viewCOTransferSiteControl = viewCoTransferSiteControl;
         }
 
-        public void GetSilverlightPostUrl()
-        {
-            _viewCOTransferSiteControl.SilverlightPostUrl = ApplicationConfiguration.Instance.SilverlightPostUrl;
-        }
+        //public void GetSilverlightPostUrl()
+        //{
+        //    _viewCOTransferSiteControl.SilverlightPostUrl = ApplicationConfiguration.Instance.SilverlightPostUrl;
+        //}
     }
 }

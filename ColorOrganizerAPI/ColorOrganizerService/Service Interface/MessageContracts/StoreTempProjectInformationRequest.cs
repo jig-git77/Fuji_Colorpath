@@ -30,5 +30,8 @@ namespace FujifilmUSA.ColorOrganizerService.MessageContracts
 
         [DataMember]
         public int ProjectId { get; set; }
+
+        [DataMember]
+        public string SilverlightPostUrl { get; set; }
     }
 }

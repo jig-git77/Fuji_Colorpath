@@ -23,21 +23,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                _presenterCOTransferSiteControl.GetSilverlightPostUrl();
+                //_presenterCOTransferSiteControl.GetSilverlightPostUrl();
                 ScriptManager.RegisterStartupScript(
                     this.Page,
                     this.Page.GetType(),
                     "messaging",
                     string.Format("window.parent.postMessage('{0}','{1}');",
-                                  !string.IsNullOrEmpty(Request.QueryString["projectid"]) ? Convert.ToInt32(Request.QueryString["projectid"]) : 0, SilverlightPostUrl),
+                                  !string.IsNullOrEmpty(Request.QueryString["projectid"])
+                                      ? Convert.ToInt32(Request.QueryString["projectid"])
+                                      : 0,
+                                  SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
                     true);
             }
         }
 
-        #region IViewCOTransferSiteControl Members
+        //#region IViewCOTransferSiteControl Members
 
-        public string SilverlightPostUrl { get; set; }
+        //public string SilverlightPostUrl { get; set; }
 
-        #endregion
+        //#endregion
     }
 }

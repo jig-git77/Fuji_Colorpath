@@ -289,6 +289,8 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         private string RipSettingsField;
         
+        private string SilverlightPostUrlField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ChartId {
             get {
@@ -389,6 +391,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 if ((object.ReferenceEquals(this.RipSettingsField, value) != true)) {
                     this.RipSettingsField = value;
                     this.RaisePropertyChanged("RipSettings");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SilverlightPostUrl {
+            get {
+                return this.SilverlightPostUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SilverlightPostUrlField, value) != true)) {
+                    this.SilverlightPostUrlField = value;
+                    this.RaisePropertyChanged("SilverlightPostUrl");
                 }
             }
         }

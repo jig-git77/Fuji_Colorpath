@@ -18,14 +18,17 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Project>();
         }
+
         public int DeleteProject(int projectId)
         {
             return 0;
         }
+        
         public Dictionary<string, string> GetProjectOption(int projectId, EProfileType type)
         {
             return new Dictionary<string, string>();
         }
+        
         public List<SourceProfile> GetSourceProfileList(int currentUserId)
         {
             return new List<SourceProfile>();
@@ -61,7 +64,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new ReferenceChartData();
         }
 
-        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId)
+        public Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl)
         {
             return new Guid();
         }

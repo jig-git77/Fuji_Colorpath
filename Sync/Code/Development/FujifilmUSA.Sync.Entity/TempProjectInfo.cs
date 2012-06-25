@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Entity
         public int MeasurementDeviceTypeId { get; set; }
         public int ChartId { get; set; }
         public int ProjectId { get; set; }
+        public string SilverlightPostUrl { get; set; }
     }
 }
