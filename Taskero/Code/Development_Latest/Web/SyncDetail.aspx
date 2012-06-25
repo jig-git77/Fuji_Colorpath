@@ -2601,7 +2601,7 @@
                                                                                                     <tr>
                                                                                                         <td colspan="2" style="padding: 5px">
                                                                                                             Curve Type :
-                                                                                                            <asp:DropDownList ID="DdlCurveType" runat="server" Width="80px" CssClass="DROPDOWNLIST"
+                                                                                                            <asp:DropDownList ID="DdlCurveType" runat="server" Width="120px" CssClass="DROPDOWNLIST"
                                                                                                                 AutoPostBack="True" OnSelectedIndexChanged="DdlCurveType_SelectedIndexChanged">
                                                                                                                 <asp:ListItem Text="1%" Value="1"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="5%" Value="5"></asp:ListItem>
@@ -2612,6 +2612,7 @@
                                                                                                                 <asp:ListItem Text="XMF" Value="25"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
+                                                                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>
                                                                                                                 <%--  <asp:ListItem Text="&#916;Ref" Value="65"></asp:ListItem>--%>
                                                                                                             </asp:DropDownList>
                                                                                                             &nbsp;&nbsp;
