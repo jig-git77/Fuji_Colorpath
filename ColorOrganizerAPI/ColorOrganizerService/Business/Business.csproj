@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Reference\FujifilmUSA.Sync.Common.dll</HintPath>
     </Reference>
+    <Reference Include="FujifilmUSA.Sync.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.DataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="FujifilmUSA.Sync.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Reference\FujifilmUSA.Sync.Entity.dll</HintPath>
