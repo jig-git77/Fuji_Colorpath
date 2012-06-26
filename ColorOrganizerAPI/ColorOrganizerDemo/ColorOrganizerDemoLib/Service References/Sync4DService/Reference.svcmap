@@ -20,7 +20,7 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/ColorOrganizerService/sync4d.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://pc116/ColorOrganizerService/sync4d.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="Sync4D7.xsd" MetadataType="Schema" ID="4f9739dd-16df-4479-9c93-4de2b352d8a2" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
