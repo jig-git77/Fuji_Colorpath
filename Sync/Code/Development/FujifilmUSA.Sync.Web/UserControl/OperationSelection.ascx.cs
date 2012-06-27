@@ -38,29 +38,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         int val = license.Value;
 
-                         switch (license.Key)
-                         {
-                             case ELicenseType.Sync1D:
-                                 lbtnAligmentCurves.Enabled = true;
-                                 Hidden_AligmentCurves.Value = val.ToString();
-                                 break;
-                             case ELicenseType.DLP:
-                                 lbtnDLPOptimization.Enabled = true;
-                                 Hidden_DLPOptimization.Value = val.ToString();
-                                 break;
-                             case ELicenseType.InkOptimization:
-                                 lbtnInkOptimization.Enabled = true;
-                                 Hidden_InkOptimization.Value = val.ToString();
-                                 break;
-                             case ELicenseType.Verification:
-                                 lbtnColorValidation.Enabled = true;
-                                 Hidden_ColorValidation.Value = val.ToString();
-                                 break;
-                             case ELicenseType.IccProfiling:
-                                 lbtnICCProfiling.Enabled = true;
-                                 Hidden_ICCProfiling.Value = val.ToString();
-                                 break;
-                         }
+                        switch (license.Key)
+                        {
+                            case ELicenseType.Sync1D:
+                                lbtnAligmentCurves.Enabled = true;
+                                Hidden_AligmentCurves.Value = val.ToString();
+                                break;
+                            case ELicenseType.DLP:
+                                lbtnDLPOptimization.Enabled = true;
+                                Hidden_DLPOptimization.Value = val.ToString();
+                                break;
+                            case ELicenseType.InkOptimization:
+                                lbtnInkOptimization.Enabled = true;
+                                Hidden_InkOptimization.Value = val.ToString();
+                                break;
+                            case ELicenseType.Verification:
+                                lbtnColorValidation.Enabled = true;
+                                Hidden_ColorValidation.Value = val.ToString();
+                                break;
+                            case ELicenseType.IccProfiling:
+                                lbtnICCProfiling.Enabled = true;
+                                Hidden_ICCProfiling.Value = val.ToString();
+                                break;
+                        }
                     }
 
                     lbtnAligmentCurves.CssClass = lbtnAligmentCurves.Enabled ? "big_bt" : "disable_big_bt";

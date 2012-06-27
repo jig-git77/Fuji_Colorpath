@@ -188,7 +188,7 @@
                                     <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc,BranchName">
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
-                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px"
+                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
                                                 ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
                                                 <ItemTemplate>
                                                     <asp:Panel ID="divSelectDevice" runat="server" class="product_list">

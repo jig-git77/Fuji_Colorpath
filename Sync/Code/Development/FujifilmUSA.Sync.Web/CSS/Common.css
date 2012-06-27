@@ -956,9 +956,9 @@ label
 
 .ContainerClass
 {
-    margin-top: 17px;
+    margin-top: 0px;
     background: url(../images/roundedcornr_bg.png) no-repeat top left;
-    margin-left:200px;
+    margin-left:160px;
 }
 .Width100percent
 {
@@ -1482,46 +1482,42 @@ label
     padding-bottom: 0px;
 }
 .big_bt
-{
-    background: url(../images/big_bt_left.png) no-repeat top left;
-    display: inline-block;
+{  
     height: 40px;
-    line-height: 40px;
-    padding-left: 9px;
-}
+    line-height: 40px; 
+} 
 .big_bt span
 {
-    background: url(../images/big_bt_right.png) no-repeat top right;
-    display: block;
-    padding: 0 25px 4px 18px;
-    font-size: 16px;
+    background: url(../images/big_bt_right.png) no-repeat top ; 
+    display: block;  
+    font-size: 15px;
     color: #fff;
     font-weight: bold;
 }
 .big_bt:hover
 {
-    background: url(../images/big_bt_left_hover.png) no-repeat top left;
+    background: url(../images/big_bt_left_hover.png) no-repeat top left; 
 }
 .big_bt:hover span
 {
-    background: url(../images/big_bt_right_hover.png) no-repeat top right;
+    background: url(../images/big_bt_right_hover.png) no-repeat top right; 
+    color: #01906d;
+    text-decoration:underline;
 }
 
 .disable_big_bt
 {
-    background: url(../images/big_bt_left_disable.png) no-repeat top left;
+    background: url(../images/big_bt_right.png) no-repeat top ; 
     display: inline-block;
     height: 40px;
-    line-height: 40px;
-    padding-left: 9px;
+    line-height: 40px;   
 }
 .disable_big_bt span
-{
-    background: url(../images/big_bt_right_disable.png) no-repeat top right;
+{  
     display: block;
     padding: 0 25px 4px 18px;
-    font-size: 16px;
-    color: #fff;
+    font-size: 15px;
+    color: #727472;
     font-weight: bold;
 }
 /************************/
@@ -2025,83 +2021,6 @@ label
     margin: 0;
 }
 
-/************DeviceList : Popup menu***************/
-/*
-.popup
-{
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 260px;
-    height: 229px;
-    background: url(../images/popup-bg.png) 0 0 no-repeat;
-}
-.popup ul
-{
-    margin: 5px 0 0 25px;
-}
-.popup li
-{
-    line-height: 44px;
-}
-
-.Popup_bt, .Popup_bt_first
-{
-    color: #000;
-    font: normal 18px/44px Arial, Helvetica, sans-serif;
-    display: block;
-}
-.Popup_bt_last
-{
-    color: #000;
-    font: normal 18px/43px Arial, Helvetica, sans-serif;
-    display: block;
-}
-
-.disable_Popup_bt, .disable_Popup_bt a
-{
-    color: #C0C0C0 !important;
-    font: normal 18px/44px Arial, Helvetica, sans-serif;
-    display: block;
-}
-a.disable_Popup_bt:hover
-{
-    color: #C0C0C0;
-    display: block;
-}
-
-a.Popup_bt:hover
-{
-    color: #fff !important;
-    background-image: url(../images/popup-over.png);
-    background-repeat: no-repeat;
-    display: block;
-    background-position: left -44px;
-}
-
-a.Popup_bt_first:hover
-{
-    color: #fff !important;
-    background-image: url(../images/popup-over.png);
-    background-repeat: no-repeat;
-    display: block;
-    background-position: 0px 0px;
-}
-a.Popup_bt_last:hover
-{
-    color: #fff !important;
-    background-image: url(../images/popup-over.png);
-    background-repeat: no-repeat;
-    display: block;
-    background-position: 0 -176px;
-}
-
-.Popup_bt span, .Popup_bt_first span, .Popup_bt_last span, .disable_Popup_bt span
-{
-    display: block;
-}
-*/
-
 /******************Download List Style*******************/
 .Download_list
 {
@@ -2132,24 +2051,3 @@ a.Popup_bt_last:hover
 }
 
 
-.Enable_Opt
-{
-    font-size: 14px; color: #fff; font-weight: bold;
-}
-
-.Enable_Opt:hover
-{
-    color:Red;
-    text-decoration:underline;
-   /* background: url(../images/big_bt_right_hover.png) no-repeat top left; */
-}
-
-.Disable_Opt
-{
-    font-size: 14px; color: #727472; font-weight: bold;
-}
-
-.Disable_Opt:hover
-{
-    color:#727472;
-}

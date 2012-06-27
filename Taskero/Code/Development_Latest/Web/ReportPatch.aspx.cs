@@ -215,7 +215,7 @@ public partial class ReportPatch : PageBase
             Fuji.Common.ReportPDF objReportPDF = new Fuji.Common.ReportPDF();
             objReportPDF.ReportType = (int)Fuji.Common.Enums.enumReportType.PatchDetailReport;
             objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
-            objReportPDF.PDF_NAME = Sessions.UserID + "_PatchDeatil.PDF";
+            objReportPDF.PDF_NAME = Sessions.UserID + "_PatchDetail.PDF";
 
 
             if (ViewState["DT_BasicInfo"] != null)
