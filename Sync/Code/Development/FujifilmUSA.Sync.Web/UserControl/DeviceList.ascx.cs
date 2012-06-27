@@ -26,6 +26,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgDeviceList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
+                ViewState["CompanyId"] = 0;
+                ViewState["BranchId"] = 0;
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
             }
@@ -106,8 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindBranchDropDown()
         {
-            this.CompanyId =
-                            string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
+            this.CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             _presenterdevice.BranchList();
             if (!IsErrorOccured)
             {
@@ -132,13 +133,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterdevice.DeviceListById();
             if (!IsErrorOccured)
             {
-                rgDeviceList.DataSource = Devices;
+                if (this.CompanyId > 0 && this.BranchId > 0)
+                {
+                    rgDeviceList.DataSource = Devices;
+                    rgDeviceList.MasterTableView.NoMasterRecordsText = "No records to display.";
+                }
+                else
+                {   //---------If company and branch are not selected------//
+                    Devices.Clear();
+                    rgDeviceList.DataSource = Devices;
+                    rgDeviceList.MasterTableView.NoMasterRecordsText = "Please select company and branch from above selection list.";
+                }
+
             }
         }
-
         #endregion
 
-        #region IViewDevice Members
         #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
@@ -153,7 +163,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> Devices { get; set; }
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
-        #endregion
-        #endregion
+        #endregion      
     }
 }
