@@ -1500,9 +1500,7 @@ label
 }
 .big_bt:hover span
 {
-    background: url(../images/big_bt_right_hover.png) no-repeat top right; 
-    color: #01906d;
-    text-decoration:underline;
+    background: url(../images/big_bt_right_hover.png) no-repeat top right;      
 }
 
 .disable_big_bt
@@ -1517,7 +1515,7 @@ label
     display: block;
     padding: 0 25px 4px 18px;
     font-size: 15px;
-    color: #727472;
+    color: #505050;
     font-weight: bold;
 }
 /************************/
@@ -2050,4 +2048,12 @@ label
     width: 260px;
 }
 
+/*======================== Chart css =====================*/
+.CHARTTABLE{width:100%;border:1px solid #B4b4b4;background-color:#FFF}
+
+.SyncBottomBorder{border-bottom:1px SOLID #000000;}
+
+.FadingTooltip{border-right: darkgray 1px outset;border-top: darkgray 1px outset;font-size: 9pt;border-left: darkgray 1px outset;width: auto;color: black;border-bottom: darkgray 1px outset;height: auto;background-color: lemonchiffon;margin: 3px 3px 3px 3px;padding: 3px 3px 3px 3px;borderbottomwidth: 3px 3px 3px 3px;}
+
+.green-title { background:url(../images/title-bg-black.gif) repeat-x left top #000; font-family:Tahoma; font-size:11px; color:#fff; line-height:21px;font-weight:bold; padding-left:15px; }
 
