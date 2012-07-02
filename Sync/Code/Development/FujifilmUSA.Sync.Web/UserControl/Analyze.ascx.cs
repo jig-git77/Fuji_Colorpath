@@ -9,6 +9,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 using System.Linq;
+using System.Data;
+using System.Drawing;
+using System.Web.UI.DataVisualization.Charting;
+using System.Text;
+
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -89,8 +94,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMesurementChart();
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
                 BindAvgDelta();
+                FillAllTabsData();
             }
             BindMesurementChart();
+
+           // FillInkPaperChart();
         }
         #endregion
 
@@ -142,6 +150,256 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             GridPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
+
+        public void FillAllTabsData()
+        {
+            MeasurementId = 0;
+            if (hdMeasurement.Value != "")
+            {
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
+            }
+            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+          
+            _presenterAnalyze.GetInkPaperChart();
+            if (!IsErrorOccured)
+            {
+                FillInkPaperChart(DTDeltaEPrimaryPatches, DTDeltaEPrimaryPatches, DTDeltaEPrimaryPatches);
+            }
+        }
+
+        #region Fill InkPaper Tab  
+        private void FillInkPaperChart(DataTable DTDeltaEPrimaryPatches, DataTable DTDensity, DataTable Paper)
+        {
+            try
+            {
+                if (DTDeltaEPrimaryPatches != null)
+                    FillDeltaEPrimaryPatchesChart(DTDeltaEPrimaryPatches);
+               // if (DTDensity != null)
+                   // FillDensityChart(DTDensity);
+               // if (Paper != null)
+                   // FillPaperChart(Paper);
+
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+        #endregion
+
+        #region Fill DeltaE Primary Patches Chart
+        private void FillDeltaEPrimaryPatchesChart(DataTable DT)
+        {
+            try
+            {
+                ChartSummary_DeltaE.BorderColor = Color.White;
+                ChartSummary_DeltaE.BorderWidth = 0;
+                ChartSummary_DeltaE.BackColor = Color.White;
+
+                //========== Clear Points and Show Chart ==========//
+                ChartSummary_DeltaE.Visible = true;
+                ChartSummary_DeltaE.Series[0].Points.Clear();
+                ChartSummary_DeltaE.Series[1].Points.Clear();
+                ChartSummary_DeltaE.Series[2].Points.Clear();
+
+                #region //========== Declarations ==========//
+                // === Series0 to display Thresold value (ΔELimit) === //
+                Series objSeries0 = (Series)ChartSummary_DeltaE.Series[0];
+                objSeries0.XValueType = ChartValueType.Int32;
+                objSeries0.YValueType = ChartValueType.String;         
+                objSeries0.ChartType = SeriesChartType.Bar;
+                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
+                objSeries0.CustomProperties = "LabelStyle=Top,DrawingStyle=Cylinder";
+
+                // === Series1 to display Actual value (ΔE) === //
+                Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
+                objSeries1.XValueType = ChartValueType.Int32;
+                objSeries1.YValueType = ChartValueType.String;            
+                objSeries1.ChartType = SeriesChartType.Bar;
+                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
+
+                // === Series2 to display red marker on Thresold value === //
+                Series objSeries2 = (Series)ChartSummary_DeltaE.Series[2];
+                objSeries2.XValueType = ChartValueType.Int32;
+                objSeries2.YValueType = ChartValueType.String;              
+                objSeries2.ChartType = SeriesChartType.Bar;
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
+
+                // === Make Chart area look like 2D even it is 3D === //
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;
+                //ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.XAngle = 0;
+                //ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.YAngle = 0;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BackColor = Color.White;
+              
+                #endregion
+
+                #region //========== ChartArea Settings ==========//
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
+
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.Auto = true;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.X = float.Parse("0");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.Y = float.Parse("5");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.Width = float.Parse("99");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.Height = float.Parse("97");
+
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].InnerPlotPosition.Auto = true;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].InnerPlotPosition.X = float.Parse("0");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].InnerPlotPosition.Y = float.Parse("2");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].InnerPlotPosition.Width = float.Parse("98");
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].InnerPlotPosition.Height = float.Parse("97");
+
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].ShadowOffset = 0;
+                ChartSummary_DeltaE.BorderSkin.SkinStyle = BorderSkinStyle.None;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BorderWidth = 0;
+                ChartSummary_DeltaE.BorderSkin.BorderWidth = 0;
+
+
+
+                #endregion
+
+                #region " === Fill Series === "
+                // === Limit with red marker === //
+                StringBuilder SBDeltaEPatches = new StringBuilder();
+                string TooltipTitle = string.Empty;
+                if (DT != null && DT.Rows.Count > 0)
+                {
+                    for (int i = 0; i < DT.Rows.Count; i++)
+                    {
+                        SBDeltaEPatches.Append("<tr style='height: 10px'>");
+                        //if (Convert.ToDecimal(DT.Rows[i]["ΔE"]) < Convert.ToDecimal(DT.Rows[i]["ΔELimit"]))
+                        //    SBDeltaEPatches.Append("<td valign='middle' align='center' style='padding-right: 5px' class='SyncBottomBorder'><img src=\"Images/Proofok.gif\" width='19px' height='10px' ></td>");
+                        //else
+                        //    SBDeltaEPatches.Append("<td valign='middle' align='center' style='padding-right: 5px' class='SyncBottomBorder'><img src=\"Images/ProofFailed.gif\" width='19px' height='10px' ></td>");
+
+                        if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>Cyan</td>");
+                            TooltipTitle = "Cyan Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Magenta</td>");
+                            TooltipTitle = "Magenta Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Yellow</td>");
+                            TooltipTitle = "Yellow Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Black</td>");
+                            TooltipTitle = "Black Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Red</td>");
+                            TooltipTitle = "Red Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Green</td>");
+                            TooltipTitle = "Green Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Blue</td>");
+                            TooltipTitle = "Blue Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Paper</td>");
+                            TooltipTitle = "Paper Patch Metrics";
+                        }
+                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Triplet_Solid_Gray).ToString())
+                        {
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>3-C</td>");
+                            TooltipTitle = "3-C Patch Metrics";
+                        }
+
+                        SBDeltaEPatches.Append("</tr>");
+                        
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, TooltipTitle);
+                    }
+                    LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
+                }
+                #endregion
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+        
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, DataRow DR, int Index, string TooltipTitle)
+        {
+            try
+            {                
+                Double Y1, Y2;
+                Y1 = Y2 = 0;
+
+                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))));
+                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))));
+
+                // === When Actual value is not available then no series will display and no marker will display
+                if (Y2 == 0)
+                    Y1 = Y2;
+                
+                Series SeriesActual = objSeries1;
+               // objSeries0.Points.AddXY((Double)0, Y1);
+               
+               // objSeries0.Points[Index]["PointWidth"] = "1.0";
+                objSeries1.Points.AddXY((Double)0, Y2);
+
+                #region Add Tooltip HTML
+                StringBuilder toolTip = new StringBuilder();
+                toolTip.Append("<table>");
+                toolTip.Append("<tr><td><b>" + TooltipTitle + "</b></td></tr>");
+                toolTip.Append("<tr><td><table>");
+                toolTip.Append("<tr><td>Actual</td><td>");
+                toolTip.Append("L*" + DR["CIELAB_L*"].ToString());
+                toolTip.Append(" a*" + DR["CIELAB_a*"].ToString());
+                toolTip.Append(" b*" + DR["CIELAB_b*"].ToString());
+                toolTip.Append("</td></tr>");
+                toolTip.Append("<tr><td>Target</td><td>");
+                toolTip.Append("L*" + DR["TargetL*"].ToString());
+                toolTip.Append(" a*" + DR["Targeta*"].ToString());
+                toolTip.Append(" b*" + DR["Targetb*"].ToString());
+                toolTip.Append("</td></tr>");
+                toolTip.Append("<tr><td>&Delta;E</td><td>");
+                toolTip.Append(DR["ΔE"].ToString());
+                //toolTip.Append("(Thr." + DR["ΔELimit"].ToString() + ")");
+                toolTip.Append("</td></tr>");
+                //toolTip.Append("<tr><td>&Delta;H</td><td>");
+                //toolTip.Append(DR["ΔH"].ToString());
+
+                toolTip.Append("</td></tr>");
+                toolTip.Append("</table></td></tr>");
+                toolTip.Append("</table>");
+                #endregion
+
+                objSeries1.Points[Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                              
+               // objSeries2.Points.AddXY((Double)0, Y1);
+               // objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
+
+                SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(DR["HTMLColor"].ToString());
+                SeriesActual.Points[Index]["PointWidth"] = "1.0";              
+
+                if (Y1 == 0 && Y2 == 0)
+                {
+                   // objSeries0.Points[Index].MarkerImage = "";
+                   // objSeries2.Points[Index].MarkerImage = "";
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+        #endregion
 
         #endregion
 
@@ -250,6 +508,36 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void GridPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
+        {
+            //Apply custom sorting -- make "Descending" order by default
+
+            GridSortExpression sortExpr = new GridSortExpression();
+            switch (e.OldSortOrder)
+            {
+                case GridSortOrder.None:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = GridSortOrder.Descending;
+
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+                case GridSortOrder.Ascending:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = GridPatchDetails.MasterTableView.AllowNaturalSort ? GridSortOrder.None : GridSortOrder.Descending;
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+                case GridSortOrder.Descending:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = GridSortOrder.Ascending;
+
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+            }
+
+            e.Canceled = true;
+            GridPatchDetails.Rebind();
+        }
+
         protected void btn_Excel_Click(object sender, EventArgs e)
         {
             ConfigureExport();
@@ -292,6 +580,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<MeasurementPatchDetails> PatchDetails { get; set; }
 
         public int MeasurementId { get; set; }
+
+        public DataTable DTDeltaEPrimaryPatches { get; set; }
 
         #endregion
 

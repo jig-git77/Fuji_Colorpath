@@ -208,7 +208,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             //OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                             Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),
                             Avg_ΔE94 = DataReader.ReadDecimal(x, "Avg_ΔE94"),
-                            Avg_ΔE2000 = DataReader.ReadDecimal(x, "Avg_ΔE2000")
+                            Avg_ΔE2000 = DataReader.ReadDecimal(x, "Avg_ΔE2000"),
+                            Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),
+                            Max_ΔE94 = DataReader.ReadDecimal(x, "Max_ΔE94"),
+                            Max_ΔE2000 = DataReader.ReadDecimal(x, "Max_ΔE2000")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAvgDeltaMeasurement"));
@@ -251,6 +254,25 @@ namespace FujifilmUSA.Sync.Business.Implementation
                   
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
+            return PatchDetails;
+        }
+
+        public DataTable GetInkPaperChart(int optimizeRunId, int MeasurementId)
+        {
+            var PatchDetails = new DataTable();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetChartData_InkPaper",
+                                new object[] { optimizeRunId, MeasurementId });
+                    PatchDetails = dsMeasurements.Tables[0];
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));
             return PatchDetails;
         }
         #endregion

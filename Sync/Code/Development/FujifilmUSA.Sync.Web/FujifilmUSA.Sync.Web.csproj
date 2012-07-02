@@ -98,6 +98,8 @@
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
+    <Content Include="Images\BGISOPaperGraph1.jpg" />
+    <Content Include="Images\BGISOPaperGraph2.jpg" />
     <Content Include="Images\branch-management.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
@@ -113,6 +115,8 @@
     <Content Include="Images\download-icon.png" />
     <Content Include="Images\download_list_bg.png" />
     <Content Include="Images\expanded.png" />
+    <Content Include="Images\ISOPaperGraph1.jpg" />
+    <Content Include="Images\ISOPaperGraph2.jpg" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
@@ -127,6 +131,7 @@
     <Content Include="Images\sourceprofile-management.png" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
+    <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="PDFReports\Sync DLP Report.pdf" />

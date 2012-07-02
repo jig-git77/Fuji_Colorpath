@@ -70,6 +70,8 @@
         }
     }
 </script>
+ <script src="../JS/ChartTooltip.js" type="text/javascript"></script>
+
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -248,13 +250,22 @@
                                                                 Upload Date
                                                             </th>
                                                             <th style="font-size:13px;">
-                                                                Average ΔE
+                                                                Avg ΔE
                                                             </th>
                                                             <th style="font-size:13px;">
-                                                                Average ΔE94
+                                                                Max ΔE
                                                             </th>
-                                                             <th style="font-size:13px;">
-                                                                Average ΔE2000
+                                                            <th style="font-size:13px;">
+                                                                Avg ΔE94
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Max ΔE94
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Avg ΔE2000
+                                                            </th>
+                                                            <th style="font-size:13px;">
+                                                                Max ΔE2000
                                                             </th>
                                                       </tr>
                                                     </thead>
@@ -274,14 +285,23 @@
                                                     <td align="center" >
                                                         <asp:Label ID="lblMeasurementDate" runat="server" Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>'></asp:Label>
                                                     </td>
-                                                     <td align="center">
+                                                    <td align="center">
                                                         <asp:Label ID="lblAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
                                                     </td>
-                                                     <td align="center">
+                                                    <td align="center">
+                                                        <asp:Label ID="lblMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
+                                                    </td>
+                                                    <td align="center">
                                                         <asp:Label ID="lblAvg_ΔE94" runat="server" Text='<%#Eval("Avg_ΔE94") %>'></asp:Label>
                                                     </td>
-                                                     <td align="center">
+                                                    <td align="center">
+                                                        <asp:Label ID="lblMax_ΔE94" runat="server" Text='<%#Eval("Max_ΔE94") %>'></asp:Label>
+                                                    </td>
+                                                    <td align="center">
                                                         <asp:Label ID="lblAvg_ΔE2000" runat="server" Text='<%#Eval("Avg_ΔE2000") %>'></asp:Label>
+                                                    </td>
+                                                    <td align="center">
+                                                        <asp:Label ID="lblMax_ΔE2000" runat="server" Text='<%#Eval("Max_ΔE2000") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
@@ -323,7 +343,121 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
+
+              <table border="1" cellpadding="0" cellspacing="0" width="99%" style="background-color:White;">
+                <tr>
+                    <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" >
+                            <tr>
+                                <td colspan="2" class="green-title">
+                                    &nbsp; &Delta;E Primary Patches
+                                </td>
+                            </tr>
+                            <tr>
+                    <td style="width: 40%;" valign="top">
+                        <table cellpadding="0" cellspacing="0" width="100%"  >
+                          
+                            <tr>
+                                <td colspan="2" style="height: 40px;" class="SyncBottomBorder">
+                                </td>
+                            </tr>
+                            <asp:Literal ID="LitDeltaEPatches" runat="server"></asp:Literal>
+                        </table>
+                    </td>
+                    <td style="width: 60%; " id="TDEPrimary" runat="server">
+                         <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="420px" EnableViewState="false">   
+                                                                                                                              
+                                        <Series>
+                                            <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
+                                                                        BorderWidth="0" Color="#D4E8FA" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
+                                                                        Label=""   IsVisibleInLegend="false">
+                                              
+                                            </asp:Series>
+                                            <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
+                                                                        IsVisibleInLegend="false">
+                                            </asp:Series>
+                                            <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" 
+                                                                        IsVisibleInLegend="false" >
+                                            </asp:Series>
+                                            
+                                        </Series>
+                                        <ChartAreas>
+                                            <asp:ChartArea Name="ChartArea1" >
+                                                 <Area3DStyle  Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
+                                                                          IsClustered="True"></Area3DStyle>
+                                          
+                                                <AxisX Interval="Auto" Enabled="true"  IsReversed="true" IsLabelAutoFit="false">
+                                                    <MajorGrid Enabled="false" LineColor="Beige" />
+                                                    <MajorTickMark Enabled="false" />
+                                                    <LabelStyle Font="Verdana, 7pt" />
+                                                </AxisX>
+                                                 <AxisY Enabled="True" IsLabelAutoFit="False">
+                                                    <MajorGrid LineColor="Beige"></MajorGrid>
+                                                    <LabelStyle Format="###" Font="Verdana, 7pt" ForeColor="Black" />
+                                                </AxisY>
+                                            </asp:ChartArea>
+                                        </ChartAreas>
+                                    </asp:Chart>
+                    </td>
+                </tr>
+                           </table>
+                                            </td>
+                                            <td style="width: 50%;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                  <%--  <tr>
+                                                        <td>
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">
+                                                                        &nbsp; Density
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+
+
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>--%>
+                                                    <tr>
+                                                        <td>
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                                <tr>
+                                                                    <td class="green-title">
+                                                                        &nbsp; &#916; Paper L* a* b*
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                            <tr>
+                                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph1.jpg) no-repeat; width: 276px;
+                                                                                    height: 169px; padding-left: 34px; padding-bottom: 14px;">
+
+
+                                                                                     </td>
+                                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph2.jpg) no-repeat; width: 104px;
+                                                                                    height: 169px; padding-left: 28px; padding-bottom: 12px;">
+
+
+
+                                                                                    </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+              </table>
        
+        
+            
         </div>
         <div class="clear"></div>
         </div>                            	
@@ -362,17 +496,18 @@
                </tr>                            
                <tr>
                 <td>   
-                    <telerik:RadGrid ID="GridPatchDetails" ShowHeader="true"  AllowSorting="true" Width="650px"
+                    <telerik:RadGrid ID="GridPatchDetails" ShowHeader="true"  AllowSorting="true" Width="650px" 
                     AllowPaging="True"  runat="server" AutoGenerateColumns="false" EnableLinqExpressions="false"  AllowFilteringByColumn="true" 
-                    OnNeedDataSource="GridPatchDetails_NeedDataSource" OnItemDataBound="GridPatchDetails_ItemDataBound" HeaderStyle-Font-Bold="true" OnItemCommand="GridPatchDetails_ItemCommand">
-                    
+                    OnNeedDataSource="GridPatchDetails_NeedDataSource" OnItemDataBound="GridPatchDetails_ItemDataBound" HeaderStyle-Font-Bold="true" OnItemCommand="GridPatchDetails_ItemCommand"
+                    OnSortCommand="GridPatchDetails_SortCommand">
+                    <GroupingSettings CaseSensitive="false" />
                      <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="True" FrozenColumnsCount="6">
                         </Scrolling>
                      </ClientSettings>
 
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                    <MasterTableView DataKeyNames="HtmlColor">
+                    <MasterTableView DataKeyNames="HtmlColor">                      
                         <Columns>
                             <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
                                 DataField="HtmlColor" AllowFiltering="true">
@@ -402,7 +537,7 @@
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" SortExpression="CmykK" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="CmykK" DataType="System.Int32">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
+                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true" UniqueName="ΔE">
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" SortExpression="ΔE94" AllowFiltering="true" FilterControlWidth="30" CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="true">
                             </telerik:GridBoundColumn>
@@ -464,3 +599,6 @@
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
+ <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
+        position: absolute">
+</div>
