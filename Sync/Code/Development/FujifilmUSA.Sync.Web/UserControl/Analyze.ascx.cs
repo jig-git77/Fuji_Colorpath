@@ -133,8 +133,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
-                grdMeasurement.DataSource = MeasurementsDelta;
-                grdMeasurement.DataBind();
+                grdMeasurement.DataSource = MeasurementsDelta;           
+                grdMeasurement.DataBind();               
             }
             catch (Exception ex)
             {
@@ -161,24 +161,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
           
             _presenterAnalyze.GetInkPaperChart();
+           
             if (!IsErrorOccured)
             {
-                FillInkPaperChart(DTDeltaEPrimaryPatches, DTDeltaEPrimaryPatches, DTDeltaEPrimaryPatches);
+                FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches);
             }
         }
 
         #region Fill InkPaper Tab  
-        private void FillInkPaperChart(DataTable DTDeltaEPrimaryPatches, DataTable DTDensity, DataTable Paper)
+        private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper)
         {
             try
             {
                 if (DTDeltaEPrimaryPatches != null)
                     FillDeltaEPrimaryPatchesChart(DTDeltaEPrimaryPatches);
-               // if (DTDensity != null)
-                   // FillDensityChart(DTDensity);
-               // if (Paper != null)
-                   // FillPaperChart(Paper);
-
+                if (Paper != null)
+                    FillPaperChart(Paper);
             }
             catch (Exception Exc)
             {
@@ -188,7 +186,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Fill DeltaE Primary Patches Chart
-        private void FillDeltaEPrimaryPatchesChart(DataTable DT)
+        private void FillDeltaEPrimaryPatchesChart(List<AnalyzeChart> DT)
         {
             try
             {
@@ -200,43 +198,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartSummary_DeltaE.Visible = true;
                 ChartSummary_DeltaE.Series[0].Points.Clear();
                 ChartSummary_DeltaE.Series[1].Points.Clear();
-                ChartSummary_DeltaE.Series[2].Points.Clear();
-
+             
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value (ΔELimit) === //
                 Series objSeries0 = (Series)ChartSummary_DeltaE.Series[0];
                 objSeries0.XValueType = ChartValueType.Int32;
                 objSeries0.YValueType = ChartValueType.String;         
                 objSeries0.ChartType = SeriesChartType.Bar;
-                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
-                objSeries0.CustomProperties = "LabelStyle=Top,DrawingStyle=Cylinder";
-
+             
                 // === Series1 to display Actual value (ΔE) === //
                 Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
                 objSeries1.YValueType = ChartValueType.String;            
                 objSeries1.ChartType = SeriesChartType.Bar;
-                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Series2 to display red marker on Thresold value === //
-                Series objSeries2 = (Series)ChartSummary_DeltaE.Series[2];
-                objSeries2.XValueType = ChartValueType.Int32;
-                objSeries2.YValueType = ChartValueType.String;              
-                objSeries2.ChartType = SeriesChartType.Bar;
-                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
-
+                objSeries1.CustomProperties = "DrawingStyle=Cylinder";                
+            
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;
-                //ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.XAngle = 0;
-                //ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.YAngle = 0;
-                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BackColor = Color.White;
-              
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BackColor = Color.White;               
+             
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].AxisX.LabelStyle.Enabled = false;
-                ChartSummary_DeltaE.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1;
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].AxisX.LabelStyle.Interval = 1.0;
 
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.Auto = true;
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Position.X = float.Parse("0");
@@ -255,73 +241,62 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].BorderWidth = 0;
                 ChartSummary_DeltaE.BorderSkin.BorderWidth = 0;
 
-
-
                 #endregion
 
                 #region " === Fill Series === "
                 // === Limit with red marker === //
                 StringBuilder SBDeltaEPatches = new StringBuilder();
                 string TooltipTitle = string.Empty;
-                if (DT != null && DT.Rows.Count > 0)
+                if (DT != null && DT.Count > 0)
                 {
-                    for (int i = 0; i < DT.Rows.Count; i++)
+                    for (int i = 0; i < DT.Count; i++)
                     {
                         SBDeltaEPatches.Append("<tr style='height: 10px'>");
-                        //if (Convert.ToDecimal(DT.Rows[i]["ΔE"]) < Convert.ToDecimal(DT.Rows[i]["ΔELimit"]))
-                        //    SBDeltaEPatches.Append("<td valign='middle' align='center' style='padding-right: 5px' class='SyncBottomBorder'><img src=\"Images/Proofok.gif\" width='19px' height='10px' ></td>");
-                        //else
-                        //    SBDeltaEPatches.Append("<td valign='middle' align='center' style='padding-right: 5px' class='SyncBottomBorder'><img src=\"Images/ProofFailed.gif\" width='19px' height='10px' ></td>");
-
-                        if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
+                       
+                        if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
                         {
                             SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>Cyan</td>");
                             TooltipTitle = "Cyan Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
                         {
                             SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Magenta</td>");
                             TooltipTitle = "Magenta Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Yellow</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>Yellow</td>");
                             TooltipTitle = "Yellow Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Black</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>Black</td>");
                             TooltipTitle = "Black Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Red</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>Red</td>");
                             TooltipTitle = "Red Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Green</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>Green</td>");
                             TooltipTitle = "Green Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Blue</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>Blue</td>");
                             TooltipTitle = "Blue Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Paper</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:8px;'>Paper</td>");
                             TooltipTitle = "Paper Patch Metrics";
                         }
-                        else if (DT.Rows[i]["PatchTypeID"].ToString() == Convert.ToInt16(CPPatchType.Triplet_Solid_Gray).ToString())
-                        {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>3-C</td>");
-                            TooltipTitle = "3-C Patch Metrics";
-                        }
-
+                      
                         SBDeltaEPatches.Append("</tr>");
                         
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, TooltipTitle);
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT, i, TooltipTitle);
                     }
                     LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
                 }
@@ -333,24 +308,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, DataRow DR, int Index, string TooltipTitle)
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, List<AnalyzeChart> DR, int Index, string TooltipTitle)
         {
             try
             {                
                 Double Y1, Y2;
                 Y1 = Y2 = 0;
 
-                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))));
-                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))));
+                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
+                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
 
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)
                     Y1 = Y2;
-                
+                               
+                objSeries0.Points.AddXY((Double)0, Y1);               
+                objSeries0.Points[Index]["PointWidth"] = "-1";
+            
                 Series SeriesActual = objSeries1;
-               // objSeries0.Points.AddXY((Double)0, Y1);
-               
-               // objSeries0.Points[Index]["PointWidth"] = "1.0";
                 objSeries1.Points.AddXY((Double)0, Y2);
 
                 #region Add Tooltip HTML
@@ -359,44 +334,105 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 toolTip.Append("<tr><td><b>" + TooltipTitle + "</b></td></tr>");
                 toolTip.Append("<tr><td><table>");
                 toolTip.Append("<tr><td>Actual</td><td>");
-                toolTip.Append("L*" + DR["CIELAB_L*"].ToString());
-                toolTip.Append(" a*" + DR["CIELAB_a*"].ToString());
-                toolTip.Append(" b*" + DR["CIELAB_b*"].ToString());
+                toolTip.Append("L*" + DR[Index].CielabL.ToString());
+                toolTip.Append(" a*" + DR[Index].CielabA.ToString());
+                toolTip.Append(" b*" + DR[Index].CielabB.ToString());
                 toolTip.Append("</td></tr>");
                 toolTip.Append("<tr><td>Target</td><td>");
-                toolTip.Append("L*" + DR["TargetL*"].ToString());
-                toolTip.Append(" a*" + DR["Targeta*"].ToString());
-                toolTip.Append(" b*" + DR["Targetb*"].ToString());
+                toolTip.Append("L*" + DR[Index].TargetL.ToString());
+                toolTip.Append(" a*" + DR[Index].Targeta.ToString());
+                toolTip.Append(" b*" + DR[Index].Targetb.ToString());
                 toolTip.Append("</td></tr>");
                 toolTip.Append("<tr><td>&Delta;E</td><td>");
-                toolTip.Append(DR["ΔE"].ToString());
-                //toolTip.Append("(Thr." + DR["ΔELimit"].ToString() + ")");
-                toolTip.Append("</td></tr>");
-                //toolTip.Append("<tr><td>&Delta;H</td><td>");
-                //toolTip.Append(DR["ΔH"].ToString());
-
+                toolTip.Append(DR[Index].ΔE.ToString());             
+                toolTip.Append("</td></tr>");      
                 toolTip.Append("</td></tr>");
                 toolTip.Append("</table></td></tr>");
                 toolTip.Append("</table>");
                 #endregion
 
                 objSeries1.Points[Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                              
-               // objSeries2.Points.AddXY((Double)0, Y1);
-               // objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
-
-                SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(DR["HTMLColor"].ToString());
-                SeriesActual.Points[Index]["PointWidth"] = "1.0";              
-
-                if (Y1 == 0 && Y2 == 0)
-                {
-                   // objSeries0.Points[Index].MarkerImage = "";
-                   // objSeries2.Points[Index].MarkerImage = "";
-                }
+                          
+                SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(DR[Index].HtmlColor.ToString());
+                SeriesActual.Points[Index]["PointWidth"] = "1.0";
             }
             catch (Exception Ex)
             {
                 throw Ex;
+            }
+        }
+        #endregion
+
+        #region Fill Papaer Chart
+        private void FillPaperChart(List<AnalyzeChart> DT)
+        {
+            try
+            {
+                if (DT != null && DT.Count > 0)
+                {
+                    #region Fill Paper 1 Chart
+                   
+                    CHRT_Paper1.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
+                    CHRT_Paper1.Series["Green"].ChartType = SeriesChartType.Point;
+                    CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;
+                    CHRT_Paper1.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
+
+                    StringBuilder toolTip = new StringBuilder();
+                    #region Add Tooltip HTML
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>Paper Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append("L*" + DT[0].Paper_CielabL.ToString());
+                    toolTip.Append(" a*" + DT[0].Paper_CielabA.ToString());
+                    toolTip.Append(" b*" + DT[0].Paper_CielabB.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("L*" + DT[0].Paper_TargetL.ToString());
+                    toolTip.Append(" a*" + DT[0].Paper_Targeta.ToString());
+                    toolTip.Append(" b*" + DT[0].Paper_Targetb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append(DT[0].Paper_ΔL.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append(DT[0].Paper_Δa.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append(DT[0].Paper_Δb.ToString());
+                    toolTip.Append("</td></tr>");
+
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+
+                    Double Paper_Δa = Convert.ToDouble(DT[0].Paper_Δa) == 0 ? 0.01 : Convert.ToDouble(DT[0].Paper_Δa); //-------If Paper_Δa = 0, then it makes problem in display chart, so just temporary assign 0.05 for negligible difference
+                    CHRT_Paper1.Series["Paper"].Points.AddXY(Paper_Δa, Convert.ToDouble(DT[0].Paper_Δb));                   
+                    CHRT_Paper1.Series["Paper"].ChartType = SeriesChartType.Point;
+                    CHRT_Paper1.Series["Paper"].Points[0].BorderWidth = 4;
+                    CHRT_Paper1.Series["Paper"].CustomProperties = "PolarDrawingStyle=Marker";
+                    CHRT_Paper1.Series["Paper"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                    #endregion
+
+                    #region Fill Paper 2 chart
+
+                    #region Line Chart Series For Dispaly Line on 0 value
+                    CHRT_Paper2.Series["Series2"].ChartType = SeriesChartType.Line;
+                    CHRT_Paper2.Series["Series2"].XAxisType = AxisType.Secondary;
+                    CHRT_Paper2.Series["Series2"].Points.AddXY(0, 0);
+                    CHRT_Paper2.Series["Series2"].Points.AddXY(1, 0);
+                    #endregion
+
+                    CHRT_Paper2.Series["Series1"].Points.AddY(Convert.ToDouble(DT[0].Paper_ΔL));
+                    CHRT_Paper2.Series["Series1"].Points[0].Color = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
+                    CHRT_Paper2.Series["Series1"].CustomProperties = "DrawingStyle=Cylinder";
+                    CHRT_Paper2.Series["Series1"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                    #endregion
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         #endregion
@@ -581,7 +617,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int MeasurementId { get; set; }
 
-        public DataTable DTDeltaEPrimaryPatches { get; set; }
+        public List<AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
+
+        public List<AnalyzeChart> DTPaperPatches { get; set; }
 
         #endregion
 

@@ -257,9 +257,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PatchDetails;
         }
 
-        public DataTable GetInkPaperChart(int optimizeRunId, int MeasurementId)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int optimizeRunId, int MeasurementId)
         {
-            var PatchDetails = new DataTable();
+            var DeltaEPatchDetails = new List<AnalyzeChart>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -269,11 +269,55 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetDsResult(
                                 "CPSync4D.GetChartData_InkPaper",
                                 new object[] { optimizeRunId, MeasurementId });
-                    PatchDetails = dsMeasurements.Tables[0];
-
+                    DeltaEPatchDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE"),
+                            ΔELimit = DataReader.ReadDecimal(x, "ΔELimit"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb")                        
+                        }).ToList();                   
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));
-            return PatchDetails;
+            return DeltaEPatchDetails;
+        }
+
+        public List<AnalyzeChart> GetInkPaperChartData(int optimizeRunId, int MeasurementId)
+        {
+            var PaperPatchDetails = new List<AnalyzeChart>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetChartData_InkPaper",
+                                new object[] { optimizeRunId, MeasurementId });
+                    PaperPatchDetails = dsMeasurements.Tables[1].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart()
+                        {
+                            Paper_CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            Paper_CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            Paper_CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            Paper_TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Paper_Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Paper_Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            Paper_ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                            Paper_Δa = DataReader.ReadDecimal(x, "Δa"),
+                            Paper_Δb = DataReader.ReadDecimal(x, "Δb")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));
+            return PaperPatchDetails;
         }
         #endregion
 

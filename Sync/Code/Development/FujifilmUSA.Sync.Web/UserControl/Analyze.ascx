@@ -343,8 +343,8 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
-
-              <table border="1" cellpadding="0" cellspacing="0" width="99%" style="background-color:White;">
+       
+              <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;">
                 <tr>
                     <td style="width: 50%;" valign="top" class="CHARTTABLE">
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" >
@@ -354,110 +354,164 @@
                                 </td>
                             </tr>
                             <tr>
-                    <td style="width: 40%;" valign="top">
-                        <table cellpadding="0" cellspacing="0" width="100%"  >
+                                <td style="width: 40%;" valign="top">
+                                    <table cellpadding="0" cellspacing="0" width="100%"  >
                           
-                            <tr>
-                                <td colspan="2" style="height: 40px;" class="SyncBottomBorder">
+                                <tr>
+                                    <td colspan="2" style="height: 40px;" class="SyncBottomBorder">
+                                    </td>
+                                </tr>
+                                <asp:Literal ID="LitDeltaEPatches" runat="server"></asp:Literal>
+                                </table>
+                                </td>
+                                <td style="width: 60%; " id="TDEPrimary" runat="server">
+                                    <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="362px" EnableViewState="false">   
+                                                                                                                              
+                                                        <Series>
+                                                            <asp:Series Name="Series0"  Color="Transparent">                                              
+                                                            </asp:Series>
+                                                            <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
+                                                                                        IsVisibleInLegend="false">
+                                                            </asp:Series>    
+                                                        </Series>
+                                                        <ChartAreas>
+                                                            <asp:ChartArea Name="ChartArea1" >
+                                                                 <Area3DStyle  Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
+                                                                                          IsClustered="True"></Area3DStyle>
+                                          
+                                                                <AxisX  Enabled="true"  IsReversed="true" IsLabelAutoFit="false" Interval="Auto" >
+                                                                    <MajorGrid Enabled="false" LineColor="Beige" />
+                                                                    <MajorTickMark Enabled="false" />
+                                                                    <LabelStyle Font="Verdana, 7pt" />
+                                                                </AxisX>
+                                                                 <AxisY Enabled="True" IsLabelAutoFit="False">
+                                                                    <MajorGrid LineColor="Beige"></MajorGrid>
+                                                                    <LabelStyle Format="###" Font="Verdana, 7pt" ForeColor="Black" />
+                                                                </AxisY>
+                                                            </asp:ChartArea>
+                                                        </ChartAreas>
+                                                    </asp:Chart>
                                 </td>
                             </tr>
-                            <asp:Literal ID="LitDeltaEPatches" runat="server"></asp:Literal>
-                        </table>
+                       </table>
                     </td>
-                    <td style="width: 60%; " id="TDEPrimary" runat="server">
-                         <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="420px" EnableViewState="false">   
-                                                                                                                              
-                                        <Series>
-                                            <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
-                                                                        BorderWidth="0" Color="#D4E8FA" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                                                        Label=""   IsVisibleInLegend="false">
-                                              
-                                            </asp:Series>
-                                            <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                                        IsVisibleInLegend="false">
-                                            </asp:Series>
-                                            <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" 
-                                                                        IsVisibleInLegend="false" >
-                                            </asp:Series>
-                                            
-                                        </Series>
-                                        <ChartAreas>
-                                            <asp:ChartArea Name="ChartArea1" >
-                                                 <Area3DStyle  Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
-                                                                          IsClustered="True"></Area3DStyle>
-                                          
-                                                <AxisX Interval="Auto" Enabled="true"  IsReversed="true" IsLabelAutoFit="false">
-                                                    <MajorGrid Enabled="false" LineColor="Beige" />
-                                                    <MajorTickMark Enabled="false" />
-                                                    <LabelStyle Font="Verdana, 7pt" />
-                                                </AxisX>
-                                                 <AxisY Enabled="True" IsLabelAutoFit="False">
-                                                    <MajorGrid LineColor="Beige"></MajorGrid>
-                                                    <LabelStyle Format="###" Font="Verdana, 7pt" ForeColor="Black" />
-                                                </AxisY>
-                                            </asp:ChartArea>
-                                        </ChartAreas>
-                                    </asp:Chart>
-                    </td>
-                </tr>
-                           </table>
-                                            </td>
-                                            <td style="width: 50%;">
+                   
+                    <td style="width: 50%;" valign="top" class="CHARTTABLE">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%" >                                                
+                           
+                            <tr>
+                                <td class="green-title">
+                                    &nbsp; &#916; Paper L* a* b*
+                                </td>
+                            </tr>
+                            <tr>
+                                            <td style="width:380px;">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                  <%--  <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                                                <tr>
-                                                                    <td class="green-title">
-                                                                        &nbsp; Density
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
+                                                <tr><td></td></tr>
+                                                        <tr>
+                                                            <td style="background: #FFFFFF url(images/BGISOPaperGraph1.jpg) no-repeat; width: 276px;
+                                                                                    height: 180px; padding-left: 34px; padding-bottom: 14px;">
+                                                                                
+                                                                <asp:Chart ID="CHRT_Paper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1.jpg"
+                                                                    ImageType="Jpeg"  Width="240px" Height="130px"
+                                                                    EnableViewState="false">
+                                                                    <Legends>
+                                                                        <asp:Legend Name="Default" Enabled="False">
+                                                                        </asp:Legend>
+                                                                    </Legends>
+                                                                    <Series>
+                                                                        <asp:Series Name="Green" ChartType="Polar" 
+                                                                            MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                            MarkerColor="Green" ShadowOffset="1">                                                                                           
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Paper" ChartType="Polar" MarkerBorderColor="Black" MarkerColor="White"
+                                                                                MarkerSize="10" MarkerBorderWidth="2"
+                                                                            MarkerStyle="Circle" ShadowOffset="1">                                                                                             
+                                                                        </asp:Series>
+                                                                    </Series>
+                                                                    <BorderSkin PageColor="AliceBlue" />
+                                                                    <Titles>
+                                                                        <asp:Title Name="Title1">
+                                                                        </asp:Title>
+                                                                    </Titles>
+                                                                    <ChartAreas>
+                                                                        <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
+                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
+                                                                                LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisY>
+                                                                            <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="20" Minimum="-20" LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisX>
+                                                                        </asp:ChartArea>
+                                                                    </ChartAreas>
+                                                                </asp:Chart>
 
-
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>--%>
-                                                    <tr>
-                                                        <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                                                <tr>
-                                                                    <td class="green-title">
-                                                                        &nbsp; &#916; Paper L* a* b*
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                            <tr>
-                                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph1.jpg) no-repeat; width: 276px;
-                                                                                    height: 169px; padding-left: 34px; padding-bottom: 14px;">
-
-
-                                                                                     </td>
-                                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph2.jpg) no-repeat; width: 104px;
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="background: #FFFFFF url(images/BGISOPaperGraph2.jpg) no-repeat; width: 104px;
                                                                                     height: 169px; padding-left: 28px; padding-bottom: 12px;">
 
 
+                                                                    <asp:Chart ID="CHRT_Paper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2.jpg"
+                                                                    ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_Paper2" Width="69px" Height="130px"
+                                                                    EnableViewState="false">
+                                                                    <Legends>
+                                                                        <asp:Legend Name="Default" Enabled="False">
+                                                                        </asp:Legend>
+                                                                    </Legends>
+                                                                    <Series>
+                                                                        <asp:Series Name="Series1" BorderColor="100, 0 , 0 , 0" ChartArea="Default" BorderWidth="1"
+                                                                            IsVisibleInLegend="false">                                                                                               
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Series2" Color="Green" ChartArea="Default" BorderWidth="2" IsVisibleInLegend="false">
+                                                                        </asp:Series>
+                                                                    </Series>
+                                                                    <BorderSkin PageColor="AliceBlue" />
+                                                                    <Titles>
+                                                                        <asp:Title Name="Title1">
+                                                                        </asp:Title>
+                                                                    </Titles>
+                                                                    <ChartAreas>
+                                                                        <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
+                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
+                                                                                LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisY>
+                                                                            <AxisX IsMarginVisible="true" TitleAlignment="Near" LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisX>
+                                                                            <AxisX2 Interval="Auto" Minimum="0" Maximum="1" LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisX2>
+                                                                        </asp:ChartArea>
+                                                                    </ChartAreas>
+                                                                </asp:Chart>
 
-                                                                                    </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+
+                                                                </td>
+                                                        </tr>
+                                                    </table>
                                             </td>
                                         </tr>
+                                   
+                        </table>
+                    </td>
+                </tr>
               </table>
        
-        
-            
         </div>
         <div class="clear"></div>
         </div>                            	

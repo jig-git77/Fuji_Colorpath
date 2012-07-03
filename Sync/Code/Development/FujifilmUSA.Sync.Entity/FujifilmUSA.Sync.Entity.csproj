@@ -48,6 +48,7 @@
     <Compile Include="Activity.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AnalyzeChart.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
     <Compile Include="MeasurementPatchDetails.cs">

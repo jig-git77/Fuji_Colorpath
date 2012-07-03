@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Business.Messages;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Business.Interface
 {
@@ -13,5 +14,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateMeasurementByAnalyzeChart(Measurement measurement);
         List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int optimizeRunId);
         List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId);
+        List<AnalyzeChart> GetDeltaEPatchChartData(int optimizeRunId, int MeasurementId);
+        List<AnalyzeChart> GetInkPaperChartData(int optimizeRunId, int MeasurementId);
     }
 }

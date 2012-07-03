@@ -2,6 +2,7 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Entity;
+using System.Data;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -42,6 +43,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId)
         {
             return new List<MeasurementPatchDetails>();
+        }
+
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int optimizeRunId, int MeasurementId)
+        {
+            return new List<AnalyzeChart>();
+        }
+
+        public List<AnalyzeChart> GetInkPaperChartData(int optimizeRunId, int MeasurementId)
+        {
+            return new List<AnalyzeChart>();
         }
 
         #endregion
