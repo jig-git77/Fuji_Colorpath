@@ -17,7 +17,7 @@ namespace FujifilmUSA.ColorOrganizerService.Business
             this.ErrorMessage = e.ErrorMessage;
         }
 
-        internal void UserLogin(string username, string hashPassword)
+        internal void UserLogin(string username, string hashPassword, bool dontRaiseException = false)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(hashPassword))
             {
@@ -32,12 +32,15 @@ namespace FujifilmUSA.ColorOrganizerService.Business
             {
                 ExceptionHandling.RaiseException(this.ErrorMessage, ErrorCode.Internal);
             }
-            
-            if (user == null || user.UserId == 0)
+
+            if (dontRaiseException)
             {
-                ExceptionHandling.RaiseException("Invalid credentials", ErrorCode.InValidCredential);
+                if (user == null || user.UserId == 0)
+                {
+                    ExceptionHandling.RaiseException("Invalid credentials", ErrorCode.InValidCredential);
+                }
             }
-            
+
             CurrentUser = user;
         }
 

@@ -40,6 +40,11 @@ namespace FujifilmUSA.ColorOrganizerService.ServiceImplementation
             return Sync4DBusiness.StoreTempProjectInformation(request);
         }
 
+        public CheckUserCredentialsResponse CheckUserCredentials(CheckUserCredentialsRequest request)
+        {
+            return Sync4DBusiness.CheckUserCredentials(request);
+        }
+
         #endregion
     }
 }

@@ -30,5 +30,9 @@ namespace FujifilmUSA.ColorOrganizerService.ServiceContracts
         [OperationContract]
         [FaultContract(typeof(ServiceFault))]
         StoreTempProjectInformationResponse StoreTempProjectInformation(StoreTempProjectInformationRequest request);
+
+        [OperationContract]
+        [FaultContract(typeof (ServiceFault))]
+        CheckUserCredentialsResponse CheckUserCredentials(CheckUserCredentialsRequest request);
     }
 }
