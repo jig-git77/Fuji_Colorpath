@@ -23,7 +23,28 @@ namespace ColorOrganizerDemoLib.ViewModels
             SelectedIccProfile = new IccProfile();
             NextButtonCommand.Executed += (sender, e) => PassToParent(EControl.ChartPrint);
             PreviousButtonCommand.Executed += (sender, e) => PassToParent(EControl.SelectDevice);
+
+            LastAnalyzeButtonCommand = new DelegateCommand();
+            LastAnalyzeButtonCommand.Executed += (sender, e) => RedirectToLastAnalyse();
+
         }
+
+        private void RedirectToLastAnalyse()
+        {
+            this.Parent.WebHost.RedirectUrl =
+                            String.Format(
+                                "{0}/COProcessRequest.ashx?action={1}&uid={2}&pwd={3}&projectid={4}&deviceid={5}",
+                                Common.FujiWebSite,
+                                "viewLastAnalyze",
+                                Common.UserName,
+                                Common.GetEncryptPassword(),
+                                this.Parent.StartIccProfile.SelectedIccProfile.ProjectId,
+                                this.Parent.SelectDevice.SelectedDevice.DeviceId);
+
+            PassToParent(EControl.WebHost);
+        }
+
+        public DelegateCommand LastAnalyzeButtonCommand { get; set; }
 
         public bool IsNextButtonEnable
         {

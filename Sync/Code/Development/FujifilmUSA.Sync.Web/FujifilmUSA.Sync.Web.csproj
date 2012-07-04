@@ -91,7 +91,9 @@
     <Content Include="AddDeviceFamily.aspx" />
     <Content Include="AddLicenseType.aspx" />
     <Content Include="AddLicenseManagement.aspx" />
+    <Content Include="COProjectMaxLimit.aspx" />
     <Content Include="COTransferSiteControl.aspx" />
+    <Content Include="COViewOpenProject.aspx" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
@@ -180,7 +182,10 @@
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\CODisplaybar.ascx" />
+    <Content Include="UserControl\COProjectMaxLimit.ascx" />
     <Content Include="UserControl\COTransferSiteControl.ascx" />
+    <Content Include="UserControl\COViewOpenProject.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
@@ -555,12 +560,26 @@
     <Compile Include="COProcessRequest.ashx.cs">
       <DependentUpon>COProcessRequest.ashx</DependentUpon>
     </Compile>
+    <Compile Include="COProjectMaxLimit.aspx.cs">
+      <DependentUpon>COProjectMaxLimit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COProjectMaxLimit.aspx.designer.cs">
+      <DependentUpon>COProjectMaxLimit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="COTransferSiteControl.aspx.cs">
       <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="COTransferSiteControl.aspx.designer.cs">
       <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COViewOpenProject.aspx.cs">
+      <DependentUpon>COViewOpenProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COViewOpenProject.aspx.designer.cs">
+      <DependentUpon>COViewOpenProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="DownloadSoftwares.aspx.cs">
       <DependentUpon>DownloadSoftwares.aspx</DependentUpon>
@@ -723,12 +742,33 @@
     <Compile Include="UserControl\BaseControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\CODisplaybar.ascx.cs">
+      <DependentUpon>CODisplaybar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CODisplaybar.ascx.designer.cs">
+      <DependentUpon>CODisplaybar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\COProjectMaxLimit.ascx.cs">
+      <DependentUpon>COProjectMaxLimit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COProjectMaxLimit.ascx.designer.cs">
+      <DependentUpon>COProjectMaxLimit.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\COTransferSiteControl.ascx.cs">
       <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\COTransferSiteControl.ascx.designer.cs">
       <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\COViewOpenProject.ascx.cs">
+      <DependentUpon>COViewOpenProject.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COViewOpenProject.ascx.designer.cs">
+      <DependentUpon>COViewOpenProject.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\DownloadSoftwares.ascx.cs">
       <DependentUpon>DownloadSoftwares.ascx</DependentUpon>

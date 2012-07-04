@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
         public DateTime EndDate;
+
+        public bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
+
         public string AddMeasurementDeleteMeasurementConfirmation
         {
             get
@@ -80,6 +89,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 header.InnerText = string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
             }
+
+            lbtnDownloadAndSaveDLP.Visible = !IsXmfUser;
 
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>Create DLP<span>"
@@ -161,7 +172,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
           
             _presenterAnalyze.GetInkPaperChart();
-           
             if (!IsErrorOccured)
             {
                 FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches);
@@ -315,8 +325,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Double Y1, Y2;
                 Y1 = Y2 = 0;
 
-                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
-                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
+                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))));
+                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))));
 
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)

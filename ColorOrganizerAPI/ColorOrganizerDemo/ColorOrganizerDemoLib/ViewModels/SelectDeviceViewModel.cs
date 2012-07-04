@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using ColorOrganizerDemoLib.Sync4DService;
+using System;
 
 namespace ColorOrganizerDemoLib.ViewModels
 {
@@ -12,6 +13,7 @@ namespace ColorOrganizerDemoLib.ViewModels
             FillDeviceList();
         }
 
+        
         public bool IsNextButtonEnable
         {
             get
@@ -35,6 +37,7 @@ namespace ColorOrganizerDemoLib.ViewModels
             }
         }
 
+        
         public ObservableCollection<Device> DeviceList { get; set; }
 
         private void FillDeviceList()

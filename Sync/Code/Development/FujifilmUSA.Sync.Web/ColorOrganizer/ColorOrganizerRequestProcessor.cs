@@ -12,12 +12,21 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
 {
     public class ColorOrganizerRequestProcessor : IViewColorOrganizerRequestProcessor
     {
+        internal enum Action
+        {
+            None = 0,
+            Add = 1,
+            Edit = 2,
+            ViewLastAnalyze = 3
+        }
+
         #region Variable Declarations
 
         private readonly PresenterColorOrganizerRequestProcessor _presenterColorOrganizerRequestProcessor;
         private const string _qsActionKey = "action";
         private const string _qsactionValueAdd = "add";
         private const string _qsactionValueEdit = "edit";
+        private const string _qsactionValueView = "viewLastAnalyze";
         private const string _qsUserNameKey = "uid";
         private const string _qsPasswordKey = "pwd";
         private const string _qsDeviceIdKey = "deviceid";
@@ -46,7 +55,9 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
             if (!HttpContext.Current.Request.QueryString[_qsActionKey].
                      Equals(_qsactionValueAdd, StringComparison.CurrentCultureIgnoreCase) &&
                 !HttpContext.Current.Request.QueryString[_qsActionKey].
-                     Equals(_qsactionValueEdit, StringComparison.CurrentCultureIgnoreCase))
+                     Equals(_qsactionValueEdit, StringComparison.CurrentCultureIgnoreCase) &&
+                !HttpContext.Current.Request.QueryString[_qsActionKey].
+                     Equals(_qsactionValueView, StringComparison.CurrentCultureIgnoreCase))
                 return false;
 
             if (HttpContext.Current.Request.QueryString[_qsActionKey].
@@ -59,6 +70,11 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
             {
                 return ProcessEditRequest();
             }
+            else if (HttpContext.Current.Request.QueryString[_qsActionKey].
+                     Equals(_qsactionValueView, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return ProcessViewLastAnalyzeRequest();
+            }
             else
             {
                 return false;
@@ -67,7 +83,90 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
         #endregion
 
         #region Private Methods
+        //private bool AuthenticateUserCredentials()
+        //{
+        //    if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsUserNameKey]) ||
+        //         string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsPasswordKey]) ||
+        //         string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]))
+        //        return false;
+
+
+        //    UserName = HttpContext.Current.Request.QueryString[_qsUserNameKey];
+        //    Password = HttpContext.Current.Request.QueryString[_qsPasswordKey].Replace(' ', '+');
+        //    _presenterColorOrganizerRequestProcessor.GetLoginInformation();
+        //    if (CurrentUser != null && CurrentUser.UserId > 0)
+        //    {
+        //        SessionManager.Instance.CurrentUser = CurrentUser;
+        //        FormsAuthentication.RedirectFromLoginPage(UserName, false);
+
+        //        DeviceId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]);
+        //        _presenterColorOrganizerRequestProcessor.GetDeviceById();
+        //        if (!IsErrorOccured)
+        //        {
+        //            SessionManager.Instance.CurrentDevice = Device;
+        //            SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+        //            SessionManager.Instance.CurrentProjLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
+
         private bool CommonProcess()
+        {
+            //Validate user credentials
+            if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsUserNameKey]) ||
+                string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsPasswordKey]) ||
+                string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]))
+                return false;
+
+            //Set login user
+            UserName = HttpContext.Current.Request.QueryString[_qsUserNameKey];
+            Password = HttpContext.Current.Request.QueryString[_qsPasswordKey].Replace(' ', '+');
+            _presenterColorOrganizerRequestProcessor.GetLoginInformation();
+            if (CurrentUser != null && CurrentUser.UserId > 0)
+            {
+                SessionManager.Instance.CurrentUser = CurrentUser;
+                FormsAuthentication.RedirectFromLoginPage(UserName, false);
+
+                //Get Current Device info
+                DeviceId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]);
+                _presenterColorOrganizerRequestProcessor.GetDeviceById();
+                if (!IsErrorOccured)
+                {
+                    //Set device to session
+                    SessionManager.Instance.CurrentDevice = Device;
+                    SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                    SessionManager.Instance.CurrentProjLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
+
+                    //Convert action to enum
+                    Action action = 0;
+                    action = (Action)Enum.Parse(typeof(Action), HttpContext.Current.Request.QueryString[_qsActionKey].ToString().Trim().ToLower(), true);
+                    switch (action)
+                    {
+                        case Action.Add:
+                        case Action.Edit:
+                            //Project info id is used in Add or Edit only
+                            if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsProjectInfoIdKey]))
+                                return false;
+                            TempProjectId = Guid.Parse(HttpContext.Current.Request.QueryString[_qsProjectInfoIdKey]);
+                            _presenterColorOrganizerRequestProcessor.GetTempProjectInfo();
+                            SessionManager.Instance.CurrentColorOrgRequest = TempProjectInfo;
+                            break;
+                        case Action.ViewLastAnalyze:
+                            break;
+                        default:
+                            break;
+                    }
+                    //Return true if no error
+                    if (!IsErrorOccured)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CommonProcess(string t)
         {
             if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsUserNameKey]) ||
                  string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsPasswordKey]) ||
@@ -110,7 +209,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     SessionManager.Instance.CurrentColorOrgRequest = TempProjectInfo;
 
                     #endregion
-                    
+
                     return true;
                 }
             }
@@ -134,7 +233,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     if (TotalProjects >= SessionManager.Instance.CurrentProjLimit)
                     {
                         //--------------Project Limit reach, so can not create more projects under this Device now-------//  
-                        HttpContext.Current.Response.Redirect("ProjectMaxLimit.aspx");
+                        HttpContext.Current.Response.Redirect("COProjectMaxLimit.aspx");
                         return false;
                     }
                     else
@@ -147,7 +246,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                                                                          CurrentDisplayStatus = ECurrentProjectStatus.New,
                                                                      };
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
-                        
+
                         if (!IsErrorOccured)
                         {
                             SessionManager.Instance.CurrentProject.ProjectName = TempProjectInfo.ProjectName;
@@ -200,6 +299,34 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     }
                 }
 
+                #endregion
+            }
+            return false;
+        }
+
+        private bool ProcessViewLastAnalyzeRequest()
+        {
+            if (CommonProcess())
+            {
+                #region Setting Existing Project Information
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsProjectIdKey]))
+                {
+                    ProjectId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsProjectIdKey]);
+                    _presenterColorOrganizerRequestProcessor.GetProjectDetail();
+                    
+                    if (Project.Status == ERefChartDisplayType.Open)
+                    {
+                        //Redirect to other page                        
+                        HttpContext.Current.Response.Redirect("COViewOpenProject.aspx");
+                    }
+                    else
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        //Redirect to COAnalyze page
+                        HttpContext.Current.Response.Redirect("COAnalyze.aspx");
+                    }
+                }
                 #endregion
             }
             return false;
