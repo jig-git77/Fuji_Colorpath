@@ -114,6 +114,7 @@
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgUser_NeedDataSource" OnItemCommand="rgUser_ItemCommand" Width="98%"
                     HeaderStyle-Font-Bold="true">
+                    <GroupingSettings CaseSensitive="false" />
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="UserId">
                         <Columns>

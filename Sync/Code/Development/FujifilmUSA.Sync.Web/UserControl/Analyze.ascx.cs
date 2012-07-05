@@ -105,11 +105,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindMesurementChart();
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
                 BindAvgDelta();
-                FillAllTabsData();
+               // FillAllTabsData();
             }
-            BindMesurementChart();
-
-           // FillInkPaperChart();
+            BindMesurementChart();           
         }
         #endregion
 
@@ -134,6 +132,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
                 GridPatchDetails.Rebind();
+                FillAllTabsData();
             }
         }
 
@@ -174,7 +173,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAnalyze.GetInkPaperChart();
             if (!IsErrorOccured)
             {
-                FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches);
+                FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
             }
         }
 
@@ -215,7 +214,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.XValueType = ChartValueType.Int32;
                 objSeries0.YValueType = ChartValueType.String;         
                 objSeries0.ChartType = SeriesChartType.Bar;
-             
+                         
                 // === Series1 to display Actual value (ΔE) === //
                 Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
@@ -226,8 +225,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;
-                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BackColor = Color.White;               
-             
+                ChartSummary_DeltaE.ChartAreas["ChartArea1"].BackColor = Color.White;
+               
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -325,8 +324,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Double Y1, Y2;
                 Y1 = Y2 = 0;
 
-                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString()))));
-                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString()))));
+                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
+                Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
 
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)
@@ -381,7 +380,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (DT != null && DT.Count > 0)
                 {
                     #region Fill Paper 1 Chart
-                   
+
+                    CHRT_Paper1.Series["Green"].Points.Clear();
+                    CHRT_Paper1.Series["Paper"].Points.Clear();
+
                     CHRT_Paper1.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
                     CHRT_Paper1.Series["Green"].ChartType = SeriesChartType.Point;
                     CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;
@@ -393,31 +395,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<tr><td><b>Paper Patch Metrics</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>Actual</td><td>");
-                    toolTip.Append("L*" + DT[0].Paper_CielabL.ToString());
-                    toolTip.Append(" a*" + DT[0].Paper_CielabA.ToString());
-                    toolTip.Append(" b*" + DT[0].Paper_CielabB.ToString());
+                    toolTip.Append("L*" + DT[0].CielabL.ToString());
+                    toolTip.Append(" a*" + DT[0].CielabA.ToString());
+                    toolTip.Append(" b*" + DT[0].CielabB.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("<tr><td>Target</td><td>");
-                    toolTip.Append("L*" + DT[0].Paper_TargetL.ToString());
-                    toolTip.Append(" a*" + DT[0].Paper_Targeta.ToString());
-                    toolTip.Append(" b*" + DT[0].Paper_Targetb.ToString());
+                    toolTip.Append("L*" + DT[0].TargetL.ToString());
+                    toolTip.Append(" a*" + DT[0].Targeta.ToString());
+                    toolTip.Append(" b*" + DT[0].Targetb.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("<tr><td>&Delta;L*</td><td>");
-                    toolTip.Append(DT[0].Paper_ΔL.ToString());
+                    toolTip.Append(DT[0].ΔL.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("<tr><td>&Delta;a*</td><td>");
-                    toolTip.Append(DT[0].Paper_Δa.ToString());
+                    toolTip.Append(DT[0].Δa.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("<tr><td>&Delta;b*</td><td>");
-                    toolTip.Append(DT[0].Paper_Δb.ToString());
+                    toolTip.Append(DT[0].Δb.ToString());
                     toolTip.Append("</td></tr>");
 
                     toolTip.Append("</table></td></tr>");
                     toolTip.Append("</table>");
                     #endregion
 
-                    Double Paper_Δa = Convert.ToDouble(DT[0].Paper_Δa) == 0 ? 0.01 : Convert.ToDouble(DT[0].Paper_Δa); //-------If Paper_Δa = 0, then it makes problem in display chart, so just temporary assign 0.05 for negligible difference
-                    CHRT_Paper1.Series["Paper"].Points.AddXY(Paper_Δa, Convert.ToDouble(DT[0].Paper_Δb));                   
+                    Double Paper_Δa = Convert.ToDouble(DT[0].Δa) == 0 ? 0.01 : Convert.ToDouble(DT[0].Δa); //-------If Δa = 0, then it makes problem in display chart, so just temporary assign 0.01 for negligible difference
+                    CHRT_Paper1.Series["Paper"].Points.AddXY(Paper_Δa, Convert.ToDouble(DT[0].Δb));                   
                     CHRT_Paper1.Series["Paper"].ChartType = SeriesChartType.Point;
                     CHRT_Paper1.Series["Paper"].Points[0].BorderWidth = 4;
                     CHRT_Paper1.Series["Paper"].CustomProperties = "PolarDrawingStyle=Marker";
@@ -426,6 +428,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     #region Fill Paper 2 chart
 
+                    CHRT_Paper2.Series["Series1"].Points.Clear();
+                    CHRT_Paper2.Series["Series2"].Points.Clear();
+
                     #region Line Chart Series For Dispaly Line on 0 value
                     CHRT_Paper2.Series["Series2"].ChartType = SeriesChartType.Line;
                     CHRT_Paper2.Series["Series2"].XAxisType = AxisType.Secondary;
@@ -433,7 +438,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CHRT_Paper2.Series["Series2"].Points.AddXY(1, 0);
                     #endregion
 
-                    CHRT_Paper2.Series["Series1"].Points.AddY(Convert.ToDouble(DT[0].Paper_ΔL));
+                    CHRT_Paper2.Series["Series1"].Points.AddY(Convert.ToDouble(DT[0].ΔL));
                     CHRT_Paper2.Series["Series1"].Points[0].Color = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
                     CHRT_Paper2.Series["Series1"].CustomProperties = "DrawingStyle=Cylinder";
                     CHRT_Paper2.Series["Series1"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";

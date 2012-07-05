@@ -101,8 +101,8 @@
                 OnNeedDataSource="rgSourceProfile_NeedDataSource"
                 OnItemCommand="rgSourceProfile_ItemCommand" 
                 Width="98%" 
-                HeaderStyle-Font-Bold="true"
-                 >
+                HeaderStyle-Font-Bold="true">
+                <GroupingSettings CaseSensitive="false" />                
 
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
 

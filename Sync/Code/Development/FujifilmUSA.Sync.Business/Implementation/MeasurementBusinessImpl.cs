@@ -305,15 +305,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
                         {
-                            Paper_CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
-                            Paper_CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
-                            Paper_CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
-                            Paper_TargetL = DataReader.ReadDecimal(x, "TargetL"),
-                            Paper_Targeta = DataReader.ReadDecimal(x, "Targeta"),
-                            Paper_Targetb = DataReader.ReadDecimal(x, "Targetb"),
-                            Paper_ΔL = DataReader.ReadDecimal(x, "ΔL"),
-                            Paper_Δa = DataReader.ReadDecimal(x, "Δa"),
-                            Paper_Δb = DataReader.ReadDecimal(x, "Δb")
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                            Δa = DataReader.ReadDecimal(x, "Δa"),
+                            Δb = DataReader.ReadDecimal(x, "Δb")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));

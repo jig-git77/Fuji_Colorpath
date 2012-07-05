@@ -111,6 +111,7 @@
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgBranch_NeedDataSource" OnItemCommand="rgBranch_ItemCommand"
                     Width="98%" HeaderStyle-Font-Bold="true">
+                    <GroupingSettings CaseSensitive="false" />
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="BranchID,CompanyID,BranchName,Location,IsActive">
                         <Columns>

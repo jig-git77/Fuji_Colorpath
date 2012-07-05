@@ -21,6 +21,6 @@ namespace FujifilmUSA.Sync.Entity
         public decimal CielabB { get; set; }
         public decimal? ΔE { get; set; }
         public decimal? ΔE94 { get; set; }
-        public decimal? ΔE2000 { get; set; }
+        public decimal? ΔE2000 { get; set; }       
     }
 }

@@ -90,6 +90,7 @@
             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
             <telerik:RadGrid ID="rgRefChart" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true" AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False"
                 EnableLinqExpressions="false" OnNeedDataSource="rgRefChart_NeedDataSource" OnItemCommand="rgRefChart_ItemCommand" Width="98%" HeaderStyle-Font-Bold="true">
+                <GroupingSettings CaseSensitive="false" />
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                 <MasterTableView DataKeyNames="ReferenceChartTypeId,ChartName">
                     <Columns>

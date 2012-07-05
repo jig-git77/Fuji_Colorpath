@@ -118,6 +118,7 @@
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgLicense_NeedDataSource" OnItemCommand="rgLicense_ItemCommand"
                     Width="98%" HeaderStyle-Font-Bold="true">
+                    <GroupingSettings CaseSensitive="false" />
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="LicenseID,Branch.CompanyId,Branch.BranchId,LicenseTypeId,LicenseDesc,ActivationDate,ExpirationDate,IsActive">
                         <Columns>                         

@@ -146,6 +146,7 @@
                                 OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand"
                                 OnItemDataBound="rgProjectList_ItemDataBound" Width="100%" CellSpacing="0" GridLines="None"
                                 AllowSorting="true">
+                                <GroupingSettings CaseSensitive="false" />
                                 <HeaderStyle Font-Bold="true" />
                                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                                 <MasterTableView DataKeyNames="ProjectId">

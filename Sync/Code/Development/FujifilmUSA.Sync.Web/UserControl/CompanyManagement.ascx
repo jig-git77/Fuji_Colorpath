@@ -102,6 +102,7 @@
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgCompany_NeedDataSource" OnItemCommand="rgCompany_ItemCommand"
                     OnItemDataBound="rgCompany_ItemDataBound" Width="98%" HeaderStyle-Font-Bold="true">
+                    <GroupingSettings CaseSensitive="false" />
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="CompanyId,CompanyName,RegionId,IsActive">
                         <Columns>

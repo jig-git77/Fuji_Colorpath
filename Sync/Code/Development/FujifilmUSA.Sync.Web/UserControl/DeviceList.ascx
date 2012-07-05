@@ -181,6 +181,7 @@
                                     AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
                                     OnItemCommand="rgDeviceList_ItemCommand" Width="675px" >
+                                    <GroupingSettings CaseSensitive="false" />
                                     <ClientSettings Selecting-AllowRowSelect="true">
                                     </ClientSettings>
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />

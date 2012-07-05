@@ -108,6 +108,7 @@
                     AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
                     OnNeedDataSource="rgDevice_NeedDataSource" OnItemCommand="rgDevice_ItemCommand"
                     Width="98%" HeaderStyle-Font-Bold="true">
+                    <GroupingSettings CaseSensitive="false" />
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="DeviceID,DeviceName,LicenseID,DeviceFamily.DeviceFamilyID,License.Branch.BranchId,License.Branch.Company.CompanyId,License.BranchId,IsActive">
                         <Columns>
