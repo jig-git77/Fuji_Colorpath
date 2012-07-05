@@ -20,7 +20,7 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                         () =>
                                         {
                                             var userBusiness = new UserBusiness();
-                                            userBusiness.UserLogin(request.UserName, request.UserPassword);
+                                            userBusiness.UserLogin(request.UserName, request.UserPassword, true);
 
                                             response.IsValid = (userBusiness.CurrentUser != null && userBusiness.CurrentUser.UserId > 0);
                                             if(response.IsValid)

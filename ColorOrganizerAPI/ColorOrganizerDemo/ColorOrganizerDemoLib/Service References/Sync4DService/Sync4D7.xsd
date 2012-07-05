@@ -107,4 +107,22 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="StoreTempProjectInformationResponse" nillable="true" type="tns:StoreTempProjectInformationResponse" />
+  <xs:complexType name="CheckUserCredentialsRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q15:BaseRequest">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CheckUserCredentialsRequest" nillable="true" type="tns:CheckUserCredentialsRequest" />
+  <xs:complexType name="CheckUserCredentialsResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q16:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsValid" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CheckUserCredentialsResponse" nillable="true" type="tns:CheckUserCredentialsResponse" />
 </xs:schema>

@@ -158,6 +158,7 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProjectInformationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProfileRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetDeviceListRequest))]
     public partial class BaseRequest : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -411,6 +412,13 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckUserCredentialsRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    public partial class CheckUserCredentialsRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GetDeviceListRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
         "Contracts")]
     public partial class GetDeviceListRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
@@ -423,6 +431,7 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProjectInformationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetDeviceListResponse))]
     public partial class BaseResponse : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -609,6 +618,28 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 if ((this.ProjectInfoIdField.Equals(value) != true)) {
                     this.ProjectInfoIdField = value;
                     this.RaisePropertyChanged("ProjectInfoId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckUserCredentialsResponse", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    public partial class CheckUserCredentialsResponse : ColorOrganizerDemoLib.Sync4DService.BaseResponse {
+        
+        private bool IsValidField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsValid {
+            get {
+                return this.IsValidField;
+            }
+            set {
+                if ((this.IsValidField.Equals(value) != true)) {
+                    this.IsValidField = value;
+                    this.RaisePropertyChanged("IsValid");
                 }
             }
         }
@@ -1090,6 +1121,12 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         System.IAsyncResult BeginStoreTempProjectInformation(ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationRequest request, System.AsyncCallback callback, object asyncState);
         
         ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse EndStoreTempProjectInformation(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentials", ReplyAction="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
+        System.IAsyncResult BeginCheckUserCredentials(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request, System.AsyncCallback callback, object asyncState);
+        
+        ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse EndCheckUserCredentials(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1212,6 +1249,25 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CheckUserCredentialsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CheckUserCredentialsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class Sync4DServiceContractClient : System.ServiceModel.ClientBase<ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract>, ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract {
         
         private BeginOperationDelegate onBeginPingDelegate;
@@ -1249,6 +1305,12 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         private EndOperationDelegate onEndStoreTempProjectInformationDelegate;
         
         private System.Threading.SendOrPostCallback onStoreTempProjectInformationCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCheckUserCredentialsDelegate;
+        
+        private EndOperationDelegate onEndCheckUserCredentialsDelegate;
+        
+        private System.Threading.SendOrPostCallback onCheckUserCredentialsCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -1314,6 +1376,8 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         public event System.EventHandler<GetProfileCompletedEventArgs> GetProfileCompleted;
         
         public event System.EventHandler<StoreTempProjectInformationCompletedEventArgs> StoreTempProjectInformationCompleted;
+        
+        public event System.EventHandler<CheckUserCredentialsCompletedEventArgs> CheckUserCredentialsCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -1593,6 +1657,52 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                         request}, this.onEndStoreTempProjectInformationDelegate, this.onStoreTempProjectInformationCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract.BeginCheckUserCredentials(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCheckUserCredentials(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract.EndCheckUserCredentials(System.IAsyncResult result) {
+            return base.Channel.EndCheckUserCredentials(result);
+        }
+        
+        private System.IAsyncResult OnBeginCheckUserCredentials(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request = ((ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest)(inValues[0]));
+            return ((ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract)(this)).BeginCheckUserCredentials(request, callback, asyncState);
+        }
+        
+        private object[] OnEndCheckUserCredentials(System.IAsyncResult result) {
+            ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse retVal = ((ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract)(this)).EndCheckUserCredentials(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnCheckUserCredentialsCompleted(object state) {
+            if ((this.CheckUserCredentialsCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CheckUserCredentialsCompleted(this, new CheckUserCredentialsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CheckUserCredentialsAsync(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request) {
+            this.CheckUserCredentialsAsync(request, null);
+        }
+        
+        public void CheckUserCredentialsAsync(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request, object userState) {
+            if ((this.onBeginCheckUserCredentialsDelegate == null)) {
+                this.onBeginCheckUserCredentialsDelegate = new BeginOperationDelegate(this.OnBeginCheckUserCredentials);
+            }
+            if ((this.onEndCheckUserCredentialsDelegate == null)) {
+                this.onEndCheckUserCredentialsDelegate = new EndOperationDelegate(this.OnEndCheckUserCredentials);
+            }
+            if ((this.onCheckUserCredentialsCompletedDelegate == null)) {
+                this.onCheckUserCredentialsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCheckUserCredentialsCompleted);
+            }
+            base.InvokeAsync(this.onBeginCheckUserCredentialsDelegate, new object[] {
+                        request}, this.onEndCheckUserCredentialsDelegate, this.onCheckUserCredentialsCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -1743,6 +1853,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
             public ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse EndStoreTempProjectInformation(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse _result = ((ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse)(base.EndInvoke("StoreTempProjectInformation", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginCheckUserCredentials(ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("CheckUserCredentials", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse EndCheckUserCredentials(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse _result = ((ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse)(base.EndInvoke("CheckUserCredentials", _args, result)));
                 return _result;
             }
         }

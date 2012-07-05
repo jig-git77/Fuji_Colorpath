@@ -33,7 +33,7 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                 ExceptionHandling.RaiseException(this.ErrorMessage, ErrorCode.Internal);
             }
 
-            if (dontRaiseException)
+            if (!dontRaiseException)
             {
                 if (user == null || user.UserId == 0)
                 {

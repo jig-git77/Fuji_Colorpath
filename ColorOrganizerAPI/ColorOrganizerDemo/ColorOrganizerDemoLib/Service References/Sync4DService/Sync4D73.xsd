@@ -83,4 +83,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CheckUserCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q11:CheckUserCredentialsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="CheckUserCredentialsResult" nillable="true" type="q12:CheckUserCredentialsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
