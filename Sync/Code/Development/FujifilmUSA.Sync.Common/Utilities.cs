@@ -331,5 +331,13 @@ namespace FujifilmUSA.Sync.Common
         {
             return (EProfilerException) Enum.Parse(typeof (EProfilerException), exception);
         }
+
+        #region Decimal Round Function
+     
+        public static Double DecimalRound(Double Del)
+        {
+            return System.Math.Round(Del, 2);
+        }
+        #endregion
     }
 }
