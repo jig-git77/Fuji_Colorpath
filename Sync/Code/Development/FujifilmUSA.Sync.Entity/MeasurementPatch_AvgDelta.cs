@@ -16,5 +16,8 @@ namespace FujifilmUSA.Sync.Entity
         public decimal Avg_ΔE94 { get; set; }
         public decimal Avg_ΔE2000 { get; set; }
 
+        public decimal Max_ΔE { get; set; }
+        public decimal Max_ΔE94 { get; set; }
+        public decimal Max_ΔE2000 { get; set; }
     }
 }
