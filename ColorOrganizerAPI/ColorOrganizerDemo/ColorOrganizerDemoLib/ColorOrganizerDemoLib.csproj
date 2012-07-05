@@ -151,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.CheckUserCredentialsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Sync4DService\ColorOrganizerDemoLib.Sync4DService.GetDeviceListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
