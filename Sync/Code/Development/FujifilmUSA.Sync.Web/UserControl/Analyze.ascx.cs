@@ -175,6 +175,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
             }
+
+            _presenterAnalyze.GetGrayChart();
+             if (!IsErrorOccured)
+             {
+                 FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
+             }
         }
 
         #region Fill InkPaper Tab  
@@ -192,7 +198,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Exc;
             }
         }
-        #endregion
+       
 
         #region Fill DeltaE Primary Patches Chart
         private void FillDeltaEPrimaryPatchesChart(List<AnalyzeChart> DT)
@@ -372,7 +378,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Fill Papaer Chart
+        #region Fill Paper Chart
         private void FillPaperChart(List<AnalyzeChart> DT)
         {
             try
@@ -450,6 +456,159 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw;
             }
         }
+        #endregion
+
+        #endregion
+
+        #region Fill Lab Tab
+        private void FillLabCharts(List<AnalyzeChart_Gray> DTLABChart, List<AnalyzeChart_Gray> DTGaumatChart1, List<AnalyzeChart_Gray> DTGaumatChart2)
+        {
+            try
+            {
+                //if (DTLABChart != null)
+                //    FillLABChart(DTLABChart);
+                if (DTGaumatChart1 != null && DTGaumatChart2 != null)
+                    FillGaumatChart(DTGaumatChart1, DTGaumatChart2);
+
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+
+
+        #region Fill Gaumat Chart
+        private void FillGaumatChart(List<AnalyzeChart_Gray> DTTarget, List<AnalyzeChart_Gray> DTColors)
+        {
+           
+            AnalyzeChart_Gray List_Paper =  DTTarget.Find(item => item.PatchType == CPPatchType.Paper.ToString());
+           
+          
+            //DataView dv = DTTarget.DefaultView;
+            Double Papera = 0;
+            Double Paperb = 0;
+        
+                Papera = Convert.ToDouble(List_Paper.CielabA);
+                Paperb = Convert.ToDouble(List_Paper.CielabB);
+
+         
+            //Set the colors first
+            BindLABComparision("Cyan", DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
+
+            BindLABComparision("Cyan", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
+
+            BindLABComparision("Cyan", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
+        }
+
+        private void BindLABComparision(string ColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)
+        {
+            StringBuilder toolTip = new StringBuilder();
+           
+            AnalyzeChart_Gray List_Color = DT.Find(item => item.PatchType == ColorName);
+            List<AnalyzeChart_Gray> ListFilter = new List<AnalyzeChart_Gray>();
+            ListFilter.Add(List_Color);
+
+            for (int i = 0; i < ListFilter.Count; i = i + 1)
+            {
+                #region Bind AB Comparison
+                if (i == 0 && !isTarget && !isActual)
+                {
+                    CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
+                    CHART_ABComparison.Series[ColorName].Points.AddXY(Papera, Paperb);
+                }
+
+                int pointCount = ((isTarget) ? CHART_ABComparison.Series["Targets"].Points.Count : CHART_ABComparison.Series[ColorName].Points.Count);
+
+
+                if (isTarget || isActual)
+                {
+                    #region Add Tooltip HTML
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append("L*" + ListFilter[i].CielabL.ToString());
+                    toolTip.Append(" a*" + ListFilter[i].CielabA.ToString());
+                    toolTip.Append(" b*" + ListFilter[i].CielabB.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("L*" + ListFilter[i].TargetL.ToString());
+                    toolTip.Append(" a*" + ListFilter[i].Targeta.ToString());
+                    toolTip.Append(" b*" + ListFilter[i].Targetb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;E</td><td>");
+                    toolTip.Append(ListFilter[i].ΔE.ToString());
+                    toolTip.Append("</td></tr>");
+                    //toolTip.Append("<tr><td>&Delta;H</td><td>");
+                    //toolTip.Append(dv[i]["ΔH"].ToString());
+                    //toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append(ListFilter[i].ΔL.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append(ListFilter[i].Δa.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append(ListFilter[i].Δb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+                }
+
+
+                if (isTarget)
+                {
+                    CHART_ABComparison.Series["Targets"].ChartType = SeriesChartType.FastPoint;
+                    CHART_ABComparison.Series["Targets"].Points.AddXY(Convert.ToDouble(ListFilter[i].Targeta), Convert.ToDouble(ListFilter[i].Targetb));
+                    CHART_ABComparison.Series["Targets"].MarkerSize = MarkerSize;
+                    CHART_ABComparison.Series["Targets"].MarkerColor = Color.Green;
+                }
+                else
+                {
+                    CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
+                    CHART_ABComparison.Series[ColorName].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].CielabB));
+                }
+
+
+                if (i == ListFilter.Count - 1 && (isTarget || isActual))
+                {
+                    if (isActual)
+                    {
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
+                    }
+                }
+                else
+                {
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = 0;
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
+                }
+                #endregion
+
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #endregion
@@ -635,6 +794,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
 
         public List<AnalyzeChart> DTPaperPatches { get; set; }
+
+        public List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }
+        public List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
+        public List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
 
         #endregion
 

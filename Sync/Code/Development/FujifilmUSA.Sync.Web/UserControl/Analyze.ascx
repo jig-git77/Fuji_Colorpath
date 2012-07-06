@@ -534,7 +534,160 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
-    
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td style="width: 45%;" valign="top" class="CHARTTABLE">
+                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td class="green-title">
+                                                    &nbsp; Gamut Plot
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                        <tr>
+                                                            <td class="green-title">
+                                                                a* - b* Comparison
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:Label ID="Label1" runat="server"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" valign="top">
+                                                           
+                                                                <asp:Chart ID="CHART_ABComparison" runat="server" BackImageWrapMode="Scaled" BackImage="~/Images/CPSyncABComparison.jpg"
+                                                                    ImageType="Jpeg" Width="280px" Height="250px" EnableViewState="false">
+                                                                    <Legends>
+                                                                        <asp:Legend Name="Default" Enabled="False">
+                                                                        </asp:Legend>
+                                                                    </Legends>
+                                                                    <Series>
+                                                                         <asp:Series Name="Targets" ChartType="Polar"
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Cyan" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Magenta" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Yellow" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Red" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Green" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Blue" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Paper" ChartType="Polar" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                    </Series>
+                                                                    <BorderSkin PageColor="AliceBlue" />
+                                                                    <Titles>
+                                                                        <asp:Title Name="Title1">
+                                                                        </asp:Title>
+                                                                    </Titles>
+                                                                    <ChartAreas>
+                                                                        <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
+                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="100" Minimum="-100"
+                                                                                LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisY>
+                                                                            <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="100" Minimum="-100" LineDashStyle="NotSet">
+                                                                                <MajorGrid Enabled="False" />
+                                                                                <MajorTickMark Enabled="false" />
+                                                                                <LabelStyle Enabled="False" />
+                                                                            </AxisX>
+                                                                        </asp:ChartArea>
+                                                                    </ChartAreas>
+                                                                </asp:Chart>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="green-title">
+                                                                L* Comparison
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" valign="top">
+
+
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+
+                                    
+                                    <td style="width: 55%;" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                                        <tr>
+                                                            <td class="green-title">
+                                                                &nbsp; Gray Balance L* a* b*
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                        <td>
+
+
+
+
+                                                                         </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+
+
+
+
+
+                                                                         </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+
+
+
+                                                                          </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                        </td>
+
+                                                                         </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
         </div>
         <div class="clear"></div>
         </div>                            	

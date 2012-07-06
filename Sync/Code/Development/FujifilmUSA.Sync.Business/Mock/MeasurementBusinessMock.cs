@@ -55,6 +55,15 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<AnalyzeChart>();
         }
 
+        public List<AnalyzeChart_Gray> GetGamutChart1(int optimizeRunId, int MeasurementId)
+        {
+            return new List<AnalyzeChart_Gray>();
+        }
+        public List<AnalyzeChart_Gray> GetGamutChart2(int optimizeRunId, int MeasurementId)
+        {
+            return new List<AnalyzeChart_Gray>();
+        }
+
         #endregion
 
         #region ITaskBase Members

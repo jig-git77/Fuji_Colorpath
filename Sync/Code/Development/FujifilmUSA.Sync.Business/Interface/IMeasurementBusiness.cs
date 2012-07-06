@@ -16,5 +16,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId);
         List<AnalyzeChart> GetDeltaEPatchChartData(int optimizeRunId, int MeasurementId);
         List<AnalyzeChart> GetInkPaperChartData(int optimizeRunId, int MeasurementId);
+        List<AnalyzeChart_Gray> GetGamutChart1(int optimizeRunId, int MeasurementId);
+        List<AnalyzeChart_Gray> GetGamutChart2(int optimizeRunId, int MeasurementId);
     }
 }

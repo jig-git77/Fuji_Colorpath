@@ -319,6 +319,72 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));
             return PaperPatchDetails;
         }
+
+        public List<AnalyzeChart_Gray> GetGamutChart1(int optimizeRunId, int MeasurementId)
+        {
+            var GamutChartDetails = new List<AnalyzeChart_Gray>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetChartData_Gray",
+                                new object[] { optimizeRunId, MeasurementId });
+                    GamutChartDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_Gray()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchType = DataReader.ReadString(x, "PatchType"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),                           
+                            ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                            Δa = DataReader.ReadDecimal(x, "Δa"),
+                            Δb = DataReader.ReadDecimal(x, "Δb"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_GrayGamut1"));
+            return GamutChartDetails;
+        }
+
+        public List<AnalyzeChart_Gray> GetGamutChart2(int optimizeRunId, int MeasurementId)
+        {
+            var GamutChartDetails = new List<AnalyzeChart_Gray>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetChartData_Gray",
+                                new object[] { optimizeRunId, MeasurementId });
+                    GamutChartDetails = dsMeasurements.Tables[1].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_Gray()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchType = DataReader.ReadString(x, "PatchType"),
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b")  
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_GrayGamut2"));
+            return GamutChartDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members
