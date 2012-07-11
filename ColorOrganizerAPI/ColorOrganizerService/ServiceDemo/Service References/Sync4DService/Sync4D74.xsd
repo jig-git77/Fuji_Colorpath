@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:1425/Sync4D.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" />
+  <xs:import schemaLocation="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" />
   <xs:element name="Ping">
     <xs:complexType>
       <xs:sequence />
@@ -80,6 +80,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="StoreTempProjectInformationResult" nillable="true" type="q10:StoreTempProjectInformationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserCredentials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q11:CheckUserCredentialsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUserCredentialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="CheckUserCredentialsResult" nillable="true" type="q12:CheckUserCredentialsResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

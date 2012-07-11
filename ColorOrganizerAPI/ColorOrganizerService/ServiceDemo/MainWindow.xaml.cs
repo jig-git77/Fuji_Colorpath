@@ -14,6 +14,7 @@ namespace ServiceDemo
     public partial class MainWindow : Window
     {
         public List<string> Methods { get; set; }
+        public Dictionary<int, string> ProfileTypes { get; set; }
         public string SelectedMethod { get; set; }
         private string _userName;
         private string _userPassword;
@@ -22,6 +23,14 @@ namespace ServiceDemo
         public MainWindow()
         {
             Methods = new List<String>() {"Get Device List", "Get ReferenceChart List", "Get Profile", "Get Project Information", "Store Temp Project Information"};
+
+            ProfileTypes = new Dictionary<int, string>()
+                               {
+                                   { Convert.ToInt32(EProfileType.None), EProfileType.None.ToString() },
+                                   { Convert.ToInt32(EProfileType.SourceProfile), EProfileType.SourceProfile.ToString() },
+                                   { Convert.ToInt32(EProfileType.DestinationPRofile), EProfileType.DestinationPRofile.ToString() },
+                                   { Convert.ToInt32(EProfileType.DeviceLinkProfile), EProfileType.DeviceLinkProfile.ToString() },
+                               };
             InitializeComponent();
         }
 
@@ -79,12 +88,14 @@ namespace ServiceDemo
                             #region GetProfile
 
                             var getProfileresponse = client.GetProfile(new GetProfileRequest()
-                            {
-                                UserName = _userName,
-                                UserPassword = _userPassword,
-                                SecurityToken = _securityToken,
-                                ProjectId = Convert.ToInt32(txtProjectId.Text)
-                            });
+                                                                           {
+                                                                               UserName = _userName,
+                                                                               UserPassword = _userPassword,
+                                                                               SecurityToken = _securityToken,
+                                                                               ProjectId = Convert.ToInt32(txtProjectId.Text),
+                                                                               ProfileType =
+                                                                                   (EProfileType) Enum.Parse(typeof (EProfileType), cmbProfileType.SelectedValue.ToString())
+                                                                           });
                             dgResult.ItemsSource = new List<Profile>() { getProfileresponse.Profile };
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getProfileresponse.Message.Message, getProfileresponse.Count);
                             #endregion
