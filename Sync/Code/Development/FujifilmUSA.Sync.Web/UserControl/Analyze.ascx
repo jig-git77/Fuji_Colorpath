@@ -518,8 +518,7 @@
        
               </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" />               
-                                       
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
                     </Triggers>  
             </asp:UpdatePanel>
         </div>
@@ -534,7 +533,11 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
-              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+            <ContentTemplate> 
+
+              <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color:White;">
                                 <tr>
                                     <td style="width: 45%;" valign="top" class="CHARTTABLE">
                                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -632,9 +635,7 @@
                                             </tr>
                                         </table>
                                     </td>
-
-
-                                    
+                                                                       
                                     <td style="width: 55%;" valign="top">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tr>
@@ -650,25 +651,137 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
                                                                         <td>
-
-
-
+                                                                
+                                                                                <asp:Chart ID="Chart_L" runat="server" Width="365px" Height="125px" 
+                                                                                        BackGradientType="Center"
+                                                                                        BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                                                        <Titles>
+                                                                                            <asp:Title ForeColor="Black" Text="L*">
+                                                                                                <Position X="94" Y="10" />
+                                                                                            </asp:Title>
+                                                                                        </Titles>
+                                                                                        <Legends>
+                                                                                            <asp:Legend Name="Default" Enabled="false">
+                                                                                            </asp:Legend>
+                                                                                        </Legends>
+                                                                                        <BorderSkin SkinStyle="None"></BorderSkin>
+                                                                               
+                                                                                        <Series>
+                                                                                            <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                                                                MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                                                            </asp:Series>
+                                                                                            <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                                                Color="Green" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                                                BorderWidth="2" Name="Series2">
+                                                                                            </asp:Series>
+                                                                                        </Series>
+                                                                                        <ChartAreas>
+                                                                                            <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="Gray"
+                                                                                                BackColor="White" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                                                <Position Height="99" Width="100" X="0" Y="0" />
+                                                                                                <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="25"
+                                                                                                    Minimum="0" Maximum="100">
+                                                                                                    <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                                </AxisY>
+                                                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                                                                    <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" ForeColor="Transparent" />
+                                                                                                </AxisX>
+                                                                                            </asp:ChartArea>
+                                                                                        </ChartAreas>
+                                                                                    </asp:Chart>
 
                                                                          </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td>                                                                        
 
-
-
-
-
+                                                                                 <asp:Chart ID="Chart_a" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
+                                                                                    BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                                                    <Legends>
+                                                                                        <asp:Legend Name="Default" Enabled="false">
+                                                                                        </asp:Legend>
+                                                                                    </Legends>
+                                                                                    <Titles>
+                                                                                        <asp:Title ForeColor="Black" Text="a*">
+                                                                                            <Position X="94" Y="10" />
+                                                                                        </asp:Title>
+                                                                                    </Titles>
+                                                                                    <BorderSkin SkinStyle="None"></BorderSkin>                                                                                   
+                                                                                    <Series>
+                                                                                        <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                                            Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                                                        </asp:Series>
+                                                                                        <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                                            Color="Green" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                                            BorderWidth="2" Name="Series2">
+                                                                                        </asp:Series>
+                                                                                    </Series>
+                                                                                    <ChartAreas>
+                                                                                        <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="#339966"
+                                                                                            BackColor="#ff66cc" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                                            <Position Height="99" Width="100" X="0" Y="0" />
+                                                                                            <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
+                                                                                                Minimum="-6" Maximum="6">
+                                                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                            </AxisY>
+                                                                                            <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Title="" Interval="25" Minimum="0" Maximum="100">
+                                                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                <LabelStyle Angle="0" Font="Verdana, 6pt" ForeColor="Transparent" />
+                                                                                            </AxisX>
+                                                                                        </asp:ChartArea>
+                                                                                    </ChartAreas>
+                                                                                </asp:Chart>
+                                                                                
                                                                          </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-
-
+                                                                        
+                                                                                 <asp:Chart ID="Chart_b" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
+                                                                                    BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                                                    <Legends>
+                                                                                        <asp:Legend Name="Default" Enabled="false">
+                                                                                        </asp:Legend>
+                                                                                    </Legends>
+                                                                                    <Titles>
+                                                                                        <asp:Title ForeColor="Black" Text="b*">
+                                                                                            <Position X="94" Y="10" />
+                                                                                        </asp:Title>
+                                                                                    </Titles>
+                                                                                    <BorderSkin SkinStyle="None"></BorderSkin>
+                                                                                   
+                                                                                    <Series>
+                                                                                        <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                                            Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                                                            MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                                                        </asp:Series>
+                                                                                        <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                                            Color="Green" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                                            BorderWidth="2" Name="Series2">
+                                                                                        </asp:Series>
+                                                                                    </Series>
+                                                                                    <ChartAreas>
+                                                                                        <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="#3333cc"
+                                                                                            BackColor="#ffff99" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                                            <Position Height="99" Width="100" X="0" Y="0" />
+                                                                                            <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
+                                                                                                Minimum="-6" Maximum="6">
+                                                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                            </AxisY>
+                                                                                            <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Minimum="0" Maximum="100"
+                                                                                                Title="">
+                                                                                                <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                            </AxisX>
+                                                                                        </asp:ChartArea>
+                                                                                    </ChartAreas>
+                                                                                </asp:Chart>
 
                                                                           </td>
                                                                     </tr>
@@ -686,7 +799,12 @@
                                         </table>
                                     </td>
                                 </tr>
-                            </table>
+                 </table>
+               </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                    </Triggers>  
+           </asp:UpdatePanel>
 
         </div>
         <div class="clear"></div>

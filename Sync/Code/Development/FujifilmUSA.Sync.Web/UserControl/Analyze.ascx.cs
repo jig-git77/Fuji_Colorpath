@@ -161,6 +161,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             GridPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
 
+        #region FillAllTabsChart
+
         public void FillAllTabsData()
         {
             MeasurementId = 0;
@@ -465,8 +467,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
-                //if (DTLABChart != null)
-                //    FillLABChart(DTLABChart);
+                if (DTLABChart != null)
+                    FillLABChart(DTLABChart);
                 if (DTGaumatChart1 != null && DTGaumatChart2 != null)
                     FillGaumatChart(DTGaumatChart1, DTGaumatChart2);
 
@@ -606,6 +608,106 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             }
         }
+
+        #endregion
+
+        #region Fill L* a* b* Chart
+        private void FillLABChart(List<AnalyzeChart_Gray> DT)
+        {
+            try
+            {
+                Chart_L.Series["Series1"].Points.Clear();
+                Chart_a.Series["Series1"].Points.Clear();
+                Chart_b.Series["Series1"].Points.Clear();
+                Chart_L.Series["Series2"].Points.Clear();
+                Chart_a.Series["Series2"].Points.Clear();
+                Chart_b.Series["Series2"].Points.Clear();
+
+                if (DT != null && DT.Count > 0)
+                {
+                    for (int i = 0; i < DT.Count; i++)
+                    {
+                        AddPointLABChart(i, Chart_L.Series["Series1"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].CielabL.ToString(), Color.Black.Name.ToString(), DT, true);
+                        AddPointLABChart(i, Chart_a.Series["Series1"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].CielabA.ToString(), Color.Black.Name.ToString(), DT, true);
+                        AddPointLABChart(i, Chart_b.Series["Series1"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].CielabB.ToString(), Color.Black.Name.ToString(), DT, true);
+
+                        if (DT[i].TargetL != null)
+                        {
+                            AddPointLABChart(i, Chart_L.Series["Series2"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].TargetL.ToString(), Color.Green.Name.ToString(), DT, false);
+                        }
+                        AddPointLABChart(i, Chart_a.Series["Series2"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].Targeta.ToString(), Color.Green.Name.ToString(), DT, false);
+                        AddPointLABChart(i, Chart_b.Series["Series2"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].Targetb.ToString(), Color.Green.Name.ToString(), DT, false);
+                    }
+                }
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+
+        private void AddPointLABChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, List<AnalyzeChart_Gray> DR, bool isActual)
+        {
+            try
+            {
+                StringBuilder toolTip = new StringBuilder();
+                if (isActual)
+                {
+                    #region Add Tooltip HTML
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + _XValue + "% GB Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append("L*" + DR[_Index].CielabL.ToString());
+                    toolTip.Append(" a*" + DR[_Index].CielabA.ToString());
+                    toolTip.Append(" b*" + DR[_Index].CielabB.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("L*" + DR[_Index].TargetL.ToString());
+                    toolTip.Append(" a*" + DR[_Index].Targeta.ToString());
+                    toolTip.Append(" b*" + DR[_Index].Targetb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;E</td><td>");
+                    toolTip.Append(DR[_Index].ΔE.ToString());
+                    toolTip.Append("</td></tr>");
+                    //toolTip.Append("<tr><td>&Delta;H</td><td>");
+                    //toolTip.Append(DR[0].ΔE.ToString());
+                    //toolTip.Append("</td></tr>");
+
+                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append(DR[_Index].ΔL.ToString());
+                    toolTip.Append("</td></tr>");
+
+                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append(DR[_Index].Δa.ToString());
+                    toolTip.Append("</td></tr>");
+
+                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append(DR[_Index].Δb.ToString());
+                    toolTip.Append("</td></tr>");
+
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+                }
+
+                _objSeries.ChartType = SeriesChartType.Spline;
+                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+                if (isActual)
+                    _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+                _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.Circle;
+                _objSeries.Points[_Index].MarkerSize = 5;
+                _objSeries.Points[_Index].BorderWidth = 1;
+                _objSeries.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+        #endregion
 
         #endregion
 
