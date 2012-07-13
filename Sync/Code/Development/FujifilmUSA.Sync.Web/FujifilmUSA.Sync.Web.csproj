@@ -103,6 +103,7 @@
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
+    <Content Include="Images\ChartBg.jpg" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\collapsed.png" />
@@ -112,6 +113,7 @@
     <Content Include="Images\contant_box_haed_bt_right_hover_Rev.png" />
     <Content Include="Images\contant_box_haed_bt_right_Rev.png" />
     <Content Include="Images\CPSyncABComparison.jpg" />
+    <Content Include="Images\CPSyncLComparison.jpg" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\dlp_optimization.png" />
     <Content Include="Images\download-icon-small.png" />
@@ -1298,7 +1300,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

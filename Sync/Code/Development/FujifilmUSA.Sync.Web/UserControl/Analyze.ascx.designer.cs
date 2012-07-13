@@ -265,6 +265,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart CHART_ABComparison;
         
         /// <summary>
+        /// CHART_LComparison control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart CHART_LComparison;
+        
+        /// <summary>
         /// Chart_L control.
         /// </summary>
         /// <remarks>

@@ -346,7 +346,7 @@
        
             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
               <ContentTemplate>    
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;">
+                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background:  url(images/ChartBg.jpg) no-repeat center;">
                     <tr>
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
@@ -367,7 +367,7 @@
                                     </table>
                                     </td>
                                     <td style="width: 60%; " id="TDEPrimary" runat="server">
-                                        <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="362px" EnableViewState="false">   
+                                        <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="362px" EnableViewState="false" BackColor="Transparent">   
                                                                                                                               
                                                             <Series>
                                                                 <asp:Series Name="Series0"  Color="Transparent">                                              
@@ -377,7 +377,7 @@
                                                                 </asp:Series>    
                                                             </Series>
                                                             <ChartAreas>
-                                                                <asp:ChartArea Name="ChartArea1" >
+                                                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
                                                                      <Area3DStyle  Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
                                                                                               IsClustered="True"></Area3DStyle>
                                           
@@ -412,7 +412,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                     <tr><td></td></tr>
                                                             <tr>
-                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph1_Sync4D.jpg) no-repeat; width: 276px;
+                                                                <td align="center" style="background:  url(images/BGISOPaperGraph1_Sync4D.jpg) no-repeat center; width: 276px;
                                                                                         height: 180px; padding-left: 34px; padding-bottom: 14px;">
                                                                                 
                                                                     <asp:Chart ID="CHRT_Paper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
@@ -458,8 +458,8 @@
                                                             </tr>
                                                         
                                                             <tr>
-                                                                <td style="background: #FFFFFF url(images/BGISOPaperGraph2_Sync4D.jpg) no-repeat; width: 104px;
-                                                                                        height: 169px; padding-left: 28px; padding-bottom: 12px;">
+                                                                <td align="center" style="background: url(images/BGISOPaperGraph2_Sync4D.jpg) no-repeat center; width: 104px;
+                                                                                        height: 169px; padding-left: 28px; padding-bottom: 12px;" >
 
 
                                                                         <asp:Chart ID="CHRT_Paper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
@@ -548,7 +548,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">
+                                                    <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">                                                     
                                                         <tr>
                                                             <td class="green-title">
                                                                 a* - b* Comparison
@@ -624,9 +624,53 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" valign="top">
-
-
+                                                            <td align="center" valign="top">                                                            
+                                                                <asp:Chart ID="CHART_LComparison" runat="server" BackGradientType="Center"
+                                                                                        BackGradientEndColor="White" BorderLineColor="#808080" Width="280px" Height="75px" EnableViewState="false">
+                                                                    <Legends>
+                                                                        <asp:Legend Name="Default" Enabled="False">
+                                                                        </asp:Legend>
+                                                                    </Legends>
+                                                                    <Series>
+                                                                        <asp:Series Name="Series0" ChartType="Polar"
+                                                                            MarkerSize="12" MarkerStyle="Circle" MarkerColor="Green" Color="Green" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Series1" ChartType="Polar" 
+                                                                            MarkerSize="12" MarkerStyle="Circle" MarkerColor="Green" MarkerBorderWidth="1"
+                                                                            Color="Green" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Series2" ChartType="FastPoint"
+                                                                            MarkerSize="12" MarkerStyle="Circle" MarkerColor="Green" Color="Red" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Series3" ChartType="FastPoint" 
+                                                                            MarkerSize="12" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                        <asp:Series Name="Series4" ChartType="FastPoint" 
+                                                                            MarkerSize="4" MarkerStyle="Circle" ShadowOffset="1">
+                                                                        </asp:Series>
+                                                                    </Series>
+                                                                    <BorderSkin PageColor="AliceBlue" />
+                                                                    <Titles>
+                                                                        <asp:Title Name="Title1">
+                                                                        </asp:Title>
+                                                                    </Titles>
+                                                                    <ChartAreas>
+                                                                        <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="Gray"
+                                                                                                BackColor="White" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                              <Position Height="99" Width="100" X="0" Y="0" />
+                                                                         
+                                                                              <AxisY  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False" Title="" Interval="15"
+                                                                                    Minimum="-15" Maximum="15">
+                                                                                    <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                </AxisY>
+                                                                                <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="20" Title="" Minimum="-100" Maximum="100">
+                                                                                    <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                                                </AxisX>
+                                                                        </asp:ChartArea>
+                                                                    </ChartAreas>
+                                                                </asp:Chart>
 
                                                             </td>
                                                         </tr>
