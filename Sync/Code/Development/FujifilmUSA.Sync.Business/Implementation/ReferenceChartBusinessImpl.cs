@@ -224,25 +224,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         referenceCharts = dsReferenceChart.Tables[0].AsEnumerable().
                             Select(x => new ReferenceChartType()
-                            {
-                                ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeId"),
-                                ChartName = DataReader.ReadString(x, "ChartName"),
-                                NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
-                                NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
-                                TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
-                                //ChartPreview = DataReader.ReadByteArray(x,"ChartPreview"),
-                               // OriginalChart = DataReader.ReadByteArray(x,"OriginalChart"),
-                                InstrumentType = new InstrumentType()
-                                {
-                                    InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
-                                    InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                },
-                                ProjectType = new ProjectType()
-                                {
-                                    ProjectTypeName = DataReader.ReadString(x, "ProjectType")
-                                },
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                            }).ToList();
+                                            {
+                                                ReferenceChartTypeId = DataReader.ReadShort(x, "ReferenceChartTypeId"),
+                                                ChartName = DataReader.ReadString(x, "ChartName"),
+                                                NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
+                                                NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
+                                                TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
+                                                //ChartPreview = DataReader.ReadByteArray(x,"ChartPreview"),
+                                                // OriginalChart = DataReader.ReadByteArray(x,"OriginalChart"),
+                                                InstrumentType = new InstrumentType()
+                                                                     {
+                                                                         InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
+                                                                         InstrumentName = DataReader.ReadString(x, "InstrumentName")
+                                                                     },
+                                                ProjectType = new ProjectType()
+                                                                  {
+                                                                      ProjectTypeName = DataReader.ReadString(x, "ProjectType")
+                                                                  },
+                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType")
+                                            }).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
