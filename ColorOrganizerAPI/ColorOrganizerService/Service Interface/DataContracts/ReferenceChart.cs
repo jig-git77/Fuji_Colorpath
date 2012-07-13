@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using FujifilmUSA.ColorOrganizerService.DataContracts.Enums;
 
 namespace FujifilmUSA.ColorOrganizerService.DataContracts
 {
@@ -19,5 +20,8 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts
 
         [DataMember]
         public EMeasurementDevice MeasurementDevice { get; set; }
+
+        [DataMember]
+        public EReferenceChartType ChartType { get; set; }
     }
 }

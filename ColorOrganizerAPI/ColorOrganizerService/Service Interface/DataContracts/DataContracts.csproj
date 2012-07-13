@@ -67,6 +67,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="Enums\EMeasurementDevice.cs" />
     <Compile Include="Enums\EProfileType.cs" />
+    <Compile Include="Enums\EReferenceChartType.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="ProjectInformation.cs" />
     <Compile Include="ProjectStatus.cs" />

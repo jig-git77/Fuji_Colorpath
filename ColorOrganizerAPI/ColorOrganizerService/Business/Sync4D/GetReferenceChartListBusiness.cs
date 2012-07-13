@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.ColorOrganizerService.DataContracts;
+using FujifilmUSA.ColorOrganizerService.DataContracts.Enums;
 using FujifilmUSA.ColorOrganizerService.MessageContracts;
 using Service.Common.Business;
 using Service.Common.FaultContracts;
@@ -48,7 +49,13 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                                                              OriginalChart = x.OriginalChart,
                                                                                              MeasurementDevice =
                                                                                                  (EMeasurementDevice)
-                                                                                                 Enum.Parse(typeof (EMeasurementDevice), x.InstrumentType.InstrumentTypeId.ToString())
+                                                                                                 Enum.Parse(typeof (EMeasurementDevice),
+                                                                                                            x.InstrumentType.InstrumentTypeId.ToString()),
+                                                                                             ChartType = (x.ChartDisplayType > 0)
+                                                                                                             ? (EReferenceChartType)
+                                                                                                               Enum.Parse(typeof (EReferenceChartType),
+                                                                                                                          x.ChartDisplayType.ToString())
+                                                                                                             : EReferenceChartType.None
                                                                                          }));
                                                 response.Count = response.ReferenceChartList.Count;
                                                 response.Message = Common.GetSuccessMessage();

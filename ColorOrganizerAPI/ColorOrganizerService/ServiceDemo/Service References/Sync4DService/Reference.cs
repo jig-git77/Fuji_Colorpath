@@ -896,6 +896,9 @@ namespace ServiceDemo.Sync4DService {
         private byte[] ChartPreviewField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ServiceDemo.Sync4DService.EReferenceChartType ChartTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceDemo.Sync4DService.EMeasurementDevice MeasurementDeviceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -951,6 +954,19 @@ namespace ServiceDemo.Sync4DService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceDemo.Sync4DService.EReferenceChartType ChartType {
+            get {
+                return this.ChartTypeField;
+            }
+            set {
+                if ((this.ChartTypeField.Equals(value) != true)) {
+                    this.ChartTypeField = value;
+                    this.RaisePropertyChanged("ChartType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public ServiceDemo.Sync4DService.EMeasurementDevice MeasurementDevice {
             get {
                 return this.MeasurementDeviceField;
@@ -984,6 +1000,21 @@ namespace ServiceDemo.Sync4DService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EReferenceChartType", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataCon" +
+        "tracts.Enums")]
+    public enum EReferenceChartType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProfileChart = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OptimizationChart = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
