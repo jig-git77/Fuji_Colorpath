@@ -209,7 +209,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ChartSummary_DeltaE.BorderColor = Color.White;
                 ChartSummary_DeltaE.BorderWidth = 0;
-                ChartSummary_DeltaE.BackColor = Color.FromArgb(213,213,213);
+                ChartSummary_DeltaE.BackColor = Color.White;
 
                 //========== Clear Points and Show Chart ==========//
                 ChartSummary_DeltaE.Visible = true;
@@ -495,177 +495,173 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         
             //Set the colors first
             BindLABComparision("Cyan", DTColors, Papera, Paperb, 5, false, false);
-            BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
-            BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
+            //BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
+            //BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
 
             BindLABComparision("Cyan", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
-            BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
+            //BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
 
             BindLABComparision("Cyan", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
-            BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
+            //BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
         }
 
         private void BindLABComparision(string ColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)
         {
             StringBuilder toolTip = new StringBuilder();
+            List<AnalyzeChart_Gray> ListFilter = new List<AnalyzeChart_Gray>();
+            
+            ListFilter = DT.FindAll(item => item.PatchType == ColorName);
 
-            if (DT.Contains(DT.Find(item => item.PatchType == ColorName)))
+            for (int i = 0; i < ListFilter.Count; i = i + 1)
             {
-                AnalyzeChart_Gray List_Color = DT.Find(item => item.PatchType == ColorName);
-                List<AnalyzeChart_Gray> ListFilter = new List<AnalyzeChart_Gray>();
-                ListFilter.Add(List_Color);
-
-                for (int i = 0; i < ListFilter.Count; i = i + 1)
+                #region Bind AB Comparison
+                if (i == 0 && !isTarget && !isActual)
                 {
-                    #region Bind AB Comparison
-                    if (i == 0 && !isTarget && !isActual)
-                    {
-                        CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
-                        CHART_ABComparison.Series[ColorName].Points.AddXY(Papera, Paperb);
-                    }
+                    CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
+                    CHART_ABComparison.Series[ColorName].Points.AddXY(Papera, Paperb);
+                }
 
-                    int pointCount = ((isTarget) ? CHART_ABComparison.Series["Targets"].Points.Count : CHART_ABComparison.Series[ColorName].Points.Count);
+                int pointCount = ((isTarget) ? CHART_ABComparison.Series["Targets"].Points.Count : CHART_ABComparison.Series[ColorName].Points.Count);
 
 
-                    if (isTarget || isActual)
-                    {
-                        #region Add Tooltip HTML
-                        toolTip.Append("<table>");
-                        toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
-                        toolTip.Append("<tr><td><table>");
-                        toolTip.Append("<tr><td>Actual</td><td>");
-                        toolTip.Append("L*" + ListFilter[i].CielabL.ToString());
-                        toolTip.Append(" a*" + ListFilter[i].CielabA.ToString());
-                        toolTip.Append(" b*" + ListFilter[i].CielabB.ToString());
-                        toolTip.Append("</td></tr>");
-                        toolTip.Append("<tr><td>Target</td><td>");
-                        toolTip.Append("L*" + ListFilter[i].TargetL.ToString());
-                        toolTip.Append(" a*" + ListFilter[i].Targeta.ToString());
-                        toolTip.Append(" b*" + ListFilter[i].Targetb.ToString());
-                        toolTip.Append("</td></tr>");
-                        toolTip.Append("<tr><td>&Delta;E</td><td>");
-                        toolTip.Append(ListFilter[i].ΔE.ToString());
-                        toolTip.Append("</td></tr>");
-                        //toolTip.Append("<tr><td>&Delta;H</td><td>");
-                        //toolTip.Append(dv[i]["ΔH"].ToString());
-                        //toolTip.Append("</td></tr>");
-                        toolTip.Append("<tr><td>&Delta;L*</td><td>");
-                        toolTip.Append(ListFilter[i].ΔL.ToString());
-                        toolTip.Append("</td></tr>");
-                        toolTip.Append("<tr><td>&Delta;a*</td><td>");
-                        toolTip.Append(ListFilter[i].Δa.ToString());
-                        toolTip.Append("</td></tr>");
-                        toolTip.Append("<tr><td>&Delta;b*</td><td>");
-                        toolTip.Append(ListFilter[i].Δb.ToString());
-                        toolTip.Append("</td></tr>");
-                        toolTip.Append("</table></td></tr>");
-                        toolTip.Append("</table>");
-                        #endregion
-                    }
-
-
-                    if (isTarget)
-                    {
-                        CHART_ABComparison.Series["Targets"].ChartType = SeriesChartType.FastPoint;
-                        CHART_ABComparison.Series["Targets"].Points.AddXY(Convert.ToDouble(ListFilter[i].Targeta), Convert.ToDouble(ListFilter[i].Targetb));
-                        CHART_ABComparison.Series["Targets"].MarkerSize = MarkerSize;
-                        CHART_ABComparison.Series["Targets"].MarkerColor = Color.Green;
-                    }
-                    else
-                    {
-                        CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
-                        CHART_ABComparison.Series[ColorName].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].CielabB));
-                    }
-
-
-                    if (i == ListFilter.Count - 1 && (isTarget || isActual))
-                    {
-                        if (isActual)
-                        {
-                            CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
-                            CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
-                            CHART_ABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                            CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
-                        }
-                    }
-                    else
-                    {
-                        CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
-                        CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = 0;
-                        CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
-                    }
-                    #endregion
-
-                    //Bind L Comparision
-                    #region Bind L Comparision
-
-                    #region //========== Declarations ==========//
-
-                    Series objSeries0 = (Series)CHART_LComparison.Series[0];
-                    objSeries0.CustomProperties = "PolarDrawingStyle=Marker";                
-
-                    Series objSeries1 = (Series)CHART_LComparison.Series[1];
-                    objSeries1.CustomProperties = "PolarDrawingStyle=Marker";
-
-                    Series objSeries2 = (Series)CHART_LComparison.Series[2];
-                    objSeries2.CustomProperties = "PolarDrawingStyle=Marker";
-
-                    Series objSeries3 = (Series)CHART_LComparison.Series[3];
-                    objSeries3.CustomProperties = "PolarDrawingStyle=Marker";
-
-                    Series objSeries4 = (Series)CHART_LComparison.Series[4];
-                    objSeries4.CustomProperties = "PolarDrawingStyle=Marker";
-
-                    #endregion
-
-                    if (isTarget)
-                    {
-                        int series = 0;
-                        if (Convert.ToString(ListFilter[i].PatchType).ToLower() == "paper")
-                        {
-                            series = 2;
-                        }
-
-                        pointCount = CHART_LComparison.Series[series].Points.Count;
-
-                        CHART_LComparison.Series[series].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(0));
-                        CHART_LComparison.Series[series].ChartType = SeriesChartType.Point;
-                        CHART_LComparison.Series[series].Points[i].BorderWidth = 2;
-                        CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-
-
-                        CHART_LComparison.Series[series + 1].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].ΔL));   //---Use ΔL instead of L Deviation (Value is same, just name is different)
-                        CHART_LComparison.Series[series + 1].ChartType = SeriesChartType.Point;
-                        CHART_LComparison.Series[series + 1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
-                        CHART_LComparison.Series[series + 1].Points[i].BorderWidth = 2;
-                        CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-
-
-                        if (Convert.ToString(ListFilter[i].PatchType).ToLower() == "paper")
-                        {
-                            CHART_LComparison.Series[series].Points[pointCount].MarkerColor = Color.White;
-                            CHART_LComparison.Series[series + 1].Points[pointCount].MarkerColor = Color.White;
-                        }
-                        else
-                        {
-                            CHART_LComparison.Series[series].Points[pointCount].MarkerColor = System.Drawing.ColorTranslator.FromHtml(Convert.ToString(ListFilter[i].PatchType));
-                            CHART_LComparison.Series[series + 1].Points[pointCount].MarkerColor = System.Drawing.ColorTranslator.FromHtml(Convert.ToString(ListFilter[i].PatchType));
-                        }
-                        CHART_LComparison.Series[series].Points[pointCount].MarkerSize = 9;
-                        CHART_LComparison.Series[series + 1].Points[pointCount].MarkerSize = 5;
-                    }
+                if (isTarget || isActual)
+                {
+                    #region Add Tooltip HTML
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append("L*" + ListFilter[i].CielabL.ToString());
+                    toolTip.Append(" a*" + ListFilter[i].CielabA.ToString());
+                    toolTip.Append(" b*" + ListFilter[i].CielabB.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("L*" + ListFilter[i].TargetL.ToString());
+                    toolTip.Append(" a*" + ListFilter[i].Targeta.ToString());
+                    toolTip.Append(" b*" + ListFilter[i].Targetb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;E</td><td>");
+                    toolTip.Append(ListFilter[i].ΔE.ToString());
+                    toolTip.Append("</td></tr>");
+                    //toolTip.Append("<tr><td>&Delta;H</td><td>");
+                    //toolTip.Append(dv[i]["ΔH"].ToString());
+                    //toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append(ListFilter[i].ΔL.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append(ListFilter[i].Δa.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append(ListFilter[i].Δb.ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
                     #endregion
                 }
+
+
+                if (isTarget)
+                {
+                    CHART_ABComparison.Series["Targets"].ChartType = SeriesChartType.FastPoint;
+                    CHART_ABComparison.Series["Targets"].Points.AddXY(Convert.ToDouble(ListFilter[i].Targeta), Convert.ToDouble(ListFilter[i].Targetb));
+                    CHART_ABComparison.Series["Targets"].MarkerSize = MarkerSize;
+                    CHART_ABComparison.Series["Targets"].MarkerColor = Color.Green;
+                }
+                else
+                {
+                    CHART_ABComparison.Series[ColorName].ChartType = SeriesChartType.Line;
+                    CHART_ABComparison.Series[ColorName].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].CielabB));
+                }
+
+
+                if (i == ListFilter.Count - 1 && (isTarget || isActual))
+                {
+                    if (isActual)
+                    {
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                        CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
+                    }
+                }
+                else
+                {
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = 0;
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
+                }
+                #endregion
+
+                //Bind L Comparision
+                #region Bind L Comparision
+
+                #region //========== Declarations ==========//
+
+                Series objSeries0 = (Series)CHART_LComparison.Series[0];
+                objSeries0.CustomProperties = "PolarDrawingStyle=Marker";
+
+                Series objSeries1 = (Series)CHART_LComparison.Series[1];
+                objSeries1.CustomProperties = "PolarDrawingStyle=Marker";
+
+                Series objSeries2 = (Series)CHART_LComparison.Series[2];
+                objSeries2.CustomProperties = "PolarDrawingStyle=Marker";
+
+                Series objSeries3 = (Series)CHART_LComparison.Series[3];
+                objSeries3.CustomProperties = "PolarDrawingStyle=Marker";
+
+                Series objSeries4 = (Series)CHART_LComparison.Series[4];
+                objSeries4.CustomProperties = "PolarDrawingStyle=Marker";
+
+                #endregion
+
+                if (isTarget)
+                {
+                    int series = 0;
+                    if (Convert.ToString(ListFilter[i].PatchType).ToLower() == "paper")
+                    {
+                        series = 2;
+                    }
+
+                    pointCount = CHART_LComparison.Series[series].Points.Count;
+
+                    CHART_LComparison.Series[series].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(0));
+                    CHART_LComparison.Series[series].ChartType = SeriesChartType.Point;
+                    CHART_LComparison.Series[series].Points[i].BorderWidth = 2;
+                    CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+
+                    CHART_LComparison.Series[series + 1].Points.AddXY(Convert.ToDouble(ListFilter[i].CielabA), Convert.ToDouble(ListFilter[i].ΔL));   //---Use ΔL instead of L Deviation (Value is same, just name is different)
+                    CHART_LComparison.Series[series + 1].ChartType = SeriesChartType.Point;
+                    CHART_LComparison.Series[series + 1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                    CHART_LComparison.Series[series + 1].Points[i].BorderWidth = 2;
+                    CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+
+                    if (Convert.ToString(ListFilter[i].PatchType).ToLower() == "paper")
+                    {
+                        CHART_LComparison.Series[series].Points[pointCount].MarkerColor = Color.White;
+                        CHART_LComparison.Series[series + 1].Points[pointCount].MarkerColor = Color.White;
+                    }
+                    else
+                    {
+                        CHART_LComparison.Series[series].Points[pointCount].MarkerColor = System.Drawing.ColorTranslator.FromHtml(Convert.ToString(ListFilter[i].PatchType));
+                        CHART_LComparison.Series[series + 1].Points[pointCount].MarkerColor = System.Drawing.ColorTranslator.FromHtml(Convert.ToString(ListFilter[i].PatchType));
+                    }
+                    CHART_LComparison.Series[series].Points[pointCount].MarkerSize = 9;
+                    CHART_LComparison.Series[series + 1].Points[pointCount].MarkerSize = 5;
+                }
+                #endregion
             }
         }
 

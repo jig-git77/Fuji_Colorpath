@@ -346,7 +346,7 @@
        
             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
               <ContentTemplate>    
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background:  url(images/ChartBg.jpg) no-repeat center;">
+                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;">
                     <tr>
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
@@ -561,9 +561,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center" valign="top">
-                                                           
-                                                                <asp:Chart ID="CHART_ABComparison" runat="server" BackImageWrapMode="Scaled" BackImage="~/Images/CPSyncABComparison.jpg"
-                                                                    ImageType="Jpeg" Width="280px" Height="250px" EnableViewState="false">
+                                                         <%--  BackImageWrapMode="Scaled" BackImage="~/Images/CPSyncABComparison.jpg"
+                                                                    ImageType="Jpeg"  Width="280px" Height="250px"--%>
+                                                                <asp:Chart ID="CHART_ABComparison" runat="server"  Width="480px" Height="450px" EnableViewState="false">
                                                                     <Legends>
                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                         </asp:Legend>
@@ -601,16 +601,20 @@
                                                                     </Titles>
                                                                     <ChartAreas>
                                                                         <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
-                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="100" Minimum="-100"
+                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="100" Minimum="-100" Interval="10"
                                                                                 LineDashStyle="NotSet">
-                                                                                <MajorGrid Enabled="False" />
+                                                                               <%-- <MajorGrid Enabled="False" />
                                                                                 <MajorTickMark Enabled="false" />
-                                                                                <LabelStyle Enabled="False" />
+                                                                                <LabelStyle Enabled="False" />--%>
+                                                                                 <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                                             </AxisY>
-                                                                            <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="100" Minimum="-100" LineDashStyle="NotSet">
-                                                                                <MajorGrid Enabled="False" />
+                                                                            <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="100" Minimum="-100" Interval="10" LineDashStyle="NotSet">
+                                                                               <%-- <MajorGrid Enabled="False" />
                                                                                 <MajorTickMark Enabled="false" />
-                                                                                <LabelStyle Enabled="False" />
+                                                                                <LabelStyle Enabled="False" />--%>
+                                                                                 <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                    <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                                             </AxisX>
                                                                         </asp:ChartArea>
                                                                     </ChartAreas>
