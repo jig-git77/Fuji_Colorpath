@@ -26,7 +26,7 @@ namespace FujifilmUSA.Sync.Presenter
                     _viewAnalyze.MeasurementIds,
                     _viewAnalyze.DestinationProfileDescription,
                     _viewAnalyze.DlpDescription,
-                    Convert.ToInt32(ERefChartDisplayType.Closed), 
+                    Convert.ToInt32(EOptimizeRunStatus.Closed), 
                     DateTime.Now);
         }
 

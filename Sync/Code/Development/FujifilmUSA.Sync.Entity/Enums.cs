@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Entity
         OptimizeRun = 14
     }
 
-    public enum ERefChartDisplayType
+    public enum EOptimizeRunStatus
     {
         Open = 1,
         Closed = 2,

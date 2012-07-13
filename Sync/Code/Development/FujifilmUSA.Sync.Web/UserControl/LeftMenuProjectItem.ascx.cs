@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.OptimizeRun:
-                    if (CurrentRun.Status == ERefChartDisplayType.Closed)
+                    if (CurrentRun.Status == EOptimizeRunStatus.Closed)
                     {
                         lnkMeasurement.Visible = false;
                         
@@ -70,7 +70,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             else
                             {                             
                                 //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
-                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 && SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == ERefChartDisplayType.Closed)
+                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 && SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed)
                                 {
                                     btnRunDelete.Visible = false;
                                 }
@@ -183,7 +183,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
             MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
             RunStatus = "";
-            if (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == ERefChartDisplayType.Closed && !SessionManager.Instance.CurrentProject.OptimizeRuns.Last().HasProfile)
+            if (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentProject.OptimizeRuns.Last().HasProfile)
             {
                 RunStatus = "Certify";
             }

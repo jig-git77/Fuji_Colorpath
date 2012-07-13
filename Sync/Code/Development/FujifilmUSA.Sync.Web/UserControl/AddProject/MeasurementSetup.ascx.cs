@@ -99,14 +99,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 switch (SessionManager.Instance.CurrentProject.Status)
                 {
-                    case ERefChartDisplayType.Open:
+                    case EOptimizeRunStatus.Open:
                         SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                         Response.Redirect(string.Format(
                             SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                 ? "COAnalyze.aspx?id={0}"
                                 : "COMeasurement.aspx?id={0}", Guid.NewGuid()));
                         break;
-                    case ERefChartDisplayType.Closed:
+                    case EOptimizeRunStatus.Closed:
                         ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                         _presenterMeasurementSetting.CreateOptimizeRun();
                         if (!IsErrorOccured)

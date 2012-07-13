@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
             if (!Page.IsPostBack)
             {
-                if (SessionManager.Instance.CurrentOptimizeRun.Status == ERefChartDisplayType.Closed && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                     lbtnDownloadAndSaveDLP.Visible = false;

@@ -314,7 +314,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     ProjectId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsProjectIdKey]);
                     _presenterColorOrganizerRequestProcessor.GetProjectDetail();
                     
-                    if (Project.Status == ERefChartDisplayType.Open)
+                    if (Project.Status == EOptimizeRunStatus.Open)
                     {
                         //Redirect to other page                        
                         HttpContext.Current.Response.Redirect("COViewOpenProject.aspx");

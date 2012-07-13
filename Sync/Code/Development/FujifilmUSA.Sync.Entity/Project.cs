@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Entity
         public SourceProfile SourceProfile { get; set; }
         public int DeviceFamilyProfilerOptionId { get; set; }
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
-        public ERefChartDisplayType Status { get; set; }
+        public EOptimizeRunStatus Status { get; set; }
         public int LicenseTypeID { get; set; }
         public int TotalRuns { get; set; }
         public bool HasDLP { get; set; }

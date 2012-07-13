@@ -63,7 +63,7 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
             optimizeRun.CreateOptimizeRun(
                 _viewMeasurementSetting.ProjectId,
-                Convert.ToInt32(ERefChartDisplayType.Open),
+                Convert.ToInt32(EOptimizeRunStatus.Open),
                 DateTime.Now);
         }
 

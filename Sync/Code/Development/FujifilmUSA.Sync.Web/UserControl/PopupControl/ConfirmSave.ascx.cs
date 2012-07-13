@@ -49,7 +49,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 int i, TotalOptRuns = 0;
                 for (i = SessionManager.Instance.CurrentProject.OptimizeRuns.Count - 2; i > 0; i--)
                 {
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns[i].Status == ERefChartDisplayType.Closed && SessionManager.Instance.CurrentProject.OptimizeRuns[i].HasProfile)
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns[i].Status == EOptimizeRunStatus.Closed && SessionManager.Instance.CurrentProject.OptimizeRuns[i].HasProfile)
                     {
                         TotalOptRuns = TotalOptRuns + 1;
                     }
