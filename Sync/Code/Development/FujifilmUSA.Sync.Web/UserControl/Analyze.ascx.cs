@@ -485,6 +485,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Double Papera = 0;
             Double Paperb = 0;
 
+            #region Clear Chart_ABComparison's Points
+            CHART_ABComparison.Series["Targets"].Points.Clear();
+            CHART_ABComparison.Series["Cyan"].Points.Clear();
+            CHART_ABComparison.Series["Magenta"].Points.Clear();
+            CHART_ABComparison.Series["Yellow"].Points.Clear();
+            CHART_ABComparison.Series["Red"].Points.Clear();
+            CHART_ABComparison.Series["Green"].Points.Clear();
+            CHART_ABComparison.Series["Blue"].Points.Clear();
+            CHART_ABComparison.Series["Paper"].Points.Clear();
+            #endregion
+
             if (DTTarget.Contains(DTTarget.Find(item => item.PatchType == CPPatchType.Paper.ToString())))
             {
                 AnalyzeChart_Gray List_Paper = DTTarget.Find(item => item.PatchType == CPPatchType.Paper.ToString());
@@ -492,27 +503,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Papera = Convert.ToDouble(List_Paper.CielabA);
                 Paperb = Convert.ToDouble(List_Paper.CielabB);
             }
-                        
-            //Set the colors first
+
+            #region Set the colors first
             BindLABComparision("Cyan", DTColors, Papera, Paperb, 5, false, false);
-            //BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
-            //BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
+            BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
 
             BindLABComparision("Cyan", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
-            //BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Blue", DTTarget, 0, 0, 9, true, false);
+            BindLABComparision("Paper", DTTarget, 0, 0, 9, true, false);
 
             BindLABComparision("Cyan", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
-            //BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Magenta", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Yellow", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Red", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Green", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
+            BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
+            #endregion
         }
 
         private void BindLABComparision(string ColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)

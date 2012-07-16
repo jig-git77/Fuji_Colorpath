@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ABCpdf, Version=8.1.0.1, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solution References\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
@@ -60,6 +61,7 @@
   <ItemGroup>
     <Compile Include="DataReader.cs" />
     <Compile Include="ExportFile.cs" />
+    <Compile Include="ReportPDF.cs" />
     <Compile Include="ResourceManager.cs" />
     <Compile Include="SessionManager.cs" />
     <Compile Include="Utilities.cs" />

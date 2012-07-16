@@ -554,16 +554,22 @@
                                                                 a* - b* Comparison
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <asp:Label ID="Label1" runat="server"></asp:Label>
-                                                            </td>
-                                                        </tr>
+                                                      
                                                         <tr>
                                                             <td align="center" valign="top">
                                                          <%--  BackImageWrapMode="Scaled" BackImage="~/Images/CPSyncABComparison.jpg"
                                                                     ImageType="Jpeg"  Width="280px" Height="250px"--%>
-                                                                <asp:Chart ID="CHART_ABComparison" runat="server"  Width="480px" Height="450px" EnableViewState="false">
+                                                                <asp:Chart ID="CHART_ABComparison" runat="server" 
+                                                                     Width="280px" Height="250px" BackGradientType="Center" 
+                                                                                    BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
+                                                                    <Titles>
+                                                                        <asp:Title ForeColor="Black" Text="a*">
+                                                                            <Position X="15" Y="42" />
+                                                                        </asp:Title>
+                                                                        <asp:Title ForeColor="Black" Text="b*">
+                                                                            <Position X="57" Y="87" />
+                                                                        </asp:Title>
+                                                                    </Titles>
                                                                     <Legends>
                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                         </asp:Legend>
@@ -595,22 +601,20 @@
                                                                         </asp:Series>
                                                                     </Series>
                                                                     <BorderSkin PageColor="AliceBlue" />
-                                                                    <Titles>
-                                                                        <asp:Title Name="Title1">
-                                                                        </asp:Title>
-                                                                    </Titles>
+                                                                   
                                                                     <ChartAreas>
-                                                                        <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
-                                                                            <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="100" Minimum="-100" Interval="10"
+                                                                        <asp:ChartArea  BackSecondaryColor="#FACECF" BackColor="#B3DEC3" BackGradientStyle="LeftRight" BorderColor="26, 59, 105" BorderDashStyle="Solid" Name="Default"  ShadowOffset="1">
+                                                                         <Position Height="99" Width="100" X="0" Y="0" />
+                                                                            <AxisY LineColor="120, 0, 0, 0"  Maximum="100" Minimum="-100" Interval="20"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False"
                                                                                 LineDashStyle="NotSet">
-                                                                               <%-- <MajorGrid Enabled="False" />
+                                                                              <%--  <MajorGrid Enabled="False" />
                                                                                 <MajorTickMark Enabled="false" />
                                                                                 <LabelStyle Enabled="False" />--%>
                                                                                  <MajorGrid LineColor="Gray"></MajorGrid>
                                                                                     <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                                             </AxisY>
-                                                                            <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="100" Minimum="-100" Interval="10" LineDashStyle="NotSet">
-                                                                               <%-- <MajorGrid Enabled="False" />
+                                                                            <AxisX LineColor="120, 0, 0, 0" Maximum="100" Minimum="-100" Interval="20" LineDashStyle="NotSet"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False">
+                                                                                <%--<MajorGrid Enabled="False" />
                                                                                 <MajorTickMark Enabled="false" />
                                                                                 <LabelStyle Enabled="False" />--%>
                                                                                  <MajorGrid LineColor="Gray"></MajorGrid>

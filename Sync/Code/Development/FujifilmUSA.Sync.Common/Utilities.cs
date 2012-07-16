@@ -9,6 +9,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
 using FujifilmUSA.Sync.Entity;
+using System.Globalization;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -339,5 +340,36 @@ namespace FujifilmUSA.Sync.Common
             return System.Math.Round(Del, 2);
         }
         #endregion
+
+        #region SetDateByCultures
+        public static String GetDateByCultures(DateTime DT)
+        {
+            string[] strLanguages = System.Web.HttpContext.Current.Request.UserLanguages;
+            CultureInfo[] cul = System.Globalization.CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+            return DT.ToString("d", CultureInfo.CreateSpecificCulture(strLanguages[0].ToString()));
+        }
+
+        public static string DecimalToString(string Dec)
+        {
+
+            if (Convert.ToString(Dec) != "")
+            {
+                return Convert.ToDecimal(Dec).ToString("N2");
+            }
+            return "0";
+
+        }
+
+        public static string IntToString(string Dec)
+        {
+            if (Convert.ToString(Dec) != "")
+            {
+                return (Math.Round(Convert.ToDecimal(Dec))).ToString();
+            }
+            return "0";
+
+        }
+        #endregion
+
     }
 }
