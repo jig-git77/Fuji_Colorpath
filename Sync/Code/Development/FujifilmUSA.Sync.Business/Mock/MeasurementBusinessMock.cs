@@ -35,22 +35,22 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int optimizeRunId)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId)
         {
             return new List<MeasurementPatch_AvgDelta>();
         }
 
-        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int optimizeRunId, int MeasurementId)
+        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId)
         {
             return new List<MeasurementPatchDetails>();
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int optimizeRunId, int MeasurementId)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId)
         {
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int optimizeRunId, int MeasurementId)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId)
         {
             return new List<AnalyzeChart>();
         }

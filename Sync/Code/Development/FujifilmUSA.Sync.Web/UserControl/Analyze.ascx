@@ -225,7 +225,9 @@
         <div class="tab_middle">
            <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" > 
-          <table cellpadding="0" cellspacing="0" width="100%">
+           <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+              <ContentTemplate>   
+                  <table cellpadding="0" cellspacing="0" width="100%">
                                     <tr id="tr1" runat="server" visible="false">
                                         <td style="width:100px;">
                                             <span>Selected Metric: &nbsp </span>
@@ -240,35 +242,7 @@
                                     <td colspan="2">
                                          <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder">
                                             <LayoutTemplate>
-                                                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >
-                                                    <thead>
-                                                      <tr>                                                         
-                                                            <th style="font-size:13px;" >
-                                                                Measurement Name
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Upload Date
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Avg ΔE
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Max ΔE
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Avg ΔE94
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Max ΔE94
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Avg ΔE2000
-                                                            </th>
-                                                            <th style="font-size:13px;">
-                                                                Max ΔE2000
-                                                            </th>
-                                                      </tr>
-                                                    </thead>
+                                                <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >                                  
                                                     <tbody>
                                                         <asp:PlaceHolder ID="phItemPlaceholder" runat="server"></asp:PlaceHolder>
                                                     </tbody>
@@ -278,30 +252,70 @@
                                                 <div class="no_data_found">No records available</div>
                                             </EmptyDataTemplate>
                                             <ItemTemplate>
-                                                <tr class="Gray">                                                  
-                                                     <td align="center">
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px; width:200px;">Measurement Name: </td>                                               
+                                                    <td>
                                                         <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center" >
+                                                </tr>
+                                                <tr class="White">   
+                                                    <td style="font-size:13px;">Upload Date: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblMeasurementDate" runat="server" Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px;">Average ΔE: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="White">   
+                                                    <td style="font-size:13px;">Maximum ΔE: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px;">Average ΔE94: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblAvg_ΔE94" runat="server" Text='<%#Eval("Avg_ΔE94") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="White">   
+                                                    <td style="font-size:13px;">Maximum ΔE94: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblMax_ΔE94" runat="server" Text='<%#Eval("Max_ΔE94") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px;">Average ΔE2000: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblAvg_ΔE2000" runat="server" Text='<%#Eval("Avg_ΔE2000") %>'></asp:Label>
                                                     </td>
-                                                    <td align="center">
+                                                </tr>
+                                                <tr class="White">   
+                                                    <td style="font-size:13px;">Maximum ΔE2000: </td>                                  
+                                                    <td>
                                                         <asp:Label ID="lblMax_ΔE2000" runat="server" Text='<%#Eval("Max_ΔE2000") %>'></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px;">10th Percentile ΔE: </td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="White">   
+                                                    <td style="font-size:13px;">90th Percentile ΔE: </td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr class="Gray">   
+                                                    <td style="font-size:13px;">95th Percentile ΔE: </td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
@@ -309,6 +323,11 @@
                                     </td>
                                     </tr>
                                 </table>
+              </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                    </Triggers>  
+           </asp:UpdatePanel>
         </div>
         <div class="clear"></div>
         </div>  

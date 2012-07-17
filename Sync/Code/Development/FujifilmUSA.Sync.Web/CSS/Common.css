@@ -619,7 +619,7 @@ label
 /****product  page ***/
 .product_list_table
 {
-    border: solid 1px #9e9e9e;
+   
     border-collapse: collapse;
     line-height: 30px;
     width: 100%;
@@ -629,8 +629,7 @@ label
 .product_list_table th
 {
     background: url(../Images/product_list_table_head.png) repeat-x top left;
-    padding: 0px 0px 0px 0px;
-    border-left: solid 1px #9e9e9e;
+    padding: 0px 0px 0px 0px;  
     color: #525252;
     font-size: 16px;
     text-align: center;
@@ -642,7 +641,7 @@ label
     border-collapse: collapse;
     font-size: 14px;
     font-weight: bold;
-    border-top: solid 1px #9e9e9e;
+   
 }
 .product_list_table td:first-child
 {
@@ -686,7 +685,16 @@ label
 }
 .product_list_table tr.Gray
 {
-    background: #F0F0F0;
+    background: #F2F2F2;
+    color: #3f6798;
+}
+.product_list_table tr td
+{
+    padding-left:5px;
+}
+.product_list_table tr.White
+{
+    background: #FFFFFF;
     color: #3f6798;
 }
 
@@ -2058,3 +2066,4 @@ label
 .green-title { background:url(../images/title-bg-black.gif) repeat-x left top #000; font-family:Tahoma; font-size:11px; color:#fff; line-height:21px;font-weight:bold; padding-left:15px; }
 
 .SYNCTABLE{width:100%;border:1px solid #B4b4b4;background-color:#DCDCDC}
+

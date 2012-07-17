@@ -104,8 +104,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 BindMesurementChart();
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
-                BindAvgDelta();
-               // FillAllTabsData();
+             
             }
             BindMesurementChart();           
         }
@@ -131,6 +130,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+                BindAvgDelta();
                 GridPatchDetails.Rebind();
                 FillAllTabsData();
             }
@@ -140,7 +140,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                MeasurementId = 0;
+                if (hdMeasurement.Value != "")
+                {
+                    MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
+                }
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
                 grdMeasurement.DataSource = MeasurementsDelta;           
@@ -170,8 +174,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-          
+                     
             _presenterAnalyze.GetInkPaperChart();
             if (!IsErrorOccured)
             {
@@ -843,9 +846,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 MeasurementId = 0;
                 if (hdMeasurement.Value != "")
                 {
-                    MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
-
-                    OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                    MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
                     PatchDetails = new List<Entity.MeasurementPatchDetails>();
                     _presenterAnalyze.GetPatchDetailsofMeasurement();
                     GridPatchDetails.DataSource = PatchDetails;

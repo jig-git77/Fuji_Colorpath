@@ -19,5 +19,9 @@ namespace FujifilmUSA.Sync.Entity
         public decimal Max_ΔE { get; set; }
         public decimal Max_ΔE94 { get; set; }
         public decimal Max_ΔE2000 { get; set; }
+
+        public decimal PercΔE_10 { get; set; }
+        public decimal PercΔE_90 { get; set; }
+        public decimal PercΔE_95 { get; set; }
     }
 }
