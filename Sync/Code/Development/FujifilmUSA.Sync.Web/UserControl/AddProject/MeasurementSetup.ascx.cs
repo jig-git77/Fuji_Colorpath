@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
+        private const string _recSelectText = "selectText";
         private Dictionary<int, EInstrumentType> MeasurementDevicesView
         {
             get
@@ -265,7 +266,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbAlignmentChart.DataTextField = "ChartName";
                 cmbAlignmentChart.DataSource = ReferenceChartType;
                 cmbAlignmentChart.DataBind();
-                cmbAlignmentChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbAlignmentChart.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));//-- Select --
             }
             if (SessionManager.Instance.CurrentColorOrgRequest != null)
             {

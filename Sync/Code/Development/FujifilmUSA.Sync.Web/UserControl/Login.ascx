@@ -75,21 +75,31 @@
     <div id="pageWrapper">
         <div class="login_logo">
             <a href="#">
-                <asp:Image ID="imgCompanyLogo" runat="server" ImageUrl="~/Images/login_logo.png" /></a></div>
+                <asp:Image ID="imgCompanyLogo" runat="server" 
+                ImageUrl="~/Images/login_logo.png" meta:resourcekey="imgCompanyLogoResource1" /></a></div>
         <div class="login_contant">
             <div class="login_eror">
                 <div style="text-align: left; margin: 10px 10px 10px 0px;">
-                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                 </div>
             </div>
             <asp:TextBox ID="txtUserName" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Username');"
-                onfocus="javascript:focusControl(this,'Username');" Text="Username"></asp:TextBox>
+                onfocus="javascript:focusControl(this,'Username');" Text="Username" 
+                meta:resourcekey="txtUserNameResource1"></asp:TextBox>
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
-                onfocus="javascript:focusControl(this,'Password');" Text="Password" TextMode="Password"></asp:TextBox>
-            <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" Text=" Remember me!" />
-            <asp:LinkButton ID="lnkForgotPassword" runat="server" Text="Forgot Password!" OnClientClick="return ShowOpenForgotPasswordWindow();"></asp:LinkButton>
+                onfocus="javascript:focusControl(this,'Password');" Text="Password" 
+                TextMode="Password" meta:resourcekey="txtPasswordResource1"></asp:TextBox>
+            <asp:DropDownList ID="ddlLanguages" runat="server" 
+                meta:resourcekey="ddlLanguagesResource1"></asp:DropDownList>
+            <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" 
+                Text=" Remember me!" meta:resourcekey="chkRememberMeResource1" />
+            <asp:LinkButton ID="lnkForgotPassword" runat="server" Text="Forgot Password!" 
+                OnClientClick="return ShowOpenForgotPasswordWindow();" 
+                meta:resourcekey="lnkForgotPasswordResource1"></asp:LinkButton>
             &nbsp;
-            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" OnClick="bntLogin_Click" OnClientClick="return SendMessageToParent();" />
+            <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" 
+                OnClick="bntLogin_Click" OnClientClick="return SendMessageToParent();" 
+                meta:resourcekey="bntLoginResource1" />
         </div>
         <div class="clear">
         </div>

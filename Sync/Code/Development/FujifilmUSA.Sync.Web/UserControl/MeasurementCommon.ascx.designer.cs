@@ -31,6 +31,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtMeasurementName;
         
         /// <summary>
+        /// locColorBar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locColorBar;
+        
+        /// <summary>
+        /// locUploadingMeasurement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locUploadingMeasurement;
+        
+        /// <summary>
+        /// locRecentUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locRecentUpload;
+        
+        /// <summary>
         /// hdOptimizeRunId control.
         /// </summary>
         /// <remarks>

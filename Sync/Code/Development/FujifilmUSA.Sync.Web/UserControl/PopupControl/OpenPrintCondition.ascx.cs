@@ -9,6 +9,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class OpenPrintCondition : BaseControl, IViewOpenPrintCondition
     {
+        #region Private variables - Globalization
+        private const string _reccurrentRunIsOpen = "currentRunIsOpen";
+        private const string _reccurrentRunIsOpenAndInactive = "currentRunIsOpenAndInactive";
+        private const string _recnoDLPText = "noDLPText";
+        private const string _recconfirmDLPText = "confirmDLPText";
+        #endregion
+
         private PresenterOpenPrintCondition _presenterOpenPrintCondition;
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -16,31 +23,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {        
+        {
             int RunNum = 0;
 
             if (Request.QueryString["TotalRuns"] != null && Request.QueryString["TotalRuns"].Length > 0)
             {
                 RunNum = Convert.ToInt32(Request.QueryString["TotalRuns"]) - 1;
             }
-            
+
             var sb = new StringBuilder();
             if (Convert.ToDecimal(Request.QueryString["days"]) <= 0)
-                sb.Append("Current Run " + RunNum + " is open.");
+                sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpen), RunNum));
             else
-                sb.Append("Current Run " + RunNum + " is open and has been inactive for " + Request.QueryString["days"] + " days.");
+                sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpenAndInactive), RunNum, Request.QueryString["days"]));
 
             sb.Append("</br>");
             if (Request.QueryString["DlpName"].Contains("-001"))
             {
-                sb.Append("Currently there is no DLP.");
+                sb.Append(GetResourceString(_recnoDLPText));
             }
             else
             {
-                sb.Append("Confirm which DLP is used in your workflow. The current DLP is \" " +
-                          Request.QueryString["DlpName"] + "\". ");   
+                sb.Append(string.Format(GetResourceString(_recconfirmDLPText), Request.QueryString["DlpName"]));
             }
-            
+
             lblOpenPrintConditionMessage.Text = sb.ToString();
         }
 
@@ -56,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                                    ? "Analyze.aspx"
                                                    : "Measurement.aspx");
-               
+
             }
         }
 

@@ -21,7 +21,7 @@
     <table cellpadding="0" cellspacing="10" width="100%">
         <tr>
             <td>
-                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </td>
         </tr>
         <tr>
@@ -36,8 +36,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div style="float: left;" class="text">
-                                        <label>
-                                            Forgot Password</label>
+                                        <label><asp:Localize runat="server" Text="Forgot Password" 
+                                            ID="locForgotPassword" meta:resourcekey="locForgotPasswordResource1"></asp:Localize></label>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -48,11 +48,13 @@
                                     <tbody>
                                         <tr>
                                             <td style="width: 140px;">
-                                                <span>UserName:</span>
+                                                <span><asp:Localize runat="server" ID="locUsername" Text="UserName:" 
+                                                    meta:resourcekey="locUsernameResource1"></asp:Localize></span>
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtUserName" runat="server" Width="200px" Height="19px" MaxLength="30"></asp:TextBox>
+                                                    <asp:TextBox ID="txtUserName" runat="server" Width="200px" Height="19px" 
+                                                        MaxLength="30" meta:resourcekey="txtUserNameResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvUserName" runat="server" Display="Dynamic" ControlToValidate="txtUserName"
@@ -70,14 +72,18 @@
                                             </td>
                                             <td align="left">
                                                 <div>
-                                                    <asp:LinkButton ID="lbtnRetrievePassword" runat="server" ValidationGroup="vgForgotPassword" CssClass="gray_bt"
+                                                    <asp:LinkButton ID="lbtnRetrievePassword" runat="server" 
+                                                        ValidationGroup="vgForgotPassword" CssClass="gray_bt"
                                                         OnClick="lbtnRetrievePassword_Click">
-                                                            <span> Retrieve Password </span>
+                                                            <span> <asp:Localize runat="server" Text="Retrieve Password" 
+                                                        ID="locRetrievePassword" meta:resourcekey="locRetrievePasswordResource1"></asp:Localize> 
+ </span>
                                                     </asp:LinkButton>
                                                      <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
                                                         CssClass="gray_bt">
-                                                             <span>
-                                                                  Cancel </span>
+                                                             <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
+                                                        meta:resourcekey="locCancelResource1"></asp:Localize> 
+ </span>
                                                     </asp:LinkButton>
                                                 </div>                                               
                                             </td>

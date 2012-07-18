@@ -12,9 +12,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class AddUserManagement : BaseControl, IViewAddUserManagement
     {
         #region Declaration
+        private const string _recResetPassword = "resetPasswordText";
+        private const string _recActivateUserAgain = "activateUserAgainText";
+        private const string _recAddUser = "lblHeaderResource1.Text";
+        private const string _recEditUser = "editUserText";
+        private const string _recSelectRole = "selectRoleText";
+        private const string _recSelectRegion = "selectRegionText";
+        private const string _recSelectCompany = "selectCompanyText";
+        private const string _recEmailSent = "emailSentText";
+        private const string _recprovideFirstName = "provideFirstNameText";
+        private const string _recprovideLastName = "provideLastNameText";
+        private const string _recprovideEmail = "provideEmailText";
+        private const string _recprovideProperEmail = "provideProperEmailText";
+        private const string _recprovideUsername = "provideUsernameText";
+        private const string _recprovideRole = "provideRoleText";
+        private const string _recprovideRegion = "provideRegionText";
+        private const string _recprovideCompany = "provideCompanyText";
+        private const string _recprovideBranch = "provideBranchText";
 
-        private const string ResetPasswordText = "Reset Password";
-        private const string ActivateUserText = "Activate User Again";
         private PresenterUserManagement _presenterUserManagement;
         public int UserId
         {
@@ -39,11 +54,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (!Page.IsPostBack)
             {
-                lblHeader.Text = "Add User";
+                lblHeader.Text = GetResourceString(_recAddUser); //"Add User";
                 BindRole();
                 if (Request.QueryString["UserId"] != null)
                 {
-                    lblHeader.Text = "Edit User";
+                    lblHeader.Text = GetResourceString(_recEditUser); //"Edit User";
                     UserId = Convert.ToInt32(Request.QueryString["UserId"]);
                     SetUser();
                 }
@@ -52,6 +67,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trPasswordReset.Visible = false;
                 }
             }
+            rfvFirstNameContainer.ValidationMsg = GetResourceString(_recprovideFirstName);
+            rfvLastNameContainer.ValidationMsg = GetResourceString(_recprovideLastName);
+            rfvEmailContainer.ValidationMsg = GetResourceString(_recprovideEmail);
+            revEmailContainer.ValidationMsg = GetResourceString(_recprovideProperEmail);
+            rfvUserNameContainer.ValidationMsg = GetResourceString(_recprovideUsername);
+            rfvRoleContainer.ValidationMsg = GetResourceString(_recprovideRole);
+            rfvRegionContainer.ValidationMsg = GetResourceString(_recprovideRegion);
+            rfvCompanyContainer.ValidationMsg = GetResourceString(_recprovideCompany);
+            cvBranchContainer.ValidationMsg = GetResourceString(_recprovideBranch);
         }
         #endregion
 
@@ -66,7 +90,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRole.DataValueField = "Key";
                 cmbRole.DataSource = UserRoleList;
                 cmbRole.DataBind();
-                cmbRole.Items.Insert(0, new ListItem("--Select Role--", ""));
+                cmbRole.Items.Insert(0, new ListItem(GetResourceString(_recSelectRole), ""));//--Select Role--
                 cmbRole_SelectedIndexChanged(null, null);
             }
         }
@@ -75,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbRegion.Items.Clear();
             if (string.IsNullOrEmpty(cmbRole.SelectedValue))
             {
-                cmbRegion.Items.Insert(0, new ListItem("--Select Region--", ""));
+                cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegion), ""));//--Select Region--
             }
             else
             {
@@ -87,7 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbRegion.DataValueField = "Key";
                     cmbRegion.DataSource = Regions;
                     cmbRegion.DataBind();
-                    cmbRegion.Items.Insert(0, new ListItem("--Select Region--", ""));
+                    cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegion), ""));//--Select Region--
                 }
             }
             cmbRegion_SelectedIndexChanged(null, null);
@@ -97,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompany.Items.Clear();
             if (string.IsNullOrEmpty(cmbRegion.SelectedValue))
             {
-                cmbCompany.Items.Insert(0, new ListItem("--Select Company--", ""));
+                cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), ""));//--Select Company--
             }
             else
             {
@@ -110,7 +134,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbCompany.DataValueField = "Key";
                     cmbCompany.DataSource = Companies;
                     cmbCompany.DataBind();
-                    cmbCompany.Items.Insert(0, new ListItem("--Select Company--", ""));
+                    cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), ""));//--Select Company--
                 }
             }
             cmbCompany_SelectedIndexChanged(null, null);
@@ -213,7 +237,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 chkIsActive.Checked = UserInformation.IsActive;
                 cmbRole.SelectedValue = UserInformation.Role.RoleId.ToString();
                 cmbRole_SelectedIndexChanged(null, null);
-                lnkPasswordReset.Text = UserInformation.IsActivated ? ResetPasswordText : ActivateUserText;
+                lnkPasswordReset.Text = UserInformation.IsActivated ? GetResourceString(_recResetPassword) : GetResourceString(_recActivateUserAgain);
                 lnkPasswordReset.Attributes.Add("authKey", UserInformation.AuthenticationKey.ToString());
                 cmbUserType.SelectedValue = UserInformation.UserType.ToString();
                 
@@ -341,7 +365,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterUserManagement.SendEmailToUser();
                 if (!IsErrorOccured)
                 {
-                    fujiStatusbar.DisplayMessage("Email has been sent to user!", false);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recEmailSent), false);//Email has been sent to user!
                 }
             }
         }

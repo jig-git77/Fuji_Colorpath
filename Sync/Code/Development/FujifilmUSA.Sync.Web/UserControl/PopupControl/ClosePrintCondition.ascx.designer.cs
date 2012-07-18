@@ -49,6 +49,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnReOptimize;
         
         /// <summary>
+        /// locReOptimize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locReOptimize;
+        
+        /// <summary>
         /// lbtnDownloadCurrentDLP control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadCurrentDLP;
+        
+        /// <summary>
+        /// locDownloadCurrentDLP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadCurrentDLP;
         
         /// <summary>
         /// lbtnViewLastAnalysis control.
@@ -67,6 +85,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnViewLastAnalysis;
         
         /// <summary>
+        /// locViewLastAnalysis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locViewLastAnalysis;
+        
+        /// <summary>
         /// lbtnClose control.
         /// </summary>
         /// <remarks>
@@ -74,6 +101,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnClose;
+        
+        /// <summary>
+        /// locCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locCancel;
         
         /// <summary>
         /// updateProgress control.

@@ -69,71 +69,109 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>
-            Activity Management</h1>        
+        <h1><asp:Localize runat="server" Text="Activity Management" ID="locActivityMgmt" 
+                meta:resourcekey="locActivityMgmtResource1"></asp:Localize></h1>        
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+      <%--  <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>--%>
+                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+            Visible="False" />
 
-        <telerik:RadGrid ID="RadGrid1" runat="server" Width="98%" ShowStatusBar="true"
-            AutoGenerateColumns="False" PageSize="7" AllowSorting="True" AllowMultiRowSelection="False"
+        <telerik:RadGrid ID="RadGrid1" runat="server" Width="98%" ShowStatusBar="True"
+            AutoGenerateColumns="False" PageSize="7" AllowSorting="True"
             AllowPaging="True" OnDetailTableDataBind="RadGrid1_DetailTableDataBind" 
-            OnNeedDataSource="RadGrid1_NeedDataSource" OnPreRender="RadGrid1_PreRender">
+            OnNeedDataSource="RadGrid1_NeedDataSource" 
+            OnPreRender="RadGrid1_PreRender" CellSpacing="0" GridLines="None">
             <PagerStyle Mode="NumericPages"></PagerStyle>
             <MasterTableView Width="100%" DataKeyNames="CompanyID" AllowMultiColumnSorting="True">
                 <DetailTables>
-                    <telerik:GridTableView DataKeyNames="BranchID" Name="BranchDetails" Width="100%">
+                    <telerik:GridTableView DataKeyNames="BranchID" Name="BranchDetails" 
+                        Width="100%">
                         <DetailTables>
                             <telerik:GridTableView DataKeyNames="BranchID" Name="UserDetails" Width="100%">
+<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+
+<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+
+<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                                 <Columns>
                                     <telerik:GridBoundColumn SortExpression="UserName" HeaderText="UserName" HeaderButtonType="TextButton"
-                                        DataField="UserName">
+                                        DataField="UserName" meta:resourcekey="GridBoundColumnResource1">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn SortExpression="PrintCondCreate" HeaderText="PrintCondCreate" HeaderButtonType="TextButton"
-                                        DataField="PrintCondCreate">
+                                    <telerik:GridBoundColumn SortExpression="PrintCondCreate" 
+                                        HeaderText="PrintCondCreate" HeaderButtonType="TextButton"
+                                        DataField="PrintCondCreate" meta:resourcekey="GridBoundColumnResource2">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn SortExpression="PrintCondDelete" HeaderText="PrintCondDelete" HeaderButtonType="TextButton"
-                                        DataField="PrintCondDelete">
+                                    <telerik:GridBoundColumn SortExpression="PrintCondDelete" 
+                                        HeaderText="PrintCondDelete" HeaderButtonType="TextButton"
+                                        DataField="PrintCondDelete" meta:resourcekey="GridBoundColumnResource3">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn SortExpression="UploadMeasure" HeaderText="UploadMeasure" HeaderButtonType="TextButton"
-                                        DataField="UploadMeasure">
+                                    <telerik:GridBoundColumn SortExpression="UploadMeasure" 
+                                        HeaderText="UploadMeasure" HeaderButtonType="TextButton"
+                                        DataField="UploadMeasure" meta:resourcekey="GridBoundColumnResource4">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn SortExpression="CreateDLP" HeaderText="CreateDLP" HeaderButtonType="TextButton"
-                                        DataField="CreateDLP">
+                                        DataField="CreateDLP" meta:resourcekey="GridBoundColumnResource5">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn SortExpression="OptDLP" HeaderText="OptDLP" HeaderButtonType="TextButton"
-                                        DataField="OptDLP">
+                                        DataField="OptDLP" meta:resourcekey="GridBoundColumnResource6">
                                     </telerik:GridBoundColumn>
                                 </Columns>
+
+<EditFormSettings>
+<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+</EditFormSettings>
                             </telerik:GridTableView>
                         </DetailTables>
+
+<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+
+<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+
+<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                         <Columns>
                             <telerik:GridBoundColumn SortExpression="BranchID" HeaderText="BranchID" HeaderButtonType="TextButton"
-                                DataField="BranchID">
+                                DataField="BranchID" meta:resourcekey="GridBoundColumnResource7">
                             </telerik:GridBoundColumn>                           
                             <telerik:GridBoundColumn SortExpression="BranchName" HeaderText="BranchName" HeaderButtonType="TextButton"
-                                DataField="BranchName" UniqueName="BranchName">
+                                DataField="BranchName" UniqueName="BranchName" 
+                                meta:resourcekey="GridBoundColumnResource8">
                             </telerik:GridBoundColumn>
                         </Columns>
+
+<EditFormSettings>
+<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+</EditFormSettings>
                     </telerik:GridTableView>
                 </DetailTables>
+
+<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+
+<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+
+<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                 <Columns>
                     <telerik:GridBoundColumn SortExpression="CompanyID" HeaderText="CompanyID" HeaderButtonType="TextButton"
-                        DataField="CompanyID">
+                        DataField="CompanyID" meta:resourcekey="GridBoundColumnResource9">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn SortExpression="CompanyName" HeaderText="CompanyName" HeaderButtonType="TextButton"
-                        DataField="CompanyName">
+                        DataField="CompanyName" meta:resourcekey="GridBoundColumnResource10">
                     </telerik:GridBoundColumn>                   
                 </Columns>
+
+<EditFormSettings>
+<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+</EditFormSettings>
             </MasterTableView>
+
+<FilterMenu EnableImageSprites="False"></FilterMenu>
         </telerik:RadGrid>
 
-  </ContentTemplate>
-        </asp:UpdatePanel>
+ <%-- </ContentTemplate>
+        </asp:UpdatePanel>--%>
     </div>
 </div>
 <div class="admin_bottom">

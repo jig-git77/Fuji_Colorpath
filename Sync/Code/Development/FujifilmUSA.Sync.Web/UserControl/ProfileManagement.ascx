@@ -20,11 +20,11 @@
          var checkspace = /\s/;
 
          if (true == checkspace.test(password)) {
-             jQuery("span[id*='spanPassWord']").html("Spaces are not allowed.");
+             jQuery("span[id*='spanPassWord']").html('<%= GetResourceString("spacesNotAllowedText") %>');
              return false;
          }
          if (password.length < 4) {
-             jQuery("span[id*='spanPassWord']").html("Must be 4 char in password");
+             jQuery("span[id*='spanPassWord']").html('<%= GetResourceString("passwordLengthText") %>');
              return false;
          }
          return true;
@@ -39,7 +39,7 @@
              return;
          }
          if (jQuery("input[id*='txtNewPassword']").val() != (jQuery("input[id*='txtConfirmPass']").val())) {
-             jQuery("span[id*='spanConfirmPassWord']").html("Password and comfirm password are not same.");
+             jQuery("span[id*='spanConfirmPassWord']").html('<%= GetResourceString("passwordNotMatchText") %>');
              arguments.IsValid = false;
              return;
          }
@@ -51,11 +51,11 @@
          var checkspace = /\s/;
 
          if (true == checkspace.test(password)) {
-             jQuery("span[id*='spanConfirmPassWord']").html("Spaces are not allowed.");
+             jQuery("span[id*='spanConfirmPassWord']").html('<%= GetResourceString("spacesNotAllowedText") %>');
              return false;
          }
          if (password.length < 4) {
-             jQuery("span[id*='spanConfirmPassWord']").html("Must be 4 char in confirm password");
+             jQuery("span[id*='spanConfirmPassWord']").html('<%= GetResourceString("confirmPasswordLengthText") %>');
              return false;
          }
          return true;
@@ -79,27 +79,27 @@
 
          if (Excellent.test(password)) {
              $("span[id*='CustomIndicator']").css("display", "inline");
-             jQuery("span[id*='PasswordRepeatedIndicator']").html("Excellent");
+             jQuery("span[id*='PasswordRepeatedIndicator']").html('<%= GetResourceString("passwordExcellent") %>');
              $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L5");
          }
          else if (strong.test(password)) {
              $("span[id*='CustomIndicator']").css("display", "inline");
-             jQuery("span[id*='PasswordRepeatedIndicator']").html("Strong");
+             jQuery("span[id*='PasswordRepeatedIndicator']").html('<%= GetResourceString("passwordStrong") %>');
              $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L4");
          }
          else if (Average.test(password) == true && bad.test(password) == false) {
              $("span[id*='CustomIndicator']").css("display", "inline");
-             jQuery("span[id*='PasswordRepeatedIndicator']").html("Average");
+             jQuery("span[id*='PasswordRepeatedIndicator']").html('<%= GetResourceString("passwordAverage") %>');
              $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L3");
          }
          else if (Weak.test(password)) {
              $("span[id*='CustomIndicator']").css("display", "inline");
-             jQuery("span[id*='PasswordRepeatedIndicator']").html("Weak");
+             jQuery("span[id*='PasswordRepeatedIndicator']").html('<%= GetResourceString("passwordWeak") %>');
              $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L2");
          }
          else {
              $("span[id*='CustomIndicator']").css("display", "inline ");
-             jQuery("span[id*='PasswordRepeatedIndicator']").html("Very Poor");
+             jQuery("span[id*='PasswordRepeatedIndicator']").html('<%= GetResourceString("passwordVeryPoor") %>');
              $("span[id*='PasswordRepeatedIndicator']").removeClass().addClass("L1");
          }
      }
@@ -109,8 +109,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            My Settings</h1>
+        <h1><asp:Localize runat="server" Text="My Settings" ID="locMySettings" 
+                meta:resourcekey="locMySettingsResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -119,26 +119,31 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
                     <center>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                        <fieldset style="width: 40%;">
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
+                        <fieldset style="width: 50%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Change Password"></asp:Label>
+                                <asp:Label ID="lblHeader" runat="server" Text="Change Password" 
+                                    meta:resourcekey="lblHeaderResource1"></asp:Label>
                             </legend>
                             <table>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;">User Name </span>
+                                        <span style="font-weight: bold;"><asp:Localize Text="User Name" runat="server" 
+                                            ID="locUsername" meta:resourcekey="locUsernameResource1"></asp:Localize> </span>
                                     </td>
                                     <td>
                                           <b>&nbsp;:&nbsp;</b>   
                                     </td>
                                     <td align="left">
-                                        <asp:Label ID="lblUserName" runat="server"></asp:Label>
+                                        <asp:Label ID="lblUserName" runat="server" 
+                                            meta:resourcekey="lblUserNameResource1"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;">New Password<span style="color: Red;">*</span>
+                                        <span style="font-weight: bold;"><asp:Localize Text="New Password" 
+                                            runat="server" ID="locNewPassword" meta:resourcekey="locNewPasswordResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -147,18 +152,23 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtNewPassword" runat="server" Height="19px" MaxLength="25" 
-                                                onkeydown="javascript:passwordcheck()" TextMode="Password" Width="200px"></asp:TextBox>
+                                                onkeydown="javascript:passwordcheck()" TextMode="Password" Width="200px" 
+                                                meta:resourcekey="txtNewPasswordResource1"></asp:TextBox>
                                             <span ID="CustomIndicator" class="Base"><span ID="PasswordRepeatedIndicator">
                                             </span></span>
                                         </div>
                                         <div style="float: left">
                                             <asp:CustomValidator ID="cvPassWord" runat="server" 
-                                                ClientValidationFunction="ValidPassword" ValidationGroup="vgChangePassword">
+                                                ClientValidationFunction="ValidPassword" 
+                                                ValidationGroup="vgChangePassword">
                                                     <div class="tooltip_round_box" style=" margin-top: 0px; margin-left: 0px; width: 250px;">
                                                     <div class="tooltip_arrow" style="margin-top: -3px;">&nbsp;</div>
                                                     <div class="tooltip_top_left"></div>
                                                     <div class="tooltip_top_right"></div>
-                                                    <div class="tooltip_inside"><span id='spanPassWord'>Please provide password.</span></div>
+                                                    <div class="tooltip_inside"><span id='spanPassWord'><asp:Localize 
+                                                            Text="Please provide password." runat="server" ID="locPasswordRequired" 
+                                                            meta:resourcekey="locPasswordRequiredResource1"></asp:Localize>
+</span></div>
                                                     <div class="tooltip_bottom_left"></div>
                                                     <div class="tooltip_bottom_right"></div>
                                                     </div>
@@ -170,7 +180,9 @@
                                 </tr>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;">Confirm Password<span style="color: Red;">*</span>
+                                        <span style="font-weight: bold;"><asp:Localize Text="Confirm Password" 
+                                            runat="server" ID="locConfirmPassword" 
+                                            meta:resourcekey="locConfirmPasswordResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -179,7 +191,7 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:TextBox ID="txtConfirmPass" runat="server" MaxLength="25" TextMode="Password"
-                                                Width="200px" Height="19px"></asp:TextBox>
+                                                Width="200px" Height="19px" meta:resourcekey="txtConfirmPassResource1"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:CustomValidator ID="cvConfirmPassword" ClientValidationFunction="ConfirmPassWordPassword"
@@ -188,7 +200,11 @@
                                                 <div class="tooltip_arrow" style="margin-top: -3px;">&nbsp;</div>
                                                 <div class="tooltip_top_left"></div>
                                                 <div class="tooltip_top_right"></div>
-                                                <div class="tooltip_inside"><span id='spanConfirmPassWord'>Please provide confirm password.</span></div>
+                                                <div class="tooltip_inside"><span id='spanConfirmPassWord'><asp:Localize 
+                                                        runat="server" Text="Please provide confirm password." 
+                                                        ID="locConfirmPasswordRequired" 
+                                                        meta:resourcekey="locConfirmPasswordRequiredResource1"></asp:Localize>
+</span></div>
                                                 <div class="tooltip_bottom_left"></div>
                                                 <div class="tooltip_bottom_right"></div>
                                                 </div>
@@ -208,10 +224,15 @@
                                             <div style="padding-left: 3px;">
                                                 <asp:LinkButton ID="lbtnSavePassword" runat="server" CssClass="gray_bt" ValidationGroup="vgChangePassword"
                                                     OnClick="lbtnSavePassword_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize Text="Save" runat="server" ID="locSavePwd" 
+                                                    meta:resourcekey="locSavePwdResource1"></asp:Localize> 
+ </span>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnCancelPassword" runat="server" CssClass="gray_bt" PostBackUrl="~/Settings.aspx">
-                                                    <span> Cancel </span>
+                                                <asp:LinkButton ID="lbtnCancelPassword" runat="server" CssClass="gray_bt" 
+                                                    PostBackUrl="~/Settings.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" ID="locCancelPwd" 
+                                                    meta:resourcekey="locCancelPwdResource1"></asp:Localize> 
+ </span>
                                                 </asp:LinkButton>
                                             </div>
                                         </div>
@@ -225,12 +246,15 @@
                         <br />
                         <fieldset style="width: 60%;">
                             <legend>
-                                <asp:Label ID="Label1" runat="server" Text="Change Security Information"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text="Change Security Information" 
+                                    meta:resourcekey="Label1Resource1"></asp:Label>
                             </legend>
                             <table>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;">Security Question<span style="color: Red;">*</span>
+                                        <span style="font-weight: bold;"><asp:Localize Text="Security Question" 
+                                            runat="server" ID="locSecurityQuestion" 
+                                            meta:resourcekey="locSecurityQuestionResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -238,12 +262,15 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <asp:DropDownList ID="cmbSecurityQuestion" runat="server" Width="400px" CssClass="select" DataValueField="Key" DataTextField="Value">
+                                            <asp:DropDownList ID="cmbSecurityQuestion" runat="server" Width="400px" 
+                                                CssClass="select" DataValueField="Key" DataTextField="Value" 
+                                                meta:resourcekey="cmbSecurityQuestionResource1">
                                             </asp:DropDownList>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvSecurityQuestion" runat="server" Display="Dynamic"
-                                                ControlToValidate="cmbSecurityQuestion" ForeColor="Red" ValidationGroup="vgChangeSecurity">
+                                                ControlToValidate="cmbSecurityQuestion" ForeColor="Red" 
+                                                ValidationGroup="vgChangeSecurity">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcSecurityQuestionContainer" runat="server"
                                                     ValidationMsg="Please select security question." Size="200" />
                                             </asp:RequiredFieldValidator>
@@ -254,7 +281,9 @@
                                 </tr>
                                 <tr>
                                     <td align="right">
-                                        <span style="font-weight: bold;">Security Answer<span style="color: Red;">*</span>
+                                        <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                            Text="Security Answer" ID="locSecurityAnswer" 
+                                            meta:resourcekey="locSecurityAnswerResource1"></asp:Localize><span style="color: Red;">*</span>
                                         </span>
                                     </td>
                                     <td>
@@ -262,11 +291,13 @@
                                     </td>
                                     <td align="left">
                                         <div style="float: left;">
-                                            <asp:TextBox ID="txtSecurityAnswer" runat="server" MaxLength="50" Width="400px" Height="19px"></asp:TextBox>
+                                            <asp:TextBox ID="txtSecurityAnswer" runat="server" MaxLength="50" Width="400px" 
+                                                Height="19px" meta:resourcekey="txtSecurityAnswerResource1"></asp:TextBox>
                                         </div>
                                         <div style="float: left">
                                             <asp:RequiredFieldValidator ID="rfvSecurityAnswer" runat="server" Display="Dynamic"
-                                                ControlToValidate="txtSecurityAnswer" ForeColor="Red" ValidationGroup="vgChangeSecurity">
+                                                ControlToValidate="txtSecurityAnswer" ForeColor="Red" 
+                                                ValidationGroup="vgChangeSecurity">
                                                 <ucValidationContainer:ValidationContainer ID="rfvcSecurityAnswerContainer" runat="server"
                                                     ValidationMsg="Please provide security answer." Size="200" />
                                             </asp:RequiredFieldValidator>
@@ -285,10 +316,17 @@
                                             <div style="padding-left: 3px;">
                                                 <asp:LinkButton ID="lbtnSaveSecurity" runat="server" CssClass="gray_bt" ValidationGroup="vgChangeSecurity"
                                                     OnClick="lbtnSaveSecurity_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize runat="server" Text="Save" 
+                                                    ID="locSaveSecurityQuestion" 
+                                                    meta:resourcekey="locSaveSecurityQuestionResource1"></asp:Localize> 
+ </span>
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="lbtnCancelSecurity" runat="server" CssClass="gray_bt" PostBackUrl="~/Settings.aspx">
-                                                    <span> Cancel </span>
+                                                <asp:LinkButton ID="lbtnCancelSecurity" runat="server" CssClass="gray_bt" 
+                                                    PostBackUrl="~/Settings.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" 
+                                                    ID="locCancelSecurityQuestion" 
+                                                    meta:resourcekey="locCancelSecurityQuestionResource1"></asp:Localize> 
+ </span>
                                                 </asp:LinkButton>
                                             </div>
                                         </div>

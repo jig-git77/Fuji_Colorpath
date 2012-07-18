@@ -9,6 +9,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Export : BaseControl, IViewExport
     {
+        #region Private Variables - Globalization
+        private const string _recDownload = "downloadText";
+        private const string _recDLP = "dlpText";
+        private const string _recDownloadChartNotAvailable = "downloadChartNotAvailableText";
+        #endregion
+
         private PresenterExport _presenterExport;
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
@@ -28,7 +34,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                header.InnerText = string.Format("Download - {0}", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
+                header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);                
             }
         }
@@ -56,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string DLPName = SessionManager.Instance.CurrentOptimizeRun.DlpName;
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
-                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
+                DLPName = SessionManager.Instance.CurrentProject.ProjectName + " "+ GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
             }
             if (!IsErrorOccured)
             {
@@ -74,11 +80,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (ChartPreview != null)
                     Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value), ".pdf");
                 else
-                    fujiStatusbar.DisplayMessage("Download chart is not available", true);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
             }
             else
             {
-                fujiStatusbar.DisplayMessage("Download chart is not available", true);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
             }
         }
 

@@ -21,6 +21,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
+        private const string _recDLPText = "dlpText";
+        private const string _recDLPMsgText = "dlpMsgText";
+        private const string _recnewPrintCondition = "newPrintConditionText";
+        private const string _recAnalyze = "analyze";
+        private const string _recCreateDLP = "createDLP";
+        private const string _recNext = "nextText";
+        private const string _recCyan = "cyanText";
+        private const string _recCyanPathMetrics = "cyanPathMetrics";
+        private const string _recMagenta = "magentaText";
+        private const string _recMagentaPathMetrics = "magentaPathMetrics ";
+        private const string _recYellow = "yellowText";
+        private const string _recYellowPathMetrics = "yellowPathMetrics ";
+        private const string _recBlack = "blackText";
+        private const string _recBlackPathMetrics = "blackPathMetrics ";
+        private const string _recRed = "redText";
+        private const string _recRedPathMetrics = "redPathMetrics ";
+        private const string _recGreen = "greenText";
+        private const string _recGreenPathMetrics = "greenPathMetrics ";
+        private const string _recBlue = "blueText";
+        private const string _recBluePathMetrics = "bluePathMetrics ";
+        private const string _recPaper = "paperText";
+        private const string _recPaperPathMetrics = "paperPathMetrics ";
+        private const string _recActual = "actualText";
+        private const string _recL = "lText";
+        private const string _recA = "aText";
+        private const string _recB = "bText";
+        private const string _recTarget = "targetText";
+        private const string _recDeltaE = "deltaEText";
+        private const string _recDeltaL = "deltaLText";
+        private const string _recDeltaA = "deltaAText";
+        private const string _recDeltaB = "deltaBText";
+        private const string _recPatchMetrics = "patchMetricsText";
+        private const string _recgbPatchMetrics = "gbPatchMetricsText";
         public DateTime EndDate;
 
         public bool IsXmfUser
@@ -62,8 +95,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
-                return string.Format("Once optimization is complete, apply {0} to workflow and reprint the {1} chart.", DLPName, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
+                string DLPName = SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
+                return string.Format(GetResourceString(_recDLPMsgText), DLPName, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
             }
         }
         #endregion
@@ -72,7 +105,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
-        }       
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -83,18 +116,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
             {
-                header.InnerText = "New Print Condition - Analyze (No DLP)";
+                header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
             }
             else
             {
-                header.InnerText = string.Format("Analyze - {0}", SessionManager.Instance.CurrentOptimizeRun.LastDlpName);
+                header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
             }
 
             lbtnDownloadAndSaveDLP.Visible = !IsXmfUser;
 
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
-                                              ? "<span><img id='imgAdd' src='Images/export.png'/>Create DLP<span>"
-                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>Next<span>";
+                                              ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "<span>"
+                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "<span>";//Create DLP - Next
             if (!Page.IsPostBack)
             {
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentOptimizeRun.HasProfile)
@@ -106,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
              
             }
-            BindMesurementChart();           
+            BindMesurementChart();
         }
         #endregion
 
@@ -147,8 +180,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
-                grdMeasurement.DataSource = MeasurementsDelta;           
-                grdMeasurement.DataBind();               
+                grdMeasurement.DataSource = MeasurementsDelta;
+                grdMeasurement.DataBind();
             }
             catch (Exception ex)
             {
@@ -182,13 +215,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             _presenterAnalyze.GetGrayChart();
-             if (!IsErrorOccured)
-             {
-                 FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
-             }
+            if (!IsErrorOccured)
+            {
+                FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
+            }
         }
 
-        #region Fill InkPaper Tab  
+        #region Fill InkPaper Tab
         private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper)
         {
             try
@@ -203,7 +236,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Exc;
             }
         }
-       
+
 
         #region Fill DeltaE Primary Patches Chart
         private void FillDeltaEPrimaryPatchesChart(List<AnalyzeChart> DT)
@@ -218,25 +251,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartSummary_DeltaE.Visible = true;
                 ChartSummary_DeltaE.Series[0].Points.Clear();
                 ChartSummary_DeltaE.Series[1].Points.Clear();
-             
+
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value (ΔELimit) === //
                 Series objSeries0 = (Series)ChartSummary_DeltaE.Series[0];
                 objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;         
+                objSeries0.YValueType = ChartValueType.String;
                 objSeries0.ChartType = SeriesChartType.Bar;
-                         
+
                 // === Series1 to display Actual value (ΔE) === //
                 Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;            
+                objSeries1.YValueType = ChartValueType.String;
                 objSeries1.ChartType = SeriesChartType.Bar;
-                objSeries1.CustomProperties = "DrawingStyle=Cylinder";                
-            
+                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
+
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;
-                            
+
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -271,50 +304,50 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     for (int i = 0; i < DT.Count; i++)
                     {
                         SBDeltaEPatches.Append("<tr style='height: 10px'>");
-                       
+
                         if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>Cyan</td>");
-                            TooltipTitle = "Cyan Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>" + GetResourceString(_recCyan) + "</td>");//Cyan
+                            TooltipTitle = GetResourceString(_recCyanPathMetrics); //"Cyan Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>Magenta</td>");
-                            TooltipTitle = "Magenta Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recMagenta) + "</td>");//Magenta
+                            TooltipTitle = GetResourceString(_recMagentaPathMetrics);//Magenta Patch Metrics
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>Yellow</td>");
-                            TooltipTitle = "Yellow Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recYellow) + "</td>");//Yellow
+                            TooltipTitle = GetResourceString(_recYellowPathMetrics); //"Yellow Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>Black</td>");
-                            TooltipTitle = "Black Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recBlack) + "</td>");//Black
+                            TooltipTitle = GetResourceString(_recBlackPathMetrics); //"Black Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>Red</td>");
-                            TooltipTitle = "Red Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recRed) + "</td>");
+                            TooltipTitle = GetResourceString(_recRedPathMetrics); //"Red Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>Green</td>");
-                            TooltipTitle = "Green Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recGreen) + "</td>");//Green
+                            TooltipTitle = GetResourceString(_recGreenPathMetrics); //"Green Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>Blue</td>");
-                            TooltipTitle = "Blue Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>" + GetResourceString(_recBlue) + "</td>");//Blue
+                            TooltipTitle = GetResourceString(_recBluePathMetrics); //"Blue Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:8px;'>Paper</td>");
-                            TooltipTitle = "Paper Patch Metrics";
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:8px;'>" + GetResourceString(_recPaper) + "</td>");
+                            TooltipTitle = GetResourceString(_recPaperPathMetrics); //"Paper Patch Metrics";
                         }
-                      
+
                         SBDeltaEPatches.Append("</tr>");
-                        
+
                         BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT, i, TooltipTitle);
                     }
                     LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
@@ -326,11 +359,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Exc;
             }
         }
-        
+
         private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, List<AnalyzeChart> DR, int Index, string TooltipTitle)
         {
             try
-            {                
+            {
                 Double Y1, Y2;
                 Y1 = Y2 = 0;
 
@@ -340,38 +373,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)
                     Y1 = Y2;
-                               
-                objSeries0.Points.AddXY((Double)0, Y1);               
-                objSeries0.Points[Index]["PointWidth"] = "-1";
-            
-                Series SeriesActual = objSeries1;
-                objSeries1.Points.AddXY((Double)0, Y2);
 
+                objSeries0.Points.AddXY((Double)0, Y1);
+                objSeries0.Points[Index]["PointWidth"] = "-1";
+
+                Series SeriesActual = objSeries1;
+                objSeries1.Points.AddXY((Double)0, Y2);               
                 #region Add Tooltip HTML
                 StringBuilder toolTip = new StringBuilder();
                 toolTip.Append("<table>");
                 toolTip.Append("<tr><td><b>" + TooltipTitle + "</b></td></tr>");
                 toolTip.Append("<tr><td><table>");
-                toolTip.Append("<tr><td>Actual</td><td>");
-                toolTip.Append("L*" + DR[Index].CielabL.ToString());
-                toolTip.Append(" a*" + DR[Index].CielabA.ToString());
-                toolTip.Append(" b*" + DR[Index].CielabB.ToString());
+                toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");//Actual
+                toolTip.Append(GetResourceString(_recL) + DR[Index].CielabL.ToString());
+                toolTip.Append(" " + GetResourceString(_recA) + DR[Index].CielabA.ToString());
+                toolTip.Append(" " + GetResourceString(_recB) + DR[Index].CielabB.ToString());
                 toolTip.Append("</td></tr>");
-                toolTip.Append("<tr><td>Target</td><td>");
-                toolTip.Append("L*" + DR[Index].TargetL.ToString());
-                toolTip.Append(" a*" + DR[Index].Targeta.ToString());
-                toolTip.Append(" b*" + DR[Index].Targetb.ToString());
+                toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");
+                toolTip.Append(GetResourceString(_recL) + DR[Index].TargetL.ToString());
+                toolTip.Append(" " + GetResourceString(_recA) + DR[Index].Targeta.ToString());
+                toolTip.Append(" " + GetResourceString(_recB) + DR[Index].Targetb.ToString());
                 toolTip.Append("</td></tr>");
-                toolTip.Append("<tr><td>&Delta;E</td><td>");
-                toolTip.Append(DR[Index].ΔE.ToString());             
-                toolTip.Append("</td></tr>");      
+                toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
+                toolTip.Append(DR[Index].ΔE.ToString());
+                toolTip.Append("</td></tr>");
                 toolTip.Append("</td></tr>");
                 toolTip.Append("</table></td></tr>");
                 toolTip.Append("</table>");
                 #endregion
 
                 objSeries1.Points[Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                          
+
                 SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(DR[Index].HtmlColor.ToString());
                 SeriesActual.Points[Index]["PointWidth"] = "1.0";
             }
@@ -399,28 +431,28 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;
                     CHRT_Paper1.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
 
-                    StringBuilder toolTip = new StringBuilder();
+                    StringBuilder toolTip = new StringBuilder();                    
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>Paper Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + GetResourceString(_recPaperPathMetrics) +  "</b></td></tr>");//Paper Patch Metrics
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual</td><td>");
-                    toolTip.Append("L*" + DT[0].CielabL.ToString());
-                    toolTip.Append(" a*" + DT[0].CielabA.ToString());
-                    toolTip.Append(" b*" + DT[0].CielabB.ToString());
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");//Actual
+                    toolTip.Append(GetResourceString(_recL) + DT[0].CielabL.ToString());
+                    toolTip.Append(" " + GetResourceString(_recA) + DT[0].CielabA.ToString());
+                    toolTip.Append(" " + GetResourceString(_recB) + DT[0].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Target</td><td>");
-                    toolTip.Append("L*" + DT[0].TargetL.ToString());
-                    toolTip.Append(" a*" + DT[0].Targeta.ToString());
-                    toolTip.Append(" b*" + DT[0].Targetb.ToString());
+                    toolTip.Append("<tr><td>" +GetResourceString(_recTarget) +  "</td><td>");//Target
+                    toolTip.Append(GetResourceString(_recL) + DT[0].TargetL.ToString());
+                    toolTip.Append(" " + GetResourceString(_recA) + DT[0].Targeta.ToString());
+                    toolTip.Append(" " + GetResourceString(_recB) + DT[0].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");//&Delta;L*
                     toolTip.Append(DT[0].ΔL.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>");//&Delta;a*
                     toolTip.Append(DT[0].Δa.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append("<tr><td>"  + GetResourceString(_recDeltaB) + "</td><td>");//&Delta;b*
                     toolTip.Append(DT[0].Δb.ToString());
                     toolTip.Append("</td></tr>");
 
@@ -429,7 +461,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #endregion
 
                     Double Paper_Δa = Convert.ToDouble(DT[0].Δa) == 0 ? 0.01 : Convert.ToDouble(DT[0].Δa); //-------If Δa = 0, then it makes problem in display chart, so just temporary assign 0.01 for negligible difference
-                    CHRT_Paper1.Series["Paper"].Points.AddXY(Paper_Δa, Convert.ToDouble(DT[0].Δb));                   
+                    CHRT_Paper1.Series["Paper"].Points.AddXY(Paper_Δa, Convert.ToDouble(DT[0].Δb));
                     CHRT_Paper1.Series["Paper"].ChartType = SeriesChartType.Point;
                     CHRT_Paper1.Series["Paper"].Points[0].BorderWidth = 4;
                     CHRT_Paper1.Series["Paper"].CustomProperties = "PolarDrawingStyle=Marker";
@@ -534,7 +566,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             StringBuilder toolTip = new StringBuilder();
             List<AnalyzeChart_Gray> ListFilter = new List<AnalyzeChart_Gray>();
-            
+
             ListFilter = DT.FindAll(item => item.PatchType == ColorName);
 
             for (int i = 0; i < ListFilter.Count; i = i + 1)
@@ -548,36 +580,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 int pointCount = ((isTarget) ? CHART_ABComparison.Series["Targets"].Points.Count : CHART_ABComparison.Series[ColorName].Points.Count);
 
-
                 if (isTarget || isActual)
                 {
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + GetResourceString(_recPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual</td><td>");
-                    toolTip.Append("L*" + ListFilter[i].CielabL.ToString());
-                    toolTip.Append(" a*" + ListFilter[i].CielabA.ToString());
-                    toolTip.Append(" b*" + ListFilter[i].CielabB.ToString());
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");
+                    toolTip.Append(GetResourceString(_recL) + ListFilter[i].CielabL.ToString());
+                    toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].CielabA.ToString());
+                    toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Target</td><td>");
-                    toolTip.Append("L*" + ListFilter[i].TargetL.ToString());
-                    toolTip.Append(" a*" + ListFilter[i].Targeta.ToString());
-                    toolTip.Append(" b*" + ListFilter[i].Targetb.ToString());
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");//Target
+                    toolTip.Append(GetResourceString(_recL) + ListFilter[i].TargetL.ToString());
+                    toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
+                    toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;E</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");//&Delta;E
                     toolTip.Append(ListFilter[i].ΔE.ToString());
                     toolTip.Append("</td></tr>");
                     //toolTip.Append("<tr><td>&Delta;H</td><td>");
                     //toolTip.Append(dv[i]["ΔH"].ToString());
                     //toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");//&Delta;L*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>");
                     toolTip.Append(ListFilter[i].Δa.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td><td>");
                     toolTip.Append(ListFilter[i].Δb.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("</table></td></tr>");
@@ -718,7 +749,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private void AddPointLABChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, List<AnalyzeChart_Gray> DR, bool isActual)
-        {
+        {            
             try
             {
                 StringBuilder toolTip = new StringBuilder();
@@ -726,34 +757,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + _XValue + "% GB Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><b>" + _XValue + GetResourceString(_recgbPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>Actual</td><td>");
-                    toolTip.Append("L*" + DR[_Index].CielabL.ToString());
-                    toolTip.Append(" a*" + DR[_Index].CielabA.ToString());
-                    toolTip.Append(" b*" + DR[_Index].CielabB.ToString());
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");
+                    toolTip.Append(GetResourceString(_recL) + DR[_Index].CielabL.ToString());
+                    toolTip.Append(" " + GetResourceString(_recA) + DR[_Index].CielabA.ToString());
+                    toolTip.Append(" " + GetResourceString(_recB) + DR[_Index].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");
                     toolTip.Append("L*" + DR[_Index].TargetL.ToString());
                     toolTip.Append(" a*" + DR[_Index].Targeta.ToString());
                     toolTip.Append(" b*" + DR[_Index].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>&Delta;E</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔE.ToString());
                     toolTip.Append("</td></tr>");
                     //toolTip.Append("<tr><td>&Delta;H</td><td>");
                     //toolTip.Append(DR[0].ΔE.ToString());
                     //toolTip.Append("</td></tr>");
 
-                    toolTip.Append("<tr><td>&Delta;L*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔL.ToString());
                     toolTip.Append("</td></tr>");
 
-                    toolTip.Append("<tr><td>&Delta;a*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>");
                     toolTip.Append(DR[_Index].Δa.ToString());
                     toolTip.Append("</td></tr>");
 
-                    toolTip.Append("<tr><td>&Delta;b*</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td>S<td>");
                     toolTip.Append(DR[_Index].Δb.ToString());
                     toolTip.Append("</td></tr>");
 
@@ -819,7 +850,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     EndDate = System.DateTime.Now;
                     DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
 
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
@@ -870,7 +901,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void GridPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)
-        {        
+        {
             switch (e.CommandName)
             {
                 case "Fillter":
@@ -938,7 +969,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
         }
 
-        #endregion   
+        #endregion
 
         #region IViewAnalyze Members
 

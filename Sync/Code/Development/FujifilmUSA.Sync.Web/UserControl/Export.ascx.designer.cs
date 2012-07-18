@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl header;
         
         /// <summary>
+        /// locDownload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownload;
+        
+        /// <summary>
         /// lbtnMeasure control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
+        /// locMeasure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
+        
+        /// <summary>
+        /// locDownloadDLPAndChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadDLPAndChart;
+        
+        /// <summary>
+        /// locDownloadDLPAndImplementWorkflow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadDLPAndImplementWorkflow;
         
         /// <summary>
         /// lbtnDownloadDLP control.
@@ -58,6 +94,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadDLP;
         
         /// <summary>
+        /// locDownloadDLP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadDLP;
+        
+        /// <summary>
+        /// locDownloadChartAndPrintThroughWorkflow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadChartAndPrintThroughWorkflow;
+        
+        /// <summary>
         /// lbtnDownloadChart control.
         /// </summary>
         /// <remarks>
@@ -67,6 +121,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadChart;
         
         /// <summary>
+        /// locDownloadChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadChart;
+        
+        /// <summary>
+        /// locAdvancedDownloads control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locAdvancedDownloads;
+        
+        /// <summary>
         /// lbtnDownloadDestinationICC control.
         /// </summary>
         /// <remarks>
@@ -74,5 +146,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnDownloadDestinationICC;
+        
+        /// <summary>
+        /// locDownloadDestinationICC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDownloadDestinationICC;
     }
 }

@@ -6,8 +6,8 @@
     &nbsp;</div>
 <div class="Global_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            System Error</h1>
+        <h1><asp:Localize runat="server" Text="System Error" ID="txtSystemError" 
+                meta:resourcekey="txtSystemErrorResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -17,11 +17,17 @@
 
             <div style="height:200px;">
                 <div style="font-size: 14px;"><br /><br /><br />
-                    <span style="font-size: 18px; color: red;">Opps!!! Unexpected error occured. Please
-                        contact your administrator.</span>
+                    <span style="font-size: 18px; color: red;"><asp:Localize Text="Opps!!! Unexpected error occured. Please
+                        contact your administrator." runat="server" ID="locUnexpectedError" 
+                        meta:resourcekey="locUnexpectedErrorResource1"></asp:Localize></span>
                     <br /><br />
-                    Please click here to go back to
-                    <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click"><span style="font-weight:bold;">Login page.</span></asp:LinkButton>
+                    <asp:Localize runat="server" Text="Please click here to go back to" 
+                        ID="locGoBack" meta:resourcekey="locGoBackResource1"></asp:Localize> 
+                    <asp:LinkButton ID="lnkLogin" runat="server" OnClick="lnkLogin_Click" 
+                        meta:resourcekey="lnkLoginResource1"><span style="font-weight:bold;"><asp:Localize 
+                        runat="server" Text="Login page." ID="locLoginPage" 
+                        meta:resourcekey="locLoginPageResource1"></asp:Localize>
+</span></asp:LinkButton>
                 </div>
             </div>
          </center>

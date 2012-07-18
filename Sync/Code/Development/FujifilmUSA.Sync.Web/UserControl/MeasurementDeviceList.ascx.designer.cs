@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class MeasurementDeviceList {
         
         /// <summary>
+        /// locMDM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMDM;
+        
+        /// <summary>
         /// likAdd control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgAdd;
+        
+        /// <summary>
+        /// locAddSyncMeasurementDevice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locAddSyncMeasurementDevice;
         
         /// <summary>
         /// testPanel control.

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class DownloadSoftwares : System.Web.UI.Page
+    public partial class DownloadSoftwares : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

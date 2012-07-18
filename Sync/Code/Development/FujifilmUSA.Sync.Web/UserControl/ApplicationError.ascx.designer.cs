@@ -13,6 +13,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class ApplicationError {
         
         /// <summary>
+        /// txtSystemError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize txtSystemError;
+        
+        /// <summary>
+        /// locUnexpectedError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locUnexpectedError;
+        
+        /// <summary>
+        /// locGoBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locGoBack;
+        
+        /// <summary>
         /// lnkLogin control.
         /// </summary>
         /// <remarks>
@@ -20,5 +47,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkLogin;
+        
+        /// <summary>
+        /// locLoginPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locLoginPage;
     }
 }

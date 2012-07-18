@@ -90,8 +90,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgCompany_ItemDataBound(object sender, GridItemEventArgs e)
         {
-
+            
         }
+       
         protected void likAdd_Click(object sender, EventArgs e)
         {
             Response.RedirectPermanent("AddCompanyManagement.aspx");

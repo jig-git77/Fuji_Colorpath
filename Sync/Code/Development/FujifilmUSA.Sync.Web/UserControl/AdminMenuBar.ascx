@@ -30,56 +30,76 @@
   <div class="dock-container" style="width: 300px">
       <asp:LinkButton ID="lbtnCompany" runat="server" 
           CssClass="dock-item overlapobject" PostBackUrl="~/CompanyManagement.aspx" 
-          onclick="lbtnCompany_Click" >
+          onclick="lbtnCompany_Click">
             <img src="Images/company-management.png" style="position:relative;z-index:1; " alt="Company"></img>
-            <span > Company </span>
+            <span > <asp:Localize Text="Company" ID="locCompany" runat="server" 
+          meta:resourcekey="locCompanyResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnBranch" runat="server" 
           CssClass="dock-item overlapobject" PostBackUrl="~/BranchManagement.aspx" 
           onclick="lbtnBranch_Click">
             <img src="Images/branch-management.png" style="position:relative;z-index:1; " alt="Branch" />
-            <span> Branch </span>
+            <span> <asp:Localize Text="Branch" runat="server" ID="locBranch" 
+          meta:resourcekey="locBranchResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnUser" runat="server" CssClass="dock-item overlapobject" 
           PostBackUrl="~/UserManagement.aspx" onclick="lbtnUser_Click">
             <img src="Images/user-management.png" style="position:relative;z-index:1; " alt="User" />
-            <span> User </span>
+            <span> <asp:localize runat="server" Text="User" ID="locUser" 
+          meta:resourcekey="locUserResource1"></asp:localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtProfileMgmt" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtProfileMgmt_Click">
             <img src="Images/Profile-Management-icon.png" style="position:relative;z-index:1; " alt="My Settings" />
-            <span> My Settings </span>
+            <span> <asp:Localize Text="My Settings" runat="server" ID="locMySettings" 
+          meta:resourcekey="locMySettingsResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="ltnLicense" runat="server" 
           CssClass="dock-item overlapobject" onclick="ltnLicense_Click">
             <img src="Images/license-management.png" style="position:relative;z-index:1; " alt="License" />
-            <span> License </span>
+            <span> <asp:Localize Text="License" runat="server" ID="locLicense" 
+          meta:resourcekey="locLicenseResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>      
       <asp:LinkButton ID="lbtnDevice" runat="server" 
           CssClass="dock-item overlapobject" PostBackUrl="~/DeviceManagement.aspx" 
           onclick="lbtnDevice_Click">
             <img src="Images/device-management.png" style="position:relative;z-index:1; " alt="Device" />
-            <span> Device </span>
+            <span> <asp:Localize Text="Device" runat="server" ID="locDevice" 
+          meta:resourcekey="locDeviceResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>      
       <asp:LinkButton ID="lbtnMeasurementDevice" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnMeasurementDevice_Click">
             <img src="Images/syncmeasurementdevice-management.png" style="position:relative;z-index:1; " alt="Measurement Device" />
-            <span> Measurement Device </span>
+            <span> <asp:Localize Text="Measurement Device" runat="server" 
+          ID="locMeasurementDevice" meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtDownload" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtDownload_Click">
             <img src="Images/download-icon-small.png" style="position:relative;z-index:1; " alt="Download" />
-            <span> Download </span>
+            <span> <asp:Localize Text="Download" runat="server" ID="locDownload" 
+          meta:resourcekey="locDownloadResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnRefChart" runat="server" 
            CssClass="dock-item overlapobject" onclick="lbtnRefChart_Click">
             <img src="Images/Reference-Chart-management.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
-            <span> Reference Chart </span>
+            <span> <asp:Localize runat="server" ID="locReferenceChart" 
+          Text="Reference Chart" meta:resourcekey="locReferenceChartResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnSourceProfile" runat="server" 
-          CssClass="dock-item overlapobject" onclick="lbtnSourceProfile_Click" >
+          CssClass="dock-item overlapobject" onclick="lbtnSourceProfile_Click">
             <img src="Images/sourceprofile-management.png" style="position:relative;z-index:1; " alt="Source Profile" />
-            <span> Source Profile </span>
+            <span> <asp:Localize Text="Source Profile" runat="server" 
+          ID="locSourceProfile" meta:resourcekey="locSourceProfileResource1"></asp:Localize> 
+ </span>
       </asp:LinkButton>      
   </div> 
 </div>

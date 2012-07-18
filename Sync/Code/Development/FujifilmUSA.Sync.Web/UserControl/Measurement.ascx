@@ -18,14 +18,18 @@
 </div>
 <div class="contant_middle">
     <div class="head">
-        <h1 id="header" runat="server">
-            Measurement</h1>
+        <h1 id="header" runat="server"><asp:Localize runat="server" Text="Measurement" 
+                ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
             <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
                 OnClientClick="return AllowToAnalyze();">
                 <span>
-                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
-                    Analyze</span>
+                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" 
+                meta:resourcekey="imgAddResource1" />
+                    
+<asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
+                meta:resourcekey="locAnalyzeResource1"></asp:Localize>
+</span>
             </asp:LinkButton>
         </div>
     </div>
@@ -34,9 +38,11 @@
             &nbsp;</div>
         <div class="middle" runat="server" id="tblMessage">
             <asp:Label ID="lblMessage" runat="server" Text="Status : Scanning device is not loaded."
-                Style="font-weight: bold; padding-left: 5px;"></asp:Label>
+                Style="font-weight: bold; padding-left: 5px;" 
+                meta:resourcekey="lblMessageResource1"></asp:Label>
             <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right;
-                font-weight: bold; padding-right: 5px;"></asp:Label>
+                font-weight: bold; padding-right: 5px;" 
+                meta:resourcekey="lblPluginMessageResource1"></asp:Label>
             &nbsp;
             <br />
         </div>

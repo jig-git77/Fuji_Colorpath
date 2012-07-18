@@ -14,6 +14,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddMeasurementDevice : BaseControl, IViewDevice
     {
+        #region Private Variables - Globalization
+        private const string _recAddMeasurementDevice = "lblHeaderResource1.Text";
+        private const string _recEditMeasurementDevice = "editMeasurementDeviceText";
+        private const string _recSelectBranch = "selectBranchText";
+        private const string _recSelectCompany = "selectCompanyText";
+        private const string _recSelectLicenseType = "selectLicenseText";
+        private const string _recSelectInstrumentType = "selectInstrumentTypeText";
+        #endregion
+
 
         #region "Declaration"
         private PresenterDevice _presenterdevice;
@@ -43,10 +52,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbCompanyName_SelectedIndexChanged(null, null);
             cmbBranch_SelectedIndexChanged(null, null);
             BindInstrumentTypeDropDown();
-            lblHeader.Text = "Add Measurement Device";
+            lblHeader.Text = GetResourceString(_recAddMeasurementDevice); // "Add Measurement Device";
             if (Request.QueryString["MeasurementDeviceId"] != null)
             {
-                lblHeader.Text = "Edit Measurement Device";
+                lblHeader.Text = GetResourceString(_recEditMeasurementDevice); //"Edit Measurement Device";
                 LoadMeasurementDevice(Convert.ToInt32(Request.QueryString["MeasurementDeviceId"]));
             }
         }
@@ -63,7 +72,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindBranchDropDown(int.Parse(cmbCompanyName.SelectedValue));
             }
             else
-                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", ""));
+                cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelectBranch), ""));//-- Select Branch --
             cmbBranch_SelectedIndexChanged(null, null);
         }
 
@@ -75,7 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindLicenseDropDown(int.Parse(cmbBranch.SelectedValue));
             }
             else
-                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", ""));
+                cmbLicenseType.Items.Insert(0, new ListItem(GetResourceString(_recSelectLicenseType), ""));//-- Select License Type --
 
         }
 
@@ -118,7 +127,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbCompanyName.DataSource = CompanyList;
                 cmbCompanyName.DataBind();
-                cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", ""));
+                cmbCompanyName.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), ""));//-- Select Company --
             }
         }
 
@@ -130,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
-                cmbBranch.Items.Insert(0, new ListItem("-- Select Branch --", ""));
+                cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelectBranch), ""));//-- Select Branch --
             }
         }
 
@@ -142,7 +151,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbLicenseType.DataSource = LicenseList;
                 cmbLicenseType.DataBind();
-                cmbLicenseType.Items.Insert(0, new ListItem("-- Select License Type --", ""));
+                cmbLicenseType.Items.Insert(0, new ListItem(GetResourceString(_recSelectLicenseType), ""));//-- Select License Type --
             }
             if (cmbLicenseType.Items.Count > 1)
             {
@@ -157,7 +166,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbInstrumentType.DataSource = InstrumentTypeList;
                 cmbInstrumentType.DataBind();
-                cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", ""));
+                cmbInstrumentType.Items.Insert(0, new ListItem(GetResourceString(_recSelectInstrumentType), ""));//-- Select Instrument Type --
             }
         }
 

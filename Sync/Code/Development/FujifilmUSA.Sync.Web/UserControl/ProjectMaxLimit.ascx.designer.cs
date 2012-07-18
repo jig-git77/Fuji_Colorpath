@@ -13,6 +13,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class ProjectMaxLimit {
         
         /// <summary>
+        /// locProjectLimit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locProjectLimit;
+        
+        /// <summary>
+        /// locMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMessage;
+        
+        /// <summary>
+        /// locGoBackMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locGoBackMessage;
+        
+        /// <summary>
         /// lnkProjectList control.
         /// </summary>
         /// <remarks>
@@ -20,5 +47,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkProjectList;
+        
+        /// <summary>
+        /// locProjectListPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locProjectListPage;
     }
 }

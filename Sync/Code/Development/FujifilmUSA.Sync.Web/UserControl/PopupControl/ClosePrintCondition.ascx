@@ -26,7 +26,7 @@
 </script>
 <div style="display: block; margin: 10px;" class="contantbox tabcontant">
     <div style=" margin-bottom: 3px;">
-    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server"  Visible="false"/>
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server"  Visible="False"/>
     </div>
     <div class="section_top">
         &nbsp;</div>
@@ -41,7 +41,8 @@
                                     <table>
                                         <tr>
                                             <td class="Content" style="line-height: 24px;">
-                                                <asp:Label ID="lblClosePrintConditionMessage" runat="server"></asp:Label>
+                                                <asp:Label ID="lblClosePrintConditionMessage" runat="server" 
+                                                    meta:resourcekey="lblClosePrintConditionMessageResource1"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
@@ -55,26 +56,37 @@
                                 <div class="buttonleft" style="padding-left: 3px">
                                     <asp:UpdatePanel ID="upReOptimize" runat="server">
                                         <ContentTemplate>
-                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnReOptimize_Click">
-                <span>Re Optimize</span>
+                                    <asp:LinkButton ID="lbtnReOptimize" runat="server" CssClass="gray_bt" 
+                                                OnClick="lbtnReOptimize_Click">
+                                        <span><asp:Localize runat="server" Text="Re Optimize" ID="locReOptimize" 
+                                                meta:resourcekey="locReOptimizeResource1"></asp:Localize>
+</span>
                                     </asp:LinkButton>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </div>
                                 <div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnDownloadCurrentDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadCurrentDLP_Click">
-                    <span>Download Current DLP</span>
+                                    <asp:LinkButton ID="lbtnDownloadCurrentDLP" runat="server" CssClass="gray_bt" 
+                                        OnClick="lbtnDownloadCurrentDLP_Click">
+                                        <span><asp:Localize runat="server" Text="Download Current DLP" 
+                                        ID="locDownloadCurrentDLP" meta:resourcekey="locDownloadCurrentDLPResource1"></asp:Localize>
+</span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
-                                    <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt" OnClick="lbtnViewLastAnalysis_Click">
-                <span>View Last Analysis</span>
+                                    <asp:LinkButton ID="lbtnViewLastAnalysis" runat="server" CssClass="gray_bt" 
+                                        OnClick="lbtnViewLastAnalysis_Click">
+                <span><asp:Localize runat="server" Text="View Last Analysis" ID="locViewLastAnalysis" 
+                                        meta:resourcekey="locViewLastAnalysisResource1"></asp:Localize>
+</span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseClosePrintConditionWindow(); return false;"
                                         CssClass="gray_bt">
-                        <span>Cancel</span>
+                        <span><asp:Localize runat="server" Text="Cancel" ID="locCancel" 
+                                        meta:resourcekey="locCancelResource1"></asp:Localize>
+</span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="clear">
@@ -91,12 +103,11 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
-<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upReOptimize"
+<asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upReOptimize"
     DisplayAfter="50" >
     <ProgressTemplate>
-        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
-            VerticalSide="Top" TargetControlID="updateProgress" 
-            runat="server">
+        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" TargetControlID="updateProgress" 
+            runat="server" Enabled="True">
         </AjaxToolkit:AlwaysVisibleControlExtender>
         <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px; top: 0px;
             z-index: 1000; width: 100%; height: 100%;" unselectable="on">

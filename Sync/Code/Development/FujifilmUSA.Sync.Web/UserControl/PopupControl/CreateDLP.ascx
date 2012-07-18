@@ -16,7 +16,8 @@
                                     <table>
                                         <tr>
                                             <td class="Content" style="line-height: 24px;">
-                                                Creating DLP, Please wait...
+                                                <asp:Localize ID="locCreatingDLP" runat="server" 
+                                                    Text="Creating DLP, Please wait..." meta:resourcekey="locCreatingDLPResource1"></asp:Localize>
                                             </td>
                                         </tr>
                                     </table>
@@ -31,7 +32,8 @@
                                     <table width="100%">
                                         <tr>
                                             <td class="Content" style="width: 100%; text-align: center; line-height: 24px;">
-                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/processbar.gif" />
+                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/processbar.gif" 
+                                                    meta:resourcekey="Image2Resource1" />
                                             </td>
                                         </tr>
                                     </table>
@@ -47,9 +49,7 @@
                                 </div>--%>
                                 <div style="float: left; padding-left: 5px; padding-top: 3px;">
                                     <asp:Label ID="lblMessage" 
-                                        runat="server" 
-                                        Text="" >
-                                    </asp:Label>
+                                        runat="server" meta:resourcekey="lblMessageResource1" ></asp:Label>
                                 </div>
                                 <div class="clear">
                                 </div>

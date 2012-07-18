@@ -13,8 +13,13 @@ using FujifilmUSA.Sync.Presenter.ViewInterface;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class DownloadSoftwares : System.Web.UI.UserControl
+    public partial class DownloadSoftwares : BaseControl
     {
+        #region Private variables - Globalization
+        private const string _recColorPathInstallerMac = "colorPathInstallerMac";
+        private const string _recColorPathInstallerPC = "colorPathInstallerPC";
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             rgDownload.PageSize = Common.Utilities.PageSize;
@@ -35,13 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             DataRow dr = dt.NewRow();
             dr["DownloadId"] = "1";
-            dr["DownloadName"] = "Colorpath Installer - Mac";
+            dr["DownloadName"] = GetResourceString(_recColorPathInstallerMac);
             dr["DownloadPath"] = "Download/Colorpath MacPlugin Installer.zip";
             dt.Rows.Add(dr);
 
             DataRow dr1 = dt.NewRow();
             dr1["DownloadId"] = "2";
-            dr1["DownloadName"] = "Colorpath Installer - PC";
+            dr1["DownloadName"] = GetResourceString(_recColorPathInstallerPC);
             dr1["DownloadPath"] = "Download/Colorpath PCPlugin Installer.zip";
             dt.Rows.Add(dr1);
 

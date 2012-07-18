@@ -84,82 +84,145 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>
-            Device Management</h1>
-        <asp:LinkButton ID="likAdd" runat="server" class="button" OnClick="likAdd_Click">
+        <h1><asp:Localize ID="locDeviceMgmt" runat="server" Text="Device Management" 
+                meta:resourcekey="locDeviceMgmtResource1"></asp:Localize></h1>
+        <asp:LinkButton ID="likAdd" runat="server" class="button" 
+            OnClick="likAdd_Click" meta:resourcekey="likAddResource1">
             <span>
-                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
-                Add Device</span>
+                <asp:Image ID="imgAdd" runat="server" 
+            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                
+<asp:Localize Text="Add Device" runat="server" ID="locAddDevice" 
+            meta:resourcekey="locAddDeviceResource1"></asp:Localize>
+</span>
         </asp:LinkButton>
-        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" OnClick="lbtnAddDeviceFamily_Click" Visible="false">
+        <asp:LinkButton ID="lbtnAddDeviceFamily" runat="server" class="button" 
+            OnClick="lbtnAddDeviceFamily_Click" Visible="False" 
+            meta:resourcekey="lbtnAddDeviceFamilyResource1">
             <span>
-                <asp:Image ID="Image1" runat="server" ImageUrl="../Images/new_project_icon.png" />
-                Add Device Family</span>
+                <asp:Image ID="Image1" runat="server" 
+            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="Image1Resource1" />
+                
+<asp:Localize runat="server" Text="Add Device Family" ID="locAddDeviceFamily" 
+            meta:resourcekey="locAddDeviceFamilyResource1"></asp:Localize>
+</span>
         </asp:LinkButton>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+      <%--  <asp:UpdatePanel runat="server">
+            <ContentTemplate>--%>
+                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+            Visible="False" />
                 <asp:HiddenField ID="hdSelectedCompanyId" runat="server" Value="0" />
-                <telerik:RadGrid ID="rgDevice" ShowHeader="true" AllowFilteringByColumn="true" AllowSorting="true"
-                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
+                <telerik:RadGrid ID="rgDevice" AllowFilteringByColumn="True" AllowSorting="True"
+                    AllowPaging="True" PageSize="5" runat="server" 
+            AutoGenerateColumns="False" EnableLinqExpressions="False"
                     OnNeedDataSource="rgDevice_NeedDataSource" OnItemCommand="rgDevice_ItemCommand"
-                    Width="98%" HeaderStyle-Font-Bold="true">
+                    Width="98%" HeaderStyle-Font-Bold="true" CellSpacing="0" 
+            GridLines="None">
                     <GroupingSettings CaseSensitive="false" />
+
+<HeaderStyle Font-Bold="True"></HeaderStyle>
+
                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                     <MasterTableView DataKeyNames="DeviceID,DeviceName,LicenseID,DeviceFamily.DeviceFamilyID,License.Branch.BranchId,License.Branch.Company.CompanyId,License.BranchId,IsActive">
+<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+
+<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+
+<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                         <Columns>
                             <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
-                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="120" HeaderStyle-Width ="120" 
+                                UniqueName="DeviceName" SortExpression="DeviceName" 
+                                FilterControlWidth="120" HeaderStyle-Width ="120" 
                                 ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
-                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true">                              
+                                ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" 
+                                ItemStyle-Wrap="true" meta:resourcekey="GridTemplateColumnResource1">                              
                                 <ItemTemplate>
-                                    <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' />
+                                    <asp:Label ID="lblDeviceName" runat="server" Text='<%# Eval("DeviceName") %>' 
+                                        meta:resourcekey="lblDeviceNameResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="120px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceFamily.DeviceFamilyDesc" AllowFiltering="true"
                                 HeaderText="Device Family Name" UniqueName="DeviceFamilyDesc" SortExpression="DeviceFamily.DeviceFamilyDesc"
                                 FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
+                                ShowFilterIcon="true" AutoPostBackOnFilter="true" 
+                                CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource2">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblDeviceFamilyDesc" runat="server" Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' />
+                                    <asp:Label ID="lblDeviceFamilyDesc" runat="server" 
+                                        Text='<%# Eval("DeviceFamily.DeviceFamilyDesc") %>' 
+                                        meta:resourcekey="lblDeviceFamilyDescResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="100px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord100" Width="100px"></ItemStyle>
                             </telerik:GridTemplateColumn>                                                      
                             <telerik:GridTemplateColumn DataField="License.Branch.Company.CompanyName" AllowFiltering="true"
                                 HeaderText="Company Name" UniqueName="CompanyName" SortExpression="License.Branch.Company.CompanyName"
                                 FilterControlWidth="120" HeaderStyle-Width ="120"  
                                 ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
+                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" 
+                                CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource3">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblCompanyName" runat="server" Text='<%# Eval("License.Branch.Company.CompanyName") %>' />
+                                    <asp:Label ID="lblCompanyName" runat="server" 
+                                        Text='<%# Eval("License.Branch.Company.CompanyName") %>' 
+                                        meta:resourcekey="lblCompanyNameResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="120px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="License.Branch.BranchName" AllowFiltering="true"
                                 HeaderText="Branch Name" UniqueName="BranchName" SortExpression="License.Branch.BranchName"
                                 FilterControlWidth="100" HeaderStyle-Width ="100"  
                                 ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" ItemStyle-Wrap="true"
-                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
+                                ShowFilterIcon="true" DataType="System.String" AutoPostBackOnFilter="true" 
+                                CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblBranchName" runat="server" Text='<%# Eval("License.Branch.BranchName") %>' />
+                                    <asp:Label ID="lblBranchName" runat="server" 
+                                        Text='<%# Eval("License.Branch.BranchName") %>' 
+                                        meta:resourcekey="lblBranchNameResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="100px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord100" Width="100px"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?"
-                                DataField="IsActive" ItemStyle-HorizontalAlign="Center"  FilterControlWidth="40" HeaderStyle-Width ="40" >
+                                DataField="IsActive" ItemStyle-HorizontalAlign="Center"  
+                                FilterControlWidth="40" HeaderStyle-Width ="40" 
+                                meta:resourcekey="GridTemplateColumnResource5" >
                                 <ItemTemplate>
-                                    <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
+                                    <asp:Image ID="imgIsActive" runat="server" 
+                                        ImageUrl='<%# Convert.ToBoolean(Eval("IsActive")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
+                                        meta:resourcekey="imgIsActiveResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="40px"></HeaderStyle>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="DeviceID" AllowFiltering="true" HeaderText=""
-                                UniqueName="Edit"  FilterControlWidth="70" HeaderStyle-Width ="70">
+                                UniqueName="Edit"  FilterControlWidth="70" HeaderStyle-Width ="70" 
+                                meta:resourcekey="GridTemplateColumnResource6">
                                 <FilterTemplate>
                                     <center>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server"  ToolTip ="Clear Fillter" CommandName="ClearFilter">
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server"  ToolTip ="Clear Fillter" 
+                                            CommandName="ClearFilter">
                                                     <span>
-                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                        <asp:Image ID="imgClearFillter" runat="server" 
+                                            AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
+                                            meta:resourcekey="imgClearFillterResource1" />
+
                                                     </span>
                                     </asp:LinkButton>
                                     </center>
@@ -171,12 +234,13 @@
                                                 <div style="float: left; padding-right: 10px;">
                                                     <asp:ImageButton ID="imgbtnEdit" runat="server" ToolTip="Edit Device" AlternateText="Edit"
                                                         ImageUrl="../Images/edit_icon.png" CommandArgument='<%# Eval("DeviceID") %>'
-                                                        CommandName="Edit" />
+                                                        CommandName="Edit" meta:resourcekey="imgbtnEditResource1" />
                                                 </div>
                                                 <div style="float: left;">
                                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Device" AlternateText="Delete"
                                                         ImageUrl="../Images/delete_icon.png" OnClientClick="javascript:return ConfirmDeleteDevice();"
-                                                        CommandArgument='<%# Eval("DeviceID") %>' CommandName="Delete" />
+                                                        CommandArgument='<%# Eval("DeviceID") %>' CommandName="Delete" 
+                                                        meta:resourcekey="imgbtnDeleteResource1" />
                                                 </div>
                                                 <div class="clear">
                                                 </div>
@@ -184,12 +248,22 @@
                                         </center>
                                     </div>
                                 </ItemTemplate>
+
+<HeaderStyle Width="70px"></HeaderStyle>
                             </telerik:GridTemplateColumn>
                         </Columns>
+
+<EditFormSettings>
+<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+</EditFormSettings>
+
+<PagerStyle AlwaysVisible="True"></PagerStyle>
                     </MasterTableView>
+
+<FilterMenu EnableImageSprites="False"></FilterMenu>
                 </telerik:RadGrid>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+         <%--   </ContentTemplate>
+        </asp:UpdatePanel>--%>
     </div>
 </div>
 <div class="admin_bottom">

@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class AddDeviceFamily {
         
         /// <summary>
+        /// locDeviceManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeviceManagement;
+        
+        /// <summary>
         /// lblHeader control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
+        
+        /// <summary>
+        /// locDeviceFamilyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeviceFamilyName;
         
         /// <summary>
         /// txtDeviceFamilyName control.
@@ -58,6 +76,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer Validationcontainer1;
         
         /// <summary>
+        /// locIsActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locIsActive;
+        
+        /// <summary>
         /// chkIsActive control.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnSave;
         
         /// <summary>
+        /// locSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locSave;
+        
+        /// <summary>
         /// lbtnCancel control.
         /// </summary>
         /// <remarks>
@@ -83,5 +119,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnCancel;
+        
+        /// <summary>
+        /// locCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locCancel;
     }
 }

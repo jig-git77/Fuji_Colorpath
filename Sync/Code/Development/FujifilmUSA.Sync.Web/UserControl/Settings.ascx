@@ -11,8 +11,8 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>
-            Admin</h1>
+        <h1><asp:Localize runat="server" Text="Admin" ID="locAdmin" 
+                meta:resourcekey="locAdminResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -30,8 +30,11 @@
                             onclick="lbtnCompanyManagement_Click">
                             <div>
                                 <asp:Image ID="Image1" runat="server" AlternateText="Company Management" ImageUrl="~/Images/company-manage-icon.png"
-                                    ToolTip="Company Management" /></div>
-                            Company Management</asp:LinkButton>
+                                    ToolTip="Company Management" meta:resourcekey="Image1Resource1" />
+</div>
+                            <asp:Localize Text="Company Management" ID="locCompanyManagement" 
+                            runat="server" meta:resourcekey="locCompanyManagementResource1"></asp:Localize>
+</asp:LinkButton>
                 </div>
                 <div id="divBranchSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                         <img alt="" src="Images/admin-icon-divider.png" />
@@ -41,8 +44,11 @@
                             PostBackUrl="~/BranchManagement.aspx" onclick="lbtnBranchManagement_Click">
                             <div>
                                 <asp:Image ID="Image2" runat="server" AlternateText="Branch Management" ImageUrl="~/Images/branch-manage-icon.png"
-                                    ToolTip="Branch Management" /></div>
-                            Branch Management</asp:LinkButton>
+                                    ToolTip="Branch Management" meta:resourcekey="Image2Resource1" />
+</div>
+                            <asp:Localize Text="Branch Management" runat="server" 
+                            ID="locBranchManagement" meta:resourcekey="locBranchManagementResource1"></asp:Localize>
+</asp:LinkButton>
                     
                 </div>
                     <div id="divUserSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
@@ -51,23 +57,30 @@
                     <div id="tdUser" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
                         <asp:LinkButton ID="lbtnUserManagement" runat="server" 
                             ToolTip="User Management" PostBackUrl="~/UserManagement.aspx" 
-                            onclick="lbtnUserManagement_Click" >
+                            onclick="lbtnUserManagement_Click">
                             <div>
                                 <asp:Image ID="Image3" runat="server" AlternateText="User Management" ImageUrl="~/Images/user-manage-icon.png"
-                                    ToolTip="User Management" /></div>
-                            User Management</asp:LinkButton>
+                                    ToolTip="User Management" meta:resourcekey="Image3Resource1" />
+</div>
+                            <asp:Localize Text="User Management" runat="server" ID="locUserMgmt" 
+                            meta:resourcekey="locUserMgmtResource1"></asp:Localize>
+</asp:LinkButton>
                 </div>
                     <div id="divProfileManagementSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                         <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                  <div id="tdProfileManagement" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                        <asp:LinkButton ID="lnkProfileMgmt" runat="server" ToolTip="My Settings"
-                        PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click"  >                       
+                        PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click">                      
                         <div>
                             <asp:Image ID="Image4" runat="server" AlternateText="My Settings"
-                                ImageUrl="~/Images/Profile-Management.png" ToolTip="My Settings" /></div>
-                        My Settings
-                    </asp:LinkButton>
+                                ImageUrl="~/Images/Profile-Management.png" ToolTip="My Settings" 
+                                meta:resourcekey="Image4Resource1" />
+</div>
+                       <asp:Localize Text="My Settings" runat="server" ID="locMySettings" 
+                           meta:resourcekey="locMySettingsResource1"></asp:Localize>
+                    
+</asp:LinkButton>
                 </div>
                 <div id="divLicenseSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
@@ -77,8 +90,12 @@
                         ToolTip="License Management" onclick="lbtnLicenseManagement_Click">
                         <div>
                             <asp:Image ID="imgLicenseManagement" runat="server" AlternateText="License Management"
-                                ImageUrl="~/Images/dongle-manage.png" ToolTip="License Management" /></div>
-                        License Management</asp:LinkButton>
+                                ImageUrl="~/Images/dongle-manage.png" ToolTip="License Management" 
+                                meta:resourcekey="imgLicenseManagementResource1" />
+</div>
+                        <asp:Localize Text="License Management" runat="server" ID="locLicenseMgmt" 
+                        meta:resourcekey="locLicenseMgmtResource1"></asp:Localize>
+</asp:LinkButton>
                 </div>   
                 </td>
             </tr>
@@ -93,8 +110,12 @@
                         PostBackUrl="~/DeviceManagement.aspx" onclick="lbtnDeviceManagement_Click">
                         <div>
                             <asp:Image ID="imgDeviceManagement" runat="server" AlternateText="Device Management"
-                                ImageUrl="~/Images/device-manage-icon.png" ToolTip="Device Management" /></div>
-                        Device Management</asp:LinkButton>
+                                ImageUrl="~/Images/device-manage-icon.png" ToolTip="Device Management" 
+                                meta:resourcekey="imgDeviceManagementResource1" />
+</div>
+                        <asp:Localize Text="Device Management" runat="server" ID="locDeviceMgmt" 
+                        meta:resourcekey="locDeviceMgmtResource1"></asp:Localize>
+</asp:LinkButton>
                 </div>
                 <div id="divMeasurementSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
@@ -107,45 +128,61 @@
                         onclick="lnkMeasurementDevice_Click">
                         <div>
                             <asp:Image ID="imgMeasurementDevice" runat="server" AlternateText="Measurement Device"
-                                ImageUrl="~/Images/syncmeasurementdevice.png" ToolTip="Measurement Device" /></div>
-                        Measurement Device
-                    </asp:LinkButton>
+                                ImageUrl="~/Images/syncmeasurementdevice.png" ToolTip="Measurement Device" 
+                                meta:resourcekey="imgMeasurementDeviceResource1" />
+</div>
+                        <asp:Localize Text="Measurement Device" runat="server" 
+                        ID="locMeasurementDevice" meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize>
+                    
+</asp:LinkButton>
                 </div>
                 <div id="divDownloadSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                  <div id="tdDownload" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                        <asp:LinkButton ID="lnkDownload" runat="server" ToolTip="Download"
-                        PostBackUrl="~/DownloadSoftwares.aspx" onclick="lnkDownload_Click">                       
+                        PostBackUrl="~/DownloadSoftwares.aspx" onclick="lnkDownload_Click">                      
                         <div>
                             <asp:Image ID="Image5" runat="server" AlternateText="Download"
-                                ImageUrl="~/Images/download-icon.png" ToolTip="Download" /></div>
-                        Download
-                    </asp:LinkButton>
+                                ImageUrl="~/Images/download-icon.png" ToolTip="Download" 
+                                meta:resourcekey="Image5Resource1" />
+</div>
+                        <asp:Localize Text="Download" runat="server" ID="locDownload" 
+                           meta:resourcekey="locDownloadResource1"></asp:Localize>
+                    
+</asp:LinkButton>
                 </div>
                 <div id="divRefChartSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                   <div id="tdReferenceChart" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                     <asp:LinkButton ID="lnkRefChart" runat="server" ToolTip="Reference Chart"
-                        PostBackUrl="~/ReferenceChartManagement.aspx" onclick="lnkRefChart_Click" >
+                        PostBackUrl="~/ReferenceChartManagement.aspx" onclick="lnkRefChart_Click">
                        
                         <div>
                             <asp:Image ID="imgRefChart" runat="server" AlternateText="Reference Chart"
-                                ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Reference Chart" /></div>
-                        Reference Chart
-                    </asp:LinkButton>
+                                ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Reference Chart" 
+                                meta:resourcekey="imgRefChartResource1" />
+</div>
+                        <asp:Localize runat="server" Text="Reference Chart" ID="locReferenceChart" 
+                          meta:resourcekey="locReferenceChartResource1"></asp:Localize>
+                    
+</asp:LinkButton>
                 </div>
                  <div id="divSourceProfileSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                <div id="tdSourceProfile" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
                         <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" 
-                            PostBackUrl="~/SourceProfileManagement.aspx" onclick="lbtnSourceProfile_Click">
+                            PostBackUrl="~/SourceProfileManagement.aspx" 
+                            onclick="lbtnSourceProfile_Click">
                             <div>
                                 <asp:Image ID="imgSoruceProfile" runat="server" AlternateText="Soruce Profile" ImageUrl="~/Images/sourceprofile.png"
-                                    ToolTip="Soruce Profile" /></div>
-                            Source Profile</asp:LinkButton>
+                                    ToolTip="Soruce Profile" meta:resourcekey="imgSoruceProfileResource1" />
+</div>
+                            <asp:Localize Text="Source Profile" runat="server" ID="locSourceProfile" 
+                            meta:resourcekey="locSourceProfileResource1"></asp:Localize>
+</asp:LinkButton>
                 </div>                
                 </td>
             </tr>
@@ -159,7 +196,8 @@
                
                 <div>
                      <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Activity Management"
-                        PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" Visible="false"/>             
+                        PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" 
+                         Visible="False" meta:resourcekey="LinkButton1Resource1"/>             
                 </div>
                 </td>               
             </tr>

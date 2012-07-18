@@ -74,6 +74,10 @@
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.GlobalResources\FujifilmUSA.Sync.GlobalResources.csproj">
+      <Project>{E8BB8C58-8365-4FFD-8F1C-F37E9ACD8E50}</Project>
+      <Name>FujifilmUSA.Sync.GlobalResources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,6 +29,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Variable Declarations
         private PresenterAddReferenceChart _presenterAddReferenceChart;
         private const string vsChartData = "_vsChartData";
+        private const string _recEditRefChart = "editRefChart";
+        private const string _recSelectProjectType = "selectProjectType";
+        private const string _recSelectInstrumentType = "selectInstrumentType";
+
         #endregion
 
         #region Page Events
@@ -48,7 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 if (Request.QueryString["RefChartId"] != null)
                 {
-                    lblHeader.Text = "Edit Reference Chart";
+                    lblHeader.Text = GetResourceString(_recEditRefChart);//"Edit Reference Chart";
                     LoadRefChart(Convert.ToInt32(Request.QueryString["RefChartId"]));
                 }
             }
@@ -283,7 +287,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbProjectType.DataSource = ProjectTypeList;
                 cmbProjectType.DataBind();
-                cmbProjectType.Items.Insert(0, new ListItem("-- Select Project Type --", ""));
+                cmbProjectType.Items.Insert(0, new ListItem(GetResourceString(_recSelectProjectType), ""));//-- Select Project Type --
             }
         }
 
@@ -294,7 +298,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbInstrumentType.DataSource = InstrumentTypeList;
                 cmbInstrumentType.DataBind();
-                cmbInstrumentType.Items.Insert(0, new ListItem("-- Select Instrument Type --", ""));
+                cmbInstrumentType.Items.Insert(0, new ListItem(GetResourceString(_recSelectInstrumentType), ""));//"-- Select Instrument Type --"
             }
         }
 

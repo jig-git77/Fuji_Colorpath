@@ -13,6 +13,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         private PresenterCompanyManagement _presenterCompanyManagement;
 
+        #region Private variables - Globalization
+        private const string _recAddCompany = "addCompanyText";
+        private const string _recEditCompany = "editCompanyText";
+        private const string _recSelectText = "selectText";
+        #endregion
+
         #region Declaration
         private int CId
         {
@@ -34,12 +40,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
-            lblHeader.Text = "Add Company";
+            lblHeader.Text = GetResourceString(_recAddCompany); //"Add Company";
             BindRegion();
             if (Request.QueryString["CompanyId"] != null)
             {
                 Setcompany(Convert.ToInt32(Request.QueryString["CompanyId"]));
-                lblHeader.Text = "Edit Company";
+                lblHeader.Text = GetResourceString(_recEditCompany); //"Edit Company";
             }
         }
         #endregion
@@ -55,7 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbRegionName.DataValueField = "Key";
                 cmbRegionName.DataSource = RegionList;
                 cmbRegionName.DataBind();
-                cmbRegionName.Items.Insert(0, new ListItem("--Select--", string.Empty));
+                cmbRegionName.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), string.Empty));
             }
         }
         private void Savecompany()

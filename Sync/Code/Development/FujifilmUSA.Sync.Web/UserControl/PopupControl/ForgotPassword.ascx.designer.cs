@@ -22,6 +22,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
         
         /// <summary>
+        /// locForgotPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locForgotPassword;
+        
+        /// <summary>
+        /// locUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locUsername;
+        
+        /// <summary>
         /// txtUserName control.
         /// </summary>
         /// <remarks>
@@ -58,6 +76,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnRetrievePassword;
         
         /// <summary>
+        /// locRetrievePassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locRetrievePassword;
+        
+        /// <summary>
         /// lbtnClose control.
         /// </summary>
         /// <remarks>
@@ -65,5 +92,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnClose;
+        
+        /// <summary>
+        /// locCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locCancel;
     }
 }

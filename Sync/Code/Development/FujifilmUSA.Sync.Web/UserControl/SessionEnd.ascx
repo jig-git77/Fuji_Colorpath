@@ -9,13 +9,20 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>Session</h1>
+        <h1><asp:Localize runat="server" Text="Session" ID="locSession" 
+                meta:resourcekey="locSessionResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 20px;">
         <div style=" font-size: 14px;">
-                Session has been unexpectadly abandoned. Please click here to go back to  <asp:LinkButton ID="LinkButton1" runat="server" OnClick="likIndex_Click"><span style="font-weight:bold;">home page.</span></asp:LinkButton>
+                <asp:Localize ID="locSessionTimeoutMessage" runat="server" 
+                    Text="Session has been unexpectadly abandoned. Please click here to go back to" 
+                    meta:resourcekey="locSessionTimeoutMessageResource1"></asp:Localize>  
+                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="likIndex_Click"><span style="font-weight:bold;"><asp:Localize 
+                    Text="home page." runat="server" ID="locHomePage" 
+                    meta:resourcekey="locHomePageResource1"></asp:Localize>
+</span></asp:LinkButton>
             </div>
     </div>
 </div>

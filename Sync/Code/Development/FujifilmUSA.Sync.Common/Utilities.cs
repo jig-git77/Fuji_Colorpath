@@ -9,8 +9,8 @@ using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.GlobalResources;
 using System.Globalization;
-
 namespace FujifilmUSA.Sync.Common
 {
     public class Utilities
@@ -298,12 +298,12 @@ namespace FujifilmUSA.Sync.Common
 
         public static Dictionary<int, string> GetEnumDescriptionAttributeDropdown<T>()
         {
-            return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => ((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description);
+            return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description));
         }
 
         public static string GetEnumDescriptionAttributeValue(Enum value)
         {
-            return ((DescriptionAttribute)Attribute.GetCustomAttribute(value.GetType().GetField(Enum.GetName(value.GetType(), value)), typeof(DescriptionAttribute))).Description;
+            return  GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(value.GetType().GetField(Enum.GetName(value.GetType(), value)), typeof(DescriptionAttribute))).Description);
         }
 
         public static void PopupWindowsRedirect(UserControl ucControl, string url)
@@ -316,7 +316,8 @@ namespace FujifilmUSA.Sync.Common
         {
             get
             {
-                return "<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>";
+                return GlobalResourceManager.Instance.GetGlobalResourceString("Fields_Marked_With_Are_Required");
+                //return "<span>Fields marked with (<span style=\"color: Red;\">*</span>) are Required</span>";
             }
         }
 

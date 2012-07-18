@@ -10,6 +10,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProfileManagement : BaseControl, IViewProfileManagement
     {
+        #region Private Variables - Globalization
+        private const string _recPasswordSavedSuccess = "passwordSavedSuccess";
+        private const string _recSecurityInfoSavedSuccess = "securityInfoSavedSuccess";
+        private const string _recSelect = "selectText";
+        #endregion
+
         #region Variable Declarations
 
         private PresenterProfileManagement _presenterProfileManagement;
@@ -42,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
-                fujiStatusbar.DisplayMessage("Password saved successfully!", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPasswordSavedSuccess), false);
             }
         }
 
@@ -55,7 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
-                fujiStatusbar.DisplayMessage("Security information saved successfully!", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recSecurityInfoSavedSuccess), false);
             }
         }
 
@@ -69,7 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbSecurityQuestion.DataSource = SecurityQuestions;
                 cmbSecurityQuestion.DataBind();
-                cmbSecurityQuestion.Items.Insert(0, new ListItem("--Select--", string.Empty));
+                cmbSecurityQuestion.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
                 cmbSecurityQuestion.SelectedValue = SessionManager.Instance.CurrentUser.SecurityQuestionId.ToString();
                 txtSecurityAnswer.Text = SessionManager.Instance.CurrentUser.SecurityAnswer.ToString();
             }

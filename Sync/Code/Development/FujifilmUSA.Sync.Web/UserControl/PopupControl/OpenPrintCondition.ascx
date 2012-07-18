@@ -23,7 +23,7 @@
         <div class="combopart">
             <div style="padding: 5px;" id="cotainer">
                 <div>
-                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                 </div>
                 <div class="OpenPrintCondition">
                     <table width="650px">
@@ -34,8 +34,9 @@
                                         <tr>
                                             <td class="Content" style="line-height: 24px; width:100%;">
                                                 <asp:Image ID="Image10" runat="server" ImageUrl="~/Images/info_icon.png" 
-                                                    SkinID=" " />
-                                                <asp:Label ID="lblOpenPrintConditionMessage" runat="server"></asp:Label>
+                                                    SkinID=" " meta:resourcekey="Image10Resource1" />
+                                                <asp:Label ID="lblOpenPrintConditionMessage" runat="server" 
+                                                    meta:resourcekey="lblOpenPrintConditionMessageResource1"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
@@ -49,13 +50,17 @@
                                 <div class="buttonright" style="padding-left: 3px">
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseOpenPrintConditionWindow(); return false;"
                                         CssClass="gray_bt">
-                                        <span>
-                                            Cancel </span>
+                                        <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
+                                        meta:resourcekey="locCancelResource1"></asp:Localize> 
+ </span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="buttonright">
-                                    <asp:LinkButton ID="lbtnContinue" runat="server" CssClass="gray_bt" OnClick="lbtnContinue_Click">
-                                         <span> Continue </span>
+                                    <asp:LinkButton ID="lbtnContinue" runat="server" CssClass="gray_bt" 
+                                        OnClick="lbtnContinue_Click">
+                                         <span> <asp:Localize runat="server" Text="Continue" ID="locContinue" 
+                                        meta:resourcekey="locContinueResource1" ></asp:Localize> 
+ </span>
                                     </asp:LinkButton>
                                 </div>
                                 <div class="clear">
@@ -72,5 +77,5 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
-<asp:HiddenField ID="hdProjectId" runat="server" Value="" />
-<asp:HiddenField ID="hdProjectName" runat="server" Value="" />
+<asp:HiddenField ID="hdProjectId" runat="server" />
+<asp:HiddenField ID="hdProjectName" runat="server" />

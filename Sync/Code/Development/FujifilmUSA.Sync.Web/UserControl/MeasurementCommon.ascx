@@ -87,35 +87,39 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
-            <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name"></asp:Label>
+            <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" 
+                meta:resourcekey="lblMeasurementNameResource1"></asp:Label>
             &nbsp; : &nbsp;&nbsp;
-            <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px">
-            </asp:TextBox>
+            <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" 
+                meta:resourcekey="txtMeasurementNameResource1"></asp:TextBox>
         </div>
         <div class="float_r">
             <span>
-                <input type="button" id="btnCalibrate" value="Calibrate" /></span>
+                <input type="button" id="btnCalibrate" value='<%= GetResourceString("calibrateButton") %>' /></span>
         </div>
         <div class="clear">
         </div>
         <div class="float_l">
-            <input type="button" id="btnMeasureAndUploadChart" value="Measure / Upload" />
+            <input type="button" id="btnMeasureAndUploadChart" value='<%= GetResourceString("measureUpload") %>' />
         </div>
         <div class="float_r">
-            <input type="button" id="btnCancelMeasurement" value="Cancel Measurement" />
+            <input type="button" id="btnCancelMeasurement" value='<%= GetResourceString("cancelMeasurement") %>' />
         </div>
         <div class="clear">
         </div>
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            Colorbar</div>
+            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" 
+                meta:resourcekey="locColorBarResource1"></asp:Localize></div>
         <div class="color_pallate_middle">
             <div id='divProgressImageMaster' style="display: none;">
                 <div style="width: 200px; text-align: center; margin-left: 150px;">
                     <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;" /><br />
                     <br />
-                    Uploading Measurement...<div class="clear">
+                    <asp:Localize runat="server" Text="Uploading Measurement..." 
+                        ID="locUploadingMeasurement" 
+                        meta:resourcekey="locUploadingMeasurementResource1"></asp:Localize><div class="clear">
                     </div>
                 </div>
             </div>
@@ -128,7 +132,8 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            Recent Upload</div>
+            <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" 
+                meta:resourcekey="locRecentUploadResource1"></asp:Localize></div>
         <div class="color_pallate_middle">
             <div id="measurementContainer">
             </div>
@@ -161,14 +166,14 @@
 <span id="dummy"></span>
 <script id="MeasurementHeaderTemplate" type="text/x-jQuery-tmpl">
           <tr>
-                <th scope="col">
-                    Measurement Name
+                <th scope="col">                
+                    <%= GetResourceString("measurementName") %>
                 </th>
                 <th scope="col">
-                    Upload Date Time
+                    <%= GetResourceString("uploadDateTime") %>
                 </th>
                 <th scope="col">
-                    Delete
+                    <%= GetResourceString("deleteButton") %>
                 </th>
           </tr>
 </script>
@@ -198,7 +203,7 @@
     var refreshTry = 0;
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
-        jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+        jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
         load();   //first you have to load the plugin
@@ -207,7 +212,7 @@
     }
     
     function GetRefChartData() {
-        jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+        jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
@@ -218,15 +223,15 @@
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Measure Chart') {
+            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') {
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
-                    MeasurementDialog("Please enter measurement name that is at least 4 characters long.", "Error");
+                    MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
                     return false;
                 }
                 if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
                 {
-                    MeasurementDialog("You reach your limit of adding measurements in one Optimization Run", "Limit Reach");
+                    MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     return false;
                 }
                 scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
@@ -237,7 +242,7 @@
         });
         jQuery("[id*='btnCancelMeasurement']").click(function () {
             refreshCanvas();
-            jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+            jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
             OnCancel();
             ListDevices();
         });
@@ -292,18 +297,18 @@
                 function (response) {
                     bindMeasurementData();
                     StopProgressBrowserWindow();
-                    jQuery("[id*='lblMessage']").html("Status : " + "Measurement uploaded successfully.");
+                    jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
                 },
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
                     StopProgressBrowserWindow();
-                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                 }
         });
         OnCancel();
         refreshCanvas();
-        jQuery("[id*='btnMeasureAndUploadChart']").val('Measure Chart');
+        jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
     }
 
     function bindMeasurementData() {
@@ -333,7 +338,7 @@
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
                         $("#measurementContainer").html("");
-                        $("#measurementContainer").append("<div class='no_data_found'>No records available</div>");
+                        $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
                     }
                 },
             success:
@@ -341,7 +346,7 @@
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
                     var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                    MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                    MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                 }
         });
     }
@@ -368,7 +373,7 @@
                     },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                MeasurementDialog("Error Cause:" + jsonFault.Reason + " Error Detail:" + jsonFault.DetailedInformation, "Error");
+                MeasurementDialog('<%= GetResourceString("errorCause") %>' + jsonFault.Reason + " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
             }
         });
     }

@@ -30,7 +30,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private const string VsUserInformation = "_vsUserInformation";
         private PresenterGlobalActivation _presenterGlobalActivation;
-
+        private const string _recprovideSecurityQue = "provideSecurityQue";
+        private const string _recprovideSecurityAns = "provideSecurityAns";
+        private const string _recincorrectURL = "incorrectURL";
+        private const string _recinvalidSecurityAns = "invalidSecurityAns";
+        private const string _recselectText = "selectText";
+        private const string _recuserAlreadyActivated = "userAlreadyActivated";
+        private const string _recinvalidKeyPassed = "invalidKeyPassed";
         #endregion
 
         #region Page Events
@@ -48,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Guid uid;
                     if (!Guid.TryParse(Request.QueryString["uid"], out uid))
                     {
-                        fujiStatusbar.DisplayMessage("url is not correct. Please contact your administrator", false);
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recincorrectURL), false);
                     }
                     else
                     {
@@ -58,9 +64,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    fujiStatusbar.DisplayMessage("url is not correct. Please contact your administrator", false);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recincorrectURL), false);
                 }
             }
+            rfvSecurityAnswerContainer.ValidationMsg = GetResourceString(_recprovideSecurityAns);
+            rfvSecurityQuestionContainer.ValidationMsg = GetResourceString(_recprovideSecurityQue);
         }
         #endregion
 
@@ -91,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    fujiStatusbar.DisplayMessage("Invalid security answer!!!", false);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recinvalidSecurityAns), false);
                 }
             }
             else if (Request.QueryString["type"] != null && Request.QueryString["type"].StartsWith("fr"))
@@ -150,7 +158,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbSecurityQuestion.DataSource = SecurityQuestions;
                 cmbSecurityQuestion.DataBind();
-                cmbSecurityQuestion.Items.Insert(0, new ListItem("--Select--", string.Empty));
+                cmbSecurityQuestion.Items.Insert(0, new ListItem(GetResourceString(_recselectText), string.Empty));
             }
         }
 
@@ -181,8 +189,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     if (User.IsActivated)
-                    {
-                        fujiStatusbar.DisplayMessage("User already activated.", false);
+                    {                        
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recuserAlreadyActivated), false);
                         lbtnSave.Enabled = false;
                         return;
                     }
@@ -206,8 +214,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ViewState[VsUserInformation] = authUser;
             }
             else
-            {
-                fujiStatusbar.DisplayMessage("invalid authentication key passed", false);
+            {                
+                fujiStatusbar.DisplayMessage(GetResourceString(_recuserAlreadyActivated), false);
             }
         }
 

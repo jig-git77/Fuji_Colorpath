@@ -19,6 +19,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Declaration"
         private PresenterSourceProfile _presentersourceprofile;
+        private const string _recAddSourceProfile = "lblHeaderResource1.Text";
+        private const string _recEditSourceProfile = "editSourceProfile";
+        private const string _recSelectCompanyText = "selectCompanyText";
+        private const string _recSelectRegionText = "selectRegionText";
         //private int MId
         //{
         //    get
@@ -39,7 +43,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
-            lblHeader.Text = "Add Source Profile";
+            lblHeader.Text = GetResourceString(_recAddSourceProfile); //"Add Source Profile";
             if (IsPostBack) return;
 
             Page.Form.Attributes.Add("enctype", "multipart/form-data");
@@ -47,7 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbRegion_SelectedIndexChanged(null, null);
             if (Request.QueryString["SourceProfileId"] != null)
             {
-                lblHeader.Text = "Edit Source Profile";
+                lblHeader.Text = GetResourceString(_recEditSourceProfile);//"Edit Source Profile";
                 LoadSourceProfile(Convert.ToInt32(Request.QueryString["SourceProfileId"]));
             }
 
@@ -119,7 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbCompanyName.DataBind();
                 }
             }
-            cmbCompanyName.Items.Insert(0, new ListItem("-- Select Company --", "0"));
+            cmbCompanyName.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompanyText), "0"));//-- Select Company --
         }
 
         private void BindRegionDropDown()
@@ -129,7 +133,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbRegion.DataSource = RegionList;
                 cmbRegion.DataBind();
-                cmbRegion.Items.Insert(0, new ListItem("-- Select Region --", "0"));
+                cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), "0"));//-- Select Region --
             }
         }
 

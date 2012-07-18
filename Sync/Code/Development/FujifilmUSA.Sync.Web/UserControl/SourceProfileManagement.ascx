@@ -74,12 +74,17 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>
-            Source Profile Management</h1>
-        <asp:LinkButton ID="likAdd" runat="server" class="button" OnClick="likAdd_Click">
+        <h1><asp:Localize runat="server" Text="Source Profile Management" 
+                ID="locSourceProfileMgmt" meta:resourcekey="locSourceProfileMgmtResource1"></asp:Localize></h1>
+        <asp:LinkButton ID="likAdd" runat="server" class="button" 
+            OnClick="likAdd_Click" meta:resourcekey="likAddResource1">
             <span>
-                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" />
-                Add Source Profile</span>
+                <asp:Image ID="imgAdd" runat="server" 
+            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                
+<asp:Localize Text="Add Source Profile" runat="server" ID="locAddSourceProfile" 
+            meta:resourcekey="locAddSourceProfileResource1"></asp:Localize>
+</span>
         </asp:LinkButton>
     </div>
     <div class="clear">
@@ -87,26 +92,33 @@
     <div style="margin-left: 10px;">
     <%--<asp:UpdatePanel ID="testPanel" runat="server">
         <ContentTemplate>--%>
-            <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+            <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+            Visible="False" />
             <telerik:RadGrid 
                 ID="rgSourceProfile" 
-                ShowHeader="true" 
-                AllowFilteringByColumn="true"
-                AllowSorting="true" 
+                AllowFilteringByColumn="True"
+                AllowSorting="True" 
                 AllowPaging="True" 
                 PageSize="5" 
                 runat="server" 
                 AutoGenerateColumns="False"
-                EnableLinqExpressions="false" 
+                EnableLinqExpressions="False" 
                 OnNeedDataSource="rgSourceProfile_NeedDataSource"
                 OnItemCommand="rgSourceProfile_ItemCommand" 
                 Width="98%" 
-                HeaderStyle-Font-Bold="true">
+                HeaderStyle-Font-Bold="true" CellSpacing="0" GridLines="None">
                 <GroupingSettings CaseSensitive="false" />                
+
+<HeaderStyle Font-Bold="True"></HeaderStyle>
 
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
 
                 <MasterTableView DataKeyNames="SourceProfileID,ProfileName">
+<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+
+<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+
+<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                     <Columns>
 
                         <telerik:GridTemplateColumn 
@@ -118,10 +130,17 @@
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290" 
                             AllowFiltering="true" 
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
+                            CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource1">
                             <ItemTemplate>
-                                <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>'/>
+                                <asp:Label ID="lblProfileName" runat="server" Text='<%# Eval("ProfileName") %>' 
+                                    meta:resourcekey="lblProfileNameResource1"/>
                             </ItemTemplate>
+
+<HeaderStyle Width="290px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord290" Width="290px"></ItemStyle>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn 
@@ -133,10 +152,17 @@
                             ShowFilterIcon="true"
                             FilterControlWidth="290"
                             HeaderStyle-Width ="290"
-                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" ItemStyle-Wrap="true" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains">
+                            ItemStyle-CssClass="breakWord290" ItemStyle-Width="290" 
+                            ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
+                            CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource2">
                             <ItemTemplate>
-                                    <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileDesc") %>' />
+                                    <asp:Label ID="lblProfileDesc" runat="server" Text='<%# Eval("ProfileDesc") %>' 
+                                        meta:resourcekey="lblProfileDescResource1" />
                             </ItemTemplate>
+
+<HeaderStyle Width="290px"></HeaderStyle>
+
+<ItemStyle Wrap="True" CssClass="breakWord290" Width="290px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         
                         <telerik:GridTemplateColumn 
@@ -146,17 +172,19 @@
                             DataField="" 
                             SortExpression="" 
                             HeaderStyle-Width ="70"
-                            FilterControlWidth="70"
+                            FilterControlWidth="70" meta:resourcekey="GridTemplateColumnResource3"
                             >
                             <ItemTemplate>
                                 <asp:LinkButton ID="lbtnProfile" runat="server" ToolTip ="Download source profile" 
                                     CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
                                     CommandName="SourceProfile">
                                   <span>
-                                     Click Me!
+                                    <asp:Localize Text="Click Me!" runat="server" ID="locClickMe" meta:resourcekey="locClickMeResource1"></asp:Localize>
                                   </span>
                                 </asp:LinkButton>
                             </ItemTemplate>
+
+<HeaderStyle Width="70px"></HeaderStyle>
                         </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn 
@@ -166,22 +194,33 @@
                                 DataField="IsActive" 
                                 HeaderStyle-Width ="40"
                                 FilterControlWidth="40"
-                                ItemStyle-HorizontalAlign="Center">
+                                ItemStyle-HorizontalAlign="Center" 
+                            meta:resourcekey="GridTemplateColumnResource4">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgIsActive" runat="server" ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png"%>' />
+                                    <asp:Image ID="imgIsActive" runat="server" 
+                                        ImageUrl='<%# Convert.ToBoolean(Eval("IsUsed")) ? "~/Images/checkbox_checked.png" : "~/Images/checkbox_unchecked.png" %>' 
+                                        meta:resourcekey="imgIsActiveResource1" />
                                 </ItemTemplate>
+
+<HeaderStyle Width="40px"></HeaderStyle>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
                             </telerik:GridTemplateColumn>
 
                         <telerik:GridTemplateColumn 
                                 DataField="SourceProfileID" 
                                 AllowFiltering="true" 
                                 HeaderText=""
-                                UniqueName="Edit">
+                                UniqueName="Edit" meta:resourcekey="GridTemplateColumnResource5">
                                 <FilterTemplate>
                                     <center>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" CommandName="ClearFilter">
+                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip ="Clear Fillter" 
+                                            CommandName="ClearFilter">
                                                     <span>
-                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" />
+                                                        <asp:Image ID="imgClearFillter" runat="server" 
+                                            AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
+                                            meta:resourcekey="imgClearFillterResource1" />
+
                                                     </span>
                                     </asp:LinkButton>
                                     </center>
@@ -193,13 +232,14 @@
                                                 <div style="float: left; padding-right: 10px;">
                                                       <asp:ImageButton ID="imgbtnUpdate" runat="server" ToolTip="Edit Source Profile" AlternateText="Edit"
                                                         ImageUrl="../Images/edit_icon.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
-                                                        CommandName="Edit" />
+                                                        CommandName="Edit" meta:resourcekey="imgbtnUpdateResource1" />
                                                 </div>
                                                 <div style="float: left;">
                                                     <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Source Profile"
                                                         AlternateText="Delete" ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteSourceProfile();"
                                                         CommandArgument='<%# DataBinder.Eval(Container.DataItem,"SourceProfileID") %>'
-                                                        CommandName="Delete" Visible="false" />
+                                                        CommandName="Delete" Visible="False" 
+                                                        meta:resourcekey="imgbtnDeleteResource1" />
                                                 </div>
                                                 <div class="clear">
                                                 </div>
@@ -210,7 +250,15 @@
                          </telerik:GridTemplateColumn>
                         
                     </Columns>
+
+<EditFormSettings>
+<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+</EditFormSettings>
+
+<PagerStyle AlwaysVisible="True"></PagerStyle>
                 </MasterTableView>
+
+<FilterMenu EnableImageSprites="False"></FilterMenu>
             </telerik:RadGrid>
        <%-- </ContentTemplate>
         <Triggers>

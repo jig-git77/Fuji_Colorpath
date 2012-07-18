@@ -16,24 +16,27 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            Source Profile</h1>
+        <h1><asp:Localize runat="server" Text="Source Profile" ID="locSourceProfile" 
+                meta:resourcekey="locSourceProfileResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
     <div style="margin-left: 10px;">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="conditional">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <center>
                     <fieldset style="width: 60%;">
                         <legend>
-                            <asp:Label ID="lblHeader" runat="server" Text="Add Source Profile"></asp:Label>
+                            <asp:Label ID="lblHeader" runat="server" Text="Add Source Profile" 
+                                meta:resourcekey="lblHeaderResource1"></asp:Label>
                         </legend>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
                         <table>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Region<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" Text="Region" 
+                                        ID="locRegion" meta:resourcekey="locRegionResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -41,15 +44,12 @@
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbRegion" runat="server" DataValueField="Key" DataTextField="Value"
-                                            CssClass="select" Width="200px" AutoPostBack="true" OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged">
+                                            CssClass="select" Width="200px" AutoPostBack="True" 
+                                            OnSelectedIndexChanged="cmbRegion_SelectedIndexChanged" 
+                                            meta:resourcekey="cmbRegionResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                       <%-- <asp:RequiredFieldValidator ID="rfvRegion" runat="server" Display="Dynamic" ControlToValidate="cmbRegion"
-                                            ForeColor="Red" ValidationGroup="vgSourceProfile" InitialValue="0">
-                                            <ucValidationContainer:ValidationContainer ID="rfvRegionContainer" runat="server"
-                                                ValidationMsg="Please select region." Size="200" />
-                                        </asp:RequiredFieldValidator>--%>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -57,7 +57,9 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Company Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" 
+                                        Text="Company Name" ID="locCompanyName" 
+                                        meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -65,15 +67,10 @@
                                 <td>
                                     <div style="float: left;">
                                         <asp:DropDownList ID="cmbCompanyName" runat="server" DataValueField="Key" DataTextField="Value"
-                                            CssClass="select" Width="200px">
+                                            CssClass="select" Width="200px" meta:resourcekey="cmbCompanyNameResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
-                                        <%--<asp:CustomValidator ID="cvCompanyName" ClientValidationFunction="IsRegionSelected" runat="server"
-                                            ValidationGroup="vgSourceProfile">
-                                            <ucValidationContainer:ValidationContainer ID="rfvCompanyuContainer" runat="server"
-                                                ValidationMsg="Please select company." Size="200" />
-                                        </asp:CustomValidator>--%>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -81,22 +78,25 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Profile Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" 
+                                        Text="Profile Name" ID="locProfileName" 
+                                        meta:resourcekey="locProfileNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtSourceProfile" runat="server" Width="200px" MaxLength="50" 
+                                            Height="19px" meta:resourcekey="txtSourceProfileResource1"></asp:TextBox>
                                         <asp:HiddenField ID="hdnSourceProfileID" runat="server" Value="0" />
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvSourceProfile" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtSourceProfile" ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
+                                            ControlToValidate="txtSourceProfile" ForeColor="Red" 
+                                            ValidationGroup="vgSourceProfile" meta:resourcekey="rfvSourceProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
                                                 ValidationMsg="Please provide source profile name." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -104,7 +104,9 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight:bold;">Profile Description:</span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" 
+                                        Text="Profile Description:" ID="locProfileDesc" 
+                                        meta:resourcekey="locProfileDescResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -112,7 +114,8 @@
                                 <td>
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtProfileDescription" runat="server" MaxLength="150" Width="300px"
-                                            Height="50px" TextMode="MultiLine"></asp:TextBox>
+                                            Height="50px" TextMode="MultiLine" 
+                                            meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                     </div>
@@ -122,21 +125,23 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight:bold;">Profile<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" Text="Profile" 
+                                        ID="locProfile" meta:resourcekey="locProfileResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:FileUpload ID="fuProfile" runat="server" />
+                                        <asp:FileUpload ID="fuProfile" runat="server" 
+                                            meta:resourcekey="fuProfileResource1" />
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvProfile" runat="server" Display="Dynamic" ControlToValidate="fuProfile"
-                                            ForeColor="Red" ValidationGroup="vgSourceProfile">
-                                            <ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgSourceProfile" 
+                                            meta:resourcekey="rfvProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvProfileContainer" runat="server"
                                                 ValidationMsg="Please provide source profile file." Size="200" />
-                                        </asp:RequiredFieldValidator>     
+</asp:RequiredFieldValidator>     
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -144,14 +149,16 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight:bold;">Is Used?</span>
+                                    <span style="font-weight:bold;"><asp:Localize runat="server" Text="Is Used?" 
+                                        ID="locIsUsed" meta:resourcekey="locIsUsedResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td style="width: 400px">
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="True" 
+                                            meta:resourcekey="chkIsActiveResource1" />
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -167,10 +174,15 @@
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgSourceProfile"
                                                 OnClick="lbtnSave_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
+                                                meta:resourcekey="locSaveResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/SourceProfileManagement.aspx">
-                                                    <span> Cancel </span>
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                PostBackUrl="~/SourceProfileManagement.aspx">
+                                                    <span> <asp:Localize ID="locCancel" runat="server" Text="Cancel" 
+                                                meta:resourcekey="locCancelResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

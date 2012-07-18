@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hTitle;
         
         /// <summary>
+        /// locNewPrintCondition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locNewPrintCondition;
+        
+        /// <summary>
         /// lnkbtnPrintDescription control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgAdd;
+        
+        /// <summary>
+        /// locTargetColorSpace control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTargetColorSpace;
         
         /// <summary>
         /// fujiStatusbar control.
@@ -67,6 +85,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Panel panelAddProjectDescription;
         
         /// <summary>
+        /// locPress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locPress;
+        
+        /// <summary>
         /// txtPress control.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtPress;
         
         /// <summary>
+        /// locDeviceFamily control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeviceFamily;
+        
+        /// <summary>
         /// txtDeviceFamily control.
         /// </summary>
         /// <remarks>
@@ -83,6 +119,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDeviceFamily;
+        
+        /// <summary>
+        /// locMedia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMedia;
         
         /// <summary>
         /// txtMedia control.
@@ -112,6 +157,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcMediaContainer;
         
         /// <summary>
+        /// locColorant control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locColorant;
+        
+        /// <summary>
         /// txtColorant control.
         /// </summary>
         /// <remarks>
@@ -137,6 +191,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvColorantContainer;
+        
+        /// <summary>
+        /// locRipSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locRipSettings;
         
         /// <summary>
         /// txtRipSetting control.
@@ -166,6 +229,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvRipSettingsContainer;
         
         /// <summary>
+        /// locNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locNotes;
+        
+        /// <summary>
         /// txtNotes control.
         /// </summary>
         /// <remarks>
@@ -173,6 +245,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNotes;
+        
+        /// <summary>
+        /// locTechnicianName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTechnicianName;
         
         /// <summary>
         /// txtTechnicianName control.

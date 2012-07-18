@@ -7,8 +7,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            License Management</h1>
+        <h1><asp:Localize Text="License Management" runat="server" ID="locLicenseMgmt" 
+                meta:resourcekey="locLicenseMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -18,13 +18,16 @@
                 <center>
                     <fieldset style="width: 60%;">
                         <legend style="margin-left: 42% !important;">
-                            <asp:Label ID="lblHeader" runat="server" Text="Add License Type"></asp:Label>
+                            <asp:Label ID="lblHeader" runat="server" Text="Add License Type" 
+                                meta:resourcekey="lblHeaderResource1"></asp:Label>
                         </legend>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
                         <table>
                             <tr>
                                 <td>
-                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="License Type" 
+                                        runat="server" id="locLicenseType" meta:resourcekey="locLicenseTypeResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -32,14 +35,15 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtLicenseType" runat="server" MaxLength="30" Width="400px" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtLicenseType" runat="server" MaxLength="30" Width="400px" 
+                                            Height="19px" meta:resourcekey="txtLicenseTypeResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtLicenseType" ForeColor="Red" ValidationGroup="vgAddDeviceFamily">
-                                            <ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
+                                            ControlToValidate="txtLicenseType" ForeColor="Red" 
+                                            ValidationGroup="vgAddDeviceFamily"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
                                                 ValidationMsg="Please provide license type." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -54,11 +58,16 @@
                                     <div class="text">
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddDeviceFamily"
-                                                OnClick="lbtnSave_Click">
-                                                    <span> Save </span>
+                                                OnClick="lbtnSave_Click" meta:resourcekey="lbtnSaveResource1">
+                                                    <span> <asp:Localize Text="Save" runat="server" ID="locSave" 
+                                                meta:resourcekey="locSaveResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/LicenseManagement.aspx">
-                                                    <span> Cancel </span>
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                PostBackUrl="~/LicenseManagement.aspx" meta:resourcekey="lbtnCancelResource1">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" ID="locCancel" 
+                                                meta:resourcekey="locCancelResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

@@ -18,7 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 case ELeftMenuItemLevel.Description:
                     ctrl = this.LoadControl("~/UserControl/AddProject/ProjectDescription.ascx");
-                    ctrl.ID = "ctrl_ProjectDescription";
+                    ctrl.ID = "ctrl_ProjectDescription";                    
                     ph.Controls.Add(ctrl);
                     break;
                 case ELeftMenuItemLevel.TargetColorSpace:

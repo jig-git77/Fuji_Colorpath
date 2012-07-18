@@ -17,8 +17,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            License Management</h1>
+        <h1><asp:Localize ID="locLicenseMgmt" runat="server" Text="License Management" 
+                meta:resourcekey="locLicenseMgmtResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -28,13 +28,16 @@
                 <center>
                     <fieldset style="width: 70%;">
                         <legend>
-                            <asp:Label ID="lblHeader" runat="server" Text="Add License"></asp:Label>
+                            <asp:Label ID="lblHeader" runat="server" Text="Add License" 
+                                meta:resourcekey="lblHeaderResource1"></asp:Label>
                         </legend>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
                         <table width="100%">
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Company Name" 
+                                        ID="locCompanyName" runat="server" meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td style="width:8px;">
@@ -42,16 +45,17 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
-                                            AutoPostBack="true" OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged">
+                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="370px" CssClass="select"
+                                            AutoPostBack="True" 
+                                            OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" 
+                                            meta:resourcekey="cmbCompanyResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompany" runat="server" Display="Dynamic" ControlToValidate="cmbCompany"
-                                            ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvCompanyContainer" runat="server"
                                                 ValidationMsg="Please select company." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -59,22 +63,23 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;"><asp:Localize ID="locBranchName" 
+                                        runat="server" Text="Branch Name" meta:resourcekey="locBranchNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbBranch" runat="server" Width="400px" CssClass="select">
+                                        <asp:DropDownList ID="cmbBranch" runat="server" Width="370px" CssClass="select" 
+                                            meta:resourcekey="cmbBranchResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
-                                            ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
                                                 ValidationMsg="Please select branch." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -82,23 +87,25 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;">License Description<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                        Text="License Description" ID="locLicenseDesc" 
+                                        meta:resourcekey="locLicenseDescResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtLicenseDescription" runat="server" MaxLength="50" Width="400px"
-                                            Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtLicenseDescription" runat="server" MaxLength="50" Width="370px"
+                                            Height="19px" meta:resourcekey="txtLicenseDescriptionResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                     <asp:RequiredFieldValidator ID="rfvLicenseDescription" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtLicenseDescription" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvcLicenseDescriptionContainer" runat="server"
+                                            ControlToValidate="txtLicenseDescription" ForeColor="Red" 
+                                            ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvcLicenseDescriptionContainer" runat="server"
                                                 ValidationMsg="Please provide license description." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -106,18 +113,23 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;">License Type<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="License Type" 
+                                        runat="server" ID="locLicenseType" meta:resourcekey="locLicenseTypeResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox"/>
-                                        <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox"/>
-                                        <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox"/>
-                                        <asp:CheckBox runat="server" ID="chkVarification" CssClass="checkListBox"/>
+                                        <asp:CheckBox runat="server" ID="chkSync1D" CssClass="checkListBox" 
+                                            meta:resourcekey="chkSync1DResource1"/>
+                                        <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" 
+                                            meta:resourcekey="chkDlpResource1"/>
+                                        <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" 
+                                            meta:resourcekey="chkInkResource1"/>
+                                        <asp:CheckBox runat="server" ID="chkVarification" CssClass="checkListBox" 
+                                            meta:resourcekey="chkVarificationResource1"/>
                                     </div>
                                     <div style="float: left">
                                     </div>
@@ -127,23 +139,25 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;">Activation Date<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Activation Date" 
+                                        ID="locActivationDate" runat="server" meta:resourcekey="locActivationDateResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtActivationDate" runat="server" OnKeyPress="javascript: return false;"
-                                            MaxLength="50" Width="100px" Height="19px"></asp:TextBox>
+                                            MaxLength="50" Width="100px" Height="19px" 
+                                            meta:resourcekey="txtActivationDateResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvActivationDate" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtActivationDate" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvActivateContainer" runat="server"
+                                            ControlToValidate="txtActivationDate" ForeColor="Red" 
+                                            ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvActivateContainer" runat="server"
                                                 ValidationMsg="Please select activation date." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -151,23 +165,26 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;">Expiration Date<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize ID="locExpirationDate" 
+                                        runat="server" Text="Expiration Date" 
+                                        meta:resourcekey="locExpirationDateResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
                                         <asp:TextBox ID="txtExpirationDate" runat="server" OnKeyPress="javascript: return false;"
-                                            MaxLength="50" Width="100px" Height="19px"></asp:TextBox>
+                                            MaxLength="50" Width="100px" Height="19px" 
+                                            meta:resourcekey="txtExpirationDateResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvExpirationDate" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtExpirationDate" ForeColor="Red" ValidationGroup="vgAddLicense">
-                                            <ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
+                                            ControlToValidate="txtExpirationDate" ForeColor="Red" 
+                                            ValidationGroup="vgAddLicense"><ucValidationContainer:ValidationContainer ID="rfvExpiraDateContainer" runat="server"
                                                 ValidationMsg="Please select expiration date." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -175,14 +192,16 @@
                             </tr>
                             <tr>
                                 <td style="width: 130px" align="right">
-                                    <span style="font-weight: bold;">Is Active?</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Active?" runat="server" 
+                                        ID="locIsActive" meta:resourcekey="locIsActiveResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
-                                <td style="width: 400px">
+                                <td style="width: 370px">
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="True" 
+                                            meta:resourcekey="chkIsActiveResource1" />
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -198,10 +217,15 @@
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddLicense"
                                                 OnClick="lbtnSave_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize Text="Save" runat="server" ID="locSave" 
+                                                meta:resourcekey="locSaveResource1"></asp:Localize>
+</span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/LicenseManagement.aspx">
-                                                    <span> Cancel </span>
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                PostBackUrl="~/LicenseManagement.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" ID="locCancel" 
+                                                meta:resourcekey="locCancelResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

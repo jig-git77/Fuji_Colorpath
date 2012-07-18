@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PopUpMaster.Master" 
 AutoEventWireup="true" 
 CodeBehind="PopupOpenPrintCondition.aspx.cs" 
-Inherits="FujifilmUSA.Sync.Web.PopupOpenPrintCondition" Title="Open Print Condition" %>
+Inherits="FujifilmUSA.Sync.Web.PopupOpenPrintCondition" Title="Open Print Condition" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 <%@ Register Src="~/UserControl/PopupControl/OpenPrintCondition.ascx" TagName="OpenPrintCondition" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

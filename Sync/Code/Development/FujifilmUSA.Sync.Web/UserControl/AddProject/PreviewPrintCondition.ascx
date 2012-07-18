@@ -37,25 +37,36 @@
     }
 </style>
 <div class="head">
-    <h1 id="hTitle" runat="server">
-        New Print Condition - Review Selections
-    </h1>
+    <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
+            Text="New Print Condition - Review Selections" ID="locNewPrintCondition" 
+            meta:resourcekey="locNewPrintConditionResource1"></asp:Localize></h1>
     <asp:LinkButton ID="lnkbtnSavePrintCondition" runat="server" CssClass="button" OnClick="lnkbtnSavePrintCondition_Click"
         OnClientClick="javascript:return ShowConfirmSaveWindow();">
         <span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" />
-            Save</span></asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" CssClass="buttonLeft" OnClick="lnkbtnMeasurementSetup_Click">
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" 
+        meta:resourcekey="Image1Resource1" />
+            
+<asp:Localize runat="server" Text="Save" ID="locSave" 
+        meta:resourcekey="locSaveResource1"></asp:Localize>
+            
+
+            </span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" 
+        CssClass="buttonLeft" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
-            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Search.png" />
-            Measurement Setup</span></asp:LinkButton>
+            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Search.png" 
+        meta:resourcekey="Image2Resource1" />
+            
+<asp:Localize Text="Measurement Setup" runat="server" ID="locMeasurementSetup" 
+        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
     </div>
 </div>
 <div class="listDevice" style="margin-left: 18px">
-    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     <table cellpadding="0" cellspacing="10" border="0">
         <tr>
             <td valign="top" style="width: 320px">
@@ -67,8 +78,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>
-                                            Description</label>
+                                        <label><asp:Localize runat="server" Text="Description" ID="Description" 
+                                            meta:resourcekey="DescriptionResource1"></asp:Localize></label>
                                     </div>
                                     <div style="float: right">
                                     </div>
@@ -80,68 +91,81 @@
                                 <table width="300px">
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Media </span>
+                                            <span style="font-weight: bold;"><asp:Localize Text="Media" runat="server" 
+                                                ID="locMedia" meta:resourcekey="locMediaResource1"></asp:Localize> </span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblMedia" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblMedia" runat="server" meta:resourcekey="lblMediaResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Colorant</span>
+                                            <span style="font-weight: bold;"><asp:Localize Text="Colorant" runat="server" 
+                                                ID="locColorant" meta:resourcekey="locColorantResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblColorant" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblColorant" runat="server" 
+                                                meta:resourcekey="lblColorantResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Rip Settings</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Rip Settings" ID="locRipSettings" 
+                                                meta:resourcekey="locRipSettingsResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblRipSettings" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblRipSettings" runat="server" 
+                                                meta:resourcekey="lblRipSettingsResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Notes</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" Text="Notes" 
+                                                ID="locNotes" meta:resourcekey="locNotesResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td class="breakWord100">
-                                            <asp:Label ID="lblNotes" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblNotes" runat="server" meta:resourcekey="lblNotesResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Technician Name</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Technician Name" ID="locTechnicianName" 
+                                                meta:resourcekey="locTechnicianNameResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblTechnicianName" runat="server" Text="" CssClass="breakWord100"></asp:Label>
+                                            <asp:Label ID="lblTechnicianName" runat="server" CssClass="breakWord100" 
+                                                meta:resourcekey="lblTechnicianNameResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="breakWord90">
-                                            <span style="font-weight: bold;">Source Profile</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Source Profile" ID="locSourceProfile" 
+                                                meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblSourceProfile" runat="server" Text="" CssClass="breakWord100"></asp:Label>
+                                            <asp:Label ID="lblSourceProfile" runat="server" CssClass="breakWord100" 
+                                                meta:resourcekey="lblSourceProfileResource1"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -165,8 +189,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>
-                                            Spectrophotometer Options</label>
+                                        <label><asp:Localize runat="server" Text="Spectrophotometer Options" 
+                                            ID="locSpectrophotometer" meta:resourcekey="locSpectrophotometerResource1"></asp:Localize></label>
                                     </div>
                                     <div style="float: right">
                                     </div>
@@ -178,46 +202,56 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight: bold;">Measurement Device</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Measurement Device" ID="locMeasurementDevice" 
+                                                meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblMeasurementDevice" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblMeasurementDevice" runat="server" 
+                                                meta:resourcekey="lblMeasurementDeviceResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight: bold;">Illuminant</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" Text="Illuminant" 
+                                                ID="locIlluminant" meta:resourcekey="locIlluminantResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblIlluminant" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblIlluminant" runat="server" 
+                                                meta:resourcekey="lblIlluminantResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span style="font-weight: bold;">Observer</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" Text="Observer" 
+                                                ID="locObserver" meta:resourcekey="locObserverResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblObserver" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblObserver" runat="server" 
+                                                meta:resourcekey="lblObserverResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr id="trUVSettings" runat="server">
                                         <td>
-                                            <span style="font-weight: bold;">UV Settings:</span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="UV Settings:" ID="locUVSettings" 
+                                                meta:resourcekey="locUVSettingsResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblUVSettings" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblUVSettings" runat="server" 
+                                                meta:resourcekey="lblUVSettingsResource1"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -231,8 +265,6 @@
                 </div>
             </td>
         </tr>
-        <tr style="height: 0px">
-        </tr>
         <tr>
             <td valign="top">
                 <div style="display: block;">
@@ -243,8 +275,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>
-                                            Option Presets</label>
+                                        <label><asp:Localize runat="server" Text="Option Presets" ID="locOptionPresets" 
+                                            meta:resourcekey="locOptionPresetsResource1"></asp:Localize></label>
                                     </div>
                                     <div style="float: right">
                                     </div>
@@ -256,22 +288,28 @@
                                 <table>
                                     <tr style="line-height: 16px;">
                                         <td>
-                                            <span style="font-weight: bold;">Selected Presets: </span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Selected Presets:" ID="locSelectedPresets" 
+                                                meta:resourcekey="locSelectedPresetsResource1"></asp:Localize> </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 20px;">
-                                            <asp:Label ID="lblSelectedPresets" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblSelectedPresets" runat="server" 
+                                                meta:resourcekey="lblSelectedPresetsResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="line-height: 16px;">
-                                            <span style="font-weight: bold;">Preset Description: </span>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Preset Description:" ID="locPresetDesc" 
+                                                meta:resourcekey="locPresetDescResource1"></asp:Localize> </span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="padding-left: 20px;">
-                                            <asp:Label ID="lblPresetDescription" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblPresetDescription" runat="server" 
+                                                meta:resourcekey="lblPresetDescriptionResource1"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -295,29 +333,35 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
-                                        <label>
-                                            Alignment Chart</label>
+                                        <label><asp:Localize runat="server" Text="Alignment Chart" 
+                                            ID="locAlignmentChart1" meta:resourcekey="locAlignmentChart1Resource1"></asp:Localize>
+                                            </label>
                                     </div>
                                     <div class="clear">
                                     </div>
                                 </div>
                             </div>
-                            <asp:Panel ID="panelAlignmentChart" runat="server" Style="padding-left: 5px" BorderStyle="None">
+                            <asp:Panel ID="panelAlignmentChart" runat="server" Style="padding-left: 5px" 
+                                BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
                                 <table>
                                     <tr>
                                         <td>
-                                            <span style="font-weight: bold;">Alignment Chart</span> &nbsp
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Alignment Chart" ID="locAlignmentChart2" 
+                                                meta:resourcekey="locAlignmentChart2Resource1"></asp:Localize></span> &nbsp;
                                         </td>
                                         <td style="width: 10px;">
                                             <span style="font-weight: bold;">:</span>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblAlignmentChart" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblAlignmentChart" runat="server" 
+                                                meta:resourcekey="lblAlignmentChartResource1"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <asp:Image ID="imgChart" runat="server" Width="76%" Height="200px" />
+                                            <asp:Image ID="imgChart" runat="server" Width="76%" Height="200px" 
+                                                meta:resourcekey="imgChartResource1" />
                                         </td>
                                     </tr>
                                 </table>

@@ -4,8 +4,8 @@
     &nbsp;</div>
 <div class="Global_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            Transfering...</h1>
+        <h1><asp:Localize runat="server" Text="Transfering..." ID="locTransferring" 
+                meta:resourcekey="locTransferringResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -14,7 +14,9 @@
         <center>
             <div style="height:200px;">
                 <div style="font-size: 14px;"><br /><br /><br />
-                    <span style="font-size: 18px;">Transfering control back to Color Organizer...</span>
+                    <span style="font-size: 18px;"><asp:Localize runat="server" 
+                        Text="Transfering control back to Color Organizer..." 
+                        ID="locTransferringControl" meta:resourcekey="locTransferringControlResource1"></asp:Localize></span>
                 </div>
             </div>
          </center>

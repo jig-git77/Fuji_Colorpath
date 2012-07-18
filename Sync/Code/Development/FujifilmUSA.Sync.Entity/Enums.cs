@@ -62,9 +62,9 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EUVIncludedMode
     {
-        [Description("UV Cut")]
+        [Description("EUVIncludedMode_UVCut")]//UV Cut
         UVCut = 0,
-        [Description("UV Included")]
+        [Description("EUVIncludedMode_UV")]//UV Included
         UV = 1
     }
 
@@ -123,27 +123,27 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum ERolePermission
     {
-        [Description("Manage License")]
+        [Description("ERolePermission_ManageLicense")]//Manage License
         ManageLicense = 1,
-        [Description("Manage Region")]
+        [Description("ERolePermission_ManageRegion")]//Manage Region
         ManageRegion = 2,
-        [Description("Manage Measurement Device")]
+        [Description("ERolePermission_ManageMeasurementDevice")]//Manage Measurement Device
         ManageMeasurementDevice = 3,
-        [Description("Manage Company")]
+        [Description("ERolePermission_ManageCompany")]//Manage Company
         ManageCompany = 4,
-        [Description("Manage Branch")]
+        [Description("ERolePermission_ManageBranch")]//Manage Branch
         ManageBranch = 5,
-        [Description("Manage Device")]
+        [Description("ERolePermission_ManageDevice")]//Manage Device
         ManageDevice = 6,
-        [Description("Create Delete Project")]
+        [Description("ERolePermission_CreateDeleteProject")]//Create Delete Project
         CreateDeleteProject = 7,
-        [Description("Modify Project")]
+        [Description("ERolePermission_ModifyProject")]//Modify Project
         ModifyProject = 8,
-        [Description("Manage User")]
+        [Description("ERolePermission_ManageUser")]//Manage User
         ManageUser = 9,
-        [Description("Manage SourceProfile")]
+        [Description("ERolePermission_ManageSourceProfile")]//Manage SourceProfile
         ManageSourceProfile = 10,
-        [Description("Manage ReferenceChart")]
+        [Description("ERolePermission_ManageReferenceChart")]//Manage ReferenceChart
         ManageReferenceChart = 11
     }
     public enum ECurrentProjectStatus
@@ -156,10 +156,10 @@ namespace FujifilmUSA.Sync.Entity
     {
         None = 0,
 
-        [Description("i1-Pro")]
+        [Description("EInstrumentType_i1Pro")]//i1-Pro
         i1Pro = 1,
 
-        [Description("i1-Sis")]
+        [Description("EInstrumentType_i1Sis")]//i1-Sis
         i1Sis = 2
     }
 
@@ -238,55 +238,55 @@ namespace FujifilmUSA.Sync.Entity
     }
     public enum EProfileRendering
     {
-        [Description("Perceptual")]
+        [Description("EProfileRendering_icPerceptual")]//Perceptual
         icPerceptual = 0,
 
-        [Description("Relative")]
+        [Description("EProfileRendering_icRelativeColorimetric")]//Relative
         icRelativeColorimetric = 1,
 
-        [Description("Saturation")]
+        [Description("EProfileRendering_icSaturation")]//Saturation
         icSaturation = 2,
 
-        [Description("Absolute")]
+        [Description("EProfileRendering_icAbsoluteColorimetric")]//Absolute
         icAbsoluteColorimetric = 3,
 
-        [Description("BlackCompensation")]
+        [Description("EProfileRendering_eCLBlackCompensationRI")]//BlackCompensation
         eCLBlackCompensationRI = 10,
 
-        [Description("AbsolutePerceptual")]
+        [Description("EProfileRendering_eCLAbsolutePerceptualRI")]//AbsolutePerceptual
         eCLAbsolutePerceptualRI = 11,
 
-        [Description("AbsLightenerCompensation")]
+        [Description("EProfileRendering_eCLAbsLightenerCompensationRI")]//AbsLightenerCompensation
         eCLAbsLightenerCompensationRI = 12,
 
-        [Description("GamutCompression")]
+        [Description("EProfileRendering_eCLGamutCompressionRI")]//GamutCompression
         eCLGamutCompressionRI = 13,
 
-        [Description("PerceptualCompression")]
+        [Description("EProfileRendering_eCLPerceptualCompressionRI")]//PerceptualCompression
         eCLPerceptualCompressionRI = 14,
 
-        [Description("RelativeCompression")]
+        [Description("EProfileRendering_eCLRelativeCompressionRI")]//RelativeCompression
         eCLRelativeCompressionRI = 15,
 
-        [Description("AbsoluteCompression")]
+        [Description("EProfileRendering_eCLAbsoluteCompressionRI")]//AbsoluteCompression
         eCLAbsoluteCompressionRI = 16,
 
-        [Description("pRelative")]
+        [Description("EProfileRendering_eCLRelativeRI")]//pRelative
         eCLRelativeRI = 17,
 
-        [Description("pAbsolute")]
+        [Description("EProfileRendering_eCLAbsoluteRI")]//pAbsolute
         eCLAbsoluteRI = 18,
 
-        [Description("RelativeLightness")]
+        [Description("EProfileRendering_eCLRelativeLightness")]//RelativeLightness
         eCLRelativeLightness = 19,
 
-        [Description("MinBlackCompression")]
+        [Description("EProfileRendering_eCLMinimumBlackCompressionRI")]//MinBlackCompression
         eCLMinimumBlackCompressionRI = 26,
 
-        [Description("MinWhiteCompression")]
+        [Description("EProfileRendering_eCLMinimumWhiteCompressionRI")]//MinWhiteCompression
         eCLMinimumWhiteCompressionRI = 27,
 
-        [Description("MinCompression")]
+        [Description("EProfileRendering_eCLMinimumCompressionRI")]//MinCompression
         eCLMinimumCompressionRI = 28
     }
     public enum UserAuthenticationUpdateType
@@ -298,17 +298,17 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum ELicenseType
     {
-        [Description("INVALID")]
+        [Description("ELicenseType_None")]//INVALID
         None = 0,
-        [Description("Alignment Curves")]
+        [Description("ELicenseType_Sync1D")]//Alignment Curves
         Sync1D = 1,
-        [Description("DLP Optimization")]
+        [Description("ELicenseType_DLP")]//DLP Optimization
         DLP = 2,
-        [Description("Ink Optimization")]
+        [Description("ELicenseType_InkOptimization")]//Ink Optimization
         InkOptimization = 3,
-        [Description("Color Validation")]
+        [Description("ELicenseType_Verification")]//Color Validation
         Verification = 4,
-        [Description("ICC Profiling")]
+        [Description("ELicenseType_IccProfiling")]//ICC Profiling
         IccProfiling = 5
     }
 
@@ -327,9 +327,9 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EReferenceChartDisType
     {
-        [Description("Profile Chart")]
+        [Description("EReferenceChartDisType_ProfileChart")]//Profile Chart
         ProfileChart = 1,
-        [Description("Optimization Chart")]
+        [Description("EReferenceChartDisType_OptimizationChart")]//Optimization Chart
         OptimizationChart = 2
     }
 

@@ -13,6 +13,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class CreateDLP {
         
         /// <summary>
+        /// locCreatingDLP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locCreatingDLP;
+        
+        /// <summary>
         /// Image2 control.
         /// </summary>
         /// <remarks>

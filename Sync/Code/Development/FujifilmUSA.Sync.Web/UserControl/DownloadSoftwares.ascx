@@ -75,8 +75,8 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1>
-            Download</h1>       
+        <h1><asp:Localize runat="server" Text="Download" ID="locDownload" 
+                meta:resourcekey="locDownloadResource1"></asp:Localize></h1>       
     </div>
     <div class="clear">
     </div>
@@ -84,22 +84,36 @@
         <div style="margin-left: 10px;" >
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
-                <telerik:RadGrid ID="rgDownload" ShowHeader="true" AllowSorting="true"
-                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="false"
-                    OnNeedDataSource="rgDownload_NeedDataSource" Width="75%" HeaderStyle-Font-Bold="true">
-                    <PagerStyle Position="Top" AlwaysVisible="false" Font-Size="Small" />
+                <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                    Visible="False" />
+                <telerik:RadGrid ID="rgDownload" AllowSorting="True"
+                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                    OnNeedDataSource="rgDownload_NeedDataSource" Width="75%" CellSpacing="0" 
+                    GridLines="None">
+                    <HeaderStyle Font-Bold="True" />
+                    <PagerStyle Position="Top" Font-Size="Small" />
                     <MasterTableView DataKeyNames="DownloadId,DownloadName">
+                        <CommandItemSettings ExportToPdfText="Export to PDF" />
+                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
+                            Visible="True">
+                        </RowIndicatorColumn>
+                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
+                            Visible="True">
+                        </ExpandCollapseColumn>
                         <Columns>                             
                             <telerik:GridTemplateColumn DataField="DownloadName" HeaderText="Software Name"
-                                   UniqueName="DownloadName" SortExpression="DownloadName" ItemStyle-CssClass="breakWord200">
+                                   UniqueName="DownloadName" SortExpression="DownloadName" 
+                                FilterControlAltText="Filter DownloadName column" 
+                                meta:resourcekey="GridTemplateColumnResource1">
                                         <ItemTemplate>
                                             <div class="Download_list">
                                                 <ul>
                                                     <li>
                                                         <div class="left">
                                                             <a href='<%# Eval("DownloadPath") %>'>
-                                                                <asp:Label ID="lblDownloadName" runat="server" Text='<%# Eval("DownloadName") %>' />
+                                                                <asp:Label ID="lblDownloadName" runat="server" 
+                                                                Text='<%# Eval("DownloadName") %>' 
+                                                                meta:resourcekey="lblDownloadNameResource1" />
                                                             </a>
                                                         </div>
                                                         <div class="clear">
@@ -110,9 +124,16 @@
                                             <div class="clear">
                                             </div>
                                         </ItemTemplate>
+                                        <ItemStyle CssClass="breakWord200" />
                                 </telerik:GridTemplateColumn>                                                  
                         </Columns>
+                        <EditFormSettings>
+                            <EditColumn FilterControlAltText="Filter EditCommandColumn column">
+                            </EditColumn>
+                        </EditFormSettings>
                     </MasterTableView>
+                    <FilterMenu EnableImageSprites="False">
+                    </FilterMenu>
                 </telerik:RadGrid>
             </ContentTemplate>
         </asp:UpdatePanel>

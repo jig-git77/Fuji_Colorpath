@@ -10,13 +10,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ReferenceChartManagement : BaseControl, IViewReferenceChartManagement
     {
+        #region Private variables - Globalization
+        private const string _recDeleteSoureProfileConfirm = "deleteSoureProfileConfirm";
+        #endregion
+
         #region Declaration
         private PresenterAddReferenceChart _presenterAddReferenceChart;
         public string SourceProfileManagement_DeleteSourceProfile_Confirmation
         {
             get
             {
-                return "No Reference Charts";
+                return GetResourceString(_recDeleteSoureProfileConfirm); //"No Reference Charts";
             }
         }
         #endregion

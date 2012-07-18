@@ -97,7 +97,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void rgProjectList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            GetProjectList();           
+            GetProjectList();
         }
         protected void rgProjectList_ItemDataBound(object sender, GridItemEventArgs e)
         {
@@ -106,7 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
             var imgStatus = e.Item.FindControl("imgStatus") as Image;
             if (imgStatus == null || btnSelect == null) return;
-            imgStatus.ToolTip = imgStatus.AlternateText = project.Status.ToString();
+            imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
 
             var days = (DateTime.Now - project.CreateDate).TotalDays;
 
@@ -185,7 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 rgProjectList.DataSource = Projects;
-            }        
+            }
             ViewState["ProjectLimit"] = Projects.Count;   //------Store the total projects to check ProjectLimit counter--------//
         }
         private void DeleteProject(int projectId)

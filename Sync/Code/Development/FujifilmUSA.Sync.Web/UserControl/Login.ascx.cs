@@ -6,6 +6,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using System.Web;
 using System.Web.Security;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -42,6 +43,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtPassword.Attributes.Add("value", Request.Cookies["SyncFujiPass"].Value);
 
                 }
+
+                //Bind language combo
+                ddlLanguages.DataSource = Languages;
+                ddlLanguages.DataTextField = "Key";
+                ddlLanguages.DataValueField = "Value";
+                ddlLanguages.DataBind();                
             }
         }
         protected void bntLogin_Click(object sender, EventArgs e)
@@ -58,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
                     
+                    SessionManager.Instance.CurrentLanguage = ddlLanguages.SelectedValue;                    
                     if (chkRememberMe.Checked == true)
                     {
                         var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
@@ -65,11 +73,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
                         Response.SetCookie(objCookie);
+
+                        objCookie = new HttpCookie("SyncFujiSelectedLanguage") { Value = ddlLanguages.SelectedValue, Expires = System.DateTime.Now.AddDays(20) };
+                        Response.SetCookie(objCookie);
                     }
                     else
                     {
                         Response.Cookies["SyncFujiLogin"].Value = "";
                         Response.Cookies["SyncFujiPass"].Value = "";
+                        Response.Cookies["SyncFujiSelectedLanguage"].Value = "";
                     }
                     
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
@@ -92,6 +104,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
                 }
+            }
+        }
+        #endregion
+
+        #region Property
+        protected Dictionary<string, string> Languages
+        {
+            get
+            {
+                Dictionary<string, string> languageList = new Dictionary<string, string>();
+                languageList.Add("English", "en-US");
+                languageList.Add("German", "de-DE");
+                languageList.Add("Japanese", "ja-JP");
+                return languageList;
             }
         }
         #endregion

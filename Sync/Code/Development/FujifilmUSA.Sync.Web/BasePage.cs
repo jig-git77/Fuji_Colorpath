@@ -8,6 +8,16 @@ namespace FujifilmUSA.Sync.Web
     public class BasePage : System.Web.UI.Page
     {
         #region Page Events
+        protected override void InitializeCulture()
+        {
+            if (SessionManager.Instance.CurrentLanguage != null)
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
+            }
+
+            base.InitializeCulture();
+        }
         protected override void OnLoad(EventArgs e)
         {
             IsLogin();

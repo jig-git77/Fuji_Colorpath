@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _branchNameSession = "BranchNameSession";
         private const string _projLimitSession = "ProjectLimitSession";
         private const string _colorOrgRequest = "ColorOrgRequest";
-
+        private const string _currentLanguage = "CurrentLanguage";
         #endregion
 
         #region Singleton
@@ -181,6 +181,22 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_colorOrgRequest] = value;
+            }
+        }
+
+        public string CurrentLanguage
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_currentLanguage] != null)
+                {
+                    return (string)HttpContext.Current.Session[_currentLanguage];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_currentLanguage] = value;
             }
         }
 

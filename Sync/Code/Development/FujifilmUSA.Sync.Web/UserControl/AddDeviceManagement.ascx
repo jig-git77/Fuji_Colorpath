@@ -8,8 +8,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            Device Management</h1>
+        <h1><asp:Localize ID="locDeviceManagement" runat="server" Text="Device Management" 
+                meta:resourcekey="locDeviceManagementResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -19,13 +19,16 @@
                 <center>
                     <fieldset style="width: 60%;">
                         <legend>
-                            <asp:Label ID="lblHeader" runat="server" Text="Add Device"></asp:Label>
+                            <asp:Label ID="lblHeader" runat="server" Text="Add Device" 
+                                meta:resourcekey="lblHeaderResource1"></asp:Label>
                         </legend>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
                         <table>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Company Name<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Company Name" 
+                                        runat="server" ID="locCompanyName" meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -33,16 +36,17 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="400px" CssClass="select"
-                                            AutoPostBack="true" OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged">
+                                        <asp:DropDownList ID="cmbCompany" runat="server" Width="370px" CssClass="select"
+                                            AutoPostBack="True" 
+                                            OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" 
+                                            meta:resourcekey="cmbCompanyResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvcompany" runat="server" Display="Dynamic" ControlToValidate="cmbCompany"
-                                            ForeColor="Red" ValidationGroup="vgAddDevice">
-                                            <ucValidationContainer:ValidationContainer ID="rfvCompanycontainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvCompanycontainer" runat="server"
                                                 ValidationMsg="Please select company." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -50,23 +54,24 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Branch Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Branch Name" 
+                                        runat="server" ID="locBranchName" meta:resourcekey="locBranchNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbBranch" runat="server" Width="400px" CssClass="select" AutoPostBack="true"
-                                            OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged">
+                                        <asp:DropDownList ID="cmbBranch" runat="server" Width="370px" CssClass="select" AutoPostBack="True"
+                                            OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" 
+                                            meta:resourcekey="cmbBranchResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvBranch" runat="server" Display="Dynamic" ControlToValidate="cmbBranch"
-                                            ForeColor="Red" ValidationGroup="vgAddDevice">
-                                            <ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvBranchContainer" runat="server"
                                                 ValidationMsg="Please select branch." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -74,7 +79,8 @@
                             </tr>
                             <tr style="display: none;">
                                 <td align="right">
-                                    <span style="font-weight: bold;">License Name<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="License Name" 
+                                        runat="server" ID="locLicenseName" meta:resourcekey="locLicenseNameResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -82,15 +88,15 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbLicense" runat="server" Width="400px" CssClass="select">
+                                        <asp:DropDownList ID="cmbLicense" runat="server" Width="370px" 
+                                            CssClass="select" meta:resourcekey="cmbLicenseResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvLicense" runat="server" Display="Dynamic" ControlToValidate="cmbLicense"
-                                            ForeColor="Red" ValidationGroup="vgAddDevice">
-                                            <ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvLicenseContainer" runat="server"
                                                 ValidationMsg="Please select license." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -98,21 +104,22 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Device Name<span style="color: Red;">*</span> </span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Device Name" 
+                                        ID="locDeviceName" runat="server" meta:resourcekey="locDeviceNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
                                 </td>
                                 <td>
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtDeviceName" runat="server" MaxLength="50" Width="400px" Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtDeviceName" runat="server" MaxLength="50" Width="370px" 
+                                            Height="19px" meta:resourcekey="txtDeviceNameResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceName" runat="server" Display="Dynamic" ControlToValidate="txtDeviceName"
-                                            ForeColor="Red" ValidationGroup="vgAddDevice">
-                                            <ucValidationContainer:ValidationContainer ID="rfvDeviceContainer" runat="server"
+                                            ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvDeviceContainer" runat="server"
                                                 ValidationMsg="Please provide device name." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -120,7 +127,8 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Device Family<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Device Family" 
+                                        runat="server" ID="locDeviceFamily" meta:resourcekey="locDeviceFamilyResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -128,15 +136,15 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:DropDownList ID="cmbDeviceFamily" runat="server" Width="400px" CssClass="select">
+                                        <asp:DropDownList ID="cmbDeviceFamily" runat="server" Width="370px" 
+                                            CssClass="select" meta:resourcekey="cmbDeviceFamilyResource1">
                                         </asp:DropDownList>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceFamily" runat="server" Display="Dynamic"
-                                            ControlToValidate="cmbDeviceFamily" ForeColor="Red" ValidationGroup="vgAddDevice">
-                                            <ucValidationContainer:ValidationContainer ID="rfvDeviceFamilyContainer" runat="server"
+                                            ControlToValidate="cmbDeviceFamily" ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="rfvDeviceFamilyContainer" runat="server"
                                                 ValidationMsg="Please select device family." Size="200" />
-                                        </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -144,7 +152,8 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">No. of Projects<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="No. of Projects" 
+                                        runat="server" ID="locNoOfProjects" meta:resourcekey="locNoOfProjectsResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -157,76 +166,73 @@
                                         <tr>
                                             <td style="width:130px;">
                                                 <span>
-                                                    <%=ELicenseSync1DText%> : </span>
-                                            </td>
+                                                    <%=ELicenseSync1DText%> &nbsp;</span></td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtSync1D" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" 
+                                                        meta:resourcekey="txtSync1DResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvSync1D" runat="server" Display="Dynamic" ControlToValidate="txtSync1D"
-                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
-                                                        <ucValidationContainer:ValidationContainer ID="rfvNoOfProjectsContainer" runat="server"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice" 
+                                                        meta:resourcekey="rfvSync1DResource1"><ucValidationContainer:ValidationContainer ID="rfvNoOfProjectsContainer" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-                                                    </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span>
-                                                    <%=ELicenseDlpText%> : </span>
-                                            </td>
+                                                    <%=ELicenseDlpText%> &nbsp;</span></td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtDlp" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" meta:resourcekey="txtDlpResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"
-                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
-                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-                                                    </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                  <span>
-                                                    <%=ELicenseInkOptimizationText%> : </span>
-                                            </td>
+                                                    <%=ELicenseInkOptimizationText%> &nbsp;</span></td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtInkOpt" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" 
+                                                        meta:resourcekey="txtInkOptResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvInkOpt" runat="server" Display="Dynamic" ControlToValidate="txtInkOpt"
-                                                        ForeColor="Red" ValidationGroup="vgAddDevice">
-                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer3" runat="server"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer3" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-                                                    </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span>
-                                                    <%=ELicenseVarificationText%> : </span>
-                                            </td>
+                                                    <%=ELicenseVarificationText%> &nbsp;</span></td>
                                             <td>
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtVarification" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)"></asp:TextBox>
+                                                        onkeypress="return CheckNumeric(event)" 
+                                                        meta:resourcekey="txtVarificationResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvVarification" runat="server" Display="Dynamic"
-                                                        ControlToValidate="txtVarification" ForeColor="Red" ValidationGroup="vgAddDevice">
-                                                        <ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
+                                                        ControlToValidate="txtVarification" ForeColor="Red" 
+                                                        ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-                                                    </asp:RequiredFieldValidator>
+</asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr> 
@@ -236,14 +242,16 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Is Active? </span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Active?" runat="server" 
+                                        ID="locIsActive" meta:resourcekey="locIsActiveResource1"></asp:Localize> </span>
                                 </td>
                                 <td>
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="True" 
+                                            meta:resourcekey="chkIsActiveResource1" />
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -259,10 +267,15 @@
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddDevice"
                                                 OnClick="lbtnSave_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
+                                                meta:resourcekey="locSaveResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/DeviceManagement.aspx">
-                                                    <span> Cancel </span>
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                PostBackUrl="~/DeviceManagement.aspx">
+                                                    <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
+                                                meta:resourcekey="locCancelResource1"></asp:Localize>
+ </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

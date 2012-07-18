@@ -13,6 +13,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class Header {
         
         /// <summary>
+        /// locYourIPAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locYourIPAddress;
+        
+        /// <summary>
+        /// locLoggedInAs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locLoggedInAs;
+        
+        /// <summary>
         /// lbtnLogout control.
         /// </summary>
         /// <remarks>

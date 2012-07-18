@@ -112,14 +112,18 @@
             <table>
                 <tr>
                     <td style="width: 80%">
-                        <h1>
-                            Device List</h1>
+                        <h1><asp:Localize ID="locDeviceList" runat="server" Text="Device List" 
+                                meta:resourcekey="locDeviceListResource1"></asp:Localize></h1>
                     </td>
                     <td style="width: 200px">
-                        <asp:LinkButton ID="lbtnReport" runat="server"><h1>Report</h1></asp:LinkButton>
+                        <asp:LinkButton ID="lbtnReport" runat="server"><h1><asp:Localize ID="locReport" 
+                                runat="server" Text="Report" meta:resourcekey="locReportResource1"></asp:Localize>
+</h1></asp:LinkButton>
                     </td>
                     <td style="width: 50px">
-                        <asp:LinkButton ID="LinkButton1" runat="server"><h1>Help</h1></asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton1" runat="server"><h1><asp:Localize ID="locHelp" 
+                                runat="server" Text="Help" meta:resourcekey="locHelpResource1"></asp:Localize>
+</h1></asp:LinkButton>
                     </td>
                 </tr>
             </table>
@@ -132,32 +136,35 @@
             <ContentTemplate>
 
                 <div class="formDevice">
-                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                     <table cellpadding="0" cellspacing="0" border="0" width="97%">
                         <tr id="tr2" runat="server">
-                            <td>
+                            <td runat="server">
                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                     <tr runat="server" id="trCompany">
-                                        <td class="DeviceListFirstTD">
-                                            <asp:Label ID="Label1" runat="server" Text="Company"></asp:Label>
+                                        <td class="DeviceListFirstTD" runat="server">
+                                            <asp:Label ID="Label1" runat="server" Text="Company" 
+                                                meta:resourcekey="Label1Resource1"></asp:Label>
                                             &nbsp; :
                                         </td>
-                                        <td>
+                                        <td runat="server">
                                             <asp:DropDownList ID="cmbCompany" runat="server" DataValueField="Key" DataTextField="Value"
-                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="true"
-                                                CssClass="select" Width="180px">
+                                                OnSelectedIndexChanged="cmbCompany_SelectedIndexChanged" AutoPostBack="True"
+                                                CssClass="select" Width="180px" meta:resourcekey="cmbCompanyResource1">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr runat="server" id="trBranch">
-                                        <td class="DeviceListFirstTD">
-                                            <asp:Label ID="Label2" runat="server" Text="Branch"></asp:Label>
+                                        <td class="DeviceListFirstTD" runat="server">
+                                            <asp:Label ID="Label2" runat="server" Text="Branch" 
+                                                meta:resourcekey="Label2Resource1"></asp:Label>
                                             &nbsp :
                                         </td>
-                                        <td>
+                                        <td runat="server">
                                             <asp:DropDownList ID="cmbBranch" runat="server" DataValueField="Key" DataTextField="Value"
-                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" AutoPostBack="true" CssClass="select"
-                                                Width="180px">
+                                                OnSelectedIndexChanged="cmbBranch_SelectedIndexChanged" 
+                                                AutoPostBack="True" CssClass="select"
+                                                Width="180px" meta:resourcekey="cmbBranchResource1">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
@@ -171,34 +178,48 @@
                         <tr>
                             <td class="Top_Grn_Header">
                                 <h3>
-                                    Select Press
+                                    <asp:Localize ID="locSelectPress" runat="server" Text="Select Press" 
+                                        meta:resourcekey="locSelectPressResource1"></asp:Localize>
                                 </h3>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <telerik:RadGrid ID="rgDeviceList" ShowHeader="true" AllowFilteringByColumn="true"
-                                    AllowSorting="true" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                    EnableLinqExpressions="false" OnNeedDataSource="rgDeviceList_NeedDataSource"
-                                    OnItemCommand="rgDeviceList_ItemCommand" Width="675px" >
-                                    <GroupingSettings CaseSensitive="false" />
-                                    <ClientSettings Selecting-AllowRowSelect="true">
+                                <telerik:RadGrid ID="rgDeviceList" AllowFilteringByColumn="True"
+                                    AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
+                                    EnableLinqExpressions="False" OnNeedDataSource="rgDeviceList_NeedDataSource"
+                                    OnItemCommand="rgDeviceList_ItemCommand" Width="675px" CellSpacing="0" 
+                                    GridLines="None" >
+                                    <GroupingSettings CaseSensitive="False" />
+                                    <ClientSettings>
+                                        <Selecting AllowRowSelect="True" />
                                     </ClientSettings>
-                                    <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
-                                    <HeaderStyle Font-Size="12px" Font-Bold="true" ForeColor="Black" />
+                                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
+                                    <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
                                     <MasterTableView DataKeyNames="DeviceId,DeviceName,DeviceFamily.DeviceFamilyId,DeviceFamily.DeviceFamilyDesc,BranchName">
+                                        <CommandItemSettings ExportToPdfText="Export to PDF" />
+                                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
+                                            Visible="True">
+                                        </RowIndicatorColumn>
+                                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
+                                            Visible="True">
+                                        </ExpandCollapseColumn>
                                         <Columns>
-                                            <telerik:GridTemplateColumn DataField="DeviceName" AllowFiltering="true" HeaderText="Device Name"
-                                                UniqueName="DeviceName" SortExpression="DeviceName" FilterControlWidth="200px" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains"
-                                                ShowFilterIcon="true" ItemStyle-CssClass="breakWord200">
+                                            <telerik:GridTemplateColumn DataField="DeviceName" HeaderText="Device Name"
+                                                UniqueName="DeviceName" SortExpression="DeviceName" 
+                                                FilterControlWidth="200px" AutoPostBackOnFilter="True" 
+                                                CurrentFilterFunction="Contains" 
+                                                FilterControlAltText="Filter DeviceName column" 
+                                                meta:resourcekey="GridTemplateColumnResource1">
                                                 <ItemTemplate>
-                                                    <asp:Panel ID="divSelectDevice" runat="server" class="product_list">
+                                                    <asp:Panel ID="divSelectDevice" runat="server" class="product_list" 
+                                                        meta:resourcekey="divSelectDeviceResource1">
                                                         <ul>
                                                             <li>
                                                                 <div class="left">
                                                                             <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
-                                                                                CommandName="Select" Text='<%# Eval("DeviceName")%>'>
-                                                                            </asp:LinkButton>
+                                                                                CommandName="Select" Text='<%# Eval("DeviceName") %>' 
+                                                                                meta:resourcekey="lbtnSelectDeviceResource1"></asp:LinkButton>
                                                                         </div>
                                                                 <div class="clear">
                                                                 </div>
@@ -208,9 +229,17 @@
                                                     <div class="clear">
                                                     </div>
                                                 </ItemTemplate>
+                                                <ItemStyle CssClass="breakWord200" />
                                             </telerik:GridTemplateColumn>
                                         </Columns>
+                                        <EditFormSettings>
+                                            <EditColumn FilterControlAltText="Filter EditCommandColumn column">
+                                            </EditColumn>
+                                        </EditFormSettings>
+                                        <PagerStyle AlwaysVisible="True" />
                                     </MasterTableView>
+                                    <FilterMenu EnableImageSprites="False">
+                                    </FilterMenu>
                                 </telerik:RadGrid>
                             </td>
                         </tr>

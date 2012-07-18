@@ -16,6 +16,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterDevice _presenterdevice;
         #endregion
 
+        #region Private Variables - Globalization
+        private const string _recselectText = "selectText";
+        private const string _recnoRecordsToDisplayText = "noRecordsToDisplayText";
+        private const string _recbranchAndCompanyRequired = "branchAndCompanyRequired";
+        #endregion
+
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {
@@ -94,7 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataSource = CompanyList;
                 cmbCompany.DataBind();
             }
-            cmbCompany.Items.Insert(0, new ListItem("-- Select --", "0"));
+            cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
 
             if (!Page.IsPostBack)
             {
@@ -115,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
             }
-            cmbBranch.Items.Insert(0, new ListItem("-- Select --", "0"));
+            cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
 
             if (CompanyId > 0)
             {
@@ -136,13 +142,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (this.CompanyId > 0 && this.BranchId > 0)
                 {
                     rgDeviceList.DataSource = Devices;
-                    rgDeviceList.MasterTableView.NoMasterRecordsText = "No records to display.";
+                    rgDeviceList.MasterTableView.NoMasterRecordsText = GetResourceString(_recnoRecordsToDisplayText);
                 }
                 else
                 {   //---------If company and branch are not selected------//
                     Devices.Clear();
                     rgDeviceList.DataSource = Devices;
-                    rgDeviceList.MasterTableView.NoMasterRecordsText = "Please select company and branch from above selection list.";
+                    rgDeviceList.MasterTableView.NoMasterRecordsText = GetResourceString(_recbranchAndCompanyRequired);
                 }
 
             }

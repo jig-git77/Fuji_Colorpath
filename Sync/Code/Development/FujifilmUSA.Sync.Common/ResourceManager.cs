@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Common
         /// <returns>Resource message of the key provided. If no resource message or key is available, it will return no message available</returns>
         public static string GetResourceMessage(string keyName)
         {
-            var message = HttpContext.GetGlobalResourceObject("ResourceMessages", keyName);
+            var message = FujifilmUSA.Sync.GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString(keyName);
             return message == null ? "No resouce message available" : message.ToString();
         }
     }

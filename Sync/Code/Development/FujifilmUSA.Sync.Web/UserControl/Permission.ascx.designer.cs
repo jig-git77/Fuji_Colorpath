@@ -10,7 +10,25 @@
 namespace FujifilmUSA.Sync.Web.UserControl {
     
     
-    public partial class SessionEnd {
+    public partial class Permission {
+        
+        /// <summary>
+        /// locSession control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locSession;
+        
+        /// <summary>
+        /// locPermissionMessgae control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locPermissionMessgae;
         
         /// <summary>
         /// lbtnHome control.
@@ -20,5 +38,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtnHome;
+        
+        /// <summary>
+        /// locHomePage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locHomePage;
     }
 }

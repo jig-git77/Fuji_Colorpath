@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadCodeBlock RadCodeBlock1;
         
         /// <summary>
+        /// locDeviceMgmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDeviceMgmt;
+        
+        /// <summary>
         /// likAdd control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgAdd;
         
         /// <summary>
+        /// locAddDevice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locAddDevice;
+        
+        /// <summary>
         /// lbtnAddDeviceFamily control.
         /// </summary>
         /// <remarks>
@@ -56,6 +74,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
+        /// locAddDeviceFamily control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locAddDeviceFamily;
         
         /// <summary>
         /// fujiStatusbar control.

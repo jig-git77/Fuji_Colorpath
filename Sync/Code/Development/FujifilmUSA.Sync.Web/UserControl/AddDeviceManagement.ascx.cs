@@ -16,6 +16,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseInkOptimizationText { get; set; }
         public string ELicenseVarificationText { get; set; }
 
+        #region Private Variables - Globalization
+        private const string _recAddDevice = "addDeviceText";
+        private const string _recEditDevice = "editDeviceText";
+        private const string _recSelectDeviceFamily = "selectDeviceFamilyText";
+        private const string _recSelectCompany = "selectCompanyText";
+        private const string _recSelectBranch = "selectBranchText";
+        private const string _recNoLicenseFound = "noLicenseFoundText";
+        private const string _recPlzSelectCompany = "plzSelectCompanyText";
+        private const string _recPlzSelectBranch = "plzSelectBranchText";
+        private const string _recPlzSelectDeviceFamily = "plzSelectDeviceFamilyText";
+        private const string _recSelect = "selectText";
+        #endregion
+
         private PresenterDeviceManagement _presenterDeviceManagement;
         #region Declaration
         private int DId
@@ -43,7 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (Page.IsPostBack) return;
 
-            lblHeader.Text = "Add Device";
+            lblHeader.Text = GetResourceString(_recAddDevice); //"Add Device";
             Bindcompany();
             BindDeviceFamily();
             BindBranch();
@@ -51,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             
             if (Request.QueryString["DeviceID"] != null)
             {
-                lblHeader.Text = "Edit Device";
+                lblHeader.Text = GetResourceString(_recEditDevice); //"Edit Device";
                 SetDevice(Convert.ToInt32(Request.QueryString["DeviceID"]));
             }
         }
@@ -70,7 +83,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbDeviceFamily.DataValueField = "Key";
                 cmbDeviceFamily.DataSource = DeviceFamilyList;
                 cmbDeviceFamily.DataBind();
-                cmbDeviceFamily.Items.Insert(0, new ListItem("--Select Device Family--", string.Empty));
+                cmbDeviceFamily.Items.Insert(0, new ListItem(GetResourceString(_recSelectDeviceFamily), string.Empty));//--Select Device Family--
             }
         }
         private void Bindcompany()
@@ -85,7 +98,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataValueField = "Key";
                 cmbCompany.DataSource = Compnaies;
                 cmbCompany.DataBind();
-                cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
+                cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), string.Empty));//--Select Company--
             }
         }
         private void BindBranch()
@@ -105,7 +118,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbBranch.DataBind();
                 }
             }
-            cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", string.Empty));
+            cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelectBranch), string.Empty)); //--Select Branch--
         }
         private void BindLicenses()
         {
@@ -124,7 +137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbLicense.DataBind();
                     if (cmbLicense.Items.Count == 0)
                     {
-                        fujiStatusbar.DisplayMessage("No license found for this branch!", false);
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recNoLicenseFound), false);//No license found for this branch!
                         txtSync1D.Enabled = false;
                         txtDlp.Enabled = false;
                         txtInkOpt.Enabled = false;
@@ -147,21 +160,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (cmbCompany.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select company.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectCompany), false);//Please select company.
                 return;
             }
             if (cmbBranch.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select branch.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);//Please select branch.
                 return;
             }
             if (cmbDeviceFamily.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select device family.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectDeviceFamily), false);//Please select device family.
                 return;
             }
 
-            int? licenseId = Convert.ToInt32(cmbLicense.SelectedValue.Equals("--Select--") ? null : cmbLicense.SelectedValue);
+            int? licenseId = Convert.ToInt32(cmbLicense.SelectedValue.Equals(GetResourceString(_recSelect)) ? null : cmbLicense.SelectedValue);//--Select--
             Device = new Device()
                          {
                              DeviceName = txtDeviceName.Text,
@@ -212,26 +225,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//
                 foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)
-                {
-                    string key = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key);
+                {                    
                     int val = item.Value;
 
-                    if (item.Key.ToString() == "Sync1D")
+                    switch (item.Key)
                     {
-                       txtSync1D.Text = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "DLP")
-                    {
-                        txtDlp.Text = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "InkOptimization")
-                    {
-                        txtInkOpt.Text = val.ToString();
-                    }
-                    else if (item.Key.ToString() == "Verification")
-                    {
-                        txtVarification.Text = val.ToString();
-                    }
+                        case ELicenseType.None:
+                            break;
+                        case ELicenseType.Sync1D:
+                            txtSync1D.Text = val.ToString();
+                            break;
+                        case ELicenseType.DLP:
+                            txtDlp.Text = val.ToString();
+                            break;
+                        case ELicenseType.InkOptimization:
+                            txtInkOpt.Text = val.ToString();
+                            break;
+                        case ELicenseType.Verification:
+                            txtVarification.Text = val.ToString();
+                            break;
+                        case ELicenseType.IccProfiling:                            
+                            break;
+                        default:
+                            break;
+                    }                    
                 }
             }
         }

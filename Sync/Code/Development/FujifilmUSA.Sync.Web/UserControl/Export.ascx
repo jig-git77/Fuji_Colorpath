@@ -28,13 +28,17 @@
 </div>
 <div class="contant_middle">
     <div class="head">
-        <h1 id="header" runat="server">
-            Download</h1>
+        <h1 id="header" runat="server"><asp:Localize ID="locDownload" runat="server" 
+                Text="Download" meta:resourcekey="locDownloadResource1"></asp:Localize></h1>
         <div class="Information_divAnalyze">
-            <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" OnClick="lbtnMeasure_Click">
+            <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" 
+                OnClick="lbtnMeasure_Click">
                 <span>
-                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" />
-                    Measure</span>
+                    <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" 
+                meta:resourcekey="imgAddResource1" />
+<asp:Localize runat="server" Text="Measure" ID="locMeasure" 
+                meta:resourcekey="locMeasureResource1"></asp:Localize>
+</span>
             </asp:LinkButton>
         </div>
     </div>
@@ -42,7 +46,7 @@
         <table cellpadding="0" cellspacing="5" border="0">
             <tr id="tr0">
                 <td>
-                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
                 </td>
             </tr>
             <tr id="tr1">
@@ -55,7 +59,8 @@
                                 <div class="header">
                                     <div class="content">
                                         <div class="text" style="float: left">
-                                            Download DLP and Chart
+                                            <asp:Localize runat="server" Text="Download DLP and Chart" 
+                                                ID="locDownloadDLPAndChart" meta:resourcekey="locDownloadDLPAndChartResource1"></asp:Localize>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -66,25 +71,36 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <span>Download DLP and Implement in Workflow :</span>
+                                                    <span><asp:Localize runat="server" 
+                                                        Text="Download DLP and Implement in Workflow :" 
+                                                        ID="locDownloadDLPAndImplementWorkflow" 
+                                                        meta:resourcekey="locDownloadDLPAndImplementWorkflowResource1"></asp:Localize></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadDLP_Click">
-                                                    <span>Download DLP</span>
+                                                    <asp:LinkButton ID="lbtnDownloadDLP" runat="server" CssClass="gray_bt" 
+                                                        OnClick="lbtnDownloadDLP_Click">
+                                                    <span><asp:Localize runat="server" Text="Download DLP" ID="locDownloadDLP" 
+                                                        meta:resourcekey="locDownloadDLPResource1"></asp:Localize>
+</span>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span>Download Chart and Print through DLP Workflow :</span>
+                                                    <span><asp:Localize Text="Download Chart and Print through DLP Workflow :" 
+                                                        runat="server" ID="locDownloadChartAndPrintThroughWorkflow" 
+                                                        meta:resourcekey="locDownloadChartAndPrintThroughWorkflowResource1"></asp:Localize></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
-                                                    <span>Download Chart</span>
+                                                    <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
+                                                        OnClick="lbtnDownloadChart_Click">
+                                                    <span><asp:Localize runat="server" Text="Download Chart" ID="locDownloadChart" 
+                                                        meta:resourcekey="locDownloadChartResource1"></asp:Localize>
+</span>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
@@ -111,7 +127,8 @@
                                     <div class="content">
                                         <div class="text collapsibleContainerTitle" style="float: left">
                                             <div id="imgHeader" class="expanded">&nbsp;</div>
-                                            Advanced Downloads
+                                            <asp:Localize Text="Advanced Downloads" runat="server" 
+                                                id="locAdvancedDownloads" meta:resourcekey="locAdvancedDownloadsResource1"></asp:Localize>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -128,7 +145,10 @@
                                                 <td>
                                                     <asp:LinkButton ID="lbtnDownloadDestinationICC" runat="server" CssClass="gray_bt"
                                                         OnClick="lbtnDownloadDestinationICC_Click">
-                                                    <span>Download Destination ICC</span>
+                                                    <span><asp:Localize runat="server" Text="Download Destination ICC" 
+                                                        ID="locDownloadDestinationICC" 
+                                                        meta:resourcekey="locDownloadDestinationICCResource1"></asp:Localize>
+</span>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>

@@ -456,6 +456,26 @@
     <Compile Include="ApplicationError.aspx.designer.cs">
       <DependentUpon>ApplicationError.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\RadFilter.Main.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadFilter.Main.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\RadGrid.Main.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadGrid.Main.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\RadGrid.Main.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadGrid.Main.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\RadGrid.Main.ja.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadGrid.Main.ja.resx</DependentUpon>
+    </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1249,6 +1269,10 @@
       <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
       <Name>FujifilmUSA.Sync.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.GlobalResources\FujifilmUSA.Sync.GlobalResources.csproj">
+      <Project>{E8BB8C58-8365-4FFD-8F1C-F37E9ACD8E50}</Project>
+      <Name>FujifilmUSA.Sync.GlobalResources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Presenter\FujifilmUSA.Sync.Presenter.csproj">
       <Project>{05EC147C-DCDC-4470-A7FD-7579E28735EC}</Project>
       <Name>FujifilmUSA.Sync.Presenter</Name>
@@ -1261,6 +1285,7 @@
     <Content Include="App_GlobalResources\ResourceMessages.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>ResourceMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -1280,13 +1305,587 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Login.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Login.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Login.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DeviceList.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DeviceList.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DeviceList.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\OperationSelection.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\OperationSelection.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\OperationSelection.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Footer.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Footer.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\Footer.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Header.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Header.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\Header.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\UserManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\SourceProfileManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\SessionEnd.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\ProjectMaxLimit.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ReferenceChartManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ReferenceChartManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\ReferenceChartManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProjectList.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProjectList.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\ProjectList.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Permission.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Permission.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\Permission.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementDeviceList.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementDeviceList.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\MeasurementDeviceList.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LicenseManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LicenseManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\LicenseManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectSetting.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectSetting.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectSetting.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\ApplicationError.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DeviceManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DeviceManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\DeviceManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\CompanyManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\RadFilter.Main.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadFilter.Main.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\RadGrid.Main.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadGrid.Main.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\RadGrid.Main.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadGrid.Main.de.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_GlobalResources\RadGrid.Main.ja.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>RadGrid.Main.ja.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\BranchManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\AddProject\App_LocalResources\MeasurementSetup.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\PreviewPrintCondition.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\PreviewPrintCondition.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\AddProject\App_LocalResources\PreviewPrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProjectDescription.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProjectDescription.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProjectDescription.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.de.resx" />
+    <Content Include="UserControl\AddProject\App_LocalResources\TargetColorSpace.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProfilerOptions.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProfilerOptions.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\AddProject\App_LocalResources\ProfilerOptions.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ConfirmSave.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ConfirmSave.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ConfirmSave.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ClosePrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.de.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupClosePrintCondition.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupClosePrintCondition.aspx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupClosePrintCondition.aspx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddSourceProfile.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddSourceProfile.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AddSourceProfile.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Analyze.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Analyze.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\Analyze.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\COTransferSiteControl.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\COTransferSiteControl.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\COTransferSiteControl.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Export.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\Export.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\Export.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectItem.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectItem.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenuProjectItem.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\LeftMenu.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\GlobalActivation.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\GlobalActivation.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\GlobalActivation.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommon.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommon.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\MeasurementCommon.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupOpenPrintCondition.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupOpenPrintCondition.aspx.de.resx" />
+    <Content Include="App_LocalResources\PopupOpenPrintCondition.aspx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupSaveProject.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupSaveProject.aspx.de.resx" />
+    <Content Include="App_LocalResources\PopupSaveProject.aspx.ja.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56067</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
@@ -1298,7 +1897,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

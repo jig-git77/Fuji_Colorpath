@@ -14,6 +14,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         private PresenterBranchManagement _presenterBranchManagement;
 
+        #region Private Variables - Globalization
+        private const string _recAddBranch = "addBranchText";
+        private const string _recEditBranch = "editBranchText";
+        private const string _recSelectRegionText = "selectRegionText";
+        #endregion
+
         #region Declaration
         private int BId
         {
@@ -36,12 +42,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (Page.IsPostBack) return;
 
-            lblHeader.Text = "Add Branch";
+            lblHeader.Text = GetResourceString(_recAddBranch);  //"Add Branch";
             BindRegionDropDown();
             if (Request.QueryString["BranchId"] != null)
             {
                 SetBranch(Convert.ToInt32(Request.QueryString["BranchId"]));
-                lblHeader.Text = "Edit Branch"; 
+                lblHeader.Text = GetResourceString(_recEditBranch); //"Edit Branch"; 
             }
 
         }
@@ -56,7 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbRegion.DataSource = RegionList;
                 cmbRegion.DataBind();
-                cmbRegion.Items.Insert(0, new ListItem("-- Select Region --", "0"));
+                cmbRegion.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), "0"));
             }
         }
 
@@ -71,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompanyName.DataValueField = "Key";
                 cmbCompanyName.DataSource = Companies;
                 cmbCompanyName.DataBind();
-                cmbCompanyName.Items.Insert(0, new ListItem("--Select--", string.Empty));
+                cmbCompanyName.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), string.Empty));
             }
         }
         private void SaveBranch()

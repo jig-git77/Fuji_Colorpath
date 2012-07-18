@@ -10,6 +10,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class SaveWindow : BaseControl, IViewSaveWindow
     {
         private PresenterSaveWindow _presenterSaveWindow;
+        private const string _recDownloadChartNotAvailable = "downloadChartNotAvailable";
+        private const string _recSaveAs = "saveAs";
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterSaveWindow = new PresenterSaveWindow(this);
@@ -24,7 +26,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
                 {
                     txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
-                    Page.Title = "Save As";
+                    Page.Title = GetResourceString(_recSaveAs);
                 }
             }
         }
@@ -69,12 +71,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (ChartPreview != null)
                         Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value), ".pdf");
                     else
-                        fujiStatusbar.DisplayMessage("Download chart is not available", true);
+                        fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
                 }
             }
             else
             {
-                fujiStatusbar.DisplayMessage("Download chart is not available", true);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
             }
         }
         #endregion

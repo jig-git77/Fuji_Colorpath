@@ -13,6 +13,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region "Declare Variable"
         private PresenterClosePrintCondition _presenterClosePrintCondition;
+        private const string _recprintOptionsText = "printOptionsText";
+        private const string _recoptimizeCompleteText = "optimizeCompleteText";
+        private const string _recnoDLPText = "noDLPText";
         #endregion
 
         #region "Event"
@@ -24,7 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                lblClosePrintConditionMessage.Text = string.Format("Options for \"{0}\" print condition", Request.QueryString["ProjectName"]);
+                lblClosePrintConditionMessage.Text = string.Format(GetResourceString(_recprintOptionsText), Request.QueryString["ProjectName"]);
                 
                 //----------------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
                 if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) == 3)
@@ -42,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured && Project != null)
                 {
                     ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = string.Format(
-                        "Once optimization is complete, apply {0} to workflow and reprint the {1} chart.",
+                        GetResourceString(_recoptimizeCompleteText),
                         Project.OptimizeRuns.Last().DlpName,
                         ((Project.OptimizeRuns != null)
                              ? Project.OptimizeRuns.Last().ReferenceChartType.Value
@@ -113,7 +116,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    fujiStatusbar.DisplayMessage("Sorry!There is no dlp to download", false);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recnoDLPText), false);
                 }
             }
         }

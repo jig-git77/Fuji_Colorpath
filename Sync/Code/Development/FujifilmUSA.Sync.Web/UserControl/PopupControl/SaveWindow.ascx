@@ -22,7 +22,7 @@
     <table cellpadding="0" cellspacing="10" width="100%">
         <tr>
             <td>
-                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </td>
         </tr>
         <tr>
@@ -37,8 +37,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div style="float: left;" class="text">
-                                        <label>
-                                            1. Name Print Condition</label>
+                                        <label><asp:Localize runat="server" Text="1. Name Print Condition" 
+                                            ID="locNamePrintCondition" meta:resourcekey="locNamePrintConditionResource1"></asp:Localize></label>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -49,15 +49,18 @@
                                     <tbody>
                                         <tr>
                                             <td style="width: 140px;">
-                                                <span>Print Condition Name:</span>
+                                                <span><asp:Localize runat="server" Text="Print Condition Name:" 
+                                                    ID="locPrintConditionName" meta:resourcekey="locPrintConditionNameResource1"></asp:Localize></span>
                                             </td>
                                             <td>
                                                 <div style="float: left;">
-                                                    <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px" MaxLength="30"></asp:TextBox>
+                                                    <asp:TextBox ID="txtProjectName" runat="server" Width="200px" Height="19px" 
+                                                        MaxLength="30" meta:resourcekey="txtProjectNameResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
-                                                        ControlToValidate="txtProjectName" ForeColor="Red" ValidationGroup="vgSaveWindows">
+                                                        ControlToValidate="txtProjectName" ForeColor="Red" 
+                                                        ValidationGroup="vgSaveWindows">
                                                         <ucValidationContainer:ValidationContainer ID="rfvProjectContainer" runat="server"
                                                             ValidationMsg="Please provide project name." Size="200" />
                                                     </asp:RequiredFieldValidator>
@@ -88,8 +91,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div style="float: left;" class="text">
-                                        <label>
-                                            2. Download Chart</label>
+                                        <label><asp:Localize runat="server" Text="2. Download Chart" 
+                                            ID="locDownloadChart" meta:resourcekey="locDownloadChartResource1"></asp:Localize></label>
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -100,14 +103,18 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <span>Download chart and print chart through a workflow that has no colormanagement
-                                                    applied :</span>
+                                                <span><asp:Localize runat="server" 
+                                                    Text="Download chart and print chart through a workflow that has no colormanagement applied :" 
+                                                    meta:resourcekey="LocalizeResource1"></asp:Localize></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" OnClick="lbtnDownloadChart_Click">
-                                        <span>Download Chart</span>
+                                                <asp:LinkButton ID="lbtnDownloadChart" runat="server" CssClass="gray_bt" 
+                                                    OnClick="lbtnDownloadChart_Click">
+                                        <span><asp:Localize runat="server" Text="Download Chart" ID="locDownloadChartButton" 
+                                                    meta:resourcekey="locDownloadChartButtonResource1"></asp:Localize>
+</span>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -128,14 +135,17 @@
                 <div class="buttonright" style="padding-left: 3px">
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: Close();"
                         CssClass="gray_bt">
-                                        <span>
-                                            Cancel </span>
+                                        <span> <asp:Localize runat="server" ID="locCancel" 
+                        Text="Cancel" meta:resourcekey="locCancelResource1"></asp:Localize> 
+ </span>
                     </asp:LinkButton>
                 </div>
                 <div class="buttonright">
                     <asp:LinkButton ID="lbtnSave" runat="server" ValidationGroup="vgSaveWindows" CssClass="gray_bt"
                         OnClick="lbtnSave_Click">
-                    <span> Save </span>
+                    <span> <asp:Localize runat="server" Text="Save" 
+                        meta:resourcekey="LocalizeResource2"></asp:Localize> 
+ </span>
                     </asp:LinkButton>
                 </div>
                 <div class="clear">

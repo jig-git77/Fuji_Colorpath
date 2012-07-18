@@ -81,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                ctrlItem.ItemName = "Home";
+                ctrlItem.ItemName = GetResourceString("homeText");//"Home"
             }
             ctrlItem.ID = "_Home";
             ph.Controls.Add(ctrlItem);
@@ -109,7 +109,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                     ctrlItem.ItemLevel = ELeftMenuItemLevel.ProjectSetup;
                     ctrlItem.ItemName = string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName)
-                                            ? "New Print Condition"
+                                            ? GetResourceString("newPrintConditionText")
                                             : SessionManager.Instance.CurrentProject.ProjectName;
                     ph.Controls.Add(ctrlItem);
                     ph.Controls.Add(this.LoadControl("~/UserControl/LeftMenuProjectSetting.ascx"));

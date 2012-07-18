@@ -14,6 +14,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
     {
         #region Variable Declarations
         private PresenterForgotPassword _presenterForgotPassword;
+        private const string _recloginIdNotExistsText = "loginIdNotExistsText";
+        private const string _recemailSentText = "emailSentText";
         #endregion
 
         #region Page Events
@@ -26,15 +28,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         #region Control Events
         protected void lbtnRetrievePassword_Click(object sender, EventArgs e)
         {
-            ResetPasswordInfo = new User() {LoginId = txtUserName.Text.Trim()};
+            ResetPasswordInfo = new User() { LoginId = txtUserName.Text.Trim() };
             _presenterForgotPassword.UpdatePreResetPasswordInformation();
-            if(string.IsNullOrEmpty(ResetPasswordInfo.Email))
+            if (string.IsNullOrEmpty(ResetPasswordInfo.Email))
             {
-                fujiStatusbar.DisplayMessage("LoginId not exists", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recloginIdNotExistsText), false);
             }
             else
             {
-                fujiStatusbar.DisplayMessage("Email has been sent!", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recemailSentText), false);
             }
         }
         #endregion

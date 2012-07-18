@@ -10,21 +10,21 @@ using System.Web.UI.WebControls;
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class OperationSelection : BaseControl
-    {       
+    {
         #region "Page Events"
-       
+
         protected void Page_Load(object sender, EventArgs e)
         {
-         if (!IsPostBack)
+            if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
-                lblDeviceName.Text = SessionManager.Instance.CurrentDevice.DeviceName;           
+                lblDeviceName.Text = SessionManager.Instance.CurrentDevice.DeviceName;
 
                 spanAligmentCurves.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
                 spanDLPOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
                 spanInkOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
                 spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
-                spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);
+                spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);                
 
                 if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
                 {
@@ -76,9 +76,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Control Events
         protected void lbtn_Click(object sender, EventArgs e)
-        {           
+        {
             if (!IsErrorOccured)
-            {             
+            {
                 var lnkButton = (LinkButton)sender;
                 switch (lnkButton.ID.ToUpper())
                 {
@@ -102,13 +102,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentOperation = ELicenseType.IccProfiling;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ICCProfiling.Value);
                         break;
-                }              
+                }
                 Response.RedirectPermanent("~/ProjectList.aspx");
             }
         }
 
         #endregion
-     
+
     }
 }
 

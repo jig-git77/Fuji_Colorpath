@@ -22,6 +22,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             base.OnLoad(e);
         }
+
+        public string GetResourceString(string key, bool IsGlobal = false)
+        {
+            if (!IsGlobal)                                   
+                return (GetLocalResourceObject(key) as string);
+            return key;
+        }   
+        
         #region IViewBase Members
 
         public int CurrentUserId { get; set; }

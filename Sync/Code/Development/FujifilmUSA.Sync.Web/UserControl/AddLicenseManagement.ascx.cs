@@ -12,6 +12,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AddLicenseManagement : BaseControl, IViewAddLicenseManagement
     {
+        #region Private Variables - Globalization
+        private const string _recAddLicense = "lblHeaderResource1.Text";
+        private const string _recEditLicense = "editLicenseText";
+        private const string _recSelectCompany = "selectCompanyText";
+        private const string _recSelectBranch = "selectBranchText";
+        private const string _recPlzSelectCompany = "plzSelectCompany";
+        private const string _recPlzSelectBranch = "plzSelectBranch";
+        private const string _recPlzSelectLicenseType = "plzSelectLicenseType";
+        #endregion
+
         #region Declaration
         private PresenterLicenseManagement _presenterLicenseManagement;
         private int LId
@@ -37,10 +47,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Bindcompany();
             BindLicenseType();
             BindBranch();
-            lblHeader.Text = "Add License";
+            lblHeader.Text = GetResourceString(_recAddLicense); //"Add License";
             if (Request.QueryString["LicenseId"] != null)
             {
-                lblHeader.Text = "Edit License";
+                lblHeader.Text = GetResourceString(_recEditLicense);  //"Edit License";
                 SetLicense(Convert.ToInt32(Request.QueryString["LicenseID"]));
             }
         }
@@ -65,7 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.DataValueField = "Key";
                 cmbCompany.DataSource = Compnaies;
                 cmbCompany.DataBind();
-                cmbCompany.Items.Insert(0, new ListItem("--Select Company--", string.Empty));
+                cmbCompany.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompany), string.Empty));//--Select Company--
             }
         }
         private void BindBranch()
@@ -85,24 +95,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     cmbBranch.DataBind();
                 }
             }
-            cmbBranch.Items.Insert(0, new ListItem("--Select Branch--", string.Empty));
+            cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recSelectBranch), string.Empty));//--Select Branch--
         }
 
         private void SaveDevice()
         {
             if (cmbCompany.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select company.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectCompany), false);//Please select company.
                 return;
             }
             if (cmbBranch.SelectedIndex == 0)
             {
-                fujiStatusbar.DisplayMessage("Please select branch.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
             if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkVarification.Checked)
             {
-                fujiStatusbar.DisplayMessage("Please select any one license type.", false);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
             }
 
@@ -149,7 +159,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompany.SelectedValue = License.Branch.CompanyId.ToString();
                 BindBranch();
                 cmbBranch.SelectedValue = License.BranchId.ToString();
-                License.LicenseType.ForEach(x=>
+                License.LicenseType.ForEach(x =>
                                                 {
                                                     switch (x)
                                                     {
@@ -168,8 +178,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                     }
                                                 });
                 txtLicenseDescription.Text = License.LicenseDesc;
-                txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("MM/dd/yyyy");
-                txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("MM/dd/yyyy");
+                txtActivationDate.Text = Convert.ToDateTime(License.ActivationDate).ToString("d");
+                txtExpirationDate.Text = Convert.ToDateTime(License.ExpirationDate).ToString("d");
                 chkIsActive.Checked = License.IsActive;
             }
         }

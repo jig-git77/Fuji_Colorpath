@@ -36,7 +36,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <div style="padding-bottom: 3px;">
-                <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -47,7 +47,8 @@
             <div class="header">
                 <div class="content">
                     <div class="text" style="float: left">
-                        Are you satisfied with the results?
+                        <asp:Localize runat="server" Text="Are you satisfied with the results?" 
+                            ID="locSatisfiedMsg" meta:resourcekey="locSatisfiedMsgResource1"></asp:Localize>
                     </div>
                     <div class="text" style="float: right">
                         <div class="buttonright" style="padding-left: 3px">
@@ -55,14 +56,19 @@
                                 <ContentTemplate>
                                     <asp:LinkButton ID="lbtnOptimize" runat="server" CssClass="gray_bt" OnClick="lbtnOptimize_Click"
                                         OnClientClick="javascript: return CheckOptRunLimit();">
-                                                <span> No, Optimize </span>
+                                                <span> <asp:Localize runat="server" Text="No, Optimize" 
+                                        ID="locNoOptimize" meta:resourcekey="locNoOptimizeResource1"></asp:Localize>
+ </span>
                                     </asp:LinkButton>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
                         <div class="buttonright">
-                            <asp:LinkButton ID="lbtnYes" runat="server" CssClass="gray_bt" OnClick="lbtnYes_Click">
-                <span> Yes, Certify </span>
+                            <asp:LinkButton ID="lbtnYes" runat="server" CssClass="gray_bt" 
+                                OnClick="lbtnYes_Click">
+                <span> <asp:Localize runat="server" Text="Yes, Certify" ID="locYesCertify" 
+                                meta:resourcekey="locYesCertifyResource1"></asp:Localize> 
+ </span>
                             </asp:LinkButton>
                         </div>
                     </div>
@@ -75,22 +81,29 @@
                     <table cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="font-weight: bold;">
-                                Certify:&nbsp;
+                                <asp:Localize runat="server" Text="Certify:" ID="locCertify" 
+                                    meta:resourcekey="locCertifyResource1"></asp:Localize>&nbsp;
                             </td>
                             <td>
                                 <p style="padding-top: 7px;">
-                                    Certify sets the state of this DLP to Certified and is considered a confirmation
-                                    that your are satisfied with the colormatch.
+                                    <asp:Localize runat="server" 
+                                        Text="Certify sets the state of this DLP to Certified and is considered a confirmation that your are satisfied with the colormatch." 
+                                        ID="locSatisfiedColorMatchMsg" 
+                                        meta:resourcekey="locSatisfiedColorMatchMsgResource1"></asp:Localize>
+                                    
                                 </p>
                             </td>
                         </tr>
                         <tr>
                             <td style="font-weight: bold;">
-                                Optimize:&nbsp;
+                                <asp:Localize runat="server" Text="Optimize:" ID="locOptimize" 
+                                    meta:resourcekey="locOptimizeResource1"></asp:Localize>&nbsp;
                             </td>
                             <td>
                                 <p style="padding-top: 7px;">
-                                    Optimize creates new optimized DLP which should be implemented in your workflow.
+                                    <asp:Localize runat="server" 
+                                        Text="Optimize creates new optimized DLP which should be implemented in your workflow." 
+                                        ID="locOptimizeDLP" meta:resourcekey="locOptimizeDLPResource1"></asp:Localize>
                                 </p>
                             </td>
                         </tr>
@@ -99,8 +112,9 @@
                 <div class="buttonright" style="padding-left: 3px">
                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseConfirmSaveWindow(); return true;"
                         CssClass="gray_bt">
-                                        <span>
-                                            Cancel </span>
+                                        <span> <asp:Localize runat="server" Text="Cancel" 
+                        ID="locCancel" meta:resourcekey="locCancelResource1"></asp:Localize> 
+ </span>
                     </asp:LinkButton>
                 </div>
                 <div class="clear">
@@ -114,16 +128,16 @@
     <div class="section_bottom">
         &nbsp;</div>
 </div>
-<asp:UpdateProgress ID="updateProgress" runat="server" DynamicLayout="true" AssociatedUpdatePanelID="upOptimize"
+<asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upOptimize"
     DisplayAfter="50">
     <ProgressTemplate>
-        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Left"
-            VerticalSide="Top" TargetControlID="updateProgress" runat="server">
+        <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" 
+            TargetControlID="updateProgress" runat="server" Enabled="True">
         </AjaxToolkit:AlwaysVisibleControlExtender>
         <div class="UpdateProgressBackgroundWithNoOpacity" style="position: fixed; left: 0px;
             top: 0px; z-index: 1000; width: 100%; height: 100%;" unselectable="on">
             <div style="margin: 10px 0px 10px 3px;">
-                <uc:CreateDLP runat="server" ID="ucCreateDLP" DLPMessage='<%# DLPMessage %>' />
+                <uc:CreateDLP runat="server" ID="ucCreateDLP" />
             </div>
         </div>
     </ProgressTemplate>

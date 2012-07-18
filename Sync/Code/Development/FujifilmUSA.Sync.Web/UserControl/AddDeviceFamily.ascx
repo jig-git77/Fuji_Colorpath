@@ -7,8 +7,8 @@
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
     <div class="head">
-        <h1>
-            Device Management</h1>
+        <h1><asp:Localize ID="locDeviceManagement" runat="server" Text="Device Management" 
+                meta:resourcekey="locDeviceManagementResource1"></asp:Localize></h1>
     </div>
     <div class="clear">
     </div>
@@ -18,13 +18,17 @@
                 <center>
                     <fieldset style="width: 60%;">
                         <legend style="margin-left: 42% !important;">
-                            <asp:Label ID="lblHeader" runat="server" Text="Add Device Family"></asp:Label>
+                            <asp:Label ID="lblHeader" runat="server" Text="Add Device Family" 
+                                meta:resourcekey="lblHeaderResource1"></asp:Label>
                         </legend>
-                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" Visible="false" />
+                        <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
+                            Visible="False" />
                         <table>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Device Family Name<span style="color: Red;">*</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Device Family Name" 
+                                        ID="locDeviceFamilyName" runat="server" 
+                                        meta:resourcekey="locDeviceFamilyNameResource1"></asp:Localize><span style="color: Red;">*</span>
                                     </span>
                                 </td>
                                 <td>
@@ -32,12 +36,13 @@
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:TextBox ID="txtDeviceFamilyName" runat="server" MaxLength="25" Width="400px"
-                                            Height="19px"></asp:TextBox>
+                                        <asp:TextBox ID="txtDeviceFamilyName" runat="server" MaxLength="25" Width="370px"
+                                            Height="19px" meta:resourcekey="txtDeviceFamilyNameResource1"></asp:TextBox>
                                     </div>
                                     <div style="float: left">
                                         <asp:RequiredFieldValidator ID="rfvDeviceFamilyName" runat="server" Display="Dynamic"
-                                            ControlToValidate="txtDeviceFamilyName" ForeColor="Red" ValidationGroup="vgAddDeviceFamily">
+                                            ControlToValidate="txtDeviceFamilyName" ForeColor="Red" 
+                                            ValidationGroup="vgAddDeviceFamily">
                                             <ucValidationContainer:ValidationContainer ID="Validationcontainer1" runat="server"
                                                 ValidationMsg="Please provide device family name." Size="225" />
                                         </asp:RequiredFieldValidator>
@@ -48,14 +53,16 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;">Is Active?</span>
+                                    <span style="font-weight: bold;"><asp:Localize Text="Is Active?" runat="server" 
+                                        ID="locIsActive" meta:resourcekey="locIsActiveResource1"></asp:Localize></span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
                                 </td>
                                 <td>
                                     <div style="float: left;">
-                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="true" />
+                                        <asp:CheckBox ID="chkIsActive" runat="server" Checked="True" 
+                                            meta:resourcekey="chkIsActiveResource1" />
                                     </div>
                                     <div class="clear">
                                     </div>
@@ -71,10 +78,15 @@
                                         <div style="padding-left: 3px;">
                                             <asp:LinkButton ID="lbtnSave" runat="server" CssClass="gray_bt" ValidationGroup="vgAddDeviceFamily"
                                                 OnClick="lbtnSave_Click">
-                                                    <span> Save </span>
+                                                    <span> <asp:Localize Text="Save" runat="server" ID="locSave" 
+                                                meta:resourcekey="locSaveResource1"></asp:Localize> 
+ </span>
                                             </asp:LinkButton>
-                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" PostBackUrl="~/DeviceManagement.aspx">
-                                                    <span> Cancel </span>
+                                            <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
+                                                PostBackUrl="~/DeviceManagement.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" ID="locCancel" 
+                                                meta:resourcekey="locCancelResource1"></asp:Localize> 
+ </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

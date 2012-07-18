@@ -45,24 +45,35 @@
     });
 </script>
 <div class="head">
-    <h1 id="hTitle" runat="server">
-        New Print Condition - Profiler Options
+    <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
+            Text="New Print Condition - Profiler Options" Id="locNewPrintCondition" 
+            meta:resourcekey="locNewPrintConditionResource1"></asp:Localize>
     </h1>
-    <asp:LinkButton ID="lnkbtnProfilerOptions" runat="server" CssClass="button" OnClick="lnkbtnProfilerOptions_Click">
+    <asp:LinkButton ID="lnkbtnProfilerOptions" runat="server" CssClass="button" 
+        OnClick="lnkbtnProfilerOptions_Click">
         <span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" />
-            Measurement Setup</span></asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnTargetColorSpace" runat="server" CssClass="buttonLeft" OnClick="lnkbtnTargetColorSpace_Click">
+            <asp:Image ID="Image1" runat="server" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image1Resource1" />
+            
+<asp:Localize runat="server" Text="Measurement Setup" ID="locMeasurementSetup" 
+        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+</span></asp:LinkButton>
+    <asp:LinkButton ID="lnkbtnTargetColorSpace" runat="server" 
+        CssClass="buttonLeft" OnClick="lnkbtnTargetColorSpace_Click">
         <span>
-            <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/new_project_icon.png" />
-            Target ColorSpace</span></asp:LinkButton>
+            <asp:Image ID="imgAdd" runat="server" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+            
+<asp:Localize runat="server" Text="Target ColorSpace" ID="locTargetColorSpace" 
+        meta:resourcekey="locTargetColorSpaceResource1"></asp:Localize>
+</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
     </div>
 </div>
 <div class="listDevice" style="margin-left: 10px;">
-    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="false" />
+    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     <table cellpadding="0" cellspacing="10" border="0" width="97%">
         <tr id="trListHeader" runat="server">
             <td>
@@ -74,7 +85,8 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left;">
-                                        <span>Options Presets</span>
+                                        <span><asp:Localize runat="server" Text="Options Presets" 
+                                            ID="locOptionsPresets" meta:resourcekey="locOptionsPresetsResource1"></asp:Localize></span>
                                     </div>
                                     <div style="float: right">
                                         <%--  <asp:LinkButton ID="lbtnMeasurementSetup" runat="server" CssClass="gray_bt" OnClick="lbtnMeasurementSetup_Click">
@@ -85,27 +97,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <asp:Panel ID="panelAddProjectDescription" Style="padding: 5px" runat="server" BorderStyle="None">
+                            <asp:Panel ID="panelAddProjectDescription" Style="padding: 5px" runat="server" 
+                                BorderStyle="None" meta:resourcekey="panelAddProjectDescriptionResource1">
                                 <table>
                                     <tr>
                                         <td style="width: 100px">
-                                            <span>Selected Presets:</span>
+                                            <span><asp:Localize runat="server" Text="Selected Presets:" 
+                                                ID="locSelectedPresets" meta:resourcekey="locSelectedPresetsResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 450px">
                                             <asp:DropDownList ID="cmbSelectedPresets" runat="server" CssClass="select" DataValueField="Key"
-                                                DataTextField="Value" AutoPostBack="true" OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged">
+                                                DataTextField="Value" AutoPostBack="True" 
+                                                OnSelectedIndexChanged="cmbSelectedPresets_SelectedIndexChanged" 
+                                                meta:resourcekey="cmbSelectedPresetsResource1">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td valign="top" colspan="2">
-                                            <span>Preset Description:</span>
+                                            <span><asp:Localize runat="server" Text="Preset Description:" 
+                                                ID="locPresetDescription" meta:resourcekey="locPresetDescriptionResource1"></asp:Localize></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
                                             <asp:TextBox ID="txtProfileDescription" runat="server" Width="120%" Height="100px"
-                                                TextMode="MultiLine" Enabled="false" ReadOnly="true" Text="This preset is best used for analog devices ……"></asp:TextBox>
+                                                TextMode="MultiLine" Enabled="False" ReadOnly="True" 
+                                                Text="This preset is best used for analog devices ……" 
+                                                meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -135,7 +154,8 @@
                                             <div id="imgHeader" class="expanded">
                                                 &nbsp;</div>
                                             <label class="collapsibleContainerTitle">
-                                                Advanced Options</label>
+                                                <asp:Localize runat="server" Text="Advanced Options" 
+                                                ID="locAdvancedOptions" meta:resourcekey="locAdvancedOptionsResource1"></asp:Localize></label>
                                         </div>
                                         <div class="clear">
                                         </div>
@@ -143,7 +163,8 @@
                                 </div>
                             </div>
                             <asp:Panel ID="panelAdvancedOptions" Style="padding: 1px" runat="server" BorderStyle="None"
-                                Width="100%" Enabled="false">
+                                Width="100%" Enabled="False" 
+                                meta:resourcekey="panelAdvancedOptionsResource1">
                                 <table cellpadding="0" cellspacing="10" border="0">
                                     <tr>
                                         <td valign="top" style="width: 320px; padding-right: 0px;">
@@ -155,8 +176,8 @@
                                                         <div class="header">
                                                             <div class="content">
                                                                 <div class="text" style="float: left">
-                                                                    <label>
-                                                                        Rendering</label>
+                                                                    <label><asp:Localize runat="server" Text="Rendering" ID="locRendering1" 
+                                                                        meta:resourcekey="locRendering1Resource1"></asp:Localize></label>
                                                                 </div>
                                                                 <div style="float: right">
                                                                 </div>
@@ -168,10 +189,12 @@
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <span>Rendering:&nbsp; </span>&nbsp;
+                                                                        <span><asp:Localize runat="server" ID="locRendering2" Text="Rendering:" 
+                                                                            meta:resourcekey="locRendering2Resource1"></asp:Localize>&nbsp; </span>&nbsp;
                                                                     </td>
                                                                     <td>
-                                                                        <asp:DropDownList runat="server" ID="cmbRendering">
+                                                                        <asp:DropDownList runat="server" ID="cmbRendering" 
+                                                                            meta:resourcekey="cmbRenderingResource1">
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                 </tr>
@@ -192,8 +215,8 @@
                                                         <div class="header">
                                                             <div class="content">
                                                                 <div class="text" style="float: left">
-                                                                    <label>
-                                                                        Black - Generation</label>
+                                                                    <label><asp:Localize runat="server" Text="Black - Generation" 
+                                                                        ID="locBlackGeneration" meta:resourcekey="locBlackGenerationResource1"></asp:Localize></label>
                                                                 </div>
                                                                 <div style="float: right">
                                                                 </div>
@@ -205,59 +228,73 @@
                                                             <table width="100%">
                                                                 <tr>
                                                                     <td class="style4">
-                                                                        <span>GCR:</span>
+                                                                        <span><asp:Localize runat="server" Text="GCR:" ID="locGCR" 
+                                                                            meta:resourcekey="locGCRResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
                                                                         <telerik:RadSlider runat="server" ID="rdsMode" MinimumValue="-100" MaximumValue="10"
-                                                                            Width="160px">
+                                                                            Width="160px" DbValue="-100" Height="22px" Length="160" 
+                                                                            meta:resourcekey="rdsModeResource1" SelectionEnd="-100" SelectionStart="-100" 
+                                                                            Value="-100">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtMode" Width="30px"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtMode" Width="30px" 
+                                                                            meta:resourcekey="txtModeResource1"></asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style4">
-                                                                        <span>Black-Start:</span>
+                                                                        <span><asp:Localize runat="server" Text="Black-Start:" ID="locBlackStart" 
+                                                                            meta:resourcekey="locBlackStartResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <telerik:RadSlider runat="server" ID="rdsBlackStart" MinimumValue="0" MaximumValue="100"
-                                                                            Width="160px">
+                                                                        <telerik:RadSlider runat="server" ID="rdsBlackStart"
+                                                                            Width="160px" DbValue="0" Height="22px" Length="160" 
+                                                                            meta:resourcekey="rdsBlackStartResource1">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtBlackStart" Width="30px"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtBlackStart" Width="30px" 
+                                                                            meta:resourcekey="txtBlackStartResource1"></asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style4">
-                                                                        <span>Black-Width:</span>
+                                                                        <span><asp:Localize runat="server" Text="Black-Width:" ID="locBlackWidth" 
+                                                                            meta:resourcekey="locBlackWidthResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <telerik:RadSlider runat="server" ID="rdsBlackWidth" MinimumValue="0" MaximumValue="100"
-                                                                            Width="160px">
+                                                                        <telerik:RadSlider runat="server" ID="rdsBlackWidth"
+                                                                            Width="160px" DbValue="0" Height="22px" Length="160" 
+                                                                            meta:resourcekey="rdsBlackWidthResource1">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtBlackWidth" Width="30px"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtBlackWidth" Width="30px" 
+                                                                            meta:resourcekey="txtBlackWidthResource1"></asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style4">
-                                                                        <span>Max-Ink:</span>
+                                                                        <span><asp:Localize runat="server" Text="Max-Ink:" ID="locMaxInk" 
+                                                                            meta:resourcekey="locMaxInkResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <asp:TextBox runat="server" ID="txtMaxInk" Width="70px"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtMaxInk" Width="70px" 
+                                                                            meta:resourcekey="txtMaxInkResource1"></asp:TextBox>
                                                                     </td>
                                                                     <td>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style4">
-                                                                        <span>Custom:</span>
+                                                                        <span><asp:Localize runat="server" Text="Custom:" ID="locCustom" 
+                                                                            meta:resourcekey="locCustomResource1"></asp:Localize></span>
                                                                     </td>
                                                                     <td style="width: 160px;">
-                                                                        <asp:TextBox runat="server" ID="txtBlackPointCustom" Width="150px"></asp:TextBox>
+                                                                        <asp:TextBox runat="server" ID="txtBlackPointCustom" Width="150px" 
+                                                                            meta:resourcekey="txtBlackPointCustomResource1"></asp:TextBox>
                                                                     </td>
                                                                     <td>
                                                                     </td>
@@ -281,8 +318,9 @@
                                                         <div class="header">
                                                             <div class="content">
                                                                 <div class="text" style="float: left">
-                                                                    <label>
-                                                                        Exceptions</label>
+                                                                    <label><asp:Localize runat="server" Text="Exceptions" ID="locExceptions" 
+                                                                        meta:resourcekey="locExceptionsResource1"></asp:Localize>
+                                                                        </label>
                                                                 </div>
                                                                 <div style="float: right">
                                                                 </div>
@@ -294,76 +332,96 @@
                                                             <table width="100%" class="checkboxFont" cellpadding="0" cellspacing="0">
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox ID="chkTriplex" runat="server" Text="  Triplex" />
+                                                                        <asp:CheckBox ID="chkTriplex" runat="server" Text="  Triplex" 
+                                                                            meta:resourcekey="chkTriplexResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chkDuplex" Text="  Duplex" />
+                                                                        <asp:CheckBox runat="server" ID="chkDuplex" Text="  Duplex" 
+                                                                            meta:resourcekey="chkDuplexResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox runat="server" ID="chkGray" Text="  Gray" />
+                                                                        <asp:CheckBox runat="server" ID="chkGray" Text="  Gray" 
+                                                                            meta:resourcekey="chkGrayResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chk100Black" Text="  100% Black" />
+                                                                        <asp:CheckBox runat="server" ID="chk100Black" Text="  100% Black" 
+                                                                            meta:resourcekey="chk100BlackResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox runat="server" ID="chk100CMY" Text="  100% C,M,Y" />
+                                                                        <asp:CheckBox runat="server" ID="chk100CMY" Text="  100% C,M,Y" 
+                                                                            meta:resourcekey="chk100CMYResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chk100RGB" Text="  100% R,G,B" />
+                                                                        <asp:CheckBox runat="server" ID="chk100RGB" Text="  100% R,G,B" 
+                                                                            meta:resourcekey="chk100RGBResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox runat="server" ID="chkMaxCMY" Text="  Max. C,M,Y" />
+                                                                        <asp:CheckBox runat="server" ID="chkMaxCMY" Text="  Max. C,M,Y" 
+                                                                            meta:resourcekey="chkMaxCMYResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chkMaxRGB" Text="  Max. R,G,B" />
+                                                                        <asp:CheckBox runat="server" ID="chkMaxRGB" Text="  Max. R,G,B" 
+                                                                            meta:resourcekey="chkMaxRGBResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1" colspan="2">
-                                                                        <asp:CheckBox ID="chkPrimaries" runat="server" Text="  Primaries" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style1" colspan="2">
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <asp:CheckBox ID="chkPC" runat="server" Text="  C" />
-                                                                        <asp:CheckBox ID="chkPM" runat="server" Text="  M" />
-                                                                        <asp:CheckBox ID="chkPY" runat="server" Text="  Y" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="style1" colspan="2">
-                                                                        <asp:CheckBox ID="chkSecondaries" runat="server" Text="  Secondaries" />
+                                                                        <asp:CheckBox ID="chkPrimaries" runat="server" Text="  Primaries" 
+                                                                            meta:resourcekey="chkPrimariesResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1" colspan="2">
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <asp:CheckBox ID="chkSMY" runat="server" Text="  MY" />
-                                                                        <asp:CheckBox ID="chkSCY" runat="server" Text="  CY" />
-                                                                        <asp:CheckBox ID="chkSCM" runat="server" Text="  CM" />
+                                                                        <asp:CheckBox ID="chkPC" runat="server" Text="  C" 
+                                                                            meta:resourcekey="chkPCResource1" />
+                                                                        <asp:CheckBox ID="chkPM" runat="server" Text="  M" 
+                                                                            meta:resourcekey="chkPMResource1" />
+                                                                        <asp:CheckBox ID="chkPY" runat="server" Text="  Y" 
+                                                                            meta:resourcekey="chkPYResource1" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="style1" colspan="2">
+                                                                        <asp:CheckBox ID="chkSecondaries" runat="server" Text="  Secondaries" 
+                                                                            meta:resourcekey="chkSecondariesResource1" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="style1" colspan="2">
+                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <asp:CheckBox ID="chkSMY" runat="server" Text="  MY" 
+                                                                            meta:resourcekey="chkSMYResource1" />
+                                                                        <asp:CheckBox ID="chkSCY" runat="server" Text="  CY" 
+                                                                            meta:resourcekey="chkSCYResource1" />
+                                                                        <asp:CheckBox ID="chkSCM" runat="server" Text="  CM" 
+                                                                            meta:resourcekey="chkSCMResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox runat="server" ID="chkBlackOverPrint" Text="  Black Overprint" />
+                                                                        <asp:CheckBox runat="server" ID="chkBlackOverPrint" Text="  Black Overprint" 
+                                                                            meta:resourcekey="chkBlackOverPrintResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chkBorderClipping" Text="  Border Clipping" />
+                                                                        <asp:CheckBox runat="server" ID="chkBorderClipping" Text="  Border Clipping" 
+                                                                            meta:resourcekey="chkBorderClippingResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="style1">
-                                                                        <asp:CheckBox runat="server" ID="chkWhite" Text="  White" />
+                                                                        <asp:CheckBox runat="server" ID="chkWhite" Text="  White" 
+                                                                            meta:resourcekey="chkWhiteResource1" />
                                                                     </td>
                                                                     <td>
-                                                                        <asp:CheckBox runat="server" ID="chk400Black" Text="  400% Black" />
+                                                                        <asp:CheckBox runat="server" ID="chk400Black" Text="  400% Black" 
+                                                                            meta:resourcekey="chk400BlackResource1" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -371,19 +429,20 @@
                                                                         <table cellpadding="0" cellspacing="0" width="98%">
                                                                             <tr>
                                                                                 <td colspan="3" valign="top">
-                                                                                    <%--<img src="../../Images/section_line_bg.png" width="300px" height="1px" />--%>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td>
-                                                                                    Range:&nbsp;
+                                                                                <td><asp:Localize runat="server" Text="Range:" ID="locRange" 
+                                                                                        meta:resourcekey="locRangeResource1"></asp:Localize>&nbsp;
                                                                                 </td>
                                                                                 <td>
-                                                                                    <telerik:RadSlider runat="server" ID="rdsRange" MinimumValue="0" MaximumValue="100">
+                                                                                    <telerik:RadSlider runat="server" ID="rdsRange" DbValue="0" Height="22px" 
+                                                                                        Length="200" meta:resourcekey="rdsRangeResource1" Width="200px">
                                                                                     </telerik:RadSlider>
                                                                                 </td>
                                                                                 <td>
-                                                                                    <asp:TextBox runat="server" ID="txtRange" Width="30px"></asp:TextBox>
+                                                                                    <asp:TextBox runat="server" ID="txtRange" Width="30px" 
+                                                                                        meta:resourcekey="txtRangeResource1"></asp:TextBox>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>

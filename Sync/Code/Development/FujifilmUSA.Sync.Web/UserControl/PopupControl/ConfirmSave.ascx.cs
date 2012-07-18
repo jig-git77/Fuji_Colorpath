@@ -13,6 +13,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ConfirmSave : BaseControl, IViewConfirmSave
     {
+        #region Private variables - Globalization
+        private const string _recDLPText = "dlpText";
+        private const string _recOptimizeCompleteMsg = "optimizeCompleteMsg";
+        #endregion
+
         private PresenterConfirmSave _presenterConfirmSave;
         public DateTime EndDate;
 
@@ -20,11 +25,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                string DLPName = Hidden_ProjectName.Value + " DLP" + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
+                string DLPName = Hidden_ProjectName.Value + " " + GetResourceString(_recDLPText)  + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(
-                            "Once optimization is complete, apply {0} to workflow and reprint the {1} chart.",
+                            GetResourceString(_recOptimizeCompleteMsg),
                             DLPName,
                             SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value)
                         : string.Empty;
@@ -94,7 +99,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 EndDate = System.DateTime.Now;
-                ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " DLP" + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
 
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
