@@ -151,7 +151,7 @@
     <value>Clear Fillter</value>
   </data>
   <data name="lbtnProfileResource1.ToolTip" xml:space="preserve">
-    <value>Download source profile</value>
+    <value>Download Source Profile</value>
   </data>
   <data name="locAddSourceProfileResource1.Text" xml:space="preserve">
     <value>Add Source Profile</value>

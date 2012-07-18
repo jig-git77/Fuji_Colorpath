@@ -118,12 +118,12 @@
                     <td style="width: 200px">
                         <asp:LinkButton ID="lbtnReport" runat="server"><h1><asp:Localize ID="locReport" 
                                 runat="server" Text="Report" meta:resourcekey="locReportResource1"></asp:Localize>
-</h1></asp:LinkButton>
+                            </h1></asp:LinkButton>
                     </td>
                     <td style="width: 50px">
                         <asp:LinkButton ID="LinkButton1" runat="server"><h1><asp:Localize ID="locHelp" 
                                 runat="server" Text="Help" meta:resourcekey="locHelpResource1"></asp:Localize>
-</h1></asp:LinkButton>
+                            </h1></asp:LinkButton>
                     </td>
                 </tr>
             </table>

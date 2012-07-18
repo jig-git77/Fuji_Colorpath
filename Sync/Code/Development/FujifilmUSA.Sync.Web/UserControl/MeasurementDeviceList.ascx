@@ -120,15 +120,15 @@
                 HeaderStyle-Font-Bold="true" CellSpacing="0" GridLines="None">
                 <GroupingSettings CaseSensitive="false" />
 
-<HeaderStyle Font-Bold="True"></HeaderStyle>
+                <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                 <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                 <MasterTableView DataKeyNames="MeasurementDeviceId">
-<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+                <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
 
-<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+                <RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
 
-<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
+                <ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                     <Columns>
                         <telerik:GridTemplateColumn 
                             UniqueName="CompanyName" AllowFiltering="true" HeaderText="Company Name" 
@@ -142,9 +142,9 @@
                                     meta:resourcekey="lblCompanyNameResource1" />
                             </ItemTemplate>
 
-<HeaderStyle Width="120px"></HeaderStyle>
+                        <HeaderStyle Width="120px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
+                        <ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
                             UniqueName="BranchName" AllowFiltering="true" HeaderText="Branch Name" 
@@ -158,9 +158,9 @@
                                     meta:resourcekey="lblBranchNameResource1" />
                             </ItemTemplate>
 
-<HeaderStyle Width="120px"></HeaderStyle>
+                        <HeaderStyle Width="120px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
+                        <ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                        
                         <telerik:GridTemplateColumn 
@@ -175,9 +175,9 @@
                                     Text='<%# Eval("SerialNumber") %>' meta:resourcekey="lblSerialNumberResource1"/>
                             </ItemTemplate>
 
-<HeaderStyle Width="90px"></HeaderStyle>
+                        <HeaderStyle Width="90px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord70" Width="90px"></ItemStyle>
+                        <ItemStyle Wrap="True" CssClass="breakWord70" Width="90px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         
                         <telerik:GridTemplateColumn 
@@ -193,15 +193,15 @@
                                     meta:resourcekey="lblInstrumentTypeResource1" />
                             </ItemTemplate>
 
-<HeaderStyle Width="100px"></HeaderStyle>
+                        <HeaderStyle Width="100px"></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord100" Width="100px"></ItemStyle>
+                        <ItemStyle Wrap="True" CssClass="breakWord100" Width="100px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                          <telerik:GridTemplateColumn 
                             UniqueName="Description" AllowFiltering="true" HeaderText="Description" 
                             DataField="Description" SortExpression="Description" 
-                            ShowFilterIcon="true"  FilterControlWidth="120" HeaderStyle-Width ="120" 
-                            ItemStyle-CssClass="breakWord120" ItemStyle-Width="120" 
+                            ShowFilterIcon="true"  FilterControlWidth="100" HeaderStyle-Width ="100" 
+                            ItemStyle-CssClass="breakWord100" ItemStyle-Width="100" 
                             ItemStyle-Wrap="true" AutoPostBackOnFilter="true" 
                             CurrentFilterFunction="Contains" meta:resourcekey="GridTemplateColumnResource5">
                             <ItemTemplate>
@@ -209,9 +209,9 @@
                                     meta:resourcekey="lblDescriptionResource1" />
                             </ItemTemplate>
 
-<HeaderStyle Width="120px"></HeaderStyle>
+                        <HeaderStyle Width="100px" CssClass="breakWord100" ></HeaderStyle>
 
-<ItemStyle Wrap="True" CssClass="breakWord120" Width="120px"></ItemStyle>
+                        <ItemStyle Wrap="True" CssClass="breakWord100" Width="100px"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
                                 UniqueName="IsActive" AllowFiltering="false" HeaderText="IsActive?" DataField="IsActive" 
@@ -223,9 +223,9 @@
                                         meta:resourcekey="imgIsActiveResource1" />
                                 </ItemTemplate>
 
-<HeaderStyle Width="40px"></HeaderStyle>
+                        <HeaderStyle Width="40px"></HeaderStyle>
 
-<ItemStyle HorizontalAlign="Center"></ItemStyle>
+                        <ItemStyle HorizontalAlign="Center"></ItemStyle>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
                                 DataField="BranchID" AllowFiltering="true" HeaderText="" 
@@ -262,14 +262,14 @@
                             </telerik:GridTemplateColumn>
                     </Columns>
 
-<EditFormSettings>
-<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
-</EditFormSettings>
+                    <EditFormSettings>
+                    <EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
+                    </EditFormSettings>
 
-<PagerStyle AlwaysVisible="True"></PagerStyle>
+                    <PagerStyle AlwaysVisible="True"></PagerStyle>
                 </MasterTableView>
 
-<FilterMenu EnableImageSprites="False"></FilterMenu>
+                <FilterMenu EnableImageSprites="False"></FilterMenu>
             </telerik:RadGrid>
         </ContentTemplate>
     </asp:UpdatePanel>

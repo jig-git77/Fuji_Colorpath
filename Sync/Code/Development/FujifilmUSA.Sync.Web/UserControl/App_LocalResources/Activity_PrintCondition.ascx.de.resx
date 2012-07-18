@@ -120,7 +120,6 @@
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
     <value>UserName</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GridBoundColumnResource10.HeaderText" xml:space="preserve">
     <value>CompanyName_de</value>
   </data>

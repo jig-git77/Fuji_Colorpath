@@ -136,7 +136,7 @@
     <value>Between</value>
   </data>
   <data name="FilterFunctionContains" xml:space="preserve">
-    <value>Contains1</value>
+    <value>Contains</value>
   </data>
   <data name="FilterFunctionDoesNotContain" xml:space="preserve">
     <value>DoesNotContain</value>

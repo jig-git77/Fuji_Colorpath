@@ -30,6 +30,7 @@
         <br /><br /><br />
         
              <table cellpadding="0" cellspacing="0" style="margin-left:68px;">
+             <tr style="height:20px;"><td></td></tr>
                  <tr>
                     <td>
                         <asp:LinkButton ID="lbtnAligmentCurves" runat="server" 
@@ -79,6 +80,7 @@
                          <input id="Hidden_ICCProfiling" type="hidden" runat="server" value="0"/>         
                    </td>
                 </tr>
+                <tr style="height:5px;"><td></td></tr>
                 </table>               
 
     </div>

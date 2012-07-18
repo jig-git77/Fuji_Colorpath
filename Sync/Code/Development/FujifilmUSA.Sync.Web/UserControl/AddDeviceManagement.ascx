@@ -161,13 +161,13 @@
                                 </td>
                                 <td>
                                     <div style="line-height: 30px; overflow-y: scroll; height: 130px; border-width: 1px;
-                                                                    border-style: solid; width: 220px">
+                                                                    border-style: solid; width: 240px">
                                     <table width="100%">
                                         <tr>
-                                            <td style="width:130px;">
+                                            <td style="width:80%;">
                                                 <span>
                                                     <%=ELicenseSync1DText%> &nbsp;</span></td>
-                                            <td>
+                                            <td style="width:20%;">
                                                 <div style="float: left;">
                                                     <asp:TextBox ID="txtSync1D" runat="server" Height="19px" Width="50px" MaxLength="4"
                                                         onkeypress="return CheckNumeric(event)" 

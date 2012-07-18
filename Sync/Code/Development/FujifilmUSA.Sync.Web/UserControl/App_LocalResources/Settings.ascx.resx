@@ -172,10 +172,10 @@
     <value>Reference Chart</value>
   </data>
   <data name="imgSoruceProfileResource1.AlternateText" xml:space="preserve">
-    <value>Soruce Profile</value>
+    <value>Source Profile</value>
   </data>
   <data name="imgSoruceProfileResource1.ToolTip" xml:space="preserve">
-    <value>Soruce Profile</value>
+    <value>Source Profile</value>
   </data>
   <data name="lbtnBranchManagementResource1.Text" xml:space="preserve">
     <value />
@@ -205,7 +205,7 @@
     <value />
   </data>
   <data name="lbtnSourceProfileResource1.ToolTip" xml:space="preserve">
-    <value>Soruce Profile</value>
+    <value>Source Profile</value>
   </data>
   <data name="lbtnUserManagementResource1.Text" xml:space="preserve">
     <value />

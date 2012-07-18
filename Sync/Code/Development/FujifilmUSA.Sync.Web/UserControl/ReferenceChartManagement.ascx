@@ -113,7 +113,7 @@
                     <Columns>
                         <telerik:GridTemplateColumn 
                             UniqueName="ChartName" HeaderText="Chart Name" DataField="ChartName" 
-                            SortExpression="ChartName" FilterControlWidth="150px" 
+                            SortExpression="ChartName" FilterControlWidth="130px" 
                             AutoPostBackOnFilter="True" CurrentFilterFunction="Contains" 
                             FilterControlAltText="Filter ChartName column" 
                             meta:resourcekey="GridTemplateColumnResource1">                            
@@ -121,8 +121,8 @@
                                 <asp:Label ID="lblChartName" runat="server" Text='<%# Eval("ChartName") %>' 
                                     meta:resourcekey="lblChartNameResource1"/>
                             </ItemTemplate>
-                            <HeaderStyle Width="150px" />
-                            <ItemStyle Width="150px" Wrap="True" />
+                            <HeaderStyle Width="130px" />
+                            <ItemStyle Width="130px" Wrap="True" />
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn 
                             UniqueName="NumOfRows" HeaderText="Num Of Rows" DataField="NumOfRows" 
