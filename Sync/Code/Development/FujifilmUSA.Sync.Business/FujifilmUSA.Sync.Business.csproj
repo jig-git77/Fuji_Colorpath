@@ -86,6 +86,7 @@
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="LogActivityManager.cs" />
     <Compile Include="LoginSecurity.cs" />
     <Compile Include="LogManager.cs" />
     <Compile Include="Messages\MeasurementDataResponse.cs" />

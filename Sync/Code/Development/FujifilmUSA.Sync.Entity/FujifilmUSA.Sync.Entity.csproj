@@ -52,6 +52,7 @@
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
+    <Compile Include="LogActivity.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
       <SubType>Code</SubType>
     </Compile>

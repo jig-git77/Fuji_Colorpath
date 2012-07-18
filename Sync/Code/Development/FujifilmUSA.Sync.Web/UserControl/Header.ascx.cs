@@ -33,6 +33,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (SessionManager.Instance.CurrentUser != null)
             {
+                WebLogActivityManager.LogActivity(LogActivityType.LoggedOut, null, Request.UserHostAddress);
+
                 #region Clear Session Information
                 Session.Clear();
                 Session.RemoveAll();

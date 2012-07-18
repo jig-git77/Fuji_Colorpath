@@ -27,15 +27,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
-        //public string EncryptPassword(string password, string key)
-        //{
-        //    return LoginSecurity.Encrypt(password, key);
-        //}
-
-        //public string DecryptPassword(string encryptedpassword, string key)
-        //{
-        //    return LoginSecurity.Decrypt(encryptedpassword, key);
-        //}
+        public int InsertLogActivity(LogActivity logActivity)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[dbo].[InsertLogActivity]",
+                            new object[]
+                                    {
+                                        logActivity.UserId,
+                                        Convert.ToInt32(logActivity.ActivityType),
+                                        logActivity.IpAddress,
+                                        Convert.ToInt32(logActivity.SystemType),
+                                        logActivity.Details,
+                                        logActivity.ActivityDate
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertLogActivity"));
+            return returnValue;
+        }
 
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -8,6 +9,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         #region IErrorHandlingBusiness Members
 
         public int InsertAppErrorLog(Entity.AppErrorLog errorLog)
+        {
+            return 0;
+        }
+
+        public int InsertLogActivity(LogActivity logActivity)
         {
             return 0;
         }

@@ -135,7 +135,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> RegionList { get; set; }
         public int RegionId { get; set; }
         #endregion
-
-      
     }
 }

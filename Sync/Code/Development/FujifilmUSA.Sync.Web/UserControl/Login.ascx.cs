@@ -55,6 +55,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (CurrentUser != null && CurrentUser.LoginId != null)
                 {
                     SessionManager.Instance.CurrentUser = CurrentUser;
+
+                    WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
+                    
                     if (chkRememberMe.Checked == true)
                     {
                         var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };

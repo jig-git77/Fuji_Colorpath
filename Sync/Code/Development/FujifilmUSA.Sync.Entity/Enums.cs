@@ -332,4 +332,23 @@ namespace FujifilmUSA.Sync.Entity
         [Description("Optimization Chart")]
         OptimizationChart = 2
     }
+
+    public enum LogActivityType
+    {
+        None = 0,
+        LoggedIn = 1,
+        LoggedOut = 2,
+        CreateProject = 3,
+        OptimizeDlp = 4,
+        CreateDlp = 5,
+        ChangeProfile = 6
+    }
+
+    public enum LogActivitySystemType
+    {
+        None = 0,
+        Web = 1,
+        Service = 2,
+        ColorPath = 3
+    }
 }

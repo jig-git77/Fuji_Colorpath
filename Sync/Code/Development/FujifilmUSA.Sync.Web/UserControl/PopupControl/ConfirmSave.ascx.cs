@@ -99,6 +99,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
                 {
+                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] {ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId},
+                                                      Request.UserHostAddress);
                     _presenterConfirmSave.GetProjectDetail();
                     if (!IsErrorOccured)
                     {

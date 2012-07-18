@@ -24,13 +24,13 @@ namespace FujifilmUSA.Sync.Business
         private int _optimizeRunLimit;
         private int _measurementsLimit;
         private string _webSiteLink;
-        //private string _silverlightPostUrl;
+        private bool _enableActivityLog;
         #endregion
 
+        #region Singleton
+        
         private ApplicationConfiguration()
         {
-            //TODO: put below entry in database configuration table...
-            //_silverlightPostUrl = Utilities.ReadConfigValue("SilverlightPostUrl");
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -83,6 +83,9 @@ namespace FujifilmUSA.Sync.Business
                                                               case "WEBSITELINK":
                                                                   _webSiteLink = x.Value;
                                                                   break;
+                                                              case "ENABLEACTIVITYLOG":
+                                                                  _enableActivityLog = Convert.ToBoolean(x.Value);
+                                                                  break;
                                                           }
                                                       });
                     }
@@ -94,6 +97,8 @@ namespace FujifilmUSA.Sync.Business
         {
             get { return _applicationConfiguration ?? (_applicationConfiguration = new ApplicationConfiguration()); }
         }
+
+        #endregion
 
         #region Configuration Properties
         public string EncryptionKey
@@ -173,10 +178,13 @@ namespace FujifilmUSA.Sync.Business
                 return _webSiteLink;
             }
         }
-        //public string SilverlightPostUrl
-        //{
-        //    get { return _silverlightPostUrl; }
-        //}
+        public bool EnableActivityLog
+        {
+            get
+            {
+                return _enableActivityLog;
+            }
+        }
         #endregion
 
         #region ITaskBase Members

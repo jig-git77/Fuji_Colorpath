@@ -1229,6 +1229,7 @@
     <Compile Include="UserControl\Statusbar.ascx.designer.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebLogActivityManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\FujifilmSkin\Fujifilm.skin" />
@@ -1297,7 +1298,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

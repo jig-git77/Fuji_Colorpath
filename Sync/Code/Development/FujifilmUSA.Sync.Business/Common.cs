@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Business.CustomExceptions;
 

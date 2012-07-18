@@ -9,6 +9,7 @@ namespace FujifilmUSA.Sync.Business
     public class LogManager
     {
         private delegate void SendEmail(AppErrorLog log);
+
         public static void WriteLog(Exception e, BusinessHandlerRequest request)
         {
             var appErrorLog = new AppErrorLog

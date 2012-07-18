@@ -38,6 +38,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsErrorOccured)
             {
+                WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] {Project.ProjectId, Project.ProjectName}, Request.UserHostAddress);
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                 if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)

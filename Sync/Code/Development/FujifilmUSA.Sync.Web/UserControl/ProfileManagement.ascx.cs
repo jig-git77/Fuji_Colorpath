@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Common;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -23,8 +24,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            {              
+            if (!IsPostBack)
+            {
                 lblUserName.Text = SessionManager.Instance.CurrentUser.LoginId;
                 GetSecurityQuestions();
             }
@@ -38,8 +39,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             LoginId = SessionManager.Instance.CurrentUser.UserId;
             Password = txtNewPassword.Text;
             _presenterProfileManagement.UpdatePassword();
-            if(!IsErrorOccured)
+            if (!IsErrorOccured)
             {
+                WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
                 fujiStatusbar.DisplayMessage("Password saved successfully!", false);
             }
         }
@@ -52,6 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterProfileManagement.UpdateSecurityInformation();
             if (!IsErrorOccured)
             {
+                WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
                 fujiStatusbar.DisplayMessage("Security information saved successfully!", false);
             }
         }
