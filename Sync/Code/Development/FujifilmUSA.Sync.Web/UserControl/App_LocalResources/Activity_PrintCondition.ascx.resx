@@ -118,36 +118,35 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridBoundColumnResource1.HeaderText" xml:space="preserve">
-    <value>UserName</value>
+    <value>User Name</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />  
   <data name="GridBoundColumnResource10.HeaderText" xml:space="preserve">
-    <value>CompanyName</value>
-  </data>  
+    <value>Company Name</value>
+  </data>
   <data name="GridBoundColumnResource2.HeaderText" xml:space="preserve">
-    <value>PrintCondCreate</value>
-  </data>  
+    <value>Print Condition Create</value>
+  </data>
   <data name="GridBoundColumnResource3.HeaderText" xml:space="preserve">
-    <value>PrintCondDelete</value>
-  </data>  
+    <value>Print Condition Delete</value>
+  </data>
   <data name="GridBoundColumnResource4.HeaderText" xml:space="preserve">
-    <value>UploadMeasure</value>
-  </data>  
+    <value>Upload Measure</value>
+  </data>
   <data name="GridBoundColumnResource5.HeaderText" xml:space="preserve">
     <value>CreateDLP</value>
-  </data>  
+  </data>
   <data name="GridBoundColumnResource6.HeaderText" xml:space="preserve">
     <value>OptDLP</value>
-  </data>  
+  </data>
   <data name="GridBoundColumnResource7.HeaderText" xml:space="preserve">
     <value>BranchID</value>
-  </data>  
+  </data>
   <data name="GridBoundColumnResource8.HeaderText" xml:space="preserve">
-    <value>BranchName</value>
-  </data>  
+    <value>Branch Name</value>
+  </data>
   <data name="GridBoundColumnResource9.HeaderText" xml:space="preserve">
     <value>CompanyID</value>
-  </data>  
+  </data>
   <data name="locActivityMgmtResource1.Text" xml:space="preserve">
     <value>Activity Management</value>
   </data>

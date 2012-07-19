@@ -87,7 +87,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Select(x => new OptimizeRun()
                             {
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                RunName = DataReader.ReadString(x, "RunName"),
+                               // RunName = DataReader.ReadString(x, "RunName"),
+                                RunName = (DataReader.ReadString(x, "RunName").Contains("DLP")) ? DataReader.ReadString(x, "RunName") : ((EOptimizeRunStatus)DataReader.ReadInt(x, "RunName") == EOptimizeRunStatus.Open) ? "Open" : "Certification",
                                 ProjectId = DataReader.ReadInt(x, "ProjectID"),
                                 Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
                                 StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
