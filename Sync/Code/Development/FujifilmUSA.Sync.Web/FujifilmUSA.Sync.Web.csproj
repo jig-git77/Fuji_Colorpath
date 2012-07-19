@@ -172,6 +172,7 @@
     <Content Include="JS\jquery.js" />
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
+    <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="UserControl\Activity_PrintCondition.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
@@ -192,6 +193,7 @@
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
+    <Content Include="UserControl\ReportSingleMeasurement.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
@@ -831,6 +833,13 @@
     </Compile>
     <Compile Include="UserControl\ReferenceChartManagement.ascx.designer.cs">
       <DependentUpon>ReferenceChartManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ReportSingleMeasurement.ascx.cs">
+      <DependentUpon>ReportSingleMeasurement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ReportSingleMeasurement.ascx.designer.cs">
+      <DependentUpon>ReportSingleMeasurement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ValidationContainer.ascx.cs">
       <DependentUpon>ValidationContainer.ascx</DependentUpon>
@@ -1897,7 +1906,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

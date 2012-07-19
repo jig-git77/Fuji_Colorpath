@@ -351,4 +351,23 @@ namespace FujifilmUSA.Sync.Entity
         Service = 2,
         ColorPath = 3
     }
+
+    public enum enumReportType
+    {
+        BranchSummaryReport = 1,
+        DeviceReport = 2,
+        ShiftVariabilityReport = 3,
+        DeviceVariabilityReport = 4,
+        ColorDetailReport = 5,
+        PatchDetailReport = 6,
+        ProductivityReport = 7,
+        ReportPerformanceSummary = 8,
+        ReportTargetMeasurement = 9,
+        ReportJobRunCertificationProcess = 10,
+        ReportJobRunCertificationNonProcess = 11,
+        ReportPressMakeReady = 12,
+        ReportSingleMeasurement = 13,
+        CPSPrintStandardsReport = 14,
+        CPSPrintStandardsReportISO = 15
+    }
 }

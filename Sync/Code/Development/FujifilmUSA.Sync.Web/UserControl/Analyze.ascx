@@ -1,8 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
-    TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/ReportSingleMeasurement.ascx" TagName="Report" TagPrefix="uc" %>
+
 <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
@@ -354,17 +355,30 @@
         <div class="tab_middle">
         <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" >
-            <table cellpadding="0" cellspacing="0" width="100%">
-                                    <tr runat="server">                                       
-                                        <td>
+          <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+             <ContentTemplate>   
+
+                 <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr runat="server" visible="false">                                       
+                            <td>
                                         
-                                          <asp:ImageButton ID="ImgBtn_Report" runat="server" 
-                                                ImageUrl="../Images/Sync DLP Report_preview.jpg" 
-                                                onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
-                                                meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
-                                        </td>
-                                    </tr>                                   
-                                </table>
+                                <asp:ImageButton ID="ImgBtn_Report" runat="server" 
+                                    ImageUrl="../Images/Sync DLP Report_preview.jpg" 
+                                    onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
+                                    meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td>                                     
+                                    <uc:Report ID="ucReportSingle" runat="server" />
+                            </td>
+                        </tr>                                 
+                 </table>
+              </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                    </Triggers>  
+           </asp:UpdatePanel>
         </div>
         <div class="clear"></div>
         </div>                            	
