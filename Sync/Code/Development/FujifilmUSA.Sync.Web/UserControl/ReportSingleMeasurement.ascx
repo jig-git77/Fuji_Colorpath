@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportSingleMeasurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ReportSingleMeasurement" %>
 
-<asp:Image ID="i1" runat="server" ImageUrl="../Images/Sync DLP Report_preview.jpg" />
+<asp:Image ID="i1" runat="server" ImageUrl="../Images/Sync DLP Report_preview.jpg" Visible="false" />
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
-    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="true">
+    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="false">
         <div style="overflow: auto; height:400px;">
             <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
                 <tr>

@@ -12,13 +12,8 @@ namespace FujifilmUSA.Sync.Entity
         public int OptimizeRunId { get; set; }
         public DateTime MeasurementDate { get; set; }
 
-        public decimal Avg_ΔE { get; set; }
-        public decimal Avg_ΔE94 { get; set; }
-        public decimal Avg_ΔE2000 { get; set; }
-
+        public decimal Avg_ΔE { get; set; } 
         public decimal Max_ΔE { get; set; }
-        public decimal Max_ΔE94 { get; set; }
-        public decimal Max_ΔE2000 { get; set; }
 
         public decimal PercΔE_10 { get; set; }
         public decimal PercΔE_90 { get; set; }

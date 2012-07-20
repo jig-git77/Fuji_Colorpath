@@ -15,6 +15,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
         List<Entity.MeasurementPatchDetails> PatchDetails { get; set; }
         int MeasurementId { get; set; }
+        string From_ΔE { get; set; }
         List<Entity.AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
         List<Entity.AnalyzeChart> DTPaperPatches { get; set; }
         List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }

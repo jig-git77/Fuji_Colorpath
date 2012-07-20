@@ -10,9 +10,7 @@ namespace FujifilmUSA.Sync.Entity
         public string HtmlColor { get; set; }
         public short PatchTypeId { get; set; }
         
-        public decimal ΔE { get; set; }
-        public decimal ΔE94 { get; set; }
-        public decimal ΔE2000 { get; set; }
+        public decimal ΔE { get; set; }     
         public decimal ΔELimit { get; set; }
 
         public decimal CielabL { get; set; }

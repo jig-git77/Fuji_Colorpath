@@ -41,7 +41,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId);
+            _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId,_viewAnalyze.From_ΔE);
         }
         
         public void UpdateMeasurementByAnalyzeChart()
@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId);
+            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
         }
 
         public void GetPatchDetailsofMeasurement()
@@ -69,8 +69,8 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId);
-            _viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId);
+            _viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
+            _viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
         }
 
         public void GetGrayChart()

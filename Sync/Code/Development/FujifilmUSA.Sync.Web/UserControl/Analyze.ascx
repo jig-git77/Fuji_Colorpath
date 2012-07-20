@@ -88,9 +88,9 @@
                         <span>
                             <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" 
                         meta:resourcekey="Image2Resource1" />
-<asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" 
+                        <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" 
                         meta:resourcekey="locCreateDLPResource1"></asp:Localize>
-</span> &nbsp;
+                        </span> &nbsp;
                     </asp:LinkButton>
                 </div>
             </div>
@@ -99,12 +99,22 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-        <ContentTemplate>
+     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+         <ContentTemplate>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
+                <tr>
+                    <td align="center">
+                        <asp:RadioButtonList ID="Rbl_DT_E" runat="server" RepeatDirection="Horizontal" 
+                            AutoPostBack="true" onselectedindexchanged="Rbl_DT_E_SelectedIndexChanged" CssClass="RadioList">
+                            <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
+                        </asp:RadioButtonList>
+                    </td>
+                </tr>
                 <tr id="trListHeader" runat="server">
                     <td runat="server">
-                        <div style="display: block;" class="contantbox tabcontant">
+                    
+                            <div style="display: block;" class="contantbox tabcontant">
                             <div class="Analyze_head">
                                 <div class="text" style="font-weight: bold; font-size: 14px; float: left">
                                     <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement" meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
@@ -171,7 +181,7 @@
                                             <asp:ChartArea Name="ChartArea1" BackColor="Transparent" BackSecondaryColor="White"
                                                 ShadowColor="Transparent">
                                                 <Position Height="99" Width="99" Auto="False" />
-                                                <AxisY Title="&Delta; E2000" TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
+                                                <AxisY  TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
                                                     <MajorGrid LineColor="216, 216, 216" />
                                                 </AxisY>
                                                 <AxisX Interval="1" TitleFont="Verdana, 5pt" IsLabelAutoFit="False">
@@ -188,10 +198,14 @@
                                 </center>
                             </div>
                         </div>
+                        
                     </td>
                 </tr>
             </table>
-        </ContentTemplate>
+        </ContentTemplate>    
+        <Triggers>                      
+            <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
+        </Triggers>              
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
@@ -253,7 +267,7 @@
                                     </tr>
                                     <tr>
                                     <td colspan="2">
-                                         <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder">
+                                         <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder" OnItemDataBound="grdMeasurement_ItemDataBound">
                                             <LayoutTemplate>
                                                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >                                  
                                                     <tbody>
@@ -279,55 +293,31 @@
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">Average ΔE: </td>                                  
+                                                    <td style="font-size:13px;">Average Δ<asp:Label ID="lblAvg_ΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="lblAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="lblRAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum ΔE: </td>                                  
+                                                    <td style="font-size:13px;">Maximum Δ<asp:Label ID="lblMax_ΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="lblMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="lblRMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
                                                     </td>
-                                                </tr>
+                                                </tr>                                            
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">Average ΔE94: </td>                                  
-                                                    <td>
-                                                        <asp:Label ID="lblAvg_ΔE94" runat="server" Text='<%#Eval("Avg_ΔE94") %>'></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum ΔE94: </td>                                  
-                                                    <td>
-                                                        <asp:Label ID="lblMax_ΔE94" runat="server" Text='<%#Eval("Max_ΔE94") %>'></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr class="Gray">   
-                                                    <td style="font-size:13px;">Average ΔE2000: </td>                                  
-                                                    <td>
-                                                        <asp:Label ID="lblAvg_ΔE2000" runat="server" Text='<%#Eval("Avg_ΔE2000") %>'></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum ΔE2000: </td>                                  
-                                                    <td>
-                                                        <asp:Label ID="lblMax_ΔE2000" runat="server" Text='<%#Eval("Max_ΔE2000") %>'></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr class="Gray">   
-                                                    <td style="font-size:13px;">10th Percentile ΔE: </td>                                  
+                                                    <td style="font-size:13px;">10th Percentile Δ<asp:Label ID="lblPercΔE_10" runat="server" Text=""></asp:Label> </td>                                                                                     
                                                     <td>
                                                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">90th Percentile ΔE: </td>                                  
+                                                    <td style="font-size:13px;">90th Percentile Δ<asp:Label ID="lblPercΔE_90" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">95th Percentile ΔE: </td>                                  
+                                                    <td style="font-size:13px;">95th Percentile Δ<asp:Label ID="lblPercΔE_95" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
                                                     </td>
@@ -340,6 +330,7 @@
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                        <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
                     </Triggers>  
            </asp:UpdatePanel>
         </div>
@@ -359,7 +350,7 @@
              <ContentTemplate>   
 
                  <table cellpadding="0" cellspacing="0" width="100%">
-                        <tr runat="server" visible="false">                                       
+                        <tr runat="server" visible="true">                                       
                             <td>
                                         
                                 <asp:ImageButton ID="ImgBtn_Report" runat="server" 
@@ -377,6 +368,7 @@
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                      <%--  <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%>
                     </Triggers>  
            </asp:UpdatePanel>
         </div>
@@ -400,7 +392,8 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
                                 <tr>
                                     <td colspan="2" class="green-title">
-                                        &nbsp; &Delta;<asp:Localize Text="E Primary Patches" runat="server" 
+                                        &nbsp; &Delta;<asp:Label ID="lblE_PryPatches" runat="server" Text=""></asp:Label>
+                                        <asp:Localize Text=" Primary Patches" runat="server"
                                             meta:resourcekey="LocalizeResource1" ></asp:Localize>
                                     </td>
                                 </tr>
@@ -572,6 +565,7 @@
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                        <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
                     </Triggers>  
             </asp:UpdatePanel>
         </div>
@@ -930,7 +924,8 @@
                  </table>
                </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
+                        <asp:PostBackTrigger ControlID="chartAnalyze" /> 
+                       <%-- <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%> 
                     </Triggers>  
            </asp:UpdatePanel>
 

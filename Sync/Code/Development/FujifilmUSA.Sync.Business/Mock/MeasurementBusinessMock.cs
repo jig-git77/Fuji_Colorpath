@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId)
+        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE)
         {
             return new List<Measurement>();
         }
@@ -35,7 +35,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE)
         {
             return new List<MeasurementPatch_AvgDelta>();
         }
@@ -45,12 +45,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementPatchDetails>();
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE)
         {
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE)
         {
             return new List<AnalyzeChart>();
         }

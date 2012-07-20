@@ -236,7 +236,7 @@
     <value>Idealliance Digital Chart</value>
   </data>
   <data name="LocalizeResource1.Text" xml:space="preserve">
-    <value>E Primary Patches</value>
+    <value> Primary Patches</value>
   </data>
   <data name="locAvgDeltaE2000Resource1.Text" xml:space="preserve">
     <value>Avg ΔE2000</value>

@@ -137,9 +137,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 BindMesurementChart();
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
-             
+
             }
-            BindMesurementChart();
+            else
+            {
+                BindMesurementChart();
+            }
         }
         #endregion
 
@@ -148,6 +151,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindMesurementChart()
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            From_ΔE = Rbl_DT_E.SelectedValue;
+            chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
             _presenterAnalyze.GetAnalyzeChartMeasurement();
             if (!IsErrorOccured)
@@ -178,10 +183,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
                 }
+                From_ΔE = Rbl_DT_E.SelectedValue;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
                 grdMeasurement.DataSource = MeasurementsDelta;
-                grdMeasurement.DataBind();
+                grdMeasurement.DataBind();    
             }
             catch (Exception ex)
             {
@@ -207,7 +213,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
-                     
+            From_ΔE = Rbl_DT_E.SelectedValue;
+            lblE_PryPatches.Text = From_ΔE;
             _presenterAnalyze.GetInkPaperChart();
             if (!IsErrorOccured)
             {
@@ -496,7 +503,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        #region Fill Lab Tab
+        #region Fill Gray / Lab Tab
         private void FillLabCharts(List<AnalyzeChart_Gray> DTLABChart, List<AnalyzeChart_Gray> DTGaumatChart1, List<AnalyzeChart_Gray> DTGaumatChart2)
         {
             try
@@ -596,12 +603,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");//&Delta;E
-                    toolTip.Append(ListFilter[i].ΔE.ToString());
-                    toolTip.Append("</td></tr>");
-                    //toolTip.Append("<tr><td>&Delta;H</td><td>");
-                    //toolTip.Append(dv[i]["ΔH"].ToString());
+                    //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");//&Delta;E
+                    //toolTip.Append(ListFilter[i].ΔE.ToString());
                     //toolTip.Append("</td></tr>");
+                 
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");//&Delta;L*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -950,6 +955,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
             GridPatchDetails.Rebind();
         }
 
+        protected void Rbl_DT_E_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+            BindMesurementChart();
+        }
+
+        protected void grdMeasurement_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            #region set Lable names
+            From_ΔE = Rbl_DT_E.SelectedValue;
+            if (e.Item.ItemType == ListViewItemType.DataItem)
+            {
+                Label lblAvg_ΔE = (Label)e.Item.FindControl("lblAvg_ΔE");
+                lblAvg_ΔE.Text = From_ΔE + ": ";
+                Label lblMax_ΔE = (Label)e.Item.FindControl("lblMax_ΔE");
+                lblMax_ΔE.Text = From_ΔE + ": ";
+                Label lblPercΔE_10 = (Label)e.Item.FindControl("lblPercΔE_10");
+                lblPercΔE_10.Text = From_ΔE + ": ";
+                Label lblPercΔE_90 = (Label)e.Item.FindControl("lblPercΔE_90");
+                lblPercΔE_90.Text = From_ΔE + ": ";
+                Label lblPercΔE_95 = (Label)e.Item.FindControl("lblPercΔE_95");
+                lblPercΔE_95.Text = From_ΔE + ": ";
+            }
+            #endregion
+        }
+
         protected void btn_Excel_Click(object sender, EventArgs e)
         {
             ConfigureExport();
@@ -964,7 +995,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
         {
-
             byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/PDFReports/Sync DLP Report.pdf"));
             Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
         }
@@ -1001,7 +1031,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
         public List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
 
+        public string From_ΔE { get; set; }
+
         #endregion
 
+       
     }
 }

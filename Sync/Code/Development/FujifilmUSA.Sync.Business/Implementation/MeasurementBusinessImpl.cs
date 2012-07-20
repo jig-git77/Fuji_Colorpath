@@ -119,7 +119,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId)
+        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE)
         {
             var measurements = new List<Measurement>();
             Common.ImplementBusinessLogic(
@@ -132,7 +132,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 "[CPSync4D].[GetAnalyzeChartMeasurement]",
                                 new object[]
                                         {
-                                            optimizeRunId
+                                            optimizeRunId, From_ΔE
                                         });
                     measurements =
                         dsMeasurements.
@@ -185,7 +185,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE)
         {
             var measurements = new List<MeasurementPatch_AvgDelta>();
             Common.ImplementBusinessLogic(
@@ -196,7 +196,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 "CPSync4D.GetMeasurementDeltasByMeasurementID",
-                                new object[] { MeasurementId });
+                                new object[] { MeasurementId, From_ΔE });
                     measurements = dsMeasurements.
                         Tables[0].
                         AsEnumerable().
@@ -204,14 +204,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
                             MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                            //OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                            Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),
-                            Avg_ΔE94 = DataReader.ReadDecimal(x, "Avg_ΔE94"),
-                            Avg_ΔE2000 = DataReader.ReadDecimal(x, "Avg_ΔE2000"),
-                            Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),
-                            Max_ΔE94 = DataReader.ReadDecimal(x, "Max_ΔE94"),
-                            Max_ΔE2000 = DataReader.ReadDecimal(x, "Max_ΔE2000"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),                         
+                            Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),                        
+                            Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),                           
                             PercΔE_10 = DataReader.ReadDecimal(x, "TenΔE"),
                             PercΔE_90 = DataReader.ReadDecimal(x, "NinetyΔE"),
                             PercΔE_95 = DataReader.ReadDecimal(x, "NinetyFiveΔE")
@@ -260,7 +255,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PatchDetails;
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
             Common.ImplementBusinessLogic(
@@ -271,7 +266,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 "CPSync4D.GetChartData_InkPaper",
-                                new object[] { MeasurementId });
+                                new object[] { MeasurementId, From_ΔE });
                     DeltaEPatchDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
@@ -292,7 +287,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return DeltaEPatchDetails;
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE)
         {
             var PaperPatchDetails = new List<AnalyzeChart>();
             Common.ImplementBusinessLogic(
@@ -303,7 +298,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Instance.
                             GetDsResult(
                                 "CPSync4D.GetChartData_InkPaper",
-                                new object[] { MeasurementId });
+                                new object[] { MeasurementId, From_ΔE });
                     PaperPatchDetails = dsMeasurements.Tables[1].
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
