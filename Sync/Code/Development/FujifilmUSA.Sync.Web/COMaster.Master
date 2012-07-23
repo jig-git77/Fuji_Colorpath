@@ -30,8 +30,6 @@
     </style>
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-
-            equal_height();
             window.onmousemove = equal_height;
             window.onmousedown = equal_height;
             window.onkeydown = equal_height;
@@ -44,13 +42,6 @@
             document.onmousewheel = equal_height;
 
         });
-
-
-        function equal_height() {
-            $("div[id*='LeftMenu2']").height($('#contant').height() - 18);
-        }
-
-
     </script>
 </head>
 <body>
@@ -70,31 +61,16 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <section id="bodyWrapper"> 
-    <section id="contant" class="equal_height">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
-      </section>
-      <div class="clear"></div>
-
-  <%--<!--Start PageWrapper-->
-  <div class="curve_top">&nbsp;</div>
   <section id="pageWrapper"> 
-  	<uc1:Header ID="ucHeader" runat="server" />  
-    <section id="containar">
-    <section id="sidebar" class="equal_height" >
-        	    <uc1:LeftMenu ID="LeftMenu2" runat="server" />        
-      </section>
-      <section id="contant" class="equal_height">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
-      </section>
-      <div class="clear"></div>
+  	<section id="containar">
+      <section id="contant" style="float:left;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <div class="clear">
+            </div>
     </section>
   </section>
-  <div class="curve_bottom">&nbsp;</div>
-  <!--End PageWrapper--> 
-  <uc1:Footer ID="ucFooter" runat="server" />--%>
-
-</section>
+    
     </form>
 </body>
 </html>

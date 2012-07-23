@@ -56,14 +56,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         public DateTime EndDate;
 
-        public bool IsXmfUser
-        {
-            get
-            {
-                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
-            }
-        }
-
         public string AddMeasurementDeleteMeasurementConfirmation
         {
             get
@@ -122,8 +114,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
             }
-
-            lbtnDownloadAndSaveDLP.Visible = !IsXmfUser;
 
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "<span>"
