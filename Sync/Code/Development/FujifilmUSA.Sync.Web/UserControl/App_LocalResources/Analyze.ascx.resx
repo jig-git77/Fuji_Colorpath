@@ -329,16 +329,16 @@
     <value>Cyan</value>
   </data>
   <data name="deltaAText" xml:space="preserve">
-    <value>&amp;Delta;a*</value>
+    <value>Δa*</value>
   </data>
   <data name="deltaBText" xml:space="preserve">
-    <value>&amp;Delta;b*</value>
+    <value>Δb*</value>
   </data>
   <data name="deltaEText" xml:space="preserve">
-    <value>&amp;Delta;E</value>
+    <value>ΔE</value>
   </data>
   <data name="deltaLText" xml:space="preserve">
-    <value>&amp;Delta;L*</value>
+    <value>ΔL*</value>
   </data>
   <data name="dlpMsgText" xml:space="preserve">
     <value>Once optimization is complete, apply {0} to workflow and reprint the {1} chart.</value>

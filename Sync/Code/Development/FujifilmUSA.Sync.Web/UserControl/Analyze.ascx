@@ -230,15 +230,15 @@
         <section class="inner_tab">
             <ul class="tabs">
                 <li><span><a href="#tab1"><asp:Localize Text="Summary" ID="locSummary" 
-                        runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>
-                <li><span><a href="#tab2"><asp:Localize Text="Report" ID="locReport" runat="server" 
-                        meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>                                
-                <li><span><a href="#tab3"><asp:Localize Text="Ink Paper" ID="locInkPaper" 
+                        runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>                                       
+                <li><span><a href="#tab2"><asp:Localize Text="Ink Paper" ID="locInkPaper" 
                         runat="server" meta:resourcekey="locInkPaperResource1"></asp:Localize></a></span></li>                                
-                <li><span><a href="#tab4"><asp:Localize Text="Gray" ID="locGray" runat="server" 
+                <li><span><a href="#tab3"><asp:Localize Text="Gray" ID="locGray" runat="server" 
                         meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>                                
-                <li><span><a href="#tab5"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
-                        runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>                                
+                <li><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
+                        runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>  
+                <li><span><a href="#tab5"><asp:Localize Text="Report" ID="locReport" runat="server" 
+                        meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>                                   
             </ul>
             <div class="clear"></div>
         </section>
@@ -340,45 +340,8 @@
     <div class="tab_bottom">
         &nbsp;</div>
     </section>
-
-    <section id="tab2" class="contantbox tabcontant hideclass">
-        <div class="tab_top">&nbsp;</div>
-        <div class="tab_middle">
-        <div class="combopart">
-        <div class="float_l" style="padding-left: 10px;" >
-          <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-             <ContentTemplate>   
-
-                 <table cellpadding="0" cellspacing="0" width="100%">
-                        <tr runat="server" visible="true">                                       
-                            <td>
-                                        
-                                <asp:ImageButton ID="ImgBtn_Report" runat="server" 
-                                    ImageUrl="../Images/Sync DLP Report_preview.jpg" 
-                                    onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
-                                    meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
-                            </td>
-                        </tr>  
-                        <tr>
-                            <td>                                     
-                                    <uc:Report ID="ucReportSingle" runat="server" />
-                            </td>
-                        </tr>                                 
-                 </table>
-              </ContentTemplate>
-                    <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" />  
-                      <%--  <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%>
-                    </Triggers>  
-           </asp:UpdatePanel>
-        </div>
-        <div class="clear"></div>
-        </div>                            	
-        </div>
-        <div class="tab_bottom">&nbsp;</div>
-   </section>
     
-   <section id="tab3" class="contantbox tabcontant hideclass">
+   <section id="tab2" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
@@ -575,7 +538,7 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
     
-   <section id="tab4" class="contantbox tabcontant hideclass">
+   <section id="tab3" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
@@ -936,7 +899,7 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
 
-  <section id="tab5" class="contantbox tabcontant hideclass" >
+  <section id="tab4" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
            <div class="combopart">
@@ -1122,7 +1085,37 @@
     </div>    
     <div class="tab_bottom">
         &nbsp;</div>
-    </section>
+  </section>
+
+  <section id="tab5" class="contantbox tabcontant hideclass">
+        <div class="tab_top">&nbsp;</div>
+        <div class="tab_middle">
+        <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" >
+       
+                 <table cellpadding="0" cellspacing="0" width="100%">
+                        <tr id="Tr2" runat="server" visible="true">                                       
+                            <td>
+                                        
+                                <asp:ImageButton ID="ImgBtn_Report" runat="server" 
+                                    ImageUrl="../Images/Sync DLP Report_preview.jpg" 
+                                    onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
+                                    meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td>                                     
+                                    <uc:Report ID="ucReportSingle" runat="server" Visible="false" />
+                            </td>
+                        </tr>                                 
+                 </table>         
+        </div>
+        <div class="clear"></div>
+        </div>                            	
+        </div>
+        <div class="tab_bottom">&nbsp;</div>
+   </section>
+
   </section>
                 </td>
             </tr>

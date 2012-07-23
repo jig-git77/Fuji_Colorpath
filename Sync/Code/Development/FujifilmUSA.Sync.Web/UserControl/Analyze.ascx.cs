@@ -375,26 +375,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.Points[Index]["PointWidth"] = "-1";
 
                 Series SeriesActual = objSeries1;
-                objSeries1.Points.AddXY((Double)0, Y2);               
+                objSeries1.Points.AddXY((Double)0, Y2);        
+       
                 #region Add Tooltip HTML
                 StringBuilder toolTip = new StringBuilder();
                 toolTip.Append("<table>");
                 toolTip.Append("<tr><td><b>" + TooltipTitle + "</b></td></tr>");
                 toolTip.Append("<tr><td><table>");
-                toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");//Actual
+                toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>"); //Actual LAB
                 toolTip.Append(GetResourceString(_recL) + DR[Index].CielabL.ToString());
                 toolTip.Append(" " + GetResourceString(_recA) + DR[Index].CielabA.ToString());
                 toolTip.Append(" " + GetResourceString(_recB) + DR[Index].CielabB.ToString());
                 toolTip.Append("</td></tr>");
-                toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");
+                toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>"); //Target LAB
                 toolTip.Append(GetResourceString(_recL) + DR[Index].TargetL.ToString());
                 toolTip.Append(" " + GetResourceString(_recA) + DR[Index].Targeta.ToString());
                 toolTip.Append(" " + GetResourceString(_recB) + DR[Index].Targetb.ToString());
                 toolTip.Append("</td></tr>");
-                toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
+                toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>"); //ΔE Value
                 toolTip.Append(DR[Index].ΔE.ToString());
-                toolTip.Append("</td></tr>");
-                toolTip.Append("</td></tr>");
+                toolTip.Append("</td></tr>");                
                 toolTip.Append("</table></td></tr>");
                 toolTip.Append("</table>");
                 #endregion
@@ -428,31 +428,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;
                     CHRT_Paper1.Series["Green"].CustomProperties = "PolarDrawingStyle=Marker";
 
-                    StringBuilder toolTip = new StringBuilder();                    
+                    StringBuilder toolTip = new StringBuilder();
+
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + GetResourceString(_recPaperPathMetrics) +  "</b></td></tr>");//Paper Patch Metrics
+                    toolTip.Append("<tr><td><b>" + GetResourceString(_recPaperPathMetrics) +  "</b></td></tr>"); //Paper Patch Metrics
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");//Actual
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>"); //Actual LAB
                     toolTip.Append(GetResourceString(_recL) + DT[0].CielabL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + DT[0].CielabA.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + DT[0].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" +GetResourceString(_recTarget) +  "</td><td>");//Target
+                    toolTip.Append("<tr><td>" +GetResourceString(_recTarget) +  "</td><td>"); //Target LAB
                     toolTip.Append(GetResourceString(_recL) + DT[0].TargetL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + DT[0].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + DT[0].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");//&Delta;L*
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>"); //ΔL*
                     toolTip.Append(DT[0].ΔL.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>");//&Delta;a*
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>"); //Δa*
                     toolTip.Append(DT[0].Δa.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>"  + GetResourceString(_recDeltaB) + "</td><td>");//&Delta;b*
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td><td>"); //Δb*
                     toolTip.Append(DT[0].Δb.ToString());
                     toolTip.Append("</td></tr>");
-
                     toolTip.Append("</table></td></tr>");
                     toolTip.Append("</table>");
                     #endregion
@@ -583,27 +583,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<table>");
                     toolTip.Append("<tr><td><b>" + ColorName + " " + GetResourceString(_recPatchMetrics) + "</b></td></tr>");
                     toolTip.Append("<tr><td><table>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>"); //Actual
                     toolTip.Append(GetResourceString(_recL) + ListFilter[i].CielabL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].CielabA.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>");//Target
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>"); //Target
                     toolTip.Append(GetResourceString(_recL) + ListFilter[i].TargetL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + ListFilter[i].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + ListFilter[i].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");//&Delta;E
+                    //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>"); //ΔE
                     //toolTip.Append(ListFilter[i].ΔE.ToString());
                     //toolTip.Append("</td></tr>");
-                 
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");//&Delta;L*
+
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>"); //ΔL*
                     toolTip.Append(ListFilter[i].ΔL.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaA) + "</td><td>"); //ΔA*
                     toolTip.Append(ListFilter[i].Δa.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td><td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td><td>"); //ΔB*
                     toolTip.Append(ListFilter[i].Δb.ToString());
                     toolTip.Append("</td></tr>");
                     toolTip.Append("</table></td></tr>");
@@ -767,10 +767,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔE.ToString());
                     toolTip.Append("</td></tr>");
-                    //toolTip.Append("<tr><td>&Delta;H</td><td>");
-                    //toolTip.Append(DR[0].ΔE.ToString());
-                    //toolTip.Append("</td></tr>");
-
+                  
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -779,7 +776,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(DR[_Index].Δa.ToString());
                     toolTip.Append("</td></tr>");
 
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td>S<td>");
+                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaB) + "</td><td>");
                     toolTip.Append(DR[_Index].Δb.ToString());
                     toolTip.Append("</td></tr>");
 
