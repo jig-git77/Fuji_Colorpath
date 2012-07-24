@@ -243,15 +243,8 @@
                                 </ItemTemplate>
                                 <HeaderStyle Width="40px" />
                          </telerik:GridTemplateColumn>                       
-                    </Columns>
-                    <EditFormSettings>
-                        <EditColumn FilterControlAltText="Filter EditCommandColumn column">
-                        </EditColumn>
-                    </EditFormSettings>
-                    <PagerStyle AlwaysVisible="True" />
-                </MasterTableView>
-                <FilterMenu EnableImageSprites="False">
-                </FilterMenu>
+                    </Columns>                    
+                </MasterTableView>            
             </telerik:RadGrid>
         </ContentTemplate>      
     </asp:UpdatePanel>

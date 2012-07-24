@@ -127,13 +127,9 @@
                                         <ItemStyle CssClass="breakWord200" />
                                 </telerik:GridTemplateColumn>                                                  
                         </Columns>
-                        <EditFormSettings>
-                            <EditColumn FilterControlAltText="Filter EditCommandColumn column">
-                            </EditColumn>
-                        </EditFormSettings>
+                        
                     </MasterTableView>
-                    <FilterMenu EnableImageSprites="False">
-                    </FilterMenu>
+             
                 </telerik:RadGrid>
             </ContentTemplate>
         </asp:UpdatePanel>

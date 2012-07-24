@@ -251,14 +251,9 @@
                         
                     </Columns>
 
-<EditFormSettings>
-<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
-</EditFormSettings>
 
-<PagerStyle AlwaysVisible="True"></PagerStyle>
                 </MasterTableView>
 
-<FilterMenu EnableImageSprites="False"></FilterMenu>
             </telerik:RadGrid>
        <%-- </ContentTemplate>
         <Triggers>

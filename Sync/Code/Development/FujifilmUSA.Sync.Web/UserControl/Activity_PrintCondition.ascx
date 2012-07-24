@@ -161,13 +161,7 @@
                         DataField="CompanyName" meta:resourcekey="GridBoundColumnResource10">
                     </telerik:GridBoundColumn>                   
                 </Columns>
-
-<EditFormSettings>
-<EditColumn FilterControlAltText="Filter EditCommandColumn column"></EditColumn>
-</EditFormSettings>
             </MasterTableView>
-
-<FilterMenu EnableImageSprites="False"></FilterMenu>
         </telerik:RadGrid>
 
  <%-- </ContentTemplate>
