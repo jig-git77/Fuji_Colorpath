@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using FujifilmUSA.Sync.Common;
@@ -29,11 +28,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            rgDeviceList.PageSize = Common.Utilities.PageSize;
+            rgDeviceList.PageSize = Utilities.PageSize;
             if (!IsPostBack)
             {
-                ViewState["CompanyId"] = 0;
-                ViewState["BranchId"] = 0;
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
                 BindCompanyDropDown();
             }
@@ -47,15 +44,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindBranchDropDown();
             CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
-            ViewState["CompanyId"] = CompanyId;
-            ViewState["BranchId"] = BranchId;
         }
         protected void cmbBranch_SelectedIndexChanged(object sender, EventArgs e)
         {
             CompanyId = string.IsNullOrEmpty(cmbCompany.SelectedValue) ? 0 : Convert.ToInt32(cmbCompany.SelectedValue);
             BranchId = string.IsNullOrEmpty(cmbBranch.SelectedValue) ? 0 : Convert.ToInt32(cmbBranch.SelectedValue);
-            ViewState["CompanyId"] = CompanyId;
-            ViewState["BranchId"] = BranchId;
             rgDeviceList.Rebind();
         }
         protected void rgDeviceList_ItemCommand(object sender, GridCommandEventArgs e)
@@ -75,17 +68,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterdevice.DeviceListByDeviceId();
 
                     SessionManager.Instance.CurrentDevice = SelectedDevice;
-                 
+
                     SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
                     Response.RedirectPermanent("OperationSelection.aspx");
                     break;
             }
         }
-        
+
         protected void rgDeviceList_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
-            CompanyId = Convert.ToInt32(ViewState["CompanyId"]);
-            BranchId = Convert.ToInt32(ViewState["BranchId"]);
             BindDeviceList();
         }
         #endregion
@@ -104,9 +95,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!Page.IsPostBack)
             {
-                if (SessionManager.Instance.CurrentUser.UserCompany != null && SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
+                if (CompanyId > 0)
                 {
-                    cmbCompany.SelectedValue = SessionManager.Instance.CurrentUser.UserCompany.CompanyId.ToString();
+                    cmbCompany.SelectedValue = CompanyId.ToString();
+                }
+                else
+                {
+                    if (SessionManager.Instance.CurrentUser.UserCompany != null && SessionManager.Instance.CurrentUser.UserCompany.CompanyId > 0)
+                    {
+                        cmbCompany.SelectedValue = SessionManager.Instance.CurrentUser.UserCompany.CompanyId.ToString();
+                    }
                 }
             }
             cmbCompany_SelectedIndexChanged(null, null);
@@ -125,9 +123,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (CompanyId > 0)
             {
-                if (SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count > 0 && SessionManager.Instance.CurrentUser.UserBranches[0].BranchId > 0)
+                if (BranchId > 0)
                 {
-                    cmbBranch.SelectedValue = SessionManager.Instance.CurrentUser.UserBranches[0].BranchId.ToString();
+                    cmbBranch.SelectedValue = BranchId.ToString();
+                }
+                else
+                {
+                    if (SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count > 0 &&
+                        SessionManager.Instance.CurrentUser.UserBranches[0].BranchId > 0)
+                    {
+                        cmbBranch.SelectedValue = SessionManager.Instance.CurrentUser.UserBranches[0].BranchId.ToString();
+                    }
                 }
             }
 
@@ -158,8 +164,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewDevice Members
         public int TaskeroUserId { get; set; }
         public int RoleId { get; set; }
-        public int CompanyId { get; set; }
-        public int BranchId { get; set; }
+        public int CompanyId
+        {
+            get
+            {
+                return SessionManager.Instance.SelectedCompany;
+            }
+            set
+            {
+                SessionManager.Instance.SelectedCompany = value;
+            }
+        }
+
+        public int BranchId
+        {
+            get
+            {
+                return SessionManager.Instance.SelectedBranch;
+            }
+            set
+            {
+                SessionManager.Instance.SelectedBranch = value;
+            }
+        }
+
         public MeasurementDevice MeasurementDevice { get; set; }
         public List<MeasurementDevice> MeasurementDevices { get; set; }
         public Dictionary<int, string> BranchList { get; set; }
@@ -169,6 +197,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Device> Devices { get; set; }
         public int DeviceId { get; set; }
         public Device SelectedDevice { get; set; }
-        #endregion      
+        #endregion
     }
 }

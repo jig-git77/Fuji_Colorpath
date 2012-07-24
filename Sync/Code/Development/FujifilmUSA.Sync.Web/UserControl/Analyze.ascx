@@ -71,7 +71,7 @@
         }
     }
 </script>
- <script src="../JS/ChartTooltip.js" type="text/javascript"></script>
+ <script src="JS/ChartTooltip.js" type="text/javascript"></script>
 
 <div class="contant_top">
     &nbsp;</div>
