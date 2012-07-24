@@ -45,8 +45,8 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                                                          {
                                                                                              ChartId = x.ReferenceChartTypeId,
                                                                                              ChartName = x.ChartName,
-                                                                                             //ChartPreview = x.ChartPreview,
-                                                                                             //OriginalChart = x.OriginalChart,
+                                                                                             ChartPreview = x.ChartPreview,
+                                                                                             OriginalChart = x.OriginalChart,
                                                                                              MeasurementDevice =
                                                                                                  (EMeasurementDevice)
                                                                                                  Enum.Parse(typeof (EMeasurementDevice),
