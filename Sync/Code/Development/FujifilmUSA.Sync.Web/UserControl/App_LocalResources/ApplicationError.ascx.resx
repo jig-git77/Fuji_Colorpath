@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lnkLoginResource1.Text" xml:space="preserve">
-    <value />
+    <value>Login page.</value>
   </data>
   <data name="lnkLoginResource1.ToolTip" xml:space="preserve">
-    <value />
+    <value>Login page.</value>
   </data>
   <data name="locGoBackResource1.Text" xml:space="preserve">
     <value>Please click here to go back to</value>

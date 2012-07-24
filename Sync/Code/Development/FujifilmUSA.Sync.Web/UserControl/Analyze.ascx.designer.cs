@@ -496,7 +496,7 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl ucReportSingle;
+        protected global::FujifilmUSA.Sync.Web.UserControl.ReportSingleMeasurement ucReportSingle;
         
         /// <summary>
         /// hdnSelectedTabIndex control.

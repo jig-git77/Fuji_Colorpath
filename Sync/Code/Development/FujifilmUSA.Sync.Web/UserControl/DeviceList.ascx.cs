@@ -121,18 +121,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
 
-            if (CompanyId > 0)
+            if (!Page.IsPostBack)
             {
-                if (BranchId > 0)
+                if (CompanyId > 0)
                 {
-                    cmbBranch.SelectedValue = BranchId.ToString();
-                }
-                else
-                {
-                    if (SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count > 0 &&
-                        SessionManager.Instance.CurrentUser.UserBranches[0].BranchId > 0)
+                    if (BranchId > 0)
                     {
-                        cmbBranch.SelectedValue = SessionManager.Instance.CurrentUser.UserBranches[0].BranchId.ToString();
+                        cmbBranch.SelectedValue = BranchId.ToString();
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentUser.UserBranches != null && SessionManager.Instance.CurrentUser.UserBranches.Count > 0 &&
+                            SessionManager.Instance.CurrentUser.UserBranches[0].BranchId > 0)
+                        {
+                            cmbBranch.SelectedValue = SessionManager.Instance.CurrentUser.UserBranches[0].BranchId.ToString();
+                        }
                     }
                 }
             }
