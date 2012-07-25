@@ -472,6 +472,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid GridPatchDetails;
         
         /// <summary>
+        /// UpdatePanel6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+        
+        /// <summary>
         /// Tr2 control.
         /// </summary>
         /// <remarks>
@@ -490,13 +499,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.ImageButton ImgBtn_Report;
         
         /// <summary>
-        /// ucReportSingle control.
+        /// TblGeneratePDFReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ReportSingleMeasurement ucReportSingle;
+        protected global::System.Web.UI.HtmlControls.HtmlTable TblGeneratePDFReport;
+        
+        /// <summary>
+        /// FRMGeneratePDFReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FRMGeneratePDFReport;
         
         /// <summary>
         /// hdnSelectedTabIndex control.

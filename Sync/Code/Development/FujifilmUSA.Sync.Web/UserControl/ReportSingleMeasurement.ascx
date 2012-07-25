@@ -4,14 +4,16 @@
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
-    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="false">
+    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="true">
         <div style="overflow: auto; height:400px;">
             <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
                 <tr>
-                    <td align="center" valign="top">
+                    <td valign="top">
+                        <asp:TextBox ID="txt_MeasurementID" runat="server"></asp:TextBox>
+                        <br />
                         Target Versus Actual AB Plot
                         <br />
-                        <%--<asp:Chart ID="CHART_TargetVersusActualAB" runat="server" BackImageMode="Scaled"
+                        <asp:Chart ID="CHART_TargetVersusActualAB" runat="server" BackImageMode="Scaled"
                             BackImage="~/Images/SingleMeasurement_PointBack.gif" Height="218px" ImageType="Jpeg"
                             Width="218px" ImageUrl="~/UploadFiles/temp/SingleMeasurement_Page1_TargetVersusActualAB">
                             <Legends>
@@ -19,40 +21,40 @@
                                 </asp:Legend>
                             </Legends>
                             <Series>
-                                <asp:Series Name="Series0" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series0" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series1" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series1" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series2" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series2" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series3" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series3" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series4" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series4" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series5" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series5" ChartType="Polar" 
                                     MarkerSize="9" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series6" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series6" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series7" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series7" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series8" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series8" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series9" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series9" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series10" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series10" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
-                                <asp:Series Name="Series11" ChartType="Polar" CustomAttributes="PolarDrawingStyle=Marker"
+                                <asp:Series Name="Series11" ChartType="Polar" 
                                     MarkerSize="6" MarkerStyle="Circle" ShadowOffset="1">
                                 </asp:Series>
                             </Series>
@@ -64,108 +66,108 @@
                             <ChartAreas>
                                 <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
                                     <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="100" Minimum="-100"
-                                        LineStyle="NotSet" >
+                                         LineDashStyle="NotSet" >
                                         <MajorGrid Enabled="False" />
                                         <MajorTickMark Enabled="false" />
                                         <LabelStyle Enabled="False" />
                                     </AxisY>
-                                    <AxisX Margin="False" TitleAlignment="Near" Maximum="100" Minimum="-100" LineStyle="NotSet">
+                                    <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="100" Minimum="-100" LineDashStyle="NotSet">
                                         <MajorGrid Enabled="False" />
                                         <MajorTickMark Enabled="false" />
                                         <LabelStyle Enabled="False" />
                                     </AxisX>
                                 </asp:ChartArea>
                             </ChartAreas>
-                        </asp:Chart>--%>
+                        </asp:Chart>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         Summary Delta Value
                         <br />
-                        <%--<asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="340px" Height="290px"
+                        <asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="340px" Height="290px"
                             ImageUrl="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_Delta" ImageType="Jpeg">
-                            <BorderSkin FrameBackGradientEndColor="White" FrameBorderColor="Black" FrameBorderWidth="2"
-                                SkinStyle="Raised" FrameBackColor="White"></BorderSkin>
-                            <UI>
+                            <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
+                                SkinStyle="Raised" BackColor="White"></BorderSkin>
+                           <%-- <UI>
                                 <Toolbar BackColor="White" BorderColor="LightSlateGray">
                                     <BorderSkin FrameBackGradientEndColor="LightBlue" PageColor="Transparent" SkinStyle="Raised"
                                         FrameBackColor="SteelBlue"></BorderSkin>
                                 </Toolbar>
-                            </UI>
+                            </UI>--%>
                             <Series>
-                                <asp:Series Name="Series0" BackGradientType="DiagonalRight" BorderColor="26, 59, 105"
+                                <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
                                     BorderWidth="0" Color="#D4E8FA" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                    Label="" CustomAttributes="LabelStyle=Top,DrawingStyle=Cylinder" ShowInLegend="true">
+                                    Label=""  IsVisibleInLegend="true">
                                 </asp:Series>
-                                <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" CustomAttributes="DrawingStyle=Cylinder"
-                                    ShowInLegend="false">
+                                <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
+                                    IsVisibleInLegend="false">
                                 </asp:Series>
-                                <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" CustomAttributes="DrawingStyle=Cylinder"
-                                    ShowInLegend="false" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
+                                <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" 
+                                    IsVisibleInLegend="false" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                 </asp:Series>
                             </Series>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1">
-                                    <Area3DStyle YAngle="0" XAngle="0" Enable3D="true" RightAngleAxes="False" WallWidth="0"
-                                        Clustered="True"></Area3DStyle>
-                                    <AxisX Interval="Auto" Enabled="true" LabelsAutoFit="False" Reverse="true">
+                                    <Area3DStyle Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
+                                        IsClustered="True"></Area3DStyle>
+                                    <AxisX Interval="Auto" Enabled="true" IsLabelAutoFit="False" IsReversed="true">
                                         <MajorGrid Enabled="false" LineColor="Beige"></MajorGrid>
                                         <MajorTickMark Enabled="false" />
                                         <LabelStyle Font="Verdana, 7pt" />                                                                        
                                     </AxisX>
-                                    <AxisY Enabled="True" LabelsAutoFit="False">
+                                    <AxisY Enabled="True" IsLabelAutoFit="False">
                                         <MajorGrid LineColor="Beige"></MajorGrid>
-                                        <LabelStyle Format="###" Font="Verdana, 7pt" FontColor="Black" />
+                                        <LabelStyle Format="###" Font="Verdana, 7pt" ForeColor="Black" />
                                     </AxisY>
                                 </asp:ChartArea>
                             </ChartAreas>
-                        </asp:Chart>--%>
+                        </asp:Chart>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         Summary Delta E Value
                         <br />
-                        <%--<asp:Chart ID="ChartResultSummary_DeltaEValue" runat="server" Width="340px" Height="400px"
+                        <asp:Chart ID="ChartResultSummary_DeltaEValue" runat="server" Width="340px" Height="400px"
                             ImageUrl="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_DeltaEValue"
                             ImageType="Jpeg">
-                            <BorderSkin FrameBackGradientEndColor="White" FrameBorderColor="Black" FrameBorderWidth="2"
-                                SkinStyle="Raised" FrameBackColor="White"></BorderSkin>
-                            <UI>
+                            <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
+                                SkinStyle="Raised" BackColor="White"></BorderSkin>
+                          <%--  <UI>
                                 <Toolbar BackColor="White" BorderColor="LightSlateGray">
                                     <BorderSkin FrameBackGradientEndColor="LightBlue" PageColor="Transparent" SkinStyle="Raised"
                                         FrameBackColor="SteelBlue"></BorderSkin>
                                 </Toolbar>
-                            </UI>
+                            </UI>--%>
                             <Series>
-                                <asp:Series Name="Series0" BackGradientType="DiagonalRight" BorderColor="26, 59, 105"
+                                <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
                                     BorderWidth="0" Color="#D4E8FA" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                    Label="" CustomAttributes="LabelStyle=Top,DrawingStyle=Cylinder" ShowInLegend="true">
+                                    Label=""  IsVisibleInLegend="true">
                                 </asp:Series>
-                                <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" CustomAttributes="DrawingStyle=Cylinder"
-                                    ShowInLegend="false">
+                                <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray"
+                                    IsVisibleInLegend="false">
                                 </asp:Series>
-                                <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" CustomAttributes="DrawingStyle=Cylinder"
-                                    ShowInLegend="false" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
+                                <asp:Series Name="Series2" BorderWidth="0" Color="Transparent" 
+                                    IsVisibleInLegend="false" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                 </asp:Series>
                             </Series>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1">
-                                    <Area3DStyle YAngle="0" XAngle="0" Enable3D="true" RightAngleAxes="False" WallWidth="0"
-                                        Clustered="True"></Area3DStyle>
-                                    <AxisX Interval="Auto" Enabled="true" LabelsAutoFit="False" Reverse="true">
+                                    <Area3DStyle Enable3D="false" IsRightAngleAxes="False" WallWidth="0"
+                                        IsClustered="True"></Area3DStyle>
+                                    <AxisX Interval="Auto" Enabled="true" IsLabelAutoFit="False" IsReversed="true">
                                         <MajorGrid Enabled="false" LineColor="Beige"></MajorGrid>
                                         <MajorTickMark Enabled="false" />
                                         <LabelStyle Font="Verdana, 7pt" />                                                                        
                                     </AxisX>
-                                    <AxisY Enabled="True" LabelsAutoFit="False">
+                                    <AxisY Enabled="True" IsLabelAutoFit="False">
                                         <MajorGrid LineColor="Beige"></MajorGrid>
-                                        <LabelStyle Format="###" Font="Verdana, 7pt" FontColor="Black" />
+                                        <LabelStyle Format="###" Font="Verdana, 7pt" ForeColor="Black" />
                                     </AxisY>
                                 </asp:ChartArea>
                             </ChartAreas>
-                        </asp:Chart>--%>
+                        </asp:Chart>
                     </td>
                 </tr>
                 <tr>

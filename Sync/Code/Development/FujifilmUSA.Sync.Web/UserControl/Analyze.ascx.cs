@@ -173,6 +173,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
                 }
+               
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId;
+                FRMGeneratePDFReport.Attributes.Add("src", path);
+                FRMGeneratePDFReport.Style.Add("display", "");
+
                 From_ΔE = Rbl_DT_E.SelectedValue;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
@@ -199,10 +204,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void FillAllTabsData()
         {
             MeasurementId = 0;
+          
             if (hdMeasurement.Value != "")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
+
+            //TextBox txt_MeasurementID = ucReportSingle.FindControl("txt_MeasurementID") as TextBox;
+            //txt_MeasurementID.Text = MeasurementId.ToString();
+
             From_ΔE = Rbl_DT_E.SelectedValue;
             lblE_PryPatches.Text = From_ΔE;
             _presenterAnalyze.GetInkPaperChart();

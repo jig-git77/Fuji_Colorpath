@@ -2,7 +2,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/ReportSingleMeasurement.ascx" TagName="Report" TagPrefix="uc" %>
 
 <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
@@ -1081,27 +1080,42 @@
   </section>
 
   <section id="tab5" class="contantbox tabcontant hideclass">
-        <div class="tab_top">&nbsp;</div>
+      <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart">
-        <div class="float_l" style="padding-left: 10px;" >
-       
-                 <table cellpadding="0" cellspacing="0" width="100%">
-                        <tr id="Tr2" runat="server" visible="true">                                       
-                            <td>
-                                        
+           <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" > 
+          <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+              <ContentTemplate>         
+           
+                 <table border="1" cellpadding="0" cellspacing="0" width="650px">
+                        <tr id="Tr2" runat="server" visible="false">                                       
+                            <td>                                        
                                 <asp:ImageButton ID="ImgBtn_Report" runat="server" 
                                     ImageUrl="../Images/Sync DLP Report_preview.jpg" 
                                     onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
                                     meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
                             </td>
-                        </tr>  
+                        </tr>                                                    
                         <tr>
-                            <td>                                     
-                                    <uc:Report ID="ucReportSingle" runat="server" Visible="false" />
+                            <td>
+                                <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 640px;"
+                                                        visible="true" cellpadding="0" cellspacing="0" class="TABLE1">
+                                                        <tr>
+                                                            <td valign="top">
+                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 600px;
+                                                                    width: 100%; display: none" frameborder="0" scrolling="yes"></iframe>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                             </td>
-                        </tr>                                 
-                 </table>         
+                        </tr>
+                 </table>  
+               </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" /> 
+                       <%-- <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%> 
+                    </Triggers>  
+           </asp:UpdatePanel>       
         </div>
         <div class="clear"></div>
         </div>                            	

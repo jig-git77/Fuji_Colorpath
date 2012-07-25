@@ -103,6 +103,7 @@
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
+    <Content Include="Images\Chart-Red-Image-Vertical.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\collapsed.png" />
@@ -130,6 +131,7 @@
     <Content Include="Images\Reference-Chart-management.jpg" />
     <Content Include="Images\Reference-Chart.jpg" />
     <Content Include="Images\roundedcornr_bg.png" />
+    <Content Include="Images\SingleMeasurement_PointBack.gif" />
     <Content Include="Images\sourceprofile-management.png" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
@@ -142,6 +144,7 @@
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
+    <Content Include="ReportSingleMeasurement.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
     <Content Include="JQuery\jquery.ui.datepicker.js" />
@@ -662,6 +665,13 @@
     </Compile>
     <Compile Include="ReferenceChartManagement.aspx.designer.cs">
       <DependentUpon>ReferenceChartManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSingleMeasurement.aspx.cs">
+      <DependentUpon>ReportSingleMeasurement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportSingleMeasurement.aspx.designer.cs">
+      <DependentUpon>ReportSingleMeasurement.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
@@ -1300,6 +1310,7 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="tempImages\" />
+    <Folder Include="UploadFiles\temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Download\Colorpath MacPlugin Installer.zip" />
@@ -1906,7 +1917,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
