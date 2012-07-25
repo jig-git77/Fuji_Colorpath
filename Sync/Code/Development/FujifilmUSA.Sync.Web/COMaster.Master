@@ -29,19 +29,19 @@
         }
     </style>
     <script type="text/javascript" language="javascript">
-        $(document).ready(function () {
-            window.onmousemove = equal_height;
-            window.onmousedown = equal_height;
-            window.onkeydown = equal_height;
+//        $(document).ready(function () {
+//            window.onmousemove = equal_height;
+//            window.onmousedown = equal_height;
+//            window.onkeydown = equal_height;
 
-            //adding the event listerner for Mozilla
-            if (window.addEventListener)
-                document.addEventListener('DOMMouseScroll', equal_height, false);
+//            //adding the event listerner for Mozilla
+//            if (window.addEventListener)
+//                document.addEventListener('DOMMouseScroll', equal_height, false);
 
-            //for IE/OPERA etc
-            document.onmousewheel = equal_height;
+//            //for IE/OPERA etc
+//            document.onmousewheel = equal_height;
 
-        });
+//        });
     </script>
 </head>
 <body>
