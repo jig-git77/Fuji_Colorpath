@@ -60,7 +60,7 @@ namespace ServiceDemo
                                                                                  {
                                                                                      UserName = _userName,
                                                                                      UserPassword = _userPassword,
-                                                                                     //SecurityToken = _securityToken
+                                                                                     SecurityToken = _securityToken
                                                                                  });
                             dgResult.ItemsSource = getDeviceListresponse.Devices;
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getDeviceListresponse.Message.Message, getDeviceListresponse.Count);
