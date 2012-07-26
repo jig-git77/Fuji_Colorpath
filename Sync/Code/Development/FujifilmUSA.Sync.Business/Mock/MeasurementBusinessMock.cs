@@ -68,6 +68,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_Gray>();
         }
+
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE)
+        {
+            return new DataSet();
+        }
         #endregion
 
         #region ITaskBase Members

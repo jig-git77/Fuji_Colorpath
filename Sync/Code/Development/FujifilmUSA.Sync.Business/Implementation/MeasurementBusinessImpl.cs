@@ -419,6 +419,23 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE)
+        {
+            var measurements = new DataSet();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "Report.GetSingleMeasurement",
+                                new object[] { MeasurementId, From_ΔE });
+                    measurements = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
+            return measurements;
+        }
 
         #endregion
 

@@ -19,5 +19,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId);
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId);
+        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE);
     }
 }

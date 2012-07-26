@@ -1102,7 +1102,7 @@
                                                         visible="true" cellpadding="0" cellspacing="0" class="TABLE1">
                                                         <tr>
                                                             <td valign="top">
-                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 600px;
+                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 2600px;
                                                                     width: 100%; display: none" frameborder="0" scrolling="yes"></iframe>
                                                             </td>
                                                         </tr>
