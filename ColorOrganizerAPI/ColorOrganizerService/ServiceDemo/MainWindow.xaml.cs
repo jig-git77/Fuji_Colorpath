@@ -112,6 +112,7 @@ namespace ServiceDemo
                                 SecurityToken = _securityToken,
                                 ProjectId = Convert.ToInt32(txtProjectId.Text)
                             });
+                        
                             dgResult.ItemsSource = new List<ProjectInformation>() { getProjInformationresponse.ProjectInformation };
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getProjInformationresponse.Message.Message, getProjInformationresponse.Count);
                             #endregion
