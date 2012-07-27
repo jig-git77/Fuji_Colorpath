@@ -120,7 +120,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objReportPDF.DS_Common = Ds;
                 objReportPDF.MakePDF();
 
-                // === After generat and save PDF file, Download it at a time === //
+                // === After generate and save PDF file, Download it at a time === //
                 //Common.Utilities.DownloadFile(objReportPDF.PDFPath, objReportPDF.PDF_NAME, objReportPDF.PDF_NAME);
             }
             catch (Exception Ex)
@@ -623,19 +623,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindLABDeviationGraph(DataTable DT)
         {
             try
-            {
-            
-                //Double LCValue = 0;
-                //Double LMaxValue = 0;
-                //Double LMinValue = 0;
-                //Double aCValue = 0;
-                //Double aMaxValue = 0;
-                //Double aMinValue = 0;
-                //Double bCValue = 0;
-                //Double bMaxValue = 0;
-                //Double bMinValue = 0;
-
-            
+            {           
+             
                 if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
                 {
                     CHRT_GrayDeviation_L.Series["Series1"].Points.Clear();

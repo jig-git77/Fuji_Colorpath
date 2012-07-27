@@ -1087,8 +1087,8 @@
           <asp:UpdatePanel ID="UpdatePanel6" runat="server">
               <ContentTemplate>         
            
-                 <table border="1" cellpadding="0" cellspacing="0" width="650px">
-                        <tr id="Tr2" runat="server" visible="false">                                       
+                 <table cellpadding="0" cellspacing="0" width="650px">
+                        <tr id="Tr2" runat="server" visible="true">                                       
                             <td>                                        
                                 <asp:ImageButton ID="ImgBtn_Report" runat="server" 
                                     ImageUrl="../Images/Sync DLP Report_preview.jpg" 
@@ -1096,13 +1096,13 @@
                                     meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
                             </td>
                         </tr>                                                    
-                        <tr>
+                        <tr >
                             <td>
                                 <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 640px;"
-                                                        visible="true" cellpadding="0" cellspacing="0" class="TABLE1">
+                                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="false">
                                                         <tr>
                                                             <td valign="top">
-                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 2600px;
+                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 600px;
                                                                     width: 100%; display: none" frameborder="0" scrolling="yes"></iframe>
                                                             </td>
                                                         </tr>

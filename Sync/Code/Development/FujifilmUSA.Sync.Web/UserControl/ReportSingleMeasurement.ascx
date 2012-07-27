@@ -5,7 +5,7 @@
 
  <%------------------------ Report Generate Structure -------------------------%>
     <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="true">
-        <div style="overflow: auto; height:2600px;">
+        <div style="overflow: auto; height:600px;">
             <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
                 <tr>
                     <td valign="top">
