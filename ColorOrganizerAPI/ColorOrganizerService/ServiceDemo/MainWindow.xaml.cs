@@ -44,9 +44,15 @@ namespace ServiceDemo
 
         private void btnCallService_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsAnyEndpointChecked)
+            {
+                MessageBox.Show("Please select anyone endpoint");
+                return;
+            }
+
             _userName = txtUserName.Text;
-            _userPassword = CryptHelper.EncryptString(txtPassword.Password, ConfigurationManager.AppSettings["XmfColorOrganizerEncryptionKey"]);            
-            using (var client = new Sync4DServiceContractClient())
+            _userPassword = CryptHelper.EncryptString(txtPassword.Password, ConfigurationManager.AppSettings["XmfColorOrganizerEncryptionKey"]);
+            using (var client = ServiceEndPointAddress)
             {
                 try
                 {
@@ -112,7 +118,7 @@ namespace ServiceDemo
                                 SecurityToken = _securityToken,
                                 ProjectId = Convert.ToInt32(txtProjectId.Text)
                             });
-                        
+
                             dgResult.ItemsSource = new List<ProjectInformation>() { getProjInformationresponse.ProjectInformation };
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getProjInformationresponse.Message.Message, getProjInformationresponse.Count);
                             #endregion
@@ -153,16 +159,22 @@ namespace ServiceDemo
                 }
             }
         }
-                
+
         private void btnCallAllServices_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsAnyEndpointChecked)
+            {
+                MessageBox.Show("Please select anyone endpoint");
+                return;
+            }
+
             List<ServiceMessages> methodCallResult = new List<ServiceMessages>();
             _userName = txtUserName.Text;
             _userPassword = CryptHelper.EncryptString(txtPassword.Password, ConfigurationManager.AppSettings["XmfColorOrganizerEncryptionKey"]);
             _securityToken = ConfigurationManager.AppSettings["SecurityToken"];
             succeeded = 0;
             failed = 0;
-            using (var client = new Sync4DServiceContractClient())
+            using (var client = ServiceEndPointAddress)
             {
 
                 try
@@ -175,7 +187,7 @@ namespace ServiceDemo
                         UserPassword = _userPassword,
                         SecurityToken = _securityToken
                     });
-                    methodCallResult.Add(new ServiceMessages(){ Value = PrepareMessage("Get Device List", false, getDeviceListresponse.Count)});
+                    methodCallResult.Add(new ServiceMessages() { Value = PrepareMessage("Get Device List", false, getDeviceListresponse.Count) });
                     //methodCallResult.Add(string.Format("Get Device List - {0} - {1}", getDeviceListresponse.Message.Message, getDeviceListresponse.Count));
                     succeeded++;
                     #endregion
@@ -269,7 +281,7 @@ namespace ServiceDemo
                             RipSettings = txtRipSettings.Text
                         });
                     methodCallResult.Add(new ServiceMessages() { Value = PrepareMessage("Store Temp Project Information", false, storeTempProjectInformationresponse.Count) });
-                    //methodCallResult.Add(string.Format("Store Temp Project Information - {0} - {1}", storeTempProjectInformationresponse.Message.Message, storeTempProjectInformationresponse.Count));
+                    txtProjectTempId.Text = storeTempProjectInformationresponse.ProjectInfoId.ToString();                    
                     succeeded++;
                     #endregion
                 }
@@ -280,7 +292,7 @@ namespace ServiceDemo
 
 
 
-                dgResult.ItemsSource = methodCallResult;          
+                dgResult.ItemsSource = methodCallResult;
                 lblStatus.Text = String.Format("  =========== Service Calls: {0} succeeded, {1} failed ============", succeeded, failed);
             }
 
@@ -298,15 +310,15 @@ namespace ServiceDemo
                 , count
                 , string.IsNullOrEmpty(message) ? string.Empty : ", " + message);
         }
-       
+
         private string PrepareErrorMessage(FaultException<ServiceFault> exception, string methodName)
         {
-            string result= string.Empty;
+            string result = string.Empty;
             switch (exception.Detail.FaultErrorCode)
             {
                 case ErrorCode.DataNotFound:
                     succeeded++;
-                    result = PrepareMessage(methodName,false,0);
+                    result = PrepareMessage(methodName, false, 0);
                     break;
 
                 case ErrorCode.None:
@@ -316,10 +328,77 @@ namespace ServiceDemo
                 case ErrorCode.UnKnown:
                 case ErrorCode.Internal:
                     failed++;
-                    result = PrepareMessage(methodName, true, 0, string.Format("ErrorCode/Message: {0}/{1}", exception.Detail.FaultErrorCode, exception.Detail.FaultMessage));                   
+                    result = PrepareMessage(methodName, true, 0, string.Format("ErrorCode/Message: {0}/{1}", exception.Detail.FaultErrorCode, exception.Detail.FaultMessage));
                     break;
             }
             return result;
+        }
+
+        private void rbtnServiceEndPoints_Click(object sender, RoutedEventArgs e)
+        {
+            if (rbtnLocal.IsChecked.HasValue ? rbtnLocal.IsChecked.Value : false)
+                tbLocal.Visibility = Visibility.Visible;
+            else
+                tbLocal.Visibility = Visibility.Hidden;
+
+            if (rbtnDevTaskero.IsChecked.HasValue ? rbtnDevTaskero.IsChecked.Value : false)
+                tbDevTaskero.Visibility = Visibility.Visible;
+            else
+                tbDevTaskero.Visibility = Visibility.Hidden;
+
+            if (rbtnOther.IsChecked.HasValue ? rbtnOther.IsChecked.Value : false)
+                txtOther.Visibility = Visibility.Visible;
+            else
+                txtOther.Visibility = Visibility.Hidden;
+        }
+
+        protected Sync4DServiceContractClient ServiceEndPointAddress
+        {
+            get
+            {
+                //BasicHttpBinding binding = new BasicHttpBinding(BasicHttpSecurityMode.None);
+                EndpointAddress epa = new EndpointAddress(tbLocal.Text);
+                if (rbtnLocal.IsChecked.HasValue ? rbtnLocal.IsChecked.Value : false)
+                {
+                    epa = new EndpointAddress(tbLocal.Text);
+                }
+                else if (rbtnDevTaskero.IsChecked.HasValue ? rbtnDevTaskero.IsChecked.Value : false)
+                {
+                    epa = new EndpointAddress(tbDevTaskero.Text);
+                }
+                else if (rbtnOther.IsChecked.HasValue ? rbtnOther.IsChecked.Value : false)
+                {
+                    epa = new EndpointAddress(txtOther.Text);
+                }
+
+                Sync4DServiceContractClient client = new Sync4DServiceContractClient("BasicHttpBinding_ISync4DServiceContract", epa);
+                return client;
+            }
+        }
+
+        protected bool IsAnyEndpointChecked
+        {
+            get
+            {
+                bool isSelected = false;
+                if (rbtnLocal.IsChecked.HasValue ? rbtnLocal.IsChecked.Value : false)
+                {
+                    isSelected = true;
+                }
+                else if (rbtnDevTaskero.IsChecked.HasValue ? rbtnDevTaskero.IsChecked.Value : false)
+                {
+                    isSelected = true;
+                }
+                else if (rbtnOther.IsChecked.HasValue ? rbtnOther.IsChecked.Value : false)
+                {
+                    isSelected = true;
+                }
+                else
+                {
+                    isSelected = false;
+                }
+                return isSelected;
+            }
         }
     }
 
