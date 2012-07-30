@@ -135,12 +135,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                    //if (!project.HasDLP)
-                    //{
-                    //    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                    //    imgStatus.ToolTip = imgStatus.AlternateText = "Certify";
-                    //}
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");                 
                     break;
                 case EOptimizeRunStatus.Certify:
                     if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))

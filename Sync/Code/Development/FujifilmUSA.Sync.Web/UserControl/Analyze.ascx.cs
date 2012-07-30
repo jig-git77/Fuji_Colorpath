@@ -119,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                               ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "<span>"
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "<span>";//Create DLP - Next
             if (!Page.IsPostBack)
-            {
+            {               
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//

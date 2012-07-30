@@ -196,7 +196,9 @@
                                                         <telerik:RadComboBoxItem Text="Open" Value="Open" runat="server" 
                                                             meta:resourcekey="RadComboBoxItemResource2" Owner="" />
                                                         <telerik:RadComboBoxItem Text="Closed" Value="Closed" runat="server" 
-                                                            meta:resourcekey="RadComboBoxItemResource3" Owner="" />                                                      
+                                                            meta:resourcekey="RadComboBoxItemResource3" Owner="" />  
+                                                        <telerik:RadComboBoxItem Text="Certify" Value="Certify" runat="server" 
+                                                            meta:resourcekey="RadComboBoxItemResource4" Owner="" />                                                         
                                                     </Items>
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">

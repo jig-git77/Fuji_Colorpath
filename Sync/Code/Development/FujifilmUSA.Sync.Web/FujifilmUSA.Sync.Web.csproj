@@ -79,6 +79,7 @@
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="ApplicationError.aspx" />
+    <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
     <Content Include="COAnalyze.aspx" />
     <Content Include="COMeasurement.aspx" />
@@ -483,6 +484,13 @@
     </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowserTest.aspx.cs">
+      <DependentUpon>BrowserTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowserTest.aspx.designer.cs">
+      <DependentUpon>BrowserTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Chart\AnalyzeChartManager.cs" />
     <Compile Include="App_GlobalResources\ResourceMessages.Designer.cs">
@@ -1917,7 +1925,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
