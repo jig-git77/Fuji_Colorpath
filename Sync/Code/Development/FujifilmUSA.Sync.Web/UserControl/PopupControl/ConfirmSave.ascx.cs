@@ -82,7 +82,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
                         _presenterConfirmSave.GetLastRunStatus();
 
-                        if (LastRunStatus == "Certify")
+                        if (LastRunStatus == EOptimizeRunStatus.Certify)
                         {
                             lbtnYes.Visible = false;
                         }
@@ -131,7 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             MasterRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-            _presenterConfirmSave.CloseOptimizeRun();
+            _presenterConfirmSave.CertifyOptimizeRun();
 
             if (!IsErrorOccured)
             {
@@ -155,7 +155,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<int> MeasurementIds { get; set; }
         public Entity.Project Project { get; set; }
         public string ProfileDescription { get; set; }
-        public string LastRunStatus { get; set; }
+        public EOptimizeRunStatus LastRunStatus { get; set; }
         #endregion
 
     }

@@ -79,6 +79,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certification.
+        /// </summary>
+        internal static string CertificationStatusText {
+            get {
+                return ResourceManager.GetString("CertificationStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected company?.
         /// </summary>
         internal static string CompanyManagement_DeleteCompany_Confirmation {
@@ -93,6 +102,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string DeviceManagement_DeleteDevice_Confirmation {
             get {
                 return ResourceManager.GetString("DeviceManagement_DeleteDevice_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DLP.
+        /// </summary>
+        internal static string DLPText {
+            get {
+                return ResourceManager.GetString("DLPText", resourceCulture);
             }
         }
         
@@ -1605,6 +1623,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation {
             get {
                 return ResourceManager.GetString("MeasurementDeviceList_DeleteMeasurementDevice_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string OpenStatusText {
+            get {
+                return ResourceManager.GetString("OpenStatusText", resourceCulture);
             }
         }
         

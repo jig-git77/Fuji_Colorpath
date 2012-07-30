@@ -11,6 +11,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<int> MeasurementIds { get; set; }
         Project Project { get; set; }
         string ProfileDescription { get; set; }
-        string LastRunStatus { get; set; }
+        EOptimizeRunStatus LastRunStatus { get; set; }
     }
 }

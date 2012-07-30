@@ -26,34 +26,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             _presenterLeftMenuProjectItem = new PresenterLeftMenuProjectItem(this);
         }
-      
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             lnkRunName.Text = ItemName;
 
-          
+
             switch (ItemLevel)
             {
                 case ELeftMenuItemLevel.OptimizeRun:
                     if (CurrentRun.Status == EOptimizeRunStatus.Closed)
                     {
                         lnkMeasurement.Visible = false;
-                        
-                        //----------If current run is closed (certify) run-----//
-                        if (!CurrentRun.HasProfile)
-                        {
-                            lnkDownload.Visible = false;                            
+                    }
+                    //----------If current run is closed (certify) run-----//
+                    else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
+                    {
+                        lnkMeasurement.Visible = false;
+                        lnkDownload.Visible = false;
 
-                           //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
-                            if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) != 3)
+                        //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
+                        if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) != 3)
+                        {
+                            //------If current run is closed (certify) and it is last run of this project--------//
+                            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
                             {
-                                //------If current run is closed (certify) and it is last run of this project--------//
-                                if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
-                                {
-                                    lnkAddRun.Visible = true;
-                                }
+                                lnkAddRun.Visible = true;
                             }
-                        }                       
+                        }
                     }
 
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 1)
@@ -68,15 +68,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lnkMeasurement.Visible = false;
                             }
                             else
-                            {                             
+                            {
                                 //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
-                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 && SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed)
+                                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 &&
+                                    (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed ||
+                                    SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
                                 {
                                     btnRunDelete.Visible = false;
                                 }
                             }
                         }
-                    }                   
+                    }
 
                     if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
                     {
@@ -100,9 +102,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             lnkDownload.ForeColor = System.Drawing.Color.Silver;
                         }
                         else
-                        {                         
+                        {
                             if (!CurrentRun.HasProfile)
-                            {                             
+                            {
                                 lnkDownload.ForeColor = System.Drawing.Color.Silver;
                             }
                         }
@@ -182,11 +184,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
             MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-            RunStatus = "";
-            if (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentProject.OptimizeRuns.Last().HasProfile)
-            {
-                RunStatus = "Certify";
-            }
+            //if (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentProject.OptimizeRuns.Last().HasProfile)
+            //{
+            RunStatus = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status;
+            //}
             _presenterLeftMenuProjectItem.DeleteOptimizeRun();
 
             if (!IsErrorOccured)
@@ -211,7 +212,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region IViewLeftMenuProjectItem Members
 
-        public int ProjectId { get; set; }   
+        public int ProjectId { get; set; }
 
         public Entity.Project Project { get; set; }
 
@@ -219,10 +220,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int MasterRunID { get; set; }
 
-        public string RunStatus { get; set; }
+        public EOptimizeRunStatus RunStatus { get; set; }
 
         #endregion
 
-       
+
     }
 }

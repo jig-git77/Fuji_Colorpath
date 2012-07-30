@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Entity
     {
         Open = 1,
         Closed = 2,
-        //Certify = 3,
+        Certify = 3,
         //NotUsed = 4
     }
 

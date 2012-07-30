@@ -642,4 +642,13 @@
   <data name="EUVIncludedMode_UVCut" xml:space="preserve">
     <value>UV Cut</value>
   </data>
+  <data name="CertificationStatusText" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="DLPText" xml:space="preserve">
+    <value>DLP</value>
+  </data>
+  <data name="OpenStatusText" xml:space="preserve">
+    <value>Open</value>
+  </data>
 </root>

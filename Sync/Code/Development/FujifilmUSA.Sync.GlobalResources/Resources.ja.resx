@@ -642,4 +642,13 @@
   <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected user?_ja</value>
   </data>
+  <data name="CertificationStatusText" xml:space="preserve">
+    <value>Certification_ja</value>
+  </data>
+  <data name="DLPText" xml:space="preserve">
+    <value>DLP_ja</value>
+  </data>
+  <data name="OpenStatusText" xml:space="preserve">
+    <value>Open_ja</value>
+  </data>
 </root>

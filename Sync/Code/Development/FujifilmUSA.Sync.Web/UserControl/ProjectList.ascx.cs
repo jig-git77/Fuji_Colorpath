@@ -111,42 +111,50 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var days = (DateTime.Now - project.CreateDate).TotalDays;
 
 
-                switch (project.Status)
-                {
-                    case EOptimizeRunStatus.Open:
-                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
-                        {
-                            btnSelect.Attributes.Add("onclick",
-                                                     "javascript: return ShowOpenPrintConditionWindow('" +
-                                                     project.ProjectId + "','" + project.ProjectName + "','" +
-                                                     Math.Round(days, 1) +
-                                                     "','" + project.CurrentDlpName + "','" + project.TotalRuns + "')");
-                        }
-                        else
-                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                        imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
-                        break;
-                    case EOptimizeRunStatus.Closed:
-                        if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
-                        {
-                            btnSelect.Attributes.Add("onclick",
-                                                     "javascript: return ShowClosePrintConditionWindow('" +
-                                                     project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
-                        }
-                        else
-                            btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                            imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
-                            if (!project.HasDLP)
-                            {
-                                imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                                imgStatus.ToolTip = imgStatus.AlternateText = "Certify";
-                            }
-                        break;
-                    //case EOptimizeRunStatus.Certify:
-                    //    btnSelect.Attributes.Add("onclick", "javascript: return false;");
+            switch (project.Status)
+            {
+                case EOptimizeRunStatus.Open:
+                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                    {
+                        btnSelect.Attributes.Add("onclick",
+                                                 "javascript: return ShowOpenPrintConditionWindow('" +
+                                                 project.ProjectId + "','" + project.ProjectName + "','" +
+                                                 Math.Round(days, 1) +
+                                                 "','" + project.CurrentDlpName + "','" + project.TotalRuns + "')");
+                    }
+                    else
+                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+                    break;
+                case EOptimizeRunStatus.Closed:
+                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                    {
+                        btnSelect.Attributes.Add("onclick",
+                                                 "javascript: return ShowClosePrintConditionWindow('" +
+                                                 project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
+                    }
+                    else
+                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
+                    //if (!project.HasDLP)
+                    //{
                     //    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                    //    break;
-                }
+                    //    imgStatus.ToolTip = imgStatus.AlternateText = "Certify";
+                    //}
+                    break;
+                case EOptimizeRunStatus.Certify:
+                    if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
+                    {
+                        btnSelect.Attributes.Add("onclick",
+                                                 "javascript: return ShowClosePrintConditionWindow('" +
+                                                 project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
+                    }
+                    else
+                        btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");                    
+                    break;
+            }
 
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {

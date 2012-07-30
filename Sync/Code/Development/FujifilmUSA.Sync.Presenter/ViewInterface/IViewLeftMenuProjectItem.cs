@@ -8,6 +8,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Project Project { get; set; }
         int OptimizeRunID { get; set; }
         int MasterRunID { get; set; }
-        string RunStatus { get; set; }
+        EOptimizeRunStatus RunStatus { get; set; }
     }
 }

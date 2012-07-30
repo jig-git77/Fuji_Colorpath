@@ -199,7 +199,7 @@
   <data name="RadComboBoxStatusResource1.Localization.ShowMoreFormatString" xml:space="preserve">
     <value>Items &lt;b&gt;1&lt;/b&gt;-&lt;b&gt;{0}&lt;/b&gt; out of &lt;b&gt;{1}&lt;/b&gt;</value>
   </data>
-  <data name="ProjectStatus_Cerity" xml:space="preserve">
+  <data name="ProjectStatus_Certiy" xml:space="preserve">
     <value>Certify</value>
   </data>
   <data name="ProjectStatus_Closed" xml:space="preserve">

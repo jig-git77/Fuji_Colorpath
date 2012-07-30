@@ -31,7 +31,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
         }
 
-        public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, string RunStatus)
+        public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 OptimizeRunID,
                                 ProjectID,
                                 MasterRunID,
-                                RunStatus
+                                (int)RunStatus
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
         }
@@ -182,13 +182,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_OptimizeDeviceLinkProfile"));
         }
 
-        public void CloseOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
+        public void CertifyOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () => DataAccessFactory.
                           Instance.
                           ExecuteProcedure(
-                              "CPSync4D.CloseOptimizeRun",
+                              "CPSync4D.CertifyOptimizeRun",
                               new object[]
                                   {
                                       optimizeRunId,
@@ -241,14 +241,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
 
-        public string GetLastRunStatus(int OptimizeRunId)
+        public EOptimizeRunStatus GetLastRunStatus(int OptimizeRunId)
         {
-            string LastRunStatus = "";
+            int LastRunStatus = 1;
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     LastRunStatus =
-                        Convert.ToString(
+                        Convert.ToInt32(
                             DataAccessFactory.
                                 Instance.
                                 GetScalar(
@@ -259,7 +259,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             }));
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
-            return LastRunStatus;
+            return (EOptimizeRunStatus)LastRunStatus;
         }
 
 

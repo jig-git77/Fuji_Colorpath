@@ -43,11 +43,11 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.CreateOptimizeRun(_viewConfirmSave.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
         }
 
-        public void CloseOptimizeRun()
+        public void CertifyOptimizeRun()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
-            optimizeRunBusiness.CloseOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Closed), DateTime.Now);
+            optimizeRunBusiness.CertifyOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Certify), DateTime.Now);
         }
 
         public void GetLastRunStatus()
