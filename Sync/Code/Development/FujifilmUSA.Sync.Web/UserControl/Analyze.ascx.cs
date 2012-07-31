@@ -173,8 +173,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
                 }
-               
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId;
+
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue;
                 FRMGeneratePDFReport.Attributes.Add("src", path);
                 FRMGeneratePDFReport.Style.Add("display", "");
 

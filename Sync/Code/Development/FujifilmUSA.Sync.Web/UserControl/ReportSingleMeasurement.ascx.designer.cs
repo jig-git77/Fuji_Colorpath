@@ -13,13 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class ReportSingleMeasurement {
         
         /// <summary>
-        /// i1 control.
+        /// btn_GeneratePDF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image i1;
+        protected global::System.Web.UI.WebControls.ImageButton btn_GeneratePDF;
         
         /// <summary>
         /// PNL_Result control.
@@ -38,6 +38,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_MeasurementID;
+        
+        /// <summary>
+        /// txt_dTE control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_dTE;
         
         /// <summary>
         /// CHART_TargetVersusActualAB control.
@@ -65,32 +74,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.DataVisualization.Charting.Chart ChartResultSummary_DeltaEValue;
-        
-        /// <summary>
-        /// CHRT_GrayDeviation_L control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_GrayDeviation_L;
-        
-        /// <summary>
-        /// CHRT_GrayDeviation_A control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_GrayDeviation_A;
-        
-        /// <summary>
-        /// CHRT_GrayDeviation_B control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_GrayDeviation_B;
     }
 }

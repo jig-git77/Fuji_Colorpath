@@ -32,23 +32,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                if (txt_MeasurementID.Text != null)
-                {
-                    MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
-                    From_ΔE = "E2000";
-                    DSReport = new DataSet();
-                    _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
-                    if (!IsErrorOccured)
-                    {
-                        if (DSReport != null && DSReport.Tables.Count > 0)
-                        {
-                            CreateReport(DSReport);
-                        }
-                    }
-                }
-            }
+           
         }
         #endregion
 
@@ -72,35 +56,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     BindSummaryDeltaEValueBarChart(DSReport.Tables[3], 0, 11); //Bind Chart of Summary Delta E Value Bar Chart
 
                     #endregion
-
-                    #region " === Page : 2 === "
-
-                    BindLABDeviationGraph(DSReport.Tables[4]); //Bind Charts Of Gray L* A* B* Deviation Line Chart
-
-
-
-                    //CalcNPDBlackAndGrayChartsMaxMin(DSReport.Tables[4], DSReport.Tables[5]); // Calculating Max Min Value For NPD Charts
-                    //BindGrayNPDGraph(DSReport.Tables[4]);  //Bind Chart Of Gray NPD Line Chart
-                    //BindBlackNPDGraph(DSReport.Tables[5]);  //Bind Chart Of Black NPD Line Chart
-
-                    #endregion
-
-                    #region " === Page : 3  === "
-
-                    //BindDotgainActualGraph(DSReport.Tables[6]);  //Bind Chart DotGain Actual Line Chart
-
-
-                    //BindDotgainDeviationGraph(DSReport.Tables[8]);  //Bind Chart DotGain Deviation Bar Chart
-
-
-                    //BindDensityDeviationGraph(DSReport.Tables[7]);  //Bind Chart Density Deviation Bar Chart               
-
-
-                    //BindPrintContrastDeviationGraph(DSReport.Tables[9]); //Bind Chart Print Contrast Deviation Bar Chart
-                    #endregion
-
                 }
-                CreateReportPDF(DSReport); // Generates PDF of Reports.
+                CreateReportPDF(DSReport); // Generates PDF Report.
             }
             catch (Exception Ex)
             {
@@ -115,13 +72,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 Common.ReportPDF objReportPDF = new Common.ReportPDF();
                 objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement;
-                objReportPDF.PDFPath = Server.MapPath("PDFReports/");
+                objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
                 objReportPDF.PDF_NAME = SessionManager.Instance.CurrentUser.UserId + "_ReportSingleMeasurement.PDF";
                 objReportPDF.DS_Common = Ds;
                 objReportPDF.MakePDF();
 
                 // === After generate and save PDF file, Download it at a time === //
-                //Common.Utilities.DownloadFile(objReportPDF.PDFPath, objReportPDF.PDF_NAME, objReportPDF.PDF_NAME);
+                byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/UploadFiles/Report_PDF/" + objReportPDF.PDF_NAME));
+                Common.Utilities.DownloadFile(bytes, objReportPDF.PDF_NAME, ".pdf");
             }
             catch (Exception Ex)
             {
@@ -617,166 +575,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        #endregion
+        #endregion      
 
-        #region " ==== Gray L* A* B* Deviation Graph ==== "
-        private void BindLABDeviationGraph(DataTable DT)
-        {
-            try
-            {           
-             
-                if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
-                {
-                    CHRT_GrayDeviation_L.Series["Series1"].Points.Clear();
-                    CHRT_GrayDeviation_A.Series["Series1"].Points.Clear();
-                    CHRT_GrayDeviation_B.Series["Series1"].Points.Clear();
-                    CHRT_GrayDeviation_L.Series["Series2"].Points.Clear();
-                    CHRT_GrayDeviation_A.Series["Series2"].Points.Clear();
-                    CHRT_GrayDeviation_B.Series["Series2"].Points.Clear();
-
-                    #region //========== ChartArea Settings ==========//
-                    //========= Setting For Gray L Deviation Graph ==============//
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].Position.Auto = true;
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].Position.X = float.Parse("3");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].Position.Y = float.Parse("5");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].Position.Width = float.Parse("91");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].Position.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].InnerPlotPosition.Auto = true;
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].InnerPlotPosition.X = float.Parse("5");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].InnerPlotPosition.Y = float.Parse("5");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].InnerPlotPosition.Width = float.Parse("95");
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].InnerPlotPosition.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].ShadowOffset = 0;
-                    CHRT_GrayDeviation_L.BorderSkin.SkinStyle = BorderSkinStyle.None;
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].BorderWidth = 1;
-                    CHRT_GrayDeviation_L.BorderSkin.BorderWidth = 0;
-
-                    //========= Setting For Gray A Deviation Graph ==============//
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].Position.Auto = true;
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].Position.X = float.Parse("3");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].Position.Y = float.Parse("5");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].Position.Width = float.Parse("91");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].Position.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].InnerPlotPosition.Auto = true;
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].InnerPlotPosition.X = float.Parse("5");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].InnerPlotPosition.Y = float.Parse("5");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].InnerPlotPosition.Width = float.Parse("95");
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].InnerPlotPosition.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].ShadowOffset = 0;
-                    CHRT_GrayDeviation_A.BorderSkin.SkinStyle = BorderSkinStyle.None;
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].BorderWidth = 1;
-                    CHRT_GrayDeviation_A.BorderSkin.BorderWidth = 0;
-
-                    //========= Setting For Gray B Deviation Graph ==============//
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].Position.Auto = true;
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].Position.X = float.Parse("3");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].Position.Y = float.Parse("5");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].Position.Width = float.Parse("91");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].Position.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].InnerPlotPosition.Auto = true;
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].InnerPlotPosition.X = float.Parse("5");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].InnerPlotPosition.Y = float.Parse("5");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].InnerPlotPosition.Width = float.Parse("95");
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].InnerPlotPosition.Height = float.Parse("86");
-
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].ShadowOffset = 0;
-                    CHRT_GrayDeviation_B.BorderSkin.SkinStyle = BorderSkinStyle.None;
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].BorderWidth = 1;
-                    CHRT_GrayDeviation_B.BorderSkin.BorderWidth = 0;
-                    #endregion
-
-                    #region Find And Set Maximum And Minimum To Chart 
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].AxisY.Minimum = -100.0;          //Math.Round(LMinValue);
-                    CHRT_GrayDeviation_L.ChartAreas["Default"].AxisY.Maximum = 100.0;         //Math.Round(LMaxValue);
-                    #endregion
-
-                    #region Set Min Max For a Chart
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].AxisY.Minimum = -10.0; //Math.Round(aMinValue);
-                    CHRT_GrayDeviation_A.ChartAreas["Default"].AxisY.Maximum = 10.0;    //Math.Round(aMaxValue);
-               
-
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].AxisY.Minimum = -10.0;     //Math.Round(bMinValue);
-                    CHRT_GrayDeviation_B.ChartAreas["Default"].AxisY.Maximum = 10.0;     //    Math.Round(bMaxValue);
-                    #endregion
-              
-
-                    for (int i = 0; i < DT.Rows.Count; i++)
-                    {
-                        //Plot Target Point in Chart L A B
-
-                        AddTargetPointChart(i, CHRT_GrayDeviation_L.Series["Series1"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), "0");// DT.Rows[i]["LAB_L1"].ToString());
-                        AddTargetPointChart(i, CHRT_GrayDeviation_A.Series["Series1"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), "0");// DT.Rows[i]["LAB_A1"].ToString());
-                        AddTargetPointChart(i, CHRT_GrayDeviation_B.Series["Series1"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), "0");// DT.Rows[i]["LAB_B1"].ToString());
-
-                        AddPointChart(i, CHRT_GrayDeviation_L.Series["Series2"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), DT.Rows[i]["CIELAB_L"].ToString(), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_L"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_a"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_b"].ToString())));
-                        AddPointChart(i, CHRT_GrayDeviation_A.Series["Series2"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), DT.Rows[i]["CIELAB_a"].ToString(), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_L"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_a"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_b"].ToString())));
-                        AddPointChart(i, CHRT_GrayDeviation_B.Series["Series2"], Convert.ToInt64(DT.Rows[i]["CMYK_C"]).ToString(), DT.Rows[i]["CIELAB_b"].ToString(), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_L"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_a"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["CIELAB_b"].ToString())));
-                    }
-
-                    // === Save Chart Image after generating image with proper data === //
-                    string LFileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_GrayDeviation_L.ImageLocation) + "." + CHRT_GrayDeviation_L.ImageType;
-                    CHRT_GrayDeviation_L.SaveImage(Server.MapPath(LFileName));
-                    string AFileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_GrayDeviation_A.ImageLocation) + "." + CHRT_GrayDeviation_A.ImageType;
-                    CHRT_GrayDeviation_A.SaveImage(Server.MapPath(AFileName));
-                    string BFileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(CHRT_GrayDeviation_B.ImageLocation) + "." + CHRT_GrayDeviation_B.ImageType;
-                    CHRT_GrayDeviation_B.SaveImage(Server.MapPath(BFileName));
-                }
-            }
-            catch (Exception Exc)
-            {
-
-                throw Exc;
-            }
-
-        }
-        //Add Point In Chart for checking Paper Point
-        private void AddTargetPointChart(int _Index, Series _objSeries, string _XValue, string _YValue)
-        {
-            try
-            {
-                _objSeries.ChartType = SeriesChartType.Spline;
-                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
-                _objSeries.Points[_Index].MarkerColor = Color.Green;
-                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.Circle;
-                _objSeries.Points[_Index].MarkerSize = 9;
-                _objSeries.Points[_Index].BorderWidth = 2;
-                _objSeries.Points[_Index].MarkerBorderColor = Color.Green;
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-        }
-
-        //Add Point In Chart for checking Paper Point
-        private void AddPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, Double L, Double A, Double B)
-        {
-            try
-            {
-                //string strHTMLColor = Formulas.ColorCalcuations.LabtoRGB(L, A, B);
-                string strHTMLColor = "#ffffff";
-               
-                _objSeries.ChartType = SeriesChartType.Spline;
-                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
-                _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(strHTMLColor);
-                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.Circle;
-                _objSeries.Points[_Index].MarkerSize = 9;
-                _objSeries.Points[_Index].BorderWidth = 2;
-                _objSeries.Points[_Index].MarkerBorderColor = Color.Black;
-            }
-            catch (Exception Ex)
-            {
-                throw Ex;
-            }
-        }
-        #endregion
-
-    #region IViewReportSingleMeasurement Members
+        #region IViewReportSingleMeasurement Members
 
     public int MeasurementId { get; set; }
 
@@ -785,6 +586,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string From_ΔE { get; set; }
 
         #endregion
+
+        protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)
+        {
+            if (txt_MeasurementID.Text != null)
+            {
+                MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
+                From_ΔE = txt_dTE.Text;
+                DSReport = new DataSet();
+                _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+                if (!IsErrorOccured)
+                {
+                    if (DSReport != null && DSReport.Tables.Count > 0)
+                    {
+                        CreateReport(DSReport);
+                    }
+                }
+            }
+        }
 
     }
 }

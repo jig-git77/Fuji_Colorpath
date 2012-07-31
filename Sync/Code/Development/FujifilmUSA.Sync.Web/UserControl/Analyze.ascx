@@ -1088,7 +1088,7 @@
               <ContentTemplate>         
            
                  <table cellpadding="0" cellspacing="0" width="650px">
-                        <tr id="Tr2" runat="server" visible="true">                                       
+                        <tr id="Tr2" runat="server" visible="false">                                       
                             <td>                                        
                                 <asp:ImageButton ID="ImgBtn_Report" runat="server" 
                                     ImageUrl="../Images/Sync DLP Report_preview.jpg" 
@@ -1099,10 +1099,10 @@
                         <tr >
                             <td>
                                 <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 640px;"
-                                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="false">
+                                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
                                                         <tr>
                                                             <td valign="top">
-                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 600px;
+                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 1600px;
                                                                     width: 100%; display: none" frameborder="0" scrolling="yes"></iframe>
                                                             </td>
                                                         </tr>

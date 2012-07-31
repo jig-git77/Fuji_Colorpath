@@ -18,6 +18,11 @@ namespace FujifilmUSA.Sync.Web
                     TextBox txt_MeasurementID = ucReportSingle.FindControl("txt_MeasurementID") as TextBox;
                     txt_MeasurementID.Text = Request.QueryString["MeasurementID"].ToString();
                 }
+                if (Request.QueryString["From_ΔE"] != null)
+                {
+                    TextBox txt_dTE = ucReportSingle.FindControl("txt_dTE") as TextBox;
+                    txt_dTE.Text = Request.QueryString["From_ΔE"].ToString();
+                }
             }
         }
     }

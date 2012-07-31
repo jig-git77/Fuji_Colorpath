@@ -101,6 +101,7 @@
     <Content Include="Global.asax" />
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
+    <Content Include="Images\abChartBackGround.gif" />
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
@@ -119,12 +120,16 @@
     <Content Include="Images\download-icon.png" />
     <Content Include="Images\download_list_bg.png" />
     <Content Include="Images\expanded.png" />
+    <Content Include="Images\header-left-img.gif" />
+    <Content Include="Images\header-middle-bg.gif" />
+    <Content Include="Images\header-right-img.gif" />
     <Content Include="Images\ISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\ISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\powered-logo.gif" />
     <Content Include="Images\Profile-Management-icon.png" />
     <Content Include="Images\Profile-Management.png" />
     <Content Include="Images\project.png" />
@@ -134,6 +139,8 @@
     <Content Include="Images\roundedcornr_bg.png" />
     <Content Include="Images\SingleMeasurement_PointBack.gif" />
     <Content Include="Images\sourceprofile-management.png" />
+    <Content Include="Images\summary-icon.png" />
+    <Content Include="Images\summary-title-bg.gif" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
@@ -177,6 +184,7 @@
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
+    <Content Include="Templates\style.css" />
     <Content Include="UserControl\Activity_PrintCondition.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
@@ -1318,6 +1326,7 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="tempImages\" />
+    <Folder Include="UploadFiles\Report_PDF\" />
     <Folder Include="UploadFiles\temp\" />
   </ItemGroup>
   <ItemGroup>
