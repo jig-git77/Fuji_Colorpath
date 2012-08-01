@@ -40,13 +40,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void CreateReport(DataSet DSReport)
         {
             try
-            {
-              
+            {              
                 // ===== Get Data from data base  ==================//             
-
                 if (DSReport != null && DSReport.Tables.Count > 0)
                 {
-
                     #region " === Page : 1 Result Summary === "
 
                     Bind_TargetVersusActual_CHART(DSReport.Tables[1]); // Bind Chart Of Target And Actual Value
@@ -393,15 +390,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 1);
 
+                    if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 2);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 2);
+
+                    if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 3);
+                    else
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 3);
+
                     if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 4);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 2);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 4);
 
                     if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 5);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 3);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 5);
                                       
                     // === Save Chart Image after generating image with proper data === //
                     string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;

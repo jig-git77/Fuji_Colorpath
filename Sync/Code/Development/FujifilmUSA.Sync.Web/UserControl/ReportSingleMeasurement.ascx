@@ -17,7 +17,7 @@
                         Target Versus Actual AB Plot
                         <br />
                         <asp:Chart ID="CHART_TargetVersusActualAB" runat="server" BackImageMode="Scaled"
-                            BackImage="~/Images/SingleMeasurement_PointBack.gif" Height="230px" ImageType="Jpeg"
+                            BackImage="~/Images/SingleMeasurement_PointBack.gif" Height="234px" ImageType="Jpeg"
                             Width="218px" ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_TargetVersusActualAB">
                             <Legends>
                                 <asp:Legend Name="Default" Enabled="False">
@@ -88,13 +88,13 @@
                     <td>
                         Summary Delta Value
                         <br />
-                        <asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="340px" Height="290px" BackColor="Transparent"
+                        <asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="340px" Height="250px" BackColor="Transparent"
                             ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_Delta" ImageType="Jpeg">
                             <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
                                 SkinStyle="Raised" BackColor="White"></BorderSkin>
                         
                            <Series>
-                                <asp:Series Name="Series0"  Color="Transparent" ChartArea="ChartArea1">                                              
+                                <asp:Series Name="Series0"  Color="blue" ChartArea="ChartArea1">                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1">
