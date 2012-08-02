@@ -566,9 +566,7 @@
                                                         </tr>
                                                       
                                                         <tr>
-                                                            <td align="center" valign="top">
-                                                         <%--  BackImageWrapMode="Scaled" BackImage="~/Images/CPSyncABComparison.jpg"
-                                                                    ImageType="Jpeg"  Width="280px" Height="250px"--%>
+                                                            <td align="center" valign="top">                                                      
                                                                 <asp:Chart ID="CHART_ABComparison" runat="server" 
                                                                      Width="280px" Height="250px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
@@ -624,19 +622,13 @@
                                                                         <asp:ChartArea  BackSecondaryColor="#FACECF" BackColor="#B3DEC3" BackGradientStyle="LeftRight" BorderColor="26, 59, 105" BorderDashStyle="Solid" Name="Default"  ShadowOffset="1">
                                                                          <Position Height="99" Width="100" X="0" Y="0" />
                                                                             <AxisY LineColor="120, 0, 0, 0"  Maximum="100" Minimum="-100" Interval="20"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False"
-                                                                                LineDashStyle="NotSet">
-                                                                              <%--  <MajorGrid Enabled="False" />
-                                                                                <MajorTickMark Enabled="false" />
-                                                                                <LabelStyle Enabled="False" />--%>
+                                                                                LineDashStyle="NotSet">                                                                           
                                                                                  <MajorGrid LineColor="Gray"></MajorGrid>
-                                                                                    <LabelStyle Font="Verdana, 6pt" />
+                                                                                 <LabelStyle Font="Verdana, 6pt" />
                                                                             </AxisY>
-                                                                            <AxisX LineColor="120, 0, 0, 0" Maximum="100" Minimum="-100" Interval="20" LineDashStyle="NotSet"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False">
-                                                                                <%--<MajorGrid Enabled="False" />
-                                                                                <MajorTickMark Enabled="false" />
-                                                                                <LabelStyle Enabled="False" />--%>
+                                                                            <AxisX LineColor="120, 0, 0, 0" Maximum="100" Minimum="-100" Interval="20" LineDashStyle="NotSet"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False">                                                                             
                                                                                  <MajorGrid LineColor="Gray"></MajorGrid>
-                                                                                    <LabelStyle Font="Verdana, 6pt" />
+                                                                                 <LabelStyle Font="Verdana, 6pt" />
                                                                             </AxisX>
                                                                         </asp:ChartArea>
                                                                     </ChartAreas>
@@ -886,8 +878,7 @@
                  </table>
                </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" /> 
-                       <%-- <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%> 
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />                     
                     </Triggers>  
            </asp:UpdatePanel>
 
@@ -1087,33 +1078,24 @@
           <asp:UpdatePanel ID="UpdatePanel6" runat="server">
               <ContentTemplate>         
            
-                 <table cellpadding="0" cellspacing="0" width="650px">
-                        <tr id="Tr2" runat="server" visible="false">                                       
-                            <td>                                        
-                                <asp:ImageButton ID="ImgBtn_Report" runat="server" 
-                                    ImageUrl="../Images/Sync DLP Report_preview.jpg" 
-                                    onclick="ImgBtn_Report_Click" ToolTip="Download PDF Report" 
-                                    meta:resourcekey="ImgBtn_ReportResource1"></asp:ImageButton>
-                            </td>
-                        </tr>                                                    
+                 <table cellpadding="0" cellspacing="0" width="650px">                                                                       
                         <tr >
                             <td>
-                                <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 640px;"
-                                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
-                                                        <tr>
-                                                            <td valign="top">
-                                                                <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 1600px;
-                                                                    width: 100%; display: none" frameborder="0" scrolling="yes"></iframe>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
+                                        cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
+                                    <tr>
+                                        <td valign="top">
+                                            <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 350px;
+                                                width: 100%; display: none" frameborder="0" scrolling="no"></iframe>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                  </table>  
                </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" /> 
-                       <%-- <asp:PostBackTrigger ControlID="Rbl_DT_E" />  --%> 
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />                     
                     </Triggers>  
            </asp:UpdatePanel>       
         </div>

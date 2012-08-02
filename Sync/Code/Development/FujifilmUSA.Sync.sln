@@ -25,7 +25,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs2010:8080/tfs/softweb
+		SccTeamFoundationServer = http://tfs:8080/tfs/softweb
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = FujifilmUSA.Sync.Common\\FujifilmUSA.Sync.Common.csproj
 		SccProjectName1 = FujifilmUSA.Sync.Common

@@ -988,13 +988,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ConfigureExport();
             GridPatchDetails.MasterTableView.ExportToCSV();
-        }
-
-        protected void ImgBtn_Report_Click(object sender, ImageClickEventArgs e)
-        {
-            byte[] bytes = System.IO.File.ReadAllBytes(Server.MapPath("~/PDFReports/Sync DLP Report.pdf"));
-            Utilities.DownloadFile(bytes, SessionManager.Instance.CurrentProject.ProjectName + " Report", ".pdf");
-        }
+        }      
 
         #endregion
 
@@ -1030,8 +1024,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string From_ΔE { get; set; }
 
-        #endregion
-
-       
+        #endregion       
     }
 }

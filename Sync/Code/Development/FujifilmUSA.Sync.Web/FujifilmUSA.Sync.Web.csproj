@@ -105,6 +105,7 @@
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
+    <Content Include="Images\center-content-whitebg.png" />
     <Content Include="Images\Chart-Red-Image-Vertical.png" />
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
@@ -139,6 +140,7 @@
     <Content Include="Images\roundedcornr_bg.png" />
     <Content Include="Images\SingleMeasurement_PointBack.gif" />
     <Content Include="Images\sourceprofile-management.png" />
+    <Content Include="Images\spacer.gif" />
     <Content Include="Images\summary-icon.png" />
     <Content Include="Images\summary-title-bg.gif" />
     <Content Include="Images\Sync DLP Report_preview.jpg" />
@@ -146,7 +148,6 @@
     <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
     <Content Include="JS\jquery.tools.min.js" />
-    <Content Include="PDFReports\Sync DLP Report.pdf" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="ProfileManagement.aspx" />
@@ -426,6 +427,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity_PrintCondition.aspx.cs">

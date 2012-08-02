@@ -481,24 +481,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel UpdatePanel6;
         
         /// <summary>
-        /// Tr2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr2;
-        
-        /// <summary>
-        /// ImgBtn_Report control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImgBtn_Report;
-        
-        /// <summary>
         /// TblGeneratePDFReport control.
         /// </summary>
         /// <remarks>

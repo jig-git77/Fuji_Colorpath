@@ -2,12 +2,12 @@
 
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" />
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
-    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="true">
-        <div style="overflow: auto; height:1600px;">
+    <asp:Panel Style="width: 100%" ID="PNL_Result" runat="server" Visible="false">
+        <div style="overflow: auto; height:400px;">
             <table style="width: 100%" cellspacing="0" cellpadding="0" align="center" border="0">
                 <tr>
                     <td valign="top">
@@ -94,7 +94,7 @@
                                 SkinStyle="Raised" BackColor="White"></BorderSkin>
                         
                            <Series>
-                                <asp:Series Name="Series0"  Color="blue" ChartArea="ChartArea1">                                              
+                                <asp:Series Name="Series0"  Color="Transparent" ChartArea="ChartArea1">                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1">
