@@ -30,19 +30,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recCyan = "cyanText";
         private const string _recCyanPathMetrics = "cyanPathMetrics";
         private const string _recMagenta = "magentaText";
-        private const string _recMagentaPathMetrics = "magentaPathMetrics ";
+        private const string _recMagentaPathMetrics = "magentaPathMetrics";
         private const string _recYellow = "yellowText";
-        private const string _recYellowPathMetrics = "yellowPathMetrics ";
+        private const string _recYellowPathMetrics = "yellowPathMetrics";
         private const string _recBlack = "blackText";
-        private const string _recBlackPathMetrics = "blackPathMetrics ";
+        private const string _recBlackPathMetrics = "blackPathMetrics";
         private const string _recRed = "redText";
-        private const string _recRedPathMetrics = "redPathMetrics ";
+        private const string _recRedPathMetrics = "redPathMetrics";
         private const string _recGreen = "greenText";
-        private const string _recGreenPathMetrics = "greenPathMetrics ";
+        private const string _recGreenPathMetrics = "greenPathMetrics";
         private const string _recBlue = "blueText";
-        private const string _recBluePathMetrics = "bluePathMetrics ";
+        private const string _recBluePathMetrics = "bluePathMetrics";
         private const string _recPaper = "paperText";
-        private const string _recPaperPathMetrics = "paperPathMetrics ";
+        private const string _recPaperPathMetrics = "paperPathMetrics";
         private const string _recActual = "actualText";
         private const string _recL = "lText";
         private const string _recA = "aText";
@@ -55,6 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recPatchMetrics = "patchMetricsText";
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         public DateTime EndDate;
+        public decimal DtELimit = 0;
 
         public string AddMeasurementDeleteMeasurementConfirmation
         {
@@ -172,17 +173,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (hdMeasurement.Value != "")
                 {
                     MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
-                }
-
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue;
-                FRMGeneratePDFReport.Attributes.Add("src", path);
-                FRMGeneratePDFReport.Style.Add("display", "");
+                }             
 
                 From_ΔE = Rbl_DT_E.SelectedValue;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement();
                 grdMeasurement.DataSource = MeasurementsDelta;
-                grdMeasurement.DataBind();    
+                grdMeasurement.DataBind();
+
+                //-----------Assign Report IFrame to load report----------------------//
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue;
+                FRMGeneratePDFReport.Attributes.Add("src", path);
+                FRMGeneratePDFReport.Style.Add("display", "");
             }
             catch (Exception ex)
             {
@@ -208,10 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (hdMeasurement.Value != "")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
-            }
-
-            //TextBox txt_MeasurementID = ucReportSingle.FindControl("txt_MeasurementID") as TextBox;
-            //txt_MeasurementID.Text = MeasurementId.ToString();
+            }        
 
             From_ΔE = Rbl_DT_E.SelectedValue;
             lblE_PryPatches.Text = From_ΔE;
@@ -263,20 +262,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series0 to display Thresold value (ΔELimit) === //
                 Series objSeries0 = (Series)ChartSummary_DeltaE.Series[0];
                 objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;
-                objSeries0.ChartType = SeriesChartType.Bar;
+                objSeries0.YValueType = ChartValueType.String;              
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series1 to display Actual value (ΔE) === //
                 Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.ChartType = SeriesChartType.Bar;
+                objSeries1.YValueType = ChartValueType.String;               
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;
-
+            
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -305,51 +302,55 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region " === Fill Series === "
                 // === Limit with red marker === //
                 StringBuilder SBDeltaEPatches = new StringBuilder();
-                string TooltipTitle = string.Empty;
+                string TooltipTitle = string.Empty;            
+
                 if (DT != null && DT.Count > 0)
                 {
+                    DtELimit = (from c in DT select c.ΔE).Max() + 2;  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+
                     for (int i = 0; i < DT.Count; i++)
                     {
                         SBDeltaEPatches.Append("<tr style='height: 10px'>");
 
                         if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>" + GetResourceString(_recCyan) + "</td>");//Cyan
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recCyan) + "</td>");//Cyan
                             TooltipTitle = GetResourceString(_recCyanPathMetrics); //"Cyan Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recMagenta) + "</td>");//Magenta
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recMagenta) + "</td>");//Magenta
                             TooltipTitle = GetResourceString(_recMagentaPathMetrics);//Magenta Patch Metrics
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recYellow) + "</td>");//Yellow
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recYellow) + "</td>");//Yellow
                             TooltipTitle = GetResourceString(_recYellowPathMetrics); //"Yellow Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:0px;'>" + GetResourceString(_recBlack) + "</td>");//Black
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recBlack) + "</td>");//Black
                             TooltipTitle = GetResourceString(_recBlackPathMetrics); //"Black Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Red).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recRed) + "</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recRed) + "</td>");
                             TooltipTitle = GetResourceString(_recRedPathMetrics); //"Red Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Green).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:2px;'>" + GetResourceString(_recGreen) + "</td>");//Green
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recGreen) + "</td>");//Green
                             TooltipTitle = GetResourceString(_recGreenPathMetrics); //"Green Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Overprint_Blue).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:4px;'>" + GetResourceString(_recBlue) + "</td>");//Blue
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recBlue) + "</td>");//Blue
                             TooltipTitle = GetResourceString(_recBluePathMetrics); //"Blue Patch Metrics";
                         }
                         else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Paper).ToString())
                         {
-                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:2px; font-family:Tahoma; font-size:13px; padding-bottom:8px;'>" + GetResourceString(_recPaper) + "</td>");
+                            SBDeltaEPatches.Append("<td colspan='2' valign='middle' class='SyncBottomBorder' style='padding-left:10px; padding-top:0px; font-family:Tahoma; font-size:13px; padding-bottom:3px;'>" + GetResourceString(_recPaper) + "</td>");
                             TooltipTitle = GetResourceString(_recPaperPathMetrics); //"Paper Patch Metrics";
                         }
 
@@ -374,7 +375,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Double Y1, Y2;
                 Y1 = Y2 = 0;
 
-                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
+                Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))));
                 Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
 
                 // === When Actual value is not available then no series will display and no marker will display

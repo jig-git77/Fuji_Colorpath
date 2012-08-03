@@ -94,16 +94,17 @@
                                 SkinStyle="Raised" BackColor="White"></BorderSkin>
                         
                            <Series>
-                                <asp:Series Name="Series0"  Color="Transparent" ChartArea="ChartArea1">                                              
+                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="false" 
+                                        BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0"
-                                                                IsClustered="True"></Area3DStyle>
+                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent" >
+                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0">
+                                        </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
                                         <MajorGrid Enabled="False" LineColor="Beige" />
@@ -129,16 +130,16 @@
                             <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
                                 SkinStyle="Raised" BackColor="White"></BorderSkin>                        
                             <Series>
-                                <asp:Series Name="Series0"  Color="Transparent" ChartArea="ChartArea1">                                              
+                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="true"  BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0"
-                                                                IsClustered="True"></Area3DStyle>
+                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0" >
+                                        </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
                                         <MajorGrid Enabled="False" LineColor="Beige" />

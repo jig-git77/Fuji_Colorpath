@@ -376,10 +376,10 @@
                                             BackColor="Transparent" meta:resourcekey="ChartSummary_DeltaEResource1">   
                                                                                                                               
                                                             <Series>
-                                                                <asp:Series Name="Series0"  Color="Transparent" ChartArea="ChartArea1">                                              
+                                                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar">                                              
                                                                 </asp:Series>
                                                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                                                            IsVisibleInLegend="False" ChartArea="ChartArea1">
+                                                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
                                                                 </asp:Series>    
                                                             </Series>
                                                             <ChartAreas>
@@ -387,7 +387,7 @@
                                                                      <Area3DStyle IsRightAngleAxes="False" WallWidth="0"
                                                                                               IsClustered="True"></Area3DStyle>
                                           
-                                                                    <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
+                                                                    <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="True" >
                                                                         <MajorGrid Enabled="False" LineColor="Beige" />
                                                                         <MajorTickMark Enabled="False" />
                                                                         <LabelStyle Font="Verdana, 7pt" />

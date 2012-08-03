@@ -392,7 +392,7 @@ namespace FujifilmUSA.Sync.Common
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
                    
-                    SBstrDeltaEValue.Append("<tr style='height: 21px'>");
+                    SBstrDeltaEValue.Append("<tr style='height: 20px'>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + Convert.ToString(DT.Rows[i]["PatchType"]) + "</td>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔE"])) + "&nbsp;</td>");

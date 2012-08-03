@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterReportSingleMeasurement _presenterReportSingleMeasurement;
+        public decimal DtELimit = 0;
 
         #endregion
 
@@ -334,22 +335,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series0 to display Thresold value === //
                 Series objSeries0 = (Series)ChartResultSummary_Delta.Series[0];
                 objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;
-                objSeries0.IsVisibleInLegend = false;
-                objSeries0.ChartType = SeriesChartType.Bar;
-                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
+                objSeries0.YValueType = ChartValueType.String;            
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";      
 
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_Delta.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
                 objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
-                objSeries1.ChartType = SeriesChartType.Bar;
+                objSeries1.IsVisibleInLegend = false;              
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";             
 
                 // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;              
+                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;                 
                 ChartResultSummary_Delta.ChartAreas["ChartArea1"].BackColor = Color.White;
                 #endregion
 
@@ -379,36 +376,47 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region " === Fill Series === "
                 // === Limit with red marker === //
                 if (DT != null && DT.Rows.Count > 0)
-                {
+                {  
+                    List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔH"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["GrayΔE"].ToString()));
+                    levels.Add(Convert.ToDecimal(DT.Rows[0]["NinetyFiveΔE"].ToString()));
+                    DtELimit = levels.Max() + 2;
+                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+
+                    //---------Normal Binding Graph-------//
                     if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 0);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 0);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0);
 
                     if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 1);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 1);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 1);
 
                     if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 2);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 2);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 2);
 
                     if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 3);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 3);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 3);
 
                     if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 4);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1,  Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 4);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 4);
 
                     if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
                         BindDeltaValueACTTHValue(objSeries0, objSeries1,  0, 0, 5);
                     else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["ΔELimit"].ToString())), 5);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 5);
                                       
                     // === Save Chart Image after generating image with proper data === //
                     string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
@@ -478,21 +486,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.XValueType = ChartValueType.Int32;
                 objSeries0.YValueType = ChartValueType.String;
                 objSeries0.IsVisibleInLegend = false;
-                objSeries0.ChartType = SeriesChartType.Bar;
-                //objSeries0.Color = Color.Gray;
-                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
-
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";       
+             
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_DeltaEValue.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
                 objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
-                objSeries1.ChartType = SeriesChartType.Bar;
+                objSeries1.IsVisibleInLegend = false;              
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";             
 
                 // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true;              
+                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;                
                 ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].BackColor = Color.White;
                 #endregion
 
@@ -524,9 +528,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 for (int i = _StartIndex; i < _EndIndex; i = i + 1)
                 {
                     if (DT != null && i < DT.Rows.Count)
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT.Rows[i], i);
+                    {
+                        List<decimal> levels = DT.AsEnumerable().Select(al => al.Field<decimal>("ΔE")).Distinct().ToList(); //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                        DtELimit = levels.Max() + 2;
+                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT.Rows[i], i, DtELimit);
+                    }
                     else
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, null, i);
+                    {
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, null, i, DtELimit);
+                    }
                 }
 
 
@@ -542,7 +554,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, DataRow DR, int Index)
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, DataRow DR, int Index, decimal DtELimit)
         {
             try
             {
@@ -552,7 +564,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 
                 if (DR != null)
                 {
-                    Y1 = (Convert.ToString(DR["ΔELimit"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString())));
+                    Y1 = (Convert.ToString(DtELimit) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DtELimit)));
                     Y2 = (Convert.ToString(DR["ΔE"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString())));
                     strHTMLColor = Convert.ToString(DR["HTMLColor"].ToString());
                 }
