@@ -1,0 +1,17 @@
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\bin\Debug\Koolwired.Imap.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\bin\Debug\Koolwired.Imap.pdb
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\obj\Debug\ResolveAssemblyReference.cache
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\obj\Debug\Koolwired.Imap.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\obj\Debug\Koolwired.Imap.pdb
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.Imap\bin\Debug\Koolwired.Imap.XML
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\bin\Debug\Koolwired.Imap.dll
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\bin\Debug\Koolwired.Imap.pdb
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\ResolveAssemblyReference.cache
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\Koolwired.Imap.dll
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\Koolwired.Imap.pdb
+X:\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\bin\Debug\Koolwired.Imap.XML
+C:\Development\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\bin\Debug\Koolwired.Imap.dll
+C:\Development\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\bin\Debug\Koolwired.Imap.pdb
+C:\Development\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\Koolwired.Imap.dll
+C:\Development\Astea\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\obj\Debug\Koolwired.Imap.pdb

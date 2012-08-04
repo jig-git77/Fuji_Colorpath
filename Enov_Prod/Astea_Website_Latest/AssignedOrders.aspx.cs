@@ -1,0 +1,99 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class AssignedOrders : System.Web.UI.Page
+{
+    protected SqlConnection ordercon;
+    protected string connectionString = ConfigurationManager.ConnectionStrings["EnovationConnectionString"].ConnectionString;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        
+
+        if (!Page.IsPostBack)
+        {
+            // Initialize the data source
+                //Logout if session expires
+                if ( Session["UserID"] == null)
+                {
+                    Response.Redirect("EnovationLogin.aspx", true);
+                }
+                string saID = Session["UserID"].ToString();
+                ordercon = new SqlConnection(connectionString);
+                ordercon.Open(); //open connection
+                string orderCommand = "select order_line.order_id, order_line.site_company_descr, service_call.bpart_id, order_line.problem_desc, CASE when sce.resolve_text is null  then '' 	when sce.resolve_text = '' then '' else SUBSTRING(sce.resolve_text,0,30) + '...' end as resolve_text, CASE order_line.Order_Stat_Uniq_Id WHEN 400 THEN 1 ELSE 0  END As 'Status', case when kt.orderid is null then 0 else 1 end as kt_resolve from order_line" + " " +
+                   "inner join service_call on order_line.order_id=service_call.order_id inner join service_call_env as sce on sce.order_id = service_call.order_id left outer join KTProblemSpec as kt on kt.OrderID = order_line.order_id where order_line.order_stat_uniq_id < 450 and service_call.sa_person_id='" + saID + "' order by order_line.order_id asc ";
+                SqlDataAdapter orderAdapt = new SqlDataAdapter(orderCommand, ordercon);
+
+                DataSet orderDs = new DataSet();
+                orderAdapt.Fill(orderDs);
+
+                // ( filling and binding dataset)
+                GridView1.DataSource = orderDs;
+                GridView1.DataBind();
+                        
+        }
+
+
+    }
+
+    protected void ExitButton_Click(object sender, EventArgs e)
+    {
+        // Dispose Session Variables
+        Session.RemoveAll();
+        Session.Abandon();
+        Response.Redirect("EnovationLogin.aspx");
+    }
+
+
+
+    protected void GridView1_RowCommand(object sender,  GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "OnSite")
+        {
+            
+            GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
+            Button btn = (Button)row.FindControl("lnkButton");
+            if (btn != null)
+            {
+
+                // Retrieve the row index stored in the 
+                // CommandArgument property.
+                string order_id = Convert.ToString(e.CommandArgument);
+                DateTime ConfirmDt = BusinessLogic.GetOnSiteConfirmDateTime(order_id );
+
+                if (ConfirmDt != DateTime.MinValue)
+                {               
+                    //do an update using order_id
+                    BusinessLogic.UpdateCallStatusToOnSite(order_id, ConfirmDt);
+                    btn.Visible = false;
+                }
+                else
+                {
+                    lblError.Text = "Call Mike Winn...Failed to determine onsite datetime..!"; 
+                }
+            }
+            
+        }
+
+    }
+
+    protected void GridView1_OnPreRender(object sender, EventArgs e)
+    {
+
+        GridView1.Style["border-collapse"] = "seperate";
+    }
+
+
+
+
+
+}

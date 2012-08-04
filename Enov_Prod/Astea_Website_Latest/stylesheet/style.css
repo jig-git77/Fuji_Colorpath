@@ -1,0 +1,190 @@
+﻿body {
+}
+
+.dropDownStyle
+{
+	
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    FONT: 8pt Verdana,Arial,Helvetica;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    BACKGROUND-COLOR: #ffffff;
+}
+
+.font_th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bolder;
+}
+.font_tahomabold {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #484848;
+}
+.font_verdana {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	
+}
+
+.errorlabel
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: Red;
+}	
+
+
+.errorlabel_bold
+{
+	font-family: Tahoma;
+	font-size: 12px;
+	font-weight: bold;
+	color: Red;
+}	
+ 
+.maintable
+{	border-width: 0px;
+	border-spacing: 0px;
+	border-style: solid;
+	border-color: #000000;
+	border-collapse: collapse;
+	background-color: white;
+	border-spacing: 1px;
+}
+
+table#maintable TD
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 14px;
+	border: 1px solid #E8E8E8;
+	padding: 1px;
+   
+
+}
+table#headtable TD
+{
+
+	border: 1px solid #E8E8E8;
+	padding: 1px;
+
+}
+
+
+.SubmitButton
+{
+	background-image: url(../images/cbutton_gradient.gif);
+	padding-bottom: 0.3em;
+	background-color: #cccccc;
+	padding-left: 0.3em;
+	width: 5.5em;
+	padding-right: 0.3em;
+	display: inline-block;
+	background-repeat: repeat-x;
+	background-position: 50% bottom;
+	padding-top: 0.3em;
+	border: 1px solid #000000;
+	cursor: pointer;
+}
+
+
+.Button
+{
+	padding-bottom: 0.1em;
+	background-color: menu;
+	padding-left: 0.1em;
+	width: 5.5em;
+	padding-right: 0.1em;
+	display: inline-block;
+	padding-top: 0.1em;
+	border: 1px solid #000000;
+	cursor: pointer;
+	font-family: Tahoma;
+	text-decoration: underline;
+}
+
+
+.txtbox
+{
+  font-family: Tahoma;
+  font-size : 12px;
+  border:1px solid #000000;
+}
+
+.txtbox_gray
+{
+  font-family: Tahoma;
+  font-size : 11px;
+  border:1px solid #A8A8A8; 
+  background-color :#E8E8E8;
+}
+
+.checkbox{VERTICAL-ALIGN:Top;font-family:Tahoma;FONT-SIZE:11PX;COLOR:#000;font-weight:normal;}
+
+.Grid {font-family: Tahoma;  font-size : 12px;border: solid 1px #000000;}
+.Grid td {border: solid 1px #000000;border-collapse:collapse;}
+.GridHeader{font-family: Tahoma;  font-size : 12px;font-weight: bold;background-color: #cccccc;border: solid 1px #000000;}
+.GridItem { background-color: #e6e6e6;}
+.GridAltItem
+{
+	background-color: #d3d3d3;
+}
+
+
+.PROGRESS{position:absolute; padding: 10px; background-color: #FFF; color:#000; border: 1px solid #808080; vertical-align: middle; font-family: Verdana; font-size: 10px;}
+
+input.btn {   
+   color:#000;   
+   font: 'trebuchet ms',helvetica,sans-serif;   
+   background-color:menu;   
+   border:1px solid;   
+   border-color: #000;   
+ }   
+
+
+.OnSiteBtn
+{
+    BACKGROUND-IMAGE: url(../images/cbutton_gradient.gif);
+    PADDING-BOTTOM: 0.3em;
+    BACKGROUND-COLOR: #fff;
+    PADDING-LEFT: 0.3em;
+    WIDTH: 5.5em;
+    PADDING-RIGHT: 0.3em;
+    DISPLAY: inline-block;
+    BACKGROUND-REPEAT: repeat-x;
+    BACKGROUND-POSITION: 50% bottom;
+    PADDING-TOP: 0.3em;
+    border:1px solid #000000;
+}
+
+.Go
+{
+	padding-bottom: 0.1em;
+	background-color: menu;
+	padding-left: 0.1em;
+	width: 1.5em;
+	padding-right: 0.1em;
+	display: inline-block;
+	padding-top: 0.1em;
+	border: 1px solid #000000;
+	cursor: pointer;
+	font-family: Tahoma;
+
+}
+
+.ddlCheckList
+{
+	
+    BORDER-RIGHT: #000000 1px solid;
+    BORDER-TOP: #000000 1px solid;
+    font-weight:normal; 
+    font-family:Verdana, Arial, Helvetica, sans-serif; 
+    font-size:11px;
+    BORDER-LEFT: #000000 1px solid;
+    BORDER-BOTTOM: #000000 1px solid;
+    BACKGROUND-COLOR: #ffffff;
+}

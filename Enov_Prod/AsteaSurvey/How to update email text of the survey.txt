@@ -1,0 +1,3 @@
+there are html files in the folder, modify this file; copy html code and just run simple update statement in SQL Server 2000.
+As long as text is less than 8000 characters it would work.
+

@@ -1,0 +1,84 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Koolwired.Imap.Test</RootNamespace>
+    <AssemblyName>Koolwired.Imap.Test</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.0.9122, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConnectionGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectionGUI.Designer.cs">
+      <DependentUpon>ConnectionGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImapAddressCollectionTest.cs" />
+    <Compile Include="ImapAddressListTest.cs" />
+    <Compile Include="ImapAddressTest.cs" />
+    <Compile Include="ImapFullConnectionTest.cs" />
+    <Compile Include="ImapMailboxTest.cs" />
+    <Compile Include="MailboxGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MailboxGUI.Designer.cs">
+      <DependentUpon>MailboxGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Koolwired.IMAP\Koolwired.Imap.csproj">
+      <Project>{B383E80F-0B52-48F7-94E1-5F4C2AF74833}</Project>
+      <Name>Koolwired.Imap</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConnectionGUI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConnectionGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MailboxGUI.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MailboxGUI.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

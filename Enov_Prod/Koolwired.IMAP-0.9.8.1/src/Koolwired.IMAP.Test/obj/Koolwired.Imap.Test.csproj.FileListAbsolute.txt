@@ -1,0 +1,13 @@
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\ResolveAssemblyReference.cache
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\Koolwired.Imap.Test.ConnectionGUI.resources
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\Koolwired.Imap.Test.MailboxGUI.resources
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\Koolwired.Imap.Test.csproj.GenerateResource.Cache
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\Koolwired.Imap.Test.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\Koolwired.Imap.Test.pdb
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\Koolwired.Imap.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\nunit.framework.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\nunit.framework.xml
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\Koolwired.Imap.pdb
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\bin\Debug\Koolwired.Imap.xml
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\Koolwired.Imap.Test.dll
+E:\Datafromdemoroom\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP.Test\obj\Debug\Koolwired.Imap.Test.pdb

@@ -1,0 +1,9 @@
+F:\APIBroker\WebApplication1\obj\Debug\ResolveAssemblyReference.cache
+F:\APIBroker\WebApplication1\obj\Debug\WebApplication1.Resources.resources
+F:\APIBroker\WebApplication1\obj\Debug\WebApplication1.vbproj.GenerateResource.Cache
+F:\APIBroker\WebApplication1\bin\WebApplication1.dll
+F:\APIBroker\WebApplication1\bin\WebApplication1.pdb
+F:\APIBroker\WebApplication1\bin\WebApplication1.xml
+F:\APIBroker\WebApplication1\obj\Debug\WebApplication1.dll
+F:\APIBroker\WebApplication1\obj\Debug\WebApplication1.xml
+F:\APIBroker\WebApplication1\obj\Debug\WebApplication1.pdb

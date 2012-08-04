@@ -1,0 +1,7 @@
+﻿
+html, body { height:100%;  }
+body { margin:0px; padding:0px; background-color:#fff; }
+
+table {font-size:11px; color:#333; font-family:tahoma,Arial, Helvetica, sans-serif; text-align:left; }
+.maintable { height:100%; }
+.logo-slogan { color:#444; font-size:12px; font-weight:bold; padding-top:2px; height:48px; }

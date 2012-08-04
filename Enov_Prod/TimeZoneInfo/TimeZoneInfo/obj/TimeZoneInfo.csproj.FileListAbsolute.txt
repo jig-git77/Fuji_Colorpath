@@ -1,0 +1,5 @@
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.dll
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.pdb
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\ResolveAssemblyReference.cache
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.dll
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.pdb

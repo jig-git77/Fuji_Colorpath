@@ -1,0 +1,28 @@
+﻿--insert service call into a new table 
+-- two criteria: a) sa is assigned in order_line table for 'service_call' and b) service agent is changed 
+insert into cust_service_agent_assign (order_id, prv_order_stat_id, order_stat_uniq_id,last_action_dt,service_level_id, sa_person_id,sa_name)
+select order_line.order_id, order_line.prv_order_stat_id, order_line.order_stat_uniq_id,order_line.last_action_dt,  order_line.service_level_id, service_call.sa_person_id
+,search_name
+from  order_line 
+inner join service_call on order_line.order_id=service_call.order_id 
+inner join person on person.person_id = service_call.sa_person_id
+ left outer join cust_service_agent_assign as t on t.order_id = service_call.order_id 
+where order_type_id = 'service_order' and order_line.order_stat_uniq_id = 200 and order_line.last_action_dt >= dateadd(mi,-15,getdate())
+and t.sa_person_id is null
+order by order_line.last_action_Dt desc
+
+select coalesce(cust_company_descr, site_company_descr) as company, address.address_1 as street_addres, address.city, address.state_prov_id as state, ISNULL(convert(varchar(20), eta_date, 101), '') as eta_date ,  
+                            address.zip, order_line.order_id as servicecall, service_level.descr as contract, warr_type.descr as warrenty, service_call.sa_person_id,  search_name, person.email_id, 
+                            order_line.caller_name, order_line.phone_id as caller_phone , order_line.problem_desc, service_call.bpart_id as model, service_call.serial_no, priority_class_id , ISNULL(order_env.opsys_desc, 'None') as SchedulingNotes
+                            from order_line inner join service_call on order_line.order_id=service_call.order_id
+                            inner join service_call_env on service_call_env.order_id = order_line.order_id 
+                            inner join person on person.person_id = service_call.sa_person_id 
+                            inner join address on order_line.ship_to_address_id=address.address_id  
+                            inner join priority_class on order_line.priority = priority_class.fr_priority  
+			    inner join order_env on order_env.order_id = order_line.order_id 
+                            left join service_level  on service_level.service_level_id= order_line.service_level_id  
+                            left join warr_type on service_call.warr_type_id =  warr_type.warr_type_id  
+                            where order_type_id = 'service_order' and order_stat_uniq_id = 200
+                            and order_line.order_id = '40028855@@1' order by last_action_Dt desc 
+                            
+  select comment_text from demand where order_id = ' svc_call_id ' and bpart_id = 'phone_act' and comment_text is not null order by actual_tm

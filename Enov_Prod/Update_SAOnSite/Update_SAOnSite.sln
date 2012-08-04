@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Update_SAOnSite", "Update_SAOnSite.vbproj", "{75A3A677-9171-42C5-AF50-06116639D92B}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koolwired.Imap", "..\Koolwired.IMAP-0.9.8.1\src\Koolwired.IMAP\Koolwired.Imap.csproj", "{B383E80F-0B52-48F7-94E1-5F4C2AF74833}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FGSU_TOOLS", "..\..\FGSU_TOOLS_2008\FGSU_TOOLS.vbproj", "{2094486A-47BE-44FA-8285-506570850100}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeZoneInfomation", "..\TimeZoneInfo\TimeZoneInfo\TimeZoneInfomation.csproj", "{B1AEFB7F-6491-465F-B785-A6F1784FE149}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75A3A677-9171-42C5-AF50-06116639D92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A3A677-9171-42C5-AF50-06116639D92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A3A677-9171-42C5-AF50-06116639D92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A3A677-9171-42C5-AF50-06116639D92B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2094486A-47BE-44FA-8285-506570850100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2094486A-47BE-44FA-8285-506570850100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2094486A-47BE-44FA-8285-506570850100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2094486A-47BE-44FA-8285-506570850100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1AEFB7F-6491-465F-B785-A6F1784FE149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AEFB7F-6491-465F-B785-A6F1784FE149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AEFB7F-6491-465F-B785-A6F1784FE149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AEFB7F-6491-465F-B785-A6F1784FE149}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

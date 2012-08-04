@@ -1,0 +1,32 @@
+<publishData>
+  <publishTarget publishUrl="C:\Temp\Publish\">
+    <file relUrl="bin/ProblemSpecs.pdb" publishTime="02/19/2012 07:20:26" />
+    <file relUrl="bin/FGSU_TOOLS.pdb" publishTime="10/28/2011 18:10:04" />
+    <file relUrl="Web.config" publishTime="02/13/2012 14:50:02" />
+    <file relUrl="bin/FGSU_TOOLS.dll" publishTime="10/28/2011 18:10:04" />
+    <file relUrl="_15Minutes.aspx" publishTime="02/13/2012 15:13:44" />
+    <file relUrl="Style/style.css" publishTime="09/27/2010 16:38:38" />
+    <file relUrl="bin/FGSU_TOOLS.xml" publishTime="10/28/2011 18:10:04" />
+    <file relUrl="bin/ProblemSpecs.dll" publishTime="02/19/2012 07:20:26" />
+  </publishTarget>
+  <publishTarget publishUrl="C:\Users\shah_c\Desktop\t\">
+    <file relUrl="bin/ProblemSpecs.pdb" publishTime="05/09/2011 08:30:29" />
+    <file relUrl="bin/FGSU_TOOLS.pdb" publishTime="04/21/2011 10:08:05" />
+    <file relUrl="Web.config" publishTime="01/20/2011 09:32:32" />
+    <file relUrl="bin/FGSU_TOOLS.dll" publishTime="04/21/2011 10:08:05" />
+    <file relUrl="_15Minutes.aspx" publishTime="05/09/2011 08:30:27" />
+    <file relUrl="Style/style.css" publishTime="09/27/2010 16:38:37" />
+    <file relUrl="bin/FGSU_TOOLS.xml" publishTime="04/21/2011 10:08:05" />
+    <file relUrl="bin/ProblemSpecs.dll" publishTime="05/09/2011 08:30:29" />
+  </publishTarget>
+  <publishTarget publishUrl="C:\Temp\Delete2\">
+    <file relUrl="bin/ProblemSpecs.pdb" publishTime="10/12/2010 13:58:42" />
+    <file relUrl="bin/FGSU_TOOLS.pdb" publishTime="11/23/2009 13:36:35" />
+    <file relUrl="Web.config" publishTime="10/05/2010 09:48:38" />
+    <file relUrl="bin/FGSU_TOOLS.dll" publishTime="11/23/2009 13:36:35" />
+    <file relUrl="_15Minutes.aspx" publishTime="10/12/2010 13:58:41" />
+    <file relUrl="Style/style.css" publishTime="09/27/2010 16:38:37" />
+    <file relUrl="bin/FGSU_TOOLS.xml" publishTime="11/23/2009 13:36:35" />
+    <file relUrl="bin/ProblemSpecs.dll" publishTime="10/12/2010 13:58:42" />
+  </publishTarget>
+</publishData>

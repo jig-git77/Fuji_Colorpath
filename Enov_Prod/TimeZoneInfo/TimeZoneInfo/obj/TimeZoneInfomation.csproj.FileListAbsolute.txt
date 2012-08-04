@@ -1,0 +1,15 @@
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.dll
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.pdb
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\ResolveAssemblyReference.cache
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.dll
+E:\Datafromdemoroom\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.pdb
+X:\Astea\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.dll
+X:\Astea\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.pdb
+X:\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\ResolveAssemblyReference.cache
+X:\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.dll
+X:\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.pdb
+C:\Development\Astea\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.dll
+C:\Development\Astea\TimeZoneInfo\TimeZoneInfo\bin\Debug\TimeZoneInfo.pdb
+C:\Development\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.dll
+C:\Development\Astea\TimeZoneInfo\TimeZoneInfo\obj\Debug\TimeZoneInfo.pdb

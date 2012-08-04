@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ref="http://schemas.xmlsoap.org/ws/2002/04/reference/" xmlns:stk="http://schemas.microsoft.com/soap-toolkit/wsdl-extension" xmlns:typens="http://10.80.4.167/ermsweb/type/" xmlns:dime="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlns="http://10.80.4.167/ermsweb/wsdl/" xmlns:content="http://schemas.xmlsoap.org/ws/2002/04/content-type/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="ermsweb" targetNamespace="http://10.80.4.167/ermsweb/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://10.80.4.167/ermsweb/type/">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/ws/2002/04/reference/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/ws/2002/04/content-type/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ermsweb.Test_Comm" />
+  <wsdl:message name="ermsweb.Test_CommResponse">
+    <wsdl:part name="Result" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Add_TrackData">
+    <wsdl:part name="cMachine" type="xsd:string" />
+    <wsdl:part name="cClientCode" type="xsd:string" />
+    <wsdl:part name="cInputCode" type="xsd:string" />
+    <wsdl:part name="cOutputCode" type="xsd:string" />
+    <wsdl:part name="tTimeStamp" type="xsd:dateTime" />
+    <wsdl:part name="cText" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Add_TrackDataResponse">
+    <wsdl:part name="Result" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_TrackData">
+    <wsdl:part name="cMachine" type="xsd:string" />
+    <wsdl:part name="cClientCode" type="xsd:string" />
+    <wsdl:part name="cStart_Date" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_TrackDataResponse">
+    <wsdl:part name="Result" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Send_NOCOMM">
+    <wsdl:part name="lCreate" type="xsd:boolean" />
+    <wsdl:part name="cMachine" type="xsd:string" />
+    <wsdl:part name="cClientCode" type="xsd:string" />
+    <wsdl:part name="tTimeStamp" type="xsd:dateTime" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Send_NOCOMMResponse">
+    <wsdl:part name="Result" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_Client_Info">
+    <wsdl:part name="cClient" type="xsd:string" />
+    <wsdl:part name="nMode" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_Client_InfoResponse">
+    <wsdl:part name="Result" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_TRC">
+    <wsdl:part name="nMode" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="ermsweb.Get_TRCResponse">
+    <wsdl:part name="Result" type="xsd:anyType" />
+  </wsdl:message>
+  <wsdl:portType name="ermswebSoapPort">
+    <wsdl:operation name="Test_Comm">
+      <wsdl:input message="wsdlns:ermsweb.Test_Comm" />
+      <wsdl:output message="wsdlns:ermsweb.Test_CommResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Add_TrackData" parameterOrder="cMachine cClientCode cInputCode cOutputCode tTimeStamp cText">
+      <wsdl:input message="wsdlns:ermsweb.Add_TrackData" />
+      <wsdl:output message="wsdlns:ermsweb.Add_TrackDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_TrackData" parameterOrder="cMachine cClientCode cStart_Date">
+      <wsdl:input message="wsdlns:ermsweb.Get_TrackData" />
+      <wsdl:output message="wsdlns:ermsweb.Get_TrackDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Send_NOCOMM" parameterOrder="lCreate cMachine cClientCode tTimeStamp">
+      <wsdl:input message="wsdlns:ermsweb.Send_NOCOMM" />
+      <wsdl:output message="wsdlns:ermsweb.Send_NOCOMMResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Client_Info" parameterOrder="cClient nMode">
+      <wsdl:input message="wsdlns:ermsweb.Get_Client_Info" />
+      <wsdl:output message="wsdlns:ermsweb.Get_Client_InfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_TRC" parameterOrder="nMode">
+      <wsdl:input message="wsdlns:ermsweb.Get_TRC" />
+      <wsdl:output message="wsdlns:ermsweb.Get_TRCResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ermswebSoapBinding" type="wsdlns:ermswebSoapPort">
+    <stk:binding preferredEncoding="UTF-8" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="Test_Comm">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Test_Comm" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add_TrackData">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Add_TrackData" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="cMachine cClientCode cInputCode cOutputCode tTimeStamp cText" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_TrackData">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Get_TrackData" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="cMachine cClientCode cStart_Date" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send_NOCOMM">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Send_NOCOMM" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="lCreate cMachine cClientCode tTimeStamp" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Client_Info">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Get_Client_Info" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="cClient nMode" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_TRC">
+      <soap:operation soapAction="http://10.80.4.167/ermsweb/action/ermsweb.Get_TRC" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="nMode" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://10.80.4.167/ermsweb/message/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" parts="Result" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ermsweb">
+    <wsdl:port name="ermswebSoapPort" binding="wsdlns:ermswebSoapBinding">
+      <soap:address location="http://10.80.4.167/SoapServices/ermsweb.WSDL" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

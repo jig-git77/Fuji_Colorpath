@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koolwired.Imap", "Koolwired.Imap\Koolwired.Imap.csproj", "{B383E80F-0B52-48F7-94E1-5F4C2AF74833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koolwired.Imap.Test", "Koolwired.IMAP.Test\Koolwired.Imap.Test.csproj", "{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B383E80F-0B52-48F7-94E1-5F4C2AF74833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B44FA6-EA7D-4C7E-AB08-879B6C9C5A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
