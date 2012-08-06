@@ -206,7 +206,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             MeasurementName = DataReader.ReadString(x, "MeasurementName"),
                             MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),                         
                             Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),                        
-                            Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),                           
+                            Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),
+                            Pri_ΔE = DataReader.ReadDecimal(x, "PriΔE"),
+                            Pri_ΔH = DataReader.ReadDecimal(x, "PriΔH"),
+                            Gray_ΔE = DataReader.ReadDecimal(x, "GrayΔE"),   
                             PercΔE_10 = DataReader.ReadDecimal(x, "TenΔE"),
                             PercΔE_90 = DataReader.ReadDecimal(x, "NinetyΔE"),
                             PercΔE_95 = DataReader.ReadDecimal(x, "NinetyFiveΔE")

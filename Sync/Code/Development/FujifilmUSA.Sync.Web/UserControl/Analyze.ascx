@@ -302,20 +302,40 @@
                                                     <td>
                                                         <asp:Label ID="lblRMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
                                                     </td>
-                                                </tr>                                            
-                                                <tr class="Gray">   
+                                                </tr>    
+                                                
+                                                  <tr class="Gray">   
+                                                    <td style="font-size:13px;">Primary Δ<asp:Label ID="lblPri_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("Pri_ΔE") %>'></asp:Label>
+                                                    </td>
+                                                </tr>    
+                                                  <tr class="White">   
+                                                    <td style="font-size:13px;">Primary ΔH:</td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("Pri_ΔH") %>'></asp:Label>
+                                                    </td>
+                                                </tr>    
+                                                  <tr class="Gray">   
+                                                    <td style="font-size:13px;">Gray Average Δ<asp:Label ID="lblGray_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td>
+                                                        <asp:Label ID="Label9" runat="server" Text='<%#Eval("Gray_ΔE") %>'></asp:Label>
+                                                    </td>
+                                                </tr>    
+                                                                                        
+                                                <tr class="White">   
                                                     <td style="font-size:13px;">10th Percentile Δ<asp:Label ID="lblPercΔE_10" runat="server" Text=""></asp:Label> </td>                                                                                     
                                                     <td>
                                                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="White">   
+                                                <tr class="Gray">   
                                                     <td style="font-size:13px;">90th Percentile Δ<asp:Label ID="lblPercΔE_90" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
                                                     </td>
                                                 </tr>
-                                                <tr class="Gray">   
+                                                <tr class="White">   
                                                     <td style="font-size:13px;">95th Percentile Δ<asp:Label ID="lblPercΔE_95" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
@@ -911,8 +931,8 @@
                <tr>
                 <td>   
                     <telerik:RadGrid ID="GridPatchDetails"  AllowSorting="True" Width="650px" 
-                    AllowPaging="True"  runat="server" AutoGenerateColumns="False" 
-                        EnableLinqExpressions="False"  AllowFilteringByColumn="True" 
+                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                       AllowFilteringByColumn="True" 
                     OnNeedDataSource="GridPatchDetails_NeedDataSource" 
                         OnItemDataBound="GridPatchDetails_ItemDataBound" OnItemCommand="GridPatchDetails_ItemCommand"
                     OnSortCommand="GridPatchDetails_SortCommand" CellSpacing="0" GridLines="None">
@@ -924,131 +944,131 @@
 
                         <HeaderStyle Font-Bold="True" />
 
-                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                    <MasterTableView DataKeyNames="HtmlColor">                      
-                        <CommandItemSettings ExportToPdfText="Export to PDF" />
-                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
-                            Visible="True">
-                        </RowIndicatorColumn>
-                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
-                            Visible="True">
-                        </ExpandCollapseColumn>
-                        <Columns>
-                            <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
-                                DataField="HtmlColor" FilterControlAltText="Filter HtmlColor column" 
-                                meta:resourcekey="GridTemplateColumnResource1">
+                            <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
+                            <MasterTableView DataKeyNames="HtmlColor">                      
+                                <CommandItemSettings ExportToPdfText="Export to PDF" />
+                                <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
+                                    Visible="True">
+                                </RowIndicatorColumn>
+                                <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
+                                    Visible="True">
+                                </ExpandCollapseColumn>
+                                <Columns>
+                                    <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
+                                        DataField="HtmlColor" FilterControlAltText="Filter HtmlColor column" 
+                                        meta:resourcekey="GridTemplateColumnResource1">
                                 
-                                 <FilterTemplate>
-                                    <center>
-                                    <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"  
-                                            CommandName="Fillter">
-                                                    <span>
-                                                        <asp:Image ID="imgClearFillter" runat="server" 
-                                            AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
-                                            meta:resourcekey="imgClearFillterResource1" />
+                                         <FilterTemplate>
+                                            <center>
+                                            <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"  
+                                                    CommandName="Fillter">
+                                                            <span>
+                                                                <asp:Image ID="imgClearFillter" runat="server" 
+                                                    AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
+                                                    meta:resourcekey="imgClearFillterResource1" />
 
-                                                    </span>
-                                    </asp:LinkButton>
-                                    </center>
-                                </FilterTemplate>
-                                <ItemTemplate>         
-                                    <asp:Label ID="lbl_HTML" runat="server" Height="14px" Width="30px" 
-                                        meta:resourcekey="lbl_HTMLResource1"></asp:Label>                                   
-                                </ItemTemplate>
+                                                            </span>
+                                            </asp:LinkButton>
+                                            </center>
+                                        </FilterTemplate>
+                                        <ItemTemplate>         
+                                            <asp:Label ID="lbl_HTML" runat="server" Height="14px" Width="30px" 
+                                                meta:resourcekey="lbl_HTMLResource1"></asp:Label>                                   
+                                        </ItemTemplate>
                                 
-                            </telerik:GridTemplateColumn>                         
+                                    </telerik:GridTemplateColumn>                         
 
-                            <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" 
-                                SortExpression="SampleId" AllowFiltering="False" UniqueName="SampleId" 
-                                FilterControlAltText="Filter SampleId column" 
-                                meta:resourcekey="GridBoundColumnResource1">
-                            </telerik:GridBoundColumn>                       
-                            <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" 
-                                SortExpression="CmykC" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                UniqueName="CmykC" DataType="System.Int32" 
-                                FilterControlAltText="Filter CmykC column" 
-                                meta:resourcekey="GridBoundColumnResource2">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" 
-                                SortExpression="CmykM" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                UniqueName="CmykM" DataType="System.Int32" 
-                                FilterControlAltText="Filter CmykM column" 
-                                meta:resourcekey="GridBoundColumnResource3">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" 
-                                SortExpression="CmykY" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                UniqueName="CmykY" DataType="System.Int32" 
-                                FilterControlAltText="Filter CmykY column" 
-                                meta:resourcekey="GridBoundColumnResource4">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" 
-                                SortExpression="CmykK" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                UniqueName="CmykK" DataType="System.Int32" 
-                                FilterControlAltText="Filter CmykK column" 
-                                meta:resourcekey="GridBoundColumnResource5">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE" 
-                                FilterControlWidth="30px" CurrentFilterFunction="GreaterThanOrEqualTo" 
-                                AutoPostBackOnFilter="True" UniqueName="ΔE" 
-                                FilterControlAltText="Filter ΔE column" 
-                                meta:resourcekey="GridBoundColumnResource6">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" 
-                                SortExpression="ΔE94" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter ΔE94 column" 
-                                meta:resourcekey="GridBoundColumnResource7" UniqueName="ΔE94">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000" 
-                                SortExpression="ΔE2000" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter ΔE2000 column" 
-                                meta:resourcekey="GridBoundColumnResource8" UniqueName="ΔE2000">
-                            </telerik:GridBoundColumn> 
-                            <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*" 
-                                SortExpression="TargetL" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter TargetL column" 
-                                meta:resourcekey="GridBoundColumnResource9" UniqueName="TargetL">
-                            </telerik:GridBoundColumn>
-                             <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" 
-                                SortExpression="CielabL" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter CielabL column" 
-                                meta:resourcekey="GridBoundColumnResource10" UniqueName="CielabL">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*" 
-                                SortExpression="Targeta" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter Targeta column" 
-                                meta:resourcekey="GridBoundColumnResource11" UniqueName="Targeta">
-                            </telerik:GridBoundColumn>
-                             <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" 
-                                SortExpression="CielabA" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter CielabA column" 
-                                meta:resourcekey="GridBoundColumnResource12" UniqueName="CielabA">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*" 
-                                SortExpression="Targetb" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter Targetb column" 
-                                meta:resourcekey="GridBoundColumnResource13" UniqueName="Targetb">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" 
-                                SortExpression="CielabB" FilterControlWidth="30px" 
-                                CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
-                                FilterControlAltText="Filter CielabB column" 
-                                meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">
-                            </telerik:GridBoundColumn>     
+                                    <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" 
+                                        SortExpression="SampleId" AllowFiltering="False" UniqueName="SampleId" 
+                                        FilterControlAltText="Filter SampleId column" 
+                                        meta:resourcekey="GridBoundColumnResource1">
+                                    </telerik:GridBoundColumn>                       
+                                    <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" 
+                                        SortExpression="CmykC" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        UniqueName="CmykC" DataType="System.Int32" 
+                                        FilterControlAltText="Filter CmykC column" 
+                                        meta:resourcekey="GridBoundColumnResource2">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" 
+                                        SortExpression="CmykM" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        UniqueName="CmykM" DataType="System.Int32" 
+                                        FilterControlAltText="Filter CmykM column" 
+                                        meta:resourcekey="GridBoundColumnResource3">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" 
+                                        SortExpression="CmykY" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        UniqueName="CmykY" DataType="System.Int32" 
+                                        FilterControlAltText="Filter CmykY column" 
+                                        meta:resourcekey="GridBoundColumnResource4">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" 
+                                        SortExpression="CmykK" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        UniqueName="CmykK" DataType="System.Int32" 
+                                        FilterControlAltText="Filter CmykK column" 
+                                        meta:resourcekey="GridBoundColumnResource5">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ΔE" HeaderText="ΔE" SortExpression="ΔE" 
+                                        FilterControlWidth="30px" CurrentFilterFunction="GreaterThanOrEqualTo" 
+                                        AutoPostBackOnFilter="True" UniqueName="ΔE" 
+                                        FilterControlAltText="Filter ΔE column" 
+                                        meta:resourcekey="GridBoundColumnResource6">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ΔE94" HeaderText="ΔE94" 
+                                        SortExpression="ΔE94" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter ΔE94 column" 
+                                        meta:resourcekey="GridBoundColumnResource7" UniqueName="ΔE94">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ΔE2000" HeaderText="ΔE2000" 
+                                        SortExpression="ΔE2000" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter ΔE2000 column" 
+                                        meta:resourcekey="GridBoundColumnResource8" UniqueName="ΔE2000">
+                                    </telerik:GridBoundColumn> 
+                                    <telerik:GridBoundColumn DataField="TargetL" HeaderText="Target L*" 
+                                        SortExpression="TargetL" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter TargetL column" 
+                                        meta:resourcekey="GridBoundColumnResource9" UniqueName="TargetL">
+                                    </telerik:GridBoundColumn>
+                                     <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" 
+                                        SortExpression="CielabL" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter CielabL column" 
+                                        meta:resourcekey="GridBoundColumnResource10" UniqueName="CielabL">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Targeta" HeaderText="Target a*" 
+                                        SortExpression="Targeta" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Targeta column" 
+                                        meta:resourcekey="GridBoundColumnResource11" UniqueName="Targeta">
+                                    </telerik:GridBoundColumn>
+                                     <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" 
+                                        SortExpression="CielabA" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter CielabA column" 
+                                        meta:resourcekey="GridBoundColumnResource12" UniqueName="CielabA">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Targetb" HeaderText="Target b*" 
+                                        SortExpression="Targetb" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Targetb column" 
+                                        meta:resourcekey="GridBoundColumnResource13" UniqueName="Targetb">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" 
+                                        SortExpression="CielabB" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter CielabB column" 
+                                        meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">
+                                    </telerik:GridBoundColumn>     
                             
                                                 
-                        </Columns>                        
-                    </MasterTableView>                        
+                                </Columns>                        
+                            </MasterTableView>                        
                 </telerik:RadGrid>
 
                  </td>

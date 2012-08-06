@@ -969,6 +969,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblAvg_ΔE.Text = From_ΔE + ": ";
                 Label lblMax_ΔE = (Label)e.Item.FindControl("lblMax_ΔE");
                 lblMax_ΔE.Text = From_ΔE + ": ";
+                Label lblPri_ΔE = (Label)e.Item.FindControl("lblPri_ΔE");
+                lblPri_ΔE.Text = From_ΔE + ": ";
+                Label lblGray_ΔE = (Label)e.Item.FindControl("lblGray_ΔE");
+                lblGray_ΔE.Text = From_ΔE + ": ";
                 Label lblPercΔE_10 = (Label)e.Item.FindControl("lblPercΔE_10");
                 lblPercΔE_10.Text = From_ΔE + ": ";
                 Label lblPercΔE_90 = (Label)e.Item.FindControl("lblPercΔE_90");
