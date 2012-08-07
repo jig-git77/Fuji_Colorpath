@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -11,24 +13,14 @@ namespace FujifilmUSA.Sync.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Page.Header.DataBind();
-            if (!Page.IsPostBack)
-            {
-               
-                
-            }
+            Page.Header.DataBind();           
         }             
 
         protected void btn_ServerSide_Click(object sender, EventArgs e)
         {
             RunServerSideTest();
         }
-
-        public void RunClientSideTest()
-        {
-
-        }
-
+              
         public void RunServerSideTest()
         {
             System.Web.HttpBrowserCapabilities browser = Request.Browser;
@@ -63,6 +55,16 @@ namespace FujifilmUSA.Sync.Web
                     browser["JavaScriptVersion"] + "<br />";
 
             lbl_Result.Text = s;
+        }      
+
+        protected void btn_GenerateImage_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics graphics = Graphics.FromImage(bitmap as System.Drawing.Image);
+            graphics.CopyFromScreen(25, 25, 25, 25, bitmap.Size);
+            bitmap.Save(Server.MapPath("UploadFiles/Report_PDF/BrowserTest/BrowserTest.jpg"), ImageFormat.Jpeg);
+
+            
         }
     }
 }

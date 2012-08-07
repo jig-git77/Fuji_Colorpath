@@ -58,6 +58,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -96,7 +97,6 @@
     <Content Include="COTransferSiteControl.aspx" />
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
-    <Content Include="CSS\main.css" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
@@ -1332,7 +1332,7 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="tempImages\" />
-    <Folder Include="UploadFiles\Report_PDF\" />
+    <Folder Include="UploadFiles\Report_PDF\BrowserTest\" />
     <Folder Include="UploadFiles\temp\" />
   </ItemGroup>
   <ItemGroup>

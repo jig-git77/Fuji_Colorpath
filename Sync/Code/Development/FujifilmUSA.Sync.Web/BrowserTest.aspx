@@ -190,17 +190,31 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>    
-        <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
-                &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btn_ServerSide" runat="server" onclick="btn_ServerSide_Click" 
-            Text="Run ServerSide Test" />
-        <br />
-       
-        <asp:Label ID="lbl_Result" runat="server"></asp:Label>
-    
+    <div>  
+       <table id="Table_Buttons" runat="server" width="100%">
+            <tr>
+                <td>
+                     <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
+                </td>
+                <td>
+                     <asp:Button ID="btn_ServerSide" runat="server" onclick="btn_ServerSide_Click" 
+                        Text="Run ServerSide Test" />
+                </td>
+                <td>
+                    <asp:Button ID="btn_GenerateImage" runat="server" Text="Generate Screen Shot" 
+                        onclick="btn_GenerateImage_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                     <asp:Label ID="lbl_Result" runat="server"></asp:Label>
+                </td>
+            </tr>
+       </table>
     </div>
+
     <br />
+
     <div>
        <div class="example"> 
             <div id="progress1">
