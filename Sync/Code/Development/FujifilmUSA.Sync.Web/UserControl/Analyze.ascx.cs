@@ -160,7 +160,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
                 BindAvgDelta();
-                GridPatchDetails.Rebind();
+                //GridPatchDetails.Rebind();
                 FillAllTabsData();
             }
         }
