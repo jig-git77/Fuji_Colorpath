@@ -40,13 +40,13 @@ namespace FujifilmUSA.Sync.Web {
         protected global::System.Web.UI.WebControls.Button btn_ServerSide;
         
         /// <summary>
-        /// btn_GenerateImage control.
+        /// btn_LoadGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_GenerateImage;
+        protected global::System.Web.UI.WebControls.Button btn_LoadGrid;
         
         /// <summary>
         /// lbl_Result control.
@@ -67,57 +67,102 @@ namespace FujifilmUSA.Sync.Web {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivTable;
         
         /// <summary>
-        /// lbl_Browser control.
+        /// Hidden_Browser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Browser;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_Browser;
         
         /// <summary>
-        /// lbl_BrowserVersion control.
+        /// Hidden_BrowserVersion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_BrowserVersion;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_BrowserVersion;
         
         /// <summary>
-        /// lbl_Javascript control.
+        /// Hidden_Javascript control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Javascript;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_Javascript;
         
         /// <summary>
-        /// lbl_Cookies control.
+        /// Hidden_Cookies control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Cookies;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_Cookies;
         
         /// <summary>
-        /// lbl_HTML5 control.
+        /// Hidden_HTML5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_HTML5;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_HTML5;
         
         /// <summary>
-        /// lblPluginMessage control.
+        /// Hidden_PluginMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPluginMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_PluginMessage;
+        
+        /// <summary>
+        /// Hidden_OtherPlugins control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_OtherPlugins;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// Panel_Grid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_Grid;
+        
+        /// <summary>
+        /// btn_PDF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_PDF;
+        
+        /// <summary>
+        /// RadGrid_Test control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadGrid RadGrid_Test;
     }
 }

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('#btn_ChkBrowser').click(function () {
-         Test_ChkBrowser(); //-----Call Client side capability test
+         Test_ChkBrowser(); //-----Call Client side browser capability test
       
         //-------Start code for displaying progress bar-----------//
         jQuery.fn.anim_progressbar = function (aOptions) {
@@ -14,7 +14,7 @@ $(document).ready(function () {
             // def options
             var aDefOpts = {
                 start: new Date(), // now
-                finish: new Date().setTime(new Date().getTime() + 10 * iCms), // now + 60 sec
+                finish: new Date().setTime(new Date().getTime() + 5 * iCms), // now + 5 sec
                 interval: 100
             }
             var aOpts = jQuery.extend(aDefOpts, aOptions);
@@ -49,7 +49,8 @@ $(document).ready(function () {
                             clearInterval(vInterval);
                             $(vPb).children('.percent').html('<b>100%</b>');
                             $(vPb).children('.elapsed').html('Finished');
-                            document.getElementById('DivTable').style.visibility = 'visible'; //---------After completed progress bar, display result table to user-------//
+                            document.getElementById('DivTable').style.visibility = 'visible';  //---------After completed progress bar, display result table to user-------//                        
+                            __doPostBack('btn_LoadGrid', 'OnClick');  //---------Call OnClick() method of btn_LoadGrid from .cs file to load the RadGrid with data-----//
                         }
                     }, aOpts.interval
                 );

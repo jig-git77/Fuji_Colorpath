@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BrowserTest.aspx.cs" Inherits="FujifilmUSA.Sync.Web.BrowserTest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BrowserTest.aspx.cs" Inherits="FujifilmUSA.Sync.Web.BrowserTest" EnableEventValidation="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -82,51 +82,47 @@
                 majorVersionName = parseInt(navigator.appVersion, 10);
             }
 
-            var d = document.getElementById('<%#lbl_Browser.ClientID%>');
-            d.innerHTML = browserName;
-            var e = document.getElementById('<%#lbl_BrowserVersion.ClientID%>');
-            e.innerHTML = fullVersionName;
+            var d = document.getElementById('<%#Hidden_Browser.ClientID%>');
+            d.value = browserName;
+            var e = document.getElementById('<%#Hidden_BrowserVersion.ClientID%>');
+            e.value = fullVersionName;         
         }
         function Test_Javascript() {
-            var myTextField = document.getElementById('txt_Javascript');
-            if (myTextField == null) //------Supports Javascript-----//
-            {
-                var a = document.getElementById('<%#lbl_Javascript.ClientID%>');
-                a.innerHTML = "True";
-            }
+            var a = document.getElementById('<%#Hidden_Javascript.ClientID%>');
+            a.value = "True";
         }
         function Test_Cookies() {
             var cookieEnabled = (navigator.cookieEnabled) ? 'True' : 'False';
-            var b = document.getElementById('<%#lbl_Cookies.ClientID%>');
+            var b = document.getElementById('<%#Hidden_Cookies.ClientID%>');
 
             if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
                 document.cookie = "testcookie";
                 cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? 'True' : 'False';
             }
-            b.innerHTML = cookieEnabled;
+            b.value = cookieEnabled;
         }
         function Test_HTML5() {
             var canvas = document.createElement('canvas');
             var answer = (!!(canvas.getContext && canvas.getContext('2d'))) ? 'True' : 'False';
-            var c = document.getElementById('<%#lbl_HTML5.ClientID%>');
-            c.innerHTML = answer;
+            var c = document.getElementById('<%#Hidden_HTML5.ClientID%>');
+            c.value = answer;
         }
         function Test_Plugins() {
             if (navigator.plugins && navigator.plugins.length > 0) {
-                var L = navigator.plugins.length;
-                var Table_Plugin = document.getElementById('Table_Plugin');
-                Table_Plugin.innerHTML = "";
-
+                var L = navigator.plugins.length;          
+                var Table_Plugin = document.getElementById('<%#Hidden_OtherPlugins.ClientID%>');
+                Table_Plugin.value = "";
+              
                 for (var i = 0; i < L; i++) {
                     if (navigator.plugins[i].name.indexOf('Fuji') != -1) {
-                        Table_Plugin.innerHTML += "<span class='style2'>" + navigator.plugins[i].name + "</span>";
+                        Table_Plugin.value +=  navigator.plugins[i].name ;
                     }
                     else {
-                        Table_Plugin.innerHTML += "<b>" + navigator.plugins[i].name + "</b>";
+                        Table_Plugin.value +=  navigator.plugins[i].name ;
                     }
-                    //                Table_Plugin.innerHTML += " | ";
-                    //                Table_Plugin.innerHTML += navigator.plugins[i].version;
-                    Table_Plugin.innerHTML += "<br>";
+                    if (i < L-1) {
+                        Table_Plugin.value += ", ";
+                    }
                 }
             }
         }
@@ -150,34 +146,24 @@
         }
 
         function Plugin_load() {
-         
-            jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
-                addEvent(plugin(), 'fire', function (x) {
-                    alert('onfired() from load(): ' + x)
-                });            
 
-                if (OSName == "Windows") {
-                    plugin().setDebug("C:/temp/FujiCM.log");
-                } else {
-                    plugin().setDebug("/tmp/isis.log");
-                }
-                var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;              
-                jQuery("[id*='lblPluginMessage']").html(newHTML);
-                SDKVerHTML = plugin().sdk_version;    
-        }
-    </script>
+            var c = document.getElementById('<%#Hidden_PluginMessage.ClientID%>');
+            c.value = "Error in plugin.";
+            addEvent(plugin(), 'fire', function (x) {
+                alert('onfired() from load(): ' + x)
+            });
 
-    <style type="text/css">
-        .style1
-        {
-            width: 200px;
-            font-weight:bold;
+            if (OSName == "Windows") {
+                plugin().setDebug("C:/temp/FujiCM.log");
+            } else {
+                plugin().setDebug("/tmp/isis.log");
+            }
+            var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
+            c.value = newHTML;
         }
-         .style2
-        {
-            font-weight:bold;
-            color:Red;
-        }
+    </script> 
+
+    <style type="text/css">       
         body{background:#eee;font-family:Verdana, Helvetica, Arial, sans-serif;margin:0;padding:0;}
         .example{background:#FFF;width:650px;font-size:80%;border:1px #000 solid;margin:20px auto;padding:15px;position:relative;-moz-border-radius: 3px;-webkit-border-radius: 3px}
         h3 {text-align:center}
@@ -188,6 +174,7 @@
         .elapsed {position:relative;text-align: right;}
     </style>
 </head>
+
 <body>
     <form id="form1" runat="server">
     <div>  
@@ -201,8 +188,8 @@
                         Text="Run ServerSide Test" />
                 </td>
                 <td>
-                    <asp:Button ID="btn_GenerateImage" runat="server" Text="Generate Screen Shot" 
-                        onclick="btn_GenerateImage_Click" />
+                    <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" 
+                        onclick="btn_LoadGrid_Click" Visible="false" />
                 </td>
             </tr>
             <tr>
@@ -216,7 +203,8 @@
     <br />
 
     <div>
-       <div class="example"> 
+       <div class="example">
+        <noscript>JavaScript: DISABLED <br /> This site requires JavaScript for navigation. Please enable JS and retry.</noscript> 
             <div id="progress1">
                 <div class="percent"></div>
                 <div class="pbar"></div>
@@ -226,76 +214,62 @@
             <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0"></object>
       
             <br />
-            <div id="DivTable" runat="server" style="visibility:hidden;">
-                <table border="1" cellpadding="0" cellspacing="0" style="width: 100%;">
-                    <tr>
-                        <td class="style1">
-                            Browser:
-                        </td>
-                        <td class="style2">
-                            <asp:Label ID="lbl_Browser" runat="server" Text=""></asp:Label>                   
-                        </td>               
-                    </tr>
-                    <tr>
-                        <td class="style1">
-                            FullVersion:
-                        </td>
-                        <td class="style2">
-                            <asp:Label ID="lbl_BrowserVersion" runat="server" Text=""></asp:Label>                  
-                        </td>               
-                    </tr>           
-                    <tr>
-                        <td class="style1">
-                            JavaScript Enabled:
-                        </td>
-                        <td class="style2">
-                            <asp:Label ID="lbl_Javascript" runat="server" Text=""></asp:Label>
-                            <noscript>False</noscript>
-                        </td>               
-                    </tr>
-                    <tr>
-                        <td class="style1">
-                            SessionCookies Enabled:
-                        </td>
-                        <td class="style2">
-                            <asp:Label ID="lbl_Cookies" runat="server" Text=""></asp:Label>
-                            <noscript>First Enable JavaScript</noscript>
-                        </td>              
-                    </tr>
-                    <tr>
-                        <td class="style1">
-                            HTML5 Supported:
-                        </td>
-                        <td class="style2">
-                            <asp:Label ID="lbl_HTML5" runat="server" Text=""></asp:Label>
-                            <noscript>First Enable JavaScript</noscript>
-                        </td>               
-                    </tr>
-                    <tr>
-                        <td class="style1">
-                            Plugins:
-                        </td>    
-                        <td>
-                            <asp:Label ID="lblPluginMessage" runat="server" Text="loading..." Style="float: right;
-                            font-weight: bold; padding-right: 5px;" ></asp:Label>
-                        </td>           
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <table id="Table_Plugin" cellpadding="0" cellspacing="0" style="width: 100%;">
-                                <tr>
-                                    <td class="style1">
-                                
-                                    </td>                                                   
-                                </tr>                      
-                            </table>
-                
-                        </td>               
-                    </tr>            
-                </table>
-
+            <div id="DivTable" runat="server" style="visibility:hidden;">               
+                            <input id="Hidden_Browser" type="hidden" runat="server" />  
+                            <input id="Hidden_BrowserVersion" type="hidden" runat="server" />                      
+                            <input id="Hidden_Javascript" type="hidden" runat="server" />
+                            <input id="Hidden_Cookies" type="hidden" runat="server" />
+                            <input id="Hidden_HTML5" type="hidden" runat="server" />
+                            <input id="Hidden_PluginMessage" type="hidden" runat="server" />  
+                            <input id="Hidden_OtherPlugins" type="hidden" runat="server" />
+            </div>
+            <br />
+            <div>
+                <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
+                </asp:ScriptManager>
+                <asp:Panel ID="Panel_Grid" runat="server">
+              
+                  <asp:Button ID="btn_PDF" CssClass="button" Width="150px" 
+                        Text="Export to PDF" runat="server" onclick="btn_PDF_Click" ></asp:Button>                   
+                 
+                   <telerik:RadGrid ID="RadGrid_Test" runat="server"                                 
+                Width="100%" CellSpacing="0" GridLines="None" >                                  
+                <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
+                <MasterTableView>  
+                    <Columns>
+                        <%--<telerik:GridTemplateColumn DataField="DeviceName" HeaderText="Device Name"
+                            UniqueName="DeviceName" SortExpression="DeviceName" 
+                            FilterControlWidth="200px" AutoPostBackOnFilter="True" 
+                            CurrentFilterFunction="Contains" 
+                            FilterControlAltText="Filter DeviceName column" 
+                            meta:resourcekey="GridTemplateColumnResource1">
+                            <ItemTemplate>
+                                <asp:Panel ID="divSelectDevice" runat="server" class="product_list" 
+                                    meta:resourcekey="divSelectDeviceResource1">
+                                    <ul>
+                                        <li>
+                                            <div class="left">
+                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
+                                                            CommandName="Select" Text='<%# Eval("DeviceName") %>' 
+                                                            meta:resourcekey="lbtnSelectDeviceResource1"></asp:LinkButton>
+                                                    </div>
+                                            <div class="clear">
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </asp:Panel>
+                                <div class="clear">
+                                </div>
+                            </ItemTemplate>
+                            <ItemStyle CssClass="breakWord200" />
+                        </telerik:GridTemplateColumn>--%>
+                    </Columns>                                        
+                </MasterTableView>                                    
+            </telerik:RadGrid>
+               </asp:Panel>
             </div>
        </div> 
+
     </div>
     </form>
 </body>
