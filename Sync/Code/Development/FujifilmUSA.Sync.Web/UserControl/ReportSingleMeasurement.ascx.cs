@@ -72,7 +72,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement;
                 objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
                 objReportPDF.PDF_NAME = SessionManager.Instance.CurrentUser.UserId + "_ReportSingleMeasurement.PDF";
-                objReportPDF.DS_Common = Ds;
+                objReportPDF.DS_Common = Ds;               
+                objReportPDF.From_ΔE = txt_dTE.Text;
+                objReportPDF.DLPName = txt_DLPName.Text;
                 objReportPDF.MakePDF();
 
                 // === After generate and save PDF file, Download it at a time === //

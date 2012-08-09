@@ -25,6 +25,8 @@ namespace FujifilmUSA.Sync.Common
         int theCount = 0;
         private DataSet _DS_Common;
         private DataGrid _Dg;
+        string _From_ΔE;
+        string _DLPName;
 
         #endregion
 
@@ -59,6 +61,18 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _Dg; }
             set { _Dg = value; }
+        }
+
+        public string From_ΔE
+        {
+            get { return _From_ΔE; }
+            set { _From_ΔE = value; }
+        }
+
+        public string DLPName
+        {
+            get { return _DLPName; }
+            set { _DLPName = value; }
         }
 
         #endregion
@@ -217,6 +231,7 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###ProjectName###", Convert.ToString(DT.Rows[0]["ProjectName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProjectName"]).Trim());
                 SBStr.Replace("###Device###", Convert.ToString(DT.Rows[0]["DeviceName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeviceName"]).Trim());
                 SBStr.Replace("###TimeStamp###", Common.Utilities.GetDateByCultures(Convert.ToDateTime(DT.Rows[0]["MeasurementDate"])));
+                SBStr.Replace("###OptimizedDLP###", DLPName.Trim() == "" ? "&nbsp;" : DLPName.Trim());
                 SBStr.Replace("###PrintTarget###", Convert.ToString(DT.Rows[0]["ProfileName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["ProfileName"]).Trim());
                 SBStr.Replace("###Media###", Media.Trim() == "" ? "&nbsp;" : Media.Trim());
                 SBStr.Replace("###Colorant###", Colorant.Trim() == "" ? "&nbsp;" : Colorant.Trim());
@@ -230,6 +245,7 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###ProjectName###", "&nbsp;");
                 SBStr.Replace("###Device###", "&nbsp;");
                 SBStr.Replace("###TimeStamp###", "&nbsp;");
+                SBStr.Replace("###OptimizedDLP###", "&nbsp;");
                 SBStr.Replace("###PrintTarget###", "&nbsp;");
                 SBStr.Replace("###Media###", "&nbsp;");
                 SBStr.Replace("###Colorant###", "&nbsp;");
@@ -257,7 +273,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'>Average &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' class='BottomBorder' style='width: 160px;'>Average &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -265,7 +281,7 @@ namespace FujifilmUSA.Sync.Common
                 {                   
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Average &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Average &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Avg_ΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -276,7 +292,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -285,7 +301,7 @@ namespace FujifilmUSA.Sync.Common
                    
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Maximum &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["Max_ΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -296,7 +312,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Primary &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -305,7 +321,7 @@ namespace FujifilmUSA.Sync.Common
                     
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Primary &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -316,7 +332,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Primary &Delta; H</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta; H</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -325,7 +341,7 @@ namespace FujifilmUSA.Sync.Common
                    
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Primary &Delta; H</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Max Primary &Delta; H</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["PriΔH"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -336,7 +352,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -345,7 +361,7 @@ namespace FujifilmUSA.Sync.Common
                    
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>Gray Average &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["GrayΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -357,7 +373,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -366,7 +382,7 @@ namespace FujifilmUSA.Sync.Common
                    
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; E</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["NinetyFiveΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }

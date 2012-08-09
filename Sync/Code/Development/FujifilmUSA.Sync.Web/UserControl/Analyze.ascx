@@ -931,7 +931,7 @@
                <tr>
                 <td>   
                     <telerik:RadGrid ID="GridPatchDetails"  AllowSorting="True" Width="650px" 
-                    AllowPaging="True" PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                    AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
                     OnNeedDataSource="GridPatchDetails_NeedDataSource" 
                         OnItemDataBound="GridPatchDetails_ItemDataBound" OnItemCommand="GridPatchDetails_ItemCommand"

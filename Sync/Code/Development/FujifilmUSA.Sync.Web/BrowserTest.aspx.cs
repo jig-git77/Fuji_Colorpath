@@ -56,10 +56,10 @@ namespace FujifilmUSA.Sync.Web
 
             table.Rows.Add("Browser:", Hidden_Browser.Value);
             table.Rows.Add("FullVersion:", Hidden_BrowserVersion.Value);
-            table.Rows.Add("JavaScript Enabled:", (Hidden_Javascript.Value == "" ? "Not detectable with JavaScript disabled" : Hidden_Javascript.Value));
-            table.Rows.Add("SessionCookies Enabled:", (Hidden_Cookies.Value == "" ? "Not detectable with JavaScript disabled" : Hidden_Cookies.Value));
-            table.Rows.Add("HTML5 Supported:", (Hidden_HTML5.Value == "" ? "Not detectable with JavaScript disabled" : Hidden_HTML5.Value));
-            table.Rows.Add("Fujifilm Plugin:", (Hidden_PluginMessage.Value == "" ? "Not detectable with JavaScript disabled" : Hidden_PluginMessage.Value));
+            table.Rows.Add("JavaScript Enabled:", Hidden_Javascript.Value);
+            table.Rows.Add("Session/Cookies Enabled:", Hidden_Cookies.Value);
+            table.Rows.Add("HTML5 Supported:", Hidden_HTML5.Value);
+            table.Rows.Add("Fujifilm Plugin:", Hidden_PluginMessage.Value);
             if (Hidden_OtherPlugins.Value != "") //---Not supported in IE
             {
                 table.Rows.Add("Other Plugins:", Hidden_OtherPlugins.Value);

@@ -111,6 +111,7 @@ var cId = 0;
 var x1 = 0;
 var y1 = 0;
 
+
 function presentScanDonei1(scanner, mychart, final) {
     /* chirag put logic to return if lengh of measurepatch = total patches so far*/
     //if (mychart["Size"] == MeasuredPatches.length) return;
@@ -126,9 +127,10 @@ function presentScanDonei1(scanner, mychart, final) {
         // This type of query means we finish up with an error, so just present the
         // error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            MeasurementDialog(mychart["Result"], "Error");
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
+            alert(mychart["Result"]);
+           // MeasurementDialog(mychart["Result"], "Error");           
         }
         if (typeof final == "string") {
             eval(final);
@@ -160,10 +162,11 @@ function presentScanDonei1(scanner, mychart, final) {
 
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
         if (results.length != mychart["NumberOfColumns"]) {
-            MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
-
+            alert("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"]);
+           // MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
+           
             if (typeof final == "string") {
                 eval(final);
             } else if (typeof final == "object") {
@@ -191,7 +194,8 @@ function presentScanDonei1(scanner, mychart, final) {
         idx = mychart["RowNames"].indexOf(curstr);
 
         if (idx < 0 || idx > mychart["NumberOfRows"]) {
-            MeasurementDialog("ERROR: Cannot determine current read column", "Error");
+            alert("ERROR: Cannot determine current read column");
+            //MeasurementDialog("ERROR: Cannot determine current read column", "Error");
             return;
         }
     }

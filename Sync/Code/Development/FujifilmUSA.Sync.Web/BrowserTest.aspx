@@ -179,21 +179,19 @@
     <form id="form1" runat="server">
     <div>  
        <table id="Table_Buttons" runat="server" width="100%">
-            <tr>
-                <td>
-                     <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
-                </td>
-                <td>
-                     <asp:Button ID="btn_ServerSide" runat="server" onclick="btn_ServerSide_Click" 
-                        Text="Run ServerSide Test" />
-                </td>
-                <td>
+            <tr>               
+                <td align="center">
+                    <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
+                    &nbsp;&nbsp;&nbsp;
+                    <asp:Button ID="btn_ServerSide" runat="server" onclick="btn_ServerSide_Click" 
+                        Text="Run ServerSide Test" />               
+                    &nbsp;&nbsp;&nbsp;               
                     <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" 
                         onclick="btn_LoadGrid_Click" Visible="false" />
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td>
                      <asp:Label ID="lbl_Result" runat="server"></asp:Label>
                 </td>
             </tr>
@@ -232,37 +230,13 @@
                   <asp:Button ID="btn_PDF" CssClass="button" Width="150px" 
                         Text="Export to PDF" runat="server" onclick="btn_PDF_Click" ></asp:Button>                   
                  
-                   <telerik:RadGrid ID="RadGrid_Test" runat="server"                                 
+                <telerik:RadGrid ID="RadGrid_Test" runat="server" AutoGenerateColumns="false"                               
                 Width="100%" CellSpacing="0" GridLines="None" >                                  
                 <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
                 <MasterTableView>  
                     <Columns>
-                        <%--<telerik:GridTemplateColumn DataField="DeviceName" HeaderText="Device Name"
-                            UniqueName="DeviceName" SortExpression="DeviceName" 
-                            FilterControlWidth="200px" AutoPostBackOnFilter="True" 
-                            CurrentFilterFunction="Contains" 
-                            FilterControlAltText="Filter DeviceName column" 
-                            meta:resourcekey="GridTemplateColumnResource1">
-                            <ItemTemplate>
-                                <asp:Panel ID="divSelectDevice" runat="server" class="product_list" 
-                                    meta:resourcekey="divSelectDeviceResource1">
-                                    <ul>
-                                        <li>
-                                            <div class="left">
-                                                        <asp:LinkButton ID="lbtnSelectDevice" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"DeviceId") %>'
-                                                            CommandName="Select" Text='<%# Eval("DeviceName") %>' 
-                                                            meta:resourcekey="lbtnSelectDeviceResource1"></asp:LinkButton>
-                                                    </div>
-                                            <div class="clear">
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </asp:Panel>
-                                <div class="clear">
-                                </div>
-                            </ItemTemplate>
-                            <ItemStyle CssClass="breakWord200" />
-                        </telerik:GridTemplateColumn>--%>
+                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description" ItemStyle-Width="170px"></telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Details" HeaderText="Details" ></telerik:GridBoundColumn>                       
                     </Columns>                                        
                 </MasterTableView>                                    
             </telerik:RadGrid>

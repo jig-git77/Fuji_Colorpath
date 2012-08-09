@@ -56,6 +56,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         public DateTime EndDate;
         public decimal DtELimit = 0;
+        public string DLPName = "";
 
         public string AddMeasurementDeleteMeasurementConfirmation
         {
@@ -110,10 +111,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
             {
                 header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
+                DLPName = "No DLP";
             }
             else
             {
                 header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
+                DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.ProjectName + " ", ""); //---DLPName to pass into report
+                DLPName = DLPName.Remove(DLPName.Length - 4);
             }
 
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
@@ -182,7 +186,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdMeasurement.DataBind();
 
                 //-----------Assign Report IFrame to load report----------------------//
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue;
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
                 FRMGeneratePDFReport.Attributes.Add("src", path);
                 FRMGeneratePDFReport.Style.Add("display", "");
             }
