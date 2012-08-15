@@ -130,7 +130,7 @@ function presentScanDonei1(scanner, mychart, final) {
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
             alert(mychart["Result"]);
-           // MeasurementDialog(mychart["Result"], "Error");           
+            //MeasurementDialog(mychart["Result"], "Error");           
         }
         if (typeof final == "string") {
             eval(final);
@@ -165,7 +165,7 @@ function presentScanDonei1(scanner, mychart, final) {
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
             alert("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"]);
-           // MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
+            //MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
            
             if (typeof final == "string") {
                 eval(final);

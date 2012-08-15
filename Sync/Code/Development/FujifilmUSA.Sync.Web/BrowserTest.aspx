@@ -183,9 +183,6 @@
                 <td align="center">
                     <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
                     &nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="btn_ServerSide" runat="server" onclick="btn_ServerSide_Click" 
-                        Text="Run ServerSide Test" />               
-                    &nbsp;&nbsp;&nbsp;               
                     <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" 
                         onclick="btn_LoadGrid_Click" Visible="false" />
                 </td>
@@ -212,6 +209,8 @@
             <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0"></object>
       
             <br />
+            &nbsp;<asp:Button ID="btn_SendEmail" runat="server" 
+               onclick="btn_SendEmail_Click" Text="Send Email" />
             <div id="DivTable" runat="server" style="visibility:hidden;">               
                             <input id="Hidden_Browser" type="hidden" runat="server" />  
                             <input id="Hidden_BrowserVersion" type="hidden" runat="server" />                      

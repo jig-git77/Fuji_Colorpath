@@ -2082,3 +2082,54 @@ label
 .content-bg1 { background:url(../images/center-content-whitebg.png) repeat-x top left #b4ded8; height:400px; }
 
 .maintable { height:100%; }
+
+
+/*=================== Plugin Alert Message Pop Up (MeasurementCommon.ascx) ====================*/
+#popup_container {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+	border: solid 2px #3A9977;
+	color: #000;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
+	text-align: left;
+}
+
+#popup_title {
+	font-size: 14px;
+	font-weight: bold;	
+	line-height: 1.75em;
+	color: #fff;
+	background: #3A9977;	
+	border-bottom: solid 1px #999;
+	cursor: default;	
+	margin: 0em;	
+	padding:0em;
+	padding-left:8px;
+}
+
+#popup_content {
+	background: 16px 16px no-repeat ;
+	padding: 1em 1.75em;
+	margin: 0em;
+	text-align: left;
+}
+
+#popup_content.success 
+{  
+    font-size: 13px;
+    text-align: left;
+    color: #333;
+    background-color: #fff;
+	padding: 12px 4px 12px 8px;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+

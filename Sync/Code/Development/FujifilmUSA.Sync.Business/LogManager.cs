@@ -100,6 +100,6 @@ namespace FujifilmUSA.Sync.Business
             message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(message);
-        }
+        }     
     }
 }

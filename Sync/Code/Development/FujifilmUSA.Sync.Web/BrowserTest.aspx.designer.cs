@@ -31,15 +31,6 @@ namespace FujifilmUSA.Sync.Web {
         protected global::System.Web.UI.HtmlControls.HtmlTable Table_Buttons;
         
         /// <summary>
-        /// btn_ServerSide control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_ServerSide;
-        
-        /// <summary>
         /// btn_LoadGrid control.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace FujifilmUSA.Sync.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_Result;
+        
+        /// <summary>
+        /// btn_SendEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_SendEmail;
         
         /// <summary>
         /// DivTable control.

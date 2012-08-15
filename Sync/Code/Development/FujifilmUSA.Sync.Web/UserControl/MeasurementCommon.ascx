@@ -13,6 +13,7 @@
 <script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
 <style type="text/css">
     .my_rectangle
     {
@@ -261,7 +262,7 @@
                 jQuery('.message', dialog.data[0]).append(message);
                 jQuery('.header', dialog.data[0]).append(type);
             }
-        });
+        });       
     }
     function saveMeasurement() {
 

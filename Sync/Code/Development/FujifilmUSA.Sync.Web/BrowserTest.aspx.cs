@@ -6,6 +6,7 @@ using System.Web.UI;
 using Telerik.Web.UI;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net.Mail;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -20,11 +21,7 @@ namespace FujifilmUSA.Sync.Web
             Page.Header.DataBind();          
         }
 
-        #region Control Events
-        protected void btn_ServerSide_Click(object sender, EventArgs e)
-        {
-            RunServerSideTest();
-        }           
+        #region Control Events                
       
         protected void btn_LoadGrid_Click(object sender, EventArgs e)
         {
@@ -65,44 +62,30 @@ namespace FujifilmUSA.Sync.Web
                 table.Rows.Add("Other Plugins:", Hidden_OtherPlugins.Value);
             }
             return table;
-        }
-
-        public void RunServerSideTest()
-        {
-            System.Web.HttpBrowserCapabilities browser = Request.Browser;
-            bool cookies = false;
-            Response.Cookies["test"].Value = "Hi";
-
-            if (Request.Cookies["test"].Value == "Hi")
-            {
-                cookies = true;
-            }
-
-            string s = "<b>Browser Capabilities</b><br />"
-                + "Type = " + browser.Type + "<br />"
-                + "Name = " + browser.Browser + "<br />"
-                + "Version = " + browser.Version + "<br />"
-                + "Major Version = " + browser.MajorVersion + "<br />"
-                + "Minor Version = " + browser.MinorVersion + "<br />"
-                + "Platform = " + browser.Platform + "<br />"
-                + "Is Beta = " + browser.Beta + "<br />"
-                + "Is Crawler = " + browser.Crawler + "<br />"
-                + "Is AOL = " + browser.AOL + "<br />"
-                + "Is Win16 = " + browser.Win16 + "<br />"
-                + "Is Win32 = " + browser.Win32 + "<br />"
-                + "Supports Frames = " + browser.Frames + "<br />"
-                + "Supports Tables = " + browser.Tables + "<br />"
-                + "Supports Cookies = " + cookies + "<br />"
-                + "Supports VBScript = " + browser.VBScript + "<br />"
-                + "Supports JavaScript = " + browser.JavaScript + "<br />"
-                + "Supports Java Applets = " + browser.JavaApplets + "<br />"
-                + "Supports ActiveX Controls = " + browser.ActiveXControls + "<br />"
-                + "Supports JavaScript Version = " +
-                    browser["JavaScriptVersion"] + "<br />";
-
-            lbl_Result.Text = s;
-        }
+        }     
 
         #endregion
+
+        protected void btn_SendEmail_Click(object sender, EventArgs e)
+        {
+           SendBrowserTestEmail("dpatel@fujifilm.com","Hi","How r u?","Dhruti Patel");
+        }
+
+
+        public static void SendBrowserTestEmail(string to, string subject, string body, string UserName)
+        {
+            var message = new MailMessage
+            {
+                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_SendUserCreatedEmail"),
+                IsBodyHtml = true,
+                Body = "Hello," + "</br>" + body + "</br>" + UserName
+            };
+            message.To.Add(to);
+            message.Bcc.Add("dpatel@fujifilm.com");
+            message.From = new MailAddress("colorpath@taskero.com");
+            
+            var mySmtpClient = new SmtpClient();
+            mySmtpClient.Send(message);
+        }
     }
 }
