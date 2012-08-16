@@ -3,6 +3,11 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+<style type="text/css">
+textarea {
+    resize: none;
+}
+</style>
 <div class="head">
     <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
             Text="New Print Condition - Description" ID="locNewPrintCondition" 
