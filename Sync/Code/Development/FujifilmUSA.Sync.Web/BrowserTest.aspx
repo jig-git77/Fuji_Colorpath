@@ -172,6 +172,10 @@
         .pbar {overflow: hidden}
         .percent {position:relative;text-align: right;}
         .elapsed {position:relative;text-align: right;}
+        .style1
+        {
+            width: 70px;
+        }
     </style>
 </head>
 
@@ -209,8 +213,6 @@
             <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0"></object>
       
             <br />
-            &nbsp;<asp:Button ID="btn_SendEmail" runat="server" 
-               onclick="btn_SendEmail_Click" Text="Send Email" />
             <div id="DivTable" runat="server" style="visibility:hidden;">               
                             <input id="Hidden_Browser" type="hidden" runat="server" />  
                             <input id="Hidden_BrowserVersion" type="hidden" runat="server" />                      
@@ -230,7 +232,7 @@
                         Text="Export to PDF" runat="server" onclick="btn_PDF_Click" ></asp:Button>                   
                  
                 <telerik:RadGrid ID="RadGrid_Test" runat="server" AutoGenerateColumns="false"                               
-                Width="100%" CellSpacing="0" GridLines="None" >                                  
+                Width="100%" CellSpacing="0" GridLines="None"  OnGridExporting="RadGrid_Test_GridExporting">                                  
                 <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
                 <MasterTableView>  
                     <Columns>
@@ -239,6 +241,77 @@
                     </Columns>                                        
                 </MasterTableView>                                    
             </telerik:RadGrid>
+                    <br />
+                    <table id="Table_Email" style="width: 100%;">
+                        <tr>
+                            <td colspan="2">                              
+                                <strong>If you need support, then please fill out details in below area and send 
+                                back to us!</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">                              
+                                <asp:Label ID="lblMsg" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                &nbsp;</td>
+                            <td style="text-align: right">
+                                &nbsp; &nbsp;
+                                <asp:Button ID="btn_SendEmail" runat="server" onclick="btn_SendEmail_Click" 
+                                    Text="Send Email" ValidationGroup="a" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                Name*:</td>
+                            <td>
+                                <asp:TextBox ID="txtUserName" runat="server" Height="19px" 
+                                    meta:resourcekey="txtPressResource1" Width="200px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvUserName" runat="server" 
+                                    ControlToValidate="txtUserName" Display="Dynamic" 
+                                    ErrorMessage="Please Provide User Name." ForeColor="Red" 
+                                    ValidationGroup="a"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                Email ID*:</td>
+                            <td>
+                                <asp:TextBox ID="txtEmail" runat="server" Height="19px" 
+                                    meta:resourcekey="txtPressResource1" Width="200px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
+                                    ControlToValidate="txtEmail" Display="Dynamic" 
+                                    ErrorMessage="Please Provide Email." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="valRegEx" runat="server" 
+                                    ControlToValidate="txtEmail" display="dynamic" 
+                                    ErrorMessage="Invalid Email address." ForeColor="Red" 
+                                    ValidationExpression=".*@.*\..*" ValidationGroup="a"></asp:RegularExpressionValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                Subject*:</td>
+                            <td>
+                                <asp:TextBox ID="txtSubject" runat="server" Height="19px" 
+                                    meta:resourcekey="txtPressResource1" Width="300px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvSubject" runat="server" 
+                                    ControlToValidate="txtSubject" Display="Dynamic" 
+                                    ErrorMessage="Please Provide Subject." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                Notes*:</td>
+                            <td>
+                                <asp:TextBox ID="txtBody" runat="server" Height="50px" 
+                                    meta:resourcekey="txtPressResource1" TextMode="MultiLine" Width="400px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvBody" runat="server" 
+                                    ControlToValidate="txtBody" Display="Dynamic" 
+                                    ErrorMessage="Please Provide Notes." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                    </table>
                </asp:Panel>
             </div>
        </div> 

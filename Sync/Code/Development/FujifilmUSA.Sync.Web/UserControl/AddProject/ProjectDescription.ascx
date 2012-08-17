@@ -70,7 +70,7 @@ textarea {
                                             <asp:RequiredFieldValidator ID="rfvMedia" runat="server" Display="Dynamic" ControlToValidate="txtMedia"
                                                 ForeColor="Red" ValidationGroup="vgDescription"><ucValidationContainer:ValidationContainer ID="rfvcMediaContainer" runat="server"
                                                     ValidationMsg="Please provide media name." Size="200" />
-</asp:RequiredFieldValidator>
+                                            </asp:RequiredFieldValidator>
                                         </div>
                                         <div class="clear">
                                         </div>

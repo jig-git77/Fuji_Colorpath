@@ -7,18 +7,25 @@ using Telerik.Web.UI;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net.Mail;
+using System.IO;
+using System.Text;
 
 namespace FujifilmUSA.Sync.Web
 {
     public partial class BrowserTest : System.Web.UI.Page
     {
+        private string url;
+        private string path = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack == false)
             {
                 Panel_Grid.Visible = false;
             }
-            Page.Header.DataBind();          
+            Page.Header.DataBind();
+            url = String.Format("UploadFiles/Report_PDF/BrowserTest/{0}.pdf", "BrowserTest");
+            path = Server.MapPath(url);
         }
 
         #region Control Events                
@@ -31,8 +38,29 @@ namespace FujifilmUSA.Sync.Web
 
         protected void btn_PDF_Click(object sender, EventArgs e)
         {
+            //------------Export RadGrid in pdf file first------------//
             RadGrid_Test.ExportSettings.OpenInNewWindow = true;
+            RadGrid_Test.ExportSettings.FileName = "BrowserTest";
             RadGrid_Test.MasterTableView.ExportToPdf();
+        }
+
+        protected void RadGrid_Test_GridExporting(object source, GridExportingArgs e)
+        {
+            if (File.Exists(path))
+            {
+                //DELETE THE FILE IF ALREADY EXISTS  
+                File.Delete(path);
+            }
+            using (FileStream fs = File.Create(path))
+            {
+                Byte[] info = System.Text.Encoding.Default.GetBytes(e.ExportOutput);
+                //SAVE IT ON THE SERVER  
+                fs.Write(info, 0, info.Length);
+                fs.Close();
+                fs.Dispose();               
+            }
+           
+            //Response.Redirect("~/BrowserTest.aspx");
         }
 
         #endregion
@@ -62,30 +90,53 @@ namespace FujifilmUSA.Sync.Web
                 table.Rows.Add("Other Plugins:", Hidden_OtherPlugins.Value);
             }
             return table;
-        }     
-
-        #endregion
+        }
 
         protected void btn_SendEmail_Click(object sender, EventArgs e)
         {
-           SendBrowserTestEmail("dpatel@fujifilm.com","Hi","How r u?","Dhruti Patel");
+            SendBrowserTestEmail(txtEmail.Text, txtSubject.Text, txtBody.Text, txtUserName.Text);
         }
 
 
-        public static void SendBrowserTestEmail(string to, string subject, string body, string UserName)
+        public void SendBrowserTestEmail(string to, string subject, string body, string UserName)
         {
-            var message = new MailMessage
+            try
+            {              
+                //---------After creating file, send email with attachment-----------//
+                if (File.Exists(path))
+                {
+                    var message = new MailMessage
+                    {
+                        Subject = subject,
+                        IsBodyHtml = true,
+                        Body = "Sub: Browser Compability Check Report From " + UserName + "<br/><br/>" + "Hello," + "<br/><br/>" + body + "<br/><br/>-Thanks,<br/>" + UserName
+                    };
+                    message.To.Add(to);                
+                    message.Attachments.Add(new Attachment(path));
+                    var mySmtpClient = new SmtpClient();
+                    mySmtpClient.Send(message);
+
+                    lblMsg.Text = "Email has been sent!";
+
+                    //if (File.Exists(path))
+                    //{
+                        ////DELETE THE FILE IF ALREADY EXISTS  
+                        File.Delete(path);
+                    //}
+                }
+                else
+                {
+                    lblMsg.Text = "First Export the PDF file, then send the Email!";
+                }
+            }
+            catch (Exception ex)
             {
-                Subject = FujifilmUSA.Sync.Common.ResourceManager.GetResourceMessage("Email_Subject_SendUserCreatedEmail"),
-                IsBodyHtml = true,
-                Body = "Hello," + "</br>" + body + "</br>" + UserName
-            };
-            message.To.Add(to);
-            message.Bcc.Add("dpatel@fujifilm.com");
-            message.From = new MailAddress("colorpath@taskero.com");
-            
-            var mySmtpClient = new SmtpClient();
-            mySmtpClient.Send(message);
+                lblMsg.Text = ex.Message;
+            }
         }
+
+        #endregion
+
+       
     }
 }
