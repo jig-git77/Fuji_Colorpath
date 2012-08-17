@@ -51,6 +51,7 @@
     <Compile Include="PresenterAddReferenceChart.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PresenterApplicationConfiguration.cs" />
     <Compile Include="PresenterClosePrintCondition.cs" />
     <Compile Include="PresenterColorOrganizerRequestProcessor.cs" />
     <Compile Include="PresenterCOTransferSiteControl.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="ViewInterface\IViewAddLicenseTypeManagement.cs" />
     <Compile Include="ViewInterface\IViewAddLicenseManagement.cs" />
     <Compile Include="ViewInterface\IViewAddReferenceChart.cs" />
+    <Compile Include="ViewInterface\IViewApplicationConfiguration.cs" />
     <Compile Include="ViewInterface\IViewClosePrintCondition.cs" />
     <Compile Include="ViewInterface\IViewColorOrganizerRequestProcessor.cs" />
     <Compile Include="ViewInterface\IViewCOTransferSiteControl.cs" />

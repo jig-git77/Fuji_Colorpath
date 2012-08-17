@@ -468,6 +468,7 @@
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationConfigurationManager.cs" />
     <Compile Include="ApplicationError.aspx.cs">
       <DependentUpon>ApplicationError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1939,7 +1940,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
