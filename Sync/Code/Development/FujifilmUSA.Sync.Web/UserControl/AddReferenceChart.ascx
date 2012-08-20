@@ -3,6 +3,26 @@
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+
+<style type="text/css">
+      .breakWord100
+     {
+            max-width: 100px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }
+     .breakWord70
+     {
+            max-width: 70px !important;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+            vertical-align: top;
+            line-height: 15px;
+     }  
+</style>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -12,12 +32,12 @@
     </div>
     <div class="clear">
     </div>
-    <div style="margin-left: 10px;">
+    <div style="margin-left: 0px;">
         <center>
             <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>--%>
             <center>
-                <fieldset style="width: 80%;">
+                <fieldset style="width: 92%;">
                     <legend>
                         <asp:Label ID="lblHeader" runat="server" Text="Add Reference Chart" 
                             meta:resourcekey="lblHeaderResource1"></asp:Label>
@@ -26,12 +46,12 @@
                         Visible="False" />
                     <table width="98%">
                         <tr>
-                            <td align="right">
+                            <td align="right" style="width:250px;">
                                 <span style="font-weight: bold;"><asp:Localize Text="Project Type" 
                                     runat="server" ID="locProjectType" meta:resourcekey="locProjectTypeResource1"></asp:Localize><span style="color: Red;">*</span>
                                 </span>
                             </td>
-                            <td>
+                            <td style="width:15px;">
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
                             <td style="width:100px;">
@@ -242,9 +262,10 @@
                             </td>
                         </tr>
                         <tr id="Tr_UploadData" runat="server">
-                            <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                    Text="Upload Chart Data (C,M,Y,K, HTML_RGB)" ID="locUploadChartData" 
+                            <td align="right" style="width:250px;">
+                                <span style="font-weight: bold;">
+                                <asp:Localize runat="server" 
+                                    Text="Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)" ID="locUploadChartData" 
                                     meta:resourcekey="locUploadChartDataResource1"></asp:Localize><span style="color: Red;">*</span>
                                 </span>
                             </td>
@@ -276,7 +297,7 @@
                                                     <span> <asp:Localize runat="server" Text="Upload Chart Data" 
                                                  ID="locUploadChartDataButton" 
                                                  meta:resourcekey="locUploadChartDataButtonResource1"></asp:Localize> 
- </span>
+                                                </span>
                                              </asp:LinkButton>
                                         </td>
                                     </tr>                                   
@@ -305,22 +326,22 @@
                             <td colspan="3">
                                 <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
                                     AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
-                                    EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" 
+                                    EnableLinqExpressions="False" Width="98%" HeaderStyle-Font-Bold="true" 
                                     OnNeedDataSource="rgChartData_OnNeedDataSource" CellSpacing="0" 
                                     GridLines="None">
 
-<HeaderStyle Font-Bold="True"></HeaderStyle>
+                                    <HeaderStyle Font-Bold="True"></HeaderStyle>
 
                                     <PagerStyle Position="Top" AlwaysVisible="true" Font-Size="Small" />
                                     <MasterTableView>
-<CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
+                                    <CommandItemSettings ExportToPdfText="Export to PDF"></CommandItemSettings>
 
-<RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
+                                    <RowIndicatorColumn Visible="True" FilterControlAltText="Filter RowIndicator column"></RowIndicatorColumn>
 
-<ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
+                                    <ExpandCollapseColumn Visible="True" FilterControlAltText="Filter ExpandColumn column"></ExpandCollapseColumn>
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="SampleID" AllowFiltering="true" HeaderText="SampleID"
-                                                UniqueName="SampleID" SortExpression="SampleID" ItemStyle-CssClass="breakWord200"
+                                                UniqueName="SampleID" SortExpression="SampleID" ItemStyle-CssClass="breakWord70"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true" 
                                                 meta:resourcekey="GridTemplateColumnResource1">
                                                 <ItemTemplate>
@@ -328,10 +349,10 @@
                                                         meta:resourcekey="lblSampleIDResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="SampleName" AllowFiltering="true" HeaderText="Sample Name"
-                                                UniqueName="SampleName" SortExpression="SampleName" ItemStyle-CssClass="breakWord200"
+                                                UniqueName="SampleName" SortExpression="SampleName" ItemStyle-CssClass="breakWord100"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true" 
                                                 meta:resourcekey="GridTemplateColumnResource2">
                                                 <ItemTemplate>
@@ -339,54 +360,54 @@
                                                         meta:resourcekey="lblSampleNameResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord100"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKC" AllowFiltering="true" HeaderText="CMYK_C"
                                                 UniqueName="CMYKC" SortExpression="CMYKC" 
-                                                ItemStyle-CssClass="breakWord200" ItemStyle-Wrap="true"
+                                                ItemStyle-CssClass="breakWord70" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource3">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKC" runat="server" Text='<%# Eval("CMYKC") %>' 
                                                         meta:resourcekey="lblCMYKCResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord70"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKM" AllowFiltering="true" HeaderText="CMYK_M"
                                                 UniqueName="CMYKM" SortExpression="CMYKM" 
-                                                ItemStyle-CssClass="breakWord200" ItemStyle-Wrap="true"
+                                                ItemStyle-CssClass="breakWord70" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource4">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKM" runat="server" Text='<%# Eval("CMYKM") %>' 
                                                         meta:resourcekey="lblCMYKMResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord70"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKY" AllowFiltering="true" HeaderText="CMYK_Y"
                                                 UniqueName="CMYKY" SortExpression="CMYKY" 
-                                                ItemStyle-CssClass="breakWord200" ItemStyle-Wrap="true"
+                                                ItemStyle-CssClass="breakWord70" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource5">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKY" runat="server" Text='<%# Eval("CMYKY") %>' 
                                                         meta:resourcekey="lblCMYKYResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord70"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="CMYKK" AllowFiltering="true" HeaderText="CMYK_K"
                                                 UniqueName="CMYKK" SortExpression="CMYKK" 
-                                                ItemStyle-CssClass="breakWord200" ItemStyle-Wrap="true"
+                                                ItemStyle-CssClass="breakWord70" ItemStyle-Wrap="true"
                                                 ShowFilterIcon="true" meta:resourcekey="GridTemplateColumnResource6">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblCMYKK" runat="server" Text='<%# Eval("CMYKK") %>' 
                                                         meta:resourcekey="lblCMYKKResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
+                                                <ItemStyle Wrap="True" CssClass="breakWord70"></ItemStyle>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="HTMLColor" AllowFiltering="true" HeaderText="HTML RGB"
-                                                UniqueName="HTMLColor" SortExpression="HTMLColor" ItemStyle-CssClass="breakWord200"
+                                                UniqueName="HTMLColor" SortExpression="HTMLColor" ItemStyle-CssClass="breakWord100"
                                                 ItemStyle-Wrap="true" ShowFilterIcon="true" 
                                                 meta:resourcekey="GridTemplateColumnResource7">
                                                 <ItemTemplate>
@@ -394,15 +415,8 @@
                                                         meta:resourcekey="lblHTMLColorResource1" />
                                                 </ItemTemplate>
 
-<ItemStyle Wrap="True" CssClass="breakWord200"></ItemStyle>
-                                            </telerik:GridTemplateColumn>
-                                            <%--<telerik:GridTemplateColumn DataField="PatchTypeId" AllowFiltering="true" HeaderText="Patch Type"
-                                                UniqueName="PatchTypeId" SortExpression="PatchTypeId" ItemStyle-CssClass="breakWord200"
-                                                ItemStyle-Wrap="true" ShowFilterIcon="true">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="lblPatchTypeId" runat="server" Text='<%# Eval("PatchTypeId") %>' />
-                                                </ItemTemplate>
-                                            </telerik:GridTemplateColumn>--%>
+                                                <ItemStyle Wrap="True" CssClass="breakWord100"></ItemStyle>
+                                            </telerik:GridTemplateColumn>                                        
                                         </Columns>
 
                                     </MasterTableView>

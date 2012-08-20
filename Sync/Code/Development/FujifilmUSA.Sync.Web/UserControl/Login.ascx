@@ -62,6 +62,13 @@
         oWindow.show();
         return false;
     }
+
+    function ShowBrowserTestWindow() {
+        var oWindow;
+        oWindow = window.radopen("BrowserTest.aspx", "BrowseTestWindow");
+        oWindow.show();
+        return false;
+    }
 </script>
 <script language="javascript" type="text/javascript">
     function CloseOpenForgotPasswordWindow() {
@@ -71,8 +78,16 @@
 </script>
 <div id="login_box">
     <div class="curve_top_login">
+         <div style="text-align:right; padding-right:40px; padding-top:20px;">
+             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/browsericons_1.png"  />
+            <asp:ImageButton ID="btn_OpenBrowserTest" runat="server" AlternateText="Open Browser Test" ImageUrl="~/Images/browsericons.png" 
+                    OnClientClick="return ShowBrowserTestWindow();" ToolTip="Open Browser Test" />
+        </div>
     </div>
     <div id="pageWrapper">
+       
+           
+       
         <div class="login_logo">
             <a href="#">
                 <asp:Image ID="imgCompanyLogo" runat="server" 
@@ -111,6 +126,11 @@
     <Windows>
         <telerik:RadWindow ID="OpenForgotPasswordWindow" runat="server" IconUrl="" VisibleStatusbar="false"
             ShowContentDuringLoad="false" Title="Forgot Password!" Width="730" Height="230"
+            Behaviors="Move, Close">
+        </telerik:RadWindow>
+
+         <telerik:RadWindow ID="BrowseTestWindow" runat="server" IconUrl="" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Browser Test" Width="730" Height="530"
             Behaviors="Move, Close">
         </telerik:RadWindow>
     </Windows>

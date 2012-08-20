@@ -202,7 +202,7 @@
     <value>Upload Chart Data</value>
   </data>
   <data name="locUploadChartDataResource1.Text" xml:space="preserve">
-    <value>Upload Chart Data (C,M,Y,K, HTML_RGB)</value>
+    <value>Upload Chart Data (SAMPLEID, SAMPLE_NAME, CMYK_C, CMYK_M, CMYK_Y, CMYK_K, HTML_RGB)</value>
   </data>
   <data name="locUploadChartPreviewResource1.Text" xml:space="preserve">
     <value>Upload Chart Preview (only image)</value>

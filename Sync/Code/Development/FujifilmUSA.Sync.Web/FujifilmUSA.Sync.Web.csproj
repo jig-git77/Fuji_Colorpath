@@ -106,6 +106,8 @@
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
+    <Content Include="Images\browsericons.png" />
+    <Content Include="Images\browsericons_1.png" />
     <Content Include="Images\center-content-whitebg.png" />
     <Content Include="Images\Chart-Red-Image-Vertical.png" />
     <Content Include="Images\chart_preview.png" />
@@ -1940,7 +1942,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

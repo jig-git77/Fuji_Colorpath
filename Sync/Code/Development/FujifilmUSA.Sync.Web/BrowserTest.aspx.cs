@@ -16,7 +16,7 @@ namespace FujifilmUSA.Sync.Web
 {
     public partial class BrowserTest : System.Web.UI.Page, IViewBrowserTest
     {
-        private string url;
+        public static string url;
         private string path = "";
         private PresenterBrowserTest presenterBrowserTest;
 
@@ -25,9 +25,10 @@ namespace FujifilmUSA.Sync.Web
             if (Page.IsPostBack == false)
             {
                 Panel_Grid.Visible = false;
+                url = String.Format("UploadFiles/Report_PDF/BrowserTest/{0}.pdf", "BrowserTest" + "_" + Guid.NewGuid().ToString());
             }
             Page.Header.DataBind();
-            url = String.Format("UploadFiles/Report_PDF/BrowserTest/{0}.pdf", "BrowserTest");
+        
             path = Server.MapPath(url);
 
             presenterBrowserTest = new PresenterBrowserTest(this);
@@ -132,17 +133,15 @@ namespace FujifilmUSA.Sync.Web
                         Body = "Sub: Browser Compability Check Report From " + UserName + "<br/><br/>" + "Hello," + "<br/><br/>" + body + "<br/><br/>-Thanks,<br/>" + UserName
                     };
                     message.To.Add(to);
-                    message.Attachments.Add(new Attachment(path));
+                    Attachment attach = new Attachment(path);
+                    message.Attachments.Add(attach);
                     var mySmtpClient = new SmtpClient();
                     mySmtpClient.Send(message);
-
+                    attach.Dispose();
                     lblMsg.Text = "Email has been sent!";
 
-                    //if (File.Exists(path))
-                    //{
-                    ////DELETE THE FILE IF ALREADY EXISTS  
+                    //DELETE THE FILE AFTER SENDING EMAIL
                     File.Delete(path);
-                    //}
                 }
                 else
                 {
@@ -156,6 +155,7 @@ namespace FujifilmUSA.Sync.Web
         }
 
         #endregion
+
         #region IViewProfilerService members
 
         public bool PingResponse { get; set; }

@@ -13,6 +13,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
     public partial class Login {
         
         /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
+        /// btn_OpenBrowserTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btn_OpenBrowserTest;
+        
+        /// <summary>
         /// imgCompanyLogo control.
         /// </summary>
         /// <remarks>
@@ -101,5 +119,14 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow OpenForgotPasswordWindow;
+        
+        /// <summary>
+        /// BrowseTestWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadWindow BrowseTestWindow;
     }
 }
