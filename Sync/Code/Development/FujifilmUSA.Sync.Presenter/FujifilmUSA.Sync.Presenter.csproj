@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PresenterBrowserTest.cs" />
     <Compile Include="PresenterActivityPrintCondition.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -91,6 +92,7 @@
     <Compile Include="PresenterTargetColorspace.cs" />
     <Compile Include="PresenterWebLogActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewInterface\IViewBrowserTest.cs" />
     <Compile Include="ViewInterface\IViewActivityPrintCondition.cs" />
     <Compile Include="ViewInterface\IViewAddLicenseTypeManagement.cs" />
     <Compile Include="ViewInterface\IViewAddLicenseManagement.cs" />

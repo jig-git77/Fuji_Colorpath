@@ -53,6 +53,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         #endregion
 
+        #region Browser Test methods
+        public bool Ping()
+        {
+            bool returnValue = false;
+            using (ProfilerService.ProfilerClient client = new ProfilerService.ProfilerClient())
+            {
+                Common.ImplementBusinessLogic(() =>
+                     returnValue = client.Ping(),
+                  new BusinessHandlerRequest(this, ErrorOccured, string.Empty));
+            }
+            return returnValue;
+        }
+        #endregion
+
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;

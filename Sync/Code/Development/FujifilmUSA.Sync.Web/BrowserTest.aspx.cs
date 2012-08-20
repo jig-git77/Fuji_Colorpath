@@ -9,13 +9,16 @@ using System.Data.SqlClient;
 using System.Net.Mail;
 using System.IO;
 using System.Text;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class BrowserTest : System.Web.UI.Page
+    public partial class BrowserTest : System.Web.UI.Page, IViewBrowserTest
     {
         private string url;
         private string path = "";
+        private PresenterBrowserTest presenterBrowserTest;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,14 +29,30 @@ namespace FujifilmUSA.Sync.Web
             Page.Header.DataBind();
             url = String.Format("UploadFiles/Report_PDF/BrowserTest/{0}.pdf", "BrowserTest");
             path = Server.MapPath(url);
+
+            presenterBrowserTest = new PresenterBrowserTest(this);
         }
 
-        #region Control Events                
-      
+        #region Control Events
+        protected void btnServerSideTest_Click(object sender, EventArgs e)
+        {
+            //Step: 1
+            presenterBrowserTest.Ping();
+
+            DataTable table = new DataTable();
+            table.Columns.Add("Description", typeof(string));
+            table.Columns.Add("Details", typeof(string));
+
+            table.Rows.Add("Profiler Service Status", PingResponse == true ? "Active" : "Inactive");
+
+            Panel_Grid.Visible = true;
+            BindRadGrid(table);
+        }
+
         protected void btn_LoadGrid_Click(object sender, EventArgs e)
         {
             Panel_Grid.Visible = true;
-            BindRadGrid();
+            BindRadGrid(BrowserTable());
         }
 
         protected void btn_PDF_Click(object sender, EventArgs e)
@@ -57,19 +76,19 @@ namespace FujifilmUSA.Sync.Web
                 //SAVE IT ON THE SERVER  
                 fs.Write(info, 0, info.Length);
                 fs.Close();
-                fs.Dispose();               
+                fs.Dispose();
             }
-           
+
             //Response.Redirect("~/BrowserTest.aspx");
         }
 
         #endregion
 
         #region Methods
-        public void BindRadGrid()
+        public void BindRadGrid(DataTable result)
         {
-            RadGrid_Test.DataSource = BrowserTable();
-            RadGrid_Test.DataBind();           
+            RadGrid_Test.DataSource = result;
+            RadGrid_Test.DataBind();
         }
 
         public DataTable BrowserTable()
@@ -89,6 +108,7 @@ namespace FujifilmUSA.Sync.Web
             {
                 table.Rows.Add("Other Plugins:", Hidden_OtherPlugins.Value);
             }
+            table.Rows.Add("Plugin Data Service status:", Hidden_PluginDataService.Value);
             return table;
         }
 
@@ -101,7 +121,7 @@ namespace FujifilmUSA.Sync.Web
         public void SendBrowserTestEmail(string to, string subject, string body, string UserName)
         {
             try
-            {              
+            {
                 //---------After creating file, send email with attachment-----------//
                 if (File.Exists(path))
                 {
@@ -111,7 +131,7 @@ namespace FujifilmUSA.Sync.Web
                         IsBodyHtml = true,
                         Body = "Sub: Browser Compability Check Report From " + UserName + "<br/><br/>" + "Hello," + "<br/><br/>" + body + "<br/><br/>-Thanks,<br/>" + UserName
                     };
-                    message.To.Add(to);                
+                    message.To.Add(to);
                     message.Attachments.Add(new Attachment(path));
                     var mySmtpClient = new SmtpClient();
                     mySmtpClient.Send(message);
@@ -120,8 +140,8 @@ namespace FujifilmUSA.Sync.Web
 
                     //if (File.Exists(path))
                     //{
-                        ////DELETE THE FILE IF ALREADY EXISTS  
-                        File.Delete(path);
+                    ////DELETE THE FILE IF ALREADY EXISTS  
+                    File.Delete(path);
                     //}
                 }
                 else
@@ -136,7 +156,16 @@ namespace FujifilmUSA.Sync.Web
         }
 
         #endregion
+        #region IViewProfilerService members
 
-       
+        public bool PingResponse { get; set; }
+
+        public int CurrentUserId { get; set; }
+
+        public void ErrorOccured(object sender, Entity.ErrorArgs e)
+        {
+            //do nothing
+        }
+        #endregion
     }
 }

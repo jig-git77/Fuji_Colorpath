@@ -16,6 +16,13 @@ namespace FujifilmUSA.Sync.Web.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class PluginDataService : IViewPluginDataService
     {
+        [WebInvoke(Method = "GET", UriTemplate = "Ping")]
+        [OperationContract]
+        public bool Ping()
+        {
+            return true;
+        }
+
         [WebInvoke(Method = "POST", UriTemplate = "SaveMeasurement")]
         [OperationContract]
         public void SaveMeasurement(Entity.Measurement measurement)

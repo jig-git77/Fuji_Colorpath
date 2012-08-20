@@ -17,6 +17,12 @@
       <xsd:import schemaLocation="http://localhost/ColorPathSync/Profiler.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ColorPathSync.DataContracts" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IProfiler_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IProfiler_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
   <wsdl:message name="IProfiler_CreateSourceProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateSourceProfile" />
   </wsdl:message>
@@ -48,6 +54,10 @@
     <wsdl:part name="parameters" element="tns:ExtractProfileValuesResponse" />
   </wsdl:message>
   <wsdl:portType name="IProfiler">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/Ping" message="tns:IProfiler_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/PingResponse" message="tns:IProfiler_Ping_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateSourceProfile">
       <wsdl:input wsaw:Action="http://tempuri.org/IProfiler/CreateSourceProfile" message="tns:IProfiler_CreateSourceProfile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProfiler/CreateSourceProfileResponse" message="tns:IProfiler_CreateSourceProfile_OutputMessage" />
@@ -72,6 +82,15 @@
   <wsdl:binding name="WSHttpBinding_IProfiler" type="tns:IProfiler">
     <wsp:PolicyReference URI="#WSHttpBinding_IProfiler_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/IProfiler/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateSourceProfile">
       <soap12:operation soapAction="http://tempuri.org/IProfiler/CreateSourceProfile" style="document" />
       <wsdl:input>

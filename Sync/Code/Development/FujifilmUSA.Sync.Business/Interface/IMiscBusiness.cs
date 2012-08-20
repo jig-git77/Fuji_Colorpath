@@ -5,5 +5,6 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         int InsertAppErrorLog(AppErrorLog errorLog);
         int InsertLogActivity(LogActivity logActivity);
+        bool Ping();
     }
 }

@@ -1,25 +1,23 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BrowserTest.aspx.cs" Inherits="FujifilmUSA.Sync.Web.BrowserTest" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BrowserTest.aspx.cs" Inherits="FujifilmUSA.Sync.Web.BrowserTest"
+    EnableEventValidation="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title>Browser Test</title>
-    
-    <link href="CSS/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
-   
+    <link href="CSS/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" />
     <script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="JQuery/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="JQuery/progressbar.js"></script>
-
     <script type="text/javascript">
-        function Test_ChkBrowser() {            
+        function Test_ChkBrowser() {
             Test_Browser();
             Test_Javascript();
             Test_Cookies();
             Test_HTML5();
             Test_Plugins();
             Plugin_load();
+            Test_PluginDataService();
         }
         function Test_Browser() {
             var navigatorVersion = navigator.appVersion;
@@ -85,7 +83,7 @@
             var d = document.getElementById('<%#Hidden_Browser.ClientID%>');
             d.value = browserName;
             var e = document.getElementById('<%#Hidden_BrowserVersion.ClientID%>');
-            e.value = fullVersionName;         
+            e.value = fullVersionName;
         }
         function Test_Javascript() {
             var a = document.getElementById('<%#Hidden_Javascript.ClientID%>');
@@ -109,22 +107,42 @@
         }
         function Test_Plugins() {
             if (navigator.plugins && navigator.plugins.length > 0) {
-                var L = navigator.plugins.length;          
+                var L = navigator.plugins.length;
                 var Table_Plugin = document.getElementById('<%#Hidden_OtherPlugins.ClientID%>');
                 Table_Plugin.value = "";
-              
+
                 for (var i = 0; i < L; i++) {
                     if (navigator.plugins[i].name.indexOf('Fuji') != -1) {
-                        Table_Plugin.value +=  navigator.plugins[i].name ;
+                        Table_Plugin.value += navigator.plugins[i].name;
                     }
                     else {
-                        Table_Plugin.value +=  navigator.plugins[i].name ;
+                        Table_Plugin.value += navigator.plugins[i].name;
                     }
-                    if (i < L-1) {
+                    if (i < L - 1) {
                         Table_Plugin.value += ", ";
                     }
                 }
             }
+        }
+
+        function Test_PluginDataService() {
+            jQuery.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "Services/PluginDataService.svc/Ping",
+                dataType: "JSON",
+                success: function (response) {
+                    var a = document.getElementById('<%#Hidden_PluginDataService.ClientID%>');
+                    if (response == true)
+                        a.value = "Active";
+                    else
+                        a.value = "Inactive";
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    var a = document.getElementById('<%#Hidden_PluginDataService.ClientID%>');
+                    a.value = 'Inactive. Error message: ' + errorThrown.toString();
+                }
+            });
         }
 
         //-----------Script to check Fuji Plugin is installed or not--------//
@@ -161,161 +179,197 @@
             var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
             c.value = newHTML;
         }
-    </script> 
-
-    <style type="text/css">       
-        body{background:#eee;font-family:Verdana, Helvetica, Arial, sans-serif;margin:0;padding:0;}
-        .example{background:#FFF;width:650px;font-size:80%;border:1px #000 solid;margin:20px auto;padding:15px;position:relative;-moz-border-radius: 3px;-webkit-border-radius: 3px}
-        h3 {text-align:center}
-
-        .pbar .ui-progressbar-value {display:block !important}
-        .pbar {overflow: hidden}
-        .percent {position:relative;text-align: right;}
-        .elapsed {position:relative;text-align: right;}
+    </script>
+    <style type="text/css">
+        body
+        {
+            background: #eee;
+            font-family: Verdana, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .example
+        {
+            background: #FFF;
+            width: 650px;
+            font-size: 80%;
+            border: 1px #000 solid;
+            margin: 20px auto;
+            padding: 15px;
+            position: relative;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+        }
+        h3
+        {
+            text-align: center;
+        }
+        
+        .pbar .ui-progressbar-value
+        {
+            display: block !important;
+        }
+        .pbar
+        {
+            overflow: hidden;
+        }
+        .percent
+        {
+            position: relative;
+            text-align: right;
+        }
+        .elapsed
+        {
+            position: relative;
+            text-align: right;
+        }
         .style1
         {
             width: 70px;
         }
     </style>
 </head>
-
 <body>
     <form id="form1" runat="server">
-    <div>  
-       <table id="Table_Buttons" runat="server" width="100%">
-            <tr>               
+    <div>                
+        <table id="Table_Buttons" runat="server" width="100%">
+            <tr>
                 <td align="center">
-                    <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test"  />
+                    <input id="btn_ChkBrowser" type="button" value="Run ClientSide Test" />
                     &nbsp;&nbsp;&nbsp;
-                    <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" 
-                        onclick="btn_LoadGrid_Click" Visible="false" />
-                </td>
+                    <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" OnClick="btn_LoadGrid_Click"
+                        Visible="false" />                    
+                    <asp:Button ID="btnServerSideTest" runat="server" Text="Run Server Side Test" OnClick="btnServerSideTest_Click" />
+                </td>                
             </tr>
             <tr>
                 <td>
-                     <asp:Label ID="lbl_Result" runat="server"></asp:Label>
+                    <asp:Label ID="lbl_Result" runat="server"></asp:Label>
                 </td>
             </tr>
-       </table>
+        </table>
     </div>
-
     <br />
-
     <div>
-       <div class="example">
-        <noscript>JavaScript: DISABLED <br /> This site requires JavaScript for navigation. Please enable JS and retry.</noscript> 
+        <div class="example">
+            <noscript>
+                JavaScript: DISABLED
+                <br />
+                This site requires JavaScript for navigation. Please enable JS and retry.</noscript>
             <div id="progress1">
-                <div class="percent"></div>
-                <div class="pbar"></div>
-                <div class="elapsed"></div>
+                <div class="percent">
+                </div>
+                <div class="pbar">
+                </div>
+                <div class="elapsed">
+                </div>
             </div>
-   
-            <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0"></object>
-      
+            <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
+            </object>
             <br />
-            <div id="DivTable" runat="server" style="visibility:hidden;">               
-                            <input id="Hidden_Browser" type="hidden" runat="server" />  
-                            <input id="Hidden_BrowserVersion" type="hidden" runat="server" />                      
-                            <input id="Hidden_Javascript" type="hidden" runat="server" />
-                            <input id="Hidden_Cookies" type="hidden" runat="server" />
-                            <input id="Hidden_HTML5" type="hidden" runat="server" />
-                            <input id="Hidden_PluginMessage" type="hidden" runat="server" />  
-                            <input id="Hidden_OtherPlugins" type="hidden" runat="server" />
+            <div id="DivTable" runat="server" style="visibility: hidden;">
+                <input id="Hidden_Browser" type="hidden" runat="server" />
+                <input id="Hidden_BrowserVersion" type="hidden" runat="server" />
+                <input id="Hidden_Javascript" type="hidden" runat="server" />
+                <input id="Hidden_Cookies" type="hidden" runat="server" />
+                <input id="Hidden_HTML5" type="hidden" runat="server" />
+                <input id="Hidden_PluginMessage" type="hidden" runat="server" />
+                <input id="Hidden_OtherPlugins" type="hidden" runat="server" />
+                <input id="Hidden_PluginDataService" type="hidden" runat="server" />
             </div>
             <br />
             <div>
                 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
                 </asp:ScriptManager>
                 <asp:Panel ID="Panel_Grid" runat="server">
-              
-                  <asp:Button ID="btn_PDF" CssClass="button" Width="150px" 
-                        Text="Export to PDF" runat="server" onclick="btn_PDF_Click" ></asp:Button>                   
-                 
-                <telerik:RadGrid ID="RadGrid_Test" runat="server" AutoGenerateColumns="false"                               
-                Width="100%" CellSpacing="0" GridLines="None"  OnGridExporting="RadGrid_Test_GridExporting">                                  
-                <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
-                <MasterTableView>  
-                    <Columns>
-                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description" ItemStyle-Width="170px"></telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Details" HeaderText="Details" ></telerik:GridBoundColumn>                       
-                    </Columns>                                        
-                </MasterTableView>                                    
-            </telerik:RadGrid>
+                    <asp:Button ID="btn_PDF" CssClass="button" Width="150px" Text="Export to PDF" runat="server"
+                        OnClick="btn_PDF_Click"></asp:Button>
+                    <telerik:RadGrid ID="RadGrid_Test" runat="server" AutoGenerateColumns="false" Width="100%"
+                        CellSpacing="0" GridLines="None" OnGridExporting="RadGrid_Test_GridExporting">
+                        <HeaderStyle Font-Size="12px" Font-Bold="True" ForeColor="Black" />
+                        <MasterTableView>
+                            <Columns>
+                                <telerik:GridBoundColumn DataField="Description" HeaderText="Description" ItemStyle-Width="170px">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Details" HeaderText="Details">
+                                </telerik:GridBoundColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
                     <br />
                     <table id="Table_Email" style="width: 100%;">
                         <tr>
-                            <td colspan="2">                              
-                                <strong>If you need support, then please fill out details in below area and send 
-                                back to us!</strong></td>
+                            <td colspan="2">
+                                <strong>If you need support, then please fill out details in below area and send back
+                                    to us!</strong>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align: center">                              
+                            <td colspan="2" style="text-align: center">
                                 <asp:Label ID="lblMsg" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                             </td>
                         </tr>
                         <tr>
                             <td class="style1">
-                                &nbsp;</td>
+                                &nbsp;
+                            </td>
                             <td style="text-align: right">
                                 &nbsp; &nbsp;
-                                <asp:Button ID="btn_SendEmail" runat="server" onclick="btn_SendEmail_Click" 
-                                    Text="Send Email" ValidationGroup="a" />
+                                <asp:Button ID="btn_SendEmail" runat="server" OnClick="btn_SendEmail_Click" Text="Send Email"
+                                    ValidationGroup="a" />
                             </td>
                         </tr>
                         <tr>
                             <td class="style1">
-                                Name*:</td>
+                                Name*:
+                            </td>
                             <td>
-                                <asp:TextBox ID="txtUserName" runat="server" Height="19px" 
-                                    meta:resourcekey="txtPressResource1" Width="200px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvUserName" runat="server" 
-                                    ControlToValidate="txtUserName" Display="Dynamic" 
-                                    ErrorMessage="Please Provide User Name." ForeColor="Red" 
-                                    ValidationGroup="a"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtUserName" runat="server" Height="19px" meta:resourcekey="txtPressResource1"
+                                    Width="200px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ControlToValidate="txtUserName"
+                                    Display="Dynamic" ErrorMessage="Please Provide User Name." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
                             <td class="style1">
-                                Email ID*:</td>
+                                Email ID*:
+                            </td>
                             <td>
-                                <asp:TextBox ID="txtEmail" runat="server" Height="19px" 
-                                    meta:resourcekey="txtPressResource1" Width="200px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" 
-                                    ControlToValidate="txtEmail" Display="Dynamic" 
-                                    ErrorMessage="Please Provide Email." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="valRegEx" runat="server" 
-                                    ControlToValidate="txtEmail" display="dynamic" 
-                                    ErrorMessage="Invalid Email address." ForeColor="Red" 
-                                    ValidationExpression=".*@.*\..*" ValidationGroup="a"></asp:RegularExpressionValidator>
+                                <asp:TextBox ID="txtEmail" runat="server" Height="19px" meta:resourcekey="txtPressResource1"
+                                    Width="200px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail"
+                                    Display="Dynamic" ErrorMessage="Please Provide Email." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="valRegEx" runat="server" ControlToValidate="txtEmail"
+                                    Display="dynamic" ErrorMessage="Invalid Email address." ForeColor="Red" ValidationExpression=".*@.*\..*"
+                                    ValidationGroup="a"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                         <tr>
                             <td class="style1">
-                                Subject*:</td>
+                                Subject*:
+                            </td>
                             <td>
-                                <asp:TextBox ID="txtSubject" runat="server" Height="19px" 
-                                    meta:resourcekey="txtPressResource1" Width="300px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvSubject" runat="server" 
-                                    ControlToValidate="txtSubject" Display="Dynamic" 
-                                    ErrorMessage="Please Provide Subject." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtSubject" runat="server" Height="19px" meta:resourcekey="txtPressResource1"
+                                    Width="300px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvSubject" runat="server" ControlToValidate="txtSubject"
+                                    Display="Dynamic" ErrorMessage="Please Provide Subject." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                         <tr>
                             <td class="style1">
-                                Notes*:</td>
+                                Notes*:
+                            </td>
                             <td>
-                                <asp:TextBox ID="txtBody" runat="server" Height="50px" 
-                                    meta:resourcekey="txtPressResource1" TextMode="MultiLine" Width="400px"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="rfvBody" runat="server" 
-                                    ControlToValidate="txtBody" Display="Dynamic" 
-                                    ErrorMessage="Please Provide Notes." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
+                                <asp:TextBox ID="txtBody" runat="server" Height="50px" meta:resourcekey="txtPressResource1"
+                                    TextMode="MultiLine" Width="400px"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="rfvBody" runat="server" ControlToValidate="txtBody"
+                                    Display="Dynamic" ErrorMessage="Please Provide Notes." ForeColor="Red" ValidationGroup="a"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                     </table>
-               </asp:Panel>
+                </asp:Panel>
             </div>
-       </div> 
-
+        </div>
     </div>
     </form>
 </body>

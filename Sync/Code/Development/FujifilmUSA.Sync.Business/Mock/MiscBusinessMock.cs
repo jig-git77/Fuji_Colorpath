@@ -35,5 +35,15 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+        #region IMiscBusiness Members
+
+
+        public bool Ping()
+        {
+            return true;
+        }
+
+        #endregion
     }
 }
