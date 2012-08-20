@@ -6,6 +6,12 @@ namespace ColorPathSync.ServiceImplementation
 {
     public class Profiler : IProfiler
     {
+        //To check whether service is running or not.
+        public bool Ping()
+        {
+            return true;
+        }
+
         public CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request)
         {
             return ProfilerBusiness.CreateSourceProfile(request);

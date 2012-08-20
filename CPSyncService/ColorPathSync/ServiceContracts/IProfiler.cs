@@ -12,6 +12,9 @@ namespace ColorPathSync.ServiceContracts
     public interface IProfiler
     {
         [OperationContract]
+        bool Ping();
+
+        [OperationContract]
         CreateSourceProfileResponse CreateSourceProfile(CreateSourceProfileRequest request);
 
         [OperationContract]
