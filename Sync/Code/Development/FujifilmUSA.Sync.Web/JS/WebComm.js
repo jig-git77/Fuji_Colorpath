@@ -37,6 +37,7 @@ function SetChartResult(objChart) {
     }
 
     if (objChart.DeviceSetting != null && objChart.DeviceSetting.MeasurementSettings != null) {
+        g_Chart["MeasurementDeviceSerial"] = objChart.DeviceSetting.SerialNumber;
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.MeasurementSettings.IlluminantName;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.MeasurementSettings.DensityType;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;
@@ -55,6 +56,12 @@ function SetChartResult(objChart) {
         g_Chart["DistToFirstField"] = objChart.ChartSetting["DistToFirstField"];
         g_Chart["PatchSizeX"] = objChart.ChartSetting["PatchSizeX"];
         g_Chart["PatchSizeY"] = objChart.ChartSetting["PatchSizeY"];
+        //For IO devices...
+        g_Chart["FirstSample"] = objChart.ChartSetting["FirstSample"];
+        g_Chart["ReadDirection"] = objChart.ChartSetting["ReadDirection"];
+        g_Chart["ReadMode"] = objChart.ChartSetting["ReadMode"];
+        g_Chart["RowsPerPage"] = objChart.ChartSetting["RowsPerPage"];
+        g_Chart["Pages"] = objChart.ChartSetting["Pages"];
     }
 
     g_Chart["RefBase"] = new Array();

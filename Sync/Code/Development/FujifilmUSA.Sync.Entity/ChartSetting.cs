@@ -15,7 +15,12 @@ namespace FujifilmUSA.Sync.Entity
         public Decimal DistToFirstField { get; set; }
         public Decimal ChartSizeX { get; set; }
         public Decimal ChartSizeY { get; set; }
-        //public short ChartSettingId { get; set; }
-        //public XmlElement Setting { get; set; }
+
+        //For IO devices...
+        public string FirstSample { get; set; }
+        public string ReadDirection { get; set; }
+        public string ReadMode { get; set; }
+        public decimal RowsPerPage { get; set; }
+        public decimal Pages { get; set; }
     }
 }

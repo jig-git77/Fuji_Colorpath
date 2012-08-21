@@ -82,12 +82,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                     ProfilerOptionId = DataReader.ReadShort(x, "ProfilerOptionID"),
                                                     ProfilerOptionValue = DataReader.ReadString(x, "ProfilerOptionValue"),
                                                 }).ToList();
-                        }                                                
+                        }
                         project.OptimizeRuns = dsProject.Tables[4].AsEnumerable().
                             Select(x => new OptimizeRun()
                             {
                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                               // RunName = DataReader.ReadString(x, "RunName"),
+                                // RunName = DataReader.ReadString(x, "RunName"),
                                 //RunName = (DataReader.ReadString(x, "RunName").Contains("DLP")) ? DataReader.ReadString(x, "RunName") : ((EOptimizeRunStatus)DataReader.ReadInt(x, "RunName") == EOptimizeRunStatus.Open) ? "Open" : "Certification",
                                 RunName = ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " + Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " + Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("HH:mm")) : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Open ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText") : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("CertificationStatusText"),
                                 ProjectId = DataReader.ReadInt(x, "ProjectID"),
@@ -529,6 +529,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         var uvIncluded = DataReader.ReadBoolean(dsReferenceChart.Tables[0].Rows[0], "UVIncluded");
                         chartData.DeviceSetting = new MeasurementDevice
                                                       {
+                                                          SerialNumber = chartData.MeasureDeviceSrNo,
                                                           MeasurementSettings = new MeasurementSetting()
                                                                                     {
                                                                                         IlluminantName =
@@ -579,6 +580,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 chartData.ChartSetting.DistToFirstField = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstField");
                             if (dsChartSettings.Tables[0].Columns.Contains("DistToBar"))
                                 chartData.ChartSetting.DistToBar = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToBar");
+
+                            //For IO devices...
+                            if (dsChartSettings.Tables[0].Columns.Contains("FirstSample"))
+                                chartData.ChartSetting.FirstSample = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "FirstSample");
+                            if (dsChartSettings.Tables[0].Columns.Contains("ReadDirection"))
+                                chartData.ChartSetting.ReadDirection = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadDirection");
+                            if (dsChartSettings.Tables[0].Columns.Contains("ReadMode"))
+                                chartData.ChartSetting.ReadMode = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadMode");
+                            if (dsChartSettings.Tables[0].Columns.Contains("RowsPerPage"))
+                                chartData.ChartSetting.RowsPerPage = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "RowsPerPage");
+                            if (dsChartSettings.Tables[0].Columns.Contains("Pages"))
+                                chartData.ChartSetting.Pages = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "Pages");
                         }
                     }
                 },
