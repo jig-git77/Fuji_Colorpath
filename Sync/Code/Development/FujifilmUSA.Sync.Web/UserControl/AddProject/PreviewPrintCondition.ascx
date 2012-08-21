@@ -343,9 +343,9 @@
                             </div>
                             <asp:Panel ID="panelAlignmentChart" runat="server" Style="padding-left: 5px" 
                                 BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
-                                <table>
+                                <table width="100%">
                                     <tr>
-                                        <td>
+                                        <td style="width: 40%">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
                                                 Text="Alignment Chart" ID="locAlignmentChart2" 
                                                 meta:resourcekey="locAlignmentChart2Resource1"></asp:Localize></span> &nbsp;
@@ -360,7 +360,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <asp:Image ID="imgChart" runat="server" Width="76%" Height="200px" 
+                                            <asp:Image ID="imgChart" runat="server" Width="96%" Height="200px" 
                                                 meta:resourcekey="imgChartResource1" />
                                         </td>
                                     </tr>

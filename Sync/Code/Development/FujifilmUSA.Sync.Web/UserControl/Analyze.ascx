@@ -113,7 +113,7 @@
                 <tr id="trListHeader" runat="server">
                     <td runat="server">
                     
-                            <div style="display: block;" class="contantbox tabcontant">
+                            <div style="display: block;" class="contantbox tabcontant1">
                             <div class="Analyze_head">
                                 <div class="text" style="font-weight: bold; font-size: 14px; float: left">
                                     <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement" meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>

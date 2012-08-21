@@ -79,9 +79,9 @@
 <div id="login_box">
     <div class="curve_top_login">
          <div style="text-align:right; padding-right:40px; padding-top:20px;">
-             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/browsericons_1.png"  />
+             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/browsericons_1.png"  Visible="false" />
             <asp:ImageButton ID="btn_OpenBrowserTest" runat="server" AlternateText="Open Browser Test" ImageUrl="~/Images/browsericons.png" 
-                    OnClientClick="return ShowBrowserTestWindow();" ToolTip="Open Browser Test" />
+                    OnClientClick="return ShowBrowserTestWindow();" ToolTip="Open Browser Test" Visible="false" />
         </div>
     </div>
     <div id="pageWrapper">

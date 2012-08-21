@@ -757,7 +757,7 @@ label
 {
     background: url(../Images/tab_active_left.png) no-repeat top left;
     height: 31px;
-    position: relative;
+   /* position: relative;  */
     top: 1px;
     z-index: 500;
 }
@@ -773,6 +773,12 @@ label
 }
 
 .tabcontant
+{
+    width: 680px;
+   /* position: relative; */
+    z-index: 0;
+}
+.tabcontant1
 {
     width: 680px;
     position: relative;
