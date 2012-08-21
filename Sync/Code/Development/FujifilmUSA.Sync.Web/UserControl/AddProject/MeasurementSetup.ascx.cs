@@ -75,7 +75,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
-        
+
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.MeasurementSetting =
@@ -108,6 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 : "COMeasurement.aspx?id={0}", Guid.NewGuid()));
                         break;
                     case EOptimizeRunStatus.Closed:
+                    case EOptimizeRunStatus.Certify:
                         ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                         _presenterMeasurementSetting.CreateOptimizeRun();
                         if (!IsErrorOccured)
