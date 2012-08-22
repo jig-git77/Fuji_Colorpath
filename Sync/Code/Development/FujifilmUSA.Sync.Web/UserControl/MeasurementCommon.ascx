@@ -186,7 +186,7 @@
                 </td>
                 <td align="center">
                     <span id="lblMeasurementDate">
-                       ${MeasurementDate}</span>
+                       ${UploadDate}</span>
                 </td>
                 <td align="center">
                     <input 
@@ -264,14 +264,20 @@
             }
         });       
     }
+
+    Date.prototype.toMSJSON = function () {
+    var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
+    return date;
+};
+
     function saveMeasurement() {
 
-        // Load progress bar
+         //Load progress bar
         LoadProgressBrowserWindow();
 
         var dt = new Date();
         var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
-        var MeasurementDateTime = dt1.toMSJSON();
+        var MeasurementDateTime = dt1.toMSJSON();     
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
         var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
         var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
@@ -322,12 +328,12 @@
             dataType: "json",
             cache: false,
             dataFilter:
-                function (data, type) {
+                function (data, type) {               
                     var json = jQuery.parseJSON(data);
-                    for (i = 0; i < json.length; i++) {
-                        var date = GetDate(json[i].MeasurementDate);
-                        json[i].MeasurementDate = date;
-                    }
+                   // for (i = 0; i < json.length; i++) {  //Removed these lines because now we are passing MeasurementDate as a string instead of DateTime as "UploadDate"
+                       // var date = GetDate(json[i].MeasurementDate);
+                       // json[i].MeasurementDate = date;                    
+                    //}
                     if (json.length > 0) {
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");

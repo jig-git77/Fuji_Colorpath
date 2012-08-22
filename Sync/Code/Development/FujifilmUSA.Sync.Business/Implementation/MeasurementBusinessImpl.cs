@@ -111,6 +111,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
                                             MeasurementName = DataReader.ReadString(x, "MeasurementName"),
                                             MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
                                             OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                                             IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                                         }).ToList();
