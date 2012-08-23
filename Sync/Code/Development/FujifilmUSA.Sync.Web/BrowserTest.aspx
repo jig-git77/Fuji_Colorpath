@@ -17,7 +17,7 @@
             Test_HTML5();
             Test_Plugins();
             Plugin_load();
-            Test_PluginDataService();
+            Test_PluginDataService();          
         }
         function Test_Browser() {
             var navigatorVersion = navigator.appVersion;
@@ -106,22 +106,41 @@
             c.value = answer;
         }
         function Test_Plugins() {
-            if (navigator.plugins && navigator.plugins.length > 0) {
-                var L = navigator.plugins.length;
-                var Table_Plugin = document.getElementById('<%#Hidden_OtherPlugins.ClientID%>');
-                Table_Plugin.value = "";
+            if (navigator.userAgent.indexOf('MSIE') != -1) { //-----For IE Other Plugins Testing
+                hasPlugin('WMPlayer.OCX'); //--Check for Windows Media Player
+                hasPlugin('QuickTime.QuickTime'); //--Check for QuickTime Player
+                hasPlugin('ShockwaveFlash.ShockwaveFlash'); //--Check for Flash Player
+            }
+            else {                                     //-----For All Other Browsers Testing
+                if (navigator.plugins && navigator.plugins.length > 0) {
+                    var L = navigator.plugins.length;
+                    var Table_Plugin = document.getElementById('<%#Hidden_OtherPlugins.ClientID%>');
+                    Table_Plugin.value = "";
 
-                for (var i = 0; i < L; i++) {
-                    if (navigator.plugins[i].name.indexOf('Fuji') != -1) {
-                        Table_Plugin.value += navigator.plugins[i].name;
-                    }
-                    else {
-                        Table_Plugin.value += navigator.plugins[i].name;
-                    }
-                    if (i < L - 1) {
-                        Table_Plugin.value += ", ";
+                    for (var i = 0; i < L; i++) {
+                        if (navigator.plugins[i].name.indexOf('Fuji') != -1) {
+                            Table_Plugin.value += navigator.plugins[i].name;
+                        }
+                        else {
+                            Table_Plugin.value += navigator.plugins[i].name;
+                        }
+                        if (i < L - 1) {
+                            Table_Plugin.value += ", ";
+                        }
                     }
                 }
+            }
+        }
+
+        function hasPlugin(name)    //---------Check for Other Plugings Test for IE
+        {
+            try {
+                new ActiveXObject(name);
+                //alert('true');
+                return true;
+            } catch (e) {
+               // alert('false');
+                return false;
             }
         }
 
@@ -178,6 +197,14 @@
             }
             var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
             c.value = newHTML;
+
+            //------Assign Plugin Version-----//
+            var d = document.getElementById('<%#Hidden_PluginVersion.ClientID%>');
+            d.value = plugin().plugin_version;
+
+            //------Assign OS version for Plugin Download-----//
+            var e = document.getElementById('<%#Hidden_PluginOS.ClientID%>');
+            e.value = OSName;
         }
     </script>
     <style type="text/css">
@@ -235,18 +262,13 @@
         <table id="Table_Buttons" runat="server" width="100%">
             <tr>
                 <td align="center">
-                    <input id="btn_ChkBrowser" type="button" value="Run Test" />
+                    <input id="btn_ChkBrowser" type="button" value="Run Browser Test" />
                     &nbsp;&nbsp;&nbsp;
                     <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" OnClick="btn_LoadGrid_Click"
                         Visible="false" />                    
                     <asp:Button ID="btnServerSideTest" runat="server" Text="Run Server Side Test" OnClick="btnServerSideTest_Click" Visible="false"/>
                 </td>                
-            </tr>
-            <tr>
-                <td>
-                    <asp:Label ID="lbl_Result" runat="server"></asp:Label>
-                </td>
-            </tr>
+            </tr>           
         </table>
     </div>
     <br />
@@ -274,6 +296,8 @@
                 <input id="Hidden_Cookies" type="hidden" runat="server" />
                 <input id="Hidden_HTML5" type="hidden" runat="server" />
                 <input id="Hidden_PluginMessage" type="hidden" runat="server" />
+                <input id="Hidden_PluginVersion" type="hidden" runat="server" />
+                <input id="Hidden_PluginOS" type="hidden" runat="server" />
                 <input id="Hidden_OtherPlugins" type="hidden" runat="server" />
                 <input id="Hidden_PluginDataService" type="hidden" runat="server" />
             </div>

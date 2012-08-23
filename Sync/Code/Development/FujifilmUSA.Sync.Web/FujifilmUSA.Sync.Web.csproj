@@ -74,7 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Activity_PrintCondition.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
@@ -191,7 +190,6 @@
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\style.css" />
-    <Content Include="UserControl\Activity_PrintCondition.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -435,13 +433,6 @@
     <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity_PrintCondition.aspx.cs">
-      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Activity_PrintCondition.aspx.designer.cs">
-      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -724,13 +715,6 @@
     </Compile>
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\Activity_PrintCondition.ascx.cs">
-      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\Activity_PrintCondition.ascx.designer.cs">
-      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
@@ -1304,6 +1288,10 @@
     <Content Include="PopUpMaster.Master" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
+      <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>
+      <Name>FujifilmUSA.Sync.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
       <Project>{B791085B-2607-458F-B9AA-5DDC581589AF}</Project>
       <Name>FujifilmUSA.Sync.Common</Name>
@@ -1678,19 +1666,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.de.resx">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="UserControl\App_LocalResources\Activity_PrintCondition.ascx.ja.resx">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.resx">
       <SubType>Designer</SubType>
     </Content>
@@ -1942,7 +1917,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

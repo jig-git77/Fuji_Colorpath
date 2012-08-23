@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using FujifilmUSA.Sync.Business;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -24,6 +25,7 @@ namespace FujifilmUSA.Sync.Web
         {
             if (Page.IsPostBack == false)
             {
+              
                 Panel_Grid.Visible = false;
                 url = String.Format("UploadFiles/Report_PDF/BrowserTest/{0}.pdf", "BrowserTest" + "_" + Guid.NewGuid().ToString());
             }
@@ -52,7 +54,7 @@ namespace FujifilmUSA.Sync.Web
 
         protected void btn_LoadGrid_Click(object sender, EventArgs e)
         {
-            Panel_Grid.Visible = true;
+            Panel_Grid.Visible = true;      
             BindRadGrid(BrowserTable());
         }
 
@@ -105,10 +107,22 @@ namespace FujifilmUSA.Sync.Web
             table.Rows.Add("Session/Cookies Enabled:", Hidden_Cookies.Value);
             table.Rows.Add("HTML5 Supported:", Hidden_HTML5.Value);
             table.Rows.Add("Fujifilm Plugin:", Hidden_PluginMessage.Value);
+            if (Hidden_PluginVersion.Value != ApplicationConfiguration.Instance.FujiFilmPluginVersion) //-----------For Giving option to download plugin, if it is outdated-----//
+            {
+                if (Hidden_PluginOS.Value == "Windows")  //-----For Windows PC
+                {
+                    table.Rows.Add("", "<a href='Download/Colorpath PCPlugin Installer.zip'><b>(Fujifilm Plugin is outdated, So please download latest version from here...)</b></a>");
+                }
+                else  //---For MAC PC
+                {
+                    table.Rows.Add("", "<a href='Download/Colorpath MacPlugin Installer.zip'><b>(Fujifilm Plugin is outdated, So please download latest version from here...)</b></a>");
+                }
+            }
             if (Hidden_OtherPlugins.Value != "") //---Not supported in IE
             {
                 table.Rows.Add("Other Plugins:", Hidden_OtherPlugins.Value);
             }
+           
             table.Rows.Add("Plugin Data Service status:", Hidden_PluginDataService.Value);
             return table;
         }

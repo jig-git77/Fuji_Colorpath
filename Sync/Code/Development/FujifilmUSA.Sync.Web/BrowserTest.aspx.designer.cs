@@ -58,15 +58,6 @@ namespace FujifilmUSA.Sync.Web {
         protected global::System.Web.UI.WebControls.Button btnServerSideTest;
         
         /// <summary>
-        /// lbl_Result control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Result;
-        
-        /// <summary>
         /// DivTable control.
         /// </summary>
         /// <remarks>
@@ -128,6 +119,24 @@ namespace FujifilmUSA.Sync.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_PluginMessage;
+        
+        /// <summary>
+        /// Hidden_PluginVersion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_PluginVersion;
+        
+        /// <summary>
+        /// Hidden_PluginOS control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden Hidden_PluginOS;
         
         /// <summary>
         /// Hidden_OtherPlugins control.

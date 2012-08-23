@@ -25,6 +25,7 @@ namespace FujifilmUSA.Sync.Business
         private int _measurementsLimit;
         private string _webSiteLink;
         private bool _enableActivityLog;
+        private string _fujifilmPluginVersion;
         #endregion
 
         #region Singleton
@@ -85,6 +86,9 @@ namespace FujifilmUSA.Sync.Business
                                                                   break;
                                                               case "ENABLEACTIVITYLOG":
                                                                   _enableActivityLog = Convert.ToBoolean(x.Value);
+                                                                  break;
+                                                              case "FUJIFILMPLUGINVERSION":
+                                                                  _fujifilmPluginVersion = x.Value;
                                                                   break;
                                                           }
                                                       });
@@ -183,6 +187,13 @@ namespace FujifilmUSA.Sync.Business
             get
             {
                 return _enableActivityLog;
+            }
+        }
+        public string FujiFilmPluginVersion
+        {
+            get
+            {
+                return _fujifilmPluginVersion;
             }
         }
         #endregion
