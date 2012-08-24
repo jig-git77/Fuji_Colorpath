@@ -54,7 +54,7 @@ if (/msie/i.test(navigator.userAgent)) //only override IE
     };
 }
 
-console.log("Loading xychartread.js");
+console.log("Loading chartread.js");
 var actKey = '';
 var g_ScannerList = new Object();
 var g_Chart = new Object();
@@ -93,11 +93,8 @@ function Patch(LAB, XYZ, Density, sName) {
     this.SampleName = sName;
 }
 
-// NOTE:  Don't overwrite the elements of this chart in the subsequent code, even
-// if you have copied it to a temporary to pass down to the plugin.  Javascript does
-// something very strange and will end up clobbering the original elements during
-// the callback, even if the original was only copied.  We can always copy elements
-// to new entries (i.e. copy mychart["ReferenceColors"] = random331samples["RefBase"][2])
+
+
 // This is the spectral values of the paper used for density
 // calculations.  Saved in the spot read function
 //paper = new Array();
@@ -121,7 +118,7 @@ function addEvent(obj, name, func) {
     }
 }
 
-function load() {    
+function load() {
     jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
@@ -149,31 +146,44 @@ function DisplayLog() {
     newHTML += '</PRE><BR>';
     document.getElementById("Log").innerHTML = newHTML;
 }
-function presentScannerList(ScannerList) {    
+function presentScannerList(ScannerList) {
     //ScannerList is an array of scanners with properties.    
     jQuery("[id*='lblPluginMessage']").html("");
-    if (ScannerList.length == 0) return;
-    if (ScannerList[0]["State"] == "Deleted") {
+    g_ScannerList = {};
 
-        jQuery("[id*='btnCalibrate']").css('display', 'none');
-        jQuery("[id*='lblMessage']").css('color', 'Red');
-        jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
-        jQuery("[id*='btnCalibrate']").css('display', 'none');
-        jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
-        jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
-    }
-    else {
-        g_ScannerList = ScannerList;
-        if (g_ScannerList[0]["Requirements"].indexOf("RequiresCalibration") >= 0) {
-            jQuery("[id*='lblMessage']").css('color', 'Black');
-            jQuery("[id*='lblMessage']").html("Status : Please calibrate.");
-            jQuery("[id*='btnCalibrate']").css('display', '');
+
+    for (var i = 0; i < ScannerList.length; i++) {
+
+        if (ScannerList[i]["State"] == "Deleted" || ScannerList[i]["Serial"] != g_Chart["MeasurementDeviceSerial"]) {
+
+            jQuery("[id*='btnCalibrate']").css('display', 'none');
+            jQuery("[id*='lblMessage']").css('color', 'Red');
+            if (ScannerList[i]["State"] == "Deleted") {
+                jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+            }
+            else {
+                jQuery("[id*='lblMessage']").html("Status : Device Serial: " + g_Chart["MeasurementDeviceSerial"] + " not found.");
+            }
+                jQuery("[id*='btnCalibrate']").css('display', 'none');
+                jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
+                jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
+            
         }
         else {
-            jQuery("[id*='lblMessage']").css('color', 'Black');
-            jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
-            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
-            jQuery("[id*='btnCancelMeasurement']").css('display', '');
+            g_ScannerList = ScannerList[i];
+            if (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
+                jQuery("[id*='lblMessage']").css('color', 'Black');
+                jQuery("[id*='lblMessage']").html("Status : Please calibrate.");
+                jQuery("[id*='btnCalibrate']").css('display', '');
+                return;
+            }
+            else {
+                jQuery("[id*='lblMessage']").css('color', 'Black');
+                jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+                jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+                jQuery("[id*='btnCancelMeasurement']").css('display', '');
+                return;
+            }
         }
     }
 }
@@ -188,17 +198,8 @@ function ListDevices() {
     }
 }
 
-// chart is an object with the following information
-// chart["Name"] = string name of strip or chart
-// chart["Description"] = description of strip or chart
-// chart["Size"] = integer number of samples
-// chart["NumberOfColumns"] = integer width
-// chart["NumberOfRows"] = integer height
-// chart["ReferencePatch"] = array of expected values
-// Query is an arbitrary object that is passed through so the prompters and done functions know what was expected.
-// other values may be included and are passed through to the callback functions
 function scan(scanner, colorspace, chart) {
-    
+
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
     if (g_Chart["Result"] > 0) g_Chart["Result"].length = 0;
     var localchart = chart;
@@ -209,7 +210,16 @@ function scan(scanner, colorspace, chart) {
         // This device will read the entire chart in a single go. So we copy entire RefBase (how chart is laid out) to the ReferencePatch
         if (typeof chart["RefBase"] != "undefined") {
             localchart["ReferencePatch"] = chart["RefBase"];
-            scanner["Mode"] = chart["Mode"];
+            
+            //temp patch to work around the mode setting being different for io and ISIS
+            if (scanner["Type"] == "iO") {
+                scanner["Mode"] = chart["ReadMode"];
+            }
+            else {
+            //this setting still needs to copy the chart["Mode"] setting to the scanner
+                scanner["Mode"] = chart["Mode"];
+            }
+
         }
     }
     else {
@@ -232,13 +242,19 @@ function scan(scanner, colorspace, chart) {
     scanner["ActivationKey"] = actKey;
     scanner["SampleSource"] = "Paper";  // Choices are Paper, LCD or CRT and for the latter the chart must have 1 sample (spot)
 
+
+
     if (typeof chart["DeviceSettings"] == "object") {
         scanner["DeviceSettings"] = chart["DeviceSettings"]; // Move device settings to the scanner
     }
 
-    if (scanner["Type"] == "iO" || scanner["Type"] == "iSis") {
 
-        //------------------Preview chart---------------//                             
+
+
+
+    if (scanner["Type"] == "iSis" || scanner["Type"] == "iO") {
+
+            //------------------Preview chart---------------//                             
 
         var canvas = document.getElementById("Canvas");
         var context = canvas.getContext("2d");
@@ -261,11 +277,40 @@ function scan(scanner, colorspace, chart) {
 
         context.globalAlpha = 1.0; //--------------Make regular background----------//
 
-        //----------------Scan code start----//     
+        if (scanner["Type"] == "iO") {
+
+            // var canvas = document.getElementById("Canvas");
+            //var context = canvas.getContext("2d");
+            // context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Clear the chart location so the caller asks for the IO coordinate location
+            //
+            delete (localchart["UpperLeft"]);
+            delete (localchart["UpperRight"]);
+            delete (localchart["LowerLeft"]);
+            delete (localchart["LowerRight"]);
+
+            scanner["DeltaLLimit"] = "30.0";        // Any line delta E over this causes a retry
+
+            var result = plugin().read(scanner, localchart, query,
+                 presentStripDialogi1, presentProgressiSis, presentScanDoneiSis);
+
+            //if (result == "ERROR: Activation Error") {
+            //   jQuery("[id*='lblMessage']").css('color', 'Red');
+            //  jQuery("[id*='lblMessage']").html("Status : This is not valid licensed measurement device.");
+            // }
+            //  else if (result != "OK") {
+            //      jQuery("[id*='lblMessage']").css('color', 'Red');
+            //      jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+            // }
+        }
+        else if (scanner["Type"] == "iSis") {
+            
         var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
+        }
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : This is not valid license device.");
+            jQuery("[id*='lblMessage']").html("Status : This is not valid licensed measurement device.");
         }
         else if (result != "OK") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
@@ -282,7 +327,7 @@ function scan(scanner, colorspace, chart) {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : This is not valid license device.");
+            jQuery("[id*='lblMessage']").html("Status : This is not valid licensed measurement device.");
             return;
         }
         else if (result != "OK") {
@@ -291,7 +336,7 @@ function scan(scanner, colorspace, chart) {
             return;
         }
         // Display the original chart from the reference values.
-        
+
         var area = new Object();
         area["W"] = 0;
         area["H"] = 0;
@@ -308,7 +353,7 @@ function scan(scanner, colorspace, chart) {
         var startPosition = 0;
         col = chart["NumberOfColumns"];
         row = chart["NumberOfRows"];
-      
+
         if (row < 20) {
             h = h - 50;
         }
@@ -316,24 +361,24 @@ function scan(scanner, colorspace, chart) {
             h = h * 2;
         }
         else if (row > 40 && row <= 50) {
-            h = h * 5;           
+            h = h * 5;
         }
         else {
-            h = h * 6;       
+            h = h * 6;
         }
-       
+
         canvas.width = w;       //---Assign new height & width
         canvas.height = h;
-      
+
         if (row != 1) {
 
             //--------Fuji 150 or more big chart----------//
-          
-            area["H"] = ((h / row) / 2) - 1;          
+
+            area["H"] = ((h / row) / 2) - 1;
             distance["R"] = ((h / row) / 2) + 1;
 
             area["W"] = ((w / col) / 2) + '';
-            distance["C"] = ((w / col) / 2) + '';     
+            distance["C"] = ((w / col) / 2) + '';
         }
         else {
 
@@ -354,7 +399,7 @@ function scan(scanner, colorspace, chart) {
 
         for (i = 0; i < row; i++) {
 
-            x1 = 0;        
+            x1 = 0;
 
             for (j = 0; j < col; j++) {
 
@@ -363,21 +408,20 @@ function scan(scanner, colorspace, chart) {
                     var xx1 = startPosition + x1;
                     var yy1 = startPosition + y1;
                     x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-                
+
                     var rgbx = chart["RefBase"][cId]["HTMLColor"];
 
                     context.fillStyle = rgbx;
                     context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-                 
+
                     drawCells++;
                     cId++;
                 }
             }
-            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"]);          
-        }      
+            y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"]);
+        }
     }
 }
-
 function refreshCanvas() {
     // jQuery("[id*='Canvas']").empty();
 

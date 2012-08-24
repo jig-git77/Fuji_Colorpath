@@ -2,9 +2,9 @@
 // in javascript so the web app can change everything including
 // the language of the query.
 function presentChartDialogiSis(scanner, chart, query) {
-    if (query["Request"] == "READACKNOWLEDGED") {        
+    if (query["Request"] == "READACKNOWLEDGED") {
         query["Prompt"] = "Chart read in progress";
-    } else {        
+    } else {
         query["Prompt"] = "Please place the chart in the scanner and click in this window.";
     }
     jQuery("[id*='lblMessage']").css('color', 'Black');
@@ -67,13 +67,13 @@ function presentScanDoneiSis(scanner, mychart, final) {
         if (ind == end) {
 
             if (cellSize == 0) {    //----For "Fuji 40 Chart" of iSis (has only 2 row, so directly goes to this function without assigning cellsize in presentProgressiSis())
-                    chartWidth = parseInt(jQuery("[id*='Canvas']").width());
-                    chartHeight = parseInt(jQuery("[id*='Canvas']").height());
+                chartWidth = parseInt(jQuery("[id*='Canvas']").width());
+                chartHeight = parseInt(jQuery("[id*='Canvas']").height());
 
-                    columnCount = mychart["NumberOfColumns"];
-                    rowCount = mychart["NumberOfRows"];
-                    cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
-                    cellSize = Math.round(cellSize - 0.5);
+                columnCount = mychart["NumberOfColumns"];
+                rowCount = mychart["NumberOfRows"];
+                cellSize = Math.min((chartWidth / columnCount), (chartHeight / rowCount));
+                cellSize = Math.round(cellSize - 0.5);
             }
             //------Call just one time to print last row
             DrawChart(results, cellSize, columnCount, ind, samples, samples, "");
@@ -91,7 +91,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         mpatch.CielabL = LABResults["L"].toFixed(2);
         mpatch.CielabA = LABResults["A"].toFixed(2);
         mpatch.CielabB = LABResults["B"].toFixed(2);
-       
+
         MeasuredPatches.push(mpatch);
     }
 
@@ -131,7 +131,7 @@ var countglobal = 0;
 var srgb;
 var rgbx;
 var canvas;
-var context;    
+var context;
 
 
 function presentProgressiSis(scanner, mychart) {

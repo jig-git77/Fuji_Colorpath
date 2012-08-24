@@ -6,7 +6,7 @@
 function GetReferenceChart(ProjectID, ReferenceChartTypeId, SerialNo) {
     jQuery.ajax({
         type: "GET",
-        contentType: "application/json; charset=utf-8",        
+        contentType: "application/json; charset=utf-8",
         url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID,
         processData: false,
         dataType: "json",
@@ -43,7 +43,7 @@ function SetChartResult(objChart) {
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;
         g_Chart["Mode"] = objChart.DeviceSetting.MeasurementSettings.UvIncludedName;
     }
-    
+
     if (objChart.ChartSetting != null) {
         g_Chart["ChartType"] = "Native";
         g_Chart["ChartSizeX"] = objChart.ChartSetting["ChartSizeX"];
@@ -65,7 +65,7 @@ function SetChartResult(objChart) {
     }
 
     g_Chart["RefBase"] = new Array();
-    for (i = 0; i < g_Chart["Size"]; i++) {        
+    for (i = 0; i < g_Chart["Size"]; i++) {
         var patch = new Object();
         patch["SampleName"] = objChart.ReferenceCharts[i].SampleName;
         patch["HTMLColor"] = objChart.ReferenceCharts[i].HtmlColor;
@@ -76,7 +76,7 @@ function SetChartResult(objChart) {
         patch["PatchTypeID"] = objChart.ReferenceCharts[i].PatchTypeId;
         g_Chart["RefBase"].push(patch);
     }
-    
+
     //clear the Measured patch array
     if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
 }

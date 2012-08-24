@@ -80,24 +80,156 @@ function presentStripDialogi1(scanner, chart, query) {
     //
     if (query["Request"] == "READACKNOWLEDGED") {
         query["Prompt"] = "Strip read in progress.";
+    } else if (query["Request"] == "GETCHARTLOCATION") {
+        // reget the chart position and we'll see if it changes.
+        g_SavedQuery = query;
+        getChartLocation(scanner);
     } else {
-        if (scanner["Type"] == "iO") {
-            query["Prompt"] = "Please place the chart on the platten and click to continue.";
-        } else {
-            query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + ".press and hold the trigger while sliding the scanner across the strip.";
-        }
+        query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + ".press and hold the trigger while sliding the scanner across the strip.";
     }
+
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
+
+
 }
-//
-// The "Done" callback functions take three args.  The scanner, 
-// the prompt object and the final function.  If the final function
-// is a function object it is called, if it is a string then
-// it is evaluated.  This generally will be a call back to the
-// C++ side to do final thread and memory cleanup. Sample values
-// must be retriveved before the final call.
-//
+
+// This function provides an interface to fetch three corners of a chart from an iO device
+// and update the chart definition so alignment of the chart isn't important.
+// This function just starts up the fetching of the corners.  The presentGetPosDone will
+// look at the results and decide if it needs to do additional corners
+function getChartLocation(scanner) {
+
+    var myQuery = new Object();
+    delete (g_Chart["UpperLeft"]);
+    delete (g_Chart["UpperRight"]);
+    delete (g_Chart["LowerLeft"]);
+    delete (g_Chart["LowerRight"]);
+    myQuery["GETPOSINSTRUCTIONS"] = "Please place your chart on the iO table and click in this window to continue";
+    myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the upper left corner of the chart and press press the i1 trigger";
+    myQuery["First"] = "true";
+    playSound('Download/Done.wav')
+    var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
+    if (result != "OK") {
+        alert("Scanning Device has been unplugged");
+    }
+}
+function presentGetPosDialog(scanner, myQuery) {
+    // alert("#6 About to call presentGetPosDialog");
+    // Everything needed for the generic presentQuery is already 
+    // filled in, however you can use this to change the actual
+    // text for example to do multi-language.
+    //
+    // Calibrate sets the Request to standard strings regardless of language and you can
+    // index pre-supplied strings (GETPOSINSTRUCTIONS, GETPOINTINSTRUCTIONS,
+    // GETPOSACKNOWLEDGED, CANCELLED) like this:
+    //alert('In presentGetPosDialog with request ' + myQuery["Request"]);
+    // if (myQuery["Request"] == "CANCELLED") {
+    //  RemoveModalWindow();
+    //  return;
+    // }
+    // if (myQuery["Request"] == "GETPOSACKNOWLEDGED") {
+    // RemoveModalWindow();
+    // }
+    myQuery["Prompt"] = myQuery[myQuery["Request"]];
+    // presentQuery(myQuery);
+    // myQuery["Prompt"] = myQuery[myQuery["Request"]];
+    //  jQuery("[id*='lblMessage']").css('color', 'Black');
+    //jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
+
+    OnQuery(myQuery);
+}
+function OnQuery(question) {
+    // Setup the clock to close the window with the appropriate question
+    //$('modalWindow').onclick = function() { OnModalWindowClick(question) };
+    // Change the text in the window then display it
+    var newHTML = question['Prompt'];
+    if (question["Request"] == "GETPOSINSTRUCTIONS") {
+
+
+
+        //g_Question = question;
+        alert(newHTML)
+        if (question["Answers"] == "NONE") {
+            // If you can't answer it here, then just return
+            return;
+        }
+
+        // Notify the user that we are done
+        question["Result"] = "OK";
+        plugin().queryDone(question);
+    }
+    else {
+        // myQuery["Prompt"] = myQuery[myQuery["Request"]];
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : " + newHTML);
+    }
+
+}
+function presentGetPosDone(scanner, query, final) {
+    //alert("#7 About to call presentGetPosDone");
+
+    // We have to make one more call to the library.  The 
+    // async request itself ran in a non-browser thread.  We need
+    // the browser thread to join with the thread to keep the process state tidy.
+    if (typeof final != "undefined") {
+        eval(final);
+    }
+    //
+    // Now let the user know how things ended up.
+    //alert('In presentGetPosDone');
+    if (typeof query == "string") {
+        // This would be either "CANCELLED" or "ERROR: ..."
+        // for CANCELLED, you might just want to do nothing.
+        if (!(msg == "OK" || msg == "CANCELLED")) {
+            // They hit cancel so clear the primary thread too.
+            if (g_SavedQuery != null) {
+                g_SavedQuery["Result"] = "CANCEL";
+                plugin().queryDone(g_SavedQuery);
+            }
+
+            //alert(msg);
+        }
+    }
+    // Save this position and move to the next corner
+    if (typeof g_Chart["UpperLeft"] == "undefined") {
+        g_Chart["UpperLeft"] = query["Result"];
+        //alert(g_Chart["UpperLeft"]["X"]);
+        var myQuery = new Object();
+        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the upper right corner of the chart and press press the i1 trigger.";
+        var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
+        if (result != "OK") {
+            alert("Scanning Device has been unplugged");
+        }
+    } else if (typeof g_Chart["UpperRight"] == "undefined") {
+        g_Chart["UpperRight"] = query["Result"];
+        var myQuery = new Object();
+        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the lower right corner of the chart and press press the i1 trigger.";
+        myQuery["First"] = "false"; // This should be true, but for testing this turns off the POSINSTRUCTIONS query
+
+        var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
+        if (result != "OK") {
+            alert("Scanning Device has been unplugged");
+        }
+    } else {
+        g_Chart["LowerRight"] = query["Result"];
+        // We have three corners.  Figure the 4th and recaluclate the sample size
+        var llx = g_Chart["UpperLeft"]["X"] - (g_Chart["UpperRight"]["X"] - g_Chart["LowerRight"]["X"]);
+        var lly = g_Chart["UpperLeft"]["Y"] - (g_Chart["UpperRight"]["Y"] - g_Chart["LowerRight"]["Y"]);
+        g_Chart["LowerLeft"] = new Object();
+        g_Chart["LowerLeft"]["X"] = llx;
+        g_Chart["LowerLeft"]["Y"] = lly;
+
+        if (g_SavedQuery != null) {
+            alert('Click to start scan');
+            g_SavedQuery["Result"] = "OK";
+            g_SavedQuery["Chart"] = g_Chart;
+            //alert('Waking up nested query');
+            plugin().queryDone(g_SavedQuery);
+        }
+    }
+}
+
 var area = new Object();
 area["W"] = 0;
 area["H"] = 0;
@@ -111,7 +243,14 @@ var cId = 0;
 var x1 = 0;
 var y1 = 0;
 
-
+//
+// The "Done" callback functions take three args.  The scanner, 
+// the prompt object and the final function.  If the final function
+// is a function object it is called, if it is a string then
+// it is evaluated.  This generally will be a call back to the
+// C++ side to do final thread and memory cleanup. Sample values
+// must be retriveved before the final call.
+//
 function presentScanDonei1(scanner, mychart, final) {
     /* chirag put logic to return if lengh of measurepatch = total patches so far*/
     //if (mychart["Size"] == MeasuredPatches.length) return;
@@ -165,8 +304,8 @@ function presentScanDonei1(scanner, mychart, final) {
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
             alert("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"]);
-            //MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
-           
+            // MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
+
             if (typeof final == "string") {
                 eval(final);
             } else if (typeof final == "object") {
@@ -244,7 +383,7 @@ function presentScanDonei1(scanner, mychart, final) {
 
     if (row != 1) {
 
-        //--------Fuji 150 or more big chart----------//
+        //--------Fuji 150 or larger chart----------//
         area["H"] = ((h / row) / 2) - 1;
         distance["R"] = ((h / row) / 2) + 1;
 
@@ -266,19 +405,19 @@ function presentScanDonei1(scanner, mychart, final) {
     if (y1 == 0) {
         y1 = parseInt(area["H"]);
     }
-   
+
 
     x1 = 0;
     col = results.length;
     for (j = 0; j < col; j++) {
         if (noOfCells > drawCells) {
-            
+
 
             var xx1 = startPosition + x1;
             var yy1 = startPosition + y1;
 
             x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
-        
+
             var canvas = document.getElementById("Canvas");
             var context = canvas.getContext("2d");
 
@@ -287,7 +426,7 @@ function presentScanDonei1(scanner, mychart, final) {
 
             context.fillStyle = rgbx;
             context.fillRect(xx1, yy1, parseInt(area["W"]), parseInt(area["H"]));
-        
+
             drawCells++;
         }
     }
@@ -297,7 +436,7 @@ function presentScanDonei1(scanner, mychart, final) {
     //
     // Now ask for the next strip, if we were not at the end
     //
-    if (next != -1) {      
+    if (next != -1) {
 
         mychart["CurrentStrip"] = mychart["RowNames"][next];
         var query = new Object();
@@ -317,7 +456,7 @@ function presentScanDonei1(scanner, mychart, final) {
     }
 
     if (next == -1) {
-        //jQuery('#btnUploadData').css('display', '');
+
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');

@@ -219,12 +219,18 @@
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
     }
     jQuery(document).ready(function () {
+   
+        jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled
+  
         jQuery("[id*='btnCalibrate']").click(function () {
-            calibrateDevice(g_ScannerList[0]);
+            calibrateDevice(g_ScannerList);
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
             if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') {
+
+                jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button Disable after hitting Measure Chart button
+
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
@@ -235,7 +241,7 @@
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     return false;
                 }
-                scan(g_ScannerList[0], 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
+                scan(g_ScannerList, 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
                 upload();
@@ -264,11 +270,6 @@
             }
         });       
     }
-
-    Date.prototype.toMSJSON = function () {
-    var date = '/Date(' + this.getTime() + ')/'; //CHANGED LINE
-    return date;
-};
 
     function saveMeasurement() {
 
@@ -305,6 +306,7 @@
                     bindMeasurementData();
                     StopProgressBrowserWindow();
                     jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
+                    jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled, after successfully uploading measurement in DB
                 },
             error:
                 function (XMLHttpRequest, textStatus, errorThrown) {
