@@ -85,7 +85,9 @@
         </div>
     </div>
     <div id="pageWrapper">
-       
+       <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+       <asp:Label ID="lblMessage" runat="server"></asp:Label>
            
        
         <div class="login_logo">
@@ -102,7 +104,7 @@
                 onfocus="javascript:focusControl(this,'Username');" Text="Username" 
                 meta:resourcekey="txtUserNameResource1"></asp:TextBox>
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
-                onfocus="javascript:focusControl(this,'Password');" Text="Password" 
+                onfocus="javascript:focusControl(this,'Password');" Text="Password"
                 TextMode="Password" meta:resourcekey="txtPasswordResource1"></asp:TextBox>
             <asp:DropDownList ID="ddlLanguages" runat="server" 
                 meta:resourcekey="ddlLanguagesResource1"></asp:DropDownList>
@@ -114,10 +116,12 @@
             &nbsp;
             <asp:Button ID="bntLogin" runat="server" CssClass="login_bt" 
                 OnClick="bntLogin_Click" OnClientClick="return SendMessageToParent();" 
-                meta:resourcekey="bntLoginResource1" />
+                meta:resourcekey="bntLoginResource1" />            
         </div>
         <div class="clear">
         </div>
+     </ContentTemplate>           
+        </asp:UpdatePanel>     
     </div>
     <div class="curve_bottom">
         &nbsp;</div>
@@ -136,13 +140,20 @@
     </Windows>
 </telerik:RadWindowManager>
 <script language="javascript">
-
     jQuery(document).ready(function () {
         if (!areCookiesEnabled()) {
             alert("Your browser's cookie functionality is turned off. Please turn it on.");
         }
+        SetPasswordWatermark();
+    });
+
+    Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function (sender, args) {
+        SetPasswordWatermark();
+    });
+
+    function SetPasswordWatermark() {
         if (jQuery("[id*='txtPassword']").val() == '') {
             jQuery("[id*='txtPassword']").val('Password');
         }
-    });   
+    }
 </script>

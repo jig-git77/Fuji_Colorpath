@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +71,7 @@
     </Compile>
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
+    <Compile Include="Implementation\ActivityValidationRuleBusinessImpl.cs" />
     <Compile Include="Interface\IMiscBusiness.cs" />
     <Compile Include="Interface\ILicenseBusiness.cs" />
     <Compile Include="Interface\IBranchBusiness.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Interface\ISourceProfileBusiness.cs" />
     <Compile Include="Interface\ITaskBase.cs" />
     <Compile Include="Interface\IUserBusiness.cs" />
+    <Compile Include="Interface\IActivityValidationRuleBusiness.cs" />
     <Compile Include="LogActivityManager.cs" />
     <Compile Include="LoginSecurity.cs" />
     <Compile Include="LogManager.cs" />
@@ -111,6 +114,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRule\NotificationRules\LoggedInValidationRule.cs" />
+    <Compile Include="ValidationRule\StrictRules\BlockUserValidationRule.cs" />
+    <Compile Include="ValidationRule\ValidationContainer.cs" />
+    <Compile Include="ValidationRule\ValidationManager.cs" />
+    <Compile Include="ValidationRule\Wrapper\ValidationRequest.cs" />
+    <Compile Include="ValidationRule\BaseValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Common\FujifilmUSA.Sync.Common.csproj">
@@ -134,7 +143,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDestinationAndDeviceLinkProfileResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

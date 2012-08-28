@@ -74,6 +74,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActivityValidationRules.aspx" />
+    <Content Include="Activity_PrintCondition.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
@@ -117,11 +119,14 @@
     <Content Include="Images\contant_box_haed_bt_left_Rev.png" />
     <Content Include="Images\contant_box_haed_bt_right_hover_Rev.png" />
     <Content Include="Images\contant_box_haed_bt_right_Rev.png" />
+    <Content Include="Images\activity-validation-rules-icon.png" />
+    <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\dlp_optimization.png" />
     <Content Include="Images\download-icon-small.png" />
     <Content Include="Images\download-icon.png" />
     <Content Include="Images\download_list_bg.png" />
+    <Content Include="Images\download_list_small_bg.png" />
     <Content Include="Images\expanded.png" />
     <Content Include="Images\header-left-img.gif" />
     <Content Include="Images\header-middle-bg.gif" />
@@ -153,6 +158,7 @@
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="Permission.aspx" />
+    <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
@@ -190,6 +196,8 @@
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\style.css" />
+    <Content Include="UserControl\ActivityValidationRules.ascx" />
+    <Content Include="UserControl\Activity_PrintCondition.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -205,6 +213,7 @@
     <Content Include="UserControl\COViewOpenProject.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
+    <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
@@ -433,6 +442,20 @@
     <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityValidationRules.aspx.cs">
+      <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActivityValidationRules.aspx.designer.cs">
+      <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity_PrintCondition.aspx.cs">
+      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Activity_PrintCondition.aspx.designer.cs">
+      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -653,6 +676,13 @@
     <Compile Include="Permission.aspx.designer.cs">
       <DependentUpon>Permission.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupDownloadSoftware.aspx.cs">
+      <DependentUpon>PopupDownloadSoftware.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupDownloadSoftware.aspx.designer.cs">
+      <DependentUpon>PopupDownloadSoftware.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PopupOpenForgotPassword.aspx.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -715,6 +745,20 @@
     </Compile>
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ActivityValidationRules.ascx.cs">
+      <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ActivityValidationRules.ascx.designer.cs">
+      <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Activity_PrintCondition.ascx.cs">
+      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Activity_PrintCondition.ascx.designer.cs">
+      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
@@ -823,6 +867,13 @@
     </Compile>
     <Compile Include="UserControl\GlobalActivation.ascx.designer.cs">
       <DependentUpon>GlobalActivation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\DownloadSoftware.ascx.cs">
+      <DependentUpon>DownloadSoftware.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\DownloadSoftware.ascx.designer.cs">
+      <DependentUpon>DownloadSoftware.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\PopupControl\ForgotPassword.ascx.cs">
       <DependentUpon>ForgotPassword.ascx</DependentUpon>
@@ -1899,6 +1950,28 @@
     <Content Include="App_LocalResources\PopupSaveProject.aspx.de.resx" />
     <Content Include="App_LocalResources\PopupSaveProject.aspx.ja.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.resx" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -1917,7 +1990,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

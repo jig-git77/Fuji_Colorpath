@@ -2,6 +2,7 @@
     Inherits="FujifilmUSA.Sync.Web.Login" %>
 
 <%@ Register Src="~/UserControl/Login.ascx" TagName="Login" TagPrefix="ucLogin" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -13,14 +14,30 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
+    <asp:UpdateProgress ID="UpdateProgress" runat="server" DynamicLayout="true" DisplayAfter="1500">
+        <ProgressTemplate>
+            <AjaxToolkit:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" HorizontalSide="Center"
+                VerticalSide="Middle" TargetControlID="UpdateProgress" runat="server">
+            </AjaxToolkit:AlwaysVisibleControlExtender>
+            <div class="UpdateProgressBackgroundLessOptimize" style="z-index: 1000; width: 100%; height: 100%;" unselectable="on">
+            </div>
+            <div id="divUpdate" style="color: #BABABA; position: absolute; z-index: 1010;">                                
+                <div style="width: 100px; height: 25px;color: #000000; font-family: Arial,Helvetica,sans-serif; font-size: 12px;">Please wait...
+                <br />
+                <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 15px;"></img>                
+                </div>                                
+                
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <div id="bodyWrapper">
         <ucLogin:Login ID="ucLogin1" runat="server" />
     </div>
     <div id="footer">
         <b>© 2012 FUJIFILM North America Corporation - Graphic Systems Division </b>
-        <br>
-        <br>
-        <img alt="" src="Images/logo_Fujifilm.png">
+        <br />
+        <br />
+        <img alt="" src="Images/logo_Fujifilm.png" />
     </div>
     </form>
 </body>

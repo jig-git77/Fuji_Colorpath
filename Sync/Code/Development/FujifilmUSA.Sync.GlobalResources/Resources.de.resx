@@ -651,4 +651,25 @@
   <data name="OpenStatusText" xml:space="preserve">
     <value>Open_de</value>
   </data>
+  <data name="LogActivityType_ChangeProfile" xml:space="preserve">
+    <value>ChangeProfile_de</value>
+  </data>
+  <data name="LogActivityType_CreateDlp" xml:space="preserve">
+    <value>CreateDlp_de</value>
+  </data>
+  <data name="LogActivityType_CreateProject" xml:space="preserve">
+    <value>CreateProject_de</value>
+  </data>
+  <data name="LogActivityType_LoggedIn" xml:space="preserve">
+    <value>LoggedIn_de</value>
+  </data>
+  <data name="LogActivityType_LoggedOut" xml:space="preserve">
+    <value>LoggedOut_de</value>
+  </data>
+  <data name="LogActivityType_None" xml:space="preserve">
+    <value>None_de</value>
+  </data>
+  <data name="LogActivityType_OptimizeDlp" xml:space="preserve">
+    <value>OptimizeDlp_de</value>
+  </data>
 </root>

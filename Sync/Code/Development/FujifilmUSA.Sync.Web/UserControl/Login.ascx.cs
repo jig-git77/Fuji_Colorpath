@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlLanguages.DataSource = Languages;
                 ddlLanguages.DataTextField = "Key";
                 ddlLanguages.DataValueField = "Value";
-                ddlLanguages.DataBind();                
+                ddlLanguages.DataBind();
             }
         }
         protected void bntLogin_Click(object sender, EventArgs e)
@@ -64,8 +64,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentUser = CurrentUser;
 
                     WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
-                    
-                    SessionManager.Instance.CurrentLanguage = ddlLanguages.SelectedValue;                    
+
+                    SessionManager.Instance.CurrentLanguage = ddlLanguages.SelectedValue;
                     if (chkRememberMe.Checked == true)
                     {
                         var objCookie = new HttpCookie("SyncFujiLogin") { Value = txtUserName.Text, Expires = System.DateTime.Now.AddDays(20) };
@@ -83,26 +83,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.Cookies["SyncFujiPass"].Value = "";
                         Response.Cookies["SyncFujiSelectedLanguage"].Value = "";
                     }
-                    
+
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
                     {
-                        FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                        
-                        Response.Redirect("Index.aspx");
+                        if (CheckUsersValidity(UserName))
+                        {
+                            FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                            Response.Redirect("Index.aspx");
+                        }
+                        else
+                        {
+                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);                            
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                        }
                     }
                     else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
                     {
-                        FormsAuthentication.RedirectFromLoginPage(UserName, false);
-                        Response.Redirect("Settings.aspx");
+                        if (CheckUsersValidity(UserName))
+                        {
+                            FormsAuthentication.RedirectFromLoginPage(UserName, false);
+                            Response.Redirect("Settings.aspx");
+                        }
+                        else
+                        {
+                            fujiStatusbar.DisplayMessage("You are already logged-in from other browser!", false);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
+                        }
                     }
                     else
                     {
                         fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                     }
                 }
                 else
                 {
                     fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "PasswordWatermark", "SetPasswordWatermark();", true);
                 }
             }
         }
@@ -119,6 +136,44 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 languageList.Add("Japanese", "ja-JP");
                 return languageList;
             }
+        }
+        #endregion
+
+        #region Methods
+        private bool CheckUsersValidity(string username)
+        {
+            if (ApplicationConfigurationManager.Instance().IsSingleUserLoginEnabled)
+            {
+                List<User> users = CacheManager.Instance.ActiveUsers;
+                User user = null;
+                if (users != null && users.Count > 0)
+                    user = users.FirstOrDefault(c => c.LoginId == username);
+
+                if (user == null)
+                {
+                    users = new List<User>();
+                    users.Add(new User()
+                    {
+                        LoginId = username,
+                        LastPingTime = DateTime.Now
+                    });
+                }
+                else
+                {
+                    TimeSpan activeTime = DateTime.Now.TimeOfDay - user.LastPingTime.TimeOfDay;
+                    if (activeTime.TotalSeconds < Convert.ToDouble(ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds))
+                    {
+                        System.Threading.Thread.Sleep(Convert.ToInt32(ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds) * 1000);
+                        activeTime = DateTime.Now.TimeOfDay - user.LastPingTime.TimeOfDay;
+                        if (activeTime.TotalSeconds < Convert.ToDouble(ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds))
+                            return false;
+                    }
+                    user.LastPingTime = DateTime.Now;
+                }
+                CacheManager.Instance.ActiveUsers = users;
+            }
+            return true;
+
         }
         #endregion
 

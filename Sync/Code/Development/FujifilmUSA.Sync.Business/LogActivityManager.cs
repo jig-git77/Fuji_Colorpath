@@ -1,5 +1,6 @@
 ﻿using System;
 using FujifilmUSA.Sync.Business.Interface;
+using FujifilmUSA.Sync.Business.ValidationRule;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 
@@ -18,6 +19,8 @@ namespace FujifilmUSA.Sync.Business
         {
             var logActivityBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             logActivityBusiness.InsertLogActivity(logActivity);
+
+            ValidationManager.ValidateRule(logActivity);
         }
 
         private static void WriteLogActivity(LogActivitySystemType systemType, LogActivityType activityType, object[] parameters, string ipAddress)

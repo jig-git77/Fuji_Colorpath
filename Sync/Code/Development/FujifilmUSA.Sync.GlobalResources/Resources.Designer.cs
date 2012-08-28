@@ -1609,6 +1609,69 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ChangeProfile.
+        /// </summary>
+        internal static string LogActivityType_ChangeProfile {
+            get {
+                return ResourceManager.GetString("LogActivityType_ChangeProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CreateDlp.
+        /// </summary>
+        internal static string LogActivityType_CreateDlp {
+            get {
+                return ResourceManager.GetString("LogActivityType_CreateDlp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CreateProject.
+        /// </summary>
+        internal static string LogActivityType_CreateProject {
+            get {
+                return ResourceManager.GetString("LogActivityType_CreateProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LoggedIn.
+        /// </summary>
+        internal static string LogActivityType_LoggedIn {
+            get {
+                return ResourceManager.GetString("LogActivityType_LoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LoggedOut.
+        /// </summary>
+        internal static string LogActivityType_LoggedOut {
+            get {
+                return ResourceManager.GetString("LogActivityType_LoggedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string LogActivityType_None {
+            get {
+                return ResourceManager.GetString("LogActivityType_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OptimizeDlp.
+        /// </summary>
+        internal static string LogActivityType_OptimizeDlp {
+            get {
+                return ResourceManager.GetString("LogActivityType_OptimizeDlp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username/Password is invalid..
         /// </summary>
         internal static string Login_InvalidLogin {

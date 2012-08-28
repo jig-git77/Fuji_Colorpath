@@ -75,5 +75,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("DownloadSoftwares.aspx");
         }
+        protected void lbtnActivityValidationRules_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ActivityValidationRules.aspx");
+        }
     }
 }

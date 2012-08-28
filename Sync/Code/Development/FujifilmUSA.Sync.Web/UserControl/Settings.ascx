@@ -190,17 +190,28 @@
                 <td style="height:50px;">
                 </td>
             </tr>
-            <tr>
-                <td style=" float:left;" >
-                    
-               
-                <div>
+            <tr align="center">
+                <td align="center" >
+                <div id="dvActivityValidationRules" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
+                    <asp:LinkButton ID="lnkBtnActivityValidationRules" runat="server" ToolTip="Activity Validation Rules"
+                        PostBackUrl="~/ActivityValidationRules.aspx">
+                        <div>
+                            <asp:Image ID="Image6" runat="server" AlternateText="Activity Validation Rules"
+                                ImageUrl="~/Images/activity-validation-rules-icon.png" ToolTip="Activity Validation Rules" />
+</div>
+                        <asp:Localize Text="Activity Validation Rules" runat="server" ID="locActivityValidationRules"></asp:Localize>
+</asp:LinkButton>
+                </div>
+                <div id="div2" runat ="server" align="center" valign="bottom" style="float:left;">
+                    <img alt="" src="Images/admin-icon-divider.png" />
+                </div>
+                 <div>
                      <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Activity Management"
                         PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" 
                          Visible="False" meta:resourcekey="LinkButton1Resource1"/>             
                 </div>
-                </td>               
-            </tr>
+                </td>
+                </tr>            
         </table>
 
 

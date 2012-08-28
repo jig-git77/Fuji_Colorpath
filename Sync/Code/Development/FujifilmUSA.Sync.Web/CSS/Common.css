@@ -2140,3 +2140,25 @@ label
 	margin: 1em 0em 0em 1em;
 }
 
+
+/******************Download List Style*******************/
+.Download_list_popup
+{
+    /* margin: 36px 26px 0 23px; commented by Jayesh */
+    overflow: hidden;
+}
+.Download_list_popup li
+{
+    background: url(../Images/download_list_small_bg.png) no-repeat top left;
+    width: 613px;
+    height: 35px;
+    margin-bottom: 11px;
+}
+.Download_list_popup li .left
+{
+    float: left;
+    margin: 10px 0 0 23px;
+    color: #5e5e5e;
+    font-size: 18px;
+}
+

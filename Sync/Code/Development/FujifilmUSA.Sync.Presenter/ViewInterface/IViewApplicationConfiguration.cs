@@ -9,5 +9,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     public interface IViewApplicationConfiguration : IViewBase
     {
         bool IsSingleUserLoginEnabled { get; set; }
+        int KeepUserAliveInSeconds { get; set; }
     }
 }

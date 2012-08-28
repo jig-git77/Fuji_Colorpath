@@ -17,7 +17,8 @@ namespace FujifilmUSA.Sync.Presenter
 
         public void FillConfiguration()
         {
-            //_viewApplicationConfiguration.IsSingleUserLoginEnabled = Business.ApplicationConfiguration.Instance.;
+            _viewApplicationConfiguration.IsSingleUserLoginEnabled = Business.ApplicationConfiguration.Instance.EnableSingleUserLogin;
+            _viewApplicationConfiguration.KeepUserAliveInSeconds = Business.ApplicationConfiguration.Instance.KeepUserAliveInSeconds;
         }
     }
 }

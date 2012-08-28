@@ -15,16 +15,14 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
-        
-        
         .UpdateProgressBackground
         {
             z-index: 3003;
             position: fixed;
             filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=100);
             background-color: #555555 !important;
-            width: 100% ;
-            height: 100% ;
+            width: 100%;
+            height: 100%;
             top: 0px;
             left: 0px;
             opacity: .4;
@@ -46,8 +44,19 @@
             //for IE/OPERA etc
             document.onmousewheel = equal_height;
 
-        });
+            MakeUserAliveRequest();
+        });        
 
+        function KeepUserAlive(userId) {                 
+            jQuery.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "Services/PluginDataService.svc/KeepUserAlive/" + userId,
+                dataType: "JSON",             
+                success: function (response) { },
+                error: function (XMLHttpRequest, textStatus, errorThrown) { }
+            });
+        }
 
         function equal_height() {
             $("div[id*='LeftMenu2']").height($('#contant').height() - 18);
@@ -69,8 +78,7 @@
                 z-index: 1000; width: 100%; height: 100%;" unselectable="on">
             </div>
             <div id="divUpdate" style="color: #000; position: absolute; z-index: 1010">
-               <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle;
-                    margin: 2px;" ></img>
+                <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img>
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>

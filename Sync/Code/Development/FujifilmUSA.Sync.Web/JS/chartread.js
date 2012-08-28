@@ -118,7 +118,7 @@ function addEvent(obj, name, func) {
     }
 }
 
-function load() {
+function load(pluginVersion) {    
     jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
@@ -131,9 +131,21 @@ function load() {
         plugin().setDebug("/tmp/isis.log");
     }
     var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
-    jQuery("[id*='lblPluginMessage']").html(newHTML);
+    jQuery("[id*='lblPluginMessage']").html(newHTML);    
     //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
+    if (plugin().plugin_version != pluginVersion) {
+        if (plugin().plugin_version == undefined) {
+            jQuery("[id*='lblMessage']").css('color', 'Black');
+            jQuery("[id*='lblMessage']").html("Status : There is no plugin installed.");
+        }
+        else {
+            jQuery("[id*='lblMessage']").css('color', 'Red');
+            jQuery("[id*='lblMessage']").html("Status : Your plugin is outdated. Please install newer version.");            
+        }
+        return false;
+    }
+    return true;
     //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 

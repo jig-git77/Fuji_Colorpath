@@ -61,6 +61,18 @@ namespace FujifilmUSA.Sync.Web.Services
             return presenter.DeleteMeasurement();
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "KeepUserAlive/{username}")]
+        [OperationContract]
+        public bool KeepUserAlive(string username)
+        {
+
+            List<User> users = FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers;
+            User user = users.FirstOrDefault(c => c.LoginId == username);
+            if (user != null)
+                user.LastPingTime = DateTime.Now;
+            FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users;            
+            return true;
+        }
         //[WebInvoke(Method = "POST", UriTemplate = "LogActivityTime/{userId}")]
         //[OperationContract]
         //public void LogActivityTime(string userId)

@@ -49,6 +49,7 @@
     <Compile Include="PresenterActivityPrintCondition.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PresenterActivityValidationRule.cs" />
     <Compile Include="PresenterAddReferenceChart.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewInterface\IViewBrowserTest.cs" />
     <Compile Include="ViewInterface\IViewActivityPrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewActivityValidationRule.cs" />
     <Compile Include="ViewInterface\IViewAddLicenseTypeManagement.cs" />
     <Compile Include="ViewInterface\IViewAddLicenseManagement.cs" />
     <Compile Include="ViewInterface\IViewAddReferenceChart.cs" />

@@ -100,6 +100,13 @@
             <span> <asp:Localize Text="Source Profile" runat="server" 
           ID="locSourceProfile" meta:resourcekey="locSourceProfileResource1"></asp:Localize> 
  </span>
+      </asp:LinkButton>   
+      <asp:LinkButton ID="lbtnActivityValidationRules" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnActivityValidationRules_Click">
+            <img src="Images/activity-validation-rules.png" style="position:relative;z-index:1; " alt="Activity Validation Rules" />
+            <span> <asp:Localize Text="Activity Validation Rules" runat="server" 
+          ID="locActivityValidationRules"></asp:Localize> 
+ </span>
       </asp:LinkButton>      
   </div> 
 </div>

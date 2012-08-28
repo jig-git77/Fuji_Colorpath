@@ -25,6 +25,8 @@ namespace FujifilmUSA.Sync.Business
         private int _measurementsLimit;
         private string _webSiteLink;
         private bool _enableActivityLog;
+        private bool _enableSingleUserLogin;
+        private int _keepUserAliveInSeconds;
         private string _fujifilmPluginVersion;
         #endregion
 
@@ -86,6 +88,12 @@ namespace FujifilmUSA.Sync.Business
                                                                   break;
                                                               case "ENABLEACTIVITYLOG":
                                                                   _enableActivityLog = Convert.ToBoolean(x.Value);
+                                                                  break;
+                                                              case "ENABLESINGLEUSERLOGIN":
+                                                                  _enableSingleUserLogin = Convert.ToBoolean(x.Value);
+                                                                  break;
+                                                              case "KEEPUSERALIVEINSECONDS":
+                                                                  _keepUserAliveInSeconds = Convert.ToInt32(x.Value);
                                                                   break;
                                                               case "FUJIFILMPLUGINVERSION":
                                                                   _fujifilmPluginVersion = x.Value;
@@ -187,6 +195,20 @@ namespace FujifilmUSA.Sync.Business
             get
             {
                 return _enableActivityLog;
+            }
+        }
+        public bool EnableSingleUserLogin
+        {
+            get
+            {
+                return _enableSingleUserLogin;
+            }
+        }
+        public int KeepUserAliveInSeconds
+        {
+            get
+            {
+                return _keepUserAliveInSeconds;
             }
         }
         public string FujiFilmPluginVersion

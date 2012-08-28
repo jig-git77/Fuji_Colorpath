@@ -335,12 +335,19 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum LogActivityType
     {
+        [Description("LogActivityType_None")]
         None = 0,
+        [Description("LogActivityType_LoggedIn")]
         LoggedIn = 1,
+        [Description("LogActivityType_LoggedOut")]
         LoggedOut = 2,
+        [Description("LogActivityType_CreateProject")]
         CreateProject = 3,
+        [Description("LogActivityType_OptimizeDlp")]
         OptimizeDlp = 4,
+        [Description("LogActivityType_CreateDlp")]
         CreateDlp = 5,
+        [Description("LogActivityType_ChangeProfile")]
         ChangeProfile = 6
     }
 
@@ -369,5 +376,12 @@ namespace FujifilmUSA.Sync.Entity
         ReportSingleMeasurement = 13,
         CPSPrintStandardsReport = 14,
         CPSPrintStandardsReportISO = 15
+    }
+
+    public enum ValidationRuleType
+    { 
+        None = 0,
+        NoitificationRule = 1,
+        StrictRule = 2
     }
 }

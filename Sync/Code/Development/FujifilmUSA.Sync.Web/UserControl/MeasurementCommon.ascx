@@ -156,6 +156,14 @@
                 padding-top: 4px" /></div>
     </div>
 </div>
+<telerik:RadWindowManager ID="RadWindowManager1" runat="server" Modal="True">
+    <Windows>
+        <telerik:RadWindow ID="DownloadSoftwareWindow" runat="server" IconUrl="" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Download Software" Width="730" Height="270"
+            Behaviors="Close">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>
 <asp:HiddenField ID="hdOptimizeRunId" runat="server" />
 <asp:HiddenField ID="hdProjectId" runat="server" />
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
@@ -207,9 +215,18 @@
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
-        load();   //first you have to load the plugin
-        ListDevices();
-        GetRefChartData();      
+        if(load('<%= ApplicationConfiguration.Instance.FujiFilmPluginVersion %>'))   //first you have to load the plugin
+        {
+            //Proceed further
+            ListDevices();
+            GetRefChartData();      
+        }
+        else
+        {
+            var oWindow;
+            oWindow = window.radopen("PopupDownloadSoftware.aspx", "DownloadSoftwareWindow");
+            oWindow.show();
+        }        
     }
     
     function GetRefChartData() {
@@ -256,7 +273,7 @@
         bindMeasurementData();
         ControlVisibility();
     });
-
+    
     function MeasurementDialog(message, type) {
         jQuery("[id*='confirm']").modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",

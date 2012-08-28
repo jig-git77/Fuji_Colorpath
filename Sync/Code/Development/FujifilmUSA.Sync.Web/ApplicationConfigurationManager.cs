@@ -27,6 +27,7 @@ namespace FujifilmUSA.Sync.Web
 
         public bool IsSingleUserLoginEnabled { get; set; }
 
+        public int KeepUserAliveInSeconds { get; set; }
         #endregion
 
         #region IViewBase Members
@@ -39,5 +40,9 @@ namespace FujifilmUSA.Sync.Web
         }
 
         #endregion
+
+
+        
+      
     }
 }
