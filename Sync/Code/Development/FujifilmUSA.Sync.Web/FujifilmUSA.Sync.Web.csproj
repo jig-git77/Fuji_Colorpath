@@ -75,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ActivityValidationRules.aspx" />
-    <Content Include="Activity_PrintCondition.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
@@ -197,7 +196,6 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
-    <Content Include="UserControl\Activity_PrintCondition.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -448,13 +446,6 @@
     </Compile>
     <Compile Include="ActivityValidationRules.aspx.designer.cs">
       <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Activity_PrintCondition.aspx.cs">
-      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Activity_PrintCondition.aspx.designer.cs">
-      <DependentUpon>Activity_PrintCondition.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
@@ -752,13 +743,6 @@
     </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.designer.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\Activity_PrintCondition.ascx.cs">
-      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControl\Activity_PrintCondition.ascx.designer.cs">
-      <DependentUpon>Activity_PrintCondition.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
@@ -1990,7 +1974,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

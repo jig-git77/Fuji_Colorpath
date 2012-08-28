@@ -288,6 +288,7 @@
         });       
     }
 
+
     function saveMeasurement() {
 
          //Load progress bar

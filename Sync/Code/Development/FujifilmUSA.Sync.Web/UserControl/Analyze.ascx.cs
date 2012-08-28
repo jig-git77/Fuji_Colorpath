@@ -185,7 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdMeasurement.DataSource = MeasurementsDelta;
                 grdMeasurement.DataBind();
 
-                //-----------Assign Report IFrame to load report----------------------//
+                //-----------Assign Report iFrame to load report in "Report" tab----------------------//
                 string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
                 FRMGeneratePDFReport.Attributes.Add("src", path);
                 FRMGeneratePDFReport.Style.Add("display", "");
@@ -198,6 +198,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public void ConfigureExport()
         {
+            //------------Patch Details GridView Export Settings----------------//
             GridPatchDetails.ExportSettings.ExportOnlyData = true;
             GridPatchDetails.ExportSettings.IgnorePaging = true;
             GridPatchDetails.ExportSettings.OpenInNewWindow = true;
@@ -205,7 +206,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             GridPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
 
-        #region FillAllTabsChart
+        #region FillAllTabs
 
         public void FillAllTabsData()
         {
@@ -229,6 +230,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
+
+            GridPatchDetails.Rebind(); //----Load Patch Details GridView in "Patch Details" tab
         }
 
         #region Fill InkPaper Tab
