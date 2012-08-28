@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Web
             }
             else
             {
-                script = "function MakeUserAliveRequest() { //do nothing };";
+                script = "function MakeUserAliveRequest() {  };";
             }
             Page.ClientScript.RegisterStartupScript(this.GetType(), "keepalivescript", script, true);
             
