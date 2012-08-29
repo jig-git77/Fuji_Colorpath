@@ -144,7 +144,7 @@
     </div>
 </div>
 <!-- modal content -->
-<div id='confirm'>
+<div id='ConfirmMessageDialog' style='display: none;'>
     <div class='header'>
         <span></span>
     </div>
@@ -152,7 +152,7 @@
     </div>
     <div class='buttons'>
         <div class='no simplemodal-close'>
-            <input type="button" value="OK" id="btnCloseModelPopup" style="border: none; background-color: transparent;
+            <input type="button" value="OK" id="btnCloseModelPopupButton" style="border: none; background-color: transparent;
                 padding-top: 4px" /></div>
     </div>
 </div>
@@ -253,7 +253,7 @@
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
                     return false;
                 }
-                if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
+                if(jQuery("input[id*='hdMeasurementLimit']").val() >= parseInt('<%= ApplicationConfiguration.Instance.MeasurementsLimit %>',10))
                 {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
                     return false;
@@ -273,9 +273,9 @@
         bindMeasurementData();
         ControlVisibility();
     });
-    
-    function MeasurementDialog(message, type) {
-        jQuery("[id*='confirm']").modal({
+
+    function MeasurementDialog(message, type) {        
+        jQuery("[id*='ConfirmMessageDialog']").modal({
             closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
             position: ["20%", ],
             overlayId: 'confirm-overlay',
