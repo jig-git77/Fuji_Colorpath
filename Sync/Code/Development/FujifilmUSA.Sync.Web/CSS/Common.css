@@ -1199,20 +1199,20 @@ label
     display: block;
 }
 
-#confirm
+#MeasurementConfirmDialog
 {
     display: none;
 }
 
 /* Overlay */
-#confirm-overlay
+#MeasurementConfirmDialog-overlay
 {
     background-color: #eee;
     cursor: wait;
 }
 
 /* Container */
-#confirm-container
+#MeasurementConfirmDialog-container
 {
     height: 140px;
     width: 420px;
@@ -1221,7 +1221,7 @@ label
     background: #fff;
     border: 2px solid #3A9977;
 }
-#confirm-container .header
+#MeasurementConfirmDialog-container .header
 {
     height: 30px;
     line-height: 30px;
@@ -1230,25 +1230,25 @@ label
     color: #fff;
     font-weight: bold;
 }
-#confirm-container .header span
+#MeasurementConfirmDialog-container .header span
 {
     padding-left: 8px;
 }
-#confirm-container .message
+#MeasurementConfirmDialog-container .message
 {
     color: #333;
     font-size: 14px;
     margin: 0;
     padding: 12px 4px 12px 8px;
 }
-#confirm-container .buttons
+#MeasurementConfirmDialog-container .buttons
 {
     line-height: 26px;
     width: 160px;
     float: right;
     padding: 10px 8px 0;
 }
-#confirm-container .buttons div
+#MeasurementConfirmDialog-container .buttons div
 {
     float: right;
     margin-left: 4px;
@@ -1261,7 +1261,7 @@ label
     border: 1px solid #bbb;
     cursor: pointer;
 }
-#confirm-container a.modal-close, #confirm-container a.modal-close:link, #confirm-container a.modal-close:active, #confirm-container a.modal-close:visited
+#MeasurementConfirmDialog-container a.modal-close, #MeasurementConfirmDialog-container a.modal-close:link, #MeasurementConfirmDialog-container a.modal-close:active, #MeasurementConfirmDialog-container a.modal-close:visited
 {
     text-decoration: none;
     font-weight: bold;
@@ -1270,7 +1270,7 @@ label
     top: 2px;
     color: #fff;
 }
-#confirm-container a.modal-close:hover
+#MeasurementConfirmDialog-container a.modal-close:hover
 {
     color: #ccc;
 }
