@@ -202,8 +202,13 @@ function presentScannerList(ScannerList) {
 
 // This function requests the device list, but the result is 
 // only a success or fail.  The listed callback function is
-// called with the entire list once it is gathered.  
+// called with the entire list once it is gathered. 
+
 function ListDevices() {
+    setTimeout("ListDevicesNow()", 3000);
+}
+
+function ListDevicesNow() {
     result = plugin().requestScannerList(presentScannerList);
     if (result != 'OK') {
         MeasurementDialog("Failed to request scanner list: " + result, "Error");

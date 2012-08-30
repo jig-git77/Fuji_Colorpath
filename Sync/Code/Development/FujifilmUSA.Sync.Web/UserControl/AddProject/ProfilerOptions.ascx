@@ -21,6 +21,10 @@
     {
         font-size: 12px;
     }
+    
+    textarea {
+        resize: none;
+    }
 </style>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {

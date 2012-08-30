@@ -291,51 +291,59 @@
 
     function saveMeasurement() {
 
-         //Load progress bar
-        LoadProgressBrowserWindow();
+        var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
+        if (jQuery.trim(MeasurementName).length < 4) {
+            MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
+            return false;
+        }
+        else
+        {
+             //Load progress bar
+            LoadProgressBrowserWindow();
 
-        var dt = new Date();
-        var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
-        var MeasurementDateTime = dt1.toMSJSON();     
-        var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
-        var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
-        var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
-        var obj;
-        obj = {
-            MeasurementName: MsmtName,
-            MeasurementDate: MeasurementDateTime,
-            OptimizeRunId: OptimizeRunId,
-            ReferenceChartTypeId: ReferenceChartTypeId,
-            MeasurementPatches: MeasuredPatches
-        };
-        //Make ajax request...
-        jQuery.ajax({
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            url: "Services/PluginDataService.svc/SaveMeasurement",
-            processData: false,
-            dataType: "json",
-            data: JSON.stringify(obj),
-            dataFilter: function (data, type) {
-                return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
-            },
-            success:
-                function (response) {
-                    bindMeasurementData();
-                    StopProgressBrowserWindow();
-                    jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
-                    jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled, after successfully uploading measurement in DB
+            var dt = new Date();
+            var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
+            var MeasurementDateTime = dt1.toMSJSON();     
+            var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
+            var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
+            var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
+            var obj;
+            obj = {
+                MeasurementName: MsmtName,
+                MeasurementDate: MeasurementDateTime,
+                OptimizeRunId: OptimizeRunId,
+                ReferenceChartTypeId: ReferenceChartTypeId,
+                MeasurementPatches: MeasuredPatches
+            };
+            //Make ajax request...
+            jQuery.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "Services/PluginDataService.svc/SaveMeasurement",
+                processData: false,
+                dataType: "json",
+                data: JSON.stringify(obj),
+                dataFilter: function (data, type) {
+                    return data.replace(/"\\\/(Date\([0-9-]+\))\\\/"/gi, 'new $1');
                 },
-            error:
-                function (XMLHttpRequest, textStatus, errorThrown) {
-                    var jsonFault = JSON.parse(XMLHttpRequest.responseText);
-                    StopProgressBrowserWindow();
-                    MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
-                }
-        });
-        OnCancel();
-        refreshCanvas();
-        jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+                success:
+                    function (response) {
+                        bindMeasurementData();
+                        StopProgressBrowserWindow();
+                        jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
+                        jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled, after successfully uploading measurement in DB
+                    },
+                error:
+                    function (XMLHttpRequest, textStatus, errorThrown) {
+                        var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                        StopProgressBrowserWindow();
+                        MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                    }
+            });
+            OnCancel();
+            refreshCanvas();
+            jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+        }
     }
 
     function bindMeasurementData() {

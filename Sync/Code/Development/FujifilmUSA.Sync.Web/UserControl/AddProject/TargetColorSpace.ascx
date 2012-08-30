@@ -1,6 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TargetColorSpace.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.TargetColorSpace" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+<style type="text/css">
+textarea {
+    resize: none;
+}
+</style>
 <div class="head">
     <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
             Text="New Print Condition - Target Colorspace" ID="locTargetColorspace" 
