@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        public int JsRandomNumber { get { return 4; } }
+        public int JsRandomNumber { get { return new Random().Next(1, 100); } }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)

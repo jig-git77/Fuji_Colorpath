@@ -14,6 +14,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
             }
+            if (IsXmfUser)
+            {
+                txtMedia.Enabled = false;
+                txtColorant.Enabled = false;
+                txtRipSetting.Enabled = false;
+            }
         }
         #endregion
 
@@ -56,6 +62,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             };
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+        }
+        #endregion
+
+        #region Properties
+        private bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
         }
         #endregion
     }
