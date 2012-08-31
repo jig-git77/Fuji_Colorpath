@@ -239,7 +239,7 @@
                                                                         <telerik:RadSlider runat="server" ID="rdsMode" MinimumValue="-100" MaximumValue="10"
                                                                             Width="160px" DbValue="-100" Height="22px" Length="160" 
                                                                             meta:resourcekey="rdsModeResource1" SelectionEnd="-100" SelectionStart="-100" 
-                                                                            Value="-100">
+                                                                            Value="-100" Enabled="false">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
@@ -255,7 +255,7 @@
                                                                     <td style="width: 160px;">
                                                                         <telerik:RadSlider runat="server" ID="rdsBlackStart"
                                                                             Width="160px" DbValue="0" Height="22px" Length="160" 
-                                                                            meta:resourcekey="rdsBlackStartResource1">
+                                                                            meta:resourcekey="rdsBlackStartResource1" Enabled="false">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
@@ -271,7 +271,7 @@
                                                                     <td style="width: 160px;">
                                                                         <telerik:RadSlider runat="server" ID="rdsBlackWidth"
                                                                             Width="160px" DbValue="0" Height="22px" Length="160" 
-                                                                            meta:resourcekey="rdsBlackWidthResource1">
+                                                                            meta:resourcekey="rdsBlackWidthResource1" Enabled="false">
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
@@ -441,7 +441,7 @@
                                                                                 </td>
                                                                                 <td>
                                                                                     <telerik:RadSlider runat="server" ID="rdsRange" DbValue="0" Height="22px" 
-                                                                                        Length="200" meta:resourcekey="rdsRangeResource1" Width="200px">
+                                                                                        Length="200" meta:resourcekey="rdsRangeResource1" Width="200px" Enabled="false">
                                                                                     </telerik:RadSlider>
                                                                                 </td>
                                                                                 <td>
