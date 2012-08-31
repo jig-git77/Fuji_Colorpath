@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="SilverlightFaultBehavior.cs" />
     <Compile Include="Sync4D\CheckUserCredentialsBusiness.cs" />
     <Compile Include="Sync4D\StoreTempProjectInformationBusiness.cs" />
     <Compile Include="Sync4D\Sync4DBusiness.cs" />
