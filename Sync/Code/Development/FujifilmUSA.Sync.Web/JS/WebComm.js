@@ -2,12 +2,12 @@
     var date = '/Date(' + this.getTime() + ')/'; //the number of milliseconds since midnight of January 1, 1970 and the specified date.
     return date;
 };
-
+//here we are adding dummy querystring in URL as IE do not invoke service each and every time rather it takes from cache
 function GetReferenceChart(ProjectID, ReferenceChartTypeId, SerialNo) {
     jQuery.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",
-        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID,
+        url: "Services/PluginDataService.svc/GetReferenceChart/" + ProjectID + "?TempId=" + Math.floor(Math.random() * 1000),
         processData: false,
         dataType: "json",
         success:
