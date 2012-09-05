@@ -8,20 +8,30 @@
     prm.add_initializeRequest(InitializeRequest);
 
     function InitializeRequest(sender, args) {
-        var updateProgress = $get('<%= UpdateProgressClientID %>');
-        var postBackElement = args.get_postBackElement();
-        if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>') {
-            if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next") {
+      //  alert(jQuery("input[id$=hdHasMeasurement]").val());
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
+           
+            if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
+
+                var updateProgress = $get('<%= UpdateProgressClientID %>');
+                var postBackElement = args.get_postBackElement();
+                if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>') {
+                    if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next") {
+                        updateProgress.control._associatedUpdatePanelId = null;
+                        $get('<%= updateProgress.ClientID %>').control._associatedUpdatePanelId = 'dummyId';
+                    }
+                    else {
+                        updateProgress.control._associatedUpdatePanelId = 'dummyId';
+                    }
+                }
+                else {
+                    updateProgress.control._associatedUpdatePanelId = null;
+                }
+            }
+            else
                 updateProgress.control._associatedUpdatePanelId = null;
-                $get('<%= updateProgress.ClientID %>').control._associatedUpdatePanelId = 'dummyId';
-            }
-            else {
-                updateProgress.control._associatedUpdatePanelId = 'dummyId';
-            }
         }
-        else {
-            updateProgress.control._associatedUpdatePanelId = null;
-        }
+       
     }
 
 </script>
@@ -55,18 +65,27 @@
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
-        if ("<%= IsNewDlp %>" == "True") {
-            return true;
-        }
-        else {
-            if ("<%= IsDlpCreated %>" == "True") {
-                return true;
+      // alert(jQuery("input[id$=hdHasMeasurement]").val());
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
+
+            if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
+
+                if ("<%= IsNewDlp %>" == "True") {
+                    return true;
+                }
+                else {
+                    if ("<%= IsDlpCreated %>" == "True") {
+                        return true;
+                    }
+                    else {
+                        var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
+                        oWnd.show();
+                        return false;
+                    }
+                }
             }
-            else {
-                var oWnd = $find("<%= ConfirmSaveWindow.ClientID %>");
-                oWnd.show();
+            else
                 return false;
-            }
         }
     }
 </script>
@@ -1136,6 +1155,7 @@
 <div class="contant_bottom">
     &nbsp;</div>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
+<asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:Label ID="InjectScript" runat="server" Width="410px" 
     meta:resourcekey="InjectScriptResource1"></asp:Label>
 <telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" 

@@ -25,11 +25,11 @@
                 OnClientClick="return AllowToAnalyze();">
                 <span>
                     <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/analyze.png" 
-                meta:resourcekey="imgAddResource1" />
+                    meta:resourcekey="imgAddResource1" />
                     
-<asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
-                meta:resourcekey="locAnalyzeResource1"></asp:Localize>
-</span>
+                    <asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
+                                meta:resourcekey="locAnalyzeResource1"></asp:Localize>
+                </span>
             </asp:LinkButton>
         </div>
     </div>

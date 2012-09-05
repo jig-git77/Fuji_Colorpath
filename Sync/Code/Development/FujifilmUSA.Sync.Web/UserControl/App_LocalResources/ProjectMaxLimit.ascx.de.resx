@@ -127,7 +127,7 @@
     <value>Please click here to go back to_de</value>
   </data>
   <data name="locMessageResource1.Text" xml:space="preserve">
-    <value>Opps!!! You reach your maximum limit of projects, so you can't create more projects._de</value>
+    <value>ERROR: You have reached your maximum license limit of projects._de</value>
   </data>
   <data name="locProjectLimitResource1.Text" xml:space="preserve">
     <value>Project Limit_de</value>

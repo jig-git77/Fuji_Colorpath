@@ -45,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void btnAnalyze_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements = true;
+            SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = true;
             Response.Redirect(
                 SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser)
                     ? string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid())

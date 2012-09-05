@@ -19,7 +19,7 @@
             <div style="height:200px;">
                 <div style="font-size: 14px;"><br /><br /><br />
                     <span style="font-size: 18px; color: red;">
-                    <asp:Localize Text="Opps!!! You reach your maximum limit of projects, so you can't create more projects." 
+                    <asp:Localize Text="Error: You reach your maximum limit of projects, so you can't create more projects." 
                         runat="server" ID="locMessage" meta:resourcekey="locMessageResource1"></asp:Localize></span>
                     <br /><br />
                     <asp:Localize Text="Please click here to go back to" runat="server" 
