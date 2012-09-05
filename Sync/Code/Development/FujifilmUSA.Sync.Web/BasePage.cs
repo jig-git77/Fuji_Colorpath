@@ -136,7 +136,7 @@ namespace FujifilmUSA.Sync.Web
             }
             else if (GetType().BaseType == typeof(ApplicationConfiguration))
             {
-                if (SessionManager.Instance.CurrentUser.Role.RoleId != (int)Entity.ERole.LicenseAdmin)
+                if (SessionManager.Instance.CurrentUser.Role.RoleId != (int)Entity.ERole.SystemAdmin)
                 {
                     NavigationToNoPermissionPage();
                 }
