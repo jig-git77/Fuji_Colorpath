@@ -865,6 +865,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     _presenterAnalyze.CreateDestinationAndDlp();
                     if (!IsErrorOccured)
                     {
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
@@ -876,6 +878,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             Response.Redirect("Export.aspx");
                         }
                     }
+                    //else
+                    //{
+                    //    WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                    //                                  Request.UserHostAddress);
+                    //}
                 }
             }
         }
