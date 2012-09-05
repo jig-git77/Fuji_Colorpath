@@ -18,10 +18,10 @@ namespace FujifilmUSA.Sync.Web
         protected void Page_PreRender(object sender, EventArgs e)
         {
             string script = string.Empty;
-            if (ApplicationConfigurationManager.Instance().IsSingleUserLoginEnabled)
+            if (ApplicationConfigurationManager.Instance().IsSingleUserLoginEnabled && FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser != null)
             {
-                int timer = ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds * 1000;                
-                script = "function MakeUserAliveRequest() { setInterval(function() { KeepUserAlive('" + FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId + "') }, " + timer.ToString() + "); };";
+                int timer = ApplicationConfigurationManager.Instance().KeepUserAliveInSeconds * 1000;
+                script = "function MakeUserAliveRequest() { KeepUserAlive('" + FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId + "'); setInterval(function() { KeepUserAlive('" + FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId + "') }, " + timer.ToString() + "); };";
             }
             else
             {
@@ -29,11 +29,11 @@ namespace FujifilmUSA.Sync.Web
             }
             Page.ClientScript.RegisterStartupScript(this.GetType(), "keepalivescript", script, true);
 
-            List<User> users = FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers;
-            User user = users.FirstOrDefault(c => c.LoginId == FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId);
-            if (user != null)
-                user.LastPingTime = DateTime.Now;
-            FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users;
+            //List<User> users = FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers;
+            //User user = users.FirstOrDefault(c => c.LoginId == FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId);
+            //if (user != null)
+            //    user.LastPingTime = DateTime.Now;
+            //FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users; 
         }
     }
 }

@@ -110,6 +110,14 @@ namespace FujifilmUSA.Sync.Business
             get { return _applicationConfiguration ?? (_applicationConfiguration = new ApplicationConfiguration()); }
         }
 
+        public static void ClearInstance()
+        {
+            lock (_applicationConfiguration)
+            {
+                _applicationConfiguration = null;
+            }
+
+        }
         #endregion
 
         #region Configuration Properties

@@ -134,6 +134,13 @@ namespace FujifilmUSA.Sync.Web
                     NavigationToNoPermissionPage();
                 }
             }
+            else if (GetType().BaseType == typeof(ApplicationConfiguration))
+            {
+                if (SessionManager.Instance.CurrentUser.Role.RoleId != (int)Entity.ERole.LicenseAdmin)
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
             #endregion
             #region Regular Pages
             else if (GetType().BaseType == typeof(OperationSelection))
@@ -237,7 +244,7 @@ namespace FujifilmUSA.Sync.Web
                 }
                 if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentOperation == ELicenseType.None ||
-                    SessionManager.Instance.CurrentProject == null||
+                    SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
                     NavigationToSessionEndPage();

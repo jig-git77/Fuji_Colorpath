@@ -56,6 +56,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="ErrorDelegate.cs" />
     <Compile Include="CustomExceptions\DuplicateException.cs" />
+    <Compile Include="Implementation\ApplicationConfigurationBusinessImpl.cs" />
     <Compile Include="Implementation\CompanyBusinessImpl.cs" />
     <Compile Include="Implementation\BranchBusinessImpl.cs" />
     <Compile Include="Implementation\MiscBusinessImpl.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Implementation\SourceProfileBusinessImpl.cs" />
     <Compile Include="Implementation\UserBusinessImpl.cs" />
     <Compile Include="Implementation\ActivityValidationRuleBusinessImpl.cs" />
+    <Compile Include="Interface\IApplicationConfigurationBusiness.cs" />
     <Compile Include="Interface\IMiscBusiness.cs" />
     <Compile Include="Interface\ILicenseBusiness.cs" />
     <Compile Include="Interface\IBranchBusiness.cs" />

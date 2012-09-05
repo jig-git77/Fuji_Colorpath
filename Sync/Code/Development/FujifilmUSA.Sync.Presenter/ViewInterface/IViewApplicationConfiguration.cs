@@ -10,5 +10,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         bool IsSingleUserLoginEnabled { get; set; }
         int KeepUserAliveInSeconds { get; set; }
+        List<Entity.ApplicationConfiguration> ApplicationConfigurationList { get; set; }
     }
 }

@@ -1213,6 +1213,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred while displaying configuration values..
+        /// </summary>
+        internal static string Error_GettingApplicationConfiguration {
+            get {
+                return ResourceManager.GetString("Error_GettingApplicationConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while retrieving users list. Please contact your administrator..
         /// </summary>
         internal static string Error_GetUser {
@@ -1443,6 +1452,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_StoreTempararyProjectInformation {
             get {
                 return ResourceManager.GetString("Error_StoreTempararyProjectInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred while updating configuration values..
+        /// </summary>
+        internal static string Error_UpdateApplicationConfiguration {
+            get {
+                return ResourceManager.GetString("Error_UpdateApplicationConfiguration", resourceCulture);
             }
         }
         

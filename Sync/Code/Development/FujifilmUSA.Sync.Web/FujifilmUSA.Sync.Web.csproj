@@ -78,6 +78,7 @@
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
+    <Content Include="ApplicationConfiguration.aspx" />
     <Content Include="ApplicationError.aspx" />
     <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
@@ -204,6 +205,7 @@
     <Content Include="UserControl\AddDeviceFamily.ascx" />
     <Content Include="UserControl\AddLicenseType.ascx" />
     <Content Include="UserControl\AddLicenseManagement.ascx" />
+    <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
     <Content Include="UserControl\CODisplaybar.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
@@ -474,6 +476,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationConfiguration.aspx.cs">
+      <DependentUpon>ApplicationConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationConfiguration.aspx.designer.cs">
+      <DependentUpon>ApplicationConfiguration.aspx</DependentUpon>
     </Compile>
     <Compile Include="ApplicationConfigurationManager.cs" />
     <Compile Include="ApplicationError.aspx.cs">
@@ -799,6 +808,13 @@
     </Compile>
     <Compile Include="UserControl\AddLicenseManagement.ascx.designer.cs">
       <DependentUpon>AddLicenseManagement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ApplicationConfiguration.ascx.cs">
+      <DependentUpon>ApplicationConfiguration.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ApplicationConfiguration.ascx.designer.cs">
+      <DependentUpon>ApplicationConfiguration.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ApplicationError.ascx.cs">
       <DependentUpon>ApplicationError.ascx</DependentUpon>
@@ -1974,7 +1990,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

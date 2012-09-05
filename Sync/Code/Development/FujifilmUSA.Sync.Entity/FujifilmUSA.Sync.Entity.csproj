@@ -51,6 +51,7 @@
     <Compile Include="ActivityValidation.cs" />
     <Compile Include="AnalyzeChart.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
+    <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
     <Compile Include="LogActivity.cs" />

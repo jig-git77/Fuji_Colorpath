@@ -7,6 +7,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class Header : BaseControl
     {
+        public string UsernameHeaderText
+        {
+            get
+            {
+                string headerText = "";
+                if (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser != null)
+                {
+                    headerText = FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId + "-" + FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.FirstName + " " + FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LastName;
+                }
+                return headerText;                
+            }
+        }
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -14,7 +26,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 if (SessionManager.Instance.CurrentUser != null)
                     lbtnSettings.Visible = SessionManager.Instance.CurrentUser.HasAdminPermission();
-                
+
             }
         }
         #endregion

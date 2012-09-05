@@ -5,9 +5,7 @@
         <%=Request.UserHostAddress %>
     </a>| <a href="#"><asp:Localize Text="Logged in as:" runat="server" 
         Id="locLoggedInAs" meta:resourcekey="locLoggedInAsResource1"></asp:Localize>
-        <%=FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LoginId%>
-        -<%= FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.FirstName %>
-        <%=FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentUser.LastName%>
+        <%= UsernameHeaderText%>        
     </a>|
     <asp:LinkButton ID="lbtnLogout" runat="server" OnClick="lbtnLogout_Click" 
         Text="Logout" meta:resourcekey="lbtnLogoutResource1"></asp:LinkButton>

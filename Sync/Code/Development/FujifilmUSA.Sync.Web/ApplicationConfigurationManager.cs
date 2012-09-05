@@ -1,6 +1,6 @@
 ﻿using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
-
+using System.Collections.Generic;
 namespace FujifilmUSA.Sync.Web
 {
     public class ApplicationConfigurationManager : IViewApplicationConfiguration
@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Web
 
         public static ApplicationConfigurationManager Instance()
         {
-            lock(_lock)
+            lock (_lock)
             {
                 return _instance ?? (_instance = new ApplicationConfigurationManager());
             }
@@ -28,12 +28,14 @@ namespace FujifilmUSA.Sync.Web
         public bool IsSingleUserLoginEnabled { get; set; }
 
         public int KeepUserAliveInSeconds { get; set; }
+
+        public List<Entity.ApplicationConfiguration> ApplicationConfigurationList { get; set; }
         #endregion
 
         #region IViewBase Members
 
         public int CurrentUserId { get; set; }
-        
+
         public void ErrorOccured(object sender, Entity.ErrorArgs e)
         {
             //Do Nothing...
@@ -42,7 +44,11 @@ namespace FujifilmUSA.Sync.Web
         #endregion
 
 
-        
-      
+
+
+
+
+
+
     }
 }

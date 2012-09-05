@@ -107,7 +107,7 @@ namespace FujifilmUSA.Sync.Web
             table.Rows.Add("Session/Cookies Enabled:", Hidden_Cookies.Value);
             table.Rows.Add("HTML5 Supported:", Hidden_HTML5.Value);
             table.Rows.Add("Fujifilm Plugin:", Hidden_PluginMessage.Value);
-            if (Hidden_PluginVersion.Value != ApplicationConfiguration.Instance.FujiFilmPluginVersion) //-----------For Giving option to download plugin, if it is outdated-----//
+            if (Hidden_PluginVersion.Value != FujifilmUSA.Sync.Business.ApplicationConfiguration.Instance.FujiFilmPluginVersion) //-----------For Giving option to download plugin, if it is outdated-----//
             {
                 if (Hidden_PluginOS.Value == "Windows")  //-----For Windows PC
                 {
