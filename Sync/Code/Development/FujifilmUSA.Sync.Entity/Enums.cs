@@ -111,14 +111,14 @@ namespace FujifilmUSA.Sync.Entity
     }
     public enum ERole
     {
-        SystemAdmin = 0,
-        LicenseAdmin = 1,
-        WebsiteAdmin = 2,
-        RegionAdmin = 3,
-        CompanyAdmin = 4,
-        BranchAdmin = 5,
-        SiteUser = 6,
-        PrintBuyer = 7
+        SystemAdmin = 1,
+        LicenseAdmin = 2,
+        WebsiteAdmin = 3,
+        RegionAdmin = 4,
+        CompanyAdmin = 5,
+        BranchAdmin = 6,
+        SiteUser = 7,
+        PrintBuyer = 8
     }
 
     public enum ERolePermission
