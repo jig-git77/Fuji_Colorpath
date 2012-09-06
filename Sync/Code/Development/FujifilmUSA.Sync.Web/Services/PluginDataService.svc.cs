@@ -49,6 +49,10 @@ namespace FujifilmUSA.Sync.Web.Services
             this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
             var presenter = new PresenterPluginDataService(this);
             presenter.GetMeasurementsOnRunId();
+            if (Measurements.Count == 0) //------If someone delete all measurements, and still able to go to Analyze page, then set this to false
+            {
+                FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = false;
+            }
             return Measurements;
         }
 
@@ -57,8 +61,8 @@ namespace FujifilmUSA.Sync.Web.Services
         public bool DeleteMeasurement(string measurementId)
         {
             MeasurementId = Convert.ToInt32(measurementId);
-            var presenter = new PresenterPluginDataService(this);
-            return presenter.DeleteMeasurement();
+            var presenter = new PresenterPluginDataService(this);           
+            return presenter.DeleteMeasurement();            
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "KeepUserAlive/{username}")]

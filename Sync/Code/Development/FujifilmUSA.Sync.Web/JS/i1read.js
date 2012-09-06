@@ -11,6 +11,7 @@ function presentCalibrateDialog(scanner, myQuery) {
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
+    jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', ''); //------Make Measure button disable during Calbration
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -37,12 +38,15 @@ function presentCalibrateDone(scanner, msg, final) {
         if (!(msg == "OK" || msg == "CANCELLED")) {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : " + msg);
+            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled on error
         }
         else {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Calibration Successful, Click on 'Measure Chart' button.");
             jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+            jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
             jQuery("[id*='btnCancelMeasurement']").css('display', '');
+            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled on error
         }
     }
 }
@@ -85,7 +89,9 @@ function presentStripDialogi1(scanner, chart, query) {
         g_SavedQuery = query;
         getChartLocation(scanner);
     } else {
+        
         query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + ".press and hold the trigger while sliding the scanner across the strip.";
+        g_SavedQuery = query;
     }
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
@@ -146,9 +152,6 @@ function OnQuery(question) {
     var newHTML = question['Prompt'];
     if (question["Request"] == "GETPOSINSTRUCTIONS") {
 
-
-
-        //g_Question = question;
         alert(newHTML)
         if (question["Answers"] == "NONE") {
             // If you can't answer it here, then just return
@@ -160,9 +163,11 @@ function OnQuery(question) {
         plugin().queryDone(question);
     }
     else {
+
         // myQuery["Prompt"] = myQuery[myQuery["Request"]];
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : " + newHTML);
+
     }
 
 }
@@ -181,15 +186,34 @@ function presentGetPosDone(scanner, query, final) {
     if (typeof query == "string") {
         // This would be either "CANCELLED" or "ERROR: ..."
         // for CANCELLED, you might just want to do nothing.
-        if (!(msg == "OK" || msg == "CANCELLED")) {
-            // They hit cancel so clear the primary thread too.
-            if (g_SavedQuery != null) {
-                g_SavedQuery["Result"] = "CANCEL";
-                plugin().queryDone(g_SavedQuery);
-            }
 
-            //alert(msg);
+        if (query == "CANCELLED") {
+
+            jQuery("[id*='lblMessage']").css('color', 'Black');
+            jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+
         }
+        if (typeof final == "string") {
+            eval(final);
+        } else if (typeof final == "object") {
+            final();
+        }
+        //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
+        // delete (g_Chart["Result"]);
+        // delete mychart["Result"];
+        return;
+
+        // if ((query != "OK" || query == "CANCELLED")) {
+        // They hit cancel so clear the primary thread too.
+        //  if (g_SavedQuery != null) {
+        //   g_SavedQuery["Result"] = "CANCEL";
+        // Notify the user that we are done
+        //plugin().queryDone(g_SavedQuery);
+        //   return;
+        // }
+
+        //alert(msg);
+        // }
     }
     // Save this position and move to the next corner
     if (typeof g_Chart["UpperLeft"] == "undefined") {
@@ -290,9 +314,20 @@ function presentScanDonei1(scanner, mychart, final) {
                     jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
                 }
             }
+
+
+        }
+        else {
+           //g_Chart["Result"] = null;
+            delete g_Chart["Result"];
+            mychart["Result"] = null;
+            row = 1;
+            jQuery("[id*='lblMessage']").css('color', 'Black');
+            jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
         }
         return;
     }
+  
     //
     // Now let the user know how things ended up.
     //
@@ -459,6 +494,9 @@ function presentScanDonei1(scanner, mychart, final) {
 
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
+        jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------button enabled now
+        jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button disable. 
+        jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled.      
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
         drawCells = 0;
         area = new Object();

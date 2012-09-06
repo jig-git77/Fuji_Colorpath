@@ -238,26 +238,38 @@
     jQuery(document).ready(function () {
    
         jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled
-  
+      jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button enable after hitting Measure Chart button
+
         jQuery("[id*='btnCalibrate']").click(function () {
+        jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button disabled after hitting Calibrate button
             calibrateDevice(g_ScannerList);
+            
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
             if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') {
-
+                jQuery("[id*='btnCancelMeasurement']").removeAttr('disabled'); //---Make Cancel button Enabled
                 jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button Disable after hitting Measure Chart button
-
+                jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
+              
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) {
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
+                    jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Calibrate button disabled.
+                    jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button enabled
+              
                     return false;
                 }
                 if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
                 {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
+                    jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Calibrate button disabled
+                    jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate buttone enabled
+                    jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button enabled.
+              
                     return false;
                 }
+                
                 scan(g_ScannerList, 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
             else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
@@ -265,12 +277,20 @@
             }
         });
         jQuery("[id*='btnCancelMeasurement']").click(function () {
-            refreshCanvas();
-            jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+                       //  jQuery("[id*='lblMessage']").css('color', 'Red');
+            jQuery("[id*='lblMessage']").html("Status : Cancelling...");
             OnCancel();
-            ListDevices();
+            refreshCanvas();
+            jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled after hitting Cancel button
+            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled after hitting Cancel button
+            jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
+            
+        
+           //  jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+           // 
+           // ListDevices();
         });
-        bindMeasurementData();
+       bindMeasurementData();
         ControlVisibility();
     });
     
@@ -332,6 +352,7 @@
                         StopProgressBrowserWindow();
                         jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
                         jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled, after successfully uploading measurement in DB
+                        jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled after hitting Cancel button
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
@@ -340,7 +361,7 @@
                         MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                     }
             });
-            OnCancel();
+           // OnCancel();
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         }
