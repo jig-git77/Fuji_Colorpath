@@ -1,10 +1,5 @@
 ﻿// -*- mode: javascript; indent-tabs-mode: nil; c-basic-offset: 4 -*-
 // 
-// This is a simplified example for just calibration and reading an X/Y chart.
-// It has all the other features removed for clarity.  Since the point read
-// has been removed, reading the Density colorspace is not allowed.
-//
-
 // Make sure the console functions exist.  If the in chrome then
 // they already exist.  For firefox you need the firebug plugin
 // If they do not exist, then they are dummied up and the script will
@@ -22,6 +17,7 @@ if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
 if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
 
 /* for Internet Exploere no Array.IndexOf Method */
+/*
 if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function (obj, start) {
         for (var i = (start || 0), j = this.length; i < j; i++) {
@@ -30,7 +26,8 @@ if (!Array.prototype.indexOf) {
         return -1;
     }
 }
-
+*/
+/*
 if (/msie/i.test(navigator.userAgent)) //only override IE
 {
     document.nativeGetElementById = document.getElementById;
@@ -53,7 +50,7 @@ if (/msie/i.test(navigator.userAgent)) //only override IE
         return null;
     };
 }
-
+*/
 console.log("Loading chartread.js");
 var actKey = '';
 var g_ScannerList = new Object();
@@ -61,13 +58,14 @@ var g_Chart = new Object();
 g_Chart["Result"] = new Array();
 
 MeasuredPatches = [];
-
+/*
 //constructor for CIELAB object
 function LAB(L, A, B) {
     this.L = L;
     this.A = A;
     this.B = B;
 }
+
 
 //constructor for CIEXYZ object
 function XYZ(X, Y, Z) {
@@ -83,6 +81,8 @@ function Density(Red, Green, Blue, Visual) {
     this.Blue = Blue;
     this.Visual = Visual;
 }
+
+*/
 
 //Patch Object
 function Patch(LAB, XYZ, Density, sName) {
@@ -110,6 +110,7 @@ function dec2hex(i) {
 function plugin() {
     return document.getElementById('plugin0');
 }
+
 function addEvent(obj, name, func) {
     if (window.addEventListener) {
         obj.addEventListener(name, func, false);
@@ -118,37 +119,39 @@ function addEvent(obj, name, func) {
     }
 }
 
-function load(pluginVersion) {    
+
+function load(pluginVersion) {
     jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
     addEvent(plugin(), 'fire', function (x) {
         alert('onfired() from load(): ' + x)
     });
     console.log("Loading plugin version " + plugin().plugin_version);
-    console.log("GUI Version 1.7");
     if (OSName == "Windows") {
         plugin().setDebug("C:/temp/FujiCM.log");
     } else {
-        plugin().setDebug("/tmp/isis.log");
+        plugin().setDebug("/tmp/FujiCM.log");
     }
     var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
-    jQuery("[id*='lblPluginMessage']").html(newHTML);    
+    jQuery("[id*='lblPluginMessage']").html(newHTML);
     //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
-//    if (plugin().plugin_version != pluginVersion) {
-//        if (plugin().plugin_version == undefined) {
-//            jQuery("[id*='lblMessage']").css('color', 'Black');
-//            jQuery("[id*='lblMessage']").html("Status : There is no plugin installed.");
-//        }
-//        else {
-//            jQuery("[id*='lblMessage']").css('color', 'Red');
-//            jQuery("[id*='lblMessage']").html("Status : Your plugin is outdated. Please install newer version.");            
-//        }
-//        return false;
-//    }
+    if (plugin().plugin_version < pluginVersion) {
+        if (plugin().plugin_version == undefined) {
+            jQuery("[id*='lblMessage']").css('color', 'Black');
+            jQuery("[id*='lblMessage']").html("Status : The Fujifilm CM plugin is not installed.");
+        }
+        else {
+            jQuery("[id*='lblMessage']").css('color', 'Red');
+            jQuery("[id*='lblMessage']").html("Status : Your plugin is outdated. Please install newer version.");
+        }
+        return false;
+    }
     return true;
     //jQuery("#DivIngLogo").wTooltip({ content: '&nbsp; ' + newHTML + '<br>&nbsp;SDK:' + SDKVerHTML + ' &nbsp;', className: "pluginImageTooltipClass", style: false });
 }
 
+
+/*
 function DisplayLog() {
     console.log("In DisplayLog");
     var log = plugin().getLog();
@@ -158,6 +161,7 @@ function DisplayLog() {
     newHTML += '</PRE><BR>';
     document.getElementById("Log").innerHTML = newHTML;
 }
+*/
 function presentScannerList(ScannerList) {
     //ScannerList is an array of scanners with properties.    
     jQuery("[id*='lblPluginMessage']").html("");
@@ -176,10 +180,10 @@ function presentScannerList(ScannerList) {
             else {
                 jQuery("[id*='lblMessage']").html("Status : Device Serial: " + g_Chart["MeasurementDeviceSerial"] + " not found.");
             }
-                jQuery("[id*='btnCalibrate']").css('display', 'none');
-                jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
-                jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
-            
+            jQuery("[id*='btnCalibrate']").css('display', 'none');
+            jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
+            jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
+
         }
         else {
             g_ScannerList = ScannerList[i];
@@ -194,6 +198,8 @@ function presentScannerList(ScannerList) {
                 jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
                 jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
                 jQuery("[id*='btnCancelMeasurement']").css('display', '');
+                ControlDisability(0, false, 1, false, 0, false); //------Make Measure button enabled.
+              
                 return;
             }
         }
@@ -227,13 +233,13 @@ function scan(scanner, colorspace, chart) {
         // This device will read the entire chart in a single go. So we copy entire RefBase (how chart is laid out) to the ReferencePatch
         if (typeof chart["RefBase"] != "undefined") {
             localchart["ReferencePatch"] = chart["RefBase"];
-            
+
             //temp patch to work around the mode setting being different for io and ISIS
             if (scanner["Type"] == "iO") {
                 scanner["Mode"] = chart["ReadMode"];
             }
             else {
-            //this setting still needs to copy the chart["Mode"] setting to the scanner
+                //this setting still needs to copy the chart["Mode"] setting to the scanner
                 scanner["Mode"] = chart["Mode"];
             }
 
@@ -271,7 +277,7 @@ function scan(scanner, colorspace, chart) {
 
     if (scanner["Type"] == "iSis" || scanner["Type"] == "iO") {
 
-            //------------------Preview chart---------------//                             
+        //------------------Preview chart---------------//                             
 
         var canvas = document.getElementById("Canvas");
         var context = canvas.getContext("2d");
@@ -322,8 +328,8 @@ function scan(scanner, colorspace, chart) {
             // }
         }
         else if (scanner["Type"] == "iSis") {
-            
-        var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
+
+            var result = plugin().read(scanner, localchart, query, presentChartDialogiSis, presentProgressiSis, presentScanDoneiSis);
         }
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
@@ -440,12 +446,14 @@ function scan(scanner, colorspace, chart) {
     }
 }
 function refreshCanvas() {
-    // jQuery("[id*='Canvas']").empty();
-
+   
     var canvas = document.getElementById("Canvas");
     var context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
+    y1 = 0;
+    drawCells = 0;
 }
+
 
 // This function takes the current saved chart data and uploads it to
 // the server as a json string, then pops up the result.
@@ -453,63 +461,77 @@ function upload() {
     saveMeasurement();
 }
 
-// From here on down is the modal window code.
-var _rulesAdded = false;
 function OnCancel() {
-    jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
 
-    if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
-    //g_Question["Result"] = 'CANCEL';
-    //var cancelstat = plugin().queryDone(g_Question);
+    //g_Question = question;
+
+   
+    g_SavedQuery["Result"] = 'CANCEL';
+     //g_Question["Result"] = 'CANCEL';
+    var cancelstat = plugin().queryDone(g_SavedQuery);
+   // alert (cancelstat);
+    
+    if (cancelstat == "Unhandled") {
+        // If unhandled clean up this stuff here...
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+       // delete mychart["Result"];
+    }
+
 }
+
+
+// From here on down is the modal window code.
+//var _rulesAdded = false;
 
 
 /* These functions deal with IE's retardedness in not allowing divs to 
 * cover select elements by replacing the select elements with spans. */
+/*
 function RemoveSelectSpans() {
-    var selects = document.getElementsByTagName('select');
-    for (var i = 0; i < selects.length; i++) {
-        var select = selects[i];
-        if (select.clientWidth == 0 || select.clientHeight == 0 ||
-	    select.nextSibling == null || select.nextSibling.className != 'selectReplacement') {
-            continue;
-        }
-        select.parentNode.removeChild(select.nextSibling);
-        select.style.display = select.cachedDisplay;
-    }
+var selects = document.getElementsByTagName('select');
+for (var i = 0; i < selects.length; i++) {
+var select = selects[i];
+if (select.clientWidth == 0 || select.clientHeight == 0 ||
+select.nextSibling == null || select.nextSibling.className != 'selectReplacement') {
+continue;
+}
+select.parentNode.removeChild(select.nextSibling);
+select.style.display = select.cachedDisplay;
+}
 }
 
 function ReplaceSelectsWithSpans() {
-    var selects = document.getElementsByTagName('select');
-    for (var i = 0; i < selects.length; i++) {
-        var select = selects[i];
-        if (select.clientWidth == 0 || select.clientHeight == 0 ||
-	    select.nextSibling == null || select.nextSibling.className == 'selectReplacement') {
-            continue;
-        }
-        var span = document.createElement('span');
-        // this would be "- 3", but for that appears to shift the block that contains the span 
-        //   one pixel down; instead we tolerate the span being 1px shorter than the select
-        span.style.height = (select.clientHeight - 4) + 'px';
-        span.style.width = (select.clientWidth - 6) + 'px';
-        span.style.display = 'inline-block';
-        span.style.border = '1px solid rgb(200, 210, 230)';
-        span.style.padding = '1px 0 0 4px';
-        span.style.fontFamily = 'Arial';
-        span.style.fontSize = 'smaller';
-        span.style.position = 'relative';
-        span.style.top = '1px';
-        span.className = 'selectReplacement';
-        span.innerHTML = select.options[select.selectedIndex].innerHTML +
-	    '<img src="custom_drop.gif" alt="drop down" style="position: absolute; right: 1px; top: 1px;" />';
-        select.cachedDisplay = select.style.display;
-        select.style.display = 'none';
-        select.parentNode.insertBefore(span, select.nextSibling);
-    }
+var selects = document.getElementsByTagName('select');
+for (var i = 0; i < selects.length; i++) {
+var select = selects[i];
+if (select.clientWidth == 0 || select.clientHeight == 0 ||
+select.nextSibling == null || select.nextSibling.className == 'selectReplacement') {
+continue;
+}
+var span = document.createElement('span');
+// this would be "- 3", but for that appears to shift the block that contains the span 
+//   one pixel down; instead we tolerate the span being 1px shorter than the select
+span.style.height = (select.clientHeight - 4) + 'px';
+span.style.width = (select.clientWidth - 6) + 'px';
+span.style.display = 'inline-block';
+span.style.border = '1px solid rgb(200, 210, 230)';
+span.style.padding = '1px 0 0 4px';
+span.style.fontFamily = 'Arial';
+span.style.fontSize = 'smaller';
+span.style.position = 'relative';
+span.style.top = '1px';
+span.className = 'selectReplacement';
+span.innerHTML = select.options[select.selectedIndex].innerHTML +
+'<img src="custom_drop.gif" alt="drop down" style="position: absolute; right: 1px; top: 1px;" />';
+select.cachedDisplay = select.style.display;
+select.style.display = 'none';
+select.parentNode.insertBefore(span, select.nextSibling);
+}
 }
 
-/* utiltiy functions */
+*/
+/* utiltiy functions 
 function GetWindowWidth() {
     return width =
 	document.documentElement && document.documentElement.clientWidth ||
@@ -529,4 +551,5 @@ function GetWindowHeight() {
 function $(id) {
     return document.getElementById(id);
 }
-console.log("xychartread.js complete");
+*/
+console.log("chartread.js complete");

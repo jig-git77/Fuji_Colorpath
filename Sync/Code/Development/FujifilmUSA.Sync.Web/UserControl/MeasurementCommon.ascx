@@ -235,38 +235,31 @@
         var SerialNo;
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
     }
-    jQuery(document).ready(function () {
-   
-        jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled
-      jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button enable after hitting Measure Chart button
+    jQuery(document).ready(function () {   
+
+        ControlDisability(1,false,0,false,1,true);
 
         jQuery("[id*='btnCalibrate']").click(function () {
-        jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button disabled after hitting Calibrate button
-            calibrateDevice(g_ScannerList);
-            
+     
+            ControlDisability(1,true,0,false,0,false);
+            calibrateDevice(g_ScannerList);            
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') {
-                jQuery("[id*='btnCancelMeasurement']").removeAttr('disabled'); //---Make Cancel button Enabled
-                jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button Disable after hitting Measure Chart button
-                jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
-              
+            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') 
+            {              
+                ControlDisability(1,true,1,true,1,false);
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
-                if (jQuery.trim(MeasurementName).length < 4) {
+                if (jQuery.trim(MeasurementName).length < 4) 
+                {
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
-                    jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Calibrate button disabled.
-                    jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button enabled
-              
+                    ControlDisability(0,false,1,false,1,true);
                     return false;
                 }
                 if(jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
                 {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
-                    jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Calibrate button disabled
-                    jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate buttone enabled
-                    jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button enabled.
-              
+                    ControlDisability(1,false,1,false,1,true);
                     return false;
                 }
                 
@@ -276,21 +269,13 @@
                 upload();
             }
         });
-        jQuery("[id*='btnCancelMeasurement']").click(function () {
-                       //  jQuery("[id*='lblMessage']").css('color', 'Red');
+        jQuery("[id*='btnCancelMeasurement']").click(function () {  
+                          
             jQuery("[id*='lblMessage']").html("Status : Cancelling...");
-            OnCancel();
-            refreshCanvas();
-            jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled after hitting Cancel button
-            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled after hitting Cancel button
-            jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
-            
-        
-           //  jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
-           // 
-           // ListDevices();
+            OnCancel();       
+            ControlDisability(1,false,1,false,1,true);
         });
-       bindMeasurementData();
+        bindMeasurementData();
         ControlVisibility();
     });
     
@@ -350,9 +335,8 @@
                     function (response) {
                         bindMeasurementData();
                         StopProgressBrowserWindow();
-                        jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');
-                        jQuery("[id*='btnCalibrate']").removeAttr('disabled'); //---Make Calibrate button Enabled, after successfully uploading measurement in DB
-                        jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled after hitting Cancel button
+                        jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');                       
+                        ControlDisability(1,false,0,false,1,true);
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
@@ -361,7 +345,7 @@
                         MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                     }
             });
-           // OnCancel();
+     
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         }
@@ -379,10 +363,7 @@
             dataFilter:
                 function (data, type) {               
                     var json = jQuery.parseJSON(data);
-                   // for (i = 0; i < json.length; i++) {  //Removed these lines because now we are passing MeasurementDate as a string instead of DateTime as "UploadDate"
-                       // var date = GetDate(json[i].MeasurementDate);
-                       // json[i].MeasurementDate = date;                    
-                    //}
+                
                     if (json.length > 0) {
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
@@ -438,6 +419,42 @@
         return value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear() + " " + value.toLocaleTimeString();
     }
 
+
+    function ControlDisability(btnCalibrate, CalibrateFlag, btnMeasure, MeasureFlag, btnCancel, CancelFlag) {
+        if(btnCalibrate == 1)
+        {
+            if(CalibrateFlag == true)
+            {
+                jQuery("[id*='btnCalibrate']").attr('disabled', '');
+            }
+            else
+            {
+                jQuery("[id*='btnCalibrate']").removeAttr('disabled', '');
+            }
+        }
+        if(btnMeasure == 1)
+        {
+            if(MeasureFlag == true)
+            {
+                jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', '');
+            }
+            else
+            {
+                jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', '');
+            }
+        }
+        if(btnCancel == 1)
+        {
+            if(CancelFlag == true)
+            {
+                jQuery("[id*='btnCancelMeasurement']").attr('disabled', '');
+            }
+            else
+            {
+                jQuery("[id*='btnCancelMeasurement']").removeAttr('disabled', '');
+            }
+        }
+    }    
 
     /************ Progress bar ***************/
     function LoadProgressBrowserWindow() {

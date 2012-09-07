@@ -11,7 +11,7 @@ function presentCalibrateDialog(scanner, myQuery) {
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
-    jQuery("[id*='btnMeasureAndUploadChart']").attr('disabled', ''); //------Make Measure button disable during Calbration
+    ControlDisability(0, false, 1, true, 0, false); //------Make Measure button disable during Calbration
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -38,15 +38,14 @@ function presentCalibrateDone(scanner, msg, final) {
         if (!(msg == "OK" || msg == "CANCELLED")) {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : " + msg);
-            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled on error
+            ControlDisability(1, false, 0, false, 0, false); //------Make Calibrate button enabled on error
         }
         else {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Calibration Successful, Click on 'Measure Chart' button.");
-            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
-            jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------Make Measure button disable after hitting Measure Chart button
-            jQuery("[id*='btnCancelMeasurement']").css('display', '');
-            jQuery("[id*='btnCalibrate']").removeAttr('disabled', ''); //------Make Calibrate button enabled on error
+            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');          
+            jQuery("[id*='btnCancelMeasurement']").css('display', '');      
+            ControlDisability(1, false, 1, false, 0, false); //------Make Measure button disable after hitting Measure Chart button & Make Calibrate button enabled on error
         }
     }
 }
@@ -112,7 +111,7 @@ function getChartLocation(scanner) {
     delete (g_Chart["LowerLeft"]);
     delete (g_Chart["LowerRight"]);
     myQuery["GETPOSINSTRUCTIONS"] = "Please place your chart on the iO table and click in this window to continue";
-    myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the upper left corner of the chart and press press the i1 trigger";
+    myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 visor to the upper left corner of the chart and press press the i1 trigger";
     myQuery["First"] = "true";
     playSound('Download/Done.wav')
     var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
@@ -171,6 +170,7 @@ function OnQuery(question) {
     }
 
 }
+
 function presentGetPosDone(scanner, query, final) {
     //alert("#7 About to call presentGetPosDone");
 
@@ -187,30 +187,38 @@ function presentGetPosDone(scanner, query, final) {
         // This would be either "CANCELLED" or "ERROR: ..."
         // for CANCELLED, you might just want to do nothing.
 
-        if (query == "CANCELLED") {
-
+        if (query != "OK" || query == "CANCELLED") {
+            // alert("query:" + query);
+            //if (g_SavedQuery != null) {
+            // g_SavedQuery["Result"] = "CANCEL";
+            // Notify the user that we are done
+            // plugin().queryDone(g_SavedQuery);
+            //}
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+            refreshCanvas()
 
         }
-        if (typeof final == "string") {
-            eval(final);
-        } else if (typeof final == "object") {
-            final();
-        }
+
+        // if (typeof final == "string") {
+        // eval(final);
+        // } else if (typeof final == "object") {
+        //    final();
+        //}
         //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
         // delete (g_Chart["Result"]);
         // delete mychart["Result"];
         return;
 
-        // if ((query != "OK" || query == "CANCELLED")) {
+        //if ((query != "OK" || query == "CANCELLED")) {
         // They hit cancel so clear the primary thread too.
-        //  if (g_SavedQuery != null) {
-        //   g_SavedQuery["Result"] = "CANCEL";
+        //alert("
+        //if (g_SavedQuery != null) {
+        // g_SavedQuery["Result"] = "CANCEL";
         // Notify the user that we are done
         //plugin().queryDone(g_SavedQuery);
-        //   return;
-        // }
+        //return;
+        //}
 
         //alert(msg);
         // }
@@ -220,15 +228,15 @@ function presentGetPosDone(scanner, query, final) {
         g_Chart["UpperLeft"] = query["Result"];
         //alert(g_Chart["UpperLeft"]["X"]);
         var myQuery = new Object();
-        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the upper right corner of the chart and press press the i1 trigger.";
+        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 visor to the lower left corner of the chart and press press the i1 trigger.";
         var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
         if (result != "OK") {
             alert("Scanning Device has been unplugged");
         }
-    } else if (typeof g_Chart["UpperRight"] == "undefined") {
-        g_Chart["UpperRight"] = query["Result"];
+    } else if (typeof g_Chart["LowerLeft"] == "undefined") {
+        g_Chart["LowerLeft"] = query["Result"];
         var myQuery = new Object();
-        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 to the lower right corner of the chart and press press the i1 trigger.";
+        myQuery["GETPOINTINSTRUCTIONS"] = "Please move the i1 visor to the lower right corner of the chart and press press the i1 trigger.";
         myQuery["First"] = "false"; // This should be true, but for testing this turns off the POSINSTRUCTIONS query
 
         var result = plugin().getPosition(scanner, myQuery, presentGetPosDialog, presentGetPosDone);
@@ -238,11 +246,11 @@ function presentGetPosDone(scanner, query, final) {
     } else {
         g_Chart["LowerRight"] = query["Result"];
         // We have three corners.  Figure the 4th and recaluclate the sample size
-        var llx = g_Chart["UpperLeft"]["X"] - (g_Chart["UpperRight"]["X"] - g_Chart["LowerRight"]["X"]);
-        var lly = g_Chart["UpperLeft"]["Y"] - (g_Chart["UpperRight"]["Y"] - g_Chart["LowerRight"]["Y"]);
-        g_Chart["LowerLeft"] = new Object();
-        g_Chart["LowerLeft"]["X"] = llx;
-        g_Chart["LowerLeft"]["Y"] = lly;
+        var urx = g_Chart["UpperLeft"]["X"] + (g_Chart["LowerRight"]["X"] - g_Chart["LowerLeft"]["X"]);
+        var ury = g_Chart["UpperLeft"]["Y"] + (g_Chart["LowerRight"]["Y"] - g_Chart["LowerLeft"]["Y"]);
+        g_Chart["UpperRight"] = new Object();
+        g_Chart["UpperRight"]["X"] = urx;
+        g_Chart["UpperRight"]["Y"] = ury;
 
         if (g_SavedQuery != null) {
             alert('Click to start scan');
@@ -324,6 +332,7 @@ function presentScanDonei1(scanner, mychart, final) {
             row = 1;
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+            refreshCanvas();
         }
         return;
     }
@@ -494,9 +503,7 @@ function presentScanDonei1(scanner, mychart, final) {
 
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
-        jQuery("[id*='btnMeasureAndUploadChart']").removeAttr('disabled', ''); //------button enabled now
-        jQuery("[id*='btnCalibrate']").attr('disabled', ''); //------Make Calibrate button disable. 
-        jQuery("[id*='btnCancelMeasurement']").attr('disabled', ''); //------Make Cancel button disabled.      
+        ControlDisability(1, true, 1, false, 1, true); //------Make Calibrate button disable, Cancel button disabled and Measure button enabled now.
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
         drawCells = 0;
         area = new Object();

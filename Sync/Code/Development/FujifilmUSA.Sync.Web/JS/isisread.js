@@ -6,6 +6,7 @@ function presentChartDialogiSis(scanner, chart, query) {
         query["Prompt"] = "Chart read in progress";
     } else {
         query["Prompt"] = "Please place the chart in the scanner and click in this window.";
+        g_SavedQuery = query;
     }
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
@@ -20,17 +21,79 @@ function presentScanDoneiSis(scanner, mychart, final) {
     // The samples object is the same object that describes the
     // chart and expected results, but with the values we actually
     // read added.
-    if (typeof mychart["Result"] == "string") {
+    /*
+    if (typeof mychart["Result"] == "string" || typeof mychart == "string")  {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            MeasurementDialog(mychart["Result"], "Error");
+        if (mychart["Result"] == "CANCELLED" || mychart == "CANCELLED" ) {
+
+            jQuery("[id*='lblMessage']").css('color', 'Black');
+            jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+
         }
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {
             final();
         }
+        if (typeof mychart == "string") {
+            alert(mychart);
+        } else if (typeof mychart["Result"] == "string") {
+            alert(mychart["Result"]);
+        }
+        
+        //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
+        // delete (g_Chart["Result"]);
+        delete mychart["Result"];
+        return;
+    }*/
+
+ 
+    if (mychart == "CANCELLED") {
+      
+        refreshCanvas()
+        if (typeof final == "string") {
+            eval(final);
+        } else if (typeof final == "object") {
+            final();
+        }
+        refreshCanvas();
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");   
+        ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled.
+        return;
+    }
+
+    if (typeof mychart["Result"] == "string") {
+        // This type of query means we finish up with an error, so just present the error
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {          
+            refreshCanvas();   
+            ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled.
+        }
+        if (typeof final == "string") {
+            eval(final);
+        } else if (typeof final == "object") {
+            final();
+        }
+
+
+
+        // You could reissue a read here, but for a full chart reader, this isn't
+        // generally a simple error, so we don't reissue the read.
+        //if (mychart["Result"] != "CANCELLED") {
+        //    var query = new Object();
+        //    query["Success"] = "Samples Complete";
+        //    query["Fail"] = "Failed to read samples";
+        //  
+        //    var result = plugin().read(scanner, mychart, query,
+        //				       presentChartDialog, presentProgress, presentScanDone); 
+        //    if (result != "OK") {
+        //       alert("Scanning Device has been unplugged");
+        //    }
+        //}
+        
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
         return;
     }
     //
@@ -104,7 +167,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
-    jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
+    ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled now.   
+    jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');   
 
     // We have to make one more call to the library.  The 
     // calibrate itself ran in a non-browser thread.  We need
