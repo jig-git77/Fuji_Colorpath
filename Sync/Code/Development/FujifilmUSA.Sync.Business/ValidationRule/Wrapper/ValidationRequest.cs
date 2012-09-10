@@ -8,19 +8,24 @@ namespace FujifilmUSA.Sync.Business.ValidationRule.Wrapper
 {
     public class ValidationRequest
     {
-        private readonly LogActivity _logActivity;
-        public ValidationRequest(LogActivity logActivity)
-        {
-            _logActivity = logActivity;
-        }
-        //Different properties that holds the values
         public LogActivity LogActivity
         {
-            get
-            {
-                return _logActivity;
-            }
+            get;
+            private set;
+        }
+        public User CurrentUser
+        {
+            get;
+            private set;
         }
 
+        public string EmailSubject { get; set; }
+        public string EmailBody { get; set; }
+
+        public ValidationRequest(LogActivity logActivity,User currentUser)
+        {
+            LogActivity = logActivity;
+            CurrentUser = currentUser;
+        }
     }
 }

@@ -34,7 +34,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     Description = DataReader.ReadString(x, "Description"),
                                     Name = DataReader.ReadString(x, "Name"),
                                     Type = (ValidationRuleType)DataReader.ReadInt(x, "ValidationRuleId"),
-                                    ValidationRuleId = DataReader.ReadInt(x, "ValidationRuleId")
+                                    ValidationRuleId = DataReader.ReadInt(x, "ValidationRuleId"),
+                                    EmailBodyTemplate = DataReader.ReadString(x, "EmailBodyTemplate"),
+                                    EmailSubjectTemplate = DataReader.ReadString(x, "EmailSubjectTemplate")
                                 }
                             }).ToList();
                     }
@@ -61,7 +63,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 {
                                     Name = DataReader.ReadString(a, "Name"),
                                     Description = DataReader.ReadString(a, "Description"),
-                                    ValidationRuleId = DataReader.ReadInt(a, "ValidationRuleId"),
+                                    ValidationRuleId = DataReader.ReadInt(a, "ValidationRuleId"),                                    
+                                    EmailBodyTemplate = DataReader.ReadString(a, "EmailBodyTemplate"),
+                                    EmailSubjectTemplate = DataReader.ReadString(a, "EmailSubjectTemplate")
                                 }
                             }).ToList();
                     }

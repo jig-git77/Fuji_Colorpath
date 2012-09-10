@@ -2,6 +2,10 @@
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.DataAccess;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Business.Implementation
 {
@@ -51,6 +55,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public List<LogActivity> GetLogActivity(LogActivity logActivity)
+        {
+            var logActivityList = new List<LogActivity>();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var logList = DataAccessFactory.Instance.GetDsResult("[dbo].[GetLogActivity]",
+                                                                              new object[]
+                                                                                      {
+                                                                                          logActivity.UserId,
+                                                                                          (int)logActivity.ActivityType,
+                                                                                          logActivity.SystemType,
+                                                                                          logActivity.ActivityDateFrom,
+                                                                                          logActivity.ActivityDateTo
+                                                                                      });
+
+                    if (logList != null && logList.Tables.Count > 0 && logList.Tables[0].Rows.Count > 0)
+                    {
+                        logActivityList = logList.Tables[0].AsEnumerable().
+                           Select(x => new LogActivity()
+                           {
+                               LogActivityId = DataReader.ReadInt(x, "LogActivityID"),
+                               UserId = DataReader.ReadInt(x, "UserID"),
+                               ActivityType = (LogActivityType)DataReader.ReadInt(x, "ActivityType"),
+                               IpAddress = DataReader.ReadString(x, "IPAddress"),
+                               SystemType = (LogActivitySystemType)DataReader.ReadInt(x, "SystemType"),
+                               Details = DataReader.ReadString(x, "Details"),
+                               ActivityDate = DataReader.ReadDate(x, "ActivityDate")
+                           }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, ""));
+            return logActivityList;
+        }
         #endregion
 
         #region Browser Test methods

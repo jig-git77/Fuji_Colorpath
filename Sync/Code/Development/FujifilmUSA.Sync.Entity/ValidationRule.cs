@@ -12,5 +12,7 @@ namespace FujifilmUSA.Sync.Entity
        public string Description { get; set; }
        public string ClassName { get; set; }
        public ValidationRuleType Type { get; set; }
+       public string EmailSubjectTemplate { get; set; }
+       public string EmailBodyTemplate { get; set; }
     }
 }

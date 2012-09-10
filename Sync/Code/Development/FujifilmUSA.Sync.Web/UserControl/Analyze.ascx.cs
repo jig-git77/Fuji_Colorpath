@@ -879,11 +879,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             Response.Redirect("Export.aspx");
                         }
                     }
-                    //else
-                    //{
-                    //    WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                    //                                  Request.UserHostAddress);
-                    //}
+                    else
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
+                    }
                 }
             }
         }

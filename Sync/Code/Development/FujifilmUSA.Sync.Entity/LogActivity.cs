@@ -11,5 +11,8 @@ namespace FujifilmUSA.Sync.Entity
         public string Details { get; set; }
         public DateTime ActivityDate { get; set; }
         public LogActivitySystemType SystemType { get; set; }
+
+        public DateTime ActivityDateFrom { get; set; }
+        public DateTime ActivityDateTo { get; set; }
     }
 }

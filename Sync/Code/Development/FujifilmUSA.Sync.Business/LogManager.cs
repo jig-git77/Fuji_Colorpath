@@ -100,6 +100,20 @@ namespace FujifilmUSA.Sync.Business
             message.Bcc.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
             mySmtpClient.Send(message);
-        }     
+        }
+
+        public static void SendActivityValidationRuleEmail(string subject, string body)
+        { 
+            var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate(0);
+            var message = new MailMessage
+            {
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = dicTemplate[(int)Entity.Template.Base].Replace("##Content##", body)
+            };
+            message.To.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
+            var mySmtpClient = new SmtpClient();
+            mySmtpClient.Send(message);
+        }
     }
 }

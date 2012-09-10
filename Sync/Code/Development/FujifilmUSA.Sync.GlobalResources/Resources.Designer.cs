@@ -1645,6 +1645,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CreateDlpError.
+        /// </summary>
+        internal static string LogActivityType_CreateDlpError {
+            get {
+                return ResourceManager.GetString("LogActivityType_CreateDlpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CreateProject.
         /// </summary>
         internal static string LogActivityType_CreateProject {

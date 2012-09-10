@@ -678,4 +678,7 @@
   <data name="Error_UpdateApplicationConfiguration" xml:space="preserve">
     <value>Error occurred while updating configuration values._ja</value>
   </data>
+  <data name="LogActivityType_CreateDlpError" xml:space="preserve">
+    <value>CreateDlpError</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@ using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.ValidationRule;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Business
 {
@@ -14,13 +15,20 @@ namespace FujifilmUSA.Sync.Business
         private const string _optimizeDlpFormat = "User has optimized dlp {0} for project id={1}";
         private const string _createDlpFormat = "User has created desitnation profile and dlp for project id={0}";
         private const string _changeProfileFormat = "User has change his/her profile";
+        private const string _createDlpErrorFormat = "Creation of destination profile and dlp for project id={0} failed";
 
         private static void WriteLogActivity(LogActivity logActivity)
         {
             var logActivityBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             logActivityBusiness.InsertLogActivity(logActivity);
 
-            ValidationManager.ValidateRule(logActivity);
+            ValidationManager.ValidateRule(logActivity, SessionManager.Instance.CurrentUser);
+        }
+
+        public static List<LogActivity> GetLogActivity(LogActivity logActivity)
+        {
+            var logActivityBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
+            return logActivityBusiness.GetLogActivity(logActivity);
         }
 
         private static void WriteLogActivity(LogActivitySystemType systemType, LogActivityType activityType, object[] parameters, string ipAddress)
@@ -58,6 +66,9 @@ namespace FujifilmUSA.Sync.Business
                     break;
                 case LogActivityType.ChangeProfile:
                     logActivity.Details = _changeProfileFormat;
+                    break;
+                case LogActivityType.CreateDlpError:
+                    logActivity.Details = _createDlpErrorFormat;
                     break;
             }
 

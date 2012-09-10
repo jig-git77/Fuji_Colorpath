@@ -348,7 +348,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("LogActivityType_CreateDlp")]
         CreateDlp = 5,
         [Description("LogActivityType_ChangeProfile")]
-        ChangeProfile = 6
+        ChangeProfile = 6,
+        [Description("LogActivityType_CreateDlpError")]
+        CreateDlpError = 7
     }
 
     public enum LogActivitySystemType

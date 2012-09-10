@@ -1,6 +1,7 @@
 ﻿using System;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Business.Mock
 {
@@ -44,6 +45,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return true;
         }
 
-        #endregion
+        public System.Collections.Generic.List<LogActivity> GetLogActivity(LogActivity logActivity)
+        {
+            return new List<LogActivity>();
+        }
+        #endregion        
     }
 }

@@ -116,6 +116,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ValidationRule\NotificationRules\CreateDLPErrorValidationRule.cs" />
+    <Compile Include="ValidationRule\NotificationRules\CreateDLPValidationRule.cs" />
     <Compile Include="ValidationRule\NotificationRules\LoggedInValidationRule.cs" />
     <Compile Include="ValidationRule\StrictRules\BlockUserValidationRule.cs" />
     <Compile Include="ValidationRule\ValidationContainer.cs" />

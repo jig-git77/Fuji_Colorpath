@@ -7,7 +7,6 @@ using FujifilmUSA.Sync.Business.ValidationRule.Wrapper;
 using FujifilmUSA.Sync.Business.Implementation;
 using System.Web;
 using FujifilmUSA.Sync.Business.Interface;
-
 namespace FujifilmUSA.Sync.Business.ValidationRule
 {
     delegate void DelegateProcess(List<BaseValidationRule> rules);
@@ -58,6 +57,10 @@ namespace FujifilmUSA.Sync.Business.ValidationRule
                             ForEach(rule =>
                             {
                                 var objRule = CreateObject(rule.ValidationRule.ClassName);
+                                objRule.Request = request;
+                                objRule.Request.EmailBody = rule.ValidationRule.EmailBodyTemplate;
+                                objRule.Request.EmailSubject= rule.ValidationRule.EmailSubjectTemplate;
+                                
                                 if (objRule != null)
                                     _Rules.Add(objRule);
                             });

@@ -9,9 +9,9 @@ namespace FujifilmUSA.Sync.Business.ValidationRule
 {
     public class ValidationManager
     {
-        public static void ValidateRule(LogActivity logActivity)
+        public static void ValidateRule(LogActivity logActivity, User currentUser)
         {
-            ValidationContainer.Instance().Process(new ValidationRequest(logActivity));            
+            ValidationContainer.Instance().Process(new ValidationRequest(logActivity,currentUser));            
         }
     }
 }
