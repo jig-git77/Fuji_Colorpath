@@ -105,13 +105,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblAlignmentChart.Text = Data["referenceChartTypeId"];
                 lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                 lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
-                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId);
+                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+
+               
+             
+               // SetImageSize();
             }
             trUVSettings.Visible = lblMeasurementDevice.Text.Contains(
              Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis));
             lblUVSettings.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
                                     ? Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UV)
                                     : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
+        }
+
+        public void SetImageSize()
+        {
+            double aw = 300;
+            double ah = 255;
+            double iw = 270;
+            double ih = 400;
+
+            double rw = aw / iw;
+            double rh = ah / ih;
+            double ratio;
+            if (rw < rh)
+            {
+                ratio = rw;
+            }
+            else
+            {
+                ratio = rh;
+            }
+            int nw = Convert.ToInt32(iw * ratio);
+            int nh = Convert.ToInt32(ih * ratio);
+
+            imgChart.Width = System.Web.UI.WebControls.Unit.Pixel(nw);
+            imgChart.Height = System.Web.UI.WebControls.Unit.Pixel(nh);
         }
 
         #region IViewPreviewPrintCondition Members

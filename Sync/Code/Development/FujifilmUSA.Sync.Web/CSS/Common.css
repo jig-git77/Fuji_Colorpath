@@ -279,7 +279,7 @@ label
 {
     background: url(../Images/sidebar_box_bg.png) repeat-y top left;
     width: 187px;
-    min-height: 780px;
+    min-height: 580px;
 }
 /***Contant**/
 #contant
@@ -300,7 +300,7 @@ label
 .contant_middle
 {
     background: url(../Images/contant_box_bg.png) repeat-y top left;
-    min-height: 781px;
+    min-height: 581px;
 }
 #contant .head
 {

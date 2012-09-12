@@ -42,7 +42,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
 
             if (image != null)
-                RenderImage(image);
+            {
+                if (Request.QueryString["Preview"] == null)
+                {
+                    RenderImage(image);
+                }
+                else
+                {
+                    RenderPreviewImage(image);
+                }
+            }
             else
                 Response.End();
 
@@ -53,13 +62,52 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #region Methods
 
         private static void RenderImage(byte[] image)
-        {
+        {      
             var stream = new MemoryStream();
             stream.Write(image, 0, image.Length);
             var bitmap = new Bitmap(stream);
             System.Web.HttpContext.Current.Response.ContentType = "image/jpg";
             bitmap.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);
         }
+
+        private static void RenderPreviewImage(byte[] image)
+        {
+            var stream = new MemoryStream();
+            stream.Write(image, 0, image.Length);
+            var bitmap = new Bitmap(stream);
+            
+            Image ImageResize = (Image)bitmap;
+            SetImageSize(ImageResize);
+        }
+
+        static void SetImageSize(Image ImageResize)
+        {
+            double aw = 300;
+            double ah = 245;
+            double iw = ImageResize.Width;
+            double ih = ImageResize.Height;
+
+            double rw = aw / iw;
+            double rh = ah / ih;
+            double ratio;
+            if (rw < rh)
+            {
+                ratio = rw;
+            }
+            else
+            {
+                ratio = rh;
+            }
+            int nw = Convert.ToInt32(iw * ratio);
+            int nh = Convert.ToInt32(ih * ratio);                  
+
+            System.Drawing.Bitmap resizedImage = new System.Drawing.Bitmap(nw, nh);
+            System.Drawing.Graphics.FromImage((System.Drawing.Image)resizedImage).DrawImage(ImageResize, 0, 0, nw, nh);
+
+            System.Web.HttpContext.Current.Response.ContentType = "image/jpg";
+            resizedImage.Save(System.Web.HttpContext.Current.Response.OutputStream, ImageFormat.Jpeg);           
+        }
+
 
         //public void DownloadImageFromUrl(string imageUrl)
         //{

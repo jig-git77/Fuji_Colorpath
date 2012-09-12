@@ -360,8 +360,10 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <asp:Image ID="imgChart" runat="server" Width="96%" Height="200px" 
+                                        
+                                            <asp:Image ID="imgChart" runat="server"
                                                 meta:resourcekey="imgChartResource1" />
+                                         
                                         </td>
                                     </tr>
                                 </table>

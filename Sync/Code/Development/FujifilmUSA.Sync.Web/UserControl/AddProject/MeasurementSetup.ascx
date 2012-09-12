@@ -169,7 +169,7 @@
                                                     ControlToValidate="cmbAlignmentChart" ForeColor="Red" InitialValue="0" 
                                                     ValidationGroup="vgMeasurementSetup"><ucValidationContainer:ValidationContainer ID="rfvcAlignmentChartContainer" runat="server"
                                                         ValidationMsg="Please select alignment chart." Size="200" />
-</asp:RequiredFieldValidator>
+                                                </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
                                             </div>
