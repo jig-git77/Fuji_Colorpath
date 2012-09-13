@@ -21,6 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
+        private PresenterGlobal _presenterGlobal;
         private const string _recDLPText = "dlpText";
         private const string _recDLPMsgText = "dlpMsgText";
         private const string _recnewPrintCondition = "newPrintConditionText";
@@ -93,16 +94,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return string.Format(GetResourceString(_recDLPMsgText), DLPName, SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value);
             }
         }
+
+        public bool IsXMFUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
         #endregion
 
         #region Page Method
         protected void Page_Init(object sender, EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
+            _presenterGlobal = new PresenterGlobal();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            lbtnMeasurement.Visible = IsXMFUser;
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;               
@@ -853,7 +864,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Response.Redirect("Export.aspx");
             }
             else
-            {
+           {
+               _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetMeasurementsOnRunId();
@@ -862,8 +874,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     EndDate = System.DateTime.Now;
                     DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                     DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-
+                    _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() Start"), false);
                     _presenterAnalyze.CreateDestinationAndDlp();
+                    _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() End"), false);
                     if (!IsErrorOccured)
                     {
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
@@ -872,15 +885,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                         {
+                            _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to " + string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid())), false);
                             Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
                         }
                         else
                         {
+                            _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to Export.aspx"), false);
                             Response.Redirect("Export.aspx");
                         }
                     }
                     else
                     {
+                        _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - _presenterAnalyze.CreateDestinationAndDlp() - Error "), false);
+
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
                                                       Request.UserHostAddress);
                     }
@@ -1008,8 +1025,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ConfigureExport();
             GridPatchDetails.MasterTableView.ExportToCSV();
-        }      
+        }
 
+        protected void lbtnMeasurement_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+            Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
+        }
         #endregion
 
         #region IViewAnalyze Members

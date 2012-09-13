@@ -10,7 +10,7 @@ namespace FujifilmUSA.Sync.Business
     {
         private delegate void SendEmail(AppErrorLog log);
 
-        public static void WriteLog(Exception e, BusinessHandlerRequest request)
+        public static void WriteLog(Exception e, BusinessHandlerRequest request, bool SendEmail = true)
         {
             var appErrorLog = new AppErrorLog
                                   {
@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Business
             var errorHandlingBusiness = BusinessFactory<IMiscBusiness>.CreateObject();
             errorHandlingBusiness.InsertAppErrorLog(appErrorLog);
 
-            if (ApplicationConfiguration.Instance.SendEmailNotificationOnError)
+            if (ApplicationConfiguration.Instance.SendEmailNotificationOnError && SendEmail)
             {
                 SendEmail errorEmail = SendErrorEmail;
                 errorEmail.BeginInvoke(appErrorLog, null, null);
@@ -103,7 +103,7 @@ namespace FujifilmUSA.Sync.Business
         }
 
         public static void SendActivityValidationRuleEmail(string subject, string body)
-        { 
+        {
             var dicTemplate = BusinessFactory<IMiscDataBusiness>.CreateObject().GetTemplate(0);
             var message = new MailMessage
             {

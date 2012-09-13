@@ -15,8 +15,8 @@
 
                 var updateProgress = $get('<%= UpdateProgressClientID %>');
                 var postBackElement = args.get_postBackElement();
-                if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>') {
-                    if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next") {
+                if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>' || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
+                    if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next" || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
                         updateProgress.control._associatedUpdatePanelId = null;
                         $get('<%= updateProgress.ClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
@@ -99,7 +99,7 @@
             <div class="head">
                 <h1 id="header" runat="server"><asp:Localize runat="server" Text="Analyze" 
                         ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
-                <div class="Information_divAnalyze">
+                <div class="Information_divAnalyze">                    
                     <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
                         OnClientClick="return ChooseRadWindow();" 
                         meta:resourcekey="lbtnDownloadAndSaveDLPResource1">
@@ -109,6 +109,11 @@
                         <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" 
                         meta:resourcekey="locCreateDLPResource1"></asp:Localize>
                         </span> &nbsp;
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
+                        <span>                            
+                            <asp:Localize runat="server" Text="Measurement" ID="locMeasurement"></asp:Localize>
+                        </span>
                     </asp:LinkButton>
                 </div>
             </div>

@@ -9,9 +9,9 @@ namespace FujifilmUSA.Sync.Presenter
 {
     public class PresenterGlobal
     {
-        public void LogApplicationError(Exception applicationException)
+        public void LogApplicationError(Exception applicationException, bool sendEmail = true)
         {
-            LogManager.WriteLog(applicationException, null);
+            LogManager.WriteLog(applicationException, null, sendEmail);
         }
     }
 }
