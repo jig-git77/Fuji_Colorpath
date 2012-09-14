@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Business
         private const string _createDlpFormat = "User has created desitnation profile and dlp for project id={0}";
         private const string _changeProfileFormat = "User has change his/her profile";
         private const string _createDlpErrorFormat = "Creation of destination profile and dlp for project id={0} failed";
+        private const string _optimizeDlpErrorFormat = "Optimizing DLP {0} for project id={1}";
 
         private static void WriteLogActivity(LogActivity logActivity)
         {
@@ -70,6 +71,10 @@ namespace FujifilmUSA.Sync.Business
                 case LogActivityType.CreateDlpError:
                     logActivity.Details = _createDlpErrorFormat;
                     break;
+                case LogActivityType.OptimizeDlpError:
+                    logActivity.Details = _optimizeDlpErrorFormat;
+                    break;
+
             }
 
             WriteLogActivity(logActivity);

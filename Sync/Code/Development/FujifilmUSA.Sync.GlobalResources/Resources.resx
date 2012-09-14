@@ -681,4 +681,7 @@
   <data name="LogActivityType_CreateDlpError" xml:space="preserve">
     <value>CreateDlpError</value>
   </data>
+  <data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
+    <value>OptimizeDlpError</value>
+  </data>
 </root>

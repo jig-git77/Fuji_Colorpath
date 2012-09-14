@@ -119,6 +119,8 @@
     <Compile Include="ValidationRule\NotificationRules\CreateDLPErrorValidationRule.cs" />
     <Compile Include="ValidationRule\NotificationRules\CreateDLPValidationRule.cs" />
     <Compile Include="ValidationRule\NotificationRules\LoggedInValidationRule.cs" />
+    <Compile Include="ValidationRule\NotificationRules\OptimizeDLPErrorValidationRule.cs" />
+    <Compile Include="ValidationRule\NotificationRules\OptimizeDLPValidationRule.cs" />
     <Compile Include="ValidationRule\StrictRules\BlockUserValidationRule.cs" />
     <Compile Include="ValidationRule\ValidationContainer.cs" />
     <Compile Include="ValidationRule\ValidationManager.cs" />

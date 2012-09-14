@@ -1699,6 +1699,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OptimizeDlpError.
+        /// </summary>
+        internal static string LogActivityType_OptimizeDlpError {
+            get {
+                return ResourceManager.GetString("LogActivityType_OptimizeDlpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username/Password is invalid..
         /// </summary>
         internal static string Login_InvalidLogin {

@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterConfirmSave.OptimizeDlp();
                 if (!IsErrorOccured)
                 {
-                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] {ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId},
+                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] { ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId },
                                                       Request.UserHostAddress);
                     _presenterConfirmSave.GetProjectDetail();
                     if (!IsErrorOccured)
@@ -122,6 +122,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Export.aspx';", true);
                         }
                     }
+                }
+                else
+                {
+                    WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                         Request.UserHostAddress);
                 }
             }
         }
