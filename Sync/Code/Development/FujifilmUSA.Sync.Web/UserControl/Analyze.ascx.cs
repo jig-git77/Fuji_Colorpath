@@ -794,9 +794,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append(" a*" + DR[_Index].Targeta.ToString());
                     toolTip.Append(" b*" + DR[_Index].Targetb.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
-                    toolTip.Append(DR[_Index].ΔE.ToString());
-                    toolTip.Append("</td></tr>");
+                    //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
+                    //toolTip.Append(DR[_Index].ΔE.ToString());
+                    //toolTip.Append("</td></tr>");
                   
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔL.ToString());

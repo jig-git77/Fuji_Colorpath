@@ -48,6 +48,22 @@ function presentScanDoneiSis(scanner, mychart, final) {
         return;
     }*/
 
+    
+    if (typeof mychart["Result"] == "string") {
+        // This type of query means we finish up with an error, so just present the
+        // error
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
+            MeasurementDialog(mychart["Result"], "Error");
+        }
+        if (typeof final == "string") {
+            eval(final);
+        } else if (typeof final == "object") {
+            final();
+        }
+        return;
+    }
+    
+ 
  
     if (mychart == "CANCELLED") {
       
