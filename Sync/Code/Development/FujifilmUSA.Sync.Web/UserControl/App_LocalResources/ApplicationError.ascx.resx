@@ -130,7 +130,7 @@
     <value>Login page.</value>
   </data>
   <data name="locUnexpectedErrorResource1.Text" xml:space="preserve">
-    <value>Opps!!! Unexpected error occured. Please
+    <value>ERROR: Unexpected error occured. Please
                         contact your administrator.</value>
   </data>
   <data name="txtSystemErrorResource1.Text" xml:space="preserve">

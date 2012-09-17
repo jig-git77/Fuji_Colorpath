@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             ucCODisplaybar.Header = "Project Limit";
-            ucCODisplaybar.Message = "Opps!!! You reach your maximum limit of projects, so you can't create more projects.";
+            ucCODisplaybar.Message = "ERROR: You have reached your maximum license limit of projects.";
         }
     }
 }

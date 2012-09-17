@@ -17,7 +17,7 @@
 
             <div style="height:200px;">
                 <div style="font-size: 14px;"><br /><br /><br />
-                    <span style="font-size: 18px; color: red;"><asp:Localize Text="Opps!!! Unexpected error occured. Please
+                    <span style="font-size: 18px; color: red;"><asp:Localize Text="ERROR: Unexpected error occured. Please
                         contact your administrator." runat="server" ID="locUnexpectedError" 
                         meta:resourcekey="locUnexpectedErrorResource1"></asp:Localize></span>
                     <br /><br />
