@@ -39,6 +39,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public string AlignmentChartSelectedValue
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(cmbAlignmentChart.SelectedValue.Trim()))
+                    return cmbAlignmentChart.SelectedValue.Trim();
+                return "0";
+            }
+        }
         #endregion
 
         #region "Page Events"
@@ -85,7 +94,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
                     MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
                     ReferenceChartType =
-                        new KeyValuePair<short, string>(Convert.ToInt16(cmbAlignmentChart.SelectedValue),
+                        new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
                                                         cmbAlignmentChart.SelectedItem.Text),
                     UvIncluded =
                         cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false
@@ -142,7 +151,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
                         MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
                         ReferenceChartType =
-                            new KeyValuePair<short, string>(Convert.ToInt16(cmbAlignmentChart.SelectedValue),
+                            new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
                                                             cmbAlignmentChart.SelectedItem.Text),
                         UvIncluded =
                             cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false
@@ -279,15 +288,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void DisplayChartImage()
         {
-            if (Convert.ToInt32(cmbAlignmentChart.SelectedValue) <= 0)
+            if (Convert.ToInt32(AlignmentChartSelectedValue) <= 0)
             {
                 imgChart.ImageUrl = ResolveUrl("../../Images/chart_preview.png");
             }
             else
             {
-                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(cmbAlignmentChart.SelectedValue);
+                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(AlignmentChartSelectedValue);
             }
-
         }
 
         private void BindUVSettings()
