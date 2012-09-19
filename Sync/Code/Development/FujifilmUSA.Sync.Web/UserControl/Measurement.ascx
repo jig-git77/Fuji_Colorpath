@@ -5,13 +5,15 @@
     TagPrefix="uc" %>
 <script language="javascript">
     function AllowToAnalyze() {
-        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
-            if (jQuery("input[id$=hdHasMeasurement]").val() == 'true')
-                return true;
-            else
-                return false;
+        if (document.readyState == 'complete') {
+            if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
+                if (jQuery("input[id$=hdHasMeasurement]").val() == 'true')
+                    return true;
+                else
+                    return false;
+            }
         }
-        return true;
+        return false;
     }
 </script>
 <div class="contant_top">
