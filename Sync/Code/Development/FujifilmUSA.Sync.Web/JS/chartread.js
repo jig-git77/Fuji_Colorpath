@@ -126,6 +126,14 @@ function load(pluginVersion) {
         alert('onfired() from load(): ' + x)
     });
     console.log("Loading plugin version " + plugin().plugin_version);
+
+    if (plugin().plugin_version == undefined) { //---If plugin has some issues or not been installed yet, let give option to install them first
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : The Fujifilm CM plugin is not installed.");
+        return false;
+    }   
+   
+
     if (OSName == "Windows") {
         plugin().setDebug("C:/temp/FujiCM.log");
     } else {
