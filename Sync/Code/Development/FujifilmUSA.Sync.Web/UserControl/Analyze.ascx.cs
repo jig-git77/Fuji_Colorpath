@@ -948,9 +948,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     GridPatchDetails.MasterTableView.Rebind();
                     break;
 
-                case "Filter":          //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
-                    ((Pair)e.CommandArgument).First = "GreaterThanOrEqualTo";
-                    break;
+                //case "Filter":          //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
+                //    ((Pair)e.CommandArgument).First = "GreaterThanOrEqualTo";
+                //    break;
             }
         }
 
