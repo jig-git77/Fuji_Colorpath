@@ -242,7 +242,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
 
-            GridPatchDetails.Rebind(); //----Load Patch Details GridView in "Patch Details" tab
+            //GridPatchDetails.Rebind(); //----Load Patch Details GridView in "Patch Details" tab
         }
 
         #region Fill InkPaper Tab
