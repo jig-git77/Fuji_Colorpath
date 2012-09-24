@@ -252,7 +252,22 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         "Contracts")]
     public partial class GetProfileRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
         
+        private ColorOrganizerDemoLib.Sync4DService.EProfileType ProfileTypeField;
+        
         private int ProjectIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorOrganizerDemoLib.Sync4DService.EProfileType ProfileType {
+            get {
+                return this.ProfileTypeField;
+            }
+            set {
+                if ((this.ProfileTypeField.Equals(value) != true)) {
+                    this.ProfileTypeField = value;
+                    this.RaisePropertyChanged("ProfileType");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ProjectId {
@@ -422,6 +437,24 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     [System.Runtime.Serialization.DataContractAttribute(Name="GetDeviceListRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
         "Contracts")]
     public partial class GetDeviceListRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EProfileType", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataCon" +
+        "tracts.Enums")]
+    public enum EProfileType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SourceProfile = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DestinationPRofile = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DeviceLinkProfile = 3,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -742,6 +775,8 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         private byte[] ChartPreviewField;
         
+        private ColorOrganizerDemoLib.Sync4DService.EReferenceChartType ChartTypeField;
+        
         private ColorOrganizerDemoLib.Sync4DService.EMeasurementDevice MeasurementDeviceField;
         
         private byte[] OriginalChartField;
@@ -786,6 +821,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorOrganizerDemoLib.Sync4DService.EReferenceChartType ChartType {
+            get {
+                return this.ChartTypeField;
+            }
+            set {
+                if ((this.ChartTypeField.Equals(value) != true)) {
+                    this.ChartTypeField = value;
+                    this.RaisePropertyChanged("ChartType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public ColorOrganizerDemoLib.Sync4DService.EMeasurementDevice MeasurementDevice {
             get {
                 return this.MeasurementDeviceField;
@@ -819,6 +867,21 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EReferenceChartType", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataCon" +
+        "tracts.Enums")]
+    public enum EReferenceChartType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProfileChart = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OptimizationChart = 2,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
