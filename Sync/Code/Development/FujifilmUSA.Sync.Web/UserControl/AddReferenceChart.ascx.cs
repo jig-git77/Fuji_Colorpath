@@ -106,12 +106,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
 
                         _presenterAddReferenceChart.SaveReferenceChart();
+                        if (IsErrorOccured) return;
                         Response.Redirect("ReferenceChartManagement.aspx");
                     }
                 }
                 else
                 {
                     _presenterAddReferenceChart.UpdateReferenceChart();
+                    if (IsErrorOccured) return;
                     Response.Redirect("ReferenceChartManagement.aspx");
                 }
             }

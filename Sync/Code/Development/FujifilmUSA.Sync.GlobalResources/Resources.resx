@@ -684,4 +684,7 @@
   <data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
     <value>OptimizeDlpError</value>
   </data>
+  <data name="Duplicate_InsertReferenceChart" xml:space="preserve">
+    <value>Reference chart already exists with same name.</value>
+  </data>
 </root>

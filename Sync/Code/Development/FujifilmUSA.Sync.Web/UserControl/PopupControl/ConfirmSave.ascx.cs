@@ -71,6 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2)
                     {
                         lbtnOptimize.Visible = false;
+                        Tr_Optimize.Visible = false;
                     }
                 }
                 else
@@ -85,6 +86,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (LastRunStatus == EOptimizeRunStatus.Certify)
                         {
                             lbtnYes.Visible = false;
+                            Tr_Certify.Visible = false;
                         }
                     }
                 }

@@ -89,7 +89,9 @@ namespace CPSync
 
                 if (strFileContent.Contains("ColorPort") == true)
                 {
+                    strFileContent = strFileContent.Replace("SAMPLE_NAME", "SAMPLE_NAMExx");
                     strFileContent = strFileContent.Replace("SAMPLE_ID", "SAMPLE_NAME");
+                    strFileContent = strFileContent.Replace("SampleID", "SAMPLE_NAME");
                 }
 
                 //Returns and newlines 

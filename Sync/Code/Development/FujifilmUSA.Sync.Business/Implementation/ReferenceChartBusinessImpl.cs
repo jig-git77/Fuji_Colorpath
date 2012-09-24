@@ -51,6 +51,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.ChartDisplayType,
                                                                                     referenceChartData.ToString()
                                                                                 });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertReferenceChart" };
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateReferenceChart"));
             return returnValue;

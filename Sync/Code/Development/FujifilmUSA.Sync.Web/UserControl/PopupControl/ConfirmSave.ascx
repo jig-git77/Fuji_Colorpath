@@ -79,7 +79,7 @@
             <div style="border-style: None; padding: 5px">
                 <div style="float: left; line-height: 24px">
                     <table cellpadding="0" cellspacing="0">
-                        <tr>
+                        <tr id="Tr_Certify" runat="server">
                             <td style="font-weight: bold;">
                                 <asp:Localize runat="server" Text="Certify:" ID="locCertify" 
                                     meta:resourcekey="locCertifyResource1"></asp:Localize>&nbsp;
@@ -94,7 +94,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr>
+                        <tr id="Tr_Optimize" runat="server">
                             <td style="font-weight: bold;">
                                 <asp:Localize runat="server" Text="Optimize:" ID="locOptimize" 
                                     meta:resourcekey="locOptimizeResource1"></asp:Localize>&nbsp;
