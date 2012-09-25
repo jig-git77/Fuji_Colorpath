@@ -8,7 +8,15 @@ namespace FujifilmUSA.Sync.Business
 {
     public class LogManager
     {
+        #region Set Global Variables
         private delegate void SendEmail(AppErrorLog log);
+        public static string Username = (SessionManager.Instance.CurrentUser != null)
+                                              ? (SessionManager.Instance.CurrentUser.FirstName + " " + SessionManager.Instance.CurrentUser.LastName)
+                                              : "NULL";
+        public static string UserEmail = (SessionManager.Instance.CurrentUser != null)
+                                             ? (SessionManager.Instance.CurrentUser.Email)
+                                             : "NULL";
+        #endregion
 
         public static void WriteLog(Exception e, BusinessHandlerRequest request, bool SendEmail = true)
         {
@@ -33,12 +41,12 @@ namespace FujifilmUSA.Sync.Business
         }
 
         public static void SendErrorEmail(AppErrorLog log)
-        {
+        {           
             var errorMessage = new MailMessage
                                    {
                                        Subject = ApplicationConfiguration.Instance.SendEmailNotificationOnErrorSubject,
                                        IsBodyHtml = true,
-                                       Body = log.ExMessage + "</br>" + log.ExStackTracke + "</br>" + log.TimeStamp
+                                       Body = "ErrorMessage: " + log.ExMessage + "<br/><br/>" + "ErrorStackTrace: " + log.ExStackTracke + "<br/><br/>" + "GeneratedTime: " + log.TimeStamp + "<br/><br/>" + "UserName: " + Username + "<br/>" + "Email: " + UserEmail
                                    };
             errorMessage.To.Add(ApplicationConfiguration.Instance.SendEmailNotificationOnErrorTo);
             var mySmtpClient = new SmtpClient();
