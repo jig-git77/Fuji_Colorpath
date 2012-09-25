@@ -76,7 +76,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                        Response.Redirect(string.Format("COMeasurement.aspx?id={0}&projectid={1}", Guid.NewGuid(),SessionManager.Instance.CurrentProject != null ? SessionManager.Instance.CurrentProject.ProjectId : 0));
+                        Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
+                        //Response.Redirect(string.Format("COMeasurement.aspx?id={0}&projectid={1}", Guid.NewGuid(),SessionManager.Instance.CurrentProject != null ? SessionManager.Instance.CurrentProject.ProjectId : 0));
                     }
                 }
             }
