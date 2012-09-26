@@ -286,14 +286,9 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     if (!IsErrorOccured)
                     {
                         SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentProject.MeasurementSetting =
-                            new MeasurementSetting()
-                                {
-                                    ReferenceChartType =
-                                        new KeyValuePair<short, string>(
-                                        Convert.ToInt16(TempProjectInfo.ChartId),
-                                        string.Empty)
-                                };
+                        SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
+                                        new KeyValuePair<short, string>(Convert.ToInt16(TempProjectInfo.ChartId), string.Empty);
+                                
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
                         HttpContext.Current.Response.Redirect(string.Format("COAddProject.aspx?id={0}", Guid.NewGuid()));
                     }
