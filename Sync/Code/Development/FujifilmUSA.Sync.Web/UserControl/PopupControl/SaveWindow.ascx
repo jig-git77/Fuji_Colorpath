@@ -59,7 +59,7 @@
                                                 </div>
                                                 <div style="float: left">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"  Display="Dynamic"
-                                                         ControlToValidate="txtProjectName" ValidationGroup="vgSaveWindows" ValidationExpression="^([1-zA-Z0-1@_\s]{1,255})$"
+                                                         ControlToValidate="txtProjectName" ValidationGroup="vgSaveWindows" ValidationExpression="^([\w(). @-]{1,255})$"
                                                          ForeColor="Red" ErrorMessage="RegularExpressionValidator">
                                                              <ucValidationContainer:ValidationContainer ID="rfvProjectContainer1" runat="server"
                                                             ValidationMsg="Please only use alphanumerics, digits and some special chars(@,_) for project name." Size="200" />
