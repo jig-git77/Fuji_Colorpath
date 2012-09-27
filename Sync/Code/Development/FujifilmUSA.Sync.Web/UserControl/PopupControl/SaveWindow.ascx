@@ -62,7 +62,7 @@
                                                          ControlToValidate="txtProjectName" ValidationGroup="vgSaveWindows" ValidationExpression="^([\w(). @-]{1,255})$"
                                                          ForeColor="Red" ErrorMessage="RegularExpressionValidator">
                                                              <ucValidationContainer:ValidationContainer ID="rfvProjectContainer1" runat="server"
-                                                            ValidationMsg="Please only use alphanumerics, digits and some special chars(@,_) for project name." Size="200" />
+                                                            ValidationMsg="Please only use alphanumerics, digits, space and some special chars(@,_.) for project name." Size="200" />
                                                          </asp:RegularExpressionValidator>
                                                     <asp:RequiredFieldValidator ID="rfvProjectName" runat="server" Display="Dynamic"
                                                         ControlToValidate="txtProjectName" ForeColor="Red" 
