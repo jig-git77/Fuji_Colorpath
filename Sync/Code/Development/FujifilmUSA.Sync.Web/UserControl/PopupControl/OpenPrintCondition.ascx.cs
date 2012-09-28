@@ -38,13 +38,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 sb.Append(string.Format(GetResourceString(_reccurrentRunIsOpenAndInactive), RunNum, Request.QueryString["days"]));
 
             sb.Append("</br>");
-            if (Request.QueryString["DlpName"].Contains("-001"))
+            if (Server.UrlDecode(Request.QueryString["DlpName"]).Contains("-001"))
             {
                 sb.Append(GetResourceString(_recnoDLPText));
             }
             else
             {
-                sb.Append(string.Format(GetResourceString(_recconfirmDLPText), Request.QueryString["DlpName"]));
+                sb.Append(string.Format(GetResourceString(_recconfirmDLPText), Server.UrlDecode(Request.QueryString["DlpName"])));
             }
 
             lblOpenPrintConditionMessage.Text = sb.ToString();

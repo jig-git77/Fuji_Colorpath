@@ -118,9 +118,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowOpenPrintConditionWindow('" +
-                                                 project.ProjectId + "','" + project.ProjectName + "','" +
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" +
                                                  Math.Round(days, 1) +
-                                                 "','" + project.CurrentDlpName + "','" + project.TotalRuns + "')");
+                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -131,7 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -142,7 +142,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + project.ProjectName + "','" + project.CurrentDlpName + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
