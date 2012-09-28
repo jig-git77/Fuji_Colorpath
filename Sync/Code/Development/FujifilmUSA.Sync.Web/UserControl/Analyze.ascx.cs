@@ -864,7 +864,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
            {
-               _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
+               //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetMeasurementsOnRunId();
@@ -873,9 +873,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     EndDate = System.DateTime.Now;
                     DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                     DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                    _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() Start"), false);
+                    //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() Start"), false);
                     _presenterAnalyze.CreateDestinationAndDlp();
-                    _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() End"), false);
+                    //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() End"), false);
                     if (!IsErrorOccured)
                     {
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
@@ -884,18 +884,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                         {
-                            _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to " + string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid())), false);
+                            //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to " + string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid())), false);
                             Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
                         }
                         else
                         {
-                            _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to Export.aspx"), false);
+                            //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to Export.aspx"), false);
                             Response.Redirect("Export.aspx");
                         }
                     }
                     else
                     {
-                        _presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - _presenterAnalyze.CreateDestinationAndDlp() - Error "), false);
+                        //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - _presenterAnalyze.CreateDestinationAndDlp() - Error "), false);
 
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
                                                       Request.UserHostAddress);

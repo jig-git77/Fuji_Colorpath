@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Start"), null, false);
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Start"), null, false);
                     var sourceProfile =
                         BusinessFactory<IProjectBusiness>.
                             CreateObject().
@@ -85,7 +85,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.DestinationProfileOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = destinationDescription });
 
-                    LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination profile option added to request object."), null, false);
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination profile option added to request object."), null, false);
 
                     var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
                     foreach (KeyValuePair<string, string> option in dlpOptions)
@@ -94,17 +94,17 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                     request.DlpOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
 
-                    LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - DLP Options added to request object."), null, false);
 
                     using (var client = new ProfilerClient())
                     {
                         var response = client.CreateDestinationAndDeviceLinkProfile(request);
                         if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                         {
-                            LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
+                            //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
                             throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
                         }
-                        LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
+                        //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure(
@@ -117,10 +117,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         status,
                                         endDateTime
                                     });
-                        LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call finished."), null, false);
+                        //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call finished."), null, false);
                     }
 
-                    LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - End"), null, false);
+                    //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - End"), null, false);
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
         }
