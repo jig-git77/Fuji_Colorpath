@@ -330,7 +330,9 @@ namespace FujifilmUSA.Sync.Entity
         [Description("EReferenceChartDisType_ProfileChart")]//Profile Chart
         ProfileChart = 1,
         [Description("EReferenceChartDisType_OptimizationChart")]//Optimization Chart
-        OptimizationChart = 2
+        OptimizationChart = 2,
+        [Description("EReferenceChartDisType_VerificationChart")]//Verification Chart
+        VerificationChart = 3
     }
 
     public enum LogActivityType
