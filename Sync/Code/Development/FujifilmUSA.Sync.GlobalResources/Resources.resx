@@ -687,4 +687,7 @@
   <data name="Duplicate_InsertReferenceChart" xml:space="preserve">
     <value>Reference chart already exists with same name.</value>
   </data>
+  <data name="EReferenceChartDisType_VerificationChart" xml:space="preserve">
+    <value>Verification Chart</value>
+  </data>
 </root>
