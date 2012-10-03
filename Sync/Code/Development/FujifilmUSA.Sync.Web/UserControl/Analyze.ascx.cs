@@ -174,8 +174,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-                BindAvgDelta();
-                //GridPatchDetails.Rebind();
+                BindAvgDelta();               
                 FillAllTabsData();
             }
         }
@@ -241,8 +240,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 FillLabCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
-
-            GridPatchDetails.Rebind(); //----Load Patch Details GridView in "Patch Details" tab
         }
 
         #region Fill InkPaper Tab
@@ -853,6 +850,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 BindMesurementChart();
+                GridPatchDetails.Rebind();  //----Load Patch Details GridView in "Patch Details" tab
             }
         }
 
