@@ -35,10 +35,21 @@
         <ucLogin:Login ID="ucLogin1" runat="server" />
     </div>
     <div id="footer">
-        <b>© 2012 FUJIFILM North America Corporation - Graphic Systems Division </b>
-        <br />
-        <br />
-        <img alt="" src="Images/logo_Fujifilm.png" />
+        <center>
+         <table style="width:70%;">
+            <tr>
+                <td style="width:20%; padding-left:7px;">
+                    <img alt="" src="Images/logo_Fujifilm.png" />
+                </td>
+                <td align="center">
+                    <b> © <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphic Systems Division </b>
+                </td>
+                <td align="right" style="width:20%;">
+                     <img alt="" src="Images/logo_bottom.png" />
+                </td>
+            </tr>
+        </table>
+      </center>
     </div>
     </form>
 </body>

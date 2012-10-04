@@ -133,6 +133,7 @@
     <Content Include="Images\header-right-img.gif" />
     <Content Include="Images\ISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\ISOPaperGraph2_Sync4D.jpg" />
+    <Content Include="Images\logo_bottom.png" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
@@ -439,6 +440,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WebForm1.aspx" />
     <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
@@ -1327,6 +1329,13 @@
     <Compile Include="UserControl\Statusbar.ascx.designer.cs">
       <DependentUpon>Statusbar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebLogActivityManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1990,7 +1999,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

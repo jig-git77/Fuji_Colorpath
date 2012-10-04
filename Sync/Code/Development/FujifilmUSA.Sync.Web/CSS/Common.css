@@ -562,7 +562,7 @@ label
 #footer
 {
     height: 27px;
-    padding-top: 23px;
+    /*padding-top: 23px;*/
     padding-bottom: 30px;
     text-align: center;
     overflow: hidden;
