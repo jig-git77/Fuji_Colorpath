@@ -45,7 +45,7 @@
     </Reference>
     <Reference Include="RadGrid.Net2, Version=5.1.2.0, Culture=neutral, PublicKeyToken=ec87bc2939ec45df, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Web\Bin\RadGrid.Net2.dll</HintPath>
+      <HintPath>bin\RadGrid.Net2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\RadCalendar.Net2.dll" />
+    <Content Include="bin\RadGrid.Net2.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
