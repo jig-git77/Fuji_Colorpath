@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OperationSelection.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="OperationSelection.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OperationSelection" %>
 
 <div class="contant_top">

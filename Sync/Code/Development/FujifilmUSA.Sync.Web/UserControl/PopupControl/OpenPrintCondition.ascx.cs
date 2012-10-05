@@ -15,9 +15,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recnoDLPText = "noDLPText";
         private const string _recconfirmDLPText = "confirmDLPText";
         #endregion
-
+        
+        #region Constructor
+        public OpenPrintCondition()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+        
         private PresenterOpenPrintCondition _presenterOpenPrintCondition;
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterOpenPrintCondition = new PresenterOpenPrintCondition(this);
         }

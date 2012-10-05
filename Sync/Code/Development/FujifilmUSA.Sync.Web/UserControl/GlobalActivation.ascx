@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="GlobalActivation.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="GlobalActivation.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.GlobalActivation" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"

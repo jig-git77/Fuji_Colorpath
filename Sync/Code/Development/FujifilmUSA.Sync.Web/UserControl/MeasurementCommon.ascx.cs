@@ -17,6 +17,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
         #endregion
 
+        public MeasurementCommon()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

@@ -35,8 +35,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         : string.Empty;
             }
         }
-
-        protected void Page_Init(object sender, EventArgs e)
+        public ConfirmSave()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        }
+        protected override void OnInit(EventArgs e)
         {
             _presenterConfirmSave = new PresenterConfirmSave(this);
         }

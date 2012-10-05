@@ -10,7 +10,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         private PresenterDeviceManagement _presenterDeviceManagement;
 
-
+        public AddDeviceFamily()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region Page Events
         protected override void OnInit(EventArgs e)
         {

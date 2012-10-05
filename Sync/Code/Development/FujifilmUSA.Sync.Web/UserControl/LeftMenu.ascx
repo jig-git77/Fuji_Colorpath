@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LeftMenu.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenu" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="LeftMenu.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenu" %>
 <%@ Reference Control="~/UserControl/LeftMenuItem.ascx" %>
 <%@ Reference Control="~/UserControl/LeftMenuProjectItem.ascx" %>
 <%@ Reference Control="~/UserControl/LeftMenuProjectSetting.ascx" %>

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TargetColorSpace.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="TargetColorSpace.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.TargetColorSpace" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <style type="text/css">

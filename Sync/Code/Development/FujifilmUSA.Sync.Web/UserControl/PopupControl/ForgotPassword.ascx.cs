@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         #endregion
 
         #region Page Events
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterForgotPassword = new PresenterForgotPassword(this);
         }

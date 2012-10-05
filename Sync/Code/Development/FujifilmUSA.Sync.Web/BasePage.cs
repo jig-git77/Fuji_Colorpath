@@ -2,6 +2,8 @@
 using System.Web;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
+using System.Threading;
+using FujifilmUSA.Sync.Presenter;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -21,6 +23,36 @@ namespace FujifilmUSA.Sync.Web
         protected override void OnLoad(EventArgs e)
         {
             IsLogin();
+
+            #region Display error message in Statusbar control
+            if (!string.IsNullOrEmpty(SessionManager.Instance.PageErrorMessage))
+            {
+                System.Web.UI.Control control = this.FindStatusControl() as System.Web.UI.Control;
+                if (control != null)
+                {
+                    if (control.GetType().BaseType == typeof(FujifilmUSA.Sync.Web.UserControl.Statusbar))
+                        ((FujifilmUSA.Sync.Web.UserControl.Statusbar)control).DisplayMessage(SessionManager.Instance.PageErrorMessage, false);
+                    else if (control.GetType().BaseType == typeof(FujifilmUSA.Sync.Web.UserControl.AdminStatusbar))
+                        ((FujifilmUSA.Sync.Web.UserControl.AdminStatusbar)control).DisplayMessage(SessionManager.Instance.PageErrorMessage, false);
+                }
+            }
+            else
+            {
+                System.Web.UI.Control control = this.FindStatusControl() as System.Web.UI.Control;
+                if (control != null)
+                {
+                    if (control.GetType().BaseType == typeof(FujifilmUSA.Sync.Web.UserControl.Statusbar))
+                        ((FujifilmUSA.Sync.Web.UserControl.Statusbar)control).Visible = false;
+                    else if (control.GetType().BaseType == typeof(FujifilmUSA.Sync.Web.UserControl.AdminStatusbar))
+                        ((FujifilmUSA.Sync.Web.UserControl.AdminStatusbar)control).Visible = false;
+
+                }
+
+            }
+            #endregion
+            //Flush error message
+            SessionManager.Instance.PageErrorMessage = null;
+
             #region Admin Pages
             if (GetType().BaseType == typeof(AddBranchManagement))
             {
@@ -281,6 +313,20 @@ namespace FujifilmUSA.Sync.Web
             //}
             base.OnLoad(e);
         }
+        protected override void OnError(EventArgs e)
+        {
+            var ex = Server.GetLastError();
+            if (ex is ThreadAbortException)
+                return;
+
+            var presenterGlobal = new PresenterGlobal();
+            presenterGlobal.LogApplicationError(ex.GetBaseException());
+
+            SessionManager.Instance.PageErrorMessage = ex.Message;
+
+            Server.ClearError();
+            Response.Redirect(this.Request.Url.ToString());
+        }
         #endregion
 
         #region Methods
@@ -302,6 +348,39 @@ namespace FujifilmUSA.Sync.Web
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
             SessionManager.Instance.CurrentOperation = ELicenseType.None;
             Response.RedirectPermanent("Permission.aspx");
+        }
+        private System.Web.UI.Control FindStatusControl()
+        {
+            var targetControlID = "fujiStatusbar";
+            System.Web.UI.Control targetControl = null;
+            foreach (System.Web.UI.Control item in this.Controls)
+            {
+                targetControl = FindControlFromNestedCollection(targetControlID, item);
+                if (targetControl != null && targetControl.ID == targetControlID)
+                    break;
+            }
+            return targetControl;
+        }
+        private System.Web.UI.Control FindControlFromNestedCollection(string targetControlID, System.Web.UI.Control control)
+        {
+            if (control.ID == targetControlID)
+            {
+                return control;
+            }
+            else
+            {
+                foreach (System.Web.UI.Control item in control.Controls)
+                {
+                    if (item.HasControls())
+                    {
+                        System.Web.UI.Control lookFor = FindControlFromNestedCollection(targetControlID, item);
+                        if (lookFor != null && lookFor.ID == targetControlID)
+                            return lookFor;
+                    }
+                }
+
+            }
+            return null;
         }
         #endregion
     }

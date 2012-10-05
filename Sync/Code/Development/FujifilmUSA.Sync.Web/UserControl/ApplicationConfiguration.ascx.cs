@@ -14,7 +14,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class ApplicationConfiguration : BaseControl, IViewApplicationConfiguration
     {
         private PresenterApplicationConfiguration _presenterApplicationConfiguration;
-
+        public ApplicationConfiguration()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region Events
         protected override void OnInit(EventArgs e)
         {

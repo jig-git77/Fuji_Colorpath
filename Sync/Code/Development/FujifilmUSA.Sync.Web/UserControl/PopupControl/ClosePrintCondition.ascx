@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ClosePrintCondition.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ClosePrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ClosePrintCondition" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>

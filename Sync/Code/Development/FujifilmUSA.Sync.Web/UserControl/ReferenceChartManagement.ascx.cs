@@ -25,6 +25,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Constructor
+        public ReferenceChartManagement()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        } 
+        #endregion
+
         #region Page Events
         protected override void OnInit(EventArgs e)
         {

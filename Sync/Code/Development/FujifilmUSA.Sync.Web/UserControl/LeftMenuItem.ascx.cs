@@ -13,6 +13,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ItemName { get; set; }
         #endregion
 
+        #region Constructor
+        public LeftMenuItem()
+        {
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        } 
+        #endregion
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             switch (ItemLevel)

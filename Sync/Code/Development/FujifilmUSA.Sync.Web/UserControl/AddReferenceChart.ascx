@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AddReferenceChart.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="AddReferenceChart.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AddReferenceChart" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"

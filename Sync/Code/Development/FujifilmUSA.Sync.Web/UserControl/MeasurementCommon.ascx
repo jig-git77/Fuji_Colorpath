@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MeasurementCommon.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="MeasurementCommon.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.MeasurementCommon" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
 <script src="JS/wz_jsgraphics.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>

@@ -33,7 +33,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             set { ViewState["LicenseID"] = value.ToString(); }
         }
         #endregion
-
+        public AddLicenseManagement()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region Page Events
         protected override void OnInit(EventArgs e)
         {

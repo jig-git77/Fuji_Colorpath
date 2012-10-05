@@ -103,9 +103,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-
+        public Analyze()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region Page Method
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
             _presenterGlobal = new PresenterGlobal();
@@ -116,7 +119,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lbtnMeasurement.Visible = IsXMFUser;
             if (!IsPostBack)
             {
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;               
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
             }
 
             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
@@ -174,7 +177,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-                BindAvgDelta();               
+                BindAvgDelta();
                 FillAllTabsData();
             }
         }
@@ -187,7 +190,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (hdMeasurement.Value != "")
                 {
                     MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
-                }             
+                }
 
                 From_ΔE = Rbl_DT_E.SelectedValue;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
@@ -196,7 +199,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdMeasurement.DataBind();
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;                
                 FRMGeneratePDFReport.Attributes.Add("src", path);
                 FRMGeneratePDFReport.Style.Add("display", "");
             }
@@ -221,11 +224,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public void FillAllTabsData()
         {
             MeasurementId = 0;
-          
+
             if (hdMeasurement.Value != "")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
-            }        
+            }
 
             From_ΔE = Rbl_DT_E.SelectedValue;
             lblE_PryPatches.Text = From_ΔE;
@@ -277,18 +280,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series0 to display Thresold value (ΔELimit) === //
                 Series objSeries0 = (Series)ChartSummary_DeltaE.Series[0];
                 objSeries0.XValueType = ChartValueType.Int32;
-                objSeries0.YValueType = ChartValueType.String;              
+                objSeries0.YValueType = ChartValueType.String;
                 objSeries0.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series1 to display Actual value (ΔE) === //
                 Series objSeries1 = (Series)ChartSummary_DeltaE.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;               
+                objSeries1.YValueType = ChartValueType.String;
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartSummary_DeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-            
+
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -317,7 +320,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #region " === Fill Series === "
                 // === Limit with red marker === //
                 StringBuilder SBDeltaEPatches = new StringBuilder();
-                string TooltipTitle = string.Empty;            
+                string TooltipTitle = string.Empty;
 
                 if (DT != null && DT.Count > 0)
                 {
@@ -401,8 +404,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.Points[Index]["PointWidth"] = "-1";
 
                 Series SeriesActual = objSeries1;
-                objSeries1.Points.AddXY((Double)0, Y2);        
-       
+                objSeries1.Points.AddXY((Double)0, Y2);
+
                 #region Add Tooltip HTML
                 StringBuilder toolTip = new StringBuilder();
                 toolTip.Append("<table>");
@@ -420,7 +423,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 toolTip.Append("</td></tr>");
                 toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>"); //ΔE Value
                 toolTip.Append(DR[Index].ΔE.ToString());
-                toolTip.Append("</td></tr>");                
+                toolTip.Append("</td></tr>");
                 toolTip.Append("</table></td></tr>");
                 toolTip.Append("</table>");
                 #endregion
@@ -458,14 +461,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     #region Add Tooltip HTML
                     toolTip.Append("<table>");
-                    toolTip.Append("<tr><td><b>" + GetResourceString(_recPaperPathMetrics) +  "</b></td></tr>"); //Paper Patch Metrics
+                    toolTip.Append("<tr><td><b>" + GetResourceString(_recPaperPathMetrics) + "</b></td></tr>"); //Paper Patch Metrics
                     toolTip.Append("<tr><td><table>");
                     toolTip.Append("<tr><td>" + GetResourceString(_recActual) + "</td><td>"); //Actual LAB
                     toolTip.Append(GetResourceString(_recL) + DT[0].CielabL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + DT[0].CielabA.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + DT[0].CielabB.ToString());
                     toolTip.Append("</td></tr>");
-                    toolTip.Append("<tr><td>" +GetResourceString(_recTarget) +  "</td><td>"); //Target LAB
+                    toolTip.Append("<tr><td>" + GetResourceString(_recTarget) + "</td><td>"); //Target LAB
                     toolTip.Append(GetResourceString(_recL) + DT[0].TargetL.ToString());
                     toolTip.Append(" " + GetResourceString(_recA) + DT[0].Targeta.ToString());
                     toolTip.Append(" " + GetResourceString(_recB) + DT[0].Targetb.ToString());
@@ -770,7 +773,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private void AddPointLABChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, List<AnalyzeChart_Gray> DR, bool isActual)
-        {            
+        {
             try
             {
                 StringBuilder toolTip = new StringBuilder();
@@ -793,7 +796,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>");
                     //toolTip.Append(DR[_Index].ΔE.ToString());
                     //toolTip.Append("</td></tr>");
-                  
+
                     toolTip.Append("<tr><td>" + GetResourceString(_recDeltaL) + "</td><td>");
                     toolTip.Append(DR[_Index].ΔL.ToString());
                     toolTip.Append("</td></tr>");
@@ -861,8 +864,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Response.Redirect("Export.aspx");
             }
             else
-           {
-               //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
+            {
+                //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetMeasurementsOnRunId();
@@ -1063,6 +1066,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string From_ΔE { get; set; }
 
-        #endregion       
+        #endregion
     }
 }

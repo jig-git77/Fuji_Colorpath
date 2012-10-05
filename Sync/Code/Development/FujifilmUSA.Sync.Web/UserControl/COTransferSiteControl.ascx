@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="COTransferSiteControl.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.COTransferSiteControl" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="COTransferSiteControl.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.COTransferSiteControl" %>
 
 <div class="Global_top">
     &nbsp;</div>

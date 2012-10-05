@@ -23,7 +23,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recSelectInstrumentType = "selectInstrumentTypeText";
         #endregion
 
-
+        public AddMeasurementDevice()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region "Declaration"
         private PresenterDevice _presenterdevice;
         private int MId

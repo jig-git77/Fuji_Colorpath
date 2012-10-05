@@ -4,9 +4,16 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
-{
+{    
     public partial class Header : BaseControl
     {
+        #region Constructor
+        public Header()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         public string UsernameHeaderText
         {
             get

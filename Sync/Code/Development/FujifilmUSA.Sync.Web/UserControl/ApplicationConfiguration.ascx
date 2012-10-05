@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ApplicationConfiguration.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ApplicationConfiguration" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ApplicationConfiguration.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ApplicationConfiguration" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <script type="text/javascript" language="javascript">
     $(function () {

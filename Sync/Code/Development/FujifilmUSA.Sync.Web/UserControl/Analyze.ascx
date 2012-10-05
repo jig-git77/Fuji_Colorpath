@@ -1,8 +1,7 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
-
 <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
@@ -1129,8 +1128,8 @@
                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
                                     <tr>
                                         <td valign="top">
-                                            <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 350px;
-                                                width: 100%; display: none" frameborder="0" scrolling="no"></iframe>
+                                         <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 350px;
+                                                width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>
                                     </tr>
                                 </table>

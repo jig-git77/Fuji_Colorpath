@@ -21,6 +21,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recbranchAndCompanyRequired = "branchAndCompanyRequired";
         #endregion
 
+        #region Constructor
+        public DeviceList()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {

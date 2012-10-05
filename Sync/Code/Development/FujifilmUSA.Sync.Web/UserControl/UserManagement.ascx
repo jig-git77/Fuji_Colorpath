@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UserManagement.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="UserManagement.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.UserManagement" %>
 <%@ Register Src="~/UserControl/AdminStatusbar.ascx" TagName="AdminStatusbar" TagPrefix="ucAdminStatusbar" %>
 <style type="text/css">

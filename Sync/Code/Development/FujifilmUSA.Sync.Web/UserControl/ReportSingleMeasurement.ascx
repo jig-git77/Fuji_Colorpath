@@ -1,5 +1,6 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ReportSingleMeasurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ReportSingleMeasurement" %>
-
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ReportSingleMeasurement.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.ReportSingleMeasurement" %>
+<%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
+<uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
     onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />

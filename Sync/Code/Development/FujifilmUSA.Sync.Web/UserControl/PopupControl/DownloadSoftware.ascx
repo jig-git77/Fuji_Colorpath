@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DownloadSoftware.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.DownloadSoftware" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="DownloadSoftware.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.PopupControl.DownloadSoftware" %>
 <style type="text/css">
     div.RadGrid .rgRow
     {

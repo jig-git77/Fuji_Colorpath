@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeviceList.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="DeviceList.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.DeviceList" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"

@@ -39,8 +39,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recinvalidKeyPassed = "invalidKeyPassed";
         #endregion
 
+        #region Constructor
+        public GlobalActivation()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         #region Page Events
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterGlobalActivation = new PresenterGlobalActivation(this);
         }

@@ -6,6 +6,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class AdminMenuBar : BaseControl
     {
+        #region Constructor
+        public AdminMenuBar()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {

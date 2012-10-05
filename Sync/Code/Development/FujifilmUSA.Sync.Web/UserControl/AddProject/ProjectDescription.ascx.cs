@@ -6,6 +6,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectDescription : BaseControl
     {
+        public ProjectDescription()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+
         #region Page Events
         protected void Page_Load(object sender, EventArgs e)
         {

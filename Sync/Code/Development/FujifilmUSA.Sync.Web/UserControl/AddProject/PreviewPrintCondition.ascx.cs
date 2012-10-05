@@ -32,6 +32,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        public PreviewPrintCondition()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+
         protected override void OnInit(EventArgs e)
         {
             _presenterPreviewPrintCondition = new PresenterPreviewPrintCondition(this);

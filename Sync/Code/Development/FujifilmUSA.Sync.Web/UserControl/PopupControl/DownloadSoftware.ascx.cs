@@ -16,6 +16,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         private const string _recColorPathInstallerPC = "colorPathInstallerPC";
         #endregion
 
+        #region Constructor
+        public DownloadSoftware()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             rgDownload.PageSize = Common.Utilities.PageSize;

@@ -7,6 +7,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenuProjectSetting : BaseControl
     {
+        public LeftMenuProjectSetting()
+        {
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        }
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             lnkDescription.Enabled =

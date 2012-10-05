@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="LeftMenuProjectItem.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="LeftMenuProjectItem.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.LeftMenuProjectItem" %>
 
 <script type="text/javascript">

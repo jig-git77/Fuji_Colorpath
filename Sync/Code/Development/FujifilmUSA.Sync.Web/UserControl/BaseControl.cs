@@ -52,5 +52,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #endregion
+
+        protected void ExceptionHandling(Action<object,EventArgs> actionList,object sender, EventArgs e)
+        {
+            try
+            {
+                actionList(sender, e);
+            }
+            catch (Exception ex)
+            {
+                var presenterGlobal = new FujifilmUSA.Sync.Presenter.PresenterGlobal();
+                presenterGlobal.LogApplicationError(ex);
+
+                this.ErrorOccured(this, new Entity.ErrorArgs(ex.Message));
+            }
+        }       
     }
 }

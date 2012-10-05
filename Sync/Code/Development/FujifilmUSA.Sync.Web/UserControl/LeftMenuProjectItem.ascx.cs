@@ -20,9 +20,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterLeftMenuProjectItem _presenterLeftMenuProjectItem;
         #endregion
 
+        #region Constructor
+        public LeftMenuProjectItem()
+        {
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        } 
+        #endregion
+
         #region "Page Events"
 
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterLeftMenuProjectItem = new PresenterLeftMenuProjectItem(this);
         }

@@ -12,15 +12,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterSaveWindow _presenterSaveWindow;
         private const string _recDownloadChartNotAvailable = "downloadChartNotAvailable";
         private const string _recSaveAs = "saveAs";
-        protected void Page_Init(object sender, EventArgs e)
+
+        public SaveWindow()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+
+        #region Page Events
+        protected override void OnInit(EventArgs e)
         {
             _presenterSaveWindow = new PresenterSaveWindow(this);
         }
 
-        #region "Control Events"
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
             if (!IsPostBack)
             {
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
@@ -29,7 +35,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Page.Title = GetResourceString(_recSaveAs);
                 }
             }
-        }
+        } 
+        #endregion
+
+        #region "Control Events"        
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;

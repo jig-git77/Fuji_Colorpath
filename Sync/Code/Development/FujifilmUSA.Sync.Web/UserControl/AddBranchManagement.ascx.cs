@@ -31,7 +31,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-
+        public AddBranchManagement()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
         #region Page Events
         protected override void OnInit(EventArgs e)
         {

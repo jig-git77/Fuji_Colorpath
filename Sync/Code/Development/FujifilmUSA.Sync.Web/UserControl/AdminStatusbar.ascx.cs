@@ -10,6 +10,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public bool Status { get; set; }
         #endregion
 
+        #region Constructor
+        public AdminStatusbar()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        } 
+        #endregion
+
         #region Page events
         protected void Page_Load(object sender, EventArgs e)
         {

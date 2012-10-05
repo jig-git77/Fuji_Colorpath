@@ -7,6 +7,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class LeftMenu : BaseControl
     {
+        #region Constructor
+        public LeftMenu()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        } 
+        #endregion
+
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
         {

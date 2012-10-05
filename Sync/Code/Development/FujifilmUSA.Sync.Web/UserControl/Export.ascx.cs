@@ -15,6 +15,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recDownloadChartNotAvailable = "downloadChartNotAvailableText";
         #endregion
 
+        #region Construtor
+        public Export()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         private PresenterExport _presenterExport;
         public string AddMeasurement_DeleteMeasurement_Confirmation
         {
@@ -24,7 +31,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterExport = new PresenterExport(this);
         }

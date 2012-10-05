@@ -22,9 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
+        public ProjectList()
+        {            
+            this.Init += (sender, e) => this.ExceptionHandling(Page_Init, sender, e);
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        }
 
         #region Page Events
-        protected override void OnInit(EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             _presenterProjectList = new PresenterProjectList(this);
 
@@ -34,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
             rgProjectList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
@@ -47,14 +53,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_PreRender(object sender, EventArgs e)
         {
             //------------Apply default CurrentFilterFunction for "CreateDate" column of rgProjectList RadGrid-----------------//
-            rgProjectList.Columns[6].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
-
+            rgProjectList.Columns[6].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;            
         }
         #endregion
 
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
-        {
+        {            
             if (Convert.ToInt32(ViewState["ProjectLimit"]) >= SessionManager.Instance.CurrentProjLimit)
             {
                 //--------------Project Limit reach, so can not create more projects under this Device now-------//  
@@ -135,7 +140,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");                 
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
                     break;
                 case EOptimizeRunStatus.Certify:
                     if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
@@ -147,7 +152,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
 
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");                    
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
                     break;
             }
 

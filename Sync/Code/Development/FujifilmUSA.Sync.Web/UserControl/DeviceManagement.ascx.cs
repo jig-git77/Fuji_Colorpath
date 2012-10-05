@@ -27,6 +27,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region
+        public DeviceManagement()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+        #endregion
+
         #region Page Events
         protected override void OnInit(EventArgs e)
         {

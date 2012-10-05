@@ -6,7 +6,8 @@
 <html>
 
 <head id="Head1" runat="server">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />    
     <title>Fujifilm Color Path</title>
     <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
     <script src="JS/html5.js?version=4" type="text/javascript"></script>

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ProjectDescription.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ProjectDescription.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ProjectDescription" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"

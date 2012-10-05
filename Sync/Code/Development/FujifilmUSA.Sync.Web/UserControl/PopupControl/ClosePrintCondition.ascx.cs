@@ -17,9 +17,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recoptimizeCompleteText = "optimizeCompleteText";
         private const string _recnoDLPText = "noDLPText";
         #endregion
-
+        public ClosePrintCondition()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
+        }
         #region "Event"
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterClosePrintCondition = new PresenterClosePrintCondition(this);
         }

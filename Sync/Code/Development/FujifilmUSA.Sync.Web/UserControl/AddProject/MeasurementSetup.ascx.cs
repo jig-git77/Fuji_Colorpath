@@ -50,6 +50,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        public MeasurementSetup()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+
         #region "Page Events"
         protected override void OnInit(EventArgs e)
         {

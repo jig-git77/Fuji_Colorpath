@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AdminStatusbar.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="AdminStatusbar.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.AdminStatusbar" %>
 
 <div id="adminstatusbar">

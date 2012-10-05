@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="OpenPrintCondition.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="OpenPrintCondition.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.OpenPrintCondition" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <script language="javascript" type="text/javascript">

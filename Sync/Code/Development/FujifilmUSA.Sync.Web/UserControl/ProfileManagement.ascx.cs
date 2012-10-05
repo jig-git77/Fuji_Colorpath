@@ -22,8 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region Constructor
+        public ProfileManagement()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        } 
+        #endregion
+
         #region Page Events
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             _presenterProfileManagement = new PresenterProfileManagement(this);
         }

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ConfirmSave.ascx.cs"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ConfirmSave.ascx.cs"
     Inherits="FujifilmUSA.Sync.Web.UserControl.ConfirmSave" %>
 <%@ Import Namespace="FujifilmUSA.Sync.Business" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>

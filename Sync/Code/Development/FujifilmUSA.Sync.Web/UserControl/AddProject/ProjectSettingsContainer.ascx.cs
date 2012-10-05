@@ -5,7 +5,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectSettingsContainer : BaseControl
     {
-        protected void Page_Init(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
         {
             LoadProjectSettingControls();
         }

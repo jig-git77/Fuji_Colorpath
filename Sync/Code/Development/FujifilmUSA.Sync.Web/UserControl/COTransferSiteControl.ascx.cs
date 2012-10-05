@@ -13,8 +13,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class COTransferSiteControl : BaseControl, IViewCOTransferSiteControl
     {
         private PresenterCOTransferSiteControl _presenterCOTransferSiteControl;
-
-        protected void Page_Init(object sender, EventArgs e)
+        public COTransferSiteControl()
+        {
+            this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+        }
+        protected override void OnInit(EventArgs e)
         {
             _presenterCOTransferSiteControl = new PresenterCOTransferSiteControl(this);
         }
