@@ -57,7 +57,7 @@
   <ItemGroup>
     <Reference Include="ABCpdf, Version=8.1.1.9, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files\WebSupergoo\ABCpdf .NET 8.1 x64\Common\ABCpdf.dll</HintPath>
+      <HintPath>..\Web\DLL\ABCpdf.dll</HintPath>
     </Reference>
     <Reference Include="Formulas, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
