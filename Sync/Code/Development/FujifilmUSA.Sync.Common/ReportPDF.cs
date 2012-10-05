@@ -424,7 +424,7 @@ namespace FujifilmUSA.Sync.Common
             #endregion                     
 
             #region Assign Server
-            SBStr.Replace("##URLIMAGES##", System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, System.Web.HttpContext.Current.Request.Url.ToString().LastIndexOf('/')) + "/Images/");
+            //SBStr.Replace("##URLIMAGES##", System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, System.Web.HttpContext.Current.Request.Url.ToString().LastIndexOf('/')) + "/Images/");
             SBStr.Replace("##IMAGES##", strServer);
             #endregion
 

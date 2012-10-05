@@ -69,7 +69,8 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
  
  /***** Start CSS For Single Measurement Report ****/
  
-.header-bg {margin:0; padding:0;}
+.header-bg {margin:0; padding:0; background:url(../Images/header-middle-bg.gif) repeat-x left top;}
+.Summarychart_header_bg {width: 263px; height: 245px; padding-top: 17px; padding-left: 12px; border: 2px solid #ccc; background:url(../Images/abChartBackGround.gif);}
 .header-title { margin:0; padding:0 0 0 10px; vertical-align:top; font-size:20px; color:#FFF; width:300px; line-height:43px; height:53px; display:block;}
 
 .passed-title-bg { margin:0; padding:0;  width:392px; height:30px;}
@@ -89,7 +90,7 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
 
 .row-content1{ margin:0; padding:2px 0px; font-size:10px; font-weight:normal;}
 
-.summary-bg { margin:0; padding:0; height:22px; }
+.summary-bg { margin:0; padding:0; height:22px; background:url(../Images/summary-title-bg.gif) repeat-x left top;}
 .summary-title { margin:0 0 0 8px; padding:0; color:#fff; font-size:14px; }
 .summary-title1 { margin:0 0 0 8px; padding:0; color:#fff; font-size:11px; }
 
