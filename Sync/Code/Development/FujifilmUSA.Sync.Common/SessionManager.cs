@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _currentLanguage = "CurrentLanguage";
         private const string _selectedCompany = "SelectedCompany";
         private const string _selectedBranch = "SelectedBranch";
+        private const string _pageErrorMessage = "PageErrorMessage";
         #endregion
 
         #region Singleton
@@ -234,6 +235,21 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
+        public string PageErrorMessage
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_pageErrorMessage] != null)
+                {                                        
+                    return HttpContext.Current.Session[_pageErrorMessage].ToString(); 
+                }
+                return string.Empty;
+            }
+            set
+            {
+                HttpContext.Current.Session[_pageErrorMessage] = value;
+            }
+        }
         #endregion
     }
 }
