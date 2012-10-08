@@ -36,7 +36,7 @@
     </div>
     <div id="footer">
         <center>
-         <table style="width:70%;">
+         <table style="width:954px">
             <tr>
                 <td style="width:20%; padding-left:7px;">
                     <img alt="" src="Images/logo_Fujifilm.png" />

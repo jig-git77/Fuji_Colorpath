@@ -111,8 +111,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                             txtMaxInk.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackGeneration:
-                                            rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
-                                            txtMode.Text = x.ProfilerOptionValue;
+                                            //rdsMode.Value = Convert.ToDecimal(x.ProfilerOptionValue);
+                                            //txtMode.Text = x.ProfilerOptionValue;
                                             break;
                                         case EProfilerOption.BlackStart:
                                             rdsBlackStart.Value = Convert.ToDecimal(x.ProfilerOptionValue);

@@ -243,7 +243,7 @@
                                                                         </telerik:RadSlider>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox runat="server" ID="txtMode" Width="30px" 
+                                                                        <asp:TextBox runat="server" ID="txtMode" Width="30px"
                                                                             meta:resourcekey="txtModeResource1"></asp:TextBox>
                                                                     </td>
                                                                 </tr>
