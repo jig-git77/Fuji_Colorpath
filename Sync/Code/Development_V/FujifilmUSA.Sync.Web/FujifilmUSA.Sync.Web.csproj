@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit">
-      <HintPath>..\Solution References\AjaxControlToolkit.dll</HintPath>
+      <HintPath>..\..\Solution References\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Service.Common.Encryption">
@@ -67,10 +67,10 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Telerik.Web.UI, Version=2011.3.1305.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Solution References\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\..\Solution References\Telerik.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Web.UI.Skins">
-      <HintPath>..\Solution References\Telerik.Web.UI.Skins.dll</HintPath>
+      <HintPath>..\..\Solution References\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
