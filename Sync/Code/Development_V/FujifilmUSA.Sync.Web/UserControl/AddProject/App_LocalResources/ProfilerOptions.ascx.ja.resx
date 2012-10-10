@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="chk100BlackResource1.Text" xml:space="preserve">
+    <value>  100% Black_ja</value>
+  </data>
+  <data name="chk100BlackResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chk100CMYResource1.Text" xml:space="preserve">
+    <value>  100% C,M,Y_ja</value>
+  </data>
+  <data name="chk100CMYResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chk100RGBResource1.Text" xml:space="preserve">
+    <value>  100% R,G,B_ja</value>
+  </data>
+  <data name="chk100RGBResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chk400BlackResource1.Text" xml:space="preserve">
+    <value>  400% Black_ja</value>
+  </data>
+  <data name="chk400BlackResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkBlackOverPrintResource1.Text" xml:space="preserve">
+    <value>  Black Overprint_ja</value>
+  </data>
+  <data name="chkBlackOverPrintResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkBorderClippingResource1.Text" xml:space="preserve">
+    <value>  Border Clipping_ja</value>
+  </data>
+  <data name="chkBorderClippingResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkDuplexResource1.Text" xml:space="preserve">
+    <value>  Duplex_ja</value>
+  </data>
+  <data name="chkDuplexResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkGrayResource1.Text" xml:space="preserve">
+    <value>  Gray_ja</value>
+  </data>
+  <data name="chkGrayResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkMaxCMYResource1.Text" xml:space="preserve">
+    <value>  Max. C,M,Y_ja</value>
+  </data>
+  <data name="chkMaxCMYResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkMaxRGBResource1.Text" xml:space="preserve">
+    <value>  Max. R,G,B_ja</value>
+  </data>
+  <data name="chkMaxRGBResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkPCResource1.Text" xml:space="preserve">
+    <value>  C_ja</value>
+  </data>
+  <data name="chkPCResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkPMResource1.Text" xml:space="preserve">
+    <value>  M_ja</value>
+  </data>
+  <data name="chkPMResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkPrimariesResource1.Text" xml:space="preserve">
+    <value>  Primaries_ja</value>
+  </data>
+  <data name="chkPrimariesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkPYResource1.Text" xml:space="preserve">
+    <value>  Y_ja</value>
+  </data>
+  <data name="chkPYResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSCMResource1.Text" xml:space="preserve">
+    <value>  CM_ja</value>
+  </data>
+  <data name="chkSCMResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSCYResource1.Text" xml:space="preserve">
+    <value>  CY_ja</value>
+  </data>
+  <data name="chkSCYResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSecondariesResource1.Text" xml:space="preserve">
+    <value>  Secondaries_ja</value>
+  </data>
+  <data name="chkSecondariesResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSMYResource1.Text" xml:space="preserve">
+    <value>  MY_ja</value>
+  </data>
+  <data name="chkSMYResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkTriplexResource1.Text" xml:space="preserve">
+    <value>  Triplex_ja</value>
+  </data>
+  <data name="chkTriplexResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkWhiteResource1.Text" xml:space="preserve">
+    <value>  White_ja</value>
+  </data>
+  <data name="chkWhiteResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cmbRenderingResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cmbSelectedPresetsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image1Resource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Image1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgAddResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgAddResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkbtnProfilerOptionsResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkbtnProfilerOptionsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkbtnTargetColorSpaceResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkbtnTargetColorSpaceResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="locAdvancedOptionsResource1.Text" xml:space="preserve">
+    <value>Advanced Options_ja</value>
+  </data>
+  <data name="locBlackGenerationResource1.Text" xml:space="preserve">
+    <value>Black - Generation_ja</value>
+  </data>
+  <data name="locBlackStartResource1.Text" xml:space="preserve">
+    <value>Black-Start:_ja</value>
+  </data>
+  <data name="locBlackWidthResource1.Text" xml:space="preserve">
+    <value>Black-Width:_ja</value>
+  </data>
+  <data name="locCustomResource1.Text" xml:space="preserve">
+    <value>Custom:_ja</value>
+  </data>
+  <data name="locExceptionsResource1.Text" xml:space="preserve">
+    <value>Exceptions_ja</value>
+  </data>
+  <data name="locGCRResource1.Text" xml:space="preserve">
+    <value>GCR:_ja</value>
+  </data>
+  <data name="locMaxInkResource1.Text" xml:space="preserve">
+    <value>Max-Ink:_ja</value>
+  </data>
+  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+    <value>Measurement Setup_ja</value>
+  </data>
+  <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
+    <value>New Print Condition - Profiler Options_ja</value>
+  </data>
+  <data name="locOptionsPresetsResource1.Text" xml:space="preserve">
+    <value>Options Presets_ja</value>
+  </data>
+  <data name="locPresetDescriptionResource1.Text" xml:space="preserve">
+    <value>Preset Description:_ja</value>
+  </data>
+  <data name="locRangeResource1.Text" xml:space="preserve">
+    <value>Range:_ja</value>
+  </data>
+  <data name="locRendering1Resource1.Text" xml:space="preserve">
+    <value>Rendering_ja</value>
+  </data>
+  <data name="locRendering2Resource1.Text" xml:space="preserve">
+    <value>Rendering:_ja</value>
+  </data>
+  <data name="locSelectedPresetsResource1.Text" xml:space="preserve">
+    <value>Selected Presets:_ja</value>
+  </data>
+  <data name="locTargetColorSpaceResource1.Text" xml:space="preserve">
+    <value>Target ColorSpace_ja</value>
+  </data>
+  <data name="panelAddProjectDescriptionResource1.GroupingText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAddProjectDescriptionResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAdvancedOptionsResource1.GroupingText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAdvancedOptionsResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rdsBlackStartResource1.DecreaseText" xml:space="preserve">
+    <value>Decrease_ja</value>
+  </data>
+  <data name="rdsBlackStartResource1.DragText" xml:space="preserve">
+    <value>Drag_ja</value>
+  </data>
+  <data name="rdsBlackStartResource1.IncreaseText" xml:space="preserve">
+    <value>Increase_ja</value>
+  </data>
+  <data name="rdsBlackStartResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rdsBlackWidthResource1.DecreaseText" xml:space="preserve">
+    <value>Decrease_ja</value>
+  </data>
+  <data name="rdsBlackWidthResource1.DragText" xml:space="preserve">
+    <value>Drag_ja</value>
+  </data>
+  <data name="rdsBlackWidthResource1.IncreaseText" xml:space="preserve">
+    <value>Increase_ja</value>
+  </data>
+  <data name="rdsBlackWidthResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rdsModeResource1.DecreaseText" xml:space="preserve">
+    <value>Decrease_ja</value>
+  </data>
+  <data name="rdsModeResource1.DragText" xml:space="preserve">
+    <value>Drag_ja</value>
+  </data>
+  <data name="rdsModeResource1.IncreaseText" xml:space="preserve">
+    <value>Increase_ja</value>
+  </data>
+  <data name="rdsModeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rdsRangeResource1.DecreaseText" xml:space="preserve">
+    <value>Decrease_ja</value>
+  </data>
+  <data name="rdsRangeResource1.DragText" xml:space="preserve">
+    <value>Drag_ja</value>
+  </data>
+  <data name="rdsRangeResource1.IncreaseText" xml:space="preserve">
+    <value>Increase_ja</value>
+  </data>
+  <data name="rdsRangeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackPointCustomResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackPointCustomResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackStartResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackStartResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackWidthResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtBlackWidthResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtMaxInkResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtMaxInkResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtModeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtModeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtProfileDescriptionResource1.Text" xml:space="preserve">
+    <value>This preset is best used for analog devices ……_ja</value>
+  </data>
+  <data name="txtProfileDescriptionResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtRangeResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtRangeResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+</root>
