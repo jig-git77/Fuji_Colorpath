@@ -14,5 +14,8 @@ namespace FujifilmUSA.Sync.Entity
         public string DensityType { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public KeyValuePair<short,string> ReferenceChartType { get; set; }
+        public short? VMeasurementDeviceID { get; set; }
+        public KeyValuePair<short, string> OPTReferenceChartTypeID { get; set; }
+        public KeyValuePair<short, string> VReferenceChartTypeID { get; set; }
     }
 }
