@@ -104,6 +104,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
+        public List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            return new List<Project>();
+        }
+
         #endregion
 
         #region ITaskBase Members

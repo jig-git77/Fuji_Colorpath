@@ -192,4 +192,13 @@
   <data name="uploadMeasurement" xml:space="preserve">
     <value>Upload Measurement</value>
   </data>
+  <data name="ImportMeasurementsButton" xml:space="preserve">
+    <value>Import Measurements</value>
+  </data>
+  <data name="locImportMeaResource1.Text" xml:space="preserve">
+    <value>Import Measurements</value>
+  </data>
+  <data name="dsa" xml:space="preserve">
+    <value>fdsf</value>
+  </data>
 </root>

@@ -134,7 +134,15 @@
     <div class="color_pallate">
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" 
-                meta:resourcekey="locRecentUploadResource1"></asp:Localize></div>
+                meta:resourcekey="locRecentUploadResource1"></asp:Localize>
+            <div id="Div_ImportMeasurements" runat="server" visible="false" style="float:right; padding-right:10px;">
+                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />
+              <%--  <asp:LinkButton ID="btnImportMeasurements" runat="server" CssClass="button" Text="Import Measurements"
+                     OnClientClick="javascript:return ShowImportWindow();">
+                     
+                </asp:LinkButton>--%>
+            </div>
+        </div>
         <div class="color_pallate_middle">
             <div id="measurementContainer">
             </div>
@@ -478,8 +486,29 @@
         jQuery("[id*='divProgressImageMaster']").hide();
     }
 
+     function ShowImportWindow() {      
+        var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+
+      function Close() {
+        var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }
 
 </script>
 <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
     position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
 </div>
+
+
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+    <Windows>
+        <telerik:RadWindow ID="ImportMeasurementWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="400"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>

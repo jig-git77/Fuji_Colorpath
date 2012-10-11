@@ -192,4 +192,7 @@
   <data name="uploadMeasurement" xml:space="preserve">
     <value>Upload Measurement_de</value>
   </data>
+  <data name="ImportMeasurementsButton" xml:space="preserve">
+    <value>Import Measurements_de</value>
+  </data>
 </root>

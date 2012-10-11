@@ -787,6 +787,61 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data;
         }
 
+        public List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            var objProjectList = new List<Project>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetProjectList",
+                                new object[]
+                                        {
+                                            deviceId, LicenseTypeID
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        objProjectList = dsProjectList.Tables[0].AsEnumerable().
+                            Select(x => new Project()
+                            {
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
+                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                SourceProfile = new SourceProfile()
+                                {
+                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                                    ProfileName = DataReader.ReadString(x, "ProfileName")
+                                },
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                PrintCondition =
+                                    new PrintCondition()
+                                    {
+                                        Media = DataReader.ReadString(x, "Media"),
+                                        Colorant = DataReader.ReadString(x, "Colorant"),
+                                        RipSettings = DataReader.ReadString(x, "RipSettings")
+                                    },
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
+                                                               DataReader.ReadString(x, "ProjectName"),
+                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
+                                                               : String.Format("{0} DLP{1}.icc",
+                                                               DataReader.ReadString(x, "ProjectName"),
+                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00"))
+
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
+            return objProjectList;
+        }
+
         #endregion
 
         #region ITaskBase Members
