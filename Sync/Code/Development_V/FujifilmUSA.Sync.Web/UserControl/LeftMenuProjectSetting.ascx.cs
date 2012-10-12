@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkTargetColorSpace.Enabled =
                 lnkProfilerOption.Enabled =
                 lnkMeasurementSetup.Enabled =
+                lnkValidationSetup.Enabled =
                 lnkSave.Enabled =
                 lnkMeasure.Enabled =
                 lnkAnalyze.Enabled =
@@ -38,6 +39,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
             {
                 lnkMeasurementSetup.Enabled = true;
+            }
+            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartTypeID.Key > 0)
+            {
+                lnkValidationSetup.Enabled = true;
             }
             if (SessionManager.Instance.CurrentProject.ProjectId > 0)
             {
@@ -60,6 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lnkTargetColorSpace.Font.Bold =
             lnkProfilerOption.Font.Bold =
             lnkMeasurementSetup.Font.Bold =
+            lnkValidationSetup.Font.Bold =
             lnkSave.Font.Bold =
             lnkMeasure.Font.Bold =
             lnkAnalyze.Font.Bold =
@@ -75,6 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkTargetColorSpace.ForeColor = System.Drawing.Color.Silver;
                         lnkProfilerOption.ForeColor = System.Drawing.Color.Silver;
                         lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkValidationSetup.ForeColor = System.Drawing.Color.Silver;
                         lnkSave.ForeColor = System.Drawing.Color.Silver;
                         lnkMeasure.ForeColor = System.Drawing.Color.Silver;
                         lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
@@ -96,6 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkProfilerOption.ForeColor = System.Drawing.Color.Silver;
                         lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkValidationSetup.ForeColor = System.Drawing.Color.Silver;
                         lnkSave.ForeColor = System.Drawing.Color.Silver;
                         lnkMeasure.ForeColor = System.Drawing.Color.Silver;
                         lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
@@ -116,6 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
                     {
                         lnkMeasurementSetup.ForeColor = System.Drawing.Color.Silver;
+                        lnkValidationSetup.ForeColor = System.Drawing.Color.Silver;
                         lnkSave.ForeColor = System.Drawing.Color.Silver;
                         lnkMeasure.ForeColor = System.Drawing.Color.Silver;
                         lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
@@ -149,6 +158,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                     break;
+                case ELeftMenuItemLevel.ValidationSetup:
+                    lnkValidationSetup.Font.Bold = true;
+                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasMeasurements))
+                    {
+                        lnkSave.ForeColor = System.Drawing.Color.Silver;
+                        lnkMeasure.ForeColor = System.Drawing.Color.Silver;
+                        lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                        lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                    }
+                    else
+                    {
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1 && !SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            lnkAnalyze.ForeColor = System.Drawing.Color.Silver;
+                            lnkDownload.ForeColor = System.Drawing.Color.Silver;
+                        }
+                    }
+                    break;
+
                 case ELeftMenuItemLevel.Save:
                     lnkSave.Font.Bold = true;
                     lnkSave.ForeColor = System.Drawing.Color.Black;
@@ -231,6 +260,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case "lnkMeasurementSetup":
                             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+                            Response.Redirect("~/AddProject.aspx");
+                            break;
+                        case "lnkValidationSetup":
+                            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
                             Response.Redirect("~/AddProject.aspx");
                             break;
                         case "lnkSave":

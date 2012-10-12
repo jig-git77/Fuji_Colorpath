@@ -36,6 +36,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ctrl.ID = "ctrl_MeasurementSetup";
                     ph.Controls.Add(ctrl);
                     break;
+                case ELeftMenuItemLevel.ValidationSetup:
+                    ctrl = this.LoadControl("~/UserControl/AddProject/ValidationSetup.ascx");
+                    ctrl.ID = "ctrl_ValidationSetup";
+                    ph.Controls.Add(ctrl);
+                    break;
                 case ELeftMenuItemLevel.Save:
                     ctrl = this.LoadControl("~/UserControl/AddProject/PreviewPrintCondition.ascx");
                     ctrl.ID = "ctrl_SavePrintCondition";

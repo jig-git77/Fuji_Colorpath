@@ -11,11 +11,10 @@
     <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" ValidationGroup="vgMeasurementSetup"
         CssClass="button" OnClick="lnkbtnMeasurementSetup_Click">
         <span>
-            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Search.png" 
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" 
         meta:resourcekey="Image1Resource1" />
             
-<asp:Localize runat="server" Text="Review Selections" ID="locReviewSelection" 
-        meta:resourcekey="locReviewSelectionResource1"></asp:Localize>
+<asp:Localize runat="server" Text="Validation Setup" ID="locValidationSetup"></asp:Localize>
 </span></asp:LinkButton>
     <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" 
         OnClick="lbtnMeasure_Click">
@@ -66,7 +65,7 @@
                                 meta:resourcekey="panelSpectrophotometerOptionsResource1">
                                 <table>
                                     <tr>
-                                        <td style="width: 160px">
+                                        <td style="width: 160px;">
                                             <span><asp:Localize Text="Measurement Device:" runat="server" 
                                                 ID="locMeasurementDevice" meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
@@ -140,7 +139,7 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left;">
-                                        <label><asp:Localize runat="server" Text="Alignment Chart" 
+                                        <label><asp:Localize runat="server" Text="Charts" 
                                             ID="locAlignmentChart" meta:resourcekey="locAlignmentChartResource1"></asp:Localize></label>
                                     </div>
                                     <div class="clear">
@@ -150,13 +149,13 @@
                             <asp:Panel ID="panelAlignmentChart" Style="margin-left: 5px; margin-right: 5px;"
                                 runat="server" BorderStyle="None" 
                                 meta:resourcekey="panelAlignmentChartResource1">
-                                <table cellpadding="0" cellspacing="0" width="100%">
+                                <table cellpadding="0" cellspacing="0" width="100%" style="padding: 10px 5px 10px 5px;">
                                     <tr>
-                                        <td>
-                                            <span><asp:Localize Text="Alignment Chart:" runat="server" 
+                                        <td valign="top" style="width: 160px;">
+                                            <span><asp:Localize Text="Base DLP Chart:" runat="server" 
                                                 ID="txtAlignmentChart" meta:resourcekey="txtAlignmentChartResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
-                                        <td>
+                                        <td valign="top">
                                             <div style="float: left;">
                                                 <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select"
                                                     AutoPostBack="True" 
@@ -168,17 +167,43 @@
                                                 <asp:RequiredFieldValidator ID="rfvAlignmentChart" runat="server" Display="Dynamic"
                                                     ControlToValidate="cmbAlignmentChart" ForeColor="Red" InitialValue="0" 
                                                     ValidationGroup="vgMeasurementSetup"><ucValidationContainer:ValidationContainer ID="rfvcAlignmentChartContainer" runat="server"
-                                                        ValidationMsg="Please select alignment chart." Size="200" />
+                                                        ValidationMsg="Please select Base DLP chart." Size="200" />
+                                                </asp:RequiredFieldValidator>
+                                            </div>                                            
+                                            <div class="clear">
+                                            </div>
+                                        </td>
+                                        <td valign="top" align="right">
+                                                <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" Width="230px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="padding: 5px 0px 5px 0px;">  
+                                           <hr />                                           
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">
+                                            <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                        </td>
+                                        <td valign="top">
+                                            <div style="float: left;">
+                                                <asp:DropDownList ID="cmbOptimizationChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true"
+                                                    OnSelectedIndexChanged="cmbOptimizationChart_SelectedIndexChanged"></asp:DropDownList>
+                                            </div>
+                                            <div style="float: left;">
+                                                <asp:RequiredFieldValidator ID="rfvOptimizationChart" runat="server" Display="Dynamic"
+                                                    ControlToValidate="cmbOptimizationChart" ForeColor="Red" InitialValue="0" 
+                                                    ValidationGroup="vgMeasurementSetup"><ucValidationContainer:ValidationContainer ID="rfvcOptimizationChartContainer" runat="server"
+                                                        ValidationMsg="Please select Optimization chart." Size="200" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
                                             </div>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" align="center">
-                                            <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" />
-                                        </td>
+                                       <td valign="top" align="right">
+                                            <asp:Image ID="imgOptimizationChart" runat="server" Width="230px" />
+                                       </td>
                                     </tr>
                                 </table>
                             </asp:Panel>

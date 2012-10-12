@@ -49,13 +49,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// locReviewSelection control.
+        /// locValidationSetup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locReviewSelection;
+        protected global::System.Web.UI.WebControls.Localize locValidationSetup;
         
         /// <summary>
         /// lbtnMeasure control.
@@ -308,5 +308,50 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgChart;
+        
+        /// <summary>
+        /// locOptimizationChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locOptimizationChart;
+        
+        /// <summary>
+        /// cmbOptimizationChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbOptimizationChart;
+        
+        /// <summary>
+        /// rfvOptimizationChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvOptimizationChart;
+        
+        /// <summary>
+        /// rfvcOptimizationChartContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcOptimizationChartContainer;
+        
+        /// <summary>
+        /// imgOptimizationChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgOptimizationChart;
     }
 }

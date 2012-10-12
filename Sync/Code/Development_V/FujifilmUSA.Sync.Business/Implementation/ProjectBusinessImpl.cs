@@ -27,7 +27,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 "CPSync4D.GetProjectDetail",
                                 new object[]
                                         {
-                                            projectId
+                                            projectId,
+                                            false
                                         });
                     if (dsProject.Tables[0].Rows.Count > 0)
                     {
@@ -44,7 +45,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                   SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
                                                                   ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
                                                               },
-                                          DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption")
+                                          DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
+                                          EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -70,7 +72,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
                                         ReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
-                                            DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName"))
+                                            DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName")),
+                                        VMeasurementDeviceID = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementDeviceID"),
+                                        OPTReferenceChartTypeID = new KeyValuePair<short, string>(
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
+                                            DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
+                                        VReferenceChartTypeID = new KeyValuePair<short, string>(
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VReferenceChartTypeID"),
+                                        DataReader.ReadString(dsProject.Tables[2].Rows[0], "VChartName"))
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -437,7 +446,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.MeasurementDeviceId,
                                                      project.MeasurementSetting.ReferenceChartType.Key,
                                                      project.DeviceFamilyProfilerOptionId,
-                                                     projectOptions.ToString()
+                                                     projectOptions.ToString(),
+                                                     project.MeasurementSetting.VMeasurementDeviceID,
+                                                     project.MeasurementSetting.OPTReferenceChartTypeID.Key,
+                                                     project.MeasurementSetting.VReferenceChartTypeID.Key,
+                                                     project.EnabledValidation
                                                  });
                         savedProject = GetProjectDetail(project.ProjectId);
                     },
@@ -490,7 +503,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
                                                      new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()},
-                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = project.LicenseTypeID}
+                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = project.LicenseTypeID},
+                                                     new Parameters() {ParameterName = "@VMeasurementDeviceID",Type=DbType.Int16,Value = project.MeasurementSetting.VMeasurementDeviceID},
+                                                     new Parameters() {ParameterName = "@OPTReferenceChartTypeID", Type=DbType.Int16, Value = project.MeasurementSetting.OPTReferenceChartTypeID.Key},
+                                                     new Parameters() {ParameterName ="@VReferenceChartTypeID", Type=DbType.Int16,Value = project.MeasurementSetting.VReferenceChartTypeID.Key },
+                                                     new Parameters(){ ParameterName = "@EnabledValidation", Type=DbType.Boolean,Value=project.EnabledValidation}
                                                  },
                                              new List<Parameters>()
                                                  {

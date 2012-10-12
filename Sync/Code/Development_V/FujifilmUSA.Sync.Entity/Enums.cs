@@ -13,11 +13,12 @@ namespace FujifilmUSA.Sync.Entity
         TargetColorSpace = 7,
         ProfilerOption = 8,
         MeasurementSetup = 9,
-        Save = 10,
-        Measure = 11,
-        Analyze = 12,
-        Download = 13,
-        OptimizeRun = 14
+        ValidationSetup = 10,
+        Save = 11,
+        Measure = 12,
+        Analyze = 13,
+        Download = 14,
+        OptimizeRun = 15
     }
 
     public enum EOptimizeRunStatus

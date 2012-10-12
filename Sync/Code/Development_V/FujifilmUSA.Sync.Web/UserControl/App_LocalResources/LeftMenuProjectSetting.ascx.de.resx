@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lnkAnalyzeResource1.Text" xml:space="preserve">
-    <value>7. Analyze_de</value>
+    <value>8. Analyze_de</value>
   </data>
   <data name="lnkAnalyzeResource1.ToolTip" xml:space="preserve">
     <value />
@@ -130,7 +130,7 @@
     <value />
   </data>
   <data name="lnkDownloadResource1.Text" xml:space="preserve">
-    <value>8. Download_de</value>
+    <value>9. Download_de</value>
   </data>
   <data name="lnkDownloadResource1.ToolTip" xml:space="preserve">
     <value />
@@ -142,7 +142,7 @@
     <value />
   </data>
   <data name="lnkMeasureResource1.Text" xml:space="preserve">
-    <value>6. Measure_de</value>
+    <value>7. Measure_de</value>
   </data>
   <data name="lnkMeasureResource1.ToolTip" xml:space="preserve">
     <value />
@@ -154,7 +154,7 @@
     <value />
   </data>
   <data name="lnkSaveResource1.Text" xml:space="preserve">
-    <value>5. Save_de</value>
+    <value>6. Save_de</value>
   </data>
   <data name="lnkSaveResource1.ToolTip" xml:space="preserve">
     <value />
@@ -163,6 +163,12 @@
     <value>2. Target ColorSpace_de</value>
   </data>
   <data name="lnkTargetColorSpaceResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lnkValidationSetupResource1.Text" xml:space="preserve">
+    <value>5. Validation Setup_de</value>
+  </data>
+  <data name="lnkValidationSetupResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
 </root>

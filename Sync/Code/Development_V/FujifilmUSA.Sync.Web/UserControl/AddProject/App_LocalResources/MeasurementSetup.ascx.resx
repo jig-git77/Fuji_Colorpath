@@ -172,7 +172,7 @@
     <value />
   </data>
   <data name="locAlignmentChartResource1.Text" xml:space="preserve">
-    <value>Alignment Chart</value>
+    <value>Charts</value>
   </data>
   <data name="locIlluminantResource1.Text" xml:space="preserve">
     <value>Illuminant:</value>
@@ -191,9 +191,6 @@
   </data>
   <data name="locProfilerOptionsResource1.Text" xml:space="preserve">
     <value>Profiler Options</value>
-  </data>
-  <data name="locReviewSelectionResource1.Text" xml:space="preserve">
-    <value>Review Selections</value>
   </data>
   <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>Spectrophotometer Options</value>
@@ -229,7 +226,7 @@
     <value />
   </data>
   <data name="txtAlignmentChartResource1.Text" xml:space="preserve">
-    <value>Alignment Chart:</value>
+    <value>Base DLP Chart:</value>
   </data>
   <data name="selectText" xml:space="preserve">
     <value>-- Select --</value>

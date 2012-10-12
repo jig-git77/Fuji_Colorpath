@@ -198,6 +198,7 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
+    <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
     <Content Include="UserControl\AddUserManagement.ascx" />
@@ -753,6 +754,13 @@
     </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.designer.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddProject\ValidationSetup.ascx.cs">
+      <DependentUpon>ValidationSetup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddProject\ValidationSetup.ascx.designer.cs">
+      <DependentUpon>ValidationSetup.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddReferenceChart.ascx.cs">
       <DependentUpon>AddReferenceChart.ascx</DependentUpon>
@@ -1991,7 +1999,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

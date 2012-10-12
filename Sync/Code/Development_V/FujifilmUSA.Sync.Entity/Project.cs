@@ -24,5 +24,6 @@ namespace FujifilmUSA.Sync.Entity
         public int LicenseTypeID { get; set; }
         public int TotalRuns { get; set; }
         public bool HasDLP { get; set; }
+        public bool EnabledValidation { get; set; }
     }
 }
