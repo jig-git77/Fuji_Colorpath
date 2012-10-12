@@ -92,60 +92,51 @@
         background-position: 0px;
     }
     
-     .breakWord80
-     {
-            max-width: 80px !important;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-            vertical-align: top;
-            line-height: 15px;
-     }
-     
-     .breakWord60
-     {
-            max-width: 60px !important;
-            word-break: break-all !important;
-            word-wrap: break-word !important;
-            vertical-align: top;
-            line-height: 15px;
-     }
-     
-     
-     
-
+    .breakWord80
+    {
+        max-width: 80px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
     
+    .breakWord60
+    {
+        max-width: 60px !important;
+        word-break: break-all !important;
+        word-wrap: break-word !important;
+        vertical-align: top;
+        line-height: 15px;
+    }
 </style>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
     <div class="head">
         <h1>
-            <asp:Label ID="lblTitle" runat="server" Text="Project List" 
-                meta:resourcekey="lblTitleResource1"></asp:Label>
-            </h1>
+            <asp:Label ID="lblTitle" runat="server" Text="Project List" meta:resourcekey="lblTitleResource1"></asp:Label>
+        </h1>
         <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button"
-            ValidationGroup="vgDestination" 
-            OnClick="lbtnCreateNewPrintCondition_Click">
+            ValidationGroup="vgDestination" OnClick="lbtnCreateNewPrintCondition_Click">
             <span>
-                <asp:Image ID="imgAdd" runat="server" 
-            ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
-                
-<asp:Localize runat="server" Text="Create New Print Condition" 
-            ID="locCreateNewPrintCondition" 
-            meta:resourcekey="locCreateNewPrintConditionResource1"></asp:Localize>
-</span></asp:LinkButton>
-    </div>
-    <div class="clear">
-    </div>
-    <div style="margin-left: 15px;">
-        <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
+                <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
+                <asp:Localize runat="server" Text="Create New Print Condition" ID="locCreateNewPrintCondition"
+                    meta:resourcekey="locCreateNewPrintConditionResource1"></asp:Localize>
+            </span>
+        </asp:LinkButton>
     </div>
     <div class="clear">
     </div>
     <div class="listDevice" style="margin-left: 15px;">
         <asp:UpdatePanel ID="testPanel" runat="server">
             <ContentTemplate>
-                <table cellpadding="0" cellspacing="0" border="0">                   
+                <div>
+                    <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
+                </div>
+                <div class="clear">
+                </div>
+                <table cellpadding="0" cellspacing="0" border="0">
                     <tr id="trListHeader" runat="server">
                         <td runat="server">
                             <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
@@ -158,17 +149,22 @@
                                 <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
                                 <MasterTableView DataKeyNames="ProjectId">
                                     <CommandItemSettings ExportToPdfText="Export to PDF" />
-                                    <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
-                                        Visible="True">
+                                    <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
                                     </RowIndicatorColumn>
-                                    <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" 
-                                        Visible="True">
+                                    <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
                                     </ExpandCollapseColumn>
                                     <Columns>
-                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False"
-                                            UniqueName="Select" SortExpression="ProjectId" 
-                                            FilterControlAltText="Filter Select column" 
-                                            meta:resourcekey="GridTemplateColumnResource1">
+                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Varification"
+                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column">
+                                            <ItemTemplate>
+                                                <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Varification" AlternateText="Varification"
+                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
+                                                    CommandName="Varification" />
+                                            </ItemTemplate>
+                                            <HeaderStyle Width="30px" />
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Select"
+                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column" meta:resourcekey="GridTemplateColumnResource1">
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
                                                     ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
@@ -176,29 +172,25 @@
                                             </ItemTemplate>
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="50px" 
-                                            HeaderText="Status" DataField="Status" 
-                                            FilterControlAltText="Filter Status column" 
-                                            meta:resourcekey="GridTemplateColumnResource2">
+                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="50px" HeaderText="Status"
+                                            DataField="Status" FilterControlAltText="Filter Status column" meta:resourcekey="GridTemplateColumnResource2">
                                             <ItemTemplate>
-                                                <asp:Image ID="imgStatus" runat="server" 
-                                                    meta:resourcekey="imgStatusResource1" />
+                                                <asp:Image ID="imgStatus" runat="server" meta:resourcekey="imgStatusResource1" />
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="True" runat="server"
-                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="50px"
-                                                    DropDownWidth="70px" 
-                                                    SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>' 
+                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="50px" DropDownWidth="70px"
+                                                    SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>'
                                                     meta:resourcekey="RadComboBoxStatusResource1">
                                                     <Items>
-                                                        <telerik:RadComboBoxItem Text="ALL" runat="server" 
-                                                            meta:resourcekey="RadComboBoxItemResource1" Owner="" Selected="True" />
-                                                        <telerik:RadComboBoxItem Text="Open" Value="Open" runat="server" 
-                                                            meta:resourcekey="RadComboBoxItemResource2" Owner="" />
-                                                        <telerik:RadComboBoxItem Text="Closed" Value="Closed" runat="server" 
-                                                            meta:resourcekey="RadComboBoxItemResource3" Owner="" />  
-                                                        <telerik:RadComboBoxItem Text="Certify" Value="Certify" runat="server" 
-                                                            meta:resourcekey="RadComboBoxItemResource4" Owner="" />                                                         
+                                                        <telerik:RadComboBoxItem Text="ALL" runat="server" meta:resourcekey="RadComboBoxItemResource1"
+                                                            Owner="" Selected="True" />
+                                                        <telerik:RadComboBoxItem Text="Open" Value="Open" runat="server" meta:resourcekey="RadComboBoxItemResource2"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="Closed" Value="Closed" runat="server" meta:resourcekey="RadComboBoxItemResource3"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="Certify" Value="Certify" runat="server" meta:resourcekey="RadComboBoxItemResource4"
+                                                            Owner="" />
                                                     </Items>
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
@@ -212,93 +204,72 @@
                                             </FilterTemplate>
                                             <HeaderStyle Width="50px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Name"
-                                            UniqueName="ProjectName" SortExpression="ProjectName"
-                                            FilterControlWidth="80px" AutoPostBackOnFilter="True" 
-                                            CurrentFilterFunction="Contains" 
-                                            FilterControlAltText="Filter ProjectName column" 
+                                        <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Name" UniqueName="ProjectName"
+                                            SortExpression="ProjectName" FilterControlWidth="80px" AutoPostBackOnFilter="True"
+                                            CurrentFilterFunction="Contains" FilterControlAltText="Filter ProjectName column"
                                             meta:resourcekey="GridTemplateColumnResource3">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' 
-                                                    meta:resourcekey="lblProjectNameResource1" />
+                                                <asp:Label ID="lblProjectName" runat="server" Text='<%# Eval("ProjectName") %>' meta:resourcekey="lblProjectNameResource1" />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="breakWord80" Width="80px" Wrap="True" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn UniqueName="SourceProfile" 
-                                            DataField="SourceProfile.ProfileName" HeaderText="Standard" 
-                                            FilterControlWidth="80px"
-                                            SortExpression="SourceProfile.ProfileName" AutoPostBackOnFilter="True" 
-                                            CurrentFilterFunction="Contains" 
-                                            FilterControlAltText="Filter SourceProfile column" 
+                                        <telerik:GridTemplateColumn UniqueName="SourceProfile" DataField="SourceProfile.ProfileName"
+                                            HeaderText="Standard" FilterControlWidth="80px" SortExpression="SourceProfile.ProfileName"
+                                            AutoPostBackOnFilter="True" CurrentFilterFunction="Contains" FilterControlAltText="Filter SourceProfile column"
                                             meta:resourcekey="GridTemplateColumnResource4">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblStandard" runat="server" 
-                                                    Text='<%# Eval("SourceProfile.ProfileName") %>' 
+                                                <asp:Label ID="lblStandard" runat="server" Text='<%# Eval("SourceProfile.ProfileName") %>'
                                                     meta:resourcekey="lblStandardResource1" />
-                                            </ItemTemplate>                                           
+                                            </ItemTemplate>
                                             <ItemStyle CssClass="breakWord80" Width="80px" Wrap="True" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn DataField="PrintCondition.Media"
-                                            HeaderText="Media" UniqueName="Media" SortExpression="PrintCondition.Media"
-                                            FilterControlWidth="60px" AutoPostBackOnFilter="True" 
-                                            CurrentFilterFunction="Contains" 
-                                            FilterControlAltText="Filter Media column" 
-                                            meta:resourcekey="GridTemplateColumnResource5">
+                                        <telerik:GridTemplateColumn DataField="PrintCondition.Media" HeaderText="Media" UniqueName="Media"
+                                            SortExpression="PrintCondition.Media" FilterControlWidth="60px" AutoPostBackOnFilter="True"
+                                            CurrentFilterFunction="Contains" FilterControlAltText="Filter Media column" meta:resourcekey="GridTemplateColumnResource5">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblMedia" runat="server" 
-                                                    Text='<%# Eval("PrintCondition.Media") %>' 
+                                                <asp:Label ID="lblMedia" runat="server" Text='<%# Eval("PrintCondition.Media") %>'
                                                     meta:resourcekey="lblMediaResource1" />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="breakWord60" Width="60px" Wrap="True" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn 
-                                            DataField="PrintCondition.Colorant"
-                                            HeaderText="Colorant" UniqueName="Colorant" SortExpression="PrintCondition.Colorant"
-                                            FilterControlWidth="60px" AutoPostBackOnFilter="True" 
-                                            CurrentFilterFunction="Contains" 
-                                            FilterControlAltText="Filter Colorant column" 
+                                        <telerik:GridTemplateColumn DataField="PrintCondition.Colorant" HeaderText="Colorant"
+                                            UniqueName="Colorant" SortExpression="PrintCondition.Colorant" FilterControlWidth="60px"
+                                            AutoPostBackOnFilter="True" CurrentFilterFunction="Contains" FilterControlAltText="Filter Colorant column"
                                             meta:resourcekey="GridTemplateColumnResource6">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblColorant" runat="server" 
-                                                    Text='<%# Eval("PrintCondition.Colorant") %>' 
+                                                <asp:Label ID="lblColorant" runat="server" Text='<%# Eval("PrintCondition.Colorant") %>'
                                                     meta:resourcekey="lblColorantResource1" />
                                             </ItemTemplate>
                                             <ItemStyle CssClass="breakWord60" Width="60px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridDateTimeColumn DataField="CreateDate" HeaderText="Last Active"
-                                                SortExpression="CreateDate" UniqueName="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}"
-                                                ShowFilterIcon="False" FilterControlWidth="100px" 
-                                            AutoPostBackOnFilter="True" CurrentFilterFunction="GreaterThanOrEqualTo" 
-                                            FilterControlAltText="Filter CreateDate column" 
-                                            meta:resourcekey="GridDateTimeColumnResource1">
-                                                <HeaderStyle Width="100px" />
-                                                <ItemStyle HorizontalAlign="Left" Width="100px" />
-                                       </telerik:GridDateTimeColumn>
-                                       
-                                        <telerik:GridTemplateColumn DataField="ProjectId" UniqueName="Delete" 
-                                            FilterControlAltText="Filter Delete column" 
-                                            meta:resourcekey="GridTemplateColumnResource7">                                           
+                                        <telerik:GridDateTimeColumn DataField="CreateDate" HeaderText="Last Active" SortExpression="CreateDate"
+                                            UniqueName="CreateDate" DataFormatString="{0:MM/dd/yy hh:mm}" ShowFilterIcon="False"
+                                            FilterControlWidth="100px" AutoPostBackOnFilter="True" CurrentFilterFunction="GreaterThanOrEqualTo"
+                                            FilterControlAltText="Filter CreateDate column" meta:resourcekey="GridDateTimeColumnResource1">
+                                            <HeaderStyle Width="100px" />
+                                            <ItemStyle HorizontalAlign="Left" Width="100px" />
+                                        </telerik:GridDateTimeColumn>
+                                        <telerik:GridTemplateColumn DataField="ProjectId" UniqueName="Delete" FilterControlAltText="Filter Delete column"
+                                            meta:resourcekey="GridTemplateColumnResource7">
                                             <FilterTemplate>
                                                 <asp:LinkButton ID="lbtnClearFillter" runat="server" CssClass="button" CommandName="ClearFilter"
                                                     ToolTip="Clear Fillter">
                                                     <span>
-                                                        <asp:Image ID="imgClearFillter" runat="server" 
-                                                    AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
-                                                    meta:resourcekey="imgClearFillterResource1" />
-
+                                                        <asp:Image ID="imgClearFillter" runat="server" AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png"
+                                                            meta:resourcekey="imgClearFillterResource1" />
                                                     </span>
                                                 </asp:LinkButton>
                                             </FilterTemplate>
                                             <ItemTemplate>
                                                 <asp:ImageButton ID="imgbtnDelete" runat="server" ToolTip="Delete Project" AlternateText="Delete"
                                                     ImageUrl="../Images/delete_icon.png" OnClientClick="return ConfirmDeleteProject();"
-                                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>' 
-                                                    CommandName="Delete" meta:resourcekey="imgbtnDeleteResource1" />
+                                                    CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>' CommandName="Delete"
+                                                    meta:resourcekey="imgbtnDeleteResource1" />
                                             </ItemTemplate>
                                             <HeaderStyle Width="40px" />
                                         </telerik:GridTemplateColumn>
-                                    </Columns>                                    
-                                </MasterTableView>                                
+                                    </Columns>
+                                </MasterTableView>
                             </telerik:RadGrid>
                             <asp:HiddenField ID="hdSelectedSourceProfileId" runat="server" Value="0" />
                         </td>
@@ -313,11 +284,11 @@
         <Windows>
             <telerik:RadWindow ID="OpenPrintConditionWindow" runat="server" IconUrl="" VisibleStatusbar="false"
                 ShowContentDuringLoad="false" Title="Open Print Condition" Width="720" Height="220"
-                Behaviors="Move,Close" >
+                Behaviors="Move,Close">
             </telerik:RadWindow>
             <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
                 ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
-                Behaviors="Move,Close" >
+                Behaviors="Move,Close">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>

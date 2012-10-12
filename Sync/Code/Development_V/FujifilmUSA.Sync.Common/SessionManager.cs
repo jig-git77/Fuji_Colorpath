@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _optimizeRunSession = "OptimizeRunSession";
         private const string _navigationSession = "NavigationSession";
         private const string _operationSession = "OperationSession";
+        private const string _dlpSubOperation = "DLPSubOperation";
         private const string _branchNameSession = "BranchNameSession";
         private const string _projLimitSession = "ProjectLimitSession";
         private const string _colorOrgRequest = "ColorOrgRequest";
@@ -139,6 +140,22 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
+        public ELicenseType CurrentDlpSubOperation
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_dlpSubOperation] != null)
+                {
+                    return (ELicenseType)System.Enum.Parse(typeof(ELicenseType), HttpContext.Current.Session[_dlpSubOperation].ToString());
+                }
+                return ELicenseType.None;
+            }
+            set
+            {
+                HttpContext.Current.Session[_dlpSubOperation] = value;
+            }
+        }
+
         public string CurrentBranchName
         {
             get
@@ -240,8 +257,8 @@ namespace FujifilmUSA.Sync.Common
             get
             {
                 if (HttpContext.Current.Session[_pageErrorMessage] != null)
-                {                                        
-                    return HttpContext.Current.Session[_pageErrorMessage].ToString(); 
+                {
+                    return HttpContext.Current.Session[_pageErrorMessage].ToString();
                 }
                 return string.Empty;
             }

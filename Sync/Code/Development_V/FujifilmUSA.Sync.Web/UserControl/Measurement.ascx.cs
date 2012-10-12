@@ -21,14 +21,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
             }
         }
-
-        //public bool IsXMFUser
-        //{
-        //    get
-        //    {
-        //        return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
-        //    }
-        //}
         #endregion
 
         #region Constructor
@@ -53,20 +45,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     header.InnerText = string.Format(GetResourceString(_recmeasureText), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Measure - {0}
                 }
             }
-
-            //if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]))
-            //{
-            //    ScriptManager.RegisterStartupScript(
-            //        this.Page,
-            //        this.Page.GetType(),
-            //        "messaging",
-            //        string.Format("window.parent.postMessage('{0}','{1}');",
-            //                      !string.IsNullOrEmpty(Request.QueryString["projectid"])
-            //                          ? Convert.ToInt32(Request.QueryString["projectid"])
-            //                          : 0,
-            //                      SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
-            //        true);
-            //}
         }
 
         #endregion

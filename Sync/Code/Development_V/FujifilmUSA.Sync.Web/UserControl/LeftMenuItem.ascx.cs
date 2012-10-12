@@ -55,17 +55,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentBranchName = null;
                     SessionManager.Instance.CurrentDevice = null;
                     SessionManager.Instance.CurrentOperation = ELicenseType.None;
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("Index.aspx");
                     break;
                 case ELeftMenuItemLevel.Device:
                     SessionManager.Instance.CurrentOperation = ELicenseType.None;
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("OperationSelection.aspx");
                     break;
                 case ELeftMenuItemLevel.Operation:
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("ProjectList.aspx");

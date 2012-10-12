@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
         public ProjectList()
-        {            
+        {
             this.Init += (sender, e) => this.ExceptionHandling(Page_Init, sender, e);
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
             this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
@@ -40,11 +40,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
             rgProjectList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
+                //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
+                SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                 lblTitle.Text = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
                 ViewState["ProjectLimit"] = 0;
             }
@@ -53,13 +55,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_PreRender(object sender, EventArgs e)
         {
             //------------Apply default CurrentFilterFunction for "CreateDate" column of rgProjectList RadGrid-----------------//
-            rgProjectList.Columns[6].CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;            
+            rgProjectList.Columns.FindByDataField("CreateDate").CurrentFilterFunction = Telerik.Web.UI.GridKnownFunction.GreaterThanOrEqualTo;
         }
         #endregion
 
         #region Control events
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
-        {            
+        {
             if (Convert.ToInt32(ViewState["ProjectLimit"]) >= SessionManager.Instance.CurrentProjLimit)
             {
                 //--------------Project Limit reach, so can not create more projects under this Device now-------//  
@@ -82,6 +84,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             switch (e.CommandName)
             {
+                case "Varification":
+                    ProjectId = Convert.ToInt32(e.CommandArgument);
+                    _presenterProjectList.GetProjectDetailWithVarification();
+                    if (!IsErrorOccured)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Verification;
+                        Response.Redirect(SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                                              ? "Analyze.aspx"
+                                              : "Measurement.aspx");
+                    }
+                    break;
                 case "Delete":
                     if (e.CommandArgument != null)
                     {
@@ -210,6 +225,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public int DeviceId { get; set; }
         public int LicenseTypeID { get; set; }
+        public Project Project { get; set; }
         #endregion
     }
 }

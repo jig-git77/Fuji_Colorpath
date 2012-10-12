@@ -9,7 +9,7 @@ namespace FujifilmUSA.Sync.Business.Mock
     {
         #region IProjectBusiness Members
 
-        public Project GetProjectDetail(int projectId)
+        public Project GetProjectDetail(int projectId, bool isVarification = false)
         {
             return new Project();
         }

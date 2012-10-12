@@ -18,7 +18,8 @@ namespace FujifilmUSA.Sync.Entity
         Measure = 12,
         Analyze = 13,
         Download = 14,
-        OptimizeRun = 15
+        OptimizeRun = 15,
+Varification=16
     }
 
     public enum EOptimizeRunStatus
@@ -26,7 +27,6 @@ namespace FujifilmUSA.Sync.Entity
         Open = 1,
         Closed = 2,
         Certify = 3,
-        //NotUsed = 4
     }
 
     //public enum EOperation
@@ -386,7 +386,7 @@ namespace FujifilmUSA.Sync.Entity
     }
 
     public enum ValidationRuleType
-    { 
+    {
         None = 0,
         NoitificationRule = 1,
         StrictRule = 2

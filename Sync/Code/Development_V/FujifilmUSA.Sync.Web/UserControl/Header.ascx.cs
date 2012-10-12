@@ -45,6 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject = null;
             SessionManager.Instance.CurrentDevice = null;
             SessionManager.Instance.CurrentOperation = ELicenseType.None;
+            SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
             Response.RedirectPermanent("Index.aspx");
         }

@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
     {
         #region IProjectBusiness Members
 
-        public Project GetProjectDetail(int projectId)
+        public Project GetProjectDetail(int projectId, bool isVerification = false)
         {
             var project = new Project();
             Common.ImplementBusinessLogic(
@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 new object[]
                                         {
                                             projectId,
-                                            false
+                                            isVerification
                                         });
                     if (dsProject.Tables[0].Rows.Count > 0)
                     {

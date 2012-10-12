@@ -8,7 +8,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IProjectBusiness : ITaskBase
     {
-        Project GetProjectDetail(int projectId);
+        Project GetProjectDetail(int projectId, bool isVarification = false);
         List<Project> GetProjectsByDeviceId(int deviceId, int LicenseTypeID);
         int DeleteProject(int projectId);
         Dictionary<string, string> GetProjectOption(int projectId, EProfileType type);
