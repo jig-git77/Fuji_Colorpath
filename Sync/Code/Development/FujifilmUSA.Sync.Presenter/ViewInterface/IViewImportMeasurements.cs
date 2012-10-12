@@ -9,6 +9,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         int DeviceId { get; set; }
         int LicenseTypeID { get; set; }
-        KeyValuePair<short, string> Measurements { get; set; }
+        List<int> Measurements { get; set; }
+        int MeasurementID { get; set; }
+        int OptimizeRunID { get; set; }
     }
 }

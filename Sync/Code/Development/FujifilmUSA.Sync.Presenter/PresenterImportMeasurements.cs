@@ -22,5 +22,17 @@ namespace FujifilmUSA.Sync.Presenter
             _viewImportMeasurements.Projects = projectBusiness.GetProjectsForImportMeasurement(_viewImportMeasurements.DeviceId, _viewImportMeasurements.LicenseTypeID, _viewImportMeasurements.ProjectId);
         }
 
+        public void GetMeasurementIDsbyProjectID()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            _viewImportMeasurements.Measurements = projectBusiness.GetMeasurementIDsbyProjectID(_viewImportMeasurements.DeviceId, _viewImportMeasurements.LicenseTypeID, _viewImportMeasurements.ProjectId);
+        }
+        public void ImportMeasurements()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewImportMeasurements.ErrorOccured;
+            projectBusiness.ImportMeasurements(_viewImportMeasurements.MeasurementID, _viewImportMeasurements.OptimizeRunID);
+        }
     }
 }

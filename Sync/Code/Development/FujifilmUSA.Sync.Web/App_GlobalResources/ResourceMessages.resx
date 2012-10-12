@@ -519,4 +519,10 @@
   <data name="Duplicate_UpdateReferenceChart" xml:space="preserve">
     <value>Reference chart already exists with same name.</value>
   </data>
+  <data name="Error_GetMeasurementIDsbyProjectID" xml:space="preserve">
+    <value>Error occured while getting list of Measurements for selected project. Please contact your administrator.</value>
+  </data>
+  <data name="Error_ImportMeasurements" xml:space="preserve">
+    <value>Error occured while importing Measurements from selected project. Please contact your administrator.</value>
+  </data>
 </root>

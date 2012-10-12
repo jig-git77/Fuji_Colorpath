@@ -842,6 +842,54 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return objProjectList;
         }
 
+        public List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int ProjectID)
+        {
+            var objMeasurementIDList = new List<int>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetMeasurementIDsByProjectID",
+                                new object[]
+                                        {
+                                            ProjectID, deviceId, LicenseTypeID
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dsProjectList.Tables[0].Rows.Count; i++)
+                        {
+                            objMeasurementIDList.Add(Convert.ToInt32(dsProjectList.Tables[0].Rows[i]["MeasurementID"].ToString()));
+                        }                               
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementIDsbyProjectID"));
+            return objMeasurementIDList;
+        }
+
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        {
+            var returnValue = 0;
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSync4D].[ImportMeasurements]",
+                            new object[]
+                                    {
+                                        MeasurementID, OptimizeRunID
+                                    });
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ImportMeasurements"));
+            return returnValue;
+        }
+
         #endregion
 
         #region ITaskBase Members

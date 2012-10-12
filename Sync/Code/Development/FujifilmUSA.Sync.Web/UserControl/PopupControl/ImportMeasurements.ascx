@@ -13,7 +13,49 @@
         if (window.radWindow) oWindow = window.radWindow;
         else if (window.frameElement.radWindow) oWindow = window.frameElement.radWindow;
         return oWindow;
-    } 
+    }
+
+    function checkboxclick(e, idFragment) {       
+        var currentCheckBox = e.srcElement || e.target;
+        var inputs = document.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            if (input.id == currentCheckBox.id)
+                continue;
+            if (input.id.indexOf(idFragment) < 0)
+                continue;
+            //clear out the rest of the checkboxes 
+            if (input.type && input.type == "checkbox") {
+                input.checked = false;
+            }
+        }
+    }
+
+    function OnClientClick() {
+        var checking = false;
+        var answer;
+        debugger;
+        var inputs = document.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].checked == true) {
+                checking = true;
+                break;
+            }
+        }
+        if (!checking) {
+            alert("Atleast one project need to be selected!");
+            return false;
+        }
+        else
+            return true;
+        
+    }
+
+    function CloseImportWindow() {
+        var oWindow = GetMeasurementRadWindow();
+        GetMeasurementRadWindow().close();
+        top.location.href = top.location.href;
+    }
 
 </script>
 
@@ -72,10 +114,7 @@
                                                                         FilterControlAltText="Filter Select column" 
                                                                         meta:resourcekey="GridTemplateColumnResource1">
                                                                         <ItemTemplate>
-                                                                            <asp:CheckBox ID="chkbtnSelect" runat="server" ToolTip="Select Project" />
-                                                                            <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
-                                                                                ImageUrl="~/Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                                                                CommandName="Select" />
+                                                                            <asp:CheckBox ID="chkbtnSelect" runat="server" ToolTip="Select Project" onclick="checkboxclick(event, 'chkbtnSelect');"/>                                                                           
                                                                         </ItemTemplate>
                                                                         <HeaderStyle Width="30px" />
                                                                     </telerik:GridTemplateColumn>
@@ -190,7 +229,7 @@
                 </div>
                 <div class="buttonright">
                     <asp:LinkButton ID="lbtnImport" runat="server" ValidationGroup="vgSaveWindows" 
-                        CssClass="gray_bt" onclick="lbtnImport_Click">
+                        CssClass="gray_bt" onclick="lbtnImport_Click" OnClientClick="if (!OnClientClick()) {return false;}">
                        
                     <span> <asp:Localize ID="Localize2" runat="server" Text="Import" 
                         meta:resourcekey="LocalizeResource2"></asp:Localize> 

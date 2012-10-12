@@ -135,12 +135,8 @@
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" 
                 meta:resourcekey="locRecentUploadResource1"></asp:Localize>
-            <div id="Div_ImportMeasurements" runat="server" visible="false" style="float:right; padding-right:10px;">
-                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />
-              <%--  <asp:LinkButton ID="btnImportMeasurements" runat="server" CssClass="button" Text="Import Measurements"
-                     OnClientClick="javascript:return ShowImportWindow();">
-                     
-                </asp:LinkButton>--%>
+            <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
+                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />             
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -178,6 +174,7 @@
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
+<asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
@@ -378,12 +375,37 @@
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
-                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//                       
+                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//  
+                        //----------------Display Import Button--------------//  
+                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
+                        {
+                            if(json.length < <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
+                            {                               
+                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            }    
+                            else
+                            {                               
+                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            }
+                        } 
+                        else
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        }            
                     }
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
+                        //----------------Display Import Button--------------//
+                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'visible');
+                        }
+                        else
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        } 
                     }
                 },
             success:

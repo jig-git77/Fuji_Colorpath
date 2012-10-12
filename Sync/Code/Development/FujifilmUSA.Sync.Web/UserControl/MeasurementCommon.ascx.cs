@@ -36,9 +36,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //----------------"Import Measurements" button only available for "Ink Optimization" Project Type and only for initial 1st run--------------//
                 if (SessionManager.Instance.CurrentOperation == ELicenseType.InkOptimization)
                 {
-                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)                       
                     {
-                        Div_ImportMeasurements.Visible = true;
+                        hdDisplayImport.Value = "yes";
                     }
                 }  
             }            

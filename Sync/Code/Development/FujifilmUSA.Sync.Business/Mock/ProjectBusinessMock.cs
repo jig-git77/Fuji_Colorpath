@@ -108,6 +108,14 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Project>();
         }
+        public List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            return new List<int>();
+        }
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        {
+            return 0;
+        }
 
         #endregion
 
