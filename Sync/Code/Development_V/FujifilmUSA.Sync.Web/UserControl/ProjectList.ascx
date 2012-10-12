@@ -38,6 +38,11 @@
     }
 </script>
 <style type="text/css">
+    .RadGrid .rgRow td, .RadGrid .rgAltRow td, .RadGrid .rgEditRow td, .RadGrid .rgFooter td, .RadGrid .rgFilterRow td, .RadGrid .rgHeader, .RadGrid .rgResizeCol, .RadGrid .rgGroupHeader td
+    {
+        padding-right: 0px !important;
+    }
+    
     div.RadGrid .rgRow
     {
         background: #F7F7F7;
@@ -147,7 +152,7 @@
                                 <GroupingSettings CaseSensitive="False" />
                                 <HeaderStyle Font-Bold="True" />
                                 <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                                <MasterTableView DataKeyNames="ProjectId">
+                                <MasterTableView DataKeyNames="ProjectId">                                
                                     <CommandItemSettings ExportToPdfText="Export to PDF" />
                                     <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
                                     </RowIndicatorColumn>
@@ -155,31 +160,32 @@
                                     </ExpandCollapseColumn>
                                     <Columns>
                                         <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Varification"
-                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column">
+                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column"
+                                            ItemStyle-Width="30px">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Varification" AlternateText="Varification"
-                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                                    CommandName="Varification" />
+                                               <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
+                                                    ImageUrl="../Images/OptimizationBlue.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
+                                                    CommandName="Select" meta:resourcekey="imgbtnSelectResource1" />
                                             </ItemTemplate>
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Select"
                                             SortExpression="ProjectId" FilterControlAltText="Filter Select column" meta:resourcekey="GridTemplateColumnResource1">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
+                                                 <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Varification" AlternateText="Varification"
                                                     ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                                    CommandName="Select" meta:resourcekey="imgbtnSelectResource1" />
+                                                    CommandName="Varification" />
                                             </ItemTemplate>
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="50px" HeaderText="Status"
+                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="30px" HeaderText="Status"
                                             DataField="Status" FilterControlAltText="Filter Status column" meta:resourcekey="GridTemplateColumnResource2">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgStatus" runat="server" meta:resourcekey="imgStatusResource1" />
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="True" runat="server"
-                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="50px" DropDownWidth="70px"
+                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="30px" DropDownWidth="70px"
                                                     SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>'
                                                     meta:resourcekey="RadComboBoxStatusResource1">
                                                     <Items>

@@ -138,6 +138,9 @@
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
     <Content Include="Images\logo_Fujifilm.png" />
+    <Content Include="Images\OptimizationBlue.png" />
+    <Content Include="Images\OptimizationGreen.png" />
+    <Content Include="Images\OptimizationRed.png" />
     <Content Include="Images\powered-logo.gif" />
     <Content Include="Images\Profile-Management-icon.png" />
     <Content Include="Images\Profile-Management.png" />
@@ -155,6 +158,10 @@
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
+    <Content Include="Images\ValidationFailed.png" />
+    <Content Include="Images\ValidationFailedOld.png" />
+    <Content Include="Images\ValidationSuccess.png" />
+    <Content Include="Images\ValidationSuccessOld.png" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\jquery.tools.min.js" />
@@ -1999,7 +2006,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -125,9 +125,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (e.Item.ItemType != GridItemType.Item && e.Item.ItemType != GridItemType.AlternatingItem) return;
             var btnSelect = e.Item.FindControl("imgbtnSelect") as ImageButton;
             var imgStatus = e.Item.FindControl("imgStatus") as Image;
-            if (imgStatus == null || btnSelect == null) return;
+            var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
+            if (imgStatus == null || btnSelect == null || imgbtnVarification == null) return;
             imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
 
+            //here we are not showing validation image icon when project is not certified, i.e. in any other state
+            imgbtnVarification.Visible = false;
             var days = (DateTime.Now - project.CreateDate).TotalDays;
 
 
@@ -166,8 +169,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
-
+                    
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
+
+                    //Here are we showing validation status icon if project is in certified state
+                    imgbtnVarification.ImageUrl = ResolveUrl("../Images/ValidationSuccess.png");
+                    imgbtnVarification.Visible = true;
                     break;
             }
 
