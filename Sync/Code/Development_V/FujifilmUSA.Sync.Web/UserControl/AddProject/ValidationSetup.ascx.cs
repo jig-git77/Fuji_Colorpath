@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             SessionManager.Instance.CurrentProject.EnabledValidation = EnableValidationValue;
             SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID = (short)MeasurementDeviceSelectedValue;
-            SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartTypeID = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
 
             //Load save control
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
@@ -76,10 +76,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();                                
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
 
-                if (SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartTypeID.Key > 0)
-                    cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartTypeID.Key.ToString();
+                if (SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
+                    cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key.ToString();
                 else
-                    cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OPTReferenceChartTypeID.Key.ToString();
+                    cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbValidationChart_SelectedIndexChanged(null, null);
             }
 

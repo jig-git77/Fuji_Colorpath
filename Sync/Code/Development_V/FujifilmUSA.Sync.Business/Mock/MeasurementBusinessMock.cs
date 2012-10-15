@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FujifilmUSA.Sync.Business.Interface;
 using FujifilmUSA.Sync.Business.Messages;
 using FujifilmUSA.Sync.Entity;
@@ -73,6 +74,17 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new DataSet();
         }
+
+        public List<Measurement> GetVMeasurementsOnProjectId(int projectId)
+        {
+            return new List<Measurement>();
+        }
+
+        public int SaveVMeasurement(Measurement measurement)
+        {
+            return 0;
+        }
+
         #endregion
 
         #region ITaskBase Members

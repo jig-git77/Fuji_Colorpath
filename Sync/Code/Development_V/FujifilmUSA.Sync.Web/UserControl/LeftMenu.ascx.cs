@@ -136,7 +136,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                         {
                             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                            ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
+                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                                                         ? ELeftMenuItemLevel.Verification
+                                                         : ELeftMenuItemLevel.OptimizeRun;
                             ctrlProjItem.ItemName = item.RunName;
                             ctrlProjItem.CurrentRun = item;
                             ph.Controls.Add(ctrlProjItem);
@@ -152,10 +154,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
-                        if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                        if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId ||
+                            (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification))
                         {
                             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                            ctrlProjItem.ItemLevel = ELeftMenuItemLevel.OptimizeRun;
+                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                                                         ? ELeftMenuItemLevel.Verification
+                                                         : ELeftMenuItemLevel.OptimizeRun;
                             ctrlProjItem.ItemName = item.RunName;
                             ctrlProjItem.CurrentRun = item;
                             ph.Controls.Add(ctrlProjItem);

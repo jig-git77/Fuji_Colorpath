@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Entity
         Analyze = 13,
         Download = 14,
         OptimizeRun = 15,
-Varification=16
+        Verification = 16
     }
 
     public enum EOptimizeRunStatus

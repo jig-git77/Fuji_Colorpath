@@ -113,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                         cmbAlignmentChart.SelectedItem.Text),
                     UvIncluded =
                         cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false,
-                    OPTReferenceChartTypeID = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
+                    OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
 
                 };
 
@@ -172,7 +172,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                             cmbAlignmentChart.SelectedItem.Text),
                         UvIncluded =
                             cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false,
-                        OPTReferenceChartTypeID = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
+                        OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
                     };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
@@ -212,7 +212,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
                 cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OPTReferenceChartTypeID.Key.ToString();
+                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart_SelectedIndexChanged(null, null);
             }
         }
@@ -357,7 +357,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbAlignmentChart.Enabled = false;
 
                 //Load selected chart if we are in update mode
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OPTReferenceChartTypeID.Key.ToString();
+                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart.Enabled = false;
             }
             DisplayChartImage();

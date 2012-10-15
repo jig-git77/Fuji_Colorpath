@@ -13,7 +13,6 @@
 <script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-
 <style type="text/css">
     .my_rectangle
     {
@@ -88,11 +87,9 @@
 <div>
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
-            <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" 
-                meta:resourcekey="lblMeasurementNameResource1"></asp:Label>
+            <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>
             &nbsp; : &nbsp;&nbsp;
-            <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" 
-                meta:resourcekey="txtMeasurementNameResource1"></asp:TextBox>
+            <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1"></asp:TextBox>
         </div>
         <div class="float_r">
             <span>
@@ -111,17 +108,15 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" 
-                meta:resourcekey="locColorBarResource1"></asp:Localize></div>
+            <asp:Localize runat="server" Text="Colorbar" ID="locColorBar" meta:resourcekey="locColorBarResource1"></asp:Localize></div>
         <div class="color_pallate_middle">
             <div id='divProgressImageMaster' style="display: none;">
                 <div style="width: 200px; text-align: center; margin-left: 150px;">
                     <img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;" /><br />
                     <br />
-                    <asp:Localize runat="server" Text="Uploading Measurement..." 
-                        ID="locUploadingMeasurement" 
+                    <asp:Localize runat="server" Text="Uploading Measurement..." ID="locUploadingMeasurement"
                         meta:resourcekey="locUploadingMeasurementResource1"></asp:Localize><div class="clear">
-                    </div>
+                        </div>
                 </div>
             </div>
             <div class="color_bar">
@@ -133,8 +128,7 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" 
-                meta:resourcekey="locRecentUploadResource1"></asp:Localize></div>
+            <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize></div>
         <div class="color_pallate_middle">
             <div id="measurementContainer">
             </div>
@@ -164,6 +158,7 @@
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
+<asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdOptimizeRunId" runat="server" />
 <asp:HiddenField ID="hdProjectId" runat="server" />
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
@@ -310,21 +305,39 @@
             var dt1 = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate(), dt.getHours(), dt.getMinutes(), dt.getSeconds(), dt.getMilliseconds()));
             var MeasurementDateTime = dt1.toMSJSON();     
             var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
+            var ProjectId = jQuery("input[id$=hdProjectId]").val();
             var ReferenceChartTypeId = jQuery("input[id$=hdReferenceChartTypeId]").val();
             var MsmtName = jQuery("input[id*='txtMeasurementName']").val();
+            var saveMeasurementUrl="";
             var obj;
-            obj = {
-                MeasurementName: MsmtName,
-                MeasurementDate: MeasurementDateTime,
-                OptimizeRunId: OptimizeRunId,
-                ReferenceChartTypeId: ReferenceChartTypeId,
-                MeasurementPatches: MeasuredPatches
-            };
+            if(jQuery("input[id$=hdIsVerification]").val() == "true")
+            {
+                saveMeasurementUrl="Services/PluginDataService.svc/SaveVMeasurement";
+                obj = {
+                    MeasurementName: MsmtName,
+                    MeasurementDate: MeasurementDateTime,
+                    ProjectId: ProjectId,
+                    ReferenceChartTypeId: ReferenceChartTypeId,
+                    MeasurementPatches: MeasuredPatches
+                };
+            }
+            else
+            {
+                saveMeasurementUrl="Services/PluginDataService.svc/SaveMeasurement";
+                obj = {
+                    MeasurementName: MsmtName,
+                    MeasurementDate: MeasurementDateTime,
+                    OptimizeRunId: OptimizeRunId,
+                    ReferenceChartTypeId: ReferenceChartTypeId,
+                    MeasurementPatches: MeasuredPatches
+                };
+            }
+            
             //Make ajax request...
             jQuery.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "Services/PluginDataService.svc/SaveMeasurement",
+                url: saveMeasurementUrl,
                 processData: false,
                 dataType: "json",
                 data: JSON.stringify(obj),
@@ -353,10 +366,20 @@
 
     function bindMeasurementData() {
         var OptimizeRunId = jQuery("input[id$=hdOptimizeRunId]").val();
+        var ProjectId = jQuery("input[id$=hdProjectId]").val();
+        var getMeasurementUrl = "";
+        if(jQuery("input[id$=hdIsVerification]").val() == "true")
+        {
+            getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
+        }
+        else
+        {
+            getMeasurementUrl = "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId;
+        }
         jQuery.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "Services/PluginDataService.svc/GetMeasurementsByOptimizeId/" + OptimizeRunId,
+            url: getMeasurementUrl,
             processData: false,
             dataType: "json",
             cache: false,

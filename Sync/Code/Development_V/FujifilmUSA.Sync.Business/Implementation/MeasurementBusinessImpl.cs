@@ -57,24 +57,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        var measurementPatches = new XElement("MeasurementPatches",
-                                                              measurement.MeasurementPatches.
-                                                                  Select(x =>
-                                                                         new XElement("MeasurementPatch",
-                                                                                      new XAttribute("SampleName", x.SampleName),
-                                                                                      new XAttribute("CIEXYZ_X", x.CiexyzX),
-                                                                                      new XAttribute("CIEXYZ_Y", x.CiexyzY),
-                                                                                      new XAttribute("CIEXYZ_Z", x.CiexyzZ),
-                                                                                      new XAttribute("CIELAB_L", x.CielabL),
-                                                                                      new XAttribute("CIELAB_a", x.CielabA),
-                                                                                      new XAttribute("CIELAB_b", x.CielabB)
-                                                                             )).ToList());
+                {
+                    var measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SampleName", x.SampleName),
+                                                                                  new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                  new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                  new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                  new XAttribute("CIELAB_L", x.CielabL),
+                                                                                  new XAttribute("CIELAB_a", x.CielabA),
+                                                                                  new XAttribute("CIELAB_b", x.CielabB)
+                                                                         )).ToList());
 
-                        DataAccessFactory.
-                            Instance.
-                            ExecuteProcedure("CPSync4D.CreateMeasurement",
-                                             new List<Parameters>()
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSync4D.CreateMeasurement",
+                                         new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
                                                      new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
@@ -82,11 +82,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
                                                      new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                  },
-                                             new List<Parameters>()
+                                         new List<Parameters>()
                                                  {
                                                      outParam
                                                  });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);
         }
@@ -169,18 +169,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             int returnValue = 0;
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        returnValue =
-                            DataAccessFactory.
-                                Instance.
-                                ExecuteProcedure(
-                                    "[CPSync4D].[UpdateMeasurementByAnalyzeChart]",
-                                    new object[]
+                {
+                    returnValue =
+                        DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CPSync4D].[UpdateMeasurementByAnalyzeChart]",
+                                new object[]
                                         {
                                             measurement.MeasurementId,
                                             measurement.IsUsed
                                         });
-                    },
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateMeasurementByAnalyzeChart"));
             return returnValue;
 
@@ -205,12 +205,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         {
                             MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
                             MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),                         
-                            Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),                        
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            Avg_ΔE = DataReader.ReadDecimal(x, "Avg_ΔE"),
                             Max_ΔE = DataReader.ReadDecimal(x, "Max_ΔE"),
                             Pri_ΔE = DataReader.ReadDecimal(x, "PriΔE"),
                             Pri_ΔH = DataReader.ReadDecimal(x, "PriΔH"),
-                            Gray_ΔE = DataReader.ReadDecimal(x, "GrayΔE"),   
+                            Gray_ΔE = DataReader.ReadDecimal(x, "GrayΔE"),
                             PercΔE_10 = DataReader.ReadDecimal(x, "TenΔE"),
                             PercΔE_90 = DataReader.ReadDecimal(x, "NinetyΔE"),
                             PercΔE_95 = DataReader.ReadDecimal(x, "NinetyFiveΔE")
@@ -237,14 +237,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         AsEnumerable().
                         Select(x => new MeasurementPatchDetails()
                         {
-                            SampleId = DataReader.ReadInt(x, "SampleID"),                          
+                            SampleId = DataReader.ReadInt(x, "SampleID"),
                             HtmlColor = DataReader.ReadString(x, "HTMLColor"),
                             CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
                             CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
                             CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
                             CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                            TargetL = DataReader.ReadDecimal(x, "TargetL"), 
-                            Targeta = DataReader.ReadDecimal(x, "Targeta"), 
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
                             Targetb = DataReader.ReadDecimal(x, "Targetb"),
                             CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
                             CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
@@ -253,7 +253,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             ΔE94 = DataReader.ReadDecimal(x, "ΔE94"),
                             ΔE2000 = DataReader.ReadDecimal(x, "ΔE2000")
                         }).ToList();
-                  
+
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return PatchDetails;
@@ -284,8 +284,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
                             TargetL = DataReader.ReadDecimal(x, "TargetL"),
                             Targeta = DataReader.ReadDecimal(x, "Targeta"),
-                            Targetb = DataReader.ReadDecimal(x, "Targetb")                        
-                        }).ToList();                   
+                            Targetb = DataReader.ReadDecimal(x, "Targetb")
+                        }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper"));
             return DeltaEPatchDetails;
@@ -345,7 +345,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
                             TargetL = DataReader.ReadDecimal(x, "TargetL"),
                             Targeta = DataReader.ReadDecimal(x, "Targeta"),
-                            Targetb = DataReader.ReadDecimal(x, "Targetb"),                           
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
                             ΔL = DataReader.ReadDecimal(x, "ΔL"),
                             Δa = DataReader.ReadDecimal(x, "Δa"),
                             Δb = DataReader.ReadDecimal(x, "Δb"),
@@ -380,7 +380,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
                             CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
                             CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
-                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b")  
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_GrayGamut2"));
@@ -402,7 +402,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     LABChartDetails = dsMeasurements.Tables[2].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_Gray()
-                        {                           
+                        {
                             CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
                             CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
                             CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
@@ -439,6 +439,74 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
             return measurements;
+        }
+
+        public List<Measurement> GetVMeasurementsOnProjectId(int projectId)
+        {
+            var measurements = new List<Measurement>();
+            Common.ImplementBusinessLogic(
+                () =>
+                    {
+                        var dsMeasurements =
+                            DataAccessFactory.
+                                Instance.
+                                GetDsResult(
+                                    "CPSyncV.GetVMeasurementByProjectID",
+                                    new object[] {projectId});
+                        measurements = dsMeasurements.
+                            Tables[0].
+                            AsEnumerable().
+                            Select(x => new Measurement()
+                                            {
+                                                MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                                MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                                MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                                                UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                            }).ToList();
+                    },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
+            return measurements;
+        }
+
+        public int SaveVMeasurement(Measurement measurement)
+        {
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SampleName", x.SampleName),
+                                                                                  new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                  new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                  new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                  new XAttribute("CIELAB_L", x.CielabL),
+                                                                                  new XAttribute("CIELAB_a", x.CielabA),
+                                                                                  new XAttribute("CIELAB_b", x.CielabB)
+                                                                         )).ToList());
+
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSyncV.CreateMeasurement",
+                                         new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                     new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = measurement.ProjectId},
+                                                     new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                     new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                 },
+                                         new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value);
         }
 
         #endregion

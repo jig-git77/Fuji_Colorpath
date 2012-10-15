@@ -40,7 +40,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lnkMeasurementSetup.Enabled = true;
             }
-            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartTypeID.Key > 0)
+            if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
             {
                 lnkValidationSetup.Enabled = true;
             }

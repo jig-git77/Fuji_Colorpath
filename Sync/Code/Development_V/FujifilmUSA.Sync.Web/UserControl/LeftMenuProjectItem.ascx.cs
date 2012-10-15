@@ -46,7 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkMeasurement.Visible = false;
                     }
-                    //----------If current run is closed (certify) run-----//
+                        //----------If current run is closed (certify) run-----//
                     else if (CurrentRun.Status == EOptimizeRunStatus.Certify)
                     {
                         lnkMeasurement.Visible = false;
@@ -56,7 +56,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) != 3)
                         {
                             //------If current run is closed (certify) and it is last run of this project--------//
-                            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
+                            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==
+                                SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId)
                             {
                                 lnkAddRun.Visible = true;
                             }
@@ -79,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 //-------------It is a certify run, don't give option to delete if it is Run-1-------------//
                                 if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2 &&
                                     (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed ||
-                                    SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
+                                     SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Certify))
                                 {
                                     btnRunDelete.Visible = false;
                                 }
@@ -119,6 +120,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         ulSubMenu.Visible = false;
+                    }
+                    break;
+                case ELeftMenuItemLevel.Verification:
+                    lnkMeasurement.ForeColor = System.Drawing.Color.Black;
+                    lnkAnalyse.ForeColor = System.Drawing.Color.Black;
+                    lnkDownload.ForeColor = System.Drawing.Color.Black;
+
+                    ulSubMenu.Visible = true;
+                    lnkDownload.Visible = false;
+                    lnkAddRun.Visible = false;
+                    
+                    lnkRunName.Font.Bold = true;
+                    lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
+                    lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
+                    lnkAnalyse.Enabled = CurrentRun.HasMeasurements;
+                    
+                    if ((SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure) && !CurrentRun.HasMeasurements)
+                    {
+                        lnkAnalyse.ForeColor = System.Drawing.Color.Silver;
                     }
                     break;
             }

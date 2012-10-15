@@ -74,10 +74,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName")),
                                         VMeasurementDeviceID = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementDeviceID"),
-                                        OPTReferenceChartTypeID = new KeyValuePair<short, string>(
+                                        OptReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
-                                        VReferenceChartTypeID = new KeyValuePair<short, string>(
+                                        VReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VReferenceChartTypeID"),
                                         DataReader.ReadString(dsProject.Tables[2].Rows[0], "VChartName"))
                                     };
@@ -94,51 +94,82 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         }
                         project.OptimizeRuns = dsProject.Tables[4].AsEnumerable().
                             Select(x => new OptimizeRun()
-                            {
-                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
-                                // RunName = DataReader.ReadString(x, "RunName"),
-                                //RunName = (DataReader.ReadString(x, "RunName").Contains("DLP")) ? DataReader.ReadString(x, "RunName") : ((EOptimizeRunStatus)DataReader.ReadInt(x, "RunName") == EOptimizeRunStatus.Open) ? "Open" : "Certification",
-                                RunName = ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " + Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " + Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("HH:mm")) : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Open ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText") : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("CertificationStatusText"),
-                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "Status"),
-                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
-                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
-                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
-                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
-                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
-                                ReferenceChartType = new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"), DataReader.ReadString(x, "ChartName"))
-                            }).ToList();
+                                            {
+                                                OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                                                RunName =
+                                                    isVerification
+                                                        ? "Verification"
+                                                        : ((EOptimizeRunStatus) DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed
+                                                              ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " +
+                                                                 Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " +
+                                                                 Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("HH:mm"))
+                                                              : ((EOptimizeRunStatus) DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Open
+                                                                    ? GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("OpenStatusText")
+                                                                    : GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString(
+                                                                        "CertificationStatusText"),
+                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                                Status = (EOptimizeRunStatus) DataReader.ReadInt(x, "Status"),
+                                                StartDateTime = DataReader.ReadDate(x, "StartDateTime"),
+                                                EndDateTime = DataReader.ReadDate(x, "EndDateTime"),
+                                                MasterRunId = DataReader.ReadInt(x, "MasterRunID"),
+                                                HasMeasurements = (DataReader.ReadInt(x, "MeasurementCount") > 0),
+                                                HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
+                                                ReferenceChartType =
+                                                    new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"),
+                                                                                    DataReader.ReadString(x, "ChartName"))
+                                            }).ToList();
 
-                        int index = 0;
-                        string LastDLPName = "";
-                        project.OptimizeRuns.ForEach(x =>
-                                                         {
-                                                             if (index > 0)
+                        if (!isVerification)
+                        {
+                            int index = 0;
+                            string LastDLPName = "";
+                            project.OptimizeRuns.ForEach(x =>
                                                              {
-                                                                 LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") + ".icc";
-                                                                 if (index > 1)
+                                                                 if (index > 0)
                                                                  {
-                                                                     if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                                                     LastDLPName = project.ProjectName + " DLP" +
+                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Month.ToString("00") +
+                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Day.ToString("00") +
+                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Hour.ToString("00") +
+                                                                                   project.OptimizeRuns[index - 1].EndDateTime.Value.Minute.ToString("00") +
+                                                                                   ".icc";
+                                                                     if (index > 1)
                                                                      {
-                                                                         LastDLPName = project.ProjectName + " DLP" + project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") + project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString("00") + ".icc";  //----If last run is certify run, then get DLP of its previous run----//
+                                                                         if (project.OptimizeRuns[index - 1].Status == EOptimizeRunStatus.Certify)
+                                                                         {
+                                                                             LastDLPName = project.ProjectName + " DLP" +
+                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Month.ToString("00") +
+                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Day.ToString("00") +
+                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Hour.ToString("00") +
+                                                                                           project.OptimizeRuns[index - 2].EndDateTime.Value.Minute.ToString(
+                                                                                               "00") + ".icc";
+                                                                                 //----If last run is certify run, then get DLP of its previous run----//
+                                                                         }
                                                                      }
                                                                  }
-                                                             }
-                                                             x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
-                                                             x.DlpName = string.Format("{0} DLP {1}.icc",
-                                                                                       project.ProjectName,
-                                                                                       index++.ToString("000"));
+                                                                 x.LastDlpName = (index == 0) ? string.Empty : LastDLPName;
+                                                                 x.DlpName = string.Format("{0} DLP {1}.icc",
+                                                                                           project.ProjectName,
+                                                                                           index++.ToString("000"));
 
-                                                         });
-                        if (project.CurrDlpId > 0)
-                        {
-                            project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
-                            project.ProposedDlpName = project.OptimizeRuns.Last().DlpName;
+                                                             });
+                            if (project.CurrDlpId > 0)
+                            {
+                                project.CurrentDlpName = project.OptimizeRuns.Single(x => x.OptimizeRunId == project.CurrDlpId).DlpName;
+                                project.ProposedDlpName = project.OptimizeRuns.Last().DlpName;
+                            }
                         }
-                        project.CurrentDisplayStatus =
-                            project.OptimizeRuns.Count() == 1
-                                ? ECurrentProjectStatus.New
-                                : ECurrentProjectStatus.Run;
+                        if (isVerification)
+                        {
+                            project.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                        }
+                        else
+                        {
+                            project.CurrentDisplayStatus =
+                                project.OptimizeRuns.Count() == 1
+                                    ? ECurrentProjectStatus.New
+                                    : ECurrentProjectStatus.Run;    
+                        }
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectDetail"));
@@ -448,8 +479,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.DeviceFamilyProfilerOptionId,
                                                      projectOptions.ToString(),
                                                      project.MeasurementSetting.VMeasurementDeviceID,
-                                                     project.MeasurementSetting.OPTReferenceChartTypeID.Key,
-                                                     project.MeasurementSetting.VReferenceChartTypeID.Key,
+                                                     project.MeasurementSetting.OptReferenceChartType.Key,
+                                                     project.MeasurementSetting.VReferenceChartType.Key,
                                                      project.EnabledValidation
                                                  });
                         savedProject = GetProjectDetail(project.ProjectId);
@@ -505,8 +536,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()},
                                                      new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = project.LicenseTypeID},
                                                      new Parameters() {ParameterName = "@VMeasurementDeviceID",Type=DbType.Int16,Value = project.MeasurementSetting.VMeasurementDeviceID},
-                                                     new Parameters() {ParameterName = "@OPTReferenceChartTypeID", Type=DbType.Int16, Value = project.MeasurementSetting.OPTReferenceChartTypeID.Key},
-                                                     new Parameters() {ParameterName ="@VReferenceChartTypeID", Type=DbType.Int16,Value = project.MeasurementSetting.VReferenceChartTypeID.Key },
+                                                     new Parameters() {ParameterName = "@OPTReferenceChartTypeID", Type=DbType.Int16, Value = project.MeasurementSetting.OptReferenceChartType.Key},
+                                                     new Parameters() {ParameterName ="@VReferenceChartTypeID", Type=DbType.Int16,Value = project.MeasurementSetting.VReferenceChartType.Key },
                                                      new Parameters(){ ParameterName = "@EnabledValidation", Type=DbType.Boolean,Value=project.EnabledValidation}
                                                  },
                                              new List<Parameters>()

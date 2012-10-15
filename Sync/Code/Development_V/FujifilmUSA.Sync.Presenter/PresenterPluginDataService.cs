@@ -19,6 +19,13 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.SaveMeasurement(_viewPluginDataService.Measurement);
         }
 
+        public void SaveVMeasurement()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement);
+        }
+
         public void GetReferenceChartData()
         {
             var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
@@ -31,6 +38,13 @@ namespace FujifilmUSA.Sync.Presenter
             var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
             _viewPluginDataService.Measurements = measurementBusiness.GetMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
+        }
+
+        public void GetVMeasurementsOnProjectId()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.Measurements = measurementBusiness.GetVMeasurementsOnProjectId(_viewPluginDataService.ProjectId);
         }
 
         public bool DeleteMeasurement()

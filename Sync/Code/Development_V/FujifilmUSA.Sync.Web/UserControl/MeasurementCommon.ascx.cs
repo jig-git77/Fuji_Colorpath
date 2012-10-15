@@ -1,5 +1,6 @@
 ﻿using FujifilmUSA.Sync.Common;
 using System;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -26,11 +27,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
+                hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification).ToString().ToLower();
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
-                hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();               
-                hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();                
+                hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                {
+                    hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key.ToString();
+                }
+                else if (!SessionManager.Instance.CurrentProject.HasDLP)
+                {
+                    hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                }
+                else
+                {
+                    hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
+                }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
-            }            
+            }
         }
     }
 }

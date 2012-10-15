@@ -32,6 +32,15 @@ namespace FujifilmUSA.Sync.Web.Services
             presenter.SaveMeasurement();
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "SaveVMeasurement")]
+        [OperationContract]
+        public void SaveVMeasurement(Entity.Measurement measurement)
+        {
+            this.Measurement = measurement;
+            var presenter = new PresenterPluginDataService(this);
+            presenter.SaveVMeasurement();
+        }
+
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}")]
         [OperationContract]
         public ReferenceChartData GetReferenceChart(string projectId)
@@ -49,6 +58,20 @@ namespace FujifilmUSA.Sync.Web.Services
             this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
             var presenter = new PresenterPluginDataService(this);
             presenter.GetMeasurementsOnRunId();
+            if (Measurements.Count == 0) //------If someone delete all measurements, and still able to go to Analyze page, then set this to false
+            {
+                FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = false;
+            }
+            return Measurements;
+        }
+
+        [WebInvoke(Method = "GET", UriTemplate = "GetVMeasurementsByProjectId/{projectId}")]
+        [OperationContract]
+        public List<Entity.Measurement> GetVMeasurementsByProjectId(string projectId)
+        {
+            this.ProjectId = Convert.ToInt32(projectId);
+            var presenter = new PresenterPluginDataService(this);
+            presenter.GetVMeasurementsOnProjectId();
             if (Measurements.Count == 0) //------If someone delete all measurements, and still able to go to Analyze page, then set this to false
             {
                 FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = false;
