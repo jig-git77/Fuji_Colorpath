@@ -75,7 +75,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName")),
                                         VMeasurementDeviceID = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementDeviceID"),
                                         OptReferenceChartType = new KeyValuePair<short, string>(
-                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "OPTReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "OPTChartName")),
                                         VReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VReferenceChartTypeID"),
