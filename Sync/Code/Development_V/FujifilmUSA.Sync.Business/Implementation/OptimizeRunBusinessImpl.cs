@@ -272,6 +272,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return (EOptimizeRunStatus)LastRunStatus;
         }
 
+        public bool DeleteVMeasurement(int measurementId)
+        {
+            int affectedRow = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    affectedRow = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "CPSyncV.DeleteVMeasurement",
+                            new object[]
+                                    {
+                                        measurementId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMeasurement"));
+            return (affectedRow > 0);
+        }
 
         #endregion
 

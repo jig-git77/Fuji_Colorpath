@@ -556,93 +556,100 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return savedProject;
         }
 
-        public ReferenceChartData GetReferenceChartData(int projectId)
+        public ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)
         {
             var chartData = new ReferenceChartData();
             Common.ImplementBusinessLogic(
                 () =>
-                {
-                    var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[GetReferenceChart]", new object[] { projectId });
-                    if (dsReferenceChart.Tables[0].Rows.Count > 0)
                     {
-                        chartData.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
-                        chartData.ChartName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ChartName");
-                        chartData.NumOfCols = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfCols");
-                        chartData.NumOfRows = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfRows");
-                        chartData.TotalPatches = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "TotalPatches");
-                        chartData.InstrumentTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID");
-                        chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
-                        chartData.ActivationKey =
-                            Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
-                        var uvIncluded = DataReader.ReadBoolean(dsReferenceChart.Tables[0].Rows[0], "UVIncluded");
-                        chartData.DeviceSetting = new MeasurementDevice
-                                                      {
-                                                          SerialNumber = chartData.MeasureDeviceSrNo,
-                                                          MeasurementSettings = new MeasurementSetting()
-                                                                                    {
-                                                                                        IlluminantName =
-                                                                                            DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
-                                                                                        ObserverTypeName = Utilities.GetValueFromDescription<EObserverType>(DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
-                                                                                        UvIncludedName =
-                                                                                            uvIncluded ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString(),
-                                                                                        DensityType = EDensityType.ANSIT.ToString()
-                                                                                    }
-                                                      };
-                        chartData.ReferenceCharts = dsReferenceChart.Tables[1].AsEnumerable().
-                            Select(x =>
-                                   new ReferenceChart()
-                                       {
-                                           ChartTypeId = DataReader.ReadShort(x, "ChartTypeID"),
-                                           SampleName = DataReader.ReadString(x, "SampleName"),
-                                           CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
-                                           CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
-                                           CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
-                                           CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                                           PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
-                                           HtmlColor = DataReader.ReadString(x, "HTMLColor")
-                                       }).ToList();
-
-                        var reader = DataAccessFactory.Instance.GetXmlResult("CPSync4D.GetChartSettings", new object[] { chartData.ReferenceChartTypeId });
-                        var dsChartSettings = new DataSet();
-                        dsChartSettings.ReadXml(reader);
-                        if (dsChartSettings.Tables.Count > 0)
+                        var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CPSync4D].[GetReferenceChart]",
+                                                                                      new object[] {projectId, referenceChartDisType});
+                        if (dsReferenceChart.Tables[0].Rows.Count > 0)
                         {
-                            chartData.ChartSetting = new ChartSetting();
-                            if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeX"))
-                                chartData.ChartSetting.ChartSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeX");
-                            if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeY"))
-                                chartData.ChartSetting.ChartSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeY");
-                            if (dsChartSettings.Tables[0].Columns.Contains("BarSizeX"))
-                                chartData.ChartSetting.BarSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeX");
-                            if (dsChartSettings.Tables[0].Columns.Contains("BarSizeY"))
-                                chartData.ChartSetting.BarSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeY");
-                            if (dsChartSettings.Tables[0].Columns.Contains("MarkerDistance"))
-                                chartData.ChartSetting.MarkerDistance = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "MarkerDistance");
-                            if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeX"))
-                                chartData.ChartSetting.PatchSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeX");
-                            if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeY"))
-                                chartData.ChartSetting.PatchSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeY");
-                            if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstLineY"))
-                                chartData.ChartSetting.DistToFirstLineY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstLineY");
-                            if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstField"))
-                                chartData.ChartSetting.DistToFirstField = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstField");
-                            if (dsChartSettings.Tables[0].Columns.Contains("DistToBar"))
-                                chartData.ChartSetting.DistToBar = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToBar");
+                            chartData.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
+                            chartData.ChartName = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ChartName");
+                            chartData.NumOfCols = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfCols");
+                            chartData.NumOfRows = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "NumOfRows");
+                            chartData.TotalPatches = DataReader.ReadInt(dsReferenceChart.Tables[0].Rows[0], "TotalPatches");
+                            chartData.InstrumentTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "InstrumentTypeID");
+                            chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
+                            chartData.ActivationKey =
+                                Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
+                            var uvIncluded = DataReader.ReadBoolean(dsReferenceChart.Tables[0].Rows[0], "UVIncluded");
+                            chartData.DeviceSetting = new MeasurementDevice
+                                                          {
+                                                              SerialNumber = chartData.MeasureDeviceSrNo,
+                                                              MeasurementSettings = new MeasurementSetting()
+                                                                                        {
+                                                                                            IlluminantName =
+                                                                                                DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0],
+                                                                                                                      "IlluminantType"),
+                                                                                            ObserverTypeName =
+                                                                                                Utilities.GetValueFromDescription<EObserverType>(
+                                                                                                    DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0],
+                                                                                                                          "ObserverType")),
+                                                                                            UvIncludedName =
+                                                                                                uvIncluded
+                                                                                                    ? EUVIncludedMode.UV.ToString()
+                                                                                                    : EUVIncludedMode.UVCut.ToString(),
+                                                                                            DensityType = EDensityType.ANSIT.ToString()
+                                                                                        }
+                                                          };
+                            chartData.ReferenceCharts = dsReferenceChart.Tables[1].AsEnumerable().
+                                Select(x =>
+                                       new ReferenceChart()
+                                           {
+                                               ChartTypeId = DataReader.ReadShort(x, "ChartTypeID"),
+                                               SampleName = DataReader.ReadString(x, "SampleName"),
+                                               CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                                               CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                                               CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                               CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                                               PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                               HtmlColor = DataReader.ReadString(x, "HTMLColor")
+                                           }).ToList();
 
-                            //For IO devices...
-                            if (dsChartSettings.Tables[0].Columns.Contains("FirstSample"))
-                                chartData.ChartSetting.FirstSample = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "FirstSample");
-                            if (dsChartSettings.Tables[0].Columns.Contains("ReadDirection"))
-                                chartData.ChartSetting.ReadDirection = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadDirection");
-                            if (dsChartSettings.Tables[0].Columns.Contains("ReadMode"))
-                                chartData.ChartSetting.ReadMode = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadMode");
-                            if (dsChartSettings.Tables[0].Columns.Contains("RowsPerPage"))
-                                chartData.ChartSetting.RowsPerPage = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "RowsPerPage");
-                            if (dsChartSettings.Tables[0].Columns.Contains("Pages"))
-                                chartData.ChartSetting.Pages = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "Pages");
+                            var reader = DataAccessFactory.Instance.GetXmlResult("CPSync4D.GetChartSettings", new object[] {chartData.ReferenceChartTypeId});
+                            var dsChartSettings = new DataSet();
+                            dsChartSettings.ReadXml(reader);
+                            if (dsChartSettings.Tables.Count > 0)
+                            {
+                                chartData.ChartSetting = new ChartSetting();
+                                if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeX"))
+                                    chartData.ChartSetting.ChartSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeX");
+                                if (dsChartSettings.Tables[0].Columns.Contains("ChartSizeY"))
+                                    chartData.ChartSetting.ChartSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "ChartSizeY");
+                                if (dsChartSettings.Tables[0].Columns.Contains("BarSizeX"))
+                                    chartData.ChartSetting.BarSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeX");
+                                if (dsChartSettings.Tables[0].Columns.Contains("BarSizeY"))
+                                    chartData.ChartSetting.BarSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "BarSizeY");
+                                if (dsChartSettings.Tables[0].Columns.Contains("MarkerDistance"))
+                                    chartData.ChartSetting.MarkerDistance = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "MarkerDistance");
+                                if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeX"))
+                                    chartData.ChartSetting.PatchSizeX = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeX");
+                                if (dsChartSettings.Tables[0].Columns.Contains("PatchSizeY"))
+                                    chartData.ChartSetting.PatchSizeY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "PatchSizeY");
+                                if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstLineY"))
+                                    chartData.ChartSetting.DistToFirstLineY = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstLineY");
+                                if (dsChartSettings.Tables[0].Columns.Contains("DistToFirstField"))
+                                    chartData.ChartSetting.DistToFirstField = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToFirstField");
+                                if (dsChartSettings.Tables[0].Columns.Contains("DistToBar"))
+                                    chartData.ChartSetting.DistToBar = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "DistToBar");
+
+                                //For IO devices...
+                                if (dsChartSettings.Tables[0].Columns.Contains("FirstSample"))
+                                    chartData.ChartSetting.FirstSample = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "FirstSample");
+                                if (dsChartSettings.Tables[0].Columns.Contains("ReadDirection"))
+                                    chartData.ChartSetting.ReadDirection = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadDirection");
+                                if (dsChartSettings.Tables[0].Columns.Contains("ReadMode"))
+                                    chartData.ChartSetting.ReadMode = DataReader.ReadString(dsChartSettings.Tables[0].Rows[0], "ReadMode");
+                                if (dsChartSettings.Tables[0].Columns.Contains("RowsPerPage"))
+                                    chartData.ChartSetting.RowsPerPage = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "RowsPerPage");
+                                if (dsChartSettings.Tables[0].Columns.Contains("Pages"))
+                                    chartData.ChartSetting.Pages = DataReader.ReadDecimal(dsChartSettings.Tables[0].Rows[0], "Pages");
+                            }
                         }
-                    }
-                },
+                    },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartData"));
             return chartData;
         }

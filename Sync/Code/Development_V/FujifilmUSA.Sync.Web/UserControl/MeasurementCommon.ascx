@@ -158,6 +158,7 @@
         </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
+<asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
 <asp:HiddenField ID="hdOptimizeRunId" runat="server" />
 <asp:HiddenField ID="hdProjectId" runat="server" />
@@ -228,7 +229,7 @@
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
-        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), ReferenceChartTypeId, SerialNo);
+        GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val());
     }
     jQuery(document).ready(function () {   
 
@@ -419,10 +420,19 @@
     }
     function deletemeasurement(smeasurementId) {
         var measurementId = $.trim(smeasurementId);
+        var deleteMeasurementUrl = "";
+        if(jQuery("input[id$=hdIsVerification]").val() == "true")
+        {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
+        }
+        else
+        {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId;
+        }
         jQuery.ajax({
             type: "POST",
             contentType: "application/json; charset=utf-8",
-            url: "Services/PluginDataService.svc/DeleteMeasurement/" + measurementId,
+            url: deleteMeasurementUrl,
             processData: false,
             dataType: "json",
             dataFilter: function (data, type) {

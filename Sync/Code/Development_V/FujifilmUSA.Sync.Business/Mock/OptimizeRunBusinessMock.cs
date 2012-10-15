@@ -54,6 +54,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return default(EOptimizeRunStatus);
         }
 
+        public bool DeleteVMeasurement(int measurementId)
+        {
+            return true;
+        }
+
         #endregion
 
         #region ITaskBase Members

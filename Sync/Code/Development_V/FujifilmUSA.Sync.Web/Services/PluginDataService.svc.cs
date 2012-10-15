@@ -41,11 +41,12 @@ namespace FujifilmUSA.Sync.Web.Services
             presenter.SaveVMeasurement();
         }
 
-        [WebGet(UriTemplate = "GetReferenceChart/{projectId}")]
+        [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}")]
         [OperationContract]
-        public ReferenceChartData GetReferenceChart(string projectId)
+        public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType)
         {
             this.ProjectId = Convert.ToInt32(projectId);
+            this.ReferenceChartDisType = (EReferenceChartDisType) Enum.Parse(typeof (EReferenceChartDisType), referenceChartDisplayType);
             var presenter = new PresenterPluginDataService(this);
             presenter.GetReferenceChartData();
             return ReferenceChartData;
@@ -88,6 +89,15 @@ namespace FujifilmUSA.Sync.Web.Services
             return presenter.DeleteMeasurement();            
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "DeleteVMeasurement/{measurementId}")]
+        [OperationContract]
+        public bool DeleteVMeasurement(string measurementId)
+        {
+            MeasurementId = Convert.ToInt32(measurementId);
+            var presenter = new PresenterPluginDataService(this);
+            return presenter.DeleteVMeasurement();
+        }
+
         [WebInvoke(Method = "POST", UriTemplate = "KeepUserAlive/{username}")]
         [OperationContract]
         public bool KeepUserAlive(string username)
@@ -100,12 +110,6 @@ namespace FujifilmUSA.Sync.Web.Services
             FujifilmUSA.Sync.Common.CacheManager.Instance.ActiveUsers = users;            
             return true;
         }
-        //[WebInvoke(Method = "POST", UriTemplate = "LogActivityTime/{userId}")]
-        //[OperationContract]
-        //public void LogActivityTime(string userId)
-        //{
-        //    LoginRestriction.LogActivityTime(Convert.ToInt32(userId));
-        //}
 
         #region IViewPluginDataService Members
         public Entity.Measurement Measurement { get; set; }
@@ -114,6 +118,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public int OptimizeRunId { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
         public int MeasurementId { get; set; }
+        public EReferenceChartDisType ReferenceChartDisType { get; set; }
         #endregion
 
         #region IViewBase Members
