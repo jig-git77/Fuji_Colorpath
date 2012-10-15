@@ -159,11 +159,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindMesurementChart()
         {
-            OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             From_ΔE = Rbl_DT_E.SelectedValue;
             chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
-            _presenterAnalyze.GetAnalyzeChartMeasurement();
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+            {
+                //This will be called when Verification process is going on
+                ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
+                _presenterAnalyze.GetAnalyzeChartVMeasurement();
+            }
+            else
+            {
+                //In case of None (i.e. Optimization)
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterAnalyze.GetAnalyzeChartMeasurement();
+            }
             if (!IsErrorOccured)
             {
                 var manager = new AnalyzeChartManager(chartAnalyze, Measurements)
@@ -199,7 +209,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdMeasurement.DataBind();
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;                
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
                 FRMGeneratePDFReport.Attributes.Add("src", path);
                 FRMGeneratePDFReport.Style.Add("display", "");
             }
@@ -1065,7 +1075,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
 
         public string From_ΔE { get; set; }
-
+        public bool IsVerification
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
+            }
+        }
         #endregion
     }
 }

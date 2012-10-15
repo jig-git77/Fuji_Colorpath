@@ -177,7 +177,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     imgbtnVarification.Visible = true;
                     break;
             }
-
+            //Here are we showing validation status icon if project is in certified state
+            imgbtnVarification.ImageUrl = ResolveUrl("../Images/ValidationSuccess.png");
+            imgbtnVarification.Visible = true;
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;

@@ -43,7 +43,14 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartMeasurement(_viewAnalyze.OptimizeRunId,_viewAnalyze.From_ΔE);
         }
-        
+
+        public void GetAnalyzeChartVMeasurement()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.Measurements = measurementBusiness.GetAnalyzeChartVMeasurement(_viewAnalyze.ProjectId, _viewAnalyze.From_ΔE);
+        }
+
         public void UpdateMeasurementByAnalyzeChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
@@ -55,31 +62,31 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
+            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE,_viewAnalyze.IsVerification);
         }
 
         public void GetPatchDetailsofMeasurement()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.PatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId);
+            _viewAnalyze.PatchDetails = measurementBusiness.GetPatchDetailsofMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
         }
 
         public void GetInkPaperChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
-            _viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE);
+            _viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification);
+            _viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification);
         }
 
         public void GetGrayChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId);
-            _viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId);
-            _viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId);
+            _viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
         }    
     }
 }

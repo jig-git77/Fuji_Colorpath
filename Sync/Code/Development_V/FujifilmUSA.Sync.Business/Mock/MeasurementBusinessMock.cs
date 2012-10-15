@@ -31,41 +31,46 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
+        public List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE)
+        {
+            return new List<Measurement>();
+        }
+
         public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
         {
             return 0;
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             return new List<MeasurementPatch_AvgDelta>();
         }
 
-        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId)
+        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
         {
             return new List<MeasurementPatchDetails>();
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId,bool IsVerification = false)
         {
             return new List<AnalyzeChart_Gray>();
         }
-        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false)
         {
             return new List<AnalyzeChart_Gray>();
         }
 
-        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false)
         {
             return new List<AnalyzeChart_Gray>();
         }

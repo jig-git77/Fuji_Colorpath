@@ -164,6 +164,50 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
+        public List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE)
+        {
+            var measurements = new List<Measurement>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "[CPSyncV].[GetAnalyzeChartVMeasurement]",
+                                new object[]
+                                        {
+                                            projectId, From_ΔE
+                                        });
+                    measurements =
+                        dsMeasurements.
+                            Tables[0].
+                            AsEnumerable().
+                            Select(x => new Measurement()
+                            {
+                                MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                            }).ToList();
+
+                    measurements.ForEach(x =>
+                    {
+                        x.MeasurementPatches =
+                            dsMeasurements.Tables[1].AsEnumerable().
+                                Where(y => DataReader.ReadInt(y, "MeasurementID") == x.MeasurementId).
+                                Select(y => new MeasurementPatch()
+                                {
+                                    MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
+                                    MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
+                                    HtmlColor = DataReader.ReadString(y, "HtmlColor"),
+                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
+                                }).ToList();
+                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAnalyzeChartMeasurement"));
+            return measurements;
+        }
+
         public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
         {
             int returnValue = 0;
@@ -186,8 +230,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
+            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
             var measurements = new List<MeasurementPatch_AvgDelta>();
             Common.ImplementBusinessLogic(
                 () =>
@@ -196,7 +243,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetMeasurementDeltasByMeasurementID",
+                                storedProc,
                                 new object[] { MeasurementId, From_ΔE });
                     measurements = dsMeasurements.
                         Tables[0].
@@ -220,9 +267,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId)
+        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
         {
             var PatchDetails = new List<MeasurementPatchDetails>();
+            string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -230,7 +280,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetPatchDetailsByMeasurementID",
+                                storedProc,
                                 new object[] { MeasurementId });
                     PatchDetails = dsMeasurements.
                         Tables[0].
@@ -259,9 +309,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PatchDetails;
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
+            string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_InkPaper";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -269,7 +322,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetChartData_InkPaper",
+                                storedProc,
                                 new object[] { MeasurementId, From_ΔE });
                     DeltaEPatchDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
@@ -291,9 +344,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return DeltaEPatchDetails;
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             var PaperPatchDetails = new List<AnalyzeChart>();
+            string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_InkPaper";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -301,7 +357,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetChartData_InkPaper",
+                               storedProc,
                                 new object[] { MeasurementId, From_ΔE });
                     PaperPatchDetails = dsMeasurements.Tables[1].
                          AsEnumerable().
@@ -322,9 +378,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PaperPatchDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
+            string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -332,7 +391,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetChartData_Gray",
+                                storedProc,
                                 new object[] { MeasurementId });
                     GamutChartDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
@@ -356,9 +415,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return GamutChartDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
+            string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -366,7 +428,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetChartData_Gray",
+                                storedProc,
                                 new object[] { MeasurementId });
                     GamutChartDetails = dsMeasurements.Tables[1].
                          AsEnumerable().
@@ -387,9 +449,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return GamutChartDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId)
+        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false)
         {
             var LABChartDetails = new List<AnalyzeChart_Gray>();
+            string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -397,7 +462,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetChartData_Gray",
+                                storedProc,
                                 new object[] { MeasurementId });
                     LABChartDetails = dsMeasurements.Tables[2].
                          AsEnumerable().
@@ -446,26 +511,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var measurements = new List<Measurement>();
             Common.ImplementBusinessLogic(
                 () =>
-                    {
-                        var dsMeasurements =
-                            DataAccessFactory.
-                                Instance.
-                                GetDsResult(
-                                    "CPSyncV.GetVMeasurementByProjectID",
-                                    new object[] {projectId});
-                        measurements = dsMeasurements.
-                            Tables[0].
-                            AsEnumerable().
-                            Select(x => new Measurement()
-                                            {
-                                                MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
-                                                MeasurementName = DataReader.ReadString(x, "MeasurementName"),
-                                                MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                                UploadDate = DataReader.ReadString(x, "MeasurementDate"),
-                                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
-                                            }).ToList();
-                    },
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSyncV.GetVMeasurementByProjectID",
+                                new object[] { projectId });
+                    measurements = dsMeasurements.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new Measurement()
+                                        {
+                                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                                            ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                        }).ToList();
+                },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
         }

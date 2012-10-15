@@ -9,18 +9,19 @@ namespace FujifilmUSA.Sync.Business.Interface
     {
         MeasurementDataResponse GetMeasurementData(List<int> measurementIds);
         int SaveMeasurement(Measurement measurement);
-        List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
-        List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE);
-        int UpdateMeasurementByAnalyzeChart(Measurement measurement);
-        List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE);
-        List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId);
-        List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE);
-        List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE);
-        List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId);
-        List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId);
-        List<AnalyzeChart_Gray> GetLABChart(int MeasurementId);
-        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE);
-        List<Measurement> GetVMeasurementsOnProjectId(int projectId);
         int SaveVMeasurement(Measurement measurement);
+        List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
+        List<Measurement> GetVMeasurementsOnProjectId(int projectId);        
+        List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE);
+        List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE);
+        int UpdateMeasurementByAnalyzeChart(Measurement measurement);
+        List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
+        List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);
+        List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false);
+        List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false);
+        List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false);
+        List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false);
+        List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);
+        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE);        
     }
 }
