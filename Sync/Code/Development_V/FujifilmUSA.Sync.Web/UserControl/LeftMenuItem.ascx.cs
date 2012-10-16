@@ -76,14 +76,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ELeftMenuItemLevel.Project:
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
-                    if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
-                    {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
-                    }
-                    else
-                    {
-                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;    
-                    }
+                    SessionManager.Instance.CurrentNavigation =
+                        SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification
+                            ? ELeftMenuItemLevel.ValidationSetup
+                            : ELeftMenuItemLevel.MeasurementSetup;
                     Response.Redirect("AddProject.aspx");
                     break;
             }

@@ -68,9 +68,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     break;
                 case ECurrentProjectStatus.Edit:
-                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                    //If verification, then don't enable Measurementsetup, analyze and download links...
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.None)
                     {
-                        lnkMeasurementSetup.Enabled = true;
+                        if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                        {
+                            lnkMeasurementSetup.Enabled = true;
+                        }
+
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+                        {
+                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
+                            {
+                                lnkAnalyze.Enabled = true;
+                            }
+                            if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
+                            {
+                                lnkDownload.Enabled = true;
+                            }
+                        }
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
                     {
@@ -80,25 +96,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkSave.Enabled = true;
                     }
-                    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
-                    {
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
-                        {
-                            lnkAnalyze.Enabled = true;
-                        }
-                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
-                        {
-                            lnkDownload.Enabled = true;
-                        }
-                    }
                     break;
                 case ECurrentProjectStatus.Run:
                     //This control won't load...
                     break;
             }
-
-
-
             switch (SessionManager.Instance.CurrentNavigation)
             {
                 case ELeftMenuItemLevel.Description:

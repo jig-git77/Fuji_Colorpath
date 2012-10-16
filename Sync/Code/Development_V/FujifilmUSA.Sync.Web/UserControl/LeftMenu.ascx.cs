@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
             this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
-        } 
+        }
         #endregion
 
         #region "Page Events"
@@ -133,7 +133,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
-                        if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification ||
+                            item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                         {
                             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
                             ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
