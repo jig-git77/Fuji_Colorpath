@@ -224,7 +224,7 @@
                                                             </td>
                                                             <td>
                                                                 <div style="float: left;">
-                                                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="30" Width="270px" 
+                                                                    <asp:TextBox ID="txtEmail" runat="server" MaxLength="50" Width="270px" 
                                                                         Height="19px" meta:resourcekey="txtEmailResource1"></asp:TextBox>
                                                                 </div>
                                                                 <div style="float: left">
