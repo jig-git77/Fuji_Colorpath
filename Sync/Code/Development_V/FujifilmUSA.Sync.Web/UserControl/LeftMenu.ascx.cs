@@ -53,6 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
+                        case ELeftMenuItemLevel.Verification:
                         case ELeftMenuItemLevel.OptimizeRun:
                             if (SessionManager.Instance.CurrentProject == null ||
                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)

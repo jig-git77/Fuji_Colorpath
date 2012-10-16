@@ -54,9 +54,9 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new byte[1];
         }
 
-        public Project SaveProject(Project project)
+        public int SaveProject(Project project)
         {
-            return new Project();
+            return 0;
         }
 
         public ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)

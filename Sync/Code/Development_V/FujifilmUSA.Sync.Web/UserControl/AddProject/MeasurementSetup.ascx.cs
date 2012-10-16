@@ -124,6 +124,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsErrorOccured)
             {
+                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                {
+                    _presenterMeasurementSetting.GetProjectDetailWithVerification();
+                }
+                else
+                {
+                    _presenterMeasurementSetting.GetProjectDetail();
+                }
+                SessionManager.Instance.CurrentProject = Project;
+
                 switch (SessionManager.Instance.CurrentProject.Status)
                 {
                     case EOptimizeRunStatus.Open:

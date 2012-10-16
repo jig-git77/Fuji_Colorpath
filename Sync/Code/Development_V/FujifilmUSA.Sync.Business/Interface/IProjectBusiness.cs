@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         byte[] GetSourceProfile(int projectId);
         byte[] GetDestinationProfile(int projectId);
         byte[] GetLastOptimizedDlp(int projectId);
-        Project SaveProject(Project project);
+        int SaveProject(Project project);
         ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType);
         Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl);
         TempProjectInfo GetTempProjectInfo(Guid tempProjectId);

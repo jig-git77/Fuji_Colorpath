@@ -9,7 +9,7 @@ using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class PreviewPrintCondition : BaseControl, IViewPreviewPrintCondition,IViewSaveWindow
+    public partial class PreviewPrintCondition : BaseControl, IViewPreviewPrintCondition, IViewSaveWindow
     {
         #region "Declaration"
         public bool IsXmfNewProject
@@ -57,7 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnSavePrintCondition_Click(object sender, EventArgs e)
         {
-            if(IsXmfUser)
+            if (IsXmfUser)
             {
                 SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
                 SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
@@ -102,7 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
-            _presenterPreviewPrintCondition.GetPreviewPrintCondition();           
+            _presenterPreviewPrintCondition.GetPreviewPrintCondition();
             if (!IsErrorOccured)
             {
                 lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
@@ -112,10 +112,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                 lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                 imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
-
-               
-             
-               // SetImageSize();
             }
             trUVSettings.Visible = lblMeasurementDevice.Text.Contains(
              Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis));
@@ -161,6 +157,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region IViewSaveWindow Members
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
+        public int ProjectId { get; set; }
         #endregion
     }
 }

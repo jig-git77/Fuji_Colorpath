@@ -89,10 +89,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     if (CurrentRun != null && SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == CurrentRun.OptimizeRunId)
                     {
-                        //lnkMeasurement.ForeColor = System.Drawing.Color.Black;
-                        //lnkAnalyse.ForeColor = System.Drawing.Color.Black;
-                        //lnkDownload.ForeColor = System.Drawing.Color.Black;
-
                         ulSubMenu.Visible = true;
                         lnkRunName.Font.Bold = true;
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
@@ -100,21 +96,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkDownload.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Download;
                         lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
                         lnkDownload.Enabled = CurrentRun.HasProfile;
-                        //lnkAddRun.Font.Underline = true;
-                        //lnkAddRun.ForeColor = System.Drawing.Color.Blue;
-
-                        //if ((SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure) && !CurrentRun.HasMeasurements)
-                        //{
-                        //    lnkAnalyse.ForeColor = System.Drawing.Color.Silver;
-                        //    lnkDownload.ForeColor = System.Drawing.Color.Silver;
-                        //}
-                        //else
-                        //{
-                        //    if (!CurrentRun.HasProfile)
-                        //    {
-                        //        lnkDownload.ForeColor = System.Drawing.Color.Silver;
-                        //    }
-                        //}
                     }
                     else
                     {
@@ -125,35 +106,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lnkDownload.Visible = false;
                     if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Run)
                     {
-                        //lnkMeasurement.ForeColor = System.Drawing.Color.Black;
-                        //lnkAnalyse.ForeColor = System.Drawing.Color.Black;
-                        //lnkDownload.ForeColor = System.Drawing.Color.Black;
                         ulSubMenu.Visible = true;
                         lnkRunName.Font.Bold = true;
                         lnkMeasurement.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure;
                         lnkAnalyse.Font.Bold = SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Analyze;
                         lnkAnalyse.Enabled = lnkDownload.Enabled = CurrentRun.HasMeasurements;
-                        //lnkAddRun.Font.Underline = true;
-                        //lnkAddRun.ForeColor = System.Drawing.Color.Blue;
-
-                        //if ((SessionManager.Instance.CurrentNavigation == ELeftMenuItemLevel.Measure) && !CurrentRun.HasMeasurements)
-                        //{
-                        //    lnkAnalyse.ForeColor = System.Drawing.Color.Silver;
-                        //    lnkDownload.ForeColor = System.Drawing.Color.Silver;
-                        //}
-                        //else
-                        //{
-                        //    if (!CurrentRun.HasProfile)
-                        //    {
-                        //        lnkDownload.ForeColor = System.Drawing.Color.Silver;
-                        //    }
-                        //}
                     }
                     else
                     {
                         ulSubMenu.Visible = false;
                     }
                     break;
+            }
+            lnkMeasurement.ForeColor = lnkMeasurement.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkAnalyse.ForeColor = lnkAnalyse.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkDownload.ForeColor = lnkDownload.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            if (lnkAddRun.Visible)
+            {
+                lnkAddRun.Font.Underline = true;
+                lnkAddRun.ForeColor = System.Drawing.Color.Blue;
             }
         }
 
@@ -225,10 +196,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
             MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-            //if (SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status == EOptimizeRunStatus.Closed && !SessionManager.Instance.CurrentProject.OptimizeRuns.Last().HasProfile)
-            //{
             RunStatus = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status;
-            //}
             _presenterLeftMenuProjectItem.DeleteOptimizeRun();
 
             if (!IsErrorOccured)
@@ -264,7 +232,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public EOptimizeRunStatus RunStatus { get; set; }
 
         #endregion
-
-
     }
 }

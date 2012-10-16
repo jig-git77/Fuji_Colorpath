@@ -57,6 +57,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewMeasurementSetting.Project = projectBusiness.GetProjectDetail(_viewMeasurementSetting.ProjectId);
         }
 
+        public void GetProjectDetailWithVerification()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.Project = projectBusiness.GetProjectDetail(_viewMeasurementSetting.ProjectId, true);
+        }
+
         public void CreateOptimizeRun()
         {
             var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
@@ -89,7 +96,7 @@ namespace FujifilmUSA.Sync.Presenter
 
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.Project = projectBusiness.SaveProject(_viewMeasurementSetting.Project);
+            _viewMeasurementSetting.ProjectId = projectBusiness.SaveProject(_viewMeasurementSetting.Project);
         }
     }
 }

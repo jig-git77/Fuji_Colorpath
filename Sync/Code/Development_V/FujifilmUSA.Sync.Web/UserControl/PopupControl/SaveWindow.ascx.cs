@@ -26,7 +26,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
@@ -46,9 +45,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
-
             if (!IsErrorOccured)
             {
+                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                {
+                    _presenterSaveWindow.GetProjectDetailWithVerification();
+                }
+                else
+                {
+                    _presenterSaveWindow.GetProjectDetail();
+                }
                 WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] {Project.ProjectId, Project.ProjectName}, Request.UserHostAddress);
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
@@ -94,6 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
+        public int ProjectId { get; set; }
         #endregion
     }
 }

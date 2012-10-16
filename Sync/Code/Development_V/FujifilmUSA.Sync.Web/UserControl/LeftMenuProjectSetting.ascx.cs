@@ -34,41 +34,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                lnkAnalyze.Font.Bold =
                lnkDownload.Font.Bold = false;
 
-            lnkDescription.ForeColor =
-                lnkTargetColorSpace.ForeColor =
-                lnkProfilerOption.ForeColor =
-                lnkMeasurementSetup.ForeColor =
-                lnkValidationSetup.ForeColor =
-                lnkSave.ForeColor =
-                lnkMeasure.ForeColor =
-                lnkAnalyze.ForeColor =
-                lnkDownload.ForeColor = System.Drawing.Color.Silver;
             switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
                 case ECurrentProjectStatus.New:
                     if (SessionManager.Instance.CurrentProject.PrintCondition != null && !string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.PrintCondition.Media))
                     {
-                        lnkDescription.ForeColor = System.Drawing.Color.Black;
                         lnkDescription.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.SourceProfile != null && SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId > 0)
                     {
-                        lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
                         lnkTargetColorSpace.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.ProjectOption != null && SessionManager.Instance.CurrentProject.ProjectOption.Count > 0)
                     {
-                        lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
                         lnkProfilerOption.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
                     {
-                        lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
                         lnkMeasurementSetup.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
                     {
-                        lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
                         lnkValidationSetup.Enabled = true;
                     }
                     break;
@@ -78,7 +64,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
                         {
-                            lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
                             lnkMeasurementSetup.Enabled = true;
                         }
 
@@ -86,24 +71,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
                             {
-                                lnkAnalyze.ForeColor = System.Drawing.Color.Black;
                                 lnkAnalyze.Enabled = true;
                             }
                             if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
                             {
-                                lnkDownload.ForeColor = System.Drawing.Color.Black;
                                 lnkDownload.Enabled = true;
                             }
                         }
                     }
                     if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
                     {
-                        lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
                         lnkValidationSetup.Enabled = true;
                     }
                     if (SessionManager.Instance.CurrentProject.ProjectId > 0)
                     {
-                        lnkSave.ForeColor = System.Drawing.Color.Black;
                         lnkSave.Enabled = true;
                     }
                     break;
@@ -114,78 +95,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
             switch (SessionManager.Instance.CurrentNavigation)
             {
                 case ELeftMenuItemLevel.Description:
-                    //lnkDescription.CssClass = "Black_font";
                     lnkDescription.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.TargetColorSpace:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass = "Black_font";
                     lnkTargetColorSpace.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.ProfilerOption:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass = "Black_font";
                     lnkProfilerOption.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.MeasurementSetup:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass = "Black_font";
                     lnkMeasurementSetup.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.ValidationSetup:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass =
-                    //lnkValidationSetup.CssClass = "Black_font";
                     lnkValidationSetup.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Save:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass =
-                    //lnkValidationSetup.CssClass =
-                    //lnkSave.CssClass = "Black_font";
                     lnkSave.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Measure:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass =
-                    //lnkValidationSetup.CssClass =
-                    //lnkSave.CssClass =
-                    //lnkMeasure.CssClass = "Black_font";
                     lnkMeasure.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Analyze:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass =
-                    //lnkValidationSetup.CssClass =
-                    //lnkSave.CssClass =
-                    //lnkMeasure.CssClass =
-                    //lnkAnalyze.CssClass = "Black_font";
                     lnkAnalyze.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Download:
-                    //lnkDescription.CssClass =
-                    //lnkTargetColorSpace.CssClass =
-                    //lnkProfilerOption.CssClass =
-                    //lnkMeasurementSetup.CssClass =
-                    //lnkValidationSetup.CssClass =
-                    //lnkSave.CssClass =
-                    //lnkMeasure.CssClass =
-                    //lnkAnalyze.CssClass =
-                    //lnkDownload.CssClass = "Black_font";
                     lnkDownload.Font.Bold = true;
                     break;
             }
+
+            lnkDescription.ForeColor = lnkDescription.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkTargetColorSpace.ForeColor = lnkTargetColorSpace.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkProfilerOption.ForeColor = lnkProfilerOption.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkMeasurementSetup.ForeColor = lnkMeasurementSetup.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkValidationSetup.ForeColor = lnkValidationSetup.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkSave.ForeColor = lnkSave.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkMeasure.ForeColor = lnkMeasure.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkAnalyze.ForeColor = lnkAnalyze.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
+            lnkDownload.ForeColor = lnkDownload.Enabled ? System.Drawing.Color.Black : System.Drawing.Color.Silver;
         }
         protected void lnkItem_Click(object sender, EventArgs e)
         {

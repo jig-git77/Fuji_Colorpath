@@ -441,9 +441,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data == DBNull.Value ? null : (byte[])data;
         }
 
-        public Project SaveProject(Project project)
+        public int SaveProject(Project project)
         {
-            var savedProject = new Project();
+            int savedProjectId = 0;
             if (project.ProjectId > 0)
             {
                 #region Update Project
@@ -483,7 +483,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.VReferenceChartType.Key,
                                                      project.EnabledValidation
                                                  });
-                        savedProject = GetProjectDetail(project.ProjectId);
+                        savedProjectId = project.ProjectId;
                     },
                     new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveProject"));
                 #endregion
@@ -549,11 +549,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 if (outParam.Value != null)
                 {
                     var projectId = Convert.ToInt32(outParam.Value);
-                    savedProject = GetProjectDetail(projectId);
+                    savedProjectId = projectId;
                 }
                 #endregion
             }
-            return savedProject;
+            return savedProjectId;
         }
 
         public ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType)
