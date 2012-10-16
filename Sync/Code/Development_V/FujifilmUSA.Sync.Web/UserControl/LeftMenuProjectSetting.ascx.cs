@@ -24,25 +24,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkAnalyze.Enabled =
                 lnkDownload.Enabled = false;
 
-             lnkDescription.Font.Bold =
-                lnkTargetColorSpace.Font.Bold =
-                lnkProfilerOption.Font.Bold =
-                lnkMeasurementSetup.Font.Bold =
-                lnkValidationSetup.Font.Bold =
-                lnkSave.Font.Bold =
-                lnkMeasure.Font.Bold =
-                lnkAnalyze.Font.Bold =
-                lnkDownload.Font.Bold = false;
+            lnkDescription.Font.Bold =
+               lnkTargetColorSpace.Font.Bold =
+               lnkProfilerOption.Font.Bold =
+               lnkMeasurementSetup.Font.Bold =
+               lnkValidationSetup.Font.Bold =
+               lnkSave.Font.Bold =
+               lnkMeasure.Font.Bold =
+               lnkAnalyze.Font.Bold =
+               lnkDownload.Font.Bold = false;
 
-            lnkDescription.ForeColor =
-                lnkTargetColorSpace.ForeColor =
-                lnkProfilerOption.ForeColor =
-                lnkMeasurementSetup.ForeColor =
-                lnkValidationSetup.ForeColor =
-                lnkSave.ForeColor =
-                lnkMeasure.ForeColor =
-                lnkAnalyze.ForeColor =
-                lnkDownload.ForeColor = System.Drawing.Color.Silver;
+            lnkDescription.CssClass =
+                lnkTargetColorSpace.CssClass =
+                lnkProfilerOption.CssClass =
+                lnkMeasurementSetup.CssClass =
+                lnkValidationSetup.CssClass =
+                lnkSave.CssClass =
+                lnkMeasure.CssClass =
+                lnkAnalyze.CssClass =
+                lnkDownload.CssClass = "Silver_font";
             switch (SessionManager.Instance.CurrentProject.CurrentDisplayStatus)
             {
                 case ECurrentProjectStatus.New:
@@ -97,80 +97,80 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
             }
 
-           
+
 
             switch (SessionManager.Instance.CurrentNavigation)
             {
                 case ELeftMenuItemLevel.Description:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass = "Black_font";
                     lnkDescription.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.TargetColorSpace:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass = "Black_font";
                     lnkTargetColorSpace.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.ProfilerOption:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass = "Black_font";
                     lnkProfilerOption.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.MeasurementSetup:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass = "Black_font";
                     lnkMeasurementSetup.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.ValidationSetup:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass =
+                    lnkValidationSetup.CssClass = "Black_font";
                     lnkValidationSetup.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Save:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkSave.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass =
+                    lnkValidationSetup.CssClass =
+                    lnkSave.CssClass = "Black_font";
                     lnkSave.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Measure:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkSave.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasure.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass =
+                    lnkValidationSetup.CssClass =
+                    lnkSave.CssClass =
+                    lnkMeasure.CssClass = "Black_font";
                     lnkMeasure.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Analyze:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkSave.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasure.ForeColor = System.Drawing.Color.Black;
-                    lnkAnalyze.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass =
+                    lnkValidationSetup.CssClass =
+                    lnkSave.CssClass =
+                    lnkMeasure.CssClass =
+                    lnkAnalyze.CssClass = "Black_font";
                     lnkAnalyze.Font.Bold = true;
                     break;
                 case ELeftMenuItemLevel.Download:
-                    lnkDescription.ForeColor = System.Drawing.Color.Black;
-                    lnkTargetColorSpace.ForeColor = System.Drawing.Color.Black;
-                    lnkProfilerOption.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasurementSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkValidationSetup.ForeColor = System.Drawing.Color.Black;
-                    lnkSave.ForeColor = System.Drawing.Color.Black;
-                    lnkMeasure.ForeColor = System.Drawing.Color.Black;
-                    lnkAnalyze.ForeColor = System.Drawing.Color.Black;
-                    lnkDownload.ForeColor = System.Drawing.Color.Black;
+                    lnkDescription.CssClass =
+                    lnkTargetColorSpace.CssClass =
+                    lnkProfilerOption.CssClass =
+                    lnkMeasurementSetup.CssClass =
+                    lnkValidationSetup.CssClass =
+                    lnkSave.CssClass =
+                    lnkMeasure.CssClass =
+                    lnkAnalyze.CssClass =
+                    lnkDownload.CssClass = "Black_font";
                     lnkDownload.Font.Bold = true;
                     break;
             }
