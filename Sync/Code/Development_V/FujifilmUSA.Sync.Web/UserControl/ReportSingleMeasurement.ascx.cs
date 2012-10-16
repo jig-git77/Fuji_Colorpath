@@ -571,6 +571,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public string From_ΔE { get; set; }
 
+        public bool IsVerification
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
+            }
+        }
         #endregion
 
         protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)
@@ -589,7 +596,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                 }
             }
-        }
-
+        }        
     }
 }

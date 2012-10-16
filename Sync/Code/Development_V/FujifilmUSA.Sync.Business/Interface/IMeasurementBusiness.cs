@@ -14,7 +14,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetVMeasurementsOnProjectId(int projectId);        
         List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE);
         List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE);
-        int UpdateMeasurementByAnalyzeChart(Measurement measurement);
+        int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false);
         List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
         List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false);
@@ -22,6 +22,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);
-        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE);        
+        DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);        
     }
 }

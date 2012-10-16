@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
+        public int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false)
         {
             return 0;
         }
@@ -75,7 +75,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<AnalyzeChart_Gray>();
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             return new DataSet();
         }

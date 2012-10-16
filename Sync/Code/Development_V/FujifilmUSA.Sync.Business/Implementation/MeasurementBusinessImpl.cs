@@ -208,9 +208,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public int UpdateMeasurementByAnalyzeChart(Measurement measurement)
+        public int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false)
         {
             int returnValue = 0;
+            string storedProc = "[CPSync4D].[UpdateMeasurementByAnalyzeChart]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[UpdateVMeasurementByAnalyzeChart]";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -218,7 +221,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure(
-                                "[CPSync4D].[UpdateMeasurementByAnalyzeChart]",
+                                storedProc,
                                 new object[]
                                         {
                                             measurement.MeasurementId,
@@ -488,9 +491,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
             var measurements = new DataSet();
+            string storedProc = "Report.GetSingleMeasurement";
+            if (IsVerification)
+                storedProc = "Report.GetSingleVMeasurement";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -498,7 +504,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "Report.GetSingleMeasurement",
+                                storedProc,
                                 new object[] { MeasurementId, From_ΔE });
                     measurements = dsMeasurements;
                 },

@@ -19,7 +19,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewReportSingleMeasurement.ErrorOccured;
-            _viewReportSingleMeasurement.DSReport = measurementBusiness.GetReportDataOnMeasurement(_viewReportSingleMeasurement.MeasurementId, _viewReportSingleMeasurement.From_ΔE);
+            _viewReportSingleMeasurement.DSReport = measurementBusiness.GetReportDataOnMeasurement(_viewReportSingleMeasurement.MeasurementId, _viewReportSingleMeasurement.From_ΔE, _viewReportSingleMeasurement.IsVerification);
         }
     }
 

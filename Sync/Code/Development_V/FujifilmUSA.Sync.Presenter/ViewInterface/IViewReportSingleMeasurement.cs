@@ -11,5 +11,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int MeasurementId { get; set; }
         DataSet DSReport { get; set; }
         string From_ΔE { get; set; }
+        bool IsVerification { get; }
     }
 }
