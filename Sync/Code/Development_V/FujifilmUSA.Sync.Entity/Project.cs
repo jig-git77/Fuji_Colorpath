@@ -23,7 +23,7 @@ namespace FujifilmUSA.Sync.Entity
         public EOptimizeRunStatus Status { get; set; }
         public int LicenseTypeID { get; set; }
         public int TotalRuns { get; set; }
-        public bool HasDLP { get; set; }
+        //public bool HasDLP { get; set; }
         public bool EnabledValidation { get; set; }
     }
 }

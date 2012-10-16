@@ -202,7 +202,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                                 LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
                                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
-                                                HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                                //HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
                                                 SourceProfile = new SourceProfile()
                                                                     {
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),

@@ -35,15 +35,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key.ToString();
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.VerificationChart).ToString();
                 }
-                else if (!SessionManager.Instance.CurrentProject.HasDLP)
-                {
-                    hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
-                    hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
-                }
-                else
+                else if (SessionManager.Instance.CurrentProject.CurrDlpId > 0)
                 {
                     hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.OptimizationChart).ToString();
+                }
+                else
+                {
+                    hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                    hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
             }
