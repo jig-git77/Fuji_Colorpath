@@ -152,6 +152,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindMesurementChart();
             }
+
+            //We need to hide the button if we are verification mode
+            //Else upper code will execute business logic
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+            {
+                //Verification mode
+                lbtnDownloadAndSaveDLP.Visible = false;
+                lbtnMeasurementVerification.Visible = true;
+                lbtnOptimize.Visible = true;
+                lbtnOptimize.Attributes.Add("onclick",
+                                                 "javascript: return ShowClosePrintConditionWindow('" +
+                                                 SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.CurrentDlpName) + "')");                
+            }
+            else
+            {
+                //None
+                //Hide Verification button
+                lbtnMeasurementVerification.Visible = false;
+                lbtnOptimize.Visible = false;
+            }
         }
         #endregion
 
@@ -849,6 +869,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control Events
+        protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Measurement.aspx");
+        }
 
         protected void hdChartButton_Click(object sender, EventArgs e)
         {

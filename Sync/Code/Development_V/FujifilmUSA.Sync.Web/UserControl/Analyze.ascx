@@ -2,14 +2,13 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
-<script type="text/javascript">
+<script type="text/javascript">   
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
-
+    
     function InitializeRequest(sender, args) {
       //  alert(jQuery("input[id$=hdHasMeasurement]").val());
-        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
-           
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {            
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
 
                 var updateProgress = $get('<%= UpdateProgressClientID %>');
@@ -17,14 +16,19 @@
                 if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>' || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
                     if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next" || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
                         updateProgress.control._associatedUpdatePanelId = null;
-                        $get('<%= updateProgress.ClientID %>').control._associatedUpdatePanelId = 'dummyId';
+                        $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
                     else {
                         updateProgress.control._associatedUpdatePanelId = 'dummyId';
                     }
                 }
                 else {
-                    updateProgress.control._associatedUpdatePanelId = null;
+                    if (postBackElement.id == '<%= lbtnMeasurementVerification.ClientID %>') {
+                        $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
+                    }
+                    else {
+                        updateProgress.control._associatedUpdatePanelId = null;
+                    }
                 }
             }
             else
@@ -41,6 +45,19 @@
         else
             return false;
     }
+
+    function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
+        var oWindow;
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+        oWindow.show();
+        return false;
+    }
+
+    function CloseClosePrintConditionWindow() {
+        var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
+        oWnd.close();
+    }
+
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
@@ -113,13 +130,24 @@
                         <span>                            
                             <asp:Localize runat="server" Text="Measurement" ID="locMeasurement"></asp:Localize>
                         </span>
+                    </asp:LinkButton>                    
+                    <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button" OnClick="lbtnMeasurementVerification_Click">
+                        <span>                            
+                            <asp:Image ID="imgAnalyze" runat="server" ImageUrl="../Images/analyze.png" />
+                            <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnOptimize" runat="server" Visible="false">
+                        <span>                            
+                            <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
+                        </span>
                     </asp:LinkButton>
                 </div>
             </div>
             <div class="listDevice" style="margin-left: 10px;">
                 <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </div>
-        </ContentTemplate>
+        </ContentTemplate>       
     </asp:UpdatePanel>
      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
          <ContentTemplate>
@@ -1170,6 +1198,10 @@
             Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" 
             meta:resourcekey="ConfirmSaveWindowResource1" >
         </telerik:RadWindow>
+        <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
+                ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
+                Behaviors="Move,Close">
+            </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
  <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
