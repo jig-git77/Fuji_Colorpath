@@ -347,19 +347,19 @@
                                                 </tr>    
                                                                                         
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">10th Quartile Δ<asp:Label ID="lblPercΔE_10" runat="server" Text=""></asp:Label> </td>                                                                                     
+                                                    <td style="font-size:13px;">10th Percentile Δ<asp:Label ID="lblPercΔE_10" runat="server" Text=""></asp:Label> </td>                                                                                     
                                                     <td>
                                                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">90th Quartile Δ<asp:Label ID="lblPercΔE_90" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;">90th Percentile Δ<asp:Label ID="lblPercΔE_90" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">95th Quartile Δ<asp:Label ID="lblPercΔE_95" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;">95th Percentile Δ<asp:Label ID="lblPercΔE_95" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
                                                     </td>

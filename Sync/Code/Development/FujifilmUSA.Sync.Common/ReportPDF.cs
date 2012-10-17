@@ -116,7 +116,7 @@ namespace FujifilmUSA.Sync.Common
                 int theID;
 
 
-                #region Case 13 : Prepress Single Measurement ReportSingleMeasurement
+                #region Prepress Single Measurement ReportSingleMeasurement
 
 
                 //========== Adds New Page IN PDF ==========//
@@ -158,7 +158,6 @@ namespace FujifilmUSA.Sync.Common
                 theDoc.Rect.Inset(0, -1);
 
                 #endregion
-
 
 
                 if (FileName.Trim() == "")
@@ -373,7 +372,7 @@ namespace FujifilmUSA.Sync.Common
                 {
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>&nbsp;</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; " + From_ΔE + "</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -382,7 +381,7 @@ namespace FujifilmUSA.Sync.Common
                    
                     SBstrDeltaValue.Append("<tr style='height: 27px'>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
-                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95% Quartile &Delta; " + From_ΔE + "</td>");
+                    SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>95th Percentile &Delta; " + From_ΔE + "</td>");
                     SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[0]["NinetyFiveΔE"])) + "&nbsp;</td>");
                     SBstrDeltaValue.Append("</tr>");
                 }
@@ -424,7 +423,6 @@ namespace FujifilmUSA.Sync.Common
             #endregion                     
 
             #region Assign Server
-            //SBStr.Replace("##URLIMAGES##", System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, System.Web.HttpContext.Current.Request.Url.ToString().LastIndexOf('/')) + "/Images/");
             SBStr.Replace("##IMAGES##", strServer);
             #endregion
 
