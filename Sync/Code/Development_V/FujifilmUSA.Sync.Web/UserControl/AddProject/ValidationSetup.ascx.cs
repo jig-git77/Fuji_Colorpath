@@ -110,7 +110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         private void BindValidationChart()
         {
             MeasurementDeviceId = MeasurementDeviceSelectedValue;
-            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);
+            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.VerificationChart);
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)

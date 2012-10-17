@@ -135,8 +135,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             lbtnDownloadAndSaveDLP.Text = IsNewDlp
-                                              ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "<span>"
-                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "<span>";//Create DLP - Next
+                                              ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "</span>"
+                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
             if (!Page.IsPostBack)
             {
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();

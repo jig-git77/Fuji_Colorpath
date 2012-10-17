@@ -32,7 +32,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 lblClosePrintConditionMessage.Text = string.Format(GetResourceString(_recprintOptionsText), Request.QueryString["ProjectName"]);
-                
+
+                #region Verification mode - Check for querystring of DLP Sub Operation
+                if (Request.QueryString["ToSubOperation"] != null && Convert.ToInt32(Request.QueryString["ToSubOperation"]) == (int)ELicenseType.None)
+                {
+                    //Verification mode
+
+                    //As we also using this popup in Verification -> Optimize
+                    //So while opening this page we pass querystring ToSubOperation as 0 which says we need to set current DLP sub operation as NONE
+
+                    SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
+                } 
+                #endregion
+
                 //----------------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
                 if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) == 3)
                 {

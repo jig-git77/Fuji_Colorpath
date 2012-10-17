@@ -48,7 +48,7 @@
 
     function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&ToSubOperation=0", "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -117,15 +117,12 @@
                         ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
                 <div class="Information_divAnalyze">                    
                     <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
-                        OnClientClick="return ChooseRadWindow();" 
-                        meta:resourcekey="lbtnDownloadAndSaveDLPResource1">
+                        OnClientClick="return ChooseRadWindow();">
                         <span>
-                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" 
-                        meta:resourcekey="Image2Resource1" />
-                        <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" 
-                        meta:resourcekey="locCreateDLPResource1"></asp:Localize>
-                        </span> &nbsp;
-                    </asp:LinkButton>
+                            <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
+                            <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
+                        </span>
+                    </asp:LinkButton> &nbsp;
                     <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
                         <span>                            
                             <asp:Localize runat="server" Text="Measurement" ID="locMeasurement"></asp:Localize>
@@ -137,7 +134,7 @@
                             <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification"></asp:Localize>
                         </span>
                     </asp:LinkButton>
-                    <asp:LinkButton ID="lbtnOptimize" runat="server" Visible="false">
+                    <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
                         <span>                            
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
                         </span>

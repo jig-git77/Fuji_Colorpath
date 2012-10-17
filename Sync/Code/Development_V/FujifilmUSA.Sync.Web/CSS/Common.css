@@ -320,6 +320,8 @@ label
     color: #fff;
     float: left;
 }
+
+/*
 #contant .head .button
 {
     background: url(../Images/contant_box_haed_bt_left.png) no-repeat top left;
@@ -383,7 +385,7 @@ label
 {
     background: url(../Images/contant_box_haed_bt_right_hover_Rev.png) no-repeat top right;
 }
-
+*/
 
 #contant .form
 {
@@ -2161,3 +2163,25 @@ label
     color: #5e5e5e;
     font-size: 18px;
 }
+
+/******************Buttons******************************/
+/*Normal button*/
+#contant .head .buttonNormal { background:url(../Images/buttonNormal.png) no-repeat left top; padding-left:6px; display:block; height:28px; text-decoration:none; font:normal 13px/23px Arial, Helvetica, sans-serif; color:#000; float:right; margin-top:6px;}
+#contant .head .buttonNormal span{ background:url(../Images/buttonNormal.png) no-repeat right -28px; padding-left:14px; padding-right:20px; display:block; height:28px;}
+#contant .head .buttonNormal:hover{ background-position:left -56px;}
+#contant .head .buttonNormal:hover span{ background-position:right -84px;}
+
+
+/*Button left*/
+#contant .head .buttonLeft { background:url(../Images/buttonLeft.png) no-repeat left top; padding-left:18px; display:block; height:28px; text-decoration:none; font:normal 13px/23px Arial, Helvetica, sans-serif; color:#000; float:right; margin-top:6px;}
+#contant .head .buttonLeft span{ background:url(../Images/buttonLeft.png) no-repeat right -28px; padding-left:10px; padding-right:22px; display:block; height:28px;}
+#contant .head .buttonLeft:hover{ background-position:left -56px;}
+#contant .head .buttonLeft:hover span{ background-position:right -84px;}
+#contant .head .buttonLeft span img { float: left; margin: 5px 6px 0 0; }
+
+/*Button right*/
+#contant .head .button { background:url(../Images/buttonRight.png) no-repeat left top; padding-left:6px; display:block; height:28px; text-decoration:none; font:normal 13px/23px Arial, Helvetica, sans-serif; color:#000; float:right; margin-top:6px;}
+#contant .head .button span{ background:url(../Images/buttonRight.png) no-repeat right -28px; padding-left:4px; padding-right:16px; display:block; height:28px;}
+#contant .head .button:hover{ background-position:left -56px;}
+#contant .head .button:hover span{ background-position:right -84px;}
+#contant .head .button span img{ float: left; margin: 5px 6px 0 0; }
