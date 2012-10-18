@@ -16,6 +16,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+
+        public bool IsOperationVerification
+        {
+            set
+            {
+                tdNotes.Visible = value;
+                tdNotesCaption.Visible = value;
+                trCustomer.Visible = value;
+            }
+        }
         #endregion
 
         public MeasurementCommon()
@@ -47,6 +57,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
             }
+            IsOperationVerification = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
         }
     }
 }

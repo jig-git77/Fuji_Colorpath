@@ -898,7 +898,7 @@ label
 #contant .info_form .float_l
 {
     float: left;
-    height: 30px;
+    /*height: 30px;*/
     margin-bottom: 20px;
     padding-left: 5px;
 }
@@ -998,7 +998,7 @@ label
 }
 .InformationtxtDivWidth
 {
-    width: 500px;
+    width: 590px;
 }
 .Information_divAnalyze
 {

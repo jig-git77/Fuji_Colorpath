@@ -13,5 +13,7 @@ namespace FujifilmUSA.Sync.Entity
         public List<MeasurementPatch> MeasurementPatches { get; set; }
         public string UploadDate { get; set; }
         public int ProjectId { get; set; }
+        public string Notes { get; set; }
+        public string Customer { get; set; }
     }
 }
