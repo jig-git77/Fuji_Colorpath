@@ -33,6 +33,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             if (ViewState[vsIsPostBack] == null)
             {
                 BindMeasurementDevice();
+                BindMetricTargetPreset();
                 LoadProjectInfoFromSession();
                 ViewState[vsIsPostBack] = true;
             }
@@ -45,6 +46,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             SessionManager.Instance.CurrentProject.EnabledValidation = EnableValidationValue;
             SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID = (short)MeasurementDeviceSelectedValue;
             SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset = new KeyValuePair<int, string>(Convert.ToInt32(cmbMetricTargetPreset.SelectedItem.Value), cmbMetricTargetPreset.SelectedItem.Text);
 
             //Load save control
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
@@ -81,6 +83,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 else
                     cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbValidationChart_SelectedIndexChanged(null, null);
+
+                if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)
+                    cmbMetricTargetPreset.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key.ToString();
             }
 
         }
@@ -120,6 +125,19 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbValidationChart.DataSource = ReferenceChartType;
                 cmbValidationChart.DataBind();
                 cmbValidationChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+            }
+        }
+
+        private void BindMetricTargetPreset()
+        {
+            _presenterMeasurementSetting.GetMetricTargetPreset();
+            if (!IsErrorOccured)
+            {
+                cmbMetricTargetPreset.DataValueField = "MetricTargetPresetID";
+                cmbMetricTargetPreset.DataTextField = "MetricTargetPresetName";
+                cmbMetricTargetPreset.DataSource = MetricTargetPreset;
+                cmbMetricTargetPreset.DataBind();
+                cmbMetricTargetPreset.Items.Insert(0, new ListItem("-- Select --", "0"));
             }
         }
 
@@ -204,6 +222,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public Entity.Project Project { get; set; }
 
         public int ChartDisplayType { get; set; }
-        #endregion
+
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
+        
+        #endregion       
     }
 }

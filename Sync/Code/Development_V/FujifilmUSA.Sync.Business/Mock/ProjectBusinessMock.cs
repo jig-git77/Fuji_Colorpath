@@ -104,6 +104,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId)
+        {
+            return new List<Entity.CPSyncV.MetricTargetPreset>();
+        }
         #endregion
 
         #region ITaskBase Members
@@ -111,5 +115,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+        
     }
 }

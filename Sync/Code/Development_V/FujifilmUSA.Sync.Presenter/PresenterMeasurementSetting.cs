@@ -43,6 +43,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewMeasurementSetting.ReferenceChartType = projectBusiness.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceId, _viewMeasurementSetting.ChartDisplayType);
         }
 
+        public void GetMetricTargetPreset()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId);
+        }
+
         public void GetReferenceChartTypeImage()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();

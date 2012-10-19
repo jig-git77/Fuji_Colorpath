@@ -139,6 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
         #endregion
 
         #region IViewBase Members
@@ -150,6 +151,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             IsErrorOccured = true;
         }
 
-        #endregion
+        #endregion        
     }
 }

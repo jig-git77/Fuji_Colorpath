@@ -124,7 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsErrorOccured)
             {
-                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
                 {
                     _presenterMeasurementSetting.GetProjectDetailWithVerification();
                 }
@@ -171,20 +171,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.MeasurementSetting =
-                new MeasurementSetting()
-                    {
-                        Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue),
-                        ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
-                        MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
-                        ReferenceChartType =
-                            new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
-                                                            cmbAlignmentChart.SelectedItem.Text),
-                        UvIncluded =
-                            cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false,
-                        OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
-                    };
+            //If project is new then call constructor of MeasurementSetting
+            if (SessionManager.Instance.CurrentProject.ProjectId <= 0)
+                SessionManager.Instance.CurrentProject.MeasurementSetting = new MeasurementSetting();
 
+            #region Assigning values to entity
+            SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType = Convert.ToInt16(cmbObserver.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
+                new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
+                                                cmbAlignmentChart.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded =
+                cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+            #endregion
+
+            //Set next navigation level as ValidationSetup
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
@@ -431,6 +434,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
         #endregion
     }
 }

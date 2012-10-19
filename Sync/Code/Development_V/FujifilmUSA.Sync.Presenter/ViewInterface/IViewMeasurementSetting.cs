@@ -17,5 +17,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int ProjectId { get; set; }
         Project Project { get; set; }
         int ChartDisplayType { get; set; }
+        List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
     }
 }

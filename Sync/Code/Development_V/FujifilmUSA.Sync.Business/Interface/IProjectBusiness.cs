@@ -27,5 +27,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType);
         Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl);
         TempProjectInfo GetTempProjectInfo(Guid tempProjectId);
+        List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId);
     }
 }
