@@ -564,19 +564,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         Instance.
                         ExecuteProcedure("CPSyncV.CreateMeasurement",
                                          new List<Parameters>()
-                                                 {
-                                                     new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
-                                                     new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = measurement.ProjectId},
-                                                     new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
-                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
-                                                     new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
-                                                     new Parameters() {ParameterName = "@Notes", Type=DbType.String, Value = (!string.IsNullOrEmpty(measurement.Notes) ? measurement.Notes.Trim() : null) },
-                                                     new Parameters() {ParameterName = "@Customer", Type=DbType.String, Value = (!string.IsNullOrEmpty(measurement.Customer) ? measurement.Customer.Trim() : null)},
-                                                 },
+                                             {
+                                                 new Parameters()
+                                                     {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                 new Parameters() {ParameterName = "@ProjectID", Type = DbType.Int32, Value = measurement.ProjectId},
+                                                 new Parameters()
+                                                     {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                 new Parameters()
+                                                     {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                 new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                 new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
+                                                 new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
+                                             },
                                          new List<Parameters>()
-                                                 {
-                                                     outParam
-                                                 });
+                                             {
+                                                 outParam
+                                             });
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
             return Convert.ToInt32(outParam.Value);

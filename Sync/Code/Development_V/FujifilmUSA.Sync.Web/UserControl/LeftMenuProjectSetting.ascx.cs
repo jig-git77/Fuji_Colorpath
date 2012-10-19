@@ -57,6 +57,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         lnkValidationSetup.Enabled = true;
                     }
+                    if (SessionManager.Instance.CurrentProject.ProjectId > 0)
+                    {
+                        lnkSave.Enabled = true;
+                    }
+                    if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
+                    {
+                        lnkMeasurementSetup.Enabled = true;
+                    }
+                    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0)
+                    {
+                        lnkMeasure.Enabled = true;
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasMeasurements)
+                        {
+                            lnkAnalyze.Enabled = true;
+                        }
+                        if (SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile)
+                        {
+                            lnkDownload.Enabled = true;
+                        }
+                    }
                     break;
                 case ECurrentProjectStatus.Edit:
                     //If verification, then don't enable Measurementsetup, analyze and download links...

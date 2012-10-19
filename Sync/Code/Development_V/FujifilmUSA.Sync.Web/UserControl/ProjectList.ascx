@@ -163,7 +163,7 @@
                                             SortExpression="ProjectId" FilterControlAltText="Filter Select column"
                                             ItemStyle-Width="30px">
                                             <ItemTemplate>
-                                               <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Select Project" AlternateText="Select"
+                                               <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
                                                     ImageUrl="../Images/OptimizationBlue.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                     CommandName="Select" meta:resourcekey="imgbtnSelectResource1" />
                                             </ItemTemplate>
