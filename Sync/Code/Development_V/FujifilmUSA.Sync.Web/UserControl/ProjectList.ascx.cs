@@ -167,16 +167,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                  "javascript: return ShowClosePrintConditionWindow('" +
                                                  project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
 
-                        //Here are we showing validation status icon if project is in certified state
-                        imgbtnVarification.ImageUrl = ResolveUrl("../Images/ValidationSuccess.png");
-                        imgbtnVarification.Visible = true;
+                        //Validation can be done only if the user has modify project permission
+                        //If validation is enabled at measurement setting level then and only then icon to navigate to its page is available
+                        if (project.EnabledValidation)
+                        {
+                            //Here are we showing validation status icon if project is in certified state
+                            imgbtnVarification.ImageUrl = ResolveUrl("../Images/ValidationSuccess.png");
+                            imgbtnVarification.Visible = true;
+                        }
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
                     
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");                    
                     break;
-            }                    
+            }            
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
