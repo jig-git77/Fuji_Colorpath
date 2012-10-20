@@ -161,6 +161,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnDownloadAndSaveDLP.Visible = false;
                 lbtnMeasurementVerification.Visible = true;
                 lbtnOptimize.Visible = true;
+                //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
+                //So its a kind of bug fix.
+                lbtnOptimize.Text = "<span>Optimize</span>";
                 lbtnOptimize.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
                                                  SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.CurrentDlpName) + "')");                
