@@ -17,18 +17,25 @@ namespace FujifilmUSA.Sync.Presenter
         {
             #region code for source profile and referencechart relation in referenceLab
 
-            var referenceChartBusiness = BusinessFactory<IReferenceChartBusiness>.CreateObject();
-            referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
-            var referenceChartData = referenceChartBusiness.GetReferenceChartForLabCalculation(_viewSaveWindow.Project.SourceProfile.SourceProfileId,
-                                                                                               _viewSaveWindow.Project.MeasurementSetting.ReferenceChartType.Key);
-            if (referenceChartData.Count > 0)
+            //check for profile chart
+            if (_viewSaveWindow.Project.MeasurementSetting.ReferenceChartType.Key > 0)
             {
-                var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
-                sourceProfileBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
-                var profile = sourceProfileBusiness.GetIccProfileBySourceProfile(_viewSaveWindow.Project.SourceProfile.SourceProfileId);
+                CreateReferenceLabData(_viewSaveWindow.Project.SourceProfile.SourceProfileId,
+                                       _viewSaveWindow.Project.MeasurementSetting.ReferenceChartType.Key);
+            }
 
-                referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
-                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, _viewSaveWindow.Project.SourceProfile.SourceProfileId);
+            //check for optimization chart
+            if (_viewSaveWindow.Project.MeasurementSetting.OptReferenceChartType.Key > 0)
+            {
+                CreateReferenceLabData(_viewSaveWindow.Project.SourceProfile.SourceProfileId,
+                                       _viewSaveWindow.Project.MeasurementSetting.OptReferenceChartType.Key);
+            }
+
+            //check for verification chart
+            if (_viewSaveWindow.Project.MeasurementSetting.VReferenceChartType.Key > 0)
+            {
+                CreateReferenceLabData(_viewSaveWindow.Project.SourceProfile.SourceProfileId, 
+                    _viewSaveWindow.Project.MeasurementSetting.VReferenceChartType.Key);
             }
 
             #endregion
@@ -59,5 +66,21 @@ namespace FujifilmUSA.Sync.Presenter
             _viewSaveWindow.ChartPreview = projectBusiness.GetChartPreviewOnReferenceChartTypeId(_viewSaveWindow.ReferenceChartTypeId, "Download");
         }
 
+        private void CreateReferenceLabData(short sourceProfileId, short referenceChartTypeId)
+        {
+            var referenceChartBusiness = BusinessFactory<IReferenceChartBusiness>.CreateObject();
+            referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+            var referenceChartData = referenceChartBusiness.GetReferenceChartForLabCalculation(sourceProfileId,
+                                                                                               referenceChartTypeId);
+            if (referenceChartData.Count > 0)
+            {
+                var sourceProfileBusiness = BusinessFactory<ISourceProfileBusiness>.CreateObject();
+                sourceProfileBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+                var profile = sourceProfileBusiness.GetIccProfileBySourceProfile(sourceProfileId);
+
+                referenceChartBusiness.ErrorOccured += _viewSaveWindow.ErrorOccured;
+                referenceChartBusiness.InsertReferenceLabData(referenceChartData, profile, sourceProfileId);
+            }
+        }
     }
 }
