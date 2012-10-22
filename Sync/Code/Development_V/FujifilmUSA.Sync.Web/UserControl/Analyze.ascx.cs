@@ -21,7 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterAnalyze _presenterAnalyze;
-        private PresenterGlobal _presenterGlobal;
+        private PresenterGlobal _presenterGlobal;        
         private const string _recDLPText = "dlpText";
         private const string _recDLPMsgText = "dlpMsgText";
         private const string _recnewPrintCondition = "newPrintConditionText";
@@ -102,6 +102,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
             }
         }
+
+        public string CurrentDLPName
+        {
+            get
+            {
+                if (SessionManager.Instance.ProjectList != null && SessionManager.Instance.ProjectList.Count > 0)
+                {
+                    return SessionManager.Instance.ProjectList.Where(p => p.ProjectId == SessionManager.Instance.CurrentProject.ProjectId).Select(p => p.CurrentDlpName).FirstOrDefault();
+                }
+                return string.Empty;
+            }
+        }
         #endregion
         public Analyze()
         {
@@ -166,7 +178,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnOptimize.Text = "<span>Optimize</span>";
                 lbtnOptimize.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.CurrentDlpName) + "')");                
+                                                 SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
             }
             else
             {
@@ -1109,6 +1121,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
             }
         }
-        #endregion
+        #endregion        
     }
 }

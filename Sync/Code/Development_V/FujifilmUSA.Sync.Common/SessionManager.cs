@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using FujifilmUSA.Sync.Entity;
+using System.Collections.Generic;
 
 namespace FujifilmUSA.Sync.Common
 {
@@ -20,6 +21,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _selectedCompany = "SelectedCompany";
         private const string _selectedBranch = "SelectedBranch";
         private const string _pageErrorMessage = "PageErrorMessage";
+        private const string _projectListSession = "projectListSession";
         #endregion
 
         #region Singleton
@@ -267,6 +269,23 @@ namespace FujifilmUSA.Sync.Common
                 HttpContext.Current.Session[_pageErrorMessage] = value;
             }
         }
+
+        public List<Project> ProjectList
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_projectListSession] != null)
+                {
+                    return (List<Project>)HttpContext.Current.Session[_projectListSession];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_projectListSession] = value;
+            }
+        }
+
         #endregion
     }
 }

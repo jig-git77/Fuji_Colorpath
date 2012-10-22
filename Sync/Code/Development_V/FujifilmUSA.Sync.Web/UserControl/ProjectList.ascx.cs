@@ -218,7 +218,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterProjectList.GetProjectListByDeviceId();
             if (!IsErrorOccured)
             {
-                rgProjectList.DataSource = Projects;
+                SessionManager.Instance.ProjectList = Projects;
+                rgProjectList.DataSource = Projects;                
             }
             ViewState["ProjectLimit"] = Projects.Count;   //------Store the total projects to check ProjectLimit counter--------//
         }
