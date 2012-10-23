@@ -243,6 +243,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 grdMeasurement.DataSource = MeasurementsDelta;
                 grdMeasurement.DataBind();
 
+
+                DetailsView1.DataSource = MeasurementData;
+                DetailsView1.DataBind();
+
+
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
                 string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
                 FRMGeneratePDFReport.Attributes.Add("src", path);
@@ -1121,6 +1126,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
             }
         }
+
+
+        public DataSet MeasurementData { get; set; }
+
         #endregion        
     }
 }

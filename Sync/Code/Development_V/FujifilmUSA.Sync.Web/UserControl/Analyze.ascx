@@ -314,7 +314,7 @@
                                     </tr>
                                     <tr>
                                     <td colspan="2">
-                                         <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder" OnItemDataBound="grdMeasurement_ItemDataBound">
+                                         <asp:ListView ID="grdMeasurement" runat="server" ItemPlaceholderID="phItemPlaceholder" OnItemDataBound="grdMeasurement_ItemDataBound" >
                                             <LayoutTemplate>
                                                 <table cellspacing="0" cellpadding="0" border="0" class="product_list_table" style="margin:0" >                                  
                                                     <tbody>
@@ -392,6 +392,19 @@
                                             </ItemTemplate>
                                         </asp:ListView>
                                     </td>
+                                    </tr>
+                                </table>
+
+                                <br />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:DetailsView ID="DetailsView1" runat="server" 
+                                                   DataKeyNames="MeasurementID"
+                                                   AutoGenerateRows="true" CssClass="product_list_table"  >
+                                                  
+                                                </asp:DetailsView>
+                                        </td>
                                     </tr>
                                 </table>
               </ContentTemplate>

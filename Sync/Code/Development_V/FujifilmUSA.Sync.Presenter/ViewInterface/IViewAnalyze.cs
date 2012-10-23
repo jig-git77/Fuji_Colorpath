@@ -22,5 +22,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
         List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
         bool IsVerification { get; }
+
+        DataSet MeasurementData { get; set; }
     }
 }

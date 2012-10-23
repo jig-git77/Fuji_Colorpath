@@ -62,7 +62,8 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE,_viewAnalyze.IsVerification);
+            _viewAnalyze.MeasurementsDelta = measurementBusiness.GetAvgDeltaMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification);
+            _viewAnalyze.MeasurementData = measurementBusiness.GetAvgDeltaOnMeasurement(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification);
         }
 
         public void GetPatchDetailsofMeasurement()

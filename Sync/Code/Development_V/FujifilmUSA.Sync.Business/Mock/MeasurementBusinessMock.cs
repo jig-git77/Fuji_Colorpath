@@ -90,6 +90,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+
+        public DataSet GetAvgDeltaOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        {
+            return new DataSet();
+        }
+
         #endregion
 
         #region ITaskBase Members

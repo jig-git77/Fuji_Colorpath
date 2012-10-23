@@ -270,6 +270,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
+        public DataSet GetAvgDeltaOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        {
+            var measurementData = new DataSet();
+            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId, From_ΔE });
+                    measurementData = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAvgDeltaMeasurement"));
+            return measurementData;
+        }
+
         public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
         {
             var PatchDetails = new List<MeasurementPatchDetails>();
