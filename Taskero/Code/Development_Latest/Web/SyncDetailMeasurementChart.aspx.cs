@@ -51,8 +51,8 @@ public partial class SyncDetailMeasurementChart : PageBase
             //Fuji.Common.CommonFunctions.SetGridViewDefaultSettings(GV_MeasurementData);
             //========== Check And Set Labels ==========//
             if (IsPostBack == false)
-            {                
-                FillAllTabCharts(Convert.ToInt32(Request.QueryString["MeasurementID"]));             
+            {
+                FillAllTabCharts(Convert.ToInt32(Request.QueryString["MeasurementID"]));
             }
         }
         catch (Exception Exc)
@@ -66,7 +66,7 @@ public partial class SyncDetailMeasurementChart : PageBase
 
     private void FillAllTabCharts(int MeasurementID)
     {
-   
+
         try
         {
 
@@ -76,51 +76,52 @@ public partial class SyncDetailMeasurementChart : PageBase
             if (Request.QueryString["PressRunID"] != null)
             {
 
-                  // ===== Create Object of CPSyncMeasurementData  ======//
-                 CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
+                // ===== Create Object of CPSyncMeasurementData  ======//
+                CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
 
                 // ===== Get Data from data base  ==================//
-                 objCPSyncMeasurementData.PressRunID = Convert.ToInt32(Request.QueryString["PressRunID"]);
-                 DS = objCPSyncMeasurementData.uspGetChartsDataAvg();            
+                objCPSyncMeasurementData.PressRunID = Convert.ToInt32(Request.QueryString["PressRunID"]);
+                DS = objCPSyncMeasurementData.uspGetChartsDataAvg();
             }
             else
-	        {
-                 // ===== Create Object of CPSyncMeasurementData  ======//
-                 CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
+            {
+                // ===== Create Object of CPSyncMeasurementData  ======//
+                CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
 
                 // ===== Get Data from data base  ==================//
                 objCPSyncMeasurementData.MeasurementID = MeasurementID;
-                DS = objCPSyncMeasurementData.uspGetAnalyzeMeasurementG7ChartsData();	        
+                DS = objCPSyncMeasurementData.uspGetAnalyzeMeasurementG7ChartsData();
             }
 
             if (DS != null && DS.Tables.Count > 0)
             {
                 FillInkPaperChart(DS.Tables[0], DS.Tables[1], DS.Tables[2]);
                 FillG7Chart(DS.Tables[3], DS.Tables[4], DS.Tables[5], DS.Tables[6]);
-                FillChartTable(DS.Tables[7],DS.Tables[8]);  //if FileFound = 1 show download icon
+                FillChartTable(DS.Tables[7], DS.Tables[8]);  //if FileFound = 1 show download icon
                 FillLabCharts(DS.Tables[9], DS.Tables[10], DS.Tables[11]);
                 FillTVIChart(DS.Tables[12]);
-            }                
+            }
             #endregion
 
-        } catch (Exception Exc)
+        }
+        catch (Exception Exc)
         {
             HandleException(Exc);
         }
     }
 
-    #region Fill InkPaper Tab    
+    #region Fill InkPaper Tab
     private void FillInkPaperChart(DataTable DTDeltaEPrimaryPatches, DataTable DTDensity, DataTable Paper)
     {
         try
-        {           
+        {
             if (DTDeltaEPrimaryPatches != null)
                 FillDeltaEPrimaryPatchesChart(DTDeltaEPrimaryPatches);
             if (DTDensity != null)
                 FillDensityChart(DTDensity);
             if (Paper != null)
-                FillPaperChart(Paper);          
-            
+                FillPaperChart(Paper);
+
         }
         catch (Exception Exc)
         {
@@ -158,7 +159,7 @@ public partial class SyncDetailMeasurementChart : PageBase
             objSeries1.YValueType = ChartValueTypes.String;
             objSeries1.ShowInLegend = false;
             objSeries1.Type = SeriesChartType.Bar;
-      
+
 
             // === Series2 to display red marker on Thresold value === //
             Series objSeries2 = (Series)ChartSummary_DeltaE.Series[2];
@@ -272,7 +273,7 @@ public partial class SyncDetailMeasurementChart : PageBase
         {
             throw Exc;
         }
-    }    
+    }
     private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, DataRow DR, int Index, string TooltipTitle)
     {
         try
@@ -354,7 +355,7 @@ public partial class SyncDetailMeasurementChart : PageBase
         try
         {
             Double CValue = 0;
-            
+
 
             //========== Clear Points and Show Chart ==========//
             CHRT_SummaryDensity.Visible = true;
@@ -426,7 +427,7 @@ public partial class SyncDetailMeasurementChart : PageBase
         {
             throw Exc;
         }
-    }    
+    }
     private void AddDensityPoint(int Index, Series objSeries0, Series objSeries1, Series objSeries2, string _XValue, string _YValue, string HTMLColor, string _Actual, string _Target, string ColorName, bool isTooltip)
     {
         try
@@ -472,7 +473,7 @@ public partial class SyncDetailMeasurementChart : PageBase
                 //CHRT_ISOPaper1.Series["Green"].Points.AddXY(Convert.ToDouble(DT.Rows[0]["Targeta*"]), Convert.ToDouble(DT.Rows[0]["Targetb*"]));
                 CHRT_Paper1.Series["Green"].Points.AddXY(Convert.ToDouble(0), Convert.ToDouble(0));
                 CHRT_Paper1.Series["Green"].Type = SeriesChartType.Point;
-                CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;                
+                CHRT_Paper1.Series["Green"].Points[0].BorderWidth = 2;
 
                 StringBuilder toolTip = new StringBuilder();
                 #region Add Tooltip HTML
@@ -518,7 +519,7 @@ public partial class SyncDetailMeasurementChart : PageBase
                 CHRT_Paper2.Series["Series2"].Points.AddXY(1, 0);
                 #endregion
 
-                CHRT_Paper2.Series["Series1"].Points.AddY(Convert.ToDouble(DT.Rows[0]["ΔL*"]));                
+                CHRT_Paper2.Series["Series1"].Points.AddY(Convert.ToDouble(DT.Rows[0]["ΔL*"]));
                 CHRT_Paper2.Series["Series1"].Points[0].Color = System.Drawing.ColorTranslator.FromHtml("#FFFFFF");
                 CHRT_Paper2.Series["Series1"].Points[0].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
                 #endregion
@@ -543,7 +544,7 @@ public partial class SyncDetailMeasurementChart : PageBase
             if (GrayQuartileSummary != null)
                 FillGrayQuartileSummary(GrayQuartileSummary);
             if (NPDChart1 != null && NPDChart2 != null)
-                FillNPDChart(NPDChart1,NPDChart2);
+                FillNPDChart(NPDChart1, NPDChart2);
 
 
         }
@@ -597,16 +598,16 @@ public partial class SyncDetailMeasurementChart : PageBase
 
             // There is an issue with tooltip on spline chart, by default it ignores 
             //http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
-            CHRT_BlackNPD.Series["Series0"]["TooltipOffset"]   = "True";
+            CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
             CHRT_BlackNPD.Series["Series1"]["TooltipOffset"] = "True";
             if (DTBlack != null && DTBlack.Rows.Count > 0 && DTBlack.Rows[0][0].ToString() != "NO DATA")
             {
                 for (int i = 0; i < DTBlack.Rows.Count; i++)
                 {
-                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack.Rows[i]["CMYK_K"]).ToString(), DTBlack.Rows[i]["Density"].ToString(), Color.Black.Name.ToString(),"Actual NPD","Density");
+                    AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack.Rows[i]["CMYK_K"]).ToString(), DTBlack.Rows[i]["Density"].ToString(), Color.Black.Name.ToString(), "Actual NPD", "Density");
                     if (DTBlack.Rows[i]["G7NPDC"] != DBNull.Value)
                     {
-                        AddNPDPointChart(i, CHRT_BlackNPD.Series["Series1"], Convert.ToInt64(DTBlack.Rows[i]["CMYK_K"]).ToString(), DTBlack.Rows[i]["G7NPDC"].ToString(), Color.Green.Name.ToString(),"Target NPD","G7NPDC");
+                        AddNPDPointChart(i, CHRT_BlackNPD.Series["Series1"], Convert.ToInt64(DTBlack.Rows[i]["CMYK_K"]).ToString(), DTBlack.Rows[i]["G7NPDC"].ToString(), Color.Green.Name.ToString(), "Target NPD", "G7NPDC");
                     }
 
                 }
@@ -621,10 +622,10 @@ public partial class SyncDetailMeasurementChart : PageBase
             {
                 for (int i = 0; i < DTGray.Rows.Count; i++)
                 {
-                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"],  Convert.ToInt64(DTGray.Rows[i]["CMYK_C"]).ToString(), DTGray.Rows[i]["Density"].ToString(), Color.Black.Name.ToString(),"Gray NPD","Density");
+                    AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray.Rows[i]["CMYK_C"]).ToString(), DTGray.Rows[i]["Density"].ToString(), Color.Black.Name.ToString(), "Gray NPD", "Density");
                     if (DTGray.Rows[i]["G7NPDC"] != DBNull.Value)
                     {
-                        AddNPDPointChart(i, CHRT_GrayNPD.Series["Series1"], Convert.ToInt64(DTGray.Rows[i]["CMYK_C"]).ToString(), DTGray.Rows[i]["G7NPDC"].ToString(), Color.Green.Name.ToString(),"Gray Target NPD","G7NPDC");
+                        AddNPDPointChart(i, CHRT_GrayNPD.Series["Series1"], Convert.ToInt64(DTGray.Rows[i]["CMYK_C"]).ToString(), DTGray.Rows[i]["G7NPDC"].ToString(), Color.Green.Name.ToString(), "Gray Target NPD", "G7NPDC");
                     }
                 }
             }
@@ -646,15 +647,15 @@ public partial class SyncDetailMeasurementChart : PageBase
             _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
             _objSeries.Points[_Index].BorderWidth = 1;
 
-             
+
             _objSeriesPoint.Type = SeriesChartType.Point;
-            _objSeriesPoint.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));            
+            _objSeriesPoint.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));
             _objSeriesPoint.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
             _objSeriesPoint.Points[_Index].MarkerStyle = showCircle ? MarkerStyle.Circle : MarkerStyle.None;
-            _objSeriesPoint.Points[_Index].MarkerSize = showCircle ?5 : 0;
+            _objSeriesPoint.Points[_Index].MarkerSize = showCircle ? 5 : 0;
             _objSeriesPoint.Points[_Index].BorderWidth = 1;
             _objSeriesPoint.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
-            
+
 
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
@@ -667,7 +668,7 @@ public partial class SyncDetailMeasurementChart : PageBase
             toolTip.Append("</td></tr>");
             toolTip.Append("</table></td></tr>");
             toolTip.Append("</table>");
-            #endregion            
+            #endregion
             _objSeriesPoint.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
 
         }
@@ -677,13 +678,13 @@ public partial class SyncDetailMeasurementChart : PageBase
         }
     }
 
-    private void AddNPDPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName,string TitleName,string ValueName)
+    private void AddNPDPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, string TitleName, string ValueName)
     {
         try
         {
             _objSeries.Type = SeriesChartType.Spline;
-          
-            _objSeries.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));            
+
+            _objSeries.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));
             _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
             _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
             _objSeries.Points[_Index].MarkerSize = 1;  //changed 0 by chirag on 10/23/10 as we will drawing more points and make smooth curve 
@@ -693,14 +694,14 @@ public partial class SyncDetailMeasurementChart : PageBase
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
             toolTip.Append("<table>");
-            toolTip.Append("<tr><td><b> "+TitleName+" " + _XValue + "% Patch Metrics</b></td></tr>");
+            toolTip.Append("<tr><td><b> " + TitleName + " " + _XValue + "% Patch Metrics</b></td></tr>");
             toolTip.Append("<tr><td><table>");
-            toolTip.Append("<tr><td>"+ValueName+" : </td><td>");
+            toolTip.Append("<tr><td>" + ValueName + " : </td><td>");
             toolTip.Append(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)).ToString());
             toolTip.Append("</td></tr>");
             toolTip.Append("</table></td></tr>");
             toolTip.Append("</table>");
-            #endregion            
+            #endregion
             _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
 
         }
@@ -712,14 +713,14 @@ public partial class SyncDetailMeasurementChart : PageBase
 
     #endregion
 
-    #region Chart Table   
+    #region Chart Table
     private void FillChartTable(DataTable DTShowDownloadIcon, DataTable DTMeasurementData)
     {
         try
-        {         
+        {
             //add by chirag on 03/30/2011  only show download icon if measurement file (file with actual spectral data is available) FileFound = "1"
-            if (DTShowDownloadIcon.Rows[0]["FileFound"].ToString() == "0") btn_DownloadFile.Visible = false;  
-            GV_MeasurementData.DataSource = DTMeasurementData;           
+            if (DTShowDownloadIcon.Rows[0]["FileFound"].ToString() == "0") btn_DownloadFile.Visible = false;
+            GV_MeasurementData.DataSource = DTMeasurementData;
         }
         catch (Exception Exc)
         {
@@ -761,10 +762,10 @@ public partial class SyncDetailMeasurementChart : PageBase
 
     protected void GV_MeasurementData_NeedDataSource(object source, Telerik.WebControls.GridNeedDataSourceEventArgs e)
     {
-       
-            /*** Changed By Chirag Shah on 10th Sept - 2010 **/
-            FillAllTabCharts(Convert.ToInt32(Request.QueryString["MeasurementID"]));
-            TabContainer1.ActiveTabIndex = 2;
+
+        /*** Changed By Chirag Shah on 10th Sept - 2010 **/
+        FillAllTabCharts(Convert.ToInt32(Request.QueryString["MeasurementID"]));
+        TabContainer1.ActiveTabIndex = 2;
     }
 
     protected void btn_Excel_Click(object sender, EventArgs e)
@@ -773,62 +774,67 @@ public partial class SyncDetailMeasurementChart : PageBase
 
         try
         {
-        //Response.Clear();
+            //Response.Clear();
 
-        //Response.AddHeader("content-disposition", "attachment;filename=MeasurementData.xls");
+            //Response.AddHeader("content-disposition", "attachment;filename=MeasurementData.xls");
 
-        //Response.Charset = "";
+            //Response.Charset = "";
 
-        //// If you want the option to open the Excel file without saving than
-        //// comment out the line below
-        //// Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //// If you want the option to open the Excel file without saving than
+            //// comment out the line below
+            //// Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
-        //Response.ContentType = "application/vnd.xls";
+            //Response.ContentType = "application/vnd.xls";
 
-        //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+            //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
 
-        //System.Web.UI.HtmlTextWriter htmlWrite =
-        //new HtmlTextWriter(stringWrite);
+            //System.Web.UI.HtmlTextWriter htmlWrite =
+            //new HtmlTextWriter(stringWrite);
 
-        //GV_MeasurementData.RenderControl(htmlWrite);
+            //GV_MeasurementData.RenderControl(htmlWrite);
 
-        //Response.Write(stringWrite.ToString());
+            //Response.Write(stringWrite.ToString());
 
-        //Response.End();        
-        //GV_MeasurementData.ExportSettings.IgnorePaging = true;
-        //GV_MeasurementData.ExportSettings.OpenInNewWindow = true;
-        //GV_MeasurementData.MasterTableView.ExportToExcel("vnd");
+            //Response.End();        
+            //GV_MeasurementData.ExportSettings.IgnorePaging = true;
+            //GV_MeasurementData.ExportSettings.OpenInNewWindow = true;
+            //GV_MeasurementData.MasterTableView.ExportToExcel("vnd");
 
-        /*** implement logic to create a memoery stream and write file with data and download it ***/
-        //get the measurment data Convert.ToInt32(Request.QueryString["MeasurementID"])
+            /*** implement logic to create a memoery stream and write file with data and download it ***/
+            //get the measurment data Convert.ToInt32(Request.QueryString["MeasurementID"])
 
-        // ===== Create Object of CPSyncMeasurementData  ======//
-        CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
+            // ===== Create Object of CPSyncMeasurementData  ======//
+            CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
 
-        int _MsmtID = Convert.ToInt32(Request.QueryString["MeasurementID"]);
+            int _MsmtID = Convert.ToInt32(Request.QueryString["MeasurementID"]);
 
-        // ===== Get Data from data base  ==================//
-        objCPSyncMeasurementData.MeasurementID = _MsmtID;
-        DataTable DT = objCPSyncMeasurementData.uspGetMeasurementData();
+            // ===== Get Data from data base  ==================//
+            objCPSyncMeasurementData.MeasurementID = _MsmtID;
+            DataTable DT = objCPSyncMeasurementData.uspGetMeasurementData();
 
-        if (DT.Rows.Count > 0)  {
-            
+            if (DT.Rows.Count > 0)
+            {
+
                 System.IO.StreamWriter sw;
                 sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + _MsmtID.ToString() + "_MeasurementFile.txt");
+                sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync 1D""");
+                sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
+                sw.WriteLine(@"ILLUMINATION_NAME	""FujiFilm Colorpath Sync 1D""");
+                sw.WriteLine(@"OBSERVER_ANGLE	""2""");
                 sw.WriteLine(@"KEYWORD	""SampleID""");
                 sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
-                sw.WriteLine("NUMBER_OF_FIELDS" + "\t" +"16");
+                sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "16");
                 sw.WriteLine("BEGIN_DATA_FORMAT");
                 sw.WriteLine("SampleID\tSAMPLE_NAME\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tXYZ_X\tXYZ_Y\tXYZ_Z\tLAB_L\tLAB_A\tLAB_B\tD_RED\tD_GREEN\tD_BLUE\tD_VIS");
                 sw.WriteLine("END_DATA_FORMAT");
-                sw.WriteLine("NUMBER_OF_SETS" + "\t" +	DT.Rows.Count.ToString());
+                sw.WriteLine("NUMBER_OF_SETS" + "\t" + DT.Rows.Count.ToString());
                 sw.WriteLine("BEGIN_DATA");
 
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
                     sw.WriteLine(DT.Rows[i]["SampleID"].ToString() + "\t" + DT.Rows[i]["SAMPLE_NAME"].ToString() + "\t" + DT.Rows[i]["CMYK_C"].ToString() + "\t" + DT.Rows[i]["CMYK_M"].ToString() + "\t" + DT.Rows[i]["CMYK_Y"].ToString() + "\t" + DT.Rows[i]["CMYK_K"].ToString() + "\t" + DT.Rows[i]["CIEXYZ_X"].ToString() + "\t" + DT.Rows[i]["CIEXYZ_Y"].ToString() + "\t" + DT.Rows[i]["CIEXYZ_Z"].ToString() + "\t" + DT.Rows[i]["LAB_L"].ToString() + "\t" + DT.Rows[i]["LAB_A"].ToString() + "\t" + DT.Rows[i]["LAB_B"].ToString() + "\t" + DT.Rows[i]["D_Red"].ToString() + "\t" + DT.Rows[i]["D_Green"].ToString() + "\t" + DT.Rows[i]["D_Blue"].ToString() + "\t" + DT.Rows[i]["D_Vis"].ToString());
                 }
- 
+
                 sw.WriteLine("END_DATA");
                 sw.Close();
 
@@ -885,12 +891,12 @@ public partial class SyncDetailMeasurementChart : PageBase
     private void FillLabCharts(DataTable DTLABChart, DataTable DTGaumatChart1, DataTable DTGaumatChart2)
     {
         try
-        {          
+        {
             if (DTLABChart != null)
                 FillLABChart(DTLABChart);
             if (DTGaumatChart1 != null && DTGaumatChart2 != null)
                 FillGaumatChart(DTGaumatChart1, DTGaumatChart2);
-            
+
         }
         catch (Exception Exc)
         {
@@ -1013,9 +1019,9 @@ public partial class SyncDetailMeasurementChart : PageBase
         BindLABComparision("Cyan", DTColors, Papera, Paperb, 5, false, false);
         BindLABComparision("Magenta", DTColors, Papera, Paperb, 5, false, false);
         BindLABComparision("Yellow", DTColors, Papera, Paperb, 5, false, false);
-        
-        BindLABComparision("Cyan", DTTarget,0,0, 9, true, false);
-        BindLABComparision("Magenta", DTTarget,0,0, 9, true, false);
+
+        BindLABComparision("Cyan", DTTarget, 0, 0, 9, true, false);
+        BindLABComparision("Magenta", DTTarget, 0, 0, 9, true, false);
         BindLABComparision("Yellow", DTTarget, 0, 0, 9, true, false);
         BindLABComparision("Red", DTTarget, 0, 0, 9, true, false);
         BindLABComparision("Green", DTTarget, 0, 0, 9, true, false);
@@ -1046,7 +1052,7 @@ public partial class SyncDetailMeasurementChart : PageBase
             }
 
             int pointCount = ((isTarget) ? CHART_ABComparison.Series["Targets"].Points.Count : CHART_ABComparison.Series[ColorName].Points.Count);
-        
+
 
             if (isTarget || isActual)
             {
@@ -1084,7 +1090,7 @@ public partial class SyncDetailMeasurementChart : PageBase
                 #endregion
             }
 
-            
+
             if (isTarget)
             {
                 CHART_ABComparison.Series["Targets"].Type = SeriesChartType.FastPoint;
@@ -1098,14 +1104,14 @@ public partial class SyncDetailMeasurementChart : PageBase
                 CHART_ABComparison.Series[ColorName].Points.AddXY(Convert.ToDouble(dv[i]["CIELAB_a*"]), Convert.ToDouble(dv[i]["CIELAB_b*"]));
             }
 
-            
+
             if (i == dv.Count - 1 && (isTarget || isActual))
             {
                 if (isActual)
                 {
                     CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
                     CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = MarkerSize;
-                    CHART_ABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";                
+                    CHART_ABComparison.Series[ColorName].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
                     CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
                 }
             }
@@ -1113,7 +1119,7 @@ public partial class SyncDetailMeasurementChart : PageBase
             {
                 CHART_ABComparison.Series[ColorName].Points[pointCount].BorderWidth = 1;
                 CHART_ABComparison.Series[ColorName].Points[pointCount].MarkerSize = 0;
-                CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);                
+                CHART_ABComparison.Series[ColorName].Points[pointCount].Color = (Color)new ColorConverter().ConvertFromString(ColorName.Equals("paper", StringComparison.CurrentCultureIgnoreCase) ? "White" : ColorName);
             }
             #endregion
 
@@ -1133,14 +1139,14 @@ public partial class SyncDetailMeasurementChart : PageBase
                 CHART_LComparison.Series[series].Type = SeriesChartType.Point;
                 CHART_LComparison.Series[series].Points[i].BorderWidth = 2;
                 CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                
+
 
                 CHART_LComparison.Series[series + 1].Points.AddXY(Convert.ToDouble(dv[0]["CIELAB_a*"]), Convert.ToDouble(dv[0]["L*Deviation"]));
                 CHART_LComparison.Series[series + 1].Type = SeriesChartType.Point;
                 CHART_LComparison.Series[series + 1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
                 CHART_LComparison.Series[series + 1].Points[i].BorderWidth = 2;
                 CHART_LComparison.Series[series].Points[pointCount].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
-                
+
 
                 if (Convert.ToString(dv[0]["PatchType"]).ToLower() == "paper")
                 {
@@ -1228,7 +1234,7 @@ public partial class SyncDetailMeasurementChart : PageBase
         try
         {
             _objSeries.Type = SeriesChartType.Spline;
-            _objSeries.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));            
+            _objSeries.Points.AddXY(Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)), Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)));
             _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
             _objSeries.Points[_Index].BorderWidth = 1;
 
@@ -1245,8 +1251,8 @@ public partial class SyncDetailMeasurementChart : PageBase
                 #region Add Tooltip HTML
                 StringBuilder toolTip = new StringBuilder();
                 toolTip.Append("<table>");
-                toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue +"% Patch Metrics</b></td></tr>");
-                toolTip.Append("<tr><td><table>");                
+                toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+                toolTip.Append("<tr><td><table>");
                 toolTip.Append("<tr><td>Dot Gain : </td><td>");
                 toolTip.Append(_YValue);
                 toolTip.Append("</td></tr>");
