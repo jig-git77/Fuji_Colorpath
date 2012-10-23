@@ -41,11 +41,11 @@
   <ItemGroup>
     <Reference Include="FujifilmUSA.Sync.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\FujifilmUSA.Sync.Business.dll</HintPath>
+      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Business.dll</HintPath>
     </Reference>
     <Reference Include="FujifilmUSA.Sync.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\FujifilmUSA.Sync.Common.dll</HintPath>
+      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Common.dll</HintPath>
     </Reference>
     <Reference Include="FujifilmUSA.Sync.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -53,32 +53,32 @@
     </Reference>
     <Reference Include="FujifilmUSA.Sync.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\FujifilmUSA.Sync.Entity.dll</HintPath>
+      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Entity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Http">
-      <HintPath>..\..\..\..\Projects\ReferenceDLLs\Microsoft.Http.dll</HintPath>
+      <HintPath>..\..\..\Reference\Microsoft.Http.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Http.Extensions">
-      <HintPath>..\..\..\..\Projects\ReferenceDLLs\Microsoft.Http.Extensions.dll</HintPath>
+      <HintPath>..\..\..\Reference\Microsoft.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ServiceModel.Web">
-      <HintPath>..\..\..\..\Projects\ReferenceDLLs\Microsoft.ServiceModel.Web.dll</HintPath>
+      <HintPath>..\..\..\Reference\Microsoft.ServiceModel.Web.dll</HintPath>
     </Reference>
     <Reference Include="Service.Common.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\Service.Common.Business.dll</HintPath>
+      <HintPath>..\..\..\Reference\Service.Common.Business.dll</HintPath>
     </Reference>
     <Reference Include="Service.Common.DataContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\Service.Common.DataContracts.dll</HintPath>
+      <HintPath>..\..\..\Reference\Service.Common.DataContracts.dll</HintPath>
     </Reference>
     <Reference Include="Service.Common.FaultContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\Service.Common.FaultContracts.dll</HintPath>
+      <HintPath>..\..\..\Reference\Service.Common.FaultContracts.dll</HintPath>
     </Reference>
     <Reference Include="Service.Common.MessageContracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Reference\Service.Common.MessageContracts.dll</HintPath>
+      <HintPath>..\..\..\Reference\Service.Common.MessageContracts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
