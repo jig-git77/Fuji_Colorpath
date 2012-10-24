@@ -179,6 +179,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnOptimize.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
                                                  SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
+                Tr_dtERadioList.Visible = false;
             }
             else
             {
@@ -186,6 +187,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //Hide Verification button
                 lbtnMeasurementVerification.Visible = false;
                 lbtnOptimize.Visible = false;
+                Tr_dtERadioList.Visible = true;
             }
         }
         #endregion
@@ -238,15 +240,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
 
                 From_ΔE = Rbl_DT_E.SelectedValue;
-                MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
-                _presenterAnalyze.GetAvgDeltaMeasurement();
-                grdMeasurement.DataSource = MeasurementsDelta;
-                grdMeasurement.DataBind();
 
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                {
+                    //This will be called when Verification process is going on
+                    _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
+                    Table_OptSummary.Visible = false;
+                    DetailsView_VSummary.DataSource = MeasurementSummary;
+                    DetailsView_VSummary.DataBind();
 
-                DetailsView1.DataSource = MeasurementData;
-                DetailsView1.DataBind();
-
+                    RadGrid_VSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
+                    RadGrid_VSummaryMetrics.DataBind();
+                }
+                else
+                {
+                    //In case of None (i.e. Optimization)
+                    Table_ValSummary.Visible = false;
+                    MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
+                    _presenterAnalyze.GetAvgDeltaMeasurement_Optimization();
+                    grdMeasurement.DataSource = MeasurementsDelta;
+                    grdMeasurement.DataBind();
+                }
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
                 string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + Rbl_DT_E.SelectedValue + "&DLPName=" + DLPName;
@@ -919,7 +933,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP Clicked"), false);
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetMeasurementsOnRunId();
@@ -928,9 +941,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     EndDate = System.DateTime.Now;
                     DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                     DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                    //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() Start"), false);
                     _presenterAnalyze.CreateDestinationAndDlp();
-                    //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - _presenterAnalyze.CreateDestinationAndDlp() End"), false);
                     if (!IsErrorOccured)
                     {
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
@@ -939,19 +950,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
                         if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                         {
-                            //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to " + string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid())), false);
                             Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
                         }
                         else
                         {
-                            //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - Redirecting to Export.aspx"), false);
                             Response.Redirect("Export.aspx");
                         }
                     }
                     else
                     {
-                        //_presenterGlobal.LogApplicationError(new Exception("Create DLP Logging - Analyze.ascx - lbtnDownloadAndSaveDLP_Click - _presenterAnalyze.CreateDestinationAndDlp() - Error "), false);
-
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
                                                       Request.UserHostAddress);
                     }
@@ -1001,11 +1008,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     GridPatchDetails.MasterTableView.FilterExpression = string.Empty;
                     GridPatchDetails.MasterTableView.Rebind();
-                    break;
-
-                //case "Filter":          //------------Apply default CurrentFilterFunction for each column of PatchDetails RadGrid-----------------//
-                //    ((Pair)e.CommandArgument).First = "GreaterThanOrEqualTo";
-                //    break;
+                    break;               
             }
         }
 
@@ -1128,7 +1131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
 
-        public DataSet MeasurementData { get; set; }
+        public List<Entity.Measurement> MeasurementSummary { get; set; }
 
         #endregion        
     }

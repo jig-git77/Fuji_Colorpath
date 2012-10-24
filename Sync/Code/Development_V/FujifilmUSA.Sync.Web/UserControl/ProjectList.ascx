@@ -172,9 +172,9 @@
                                         <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Select"
                                             SortExpression="ProjectId" FilterControlAltText="Filter Select column" meta:resourcekey="GridTemplateColumnResource1">
                                             <ItemTemplate>
-                                                 <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Varification" AlternateText="Varification"
+                                                 <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Validation" AlternateText="Validation"
                                                     ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
-                                                    CommandName="Varification" />
+                                                    CommandName="Validation" />
                                             </ItemTemplate>
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>

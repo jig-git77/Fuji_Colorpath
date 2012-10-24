@@ -15,5 +15,8 @@ namespace FujifilmUSA.Sync.Entity
         public int ProjectId { get; set; }
         public string Notes { get; set; }
         public string Customer { get; set; }
+
+        public string dEMethod { get; set; }
+        public List<ValidationMetrics> ValidationMetrics { get; set; }
     }
 }

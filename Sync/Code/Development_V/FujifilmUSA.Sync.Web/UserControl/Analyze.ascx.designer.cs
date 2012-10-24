@@ -148,6 +148,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
+        /// Tr_dtERadioList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow Tr_dtERadioList;
+        
+        /// <summary>
         /// Rbl_DT_E control.
         /// </summary>
         /// <remarks>
@@ -292,6 +301,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
         
         /// <summary>
+        /// Table_OptSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable Table_OptSummary;
+        
+        /// <summary>
         /// tr1 control.
         /// </summary>
         /// <remarks>
@@ -328,13 +346,31 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.ListView grdMeasurement;
         
         /// <summary>
-        /// DetailsView1 control.
+        /// Table_ValSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DetailsView DetailsView1;
+        protected global::System.Web.UI.HtmlControls.HtmlTable Table_ValSummary;
+        
+        /// <summary>
+        /// DetailsView_VSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DetailsView DetailsView_VSummary;
+        
+        /// <summary>
+        /// RadGrid_VSummaryMetrics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadGrid RadGrid_VSummaryMetrics;
         
         /// <summary>
         /// UpdatePanel3 control.

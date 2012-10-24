@@ -111,6 +111,7 @@
     <Compile Include="UserBranch.cs" />
     <Compile Include="UserCompany.cs" />
     <Compile Include="UserLicense.cs" />
+    <Compile Include="ValidationMetrics.cs" />
     <Compile Include="ValidationRule.cs" />
   </ItemGroup>
   <ItemGroup>

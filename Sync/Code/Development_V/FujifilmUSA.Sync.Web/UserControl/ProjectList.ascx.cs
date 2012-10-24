@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             switch (e.CommandName)
             {
-                case "Varification":
+                case "Validation":
                     ProjectId = Convert.ToInt32(e.CommandArgument);
                     _presenterProjectList.GetProjectDetailWithVarification();
                     if (!IsErrorOccured)

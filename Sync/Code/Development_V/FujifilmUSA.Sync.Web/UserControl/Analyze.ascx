@@ -149,7 +149,7 @@
      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
          <ContentTemplate>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
-                <tr>
+                <tr id="Tr_dtERadioList" runat="server">
                     <td align="center">
                         <asp:RadioButtonList ID="Rbl_DT_E" runat="server" RepeatDirection="Horizontal" 
                             AutoPostBack="true" onselectedindexchanged="Rbl_DT_E_SelectedIndexChanged" CssClass="RadioList">
@@ -298,7 +298,7 @@
         <div class="float_l" style="padding-left: 10px;" > 
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
               <ContentTemplate>   
-                  <table cellpadding="0" cellspacing="0" width="100%">
+                  <table id="Table_OptSummary" runat="server" cellpadding="0" cellspacing="0" width="100%">
                                     <tr id="tr1" runat="server" visible="false">
                                         <td style="width:100px;">
                                             <span> <asp:Localize runat="server" Text="Selected Metric:" 
@@ -394,19 +394,47 @@
                                     </td>
                                     </tr>
                                 </table>
-
-                                <br />
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <asp:DetailsView ID="DetailsView1" runat="server" 
-                                                   DataKeyNames="MeasurementID"
-                                                   AutoGenerateRows="true" CssClass="product_list_table"  >
-                                                  
-                                                </asp:DetailsView>
-                                        </td>
-                                    </tr>
-                                </table>
+                             
+                  <table id="Table_ValSummary" runat="server" cellpadding="0" cellspacing="0" width="650px">
+                        <tr>
+                            <td style="width:48%; border:1px Solid Gray;">
+                                <asp:DetailsView ID="DetailsView_VSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
+                                    <Fields>
+                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
+                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
+                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
+                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
+                                        <asp:BoundField DataField="Notes" HeaderText="Notes:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
+                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Method:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
+                                    </Fields>
+                                </asp:DetailsView>
+                            </td>
+                            <td style="width:2%;"></td>
+                            <td valign="top" style="width:50%;">
+                                <telerik:RadGrid ID="RadGrid_VSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
+                                    CellSpacing="0" GridLines="None">   
+                                        <HeaderStyle Font-Bold="True" />                      
+                                            <MasterTableView DataKeyNames="MetricMeasuredID">                      
+                               
+                                                <Columns>
+                                                        <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
+                                                        UniqueName="MetricSumName">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                        UniqueName="TargetValue">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                        UniqueName="MeasuredValue">
+                                                    </telerik:GridBoundColumn>     
+                                                    <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
+                                                        UniqueName="IsNotOK">
+                                                    </telerik:GridBoundColumn>                                               
+                                                </Columns>                        
+                                            </MasterTableView>                        
+                                </telerik:RadGrid>
+                            </td>
+                        </tr>
+                    </table>
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  

@@ -270,12 +270,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetAvgDeltaOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
-            var measurementData = new DataSet();
-            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
+            var VmeasurementSummary = new List<Measurement>();
+            string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
+          
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -285,10 +284,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetDsResult(
                                 storedProc,
                                 new object[] { MeasurementId, From_ΔE });
-                    measurementData = dsMeasurements;
+                    if (dsMeasurements.Tables[0].Rows.Count > 0)
+                    {
+                        //VmeasurementSummary = new Measurement()
+                        //              {
+                        //                  MeasurementId = DataReader.ReadInt(dsMeasurements.Tables[0].Rows[0], "MeasurementID"),
+                        //                  MeasurementName = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "MeasurementName"),
+                        //                  MeasurementDate = DataReader.ReadDate(dsMeasurements.Tables[0].Rows[0], "MeasurementDate"),
+                        //                  Customer = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "Customer"),
+                        //                  Notes = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "Notes"),
+                        //                  dEMethod = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "dEMethod")
+                        //              };
+                        VmeasurementSummary = dsMeasurements.Tables[0].AsEnumerable().
+                          Select(x => new Measurement()
+                          {
+                              MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                              MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                              MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                              Customer = DataReader.ReadString(x, "Customer"),
+                              Notes = DataReader.ReadString(x, "Notes"),
+                              dEMethod = DataReader.ReadString(x, "dEMethod")
+                          }).ToList();
+                        VmeasurementSummary[0].ValidationMetrics = dsMeasurements.Tables[1].AsEnumerable().
+                           Select(x => new ValidationMetrics()
+                           {
+                               MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
+                               Metric = DataReader.ReadString(x, "MetricSumName"),
+                               Tolerance = DataReader.ReadInt(x, "TargetValue"),
+                               Actual = DataReader.ReadInt(x, "MeasuredValue"),
+                               IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
+                           }).ToList();
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetAvgDeltaMeasurement"));
-            return measurementData;
+            return VmeasurementSummary;
         }
 
         public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)

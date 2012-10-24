@@ -2185,3 +2185,12 @@ label
 #contant .head .button:hover{ background-position:left -56px;}
 #contant .head .button:hover span{ background-position:right -84px;}
 #contant .head .button span img{ float: left; margin: 5px 6px 0 0; }
+
+
+/*****************Validation*************************/
+.Validation_Summary
+{
+    line-height:25px;
+    color:#3f6798;
+    font-weight:bold;
+}

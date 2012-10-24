@@ -91,9 +91,9 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
 
-        public DataSet GetAvgDeltaOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
-            return new DataSet();
+            return new List<Measurement>();
         }
 
         #endregion

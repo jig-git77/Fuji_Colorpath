@@ -24,6 +24,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);
         DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
 
-        DataSet GetAvgDeltaOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);        
+        List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false);        
     }
 }
