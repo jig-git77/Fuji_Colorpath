@@ -286,15 +286,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 new object[] { MeasurementId, From_ΔE });
                     if (dsMeasurements.Tables[0].Rows.Count > 0)
                     {
-                        //VmeasurementSummary = new Measurement()
-                        //              {
-                        //                  MeasurementId = DataReader.ReadInt(dsMeasurements.Tables[0].Rows[0], "MeasurementID"),
-                        //                  MeasurementName = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "MeasurementName"),
-                        //                  MeasurementDate = DataReader.ReadDate(dsMeasurements.Tables[0].Rows[0], "MeasurementDate"),
-                        //                  Customer = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "Customer"),
-                        //                  Notes = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "Notes"),
-                        //                  dEMethod = DataReader.ReadString(dsMeasurements.Tables[0].Rows[0], "dEMethod")
-                        //              };
                         VmeasurementSummary = dsMeasurements.Tables[0].AsEnumerable().
                           Select(x => new Measurement()
                           {
@@ -303,7 +294,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                               Customer = DataReader.ReadString(x, "Customer"),
                               Notes = DataReader.ReadString(x, "Notes"),
-                              dEMethod = DataReader.ReadString(x, "dEMethod")
+                              dEMethod = DataReader.ReadString(x, "dEMethod"),
+                              MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus")
                           }).ToList();
                         VmeasurementSummary[0].ValidationMetrics = dsMeasurements.Tables[1].AsEnumerable().
                            Select(x => new ValidationMetrics()

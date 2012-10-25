@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Entity
 
         public string dEMethod { get; set; }
         public List<ValidationMetrics> ValidationMetrics { get; set; }
+        public string MeasurementStatus { get; set; }
     }
 }

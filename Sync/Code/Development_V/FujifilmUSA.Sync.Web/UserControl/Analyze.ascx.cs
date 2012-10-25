@@ -151,6 +151,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
             if (!Page.IsPostBack)
             {
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                {
+                    Rbl_DT_E.SelectedIndex = 1; //-----By default set to ΔE for Validation(Verification)
+                }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
@@ -1070,6 +1074,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblPercΔE_95.Text = From_ΔE + ": ";
             }
             #endregion
+        }
+
+        protected void RadGrid_VSummaryMetrics_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }               
+            }
         }
 
         protected void btn_Excel_Click(object sender, EventArgs e)

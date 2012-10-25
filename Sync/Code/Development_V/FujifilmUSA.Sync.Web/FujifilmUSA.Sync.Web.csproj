@@ -131,6 +131,7 @@
     <Content Include="Images\download_list_bg.png" />
     <Content Include="Images\download_list_small_bg.png" />
     <Content Include="Images\expanded.png" />
+    <Content Include="Images\Failed.png" />
     <Content Include="Images\header-left-img.gif" />
     <Content Include="Images\header-middle-bg.gif" />
     <Content Include="Images\header-right-img.gif" />
@@ -144,6 +145,7 @@
     <Content Include="Images\OptimizationBlue.png" />
     <Content Include="Images\OptimizationGreen.png" />
     <Content Include="Images\OptimizationRed.png" />
+    <Content Include="Images\Passed.png" />
     <Content Include="Images\powered-logo.gif" />
     <Content Include="Images\Profile-Management-icon.png" />
     <Content Include="Images\Profile-Management.png" />
@@ -2009,7 +2011,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -397,27 +397,34 @@
                              
                   <table id="Table_ValSummary" runat="server" cellpadding="0" cellspacing="0" width="650px">
                         <tr>
-                            <td style="width:48%; border:1px Solid Gray;">
+                            <td style="width:63%; border:1px Solid Gray;">
                                 <asp:DetailsView ID="DetailsView_VSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
                                     <Fields>
-                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
-                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
-                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
-                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
-                                        <asp:BoundField DataField="Notes" HeaderText="Notes:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"/>
-                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Method:" ItemStyle-BackColor="#FFFFFF" HeaderStyle-BackColor="#FFFFFF"/>
+                                       <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
+                                        <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right">
+                                            <ItemTemplate>
+                                                <div class='<%# Eval("MeasurementStatus") == "OK" ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
+                                                    <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>                                     
+                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Method:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
                                     </Fields>
                                 </asp:DetailsView>
                             </td>
                             <td style="width:2%;"></td>
-                            <td valign="top" style="width:50%;">
+                            <td valign="top" style="width:35%;">
                                 <telerik:RadGrid ID="RadGrid_VSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                    CellSpacing="0" GridLines="None">   
+                                    OnItemDataBound="RadGrid_VSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
                                         <HeaderStyle Font-Bold="True" />                      
-                                            <MasterTableView DataKeyNames="MetricMeasuredID">                      
-                               
+                                            <MasterTableView DataKeyNames="MetricMeasuredID">  
                                                 <Columns>
-                                                        <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
+                                                    <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
                                                         UniqueName="MetricSumName">
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
@@ -427,7 +434,7 @@
                                                         UniqueName="MeasuredValue">
                                                     </telerik:GridBoundColumn>     
                                                     <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                        UniqueName="IsNotOK">
+                                                        UniqueName="IsNotOK" Visible="false">
                                                     </telerik:GridBoundColumn>                                               
                                                 </Columns>                        
                                             </MasterTableView>                        

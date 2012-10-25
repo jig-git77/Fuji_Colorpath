@@ -2190,7 +2190,38 @@ label
 /*****************Validation*************************/
 .Validation_Summary
 {
-    line-height:25px;
-    color:#3f6798;
-    font-weight:bold;
+    line-height: 25px;
+    color: #3f6798;
+    font-weight: bold;
+}
+
+.Validation_Status_Red
+{
+    color: Red;
+}
+
+.Validation_Status_Green
+{
+    color: Green;
+}
+
+.Summary_Left
+{
+    padding-left: 7px;
+    background-color: #F2F2F2;
+}
+.Summary_Left_Alt
+{
+    padding-left: 7px;
+    background-color: #FFFFFF;
+}
+.Summary_Right
+{
+    padding-right: 3px;
+    background-color: #F2F2F2;
+}
+.Summary_Right_Alt
+{
+    padding-right: 3px;
+    background-color: #FFFFFF;
 }
