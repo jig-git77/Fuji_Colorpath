@@ -2,7 +2,7 @@
 using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-//using System.Web.UI;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -22,20 +22,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        //public bool IsXMFUser
-        //{
-        //    get
-        //    {
-        //        return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
-        //    }
-        //}
+        public bool IsXMFUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
         #endregion
 
         #region Constructor
         public Measurement()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
 
         #region "Page Events"
@@ -54,19 +54,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
 
-            //if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]))
-            //{
-            //    ScriptManager.RegisterStartupScript(
-            //        this.Page,
-            //        this.Page.GetType(),
-            //        "messaging",
-            //        string.Format("window.parent.postMessage('{0}','{1}');",
-            //                      !string.IsNullOrEmpty(Request.QueryString["projectid"])
-            //                          ? Convert.ToInt32(Request.QueryString["projectid"])
-            //                          : 0,
-            //                      SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
-            //        true);
-            //}
+            if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+            {
+                ScriptManager.RegisterStartupScript(
+                    this.Page,
+                    this.Page.GetType(),
+                    "messaging",
+                    string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
+                                  Convert.ToInt32(Request.QueryString["projectid"]),
+                                  SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
+                    true);
+            }
         }
 
         #endregion
