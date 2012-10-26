@@ -38,5 +38,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         }
 
         public event ErrorHandler ErrorOccured;
+
+
+        public ReferenceChartType GetReferenceChartDataForXmf(int refChartId)
+        {
+            return new ReferenceChartType();
+        }
     }
 }
