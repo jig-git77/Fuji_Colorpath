@@ -22,13 +22,21 @@ namespace ServiceDemo
 
         public MainWindow()
         {
-            Methods = new List<String>() { "Get Device List", "Get ReferenceChart List", "Get Profile", "Get Project Information", "Store Temp Project Information" };
+            Methods = new List<String>()
+                          {
+                              "Get Device List",
+                              "Get ReferenceChart List",
+                              "Get ReferenceChart Data",
+                              "Get Profile",
+                              "Get Project Information",
+                              "Store Temp Project Information"
+                          };
 
             ProfileTypes = new Dictionary<int, string>()
                                {
                                    { Convert.ToInt32(EProfileType.None), EProfileType.None.ToString() },
                                    { Convert.ToInt32(EProfileType.SourceProfile), EProfileType.SourceProfile.ToString() },
-                                   { Convert.ToInt32(EProfileType.DestinationPRofile), EProfileType.DestinationPRofile.ToString() },
+                                   { Convert.ToInt32(EProfileType.DestinationProfile), EProfileType.DestinationProfile.ToString() },
                                    { Convert.ToInt32(EProfileType.DeviceLinkProfile), EProfileType.DeviceLinkProfile.ToString() },
                                };
             InitializeComponent();
@@ -85,6 +93,23 @@ namespace ServiceDemo
                             });
                             dgResult.ItemsSource = getRefChartListresponse.ReferenceChartList;
                             lblStatus.Text = String.Format("Status: {0} with count: {1}", getRefChartListresponse.Message.Message, getRefChartListresponse.Count);
+
+                            #endregion
+
+                            break;
+                        case "Get ReferenceChart Data":
+
+                            #region GetReferenceChartData
+
+                            var getRefChartDataresponse = client.GetReferenceChartData(new GetReferenceChartDataRequest()
+                            {
+                                UserName = _userName,
+                                UserPassword = _userPassword,
+                                SecurityToken = _securityToken,
+                                ChartId = Convert.ToInt32(txtRefChartId.Text)
+                            });
+                            dgResult.ItemsSource = new List<ReferenceChart>() {getRefChartDataresponse.ReferenceChart};
+                            lblStatus.Text = String.Format("Status: {0} with count: {1}", getRefChartDataresponse.Message.Message, getRefChartDataresponse.Count);
 
                             #endregion
 

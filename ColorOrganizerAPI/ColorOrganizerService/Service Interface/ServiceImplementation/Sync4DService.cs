@@ -45,6 +45,11 @@ namespace FujifilmUSA.ColorOrganizerService.ServiceImplementation
             return Sync4DBusiness.CheckUserCredentials(request);
         }
 
+        public GetReferenceChartDataResponse GetReferenceChartData(GetReferenceChartDataRequest request)
+        {
+            return Sync4DBusiness.GetReferenceChartData(request);
+        }
+
         #endregion
     }
 }

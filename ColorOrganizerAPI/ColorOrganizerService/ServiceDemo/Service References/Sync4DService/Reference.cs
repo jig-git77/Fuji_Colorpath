@@ -173,6 +173,7 @@ namespace ServiceDemo.Sync4DService {
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseRequest", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetReferenceChartListRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetReferenceChartDataRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProjectInformationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProfileRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempProjectInformationRequest))]
@@ -257,6 +258,30 @@ namespace ServiceDemo.Sync4DService {
         "Contracts")]
     [System.SerializableAttribute()]
     public partial class GetReferenceChartListRequest : ServiceDemo.Sync4DService.BaseRequest {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReferenceChartDataRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    [System.SerializableAttribute()]
+    public partial class GetReferenceChartDataRequest : ServiceDemo.Sync4DService.BaseRequest {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ChartIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChartId {
+            get {
+                return this.ChartIdField;
+            }
+            set {
+                if ((this.ChartIdField.Equals(value) != true)) {
+                    this.ChartIdField = value;
+                    this.RaisePropertyChanged("ChartId");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -503,10 +528,13 @@ namespace ServiceDemo.Sync4DService {
         SourceProfile = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        DestinationPRofile = 2,
+        DestinationProfile = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         DeviceLinkProfile = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OptimizeDlp = 4,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -514,6 +542,7 @@ namespace ServiceDemo.Sync4DService {
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetReferenceChartListResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetReferenceChartDataResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProjectInformationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempProjectInformationResponse))]
@@ -672,6 +701,30 @@ namespace ServiceDemo.Sync4DService {
                 if ((object.ReferenceEquals(this.ReferenceChartListField, value) != true)) {
                     this.ReferenceChartListField = value;
                     this.RaisePropertyChanged("ReferenceChartList");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReferenceChartDataResponse", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    [System.SerializableAttribute()]
+    public partial class GetReferenceChartDataResponse : ServiceDemo.Sync4DService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ServiceDemo.Sync4DService.ReferenceChart ReferenceChartField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceDemo.Sync4DService.ReferenceChart ReferenceChart {
+            get {
+                return this.ReferenceChartField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReferenceChartField, value) != true)) {
+                    this.ReferenceChartField = value;
+                    this.RaisePropertyChanged("ReferenceChart");
                 }
             }
         }
@@ -902,7 +955,19 @@ namespace ServiceDemo.Sync4DService {
         private ServiceDemo.Sync4DService.EMeasurementDevice MeasurementDeviceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumOfColsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumOfRowsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] OriginalChartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ServiceDemo.Sync4DService.ProjectType ProjectTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalPatchesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -980,6 +1045,32 @@ namespace ServiceDemo.Sync4DService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumOfCols {
+            get {
+                return this.NumOfColsField;
+            }
+            set {
+                if ((this.NumOfColsField.Equals(value) != true)) {
+                    this.NumOfColsField = value;
+                    this.RaisePropertyChanged("NumOfCols");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumOfRows {
+            get {
+                return this.NumOfRowsField;
+            }
+            set {
+                if ((this.NumOfRowsField.Equals(value) != true)) {
+                    this.NumOfRowsField = value;
+                    this.RaisePropertyChanged("NumOfRows");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] OriginalChart {
             get {
                 return this.OriginalChartField;
@@ -988,6 +1079,94 @@ namespace ServiceDemo.Sync4DService {
                 if ((object.ReferenceEquals(this.OriginalChartField, value) != true)) {
                     this.OriginalChartField = value;
                     this.RaisePropertyChanged("OriginalChart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceDemo.Sync4DService.ProjectType ProjectType {
+            get {
+                return this.ProjectTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProjectTypeField, value) != true)) {
+                    this.ProjectTypeField = value;
+                    this.RaisePropertyChanged("ProjectType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalPatches {
+            get {
+                return this.TotalPatchesField;
+            }
+            set {
+                if ((this.TotalPatchesField.Equals(value) != true)) {
+                    this.TotalPatchesField = value;
+                    this.RaisePropertyChanged("TotalPatches");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProjectType", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataCon" +
+        "tracts")]
+    [System.SerializableAttribute()]
+    public partial class ProjectType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private short ProjectTypeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProjectTypeNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public short ProjectTypeId {
+            get {
+                return this.ProjectTypeIdField;
+            }
+            set {
+                if ((this.ProjectTypeIdField.Equals(value) != true)) {
+                    this.ProjectTypeIdField = value;
+                    this.RaisePropertyChanged("ProjectTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProjectTypeName {
+            get {
+                return this.ProjectTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProjectTypeNameField, value) != true)) {
+                    this.ProjectTypeNameField = value;
+                    this.RaisePropertyChanged("ProjectTypeName");
                 }
             }
         }
@@ -1015,6 +1194,9 @@ namespace ServiceDemo.Sync4DService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OptimizationChart = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VerificationChart = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -1334,6 +1516,10 @@ namespace ServiceDemo.Sync4DService {
         [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartListServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
         ServiceDemo.Sync4DService.GetReferenceChartListResponse GetReferenceChartList(ServiceDemo.Sync4DService.GetReferenceChartListRequest request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData", ReplyAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
+        ServiceDemo.Sync4DService.GetReferenceChartDataResponse GetReferenceChartData(ServiceDemo.Sync4DService.GetReferenceChartDataRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformation", ReplyAction="http://tempuri.org/ISync4DServiceContract/GetProjectInformationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
         ServiceDemo.Sync4DService.GetProjectInformationResponse GetProjectInformation(ServiceDemo.Sync4DService.GetProjectInformationRequest request);
@@ -1389,6 +1575,10 @@ namespace ServiceDemo.Sync4DService {
         
         public ServiceDemo.Sync4DService.GetReferenceChartListResponse GetReferenceChartList(ServiceDemo.Sync4DService.GetReferenceChartListRequest request) {
             return base.Channel.GetReferenceChartList(request);
+        }
+        
+        public ServiceDemo.Sync4DService.GetReferenceChartDataResponse GetReferenceChartData(ServiceDemo.Sync4DService.GetReferenceChartDataRequest request) {
+            return base.Channel.GetReferenceChartData(request);
         }
         
         public ServiceDemo.Sync4DService.GetProjectInformationResponse GetProjectInformation(ServiceDemo.Sync4DService.GetProjectInformationRequest request) {

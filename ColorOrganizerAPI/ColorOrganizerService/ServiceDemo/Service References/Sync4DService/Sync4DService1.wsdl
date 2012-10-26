@@ -39,6 +39,15 @@
   <wsdl:message name="ISync4DServiceContract_GetReferenceChartList_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartData" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReferenceChartDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISync4DServiceContract_GetReferenceChartData_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_GetProjectInformation_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProjectInformation" />
   </wsdl:message>
@@ -46,7 +55,7 @@
     <wsdl:part name="parameters" element="tns:GetProjectInformationResponse" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_GetProjectInformation_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q4:ServiceFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q5:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_GetProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:GetProfile" />
@@ -55,7 +64,7 @@
     <wsdl:part name="parameters" element="tns:GetProfileResponse" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_GetProfile_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q5:ServiceFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_StoreTempProjectInformation_InputMessage">
     <wsdl:part name="parameters" element="tns:StoreTempProjectInformation" />
@@ -64,7 +73,7 @@
     <wsdl:part name="parameters" element="tns:StoreTempProjectInformationResponse" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_StoreTempProjectInformation_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q6:ServiceFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_CheckUserCredentials_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckUserCredentials" />
@@ -73,7 +82,7 @@
     <wsdl:part name="parameters" element="tns:CheckUserCredentialsResponse" />
   </wsdl:message>
   <wsdl:message name="ISync4DServiceContract_CheckUserCredentials_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q7:ServiceFault" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts" name="detail" element="q8:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="ISync4DServiceContract">
     <wsdl:operation name="Ping">
@@ -90,6 +99,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartList" message="tns:ISync4DServiceContract_GetReferenceChartList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartListResponse" message="tns:ISync4DServiceContract_GetReferenceChartList_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartListServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetReferenceChartList_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData" message="tns:ISync4DServiceContract_GetReferenceChartData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataResponse" message="tns:ISync4DServiceContract_GetReferenceChartData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataServiceFaultFault" name="ServiceFaultFault" message="tns:ISync4DServiceContract_GetReferenceChartData_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetProjectInformation">
       <wsdl:input wsaw:Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformation" message="tns:ISync4DServiceContract_GetProjectInformation_InputMessage" />
@@ -140,6 +154,18 @@
     </wsdl:operation>
     <wsdl:operation name="GetReferenceChartList">
       <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetReferenceChartData">
+      <soap:operation soapAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

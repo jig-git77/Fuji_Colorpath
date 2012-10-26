@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FujifilmUSA.ColorOrganizerService.DataContracts;
 using FujifilmUSA.ColorOrganizerService.DataContracts.Enums;
 using FujifilmUSA.ColorOrganizerService.MessageContracts;
@@ -39,30 +37,37 @@ namespace FujifilmUSA.ColorOrganizerService.Business
 
                                             if (referenceCharts.Count > 0)
                                             {
-                                                referenceCharts.ForEach(x => response.
-                                                                                 ReferenceChartList.
-                                                                                 Add(new ReferenceChart()
-                                                                                         {
-                                                                                             ChartId = x.ReferenceChartTypeId,
-                                                                                             ChartName = x.ChartName,
-                                                                                             ChartPreview = x.ChartPreview,
-                                                                                             OriginalChart = x.OriginalChart,
-                                                                                             MeasurementDevice =
-                                                                                                 (EMeasurementDevice)
-                                                                                                 Enum.Parse(typeof (EMeasurementDevice),
-                                                                                                            x.InstrumentType.InstrumentTypeId.ToString()),
-                                                                                             ChartType = (x.ChartDisplayType > 0)
-                                                                                                             ? (EReferenceChartType)
-                                                                                                               Enum.Parse(typeof (EReferenceChartType),
-                                                                                                                          x.ChartDisplayType.ToString())
-                                                                                                             : EReferenceChartType.None
-                                                                                         }));
+                                                referenceCharts.ForEach(x =>
+                                                                        response.
+                                                                            ReferenceChartList.
+                                                                            Add(new ReferenceChart()
+                                                                                    {
+                                                                                        ChartId = x.ReferenceChartTypeId,
+                                                                                        ChartName = x.ChartName,
+                                                                                        NumOfCols = x.NumOfCols,
+                                                                                        NumOfRows = x.NumOfRows,
+                                                                                        TotalPatches = x.TotalPatches,
+                                                                                        ProjectType = new ProjectType()
+                                                                                                          {
+                                                                                                              ProjectTypeId = x.ProjectType.ProjectTypeId,
+                                                                                                              ProjectTypeName = x.ProjectType.ProjectTypeName
+                                                                                                          },
+                                                                                        MeasurementDevice =
+                                                                                            (EMeasurementDevice)
+                                                                                            Enum.Parse(typeof (EMeasurementDevice),
+                                                                                                       x.InstrumentType.InstrumentTypeId.ToString()),
+                                                                                        ChartType = (x.ChartDisplayType > 0)
+                                                                                                        ? (EReferenceChartType)
+                                                                                                          Enum.Parse(typeof (EReferenceChartType),
+                                                                                                                     x.ChartDisplayType.ToString())
+                                                                                                        : EReferenceChartType.None,
+                                                                                    }));
                                                 response.Count = response.ReferenceChartList.Count;
                                                 response.Message = Common.GetSuccessMessage();
                                             }
                                             else
                                             {
-                                                ExceptionHandling.RaiseException("Devices not found", ErrorCode.DataNotFound);
+                                                ExceptionHandling.RaiseException("Charts not found", ErrorCode.DataNotFound);
                                             }
                                         }, "Get Reference Chart List");
             response.CalculateAndLogRequestTime("GetReferenceChartList");

@@ -11,10 +11,22 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts
 
         [DataMember]
         public string ChartName { get; set; }
-        
+
+        [DataMember]
+        public int NumOfRows { get; set; }
+
+        [DataMember]
+        public int NumOfCols { get; set; }
+
+        [DataMember]
+        public int TotalPatches { get; set; }
+
+        [DataMember]
+        public ProjectType ProjectType { get; set; }
+
         [DataMember]
         public byte[] ChartPreview { get; set; }
-        
+
         [DataMember]
         public byte[] OriginalChart { get; set; }
 

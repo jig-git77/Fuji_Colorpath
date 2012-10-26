@@ -37,7 +37,7 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                     case EProfileType.SourceProfile:
                                                         profileData = projectBusiness.GetSourceProfile(request.ProjectId);
                                                         break;
-                                                    case EProfileType.DestinationPRofile:
+                                                    case EProfileType.DestinationProfile:
                                                         profileData = projectBusiness.GetDestinationProfile(request.ProjectId);
                                                         break;
                                                     case EProfileType.DeviceLinkProfile:

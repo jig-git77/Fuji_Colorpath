@@ -40,9 +40,29 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="GetReferenceChartListResponse" nillable="true" type="tns:GetReferenceChartListResponse" />
-  <xs:complexType name="GetProjectInformationRequest">
+  <xs:complexType name="GetReferenceChartDataRequest">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q7:BaseRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChartId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetReferenceChartDataRequest" nillable="true" type="tns:GetReferenceChartDataRequest" />
+  <xs:complexType name="GetReferenceChartDataResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q8:BaseResponse">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" minOccurs="0" name="ReferenceChart" nillable="true" type="q9:ReferenceChart" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetReferenceChartDataResponse" nillable="true" type="tns:GetReferenceChartDataResponse" />
+  <xs:complexType name="GetProjectInformationRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q10:BaseRequest">
         <xs:sequence>
           <xs:element minOccurs="0" name="ProjectId" type="xs:int" />
         </xs:sequence>
@@ -52,9 +72,9 @@
   <xs:element name="GetProjectInformationRequest" nillable="true" type="tns:GetProjectInformationRequest" />
   <xs:complexType name="GetProjectInformationResponse">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q8:BaseResponse">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q11:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" minOccurs="0" name="ProjectInformation" nillable="true" type="q9:ProjectInformation" />
+          <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" minOccurs="0" name="ProjectInformation" nillable="true" type="q12:ProjectInformation" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -62,9 +82,9 @@
   <xs:element name="GetProjectInformationResponse" nillable="true" type="tns:GetProjectInformationResponse" />
   <xs:complexType name="GetProfileRequest">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q10:BaseRequest">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q13:BaseRequest">
         <xs:sequence>
-          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" minOccurs="0" name="ProfileType" type="q11:EProfileType" />
+          <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" minOccurs="0" name="ProfileType" type="q14:EProfileType" />
           <xs:element minOccurs="0" name="ProjectId" type="xs:int" />
         </xs:sequence>
       </xs:extension>
@@ -73,9 +93,9 @@
   <xs:element name="GetProfileRequest" nillable="true" type="tns:GetProfileRequest" />
   <xs:complexType name="GetProfileResponse">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q12:BaseResponse">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q15:BaseResponse">
         <xs:sequence>
-          <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" minOccurs="0" name="Profile" nillable="true" type="q13:Profile" />
+          <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" minOccurs="0" name="Profile" nillable="true" type="q16:Profile" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -83,7 +103,7 @@
   <xs:element name="GetProfileResponse" nillable="true" type="tns:GetProfileResponse" />
   <xs:complexType name="StoreTempProjectInformationRequest">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q14:BaseRequest">
+      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q17:BaseRequest">
         <xs:sequence>
           <xs:element minOccurs="0" name="ChartId" type="xs:int" />
           <xs:element minOccurs="0" name="Colorant" nillable="true" type="xs:string" />
@@ -101,7 +121,7 @@
   <xs:element name="StoreTempProjectInformationRequest" nillable="true" type="tns:StoreTempProjectInformationRequest" />
   <xs:complexType name="StoreTempProjectInformationResponse">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q15:BaseResponse">
+      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q18:BaseResponse">
         <xs:sequence>
           <xs:element minOccurs="0" name="ProjectInfoId" type="ser:guid" />
         </xs:sequence>
@@ -111,7 +131,7 @@
   <xs:element name="StoreTempProjectInformationResponse" nillable="true" type="tns:StoreTempProjectInformationResponse" />
   <xs:complexType name="CheckUserCredentialsRequest">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q16:BaseRequest">
+      <xs:extension xmlns:q19="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q19:BaseRequest">
         <xs:sequence />
       </xs:extension>
     </xs:complexContent>
@@ -119,7 +139,7 @@
   <xs:element name="CheckUserCredentialsRequest" nillable="true" type="tns:CheckUserCredentialsRequest" />
   <xs:complexType name="CheckUserCredentialsResponse">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q17:BaseResponse">
+      <xs:extension xmlns:q20="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q20:BaseResponse">
         <xs:sequence>
           <xs:element minOccurs="0" name="IsValid" type="xs:boolean" />
         </xs:sequence>

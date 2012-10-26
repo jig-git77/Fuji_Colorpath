@@ -5,12 +5,15 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts.Enums
     public enum EReferenceChartType
     {
         [EnumMember]
-        None=0,
+        None = 0,
 
         [EnumMember]
         ProfileChart = 1,
 
         [EnumMember]
-        OptimizationChart = 2
+        OptimizationChart = 2,
+
+        [EnumMember]
+        VerificationChart = 3
     }
 }

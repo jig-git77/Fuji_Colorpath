@@ -81,6 +81,8 @@
     <Compile Include="GetProfileResponse.cs" />
     <Compile Include="GetProjectInformationRequest.cs" />
     <Compile Include="GetProjectInformationResponse.cs" />
+    <Compile Include="GetReferenceChartDataRequest.cs" />
+    <Compile Include="GetReferenceChartDataResponse.cs" />
     <Compile Include="GetReferenceChartListRequest.cs" />
     <Compile Include="GetReferenceChartListResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

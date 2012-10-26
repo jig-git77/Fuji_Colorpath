@@ -136,6 +136,9 @@
     <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.GetProjectInformationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.GetReferenceChartDataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.GetReferenceChartListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

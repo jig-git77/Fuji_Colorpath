@@ -66,6 +66,8 @@
 
             <TextBlock Grid.Column="0" Grid.Row="6" Text="ProfileType" Margin="5,5,5,5" HorizontalAlignment="Right"></TextBlock>
             <ComboBox Grid.Column="1" Grid.Row="6" Margin="5,5,5,5" Name="cmbProfileType" ItemsSource="{Binding ProfileTypes}" DisplayMemberPath="Value" SelectedValuePath="Key"></ComboBox>
+            <TextBlock Grid.Column="2" Grid.Row="6" Text="Reference Chart Id" Margin="5,5,5,5" HorizontalAlignment="Right"></TextBlock>
+            <TextBox Grid.Column="3" Grid.Row="6" Margin="5,5,5,5" Name="txtRefChartId"></TextBox>
 
             <TextBlock Name="lblStatus" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Left" Margin="5,5,5,5"></TextBlock>
         </Grid>

@@ -20,6 +20,10 @@ namespace FujifilmUSA.ColorOrganizerService.ServiceContracts
         GetReferenceChartListResponse GetReferenceChartList(GetReferenceChartListRequest request);
 
         [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        GetReferenceChartDataResponse GetReferenceChartData(GetReferenceChartDataRequest request);
+
+        [OperationContract]
         [FaultContract(typeof (ServiceFault))]
         GetProjectInformationResponse GetProjectInformation(GetProjectInformationRequest request);
 
