@@ -155,6 +155,7 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseRequest", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProjectInformationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProfileRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationRequest))]
@@ -222,6 +223,28 @@ namespace ColorOrganizerDemoLib.Sync4DService {
     [System.Runtime.Serialization.DataContractAttribute(Name="GetReferenceChartListRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
         "Contracts")]
     public partial class GetReferenceChartListRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReferenceChartDataRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    public partial class GetReferenceChartDataRequest : ColorOrganizerDemoLib.Sync4DService.BaseRequest {
+        
+        private int ChartIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChartId {
+            get {
+                return this.ChartIdField;
+            }
+            set {
+                if ((this.ChartIdField.Equals(value) != true)) {
+                    this.ChartIdField = value;
+                    this.RaisePropertyChanged("ChartId");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -451,16 +474,20 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         SourceProfile = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        DestinationPRofile = 2,
+        DestinationProfile = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         DeviceLinkProfile = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OptimizeDlp = 4,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseResponse", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProjectInformationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.GetProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.StoreTempProjectInformationResponse))]
@@ -585,6 +612,28 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 if ((object.ReferenceEquals(this.ReferenceChartListField, value) != true)) {
                     this.ReferenceChartListField = value;
                     this.RaisePropertyChanged("ReferenceChartList");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetReferenceChartDataResponse", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    public partial class GetReferenceChartDataResponse : ColorOrganizerDemoLib.Sync4DService.BaseResponse {
+        
+        private ColorOrganizerDemoLib.Sync4DService.ReferenceChart ReferenceChartField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorOrganizerDemoLib.Sync4DService.ReferenceChart ReferenceChart {
+            get {
+                return this.ReferenceChartField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReferenceChartField, value) != true)) {
+                    this.ReferenceChartField = value;
+                    this.RaisePropertyChanged("ReferenceChart");
                 }
             }
         }
@@ -779,7 +828,15 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         private ColorOrganizerDemoLib.Sync4DService.EMeasurementDevice MeasurementDeviceField;
         
+        private int NumOfColsField;
+        
+        private int NumOfRowsField;
+        
         private byte[] OriginalChartField;
+        
+        private ColorOrganizerDemoLib.Sync4DService.ProjectType ProjectTypeField;
+        
+        private int TotalPatchesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ChartId {
@@ -847,6 +904,32 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumOfCols {
+            get {
+                return this.NumOfColsField;
+            }
+            set {
+                if ((this.NumOfColsField.Equals(value) != true)) {
+                    this.NumOfColsField = value;
+                    this.RaisePropertyChanged("NumOfCols");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumOfRows {
+            get {
+                return this.NumOfRowsField;
+            }
+            set {
+                if ((this.NumOfRowsField.Equals(value) != true)) {
+                    this.NumOfRowsField = value;
+                    this.RaisePropertyChanged("NumOfRows");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] OriginalChart {
             get {
                 return this.OriginalChartField;
@@ -855,6 +938,78 @@ namespace ColorOrganizerDemoLib.Sync4DService {
                 if ((object.ReferenceEquals(this.OriginalChartField, value) != true)) {
                     this.OriginalChartField = value;
                     this.RaisePropertyChanged("OriginalChart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ColorOrganizerDemoLib.Sync4DService.ProjectType ProjectType {
+            get {
+                return this.ProjectTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProjectTypeField, value) != true)) {
+                    this.ProjectTypeField = value;
+                    this.RaisePropertyChanged("ProjectType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalPatches {
+            get {
+                return this.TotalPatchesField;
+            }
+            set {
+                if ((this.TotalPatchesField.Equals(value) != true)) {
+                    this.TotalPatchesField = value;
+                    this.RaisePropertyChanged("TotalPatches");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ProjectType", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataCon" +
+        "tracts")]
+    public partial class ProjectType : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private short ProjectTypeIdField;
+        
+        private string ProjectTypeNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public short ProjectTypeId {
+            get {
+                return this.ProjectTypeIdField;
+            }
+            set {
+                if ((this.ProjectTypeIdField.Equals(value) != true)) {
+                    this.ProjectTypeIdField = value;
+                    this.RaisePropertyChanged("ProjectTypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ProjectTypeName {
+            get {
+                return this.ProjectTypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProjectTypeNameField, value) != true)) {
+                    this.ProjectTypeNameField = value;
+                    this.RaisePropertyChanged("ProjectTypeName");
                 }
             }
         }
@@ -882,6 +1037,9 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         OptimizationChart = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VerificationChart = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -1166,6 +1324,12 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse EndGetReferenceChartList(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartData", ReplyAction="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetReferenceChartDataServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
+        System.IAsyncResult BeginGetReferenceChartData(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request, System.AsyncCallback callback, object asyncState);
+        
+        ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse EndGetReferenceChartData(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformation", ReplyAction="http://tempuri.org/ISync4DServiceContract/GetProjectInformationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ColorOrganizerDemoLib.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/GetProjectInformationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
         System.IAsyncResult BeginGetProjectInformation(ColorOrganizerDemoLib.Sync4DService.GetProjectInformationRequest request, System.AsyncCallback callback, object asyncState);
@@ -1249,6 +1413,25 @@ namespace ColorOrganizerDemoLib.Sync4DService {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetReferenceChartDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetReferenceChartDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse)(this.results[0]));
             }
         }
     }
@@ -1351,6 +1534,12 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         
         private System.Threading.SendOrPostCallback onGetReferenceChartListCompletedDelegate;
         
+        private BeginOperationDelegate onBeginGetReferenceChartDataDelegate;
+        
+        private EndOperationDelegate onEndGetReferenceChartDataDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetReferenceChartDataCompletedDelegate;
+        
         private BeginOperationDelegate onBeginGetProjectInformationDelegate;
         
         private EndOperationDelegate onEndGetProjectInformationDelegate;
@@ -1433,6 +1622,8 @@ namespace ColorOrganizerDemoLib.Sync4DService {
         public event System.EventHandler<GetDeviceListCompletedEventArgs> GetDeviceListCompleted;
         
         public event System.EventHandler<GetReferenceChartListCompletedEventArgs> GetReferenceChartListCompleted;
+        
+        public event System.EventHandler<GetReferenceChartDataCompletedEventArgs> GetReferenceChartDataCompleted;
         
         public event System.EventHandler<GetProjectInformationCompletedEventArgs> GetProjectInformationCompleted;
         
@@ -1580,6 +1771,52 @@ namespace ColorOrganizerDemoLib.Sync4DService {
             }
             base.InvokeAsync(this.onBeginGetReferenceChartListDelegate, new object[] {
                         request}, this.onEndGetReferenceChartListDelegate, this.onGetReferenceChartListCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract.BeginGetReferenceChartData(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetReferenceChartData(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract.EndGetReferenceChartData(System.IAsyncResult result) {
+            return base.Channel.EndGetReferenceChartData(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetReferenceChartData(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request = ((ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest)(inValues[0]));
+            return ((ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract)(this)).BeginGetReferenceChartData(request, callback, asyncState);
+        }
+        
+        private object[] OnEndGetReferenceChartData(System.IAsyncResult result) {
+            ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse retVal = ((ColorOrganizerDemoLib.Sync4DService.ISync4DServiceContract)(this)).EndGetReferenceChartData(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetReferenceChartDataCompleted(object state) {
+            if ((this.GetReferenceChartDataCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetReferenceChartDataCompleted(this, new GetReferenceChartDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetReferenceChartDataAsync(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request) {
+            this.GetReferenceChartDataAsync(request, null);
+        }
+        
+        public void GetReferenceChartDataAsync(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request, object userState) {
+            if ((this.onBeginGetReferenceChartDataDelegate == null)) {
+                this.onBeginGetReferenceChartDataDelegate = new BeginOperationDelegate(this.OnBeginGetReferenceChartData);
+            }
+            if ((this.onEndGetReferenceChartDataDelegate == null)) {
+                this.onEndGetReferenceChartDataDelegate = new EndOperationDelegate(this.OnEndGetReferenceChartData);
+            }
+            if ((this.onGetReferenceChartDataCompletedDelegate == null)) {
+                this.onGetReferenceChartDataCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetReferenceChartDataCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetReferenceChartDataDelegate, new object[] {
+                        request}, this.onEndGetReferenceChartDataDelegate, this.onGetReferenceChartDataCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1877,6 +2114,19 @@ namespace ColorOrganizerDemoLib.Sync4DService {
             public ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse EndGetReferenceChartList(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse _result = ((ColorOrganizerDemoLib.Sync4DService.GetReferenceChartListResponse)(base.EndInvoke("GetReferenceChartList", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginGetReferenceChartData(ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("GetReferenceChartData", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse EndGetReferenceChartData(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse _result = ((ColorOrganizerDemoLib.Sync4DService.GetReferenceChartDataResponse)(base.EndInvoke("GetReferenceChartData", _args, result)));
                 return _result;
             }
             

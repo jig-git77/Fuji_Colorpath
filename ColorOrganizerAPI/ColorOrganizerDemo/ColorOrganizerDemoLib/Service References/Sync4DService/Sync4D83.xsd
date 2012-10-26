@@ -5,6 +5,7 @@
       <xs:enumeration value="None" />
       <xs:enumeration value="ProfileChart" />
       <xs:enumeration value="OptimizationChart" />
+      <xs:enumeration value="VerificationChart" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EReferenceChartType" nillable="true" type="tns:EReferenceChartType" />
@@ -12,8 +13,9 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="None" />
       <xs:enumeration value="SourceProfile" />
-      <xs:enumeration value="DestinationPRofile" />
+      <xs:enumeration value="DestinationProfile" />
       <xs:enumeration value="DeviceLinkProfile" />
+      <xs:enumeration value="OptimizeDlp" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EProfileType" nillable="true" type="tns:EProfileType" />

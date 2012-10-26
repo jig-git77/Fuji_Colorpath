@@ -20,19 +20,19 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/ColorOrganizerService/sync4d.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="cd427e83-f19c-454b-99e3-d7259808a124" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
-    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="2d2a1f82-2e08-477a-b19f-4a3f18b6a5ec" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?wsdl" />
-    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="3a168ed9-c463-41fb-a562-52d166cb8ef0" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
-    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="9a807121-202f-4585-b1f0-4f3e10b666b0" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
-    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="704ddfbc-a979-4b4a-85a7-7db2752d80b9" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
-    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="bf0d6c12-9b82-4fdb-a25e-8b7cf0d82144" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?disco" />
-    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="10b309b5-3be9-4b5e-97d6-8ad4a5e61a3b" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
-    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="f473261e-21eb-4a74-a3d5-2a247aac0478" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd7" />
-    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="11f60e8e-aeef-439f-a86d-3e20b7f220d7" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
-    <MetadataFile FileName="Sync4D7.xsd" MetadataType="Schema" ID="1ac11c23-cc3e-4c8b-866e-c3a69c46e5bd" SourceId="1" SourceUrl="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4D8.xsd" MetadataType="Schema" ID="499f51cc-efb6-451e-9544-67e5a7b829fa" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4DService1.wsdl" MetadataType="Wsdl" ID="5f1f8ccc-6370-4531-b3cb-153167c055ac" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?wsdl" />
+    <MetadataFile FileName="Sync4D81.xsd" MetadataType="Schema" ID="73305801-792f-4ebe-81a0-9e045b78e2d9" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4D82.xsd" MetadataType="Schema" ID="9f086573-c414-4b42-abb7-f2829ec5167d" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4D83.xsd" MetadataType="Schema" ID="c8cd9b76-388b-4e13-8ff0-165fd2a728de" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd7" />
+    <MetadataFile FileName="Sync4D84.xsd" MetadataType="Schema" ID="38d3e6af-408d-450c-904e-811714121e53" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
+    <MetadataFile FileName="Sync4D85.xsd" MetadataType="Schema" ID="f62da5d0-d714-4e5a-adda-efa45f8c8898" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
+    <MetadataFile FileName="Sync4D86.xsd" MetadataType="Schema" ID="14af50b2-1d12-44f1-a8ad-9b37e23d22ca" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4D1.disco" MetadataType="Disco" ID="dcdb7145-8034-4d7a-89b7-1a3bd7d8bd8c" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?disco" />
+    <MetadataFile FileName="Sync4D87.xsd" MetadataType="Schema" ID="a12ab161-3af8-4c4d-83e4-cd8668812154" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

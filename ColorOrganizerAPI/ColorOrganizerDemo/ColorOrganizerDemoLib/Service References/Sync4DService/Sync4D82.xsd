@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" />
-  <xs:import schemaLocation="http://www.colorpathsync.com/ColorPathServices/ColorOrganizerService/Sync4D.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" />
+  <xs:import schemaLocation="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="ArrayOfDevice">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Device" nillable="true" type="tns:Device" />
@@ -28,7 +28,11 @@
       <xs:element minOccurs="0" name="ChartPreview" nillable="true" type="xs:base64Binary" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.DataContracts.Enums" minOccurs="0" name="ChartType" type="q1:EReferenceChartType" />
       <xs:element minOccurs="0" name="MeasurementDevice" type="tns:EMeasurementDevice" />
+      <xs:element minOccurs="0" name="NumOfCols" type="xs:int" />
+      <xs:element minOccurs="0" name="NumOfRows" type="xs:int" />
       <xs:element minOccurs="0" name="OriginalChart" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ProjectType" nillable="true" type="tns:ProjectType" />
+      <xs:element minOccurs="0" name="TotalPatches" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ReferenceChart" nillable="true" type="tns:ReferenceChart" />
@@ -41,6 +45,13 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="EMeasurementDevice" nillable="true" type="tns:EMeasurementDevice" />
+  <xs:complexType name="ProjectType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProjectTypeId" type="xs:short" />
+      <xs:element minOccurs="0" name="ProjectTypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProjectType" nillable="true" type="tns:ProjectType" />
   <xs:complexType name="ProjectInformation">
     <xs:sequence>
       <xs:element minOccurs="0" name="ChartId" type="xs:int" />
