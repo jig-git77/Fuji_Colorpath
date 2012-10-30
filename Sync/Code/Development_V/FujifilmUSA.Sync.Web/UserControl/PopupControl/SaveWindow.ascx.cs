@@ -27,7 +27,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
+            {              
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
                 {
                     txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterSaveWindow.SaveProject();
             if (!IsErrorOccured)
             {
-                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     _presenterSaveWindow.GetProjectDetailWithVerification();
                 }

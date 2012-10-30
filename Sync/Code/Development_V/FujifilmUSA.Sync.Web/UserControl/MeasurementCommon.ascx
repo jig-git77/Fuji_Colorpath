@@ -149,7 +149,11 @@
     </div>
     <div class="color_pallate">
         <div class="color_pallate_head">
-            <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize></div>
+            <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
+              <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
+                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />             
+            </div>
+        </div>
         <div class="color_pallate_middle">
             <div id="measurementContainer">
             </div>
@@ -187,6 +191,7 @@
 <asp:HiddenField ID="hdSerialNumber" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
 <asp:HiddenField ID="hdMeasurementLimit" runat="server" Value="0" />
+<asp:HiddenField ID="hdDisplayImport" runat="server" Value="no" />
 <object id="plugin0" type="application/x-fujicmplugin" width="0" height="0">
 </object>
 <span id="dummy"></span>
@@ -417,12 +422,37 @@
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
                         $("#MeasurementHeaderTemplate").tmpl().appendTo("#lvMeasurement1");
                         $("#MeasurementDetailTemplate").tmpl(json).appendTo("#lvMeasurement1");
-                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//                       
+                        jQuery("input[id*='hdMeasurementLimit']").val(json.length);  //----------Set MeasurementLimit in hiddeninput-------------//      
+                        //----------------Display Import Button--------------//  
+                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
+                        {
+                            if(json.length < <%= ApplicationConfiguration.Instance.MeasurementsLimit %>)
+                            {                               
+                                $("#Div_ImportMeasurements").css('visibility', 'visible');
+                            }    
+                            else
+                            {                               
+                                $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                            }
+                        } 
+                        else
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        }                  
                     }
                     else {
                         jQuery("input[id*='hdHasMeasurement']").val('false');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");
+                        //----------------Display Import Button--------------//
+                        if(jQuery("input[id*='hdDisplayImport']").val() == "yes")
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'visible');
+                        }
+                        else
+                        {
+                             $("#Div_ImportMeasurements").css('visibility', 'hidden');
+                        } 
                     }
                 },
             success:
@@ -534,8 +564,28 @@
         jQuery("[id*='divProgressImageMaster']").hide();
     }
 
+     function ShowImportWindow() {      
+        var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
+        oWnd.show();
+        return false;
+    }
+
+      function Close() {
+        var oWnd = $find("<%= ImportMeasurementWindow.ClientID %>");
+        oWnd.close();
+        return false;
+    }
 
 </script>
 <div id="divBackgroundProgressMaster" class="UpdateProgressBackground" style="display: none;
     position: fixed; top: 0px; left: 0px; height: 100%; width: 100%;">
 </div>
+
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True">
+    <Windows>
+        <telerik:RadWindow ID="ImportMeasurementWindow" runat="server" VisibleStatusbar="false"
+            ShowContentDuringLoad="false" Title="Import Measurements" Width="730" Height="400"
+            Behaviors="Close, Move" Behavior="Close, Move" NavigateUrl="~/PopupImportMeasurements.aspx">
+        </telerik:RadWindow>
+    </Windows>
+</telerik:RadWindowManager>

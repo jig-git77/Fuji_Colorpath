@@ -30,7 +30,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 spanAligmentCurves.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
                 spanDLPOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
                 spanInkOptimization.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-                spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
+                spanColorValidation.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Validation);
                 spanICCProfiling.InnerHtml = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.IccProfiling);                
 
                 if (SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
@@ -59,7 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 lbtnInkOptimization.Enabled = true;
                                 Hidden_InkOptimization.Value = val.ToString();
                                 break;
-                            case ELicenseType.Verification:
+                            case ELicenseType.Validation:
                                 lbtnColorValidation.Enabled = true;
                                 Hidden_ColorValidation.Value = val.ToString();
                                 break;
@@ -102,7 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_InkOptimization.Value);
                         break;
                     case "LBTNCOLORVALIDATION":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.Verification;
+                        SessionManager.Instance.CurrentOperation = ELicenseType.Validation;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ColorValidation.Value);
                         break;
                     case "LBTNICCPROFILING":

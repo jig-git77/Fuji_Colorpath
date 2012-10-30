@@ -91,7 +91,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Verification;
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
                         Response.Redirect(SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                               ? "Analyze.aspx"
                                               : "Measurement.aspx");

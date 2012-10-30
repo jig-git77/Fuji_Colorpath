@@ -192,7 +192,7 @@
   <data name="ELicenseType_Sync1D" xml:space="preserve">
     <value>Alignment Curves_ja</value>
   </data>
-  <data name="ELicenseType_Verification" xml:space="preserve">
+  <data name="ELicenseType_Validation" xml:space="preserve">
     <value>Color Validation_ja</value>
   </data>
   <data name="Email_Subject_SendPasswordForceResetEmail" xml:space="preserve">

@@ -185,7 +185,7 @@
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="RadComboBoxStatus" AppendDataBoundItems="True" runat="server"
-                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="30px" DropDownWidth="70px"
+                                                    OnClientSelectedIndexChanged="StatusIndexChanged" Width="40px" DropDownWidth="70px"
                                                     SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("Status").CurrentFilterValue %>'
                                                     meta:resourcekey="RadComboBoxStatusResource1">
                                                     <Items>

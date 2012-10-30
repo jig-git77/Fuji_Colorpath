@@ -49,10 +49,12 @@
                                                 ID="locEnableValidation"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                         <td>
-                                            <div style="float: left;">                                                
-                                                <asp:RadioButton ID="rbtnEnableValidationYes" runat="server" Text="Yes" GroupName="EnableValidation" Checked="true" />
-                                                &nbsp;
-                                                <asp:RadioButton ID="rbtnEnableValidationNo" runat="server" Text="No" GroupName="EnableValidation" />
+                                            <div style="float: left;">  
+                                                <asp:RadioButtonList ID="rbtnEnableValidation" runat="server" 
+                                                    AutoPostBack="true" onselectedindexchanged="rbtnEnableValidation_SelectedIndexChanged" RepeatDirection="Horizontal">
+                                                    <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
+                                                    <asp:ListItem Text="No" Value="No"></asp:ListItem>
+                                                </asp:RadioButtonList>
                                             </div>                                            
                                             <div class="clear">
                                             </div>
@@ -110,7 +112,7 @@
                                             </div>
                                         </td>
                                         <td valign="middle" align="right" rowspan="2">
-                                            <asp:Image ID="imgValidationChart" runat="server" Width="230px" />
+                                            <asp:Image ID="imgValidationChart" runat="server" Width="150px" />
                                        </td>
                                     </tr>
                                     <tr>

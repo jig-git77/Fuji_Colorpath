@@ -103,22 +103,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Localize locEnableValidation;
         
         /// <summary>
-        /// rbtnEnableValidationYes control.
+        /// rbtnEnableValidation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnEnableValidationYes;
-        
-        /// <summary>
-        /// rbtnEnableValidationNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtnEnableValidationNo;
+        protected global::System.Web.UI.WebControls.RadioButtonList rbtnEnableValidation;
         
         /// <summary>
         /// locValidationChart control.

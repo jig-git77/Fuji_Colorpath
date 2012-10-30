@@ -36,6 +36,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 BindMetricTargetPreset();
                 LoadProjectInfoFromSession();
                 ViewState[vsIsPostBack] = true;
+
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                {
+                    //-----------If we are in Validation mode, we can't disable validation-----------//
+                    rbtnEnableValidation.Items[1].Enabled = false;
+                }
             }
         }
         #endregion
@@ -115,7 +121,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         private void BindValidationChart()
         {
             MeasurementDeviceId = MeasurementDeviceSelectedValue;
-            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.VerificationChart);
+            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ValidationChart);
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -175,10 +181,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         private bool EnableValidationValue
         {
             get
-            {
-                if (rbtnEnableValidationYes.Checked)
+            {    
+                if (rbtnEnableValidation.SelectedIndex == 0)
                     return true;
-                else if (rbtnEnableValidationNo.Checked)
+                else if (rbtnEnableValidation.SelectedIndex == 1)
                     return false;
                 else
                     return false;
@@ -187,13 +193,17 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             {
                 if (value)
                 {
-                    rbtnEnableValidationYes.Checked = true;
-                    rbtnEnableValidationNo.Checked = false;
+                    rbtnEnableValidation.SelectedIndex = 0;                   
+                    //------If validation, then check for required fields-----//
+                    rfvValidationChart.ValidationGroup = "vgValidationSetup";
+                    rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
                 }
                 else
                 {
-                    rbtnEnableValidationYes.Checked = false;
-                    rbtnEnableValidationNo.Checked = true;
+                    rbtnEnableValidation.SelectedIndex = 1;                   
+                    //------If no validation, then don't check for required fields-----//
+                    rfvValidationChart.ValidationGroup = "a";
+                    rfvMetricTargetPreset.ValidationGroup = "a";
                 }
             }
         }
@@ -226,5 +236,24 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
         
         #endregion       
+
+        protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbtnEnableValidation.SelectedIndex == 0)
+            {
+                //------If validation, then check for required fields-----//
+                rfvValidationChart.ValidationGroup = "vgValidationSetup";
+                rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
+            }
+            else
+            {
+                //------If no validation, then don't check for required fields-----//
+                rfvValidationChart.ValidationGroup = "a";
+                rfvMetricTargetPreset.ValidationGroup = "a";
+
+                cmbValidationChart.SelectedIndex = 0;
+                cmbMetricTargetPreset.SelectedIndex = 0;
+            }
+        }
     }
 }

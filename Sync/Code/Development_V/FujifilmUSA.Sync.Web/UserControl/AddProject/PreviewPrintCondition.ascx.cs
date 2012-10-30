@@ -44,7 +44,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {           
             lnkbtnMeasurementSetup.Visible = IsXmfNewProject;
             LoadRecord();
         }

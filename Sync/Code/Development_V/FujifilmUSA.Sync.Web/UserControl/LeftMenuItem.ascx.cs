@@ -77,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.First();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
                     SessionManager.Instance.CurrentNavigation =
-                        SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification
+                        SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation
                             ? ELeftMenuItemLevel.ValidationSetup
                             : ELeftMenuItemLevel.MeasurementSetup;
                     Response.Redirect("AddProject.aspx");

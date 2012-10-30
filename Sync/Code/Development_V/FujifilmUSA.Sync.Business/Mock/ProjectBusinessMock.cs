@@ -108,6 +108,20 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
+
+        public List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            return new List<Project>();
+        }
+        public List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            return new List<int>();
+        }
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        {
+            return 0;
+        }
+
         #endregion
 
         #region ITaskBase Members

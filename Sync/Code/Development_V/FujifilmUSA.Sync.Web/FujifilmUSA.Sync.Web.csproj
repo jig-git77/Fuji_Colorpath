@@ -163,6 +163,7 @@
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
+    <Content Include="Images\Validation Report_preview.jpg" />
     <Content Include="Images\ValidationFailed.png" />
     <Content Include="Images\ValidationFailedOld.png" />
     <Content Include="Images\ValidationSuccess.png" />
@@ -172,6 +173,7 @@
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
+    <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
@@ -229,6 +231,7 @@
     <Content Include="UserControl\GlobalActivation.ascx" />
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
+    <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
@@ -697,6 +700,12 @@
     <Compile Include="PopupDownloadSoftware.aspx.designer.cs">
       <DependentUpon>PopupDownloadSoftware.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PopupImportMeasurements.aspx.cs">
+      <DependentUpon>PopupImportMeasurements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupImportMeasurements.aspx.designer.cs">
+      <DependentUpon>PopupImportMeasurements.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PopupOpenForgotPassword.aspx.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -902,6 +911,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ForgotPassword.ascx.designer.cs">
       <DependentUpon>ForgotPassword.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.cs">
+      <DependentUpon>ImportMeasurements.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.designer.cs">
+      <DependentUpon>ImportMeasurements.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProfileManagement.ascx.cs">
       <DependentUpon>ProfileManagement.ascx</DependentUpon>
@@ -2011,7 +2027,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -27,6 +27,7 @@ namespace FujifilmUSA.Sync.Common
         private DataGrid _Dg;
         string _From_ΔE;
         string _DLPName;
+        string _ReportName;
 
         #endregion
 
@@ -73,6 +74,12 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _DLPName; }
             set { _DLPName = value; }
+        }
+
+        public string ReportName
+        {
+            get { return _ReportName; }
+            set { _ReportName = value; }
         }
 
         #endregion
@@ -212,6 +219,7 @@ namespace FujifilmUSA.Sync.Common
             DataTable DT = new DataTable();
 
             SBStr.Replace("#csspath#", CSSPath);
+            SBStr.Replace("###ReportName###", ReportName);
 
             // === Table 0 = "JobDetail" : Replace Job Detail In HTML Tamplate ==== //    
             #region ==== Table = 0,  Job Detail  ====

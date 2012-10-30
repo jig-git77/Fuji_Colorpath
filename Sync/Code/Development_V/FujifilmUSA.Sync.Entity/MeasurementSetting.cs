@@ -18,5 +18,6 @@ namespace FujifilmUSA.Sync.Entity
         public KeyValuePair<short, string> OptReferenceChartType { get; set; }
         public KeyValuePair<short, string> VReferenceChartType { get; set; }
         public KeyValuePair<int, string> MetricTargetPreset { get; set; }
+        public string dEMethod { get; set; }
     }
 }

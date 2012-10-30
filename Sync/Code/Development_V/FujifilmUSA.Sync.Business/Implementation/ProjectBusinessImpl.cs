@@ -82,7 +82,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         DataReader.ReadString(dsProject.Tables[2].Rows[0], "VChartName")),
                                         MetricTargetPreset = new KeyValuePair<int, string>(
                                                 DataReader.ReadInt(dsProject.Tables[2].Rows[0], "MetricTargetPresetID"),
-                                                DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName"))
+                                                DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName")),
+                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod")
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -101,7 +102,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
                                                 RunName =
                                                     isVerification
-                                                        ? "Verification"
+                                                        ? "Validation"
                                                         : ((EOptimizeRunStatus)DataReader.ReadInt(x, "Status")) == EOptimizeRunStatus.Closed
                                                               ? (GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("DLPText") + " " +
                                                                  Convert.ToDateTime(DataReader.ReadDate(x, "EndDateTime")).ToString("MMdd") + " " +
@@ -869,6 +870,110 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricTargetPresetList"));
             return metricPresetList;
         }
+
+        public List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID)
+        {
+            var objProjectList = new List<Project>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetProjectList",
+                                new object[]
+                                        {
+                                            deviceId, LicenseTypeID
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        objProjectList = dsProjectList.Tables[0].AsEnumerable().
+                            Select(x => new Project()
+                            {
+                                ProjectId = DataReader.ReadInt(x, "ProjectID"),
+                                ProjectName = DataReader.ReadString(x, "ProjectName"),
+                                DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
+                                TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
+                                HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
+                                SourceProfile = new SourceProfile()
+                                {
+                                    SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
+                                    ProfileName = DataReader.ReadString(x, "ProfileName")
+                                },
+                                CreateDate = DataReader.ReadDate(x, "EndDateTime"),
+                                PrintCondition =
+                                    new PrintCondition()
+                                    {
+                                        Media = DataReader.ReadString(x, "Media"),
+                                        Colorant = DataReader.ReadString(x, "Colorant"),
+                                        RipSettings = DataReader.ReadString(x, "RipSettings")
+                                    },
+                                Status = (EOptimizeRunStatus)DataReader.ReadInt(x, "ProjStatus"),
+                                CurrentDlpName = (DataReader.ReadInt(x, "CurrentDlpNo").ToString("000").Contains("-001")) ? String.Format("{0} DLP {1}.icc",
+                                                               DataReader.ReadString(x, "ProjectName"),
+                                                               DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
+                                                               : String.Format("{0} DLP{1}.icc",
+                                                               DataReader.ReadString(x, "ProjectName"),
+                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00"))
+
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectsByDeviceId"));
+            return objProjectList;
+        }
+
+        public List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int ProjectID)
+        {
+            var objMeasurementIDList = new List<int>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectList =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync4D.GetMeasurementIDsByProjectID",
+                                new object[]
+                                        {
+                                            ProjectID, deviceId, LicenseTypeID
+                                        });
+                    if (dsProjectList != null && dsProjectList.Tables.Count > 0 && dsProjectList.Tables[0].Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dsProjectList.Tables[0].Rows.Count; i++)
+                        {
+                            objMeasurementIDList.Add(Convert.ToInt32(dsProjectList.Tables[0].Rows[i]["MeasurementID"].ToString()));
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementIDsbyProjectID"));
+            return objMeasurementIDList;
+        }
+
+        public int ImportMeasurements(int MeasurementID, int OptimizeRunID)
+        {
+            var returnValue = 0;
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSync4D].[ImportMeasurements]",
+                            new object[]
+                                    {
+                                        MeasurementID, OptimizeRunID
+                                    });
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_ImportMeasurements"));
+            return returnValue;
+        }
+
         #endregion
 
         #region ITaskBase Members

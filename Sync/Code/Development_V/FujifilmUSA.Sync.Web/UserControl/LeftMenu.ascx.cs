@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New)
                                 ph.Controls.Remove(ph.Controls[i]);
                             break;
-                        case ELeftMenuItemLevel.Verification:
+                        case ELeftMenuItemLevel.Validation:
                         case ELeftMenuItemLevel.OptimizeRun:
                             if (SessionManager.Instance.CurrentProject == null ||
                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.New)
@@ -134,12 +134,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns == null) return;
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
-                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification ||
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation ||
                             item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                         {
                             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
-                                                         ? ELeftMenuItemLevel.Verification
+                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                                                         ? ELeftMenuItemLevel.Validation
                                                          : ELeftMenuItemLevel.OptimizeRun;
                             ctrlProjItem.ItemName = item.RunName;
                             ctrlProjItem.CurrentRun = item;
@@ -157,11 +157,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     foreach (var item in SessionManager.Instance.CurrentProject.OptimizeRuns)
                     {
                         if (item.OptimizeRunId != SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId ||
-                            (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification))
+                            (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation))
                         {
                             var ctrlProjItem = ((LeftMenuProjectItem)this.LoadControl("~/UserControl/LeftMenuProjectItem.ascx"));
-                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
-                                                         ? ELeftMenuItemLevel.Verification
+                            ctrlProjItem.ItemLevel = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                                                         ? ELeftMenuItemLevel.Validation
                                                          : ELeftMenuItemLevel.OptimizeRun;
                             ctrlProjItem.ItemName = item.RunName;
                             ctrlProjItem.CurrentRun = item;

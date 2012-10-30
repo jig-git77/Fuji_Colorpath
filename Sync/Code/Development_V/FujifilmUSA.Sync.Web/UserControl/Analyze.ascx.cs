@@ -151,9 +151,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                               : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
             if (!Page.IsPostBack)
             {
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
-                    Rbl_DT_E.SelectedIndex = 1; //-----By default set to ΔE for Validation(Verification)
+                    //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
+                    Rbl_DT_E.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);                  
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
@@ -171,7 +172,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //We need to hide the button if we are verification mode
             //Else upper code will execute business logic
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
                 //Verification mode
                 lbtnDownloadAndSaveDLP.Visible = false;
@@ -203,7 +204,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             From_ΔE = Rbl_DT_E.SelectedValue;
             chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
                 //This will be called when Verification process is going on
                 ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
@@ -245,7 +246,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 From_ΔE = Rbl_DT_E.SelectedValue;
 
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //This will be called when Verification process is going on
                     _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
@@ -1143,7 +1144,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             }
         }
 

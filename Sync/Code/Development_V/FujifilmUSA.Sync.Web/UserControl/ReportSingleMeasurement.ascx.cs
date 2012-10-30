@@ -40,7 +40,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Page.IsPostBack == false)
+            {
+                //-----Set Validation Report Preview image------//
+                if (IsVerification)
+                {
+                    btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";
+                }
+            }
         }
         #endregion
 
@@ -73,6 +80,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             objReportPDF.DS_Common = Ds;
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
+            if (IsVerification)
+            {
+                objReportPDF.ReportName = "Validation Report";                
+            }
+            else
+            {
+                objReportPDF.ReportName = "DLP Optimization Report";
+            }
             objReportPDF.MakePDF();
 
             // === After generate and save PDF file, Download it at a time === //
@@ -575,7 +590,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             }
         }
         #endregion

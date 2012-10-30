@@ -102,7 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ulSubMenu.Visible = false;
                     }
                     break;
-                case ELeftMenuItemLevel.Verification:
+                case ELeftMenuItemLevel.Validation:
                     lnkDownload.Visible = false;
                     if (SessionManager.Instance.CurrentProject.CurrentDisplayStatus == ECurrentProjectStatus.Run)
                     {

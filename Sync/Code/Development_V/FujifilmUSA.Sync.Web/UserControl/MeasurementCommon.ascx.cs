@@ -1,6 +1,7 @@
 ﻿using FujifilmUSA.Sync.Common;
 using System;
 using FujifilmUSA.Sync.Entity;
+using System.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -37,13 +38,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
-                hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification).ToString().ToLower();
+                hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     hdReferenceChartTypeId.Value = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key.ToString();
-                    hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.VerificationChart).ToString();
+                    hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ValidationChart).ToString();
                 }
                 else if (SessionManager.Instance.CurrentProject.CurrDlpId > 0)
                 {
@@ -56,8 +57,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
+                //----------------"Import Measurements" button only available for "Ink Optimization" Project Type and only for initial 1st run--------------//
+                if (SessionManager.Instance.CurrentOperation == ELicenseType.InkOptimization)
+                {
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                    {
+                        hdDisplayImport.Value = "yes";
+                    }
+                }  
             }
-            IsOperationVerification = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification);
+            IsOperationVerification = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
         }
     }
 }

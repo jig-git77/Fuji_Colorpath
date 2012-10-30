@@ -124,7 +124,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!IsErrorOccured)
             {
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Verification)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     _presenterMeasurementSetting.GetProjectDetailWithVerification();
                 }

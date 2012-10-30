@@ -65,7 +65,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
             chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-            chkVarification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Verification);
+            chkVarification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Validation);
         }
         private void Bindcompany()
         {
@@ -137,7 +137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chkInk.Checked)
                 License.LicenseType.Add(ELicenseType.InkOptimization);
             if (chkVarification.Checked)
-                License.LicenseType.Add(ELicenseType.Verification);
+                License.LicenseType.Add(ELicenseType.Validation);
 
             if (LId == 0) // Add New company
             {
@@ -175,7 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                         case ELicenseType.InkOptimization:
                                                             chkInk.Checked = true;
                                                             break;
-                                                        case ELicenseType.Verification:
+                                                        case ELicenseType.Validation:
                                                             chkVarification.Checked = true;
                                                             break;
                                                     }

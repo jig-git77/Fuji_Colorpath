@@ -139,7 +139,7 @@
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left;">
-                                        <label><asp:Localize runat="server" Text="Charts" 
+                                        <label><asp:Localize runat="server" Text="Alignment Charts" 
                                             ID="locAlignmentChart" meta:resourcekey="locAlignmentChartResource1"></asp:Localize></label>
                                     </div>
                                     <div class="clear">
@@ -156,7 +156,15 @@
                                                 ID="txtAlignmentChart" meta:resourcekey="txtAlignmentChartResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                         <td valign="top">
-                                            <div style="float: left;">
+                                          
+                                        </td>
+                                        <td valign="top" style="width:45%" >
+                                              <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding: 5px 0px 5px 0px;" valign="top">
+                                         <div style="float: left;">
                                                 <asp:DropDownList ID="cmbAlignmentChart" runat="server" Width="200px" CssClass="select"
                                                     AutoPostBack="True" 
                                                     OnSelectedIndexChanged="cmbAlignmentChart_SelectedIndexChanged" 
@@ -172,22 +180,10 @@
                                             </div>                                            
                                             <div class="clear">
                                             </div>
+                                               <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" Width="150px" Visible="true" />                           
                                         </td>
-                                        <td valign="top" align="right">
-                                                <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" Width="230px" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="padding: 5px 0px 5px 0px;">  
-                                           <hr />                                           
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top">
-                                            <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
-                                        </td>
-                                        <td valign="top">
-                                            <div style="float: left;">
+                                         <td valign="top" style="padding: 5px 0px 5px 0px;"  style="width:45%" >
+                                              <div style="float: left;">
                                                 <asp:DropDownList ID="cmbOptimizationChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true"
                                                     OnSelectedIndexChanged="cmbOptimizationChart_SelectedIndexChanged"></asp:DropDownList>
                                             </div>
@@ -195,16 +191,14 @@
                                                 <asp:RequiredFieldValidator ID="rfvOptimizationChart" runat="server" Display="Dynamic"
                                                     ControlToValidate="cmbOptimizationChart" ForeColor="Red" InitialValue="0" 
                                                     ValidationGroup="vgMeasurementSetup"><ucValidationContainer:ValidationContainer ID="rfvcOptimizationChartContainer" runat="server"
-                                                        ValidationMsg="Please select Optimization chart." Size="200" />
+                                                        ValidationMsg="Please select Optimization chart." Size="-500" />
                                                 </asp:RequiredFieldValidator>
                                             </div>
                                             <div class="clear">
                                             </div>
+                                             <asp:Image ID="imgOptimizationChart" runat="server" Width="150px" />
                                         </td>
-                                       <td valign="top" align="right">
-                                            <asp:Image ID="imgOptimizationChart" runat="server" Width="230px" />
-                                       </td>
-                                    </tr>
+                                    </tr>  
                                 </table>
                             </asp:Panel>
                         </div>

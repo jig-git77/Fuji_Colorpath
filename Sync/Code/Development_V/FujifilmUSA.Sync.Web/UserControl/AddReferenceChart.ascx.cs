@@ -283,7 +283,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             cmbChartDisplayType.Items.Clear();         
             cmbChartDisplayType.Items.Insert(0, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.ProfileChart), Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString()));
             cmbChartDisplayType.Items.Insert(1, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.OptimizationChart), Convert.ToInt32(EReferenceChartDisType.OptimizationChart).ToString()));
-            cmbChartDisplayType.Items.Insert(2, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.VerificationChart), Convert.ToInt32(EReferenceChartDisType.VerificationChart).ToString()));
+            cmbChartDisplayType.Items.Insert(2, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.ValidationChart), Convert.ToInt32(EReferenceChartDisType.ValidationChart).ToString()));
         }
 
         private void BindProjectTypeList()
