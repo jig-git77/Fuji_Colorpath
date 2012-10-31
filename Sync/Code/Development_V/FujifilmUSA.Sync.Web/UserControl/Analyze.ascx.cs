@@ -129,33 +129,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lbtnMeasurement.Visible = IsXMFUser;
-            if (!IsPostBack)
-            {
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-            }
-
-            if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
-            {
-                header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
-                DLPName = "No DLP";
-            }
-            else
-            {
-                header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
-                DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.ProjectName + " ", ""); //---DLPName to pass into report
-                DLPName = DLPName.Remove(DLPName.Length - 4);
-            }
-
-            lbtnDownloadAndSaveDLP.Text = IsNewDlp
-                                              ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "</span>"
-                                              : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
             if (!Page.IsPostBack)
             {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
+                    header.InnerText = "Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
-                    Rbl_DT_E.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);                  
+                    Rbl_DT_E.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                 }
+                else
+                {
+                    if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
+                    {
+                        header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
+                        DLPName = "No DLP";
+                    }
+                    else
+                    {
+                        header.InnerText = string.Format(GetResourceString(_recAnalyze), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Analyze - {0}
+                        DLPName = SessionManager.Instance.CurrentOptimizeRun.LastDlpName.Replace(SessionManager.Instance.CurrentProject.ProjectName + " ", ""); //---DLPName to pass into report
+                        DLPName = DLPName.Remove(DLPName.Length - 4);
+                    }
+                }
+                lbtnDownloadAndSaveDLP.Text = IsNewDlp
+                                                  ? "<span><img id='imgAdd' src='Images/export.png'/>" + GetResourceString(_recCreateDLP) + "</span>"
+                                                  : "<span><img id='imgAdd' src='Images/save_icon.png'/>" + GetResourceString(_recNext) + "</span>";//Create DLP - Next
+                               
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 if (SessionManager.Instance.CurrentOptimizeRun.Status == EOptimizeRunStatus.Certify)
                 {
@@ -164,35 +165,35 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 BindMesurementChart();
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
+
+                //We need to hide the button if we are verification mode
+                //Else upper code will execute business logic
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                {
+                    //Verification mode
+                    lbtnDownloadAndSaveDLP.Visible = false;
+                    lbtnMeasurementVerification.Visible = true;
+                    lbtnOptimize.Visible = true;
+                    //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
+                    //So its a kind of bug fix.
+                    lbtnOptimize.Text = "<span>Optimize</span>";
+                    lbtnOptimize.Attributes.Add("onclick",
+                                                     "javascript: return ShowClosePrintConditionWindow('" +
+                                                     SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
+                    Tr_dtERadioList.Visible = false;
+                }
+                else
+                {
+                    //None
+                    //Hide Verification button
+                    lbtnMeasurementVerification.Visible = false;
+                    lbtnOptimize.Visible = false;
+                    Tr_dtERadioList.Visible = true;
+                }
             }
             else
             {
                 BindMesurementChart();
-            }
-
-            //We need to hide the button if we are verification mode
-            //Else upper code will execute business logic
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
-            {
-                //Verification mode
-                lbtnDownloadAndSaveDLP.Visible = false;
-                lbtnMeasurementVerification.Visible = true;
-                lbtnOptimize.Visible = true;
-                //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
-                //So its a kind of bug fix.
-                lbtnOptimize.Text = "<span>Optimize</span>";
-                lbtnOptimize.Attributes.Add("onclick",
-                                                 "javascript: return ShowClosePrintConditionWindow('" +
-                                                 SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
-                Tr_dtERadioList.Visible = false;
-            }
-            else
-            {
-                //None
-                //Hide Verification button
-                lbtnMeasurementVerification.Visible = false;
-                lbtnOptimize.Visible = false;
-                Tr_dtERadioList.Visible = true;
             }
         }
         #endregion

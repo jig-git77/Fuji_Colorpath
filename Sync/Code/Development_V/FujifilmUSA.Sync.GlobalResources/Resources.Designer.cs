@@ -538,11 +538,11 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verification Chart.
+        ///   Looks up a localized string similar to Validation Chart.
         /// </summary>
-        internal static string EReferenceChartDisType_VerificationChart {
+        internal static string EReferenceChartDisType_ValidationChart {
             get {
-                return ResourceManager.GetString("EReferenceChartDisType_VerificationChart", resourceCulture);
+                return ResourceManager.GetString("EReferenceChartDisType_ValidationChart", resourceCulture);
             }
         }
         

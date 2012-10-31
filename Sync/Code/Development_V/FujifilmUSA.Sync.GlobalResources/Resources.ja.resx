@@ -684,7 +684,7 @@
   <data name="LogActivityType_OptimizeDlpError" xml:space="preserve">
     <value>OptimizeDlpError_ja</value>
   </data>
-  <data name="EReferenceChartDisType_VerificationChart" xml:space="preserve">
-    <value>Verification Chart_ja</value>
+  <data name="EReferenceChartDisType_ValidationChart" xml:space="preserve">
+    <value>Validation Chart_ja</value>
   </data>
 </root>
