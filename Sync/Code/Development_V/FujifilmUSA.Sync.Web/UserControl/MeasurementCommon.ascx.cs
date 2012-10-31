@@ -18,14 +18,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
 
-        public bool IsOperationVerification
+        public void SetVerificationControlVisibility()
         {
-            set
-            {
-                tdNotes.Visible = value;
-                tdNotesCaption.Visible = value;
-                trCustomer.Visible = value;
-            }
+            tdNotes.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            tdNotesCaption.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            trCustomer.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
         }
         #endregion
 
@@ -64,9 +61,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         hdDisplayImport.Value = "yes";
                     }
-                }  
+                }
             }
-            IsOperationVerification = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            SetVerificationControlVisibility();
         }
     }
 }

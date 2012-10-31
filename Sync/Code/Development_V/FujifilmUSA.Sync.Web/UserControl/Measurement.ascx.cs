@@ -2,7 +2,7 @@
 using System.Linq;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-//using System.Web.UI;
+using System.Web.UI;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -19,6 +19,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             get
             {
                 return ResourceManager.GetResourceMessage("AddMeasurement_DeleteMeasurement_Confirmation");
+            }
+        }
+
+        public bool IsXMFUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
             }
         }
         #endregion
@@ -43,6 +51,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 else
                 {
                     header.InnerText = string.Format(GetResourceString(_recmeasureText), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Measure - {0}
+                }
+                if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+                {
+                    ScriptManager.RegisterStartupScript(
+                        this.Page,
+                        this.Page.GetType(),
+                        "messaging",
+                        string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
+                                      Convert.ToInt32(Request.QueryString["projectid"]),
+                                      SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
+                        true);
                 }
             }
         }

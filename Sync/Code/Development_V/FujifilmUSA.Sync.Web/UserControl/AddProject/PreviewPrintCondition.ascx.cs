@@ -63,6 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
                 Project = SessionManager.Instance.CurrentProject;
                 _presenterSaveWindow.SaveProject();
+                _presenterSaveWindow.GetProjectDetail();
 
                 if (!IsErrorOccured)
                 {
