@@ -302,8 +302,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            {
                                MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
                                Metric = DataReader.ReadString(x, "MetricSumName"),
-                               Tolerance = DataReader.ReadInt(x, "TargetValue"),
-                               Actual = DataReader.ReadInt(x, "MeasuredValue"),
+                               Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
+                               Actual = DataReader.ReadDecimal(x, "MeasuredValue"),
                                IsNotOK = DataReader.ReadBoolean(x, "IsNotOK")
                            }).ToList();
                     }

@@ -403,7 +403,7 @@
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
                                         <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right">
                                             <ItemTemplate>
-                                                <div class='<%# Eval("MeasurementStatus") == "OK" ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
+                                                <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
                                                     <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
                                             </ItemTemplate>
