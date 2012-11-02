@@ -806,7 +806,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId)
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId)
         {
             var data = new Dictionary<string, string>();
             Common.ImplementBusinessLogic(
@@ -819,30 +819,44 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                            illuminantId,
                                                                                            observerTypeId,
                                                                                            referenceChartTypeId,
-                                                                                           deviceFamilyProfilerOptionId
+                                                                                           deviceFamilyProfilerOptionId,
+                                                                                           V_measurementDeviceId,
+                                                                                           Opt_ReferenceChartTypeId,
+                                                                                           V_ReferenceChartTypeId
                                                                                        });
 
                     if (dsPreviewData.Tables[0].Rows.Count > 0)
                     {
                         data.Add("MeasurementDeviceId", dsPreviewData.Tables[0].Rows[0]["MeasurementDevice"].ToString());
-
                     }
                     if (dsPreviewData.Tables[1].Rows.Count > 0)
                     {
-                        data.Add("illuminantId", dsPreviewData.Tables[1].Rows[0]["IlluminantType"].ToString());
+                        data.Add("V_MeasurementDeviceId", dsPreviewData.Tables[1].Rows[0]["V_MeasurementDevice"].ToString());
                     }
                     if (dsPreviewData.Tables[2].Rows.Count > 0)
                     {
-                        data.Add("observerTypeId", dsPreviewData.Tables[2].Rows[0]["ObserverType"].ToString());
+                        data.Add("illuminantId", dsPreviewData.Tables[2].Rows[0]["IlluminantType"].ToString());
                     }
                     if (dsPreviewData.Tables[3].Rows.Count > 0)
                     {
-                        data.Add("referenceChartTypeId", dsPreviewData.Tables[3].Rows[0]["ChartName"].ToString());
+                        data.Add("observerTypeId", dsPreviewData.Tables[3].Rows[0]["ObserverType"].ToString());
                     }
                     if (dsPreviewData.Tables[4].Rows.Count > 0)
                     {
-                        data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsName"].ToString());
-                        data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[4].Rows[0]["ProfilerOptionsDesc"].ToString());
+                        data.Add("referenceChartTypeId", dsPreviewData.Tables[4].Rows[0]["ChartName"].ToString());
+                    }
+                    if (dsPreviewData.Tables[5].Rows.Count > 0)
+                    {
+                        data.Add("deviceFamilyProfilerOptionId", dsPreviewData.Tables[5].Rows[0]["ProfilerOptionsName"].ToString());
+                        data.Add("deviceFamilyProfilerOptionDesc", dsPreviewData.Tables[5].Rows[0]["ProfilerOptionsDesc"].ToString());
+                    }
+                    if (dsPreviewData.Tables[6].Rows.Count > 0)
+                    {
+                        data.Add("opt_referenceChartTypeId", dsPreviewData.Tables[6].Rows[0]["OptimizationChart"].ToString());
+                    }
+                    if (dsPreviewData.Tables[7].Rows.Count > 0)
+                    {
+                        data.Add("v_referenceChartTypeId", dsPreviewData.Tables[7].Rows[0]["ValidationChart"].ToString());
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintConditionPreviewData"));

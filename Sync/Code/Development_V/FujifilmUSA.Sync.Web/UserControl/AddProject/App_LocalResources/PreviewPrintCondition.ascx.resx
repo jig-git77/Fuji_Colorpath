@@ -232,7 +232,7 @@
     <value>Alignment Chart</value>
   </data>
   <data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
-    <value>Alignment Chart</value>
+    <value>Base DLP Chart</value>
   </data>
   <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Colorant</value>
@@ -283,12 +283,36 @@
     <value>Technician Name</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
-    <value>UV Settings:</value>
+    <value>UV Settings</value>
   </data>
   <data name="panelAlignmentChartResource1.GroupingText" xml:space="preserve">
     <value />
   </data>
   <data name="panelAlignmentChartResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="locEnable_ValiResource1.Text" xml:space="preserve">
+    <value>Enable Validation</value>
+  </data>
+  <data name="locVali_MeaDeviceResource1.Text" xml:space="preserve">
+    <value>Validation Device</value>
+  </data>
+  <data name="locOptimizationChart2Resource1.Text" xml:space="preserve">
+    <value>Optimization Chart</value>
+  </data>
+  <data name="lblOptimizationChartResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgOptimizationChartResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="locValiChart2Resource1.Text" xml:space="preserve">
+    <value>Validation Chart</value>
+  </data>
+  <data name="lblValiChartResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="imgValiChartResource1.AlternateText" xml:space="preserve">
     <value />
   </data>
 </root>

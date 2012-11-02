@@ -103,6 +103,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
             ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
             MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
+            V_MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID;
+            Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+            V_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
+
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
             if (!IsErrorOccured)
             {
@@ -113,12 +117,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                 lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
                 imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+                lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
+                if (Opt_ReferenceChartTypeId != 0)
+                {
+                    lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
+                    Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
+                }
+                if (V_ReferenceChartTypeId != 0)
+                {
+                    lblValiChart.Text = Data["v_referenceChartTypeId"];
+                    Image_ValiChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key) + "&Preview=1";
+                }
             }
             trUVSettings.Visible = lblMeasurementDevice.Text.Contains(
              Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis));
             lblUVSettings.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
                                     ? Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UV)
                                     : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
+
+            lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
+           
+            if (SessionManager.Instance.CurrentProject.EnabledValidation)
+            {
+                Table_Validation.Visible = true;
+                Div_ValidationChart.Visible = true;
+                lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
+            }
         }
 
         public void SetImageSize()
@@ -153,6 +177,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short ReferenceChartTypeId { get; set; }
         public short? MeasurementDeviceId { get; set; }
         public Dictionary<string, string> Data { get; set; }
+        public short? V_MeasurementDeviceId { get; set; }
+        public short Opt_ReferenceChartTypeId { get; set; }
+        public short V_ReferenceChartTypeId { get; set; }
         #endregion
 
         #region IViewSaveWindow Members

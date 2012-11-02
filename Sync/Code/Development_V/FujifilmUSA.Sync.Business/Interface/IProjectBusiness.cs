@@ -18,7 +18,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<ObserverType> GetObserverTypeList();
         List<MeasurementDevice> GetMeasurementDeviceList(int deviceId);
         List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType);
-        Dictionary<string, string> GetPrintConditionPreviewData(short measurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId);
+        Dictionary<string, string> GetPrintConditionPreviewData(short measurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId);
         byte[] GetChartPreviewOnReferenceChartTypeId(short referenceChartTypeId, string source);
         byte[] GetSourceProfile(int projectId);
         byte[] GetDestinationProfile(int projectId);

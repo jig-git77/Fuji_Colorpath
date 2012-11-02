@@ -10,5 +10,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         short ReferenceChartTypeId { get; set; }
         short? MeasurementDeviceId { get; set; }
         Dictionary<string, string> Data { get; set; }
+        short? V_MeasurementDeviceId { get; set; }
+        short Opt_ReferenceChartTypeId { get; set; }
+        short V_ReferenceChartTypeId { get; set; }
     }
 }

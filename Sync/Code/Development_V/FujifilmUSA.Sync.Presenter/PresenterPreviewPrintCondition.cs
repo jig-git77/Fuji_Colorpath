@@ -22,7 +22,10 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewPreviewPrintCondition.IlluminantId,
                 _viewPreviewPrintCondition.ObserverTypeId,
                 _viewPreviewPrintCondition.ReferenceChartTypeId,
-                _viewPreviewPrintCondition.DeviceFamilyProfilerOptionId);
+                _viewPreviewPrintCondition.DeviceFamilyProfilerOptionId,
+                _viewPreviewPrintCondition.V_MeasurementDeviceId.Value,
+                _viewPreviewPrintCondition.Opt_ReferenceChartTypeId,
+                _viewPreviewPrintCondition.V_ReferenceChartTypeId);
         }
     }
 }

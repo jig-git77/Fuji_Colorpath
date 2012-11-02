@@ -201,7 +201,7 @@
                             <div id="Div1" style="padding-left: 10px">
                                 <table>
                                     <tr>
-                                        <td>
+                                        <td  style="width:120px;">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
                                                 Text="Measurement Device" ID="locMeasurementDevice" 
                                                 meta:resourcekey="locMeasurementDeviceResource1"></asp:Localize></span>
@@ -243,7 +243,7 @@
                                     <tr id="trUVSettings" runat="server">
                                         <td>
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                Text="UV Settings:" ID="locUVSettings" 
+                                                Text="UV Settings" ID="locUVSettings" 
                                                 meta:resourcekey="locUVSettingsResource1"></asp:Localize></span>
                                         </td>
                                         <td style="width: 10px;">
@@ -252,6 +252,52 @@
                                         <td>
                                             <asp:Label ID="lblUVSettings" runat="server" 
                                                 meta:resourcekey="lblUVSettingsResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Enable Validation" ID="locEnable_Vali" 
+                                                meta:resourcekey="locEnable_ValiResource1"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblEnableValidation" runat="server" 
+                                                meta:resourcekey="lblEnableValidationResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <table id="Table_Validation" runat="server" visible="false" cellpadding="0" cellspacing="0">
+                                                 <tr>
+                                                    <td  style="width:120px;">
+                                                        <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                            Text="Validation Device" ID="locVali_MeaDevice" 
+                                                            meta:resourcekey="locVali_MeaDeviceResource1"></asp:Localize></span>
+                                                    </td>
+                                                    <td style="width: 10px;">
+                                                         <span style="font-weight: bold;">:</span>
+                                                    </td>
+                                                    <td>
+                                                        <asp:Label ID="lblVali_MeaDevice" runat="server" 
+                                                            meta:resourcekey="lblVali_MeaDeviceResource1"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span style="font-weight: bold;">Validation Metric</span>
+                                                    </td>
+                                                    <td style="width: 10px;">
+                                                         <span style="font-weight: bold;">:</span>
+                                                    </td>
+                                                    <td class="breakWord100">
+                                                        <asp:Label ID="lblVali_Metric" runat="server" 
+                                                            meta:resourcekey="lblVali_MetricResource1"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
                                     </tr>
                                 </table>
@@ -347,7 +393,7 @@
                                     <tr>
                                         <td style="width: 40%">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
-                                                Text="Alignment Chart" ID="locAlignmentChart2" 
+                                                Text="Base DLP Chart" ID="locAlignmentChart2" 
                                                 meta:resourcekey="locAlignmentChart2Resource1"></asp:Localize></span> &nbsp;
                                         </td>
                                         <td style="width: 10px;">
@@ -363,6 +409,110 @@
                                         
                                             <asp:Image ID="imgChart" runat="server"
                                                 meta:resourcekey="imgChartResource1" />
+                                         
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="section_small_bottom">
+                        &nbsp;</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <div style="display: block;">
+                    <div class="section_small_top">
+                        &nbsp;</div>
+                    <div class="section_small_middle">
+                        <div class="combopart">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left">
+                                        <label><asp:Localize runat="server" Text="Alignment Chart" 
+                                            ID="Localize1" meta:resourcekey="locAlignmentChart1Resource1"></asp:Localize>
+                                            </label>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="panel2" runat="server" Style="padding-left: 5px" 
+                                BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
+                                <table width="100%">
+                                    <tr>
+                                        <td style="width: 40%">
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Optimization Chart" ID="Localize2" 
+                                                meta:resourcekey="locOptimizationChart2Resource1"></asp:Localize></span> &nbsp;
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblOptimizationChart" runat="server" 
+                                                meta:resourcekey="lblOptimizationChartResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                        
+                                            <asp:Image ID="Image_OptimizationChart" runat="server"
+                                                meta:resourcekey="imgOptimizationChartResource1" />
+                                         
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="section_small_bottom">
+                        &nbsp;</div>
+                </div>
+            </td>
+            <td style="width: 0px">
+            </td>
+            <td valign="top">
+                <div id="Div_ValidationChart" runat="server" visible="false" style="display: block;">
+                    <div class="section_small_top">
+                        &nbsp;</div>
+                    <div class="section_small_middle">
+                        <div class="combopart">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left">
+                                        <label><asp:Localize runat="server" Text="Alignment Chart" 
+                                            ID="Localize4" meta:resourcekey="locAlignmentChart1Resource1"></asp:Localize>
+                                            </label>
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="panel_ValidationChart" runat="server" Style="padding-left: 5px" 
+                                BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
+                                <table width="100%">
+                                    <tr>
+                                        <td style="width: 40%">
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Validation Chart" ID="locValiChart" 
+                                                meta:resourcekey="locValiChart2Resource1"></asp:Localize></span> &nbsp;
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblValiChart" runat="server" 
+                                                meta:resourcekey="lblValiChartResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                        
+                                            <asp:Image ID="Image_ValiChart" runat="server"
+                                                meta:resourcekey="imgValiChartResource1" />
                                          
                                         </td>
                                     </tr>
