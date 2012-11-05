@@ -67,6 +67,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.LinkButton lnkAnalyse;
         
         /// <summary>
+        /// TR1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow TR1;
+        
+        /// <summary>
         /// lnkDownload control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkDownload;
+        
+        /// <summary>
+        /// btnDLPDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnDLPDelete;
         
         /// <summary>
         /// lnkAddRun control.

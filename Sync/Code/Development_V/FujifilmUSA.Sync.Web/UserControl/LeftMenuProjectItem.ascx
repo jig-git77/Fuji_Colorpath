@@ -4,7 +4,11 @@
 <script type="text/javascript">
     function ConfirmDelete() {
         return confirm('<%= GetResourceString("deleteRunMsg") %>');
-        }
+    }
+
+    function ConfirmDLPDelete() {
+        return confirm('Are you sure you want to delete this DLP?');
+    }
 </script>
 
 <style type="text/css">
@@ -38,8 +42,20 @@
                             OnClick="lnkItem_Click" meta:resourcekey="lnkAnalyseResource1"></asp:LinkButton>
                     </li>
                     <li>
-                        <asp:LinkButton runat="server" ID="lnkDownload" Text="Download" 
-                            OnClick="lnkItem_Click" meta:resourcekey="lnkDownloadResource1"></asp:LinkButton>
+                         <table cellpadding="0" cellspacing="0" width="100%" >
+                            <tr id="TR1" runat="server">
+                                <td style="width:100%;">
+                                    <asp:LinkButton runat="server" ID="lnkDownload" Text="Download" 
+                                        OnClick="lnkItem_Click" meta:resourcekey="lnkDownloadResource1"></asp:LinkButton>
+                                </td>
+                                <td align="left">       
+                                    <asp:ImageButton ID="btnDLPDelete" runat="server" 
+                                    ImageUrl="~/Images/delete_icon_LeftMenu.png" ToolTip="Delete Run" OnClientClick="return ConfirmDLPDelete()" 
+                                    Visible="False" meta:resourcekey="btnRunDeleteResource1" 
+                                    onclick="btnDLPDelete_Click"/>    
+                                </td>
+                            </tr>
+                         </table>
                     </li>
                     <li>
                         <asp:LinkButton runat="server" ID="lnkAddRun" onclick="lnkAddRun_Click" 

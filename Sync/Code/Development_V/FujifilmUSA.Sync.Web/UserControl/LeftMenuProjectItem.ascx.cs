@@ -73,6 +73,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             if (CurrentRun.HasProfile)
                             {
                                 lnkMeasurement.Visible = false;
+                                //------------Only visible DeleteDLP button, if DLP is created for this last run---------//
+                                btnDLPDelete.Visible = true;
                             }
                             else
                             {
@@ -232,5 +234,33 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public EOptimizeRunStatus RunStatus { get; set; }
 
         #endregion
+
+        protected void btnDLPDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
+
+            _presenterLeftMenuProjectItem.DeleteOptimizeRunDLP();
+
+            if (!IsErrorOccured)
+            {
+                _presenterLeftMenuProjectItem.GetProjectDetail();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                    if (Project.OptimizeRuns.Count > 1)
+                    {
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                    }
+                    else
+                    {
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+                    }
+                    Response.Redirect("~/Analyze.aspx");
+                }
+            }
+        }
     }
 }

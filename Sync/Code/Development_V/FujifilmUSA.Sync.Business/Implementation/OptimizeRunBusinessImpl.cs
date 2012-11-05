@@ -49,6 +49,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
         }
 
+        public void DeleteOptimizeRunDLP(int OptimizeRunID, int ProjectID)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "CPSync4D.DeleteOptimizeRunDLP",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                ProjectID
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRunDLP"));
+        }
+
         public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
