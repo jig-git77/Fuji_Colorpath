@@ -12,7 +12,7 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts.Enums
         SourceProfile = 1,
 
         [EnumMember]
-        DestinationProfile = 2,
+        DestinationPRofile = 2,
 
         [EnumMember]
         DeviceLinkProfile = 3,
