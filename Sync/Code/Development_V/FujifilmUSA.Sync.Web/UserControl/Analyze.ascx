@@ -1,14 +1,27 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
-<script type="text/javascript">   
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
+    TagPrefix="uc" %>
+<style type="text/css">   
+    .Defaulttbl 
+    {
+        background:none repeat scroll 0 0 #FFFFFF;
+        border:1px solid #828282;
+    }
+    .RadGrid_Default 
+    {
+        background:none !important;
+        border:none !important;
+    }
+</style>
+<script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
-    
+
     function InitializeRequest(sender, args) {
-      //  alert(jQuery("input[id$=hdHasMeasurement]").val());
-        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {            
+        //  alert(jQuery("input[id$=hdHasMeasurement]").val());
+        if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
 
                 var updateProgress = $get('<%= UpdateProgressClientID %>');
@@ -26,17 +39,22 @@
                     if (postBackElement.id == '<%= lbtnMeasurementVerification.ClientID %>') {
                         $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
+                    else if (postBackElement.id == '<%= btnFillPatchDetails.ClientID %>' ||
+                            postBackElement.id == '<%= btnFillInkPaper.ClientID %>' ||
+                            postBackElement.id == '<%= btnFillGray.ClientID %>') {
+                        updateProgress.control._associatedUpdatePanelId = 'dummyId';
+                    }
                     else {
                         updateProgress.control._associatedUpdatePanelId = null;
+                        $get('<%= uprogressTab4.ClientID %>').control._associatedUpdatePanelId = 'dummyId'
                     }
                 }
             }
             else
                 updateProgress.control._associatedUpdatePanelId = null;
         }
-       
-    }
 
+    }    
 </script>
 <script type="text/javascript" language="javascript">
     function ConfirmMeasurement() {
@@ -58,6 +76,25 @@
         oWnd.close();
     }
 
+    function FillTabsData(controlTabId) {
+        //Perform partial postback to fill the data in tabs
+        switch (controlTabId) {
+            case '#tab2':
+                if ($('#<%= hdnIsInkPaperFilled.ClientID %>').val() != '1')
+                    $('#<%= btnFillInkPaper.ClientID %>').click();
+                break;
+            case '#tab3':
+                if ($('#<%= hdnIsGrayFilled.ClientID %>').val() != '1')
+                    $('#<%= btnFillGray.ClientID %>').click();
+                break;
+            case '#tab4':
+                if ($('#<%= hdnIsPatchDetailsFilled.ClientID %>').val() != '1')
+                    $('#<%= btnFillPatchDetails.ClientID %>').click();
+                break;
+            default:
+
+        }
+    }
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
@@ -73,15 +110,22 @@
             $(".hideclass").hide(); //Hide all tab content
             var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
             $(activeTab).fadeIn(); //Fade in the active content
+            //Fill tab#2,3,4 data through partial postback to load optimize performance
+            FillTabsData($(this).find('a').attr('href'));
+
             return false;
         });
+
+        //Execute the block if its a postback
+        if ('<%= Page.IsPostBack %>' == 'True')
+            FillTabsData($('ul.tabs li:eq(' + $("#<%= hdnSelectedTabIndex.ClientID %>").val() + ')').find('a').attr('href'));
     });
 </script>
 <script type="text/javascript" language="javascript">
 
     //According to new or old Project open rad window
     function ChooseRadWindow() {
-      // alert(jQuery("input[id$=hdHasMeasurement]").val());
+        // alert(jQuery("input[id$=hdHasMeasurement]").val());
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
 
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
@@ -105,37 +149,38 @@
         }
     }
 </script>
- <script src="JS/ChartTooltip.js" type="text/javascript"></script>
-
+<script src="JS/ChartTooltip.js" type="text/javascript"></script>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
     <asp:UpdatePanel ID="upCreateDLP" runat="server">
         <ContentTemplate>
             <div class="head">
-                <h1 id="header" runat="server"><asp:Localize runat="server" Text="Analyze" 
-                        ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
-                <div class="Information_divAnalyze">                    
+                <h1 id="header" runat="server">
+                    <asp:Localize runat="server" Text="Analyze" ID="btnAnalyze" meta:resourcekey="btnAnalyzeResource1"></asp:Localize></h1>
+                <div class="Information_divAnalyze">
                     <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
                         OnClientClick="return ChooseRadWindow();">
                         <span>
                             <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
                             <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
                         </span>
-                    </asp:LinkButton> &nbsp;
+                    </asp:LinkButton>
+                    &nbsp;
                     <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
-                        <span>                            
+                        <span>
                             <asp:Localize runat="server" Text="Measurement" ID="locMeasurement"></asp:Localize>
                         </span>
-                    </asp:LinkButton>                    
-                    <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button" OnClick="lbtnMeasurementVerification_Click">
-                        <span>                            
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button"
+                        OnClick="lbtnMeasurementVerification_Click">
+                        <span>
                             <asp:Image ID="imgAnalyze" runat="server" ImageUrl="../Images/analyze.png" />
                             <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification"></asp:Localize>
                         </span>
                     </asp:LinkButton>
                     <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
-                        <span>                            
+                        <span>
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
                         </span>
                     </asp:LinkButton>
@@ -144,15 +189,15 @@
             <div class="listDevice" style="margin-left: 10px;">
                 <uc:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
             </div>
-        </ContentTemplate>       
+        </ContentTemplate>
     </asp:UpdatePanel>
-     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-         <ContentTemplate>
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
                 <tr id="Tr_dtERadioList" runat="server">
                     <td align="center">
-                        <asp:RadioButtonList ID="Rbl_DT_E" runat="server" RepeatDirection="Horizontal" 
-                            AutoPostBack="true" onselectedindexchanged="Rbl_DT_E_SelectedIndexChanged" CssClass="RadioList">
+                        <asp:RadioButtonList ID="Rbl_DT_E" runat="server" RepeatDirection="Horizontal" AutoPostBack="true"
+                            OnSelectedIndexChanged="Rbl_DT_E_SelectedIndexChanged" CssClass="RadioList">
                             <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
                         </asp:RadioButtonList>
@@ -160,11 +205,11 @@
                 </tr>
                 <tr id="trListHeader" runat="server">
                     <td runat="server">
-                    
-                            <div style="display: block;" class="contantbox tabcontant1">
+                        <div style="display: block;" class="contantbox tabcontant1">
                             <div class="Analyze_head">
                                 <div class="text" style="font-weight: bold; font-size: 14px; float: left">
-                                    <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement" meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
+                                    <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
+                                        meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
                                     <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
                                 </div>
                             </div>
@@ -195,9 +240,8 @@
                                         } 
                                     </script>
                                     <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
-                                        BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" 
-                                        Palette="SemiTransparent" BorderlineColor="176, 176, 176" 
-                                        BorderlineDashStyle="Solid">                                         
+                                        BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
+                                        BorderlineColor="176, 176, 176" BorderlineDashStyle="Solid">
                                         <Series>
                                             <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
                                                 BorderWidth="2">
@@ -228,7 +272,7 @@
                                             <asp:ChartArea Name="ChartArea1" BackColor="Transparent" BackSecondaryColor="White"
                                                 ShadowColor="Transparent">
                                                 <Position Height="99" Width="99" Auto="False" />
-                                                <AxisY  TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
+                                                <AxisY TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
                                                     <MajorGrid LineColor="216, 216, 216" />
                                                 </AxisY>
                                                 <AxisX Interval="1" TitleFont="Verdana, 5pt" IsLabelAutoFit="False">
@@ -245,14 +289,13 @@
                                 </center>
                             </div>
                         </div>
-                        
                     </td>
                 </tr>
             </table>
-        </ContentTemplate>    
-        <Triggers>                      
-            <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
-        </Triggers>              
+        </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="Rbl_DT_E" />
+        </Triggers>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
@@ -460,11 +503,17 @@
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
-        <div class="float_l" style="padding-left: 10px;" >
-       
-            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <asp:UpdateProgress ID="uprogressTab2" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
+                <ProgressTemplate>                    
+                    <div id="divUpdate" style="color: #000; width: 100%;">
+                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+        <div class="float_l" style="padding-left: 10px;" >            
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
               <ContentTemplate>    
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;">
+                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;" id="tbInkPaper" runat="server">
                     <tr>
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
@@ -639,7 +688,8 @@
                         </td>
                     </tr>
                   </table>
-       
+                  <asp:HiddenField ID="hdnIsInkPaperFilled" runat="server" Value="0" />
+                 <asp:Button ID="btnFillInkPaper" runat="server" style="display: none;" OnClick="btnFillInkPaper_Click" />
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
@@ -657,12 +707,19 @@
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
         <div class="combopart">
+            <asp:UpdateProgress ID="uprogressTab3" runat="server" AssociatedUpdatePanelID="UpdatePanel4">
+                <ProgressTemplate>                    
+                    <div id="divUpdate" style="color: #000; width: 100%;">
+                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
         <div class="float_l" style="padding-left: 10px;" >
 
-         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+         <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
             <ContentTemplate> 
 
-              <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color:White;">
+              <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color:White;" id="tbGray" runat="server">
                                 <tr>
                                     <td style="width: 45%;" valign="top" class="CHARTTABLE">
                                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -992,6 +1049,8 @@
                                     </td>
                                 </tr>
                  </table>
+                 <asp:HiddenField ID="hdnIsGrayFilled" runat="server" Value="0" />
+                 <asp:Button ID="btnFillGray" runat="server" style="display: none;" OnClick="btnFillGray_Click" />
                </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />                     
@@ -1009,12 +1068,19 @@
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
            <div class="combopart">
+           <asp:UpdateProgress ID="uprogressTab4" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                <ProgressTemplate>                    
+                    <div id="divUpdate" style="color: #000; width: 100%;">
+                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
         <div class="float_l" style="padding-left: 10px;" > 
            
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
               <ContentTemplate>         
            
-            <table cellpadding="0" cellspacing="0" width="100%"> 
+            <table cellpadding="0" cellspacing="0" width="100%" id="tbPatchDetails" runat="server"> 
                <tr>
                 <td align="right">
                     <asp:Button ID="btn_Excel" CssClass="button" Width="150px" 
@@ -1025,23 +1091,18 @@
                 </td>
                </tr>                            
                <tr>
-                <td>   
-                    <telerik:RadGrid ID="GridPatchDetails"  AllowSorting="True" Width="650px" 
+                <td>
+                <asp:Panel ID="pnlgrid" runat="server" Width="650px" ScrollBars="Auto" CssClass="Defaulttbl">
+                    <telerik:RadGrid ID="GridPatchDetails"  AllowSorting="True" Width="100%" 
                     AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
                     OnNeedDataSource="GridPatchDetails_NeedDataSource" 
                         OnItemDataBound="GridPatchDetails_ItemDataBound" OnItemCommand="GridPatchDetails_ItemCommand"
                     OnSortCommand="GridPatchDetails_SortCommand" CellSpacing="0" GridLines="None">
                     <GroupingSettings CaseSensitive="False" />
-                     <ClientSettings>
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="6">
-                        </Scrolling>
-                     </ClientSettings>
-
-                        <HeaderStyle Font-Bold="True" />
-
+                        <HeaderStyle Font-Bold="True"/>
                             <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                            <MasterTableView DataKeyNames="HtmlColor">                      
+                            <MasterTableView DataKeyNames="HtmlColor"  >                      
                                 <CommandItemSettings ExportToPdfText="Export to PDF" />
                                 <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                                     Visible="True">
@@ -1165,12 +1226,13 @@
                                                 
                                 </Columns>                        
                             </MasterTableView>                        
-                </telerik:RadGrid>
-
+                </telerik:RadGrid>   
+                   </asp:Panel>            
                  </td>
                 </tr>
             </table>
-            
+             <asp:HiddenField ID="hdnIsPatchDetailsFilled" runat="server" Value="0" />
+                <asp:Button ID="btnFillPatchDetails" runat="server" style="display: none;" OnClick="btnFillPatchDetails_Click" />
          </ContentTemplate> 
          <Triggers>
                 <asp:PostBackTrigger ControlID="btn_Excel" />               
@@ -1233,22 +1295,19 @@
     &nbsp;</div>
 <asp:HiddenField ID="hdnSelectedTabIndex" runat="server" Value="0" />
 <asp:HiddenField ID="hdHasMeasurement" runat="server" Value="0" />
-<asp:Label ID="InjectScript" runat="server" Width="410px" 
-    meta:resourcekey="InjectScriptResource1"></asp:Label>
-<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" 
-    meta:resourcekey="RadWindowManagerResource1">
+<asp:Label ID="InjectScript" runat="server" Width="410px" meta:resourcekey="InjectScriptResource1"></asp:Label>
+<telerik:RadWindowManager ID="RadWindowManager" runat="server" Modal="True" meta:resourcekey="RadWindowManagerResource1">
     <Windows>
         <telerik:RadWindow ID="ConfirmSaveWindow" runat="server" ShowContentDuringLoad="false"
             VisibleStatusbar="false" Title="Choose Next Action" Width="702" Height="250"
-            Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" 
-            meta:resourcekey="ConfirmSaveWindowResource1" >
+            Behaviors="Move,Close" NavigateUrl="~/PopupConfirmSave.aspx" meta:resourcekey="ConfirmSaveWindowResource1">
         </telerik:RadWindow>
         <telerik:RadWindow ID="ClosePrintConditionWindow" runat="server" VisibleStatusbar="false"
-                ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
-                Behaviors="Move,Close">
-            </telerik:RadWindow>
+            ShowContentDuringLoad="false" Title="Close Print Condition" Width="720" Height="200"
+            Behaviors="Move,Close">
+        </telerik:RadWindow>
     </Windows>
 </telerik:RadWindowManager>
- <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
-        position: absolute">
+<div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
+    position: absolute">
 </div>
