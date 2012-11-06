@@ -36,7 +36,7 @@ namespace ServiceDemo
                                {
                                    { Convert.ToInt32(EProfileType.None), EProfileType.None.ToString() },
                                    { Convert.ToInt32(EProfileType.SourceProfile), EProfileType.SourceProfile.ToString() },
-                                   { Convert.ToInt32(EProfileType.DestinationProfile), EProfileType.DestinationProfile.ToString() },
+                                   { Convert.ToInt32(EProfileType.DestinationPRofile), EProfileType.DestinationPRofile.ToString() },
                                    { Convert.ToInt32(EProfileType.DeviceLinkProfile), EProfileType.DeviceLinkProfile.ToString() },
                                };
             InitializeComponent();

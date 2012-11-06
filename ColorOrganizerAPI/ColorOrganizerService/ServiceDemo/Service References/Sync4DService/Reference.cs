@@ -528,7 +528,7 @@ namespace ServiceDemo.Sync4DService {
         SourceProfile = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        DestinationProfile = 2,
+        DestinationPRofile = 2,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         DeviceLinkProfile = 3,
