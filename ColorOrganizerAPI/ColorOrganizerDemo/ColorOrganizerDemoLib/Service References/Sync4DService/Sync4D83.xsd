@@ -13,7 +13,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="None" />
       <xs:enumeration value="SourceProfile" />
-      <xs:enumeration value="DestinationProfile" />
+      <xs:enumeration value="DestinationPRofile" />
       <xs:enumeration value="DeviceLinkProfile" />
       <xs:enumeration value="OptimizeDlp" />
     </xs:restriction>
