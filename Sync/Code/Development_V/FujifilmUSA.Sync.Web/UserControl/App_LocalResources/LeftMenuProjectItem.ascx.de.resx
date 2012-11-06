@@ -123,8 +123,17 @@
   <data name="btnRunDeleteResource1.ToolTip" xml:space="preserve">
     <value>Delete Run_de</value>
   </data>
+  <data name="btnDLPDeleteResource1.AlternateText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnDLPDeleteResource1.ToolTip" xml:space="preserve">
+    <value>Delete DLP_de</value>
+  </data>
   <data name="deleteRunMsg" xml:space="preserve">
     <value>Are you sure you want to delete this optimization run?_de</value>
+  </data>
+  <data name="deleteDLPMsg" xml:space="preserve">
+    <value>Are you sure you want to delete this DLP?_de</value>
   </data>
   <data name="lnkAddRunResource1.Text" xml:space="preserve">
     <value>New Run_de</value>

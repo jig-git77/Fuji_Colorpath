@@ -333,6 +333,9 @@
   <data name="Error_DeleteOptimizeRun" xml:space="preserve">
     <value>Error occured while deleting optimize run.Please contact your administrator._de</value>
   </data>
+  <data name="Error_DeleteOptimizeRunDLP" xml:space="preserve">
+    <value>Error occured while deleting optimize run's DLP.Please contact your administrator._de</value>
+  </data>
   <data name="Error_DeleteProject" xml:space="preserve">
     <value>Error occured while deleting project. Please contact your administrator._de</value>
   </data>

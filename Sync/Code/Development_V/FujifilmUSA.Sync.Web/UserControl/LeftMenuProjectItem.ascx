@@ -7,7 +7,7 @@
     }
 
     function ConfirmDLPDelete() {
-        return confirm('Are you sure you want to delete this DLP?');
+        return confirm('<%= GetResourceString("deleteDLPMsg") %>');
     }
 </script>
 
@@ -51,7 +51,7 @@
                                 <td align="left">       
                                     <asp:ImageButton ID="btnDLPDelete" runat="server" 
                                     ImageUrl="~/Images/delete_icon_LeftMenu.png" ToolTip="Delete Run" OnClientClick="return ConfirmDLPDelete()" 
-                                    Visible="False" meta:resourcekey="btnRunDeleteResource1" 
+                                    Visible="False" meta:resourcekey="btnDLPDeleteResource1" 
                                     onclick="btnDLPDelete_Click"/>    
                                 </td>
                             </tr>

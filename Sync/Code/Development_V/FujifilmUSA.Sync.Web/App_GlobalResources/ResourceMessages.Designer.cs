@@ -367,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while deleting optimize run&apos;s DLP.Please contact your administrator..
+        /// </summary>
+        internal static string Error_DeleteOptimizeRunDLP {
+            get {
+                return ResourceManager.GetString("Error_DeleteOptimizeRunDLP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while deleting project. Please contact your administrator..
         /// </summary>
         internal static string Error_DeleteProject {

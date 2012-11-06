@@ -239,7 +239,8 @@
                                             }
                                         } 
                                     </script>
-                                    <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
+                                    <div style="width:680px; overflow:auto;">
+                                        <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
                                         BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
                                         BorderlineColor="176, 176, 176" BorderlineDashStyle="Solid">
                                         <Series>
@@ -281,6 +282,7 @@
                                             </asp:ChartArea>
                                         </ChartAreas>
                                     </asp:Chart>
+                                    </div>
                                     <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
                                     <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
                                         Style="display: none;" />
@@ -461,10 +463,12 @@
                                 </asp:DetailsView>
                             </td>
                             <td style="width:2%;"></td>
-                            <td valign="top" style="width:35%;">
+                            <td valign="top" style="width:35%; border:1px Solid Gray;">
                                 <telerik:RadGrid ID="RadGrid_VSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
                                     OnItemDataBound="RadGrid_VSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
-                                        <HeaderStyle Font-Bold="True" />                      
+                                        <HeaderStyle Font-Bold="True" />  
+                                        <ItemStyle BackColor="#F2F2F2" />
+                                        <AlternatingItemStyle BackColor="#FFFFFF" />                    
                                             <MasterTableView DataKeyNames="MetricMeasuredID">  
                                                 <Columns>
                                                     <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
