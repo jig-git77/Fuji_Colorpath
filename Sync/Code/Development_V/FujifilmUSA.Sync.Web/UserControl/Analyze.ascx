@@ -194,10 +194,10 @@
     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
-                <tr id="Tr_dtERadioList" runat="server">
+                <tr id="trRBtnListDeltaE" runat="server">
                     <td align="center">
-                        <asp:RadioButtonList ID="Rbl_DT_E" runat="server" RepeatDirection="Horizontal" AutoPostBack="true"
-                            OnSelectedIndexChanged="Rbl_DT_E_SelectedIndexChanged" CssClass="RadioList">
+                        <asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal" AutoPostBack="true"
+                            OnSelectedIndexChanged="rbtnListDeltaE_SelectedIndexChanged" CssClass="RadioList">
                             <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
                         </asp:RadioButtonList>
@@ -296,7 +296,7 @@
             </table>
         </ContentTemplate>
         <Triggers>
-            <asp:PostBackTrigger ControlID="Rbl_DT_E" />
+            <asp:PostBackTrigger ControlID="rbtnListDeltaE" />
         </Triggers>
     </asp:UpdatePanel>
     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
@@ -343,7 +343,7 @@
         <div class="float_l" style="padding-left: 10px;" > 
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
               <ContentTemplate>   
-                  <table id="Table_OptSummary" runat="server" cellpadding="0" cellspacing="0" width="100%">
+                  <table id="tbOptSummary" runat="server" cellpadding="0" cellspacing="0" width="100%">
                                     <tr id="tr1" runat="server" visible="false">
                                         <td style="width:100px;">
                                             <span> <asp:Localize runat="server" Text="Selected Metric:" 
@@ -385,20 +385,20 @@
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">Average Δ<asp:Label ID="lblAvg_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;">Average Δ<asp:Label ID="lblAvgΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
                                                         <asp:Label ID="lblRAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum Δ<asp:Label ID="lblMax_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;">Maximum Δ<asp:Label ID="lblMaxΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
                                                         <asp:Label ID="lblRMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
                                                     </td>
                                                 </tr>    
                                                 
                                                   <tr class="Gray">   
-                                                    <td style="font-size:13px;">Maximum Primary Δ<asp:Label ID="lblPri_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;">Maximum Primary Δ<asp:Label ID="lblPriΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
                                                         <asp:Label ID="Label5" runat="server" Text='<%#Eval("Pri_ΔE") %>'></asp:Label>
                                                     </td>
@@ -410,26 +410,26 @@
                                                     </td>
                                                 </tr>    
                                                   <tr class="Gray">   
-                                                    <td style="font-size:13px;">Gray Average Δ<asp:Label ID="lblGray_ΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;">Gray Average Δ<asp:Label ID="lblGrayΔE" runat="server" Text=""></asp:Label></td>                                  
                                                     <td>
                                                         <asp:Label ID="Label9" runat="server" Text='<%#Eval("Gray_ΔE") %>'></asp:Label>
                                                     </td>
                                                 </tr>    
                                                                                         
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">10th Quartile Δ<asp:Label ID="lblPercΔE_10" runat="server" Text=""></asp:Label> </td>                                                                                     
+                                                    <td style="font-size:13px;">10th Quartile Δ<asp:Label ID="lblPercΔE10" runat="server" Text=""></asp:Label> </td>                                                                                     
                                                     <td>
                                                         <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">90th Quartile Δ<asp:Label ID="lblPercΔE_90" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;">90th Quartile Δ<asp:Label ID="lblPercΔE90" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">95th Quartile Δ<asp:Label ID="lblPercΔE_95" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;">95th Quartile Δ<asp:Label ID="lblPercΔE95" runat="server" Text=""></asp:Label> </td>                                                                                    
                                                     <td>
                                                         <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
                                                     </td>
@@ -440,10 +440,10 @@
                                     </tr>
                                 </table>
                              
-                  <table id="Table_ValSummary" runat="server" cellpadding="0" cellspacing="0" width="650px">
+                  <table id="tbValidationSummary" runat="server" cellpadding="0" cellspacing="0" width="650px">
                         <tr>
                             <td style="width:63%; border:1px Solid Gray;">
-                                <asp:DetailsView ID="DetailsView_VSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
+                                <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
                                     <Fields>
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
                                         <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right">
@@ -464,8 +464,8 @@
                             </td>
                             <td style="width:2%;"></td>
                             <td valign="top" style="width:35%; border:1px Solid Gray;">
-                                <telerik:RadGrid ID="RadGrid_VSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                    OnItemDataBound="RadGrid_VSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                <telerik:RadGrid ID="rgValidationSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
+                                    OnItemDataBound="rgValidationSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
                                         <HeaderStyle Font-Bold="True" />  
                                         <ItemStyle BackColor="#F2F2F2" />
                                         <AlternatingItemStyle BackColor="#FFFFFF" />                    
@@ -492,7 +492,7 @@
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
-                        <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
+                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />  
                     </Triggers>  
            </asp:UpdatePanel>
         </div>
@@ -523,7 +523,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
                                 <tr>
                                     <td colspan="2" class="green-title">
-                                        &nbsp; &Delta;<asp:Label ID="lblE_PryPatches" runat="server" Text=""></asp:Label>
+                                        &nbsp; &Delta;<asp:Label ID="lblEPryPatches" runat="server" Text=""></asp:Label>
                                         <asp:Localize Text=" Primary Patches" runat="server"
                                             meta:resourcekey="LocalizeResource1" ></asp:Localize>
                                     </td>
@@ -541,8 +541,8 @@
                                     </table>
                                     </td>
                                     <td style="width: 60%; " id="TDEPrimary" runat="server">
-                                        <asp:Chart ID="ChartSummary_DeltaE" runat="server" Width="210px" Height="362px" 
-                                            BackColor="Transparent" meta:resourcekey="ChartSummary_DeltaEResource1">   
+                                        <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="362px" 
+                                            BackColor="Transparent" meta:resourcekey="chartDeltaEResource1">   
                                                                                                                               
                                                             <Series>
                                                                 <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar">                                              
@@ -591,9 +591,9 @@
                                                                 <td align="center" style="background:  url(images/BGISOPaperGraph1_Sync4D.jpg) no-repeat center; width: 276px;
                                                                                         height: 180px; padding-left: 34px; padding-bottom: 14px;">
                                                                                 
-                                                                    <asp:Chart ID="CHRT_Paper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
+                                                                    <asp:Chart ID="chartPaper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
                                                                         ImageType="Jpeg"  Width="240px" Height="130px" 
-                                                                        meta:resourcekey="CHRT_Paper1Resource1">
+                                                                        meta:resourcekey="chartPaper1Resource1">
                                                                         <Legends>
                                                                             <asp:Legend Name="Default" Enabled="False">
                                                                             </asp:Legend>
@@ -638,9 +638,9 @@
                                                                                         height: 169px; padding-left: 28px; padding-bottom: 12px;" >
 
 
-                                                                        <asp:Chart ID="CHRT_Paper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
+                                                                        <asp:Chart ID="chartPaper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
                                                                         ImageType="Jpeg" Width="69px" Height="130px" 
-                                                                            meta:resourcekey="CHRT_Paper2Resource1">
+                                                                            meta:resourcekey="chartPaper2Resource1">
                                                                         <Legends>
                                                                             <asp:Legend Name="Default" Enabled="False">
                                                                             </asp:Legend>
@@ -697,7 +697,7 @@
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
-                        <asp:PostBackTrigger ControlID="Rbl_DT_E" />  
+                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />  
                     </Triggers>  
             </asp:UpdatePanel>
         </div>
@@ -744,7 +744,7 @@
                                                       
                                                         <tr>
                                                             <td align="center" valign="top">                                                      
-                                                                <asp:Chart ID="CHART_ABComparison" runat="server" 
+                                                                <asp:Chart ID="chartABComparison" runat="server" 
                                                                      Width="280px" Height="250px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
                                                                     <Titles>
@@ -820,7 +820,7 @@
                                                         </tr>
                                                         <tr runat="server">
                                                             <td align="center" valign="top" runat="server">                                                            
-                                                                <asp:Chart ID="CHART_LComparison" runat="server" BackGradientType="Center"
+                                                                <asp:Chart ID="chartLComparison" runat="server" BackGradientType="Center"
                                                                                         BackGradientEndColor="White" BorderLineColor="Gray" 
                                                                     Width="280px" Height="75px">
                                                                     <Legends>
@@ -898,10 +898,10 @@
                                                                     <tr>
                                                                         <td>
                                                                 
-                                                                                <asp:Chart ID="Chart_L" runat="server" Width="365px" Height="125px" 
+                                                                                <asp:Chart ID="chartL" runat="server" Width="365px" Height="125px" 
                                                                                         BackGradientType="Center"
                                                                                         BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                    meta:resourcekey="Chart_LResource1">
+                                                                                    meta:resourcekey="chartLResource1">
                                                                                         <Titles>
                                                                                             <asp:Title Text="L*" Name="Title1">
                                                                                                 <Position X="94" Y="10" Auto="False" />
@@ -946,9 +946,9 @@
                                                                     <tr>
                                                                         <td>                                                                        
 
-                                                                                 <asp:Chart ID="Chart_a" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
+                                                                                 <asp:Chart ID="chartA" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                     meta:resourcekey="Chart_aResource1">
+                                                                                     meta:resourcekey="chartAResource1">
                                                                                     <Legends>
                                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                                         </asp:Legend>
@@ -993,9 +993,9 @@
                                                                     <tr>
                                                                         <td>
                                                                         
-                                                                                 <asp:Chart ID="Chart_b" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
+                                                                                 <asp:Chart ID="chartB" runat="server" Width="365px" Height="125px" BackGradientType="Center" 
                                                                                     BackGradientEndColor="White" BorderLineColor="Gray" 
-                                                                                     meta:resourcekey="Chart_bResource1">
+                                                                                     meta:resourcekey="chartBResource1">
                                                                                     <Legends>
                                                                                         <asp:Legend Name="Default" Enabled="False">
                                                                                         </asp:Legend>
@@ -1087,22 +1087,22 @@
             <table cellpadding="0" cellspacing="0" width="100%" id="tbPatchDetails" runat="server"> 
                <tr>
                 <td align="right">
-                    <asp:Button ID="btn_Excel" CssClass="button" Width="150px" 
-                        Text="Export to Excel" runat="server" onclick="btn_Excel_Click" Visible="False" 
-                        meta:resourcekey="btn_ExcelResource1"></asp:Button>                   
-                    <asp:Button ID="btn_CSV" CssClass="button" Width="150px" Text="Export to CSV" 
-                        runat="server" onclick="btn_CSV_Click" meta:resourcekey="btn_CSVResource1"></asp:Button>                   
+                    <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
+                        Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
+                        meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
+                    <asp:Button ID="btnCSVExport" CssClass="button" Width="150px" Text="Export to CSV" 
+                        runat="server" onclick="btnCSVExport_Click" meta:resourcekey="btnCSVExportResource1"></asp:Button>                   
                 </td>
                </tr>                            
                <tr>
                 <td>
                 <asp:Panel ID="pnlgrid" runat="server" Width="650px" ScrollBars="Auto" CssClass="Defaulttbl">
-                    <telerik:RadGrid ID="GridPatchDetails"  AllowSorting="True" Width="100%" 
+                    <telerik:RadGrid ID="rgPatchDetails"  AllowSorting="True" Width="100%" 
                     AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
-                    OnNeedDataSource="GridPatchDetails_NeedDataSource" 
-                        OnItemDataBound="GridPatchDetails_ItemDataBound" OnItemCommand="GridPatchDetails_ItemCommand"
-                    OnSortCommand="GridPatchDetails_SortCommand" CellSpacing="0" GridLines="None">
+                    OnNeedDataSource="rgPatchDetails_NeedDataSource" 
+                        OnItemDataBound="rgPatchDetails_ItemDataBound" OnItemCommand="rgPatchDetails_ItemCommand"
+                    OnSortCommand="rgPatchDetails_SortCommand" CellSpacing="0" GridLines="None">
                     <GroupingSettings CaseSensitive="False" />
                         <HeaderStyle Font-Bold="True"/>
                             <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
@@ -1239,8 +1239,8 @@
                 <asp:Button ID="btnFillPatchDetails" runat="server" style="display: none;" OnClick="btnFillPatchDetails_Click" />
          </ContentTemplate> 
          <Triggers>
-                <asp:PostBackTrigger ControlID="btn_Excel" />               
-                <asp:PostBackTrigger ControlID="btn_CSV" />                
+                <asp:PostBackTrigger ControlID="btnExcelExport" />               
+                <asp:PostBackTrigger ControlID="btnCSVExport" />                
          </Triggers>        
        </asp:UpdatePanel>
 
@@ -1267,7 +1267,7 @@
                                         cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
                                     <tr>
                                         <td valign="top">
-                                         <iframe id="FRMGeneratePDFReport" runat="server" name="FRMGeneratePDFReport" style="height: 350px;
+                                         <iframe id="iframeGeneratePDFReport" runat="server" name="iframeGeneratePDFReport" style="height: 350px;
                                                 width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>
                                     </tr>
