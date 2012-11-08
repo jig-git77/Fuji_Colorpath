@@ -210,7 +210,22 @@
                                 <div class="text" style="font-weight: bold; font-size: 14px; float: left">
                                     <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
                                         meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
-                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
+                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server" ></asp:Label>
+                                </div>
+                                <div style="display:none;">
+                                    &nbsp;&nbsp;&nbsp; 
+                                     Record(s)&nbsp;<asp:Literal ID="LTRL_StartRecord" runat="server">0</asp:Literal>&nbsp;to&nbsp;<asp:Literal ID="LTRL_EndRecord" runat="server">0</asp:Literal>&nbsp;of&nbsp;<asp:Literal ID="LTRL_TotalRec" runat="server">0</asp:Literal>&nbsp;|&nbsp;<asp:ImageButton ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton 
+                                    ID="IBTN_PreviousPage" runat="server" 
+                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click" 
+                                    style="height: 13px" />&nbsp;<asp:ImageButton ID="IBTN_NextPage" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" OnClick="IBTN_NextPage_Click" />&nbsp;<asp:ImageButton ID="IBTN_LastPage" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif" OnClick="IBTN_LastPage_Click" />&nbsp;|&nbsp;Records&nbsp;<asp:DropDownList ID="DDL_PageSize" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_PageSize_SelectedIndexChanged">
+                                        <asp:ListItem Value="5" Selected="True">5</asp:ListItem>
+                                        <asp:ListItem Value="10">10</asp:ListItem>
+                                        <asp:ListItem Value="25">25</asp:ListItem>
+                                        <asp:ListItem Value="50">50</asp:ListItem>
+                                        <asp:ListItem Value="100">100</asp:ListItem>
+                                        <asp:ListItem Value="500">500</asp:ListItem>
+                                        <asp:ListItem Value="1000">1000</asp:ListItem>
+                                    </asp:DropDownList>&nbsp;|&nbsp;Go to page&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
                                 </div>
                             </div>
                             <div class="section_middle">
@@ -239,7 +254,7 @@
                                             }
                                         } 
                                     </script>
-                                    <div style="width:680px; overflow:auto;">
+                                  
                                         <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
                                         BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
                                         BorderlineColor="176, 176, 176" BorderlineDashStyle="Solid">
@@ -282,7 +297,7 @@
                                             </asp:ChartArea>
                                         </ChartAreas>
                                     </asp:Chart>
-                                    </div>
+                                  
                                     <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
                                     <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
                                         Style="display: none;" />
