@@ -129,10 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbtnMeasurement.Visible = IsXMFUser;
-
-            //Here we are resetting the hidden controls used to identify the async call to fill chart and grid            
-            ResetFilledControlsValues();
+            lbtnMeasurement.Visible = IsXMFUser;          
 
             if (!Page.IsPostBack)
             {
@@ -194,15 +191,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnMeasurementVerification.Visible = false;
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
-                }
-
-                //Initially we are hiding RadGrid to prevent NeedDataSource event call
-                HidePatchDetailsGrid();
+                }                
             }
             else
             {
-                BindMesurementChart();
-                //FillAllTabsData();
+                BindMesurementChart();                
             }
         }
 
@@ -242,6 +235,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
                 BindAvgDelta();
+                FillAllTabsData();
             }
         }
 
@@ -302,15 +296,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public void FillAllTabsData()
         {
-            //This method is converted to smaller functions as we calling it asynchronously one by one to fill relevant tab data
-            GetInkPaperChart();
-
-            GetGrayChart();
-        }
-
-        private void GetInkPaperChart()
-        {
-            MeasurementId = 0;
+             MeasurementId = 0;
 
             if (hdMeasurement.Value != "")
             {
@@ -323,29 +309,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
-                hdnIsInkPaperFilled.Value = "1";
-                tbInkPaper.Visible = true;
-            }
-        }
 
-        private void GetGrayChart()
-        {
-            MeasurementId = 0;
 
-            if (hdMeasurement.Value != "")
-            {
-                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
             }
 
             _presenterAnalyze.GetGrayChart();
             if (!IsErrorOccured)
             {
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
-                //Set the values to indicate that is chart is displayed with data
-                hdnIsGrayFilled.Value = "1";
-                tbGray.Visible = true;
             }
-        }
+        }            
 
         #region Fill InkPaper Tab
         private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper)
@@ -885,25 +858,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #endregion
-
-        private void ResetFilledControlsValues()
-        {
-            hdnIsInkPaperFilled.Value = "0";
-            hdnIsGrayFilled.Value = "0";
-
-            tbInkPaper.Visible = false;
-            tbGray.Visible = false;
-        }
-
-        private void HidePatchDetailsGrid()
-        {
-            //We are hiding PatchDetailsGrid as we need to prevent NeedDataSource event calling to optimize performance
-            //Initially we are hiding RadGrid to prevent NeedDataSource event call
-            rgPatchDetails.Visible = false;
-            hdnIsPatchDetailsFilled.Value = "0";
-            tbPatchDetails.Visible = false;
-
-        }
+        
         #endregion
 
         #region Control Events
@@ -1008,13 +963,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     rgPatchDetails.MasterTableView.FilterExpression = string.Empty;
                     rgPatchDetails.MasterTableView.Rebind();
-                    break;
-
-                default:
-                    //In all other item command we are showing RadGrid to fire NeedDataSource and Rebiding grid
-                    rgPatchDetails.Visible = true;
-                    rgPatchDetails.Rebind();
-                    break;
+                    break;                
             }
         }
 
@@ -1050,8 +999,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rbtnListDeltaE_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-            HidePatchDetailsGrid();
+            //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//            
             BindMesurementChart();
         }
 
@@ -1109,25 +1057,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
         }
-
-        protected void btnFillPatchDetails_Click(object sender, EventArgs e)
-        {
-            rgPatchDetails.Visible = true;
-            rgPatchDetails.Rebind();
-            hdnIsPatchDetailsFilled.Value = "1";
-
-            tbPatchDetails.Visible = true;
-        }
-
-        protected void btnFillInkPaper_Click(object sender, EventArgs e)
-        {
-            GetInkPaperChart();
-        }
-
-        protected void btnFillGray_Click(object sender, EventArgs e)
-        {
-            GetGrayChart();
-        }
+       
         #endregion
 
         #region IViewAnalyze Members

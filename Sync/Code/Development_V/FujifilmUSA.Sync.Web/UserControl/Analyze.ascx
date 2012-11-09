@@ -1,21 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
-    TagPrefix="uc" %>
-<style type="text/css">   
-    .Defaulttbl 
-    {
-        background:none repeat scroll 0 0 #FFFFFF;
-        border:1px solid #828282;
-    }
-    .RadGrid_Default 
-    {
-        background:none !important;
-        border:none !important;
-    }
-</style>
-<script type="text/javascript">
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+ <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
 
@@ -39,15 +26,9 @@
                     if (postBackElement.id == '<%= lbtnMeasurementVerification.ClientID %>') {
                         $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
-                    else if (postBackElement.id == '<%= btnFillPatchDetails.ClientID %>' ||
-                            postBackElement.id == '<%= btnFillInkPaper.ClientID %>' ||
-                            postBackElement.id == '<%= btnFillGray.ClientID %>') {
-                        updateProgress.control._associatedUpdatePanelId = 'dummyId';
-                    }
                     else {
                         updateProgress.control._associatedUpdatePanelId = null;
-                        $get('<%= uprogressTab4.ClientID %>').control._associatedUpdatePanelId = 'dummyId'
-                    }
+                    }                    
                 }
             }
             else
@@ -74,27 +55,7 @@
     function CloseClosePrintConditionWindow() {
         var oWnd = $find("<%= ClosePrintConditionWindow.ClientID %>");
         oWnd.close();
-    }
-
-    function FillTabsData(controlTabId) {
-        //Perform partial postback to fill the data in tabs
-        switch (controlTabId) {
-            case '#tab2':
-                if ($('#<%= hdnIsInkPaperFilled.ClientID %>').val() != '1')
-                    $('#<%= btnFillInkPaper.ClientID %>').click();
-                break;
-            case '#tab3':
-                if ($('#<%= hdnIsGrayFilled.ClientID %>').val() != '1')
-                    $('#<%= btnFillGray.ClientID %>').click();
-                break;
-            case '#tab4':
-                if ($('#<%= hdnIsPatchDetailsFilled.ClientID %>').val() != '1')
-                    $('#<%= btnFillPatchDetails.ClientID %>').click();
-                break;
-            default:
-
-        }
-    }
+    }       
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
@@ -110,15 +71,9 @@
             $(".hideclass").hide(); //Hide all tab content
             var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
             $(activeTab).fadeIn(); //Fade in the active content
-            //Fill tab#2,3,4 data through partial postback to load optimize performance
-            FillTabsData($(this).find('a').attr('href'));
-
+           
             return false;
-        });
-
-        //Execute the block if its a postback
-        if ('<%= Page.IsPostBack %>' == 'True')
-            FillTabsData($('ul.tabs li:eq(' + $("#<%= hdnSelectedTabIndex.ClientID %>").val() + ')').find('a').attr('href'));
+        });        
     });
 </script>
 <script type="text/javascript" language="javascript">
@@ -521,18 +476,11 @@
    <section id="tab2" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart">
-            <asp:UpdateProgress ID="uprogressTab2" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
-                <ProgressTemplate>                    
-                    <div id="divUpdate" style="color: #000; width: 100%;">
-                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
-                    </div>
-                </ProgressTemplate>
-            </asp:UpdateProgress>
+        <div class="combopart">            
         <div class="float_l" style="padding-left: 10px;" >            
-            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
               <ContentTemplate>    
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;" id="tbInkPaper" runat="server">
+                  <table border="1" cellpadding="0" cellspacing="0" width="100%" style="background-color:White;">
                     <tr>
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
@@ -706,9 +654,7 @@
                             </table>
                         </td>
                     </tr>
-                  </table>
-                  <asp:HiddenField ID="hdnIsInkPaperFilled" runat="server" Value="0" />
-                 <asp:Button ID="btnFillInkPaper" runat="server" style="display: none;" OnClick="btnFillInkPaper_Click" />
+                  </table>                  
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  
@@ -725,20 +671,13 @@
    <section id="tab3" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-        <div class="combopart">
-            <asp:UpdateProgress ID="uprogressTab3" runat="server" AssociatedUpdatePanelID="UpdatePanel4">
-                <ProgressTemplate>                    
-                    <div id="divUpdate" style="color: #000; width: 100%;">
-                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
-                    </div>
-                </ProgressTemplate>
-            </asp:UpdateProgress>
+        <div class="combopart">            
         <div class="float_l" style="padding-left: 10px;" >
 
-         <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional">
+         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
             <ContentTemplate> 
 
-              <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color:White;" id="tbGray" runat="server">
+              <table border="1" cellpadding="0" cellspacing="0" width="200px" style="background-color:White;">
                                 <tr>
                                     <td style="width: 45%;" valign="top" class="CHARTTABLE">
                                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1067,9 +1006,7 @@
                                         </table>
                                     </td>
                                 </tr>
-                 </table>
-                 <asp:HiddenField ID="hdnIsGrayFilled" runat="server" Value="0" />
-                 <asp:Button ID="btnFillGray" runat="server" style="display: none;" OnClick="btnFillGray_Click" />
+                 </table>                 
                </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />                     
@@ -1086,20 +1023,13 @@
   <section id="tab4" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
-           <div class="combopart">
-           <asp:UpdateProgress ID="uprogressTab4" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                <ProgressTemplate>                    
-                    <div id="divUpdate" style="color: #000; width: 100%;">
-                        <center><img src="Images/processbar.gif" alt="Loading" style="vertical-align: middle; margin: 2px;"></img></center>
-                    </div>
-                </ProgressTemplate>
-            </asp:UpdateProgress>
+           <div class="combopart">           
         <div class="float_l" style="padding-left: 10px;" > 
            
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
               <ContentTemplate>         
            
-            <table cellpadding="0" cellspacing="0" width="100%" id="tbPatchDetails" runat="server"> 
+            <table cellpadding="0" cellspacing="0" width="100%"> 
                <tr>
                 <td align="right">
                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
@@ -1249,9 +1179,7 @@
                    </asp:Panel>            
                  </td>
                 </tr>
-            </table>
-             <asp:HiddenField ID="hdnIsPatchDetailsFilled" runat="server" Value="0" />
-                <asp:Button ID="btnFillPatchDetails" runat="server" style="display: none;" OnClick="btnFillPatchDetails_Click" />
+            </table>             
          </ContentTemplate> 
          <Triggers>
                 <asp:PostBackTrigger ControlID="btnExcelExport" />               
