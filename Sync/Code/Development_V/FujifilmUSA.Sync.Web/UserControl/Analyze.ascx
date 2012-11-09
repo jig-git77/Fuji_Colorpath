@@ -1040,8 +1040,7 @@
                 </td>
                </tr>                            
                <tr>
-                <td>
-                <asp:Panel ID="pnlgrid" runat="server" Width="650px" ScrollBars="Auto" CssClass="Defaulttbl">
+                <td>                
                     <telerik:RadGrid ID="rgPatchDetails"  AllowSorting="True" Width="100%" 
                     AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
@@ -1175,8 +1174,7 @@
                                                 
                                 </Columns>                        
                             </MasterTableView>                        
-                </telerik:RadGrid>   
-                   </asp:Panel>            
+                </telerik:RadGrid>                             
                  </td>
                 </tr>
             </table>             
