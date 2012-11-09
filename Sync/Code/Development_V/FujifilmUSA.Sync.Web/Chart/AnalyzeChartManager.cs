@@ -11,16 +11,17 @@ namespace FujifilmUSA.Sync.Web
 {
     public class AnalyzeChartManager
     {
-        public AnalyzeChartManager(Chart analyzeChart, List<Entity.Measurement> lst)
+        public AnalyzeChartManager(Chart analyzeChart, List<Entity.Measurement> lst, bool _isValidation)
         {
             AnalyzeChart = analyzeChart;
             Measurements = lst;
+            IsValidation = _isValidation;
         }
         public Chart AnalyzeChart { get; set; }
         public List<Entity.Measurement> Measurements { get; set; }
         public int CurrentMeasurementID { get; set; }
-
         public string MeasurementName { get; set; }
+        public bool IsValidation { get; set; }
 
         //======== Data Point Index ==========//
         int[] PatchTypeID = new int[8];
@@ -42,39 +43,42 @@ namespace FujifilmUSA.Sync.Web
                     {
                         case (int)CPPatchType.Cyan:
                             x.HtmlColor = "#00FFFF";
-                            AddPoint(0, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(0, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Magenta:
                             x.HtmlColor = "#FF00FF";
-                            AddPoint(1, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(1, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Yellow:
                             x.HtmlColor = "#FFFF00";
-                            AddPoint(2, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(2, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Black:
                             x.HtmlColor = "#000000";
-                            AddPoint(3, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(3, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Red:
                             x.HtmlColor = "#FF0000";
-                            AddPoint(4, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(4, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Green:
                             x.HtmlColor = "#008000";
-                            AddPoint(5, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(5, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Blue:
                             x.HtmlColor = "#0000FF";
-                            AddPoint(6, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(6, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Paper:
                             x.HtmlColor = "#FFFFFF";
-                            AddPoint(7, x, i, p.MeasurementName, p.IsUsed);
+                            AddPoint(7, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
                             break;
                     }
                 });
-                AddCheckBox(i, p, Measurements.Where(x => x.IsUsed).Count());
+                if (!IsValidation) //if Optimization, then only add checkboxes
+                {
+                    AddCheckBox(i, p, Measurements.Where(x => x.IsUsed).Count());
+                }
                 i++;
             });
 
@@ -96,12 +100,19 @@ namespace FujifilmUSA.Sync.Web
                     CurrentMeasurementID = Measurements[Measurements.Count - 1].MeasurementId;
 
         }
-        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementNo, string measurementName, bool IsUsed)
+        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementno, DateTime MeasurementDate, string measurementName, bool IsUsed, bool _isValidation)
         {
             int index = PatchTypeID[seriesId];
 
             AnalyzeChart.Series["Series" + seriesId].ChartType = SeriesChartType.Spline;  // Set series type 
-            AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementNo + 1, measurementPatch.Δe2000.ToString()); // Add XY point
+            if (_isValidation) //if Validation
+            {
+                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(MeasurementDate.ToString(), measurementPatch.Δe2000.ToString()); // Add XY point
+            }
+            else   //if Optimization
+            {
+                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(measurementno + 1, measurementPatch.Δe2000.ToString()); // Add XY point
+            }
             AnalyzeChart.Series["Series" + seriesId].Color = ColorTranslator.FromHtml(measurementPatch.HtmlColor); // Set HTML color to series         
             AnalyzeChart.Series["Series" + seriesId].Points[index].ToolTip = measurementName;
 

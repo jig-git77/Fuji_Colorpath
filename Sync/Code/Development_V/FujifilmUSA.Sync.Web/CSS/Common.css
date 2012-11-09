@@ -1930,12 +1930,19 @@ label
     height: 31px;
     line-height: 31px;
     overflow: hidden;
-    font-size: 16px;
-    color: #353535;
-    font-weight: bold;
+  
     padding-left: 15px;
     position: relative;
     z-index: 5;
+}
+
+.Analyze_head_text
+{
+   
+    font-size: 16px;
+    color: #353535;
+    font-weight: bold;
+  
 }
 
 .Top_Grn_Header
@@ -2225,3 +2232,8 @@ label
     padding-right: 3px;
     background-color: #FFFFFF;
 }
+
+.DROPDOWNLIST{ color:#000; font-weight:normal; font-family:Tahoma; font-size:11px; border:1px solid #7f9db9; width:150px; line-height:18px; padding-left:2px; }
+.DROPDOWNLIST1{ background:url(../images/login-input-bg.gif) no-repeat left top; border:1px solid #d0d0d0; color:#444; height:17px;font-size:10px }
+.DROPDOWNLIST11{ background:url(../images/login-input-bg.gif) no-repeat left top; border:1px solid #d0d0d0; color:#444; }
+.DROPDOWNLIST2, .DROPDOWNLIST2 INPUT{BORDER: 1PX SOLID #808080; COLOR: #000; FONT-FAMILY: VERDANA,ARIAL,HELVETICA,TAHOMA; FONT-SIZE: 10PX}

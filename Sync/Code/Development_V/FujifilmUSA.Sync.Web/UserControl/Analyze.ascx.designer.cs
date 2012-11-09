@@ -175,6 +175,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.HtmlControls.HtmlTableRow trListHeader;
         
         /// <summary>
+        /// Div_Opt_Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Opt_Header;
+        
+        /// <summary>
         /// locAnaluzeMeasurement control.
         /// </summary>
         /// <remarks>
@@ -191,6 +200,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMeasurementName;
+        
+        /// <summary>
+        /// Div_Validation_Header control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Validation_Header;
         
         /// <summary>
         /// LTRL_StartRecord control.
@@ -740,5 +758,32 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadWindow ClosePrintConditionWindow;
+        
+        /// <summary>
+        /// LTRL_PageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LTRL_PageSize;
+        
+        /// <summary>
+        /// LTRL_CurrentPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LTRL_CurrentPage;
+        
+        /// <summary>
+        /// LTRL_StartIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal LTRL_StartIndex;
     }
 }

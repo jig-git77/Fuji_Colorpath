@@ -138,6 +138,14 @@
     <Content Include="Images\ISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\ISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\logo_bottom.png" />
+    <Content Include="Images\Nav_FirstPage.gif" />
+    <Content Include="Images\Nav_FirstPage_off.gif" />
+    <Content Include="Images\Nav_LastPage.gif" />
+    <Content Include="Images\Nav_LastPage_off.gif" />
+    <Content Include="Images\Nav_NextPage.gif" />
+    <Content Include="Images\Nav_NextPage_off.gif" />
+    <Content Include="Images\Nav_PreviousPage.gif" />
+    <Content Include="Images\Nav_PreviousPage_off.gif" />
     <Content Include="Images\no_chart_preview.png" />
     <Content Include="Images\device-management.png" />
     <Content Include="Images\license-management.png" />
@@ -2027,7 +2035,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

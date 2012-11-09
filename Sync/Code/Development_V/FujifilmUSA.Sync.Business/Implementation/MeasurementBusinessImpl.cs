@@ -187,6 +187,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             {
                                 MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
                                 MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                                MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed")
                             }).ToList();
 
@@ -295,7 +296,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               Customer = DataReader.ReadString(x, "Customer"),
                               Notes = DataReader.ReadString(x, "Notes"),
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
-                              MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus")
+                              MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
+                              MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
                           }).ToList();
                         VmeasurementSummary[0].ValidationMetrics = dsMeasurements.Tables[1].AsEnumerable().
                            Select(x => new ValidationMetrics()

@@ -162,13 +162,12 @@
                     <td runat="server">
                         <div style="display: block;" class="contantbox tabcontant1">
                             <div class="Analyze_head">
-                                <div class="text" style="font-weight: bold; font-size: 14px; float: left">
+                                <div id="Div_Opt_Header" runat="server" visible="false" class="Analyze_head_text" style="font-weight: bold; font-size: 14px; float: left; ">
                                     <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
                                         meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
                                     <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server" ></asp:Label>
                                 </div>
-                                <div style="display:none;">
-                                    &nbsp;&nbsp;&nbsp; 
+                                <div id="Div_Validation_Header" runat="server" visible="false">                                   
                                      Record(s)&nbsp;<asp:Literal ID="LTRL_StartRecord" runat="server">0</asp:Literal>&nbsp;to&nbsp;<asp:Literal ID="LTRL_EndRecord" runat="server">0</asp:Literal>&nbsp;of&nbsp;<asp:Literal ID="LTRL_TotalRec" runat="server">0</asp:Literal>&nbsp;|&nbsp;<asp:ImageButton ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton 
                                     ID="IBTN_PreviousPage" runat="server" 
                                     ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click" 
@@ -177,10 +176,8 @@
                                         <asp:ListItem Value="10">10</asp:ListItem>
                                         <asp:ListItem Value="25">25</asp:ListItem>
                                         <asp:ListItem Value="50">50</asp:ListItem>
-                                        <asp:ListItem Value="100">100</asp:ListItem>
-                                        <asp:ListItem Value="500">500</asp:ListItem>
-                                        <asp:ListItem Value="1000">1000</asp:ListItem>
-                                    </asp:DropDownList>&nbsp;|&nbsp;Go to page&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
+                                        <asp:ListItem Value="100">100</asp:ListItem>                                       
+                                    </asp:DropDownList>&nbsp;|&nbsp;Go to page&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" Width="45px" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
                                 </div>
                             </div>
                             <div class="section_middle">
@@ -427,13 +424,14 @@
                                         <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
                                         <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
                                         <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
-                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Method:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
                                     </Fields>
                                 </asp:DetailsView>
                             </td>
                             <td style="width:2%;"></td>
-                            <td valign="top" style="width:35%; border:1px Solid Gray;">
+                            <td valign="top" style="width:35%; ">
                                 <telerik:RadGrid ID="rgValidationSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
                                     OnItemDataBound="rgValidationSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
                                         <HeaderStyle Font-Bold="True" />  
@@ -1256,3 +1254,10 @@
 <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
     position: absolute">
 </div>
+
+
+
+<asp:Literal ID="LTRL_PageSize" runat="server" Visible="false">5</asp:Literal>
+<asp:Literal ID="LTRL_CurrentPage" runat="server" Visible="false">-1</asp:Literal>
+<asp:Literal ID="LTRL_StartIndex" runat="server" Visible="false">0</asp:Literal>
+

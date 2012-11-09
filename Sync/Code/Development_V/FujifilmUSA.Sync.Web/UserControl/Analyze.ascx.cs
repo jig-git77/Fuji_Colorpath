@@ -183,6 +183,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                      "javascript: return ShowClosePrintConditionWindow('" +
                                                      SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
                     trRBtnListDeltaE.Visible = false;
+                    Div_Validation_Header.Visible = true;
                 }
                 else
                 {
@@ -191,6 +192,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnMeasurementVerification.Visible = false;
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
+                    Div_Opt_Header.Visible = true;
                 }                
             }
             else
@@ -208,11 +210,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             From_ΔE = rbtnListDeltaE.SelectedValue;
             chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
+            bool IsValidation = false;
+
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
                 //This will be called when Verification process is going on
                 ProjectId = SessionManager.Instance.CurrentOptimizeRun.ProjectId;
                 _presenterAnalyze.GetAnalyzeChartVMeasurement();
+                IsValidation = true;
             }
             else
             {
@@ -222,8 +227,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (!IsErrorOccured)
             {
-                //AlignPaging(Measurements);
-                var manager = new AnalyzeChartManager(chartAnalyze, Measurements)
+                List<Entity.Measurement> MeasurementList = new List<Entity.Measurement>();
+                MeasurementList = Measurements;
+              
+                if (IsValidation)  //This will be called when Verification process is going on
+                {
+                    MeasurementList = AlignPaging(Measurements);
+                }
+                var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
                 {
                     CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
                 };
@@ -1106,48 +1117,164 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void DDL_PageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //========== Alter the page size ==========//
+            LTRL_PageSize.Text = DDL_PageSize.SelectedValue;
 
+            int _PageSize = Convert.ToInt32(LTRL_PageSize.Text);
+            int _PageCount = Convert.ToInt32(LTRL_TotalRec.Text) / _PageSize; if ((Convert.ToInt32(LTRL_TotalRec.Text) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+
+            //========== Filling the DropDown ==========//
+            DDL_GoToPage.Items.Clear();
+            FillDDLGoToPage(_PageCount);
+
+            BindMesurementChart();
         }
 
         protected void DDL_GoToPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            BindMesurementChart();
         }
 
         protected void IBTN_FirstPage_Click(object sender, ImageClickEventArgs e)
         {
-
+            //========== Go To Page 1 ==========//
+            DDL_GoToPage.SelectedIndex = 0;
+            BindMesurementChart();
         }
 
         protected void IBTN_PreviousPage_Click(object sender, ImageClickEventArgs e)
         {
-
+            //========== Go To previous page ==========//
+            DDL_GoToPage.SelectedValue = Convert.ToString(Convert.ToInt32(DDL_GoToPage.SelectedValue) - 1);
+            BindMesurementChart();
         }
 
         protected void IBTN_NextPage_Click(object sender, ImageClickEventArgs e)
         {
-
+            //========== Go To next page ==========//
+            DDL_GoToPage.SelectedValue = Convert.ToString(Convert.ToInt32(DDL_GoToPage.SelectedValue) + 1);
+            BindMesurementChart();
         }
 
         protected void IBTN_LastPage_Click(object sender, ImageClickEventArgs e)
         {
-
+            //========== Go To last page ==========//
+            DDL_GoToPage.SelectedIndex = DDL_GoToPage.Items.Count - 1;
+            BindMesurementChart();
         }
 
-        public void AlignPaging(List<Measurement> MeasurementList)
+        public List<Entity.Measurement> AlignPaging(List<Entity.Measurement> MeasurementList)
         {
+            List<Entity.Measurement> MeasurementReturn = new List<Entity.Measurement>();
+
             #region Paging
             #region Paging Variables
-            //========== Settings for paging ==========//
-            int _PageSize = Convert.ToInt32(DDL_PageSize.SelectedValue);
-           // int _CurrentPageIndex = Convert.ToInt32(LTRL_CurrentPage.Text);
-          //  int _PageCount = DT.Rows.Count / _PageSize; if ((DT.Rows.Count % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+            //========== Settings for paging ==========//          
+            int _PageSize = Convert.ToInt32(LTRL_PageSize.Text);
+            int _CurrentPageIndex = Convert.ToInt32(LTRL_CurrentPage.Text);
+            int _PageCount = MeasurementList.Count / _PageSize; if ((MeasurementList.Count % _PageSize) > 0) { _PageCount = _PageCount + 1; }
             int _StartIndex = 1;
-            int _EndIndex = 0;
-            int _CPMOnPage = 0;
+            int _EndIndex = 0;          
             #endregion
 
+            //========== Filling the DropDown ==========//
+            if (Page.IsPostBack == false)
+            {               
+                FillDDLGoToPage(_PageCount);
+                LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+            }
+
+            #region Settings for Paging
+            _CurrentPageIndex = Convert.ToInt32(DDL_GoToPage.SelectedValue);
+
+            if (_CurrentPageIndex == 0) { _StartIndex = 0; } else { _StartIndex = (_CurrentPageIndex * _PageSize); }
+
+            _EndIndex = _StartIndex + _PageSize;
+
+            if (MeasurementList.Count < _EndIndex) { _EndIndex = MeasurementList.Count; }
+
+            //========== Show Hide Settings and Setting Label Values ==========//        
+            IBTN_FirstPage.Enabled = true; IBTN_FirstPage.ImageUrl = "~/Images/Nav_FirstPage.gif";
+            IBTN_PreviousPage.Enabled = true; IBTN_PreviousPage.ImageUrl = "~/Images/Nav_PreviousPage.gif";
+
+            IBTN_NextPage.Enabled = true; IBTN_NextPage.ImageUrl = "~/Images/Nav_NextPage.gif";
+            IBTN_LastPage.Enabled = true; IBTN_LastPage.ImageUrl = "~/Images/Nav_LastPage.gif";
+
+            //=========== Don't Show if Current Page = 0 =========//
+            if (_CurrentPageIndex == 0)
+            {
+                IBTN_FirstPage.Enabled = false;
+                IBTN_PreviousPage.Enabled = false;
+
+                IBTN_FirstPage.ImageUrl = "~/Images/Nav_FirstPage_off.gif";
+                IBTN_PreviousPage.ImageUrl = "~/Images/Nav_PreviousPage_off.gif";
+            }
+            //=========== Don't Show if Current Page = Last Page =========//
+            if (_CurrentPageIndex == (_PageCount - 1))
+            {
+                IBTN_NextPage.Enabled = false;
+                IBTN_LastPage.Enabled = false;
+
+                IBTN_NextPage.ImageUrl = "~/Images/Nav_NextPage_Off.gif";
+                IBTN_LastPage.ImageUrl = "~/Images/Nav_LastPage_Off.gif";
+            }
+
+            //=========== Don't Show if PageCount = 0 =========//
+            if (_PageCount == 0)
+            {
+                IBTN_FirstPage.Enabled = false;
+                IBTN_PreviousPage.Enabled = false;
+
+                IBTN_NextPage.Enabled = false;
+                IBTN_LastPage.Enabled = false;
+
+                IBTN_FirstPage.ImageUrl = "~/Images/Nav_FirstPage_off.gif";
+                IBTN_PreviousPage.ImageUrl = "~/Images/Nav_PreviousPage_off.gif";
+
+                IBTN_NextPage.ImageUrl = "~/Images/Nav_NextPage_Off.gif";
+                IBTN_LastPage.ImageUrl = "~/Images/Nav_LastPage_Off.gif";
+            }
+
+            //========== Set Values Back To Label ==========//
+            LTRL_StartIndex.Text = _StartIndex.ToString();
+            LTRL_CurrentPage.Text = _CurrentPageIndex.ToString();
+            LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
+            LTRL_EndRecord.Text = _EndIndex.ToString();
+            LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+
             #endregion
+
+            for (int i = _StartIndex; i < _EndIndex; i = i + 1)
+            {
+                MeasurementReturn.Add(MeasurementList[i]);               
+            }        
+
+            return MeasurementReturn;
+
+            #endregion
+        }
+
+        private void FillDDLGoToPage(int _Count)
+        {
+            try
+            {
+                DDL_GoToPage.Items.Clear();
+                //========== Fills the Paging =========//
+                for (int i = 0; i < _Count; i = i + 1)
+                {
+                    DDL_GoToPage.Items.Insert(i, (new ListItem((i + 1).ToString(), i.ToString())));
+                }
+
+                //========== Add A Def =========//
+                if (_Count == 0) { DDL_GoToPage.Items.Insert(0, (new ListItem("--", "0"))); }
+
+                //========== Sets Default =========//
+                DDL_GoToPage.SelectedIndex = DDL_GoToPage.Items.Count - 1;               
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
         }
     }
 }
