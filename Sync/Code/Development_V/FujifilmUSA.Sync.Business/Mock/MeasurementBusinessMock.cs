@@ -104,7 +104,22 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_G7>();
         }
-       
+        public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
+        {
+            return new List<AnalyzeChart_G7>();
+        }
+        public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
+        {
+            return new List<AnalyzeChart_G7>();
+        }
+        //public List<AnalyzeChart_G7> GetBlackNPDChart(int MeasurementId, bool IsVerification = false)
+        //{
+        //    return new List<AnalyzeChart_G7>();
+        //}
+        //public List<AnalyzeChart_G7> GetGrayNPDChart(int MeasurementId, bool IsVerification = false)
+        //{
+        //    return new List<AnalyzeChart_G7>();
+        //}
         #endregion
 
         #region ITaskBase Members

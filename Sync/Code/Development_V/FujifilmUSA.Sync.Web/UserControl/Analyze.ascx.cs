@@ -193,8 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
                     Div_Opt_Header.Visible = true;
-                    Tab_G7.Visible = false;
-                    Tab_TVI.Visible = false;
+                    Tab_G7.Visible = false;                  
                 }                
             }
             else
@@ -336,7 +335,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)
                 {
-                    FillG7Chart(GrayFChart, GrayQuartileSummary, NPDChart1, NPDChart2);
+                    FillG7Chart(GrayFChart, GrayQuartileSummary, BlackLChart, GrayLChart, BlackNPDChart, GrayNPDChart);
                 }
             }
         }            
@@ -879,19 +878,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Fill G7 Tab
-        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayQuartileSummary, List<AnalyzeChart_G7> NPDChart1, List<AnalyzeChart_G7> NPDChart2)
+        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayQuartileSummary, List<AnalyzeChart_G7> BlackLChart, List<AnalyzeChart_G7> GrayLChart, List<AnalyzeChart_G7> BlackNPDChart, List<AnalyzeChart_G7> GrayNPDChart)
         {
-            if (GrayFChart != null)
-                FillGrayFChart(GrayFChart);
+            if (GrayFChart != null && BlackLChart != null && GrayLChart != null)
+                FillGrayFLChart(GrayFChart, BlackLChart, GrayLChart);
             if (GrayQuartileSummary != null)
                 FillGrayQuartileSummary(GrayQuartileSummary);
-            //if (NPDChart1 != null && NPDChart2 != null)
-            //FillNPDChart(NPDChart1, NPDChart2);
+            // if (BlackNPDChart != null && GrayNPDChart != null)
+            // FillNPDChart(BlackNPDChart, GrayNPDChart);
         }
 
-        #region Fill Gray Ch / F Chart
-        private void FillGrayFChart(List<AnalyzeChart_G7> DT)
+        #region Fill Gray Ch / F  and ΔL Charts
+        private void FillGrayFLChart(List<AnalyzeChart_G7> DT, List<AnalyzeChart_G7> DTBlackL, List<AnalyzeChart_G7> DTGrayL)
         {
+            #region Fill Gray Ch / F Chart
             Chart_GrayF.Series["Series1"].Points.Clear();
             Chart_GrayF.Series["Series1"]["TooltipOffset"] = "True";
             Chart_GrayF.Series["Series1Point"].Points.Clear();
@@ -902,13 +902,48 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 for (int i = 0; i < DT.Count; i++)
                 {
-                    AddPointFChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].ΔF.ToString(), Color.Black.Name.ToString(), true);
-                    AddPointFChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].ΔFLimit.ToString(), Color.Red.Name.ToString(), false);
+                    AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔF*");
+                    AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔF*");
                 }
             }
+            #endregion
+
+            #region Fill Black ΔL Chart
+            Chart_BlackL.Series["Series1"].Points.Clear();
+            Chart_BlackL.Series["Series1"]["TooltipOffset"] = "True";
+            Chart_BlackL.Series["Series1Point"].Points.Clear();
+            Chart_BlackL.Series["Series2"].Points.Clear();
+            Chart_BlackL.Series["Series2Point"].Points.Clear();
+
+            if (DTBlackL != null && DTBlackL.Count > 0)
+            {
+                for (int i = 0; i < DTBlackL.Count; i++)
+                {
+                    AddPointInChart(i, Chart_BlackL.Series["Series1"], Chart_BlackL.Series["Series1Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔL*");
+                    AddPointInChart(i, Chart_BlackL.Series["Series2"], Chart_BlackL.Series["Series2Point"], Convert.ToInt64(DTBlackL[i].Cmyk_Value).ToString(), DTBlackL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
+                }
+            }
+            #endregion
+
+            #region Fill CMY / Gray ΔL Chart
+            Chart_GrayL.Series["Series1"].Points.Clear();
+            Chart_GrayL.Series["Series1"]["TooltipOffset"] = "True";
+            Chart_GrayL.Series["Series1Point"].Points.Clear();
+            Chart_GrayL.Series["Series2"].Points.Clear();
+            Chart_GrayL.Series["Series2Point"].Points.Clear();
+
+            if (DTGrayL != null && DTGrayL.Count > 0)
+            {
+                for (int i = 0; i < DTGrayL.Count; i++)
+                {
+                    AddPointInChart(i, Chart_GrayL.Series["Series1"], Chart_GrayL.Series["Series1Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔL*");
+                    AddPointInChart(i, Chart_GrayL.Series["Series2"], Chart_GrayL.Series["Series2Point"], Convert.ToInt64(DTGrayL[i].Cmyk_Value).ToString(), DTGrayL[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔL*");
+                }
+            }
+            #endregion
         }
 
-        private void AddPointFChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, bool showCircle)
+        private void AddPointInChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, bool showCircle, string From_Delta)
         {
             _objSeries.ChartType = SeriesChartType.Spline;
             _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
@@ -930,8 +965,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             toolTip.Append("<table>");
             toolTip.Append("<tr><td><b>" + _XValue + "% Patch Metrics</b></td></tr>");
             toolTip.Append("<tr><td><table>");
-            if (!showCircle) { toolTip.Append("<tr><td>ΔF* Threshold : </td><td>"); }
-            else { toolTip.Append("<tr><td>ΔF* : </td><td>"); };
+            if (!showCircle) { toolTip.Append("<tr><td>" + From_Delta + " Threshold : </td><td>"); }
+            else { toolTip.Append("<tr><td>" + From_Delta + " : </td><td>"); };
             toolTip.Append(_YValue);
             toolTip.Append("</td></tr>");
             toolTip.Append("</table></td></tr>");
@@ -951,6 +986,65 @@ namespace FujifilmUSA.Sync.Web.UserControl
             RG_ΔChQuartileSummary.DataSource = Dt;
             RG_ΔChQuartileSummary.DataBind();
         }
+
+        #endregion
+
+        #region Fill NPD Chart
+        private void FillNPDChart(List<AnalyzeChart_G7> DTBlack, List<AnalyzeChart_G7> DTGray)
+        {
+            //CHRT_BlackNPD.Series["Series0"].Points.Clear();
+            //CHRT_BlackNPD.Series["Series0Point"].Points.Clear();
+           
+            //// There is an issue with tooltip on spline chart, by default it ignores 
+            ////http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
+            //CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
+          
+            //if (DTBlack != null && DTBlack.Count > 0)
+            //{
+            //    for (int i = 0; i < DTBlack.Count; i++)
+            //    {
+            //        AddNPDPointChart(i, CHRT_BlackNPD.Series["Series0"], Convert.ToInt64(DTBlack[i].Cmyk_Value).ToString(), DTBlack[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Black Target NPD", "G7NPDC");
+            //    }
+            //}
+
+            //CHRT_GrayNPD.Series["Series0"].Points.Clear();
+            //// CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
+
+            //CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
+          
+            //if (DTGray != null && DTGray.Count > 0)
+            //{
+            //    for (int i = 0; i < DTGray.Count; i++)
+            //    {
+            //        AddNPDPointChart(i, CHRT_GrayNPD.Series["Series0"], Convert.ToInt64(DTGray[i].Cmyk_Value).ToString(), DTGray[i].ΔValue.ToString(), Color.Black.Name.ToString(), "Gray Target NPD", "G7NPDC");
+            //    }
+            //}
+        }
+
+        //private void AddNPDPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string ColorName, string TitleName, string ValueName)
+        //{
+        //    _objSeries.ChartType = SeriesChartType.Spline;
+
+        //    _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+        //    _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+        //    _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+        //    _objSeries.Points[_Index].MarkerSize = 1;  //changed 0 by chirag on 10/23/10 as we will drawing more points and make smooth curve 
+        //    _objSeries.Points[_Index].BorderWidth = 1;
+        //    _objSeries.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+
+        //    #region Add Tooltip HTML
+        //    StringBuilder toolTip = new StringBuilder();
+        //    toolTip.Append("<table>");
+        //    toolTip.Append("<tr><td><b> " + TitleName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+        //    toolTip.Append("<tr><td><table>");
+        //    toolTip.Append("<tr><td>" + ValueName + " : </td><td>");
+        //    toolTip.Append(Utilities.DecimalRound(Convert.ToDouble(_YValue)).ToString());
+        //    toolTip.Append("</td></tr>");
+        //    toolTip.Append("</table></td></tr>");
+        //    toolTip.Append("</table>");
+        //    #endregion
+        //    _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+        //}
 
         #endregion
 
@@ -1203,8 +1297,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
         public List<Entity.AnalyzeChart_G7> GrayQuartileSummary { get; set; }
-        public List<Entity.AnalyzeChart_G7> NPDChart1 { get; set; }
-        public List<Entity.AnalyzeChart_G7> NPDChart2 { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         #endregion
 

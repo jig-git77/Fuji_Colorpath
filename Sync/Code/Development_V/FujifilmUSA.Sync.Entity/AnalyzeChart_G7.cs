@@ -7,9 +7,9 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class AnalyzeChart_G7 : AnalyzeChart
     {
-        public decimal CmykC { get; set; }
-        public decimal ΔF { get; set; }
-        public decimal ΔFLimit { get; set; }
+        public decimal Cmyk_Value { get; set; }
+        public decimal ΔValue { get; set; }
+        public decimal ΔLimit { get; set; }
        
         public string Gray_Quartile { get; set; }
         public decimal AvgΔF { get; set; }

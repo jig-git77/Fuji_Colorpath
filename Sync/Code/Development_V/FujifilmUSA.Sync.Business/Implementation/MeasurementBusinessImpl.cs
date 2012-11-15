@@ -647,10 +647,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     G7ChartDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_G7()
-                        {                          
-                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
-                            ΔF = DataReader.ReadDecimal(x, "ΔF"),
-                            ΔFLimit = DataReader.ReadDecimal(x, "ΔFLimit")                            
+                        {
+                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
+                            ΔValue = DataReader.ReadDecimal(x, "ΔF"),
+                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")                            
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));
@@ -679,6 +679,62 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Gray_Quartile = DataReader.ReadString(x, "Gray Quartile"),
                             AvgΔF = DataReader.ReadDecimal(x, "AvgΔF"),
                             MAXΔF = DataReader.ReadDecimal(x, "MAXΔF")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));
+            return G7ChartDetails;
+        }
+
+        public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
+        {
+            var G7ChartDetails = new List<AnalyzeChart_G7>();
+            string storedProc = "CPSync4D.GetVChartData_G7";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_G7";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    G7ChartDetails = dsMeasurements.Tables[2].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_G7()
+                        {
+                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_K"),
+                            ΔValue = DataReader.ReadDecimal(x, "ΔL"),
+                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")     
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));
+            return G7ChartDetails;
+        }
+
+        public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
+        {
+            var G7ChartDetails = new List<AnalyzeChart_G7>();
+            string storedProc = "CPSync4D.GetVChartData_G7";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_G7";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    G7ChartDetails = dsMeasurements.Tables[3].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_G7()
+                        {
+                            Cmyk_Value = DataReader.ReadDecimal(x, "CMYK_C"),
+                            ΔValue = DataReader.ReadDecimal(x, "ΔL"),
+                            ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")     
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));

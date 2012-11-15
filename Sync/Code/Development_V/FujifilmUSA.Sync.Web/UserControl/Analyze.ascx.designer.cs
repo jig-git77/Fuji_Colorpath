@@ -355,6 +355,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSummary;
         
         /// <summary>
+        /// Tab_G7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Tab_G7;
+        
+        /// <summary>
+        /// locG7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locG7;
+        
+        /// <summary>
         /// locInkPaper control.
         /// </summary>
         /// <remarks>
@@ -389,42 +407,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Localize locReport;
-        
-        /// <summary>
-        /// Tab_G7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Tab_G7;
-        
-        /// <summary>
-        /// locG7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locG7;
-        
-        /// <summary>
-        /// Tab_TVI control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Tab_TVI;
-        
-        /// <summary>
-        /// locTVI control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTVI;
         
         /// <summary>
         /// UpdatePanel5 control.
@@ -742,31 +724,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid RG_ΔChQuartileSummary;
         
         /// <summary>
-        /// CHRT_BlackNPD control.
+        /// Chart_BlackL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_BlackNPD;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_BlackL;
         
         /// <summary>
-        /// CHRT_GrayNPD control.
+        /// Chart_GrayL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_GrayNPD;
-        
-        /// <summary>
-        /// UpdatePanel8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel8;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_GrayL;
         
         /// <summary>
         /// hdnSelectedTabIndex control.
