@@ -243,6 +243,12 @@
   <data name="locReportResource1.Text" xml:space="preserve">
     <value>Report_de</value>
   </data>
+  <data name="locG7Resource1.Text" xml:space="preserve">
+    <value>G7_de</value>
+  </data>
+  <data name="locTVIResource1.Text" xml:space="preserve">
+    <value>TVI_de</value>
+  </data>
   <data name="locSelectedMetricResource1.Text" xml:space="preserve">
     <value>Selected Metric:_de</value>
   </data>

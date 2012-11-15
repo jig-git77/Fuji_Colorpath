@@ -693,4 +693,16 @@
   <data name="EReferenceChartDisType_ValidationChart" xml:space="preserve">
     <value>Validation Chart</value>
   </data>
+  <data name="Error_ProfilerSettings_MissingUploadFile" xml:space="preserve">
+    <value>You are missing of uploading neccessary data. Please check wheather you have upload Profiler Settings file.</value>
+  </data>
+  <data name="Duplicate_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+    <value>Device family Profiler Option already exists with same name.</value>
+  </data>
+  <data name="Error_InsertDeviceFamilyProfilerOption" xml:space="preserve">
+    <value>Error occured while inserting device family Profiler Option.Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
+    <value>Error occured while inserting device family Profiler Option Presets.Please contact your administrator.</value>
+  </data>
 </root>

@@ -92,22 +92,29 @@
             <img src="Images/Reference-Chart-management.jpg" style="position:relative;z-index:1; " alt="Reference Chart" />
             <span> <asp:Localize runat="server" ID="locReferenceChart" 
           Text="Reference Chart" meta:resourcekey="locReferenceChartResource1"></asp:Localize> 
- </span>
+        </span>
       </asp:LinkButton>
       <asp:LinkButton ID="lbtnSourceProfile" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnSourceProfile_Click">
             <img src="Images/sourceprofile-management.png" style="position:relative;z-index:1; " alt="Source Profile" />
             <span> <asp:Localize Text="Source Profile" runat="server" 
           ID="locSourceProfile" meta:resourcekey="locSourceProfileResource1"></asp:Localize> 
- </span>
+        </span>
       </asp:LinkButton>   
       <asp:LinkButton ID="lbtnActivityValidationRules" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnActivityValidationRules_Click">
             <img src="Images/activity-validation-rules.png" style="position:relative;z-index:1; " alt="Activity Validation Rules" />
             <span> <asp:Localize Text="Activity Validation Rules" runat="server" 
           ID="locActivityValidationRules"></asp:Localize> 
- </span>
+        </span>
       </asp:LinkButton>      
+       <asp:LinkButton ID="lbtnProfilerSettings" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnActivityValidationRules_Click">
+            <img src="Images/Profiler-Settings-management.jpg" style="position:relative;z-index:1; " alt="Device Family Profiler Settings" />
+            <span> <asp:Localize Text="Device Family Profiler Settings" runat="server" 
+          ID="locProfilerSettings"></asp:Localize> 
+            </span>
+      </asp:LinkButton>    
   </div> 
 </div>
 </div>

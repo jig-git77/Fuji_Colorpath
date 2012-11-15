@@ -57,6 +57,7 @@
     <Compile Include="PresenterClosePrintCondition.cs" />
     <Compile Include="PresenterColorOrganizerRequestProcessor.cs" />
     <Compile Include="PresenterCOTransferSiteControl.cs" />
+    <Compile Include="PresenterDeviceProfilerSettings.cs" />
     <Compile Include="PresenterForgotPassword.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +105,7 @@
     <Compile Include="ViewInterface\IViewClosePrintCondition.cs" />
     <Compile Include="ViewInterface\IViewColorOrganizerRequestProcessor.cs" />
     <Compile Include="ViewInterface\IViewCOTransferSiteControl.cs" />
+    <Compile Include="ViewInterface\IViewDeviceProfilerSettings.cs" />
     <Compile Include="ViewInterface\IViewForgotPassword.cs" />
     <Compile Include="ViewInterface\IViewGlobalActivation.cs" />
     <Compile Include="ViewInterface\IViewImportMeasurements.cs" />

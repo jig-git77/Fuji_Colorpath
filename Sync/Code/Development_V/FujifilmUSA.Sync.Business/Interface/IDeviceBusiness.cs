@@ -11,5 +11,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateDevice(Device device);
         bool DeleteDevice(int deviceId);
         int InsertDeviceFamily(DeviceFamily deviceFamily);
+
+        int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption);       
     }
 }

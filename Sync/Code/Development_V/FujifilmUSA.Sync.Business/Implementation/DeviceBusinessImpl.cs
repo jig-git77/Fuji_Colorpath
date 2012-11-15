@@ -243,6 +243,43 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamily"));
             return returnValue;
+        }       
+
+        public int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption deviceFamilyProfilerOption)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var profilerOptionPresets = new XElement("ProfilerOptionPresetData",
+                                                       deviceFamilyProfilerOption.ProfilerOptionPresets.
+                                                             Select(x =>
+                                                                    new XElement("ProfilerOptionPreset",
+                                                                                 new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                 new XAttribute("ProfilerOptionID", x.ProfilerOption.ProfilerOptionId),
+                                                                                 new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)                                                                              
+                                                                        )).ToList());
+
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertDeviceFamilyProfilerOption]",
+                            new object[]
+                                    {
+                                        deviceFamilyProfilerOption.DeviceFamilyId,
+                                        deviceFamilyProfilerOption.ProfilerOptionsName,
+                                        deviceFamilyProfilerOption.ProfilerOptionsDesc,
+                                        deviceFamilyProfilerOption.ProjectTypeID,
+                                        profilerOptionPresets.ToString()                             
+                                        
+                                    });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertDeviceFamilyProfilerOption" };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertDeviceFamilyProfilerOption"));
+            return returnValue;
         }
 
         #endregion

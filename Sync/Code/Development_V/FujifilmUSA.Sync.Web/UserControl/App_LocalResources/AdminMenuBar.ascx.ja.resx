@@ -207,4 +207,7 @@
   <data name="ltnLicenseResource1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="locProfilerSettingsResource1.Text" xml:space="preserve">
+    <value>Device Family Profiler Settings_ja</value>
+  </data>
 </root>

@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ActivityValidationRules.aspx" />
+    <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
@@ -157,6 +158,8 @@
     <Content Include="Images\powered-logo.gif" />
     <Content Include="Images\Profile-Management-icon.png" />
     <Content Include="Images\Profile-Management.png" />
+    <Content Include="Images\Profiler-Settings-management.jpg" />
+    <Content Include="Images\Profiler-Settings.jpg" />
     <Content Include="Images\project.png" />
     <Content Include="Images\Project_Close_1.png" />
     <Content Include="Images\Reference-Chart-management.jpg" />
@@ -220,6 +223,7 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
+    <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
@@ -474,6 +478,13 @@
     <Compile Include="ActivityValidationRules.aspx.designer.cs">
       <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AddDeviceProfilerSettings.aspx.cs">
+      <DependentUpon>AddDeviceProfilerSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDeviceProfilerSettings.aspx.designer.cs">
+      <DependentUpon>AddDeviceProfilerSettings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AddMeasurementDevice.aspx.cs">
       <DependentUpon>AddMeasurementDevice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -710,6 +721,7 @@
     </Compile>
     <Compile Include="PopupImportMeasurements.aspx.cs">
       <DependentUpon>PopupImportMeasurements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PopupImportMeasurements.aspx.designer.cs">
       <DependentUpon>PopupImportMeasurements.aspx</DependentUpon>
@@ -783,6 +795,13 @@
     </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.designer.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceProfilerSettings.ascx.cs">
+      <DependentUpon>AddDeviceProfilerSettings.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddDeviceProfilerSettings.ascx.designer.cs">
+      <DependentUpon>AddDeviceProfilerSettings.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject\ValidationSetup.ascx.cs">
       <DependentUpon>ValidationSetup.ascx</DependentUpon>
@@ -1525,8 +1544,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.resx" />
@@ -1559,11 +1582,17 @@
     <Content Include="UserControl\App_LocalResources\Header.ascx.ja.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Settings.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Settings.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\Settings.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\Settings.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\UserManagement.ascx.resx">
@@ -2016,6 +2045,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.de.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

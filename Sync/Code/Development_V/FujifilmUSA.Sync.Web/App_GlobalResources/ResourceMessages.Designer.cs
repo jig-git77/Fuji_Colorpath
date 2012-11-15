@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device family Profiler Option already exists with same name..
+        /// </summary>
+        internal static string Duplicate_InsertDeviceFamilyProfilerOption {
+            get {
+                return ResourceManager.GetString("Duplicate_InsertDeviceFamilyProfilerOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to License already exists with same branch..
         /// </summary>
         internal static string Duplicate_InsertLicense {
@@ -925,6 +934,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting device family Profiler Option.Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertDeviceFamilyProfilerOption {
+            get {
+                return ResourceManager.GetString("Error_InsertDeviceFamilyProfilerOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while inserting license.Please contact your administrator..
         /// </summary>
         internal static string Error_InsertLicense {
@@ -948,6 +966,15 @@ namespace Resources {
         internal static string Error_InsertMeasurementDevice {
             get {
                 return ResourceManager.GetString("Error_InsertMeasurementDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting device family Profiler Option Presets.Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertProfilerOptionPreset {
+            get {
+                return ResourceManager.GetString("Error_InsertProfilerOptionPreset", resourceCulture);
             }
         }
         
@@ -993,6 +1020,15 @@ namespace Resources {
         internal static string Error_OptimizeDeviceLinkProfile {
             get {
                 return ResourceManager.GetString("Error_OptimizeDeviceLinkProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are missing of uploading neccessary data. Please check wheather you have upload Profiler Settings file..
+        /// </summary>
+        internal static string Error_ProfilerSettings_MissingUploadFile {
+            get {
+                return ResourceManager.GetString("Error_ProfilerSettings_MissingUploadFile", resourceCulture);
             }
         }
         

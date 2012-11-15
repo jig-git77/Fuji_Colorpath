@@ -24,5 +24,10 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsVerification { get; }
 
         List<Entity.Measurement> MeasurementSummary { get; set; }
+
+        List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
+        List<Entity.AnalyzeChart_G7> GrayQuartileSummary { get; set; }
+        List<Entity.AnalyzeChart_G7> NPDChart1 { get; set; }
+        List<Entity.AnalyzeChart_G7> NPDChart2 { get; set; }
     }
 }

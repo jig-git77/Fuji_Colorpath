@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="ActivityValidation.cs" />
     <Compile Include="AnalyzeChart.cs" />
+    <Compile Include="AnalyzeChart_G7.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="Enums.cs" />

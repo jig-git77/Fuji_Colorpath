@@ -96,6 +96,15 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
+        public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
+        {
+            return new List<AnalyzeChart_G7>();
+        }
+        public List<AnalyzeChart_G7> GetGrayQuartileSummary(int MeasurementId, bool IsVerification = false)
+        {
+            return new List<AnalyzeChart_G7>();
+        }
+       
         #endregion
 
         #region ITaskBase Members

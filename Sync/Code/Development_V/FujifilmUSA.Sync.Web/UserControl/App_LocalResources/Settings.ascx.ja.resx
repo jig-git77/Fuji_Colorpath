@@ -276,4 +276,10 @@
   <data name="locUserMgmtResource1.Text" xml:space="preserve">
     <value>User Management_ja</value>
   </data>
+  <data name="imgProfilerSettingsResource1.AlternateText" xml:space="preserve">
+    <value>Device Family Profiler Settings_ja</value>
+  </data>
+  <data name="imgProfilerSettingsResource1.ToolTip" xml:space="preserve">
+    <value>Device Family Profiler Settings_ja</value>
+  </data>
 </root>

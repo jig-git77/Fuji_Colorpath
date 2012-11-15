@@ -163,11 +163,11 @@
                             <asp:Image ID="imgRefChart" runat="server" AlternateText="Reference Chart"
                                 ImageUrl="~/Images/Reference-Chart.jpg" ToolTip="Reference Chart" 
                                 meta:resourcekey="imgRefChartResource1" />
-</div>
+                        </div>
                         <asp:Localize runat="server" Text="Reference Chart" ID="locReferenceChart" 
                           meta:resourcekey="locReferenceChartResource1"></asp:Localize>
                     
-</asp:LinkButton>
+                    </asp:LinkButton>
                 </div>
                  <div id="divSourceProfileSeprator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
@@ -198,9 +198,9 @@
                         <div>
                             <asp:Image ID="Image6" runat="server" AlternateText="Activity Validation Rules"
                                 ImageUrl="~/Images/activity-validation-rules-icon.png" ToolTip="Activity Validation Rules" />
-</div>
+                        </div>
                         <asp:Localize Text="Activity Validation Rules" runat="server" ID="locActivityValidationRules"></asp:Localize>
-</asp:LinkButton>
+                    </asp:LinkButton>
                 </div>
                 <div id="div2" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
@@ -209,6 +209,21 @@
                      <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Activity Management"
                         PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" 
                          Visible="False" meta:resourcekey="LinkButton1Resource1"/>             
+                </div>
+                <div id="divProfilerSettingSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                    <img alt="" src="Images/admin-icon-divider.png" />
+                </div>
+                  <div id="tdProfilerSettings" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                     <asp:LinkButton ID="lnkProfilerSettings" runat="server" ToolTip="Device Family Profiler Settings"
+                        PostBackUrl="~/AddDeviceProfilerSettings.aspx" Text="Device Family Profiler Settings" >                                   
+                         <div>
+                            <asp:Image ID="Image_ProfilerSettings" runat="server" AlternateText="Device Family Profiler Settings"
+                                ImageUrl="~/Images/Profiler-Settings.jpg" ToolTip="Device Family Profiler Settings" 
+                                meta:resourcekey="imgProfilerSettingsResource1" />
+                        </div>
+                        <asp:Localize runat="server" Text="Device Family Profiler Settings" ID="locProfilerSettings" 
+                          meta:resourcekey="locProfilerSettingsResource1"></asp:Localize>                    
+                    </asp:LinkButton>
                 </div>
                 </td>
                 </tr>            

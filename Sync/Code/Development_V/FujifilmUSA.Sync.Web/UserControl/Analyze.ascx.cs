@@ -193,6 +193,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
                     Div_Opt_Header.Visible = true;
+                    Tab_G7.Visible = false;
+                    Tab_TVI.Visible = false;
                 }                
             }
             else
@@ -316,18 +318,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             From_ΔE = rbtnListDeltaE.SelectedValue;
             lblEPryPatches.Text = From_ΔE;
+
             _presenterAnalyze.GetInkPaperChart();
             if (!IsErrorOccured)
             {
                 FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
-
-
             }
 
             _presenterAnalyze.GetGrayChart();
             if (!IsErrorOccured)
             {
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
+            }
+
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-------------Only call G7 & TVI tab data if it is Validation
+            {
+                _presenterAnalyze.GetG7Chart();
+                if (!IsErrorOccured)
+                {
+                    FillG7Chart(GrayFChart, GrayQuartileSummary, NPDChart1, NPDChart2);
+                }
             }
         }            
 
@@ -868,8 +878,86 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region Fill G7 Tab
+        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayQuartileSummary, List<AnalyzeChart_G7> NPDChart1, List<AnalyzeChart_G7> NPDChart2)
+        {
+            if (GrayFChart != null)
+                FillGrayFChart(GrayFChart);
+            if (GrayQuartileSummary != null)
+                FillGrayQuartileSummary(GrayQuartileSummary);
+            //if (NPDChart1 != null && NPDChart2 != null)
+            //FillNPDChart(NPDChart1, NPDChart2);
+        }
+
+        #region Fill Gray Ch / F Chart
+        private void FillGrayFChart(List<AnalyzeChart_G7> DT)
+        {
+            Chart_GrayF.Series["Series1"].Points.Clear();
+            Chart_GrayF.Series["Series1"]["TooltipOffset"] = "True";
+            Chart_GrayF.Series["Series1Point"].Points.Clear();
+            Chart_GrayF.Series["Series2"].Points.Clear();
+            Chart_GrayF.Series["Series2Point"].Points.Clear();
+
+            if (DT != null && DT.Count > 0)
+            {
+                for (int i = 0; i < DT.Count; i++)
+                {
+                    AddPointFChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].ΔF.ToString(), Color.Black.Name.ToString(), true);
+                    AddPointFChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].ΔFLimit.ToString(), Color.Red.Name.ToString(), false);
+                }
+            }
+        }
+
+        private void AddPointFChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, bool showCircle)
+        {
+            _objSeries.ChartType = SeriesChartType.Spline;
+            _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+            _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+            _objSeries.Points[_Index].BorderWidth = 1;
+
+
+            _objSeriesPoint.ChartType = SeriesChartType.Point;
+            _objSeriesPoint.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+            _objSeriesPoint.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+            _objSeriesPoint.Points[_Index].MarkerStyle = showCircle ? MarkerStyle.Circle : MarkerStyle.None;
+            _objSeriesPoint.Points[_Index].MarkerSize = showCircle ? 5 : 0;
+            _objSeriesPoint.Points[_Index].BorderWidth = 1;
+            _objSeriesPoint.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+
+
+            #region Add Tooltip HTML
+            StringBuilder toolTip = new StringBuilder();
+            toolTip.Append("<table>");
+            toolTip.Append("<tr><td><b>" + _XValue + "% Patch Metrics</b></td></tr>");
+            toolTip.Append("<tr><td><table>");
+            if (!showCircle) { toolTip.Append("<tr><td>ΔF* Threshold : </td><td>"); }
+            else { toolTip.Append("<tr><td>ΔF* : </td><td>"); };
+            toolTip.Append(_YValue);
+            toolTip.Append("</td></tr>");
+            toolTip.Append("</table></td></tr>");
+            toolTip.Append("</table>");
+            #endregion
+            _objSeriesPoint.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+
+        }
+
+
         #endregion
-        
+
+        #region Fill Gray Quartile Summary
+
+        private void FillGrayQuartileSummary(List<AnalyzeChart_G7> Dt)
+        {
+            RG_ΔChQuartileSummary.DataSource = Dt;
+            RG_ΔChQuartileSummary.DataBind();
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
         #endregion
 
         #region Control Events
@@ -1113,8 +1201,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public List<Entity.Measurement> MeasurementSummary { get; set; }
 
+        public List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayQuartileSummary { get; set; }
+        public List<Entity.AnalyzeChart_G7> NPDChart1 { get; set; }
+        public List<Entity.AnalyzeChart_G7> NPDChart2 { get; set; }
+
         #endregion
 
+        #region Paging for top Trendline Chart
         protected void DDL_PageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             //========== Alter the page size ==========//
@@ -1276,5 +1370,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Ex;
             }
         }
+        #endregion
     }
 }

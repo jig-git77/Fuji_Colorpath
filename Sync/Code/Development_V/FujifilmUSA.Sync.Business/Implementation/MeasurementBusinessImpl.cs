@@ -629,6 +629,62 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return Convert.ToInt32(outParam.Value);
         }
 
+        public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
+        {
+            var G7ChartDetails = new List<AnalyzeChart_G7>();
+            string storedProc = "CPSync4D.GetVChartData_G7";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_G7";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    G7ChartDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_G7()
+                        {                          
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            ΔF = DataReader.ReadDecimal(x, "ΔF"),
+                            ΔFLimit = DataReader.ReadDecimal(x, "ΔFLimit")                            
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));
+            return G7ChartDetails;
+        }
+
+        public List<AnalyzeChart_G7> GetGrayQuartileSummary(int MeasurementId, bool IsVerification = false)
+        {
+            var G7ChartDetails = new List<AnalyzeChart_G7>();
+            string storedProc = "CPSync4D.GetVChartData_G7";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_G7";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    G7ChartDetails = dsMeasurements.Tables[1].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_G7()
+                        {
+                            Gray_Quartile = DataReader.ReadString(x, "Gray Quartile"),
+                            AvgΔF = DataReader.ReadDecimal(x, "AvgΔF"),
+                            MAXΔF = DataReader.ReadDecimal(x, "MAXΔF")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7"));
+            return G7ChartDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members

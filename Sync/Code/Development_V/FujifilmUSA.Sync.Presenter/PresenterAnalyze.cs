@@ -94,6 +94,15 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
             _viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
             _viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-        }    
+        }
+
+        public void GetG7Chart()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.GrayFChart = measurementBusiness.GetGrayFChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.GrayQuartileSummary = measurementBusiness.GetGrayQuartileSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+           // _viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+        } 
     }
 }

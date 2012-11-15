@@ -37,8 +37,12 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return 0;
         }
-
-
+       
+        public int InsertDeviceFamilyProfilerOption(DeviceFamilyProfilerOption DeviceFamilyProfilerOption)
+        {
+            return 0;
+        }
+       
         #endregion
 
         #region ITaskBase Members
