@@ -289,12 +289,12 @@
         <section class="inner_tab">
             <ul class="tabs">
                 <li><span><a href="#tab1"><asp:Localize Text="Summary" ID="locSummary" 
-                        runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>   
-                <li id="Tab_G7" runat="server"><span><a href="#tab6"><asp:Localize Text="G7" ID="locG7" runat="server" 
-                        meta:resourcekey="locG7Resource1"></asp:Localize></a></span></li>                                      
+                        runat="server" meta:resourcekey="locSummaryResource1"></asp:Localize></a></span></li>                                                
                 <li><span><a href="#tab2"><asp:Localize Text="Ink Paper" ID="locInkPaper" 
-                        runat="server" meta:resourcekey="locInkPaperResource1"></asp:Localize></a></span></li>                                
-                <li><span><a href="#tab3"><asp:Localize Text="Gray" ID="locGray" runat="server" 
+                        runat="server" meta:resourcekey="locInkPaperResource1"></asp:Localize></a></span></li> 
+                <li id="Tab_G7" runat="server"><span><a href="#tab6"><asp:Localize Text="G7" ID="locG7" runat="server" 
+                        meta:resourcekey="locG7Resource1"></asp:Localize></a></span></li>                                    
+                <li><span><a href="#tab3"><asp:Localize Text="Gamut" ID="locGray" runat="server" 
                         meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>                                
                 <li><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
                         runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>  
@@ -402,18 +402,18 @@
                                 <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
                                     <Fields>
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
+                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
                                         <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right">
                                             <ItemTemplate>
                                                 <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
                                                     <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
                                             </ItemTemplate>
-                                        </asp:TemplateField>                                     
-                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        </asp:TemplateField>   
+                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                  
+                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                       
                                         <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
-                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                        
                                         <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
                                         <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
                                     </Fields>
@@ -431,7 +431,7 @@
                                                     <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
                                                         UniqueName="MetricSumName">
                                                     </telerik:GridBoundColumn>
-                                                    <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                    <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
                                                         UniqueName="TargetValue">
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
@@ -458,8 +458,8 @@
     </div>    
     <div class="tab_bottom">
         &nbsp;</div>
-    </section>
-    
+    </section>  
+
    <section id="tab2" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -655,6 +655,406 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
     
+   <section id="tab6" class="contantbox tabcontant hideclass">
+      <div class="tab_top">&nbsp;</div>
+        <div class="tab_middle">
+           <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" > 
+          <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+              <ContentTemplate>         
+           
+                    <table cellpadding="0" cellspacing="0" width="650px">
+                         <tr>
+                            <td valign="top" style="width: 59%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                    <tr>
+                                        <td class="green-title">
+                                            &nbsp; Gray Balance ΔCh
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top">
+                                                <asp:Chart ID="Chart_GrayF" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
+                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                <Legends>
+                                                    <asp:Legend Name="Default" Enabled="False">
+                                                    </asp:Legend>
+                                                </Legends>
+                                                <BorderSkin SkinStyle="None"></BorderSkin>                                               
+                                                <Series>
+                                                    <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>                                                         
+                                                    <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>  
+                                                    <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                    BorderWidth="2">
+                                                    </asp:Series>  
+                                                    <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                            Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                                BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>                                                       
+                                                </Series>
+                                                <ChartAreas>
+                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                        <Position Height="99" Width="94" X="0" Y="2" />
+                                                        <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
+                                                            Minimum="0" Maximum="12">
+                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                        </AxisY>
+                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                        </AxisX>
+                                                    </asp:ChartArea>
+                                                </ChartAreas>
+                                            </asp:Chart>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width: 2%;">
+                            </td>
+                            <td style="width: 39%" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                    <tr>
+                                        <td class="green-title">
+                                            &nbsp; Gray  ΔCh Summary
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" style="padding: 2px">
+                                            <telerik:RadGrid ID="RG_ΔChSummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔChSummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                                    <HeaderStyle Font-Bold="True" />  
+                                                    <ItemStyle BackColor="#F2F2F2" />
+                                                    <AlternatingItemStyle BackColor="#FFFFFF" />                    
+                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                            <Columns>
+                                                                <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
+                                                                    UniqueName="MetricSumName">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                    UniqueName="TargetValue">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                                    UniqueName="MeasuredValue">
+                                                                </telerik:GridBoundColumn>     
+                                                                <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
+                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                </telerik:GridBoundColumn>                                               
+                                                            </Columns>                        
+                                                        </MasterTableView>                        
+                                            </telerik:RadGrid>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>                                
+                        </tr>
+                    </table>
+                    
+                    <table cellpadding="0" cellspacing="0" width="650px">
+                        <tr>
+                        <td valign="top" style="width: 59%">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                <tr>
+                                    <td class="green-title">
+                                        &nbsp; Black ΔL
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                            <asp:Chart ID="Chart_BlackL" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
+                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                            <Legends>
+                                                <asp:Legend Name="Default" Enabled="False">
+                                                </asp:Legend>
+                                            </Legends>
+                                            <BorderSkin SkinStyle="None"></BorderSkin>                                               
+                                            <Series>
+                                                <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                                         
+                                                <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>  
+                                                <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                BorderWidth="2">
+                                                </asp:Series>  
+                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                                       
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                    <Position Height="99" Width="94" X="0" Y="2" />
+                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
+                                                        Minimum="0" Maximum="12">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisY>
+                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisX>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 2%;">
+                        </td>
+                        <td style="width: 39%" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                    <tr>
+                                        <td class="green-title">
+                                            &nbsp; Black  ΔL Summary
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" style="padding: 2px">
+                                            <telerik:RadGrid ID="RG_ΔLBlackSummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔLBlackSummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                                    <HeaderStyle Font-Bold="True" />  
+                                                    <ItemStyle BackColor="#F2F2F2" />
+                                                    <AlternatingItemStyle BackColor="#FFFFFF" />                    
+                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                            <Columns>
+                                                                <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
+                                                                    UniqueName="MetricSumName">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                    UniqueName="TargetValue">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                                    UniqueName="MeasuredValue">
+                                                                </telerik:GridBoundColumn>     
+                                                                <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
+                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                </telerik:GridBoundColumn>                                               
+                                                            </Columns>                        
+                                                        </MasterTableView>                        
+                                            </telerik:RadGrid>
+                                        </td>
+                                    </tr>
+                                </table>
+                        </td>                                
+                    </tr>
+                </table>
+
+                    <table cellpadding="0" cellspacing="0" width="650px">
+                        <tr>
+                        <td valign="top" style="width: 59%">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                <tr>
+                                    <td class="green-title">
+                                        &nbsp; Gray ΔL
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                            <asp:Chart ID="Chart_GrayL" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
+                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                            <Legends>
+                                                <asp:Legend Name="Default" Enabled="False">
+                                                </asp:Legend>
+                                            </Legends>
+                                            <BorderSkin SkinStyle="None"></BorderSkin>                                               
+                                            <Series>
+                                                <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                                         
+                                                <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>  
+                                                <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
+                                                                BorderWidth="2">
+                                                </asp:Series>  
+                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                            BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                                       
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                    <Position Height="99" Width="94" X="0" Y="2" />
+                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
+                                                        Minimum="0" Maximum="12">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisY>
+                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisX>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 2%;">
+                        </td>
+                        <td style="width: 39%" valign="top">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                    <tr>
+                                        <td class="green-title">
+                                            &nbsp; Gray  ΔL Summary
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" style="padding: 2px">
+                                            <telerik:RadGrid ID="RG_ΔLGraySummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔLGraySummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                                    <HeaderStyle Font-Bold="True" />  
+                                                    <ItemStyle BackColor="#F2F2F2" />
+                                                    <AlternatingItemStyle BackColor="#FFFFFF" />                    
+                                                        <MasterTableView DataKeyNames="MetricMeasuredID">  
+                                                            <Columns>
+                                                                <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
+                                                                    UniqueName="MetricSumName">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
+                                                                    UniqueName="TargetValue">
+                                                                </telerik:GridBoundColumn>
+                                                                <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
+                                                                    UniqueName="MeasuredValue">
+                                                                </telerik:GridBoundColumn>     
+                                                                <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
+                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                </telerik:GridBoundColumn>                                               
+                                                            </Columns>                        
+                                                        </MasterTableView>                        
+                                            </telerik:RadGrid>
+                                        </td>
+                                    </tr>
+                                </table>
+                        </td>                                
+                    </tr>
+                </table>
+
+                    <%--<table cellpadding="0" cellspacing="0" width="650px">
+                        <tr>
+                            <td style="width: 49%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                <tr>
+                                    <td class="green-title">
+                                        &nbsp; Black NPD
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                        <asp:Chart ID="CHRT_BlackNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
+                                            ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
+                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                            <Legends>
+                                                <asp:Legend Name="Default" Enabled="false">
+                                                </asp:Legend>
+                                            </Legends>
+                                            <BorderSkin SkinStyle="None"></BorderSkin>
+                                           
+                                            <Series>
+                                                <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series0Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>                                               
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                    <Position Height="99" Width="94" X="0" Y="2" />
+                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisY>
+                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                    </AxisX>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                    </td>
+                                </tr>
+                            </table>
+                            </td>
+                            <td style="width: 2%;">
+                            </td>
+                            <td style="width: 49%;">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                    <tr>
+                                        <td class="green-title">
+                                            &nbsp; Gray NPD
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:Chart ID="CHRT_GrayNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
+                                                ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
+                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
+                                                <Legends>
+                                                    <asp:Legend Name="Default" Enabled="false">
+                                                    </asp:Legend>
+                                                </Legends>
+                                                <BorderSkin SkinStyle="None"></BorderSkin>
+                                              
+                                                <Series>
+                                                    <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                        Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
+                                                        MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                    </asp:Series>                                            
+                                                </Series>
+                                                <ChartAreas>
+                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                        <Position Height="99" Width="94" X="0" Y="2" />
+                                                        <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
+                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                        </AxisY>
+                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
+                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
+                                                        </AxisX>
+                                                    </asp:ChartArea>
+                                                </ChartAreas>
+                                            </asp:Chart>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>--%>
+               
+               </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />                     
+                    </Triggers>  
+           </asp:UpdatePanel>       
+        </div>
+        <div class="clear"></div>
+        </div>                            	
+        </div>
+        <div class="tab_bottom">&nbsp;</div>
+   </section>
+
    <section id="tab3" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1219,332 +1619,7 @@
         <div class="tab_bottom">&nbsp;</div>
    </section>
   
-    <section id="tab6" class="contantbox tabcontant hideclass">
-      <div class="tab_top">&nbsp;</div>
-        <div class="tab_middle">
-           <div class="combopart">
-        <div class="float_l" style="padding-left: 10px;" > 
-          <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-              <ContentTemplate>         
-           
-                    <table cellpadding="0" cellspacing="0" width="650px">
-                         <tr>
-                            <td valign="top" style="width: 59%">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                    <tr>
-                                        <td class="green-title">
-                                            &nbsp; Gray Balance ΔCh
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top">
-                                                <asp:Chart ID="Chart_GrayF" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
-                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
-                                                <Legends>
-                                                    <asp:Legend Name="Default" Enabled="False">
-                                                    </asp:Legend>
-                                                </Legends>
-                                                <BorderSkin SkinStyle="None"></BorderSkin>                                               
-                                                <Series>
-                                                    <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                        Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                    </asp:Series>                                                         
-                                                    <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                        Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                        MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                    </asp:Series>  
-                                                    <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                    BorderWidth="2">
-                                                    </asp:Series>  
-                                                    <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                            Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                                BackSecondaryColor="162, 164, 255">
-                                                    </asp:Series>                                                       
-                                                </Series>
-                                                <ChartAreas>
-                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
-                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
-                                                        <Position Height="99" Width="94" X="0" Y="2" />
-                                                        <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                            Minimum="0" Maximum="12">
-                                                            <MajorGrid LineColor="Gray"></MajorGrid>
-                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                        </AxisY>
-                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
-                                                            <MajorGrid LineColor="Gray"></MajorGrid>
-                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                        </AxisX>
-                                                    </asp:ChartArea>
-                                                </ChartAreas>
-                                            </asp:Chart>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td style="width: 2%;">
-                            </td>
-                            <td style="width: 39%" valign="top">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                    <tr>
-                                        <td class="green-title">
-                                            &nbsp; Gray  ΔCh Quartile Summary
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top" style="padding: 2px">
-                                            <telerik:RadGrid ID="RG_ΔChQuartileSummary" Width="100%" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                                               CellSpacing="0" GridLines="None">
-                   
-                                                    <HeaderStyle Font-Bold="True"/>                           
-                                                        <MasterTableView DataKeyNames="Gray_Quartile"  >  
-                                                            <Columns>                                 
-                                                                 <telerik:GridBoundColumn DataField="Gray_Quartile" HeaderText="Gray Quartile" UniqueName="Gray_Quartile"></telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="AvgΔF" HeaderText="Avg ΔF"  UniqueName="AvgΔF"></telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="MAXΔF" HeaderText="MAX ΔF" UniqueName="MAXΔF"></telerik:GridBoundColumn>  
-                                                            </Columns>                        
-                                                        </MasterTableView>                        
-                                            </telerik:RadGrid>                        
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>                                
-                        </tr>
-                    </table>
-                    
-                    <table cellpadding="0" cellspacing="0" width="650px">
-                        <tr>
-                        <td valign="top" style="width: 59%">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                <tr>
-                                    <td class="green-title">
-                                        &nbsp; Black ΔL
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">
-                                            <asp:Chart ID="Chart_BlackL" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
-                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
-                                            <Legends>
-                                                <asp:Legend Name="Default" Enabled="False">
-                                                </asp:Legend>
-                                            </Legends>
-                                            <BorderSkin SkinStyle="None"></BorderSkin>                                               
-                                            <Series>
-                                                <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>                                                         
-                                                <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>  
-                                                <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                BorderWidth="2">
-                                                </asp:Series>  
-                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                        Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                            BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>                                                       
-                                            </Series>
-                                            <ChartAreas>
-                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
-                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
-                                                    <Position Height="99" Width="94" X="0" Y="2" />
-                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                        Minimum="0" Maximum="12">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisY>
-                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisX>
-                                                </asp:ChartArea>
-                                            </ChartAreas>
-                                        </asp:Chart>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td style="width: 2%;">
-                        </td>
-                        <td style="width: 39%" valign="top">
-                               
-                        </td>                                
-                    </tr>
-                </table>
-
-                    <table cellpadding="0" cellspacing="0" width="650px">
-                        <tr>
-                        <td valign="top" style="width: 59%">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                <tr>
-                                    <td class="green-title">
-                                        &nbsp; Gray ΔL
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">
-                                            <asp:Chart ID="Chart_GrayL" runat="server" Width="400px"  Height="105px" BackGradientType="Center" 
-                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
-                                            <Legends>
-                                                <asp:Legend Name="Default" Enabled="False">
-                                                </asp:Legend>
-                                            </Legends>
-                                            <BorderSkin SkinStyle="None"></BorderSkin>                                               
-                                            <Series>
-                                                <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>                                                         
-                                                <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>  
-                                                <asp:Series  Name="Series2" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false" Color="Red" ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                BorderWidth="2">
-                                                </asp:Series>  
-                                                <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                        Color="Red" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
-                                                            BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>                                                       
-                                            </Series>
-                                            <ChartAreas>
-                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
-                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
-                                                    <Position Height="99" Width="94" X="0" Y="2" />
-                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                        Minimum="0" Maximum="12">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisY>
-                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisX>
-                                                </asp:ChartArea>
-                                            </ChartAreas>
-                                        </asp:Chart>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td style="width: 2%;">
-                        </td>
-                        <td style="width: 39%" valign="top">
-                               
-                        </td>                                
-                    </tr>
-                </table>
-
-                    <%--<table cellpadding="0" cellspacing="0" width="650px">
-                        <tr>
-                            <td style="width: 49%">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                <tr>
-                                    <td class="green-title">
-                                        &nbsp; Black NPD
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top">
-                                        <asp:Chart ID="CHRT_BlackNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
-                                            ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
-                                            BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
-                                            <Legends>
-                                                <asp:Legend Name="Default" Enabled="false">
-                                                </asp:Legend>
-                                            </Legends>
-                                            <BorderSkin SkinStyle="None"></BorderSkin>
-                                           
-                                            <Series>
-                                                <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>
-                                                <asp:Series Name="Series0Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                    Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" BackSecondaryColor="162, 164, 255">
-                                                </asp:Series>                                               
-                                            </Series>
-                                            <ChartAreas>
-                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
-                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
-                                                    <Position Height="99" Width="94" X="0" Y="2" />
-                                                    <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisY>
-                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
-                                                        <MajorGrid LineColor="Gray"></MajorGrid>
-                                                        <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                    </AxisX>
-                                                </asp:ChartArea>
-                                            </ChartAreas>
-                                        </asp:Chart>
-                                    </td>
-                                </tr>
-                            </table>
-                            </td>
-                            <td style="width: 2%;">
-                            </td>
-                            <td style="width: 49%;">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
-                                    <tr>
-                                        <td class="green-title">
-                                            &nbsp; Gray NPD
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Chart ID="CHRT_GrayNPD" runat="server" Width="320px" Height="250px" ImageType="Jpeg"
-                                                ImageUrl="~/UploadFiles/temp/GrayNPD" BackGradientType="Center" 
-                                                BackGradientEndColor="White" BorderLineColor="#808080" EnableViewState="false">
-                                                <Legends>
-                                                    <asp:Legend Name="Default" Enabled="false">
-                                                    </asp:Legend>
-                                                </Legends>
-                                                <BorderSkin SkinStyle="None"></BorderSkin>
-                                              
-                                                <Series>
-                                                    <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                        Color="Black" BorderWidth="3" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
-                                                        MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                    </asp:Series>                                            
-                                                </Series>
-                                                <ChartAreas>
-                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
-                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
-                                                        <Position Height="99" Width="94" X="0" Y="2" />
-                                                        <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="Auto">
-                                                            <MajorGrid LineColor="Gray"></MajorGrid>
-                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                        </AxisY>
-                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="" Minimum="0" Maximum="100">
-                                                            <MajorGrid LineColor="Gray"></MajorGrid>
-                                                            <LabelStyle Angle="0" Font="Verdana, 6pt" />
-                                                        </AxisX>
-                                                    </asp:ChartArea>
-                                                </ChartAreas>
-                                            </asp:Chart>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>--%>
-               
-               </ContentTemplate>
-                    <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" />                     
-                    </Triggers>  
-           </asp:UpdatePanel>       
-        </div>
-        <div class="clear"></div>
-        </div>                            	
-        </div>
-        <div class="tab_bottom">&nbsp;</div>
-   </section>
-
+   
    
 
   </section>

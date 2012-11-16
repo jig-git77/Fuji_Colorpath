@@ -335,7 +335,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)
                 {
-                    FillG7Chart(GrayFChart, GrayQuartileSummary, BlackLChart, GrayLChart, BlackNPDChart, GrayNPDChart);
+                    FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                 }
             }
         }            
@@ -878,12 +878,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Fill G7 Tab
-        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayQuartileSummary, List<AnalyzeChart_G7> BlackLChart, List<AnalyzeChart_G7> GrayLChart, List<AnalyzeChart_G7> BlackNPDChart, List<AnalyzeChart_G7> GrayNPDChart)
+        private void FillG7Chart(List<AnalyzeChart_G7> GrayFChart, List<AnalyzeChart_G7> GrayFSummary, List<AnalyzeChart_G7> BlackLChart, List<AnalyzeChart_G7> BlackLSummary, List<AnalyzeChart_G7> GrayLChart, List<AnalyzeChart_G7> GrayLSummary)
         {
             if (GrayFChart != null && BlackLChart != null && GrayLChart != null)
                 FillGrayFLChart(GrayFChart, BlackLChart, GrayLChart);
-            if (GrayQuartileSummary != null)
-                FillGrayQuartileSummary(GrayQuartileSummary);
+            if (GrayFSummary != null)
+                FillGrayQuartileSummary(GrayFSummary, BlackLSummary, GrayLSummary);
             // if (BlackNPDChart != null && GrayNPDChart != null)
             // FillNPDChart(BlackNPDChart, GrayNPDChart);
         }
@@ -901,7 +901,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (DT != null && DT.Count > 0)
             {
                 for (int i = 0; i < DT.Count; i++)
-                {
+                {                  
                     AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔF*");
                     AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔF*");
                 }
@@ -981,10 +981,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Fill Gray Quartile Summary
 
-        private void FillGrayQuartileSummary(List<AnalyzeChart_G7> Dt)
+        private void FillGrayQuartileSummary(List<AnalyzeChart_G7> DT_GrayF, List<AnalyzeChart_G7> DT_BlackL, List<AnalyzeChart_G7> DT_GrayL)
         {
-            RG_ΔChQuartileSummary.DataSource = Dt;
-            RG_ΔChQuartileSummary.DataBind();
+            RG_ΔChSummary.DataSource = DT_GrayF;
+            RG_ΔChSummary.DataBind();
+
+            RG_ΔLBlackSummary.DataSource = DT_BlackL;
+            RG_ΔLBlackSummary.DataBind();
+
+            RG_ΔLGraySummary.DataSource = DT_GrayL;
+            RG_ΔLGraySummary.DataBind();
         }
 
         #endregion
@@ -1233,6 +1239,45 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void RG_ΔChSummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void RG_ΔLBlackSummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void RG_ΔLGraySummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
         protected void btnExcelExport_Click(object sender, EventArgs e)
         {
             ConfigureExport();
@@ -1296,9 +1341,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.Measurement> MeasurementSummary { get; set; }
 
         public List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
-        public List<Entity.AnalyzeChart_G7> GrayQuartileSummary { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }
         public List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackLSummary { get; set; }
         public List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayLSummary { get; set; }
         public List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 

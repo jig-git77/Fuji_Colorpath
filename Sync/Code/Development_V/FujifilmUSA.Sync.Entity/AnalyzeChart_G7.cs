@@ -10,9 +10,11 @@ namespace FujifilmUSA.Sync.Entity
         public decimal Cmyk_Value { get; set; }
         public decimal ΔValue { get; set; }
         public decimal ΔLimit { get; set; }
-       
-        public string Gray_Quartile { get; set; }
-        public decimal AvgΔF { get; set; }
-        public decimal MAXΔF { get; set; }
+
+        public int MetricMeasuredID { get; set; }
+        public string Metric { get; set; }
+        public decimal Tolerance { get; set; }
+        public decimal Actual { get; set; }
+        public bool IsNotOK { get; set; }
     }
 }

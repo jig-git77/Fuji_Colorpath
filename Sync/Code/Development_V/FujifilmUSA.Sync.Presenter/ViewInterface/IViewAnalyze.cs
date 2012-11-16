@@ -26,10 +26,12 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.Measurement> MeasurementSummary { get; set; }
 
         List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
-        List<Entity.AnalyzeChart_G7> GrayQuartileSummary { get; set; }
+        List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }       
+        List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
+        List<Entity.AnalyzeChart_G7> BlackLSummary { get; set; }
+        List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
+        List<Entity.AnalyzeChart_G7> GrayLSummary { get; set; }
         List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
         List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
-        List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
-        List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
     }
 }

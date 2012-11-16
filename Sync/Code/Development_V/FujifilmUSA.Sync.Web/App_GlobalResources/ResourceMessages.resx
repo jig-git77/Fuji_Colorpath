@@ -534,4 +534,40 @@
   <data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
     <value>Error occured while inserting device family Profiler Option Presets.Please contact your administrator.</value>
   </data>
+
+  <data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
+    <value>Error occured while displaying G7 Gray ΔCh chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_G7_GrayFSummary" xml:space="preserve">
+    <value>Error occured while displaying G7 Gray ΔCh Summary. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_G7_BlackL" xml:space="preserve">
+    <value>Error occured while displaying G7 Black ΔL chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_G7_BlackLSummary" xml:space="preserve">
+    <value>Error occured while displaying G7 Black ΔL Summary. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_G7_GrayL" xml:space="preserve">
+    <value>Error occured while displaying G7 Gray ΔL chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
+    <value>Error occured while displaying G7 Gray ΔL Summary. Please contact your administrator.</value>
+  </data>
+
+  <data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
+    <value>Error occured while displaying Ink Paper ΔE Primary Patches chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_InkPaper_PaperLAB" xml:space="preserve">
+    <value>Error occured while displaying Ink Paper LAB charts. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_GrayGamut1" xml:space="preserve">
+    <value>Error occured while displaying Gamut a*-b* Comparison chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_GrayGamut2" xml:space="preserve">
+    <value>Error occured while displaying Gamut L* Comparison chart. Please contact your administrator.</value>
+  </data>
+  <data name="Error_GetChartData_LABChart" xml:space="preserve">
+    <value>Error occured while displaying Gamut LAB charts. Please contact your administrator.</value>
+  </data>
+  
 </root>

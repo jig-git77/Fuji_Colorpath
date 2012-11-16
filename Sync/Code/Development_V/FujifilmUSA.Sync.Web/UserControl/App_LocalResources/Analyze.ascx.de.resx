@@ -214,7 +214,7 @@
     <value>Gray Balance L* a* b*_de</value>
   </data>
   <data name="locGrayResource1.Text" xml:space="preserve">
-    <value>Gray_de</value>
+    <value>Gamut_de</value>
   </data>
   <data name="locInkPaperResource1.Text" xml:space="preserve">
     <value>Ink Paper_de</value>
