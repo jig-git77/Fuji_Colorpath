@@ -902,8 +902,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 for (int i = 0; i < DT.Count; i++)
                 {                  
-                    AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔF*");
-                    AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔF*");
+                    AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔCh*");
+                    AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔCh*");
                 }
             }
             #endregion

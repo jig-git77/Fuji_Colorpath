@@ -703,7 +703,7 @@
                                                         BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                         <Position Height="99" Width="94" X="0" Y="2" />
                                                         <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                            Minimum="0" Maximum="12">
+                                                            Minimum="0" Maximum="10">
                                                             <MajorGrid LineColor="Gray"></MajorGrid>
                                                             <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                         </AxisY>
@@ -798,7 +798,7 @@
                                                     BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                     <Position Height="99" Width="94" X="0" Y="2" />
                                                     <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                        Minimum="0" Maximum="12">
+                                                        Minimum="0" Maximum="10">
                                                         <MajorGrid LineColor="Gray"></MajorGrid>
                                                         <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                     </AxisY>
@@ -893,7 +893,7 @@
                                                     BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                     <Position Height="99" Width="94" X="0" Y="2" />
                                                     <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                                        Minimum="0" Maximum="12">
+                                                        Minimum="0" Maximum="10">
                                                         <MajorGrid LineColor="Gray"></MajorGrid>
                                                         <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                                     </AxisY>

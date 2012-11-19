@@ -84,7 +84,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnActivityValidationRules_Click(object sender, EventArgs e)
         {
-            Response.RedirectPermanent("ActivityValidationRules.aspx");
+            Response.RedirectPermanent("AddDeviceProfilerSettings.aspx");
         }
     }
 }
