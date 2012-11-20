@@ -159,7 +159,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="height: 2px">
+                        <td colspan="2" style="height: 1px">
                             &nbsp;
                         </td>
                     </tr>
@@ -173,58 +173,109 @@
                     <tr>
                         <td style="border: 2px solid #ccc; padding-left: 2px;">
                             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                               
                                 <tr>
-                                    <td class="summary-bg" colspan="2" >
-                                        <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;" /><span
-                                            class="summary-title">Grayscale Δ</span>
-                                    </td>
-                                    <td style="width:5px;"></td>
-                                    <td class="summary-bg" >
-                                        <span
-                                            class="summary-title">Gray Balance ΔCh</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                     <td valign="top" align="left" style="width:150px;">
-                                        <table cellpadding="0" cellspacing="0" width="100%">
-                                            <tr style="height: 20px">
-                                                <td valign="middle" style="width: 25px" class="BottomBorder">
-                                                     &nbsp;
+                                    <td>
+                                        <table width="350px" border="0" cellspacing="0" cellpadding="0">  
+                                            <tr>
+                                                <td class="summary-bg" colspan="2" >
+                                                    <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;" /><span
+                                                        class="summary-title">Grayscale Δ</span>
                                                 </td>
-                                                <td valign="bottom" style="width: 50%" class="BottomBorder">
-                                                    <span class="graph-title-text">Metric</span>
-                                                </td>
-                                                 <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
-                                                    <span class="graph-title-text">Tol</span>
-                                                </td>
-                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
-                                                    <span class="graph-title-text">Actual</span>
-                                                </td>
+                                            </tr>   
+                                            <tr>
+                                                <td valign="top" align="left" style="width:200px;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr style="height: 20px">
+                                                            <td valign="middle" style="width: 25px" class="BottomBorder">
+                                                                 &nbsp;
+                                                            </td>
+                                                            <td valign="bottom" style="width: 60%" class="BottomBorder">
+                                                                <span class="graph-title-text">Metric</span>
+                                                            </td>
+                                                             <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Tol</span>
+                                                            </td>
+                                                            <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Actual</span>
+                                                            </td>
                                                
-                                            </tr>
-                                            <tr>
-                                                <td colspan="3" style="height: 11px">
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" style="height: 11px">
+                                                            </td>
+                                                        </tr>
+                                                        ###DeltaSummaryDetail###
+                                                    </table>
+                                                </td>
+                                                <td valign="top">
+                                                    <table width="150" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td valign="top" style="padding-top: 10px">
+                                                                <img src="###ResultSummary_DeltaImage###" width="150" height="200px" alt='Summary Delta'
+                                                                    id='img3' />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                             </tr>
-                                            ###DeltaSummaryDetail###
-                                        </table>
-                                    </td>
-                                    <td valign="top">
-                                        <table width="200" border="0" cellspacing="0" cellpadding="0">
+                                             <tr>
+                                                <td class="summary-bg" colspan="2" >
+                                                    <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;" />
+                                                        <span class="summary-title">Targeted Δ</span>
+                                                </td>                                              
+                                            </tr>
                                             <tr>
-                                                <td valign="top" style="padding-top: 10px">
-                                                    <img src="###ResultSummary_DeltaImage###" width="200" height="200px" alt='Summary Delta'
-                                                        id='img3' />
+                                                <td valign="top" align="left" style="width:200px;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                                                        <tr style="height: 20px">
+                                                            <td valign="middle" style="width: 25px" class="BottomBorder">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td valign="bottom" style="width: 60%" class="BottomBorder">
+                                                                <span class="graph-title-text">Metric</span>
+                                                            </td>
+                                                             <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Tol</span>
+                                                            </td>
+                                                            <td valign="bottom" align="center" style="width: 20%" class="BottomBorder">
+                                                                <span class="graph-title-text">Actual</span>
+                                                            </td>
+                                               
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" style="height: 11px">
+                                                            </td>
+                                                        </tr>
+                                                        ###DeltaESummaryDetail###
+                                                    </table>
                                                 </td>
+                                                <td valign="top">
+                                                    <table width="150" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td valign="top" style="padding-top: 9px">
+                                                                <img src="###ResultSummary_DeltaEImage###" width="150px" height="260px" alt='Summary Delta'
+                                                                    id='img10' />
+                                                            </td>
+                                                        </tr>                                           
+                                                    </table>
+                                    </td>                                   
                                             </tr>
                                         </table>
                                     </td>
+                                    
                                     <td style="width:5px;"></td>
                                     <td valign="top">
-                                        <table width="300" border="0" cellspacing="0" cellpadding="0">                                            
+                                        <table width="300" border="0" cellspacing="0" cellpadding="0">    
                                             <tr>
-                                                <td valign="top" style="padding-top: 10px">
-                                                    <img src="###ResultSummary_DeltaImage###" width="300px" height="100px" alt='Summary Delta'
+                                                <td class="summary-bg" >
+                                                   <span
+                                                        class="summary-title">Gray Balance ΔCh</span>
+                                                </td>
+                                            </tr>                                        
+                                            <tr>
+                                                <td valign="top" >
+                                                    <img src="###ResultSummary_DeltaChImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img1' />
                                                 </td>
                                             </tr>
@@ -235,8 +286,8 @@
                                                 </td>
                                             </tr>
                                              <tr>
-                                                <td valign="top" style="padding-top: 10px">
-                                                    <img src="###ResultSummary_DeltaImage###" width="300px" height="100px" alt='Summary Delta'
+                                                <td valign="top" >
+                                                    <img src="###ResultSummary_BlackDeltaLImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img5' />
                                                 </td>
                                             </tr>
@@ -247,95 +298,32 @@
                                                 </td>
                                             </tr>
                                              <tr>
-                                                <td valign="top" style="padding-top: 10px">
-                                                    <img src="###ResultSummary_DeltaImage###" width="300px" height="100px" alt='Summary Delta'
+                                                <td valign="top" >
+                                                    <img src="###ResultSummary_GrayDeltaLImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img6' />
                                                 </td>
                                             </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td height="3px">
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <table width="660" border="0" cellspacing="0" cellpadding="0">
-                   
-                    <tr>
-                        <td style="border: 2px solid #ccc; padding-left: 2px;">
-                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td class="summary-bg" colspan="2" >
-                                        <img src="##IMAGES##summary-icon.png" width="12" height="11" style="margin: 2px 0 0 5px;" /><span
-                                            class="summary-title">Targeted Δ</span>
-                                    </td>
-                                    <td style="width:5px;"></td>
-                                    <td class="summary-bg" >
-                                        <span
-                                            class="summary-title">Gray Balance L*a*b*</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td valign="top" align="left" style="width:150px;">
-                                        <table cellpadding="0" cellspacing="0" width="100%" border="0">
-                                            <tr style="height: 20px">
-                                                <td valign="middle" style="width: 25px" class="BottomBorder">
-                                                    &nbsp;
-                                                </td>
-                                                <td valign="bottom" style="width: 50%" class="BottomBorder">
-                                                    <span class="graph-title-text">Metric</span>
-                                                </td>
-                                                 <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
-                                                    <span class="graph-title-text">Tol</span>
-                                                </td>
-                                                <td valign="bottom" align="center" style="width: 25%" class="BottomBorder">
-                                                    <span class="graph-title-text">Actual</span>
-                                                </td>
-                                               
-                                            </tr>
                                             <tr>
-                                                <td colspan="3" style="height: 11px">
+                                                <td class="summary-bg" >
+                                                   <span
+                                                        class="summary-title">Gray Balance L*a*b*</span>
                                                 </td>
                                             </tr>
-                                            ###DeltaESummaryDetail###
-                                        </table>
-                                    </td>
-                                    <td valign="top">
-                                        <table width="200" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td valign="top" style="padding-top: 9px">
-                                                    <img src="###ResultSummary_DeltaEImage###" width="200px" height="200px" alt='Summary Delta'
-                                                        id='img9' />
-                                                </td>
-                                            </tr>                                           
-                                        </table>
-                                    </td>
-                                    <td style="width:5px;"></td>
-                                    <td valign="top">
-                                        <table width="300" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td valign="top" style="padding-top: 9px">
-                                                    <img src="###ResultSummary_DeltaEImage###" width="300px" height="100px" alt='Summary Delta'
+                                             <tr>
+                                                <td valign="top" >
+                                                    <img src="###ResultSummary_GrayLImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img4' />
                                                 </td>
-                                            </tr>
+                                            </tr>                                           
                                             <tr>
-                                                <td valign="top" style="padding-top: 9px">
-                                                    <img src="###ResultSummary_DeltaEImage###" width="300px" height="100px" alt='Summary Delta'
+                                                <td valign="top" >
+                                                    <img src="###ResultSummary_GrayaImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img7' />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td valign="top" style="padding-top: 9px">
-                                                    <img src="###ResultSummary_DeltaEImage###" width="300px" height="100px" alt='Summary Delta'
+                                                <td valign="top" >
+                                                     <img src="###ResultSummary_GraybImage###" width="300px" height="70px" alt='Summary Delta'
                                                         id='img8' />
                                                 </td>
                                             </tr>
@@ -348,6 +336,7 @@
                 </table>
             </td>
         </tr>
+       
     </table>
    
 </body>

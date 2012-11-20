@@ -593,6 +593,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             }
         }
+
+        public DataSet DSReport_G7_Vali { get; set; }
         #endregion
 
         protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)

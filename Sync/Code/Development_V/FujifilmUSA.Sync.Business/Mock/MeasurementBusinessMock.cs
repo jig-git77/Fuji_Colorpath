@@ -80,6 +80,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataSet();
         }
 
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        {
+            return new DataSet();
+        }
+
         public List<Measurement> GetVMeasurementsOnProjectId(int projectId)
         {
             return new List<Measurement>();

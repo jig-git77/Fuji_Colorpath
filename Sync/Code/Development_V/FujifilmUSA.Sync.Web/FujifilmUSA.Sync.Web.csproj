@@ -190,6 +190,7 @@
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
     <Content Include="ReportSingleMeasurement.aspx" />
+    <Content Include="ReportSingleMeasurement_G7_Vali.aspx" />
     <Content Include="SessionEnd.aspx" />
     <Content Include="JQuery\jquery.ui.core.js" />
     <Content Include="JQuery\jquery.ui.datepicker.js" />
@@ -249,6 +250,7 @@
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
     <Content Include="UserControl\ReportSingleMeasurement.ascx" />
+    <Content Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx" />
     <Content Include="UserControl\ValidationContainer.ascx" />
     <Content Include="UserControl\Permission.ascx" />
     <Content Include="UserControl\SessionEnd.ascx" />
@@ -762,6 +764,13 @@
     <Compile Include="ReportSingleMeasurement.aspx.designer.cs">
       <DependentUpon>ReportSingleMeasurement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportSingleMeasurement_G7_Vali.aspx.cs">
+      <DependentUpon>ReportSingleMeasurement_G7_Vali.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportSingleMeasurement_G7_Vali.aspx.designer.cs">
+      <DependentUpon>ReportSingleMeasurement_G7_Vali.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SessionEnd.aspx.cs">
       <DependentUpon>SessionEnd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -974,6 +983,13 @@
     </Compile>
     <Compile Include="UserControl\ReportSingleMeasurement.ascx.designer.cs">
       <DependentUpon>ReportSingleMeasurement.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx.cs">
+      <DependentUpon>ReportSingleMeasurement_G7_Vali.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ReportSingleMeasurement_G7_Vali.ascx.designer.cs">
+      <DependentUpon>ReportSingleMeasurement_G7_Vali.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ValidationContainer.ascx.cs">
       <DependentUpon>ValidationContainer.ascx</DependentUpon>
@@ -2070,7 +2086,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

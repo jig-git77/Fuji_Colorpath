@@ -23,6 +23,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);
         DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
+        DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false);
 
         List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false);
 

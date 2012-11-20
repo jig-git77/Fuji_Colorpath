@@ -3,7 +3,7 @@
 <uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" Visible="true" />
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>

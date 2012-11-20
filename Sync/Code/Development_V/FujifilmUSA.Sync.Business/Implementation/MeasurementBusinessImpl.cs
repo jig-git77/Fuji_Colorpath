@@ -556,6 +556,42 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        {
+            var measurements = new DataSet();
+            string storedProc = "Report.GetSingleMeasurement";
+            int ValidationType = 0; //-----For Standard Validation
+            if (IsVerification)
+            {
+                storedProc = "Report.GetSingleVMeasurement";
+                ValidationType = 1;
+            }
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements = new DataSet();
+                    if (!IsVerification)
+                    {
+                        dsMeasurements = DataAccessFactory.
+                             Instance.
+                             GetDsResult(
+                                 storedProc,
+                                 new object[] { MeasurementId, From_ΔE });
+                    }
+                    else
+                    {
+                        dsMeasurements = DataAccessFactory.
+                             Instance.
+                             GetDsResult(
+                                 storedProc,
+                                 new object[] { MeasurementId, From_ΔE, ValidationType });
+                    }
+                    measurements = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
+            return measurements;
+        }
+
         public List<Measurement> GetVMeasurementsOnProjectId(int projectId)
         {
             var measurements = new List<Measurement>();

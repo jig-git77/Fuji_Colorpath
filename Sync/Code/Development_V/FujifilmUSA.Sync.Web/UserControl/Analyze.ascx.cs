@@ -274,6 +274,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
                 }
+
+                //-----------Assign Report iFrame to load report in "Report" tab----------------------//
+                string path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                iframeGeneratePDFReport.Attributes.Add("src", path);
+                iframeGeneratePDFReport.Style.Add("display", "");
             }
             else
             {
@@ -286,12 +291,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     grdMeasurement.DataSource = MeasurementsDelta;
                     grdMeasurement.DataBind();
                 }
-            }
 
-            //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-            string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
-            iframeGeneratePDFReport.Attributes.Add("src", path);
-            iframeGeneratePDFReport.Style.Add("display", "");
+                //-----------Assign Report iFrame to load report in "Report" tab----------------------//
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                iframeGeneratePDFReport.Attributes.Add("src", path);
+                iframeGeneratePDFReport.Style.Add("display", "");
+            }           
         }
 
         public void ConfigureExport()
