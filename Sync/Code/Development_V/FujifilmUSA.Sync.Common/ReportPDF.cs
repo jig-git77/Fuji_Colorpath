@@ -28,7 +28,7 @@ namespace FujifilmUSA.Sync.Common
         string _From_ΔE;
         string _DLPName;
         string _ReportName;
-
+        bool _IsValidation;
         #endregion
 
 
@@ -80,6 +80,12 @@ namespace FujifilmUSA.Sync.Common
         {
             get { return _ReportName; }
             set { _ReportName = value; }
+        }
+
+        public bool IsValidation
+        {
+            get { return _IsValidation; }
+            set { _IsValidation = value; }
         }
 
         #endregion
@@ -252,6 +258,13 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###RipSettings###", RipSettings.Trim() == "" ? "&nbsp;" : RipSettings.Trim());
                 SBStr.Replace("###Location###", Location.Trim() == "" ? "&nbsp;" : Location.Trim());
                 SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
+
+                //--------For G7 Validation Report
+                if (ReportType == 16)
+                {
+                    SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>" : "<td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>");
+                    SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
+                }
             }
             else
             {
@@ -266,6 +279,13 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###RipSettings###", "&nbsp;");
                 SBStr.Replace("###Location###", "&nbsp;");
                 SBStr.Replace("###DeltaEFormula###", "&nbsp;");
+
+                //--------For G7 Validation Report
+                if (ReportType == 16)
+                {
+                    SBStr.Replace("###JobStatus###", "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>");
+                    SBStr.Replace("###MetricPreset###", "&nbsp;");
+                }
             }
             #endregion
 
@@ -277,7 +297,7 @@ namespace FujifilmUSA.Sync.Common
             // === Table 2 = Chart of Summary Delta Value Graph Image And Table Value Ploted === //          
             #region ==== Summary Delta Value Graph Image ====
 
-            if (ReportType == 16)   //--------For G7 Validation Report
+            if (ReportType == 16 || IsValidation == true)   //--------For G7/ Any Validation Report
             {
                 DT = DS_Common.Tables[8];
             }
@@ -290,11 +310,18 @@ namespace FujifilmUSA.Sync.Common
             {
                 string strStatusImg = "";
 
-                if (ReportType == 16)
+                if (ReportType == 16 || IsValidation == true)   //--------For G7/ Any Validation Report
                 {
                     for (int i = 0; i < DT.Rows.Count; i++)
                     {
-                        SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                        if (Convert.ToDecimal(DT.Rows[i]["MeasuredValue"]) > Convert.ToDecimal(DT.Rows[i]["TargetValue"].ToString()))
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px; color:Red;'>");
+                        }
+                        else
+                        {
+                            SBstrDeltaValue.Append("<tr style='height: 27px'>");
+                        }                       
                         SBstrDeltaValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                         SBstrDeltaValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + DT.Rows[i]["MetricSumName"] + "</td>");
                         SBstrDeltaValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["TargetValue"])) + "&nbsp;</td>");

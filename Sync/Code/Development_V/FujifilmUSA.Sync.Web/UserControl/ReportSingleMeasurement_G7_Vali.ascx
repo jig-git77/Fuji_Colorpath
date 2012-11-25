@@ -3,7 +3,7 @@
 <uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" Height="25px" />
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
@@ -14,7 +14,8 @@
                     <td valign="top">
                         <asp:TextBox ID="txt_MeasurementID" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_dTE" runat="server"></asp:TextBox>
-                        <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>    
+                        <asp:TextBox ID="txt_ValiType" runat="server"></asp:TextBox>                               
                         <br />
                         Target Versus Actual AB Plot
                         <br />
@@ -90,10 +91,10 @@
                     <td>
                         Summary Delta Value
                         <br />
-                        <asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="150px" Height="200px" BackColor="Transparent"
+                        <asp:Chart ID="ChartResultSummary_Delta" runat="server" Width="150px" Height="250px" BackColor="Transparent"
                             ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_ResultSummary_Delta" ImageType="Jpeg">
-                            <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
-                                SkinStyle="Raised" BackColor="White"></BorderSkin>
+                             <BorderSkin BackSecondaryColor="White" BorderColor="Black" BorderWidth="2"
+                                SkinStyle="Raised" BackColor="White"></BorderSkin> 
                         
                            <Series>
                                 <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="false" 
@@ -102,10 +103,13 @@
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
                                 </asp:Series>    
+                                 <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
+                                </asp:Series>
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent" >
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0">
+                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
+                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0" >
                                         </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
@@ -307,7 +311,7 @@
                             ImageLocation="~/UploadFiles/temp/SingleMeasurement_Page1_LChart" ImageType="Jpeg">
                             <Titles>
                                 <asp:Title Text="L*" Name="Title1">
-                                    <Position X="94" Y="10" Auto="False" />
+                                    <Position X="94" Y="15" Auto="False" />
                                 </asp:Title>
                             </Titles>
                             <Legends>
@@ -353,7 +357,7 @@
                             </Legends>
                             <Titles>
                                 <asp:Title Text="a*" Name="Title1">
-                                    <Position X="94" Y="10" Auto="False" />
+                                    <Position X="94" Y="15" Auto="False" />
                                 </asp:Title>
                             </Titles>
                             <Series>
@@ -395,7 +399,7 @@
                             </Legends>
                             <Titles>
                                 <asp:Title Text="b*" Name="Title1">
-                                    <Position X="94" Y="10" Auto="False" />
+                                    <Position X="94" Y="15" Auto="False" />
                                 </asp:Title>
                             </Titles>
                                                                                    

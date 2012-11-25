@@ -22,6 +22,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Variable Declarations
         private PresenterReportSingleMeasurement _presenterReportSingleMeasurement;
         public decimal DtELimit = 0;
+        public int ValidtionType = 0;
 
         #endregion
 
@@ -57,11 +58,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // ===== Get Data from data base  ==================//             
             if (DSReport != null && DSReport.Tables.Count > 0)
             {
+                if (DSReport.Tables[0] != null && DSReport.Tables[0].Rows.Count > 0)
+                {
+                    ValidtionType = Convert.ToInt32(DSReport.Tables[0].Rows[0]["ValidationType"].ToString());
+                }
                 #region " === Page : 1 Result Summary === "
 
                 Bind_TargetVersusActual_CHART(DSReport.Tables[1]); // Bind Chart Of Target And Actual Value
 
-                BindSummaryDeltaValueBarChart(DSReport.Tables[2]); // Bind Chart of Summary Delta Value Bar Chart
+                BindSummaryDeltaValueBarChart(DSReport.Tables[8]); // Bind Chart of Summary Delta Value Bar Chart
 
                 BindSummaryDeltaEValueBarChart(DSReport.Tables[3], 0, 11); //Bind Chart of Summary Delta E Value Bar Chart
 
@@ -78,20 +83,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // === Set all parameters to generate pdf file === //              
 
             Common.ReportPDF objReportPDF = new Common.ReportPDF();
-            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7_Vali;
+
             objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
             objReportPDF.PDF_NAME = SessionManager.Instance.CurrentUser.UserId + "_ReportSingleMeasurement.PDF";
             objReportPDF.DS_Common = Ds;
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
-            if (IsVerification)
+            objReportPDF.IsValidation = true;
+
+            if (ValidtionType == 0)
             {
-                objReportPDF.ReportName = "G7 Validation Report";                
+                objReportPDF.ReportName = "Validation Report";
+                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement;
             }
-            else
+            else if (ValidtionType == 1)
             {
-                objReportPDF.ReportName = "DLP Optimization Report";
+                objReportPDF.ReportName = "G7 Validation Report";
+                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7_Vali;
             }
+
             objReportPDF.MakePDF();
 
             // === After generate and save PDF file, Download it at a time === //
@@ -337,6 +347,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartResultSummary_Delta.Visible = true;
                 ChartResultSummary_Delta.Series[0].Points.Clear();
                 ChartResultSummary_Delta.Series[1].Points.Clear();
+                ChartResultSummary_Delta.Series[2].Points.Clear();
 
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value === //
@@ -351,6 +362,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries1.YValueType = ChartValueType.String;
                 objSeries1.IsVisibleInLegend = false;
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
+
+                // === Series2 to display red marker on Thresold value === //
+                Series objSeries2 = (Series)ChartResultSummary_Delta.Series[2];
+                objSeries2.XValueType = ChartValueType.Int32;
+                objSeries2.YValueType = ChartValueType.String;
+                objSeries2.IsVisibleInLegend = false;
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Make Chart area look like 2D even it is 3D === //
                 ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
@@ -395,7 +413,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //---------Normal Binding Graph-------//
                     for (int i = 0; i < DT.Rows.Count; i++)
                     {
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["MeasuredValue"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0);
+                        BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["MeasuredValue"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["TargetValue"].ToString())), 0);
                     }                   
                    
                     // === Save Chart Image after generating image with proper data === //
@@ -405,14 +423,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #endregion
           
         }
-        private void BindDeltaValueACTTHValue(Series objSeries0, Series objSeries1, double ACT, double TH, int Index)
+        private void BindDeltaValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, double ACT, double TH, double Tol, int Index)
         {            
 
-                Double Y1, Y2;
-                Y1 = Y2 = 0;
+                Double Y1, Y2, Y3;
+                Y1 = Y2 = Y3 = 0;
 
                 Y1 = (Convert.ToString(TH) == "" ? 0 : Convert.ToDouble(TH.ToString()));
                 Y2 = (Convert.ToString(ACT) == "" ? 0 : Convert.ToDouble(ACT.ToString()));
+                Y3 = (Convert.ToString(Tol) == "" ? 0 : Convert.ToDouble(Tol.ToString()));
 
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)
@@ -424,6 +443,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.Points[Index]["PointWidth"] = "0.8";
                 objSeries1.Points.AddXY((Double)0, Y2);
 
+                //objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
                 objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
 
                 SeriesActual.Points[Index]["PointWidth"] = "0.8";
@@ -431,6 +451,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (Y1 == 0 && Y2 == 0)
                 {
                     objSeries0.Points[Index].MarkerImage = "";
+                   // objSeries2.Points[Index].MarkerImage = "";
                 }
          
         }
@@ -749,6 +770,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public DataSet DSReport_G7_Vali { get; set; }
+        public int ValidationType { get; set; }
 
         #endregion
        

@@ -139,7 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
-                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
+                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);                   
                 }
                 else
                 {
@@ -276,7 +276,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                string path = "";
+                if (SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationType == 1)  //G7 type
+                {
+
+                    path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationType;
+                }
+                else
+                {
+                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                }
                 iframeGeneratePDFReport.Attributes.Add("src", path);
                 iframeGeneratePDFReport.Style.Add("display", "");
             }
