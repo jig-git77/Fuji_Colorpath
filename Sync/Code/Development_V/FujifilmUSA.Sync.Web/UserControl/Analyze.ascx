@@ -1441,7 +1441,7 @@
                          </ClientSettings>
                         <HeaderStyle Font-Bold="True"/>
                             <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                            <MasterTableView DataKeyNames="HtmlColor"  >                      
+                            <MasterTableView DataKeyNames="HTMLColor"  >                      
                                 <CommandItemSettings ExportToPdfText="Export to PDF" />
                                 <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                                     Visible="True">
@@ -1451,7 +1451,7 @@
                                 </ExpandCollapseColumn>
                                 <Columns>
                                     <telerik:GridTemplateColumn UniqueName="HtmlColor" HeaderText="Patch"
-                                        DataField="HtmlColor" FilterControlAltText="Filter HtmlColor column" 
+                                        DataField="HTMLColor" FilterControlAltText="Filter HtmlColor column" 
                                         meta:resourcekey="GridTemplateColumnResource1">
                                 
                                          <FilterTemplate>
@@ -1474,34 +1474,34 @@
                                 
                                     </telerik:GridTemplateColumn>                         
 
-                                    <telerik:GridBoundColumn DataField="SampleId" HeaderText="ID" 
-                                        SortExpression="SampleId" AllowFiltering="False" UniqueName="SampleId" 
+                                    <telerik:GridBoundColumn DataField="SampleID" HeaderText="ID" 
+                                        SortExpression="SampleID" AllowFiltering="False" UniqueName="SampleId" 
                                         FilterControlAltText="Filter SampleId column" 
                                         meta:resourcekey="GridBoundColumnResource1">
                                     </telerik:GridBoundColumn>                       
-                                    <telerik:GridBoundColumn DataField="CmykC" HeaderText="C" 
-                                        SortExpression="CmykC" FilterControlWidth="30px" 
+                                    <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" 
+                                        SortExpression="CMYK_C" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         UniqueName="CmykC" DataType="System.Int32" 
                                         FilterControlAltText="Filter CmykC column" 
                                         meta:resourcekey="GridBoundColumnResource2">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="CmykM" HeaderText="M" 
-                                        SortExpression="CmykM" FilterControlWidth="30px" 
+                                    <telerik:GridBoundColumn DataField="CMYK_M" HeaderText="M" 
+                                        SortExpression="CMYK_M" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         UniqueName="CmykM" DataType="System.Int32" 
                                         FilterControlAltText="Filter CmykM column" 
                                         meta:resourcekey="GridBoundColumnResource3">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="CmykY" HeaderText="Y" 
-                                        SortExpression="CmykY" FilterControlWidth="30px" 
+                                    <telerik:GridBoundColumn DataField="CMYK_Y" HeaderText="Y" 
+                                        SortExpression="CMYK_Y" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         UniqueName="CmykY" DataType="System.Int32" 
                                         FilterControlAltText="Filter CmykY column" 
                                         meta:resourcekey="GridBoundColumnResource4">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="CmykK" HeaderText="K" 
-                                        SortExpression="CmykK" FilterControlWidth="30px" 
+                                    <telerik:GridBoundColumn DataField="CMYK_K" HeaderText="K" 
+                                        SortExpression="CMYK_K" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         UniqueName="CmykK" DataType="System.Int32" 
                                         FilterControlAltText="Filter CmykK column" 
@@ -1531,8 +1531,8 @@
                                         FilterControlAltText="Filter TargetL column" 
                                         meta:resourcekey="GridBoundColumnResource9" UniqueName="TargetL">
                                     </telerik:GridBoundColumn>
-                                     <telerik:GridBoundColumn DataField="CielabL" HeaderText="Actual L*" 
-                                        SortExpression="CielabL" FilterControlWidth="30px" 
+                                     <telerik:GridBoundColumn DataField="CIELAB_L" HeaderText="Actual L*" 
+                                        SortExpression="CIELAB_L" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter CielabL column" 
                                         meta:resourcekey="GridBoundColumnResource10" UniqueName="CielabL">
@@ -1543,8 +1543,8 @@
                                         FilterControlAltText="Filter Targeta column" 
                                         meta:resourcekey="GridBoundColumnResource11" UniqueName="Targeta">
                                     </telerik:GridBoundColumn>
-                                     <telerik:GridBoundColumn DataField="CielabA" HeaderText="Actual a*" 
-                                        SortExpression="CielabA" FilterControlWidth="30px" 
+                                     <telerik:GridBoundColumn DataField="CIELAB_a" HeaderText="Actual a*" 
+                                        SortExpression="CIELAB_a" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter CielabA column" 
                                         meta:resourcekey="GridBoundColumnResource12" UniqueName="CielabA">
@@ -1555,8 +1555,8 @@
                                         FilterControlAltText="Filter Targetb column" 
                                         meta:resourcekey="GridBoundColumnResource13" UniqueName="Targetb">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="CielabB" HeaderText="Actual b*" 
-                                        SortExpression="CielabB" FilterControlWidth="30px" 
+                                    <telerik:GridBoundColumn DataField="CIELAB_b" HeaderText="Actual b*" 
+                                        SortExpression="CIELAB_b" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter CielabB column" 
                                         meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">

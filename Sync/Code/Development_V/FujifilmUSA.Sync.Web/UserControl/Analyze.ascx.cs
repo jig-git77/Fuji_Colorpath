@@ -1145,11 +1145,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (hdMeasurement.Value != "")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
-                PatchDetails = new List<Entity.MeasurementPatchDetails>();
+                
+                //Now we are using DataTable to bind the grid
+                //PatchDetails = new List<Entity.MeasurementPatchDetails>();
+                dtPatchDetails = new DataTable();
+                
                 _presenterAnalyze.GetPatchDetailsofMeasurement();
                 if (!IsErrorOccured)
                 {
-                    rgPatchDetails.DataSource = PatchDetails;
+                    //Now we are using DataTable as DataSource
+                    //rgPatchDetails.DataSource = PatchDetails;
+                    rgPatchDetails.DataSource = dtPatchDetails;
                 }
             }
         }
@@ -1161,7 +1167,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 GridDataItem item = (GridDataItem)e.Item;
 
                 Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
-                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HtmlColor").ToString());
+                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
             }
         }
 
@@ -1364,6 +1370,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
+        public DataTable dtPatchDetails { get; set; }
         #endregion
 
         #region Paging for top Trendline Chart

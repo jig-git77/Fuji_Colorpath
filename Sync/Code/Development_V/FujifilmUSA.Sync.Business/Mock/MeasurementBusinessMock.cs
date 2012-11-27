@@ -46,9 +46,9 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementPatch_AvgDelta>();
         }
 
-        public List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
         {
-            return new List<MeasurementPatchDetails>();
+            return new DataTable();
         }
 
         public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)

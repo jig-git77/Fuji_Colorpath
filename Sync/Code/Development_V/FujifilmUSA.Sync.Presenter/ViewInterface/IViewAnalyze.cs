@@ -33,5 +33,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_G7> GrayLSummary { get; set; }
         List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
         List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
+
+        DataTable dtPatchDetails { get; set; }
     }
 }
