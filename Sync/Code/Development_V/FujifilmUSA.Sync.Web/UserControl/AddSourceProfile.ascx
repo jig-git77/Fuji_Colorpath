@@ -12,6 +12,12 @@
         }
     </script>
 
+    <style type="text/css">
+        textarea {
+            resize: none;
+        }
+</style>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">

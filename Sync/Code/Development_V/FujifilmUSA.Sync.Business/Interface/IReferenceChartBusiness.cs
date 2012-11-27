@@ -14,5 +14,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<ReferenceChartType> GetReferenceCharts(int RefChartID);
         int UpdateReferenceChart(ReferenceChartType referenceChartType);
         List<ReferenceChartType> GetReferenceChartsForXmf();
+        ReferenceChartType GetReferenceChartDataForXmf(int refChartId);
     }
 }

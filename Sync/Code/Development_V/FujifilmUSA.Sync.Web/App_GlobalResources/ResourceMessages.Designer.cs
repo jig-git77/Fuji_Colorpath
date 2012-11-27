@@ -772,6 +772,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while getting list of Measurements for selected project. Please contact your administrator..
+        /// </summary>
+        internal static string Error_GetMeasurementIDsbyProjectID {
+            get {
+                return ResourceManager.GetString("Error_GetMeasurementIDsbyProjectID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while retrieving measurements. Please contact your administrator..
         /// </summary>
         internal static string Error_GetMeasurementsOnRunId {
@@ -993,6 +1002,15 @@ namespace Resources {
         internal static string Error_GetUserRoleList {
             get {
                 return ResourceManager.GetString("Error_GetUserRoleList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while importing Measurements from selected project. Please contact your administrator..
+        /// </summary>
+        internal static string Error_ImportMeasurements {
+            get {
+                return ResourceManager.GetString("Error_ImportMeasurements", resourceCulture);
             }
         }
         

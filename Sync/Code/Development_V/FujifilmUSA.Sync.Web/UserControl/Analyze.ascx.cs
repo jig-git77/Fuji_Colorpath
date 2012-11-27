@@ -193,6 +193,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
                     Div_Opt_Header.Visible = true;
+                    tab6.Visible = false;
                     Tab_G7.Visible = false;                  
                 }                
             }

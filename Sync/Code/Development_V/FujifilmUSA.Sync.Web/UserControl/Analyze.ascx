@@ -655,7 +655,7 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
     
-   <section id="tab6" class="contantbox tabcontant hideclass">
+   <section id="tab6" class="contantbox tabcontant hideclass" runat="server">
       <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
            <div class="combopart">

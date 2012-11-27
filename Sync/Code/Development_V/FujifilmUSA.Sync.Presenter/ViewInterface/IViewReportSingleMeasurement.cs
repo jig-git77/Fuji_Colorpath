@@ -13,6 +13,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool IsVerification { get; }
         DataSet DSReport { get; set; }
         DataSet DSReport_G7_Vali { get; set; }
-        int ValidationType { get; set; }
+        //int ValidationType { get; set; }
     }
 }

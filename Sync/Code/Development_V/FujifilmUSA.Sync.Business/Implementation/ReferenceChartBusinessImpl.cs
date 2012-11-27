@@ -176,7 +176,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
                                 ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType"),
                                 ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
-                                OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")    
+                                OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")
 
                             }).ToList();
                     }
@@ -217,6 +217,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        /// <summary>
+        /// Provide list of reference chart without preview and original byte[] data...
+        /// </summary>
+        /// <returns></returns>
         public List<ReferenceChartType> GetReferenceChartsForXmf()
         {
             var referenceCharts = new List<ReferenceChartType>();
@@ -234,8 +238,6 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 NumOfRows = DataReader.ReadInt(x, "NumOfRows"),
                                                 NumOfCols = DataReader.ReadInt(x, "NumOfCols"),
                                                 TotalPatches = DataReader.ReadInt(x, "TotalPatches"),
-                                                ChartPreview = DataReader.ReadByteArray(x,"ChartPreview"),
-                                                OriginalChart = DataReader.ReadByteArray(x,"OriginalChart"),
                                                 InstrumentType = new InstrumentType()
                                                                      {
                                                                          InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
@@ -243,6 +245,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                      },
                                                 ProjectType = new ProjectType()
                                                                   {
+                                                                      ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
                                                                       ProjectTypeName = DataReader.ReadString(x, "ProjectType")
                                                                   },
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
@@ -252,6 +255,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
             return referenceCharts;
+        }
+
+        /// <summary>
+        /// Provide preview and original data for single reference chart based on chartid...
+        /// </summary>
+        /// <returns></returns>
+        public ReferenceChartType GetReferenceChartDataForXmf(int refChartId)
+        {
+            var referenceChart = new ReferenceChartType();
+            Common.ImplementBusinessLogic(
+                () =>
+                    {
+                        var dsReferenceChart = DataAccessFactory.Instance.GetDsResult("[CP].[GetReferenceChartDataForXmf]", new object[] {refChartId});
+                        if (dsReferenceChart != null && dsReferenceChart.Tables.Count > 0 && dsReferenceChart.Tables[0].Rows.Count > 0)
+                        {
+                            referenceChart.ReferenceChartTypeId = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "ReferenceChartTypeID");
+                            referenceChart.ChartPreview = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "ChartPreview");
+                            referenceChart.OriginalChart = DataReader.ReadByteArray(dsReferenceChart.Tables[0].Rows[0], "OriginalChart");
+                        }
+                    },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetReferenceChartsForXmf"));
+            return referenceChart;
         }
 
         #endregion
