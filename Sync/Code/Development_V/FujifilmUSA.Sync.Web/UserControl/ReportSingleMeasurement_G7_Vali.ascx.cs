@@ -21,8 +21,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     {
         #region Variable Declarations
         private PresenterReportSingleMeasurement _presenterReportSingleMeasurement;
-        public decimal DtELimit = 0;
-        public int ValidtionType = 0;
+        public decimal DtELimit = 0;    
 
         #endregion
 
@@ -43,11 +42,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Page.IsPostBack == false)
             {
-                //-----Set Validation Report Preview image------//
-                if (IsVerification)
-                {
-                    btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";
-                }
+                //-----Set G7 Validation Report Preview image------//
+
+                btn_GeneratePDF.ImageUrl = "../Images/Validation Report_G7_preview.jpg";
             }
         }
         #endregion
@@ -58,15 +55,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // ===== Get Data from data base  ==================//             
             if (DSReport != null && DSReport.Tables.Count > 0)
             {
-                if (DSReport.Tables[0] != null && DSReport.Tables[0].Rows.Count > 0)
-                {
-                    ValidtionType = Convert.ToInt32(DSReport.Tables[0].Rows[0]["ValidationType"].ToString());
-                }
                 #region " === Page : 1 Result Summary === "
 
                 Bind_TargetVersusActual_CHART(DSReport.Tables[1]); // Bind Chart Of Target And Actual Value
 
-                BindSummaryDeltaValueBarChart(DSReport.Tables[8]); // Bind Chart of Summary Delta Value Bar Chart
+                BindSummaryDeltaValueBarChart(DSReport.Tables[2]); // Bind Chart of Summary Delta Value Bar Chart
 
                 BindSummaryDeltaEValueBarChart(DSReport.Tables[3], 0, 11); //Bind Chart of Summary Delta E Value Bar Chart
 
@@ -90,13 +83,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
             objReportPDF.IsValidation = true;
+            ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
 
-            if (ValidtionType == 0)
-            {
-                objReportPDF.ReportName = "Validation Report";
-                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement;
-            }
-            else if (ValidtionType == 1)
+            if (ValidationType == 1)
             {
                 objReportPDF.ReportName = "G7 Validation Report";
                 objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7_Vali;
@@ -741,6 +730,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
                 From_ΔE = txt_dTE.Text;
+                ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
                 DSReport_G7_Vali = new DataSet();
                 _presenterReportSingleMeasurement.GetReportDataOnMeasurement_G7_Vali();
                 if (!IsErrorOccured)

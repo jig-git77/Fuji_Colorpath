@@ -30,9 +30,9 @@ namespace FujifilmUSA.Sync.Web
                 }
                 if (Request.QueryString["Vali_Type"] != null)
                 {
-                    TextBox txt_ValiType = ucReportSingle.FindControl("txt_ValiType") as TextBox;
-                    txt_ValiType.Text = Request.QueryString["Vali_Type"].ToString();
-                } 
+                    TextBox txt_Vali_Type = ucReportSingle.FindControl("txt_Vali_Type") as TextBox;
+                    txt_Vali_Type.Text = Request.QueryString["Vali_Type"].ToString();
+                }
             }
         }
     }

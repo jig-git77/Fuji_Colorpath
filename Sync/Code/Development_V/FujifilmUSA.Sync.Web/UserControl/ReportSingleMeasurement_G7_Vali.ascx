@@ -3,7 +3,7 @@
 <uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" Height="25px" />
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF"/>
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
@@ -14,8 +14,8 @@
                     <td valign="top">
                         <asp:TextBox ID="txt_MeasurementID" runat="server"></asp:TextBox>
                         <asp:TextBox ID="txt_dTE" runat="server"></asp:TextBox>
-                        <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>    
-                        <asp:TextBox ID="txt_ValiType" runat="server"></asp:TextBox>                               
+                        <asp:TextBox ID="txt_DLPName" runat="server"></asp:TextBox>  
+                        <asp:TextBox ID="txt_Vali_Type" runat="server"></asp:TextBox>
                         <br />
                         Target Versus Actual AB Plot
                         <br />

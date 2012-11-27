@@ -578,6 +578,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+     
+        protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)
+        {
+            if (txt_MeasurementID.Text != null)
+            {
+                MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
+                From_ΔE = txt_dTE.Text;
+                ValidationType = Convert.ToInt32(txt_Vali_Type.Text);
+                DSReport = new DataSet();
+                _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
+                if (!IsErrorOccured)
+                {
+                    if (DSReport != null && DSReport.Tables.Count > 0)
+                    {
+                        CreateReport(DSReport);
+                    }
+                }
+            }
+        }
+
         #region IViewReportSingleMeasurement Members
 
         public int MeasurementId { get; set; }
@@ -595,24 +615,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public DataSet DSReport_G7_Vali { get; set; }
-        #endregion
+        public int ValidationType { get; set; }
 
-        protected void btn_GeneratePDF_Click(object sender, ImageClickEventArgs e)
-        {
-            if (txt_MeasurementID.Text != null)
-            {
-                MeasurementId = Convert.ToInt32(txt_MeasurementID.Text);
-                From_ΔE = txt_dTE.Text;
-                DSReport = new DataSet();
-                _presenterReportSingleMeasurement.GetReportDataOnMeasurement();
-                if (!IsErrorOccured)
-                {
-                    if (DSReport != null && DSReport.Tables.Count > 0)
-                    {
-                        CreateReport(DSReport);
-                    }
-                }
-            }
-        }        
+        #endregion
     }
 }

@@ -59,6 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public DateTime EndDate;
         public decimal DtELimit = 0;
         public string DLPName = "";
+        public int ValidationType = -1;
 
         public string AddMeasurementDeleteMeasurementConfirmation
         {
@@ -184,6 +185,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                      SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
                     trRBtnListDeltaE.Visible = false;
                     Div_Validation_Header.Visible = true;
+                    if (ValidationType == 1)  //G7 type
+                    {                        
+                        Tab_G7.Visible = true;
+                    }
+                    else
+                    {                        
+                        Tab_G7.Visible = false;
+                    }
                 }
                 else
                 {
@@ -192,8 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnMeasurementVerification.Visible = false;
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
-                    Div_Opt_Header.Visible = true;
-                    tab6.Visible = false;
+                    Div_Opt_Header.Visible = true;                   
                     Tab_G7.Visible = false;                  
                 }                
             }
@@ -269,6 +277,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     tbOptSummary.Visible = false;
+                    ValidationType = MeasurementSummary[0].ValidationType;
+
                     dvValidationSummary.DataSource = MeasurementSummary;
                     dvValidationSummary.DataBind();
 
@@ -278,14 +288,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
                 string path = "";
-                if (SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationType == 1)  //G7 type
+                if (ValidationType == 1)  //G7 type
                 {
-
-                    path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + SessionManager.Instance.CurrentProject.MeasurementSetting.ValidationType;
+                    Tab_G7.Visible = true;
+                    path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 }
                 else
                 {
-                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                    Tab_G7.Visible = false;
+                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 }
                 iframeGeneratePDFReport.Attributes.Add("src", path);
                 iframeGeneratePDFReport.Style.Add("display", "");
@@ -294,16 +305,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 //In case of None (i.e. Optimization)
                 tbValidationSummary.Visible = false;
+                Tab_G7.Visible = false;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement_Optimization();
                 if (!IsErrorOccured)
                 {
+                    ValidationType = -1; //-----For DLP Optimization Report
                     grdMeasurement.DataSource = MeasurementsDelta;
                     grdMeasurement.DataBind();
                 }
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName;
+                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 iframeGeneratePDFReport.Attributes.Add("src", path);
                 iframeGeneratePDFReport.Style.Add("display", "");
             }           
@@ -345,7 +358,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
 
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-------------Only call G7 & TVI tab data if it is Validation
+            if (IsVerification == true && ValidationType == 1)  //-------------Only call G7 & TVI tab data if it is G7 Validation type
             {
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)

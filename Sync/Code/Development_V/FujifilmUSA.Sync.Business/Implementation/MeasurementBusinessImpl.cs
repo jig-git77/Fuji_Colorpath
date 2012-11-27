@@ -297,7 +297,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               Notes = DataReader.ReadString(x, "Notes"),
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
                               MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
-                              MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
+                              MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
+                              ValidationType = DataReader.ReadInt(x, "ValidationType")
                           }).ToList();
                         VmeasurementSummary[0].ValidationMetrics = dsMeasurements.Tables[1].AsEnumerable().
                            Select(x => new ValidationMetrics()
@@ -538,37 +539,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleMeasurement";
             if (IsVerification)
                 storedProc = "Report.GetSingleVMeasurement";
-            Common.ImplementBusinessLogic(
-                () =>
-                {
-                    var dsMeasurements =
-                        DataAccessFactory.
-                            Instance.
-                            GetDsResult(
-                                storedProc,
-                                new object[] { MeasurementId, From_ΔE });
-                    measurements = dsMeasurements;
-                },
-                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
-            return measurements;
-        }
-
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false)
-        {
-            var measurements = new DataSet();
-            string storedProc = "Report.GetSingleMeasurement";
-            int ValidationType = 0; //-----For Standard Validation
-            if (IsVerification)
-            {
-                storedProc = "Report.GetSingleVMeasurement";
-                ValidationType = 1;
-            }
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -589,6 +565,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                  storedProc,
                                  new object[] { MeasurementId, From_ΔE, ValidationType });
                     }
+                    measurements = dsMeasurements;
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
+            return measurements;
+        }
+
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1)
+        {
+            var measurements = new DataSet();
+            string storedProc = "Report.GetSingleVMeasurement";          
+        
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements = DataAccessFactory.
+                             Instance.
+                             GetDsResult(
+                                 storedProc,
+                                 new object[] { MeasurementId, From_ΔE, ValidationType });
+                  
                     measurements = dsMeasurements;
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_Report_GetSingleMeasurement"));
@@ -671,9 +667,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -711,9 +705,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -742,9 +734,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -782,9 +772,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetBlackLSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -813,9 +801,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -853,9 +839,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSync4D.GetVChartData_G7";
-            if (IsVerification)
-                storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "CPSyncV.GetVChartData_G7";
             Common.ImplementBusinessLogic(
                 () =>
                 {

@@ -28,6 +28,11 @@ namespace FujifilmUSA.Sync.Web
                     TextBox txt_DLPName = ucReportSingle.FindControl("txt_DLPName") as TextBox;
                     txt_DLPName.Text = Request.QueryString["DLPName"].ToString();
                 }
+                if (Request.QueryString["Vali_Type"] != null)
+                {
+                    TextBox txt_Vali_Type = ucReportSingle.FindControl("txt_Vali_Type") as TextBox;
+                    txt_Vali_Type.Text = Request.QueryString["Vali_Type"].ToString();
+                }
             }
         }
     }

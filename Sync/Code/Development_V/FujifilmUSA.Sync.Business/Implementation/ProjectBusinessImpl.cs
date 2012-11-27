@@ -83,8 +83,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         MetricTargetPreset = new KeyValuePair<int, string>(
                                                 DataReader.ReadInt(dsProject.Tables[2].Rows[0], "MetricTargetPresetID"),
                                                 DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName")),
-                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod"),
-                                        //ValidationType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ValidationType")
+                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod")                                        
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)

@@ -20,5 +20,6 @@ namespace FujifilmUSA.Sync.Entity
         public List<ValidationMetrics> ValidationMetrics { get; set; }
         public string MeasurementStatus { get; set; }
         public string MetricTargetPresetName { get; set; }
+        public int ValidationType { get; set; }
     }
 }

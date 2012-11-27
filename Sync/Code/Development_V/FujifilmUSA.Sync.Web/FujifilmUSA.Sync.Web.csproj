@@ -174,6 +174,7 @@
     <Content Include="Images\syncmeasurementdevice-management.png" />
     <Content Include="Images\Title-Bg-Black.gif" />
     <Content Include="Images\user-management.png" />
+    <Content Include="Images\Validation Report_G7_preview.jpg" />
     <Content Include="Images\Validation Report_preview.jpg" />
     <Content Include="Images\ValidationFailed.png" />
     <Content Include="Images\ValidationFailedOld.png" />
@@ -2086,7 +2087,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
