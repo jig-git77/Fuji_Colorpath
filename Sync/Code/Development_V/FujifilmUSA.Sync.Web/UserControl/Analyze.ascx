@@ -146,8 +146,8 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-        <ContentTemplate>
+   <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>--%>
             <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
                 <tr id="trRBtnListDeltaE" runat="server">
                     <td align="center">
@@ -261,11 +261,11 @@
                     </td>
                 </tr>
             </table>
-        </ContentTemplate>
+       <%-- </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="rbtnListDeltaE" />
         </Triggers>
-    </asp:UpdatePanel>
+    </asp:UpdatePanel>--%>
     <asp:UpdateProgress ID="updateProgress" runat="server" AssociatedUpdatePanelID="upCreateDLP"
         DisplayAfter="50">
         <ProgressTemplate>
@@ -1045,7 +1045,8 @@
                
                </ContentTemplate>
                     <Triggers>
-                        <asp:PostBackTrigger ControlID="chartAnalyze" />                     
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />   
+                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />            
                     </Triggers>  
            </asp:UpdatePanel>       
         </div>
