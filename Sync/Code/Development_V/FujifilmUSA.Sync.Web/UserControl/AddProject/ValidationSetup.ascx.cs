@@ -37,9 +37,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 LoadProjectInfoFromSession();
                 ViewState[vsIsPostBack] = true;
 
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                if (!SessionManager.Instance.CurrentDevice.IsValidation) //---If this device doesn't have permission for Validation, disable radiobuttonlist------//
                 {
-                    //-----------If we are in Validation mode, we can't disable validation-----------//
+                    rbtnEnableValidation.Enabled = false;
+                    panelValidationChart.Enabled = false;
+                    panel_Metrictarget.Enabled = false;
+                    lbl_Valimsg.Text = "You are not currently licensed for Validation!";
+                }
+
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)   //-----------If we are in Validation mode, we can't disable validation-----------//
+                {                   
                     rbtnEnableValidation.Items[1].Enabled = false;
                 }
             }

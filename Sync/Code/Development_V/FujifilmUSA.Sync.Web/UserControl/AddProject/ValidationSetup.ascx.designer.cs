@@ -112,6 +112,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.RadioButtonList rbtnEnableValidation;
         
         /// <summary>
+        /// lbl_Valimsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Valimsg;
+        
+        /// <summary>
         /// locValidationChart control.
         /// </summary>
         /// <remarks>
@@ -220,13 +229,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Localize locValidationMetrics;
         
         /// <summary>
-        /// panel1 control.
+        /// panel_Metrictarget control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel1;
+        protected global::System.Web.UI.WebControls.Panel panel_Metrictarget;
         
         /// <summary>
         /// locValidationMetric control.

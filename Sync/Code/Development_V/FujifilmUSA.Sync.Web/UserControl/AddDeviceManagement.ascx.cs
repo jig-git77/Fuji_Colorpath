@@ -184,7 +184,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                              LicenseId = (int)licenseId,
                              DeviceFamily =
                                  new DeviceFamily() { DeviceFamilyId = Convert.ToInt16(cmbDeviceFamily.SelectedValue) },
-                             IsActive = chkIsActive.Checked
+                             IsActive = chkIsActive.Checked,
+                             IsValidation = chkIsValidation.Checked
                          };
 
             if (txtSync1D.Enabled)
@@ -225,6 +226,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtDeviceName.Text = Device.DeviceName;
                 cmbDeviceFamily.SelectedValue = Device.DeviceFamilyId.ToString();
                 chkIsActive.Checked = Device.IsActive;
+                chkIsValidation.Checked = Device.IsValidation;
 
                 //-----------In Edit Device page, put MaxProjects value from DB----------------//
                 foreach (KeyValuePair<ELicenseType, int> item in Device.LicenseTypeProject)

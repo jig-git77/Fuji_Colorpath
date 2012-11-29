@@ -180,4 +180,7 @@
   <data name="selectText" xml:space="preserve">
     <value>--Select--</value>
   </data>
+  <data name="locIsValidationResource1.Text" xml:space="preserve">
+    <value>Is Validation?</value>
+  </data>
 </root>

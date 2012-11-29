@@ -50,11 +50,20 @@
                                         </td>
                                         <td>
                                             <div style="float: left;">  
-                                                <asp:RadioButtonList ID="rbtnEnableValidation" runat="server" 
-                                                    AutoPostBack="true" onselectedindexchanged="rbtnEnableValidation_SelectedIndexChanged" RepeatDirection="Horizontal">
-                                                    <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
-                                                    <asp:ListItem Text="No" Value="No"></asp:ListItem>
-                                                </asp:RadioButtonList>
+                                              <table cellpadding="0" cellspacing="0" width="100%">
+                                                <tr>
+                                                    <td style="width:100px;">
+                                                        <asp:RadioButtonList ID="rbtnEnableValidation" runat="server" 
+                                                            AutoPostBack="true" onselectedindexchanged="rbtnEnableValidation_SelectedIndexChanged" RepeatDirection="Horizontal">
+                                                            <asp:ListItem Selected="True" Text="Yes" Value="Yes"></asp:ListItem>
+                                                            <asp:ListItem Text="No" Value="No"></asp:ListItem>
+                                                        </asp:RadioButtonList>
+                                                    </td>
+                                                    <td>
+                                                         <asp:Label ID="lbl_Valimsg" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                              </table> 
                                             </div>                                            
                                             <div class="clear">
                                             </div>
@@ -162,7 +171,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <asp:Panel ID="panel1" Style="margin-left: 5px; margin-right: 5px;"
+                                <asp:Panel ID="panel_Metrictarget" Style="margin-left: 5px; margin-right: 5px;"
                                 runat="server" BorderStyle="None">
                                 <table cellpadding="0" cellspacing="0" width="100%" style="padding: 10px 5px 10px 5px;">
                                     <tr style="height: 44px;">

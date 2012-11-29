@@ -232,7 +232,7 @@
                                                         ControlToValidate="txtVarification" ForeColor="Red" 
                                                         ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-</asp:RequiredFieldValidator>
+                                                    </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr> 
@@ -242,8 +242,29 @@
                             </tr>
                             <tr>
                                 <td align="right">
-                                    <span style="font-weight: bold;"><asp:Localize Text="Is Active?" runat="server" 
-                                        ID="locIsActive" meta:resourcekey="locIsActiveResource1"></asp:Localize> </span>
+                                    <span style="font-weight: bold;">
+                                    <asp:Localize ID="locIsValidation" runat="server" 
+                                        meta:resourcekey="locIsValidationResource1" Text="Is Validation?"></asp:Localize>
+                                    </span>
+                                </td>
+                                <td>
+                                    &nbsp;:&nbsp;
+                                </td>
+                                <td>
+                                     <div style="float: left;">
+                                        <asp:CheckBox ID="chkIsValidation" runat="server" Checked="False" 
+                                             meta:resourcekey="chkIsValidationResource1" />
+                                      </div>
+                                    <div class="clear">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <span style="font-weight: bold;">
+                                    <asp:Localize ID="locIsActive" runat="server" 
+                                        meta:resourcekey="locIsActiveResource1" Text="Is Active?"></asp:Localize>
+                                    </span>
                                 </td>
                                 <td>
                                     &nbsp;:&nbsp;

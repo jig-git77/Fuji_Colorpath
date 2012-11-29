@@ -85,6 +85,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            DeviceName = DataReader.ReadString(x, "DeviceName"),
                                            DeviceFamilyId = DataReader.ReadByte(x, "DeviceFamilyID"),
                                            IsActive = DataReader.ReadBoolean(x, "IsActive"),
+                                           IsValidation = DataReader.ReadBoolean(x, "IsValidation"),
                                            LicenseId = DataReader.ReadInt(x, "LicenseId"),
                                            DeviceFamily = new DeviceFamily()
                                                               {
@@ -159,6 +160,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceName,
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive,
+                                        device.IsValidation,
                                         licenseDetails.ToString()
                                     });
                         if (returnValue == -1)
@@ -195,6 +197,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         device.DeviceName,
                                         device.DeviceFamily.DeviceFamilyId,
                                         device.IsActive,
+                                        device.IsValidation,
                                         licenseDetails.ToString()
                                     });
                         if (returnValue == -1)
