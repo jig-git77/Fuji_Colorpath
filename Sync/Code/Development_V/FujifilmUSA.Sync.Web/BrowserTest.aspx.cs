@@ -54,8 +54,20 @@ namespace FujifilmUSA.Sync.Web
 
         protected void btn_LoadGrid_Click(object sender, EventArgs e)
         {
-            Panel_Grid.Visible = true;      
+            Panel_Grid.Visible = true;
+
+            #region automatic generate PDF but doesn't display RadGrid on page either
+            //RadGrid_Test.GridExporting += new OnGridExportingEventHandler(RadGrid_Test_GridExporting);            
+            //RadGrid_Test.ExportSettings.ExportOnlyData = true;
+            #endregion
+
             BindRadGrid(BrowserTable());
+
+            #region automatic generate PDF but doesn't display RadGrid on page either
+            //RadGrid_Test.ExportSettings.OpenInNewWindow = true;
+            //RadGrid_Test.ExportSettings.FileName = "BrowserTest";
+            //RadGrid_Test.MasterTableView.ExportToPdf();
+            #endregion       
         }
 
         protected void btn_PDF_Click(object sender, EventArgs e)
@@ -67,7 +79,7 @@ namespace FujifilmUSA.Sync.Web
         }
 
         protected void RadGrid_Test_GridExporting(object source, GridExportingArgs e)
-        {
+        {   
             if (File.Exists(path))
             {
                 //DELETE THE FILE IF ALREADY EXISTS  
@@ -80,9 +92,7 @@ namespace FujifilmUSA.Sync.Web
                 fs.Write(info, 0, info.Length);
                 fs.Close();
                 fs.Dispose();
-            }
-
-            //Response.Redirect("~/BrowserTest.aspx");
+            }            
         }
 
         #endregion
@@ -180,6 +190,6 @@ namespace FujifilmUSA.Sync.Web
         {
             //do nothing
         }
-        #endregion
+        #endregion     
     }
 }

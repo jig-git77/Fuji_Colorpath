@@ -403,19 +403,19 @@
                                     <Fields>
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
                                         <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
-                                        <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right">
+                                        <asp:TemplateField HeaderText="Measurement Status:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt">
                                             <ItemTemplate>
                                                 <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
                                                     <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
                                             </ItemTemplate>
                                         </asp:TemplateField>   
-                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                  
+                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                  
                                         <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                       
-                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                        
-                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
+                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                        
+                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
+                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                       
                                     </Fields>
                                 </asp:DetailsView>
                             </td>
@@ -480,20 +480,18 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 40%;" valign="top">
-                                        <table cellpadding="0" cellspacing="0" width="100%"  >
-                          
-                                    <tr>
-                                        <td colspan="2" style="height: 40px;" class="SyncBottomBorder">
-                                        </td>
-                                    </tr>
-                                    <asp:Literal ID="LitDeltaEPatches" runat="server" 
+                                        <table cellpadding="0" cellspacing="0" width="100%">                          
+                                            <tr>
+                                                <td colspan="2" style="height: 40px;" class="SyncBottomBorder">
+                                                </td>
+                                            </tr>
+                                            <asp:Literal ID="LitDeltaEPatches" runat="server" 
                                                 meta:resourcekey="LitDeltaEPatchesResource1"></asp:Literal>
-                                    </table>
+                                        </table>
                                     </td>
                                     <td style="width: 60%; " id="TDEPrimary" runat="server">
                                         <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="362px" 
-                                            BackColor="Transparent" meta:resourcekey="chartDeltaEResource1">   
-                                                                                                                              
+                                            BackColor="Transparent" meta:resourcekey="chartDeltaEResource1">                  
                                                             <Series>
                                                                 <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar">                                              
                                                                 </asp:Series>

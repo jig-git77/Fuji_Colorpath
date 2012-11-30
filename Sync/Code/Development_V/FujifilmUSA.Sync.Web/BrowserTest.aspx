@@ -266,7 +266,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <asp:Button ID="btn_LoadGrid" runat="server" Text="Load Grid Data" OnClick="btn_LoadGrid_Click"
                         Visible="false" />                    
-                    <asp:Button ID="btnServerSideTest" runat="server" Text="Run Server Side Test" OnClick="btnServerSideTest_Click" Visible="false"/>
+                    <asp:Button ID="btnServerSideTest" runat="server" Text="Run Server Side Test" OnClick="btnServerSideTest_Click" Visible="false"/>                    
                 </td>                
             </tr>           
         </table>
