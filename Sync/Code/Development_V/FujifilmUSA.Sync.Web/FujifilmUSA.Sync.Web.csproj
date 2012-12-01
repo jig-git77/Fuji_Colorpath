@@ -105,6 +105,10 @@
     <Content Include="GlobalActivation.aspx" />
     <Content Include="GlobalMaster.Master" />
     <Content Include="Images\abChartBackGround.gif" />
+    <Content Include="Images\AlignCurve_G7.png" />
+    <Content Include="Images\AlignCurve_G7_Certified.png" />
+    <Content Include="Images\AlignCurve_ISO.png" />
+    <Content Include="Images\AlignCurve_ISO_Certified.png" />
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
@@ -126,6 +130,8 @@
     <Content Include="Images\activity-validation-rules-icon.png" />
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
+    <Content Include="Images\DLP.png" />
+    <Content Include="Images\DLP_Certified.png" />
     <Content Include="Images\dlp_optimization.png" />
     <Content Include="Images\download-icon-small.png" />
     <Content Include="Images\download-icon.png" />
@@ -136,6 +142,8 @@
     <Content Include="Images\header-left-img.gif" />
     <Content Include="Images\header-middle-bg.gif" />
     <Content Include="Images\header-right-img.gif" />
+    <Content Include="Images\InkOptimize.png" />
+    <Content Include="Images\InkOptimize_Certified.png" />
     <Content Include="Images\ISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\ISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\logo_bottom.png" />
@@ -180,6 +188,10 @@
     <Content Include="Images\ValidationFailedOld.png" />
     <Content Include="Images\ValidationSuccess.png" />
     <Content Include="Images\ValidationSuccessOld.png" />
+    <Content Include="Images\Validation_Last_Failed.png" />
+    <Content Include="Images\Validation_Last_OK.png" />
+    <Content Include="Images\Validation_Not_Active.png" />
+    <Content Include="Images\Validation_Not_Certified.png" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\jquery.tools.min.js" />
@@ -2087,7 +2099,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

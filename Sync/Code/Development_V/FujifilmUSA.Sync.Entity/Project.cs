@@ -26,5 +26,7 @@ namespace FujifilmUSA.Sync.Entity
         public bool HasDLP { get; set; }
         public KeyValuePair<short, string> Measurements { get; set; }
         public bool EnabledValidation { get; set; }
+                
+        public ValidationStatus ValidationStatus { get; set; }
     }
 }

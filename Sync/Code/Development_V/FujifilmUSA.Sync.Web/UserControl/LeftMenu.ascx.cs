@@ -102,13 +102,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ctrlItem.ID = "_Device";
             ph.Controls.Add(ctrlItem);
 
-            if (SessionManager.Instance.CurrentOperation == ELicenseType.None) return;
-            ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
-            ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation;
-            ctrlItem.ItemName = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
-            ctrlItem.ID = "_Operation";
-            ph.Controls.Add(ctrlItem);
-
+            if (SessionManager.Instance.CurrentOperation != ELicenseType.None
+                && SessionManager.Instance.CurrentProject != null
+                && SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New)
+            {
+                ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
+                ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation; //Operation will also navigate to Device level
+                ctrlItem.ItemName = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
+                ctrlItem.ID = "_Operation";
+                ph.Controls.Add(ctrlItem);
+            }
             if (SessionManager.Instance.CurrentProject == null) return;
 
 

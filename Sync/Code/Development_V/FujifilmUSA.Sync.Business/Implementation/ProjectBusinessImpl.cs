@@ -227,8 +227,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                : String.Format("{0} DLP{1}.icc",
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
-                                                EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation")
-
+                                                EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
+                                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")                                                
                                             }).ToList();
                     }
                 },

@@ -77,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentDevice = SelectedDevice;
 
                     SessionManager.Instance.CurrentBranchName = ((GridDataItem)e.Item).GetDataKeyValue("BranchName").ToString();
-                    Response.RedirectPermanent("OperationSelection.aspx");
+                    Response.RedirectPermanent("ProjectList.aspx");
                     break;
             }
         }

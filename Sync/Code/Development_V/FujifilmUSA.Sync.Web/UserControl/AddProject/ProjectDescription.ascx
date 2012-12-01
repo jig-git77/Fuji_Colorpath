@@ -58,6 +58,24 @@ textarea {
                                 </tr>
                                 <tr>
                                     <td>
+                                        <span><asp:Localize runat="server" ID="locOperationType" Text="Operation:"></asp:Localize><span style="color: Red;">*</span></span>
+                                    </td>
+                                    <td>
+                                        <div style="float: left;">
+                                            <asp:DropDownList runat="server" ID="ddlLicenseType" Width="200px" CssClass="select"></asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvLicenseType" runat="server" Display="Dynamic" ControlToValidate="ddlLicenseType"
+                                                ForeColor="Red" ValidationGroup="vgDescription" InitialValue="-1"><ucValidationContainer:ValidationContainer ID="rfvcLicenseType" runat="server"
+                                                    ValidationMsg="Please select operation." Size="200" />
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <span><asp:Localize runat="server" Text="Media:" ID="locMedia" 
                                             meta:resourcekey="locMediaResource1"></asp:Localize><span style="color: Red;">*</span></span>
                                     </td>

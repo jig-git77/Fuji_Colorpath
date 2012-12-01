@@ -392,4 +392,15 @@ namespace FujifilmUSA.Sync.Entity
         NoitificationRule = 1,
         StrictRule = 2
     }
+
+    public enum ValidationStatus
+    { 
+        None = 0,
+        NotCertified = 1,//Validation_Not_Certified | Open/Close
+        Disabled = 2, //Validation_Not_Active        
+        NoMeasurement = 3, //Certified but no measurement found
+        LastOK = 4, // Validation_Last_OK
+        LastFailed = 5 //Validation_Last_Failed
+
+    }
 }

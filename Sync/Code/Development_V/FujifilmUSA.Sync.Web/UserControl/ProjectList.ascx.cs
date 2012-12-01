@@ -44,14 +44,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgProjectList.PageSize = Common.Utilities.PageSize;
             if (!IsPostBack)
             {
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Operation;
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-                lblTitle.Text = Utilities.GetEnumDescriptionAttributeValue(SessionManager.Instance.CurrentOperation);
-                ViewState["ProjectLimit"] = 0;
+                lblTitle.Text = "Projects";
             }
         }
-
         protected void Page_PreRender(object sender, EventArgs e)
         {
             //------------Apply default CurrentFilterFunction for "CreateDate" column of rgProjectList RadGrid-----------------//
@@ -60,25 +58,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Control events
+        protected void rgProjectList_ItemCreated(object sender, GridItemEventArgs e)
+        {
+            if (e.Item.ItemType == GridItemType.FilteringItem)
+            {
+                RadComboBox rcmbLicenseType = e.Item.FindControl("rcmbLicenseType") as RadComboBox;
+                if (rcmbLicenseType != null)
+                {
+                    if (SessionManager.Instance.CurrentDevice != null && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
+                    {
+                        foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
+                        {
+                            rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                        }
+
+                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = "All", Value = "" });
+                        rcmbLicenseType.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
         protected void lbtnCreateNewPrintCondition_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(ViewState["ProjectLimit"]) >= SessionManager.Instance.CurrentProjLimit)
-            {
-                //--------------Project Limit reach, so can not create more projects under this Device now-------//  
-                Response.Redirect("ProjectMaxLimit.aspx");
-            }
-            else
-            {
-                //------------Create new Project under this Device-----------------//
-                SessionManager.Instance.CurrentProject = new Project()
-                                                             {
-                                                                 DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
-                                                                 IsUsed = true,
-                                                                 CurrentDisplayStatus = ECurrentProjectStatus.New
-                                                             };
-                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
-                Response.Redirect("AddProject.aspx");
-            }
+            //------------Create new Project under this Device-----------------//
+            SessionManager.Instance.CurrentProject = new Project()
+                                                         {
+                                                             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId,
+                                                             IsUsed = true,
+                                                             CurrentDisplayStatus = ECurrentProjectStatus.New
+                                                         };
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
+            Response.Redirect("AddProject.aspx");
         }
         protected void rgProjectList_ItemCommand(object sender, GridCommandEventArgs e)
         {
@@ -92,6 +102,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                         SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
+                        //Here we take current operation from project list based on projectid selected
+                        SessionManager.Instance.CurrentOperation = (ELicenseType)SessionManager.Instance.ProjectList.Where(p => p.ProjectId == ProjectId).Select(p => p.LicenseTypeID).FirstOrDefault();
                         Response.Redirect(SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                               ? "Analyze.aspx"
                                               : "Measurement.aspx");
@@ -128,11 +140,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
             if (imgStatus == null || btnSelect == null || imgbtnVarification == null) return;
             imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
+            btnSelect.AlternateText = btnSelect.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue((ELicenseType)project.LicenseTypeID);
 
-            //here we are not showing validation image icon when project is not certified, i.e. in any other state
-            imgbtnVarification.Visible = false;
             var days = (DateTime.Now - project.CreateDate).TotalDays;
-
 
             switch (project.Status)
             {
@@ -143,21 +153,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                  "javascript: return ShowOpenPrintConditionWindow('" +
                                                  project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" +
                                                  Math.Round(days, 1) +
-                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "')");
+                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Open.png");
+
                     break;
                 case EOptimizeRunStatus.Closed:
                     if (SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ModifyProject))
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
+
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Close.png");
                     break;
                 case EOptimizeRunStatus.Certify:
@@ -165,23 +178,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
-
-                        //Validation can be done only if the user has modify project permission
-                        //If validation is enabled at measurement setting level then and only then icon to navigate to its page is available
-                        if (project.EnabledValidation)
-                        {
-                            //Here are we showing validation status icon if project is in certified state
-                            imgbtnVarification.ImageUrl = ResolveUrl("../Images/ValidationSuccess.png");
-                            imgbtnVarification.Visible = true;
-                        }
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
-                    
-                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");                    
+
+                    imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
                     break;
-            }            
+            }
+
+            //Decide and set image URL based on conditions
+            SetOperationImageURL(btnSelect, (ELicenseType)project.LicenseTypeID, project.Status);
+            SetValidationImageURL(imgbtnVarification, project);
+
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
@@ -193,7 +202,105 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Method
+        #region Method        
+        private void SetValidationImageURL(Image imgValidationButton, Project project)
+        {
+            switch (project.ValidationStatus)
+            {
+                case ValidationStatus.NotCertified:
+                    //Project is in open/close state so no validation can be performed
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Not_Certified.png";
+                    imgValidationButton.ToolTip = GetResourceString("ProjectStatus_" + project.Status.ToString());
+                    imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
+                    break;
+                case ValidationStatus.Disabled:
+                    //Validation is not enabled
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
+                    imgValidationButton.ToolTip = "Validation is disabled";
+                    imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
+                    break;
+                case ValidationStatus.NoMeasurement:
+                    //No validation found
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Last_Failed.png";
+                    imgValidationButton.ToolTip = "No measurement found";
+                    break;
+                case ValidationStatus.LastOK:
+                    //Validation Last Success
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Last_OK.png";
+                    imgValidationButton.ToolTip = "Last validation OK";
+                    break;
+                case ValidationStatus.LastFailed:
+                    //Validation Last Failed
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Last_Failed.png";
+                    imgValidationButton.ToolTip = "Last validation failed";
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void SetOperationImageURL(ImageButton imgOperationButton, ELicenseType selectedLicenseType, EOptimizeRunStatus optimizeRunStatus)
+        {
+            string operationImageURL = "";
+            switch (optimizeRunStatus)
+            {
+                //Open and Closed has same type of images
+                case EOptimizeRunStatus.Open:
+                case EOptimizeRunStatus.Closed:
+                    switch (selectedLicenseType)
+                    {
+                        case ELicenseType.None:
+                            break;
+                        case ELicenseType.Sync1D:
+
+                            break;
+                        case ELicenseType.DLP:
+                            operationImageURL = @"../Images/DLP.png";
+                            break;
+                        case ELicenseType.InkOptimization:
+                            operationImageURL = @"../Images/InkOptimize.png";
+                            break;
+                        case ELicenseType.Validation:
+
+                            break;
+                        case ELicenseType.IccProfiling:
+
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+
+                //Certified has different type of image
+                case EOptimizeRunStatus.Certify:
+                    switch (selectedLicenseType)
+                    {
+                        case ELicenseType.None:
+                            break;
+                        case ELicenseType.Sync1D:
+
+                            break;
+                        case ELicenseType.DLP:
+                            operationImageURL = @"../Images/DLP_Certified.png";
+                            break;
+                        case ELicenseType.InkOptimization:
+                            operationImageURL = @"../Images/InkOptimize_Certified.png";
+                            break;
+                        case ELicenseType.Validation:
+
+                            break;
+                        case ELicenseType.IccProfiling:
+
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            imgOperationButton.ImageUrl = operationImageURL;
+            imgOperationButton.Visible = operationImageURL.Length > 0;
+        }
         private void GetSourceProfiles()
         {
             //TODO: SessionManager.Instance.CurrentUser.UserCompany.CompanyId;
@@ -214,14 +321,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Projects = new List<Project>();
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-            LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+            //Now we are passing LicenseTypeID as None to bring all projects based on DeviceId
+            //LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+            LicenseTypeID = Convert.ToInt32(ELicenseType.None);
             _presenterProjectList.GetProjectListByDeviceId();
             if (!IsErrorOccured)
             {
                 SessionManager.Instance.ProjectList = Projects;
-                rgProjectList.DataSource = Projects;                
+                rgProjectList.DataSource = Projects;
             }
-            ViewState["ProjectLimit"] = Projects.Count;   //------Store the total projects to check ProjectLimit counter--------//
         }
         private void DeleteProject(int projectId)
         {

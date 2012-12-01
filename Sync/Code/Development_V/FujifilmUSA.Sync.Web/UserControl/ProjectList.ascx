@@ -14,15 +14,15 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, licenseTypeId) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&LicenseTypeId=" + licenseTypeId, "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }
-    function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
+    function ShowClosePrintConditionWindow(projectId, projectName, DlpName, licenseTypeId) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&LicenseTypeId=" + licenseTypeId,"ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -146,7 +146,7 @@
                         <td runat="server">
                             <telerik:RadGrid ID="rgProjectList" AllowFilteringByColumn="True" AllowPaging="True"
                                 PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                                OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand"
+                                OnNeedDataSource="rgProjectList_NeedDataSource" OnItemCommand="rgProjectList_ItemCommand" OnItemCreated="rgProjectList_ItemCreated"
                                 OnItemDataBound="rgProjectList_ItemDataBound" Width="100%" CellSpacing="0" GridLines="None"
                                 AllowSorting="True">
                                 <GroupingSettings CaseSensitive="False" />
@@ -159,26 +159,67 @@
                                     <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
                                     </ExpandCollapseColumn>
                                     <Columns>
-                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Varification"
-                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column"
+                                        <telerik:GridTemplateColumn DataField="LicenseTypeID" AllowFiltering="True" UniqueName="LicenseTypeID" FilterControlAltText="Filter Select column" HeaderText="Type"
                                             ItemStyle-Width="30px">
                                             <ItemTemplate>
                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
                                                     ImageUrl="../Images/OptimizationBlue.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
                                                     CommandName="Select" meta:resourcekey="imgbtnSelectResource1" />
                                             </ItemTemplate>
+                                            <FilterTemplate>
+                                                <telerik:RadComboBox ID="rcmbLicenseType" AppendDataBoundItems="True" runat="server"
+                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("LicenseTypeID").CurrentFilterValue %>'
+                                                    OnClientSelectedIndexChanged="LicenseTypeIndexChanged" Width="40px" DropDownWidth="150px">
+                                                </telerik:RadComboBox>
+                                                <telerik:RadScriptBlock ID="radscriptLicenseType" runat="server">
+                                                    <script type="text/javascript">
+                                                        function LicenseTypeIndexChanged(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            tableView.filter("LicenseTypeID", args.get_item().get_value(), "EqualTo");
+                                                        }
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                            </FilterTemplate>                                            
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn DataField="ProjectId" AllowFiltering="False" UniqueName="Select"
-                                            SortExpression="ProjectId" FilterControlAltText="Filter Select column" meta:resourcekey="GridTemplateColumnResource1">
+                                        <telerik:GridTemplateColumn DataField="ValidationStatus" AllowFiltering="True" UniqueName="ValidationStatus" HeaderText="Validation"
+                                            FilterControlAltText="Filter ValidationStatus column" meta:resourcekey="GridTemplateColumnResource1">
                                             <ItemTemplate>
                                                  <asp:ImageButton ID="imgbtnVarification" runat="server" ToolTip="Validation" AlternateText="Validation"
-                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
+                                                    ImageUrl="../Images/next.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'                                                    
                                                     CommandName="Validation" />
                                             </ItemTemplate>
+                                            <FilterTemplate>
+                                                <telerik:RadComboBox ID="rcmbValidationStatus" AppendDataBoundItems="True" runat="server"
+                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("ValidationStatus").CurrentFilterValue %>'
+                                                    OnClientSelectedIndexChanged="ValidationStatusIndexChanged" Width="40px" DropDownWidth="120px">
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem Text="ALL" runat="server"
+                                                            Owner="" Selected="True" />
+                                                        <telerik:RadComboBoxItem Text="Not Certified" Value="NotCertified" runat="server"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="Disabled" Value="Disabled" runat="server"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="No Measurement" Value="NoMeasurement" runat="server"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="Last OK" Value="LastOK" runat="server"
+                                                            Owner="" />
+                                                        <telerik:RadComboBoxItem Text="Last Failed" Value="LastFailed" runat="server"
+                                                            Owner="" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                                <telerik:RadScriptBlock ID="radscriptValidationStatus" runat="server">
+                                                    <script type="text/javascript">
+                                                        function ValidationStatusIndexChanged(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            tableView.filter("ValidationStatus", args.get_item().get_value(), "EqualTo");
+                                                        }
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                            </FilterTemplate>
                                             <HeaderStyle Width="30px" />
                                         </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="30px" HeaderText="Status"
+                                        <telerik:GridTemplateColumn UniqueName="Status" FilterControlWidth="30px" HeaderText="Status" Visible="false"
                                             DataField="Status" FilterControlAltText="Filter Status column" meta:resourcekey="GridTemplateColumnResource2">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgStatus" runat="server" meta:resourcekey="imgStatusResource1" />
@@ -211,7 +252,7 @@
                                             <HeaderStyle Width="50px" />
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Name" UniqueName="ProjectName"
-                                            SortExpression="ProjectName" FilterControlWidth="80px" AutoPostBackOnFilter="True"
+                                            SortExpression="ProjectName" FilterControlWidth="90px" AutoPostBackOnFilter="True"
                                             CurrentFilterFunction="Contains" FilterControlAltText="Filter ProjectName column"
                                             meta:resourcekey="GridTemplateColumnResource3">
                                             <ItemTemplate>

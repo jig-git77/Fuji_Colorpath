@@ -15,14 +15,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recnoDLPText = "noDLPText";
         private const string _recconfirmDLPText = "confirmDLPText";
         #endregion
-        
+
         #region Constructor
         public OpenPrintCondition()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
-        } 
+        }
         #endregion
-        
+
+        private ELicenseType CurrentLicenseType
+        {
+            get
+            {
+                if (Request.QueryString["LicenseTypeId"] != null && Request.QueryString["LicenseTypeId"].Length > 0)
+                    return (ELicenseType)Convert.ToInt32(Request.QueryString["LicenseTypeId"]);
+                else
+                    return ELicenseType.None;
+            }
+        }
+
         private PresenterOpenPrintCondition _presenterOpenPrintCondition;
         protected override void OnInit(EventArgs e)
         {
@@ -60,6 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnContinue_Click(object sender, EventArgs e)
         {
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+            SessionManager.Instance.CurrentOperation = CurrentLicenseType;
             _presenterOpenPrintCondition.GetProjectDetail();
             if (!IsErrorOccured)
             {

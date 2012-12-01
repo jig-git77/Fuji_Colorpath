@@ -45,9 +45,9 @@
             return false;
     }
 
-    function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
+    function ShowClosePrintConditionWindow(projectId, projectName, DlpName, licenseType) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&ToSubOperation=0", "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&ToSubOperation=0" + "&LicenseTypeId=" + licenseType, "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -653,7 +653,7 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
     
-   <section id="tab6" class="contantbox tabcontant hideclass" >
+   <section id="tab6" class="contantbox tabcontant hideclass" runat="server">
       <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
            <div class="combopart">

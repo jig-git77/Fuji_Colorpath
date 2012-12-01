@@ -22,6 +22,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
             this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
         }
+
+        #region Property
+        private ELicenseType CurrentLicenseType
+        {
+            get
+            {
+                if (Request.QueryString["LicenseTypeId"] != null && Request.QueryString["LicenseTypeId"].Length > 0)
+                    return (ELicenseType)Convert.ToInt32(Request.QueryString["LicenseTypeId"]);
+                else
+                    return ELicenseType.None;
+            }
+        }
+        #endregion
+
         #region "Event"
         protected override void OnInit(EventArgs e)
         {
@@ -32,12 +46,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 lblClosePrintConditionMessage.Text = string.Format(GetResourceString(_recprintOptionsText), Request.QueryString["ProjectName"]);
-                
+
                 //----------------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
-                if (Convert.ToInt32(SessionManager.Instance.CurrentOperation) == 3)
+                if (CurrentLicenseType == ELicenseType.InkOptimization)
                 {
                     lbtnReOptimize.Visible = false;
-                }               
+                }
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -75,7 +89,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                 }
                 #endregion
-                
+
                 if (!IsErrorOccured)
                 {
                     _presenterClosePrintCondition.CreateOptimizeRun();
@@ -87,6 +101,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             SessionManager.Instance.CurrentProject = Project;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                             SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                            SessionManager.Instance.CurrentOperation = CurrentLicenseType;
+
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
                         }
                     }
@@ -115,6 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                     SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
+                    SessionManager.Instance.CurrentOperation = CurrentLicenseType;
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
@@ -123,6 +140,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
                 }
             }
+
         }
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
@@ -158,7 +176,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
 
         public string DeviceName { get; set; }
-        
+
         #endregion
     }
 }

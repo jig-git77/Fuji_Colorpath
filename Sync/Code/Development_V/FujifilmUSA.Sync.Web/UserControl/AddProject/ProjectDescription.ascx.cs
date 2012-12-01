@@ -1,7 +1,8 @@
 ﻿using System;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Entity;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectDescription : BaseControl
@@ -16,6 +17,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!Page.IsPostBack)
             {
+                LoadLicenseType();
                 LoadDeviceInfoFromSession();
                 LoadProjectInfoFromSession();
             }
@@ -29,6 +31,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+        private void LoadLicenseType()
+        {
+            ddlLicenseType.Items.Clear();
+            //Here we are supposed to load license type which can be accessed by user
+            if (SessionManager.Instance.CurrentDevice != null
+                && SessionManager.Instance.CurrentDevice.LicenseTypeProject != null
+                    && SessionManager.Instance.CurrentDevice.LicenseTypeProject.Count > 0)
+            {
+
+                foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
+                {
+                    ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                }
+
+                ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = "Please select operation", Value = "-1" });
+                ddlLicenseType.SelectedIndex = 0;
+            }
+        }
         private void LoadDeviceInfoFromSession()
         {
             if (SessionManager.Instance.CurrentDevice.DeviceName != null)
@@ -57,6 +77,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lnkbtnPrintDescription_Click(object sender, EventArgs e)
         {
+            //Check for project limit 
+            int currentProjectLimit = 0;
+            if (SessionManager.Instance.ProjectList != null)
+                currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseTypeID == Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
+
+            int maxProjectLimit = 0;
+            if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
+                maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
+            
+            if (currentProjectLimit >= maxProjectLimit)
+            {
+                //--------------Project Limit reach, so can not create more projects under this Device now-------//  
+                Response.Redirect("ProjectMaxLimit.aspx");
+            }
+            
             SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
             {
                 Media = txtMedia.Text.Trim(),
@@ -65,6 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Notes = txtNotes.Text.Trim(),
                 TechnicianName = txtTechnicianName.Text.Trim()
             };
+            SessionManager.Instance.CurrentOperation = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
