@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Private variables - Globalization
         private const string _recColorPathInstallerMac = "colorPathInstallerMac";
         private const string _recColorPathInstallerPC = "colorPathInstallerPC";
+        private const string _recValidationCharts = "ValidationCharts";
         #endregion
 
         #region Constructor
@@ -57,11 +58,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             dr1["DownloadPath"] = "Download/Colorpath PCPlugin Installer.zip";
             dt.Rows.Add(dr1);
 
-            //DataRow dr2 = dt.NewRow();
-            //dr2["DownloadId"] = "3";
-            //dr2["DownloadName"] = "Taskero Display (ER) Installer - Mac";
-            //dr2["DownloadPath"] = "Download/3";
-            //dt.Rows.Add(dr2);
+            DataRow dr2 = dt.NewRow();
+            dr2["DownloadId"] = "3";
+            dr2["DownloadName"] = GetResourceString(_recValidationCharts);
+            dr2["DownloadPath"] = "Download/Validation Charts.zip";
+            dt.Rows.Add(dr2);
 
             //DataRow dr3 = dt.NewRow();
             //dr3["DownloadId"] = "4";

@@ -45,7 +45,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
                 }
 
-                ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = "Please select operation", Value = "-1" });
+                ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = "-- Please select operation --", Value = "-1" });
                 ddlLicenseType.SelectedIndex = 0;
             }
         }

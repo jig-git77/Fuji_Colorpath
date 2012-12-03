@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;
+            ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
             _presenterExport.GetChartPreview();
             if (!IsErrorOccured)
             {

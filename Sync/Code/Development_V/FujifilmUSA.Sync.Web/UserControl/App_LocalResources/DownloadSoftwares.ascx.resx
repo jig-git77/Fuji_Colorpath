@@ -129,4 +129,7 @@
   <data name="colorPathInstallerPC" xml:space="preserve">
     <value>Colorpath Installer - PC</value>
   </data>
+  <data name="ValidationCharts" xml:space="preserve">
+    <value>Validation Charts</value>
+  </data>
 </root>
