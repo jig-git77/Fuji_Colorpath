@@ -47,7 +47,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Device;
                 //set dlpsuboperation session to none everytime page loads fresh(!ispostback)...
                 SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
-                lblTitle.Text = "Projects";
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)
@@ -102,8 +101,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                         SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
-                        //Here we take current operation from project list based on projectid selected
-                        SessionManager.Instance.CurrentOperation = (ELicenseType)SessionManager.Instance.ProjectList.Where(p => p.ProjectId == ProjectId).Select(p => p.LicenseTypeID).FirstOrDefault();
                         Response.Redirect(SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
                                               ? "Analyze.aspx"
                                               : "Measurement.aspx");
@@ -140,7 +137,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var imgbtnVarification = e.Item.FindControl("imgbtnVarification") as Image;
             if (imgStatus == null || btnSelect == null || imgbtnVarification == null) return;
             imgStatus.ToolTip = imgStatus.AlternateText = GetResourceString("ProjectStatus_" + project.Status.ToString());
-            btnSelect.AlternateText = btnSelect.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue((ELicenseType)project.LicenseTypeID);
+            btnSelect.AlternateText = btnSelect.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(project.LicenseType);
 
             var days = (DateTime.Now - project.CreateDate).TotalDays;
 
@@ -153,7 +150,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                  "javascript: return ShowOpenPrintConditionWindow('" +
                                                  project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" +
                                                  Math.Round(days, 1) +
-                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
+                                                 "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + project.TotalRuns + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -166,7 +163,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -178,7 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "','" + Convert.ToInt32(project.LicenseTypeID) + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -188,7 +185,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             //Decide and set image URL based on conditions
-            SetOperationImageURL(btnSelect, (ELicenseType)project.LicenseTypeID, project.Status);
+            SetOperationImageURL(btnSelect, project.LicenseType, project.Status);
             SetValidationImageURL(imgbtnVarification, project);
 
             if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
@@ -202,7 +199,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Method        
+        #region Method
         private void SetValidationImageURL(Image imgValidationButton, Project project)
         {
             switch (project.ValidationStatus)
@@ -210,29 +207,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 case ValidationStatus.NotCertified:
                     //Project is in open/close state so no validation can be performed
                     imgValidationButton.ImageUrl = @"../Images/Validation_Not_Certified.png";
-                    imgValidationButton.ToolTip = GetResourceString("ProjectStatus_" + project.Status.ToString());
+                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.NotCertified);
                     imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
                     break;
                 case ValidationStatus.Disabled:
                     //Validation is not enabled
                     imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
-                    imgValidationButton.ToolTip = "Validation is disabled";
+                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.Disabled);
                     imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
                     break;
                 case ValidationStatus.NoMeasurement:
                     //No validation found
                     imgValidationButton.ImageUrl = @"../Images/Validation_Last_Failed.png";
-                    imgValidationButton.ToolTip = "No measurement found";
+                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.NoMeasurement);
                     break;
                 case ValidationStatus.LastOK:
                     //Validation Last Success
                     imgValidationButton.ImageUrl = @"../Images/Validation_Last_OK.png";
-                    imgValidationButton.ToolTip = "Last validation OK";
+                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.LastOK);
                     break;
                 case ValidationStatus.LastFailed:
                     //Validation Last Failed
                     imgValidationButton.ImageUrl = @"../Images/Validation_Last_Failed.png";
-                    imgValidationButton.ToolTip = "Last validation failed";
+                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.LastFailed);
                     break;
                 default:
                     break;

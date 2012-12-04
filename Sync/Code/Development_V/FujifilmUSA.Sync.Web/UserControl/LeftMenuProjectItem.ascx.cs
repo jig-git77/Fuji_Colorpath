@@ -52,7 +52,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         lnkDownload.Visible = false;
 
                         //----------------If LicenseTypeID != 3 (Ink Optimization)----------------//
-                        if (SessionManager.Instance.CurrentOperation != ELicenseType.InkOptimization)
+                        if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimization)
                         {
                             //------If current run is closed (certify) and it is last run of this project--------//
                             if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId ==

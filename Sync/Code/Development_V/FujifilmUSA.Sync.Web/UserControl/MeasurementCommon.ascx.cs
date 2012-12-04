@@ -55,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
                 //----------------"Import Measurements" button only available for "Ink Optimization" Project Type and only for initial 1st run--------------//
-                if (SessionManager.Instance.CurrentOperation == ELicenseType.InkOptimization)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                 {
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {

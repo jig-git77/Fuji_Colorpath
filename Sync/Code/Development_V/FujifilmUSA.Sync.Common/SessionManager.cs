@@ -126,21 +126,21 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
-        public ELicenseType CurrentOperation
-        {
-            get
-            {
-                if (HttpContext.Current.Session[_operationSession] != null)
-                {
-                    return (ELicenseType)System.Enum.Parse(typeof(ELicenseType), HttpContext.Current.Session[_operationSession].ToString());
-                }
-                return ELicenseType.None;
-            }
-            set
-            {
-                HttpContext.Current.Session[_operationSession] = value;
-            }
-        }
+        //public ELicenseType CurrentOperation
+        //{
+        //    get
+        //    {
+        //        if (HttpContext.Current.Session[_operationSession] != null)
+        //        {
+        //            return (ELicenseType)System.Enum.Parse(typeof(ELicenseType), HttpContext.Current.Session[_operationSession].ToString());
+        //        }
+        //        return ELicenseType.None;
+        //    }
+        //    set
+        //    {
+        //        HttpContext.Current.Session[_operationSession] = value;
+        //    }
+        //}
 
         public ELicenseType CurrentDlpSubOperation
         {

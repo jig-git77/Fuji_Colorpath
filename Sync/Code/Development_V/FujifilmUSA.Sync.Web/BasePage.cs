@@ -207,8 +207,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||
-                    SessionManager.Instance.CurrentOperation == ELicenseType.None ||
+                if (SessionManager.Instance.CurrentDevice == null ||                    
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -221,8 +220,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||
-                    SessionManager.Instance.CurrentOperation == ELicenseType.None ||
+                if (SessionManager.Instance.CurrentDevice == null ||                    
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -235,8 +233,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||
-                    SessionManager.Instance.CurrentOperation == ELicenseType.None ||
+                if (SessionManager.Instance.CurrentDevice == null ||                    
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -271,8 +268,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||
-                    SessionManager.Instance.CurrentOperation == ELicenseType.None ||
+                if (SessionManager.Instance.CurrentDevice == null ||                    
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -285,8 +281,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||
-                    SessionManager.Instance.CurrentOperation == ELicenseType.None ||
+                if (SessionManager.Instance.CurrentDevice == null ||                    
                     SessionManager.Instance.CurrentProject == null)
                 {
                     NavigationToSessionEndPage();
@@ -337,13 +332,13 @@ namespace FujifilmUSA.Sync.Web
         private void NavigationToSessionEndPage()
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-            SessionManager.Instance.CurrentOperation = ELicenseType.None;
+            SessionManager.Instance.CurrentProject = null;
             Response.RedirectPermanent("SessionEnd.aspx");
         }
         private void NavigationToNoPermissionPage()
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Home;
-            SessionManager.Instance.CurrentOperation = ELicenseType.None;
+            SessionManager.Instance.CurrentProject = null;
             Response.RedirectPermanent("Permission.aspx");
         }
         private System.Web.UI.Control FindStatusControl()

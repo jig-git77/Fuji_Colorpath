@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //Check for project limit 
             int currentProjectLimit = 0;
             if (SessionManager.Instance.ProjectList != null)
-                currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseTypeID == Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
+                currentProjectLimit = SessionManager.Instance.ProjectList.Where(p => p.LicenseType == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.ProjectId).Count();
 
             int maxProjectLimit = 0;
             if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
@@ -98,9 +98,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 Colorant = txtColorant.Text.Trim(),
                 RipSettings = txtRipSetting.Text.Trim(),
                 Notes = txtNotes.Text.Trim(),
-                TechnicianName = txtTechnicianName.Text.Trim()
+                TechnicianName = txtTechnicianName.Text.Trim(),
             };
-            SessionManager.Instance.CurrentOperation = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
+
+            SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);            
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }

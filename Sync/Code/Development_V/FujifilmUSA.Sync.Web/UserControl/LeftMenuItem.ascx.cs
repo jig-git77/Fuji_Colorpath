@@ -53,16 +53,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 case ELeftMenuItemLevel.Home:
                     SessionManager.Instance.CurrentBranchName = null;
-                    SessionManager.Instance.CurrentDevice = null;
-                    SessionManager.Instance.CurrentOperation = ELicenseType.None;
+                    SessionManager.Instance.CurrentDevice = null;                    
                     SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;
                     Response.Redirect("Index.aspx");
                     break;
                 case ELeftMenuItemLevel.Device:
-                case ELeftMenuItemLevel.Operation: //Here operation level will work as device level
-                    SessionManager.Instance.CurrentOperation = ELicenseType.None;
+                case ELeftMenuItemLevel.Operation: //Here operation level will work as device level                    
                     SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.None;
                     SessionManager.Instance.CurrentProject = null;
                     SessionManager.Instance.CurrentOptimizeRun = null;

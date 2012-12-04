@@ -20,13 +20,13 @@ namespace FujifilmUSA.Sync.Entity
         public SourceProfile SourceProfile { get; set; }
         public int DeviceFamilyProfilerOptionId { get; set; }
         public ECurrentProjectStatus CurrentDisplayStatus { set; get; }
-        public EOptimizeRunStatus Status { get; set; }
-        public int LicenseTypeID { get; set; }
+        public EOptimizeRunStatus Status { get; set; }        
         public int TotalRuns { get; set; }
         public bool HasDLP { get; set; }
         public KeyValuePair<short, string> Measurements { get; set; }
         public bool EnabledValidation { get; set; }
                 
         public ValidationStatus ValidationStatus { get; set; }
+        public ELicenseType LicenseType { get; set; }
     }
 }

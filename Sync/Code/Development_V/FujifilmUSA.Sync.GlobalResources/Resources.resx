@@ -705,7 +705,6 @@
   <data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
     <value>Error occured while inserting device family Profiler Option Presets.Please contact your administrator.</value>
   </data>
-  
   <data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
     <value>Error occured while displaying G7 Gray ΔCh chart. Please contact your administrator.</value>
   </data>
@@ -724,7 +723,6 @@
   <data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
     <value>Error occured while displaying G7 Gray ΔL Summary. Please contact your administrator.</value>
   </data>
-
   <data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
     <value>Error occured while displaying Ink Paper ΔE Primary Patches chart. Please contact your administrator.</value>
   </data>
@@ -739,5 +737,23 @@
   </data>
   <data name="Error_GetChartData_LABChart" xml:space="preserve">
     <value>Error occured while displaying Gamut LAB charts. Please contact your administrator.</value>
+  </data>
+  <data name="ValidationStatus_Disabled" xml:space="preserve">
+    <value>Validation is disabled</value>
+  </data>
+  <data name="ValidationStatus_LastFailed" xml:space="preserve">
+    <value>Last validation failed</value>
+  </data>
+  <data name="ValidationStatus_LastOK" xml:space="preserve">
+    <value>Last validation is OK</value>
+  </data>
+  <data name="ValidationStatus_NoMeasurement" xml:space="preserve">
+    <value>Last validation failed</value>
+  </data>
+  <data name="ValidationStatus_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ValidationStatus_NotCertified" xml:space="preserve">
+    <value>Not certified for validation</value>
   </data>
 </root>

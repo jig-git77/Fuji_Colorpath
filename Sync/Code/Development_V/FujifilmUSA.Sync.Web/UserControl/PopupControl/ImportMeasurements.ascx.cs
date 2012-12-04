@@ -69,7 +69,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
          
             //---------Get list of Measurement IDs with above selected Project-----------------//
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-            LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+            LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
             _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
 
             if (!IsErrorOccured)
@@ -92,7 +92,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
             Projects = new List<Project>();
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-            LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+            LicenseTypeID =(int)SessionManager.Instance.CurrentProject.LicenseType;
             _presenterImportMeasurements.GetProjectList();
 
             if (!IsErrorOccured)

@@ -46,7 +46,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                   ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
                                                               },
                                           DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
-                                          EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation")
+                                          EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
+                                          LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -83,7 +84,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         MetricTargetPreset = new KeyValuePair<int, string>(
                                                 DataReader.ReadInt(dsProject.Tables[2].Rows[0], "MetricTargetPresetID"),
                                                 DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName")),
-                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod")                                        
+                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod")
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -204,7 +205,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
+                                                LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
                                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
                                                 //HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
                                                 SourceProfile = new SourceProfile()
@@ -228,7 +229,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                DataReader.ReadString(x, "ProjectName"),
                                                                                DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
                                                 EnabledValidation = DataReader.ReadBoolean(x, "EnabledValidation"),
-                                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")                                                
+                                                ValidationStatus = (ValidationStatus)DataReader.ReadInt(x, "ValidationStatus")
                                             }).ToList();
                     }
                 },
@@ -540,7 +541,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@StartDateTime", Type = DbType.DateTime, Value = DateTime.Now},
                                                      new Parameters() {ParameterName = "@DeviceFamilyProfilerOptionId", Type = DbType.Int32, Value = project.DeviceFamilyProfilerOptionId},
                                                      new Parameters() {ParameterName = "@ProjectOptions", Value = projectOptions.ToString()},
-                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = project.LicenseTypeID},
+                                                     new Parameters() {ParameterName = "@LicenseTypeID", Type = DbType.Int32, Value = (int)project.LicenseType},
                                                      new Parameters() {ParameterName = "@VMeasurementDeviceID",Type=DbType.Int16,Value = project.MeasurementSetting.VMeasurementDeviceID},
                                                      new Parameters() {ParameterName = "@OPTReferenceChartTypeID", Type=DbType.Int16, Value = project.MeasurementSetting.OptReferenceChartType.Key},
                                                      new Parameters() {ParameterName ="@VReferenceChartTypeID", Type=DbType.Int16,Value = project.MeasurementSetting.VReferenceChartType.Key },
@@ -909,7 +910,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ProjectName = DataReader.ReadString(x, "ProjectName"),
                                 DeviceId = DataReader.ReadInt(x, "CpDeviceId"),
                                 IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                LicenseTypeID = DataReader.ReadInt(x, "LicenseTypeID"),
+                                LicenseType = (ELicenseType)DataReader.ReadInt(x, "LicenseTypeID"),
                                 TotalRuns = DataReader.ReadInt(x, "TotalRuns"),
                                 HasDLP = DataReader.ReadBoolean(x, "HasDLP"),
                                 SourceProfile = new SourceProfile()

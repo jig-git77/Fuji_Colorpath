@@ -182,7 +182,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Text = "<span>Optimize</span>";
                     lbtnOptimize.Attributes.Add("onclick",
                                                      "javascript: return ShowClosePrintConditionWindow('" +
-                                                     SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "','" + Convert.ToInt32(SessionManager.Instance.CurrentOperation) + "')");
+                                                     SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
                     trRBtnListDeltaE.Visible = false;
                     Div_Validation_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type

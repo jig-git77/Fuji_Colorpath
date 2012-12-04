@@ -45,9 +45,9 @@
             return false;
     }
 
-    function ShowClosePrintConditionWindow(projectId, projectName, DlpName, licenseType) {
+    function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&ToSubOperation=0" + "&LicenseTypeId=" + licenseType, "ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&ToSubOperation=0", "ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }

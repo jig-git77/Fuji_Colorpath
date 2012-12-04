@@ -14,15 +14,15 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
-    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns, licenseTypeId) {
+    function ShowOpenPrintConditionWindow(projectId, projectName, days, DlpName, TotalRuns) {
         var oWindow;
-        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns + "&LicenseTypeId=" + licenseTypeId, "OpenPrintConditionWindow");
+        oWindow = window.radopen("PopupOpenPrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&days=" + days + "&DlpName=" + DlpName + "&TotalRuns=" + TotalRuns , "OpenPrintConditionWindow");
         oWindow.show();
         return false;
     }
-    function ShowClosePrintConditionWindow(projectId, projectName, DlpName, licenseTypeId) {
+    function ShowClosePrintConditionWindow(projectId, projectName, DlpName) {
         var oWindow;
-        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName + "&LicenseTypeId=" + licenseTypeId,"ClosePrintConditionWindow");
+        oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&DlpName=" + DlpName ,"ClosePrintConditionWindow");
         oWindow.show();
         return false;
     }
@@ -123,7 +123,8 @@
             <asp:Label ID="lblTitle" runat="server" Text="Project List" meta:resourcekey="lblTitleResource1"></asp:Label>
         </h1>
         <asp:LinkButton ID="lbtnCreateNewPrintCondition" runat="server" CssClass="button"
-            ValidationGroup="vgDestination" OnClick="lbtnCreateNewPrintCondition_Click">
+            ValidationGroup="vgDestination" 
+            OnClick="lbtnCreateNewPrintCondition_Click">
             <span>
                 <asp:Image ID="imgAdd" runat="server" ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
                 <asp:Localize runat="server" Text="Create New Print Condition" ID="locCreateNewPrintCondition"
@@ -180,7 +181,7 @@
                                                     </script>
                                                 </telerik:RadScriptBlock>
                                             </FilterTemplate>                                            
-                                            <HeaderStyle Width="30px" />
+                                            <HeaderStyle Width="30px" />                                            
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridTemplateColumn DataField="ValidationStatus" AllowFiltering="True" UniqueName="ValidationStatus" HeaderText="Validation"
                                             FilterControlAltText="Filter ValidationStatus column" meta:resourcekey="GridTemplateColumnResource1">
@@ -199,9 +200,7 @@
                                                         <telerik:RadComboBoxItem Text="Not Certified" Value="NotCertified" runat="server"
                                                             Owner="" />
                                                         <telerik:RadComboBoxItem Text="Disabled" Value="Disabled" runat="server"
-                                                            Owner="" />
-                                                        <telerik:RadComboBoxItem Text="No Measurement" Value="NoMeasurement" runat="server"
-                                                            Owner="" />
+                                                            Owner="" />                                                        
                                                         <telerik:RadComboBoxItem Text="Last OK" Value="LastOK" runat="server"
                                                             Owner="" />
                                                         <telerik:RadComboBoxItem Text="Last Failed" Value="LastFailed" runat="server"
@@ -315,8 +314,8 @@
                                             </ItemTemplate>
                                             <HeaderStyle Width="40px" />
                                         </telerik:GridTemplateColumn>
-                                    </Columns>
-                                </MasterTableView>
+                                    </Columns>                                                                   
+                                </MasterTableView>                                
                             </telerik:RadGrid>
                             <asp:HiddenField ID="hdSelectedSourceProfileId" runat="server" Value="0" />
                         </td>

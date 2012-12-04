@@ -70,8 +70,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnContinue_Click(object sender, EventArgs e)
         {
-            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-            SessionManager.Instance.CurrentOperation = CurrentLicenseType;
+            ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);            
             _presenterOpenPrintCondition.GetProjectDetail();
             if (!IsErrorOccured)
             {

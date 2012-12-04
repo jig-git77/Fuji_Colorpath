@@ -90,23 +90,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 switch (lnkButton.ID.ToUpper())
                 {
                     case "LBTNALIGMENTCURVES":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.Sync1D;
+                        //SessionManager.Instance.CurrentOperation = ELicenseType.Sync1D;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_AligmentCurves.Value);
                         break;
                     case "LBTNDLPOPTIMIZATION":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                        //SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_DLPOptimization.Value);
                         break;
                     case "LBTNINKOPTIMIZATION":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.InkOptimization;
+                        //SessionManager.Instance.CurrentOperation = ELicenseType.InkOptimization;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_InkOptimization.Value);
                         break;
                     case "LBTNCOLORVALIDATION":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.Validation;
+                        //SessionManager.Instance.CurrentOperation = ELicenseType.Validation;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ColorValidation.Value);
                         break;
                     case "LBTNICCPROFILING":
-                        SessionManager.Instance.CurrentOperation = ELicenseType.IccProfiling;
+                        //SessionManager.Instance.CurrentOperation = ELicenseType.IccProfiling;
                         SessionManager.Instance.CurrentProjLimit = Convert.ToInt32(Hidden_ICCProfiling.Value);
                         break;
                 }

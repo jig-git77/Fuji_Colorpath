@@ -394,12 +394,18 @@ namespace FujifilmUSA.Sync.Entity
     }
 
     public enum ValidationStatus
-    { 
+    {
+        [Description("ValidationStatus_None")]
         None = 0,
+        [Description("ValidationStatus_NotCertified")]
         NotCertified = 1,//Validation_Not_Certified | Open/Close
-        Disabled = 2, //Validation_Not_Active        
+        [Description("ValidationStatus_Disabled")]
+        Disabled = 2, //Validation_Not_Active  
+        [Description("ValidationStatus_NoMeasurement")]
         NoMeasurement = 3, //Certified but no measurement found
+        [Description("ValidationStatus_LastOK")]
         LastOK = 4, // Validation_Last_OK
+        [Description("ValidationStatus_LastFailed")]
         LastFailed = 5 //Validation_Last_Failed
 
     }

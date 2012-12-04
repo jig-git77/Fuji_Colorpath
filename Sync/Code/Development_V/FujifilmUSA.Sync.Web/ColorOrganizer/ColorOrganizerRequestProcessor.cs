@@ -136,7 +136,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 {
                     //Set device to session
                     SessionManager.Instance.CurrentDevice = Device;
-                    SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                    //to-do
+                    //SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
                     SessionManager.Instance.CurrentProjLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
 
                     //Convert action to enum
@@ -196,8 +197,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 #endregion
 
                     #region Setting Current Operation - Static to DLP
-
-                    SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
+                    //to-do
+                    //SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
                     SessionManager.Instance.CurrentProjLimit =
                         SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
 
@@ -227,7 +228,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
 
                     DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-                    LicenseTypeId = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+                    //to-do 
+                    //LicenseTypeId = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
                     _presenterColorOrganizerRequestProcessor.GetProjectCountByDeviceId();
 
                     if (TotalProjects >= SessionManager.Instance.CurrentProjLimit)

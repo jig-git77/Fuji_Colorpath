@@ -59,8 +59,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (IsXmfUser)
             {
-                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
-                SessionManager.Instance.CurrentProject.LicenseTypeID = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+                SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;                
                 Project = SessionManager.Instance.CurrentProject;
                 _presenterSaveWindow.SaveProject();
                 _presenterSaveWindow.GetProjectDetail();

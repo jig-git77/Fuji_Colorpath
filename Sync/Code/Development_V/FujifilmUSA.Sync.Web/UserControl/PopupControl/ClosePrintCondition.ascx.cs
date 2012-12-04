@@ -100,8 +100,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             SessionManager.Instance.CurrentProject = Project;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                            SessionManager.Instance.CurrentOperation = CurrentLicenseType;
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;                            
 
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
                         }
@@ -130,8 +129,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
-                    SessionManager.Instance.CurrentOperation = CurrentLicenseType;
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;                    
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
