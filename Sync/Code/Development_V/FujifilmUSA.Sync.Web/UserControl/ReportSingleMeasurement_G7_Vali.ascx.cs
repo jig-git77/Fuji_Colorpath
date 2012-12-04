@@ -348,20 +348,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_Delta.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
+                objSeries1.YValueType = ChartValueType.String;              
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series2 to display red marker on Thresold value === //
                 Series objSeries2 = (Series)ChartResultSummary_Delta.Series[2];
                 objSeries2.XValueType = ChartValueType.Int32;
-                objSeries2.YValueType = ChartValueType.String;
-                objSeries2.IsVisibleInLegend = false;
-                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].BackColor = Color.White;
+                objSeries2.YValueType = ChartValueType.String;              
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";           
+                            
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -432,7 +427,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries0.Points[Index]["PointWidth"] = "0.8";
                 objSeries1.Points.AddXY((Double)0, Y2);
 
-                //objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+                objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
                 objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
 
                 SeriesActual.Points[Index]["PointWidth"] = "0.8";
@@ -470,13 +465,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_DeltaEValue.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
+                objSeries1.YValueType = ChartValueType.String;           
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].BackColor = Color.White;
+               
                 #endregion
 
                 #region //========== ChartArea Settings ==========//

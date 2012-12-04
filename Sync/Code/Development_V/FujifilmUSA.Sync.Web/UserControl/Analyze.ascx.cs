@@ -377,7 +377,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillPaperChart(Paper);
         }
 
-        #region Fill DeltaE Primary Patches Chart
+        #region Fill Delta E Primary Patches Chart
         private void FillDeltaEPrimaryPatchesChart(List<AnalyzeChart> DT)
         {
             chartDeltaE.BorderColor = Color.White;
@@ -400,10 +400,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Series objSeries1 = (Series)chartDeltaE.Series[1];
             objSeries1.XValueType = ChartValueType.Int32;
             objSeries1.YValueType = ChartValueType.String;
-            objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-            // === Make Chart area look like 2D even it is 3D === //
-            chartDeltaE.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
+            objSeries1.CustomProperties = "DrawingStyle=Cylinder";          
 
             #endregion
 

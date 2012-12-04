@@ -101,12 +101,12 @@
                                         BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent" >
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0">
+                                <asp:ChartArea Name="ChartArea1" BackColor="White" >
+                                        <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
                                         </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
@@ -136,12 +136,12 @@
                                 <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="true"  BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0" >
+                                <asp:ChartArea Name="ChartArea1" BackColor="White">
+                                         <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
                                         </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >

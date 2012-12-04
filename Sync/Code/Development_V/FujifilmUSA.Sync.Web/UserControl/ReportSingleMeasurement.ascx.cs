@@ -344,13 +344,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_Delta.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
+                objSeries1.YValueType = ChartValueType.String;             
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_Delta.ChartAreas["ChartArea1"].BackColor = Color.White;
+               
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -483,13 +479,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)ChartResultSummary_DeltaEValue.Series[1];
                 objSeries1.XValueType = ChartValueType.Int32;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
+                objSeries1.YValueType = ChartValueType.String;           
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-
-                // === Make Chart area look like 2D even it is 3D === //
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].Area3DStyle.IsRightAngleAxes = true;
-                ChartResultSummary_DeltaEValue.ChartAreas["ChartArea1"].BackColor = Color.White;
+              
                 #endregion
 
                 #region //========== ChartArea Settings ==========//

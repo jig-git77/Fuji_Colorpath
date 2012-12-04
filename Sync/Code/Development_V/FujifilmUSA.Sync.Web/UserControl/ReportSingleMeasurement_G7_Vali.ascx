@@ -3,7 +3,7 @@
 <uc:Statusbar ID="fujiStatusbar" runat="server" />
 <asp:ImageButton ID="btn_GeneratePDF" 
     ImageUrl="../Images/Sync DLP Report_preview.jpg" runat="server" 
-    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF"/>
+    onclick="btn_GeneratePDF_Click" ToolTip="Download PDF" />
 <br />
 
  <%------------------------ Report Generate Structure -------------------------%>
@@ -97,19 +97,19 @@
                                 SkinStyle="Raised" BackColor="White"></BorderSkin> 
                         
                            <Series>
-                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="false" 
+                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="False" 
                                         BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
                                 </asp:Series>    
                                  <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                 </asp:Series>
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0" >
+                                <asp:ChartArea Name="ChartArea1" BackColor="White">
+                                        <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
                                         </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
@@ -139,12 +139,12 @@
                                 <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar" IsVisibleInLegend="true"  BackGradientStyle="DiagonalRight" >                                              
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
-                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="StackedBar">
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
-                                <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                        <Area3DStyle IsRightAngleAxes="False" WallWidth="0" >
+                                <asp:ChartArea Name="ChartArea1" BackColor="White">
+                                        <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
                                         </Area3DStyle>
                                           
                                     <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="False" >
