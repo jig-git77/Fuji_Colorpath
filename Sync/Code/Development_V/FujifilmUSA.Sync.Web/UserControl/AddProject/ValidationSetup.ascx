@@ -60,7 +60,7 @@
                                                         </asp:RadioButtonList>
                                                     </td>
                                                     <td>
-                                                         <asp:Label ID="lbl_Valimsg" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                                         <asp:Label ID="lbl_Valimsg" runat="server"></asp:Label>
                                                     </td>
                                                 </tr>
                                               </table> 

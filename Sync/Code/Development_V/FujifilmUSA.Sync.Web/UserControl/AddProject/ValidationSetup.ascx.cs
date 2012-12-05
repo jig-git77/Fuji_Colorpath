@@ -42,7 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     rbtnEnableValidation.Enabled = false;
                     panelValidationChart.Enabled = false;
                     panel_Metrictarget.Enabled = false;
-                    lbl_Valimsg.Text = "You are not currently licensed for Validation!";
+                    lbl_Valimsg.Text = "You are not currently licensed for Validation";
                 }
 
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)   //-----------If we are in Validation mode, we can't disable validation-----------//
