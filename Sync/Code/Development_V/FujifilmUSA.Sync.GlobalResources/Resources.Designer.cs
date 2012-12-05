@@ -1996,7 +1996,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not certified for validation.
+        ///   Looks up a localized string similar to Not certified.
         /// </summary>
         internal static string ValidationStatus_NotCertified {
             get {

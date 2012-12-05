@@ -754,7 +754,7 @@
     <value>None</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
-    <value>Not certified for validation</value>
+    <value>Not certified</value>
   </data>
   <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
     <value>Manage Activity Validation Rules</value>
