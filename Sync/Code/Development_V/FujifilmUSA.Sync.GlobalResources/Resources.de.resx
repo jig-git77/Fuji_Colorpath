@@ -745,12 +745,21 @@
     <value>Last validation is OK_de</value>
   </data>
   <data name="ValidationStatus_NoMeasurement" xml:space="preserve">
-    <value>Last validation failed_de</value>
+    <value>No measurement_de</value>
   </data>
   <data name="ValidationStatus_None" xml:space="preserve">
     <value>None_de</value>
   </data>
   <data name="ValidationStatus_NotCertified" xml:space="preserve">
     <value>Not certified for validation_de</value>
+  </data>
+  <data name="ERolePermission_ManageActivityValidationRules" xml:space="preserve">
+    <value>Manage Activity Validation Rules_de</value>
+  </data>
+  <data name="ERolePermission_ManageApplicationConfiguration" xml:space="preserve">
+    <value>Manage Application Configuration_de</value>
+  </data>
+  <data name="ERolePermission_ManageDeviceProfileSettings" xml:space="preserve">
+    <value>Manage Device Profiler Settings_de</value>
   </data>
 </root>

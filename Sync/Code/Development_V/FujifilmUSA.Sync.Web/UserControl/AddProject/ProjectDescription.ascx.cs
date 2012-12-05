@@ -48,6 +48,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = "-- Please select operation --", Value = "-1" });
                 ddlLicenseType.SelectedIndex = 0;
             }
+
+            if (SessionManager.Instance.CurrentProject != null &&                
+                SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.None)
+            {
+                ddlLicenseType.SelectedIndex = ddlLicenseType.Items.IndexOf(ddlLicenseType.Items.FindByValue(Convert.ToString((int)SessionManager.Instance.CurrentProject.LicenseType)));
+                ddlLicenseType.Enabled = false;
+            }
         }
         private void LoadDeviceInfoFromSession()
         {
@@ -85,13 +92,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             int maxProjectLimit = 0;
             if (SessionManager.Instance.CurrentDevice.LicenseTypeProject != null)
                 maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Where(p => p.Key == (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value)).Select(p => p.Value).FirstOrDefault();
-            
+
             if (currentProjectLimit >= maxProjectLimit)
             {
                 //--------------Project Limit reach, so can not create more projects under this Device now-------//  
                 Response.Redirect("ProjectMaxLimit.aspx");
             }
-            
+
             SessionManager.Instance.CurrentProject.PrintCondition = new FujifilmUSA.Sync.Entity.PrintCondition
             {
                 Media = txtMedia.Text.Trim(),
@@ -101,7 +108,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 TechnicianName = txtTechnicianName.Text.Trim(),
             };
 
-            SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);            
+            SessionManager.Instance.CurrentProject.LicenseType = (ELicenseType)Convert.ToInt32(ddlLicenseType.SelectedItem.Value);
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }

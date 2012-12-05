@@ -168,7 +168,21 @@ namespace FujifilmUSA.Sync.Web
             }
             else if (GetType().BaseType == typeof(ApplicationConfiguration))
             {
-                if (SessionManager.Instance.CurrentUser.Role.RoleId != (int)Entity.ERole.SystemAdmin)
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(ActivityValidationRules))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules))
+                {
+                    NavigationToNoPermissionPage();
+                }
+            }
+            else if (GetType().BaseType == typeof(AddDeviceProfilerSettings))
+            {
+                if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings))
                 {
                     NavigationToNoPermissionPage();
                 }
@@ -195,7 +209,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null)
                 {
                     NavigationToSessionEndPage();
@@ -207,7 +221,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -220,7 +234,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -233,7 +247,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -268,7 +282,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null ||
                     SessionManager.Instance.CurrentOptimizeRun == null)
                 {
@@ -281,7 +295,7 @@ namespace FujifilmUSA.Sync.Web
                 {
                     NavigationToNoPermissionPage();
                 }
-                if (SessionManager.Instance.CurrentDevice == null ||                    
+                if (SessionManager.Instance.CurrentDevice == null ||
                     SessionManager.Instance.CurrentProject == null)
                 {
                     NavigationToSessionEndPage();

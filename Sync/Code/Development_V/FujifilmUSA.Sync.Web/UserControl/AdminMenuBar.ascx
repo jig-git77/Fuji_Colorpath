@@ -109,12 +109,19 @@
         </span>
       </asp:LinkButton>      
        <asp:LinkButton ID="lbtnProfilerSettings" runat="server" 
-          CssClass="dock-item overlapobject" onclick="lbtnActivityValidationRules_Click">
+          CssClass="dock-item overlapobject" onclick="lbtnProfilerSettings_Click">
             <img src="Images/Profiler-Settings-management.jpg" style="position:relative;z-index:1; " alt="Device Family Profiler Settings" />
             <span> <asp:Localize Text="Device Family Profiler Settings" runat="server" 
           ID="locProfilerSettings"></asp:Localize> 
             </span>
-      </asp:LinkButton>    
+      </asp:LinkButton>   
+       <asp:LinkButton ID="lbtnApplicationConfiguration" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnApplicationConfiguration_Click">
+            <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Application Configuration" />
+            <span> <asp:Localize Text="Application Configuration" runat="server" 
+          ID="locApplicationConfiguration"></asp:Localize> 
+            </span>
+      </asp:LinkButton>  
   </div> 
 </div>
 </div>

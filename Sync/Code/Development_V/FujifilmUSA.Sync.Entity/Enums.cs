@@ -145,7 +145,13 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ERolePermission_ManageSourceProfile")]//Manage SourceProfile
         ManageSourceProfile = 10,
         [Description("ERolePermission_ManageReferenceChart")]//Manage ReferenceChart
-        ManageReferenceChart = 11
+        ManageReferenceChart = 11,
+        [Description("ERolePermission_ManageApplicationConfiguration")] //Manage Application Configuration
+        ManageApplicationConfiguration = 12,
+        [Description("ERolePermission_ManageActivityValidationRules")] //Manage Activity Validation Rules
+        ManageActivityValidationRules = 13,
+        [Description("ERolePermission_ManageDeviceProfileSettings")] //Manage Device Profiler Settings
+        ManageDeviceProfileSettings = 14
     }
     public enum ECurrentProjectStatus
     {

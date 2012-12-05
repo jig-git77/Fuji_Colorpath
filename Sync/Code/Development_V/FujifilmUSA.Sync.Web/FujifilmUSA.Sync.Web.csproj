@@ -109,6 +109,8 @@
     <Content Include="Images\AlignCurve_G7_Certified.png" />
     <Content Include="Images\AlignCurve_ISO.png" />
     <Content Include="Images\AlignCurve_ISO_Certified.png" />
+    <Content Include="Images\application-configuration-icon.png" />
+    <Content Include="Images\application-configuration.png" />
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
     <Content Include="Images\branch-management.png" />
@@ -2102,7 +2104,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

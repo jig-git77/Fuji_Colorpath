@@ -565,6 +565,24 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Activity Validation Rules.
+        /// </summary>
+        internal static string ERolePermission_ManageActivityValidationRules {
+            get {
+                return ResourceManager.GetString("ERolePermission_ManageActivityValidationRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Application Configuration.
+        /// </summary>
+        internal static string ERolePermission_ManageApplicationConfiguration {
+            get {
+                return ResourceManager.GetString("ERolePermission_ManageApplicationConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage Branch.
         /// </summary>
         internal static string ERolePermission_ManageBranch {
@@ -588,6 +606,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string ERolePermission_ManageDevice {
             get {
                 return ResourceManager.GetString("ERolePermission_ManageDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Device Profiler Settings.
+        /// </summary>
+        internal static string ERolePermission_ManageDeviceProfileSettings {
+            get {
+                return ResourceManager.GetString("ERolePermission_ManageDeviceProfileSettings", resourceCulture);
             }
         }
         
@@ -1951,7 +1978,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last validation failed.
+        ///   Looks up a localized string similar to No measurement.
         /// </summary>
         internal static string ValidationStatus_NoMeasurement {
             get {

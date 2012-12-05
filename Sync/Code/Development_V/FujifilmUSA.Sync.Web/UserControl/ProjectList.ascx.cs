@@ -212,13 +212,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case ValidationStatus.Disabled:
                     //Validation is not enabled
-                    imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
-                    imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.Disabled);
-                    imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
+                    imgValidationButton.Visible = false;
+                    //imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
+                    //imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.Disabled);
+                    //imgValidationButton.Attributes.Add("onclick", "javascript: return false;");
                     break;
                 case ValidationStatus.NoMeasurement:
                     //No validation found
-                    imgValidationButton.ImageUrl = @"../Images/Validation_Last_Failed.png";
+                    imgValidationButton.ImageUrl = @"../Images/Validation_Not_Active.png";
                     imgValidationButton.ToolTip = Common.Utilities.GetEnumDescriptionAttributeValue(ValidationStatus.NoMeasurement);
                     break;
                 case ValidationStatus.LastOK:

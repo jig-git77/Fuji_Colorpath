@@ -117,7 +117,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 };
 
-            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;            
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
@@ -200,6 +200,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbAlignmentChart_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisplayChartImage();
+            SetOptimizationChart();
         }
 
         protected void cmbOptimizationChart_SelectedIndexChanged(object sender, EventArgs e)
@@ -371,9 +372,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //Load selected chart if we are in update mode
                 cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart.Enabled = false;
-            }
+            }            
             DisplayChartImage();
             DisplayOptimizationChartImage();
+            SetOptimizationChart();
+        }
+
+        private void SetOptimizationChart()
+        {
+            if (cmbAlignmentChart.SelectedIndex != 0 && cmbOptimizationChart.SelectedIndex == 0)
+            {
+                cmbOptimizationChart.SelectedIndex = cmbOptimizationChart.Items.IndexOf(cmbOptimizationChart.Items.FindByValue(cmbAlignmentChart.SelectedValue));
+                DisplayOptimizationChartImage();
+            }
         }
 
         private void DisplayChartImage()

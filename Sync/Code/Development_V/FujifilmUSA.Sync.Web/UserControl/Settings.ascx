@@ -201,19 +201,11 @@
                         </div>
                         <asp:Localize Text="Activity Validation Rules" runat="server" ID="locActivityValidationRules"></asp:Localize>
                     </asp:LinkButton>
-                </div>
-                <div id="div2" runat ="server" align="center" valign="bottom" style="float:left;">
-                    <img alt="" src="Images/admin-icon-divider.png" />
-                </div>
-                 <div>
-                     <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Activity Management"
-                        PostBackUrl="~/Activity_PrintCondition.aspx" Text="Activity" 
-                         Visible="False" meta:resourcekey="LinkButton1Resource1"/>             
-                </div>
+                </div>                               
                 <div id="divProfilerSettingSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
-                </div>
-                  <div id="tdProfilerSettings" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
+                </div>                             
+                  <div id="dvProfilerSettings" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                      <asp:LinkButton ID="lnkProfilerSettings" runat="server" ToolTip="Device Family Profiler Settings"
                         PostBackUrl="~/AddDeviceProfilerSettings.aspx" Text="Device Family Profiler Settings" >                                   
                          <div>
@@ -225,6 +217,17 @@
                           meta:resourcekey="locProfilerSettingsResource1"></asp:Localize>                    
                     </asp:LinkButton>
                 </div>
+                 <div id="divApplicationConfigurationSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
+                    <img alt="" src="Images/admin-icon-divider.png" />
+                </div> 
+                <div id="dvApplicationConfiguration" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                    <asp:LinkButton ID="lnkbtnApplicationConfiguration" runat="server" ToolTip="Application Configuration" PostBackUrl="~/ApplicationConfiguration.aspx">
+                        <div>
+                            <asp:Image ID="imgApplicationConfig" runat="server" AlternateText="Application Configuration" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Application Configuration" />
+                        </div>
+                        <asp:Localize Text="Application Configuration" runat="server" ID="locApplicationConfiguration"></asp:Localize>
+                    </asp:LinkButton>                
+                </div>                 
                 </td>
                 </tr>            
         </table>

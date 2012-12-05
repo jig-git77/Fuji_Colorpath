@@ -103,8 +103,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ph.Controls.Add(ctrlItem);
 
             if (SessionManager.Instance.CurrentProject != null
-                && (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New
-                || SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1))
+                && (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.New 
+                || (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count() == 1)))
             {
                 ctrlItem = ((LeftMenuItem)this.LoadControl("~/UserControl/LeftMenuItem.ascx"));
                 ctrlItem.ItemLevel = ELeftMenuItemLevel.Operation; //Operation will also navigate to Device level

@@ -27,12 +27,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ltnLicense.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageLicense);
                 lbtnMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
                 lbtnRefChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart);
+
+                lbtnActivityValidationRules.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules);
+                lbtnProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
+                lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
             }
         }
         #endregion
 
         #region "Control Events"
-        #endregion
+        
 
 
         protected void lbtnCompany_Click(object sender, EventArgs e)
@@ -84,7 +88,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         protected void lbtnActivityValidationRules_Click(object sender, EventArgs e)
         {
+            Response.RedirectPermanent("ActivityValidationRules.aspx");
+        }
+
+        protected void lbtnProfilerSettings_Click(object sender, EventArgs e)
+        {
             Response.RedirectPermanent("AddDeviceProfilerSettings.aspx");
         }
+
+        protected void lbtnApplicationConfiguration_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("ApplicationConfiguration.aspx");
+        }
+        #endregion
     }
 }

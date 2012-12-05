@@ -31,6 +31,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdMeasurementDevice.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageMeasurementDevice);
             tdReferenceChart.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageReferenceChart);
 
+            dvActivityValidationRules.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules);
+            dvApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
+            dvProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
+
             ////seperator image 
             divBranchSeprator.Visible = tdBranch.Visible && tdcompany.Visible;
             divUserSeprator.Visible = tdUser.Visible && tdBranch.Visible;
@@ -40,7 +44,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             divMeasurementSeprator.Visible = tdMeasurementDevice.Visible && tdDevice.Visible;
             divDownloadSeprator.Visible = tdDownload.Visible && tdMeasurementDevice.Visible;
             divRefChartSeparator.Visible = tdReferenceChart.Visible && tdDownload.Visible;
-            divSourceProfileSeprator.Visible = tdSourceProfile.Visible && tdReferenceChart.Visible;                    
+            divSourceProfileSeprator.Visible = tdSourceProfile.Visible && tdReferenceChart.Visible;
+
+            divProfilerSettingSeparator.Visible = dvProfilerSettings.Visible && dvActivityValidationRules.Visible;
+            divApplicationConfigurationSeparator.Visible = dvApplicationConfiguration.Visible && dvProfilerSettings.Visible;
         }
         #endregion
 
