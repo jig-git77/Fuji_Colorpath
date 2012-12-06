@@ -187,11 +187,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Div_Validation_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type
                     {                        
-                        tab6.Visible = Tab_G7.Visible = true;
+                        dvTab6.Visible = Tab_G7.Visible = true;
                     }
                     else
                     {
-                        tab6.Visible = Tab_G7.Visible = false;
+                        dvTab6.Visible = Tab_G7.Visible = false;
                     }
                 }
                 else
@@ -202,7 +202,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
                     Div_Opt_Header.Visible = true;
-                    tab6.Visible = Tab_G7.Visible = false;                  
+                    dvTab6.Visible = Tab_G7.Visible = false;                  
                 }                
             }
             else
@@ -290,12 +290,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 string path = "";
                 if (ValidationType == 1)  //G7 type
                 {
-                    tab6.Visible = Tab_G7.Visible = true;
+                    dvTab6.Visible = Tab_G7.Visible = true;
                     path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 }
                 else
                 {
-                    tab6.Visible = Tab_G7.Visible = false;
+                    dvTab6.Visible = Tab_G7.Visible = false;
                     path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 }
                 iframeGeneratePDFReport.Attributes.Add("src", path);
@@ -305,7 +305,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 //In case of None (i.e. Optimization)
                 tbValidationSummary.Visible = false;
-                tab6.Visible = Tab_G7.Visible = false;
+                dvTab6.Visible = Tab_G7.Visible = false;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement_Optimization();
                 if (!IsErrorOccured)
