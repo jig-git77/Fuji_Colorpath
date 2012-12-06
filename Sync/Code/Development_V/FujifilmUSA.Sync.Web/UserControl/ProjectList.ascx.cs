@@ -68,7 +68,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         foreach (KeyValuePair<ELicenseType, int> item in SessionManager.Instance.CurrentDevice.LicenseTypeProject)
                         {
-                            rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
+                            rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = item.Key.ToString() });
                         }
 
                         rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = "All", Value = "" });

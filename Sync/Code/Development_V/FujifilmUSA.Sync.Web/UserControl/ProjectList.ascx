@@ -160,7 +160,7 @@
                                     <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
                                     </ExpandCollapseColumn>
                                     <Columns>
-                                        <telerik:GridTemplateColumn DataField="LicenseTypeID" AllowFiltering="True" UniqueName="LicenseTypeID" FilterControlAltText="Filter Select column" HeaderText="Type"
+                                        <telerik:GridTemplateColumn DataField="LicenseType" AllowFiltering="True" UniqueName="LicenseType" FilterControlAltText="Filter Select column" HeaderText="Type"
                                             ItemStyle-Width="30px">
                                             <ItemTemplate>
                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
@@ -169,14 +169,14 @@
                                             </ItemTemplate>
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="rcmbLicenseType" AppendDataBoundItems="True" runat="server"
-                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("LicenseTypeID").CurrentFilterValue %>'
+                                                SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("LicenseType").CurrentFilterValue %>'
                                                     OnClientSelectedIndexChanged="LicenseTypeIndexChanged" Width="40px" DropDownWidth="150px">
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="radscriptLicenseType" runat="server">
                                                     <script type="text/javascript">
                                                         function LicenseTypeIndexChanged(sender, args) {
-                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                            tableView.filter("LicenseTypeID", args.get_item().get_value(), "EqualTo");
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");                                                                                                                        
+                                                            tableView.filter("LicenseType", args.get_item().get_value(), "EqualTo");
                                                         }
                                                     </script>
                                                 </telerik:RadScriptBlock>
