@@ -388,6 +388,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chartDeltaE.Visible = true;
             chartDeltaE.Series[0].Points.Clear();
             chartDeltaE.Series[1].Points.Clear();
+            chartDeltaE.Series[2].Points.Clear();
 
             #region //========== Declarations ==========//
             // === Series0 to display Thresold value (ΔELimit) === //
@@ -400,8 +401,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Series objSeries1 = (Series)chartDeltaE.Series[1];
             objSeries1.XValueType = ChartValueType.Int32;
             objSeries1.YValueType = ChartValueType.String;
-            objSeries1.CustomProperties = "DrawingStyle=Cylinder";          
+            objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
+            // === Series2 to display red marker on Thresold value === //
+            Series objSeries2 = (Series)chartDeltaE.Series[2];
+            objSeries2.XValueType = ChartValueType.Int32;
+            objSeries2.YValueType = ChartValueType.String;
+            objSeries2.CustomProperties = "DrawingStyle=Cylinder";           
+                            
             #endregion
 
             #region //========== ChartArea Settings ==========//
@@ -484,20 +491,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     SBDeltaEPatches.Append("</tr>");
 
-                    BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT, i, TooltipTitle);
+                    BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT, i, TooltipTitle);
                 }
                 LitDeltaEPatches.Text = SBDeltaEPatches.ToString();
             }
             #endregion
         }
 
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, List<AnalyzeChart> DR, int Index, string TooltipTitle)
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, List<AnalyzeChart> DR, int Index, string TooltipTitle)
         {
-            Double Y1, Y2;
-            Y1 = Y2 = 0;
+            Double Y1, Y2, Y3;
+            Y1 = Y2 = Y3 = 0;
 
             Y1 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DtELimit))));
             Y2 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔE.ToString()))));
+            Y3 = (Convert.ToString(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))) == "" ? 0 : Convert.ToDouble(Common.Utilities.DecimalRound(Convert.ToDouble(DR[Index].ΔELimit.ToString()))));
 
             // === When Actual value is not available then no series will display and no marker will display
             if (Y2 == 0)
@@ -508,6 +516,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             Series SeriesActual = objSeries1;
             objSeries1.Points.AddXY((Double)0, Y2);
+
+           // objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
 
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
