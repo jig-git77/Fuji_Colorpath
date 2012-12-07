@@ -136,9 +136,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 {
                     //Set device to session
                     SessionManager.Instance.CurrentDevice = Device;
-                    //to-do
-                    //SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
-                    SessionManager.Instance.CurrentProjLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
+                    //SessionManager.Instance.CurrentProjLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
 
                     //Convert action to enum
                     Action action = 0;
@@ -167,56 +165,6 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
             return false;
         }
 
-        private bool CommonProcess(string t)
-        {
-            if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsUserNameKey]) ||
-                 string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsPasswordKey]) ||
-                 string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]) ||
-                string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsProjectInfoIdKey]))
-                return false;
-
-            #region Setting Login User
-            UserName = HttpContext.Current.Request.QueryString[_qsUserNameKey];
-            Password = HttpContext.Current.Request.QueryString[_qsPasswordKey].Replace(' ', '+');
-            _presenterColorOrganizerRequestProcessor.GetLoginInformation();
-            if (CurrentUser != null && CurrentUser.UserId > 0)
-            {
-                SessionManager.Instance.CurrentUser = CurrentUser;
-                FormsAuthentication.RedirectFromLoginPage(UserName, false);
-
-            #endregion
-
-                #region Setting Current Device
-
-                DeviceId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsDeviceIdKey]);
-                _presenterColorOrganizerRequestProcessor.GetDeviceById();
-                if (!IsErrorOccured)
-                {
-                    SessionManager.Instance.CurrentDevice = Device;
-
-                #endregion
-
-                    #region Setting Current Operation - Static to DLP
-                    //to-do
-                    //SessionManager.Instance.CurrentOperation = ELicenseType.DLP;
-                    SessionManager.Instance.CurrentProjLimit =
-                        SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
-
-                    #endregion
-
-                    #region Setting TempProjectInfo to Session
-                    TempProjectId = Guid.Parse(HttpContext.Current.Request.QueryString[_qsProjectInfoIdKey]);
-                    _presenterColorOrganizerRequestProcessor.GetTempProjectInfo();
-                    SessionManager.Instance.CurrentColorOrgRequest = TempProjectInfo;
-
-                    #endregion
-
-                    return true;
-                }
-            }
-            return false;
-        }
-
         private bool ProcessAddRequest()
         {
             if (CommonProcess())
@@ -228,11 +176,11 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
 
                     DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
-                    //to-do 
-                    //LicenseTypeId = Convert.ToInt32(SessionManager.Instance.CurrentOperation);
+                    LicenseTypeId = Convert.ToInt32(ELicenseType.DLP);
                     _presenterColorOrganizerRequestProcessor.GetProjectCountByDeviceId();
 
-                    if (TotalProjects >= SessionManager.Instance.CurrentProjLimit)
+                    int maxProjectLimit = SessionManager.Instance.CurrentDevice.LicenseTypeProject.Single(x => x.Key == ELicenseType.DLP).Value;
+                    if (TotalProjects >= maxProjectLimit)
                     {
                         //--------------Project Limit reach, so can not create more projects under this Device now-------//  
                         HttpContext.Current.Response.Redirect("COProjectMaxLimit.aspx");
@@ -249,25 +197,27 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                                                                      };
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Description;
 
-                        if (!IsErrorOccured)
-                        {
-                            SessionManager.Instance.CurrentProject.ProjectName = TempProjectInfo.ProjectName;
-                            SessionManager.Instance.CurrentProject.PrintCondition = new PrintCondition()
-                                                                                        {
-                                                                                            Media = TempProjectInfo.Media,
-                                                                                            Colorant = TempProjectInfo.Colorant,
-                                                                                            RipSettings = TempProjectInfo.RipSettings
-                                                                                        };
-                            SessionManager.Instance.CurrentProject.MeasurementSetting =
-                                new MeasurementSetting()
-                                    {
-                                        ReferenceChartType =
-                                            new KeyValuePair<short, string>(
-                                            Convert.ToInt16(TempProjectInfo.ChartId),
-                                            string.Empty)
-                                    };
-                            HttpContext.Current.Response.Redirect(string.Format("COAddProject.aspx?id={0}", Guid.NewGuid()));
-                        }
+                        SessionManager.Instance.CurrentProject.ProjectName = TempProjectInfo.ProjectName;
+                        SessionManager.Instance.CurrentProject.PrintCondition = new PrintCondition()
+                                                                                    {
+                                                                                        Media = TempProjectInfo.Media,
+                                                                                        Colorant = TempProjectInfo.Colorant,
+                                                                                        RipSettings = TempProjectInfo.RipSettings
+                                                                                    };
+                        SessionManager.Instance.CurrentProject.LicenseType = ELicenseType.DLP;
+                        SessionManager.Instance.CurrentProject.MeasurementSetting =
+                            new MeasurementSetting()
+                                {
+                                    ReferenceChartType =
+                                        new KeyValuePair<short, string>(
+                                        Convert.ToInt16(TempProjectInfo.ChartId),
+                                        string.Empty),
+                                    OptReferenceChartType = 
+                                        new KeyValuePair<short, string>(
+                                        Convert.ToInt16(TempProjectInfo.ChartId),
+                                        string.Empty)
+                                };
+                        HttpContext.Current.Response.Redirect(string.Format("COAddProject.aspx?id={0}", Guid.NewGuid()));
                     }
                 }
 
@@ -290,7 +240,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
                                         new KeyValuePair<short, string>(Convert.ToInt16(TempProjectInfo.ChartId), string.Empty);
-                                
+
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
                         HttpContext.Current.Response.Redirect(string.Format("COAddProject.aspx?id={0}", Guid.NewGuid()));
                     }
@@ -310,7 +260,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 {
                     ProjectId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsProjectIdKey]);
                     _presenterColorOrganizerRequestProcessor.GetProjectDetail();
-                    
+
                     if (Project.Status == EOptimizeRunStatus.Open)
                     {
                         //Redirect to other page                        
