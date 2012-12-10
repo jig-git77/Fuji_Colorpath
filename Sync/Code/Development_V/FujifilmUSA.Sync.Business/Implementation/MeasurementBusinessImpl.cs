@@ -202,6 +202,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
                                     HtmlColor = DataReader.ReadString(y, "HtmlColor"),
                                     Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
+                                    Δelimit = DataReader.ReadDecimal(y, "ΔELimit")
                                 }).ToList();
                     });
                 },

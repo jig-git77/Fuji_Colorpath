@@ -107,7 +107,8 @@ namespace FujifilmUSA.Sync.Web
             AnalyzeChart.Series["Series" + seriesId].ChartType = SeriesChartType.Spline;  // Set series type 
             if (_isValidation) //if Validation
             {
-                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(MeasurementDate.ToString(), measurementPatch.Δe2000.ToString()); // Add XY point
+                string MeasurementDate1 = String.Format("{0:d}", MeasurementDate) + "\n" + String.Format("{0:T}", MeasurementDate); //---Formatted Date
+                AnalyzeChart.Series["Series" + seriesId].Points.AddXY(MeasurementDate1, measurementPatch.Δe2000.ToString()); // Add XY point
             }
             else   //if Optimization
             {
@@ -131,8 +132,27 @@ namespace FujifilmUSA.Sync.Web
             else
             {
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;
-                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Gray;
-                AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Circle;
+                if (_isValidation) //if Validation
+                {
+                    if (measurementPatch.Δelimit > 0)    //---Just temparory for patches, which doesn't have limit mentioned yet
+                    {
+                        if (measurementPatch.Δe2000 > measurementPatch.Δelimit)     //-----If Δe exceeds Δelimit value, then put red tringle maker for fail patch symbol
+                        {
+                            AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Red;
+                            AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Triangle;
+                        }
+                    }
+                    else
+                    {
+                        AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Gray;
+                        AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Circle;
+                    }
+                }
+                else      //if Optimization
+                {
+                    AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Gray;
+                    AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Circle;
+                }         
             }
             PatchTypeID[seriesId]++;
         }
