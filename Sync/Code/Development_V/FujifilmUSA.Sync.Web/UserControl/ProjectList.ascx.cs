@@ -71,7 +71,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = item.Key.ToString() });
                         }
 
-                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = "All", Value = "" });
+                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
                         rcmbLicenseType.SelectedIndex = 0;
                     }
                 }

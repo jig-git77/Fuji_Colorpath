@@ -134,6 +134,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!Page.IsPostBack)
             {
+                ViewState["MetricSumID"] = "";
+
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
 
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
@@ -289,6 +291,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
+
+                    if (Page.IsPostBack == false)
+                    {
+                        rcmbMetricSumlist.Items.Clear();
+                        for (int i = 0; i < MeasurementSummary[0].ValidationMetrics.Count; i++)
+                        {
+                            rcmbMetricSumlist.Items.Add(new RadComboBoxItem() { Text = MeasurementSummary[0].ValidationMetrics[i].Metric, Value = MeasurementSummary[0].ValidationMetrics[i].MetricMeasuredID.ToString() });
+                        }
+
+                        rcmbMetricSumlist.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
+                        rcmbMetricSumlist.SelectedIndex = 0;
+                    }
                 }
 
                 //-----------Assign Report iFrame to load report in "Report" tab----------------------//
@@ -1178,7 +1192,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     //Now we are using DataTable as DataSource                  
-                    rgPatchDetails.DataSource = dtPatchDetails;
+                    //rgPatchDetails.DataSource = dtPatchDetails;
+                    if (ViewState["MetricSumID"].ToString() == "10")
+                    {
+                        DataTable dt = dtPatchDetails.AsEnumerable()
+                                .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2)
+                                .CopyToDataTable();
+                        rgPatchDetails.DataSource = dt;
+
+                    }
+                    else
+                    {
+                        rgPatchDetails.DataSource = dtPatchDetails;
+                    }
                 }
             }
         }
@@ -1209,6 +1235,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;                
             }
         }
+
+        //protected void rgPatchDetails_ItemCreated(object sender, GridItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == GridItemType.CommandItem)
+        //    {
+        //        RadComboBox rcmbMetricSumlist = e.Item.FindControl("rcmbMetricSumlist") as RadComboBox;
+        //        if (rcmbMetricSumlist != null)
+        //        {
+        //            if (MeasurementSummary[0].ValidationMetrics != null && MeasurementSummary[0].ValidationMetrics.Count > 0)
+        //            {
+        //                for (int i = 0; i < MeasurementSummary[0].ValidationMetrics.Count; i++)
+        //                {
+        //                    rcmbMetricSumlist.Items.Add(new RadComboBoxItem() { Text = MeasurementSummary[0].ValidationMetrics[i].Metric, Value = MeasurementSummary[0].ValidationMetrics[i].MetricMeasuredID.ToString() });
+        //                }
+
+        //                rcmbMetricSumlist.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
+        //                rcmbMetricSumlist.SelectedIndex = 0;
+        //            }
+        //        }
+        //    }
+        //}
 
         protected void rgPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
         {
@@ -1339,7 +1386,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
             Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
         }
-       
+
+        protected void rcmbMetricSumlist_SelectedIndexChanged(object o, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            //Response.Write("You selected " + e.Text + " item");
+            ViewState["MetricSumID"] = e.Value;
+         
+            rgPatchDetails.Rebind();
+        }
+
         #endregion
 
         #region IViewAnalyze Members

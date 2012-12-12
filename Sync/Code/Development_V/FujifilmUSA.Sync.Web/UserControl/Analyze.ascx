@@ -1422,11 +1422,16 @@
             <table cellpadding="0" cellspacing="0" width="100%"> 
                <tr>
                 <td align="right">
+                     Filter by Metric Sum:
+                     <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"                                               
+                                                Width="150px" DropDownWidth="150px" AutoPostBack="true" OnSelectedIndexChanged ="rcmbMetricSumlist_SelectedIndexChanged">
+                             </telerik:RadComboBox> 
                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
                         Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
                         meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
                     <asp:Button ID="btnCSVExport" CssClass="button" Width="150px" Text="Export to CSV" 
-                        runat="server" onclick="btnCSVExport_Click" meta:resourcekey="btnCSVExportResource1"></asp:Button>                   
+                        runat="server" onclick="btnCSVExport_Click" meta:resourcekey="btnCSVExportResource1"></asp:Button>      
+                                    
                 </td>
                </tr>                            
                <tr>
@@ -1436,7 +1441,7 @@
                        AllowFilteringByColumn="True" 
                     OnNeedDataSource="rgPatchDetails_NeedDataSource" 
                         OnItemDataBound="rgPatchDetails_ItemDataBound" OnItemCommand="rgPatchDetails_ItemCommand"
-                    OnSortCommand="rgPatchDetails_SortCommand" CellSpacing="0" GridLines="None">
+                    OnSortCommand="rgPatchDetails_SortCommand" CellSpacing="0" GridLines="None" >
                     <GroupingSettings CaseSensitive="False" />
                          <ClientSettings>
                             <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="6">
@@ -1444,8 +1449,23 @@
                          </ClientSettings>
                         <HeaderStyle Font-Bold="True"/>
                             <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                            <MasterTableView DataKeyNames="HTMLColor"  >                      
+                            <MasterTableView DataKeyNames="HTMLColor" >                      
                                 <CommandItemSettings ExportToPdfText="Export to PDF" />
+                               <%-- <CommandItemTemplate>
+                                    Filter by Metric Sum:
+                                    <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"
+                                               
+                                                    OnClientSelectedIndexChanged="LicenseTypeIndexChanged" Width="40px" DropDownWidth="150px" AutoPostBack="true">
+                                                </telerik:RadComboBox>
+                                                <telerik:RadScriptBlock ID="radscriptLicenseType" runat="server">
+                                                    <script type="text/javascript">
+                                                        function LicenseTypeIndexChanged(sender, args) {
+                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
+                                                            tableView.filter("HTMLColor", args.get_item().get_value(), "EqualTo");
+                                                        }
+                                                    </script>
+                                                </telerik:RadScriptBlock>
+                                </CommandItemTemplate>--%>
                                 <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                                     Visible="True">
                                 </RowIndicatorColumn>
@@ -1481,7 +1501,11 @@
                                         SortExpression="SampleID" AllowFiltering="False" UniqueName="SampleId" 
                                         FilterControlAltText="Filter SampleId column" 
                                         meta:resourcekey="GridBoundColumnResource1">
-                                    </telerik:GridBoundColumn>                       
+                                    </telerik:GridBoundColumn>     
+                                      <telerik:GridBoundColumn DataField="PatchTypeID" HeaderText="PatchTypeID" 
+                                        SortExpression="PatchTypeID" AllowFiltering="False" UniqueName="PatchTypeID" 
+                                       >
+                                    </telerik:GridBoundColumn>                  
                                     <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" 
                                         SortExpression="CMYK_C" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
@@ -1575,7 +1599,8 @@
          </ContentTemplate> 
          <Triggers>
                 <asp:PostBackTrigger ControlID="btnExcelExport" />               
-                <asp:PostBackTrigger ControlID="btnCSVExport" />                
+                <asp:PostBackTrigger ControlID="btnCSVExport" />   
+                <asp:PostBackTrigger ControlID="rcmbMetricSumlist" />                                
          </Triggers>        
        </asp:UpdatePanel>
 
