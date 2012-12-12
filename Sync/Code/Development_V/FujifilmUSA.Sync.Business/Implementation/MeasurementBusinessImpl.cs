@@ -188,7 +188,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
                                 MeasurementName = DataReader.ReadString(x, "MeasurementName"),
                                 MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                dEMethod = DataReader.ReadString(x, "dEMethod"),
+                                MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus")
                             }).ToList();
 
                     measurements.ForEach(x =>
@@ -201,8 +203,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     MeasurementId = DataReader.ReadInt(y, "MeasurementID"),
                                     MeasurementPatchId = DataReader.ReadShort(y, "PatchTypeID"),
                                     HtmlColor = DataReader.ReadString(y, "HtmlColor"),
-                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000"),
-                                    Δelimit = DataReader.ReadDecimal(y, "ΔELimit")
+                                    Δe2000 = DataReader.ReadDecimal(y, "ΔE2000")                                   
                                 }).ToList();
                     });
                 },

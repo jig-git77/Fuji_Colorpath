@@ -43,35 +43,35 @@ namespace FujifilmUSA.Sync.Web
                     {
                         case (int)CPPatchType.Cyan:
                             x.HtmlColor = "#00FFFF";
-                            AddPoint(0, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(0, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Magenta:
                             x.HtmlColor = "#FF00FF";
-                            AddPoint(1, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(1, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Yellow:
                             x.HtmlColor = "#FFFF00";
-                            AddPoint(2, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(2, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Black:
                             x.HtmlColor = "#000000";
-                            AddPoint(3, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(3, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Red:
                             x.HtmlColor = "#FF0000";
-                            AddPoint(4, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(4, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Green:
                             x.HtmlColor = "#008000";
-                            AddPoint(5, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(5, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Overprint_Blue:
                             x.HtmlColor = "#0000FF";
-                            AddPoint(6, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(6, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                         case (int)CPPatchType.Paper:
                             x.HtmlColor = "#FFFFFF";
-                            AddPoint(7, x, i, p.MeasurementDate, p.MeasurementName, p.IsUsed, IsValidation);
+                            AddPoint(7, x, i, p.MeasurementDate, p.MeasurementName, p.MeasurementStatus, p.IsUsed, IsValidation);
                             break;
                     }
                 });
@@ -100,7 +100,7 @@ namespace FujifilmUSA.Sync.Web
                     CurrentMeasurementID = Measurements[Measurements.Count - 1].MeasurementId;
 
         }
-        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementno, DateTime MeasurementDate, string measurementName, bool IsUsed, bool _isValidation)
+        private void AddPoint(int seriesId, Entity.MeasurementPatch measurementPatch, int measurementno, DateTime MeasurementDate, string measurementName, string measurementStatus, bool IsUsed, bool _isValidation)
         {
             int index = PatchTypeID[seriesId];
 
@@ -134,13 +134,10 @@ namespace FujifilmUSA.Sync.Web
                 AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerSize = 10;
                 if (_isValidation) //if Validation
                 {
-                    if (measurementPatch.Δelimit > 0)    //---Just temparory for patches, which doesn't have limit mentioned yet
+                    if (!measurementStatus.Contains("OK"))     //-----If measurement fail, then put red tringle marker for all patchs
                     {
-                        if (measurementPatch.Δe2000 > measurementPatch.Δelimit)     //-----If Δe exceeds Δelimit value, then put red tringle maker for fail patch symbol
-                        {
-                            AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Red;
-                            AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Triangle;
-                        }
+                        AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerColor = Color.Red;
+                        AnalyzeChart.Series["Series" + seriesId].Points[index].MarkerStyle = MarkerStyle.Triangle;
                     }
                     else
                     {

@@ -216,7 +216,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Methods
 
         private void BindMesurementChart()
-        {
+        {           
             From_ΔE = rbtnListDeltaE.SelectedValue;
             chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
@@ -254,6 +254,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
 
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
+                {
+                    From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
+                    chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
+                }
                 //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
                 BindAvgDelta();
                 FillAllTabsData();
@@ -1166,15 +1171,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
                 
-                //Now we are using DataTable to bind the grid
-                //PatchDetails = new List<Entity.MeasurementPatchDetails>();
+                //Now we are using DataTable to bind the grid               
                 dtPatchDetails = new DataTable();
                 
                 _presenterAnalyze.GetPatchDetailsofMeasurement();
                 if (!IsErrorOccured)
                 {
-                    //Now we are using DataTable as DataSource
-                    //rgPatchDetails.DataSource = PatchDetails;
+                    //Now we are using DataTable as DataSource                  
                     rgPatchDetails.DataSource = dtPatchDetails;
                 }
             }
