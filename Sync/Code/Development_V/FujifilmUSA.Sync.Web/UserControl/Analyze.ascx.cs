@@ -194,9 +194,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         dvTab6.Visible = Tab_G7.Visible = false;
-                    }
+                    }                 
                 }
-                else
+                else   //-----DLP Optimization
                 {
                     //None
                     //Hide Verification button
@@ -204,7 +204,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = true;
                     Div_Opt_Header.Visible = true;
-                    dvTab6.Visible = Tab_G7.Visible = false;                  
+                    dvTab6.Visible = Tab_G7.Visible = false;
+                    Div_MetricSumFilter.Visible = false;
                 }                
             }
             else
@@ -292,16 +293,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
 
-                    if (Page.IsPostBack == false)
+                    if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
                     {
-                        rcmbMetricSumlist.Items.Clear();
-                        for (int i = 0; i < MeasurementSummary[0].ValidationMetrics.Count; i++)
-                        {
-                            rcmbMetricSumlist.Items.Add(new RadComboBoxItem() { Text = MeasurementSummary[0].ValidationMetrics[i].Metric, Value = MeasurementSummary[0].ValidationMetrics[i].MetricMeasuredID.ToString() });
-                        }
-
-                        rcmbMetricSumlist.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
-                        rcmbMetricSumlist.SelectedIndex = 0;
+                        FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
                     }
                 }
 
@@ -1112,6 +1106,98 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)
+        {
+            DataTable DT = new DataTable();
+
+            if (MetricSumID == "3")     //----For 'Paper ΔE Avg'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 8)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "4")    //----For 'CMYK ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3 || r.Field<byte>("PatchTypeID") == 4)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "5")    //----For 'CMYK ΔH Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3 || r.Field<byte>("PatchTypeID") == 4)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "6")    //----For 'FOGRA Gray ΔH Avg'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 52 || r.Field<byte>("PatchTypeID") == 53 || r.Field<byte>("PatchTypeID") == 54 || r.Field<byte>("PatchTypeID") == 55 || r.Field<byte>("PatchTypeID") == 56 || r.Field<byte>("PatchTypeID") == 57)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "7")    //----For 'CMYKRGB ΔH Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2 || r.Field<byte>("PatchTypeID") == 3 || r.Field<byte>("PatchTypeID") == 4 || r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "8" || MetricSumID == "9")    //----For 'G7 Gray ΔCh Avg' or ----For 'G7 Gray ΔCh Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 10 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
+                        .CopyToDataTable();
+            }          
+            else if (MetricSumID == "10" || MetricSumID == "11")   //----For 'G7 Black ΔL Avg' or ----For 'G7 Black ΔL Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 4 || r.Field<byte>("PatchTypeID") == 15 || r.Field<byte>("PatchTypeID") == 25 || r.Field<byte>("PatchTypeID") == 26 || r.Field<byte>("PatchTypeID") == 27)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "12" || MetricSumID == "13")    //----For 'G7 CMY / Gray ΔL Avg' or ----For 'G7 CMY / Gray ΔL Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
+                        .CopyToDataTable();
+            }
+            else if (MetricSumID == "14")    //----For 'RGB ΔE Max'
+            {
+                DT = dtPatchDetails.AsEnumerable()
+                        .Where(r => r.Field<byte>("PatchTypeID") == 5 || r.Field<byte>("PatchTypeID") == 6 || r.Field<byte>("PatchTypeID") == 7)
+                        .CopyToDataTable();
+            }
+            else
+            {
+                DT = dtPatchDetails;
+            }
+
+            return DT;
+        }
+
+        private void FillMetricSumList(List<ValidationMetrics> ValidationMetrics)
+        {
+            if (ValidationMetrics == null)
+            {
+                MeasurementId = 0;
+                if (hdMeasurement.Value != "")
+                {
+                    MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above
+                }
+                _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
+                if (!IsErrorOccured)
+                {
+                    ValidationMetrics = MeasurementSummary[0].ValidationMetrics;
+                }
+            }
+
+            rcmbMetricSumlist.Items.Clear();
+            for (int i = 0; i < ValidationMetrics.Count; i++)
+            {
+                rcmbMetricSumlist.Items.Add(new RadComboBoxItem() { Text = ValidationMetrics[i].Metric, Value = ValidationMetrics[i].MetricSumID.ToString() });
+            }
+
+            rcmbMetricSumlist.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
+            rcmbMetricSumlist.SelectedIndex = 0;
+        }
+
         #endregion
 
         #region Control Events
@@ -1133,6 +1219,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 BindMesurementChart();
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, bind MetricSumList for filtering
+                {
+                    ViewState["MetricSumID"] = "";
+                    FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                }
                 rgPatchDetails.Rebind();  //----Load Patch Details GridView in "Patch Details" tab
             }
         }
@@ -1191,20 +1282,38 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetPatchDetailsofMeasurement();
                 if (!IsErrorOccured)
                 {
-                    //Now we are using DataTable as DataSource                  
-                    //rgPatchDetails.DataSource = dtPatchDetails;
-                    if (ViewState["MetricSumID"].ToString() == "10")
-                    {
-                        DataTable dt = dtPatchDetails.AsEnumerable()
-                                .Where(r => r.Field<byte>("PatchTypeID") == 1 || r.Field<byte>("PatchTypeID") == 2)
-                                .CopyToDataTable();
-                        rgPatchDetails.DataSource = dt;
+                    //Now we are using DataTable as DataSource                    
+                    rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
 
-                    }
-                    else
+                    #region Make Visible/Invisible columns according to MetricSum selected
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, visible metricsum columns respectively
                     {
-                        rgPatchDetails.DataSource = dtPatchDetails;
+                        if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = true;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
+                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = true;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
+                        else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = true;  //-----ΔL
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                        }
+                        else
+                        {
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
                     }
+                    #endregion
                 }
             }
         }
@@ -1234,28 +1343,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgPatchDetails.MasterTableView.Rebind();
                     break;                
             }
-        }
-
-        //protected void rgPatchDetails_ItemCreated(object sender, GridItemEventArgs e)
-        //{
-        //    if (e.Item.ItemType == GridItemType.CommandItem)
-        //    {
-        //        RadComboBox rcmbMetricSumlist = e.Item.FindControl("rcmbMetricSumlist") as RadComboBox;
-        //        if (rcmbMetricSumlist != null)
-        //        {
-        //            if (MeasurementSummary[0].ValidationMetrics != null && MeasurementSummary[0].ValidationMetrics.Count > 0)
-        //            {
-        //                for (int i = 0; i < MeasurementSummary[0].ValidationMetrics.Count; i++)
-        //                {
-        //                    rcmbMetricSumlist.Items.Add(new RadComboBoxItem() { Text = MeasurementSummary[0].ValidationMetrics[i].Metric, Value = MeasurementSummary[0].ValidationMetrics[i].MetricMeasuredID.ToString() });
-        //                }
-
-        //                rcmbMetricSumlist.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
-        //                rcmbMetricSumlist.SelectedIndex = 0;
-        //            }
-        //        }
-        //    }
-        //}
+        }     
 
         protected void rgPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
         {
@@ -1388,10 +1476,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void rcmbMetricSumlist_SelectedIndexChanged(object o, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            //Response.Write("You selected " + e.Text + " item");
-            ViewState["MetricSumID"] = e.Value;
-         
+        {       
+            //--------Set selected MetricSumID in viewstate and re-bind Patch Details RadGrid---------------//
+            ViewState["MetricSumID"] = e.Value;    
             rgPatchDetails.Rebind();
         }
 

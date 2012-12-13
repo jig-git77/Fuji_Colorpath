@@ -153,9 +153,6 @@
   <data name="GridBoundColumnResource4.HeaderText" xml:space="preserve">
     <value>Y_de</value>
   </data>
-  <data name="GridBoundColumnResource4.SortExpression" xml:space="preserve">
-    <value>CmykY_de</value>
-  </data>
   <data name="GridBoundColumnResource5.HeaderText" xml:space="preserve">
     <value>K_de</value>
   </data>
@@ -170,6 +167,15 @@
   </data>
   <data name="GridBoundColumnResource9.HeaderText" xml:space="preserve">
     <value>Target L*_de</value>
+  </data>
+  <data name="GridBoundColumnResource15.HeaderText" xml:space="preserve">
+    <value>ΔH_de</value>
+  </data>
+  <data name="GridBoundColumnResource16.HeaderText" xml:space="preserve">
+    <value>ΔCh_ja</value>
+  </data>
+  <data name="GridBoundColumnResource17.HeaderText" xml:space="preserve">
+    <value>ΔL_ja</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
     <value>Patch_de</value>

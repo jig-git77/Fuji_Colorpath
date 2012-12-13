@@ -64,8 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
-            chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-            chkVarification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Validation);
+            chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);           
         }
         private void Bindcompany()
         {
@@ -91,7 +90,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterLicenseManagement.GetBranches();
                 if (!IsErrorOccured)
                 {
-
                     cmbBranch.DataTextField = "Value";
                     cmbBranch.DataValueField = "Key";
                     cmbBranch.DataSource = Branches;
@@ -113,7 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkVarification.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -135,9 +133,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chkDlp.Checked)
                 License.LicenseType.Add(ELicenseType.DLP);
             if (chkInk.Checked)
-                License.LicenseType.Add(ELicenseType.InkOptimization);
-            if (chkVarification.Checked)
-                License.LicenseType.Add(ELicenseType.Validation);
+                License.LicenseType.Add(ELicenseType.InkOptimization);           
 
             if (LId == 0) // Add New company
             {
@@ -174,10 +170,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                             break;
                                                         case ELicenseType.InkOptimization:
                                                             chkInk.Checked = true;
-                                                            break;
-                                                        case ELicenseType.Validation:
-                                                            chkVarification.Checked = true;
-                                                            break;
+                                                            break;                                                       
                                                     }
                                                 });
                 txtLicenseDescription.Text = License.LicenseDesc;

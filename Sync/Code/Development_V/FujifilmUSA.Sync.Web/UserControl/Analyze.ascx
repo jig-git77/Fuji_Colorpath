@@ -1421,11 +1421,16 @@
            
             <table cellpadding="0" cellspacing="0" width="100%"> 
                <tr>
+                <td>
+                    <div id="Div_MetricSumFilter" runat="server">
+                         Filter by Metric Sum: &nbsp;
+                         <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"                                               
+                                      Width="150px" DropDownWidth="150px" AutoPostBack="true" OnSelectedIndexChanged ="rcmbMetricSumlist_SelectedIndexChanged">
+                         </telerik:RadComboBox> 
+                    </div>
+                </td>
                 <td align="right">
-                     Filter by Metric Sum:
-                     <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"                                               
-                                                Width="150px" DropDownWidth="150px" AutoPostBack="true" OnSelectedIndexChanged ="rcmbMetricSumlist_SelectedIndexChanged">
-                             </telerik:RadComboBox> 
+                    
                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
                         Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
                         meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
@@ -1435,7 +1440,7 @@
                 </td>
                </tr>                            
                <tr>
-                <td>                
+                <td colspan="2">                
                     <telerik:RadGrid ID="rgPatchDetails"  AllowSorting="True" Width="650px" 
                     AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
@@ -1450,22 +1455,7 @@
                         <HeaderStyle Font-Bold="True"/>
                             <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
                             <MasterTableView DataKeyNames="HTMLColor" >                      
-                                <CommandItemSettings ExportToPdfText="Export to PDF" />
-                               <%-- <CommandItemTemplate>
-                                    Filter by Metric Sum:
-                                    <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"
-                                               
-                                                    OnClientSelectedIndexChanged="LicenseTypeIndexChanged" Width="40px" DropDownWidth="150px" AutoPostBack="true">
-                                                </telerik:RadComboBox>
-                                                <telerik:RadScriptBlock ID="radscriptLicenseType" runat="server">
-                                                    <script type="text/javascript">
-                                                        function LicenseTypeIndexChanged(sender, args) {
-                                                            var tableView = $find("<%# ((GridItem)Container).OwnerTableView.ClientID %>");
-                                                            tableView.filter("HTMLColor", args.get_item().get_value(), "EqualTo");
-                                                        }
-                                                    </script>
-                                                </telerik:RadScriptBlock>
-                                </CommandItemTemplate>--%>
+                                <CommandItemSettings ExportToPdfText="Export to PDF" />                             
                                 <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                                     Visible="True">
                                 </RowIndicatorColumn>
@@ -1501,11 +1491,7 @@
                                         SortExpression="SampleID" AllowFiltering="False" UniqueName="SampleId" 
                                         FilterControlAltText="Filter SampleId column" 
                                         meta:resourcekey="GridBoundColumnResource1">
-                                    </telerik:GridBoundColumn>     
-                                      <telerik:GridBoundColumn DataField="PatchTypeID" HeaderText="PatchTypeID" 
-                                        SortExpression="PatchTypeID" AllowFiltering="False" UniqueName="PatchTypeID" 
-                                       >
-                                    </telerik:GridBoundColumn>                  
+                                    </telerik:GridBoundColumn> 
                                     <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" 
                                         SortExpression="CMYK_C" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
@@ -1587,9 +1573,26 @@
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter CielabB column" 
                                         meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">
-                                    </telerik:GridBoundColumn>     
-                            
-                                                
+                                    </telerik:GridBoundColumn>    
+                                     
+                                    <telerik:GridBoundColumn DataField="ΔH" HeaderText="ΔH" 
+                                        SortExpression="ΔH" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter ΔH column" 
+                                        meta:resourcekey="GridBoundColumnResource15" UniqueName="ΔH" Visible="false">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ΔCh" HeaderText="ΔCh" 
+                                        SortExpression="ΔCh" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter ΔCh column" 
+                                        meta:resourcekey="GridBoundColumnResource16" UniqueName="ΔCh" Visible="false">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="ΔL" HeaderText="ΔL" 
+                                        SortExpression="ΔL" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter ΔL column" 
+                                        meta:resourcekey="GridBoundColumnResource17" UniqueName="ΔL" Visible="false">
+                                    </telerik:GridBoundColumn>           
                                 </Columns>                        
                             </MasterTableView>                        
                 </telerik:RadGrid>                             

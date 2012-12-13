@@ -306,6 +306,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                            Select(x => new ValidationMetrics()
                            {
                                MetricMeasuredID = DataReader.ReadInt(x, "MetricMeasuredID"),
+                               MetricSumID = DataReader.ReadInt(x, "MetricSumID"),
                                Metric = DataReader.ReadString(x, "MetricSumName"),
                                Tolerance = DataReader.ReadDecimal(x, "TargetValue"),
                                Actual = DataReader.ReadDecimal(x, "MeasuredValue"),

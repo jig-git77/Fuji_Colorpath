@@ -14,8 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string ELicenseSync1DText { get; set; }
         public string ELicenseDlpText { get; set; }
         public string ELicenseInkOptimizationText { get; set; }
-        public string ELicenseVarificationText { get; set; }
-
+      
         #region Private Variables - Globalization
         private const string _recAddDevice = "addDeviceText";
         private const string _recEditDevice = "editDeviceText";
@@ -55,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ELicenseSync1DText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             ELicenseDlpText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
             ELicenseInkOptimizationText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-            ELicenseVarificationText = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Validation);
+         
 
             if (Page.IsPostBack) return;
 
@@ -143,17 +142,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         fujiStatusbar.DisplayMessage(GetResourceString(_recNoLicenseFound), false);//No license found for this branch!
                         txtSync1D.Enabled = false;
                         txtDlp.Enabled = false;
-                        txtInkOpt.Enabled = false;
-                        txtVarification.Enabled = false;
+                        txtInkOpt.Enabled = false;                      
                     }
                     else
                     {
                         cmbLicense.SelectedIndex = 0;
-                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = txtVarification.Text = "0";                        
+                        txtSync1D.Text = txtDlp.Text = txtInkOpt.Text = "0";                        
                         txtSync1D.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Sync1D).Count() > 0);
                         txtDlp.Enabled = (License.LicenseType.Where(x => x == ELicenseType.DLP).Count() > 0);
-                        txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);
-                        txtVarification.Enabled = (License.LicenseType.Where(x => x == ELicenseType.Validation).Count() > 0);
+                        txtInkOpt.Enabled = (License.LicenseType.Where(x => x == ELicenseType.InkOptimization).Count() > 0);                       
                     }
                 }
             }
@@ -193,9 +190,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (txtDlp.Enabled)
                 Device.LicenseTypeProject.Add(ELicenseType.DLP, Convert.ToInt32(txtDlp.Text));
             if (txtInkOpt.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));
-            if (txtVarification.Enabled)
-                Device.LicenseTypeProject.Add(ELicenseType.Validation, Convert.ToInt32(txtVarification.Text));
+                Device.LicenseTypeProject.Add(ELicenseType.InkOptimization, Convert.ToInt32(txtInkOpt.Text));           
 
             if (DId == 0) // Add New company
             {
@@ -245,10 +240,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             break;
                         case ELicenseType.InkOptimization:
                             txtInkOpt.Text = val.ToString();
-                            break;
-                        case ELicenseType.Validation:
-                            txtVarification.Text = val.ToString();
-                            break;
+                            break;                        
                         case ELicenseType.IccProfiling:                            
                             break;
                         default:

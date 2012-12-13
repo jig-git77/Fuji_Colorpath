@@ -160,7 +160,7 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <div style="line-height: 30px; overflow-y: scroll; height: 130px; border-width: 1px;
+                                    <div style="line-height: 30px; overflow-y: scroll; height: 100px; border-width: 1px;
                                                                     border-style: solid; width: 240px">
                                     <table width="100%">
                                         <tr>
@@ -178,7 +178,7 @@
                                                         ForeColor="Red" ValidationGroup="vgAddDevice" 
                                                         meta:resourcekey="rfvSync1DResource1"><ucValidationContainer:ValidationContainer ID="rfvNoOfProjectsContainer" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-</asp:RequiredFieldValidator>
+                                                    </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr>
@@ -195,7 +195,7 @@
                                                     <asp:RequiredFieldValidator ID="rfvDlp" runat="server" Display="Dynamic" ControlToValidate="txtDlp"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer1" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-</asp:RequiredFieldValidator>
+                                                    </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
                                         </tr>
@@ -213,29 +213,11 @@
                                                     <asp:RequiredFieldValidator ID="rfvInkOpt" runat="server" Display="Dynamic" ControlToValidate="txtInkOpt"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer3" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
-</asp:RequiredFieldValidator>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span>
-                                                    <%=ELicenseVarificationText%> &nbsp;</span></td>
-                                            <td>
-                                                <div style="float: left;">
-                                                    <asp:TextBox ID="txtVarification" runat="server" Height="19px" Width="50px" MaxLength="4"
-                                                        onkeypress="return CheckNumeric(event)" 
-                                                        meta:resourcekey="txtVarificationResource1"></asp:TextBox>
-                                                </div>
-                                                <div style="float: left">
-                                                    <asp:RequiredFieldValidator ID="rfvVarification" runat="server" Display="Dynamic"
-                                                        ControlToValidate="txtVarification" ForeColor="Red" 
-                                                        ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
-                                                            ValidationMsg="Please provide no.of projects." />
                                                     </asp:RequiredFieldValidator>
                                                 </div>
                                             </td>
-                                        </tr> 
+                                        </tr>
+                                       
                                     </table>
                                     </div>
                                 </td>
@@ -290,13 +272,13 @@
                                                 OnClick="lbtnSave_Click">
                                                     <span> <asp:Localize runat="server" Text="Save" ID="locSave" 
                                                 meta:resourcekey="locSaveResource1"></asp:Localize>
- </span>
+                                                    </span>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="lbtnCancel" runat="server" CssClass="gray_bt" 
                                                 PostBackUrl="~/DeviceManagement.aspx">
                                                     <span> <asp:Localize runat="server" Text="Cancel" ID="locCancel" 
                                                 meta:resourcekey="locCancelResource1"></asp:Localize>
- </span>
+                                                    </span>
                                             </asp:LinkButton>
                                         </div>
                                     </div>

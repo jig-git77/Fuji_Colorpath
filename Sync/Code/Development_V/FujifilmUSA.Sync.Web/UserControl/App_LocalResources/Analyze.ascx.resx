@@ -181,9 +181,6 @@
   <data name="GridBoundColumnResource4.HtmlEncode" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="GridBoundColumnResource4.SortExpression" xml:space="preserve">
-    <value>CmykY</value>
-  </data>
   <data name="GridBoundColumnResource5.HeaderText" xml:space="preserve">
     <value>K</value>
   </data>
@@ -212,6 +209,24 @@
     <value>Target L*</value>
   </data>
   <data name="GridBoundColumnResource9.HtmlEncode" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="GridBoundColumnResource15.HeaderText" xml:space="preserve">
+    <value>ΔH</value>
+  </data>
+  <data name="GridBoundColumnResource15.HtmlEncode" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="GridBoundColumnResource16.HeaderText" xml:space="preserve">
+    <value>ΔCh</value>
+  </data>
+  <data name="GridBoundColumnResource16.HtmlEncode" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="GridBoundColumnResource17.HeaderText" xml:space="preserve">
+    <value>ΔL</value>
+  </data>
+  <data name="GridBoundColumnResource17.HtmlEncode" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
