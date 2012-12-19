@@ -218,6 +218,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Methods
 
+        #region Bind Trendline Chart
         private void BindMesurementChart()
         {           
             From_ΔE = rbtnListDeltaE.SelectedValue;
@@ -246,10 +247,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (IsValidation)  //This will be called when Verification process is going on
                 {
                     MeasurementList = AlignPaging(Measurements);
+                    //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
+                    int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
+                    if (index < 0)
+                    {
+                        // element not exists, update to last record's measurementID
+                        hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                    }
                 }
+                
                 var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
                 {
-                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
+                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)  
                 };
                 manager.BindChart();
 
@@ -267,6 +276,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillAllTabsData();
             }
         }
+        #endregion
+
+        #region Fill Summary tab
 
         private void BindAvgDelta()    //------Code for Avg Delta display on "Summary" Tab
         {
@@ -335,15 +347,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }           
         }
 
-        public void ConfigureExport()
-        {
-            //------------Patch Details GridView Export Settings----------------//
-            rgPatchDetails.ExportSettings.ExportOnlyData = true;
-            rgPatchDetails.ExportSettings.IgnorePaging = true;
-            rgPatchDetails.ExportSettings.OpenInNewWindow = true;
-
-            rgPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
-        }
+        #endregion       
 
         #region FillAllTabs
 
@@ -1106,6 +1110,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region Methods for Patch Details tab
         private DataTable FilteredPatchDetailsTable(string MetricSumID, DataTable dtPatchDetails)
         {
             DataTable DT = new DataTable();
@@ -1198,345 +1203,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rcmbMetricSumlist.SelectedIndex = 0;
         }
 
-        #endregion
-
-        #region Control Events
-        protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
+        public void ConfigureExport()
         {
-            Response.Redirect("Measurement.aspx");
+            //------------Patch Details GridView Export Settings----------------//
+            rgPatchDetails.ExportSettings.ExportOnlyData = true;
+            rgPatchDetails.ExportSettings.IgnorePaging = true;
+            rgPatchDetails.ExportSettings.OpenInNewWindow = true;
+
+            rgPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
 
-        protected void hdChartButton_Click(object sender, EventArgs e)
-        {
-            if (Convert.ToInt32(hdCheckBoxChange.Value) == 1)
-            {
-                Measurement = new Entity.Measurement();
-                Measurement.MeasurementId = Convert.ToInt32(hdMeasurement.Value);
-                Measurement.IsUsed = hdChartCheckBox.Checked;
-
-                _presenterAnalyze.UpdateMeasurementByAnalyzeChart();
-            }
-            if (!IsErrorOccured)
-            {
-                BindMesurementChart();
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, bind MetricSumList for filtering
-                {
-                    ViewState["MetricSumID"] = "";
-                    FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
-                }
-                rgPatchDetails.Rebind();  //----Load Patch Details GridView in "Patch Details" tab
-            }
-        }
-
-        protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
-        {
-            if (!IsNewDlp && IsDlpCreated)
-            {
-                Response.Redirect("Export.aspx");
-            }
-            else
-            {
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                _presenterAnalyze.GetMeasurementsOnRunId();
-                if (!IsErrorOccured)
-                {
-                    EndDate = System.DateTime.Now;
-                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                    _presenterAnalyze.CreateDestinationAndDlp();
-                    if (!IsErrorOccured)
-                    {
-                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                      Request.UserHostAddress);
-                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
-                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
-                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
-                        {
-                            Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
-                        }
-                        else
-                        {
-                            Response.Redirect("Export.aspx");
-                        }
-                    }
-                    else
-                    {
-                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                      Request.UserHostAddress);
-                    }
-                }
-            }
-        }
-
-        protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
-        {
-            MeasurementId = 0;
-            if (hdMeasurement.Value != "")
-            {
-                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
-                
-                //Now we are using DataTable to bind the grid               
-                dtPatchDetails = new DataTable();
-                
-                _presenterAnalyze.GetPatchDetailsofMeasurement();
-                if (!IsErrorOccured)
-                {
-                    //Now we are using DataTable as DataSource                    
-                    rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
-
-                    #region Make Visible/Invisible columns according to MetricSum selected
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, visible metricsum columns respectively
-                    {
-                        if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
-                        {
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = true;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
-                        }
-                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9")
-                        {
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = true;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
-                        }
-                        else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13")
-                        {
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = true;  //-----ΔL
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
-                        }
-                        else
-                        {
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
-                        }
-                    }
-                    #endregion
-                }
-            }
-        }
-
-        protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-
-                Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
-                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
-            }
-        }
-
-        protected void rgPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)
-        {
-            switch (e.CommandName)
-            {
-                case "Fillter":
-                    foreach (GridColumn column in rgPatchDetails.MasterTableView.Columns)
-                    {
-                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
-                        column.CurrentFilterValue = string.Empty;
-                    }
-                    rgPatchDetails.MasterTableView.FilterExpression = string.Empty;
-                    rgPatchDetails.MasterTableView.Rebind();
-                    break;                
-            }
-        }     
-
-        protected void rgPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
-        {
-            //Apply custom sorting -- make "Descending" order by default
-
-            GridSortExpression sortExpr = new GridSortExpression();
-            switch (e.OldSortOrder)
-            {
-                case GridSortOrder.None:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = GridSortOrder.Descending;
-
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-                case GridSortOrder.Ascending:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = rgPatchDetails.MasterTableView.AllowNaturalSort ? GridSortOrder.None : GridSortOrder.Descending;
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-                case GridSortOrder.Descending:
-                    sortExpr.FieldName = e.SortExpression;
-                    sortExpr.SortOrder = GridSortOrder.Ascending;
-
-                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
-                    break;
-            }
-
-            e.Canceled = true;
-            rgPatchDetails.Rebind();
-        }
-
-        protected void rbtnListDeltaE_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//            
-            BindMesurementChart();
-        }
-
-        protected void grdMeasurement_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            #region set Lable names
-            From_ΔE = rbtnListDeltaE.SelectedValue;
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                Label lblAvgΔE = (Label)e.Item.FindControl("lblAvgΔE");
-                lblAvgΔE.Text = From_ΔE + ": ";
-                Label lblMaxΔE = (Label)e.Item.FindControl("lblMaxΔE");
-                lblMaxΔE.Text = From_ΔE + ": ";
-                Label lblPriΔE = (Label)e.Item.FindControl("lblPriΔE");
-                lblPriΔE.Text = From_ΔE + ": ";
-                Label lblGrayΔE = (Label)e.Item.FindControl("lblGrayΔE");
-                lblGrayΔE.Text = From_ΔE + ": ";
-                Label lblPercΔE10 = (Label)e.Item.FindControl("lblPercΔE10");
-                lblPercΔE10.Text = From_ΔE + ": ";
-                Label lblPercΔE90 = (Label)e.Item.FindControl("lblPercΔE90");
-                lblPercΔE90.Text = From_ΔE + ": ";
-                Label lblPercΔE95 = (Label)e.Item.FindControl("lblPercΔE95");
-                lblPercΔE95.Text = From_ΔE + ": ";
-            }
-            #endregion
-        }
-
-        protected void rgValidationSummaryMetrics_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            //---------Changed color of row, if that metric is failed---------------//
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-                if (item["IsNotOK"].Text == "True")
-                {
-                    item.ForeColor = System.Drawing.Color.Red;
-                }
-            }
-        }
-
-        protected void RG_ΔChSummary_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            //---------Changed color of row, if that metric is failed---------------//
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-                if (item["IsNotOK"].Text == "True")
-                {
-                    item.ForeColor = System.Drawing.Color.Red;
-                }
-            }
-        }
-
-        protected void RG_ΔLBlackSummary_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            //---------Changed color of row, if that metric is failed---------------//
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-                if (item["IsNotOK"].Text == "True")
-                {
-                    item.ForeColor = System.Drawing.Color.Red;
-                }
-            }
-        }
-
-        protected void RG_ΔLGraySummary_ItemDataBound(object sender, GridItemEventArgs e)
-        {
-            //---------Changed color of row, if that metric is failed---------------//
-            if (e.Item is GridDataItem)
-            {
-                GridDataItem item = (GridDataItem)e.Item;
-                if (item["IsNotOK"].Text == "True")
-                {
-                    item.ForeColor = System.Drawing.Color.Red;
-                }
-            }
-        }
-
-        protected void btnExcelExport_Click(object sender, EventArgs e)
-        {
-            ConfigureExport();
-            rgPatchDetails.MasterTableView.ExportToExcel();
-        }
-
-        protected void btnCSVExport_Click(object sender, EventArgs e)
-        {
-            ConfigureExport();
-            rgPatchDetails.MasterTableView.ExportToCSV();
-        }
-
-        protected void lbtnMeasurement_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-            Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
-        }
-
-        protected void rcmbMetricSumlist_SelectedIndexChanged(object o, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
-        {       
-            //--------Set selected MetricSumID in viewstate and re-bind Patch Details RadGrid---------------//
-            ViewState["MetricSumID"] = e.Value;    
-            rgPatchDetails.Rebind();
-        }
-
-        #endregion
-
-        #region IViewAnalyze Members
-
-        public int ProjectId { get; set; }
-
-        public int OptimizeRunId { get; set; }
-
-        public List<int> MeasurementIds { get; set; }
-
-        public List<Entity.Measurement> Measurements { get; set; }
-
-        public Entity.Measurement Measurement { get; set; }
-
-        public string DestinationProfileDescription { get; set; }
-
-        public string DlpDescription { get; set; }
-
-        public List<MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
-
-        public List<MeasurementPatchDetails> PatchDetails { get; set; }
-
-        public int MeasurementId { get; set; }
-
-        public List<AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
-
-        public List<AnalyzeChart> DTPaperPatches { get; set; }
-
-        public List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }
-        public List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
-        public List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
-
-        public string From_ΔE { get; set; }
-        public bool IsVerification
-        {
-            get
-            {
-                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
-            }
-        }
-
-
-        public List<Entity.Measurement> MeasurementSummary { get; set; }
-
-        public List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
-        public List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }
-        public List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
-        public List<Entity.AnalyzeChart_G7> BlackLSummary { get; set; }
-        public List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
-        public List<Entity.AnalyzeChart_G7> GrayLSummary { get; set; }
-        public List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
-        public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
-
-        public DataTable dtPatchDetails { get; set; }
-        #endregion
+        #endregion       
 
         #region Paging for top Trendline Chart
         protected void DDL_PageSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -1700,6 +1377,346 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Ex;
             }
         }
+        #endregion
+
+        #endregion
+
+        #region Control Events
+        protected void lbtnMeasurementVerification_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Measurement.aspx");
+        }
+
+        protected void hdChartButton_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(hdCheckBoxChange.Value) == 1)
+            {
+                Measurement = new Entity.Measurement();
+                Measurement.MeasurementId = Convert.ToInt32(hdMeasurement.Value);
+                Measurement.IsUsed = hdChartCheckBox.Checked;
+
+                _presenterAnalyze.UpdateMeasurementByAnalyzeChart();
+            }
+            if (!IsErrorOccured)
+            {
+                BindMesurementChart();
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, bind MetricSumList for filtering
+                {
+                    ViewState["MetricSumID"] = "";
+                    FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                }
+                rgPatchDetails.Rebind();  //----Load Patch Details GridView in "Patch Details" tab
+            }
+        }
+
+        protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
+        {
+            if (!IsNewDlp && IsDlpCreated)
+            {
+                Response.Redirect("Export.aspx");
+            }
+            else
+            {
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                _presenterAnalyze.GetMeasurementsOnRunId();
+                if (!IsErrorOccured)
+                {
+                    EndDate = System.DateTime.Now;
+                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                    _presenterAnalyze.CreateDestinationAndDlp();
+                    if (!IsErrorOccured)
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                        {
+                            Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                        }
+                        else
+                        {
+                            Response.Redirect("Export.aspx");
+                        }
+                    }
+                    else
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
+                    }
+                }
+            }
+        }
+
+        protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            MeasurementId = 0;
+            if (hdMeasurement.Value != "")
+            {
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
+
+                //Now we are using DataTable to bind the grid               
+                dtPatchDetails = new DataTable();
+
+                _presenterAnalyze.GetPatchDetailsofMeasurement();
+                if (!IsErrorOccured)
+                {
+                    //Now we are using DataTable as DataSource                    
+                    rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
+
+                    #region Make Visible/Invisible columns according to MetricSum selected
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, visible metricsum columns respectively
+                    {
+                        if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = true;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
+                        else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = true;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
+                        else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13")
+                        {
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = true;  //-----ΔL
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                        }
+                        else
+                        {
+                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                        }
+                    }
+                    #endregion
+                }
+            }
+        }
+
+        protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+
+                Label lblHTML = (Label)item["HtmlColor"].FindControl("lbl_HTML");
+                lblHTML.BackColor = System.Drawing.ColorTranslator.FromHtml(item.GetDataKeyValue("HTMLColor").ToString());
+            }
+        }
+
+        protected void rgPatchDetails_ItemCommand(object sender, GridCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "Fillter":
+                    foreach (GridColumn column in rgPatchDetails.MasterTableView.Columns)
+                    {
+                        column.CurrentFilterFunction = GridKnownFunction.NoFilter;
+                        column.CurrentFilterValue = string.Empty;
+                    }
+                    rgPatchDetails.MasterTableView.FilterExpression = string.Empty;
+                    rgPatchDetails.MasterTableView.Rebind();
+                    break;
+            }
+        }
+
+        protected void rgPatchDetails_SortCommand(object source, Telerik.Web.UI.GridSortCommandEventArgs e)
+        {
+            //Apply custom sorting -- make "Descending" order by default
+
+            GridSortExpression sortExpr = new GridSortExpression();
+            switch (e.OldSortOrder)
+            {
+                case GridSortOrder.None:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = GridSortOrder.Descending;
+
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+                case GridSortOrder.Ascending:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = rgPatchDetails.MasterTableView.AllowNaturalSort ? GridSortOrder.None : GridSortOrder.Descending;
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+                case GridSortOrder.Descending:
+                    sortExpr.FieldName = e.SortExpression;
+                    sortExpr.SortOrder = GridSortOrder.Ascending;
+
+                    e.Item.OwnerTableView.SortExpressions.AddSortExpression(sortExpr);
+                    break;
+            }
+
+            e.Canceled = true;
+            rgPatchDetails.Rebind();
+        }
+
+        protected void rbtnListDeltaE_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//            
+            BindMesurementChart();
+        }
+
+        protected void grdMeasurement_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            #region set Lable names
+            From_ΔE = rbtnListDeltaE.SelectedValue;
+            if (e.Item.ItemType == ListViewItemType.DataItem)
+            {
+                Label lblAvgΔE = (Label)e.Item.FindControl("lblAvgΔE");
+                lblAvgΔE.Text = From_ΔE + ": ";
+                Label lblMaxΔE = (Label)e.Item.FindControl("lblMaxΔE");
+                lblMaxΔE.Text = From_ΔE + ": ";
+                Label lblPriΔE = (Label)e.Item.FindControl("lblPriΔE");
+                lblPriΔE.Text = From_ΔE + ": ";
+                Label lblGrayΔE = (Label)e.Item.FindControl("lblGrayΔE");
+                lblGrayΔE.Text = From_ΔE + ": ";
+                Label lblPercΔE10 = (Label)e.Item.FindControl("lblPercΔE10");
+                lblPercΔE10.Text = From_ΔE + ": ";
+                Label lblPercΔE90 = (Label)e.Item.FindControl("lblPercΔE90");
+                lblPercΔE90.Text = From_ΔE + ": ";
+                Label lblPercΔE95 = (Label)e.Item.FindControl("lblPercΔE95");
+                lblPercΔE95.Text = From_ΔE + ": ";
+            }
+            #endregion
+        }
+
+        protected void rgValidationSummaryMetrics_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void RG_ΔChSummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void RG_ΔLBlackSummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void RG_ΔLGraySummary_ItemDataBound(object sender, GridItemEventArgs e)
+        {
+            //---------Changed color of row, if that metric is failed---------------//
+            if (e.Item is GridDataItem)
+            {
+                GridDataItem item = (GridDataItem)e.Item;
+                if (item["IsNotOK"].Text == "True")
+                {
+                    item.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+        protected void btnExcelExport_Click(object sender, EventArgs e)
+        {
+            ConfigureExport();
+            rgPatchDetails.MasterTableView.ExportToExcel();
+        }
+
+        protected void btnCSVExport_Click(object sender, EventArgs e)
+        {
+            ConfigureExport();
+            rgPatchDetails.MasterTableView.ExportToCSV();
+        }
+
+        protected void lbtnMeasurement_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+            Response.Redirect(string.Format("COMeasurement.aspx?id={0}", Guid.NewGuid()));
+        }
+
+        protected void rcmbMetricSumlist_SelectedIndexChanged(object o, Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            //--------Set selected MetricSumID in viewstate and re-bind Patch Details RadGrid---------------//
+            ViewState["MetricSumID"] = e.Value;
+            rgPatchDetails.Rebind();
+        }
+
+        #endregion
+
+        #region IViewAnalyze Members
+
+        public int ProjectId { get; set; }
+
+        public int OptimizeRunId { get; set; }
+
+        public List<int> MeasurementIds { get; set; }
+
+        public List<Entity.Measurement> Measurements { get; set; }
+
+        public Entity.Measurement Measurement { get; set; }
+
+        public string DestinationProfileDescription { get; set; }
+
+        public string DlpDescription { get; set; }
+
+        public List<MeasurementPatch_AvgDelta> MeasurementsDelta { get; set; }
+
+        public List<MeasurementPatchDetails> PatchDetails { get; set; }
+
+        public int MeasurementId { get; set; }
+
+        public List<AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
+
+        public List<AnalyzeChart> DTPaperPatches { get; set; }
+
+        public List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }
+        public List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
+        public List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
+
+        public string From_ΔE { get; set; }
+        public bool IsVerification
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            }
+        }
+
+
+        public List<Entity.Measurement> MeasurementSummary { get; set; }
+
+        public List<Entity.AnalyzeChart_G7> GrayFChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayFSummary { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackLSummary { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayLChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayLSummary { get; set; }
+        public List<Entity.AnalyzeChart_G7> BlackNPDChart { get; set; }
+        public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
+
+        public DataTable dtPatchDetails { get; set; }
         #endregion
     }
 }
