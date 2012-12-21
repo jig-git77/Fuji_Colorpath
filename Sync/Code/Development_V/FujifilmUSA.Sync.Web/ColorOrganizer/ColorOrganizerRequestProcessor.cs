@@ -238,8 +238,16 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     if (!IsErrorOccured)
                     {
                         SessionManager.Instance.CurrentProject = Project;
-                        SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
-                                        new KeyValuePair<short, string>(Convert.ToInt16(TempProjectInfo.ChartId), string.Empty);
+                        
+                        if (!(SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile))
+                        {
+                            //This will be called when no DLP is created
+                            SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
+                                            new KeyValuePair<short, string>(Convert.ToInt16(TempProjectInfo.ChartId), string.Empty);
+                        }
+                        //This will be set every time
+                        SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType =
+                                           new KeyValuePair<short, string>(Convert.ToInt16(TempProjectInfo.ChartId), string.Empty);
 
                         SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
                         HttpContext.Current.Response.Redirect(string.Format("COAddProject.aspx?id={0}", Guid.NewGuid()));
