@@ -18,8 +18,13 @@ PrintLabel = function () {
             printerName = printer.name;
             break;
         }
-    }      
-    label.print(printerName);
+    }
+    try {
+        label.print(printerName);
+    }
+    catch (e) {
+        alert("Error while printing label. Please try again.");
+    }
 
     return false;
 };
