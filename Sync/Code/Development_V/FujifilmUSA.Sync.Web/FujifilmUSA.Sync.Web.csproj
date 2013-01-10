@@ -124,6 +124,7 @@
     <Content Include="Images\chart_preview.png" />
     <Content Include="Images\clear-fillter.png" />
     <Content Include="Images\collapsed.png" />
+    <Content Include="Images\ColorPathLogoForLabel.png" />
     <Content Include="Images\company-management.png" />
     <Content Include="Images\contant_box_haed_bt_left_hover_Rev.png" />
     <Content Include="Images\contant_box_haed_bt_left_Rev.png" />
@@ -139,6 +140,7 @@
     <Content Include="Images\download-icon.png" />
     <Content Include="Images\download_list_bg.png" />
     <Content Include="Images\download_list_small_bg.png" />
+    <Content Include="Images\DymoPrintIcon.png" />
     <Content Include="Images\expanded.png" />
     <Content Include="Images\Failed.png" />
     <Content Include="Images\header-left-img.gif" />
@@ -194,9 +196,13 @@
     <Content Include="Images\Validation_Last_OK.png" />
     <Content Include="Images\Validation_Not_Active.png" />
     <Content Include="Images\Validation_Not_Certified.png" />
+    <Content Include="Images\VStatusFailedIcon.png" />
+    <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\progressbar.js" />
+    <Content Include="JS\DYMO.Label.Framework.latest.js" />
     <Content Include="JS\jquery.tools.min.js" />
+    <Content Include="JS\Printing.js" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
@@ -2086,6 +2092,9 @@
   <ItemGroup>
     <Content Include="Download\Validation Charts.zip" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\CertifiedLabel.label" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -2104,7 +2113,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

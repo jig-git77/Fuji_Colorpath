@@ -2,6 +2,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
 <%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+<script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
  <script type="text/javascript">
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
@@ -301,6 +303,9 @@
                 <li><span><a href="#tab5"><asp:Localize Text="Report" ID="locReport" runat="server" 
                         meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>  
             </ul>
+            <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
+                <asp:ImageButton ID="ibtnPrintLabel" runat="server" ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Click to print label" OnClientClick="PrintLabel(); return false;"  />
+            </div>                
             <div class="clear"></div>
         </section>
 
@@ -311,7 +316,7 @@
            <div class="combopart">
         <div class="float_l" style="padding-left: 10px;" > 
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-              <ContentTemplate>   
+              <ContentTemplate>                   
                   <table id="tbOptSummary" runat="server" cellpadding="0" cellspacing="0" width="100%">                                   
                                     <tr>
                                     <td>
@@ -420,7 +425,7 @@
                                 </asp:DetailsView>
                             </td>
                             <td style="width:2%;"></td>
-                            <td valign="top" style="width:35%; ">
+                            <td valign="top" style="width:35%; ">                              
                                 <telerik:RadGrid ID="rgValidationSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
                                     OnItemDataBound="rgValidationSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
                                         <HeaderStyle Font-Bold="True" />  
@@ -442,10 +447,10 @@
                                                     </telerik:GridBoundColumn>                                               
                                                 </Columns>                        
                                             </MasterTableView>                        
-                                </telerik:RadGrid>
+                                </telerik:RadGrid>                                
                             </td>
                         </tr>
-                    </table>
+                    </table>               
               </ContentTemplate>
                     <Triggers>
                         <asp:PostBackTrigger ControlID="chartAnalyze" />  

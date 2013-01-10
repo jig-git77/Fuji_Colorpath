@@ -13,6 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Web.UI.DataVisualization.Charting;
 using System.Text;
+using System.IO;
 
 
 namespace FujifilmUSA.Sync.Web.UserControl
@@ -130,7 +131,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbtnMeasurement.Visible = IsXMFUser;          
+            lbtnMeasurement.Visible = IsXMFUser;
 
             if (!Page.IsPostBack)
             {
@@ -142,7 +143,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     header.InnerText = GetResourceString(_recValidationAnalyzeHeaderText); //"Validation - Analyze";
                     //------Assign dEMethod value to radiolist, based on selected MetricTargetPresetID----------------//
-                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);                   
+                    rbtnListDeltaE.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.dEMethod.ToString().Substring(1);
                 }
                 else
                 {
@@ -188,13 +189,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     trRBtnListDeltaE.Visible = false;
                     Div_Validation_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type
-                    {                        
+                    {
                         dvTab6.Visible = Tab_G7.Visible = true;
                     }
                     else
                     {
                         dvTab6.Visible = Tab_G7.Visible = false;
-                    }                 
+                    }
                 }
                 else   //-----DLP Optimization
                 {
@@ -206,11 +207,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Div_Opt_Header.Visible = true;
                     dvTab6.Visible = Tab_G7.Visible = false;
                     Div_MetricSumFilter.Visible = false;
-                }                
+                }
             }
             else
             {
-                BindMesurementChart();                
+                BindMesurementChart();
             }
         }
 
@@ -220,7 +221,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Bind Trendline Chart
         private void BindMesurementChart()
-        {           
+        {
             From_ΔE = rbtnListDeltaE.SelectedValue;
             chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
             Measurements = new List<Entity.Measurement>();
@@ -243,7 +244,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 List<Entity.Measurement> MeasurementList = new List<Entity.Measurement>();
                 MeasurementList = Measurements;
-              
+
                 if (IsValidation)  //This will be called when Verification process is going on
                 {
                     MeasurementList = AlignPaging(Measurements);
@@ -255,10 +256,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
                     }
                 }
-                
+
                 var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
                 {
-                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)  
+                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
                 };
                 manager.BindChart();
 
@@ -305,6 +306,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
 
+                    PreparePrintLabelXML(MeasurementSummary[0]);
+
                     if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
                     {
                         FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
@@ -329,6 +332,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 //In case of None (i.e. Optimization)
+                ibtnPrintLabel.Visible = false;
                 tbValidationSummary.Visible = false;
                 dvTab6.Visible = Tab_G7.Visible = false;
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
@@ -344,16 +348,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
                 iframeGeneratePDFReport.Attributes.Add("src", path);
                 iframeGeneratePDFReport.Style.Add("display", "");
-            }           
+            }
         }
 
-        #endregion       
+        #endregion
 
         #region FillAllTabs
 
         public void FillAllTabsData()
         {
-             MeasurementId = 0;
+            MeasurementId = 0;
 
             if (hdMeasurement.Value != "")
             {
@@ -383,7 +387,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                 }
             }
-        }            
+        }
 
         #region Fill InkPaper Tab
         private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper)
@@ -424,8 +428,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Series objSeries2 = (Series)chartDeltaE.Series[2];
             objSeries2.XValueType = ChartValueType.Int32;
             objSeries2.YValueType = ChartValueType.String;
-            objSeries2.CustomProperties = "DrawingStyle=Cylinder";           
-                            
+            objSeries2.CustomProperties = "DrawingStyle=Cylinder";
+
             #endregion
 
             #region //========== ChartArea Settings ==========//
@@ -534,7 +538,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Series SeriesActual = objSeries1;
             objSeries1.Points.AddXY((Double)0, Y2);
 
-           // objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+            // objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
 
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
@@ -648,7 +652,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (DTGaumatChart1 != null && DTGaumatChart1.Count > 0 && DTGaumatChart2 != null && DTGaumatChart2.Count > 0)
                 FillGaumatChart(DTGaumatChart1, DTGaumatChart2);
         }
-        
+
         #region Fill Gaumat Chart
         private void FillGaumatChart(List<AnalyzeChart_Gray> DTTarget, List<AnalyzeChart_Gray> DTColors)
         {
@@ -953,7 +957,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (DT != null && DT.Count > 0)
             {
                 for (int i = 0; i < DT.Count; i++)
-                {                  
+                {
                     AddPointInChart(i, Chart_GrayF.Series["Series1"], Chart_GrayF.Series["Series1Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔValue.ToString(), Color.Black.Name.ToString(), true, "ΔCh*");
                     AddPointInChart(i, Chart_GrayF.Series["Series2"], Chart_GrayF.Series["Series2Point"], Convert.ToInt64(DT[i].Cmyk_Value).ToString(), DT[i].ΔLimit.ToString(), Color.Red.Name.ToString(), false, "ΔCh*");
                 }
@@ -1052,11 +1056,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             //CHRT_BlackNPD.Series["Series0"].Points.Clear();
             //CHRT_BlackNPD.Series["Series0Point"].Points.Clear();
-           
+
             //// There is an issue with tooltip on spline chart, by default it ignores 
             ////http://support2.dundas.com/OnlineDocumentation/WebChart2003/CustomAttributes_TooltipOffset.html
             //CHRT_BlackNPD.Series["Series0"]["TooltipOffset"] = "True";
-          
+
             //if (DTBlack != null && DTBlack.Count > 0)
             //{
             //    for (int i = 0; i < DTBlack.Count; i++)
@@ -1069,7 +1073,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //// CHRT_GrayNPD.Series["Series0Point"].Points.Clear();           
 
             //CHRT_GrayNPD.Series["Series0"]["TooltipOffset"] = "True";
-          
+
             //if (DTGray != null && DTGray.Count > 0)
             //{
             //    for (int i = 0; i < DTGray.Count; i++)
@@ -1150,7 +1154,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 DT = dtPatchDetails.AsEnumerable()
                         .Where(r => r.Field<byte>("PatchTypeID") == 9 || r.Field<byte>("PatchTypeID") == 10 || r.Field<byte>("PatchTypeID") == 28 || r.Field<byte>("PatchTypeID") == 29 || r.Field<byte>("PatchTypeID") == 30 || r.Field<byte>("PatchTypeID") == 31 || r.Field<byte>("PatchTypeID") == 32 || r.Field<byte>("PatchTypeID") == 33 || r.Field<byte>("PatchTypeID") == 34 || r.Field<byte>("PatchTypeID") == 35 || r.Field<byte>("PatchTypeID") == 36 || r.Field<byte>("PatchTypeID") == 37 || r.Field<byte>("PatchTypeID") == 38 || r.Field<byte>("PatchTypeID") == 39 || r.Field<byte>("PatchTypeID") == 40 || r.Field<byte>("PatchTypeID") == 41 || r.Field<byte>("PatchTypeID") == 42 || r.Field<byte>("PatchTypeID") == 43 || r.Field<byte>("PatchTypeID") == 44 || r.Field<byte>("PatchTypeID") == 45 || r.Field<byte>("PatchTypeID") == 46 || r.Field<byte>("PatchTypeID") == 47 || r.Field<byte>("PatchTypeID") == 48 || r.Field<byte>("PatchTypeID") == 49 || r.Field<byte>("PatchTypeID") == 50)
                         .CopyToDataTable();
-            }          
+            }
             else if (MetricSumID == "10" || MetricSumID == "11")   //----For 'G7 Black ΔL Avg' or ----For 'G7 Black ΔL Max'
             {
                 DT = dtPatchDetails.AsEnumerable()
@@ -1213,7 +1217,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
         }
 
-        #endregion       
+        #endregion
 
         #region Paging for top Trendline Chart
         protected void DDL_PageSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -1275,12 +1279,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             int _CurrentPageIndex = Convert.ToInt32(LTRL_CurrentPage.Text);
             int _PageCount = MeasurementList.Count / _PageSize; if ((MeasurementList.Count % _PageSize) > 0) { _PageCount = _PageCount + 1; }
             int _StartIndex = 1;
-            int _EndIndex = 0;          
+            int _EndIndex = 0;
             #endregion
 
             //========== Filling the DropDown ==========//
             if (Page.IsPostBack == false)
-            {               
+            {
                 FillDDLGoToPage(_PageCount);
                 LTRL_TotalRec.Text = MeasurementList.Count.ToString();
             }
@@ -1347,8 +1351,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             for (int i = _StartIndex; i < _EndIndex; i = i + 1)
             {
-                MeasurementReturn.Add(MeasurementList[i]);               
-            }        
+                MeasurementReturn.Add(MeasurementList[i]);
+            }
 
             return MeasurementReturn;
 
@@ -1370,7 +1374,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (_Count == 0) { DDL_GoToPage.Items.Insert(0, (new ListItem("--", "0"))); }
 
                 //========== Sets Default =========//
-                DDL_GoToPage.SelectedIndex = DDL_GoToPage.Items.Count - 1;               
+                DDL_GoToPage.SelectedIndex = DDL_GoToPage.Items.Count - 1;
             }
             catch (Exception Ex)
             {
@@ -1379,6 +1383,57 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        private void PreparePrintLabelXML(Entity.Measurement measurmentSummary)
+        {
+            //Open label template from XML(.label) file            
+            StreamReader streamReader = new StreamReader(Server.MapPath(@"Templates\CertifiedLabel.label"));
+            //StreamReader streamReader = new StreamReader(@"D:\Chirag.Vidani\Work\FujiFilm\Dymo\Labels\CertifiedLabel.label");
+            string labelXML = streamReader.ReadToEnd();
+            streamReader.Close();
+            //string labelXML = "XML";
+            //Set the values to Placeholder
+            labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
+            labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
+            labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
+            labelXML = labelXML.Replace("[ID]", measurmentSummary.MeasurementId.ToString());
+            labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
+            labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
+            labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
+            System.Text.StringBuilder metricName = new StringBuilder();
+            System.Text.StringBuilder metricTol = new StringBuilder();
+            System.Text.StringBuilder metricActual = new StringBuilder();
+            bool appendNewLine = true;
+            foreach (var item in measurmentSummary.ValidationMetrics)
+            {
+                appendNewLine = true;
+                if (measurmentSummary.ValidationMetrics.Count == measurmentSummary.ValidationMetrics.IndexOf(item) + 1)
+                    appendNewLine = false;
+                metricName.Append(item.Metric + (appendNewLine ? Environment.NewLine : ""));
+                metricTol.Append(item.Tolerance.ToString() + (appendNewLine ? Environment.NewLine : ""));
+                metricActual.Append(item.Actual.ToString() + (appendNewLine ? Environment.NewLine : ""));
+            }
+            labelXML = labelXML.Replace("[MetricCaption]", metricName.ToString());
+            labelXML = labelXML.Replace("[dTol]", metricTol.ToString());
+            labelXML = labelXML.Replace("[dActual]", metricActual.ToString());
+            labelXML = labelXML.Replace("\r\n", @"\ \r\n");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "LabelXML", " function GetLabelXml() { return '" + labelXML.ToString() + "'; };", true);
+
+            string imagePath = "";
+            if (measurmentSummary.MeasurementStatus.Equals("OK", StringComparison.InvariantCultureIgnoreCase))
+                imagePath = Server.MapPath(@"Images\VStatusSuccessIcon.png");
+            else
+                imagePath = Server.MapPath(@"Images\VStatusFailedIcon.png");
+
+
+            byte[] binaryData = File.ReadAllBytes(imagePath);
+            string base64String = System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ImageString", " function GetStatusIconImageString() { return '" + base64String + "' ;};", true);
+        }
+
+        #endregion
+
+        #region Properties
+        public int JsRandomNumber { get { return new Random().Next(1, 100); } }
         #endregion
 
         #region Control Events
