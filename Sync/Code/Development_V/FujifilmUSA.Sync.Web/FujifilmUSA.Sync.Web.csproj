@@ -113,6 +113,7 @@
     <Content Include="Images\application-configuration.png" />
     <Content Include="Images\BGISOPaperGraph1_Sync4D.jpg" />
     <Content Include="Images\BGISOPaperGraph2_Sync4D.jpg" />
+    <Content Include="Images\body_bg_small.png" />
     <Content Include="Images\branch-management.png" />
     <Content Include="Images\browsericons.png" />
     <Content Include="Images\browsericons_1.png" />
@@ -132,6 +133,7 @@
     <Content Include="Images\contant_box_haed_bt_right_Rev.png" />
     <Content Include="Images\activity-validation-rules-icon.png" />
     <Content Include="Images\activity-validation-rules.png" />
+    <Content Include="Images\DymoPrintPreviewIcon.png" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\DLP.png" />
     <Content Include="Images\DLP_Certified.png" />
@@ -207,6 +209,7 @@
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
+    <Content Include="PrintPreview.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
@@ -267,6 +270,7 @@
     <Content Include="UserControl\PopupControl\DownloadSoftware.ascx" />
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
+    <Content Include="UserControl\PrintPreview.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
@@ -757,6 +761,13 @@
     <Compile Include="PopupOpenForgotPassword.aspx.designer.cs">
       <DependentUpon>PopupOpenForgotPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PrintPreview.aspx.cs">
+      <DependentUpon>PrintPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintPreview.aspx.designer.cs">
+      <DependentUpon>PrintPreview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProfileManagement.aspx.cs">
       <DependentUpon>ProfileManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -976,6 +987,13 @@
     </Compile>
     <Compile Include="UserControl\PopupControl\ImportMeasurements.ascx.designer.cs">
       <DependentUpon>ImportMeasurements.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PrintPreview.ascx.cs">
+      <DependentUpon>PrintPreview.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PrintPreview.ascx.designer.cs">
+      <DependentUpon>PrintPreview.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProfileManagement.ascx.cs">
       <DependentUpon>ProfileManagement.ascx</DependentUpon>

@@ -5,6 +5,7 @@
 <script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
  <script type="text/javascript">
+    var previewImageCodedString = '';
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
 
@@ -62,7 +63,8 @@
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         if (!IsPrinterInstalled()) {
-            $('#<%= ibtnPrintLabel.ClientID %>').hide();
+            $('#input[type="image"][id*="ibtnPrintPreview"]').hide();
+            $('#input[type="image"][id*="ibtnPrintLabel"]').hide();
         }
         //Default Action
         $(".hideclass").hide(); //Hide all content
@@ -307,7 +309,8 @@
                         meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>  
             </ul>
             <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
-                <asp:ImageButton ID="ibtnPrintLabel" runat="server" ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Click to print label" OnClientClick="PrintLabel(); return false;"  />
+                <asp:ImageButton ID="ibtnPrintPreview" runat="server" ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label" OnClientClick="ShowLabelPrintPreview(); return false;"  />
+                <asp:ImageButton ID="ibtnPrintLabel" runat="server" ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label" OnClientClick="PrintLabel(false); return false;"  />
             </div>                
             <div class="clear"></div>
         </section>

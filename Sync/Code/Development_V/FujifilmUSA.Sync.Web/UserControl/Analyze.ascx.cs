@@ -332,6 +332,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 //In case of None (i.e. Optimization)
+                ibtnPrintPreview.Visible = false;
                 ibtnPrintLabel.Visible = false;
                 tbValidationSummary.Visible = false;
                 dvTab6.Visible = Tab_G7.Visible = false;

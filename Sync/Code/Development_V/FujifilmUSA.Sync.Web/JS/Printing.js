@@ -11,7 +11,9 @@ IsPrinterInstalled = function () {
 };
 
 //This function will print the label via dymo printer on client machine
-PrintLabel = function () {
+//This function is used to display preview as well as print label
+//Argument indicates whether to preview/print and is of type bool
+PrintLabel = function (previewLabel) {
     //First check whether printer is installed or not
     if (IsPrinterInstalled()) {
 
@@ -23,27 +25,44 @@ PrintLabel = function () {
         //It contains the image in base64 encoded string format which will be replaced with placeholders in template using below line of code
         label.setObjectText('imgMeasurementStatusIcon', GetStatusIconImageString());
 
-        //Code to print    
-        var printerName = "";
-        var printers = dymo.label.framework.getPrinters();
-        if (printers.length == 0)
-            return false;    
-        for (var i = 0; i < printers.length; ++i) {
-            var printer = printers[i];
-            if (printer.printerType == "LabelWriterPrinter") {
-                printerName = printer.name;
-                break;
+        if (previewLabel) {
+            //Code to view preview
+            previewImageCodedString = label.render();            
+        }
+        else {
+            //Code to print    
+            var printerName = "";
+            var printers = dymo.label.framework.getPrinters();
+            if (printers.length == 0)
+                return false;
+            for (var i = 0; i < printers.length; ++i) {
+                var printer = printers[i];
+                if (printer.printerType == "LabelWriterPrinter") {
+                    printerName = printer.name;
+                    break;
+                }
+            }
+            try {
+                if (printerName != "")
+                    label.print(printerName); //This will print the label
+                else
+                    alert("No label writer printers available/installed.");
+            }
+            catch (e) {
+                alert("Error while printing label. Please try again.");
             }
         }
-        try {
-            if (printerName != "")
-                label.print(printerName); //This will print the label
-            else
-                alert("No label writer printers available/installed.");
-        }
-        catch (e) {
-            alert("Error while printing label. Please try again.");
-        }
     }
+    return false;
+};
+var printPreviewWindow = null;
+ShowLabelPrintPreview = function () {
+    PrintLabel(true);
+    if (printPreviewWindow != null) {
+        printPreviewWindow.close()
+        printPreviewWindow = null;
+    }
+    printPreviewWindow = window.open("PrintPreview.aspx", "PrintPreviewWindow", "width=410,height=275,resizable=no,scrollbars=no");
+    printPreviewWindow.focus();
     return false;
 };

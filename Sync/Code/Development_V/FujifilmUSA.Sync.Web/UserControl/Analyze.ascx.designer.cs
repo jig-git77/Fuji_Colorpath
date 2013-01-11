@@ -400,6 +400,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locReport;
         
         /// <summary>
+        /// ibtnPrintPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ibtnPrintPreview;
+        
+        /// <summary>
         /// ibtnPrintLabel control.
         /// </summary>
         /// <remarks>
