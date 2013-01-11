@@ -63,8 +63,8 @@
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
         if (!IsPrinterInstalled()) {
-            $('#input[type="image"][id*="ibtnPrintPreview"]').hide();
-            $('#input[type="image"][id*="ibtnPrintLabel"]').hide();
+            $('input[type="image"][id*="ibtnPrintPreview"]').hide();
+            $('input[type="image"][id*="ibtnPrintLabel"]').hide();
         }
         //Default Action
         $(".hideclass").hide(); //Hide all content
