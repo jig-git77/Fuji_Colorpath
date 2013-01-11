@@ -61,6 +61,9 @@
 </script>
 <script type="text/javascript" language="javascript">
     $(document).ready(function () {
+        if (!IsPrinterInstalled()) {
+            $('#<%= ibtnPrintLabel.ClientID %>').hide();
+        }
         //Default Action
         $(".hideclass").hide(); //Hide all content
         $("ul.tabs li:eq(" + $('#<%= hdnSelectedTabIndex.ClientID %>').val() + ")").addClass("active").show(); //Activate first tab
@@ -73,9 +76,9 @@
             $(".hideclass").hide(); //Hide all tab content
             var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
             $(activeTab).fadeIn(); //Fade in the active content
-           
+
             return false;
-        });        
+        });
     });
 </script>
 <script type="text/javascript" language="javascript">
