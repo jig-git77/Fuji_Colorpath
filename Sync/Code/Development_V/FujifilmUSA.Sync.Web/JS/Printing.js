@@ -25,6 +25,9 @@ PrintLabel = function () {
 
         //Code to print    
         var printerName = "";
+        var printers = dymo.label.framework.getPrinters();
+        if (printers.length == 0)
+            return false;    
         for (var i = 0; i < printers.length; ++i) {
             var printer = printers[i];
             if (printer.printerType == "LabelWriterPrinter") {
