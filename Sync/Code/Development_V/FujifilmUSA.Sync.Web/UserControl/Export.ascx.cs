@@ -80,12 +80,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadChart_Click(object sender, EventArgs e)
         {
-            ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
+            //ReferenceChartTypeId = SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Key;  
+            //Here we are considering optimization chart as export will be visible only once DLP is created (i.e. success of Run0)
+            ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;  
             _presenterExport.GetChartPreview();
             if (!IsErrorOccured)
             {
                 if (ChartPreview != null)
-                    Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentOptimizeRun.ReferenceChartType.Value), ".pdf");
+                    Utilities.DownloadFile(ChartPreview, string.Format("{0}.pdf", SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value), ".pdf");
                 else
                     fujiStatusbar.DisplayMessage(GetResourceString(_recDownloadChartNotAvailable), true);
             }
