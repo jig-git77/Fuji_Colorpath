@@ -27,26 +27,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {              
+            {
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
                 {
                     txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
                     Page.Title = GetResourceString(_recSaveAs);
                 }
             }
-        } 
+        }
         #endregion
 
-        #region "Control Events"        
+        #region "Control Events"
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
-            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;            
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterSaveWindow.SaveProject();
             if (!IsErrorOccured)
             {
-                if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     _presenterSaveWindow.GetProjectDetailWithVerification();
                 }
@@ -54,7 +54,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     _presenterSaveWindow.GetProjectDetail();
                 }
-                WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] {Project.ProjectId, Project.ProjectName}, Request.UserHostAddress);
+                WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                 SessionManager.Instance.CurrentProject = Project;
                 SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                 if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
@@ -79,12 +79,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string ChartName = "";
             if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0 && SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key > 0)
             {
-                if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || SessionManager.Instance.CurrentProject.OptimizeRuns.Count <= 1) //-----For Base DLP Chart
+                //if (SessionManager.Instance.CurrentProject.OptimizeRuns == null || SessionManager.Instance.CurrentProject.OptimizeRuns.Count <= 1) //-----For Base DLP Chart
+                if (SessionManager.Instance.CurrentProject.CurrDlpId < 1) //When no DLP load profile chart
                 {
                     ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
                     ChartName = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Value;
                 }
-                else   //----------For Optimization Chart
+                else   //----------For Optimization Chart //Load optimization chart once DLP is created
                 {
                     ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
                     ChartName = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Value;
