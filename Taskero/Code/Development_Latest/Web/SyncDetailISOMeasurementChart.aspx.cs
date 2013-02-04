@@ -625,7 +625,7 @@ public partial class SyncDetailISOMeasurementChart : PageBase
                     if (Convert.ToInt16(DV[i]["Threshold"]) == 0)
                         ThresholdValue = 0;
                     else
-                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]) / 2;
+                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]) ;
 
                     ThresholdTop = Convert.ToDouble(DV[i]["TargetDotGain"]) + ThresholdValue;
                     ThresholdBottom = Convert.ToDouble(DV[i]["TargetDotGain"]) - ThresholdValue;
@@ -656,7 +656,7 @@ public partial class SyncDetailISOMeasurementChart : PageBase
                     if (Convert.ToInt16(DV[i]["Threshold"]) == 0)
                         ThresholdValue = 0;
                     else
-                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]) / 2;
+                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]);
 
                     ThresholdTop = Convert.ToDouble(DV[i]["TargetDotGain"]) + ThresholdValue;
                     ThresholdBottom = Convert.ToDouble(DV[i]["TargetDotGain"]) - ThresholdValue;
@@ -688,7 +688,7 @@ public partial class SyncDetailISOMeasurementChart : PageBase
                     if (Convert.ToInt16(DV[i]["Threshold"]) == 0)
                         ThresholdValue = 0;
                     else
-                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]) / 2;
+                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]);
 
                     ThresholdTop = Convert.ToDouble(DV[i]["TargetDotGain"]) + ThresholdValue;
                     ThresholdBottom = Convert.ToDouble(DV[i]["TargetDotGain"]) - ThresholdValue;
@@ -719,7 +719,7 @@ public partial class SyncDetailISOMeasurementChart : PageBase
                     if (Convert.ToInt16(DV[i]["Threshold"]) == 0)
                         ThresholdValue = 0;
                     else
-                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]) / 2;
+                        ThresholdValue = Convert.ToDouble(DV[i]["Threshold"]);
 
                     ThresholdTop = Convert.ToDouble(DV[i]["TargetDotGain"]) + ThresholdValue;
                     ThresholdBottom = Convert.ToDouble(DV[i]["TargetDotGain"]) - ThresholdValue;

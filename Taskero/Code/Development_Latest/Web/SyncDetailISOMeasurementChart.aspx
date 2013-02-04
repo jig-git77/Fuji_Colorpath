@@ -635,7 +635,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td class="TDTABLEBOXLEFT">
-                                                                                        <b>Max Spread</b>
+                                                                                        <b>Chromatic Variation</b>
                                                                                     </td>
                                                                                     <td class="TDTABLEBOX">
                                                                                         <asp:Label ID="lblMaxSpread25" runat="server" Text=""></asp:Label>

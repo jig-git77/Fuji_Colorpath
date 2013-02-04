@@ -172,7 +172,11 @@ namespace Fuji.Common
             GRACoL = 1,
             SWOP_5 = 2,
             SWOP_3 = 3,
-            PSO_12647_2 = 4
+            PSO_12647_2 = 4,
+            PSO_Uncoated = 5,
+            Fogra_45 = 6,
+            ISO_P3_Web = 7,
+ 
         }
 
         //public enum SyncMeasurementDeviceType

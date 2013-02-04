@@ -607,7 +607,7 @@ public partial class SyncDetail : PageBase
                 TxtProjectName.Text = DT_SyncPressRun.Rows[0]["ProjectName"].ToString();
                 lblProjectHeader.Text = "Project Information";
                 TxtProjectName.Enabled = false;
-                ddlMeasurentDeviceType.Enabled = false;
+                ddlMeasurentDeviceType.Enabled = true;
 
                 DDLProjectType.SelectedValue = DT_SyncPressRun.Rows[0]["ProjectTypeID"].ToString();
                 DDLOutputType.SelectedValue = DT_SyncPressRun.Rows[0]["OutputTypeID"].ToString();
@@ -3448,7 +3448,7 @@ public partial class SyncDetail : PageBase
                 }
                 else
                 {
-                    DTCPSyncPrintStandardType.DefaultView.RowFilter = "(PrintStandardTypeID in (" + Convert.ToInt16(Enums.PrintStandardType.PSO_12647_2).ToString() + "))";
+                    DTCPSyncPrintStandardType.DefaultView.RowFilter = "(PrintStandardTypeID in (" + Convert.ToInt16(Enums.PrintStandardType.PSO_12647_2).ToString() + "," + Convert.ToInt16(Enums.PrintStandardType.PSO_Uncoated).ToString() + "," + Convert.ToInt16(Enums.PrintStandardType.Fogra_45).ToString() + "," + Convert.ToInt16(Enums.PrintStandardType.ISO_P3_Web).ToString() + "))";
                     DV = DTCPSyncPrintStandardType.DefaultView;
                 }
                 //========== Assign the Print Standard Type list ===========//
