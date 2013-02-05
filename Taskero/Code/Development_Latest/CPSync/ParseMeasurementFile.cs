@@ -270,6 +270,8 @@ namespace CPSync
 
                     if (bOriginatorFuji)
                     {
+                        objMeasuredPatch.SampleID = Convert.ToInt32(Row["SampleID"]);
+                        objMeasuredPatch.SampleName = Convert.ToString(Row["SAMPLE_NAME"]);
                         objMeasuredPatch.Density = new SpectralDensity(Convert.ToDouble(Row["D_RED"]), Convert.ToDouble(Row["D_GREEN"]), Convert.ToDouble(Row["D_BLUE"]), Convert.ToDouble(Row["D_VIS"]));
                         objMeasuredPatch.XYZ = new CIEXYZ(Convert.ToDouble(Row["XYZ_X"]), Convert.ToDouble(Row["XYZ_Y"]), Convert.ToDouble(Row["XYZ_Z"]));
                         objMeasuredPatch.LAB = new CIELab(Convert.ToDouble(Row["LAB_L"]), Convert.ToDouble(Row["LAB_A"]), Convert.ToDouble(Row["LAB_B"]));

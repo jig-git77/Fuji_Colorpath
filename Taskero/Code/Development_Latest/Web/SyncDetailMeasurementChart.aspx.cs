@@ -819,7 +819,7 @@ public partial class SyncDetailMeasurementChart : PageBase
                 sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + _MsmtID.ToString() + "_MeasurementFile.txt");
                 sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync 1D""");
                 sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
-                sw.WriteLine(@"ILLUMINATION_NAME	""FujiFilm Colorpath Sync 1D""");
+                sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
                 sw.WriteLine(@"OBSERVER_ANGLE	""2""");
                 sw.WriteLine(@"KEYWORD	""SampleID""");
                 sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
