@@ -412,13 +412,13 @@
                                                                                                             </td>
                                                                                                             <td id="certrun" runat="server" align="right">
                                                                                                                 ReTarget based on :
-                                                                                                                <asp:DropDownList ID="ddlCertifiedProject" runat="server" CssClass="DROPDOWNLIST"
+                                                                                                                <asp:DropDownList ID="ddlCertifiedProject" runat="server" CssClass="DROPDOWNLIST" Width="300px"
                                                                                                                     AutoPostBack="True" OnSelectedIndexChanged="ddlCertifiedProject_SelectedIndexChanged">
                                                                                                                 </asp:DropDownList>
                                                                                                             </td>
                                                                                                             <td id="standardpt" runat="server" align="right">
                                                                                                                 Select Preset :
-                                                                                                                <asp:DropDownList ID="DdlStanderdsPreset" runat="server" CssClass="DROPDOWNLIST"
+                                                                                                                <asp:DropDownList ID="DdlStanderdsPreset" runat="server" CssClass="DROPDOWNLIST" Width="300px"
                                                                                                                     AutoPostBack="True" OnSelectedIndexChanged="DdlStanderdsPreset_SelectedIndexChanged">
                                                                                                                 </asp:DropDownList>
                                                                                                             </td>
@@ -2487,7 +2487,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td align="center">
-                                                                            <iframe id="FRM1" runat="server" name="FRM1" style="height: 445px; width: 100%; display: none"
+                                                                            <iframe id="FRM1" runat="server" name="FRM1" style="height: 485px; width: 100%; display: none"
                                                                                 frameborder="0" scrolling="no"></iframe>
                                                                         </td>
                                                                     </tr>
