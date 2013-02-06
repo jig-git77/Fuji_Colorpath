@@ -1124,9 +1124,38 @@ public partial class SyncDetailISOMeasurementChart : PageBase
     }
     protected void btn_Excel_Click(object sender, EventArgs e)
     {
+
+
         try
         {
-            
+            //Response.Clear();
+
+            //Response.AddHeader("content-disposition", "attachment;filename=MeasurementData.xls");
+
+            //Response.Charset = "";
+
+            //// If you want the option to open the Excel file without saving than
+            //// comment out the line below
+            //// Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            //Response.ContentType = "application/vnd.xls";
+
+            //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+
+            //System.Web.UI.HtmlTextWriter htmlWrite =
+            //new HtmlTextWriter(stringWrite);
+
+            //GV_MeasurementData.RenderControl(htmlWrite);
+
+            //Response.Write(stringWrite.ToString());
+
+            //Response.End();        
+            //GV_MeasurementData.ExportSettings.IgnorePaging = true;
+            //GV_MeasurementData.ExportSettings.OpenInNewWindow = true;
+            //GV_MeasurementData.MasterTableView.ExportToExcel("vnd");
+
+            /*** implement logic to create a memoery stream and write file with data and download it ***/
+            //get the measurment data Convert.ToInt32(Request.QueryString["MeasurementID"])
 
             // ===== Create Object of CPSyncMeasurementData  ======//
             CPSyncMeasurementData objCPSyncMeasurementData = new CPSyncMeasurementData();
@@ -1142,6 +1171,10 @@ public partial class SyncDetailISOMeasurementChart : PageBase
 
                 System.IO.StreamWriter sw;
                 sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + _MsmtID.ToString() + "_MeasurementFile.txt");
+                sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync 1D""");
+                sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
+                sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
+                sw.WriteLine(@"OBSERVER_ANGLE	""2""");
                 sw.WriteLine(@"KEYWORD	""SampleID""");
                 sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
                 sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "16");

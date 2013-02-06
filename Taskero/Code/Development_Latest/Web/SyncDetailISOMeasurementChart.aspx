@@ -1032,7 +1032,7 @@
                                     <ajaxtoolkit:TabPanel ID="TabPanChart" Width="100%" runat="server" HeaderText="Patch Details">
                                         <ContentTemplate>
                                             <asp:ImageButton ID="btn_Excel" runat="server" OnClick="btn_Excel_Click" ImageUrl="~/Images/excel-icon.gif"
-                                                ToolTip="Export To Excel" />&nbsp;<asp:ImageButton ID="btn_DownloadFile" runat="server"
+                                                ToolTip="Export To CGATS" />&nbsp;<asp:ImageButton ID="btn_DownloadFile" runat="server"
                                                     OnClick="btn_DownloadFile_Click" ImageUrl="~/Images/notepad-icon.gif" ToolTip="Download File" /></br>
                                             <div style="overflow: hidden; width: 740px; height: 30px;">
                                                 <table class="MasterTable_Green gridTabContainer1_TabPanChart_GV_MeasurementISOData_ctl01"
