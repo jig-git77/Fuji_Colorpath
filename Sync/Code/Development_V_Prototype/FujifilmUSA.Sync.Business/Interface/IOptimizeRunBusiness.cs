@@ -17,5 +17,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         EOptimizeRunStatus GetLastRunStatus(int OptimizeRunID);
         bool DeleteVMeasurement(int measurementId);
         void DeleteOptimizeRunDLP(int OptimizeRunID, int ProjectID);
+        DensityCharts GetDensityChartsData(int optimizeRunID);
     }
 }

@@ -52,7 +52,7 @@ namespace FujifilmUSA.Sync.Web.Services
             return ReferenceChartData;
         }
 
-        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByOptimizeId/{optimizeRunId}")]
+        [WebInvoke(Method = "GET", UriTemplate = "GetMeasurementsByOptimizeId/{optimizeRunId}")]        
         [OperationContract]
         public List<Entity.Measurement> GetMeasurementsByOptimizeId(string optimizeRunId)
         {
@@ -98,6 +98,16 @@ namespace FujifilmUSA.Sync.Web.Services
             return presenter.DeleteVMeasurement();
         }
 
+        [WebInvoke(Method = "GET", UriTemplate = "GetDensityChartsData/{optimizeRunId}")]
+        [OperationContract]
+        public DensityCharts GetDensityChartsData(string optimizeRunId)
+        {
+            OptimizeRunId = Convert.ToInt32(optimizeRunId);
+            var presenter = new PresenterPluginDataService(this);
+            presenter.GetDensityChartsData();
+            return DensityChartsData;
+        }
+
         [WebInvoke(Method = "POST", UriTemplate = "KeepUserAlive/{username}")]
         [OperationContract]
         public bool KeepUserAlive(string username)
@@ -119,6 +129,7 @@ namespace FujifilmUSA.Sync.Web.Services
         public List<Entity.Measurement> Measurements { get; set; }
         public int MeasurementId { get; set; }
         public EReferenceChartDisType ReferenceChartDisType { get; set; }
+        public DensityCharts DensityChartsData { get; set; }
         #endregion
 
         #region IViewBase Members

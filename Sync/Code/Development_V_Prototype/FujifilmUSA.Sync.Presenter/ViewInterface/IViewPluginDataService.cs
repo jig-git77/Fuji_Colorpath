@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Measurement> Measurements { get; set; }
         int MeasurementId { get; set; }
         EReferenceChartDisType ReferenceChartDisType { get; set; }
+        DensityCharts DensityChartsData { get; set; }
     }
 }

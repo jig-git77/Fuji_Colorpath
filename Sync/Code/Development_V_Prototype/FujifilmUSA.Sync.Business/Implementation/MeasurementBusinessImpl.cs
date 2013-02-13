@@ -45,6 +45,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
                             response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+
+                            response.DcsData.Add(DataReader.ReadDouble(row, "Density_C"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "Density_M"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "Density_Y"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "Density_V"));
                         }
                     }
                 },
@@ -68,7 +73,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("CIEXYZ_Z", x.CiexyzZ),
                                                                                   new XAttribute("CIELAB_L", x.CielabL),
                                                                                   new XAttribute("CIELAB_a", x.CielabA),
-                                                                                  new XAttribute("CIELAB_b", x.CielabB)
+                                                                                  new XAttribute("CIELAB_b", x.CielabB),
+                                                                                  new XAttribute("Density_C", x.Density.Red),
+                                                                                  new XAttribute("Density_M", x.Density.Green),
+                                                                                  new XAttribute("Density_Y", x.Density.Blue),
+                                                                                  new XAttribute("Density_V", x.Density.Visual)
                                                                          )).ToList());
 
                     DataAccessFactory.

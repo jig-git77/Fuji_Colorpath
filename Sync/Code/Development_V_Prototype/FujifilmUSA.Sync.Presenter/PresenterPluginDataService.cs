@@ -61,5 +61,12 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
             return optimizeRunBusiness.DeleteVMeasurement(_viewPluginDataService.MeasurementId);
         }
+
+        public void GetDensityChartsData()
+        {
+            var optimizeRunBusiness = Business.BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.DensityChartsData = optimizeRunBusiness.GetDensityChartsData(_viewPluginDataService.OptimizeRunId);
+        }
     }
 }

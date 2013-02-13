@@ -13,6 +13,11 @@
 <script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/RGraph.common.core.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/RGraph.common.dynamic.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/RGraph.common.tooltips.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/RGraph.common.effects.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/RGraph.line.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <style type="text/css">
     .my_rectangle
     {
@@ -83,6 +88,29 @@
         document.getElementById("dummy").innerHTML =
  "<embed src=\"" + soundfile + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
     }
+
+    function createChart(chartValues, canvasId) {
+        RGraph.Reset(canvasId);
+        var line = new RGraph.Line(canvasId, chartValues.CielabB);        
+        line.Set('chart.curvy', true);
+        line.Set('chart.curvy.tickmarks', true);
+        line.Set('chart.curvy.tickmarks.fill', null);
+        line.Set('chart.curvy.tickmarks.stroke', '#aaa');
+        line.Set('chart.curvy.tickmarks.stroke.linewidth', 2);
+        line.Set('chart.curvy.tickmarks.size', 5);
+        line.Set('chart.linewidth', 3);
+        line.Set('chart.hmargin', 5);
+        line.Set('chart.xmin', 0);
+        line.Set('chart.xmax', 100);
+        line.Set('chart.ymin', 0);
+        line.Set('chart.ymax', 100);                
+        line.Set('chart.xaxispos', chartValues.XPosition);
+        line.Set('chart.yaxispos', chartValues.YPosition);
+        line.Set('chart.labels', chartValues.CielabA);        
+        line.Set('chart.tooltips', chartValues.Density);        
+        line.Set('chart.tickmarks', 'circle');
+        RGraph.Effects.Line.jQuery.Trace(line);                          
+    }    
 </script>
 <div>
     <div class="info_form">
@@ -157,6 +185,29 @@
         <div class="color_pallate_middle">
             <div id="measurementContainer">
             </div>
+        </div>
+        <div class="color_pallate_bottom">
+            &nbsp;</div>
+    </div>
+    <div id="dvDensityCharts" class="color_pallate" style="display: none;">
+        <div class="color_pallate_head">
+            <asp:Localize runat="server" Text="Density Charts" ID="locDensityCharts"></asp:Localize>              
+        </div>
+        <div class="color_pallate_middle">            
+            <table style="width: 98%; padding-top: 10px;" cellspacing="5" cellpadding="0" border="0">
+                <tr>
+                    <td style="width: 50%;"><asp:Label ID="lblCyanChart" runat="server" Text="Cyan" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsCyanChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td style="width: 50%;"><asp:Label ID="lblMagentaChart" runat="server" Text="Magenta" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsMagentaChart" width="300" height="250">[No canvas support]</canvas></td>
+                </tr>
+                <tr>
+                    <td><asp:Label ID="lblYellowChart" runat="server" Text="Yellow" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsYellowChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td><asp:Label ID="lblRedChart" runat="server" Text="Red" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsRedChart" width="300" height="250">[No canvas support]</canvas></td>
+                </tr>
+                <tr>
+                    <td><asp:Label ID="lblGreenChart" runat="server" Text="Green" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsGreenChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td><asp:Label ID="lblBlueChart" runat="server" Text="Blue" Font-Bold="true" CssClass="no_data_found"></asp:Label> <br /><canvas id="cvsBlueChart" width="300" height="250">[No canvas support]</canvas></td>
+                </tr>
+            </table>             
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
@@ -315,6 +366,39 @@
         });       
     }
 
+    function GetDensityChartsData(optimizeRunId){
+        
+        //Make ajax request...
+            jQuery.ajax({
+               type: "GET",
+            contentType: "application/json; charset=utf-8",
+            url: 'Services/PluginDataService.svc/GetDensityChartsData/' + optimizeRunId,
+            processData: false,
+            dataType: "json",
+            cache: false,
+            dataFilter:
+                function (data, type) {               
+                    var json = jQuery.parseJSON(data);                               
+                        $('#dvDensityCharts').show();
+                        createChart(json.CyanValues, 'cvsCyanChart');  
+                        createChart(json.MagentaValues, 'cvsMagentaChart');  
+                        createChart(json.YellowValues, 'cvsYellowChart');  
+                        createChart(json.RedValues, 'cvsRedChart');  
+                        createChart(json.GreenValues, 'cvsGreenChart');  
+                        createChart(json.BlueValues, 'cvsBlueChart');                            
+                },                                
+                success:
+                    function (response) {
+                       
+                    },
+                error:
+                    function (XMLHttpRequest, textStatus, errorThrown) {
+                        var jsonFault = JSON.parse(XMLHttpRequest.responseText);
+                        StopProgressBrowserWindow();
+                        MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
+                    }
+            });
+    }
 
     function saveMeasurement() {
 
@@ -417,6 +501,7 @@
                     var json = jQuery.parseJSON(data);
                 
                     if (json.length > 0) {
+                        GetDensityChartsData(jQuery("input[id$=hdOptimizeRunId]").val());
                         jQuery("input[id*='hdHasMeasurement']").val('true');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<table id ='lvMeasurement1'  cellspacing='0' cellpadding='0' border='0' class='recent_upload'><tbody></tbody></table>");
@@ -441,6 +526,7 @@
                         }                  
                     }
                     else {
+                         $('#dvDensityCharts').hide();
                         jQuery("input[id*='hdHasMeasurement']").val('false');
                         $("#measurementContainer").html("");
                         $("#measurementContainer").append("<div class='no_data_found'>" + '<%= GetResourceString("noRecordsAvailable") %>' + "</div>");

@@ -53,9 +53,12 @@
     <Compile Include="AnalyzeChart_G7.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="Density.cs" />
+    <Compile Include="DensityCharts.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
     <Compile Include="LogActivity.cs" />
+    <Compile Include="MeasurementPatchData.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
       <SubType>Code</SubType>
     </Compile>

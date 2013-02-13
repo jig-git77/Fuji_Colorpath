@@ -73,7 +73,7 @@ function XYZ(X, Y, Z) {
     this.Y = Y;
     this.Z = Z;
 }
-
+*/
 //constructor for Density object
 function Density(Red, Green, Blue, Visual) {
     this.Red = Red;
@@ -82,7 +82,6 @@ function Density(Red, Green, Blue, Visual) {
     this.Visual = Visual;
 }
 
-*/
 
 //Patch Object
 function Patch(LAB, XYZ, Density, sName) {
@@ -466,7 +465,7 @@ function refreshCanvas() {
 // This function takes the current saved chart data and uploads it to
 // the server as a json string, then pops up the result.
 function upload() {
-    saveMeasurement();
+    saveMeasurement();    
 }
 
 function OnCancel() {

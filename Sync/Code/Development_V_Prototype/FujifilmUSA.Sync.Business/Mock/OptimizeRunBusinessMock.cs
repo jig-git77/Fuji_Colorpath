@@ -63,6 +63,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+
+        public DensityCharts GetDensityChartsData(int optimizeRunID)
+        {
+          return new DensityCharts();
+        }
         #endregion
 
         #region ITaskBase Members
@@ -70,5 +75,8 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+
+        
     }
 }

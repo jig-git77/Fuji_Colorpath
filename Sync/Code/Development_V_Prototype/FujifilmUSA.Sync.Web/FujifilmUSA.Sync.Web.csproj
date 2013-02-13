@@ -205,6 +205,11 @@
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
+    <Content Include="JS\RGraph.common.core.js" />
+    <Content Include="JS\RGraph.common.dynamic.js" />
+    <Content Include="JS\RGraph.common.effects.js" />
+    <Content Include="JS\RGraph.common.tooltips.js" />
+    <Content Include="JS\RGraph.line.js" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
@@ -2131,7 +2136,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
