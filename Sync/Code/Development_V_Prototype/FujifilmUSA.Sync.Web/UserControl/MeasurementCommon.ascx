@@ -17,7 +17,8 @@
 <script src="JS/RGraph.common.dynamic.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/RGraph.common.tooltips.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/RGraph.common.effects.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<script src="JS/RGraph.line.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<%--<script src="JS/RGraph.line.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
+<script src="JS/RGraph.scatter.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <style type="text/css">
     .my_rectangle
     {
@@ -89,27 +90,58 @@
  "<embed src=\"" + soundfile + "\" hidden=\"true\" autostart=\"true\" loop=\"false\" />";
     }
 
-    function createChart(chartValues, canvasId) {
+    function createChart(chartValues, canvasId, tickColor) {
+        var dataWrapper = new Array();
+        var data = new Array();
+        var xMin = chartValues.TargetA - chartValues.ThresholdA;
+        var xMax = chartValues.TargetA + chartValues.ThresholdA;
+
+        var yMin = chartValues.TargetB - chartValues.ThresholdB;
+        var yMax = chartValues.TargetB + chartValues.ThresholdB;
+
+        var xLabelCount = chartValues.ThresholdA + 1;
+        var yLabelCount = chartValues.ThresholdB + 1;
+        data.push(chartValues.TargetA);
+        data.push(chartValues.TargetB);
+        data.push('black');
+        data.push('Series: Target, Point: ' + chartValues.TargetA.toString() + ', ' + chartValues.TargetB.toString());
+        dataWrapper.push(data);
+
+        for (var i = 0; i < chartValues.CielabB.length; i++) {
+            data = new Array();
+            data.push(chartValues.CielabA[i]);
+            data.push(chartValues.CielabB[i]);
+            data.push(tickColor);
+            data.push(chartValues.Density[i]);
+
+            dataWrapper.push(data);
+        }
         RGraph.Reset(canvasId);
-        var line = new RGraph.Line(canvasId, chartValues.CielabB);        
-        line.Set('chart.curvy', true);
-        line.Set('chart.curvy.tickmarks', true);
-        line.Set('chart.curvy.tickmarks.fill', null);
-        line.Set('chart.curvy.tickmarks.stroke', '#aaa');
-        line.Set('chart.curvy.tickmarks.stroke.linewidth', 2);
-        line.Set('chart.curvy.tickmarks.size', 5);
-        line.Set('chart.linewidth', 3);
-        line.Set('chart.hmargin', 5);
-        line.Set('chart.xmin', 0);
-        line.Set('chart.xmax', 100);
-        line.Set('chart.ymin', 0);
-        line.Set('chart.ymax', 100);                
-        line.Set('chart.xaxispos', chartValues.XPosition);
-        line.Set('chart.yaxispos', chartValues.YPosition);
-        line.Set('chart.labels', chartValues.CielabA);        
-        line.Set('chart.tooltips', chartValues.Density);        
-        line.Set('chart.tickmarks', 'circle');
-        RGraph.Effects.Line.jQuery.Trace(line);                          
+
+        var scatter = new RGraph.Scatter(canvasId, dataWrapper);
+        scatter.Set('chart.xmin', xMin);
+        scatter.Set('chart.xmax', xMax);
+        scatter.Set('chart.ymin', yMin);
+        scatter.Set('chart.ymax', yMax);
+        scatter.Set('chart.xscale', true);        
+        scatter.Set('chart.xaxispos', 'bottom');
+        scatter.Set('chart.yaxispos', 'left');
+        scatter.Set('chart.tickmarks', 'circle');
+        scatter.Set('chart.ticksize', 8);        
+        scatter.Set('chart.xscale.numlabels', xLabelCount);
+        //scatter.Set('chart.numyticks', yLabelCount);
+        scatter.Draw();
+
+
+        scatter.canvas.onmousemove = function (e) {
+            var obj = e.target.__object__;
+            var shape = obj.getShape(e);
+
+            if (!shape) {
+                RGraph.HideTooltip();
+                RGraph.Redraw();
+            }
+        }                 
     }    
 </script>
 <div>
@@ -196,15 +228,15 @@
         <div class="color_pallate_middle">            
             <table style="width: 98%; padding-top: 10px;" cellspacing="5" cellpadding="0" border="0">
                 <tr>
-                    <td style="width: 50%;"><asp:Label ID="lblCyanChart" runat="server" Text="Cyan" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsCyanChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td style="width: 50%;"><asp:Label ID="lblCyanChart" runat="server" Text="Cyan" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsCyanChart" width="300" height="250">[No canvas support]</canvas></td>                   
                     <td style="width: 50%;"><asp:Label ID="lblMagentaChart" runat="server" Text="Magenta" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsMagentaChart" width="300" height="250">[No canvas support]</canvas></td>
                 </tr>
                 <tr>
-                    <td><asp:Label ID="lblYellowChart" runat="server" Text="Yellow" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsYellowChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td><asp:Label ID="lblYellowChart" runat="server" Text="Yellow" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsYellowChart" width="300" height="250">[No canvas support]</canvas></td>                   
                     <td><asp:Label ID="lblRedChart" runat="server" Text="Red" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsRedChart" width="300" height="250">[No canvas support]</canvas></td>
                 </tr>
                 <tr>
-                    <td><asp:Label ID="lblGreenChart" runat="server" Text="Green" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsGreenChart" width="300" height="250">[No canvas support]</canvas></td>
+                    <td><asp:Label ID="lblGreenChart" runat="server" Text="Green" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsGreenChart" width="300" height="250">[No canvas support]</canvas></td>                    
                     <td><asp:Label ID="lblBlueChart" runat="server" Text="Blue" Font-Bold="true" CssClass="no_data_found"></asp:Label> <br /><canvas id="cvsBlueChart" width="300" height="250">[No canvas support]</canvas></td>
                 </tr>
             </table>             
@@ -380,12 +412,12 @@
                 function (data, type) {               
                     var json = jQuery.parseJSON(data);                               
                         $('#dvDensityCharts').show();
-                        createChart(json.CyanValues, 'cvsCyanChart');  
-                        createChart(json.MagentaValues, 'cvsMagentaChart');  
-                        createChart(json.YellowValues, 'cvsYellowChart');  
-                        createChart(json.RedValues, 'cvsRedChart');  
-                        createChart(json.GreenValues, 'cvsGreenChart');  
-                        createChart(json.BlueValues, 'cvsBlueChart');                            
+                        createChart(json.CyanValues, 'cvsCyanChart','cyan');  
+                        createChart(json.MagentaValues, 'cvsMagentaChart','magenta');  
+                        createChart(json.YellowValues, 'cvsYellowChart','yellow');  
+                        createChart(json.RedValues, 'cvsRedChart','red');  
+                        createChart(json.GreenValues, 'cvsGreenChart','green');  
+                        createChart(json.BlueValues, 'cvsBlueChart','blue');                            
                 },                                
                 success:
                     function (response) {

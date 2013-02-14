@@ -12,6 +12,9 @@ namespace FujifilmUSA.Sync.Entity
             CielabA = new List<decimal>();
             CielabB = new List<decimal>();
             Density = new List<string>();
+
+            ThresholdA = 8;
+            ThresholdB = 8;
         }
 
         public int PatchTypeId { get; set; }
@@ -20,5 +23,10 @@ namespace FujifilmUSA.Sync.Entity
         public List<string> Density { get; set; }
         public string XPosition { get; set; }
         public string YPosition { get; set; }
+
+        public decimal TargetA { get; set; }
+        public decimal TargetB { get; set; }
+        public decimal ThresholdA { get; set; }
+        public decimal ThresholdB { get; set; }
     }
 }

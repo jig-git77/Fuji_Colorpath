@@ -210,6 +210,7 @@
     <Content Include="JS\RGraph.common.effects.js" />
     <Content Include="JS\RGraph.common.tooltips.js" />
     <Content Include="JS\RGraph.line.js" />
+    <Content Include="JS\RGraph.scatter.js" />
     <Content Include="Permission.aspx" />
     <Content Include="PopupDownloadSoftware.aspx" />
     <Content Include="PopupImportMeasurements.aspx" />
@@ -2136,7 +2137,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

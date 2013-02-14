@@ -415,4 +415,22 @@ namespace FujifilmUSA.Sync.Entity
         LastFailed = 5 //Validation_Last_Failed
 
     }
+
+    public enum CPSyncColorChar
+    {
+        Density = 1,
+        DeltaE = 2,
+        DeltaE_2000 = 3,
+        DeltaF = 4,
+        L = 5,
+        a = 6,
+        b = 7,
+        DotGain_TVI = 9,
+        Gray_L_Target_G7 = 10,
+        Gray_a_Target_G7 = 11,
+        Gray_b_Target_G7 = 12,
+        G7_NPDC = 13,
+        DeltaH = 14,
+        DotGain_TVI_Spread = 15
+    }
 }

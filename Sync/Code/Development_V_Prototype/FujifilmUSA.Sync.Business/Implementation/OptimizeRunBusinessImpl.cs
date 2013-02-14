@@ -337,7 +337,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             if (hasNegative && hasPositive)
                 patchData.XPosition = "center";
             else if (hasNegative)
-                patchData.XPosition = "top";
+                patchData.XPosition = "center";
             else if (hasPositive)
                 patchData.XPosition = "bottom";
         }
@@ -360,48 +360,47 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     if (dsDensityValueList != null && dsDensityValueList.Tables.Count > 0 && dsDensityValueList.Tables[0].Rows.Count > 0)
                     {
-                        int patchTypeId = 0;
+                        CPPatchType patchTypeId = 0;
                         for (int i = 0; i < dsDensityValueList.Tables[0].Rows.Count; i++)
                         {
-                            
-                            patchTypeId = Convert.ToInt32(dsDensityValueList.Tables[0].Rows[i]["PatchTypeId"].ToString());
-                            
-                            if(patchTypeId == 1)//Cyan
+                            patchTypeId = (CPPatchType)Convert.ToInt32(dsDensityValueList.Tables[0].Rows[i]["PatchTypeId"].ToString());
+
+                            if (patchTypeId == CPPatchType.Cyan)//Cyan
                             {
-                                densityChartsData.CyanValues.PatchTypeId = patchTypeId;
+                                densityChartsData.CyanValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.CyanValues.Density.Add(dsDensityValueList.Tables[0].Rows[i]["Density_C"].ToString());
                                 densityChartsData.CyanValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.CyanValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
-                            else if (patchTypeId == 2)//Magenta
+                            else if (patchTypeId == CPPatchType.Magenta)//Magenta
                             {
-                                densityChartsData.MagentaValues.PatchTypeId = patchTypeId;
+                                densityChartsData.MagentaValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.MagentaValues.Density.Add(dsDensityValueList.Tables[0].Rows[i]["Density_M"].ToString());
                                 densityChartsData.MagentaValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.MagentaValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
-                            else if (patchTypeId == 3)//Yellow
+                            else if (patchTypeId == CPPatchType.Yellow)//Yellow
                             {
-                                densityChartsData.YellowValues.PatchTypeId = patchTypeId;
+                                densityChartsData.YellowValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.YellowValues.Density.Add(dsDensityValueList.Tables[0].Rows[i]["Density_Y"].ToString());
                                 densityChartsData.YellowValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.YellowValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
-                            else if (patchTypeId == 5)//Red
+                            else if (patchTypeId == CPPatchType.Overprint_Red)//Red
                             {
-                                densityChartsData.RedValues.PatchTypeId = patchTypeId;
+                                densityChartsData.RedValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.RedValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.RedValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
-                            else if (patchTypeId == 6)//Green
+                            else if (patchTypeId == CPPatchType.Overprint_Green)//Green
                             {
-                                densityChartsData.GreenValues.PatchTypeId = patchTypeId;
+                                densityChartsData.GreenValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.GreenValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.GreenValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
-                            else if (patchTypeId == 7)//Blue
+                            else if (patchTypeId == CPPatchType.Overprint_Blue)//Blue
                             {
-                                densityChartsData.BlueValues.PatchTypeId = patchTypeId;
+                                densityChartsData.BlueValues.PatchTypeId = (int)patchTypeId;
                                 densityChartsData.BlueValues.CielabA.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_a*"].ToString()));
                                 densityChartsData.BlueValues.CielabB.Add(Convert.ToDecimal(dsDensityValueList.Tables[0].Rows[i]["CIELAB_b*"].ToString()));
                             }
@@ -412,6 +411,61 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DecideXYPosition(densityChartsData.RedValues);
                         DecideXYPosition(densityChartsData.GreenValues);
                         DecideXYPosition(densityChartsData.BlueValues);
+                    }
+
+                    if (dsDensityValueList != null && dsDensityValueList.Tables.Count > 0 && dsDensityValueList.Tables[1].Rows.Count > 0)
+                    {
+                        CPPatchType patchTypeId = 0;
+                        CPSyncColorChar colorCharId = 0;
+                        decimal target = 0;
+                        for (int i = 0; i < dsDensityValueList.Tables[1].Rows.Count; i++)
+                        {
+                            patchTypeId = (CPPatchType)Convert.ToInt32(dsDensityValueList.Tables[1].Rows[i]["PatchTypeId"].ToString());
+                            colorCharId = (CPSyncColorChar)Convert.ToInt32(dsDensityValueList.Tables[1].Rows[i]["ColorCharId"].ToString());
+                            target = Convert.ToDecimal(dsDensityValueList.Tables[1].Rows[i]["Target"].ToString());
+                            if (colorCharId == CPSyncColorChar.a)
+                            {
+                                switch (patchTypeId)
+                                {
+                                    case CPPatchType.Cyan: densityChartsData.CyanValues.TargetA = target;
+                                        break;
+                                    case CPPatchType.Magenta: densityChartsData.MagentaValues.TargetA = target;
+                                        break;
+                                    case CPPatchType.Yellow: densityChartsData.YellowValues.TargetA = target;
+                                        break;
+                                    case CPPatchType.Overprint_Red: densityChartsData.RedValues.TargetA = target;
+                                        break;
+                                    case CPPatchType.Overprint_Green: densityChartsData.GreenValues.TargetA = target;
+                                        break;
+                                    case CPPatchType.Overprint_Blue: densityChartsData.BlueValues.TargetA = target;
+                                        break;                                    
+                                    default:
+                                        break;
+                                }    
+                            }
+
+                            if (colorCharId == CPSyncColorChar.b)
+                            {
+                                switch (patchTypeId)
+                                {
+                                    case CPPatchType.Cyan: densityChartsData.CyanValues.TargetB = target;
+                                        break;
+                                    case CPPatchType.Magenta: densityChartsData.MagentaValues.TargetB = target;
+                                        break;
+                                    case CPPatchType.Yellow: densityChartsData.YellowValues.TargetB = target;
+                                        break;
+                                    case CPPatchType.Overprint_Red: densityChartsData.RedValues.TargetB = target;
+                                        break;
+                                    case CPPatchType.Overprint_Green: densityChartsData.GreenValues.TargetB = target;
+                                        break;
+                                    case CPPatchType.Overprint_Blue: densityChartsData.BlueValues.TargetB = target;
+                                        break;
+                                    default:
+                                        break;
+                                }    
+                            }                            
+                        }
+
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMeasurement"));
