@@ -146,7 +146,7 @@
     }
 
     
-    function createKendoChart(chartValues, dvChartId, chartTitle) { 
+    function createKendoChart(chartValues, dvChartId, chartTitle, showTooltip) { 
             var measuredPoints = new Array();
             var data = new Object();
 
@@ -195,7 +195,10 @@
                                         },
                                         {
                                             name: 'targetPoints',
-                                            data: [[chartValues.TargetA, chartValues.TargetB ]],
+                                            data: [[chartValues.TargetA, chartValues.TargetB]],
+                                            tooltip: {
+                                                visible: false
+                                            },
                                             markers: {
                                                 type: "square"
                                             }                                    
@@ -234,8 +237,8 @@
                                     axisCrossingValues: [yMin,xMin]
                                 },
                                 tooltip: {
-                                    visible: true,
-                                    template: "#= '<b>' + 'Density: ' + dataItem.Density +  #"                           
+                                    visible: showTooltip,
+                                    template: "#= '<b>' + 'Density: ' + dataItem.Density +  '</b>' #"                           
                                 }
                             });        
                 };
@@ -323,7 +326,7 @@
         </div>
         <div class="color_pallate_middle">
             <div>
-                <div style="padding: 10px 0 5px 5px;">Select graph type: &nbsp;&nbsp; <select id="cmbGraphType">
+                <div style="padding: 10px 0 5px 5px;">Select graph type: &nbsp;&nbsp; <select id="cmbGraphType" style="width: 300px;">
                                             <option value="R" selected="selected">RGraph DataViz</option>
                                             <option value="K">KendoUI DataViz</option>
                                         </select>
@@ -557,12 +560,12 @@
                         createChart(json.GreenValues, 'cvsGreenChart','green');  
                         createChart(json.BlueValues, 'cvsBlueChart','blue');    
                         
-                        createKendoChart(json.CyanValues, 'dvCyanChart','Cyan');  
-                        createKendoChart(json.MagentaValues, 'dvMagentaChart','Magenta');  
-                        createKendoChart(json.YellowValues, 'dvYellowChart','Yellow');  
-                        createKendoChart(json.RedValues, 'dvRedChart','Red');  
-                        createKendoChart(json.GreenValues, 'dvGreenChart','Green');  
-                        createKendoChart(json.BlueValues, 'dvBlueChart','Blue');  
+                        createKendoChart(json.CyanValues, 'dvCyanChart','Cyan',true);  
+                        createKendoChart(json.MagentaValues, 'dvMagentaChart','Magenta',true);  
+                        createKendoChart(json.YellowValues, 'dvYellowChart','Yellow',true);  
+                        createKendoChart(json.RedValues, 'dvRedChart','Red', false);  
+                        createKendoChart(json.GreenValues, 'dvGreenChart','Green', false);  
+                        createKendoChart(json.BlueValues, 'dvBlueChart','Blue', false);  
                         
                         $('#cmbGraphType').trigger('change'); 
                 },                                
