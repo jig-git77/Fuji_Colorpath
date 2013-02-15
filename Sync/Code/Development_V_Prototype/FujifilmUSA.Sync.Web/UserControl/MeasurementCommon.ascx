@@ -214,7 +214,7 @@
                                         format: "N0"
                                     },
                                     count: xLabelCount,
-                                    position: 'bottom'
+                                    axisCrossingValues: [xMin,yMin]
                                 },
 
                                 yAxis: {
@@ -231,7 +231,7 @@
                                         format: "N0"
                                     },
                                     count: yLabelCount,
-                                    position: 'left'
+                                    axisCrossingValues: [yMin,xMin]
                                 },
                                 tooltip: {
                                     visible: true,
@@ -323,7 +323,7 @@
         </div>
         <div class="color_pallate_middle">
             <div>
-                <div style="padding: 10px 0 5px 5px; width: 300px;">Select graph type: &nbsp;&nbsp; <select id="cmbGraphType">
+                <div style="padding: 10px 0 5px 5px;">Select graph type: &nbsp;&nbsp; <select id="cmbGraphType">
                                             <option value="R" selected="selected">RGraph DataViz</option>
                                             <option value="K">KendoUI DataViz</option>
                                         </select>
