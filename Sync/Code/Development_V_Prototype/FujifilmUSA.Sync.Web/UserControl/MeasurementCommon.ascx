@@ -17,8 +17,9 @@
 <script src="JS/RGraph.common.dynamic.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/RGraph.common.tooltips.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/RGraph.common.effects.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
-<%--<script src="JS/RGraph.line.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>--%>
 <script src="JS/RGraph.scatter.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<script src="JS/kendo.dataviz.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+<link href="CSS/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
     .my_rectangle
     {
@@ -141,8 +142,103 @@
                 RGraph.HideTooltip();
                 RGraph.Redraw();
             }
-        }                 
-    }    
+        }
+    }
+
+    
+    function createKendoChart(chartValues, dvChartId, chartTitle) { 
+            var measuredPoints = new Array();
+            var data = new Object();
+
+            var xMin = chartValues.TargetA - chartValues.ThresholdA;
+            var xMax = chartValues.TargetA + chartValues.ThresholdA;
+
+            var yMin = chartValues.TargetB - chartValues.ThresholdB;
+            var yMax = chartValues.TargetB + chartValues.ThresholdB;
+
+            var xLabelCount = chartValues.ThresholdA + 1;
+            var yLabelCount = chartValues.ThresholdB + 1;
+            
+            for (var i = 0; i < chartValues.CielabB.length; i++) {
+                data = new Object();
+                data.CielabA =chartValues.CielabA[i];
+                data.CielabB = chartValues.CielabB[i];            
+                data.Density=chartValues.Density[i];
+                measuredPoints.push(data);
+            }
+
+            $('#' + dvChartId).kendoChart({
+                          chartArea: {
+        				        width: 300,
+        				        height: 250
+    					        },
+                                theme: $(document).data("kendoSkin") || "default",
+                                title: {
+                                    text: chartTitle
+                                },
+                                legend: {                                  
+                                    visible: false
+                                },                                               
+                                dataSource: {
+                                    data: measuredPoints
+                                },
+                                seriesDefaults: {
+                                    type: "scatter"
+                                },
+                                series: [{
+                                            name: 'measuredPoints',
+                                            xField: 'CielabA',
+                                            yField: 'CielabB',
+                                            markers: {
+                                                type: "circle"
+                                            }
+                                        },
+                                        {
+                                            name: 'targetPoints',
+                                            data: [[chartValues.TargetA, chartValues.TargetB ]],
+                                            markers: {
+                                                type: "square"
+                                            }                                    
+                                        }],
+                                xAxis: {
+                                    title: 'CielabA',
+ 							        min: xMin,
+                                    labels: {
+                                        format: "N0"
+                                    },
+                                    max: xMax,
+                                    labels: {
+                                        format: "N0"
+                                    },                                                                
+                                    labels: {
+                                        format: "N0"
+                                    },
+                                    count: xLabelCount,
+                                    position: 'bottom'
+                                },
+
+                                yAxis: {
+                                    text: 'CielabB',
+ 							        min: yMin,
+                                    labels: {
+                                        format: "N0"
+                                    },
+                                    max: yMax,
+                                    labels: {
+                                        format: "N0"
+                                    },                                    
+                                    labels: {
+                                        format: "N0"
+                                    },
+                                    count: yLabelCount,
+                                    position: 'left'
+                                },
+                                tooltip: {
+                                    visible: true,
+                                    template: "#= '<b>' + 'Density: ' + dataItem.Density +  #"                           
+                                }
+                            });        
+                };
 </script>
 <div>
     <div class="info_form">
@@ -225,21 +321,47 @@
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Density Charts" ID="locDensityCharts"></asp:Localize>              
         </div>
-        <div class="color_pallate_middle">            
-            <table style="width: 98%; padding-top: 10px;" cellspacing="5" cellpadding="0" border="0">
-                <tr>
-                    <td style="width: 50%;"><asp:Label ID="lblCyanChart" runat="server" Text="Cyan" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsCyanChart" width="300" height="250">[No canvas support]</canvas></td>                   
-                    <td style="width: 50%;"><asp:Label ID="lblMagentaChart" runat="server" Text="Magenta" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsMagentaChart" width="300" height="250">[No canvas support]</canvas></td>
-                </tr>
-                <tr>
-                    <td><asp:Label ID="lblYellowChart" runat="server" Text="Yellow" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsYellowChart" width="300" height="250">[No canvas support]</canvas></td>                   
-                    <td><asp:Label ID="lblRedChart" runat="server" Text="Red" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsRedChart" width="300" height="250">[No canvas support]</canvas></td>
-                </tr>
-                <tr>
-                    <td><asp:Label ID="lblGreenChart" runat="server" Text="Green" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsGreenChart" width="300" height="250">[No canvas support]</canvas></td>                    
-                    <td><asp:Label ID="lblBlueChart" runat="server" Text="Blue" Font-Bold="true" CssClass="no_data_found"></asp:Label> <br /><canvas id="cvsBlueChart" width="300" height="250">[No canvas support]</canvas></td>
-                </tr>
-            </table>             
+        <div class="color_pallate_middle">
+            <div>
+                <div style="padding: 10px 0 5px 5px; width: 300px;">Select graph type: &nbsp;&nbsp; <select id="cmbGraphType">
+                                            <option value="R" selected="selected">RGraph DataViz</option>
+                                            <option value="K">KendoUI DataViz</option>
+                                        </select>
+                </div>
+                <div id="dvKendoUICharts" style="display: none;"><table style="width: 98%; padding-top: 10px;" cellspacing="5" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width: 50%;"><div class="chart-wrapper"><div id="dvCyanChart"></div></div></td>                   
+                            <td style="width: 50%;"><div class="chart-wrapper"><div id="dvMagentaChart"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="chart-wrapper"><div id="dvYellowChart"></div></div></td>                   
+                            <td><div class="chart-wrapper"><div id="dvRedChart"></div></div></td>
+                        </tr>
+                        <tr>
+                            <td><div class="chart-wrapper"><div id="dvGreenChart"></div></div></td>                    
+                            <td><div class="chart-wrapper"><div id="dvBlueChart"></div></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="dvRGraphCharts" style="display: none;">
+                    <table style="width: 98%; padding-top: 10px;" cellspacing="5" cellpadding="0" border="0">
+                        <tr>
+                            <td style="width: 50%;"><asp:Label ID="lblCyanChart" runat="server" Text="Cyan" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsCyanChart" width="300" height="250">[No canvas support]</canvas></td>                   
+                            <td style="width: 50%;"><asp:Label ID="lblMagentaChart" runat="server" Text="Magenta" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsMagentaChart" width="300" height="250">[No canvas support]</canvas></td>
+                        </tr>
+                        <tr>
+                            <td><asp:Label ID="lblYellowChart" runat="server" Text="Yellow" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsYellowChart" width="300" height="250">[No canvas support]</canvas></td>                   
+                            <td><asp:Label ID="lblRedChart" runat="server" Text="Red" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsRedChart" width="300" height="250">[No canvas support]</canvas></td>
+                        </tr>
+                        <tr>
+                            <td><asp:Label ID="lblGreenChart" runat="server" Text="Green" Font-Bold="true" CssClass="no_data_found"></asp:Label><br /><canvas id="cvsGreenChart" width="300" height="250">[No canvas support]</canvas></td>                    
+                            <td><asp:Label ID="lblBlueChart" runat="server" Text="Blue" Font-Bold="true" CssClass="no_data_found"></asp:Label> <br /><canvas id="cvsBlueChart" width="300" height="250">[No canvas support]</canvas></td>
+                        </tr>
+                    </table>    
+                </div>
+            </div>
+            
+                    
         </div>
         <div class="color_pallate_bottom">
             &nbsp;</div>
@@ -341,6 +463,22 @@
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val());
     }
     jQuery(document).ready(function () {   
+        
+        $('#cmbGraphType').change(function(){
+            if($('#dvDensityCharts').is(':visible'))
+            {
+                if($(this).val() == 'R')
+                {                
+                    $('#dvKendoUICharts').hide();
+                    $('#dvRGraphCharts').show();
+                }
+                else 
+                {
+                    $('#dvKendoUICharts').show();
+                    $('#dvRGraphCharts').hide();
+                }
+            }            
+        });
 
         ControlDisability(1,false,0,false,1,true);
 
@@ -417,7 +555,16 @@
                         createChart(json.YellowValues, 'cvsYellowChart','yellow');  
                         createChart(json.RedValues, 'cvsRedChart','red');  
                         createChart(json.GreenValues, 'cvsGreenChart','green');  
-                        createChart(json.BlueValues, 'cvsBlueChart','blue');                            
+                        createChart(json.BlueValues, 'cvsBlueChart','blue');    
+                        
+                        createKendoChart(json.CyanValues, 'dvCyanChart','Cyan');  
+                        createKendoChart(json.MagentaValues, 'dvMagentaChart','Magenta');  
+                        createKendoChart(json.YellowValues, 'dvYellowChart','Yellow');  
+                        createKendoChart(json.RedValues, 'dvRedChart','Red');  
+                        createKendoChart(json.GreenValues, 'dvGreenChart','Green');  
+                        createKendoChart(json.BlueValues, 'dvBlueChart','Blue');  
+                        
+                        $('#cmbGraphType').trigger('change'); 
                 },                                
                 success:
                     function (response) {
@@ -429,7 +576,7 @@
                         StopProgressBrowserWindow();
                         MeasurementDialog('<%= GetResourceString("errorCause") %>'+ jsonFault.Reason +  " " + '<%= GetResourceString("errorDetail") %>' + jsonFault.DetailedInformation, "Error");
                     }
-            });
+            });            
     }
 
     function saveMeasurement() {

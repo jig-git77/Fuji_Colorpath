@@ -98,6 +98,7 @@
     <Content Include="COTransferSiteControl.aspx" />
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
+    <Content Include="CSS\kendo.dataviz.min.css" />
     <Content Include="DownloadSoftwares.aspx" />
     <Content Include="Download\Done.wav" />
     <Content Include="Download\Error.wav" />
@@ -204,6 +205,7 @@
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
     <Content Include="JS\jquery.tools.min.js" />
+    <Content Include="JS\kendo.dataviz.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="JS\RGraph.common.core.js" />
     <Content Include="JS\RGraph.common.dynamic.js" />
@@ -2137,7 +2139,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
