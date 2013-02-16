@@ -161,7 +161,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
         //-----------Code to add all measurement patches in DB-----------------------//
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
-
+        var DensityResults = results[ind]["Density"];
+        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
         mpatch = new Patch();
         mpatch.SampleName = mychart["ReferencePatch"][ind]["SampleName"];
         mpatch.CiexyzX = XYZResults["X"].toFixed(2);
@@ -170,7 +171,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         mpatch.CielabL = LABResults["L"].toFixed(2);
         mpatch.CielabA = LABResults["A"].toFixed(2);
         mpatch.CielabB = LABResults["B"].toFixed(2);
-
+        mpatch.Density = _Density;
         MeasuredPatches.push(mpatch);
     }
 
