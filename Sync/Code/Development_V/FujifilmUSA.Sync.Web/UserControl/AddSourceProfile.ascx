@@ -42,7 +42,7 @@
                             <tr>
                                 <td align="right">
                                     <span style="font-weight:bold;"><asp:Localize runat="server" Text="Region" 
-                                        ID="locRegion" meta:resourcekey="locRegionResource1"></asp:Localize><span style="color: Red;">*</span> </span>
+                                        ID="locRegion" meta:resourcekey="locRegionResource1"></asp:Localize> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>
@@ -65,7 +65,7 @@
                                 <td align="right">
                                     <span style="font-weight:bold;"><asp:Localize runat="server" 
                                         Text="Company Name" ID="locCompanyName" 
-                                        meta:resourcekey="locCompanyNameResource1"></asp:Localize><span style="color: Red;">*</span> </span>
+                                        meta:resourcekey="locCompanyNameResource1"></asp:Localize> </span>
                                 </td>
                                 <td>
                                     <b>&nbsp;:&nbsp;</b>

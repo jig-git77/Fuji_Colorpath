@@ -125,9 +125,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbBranch.DataSource = BranchList;
                 cmbBranch.DataBind();
-            }
+            }            
             cmbBranch.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
+            
+            if (cmbBranch.Items.Count == 2)     //------If selected company has only one branch then by default select that branch and pre-populate below DeviceList automatically-----
+            {
+                cmbBranch.SelectedIndex = 1;
+            }
 
+            //-----Set branch 
             if (!Page.IsPostBack)
             {
                 if (CompanyId > 0)
