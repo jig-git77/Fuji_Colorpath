@@ -1396,7 +1396,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
             labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
             labelXML = labelXML.Replace("[Metric]", measurmentSummary.MetricTargetPresetName);
-            labelXML = labelXML.Replace("[ID]", measurmentSummary.MeasurementId.ToString());
+            labelXML = labelXML.Replace("[PrintStandard]", measurmentSummary.PrintStandardType);
             labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
             labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
