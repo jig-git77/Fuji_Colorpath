@@ -112,6 +112,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Panel panelAddProjectDescription;
         
         /// <summary>
+        /// locTargetPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locTargetPrint;
+        
+        /// <summary>
+        /// cmbPrintStandardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbPrintStandardType;
+        
+        /// <summary>
         /// locSourceProfile control.
         /// </summary>
         /// <remarks>
@@ -121,13 +139,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSourceProfile;
         
         /// <summary>
-        /// cmbSourceProfile control.
+        /// lblSourceProfileName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbSourceProfile;
+        protected global::System.Web.UI.WebControls.Label lblSourceProfileName;
         
         /// <summary>
         /// locProfileDesc control.

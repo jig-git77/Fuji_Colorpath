@@ -47,7 +47,7 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId);
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.LicenseType);
         }
 
         public void GetReferenceChartTypeImage()
@@ -104,6 +104,23 @@ namespace FujifilmUSA.Sync.Presenter
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
             _viewMeasurementSetting.ProjectId = projectBusiness.SaveProject(_viewMeasurementSetting.Project);
+        }
+
+        public void GetTargetLABList()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.ProjectTargetLABList = projectBusiness.GetProjectTargetLAB(_viewMeasurementSetting.PrintstandardTypeId, _viewMeasurementSetting.ReferenceChartTypeId, _viewMeasurementSetting.MetricTargetPresetID);
+        }
+
+        public void Create1DOptimizeRun()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            optimizeRun.Create1DOptimizeRun(
+                _viewMeasurementSetting.ProjectId,
+                Convert.ToInt32(EOptimizeRunStatus.Open),
+                DateTime.Now);
         }
     }
 }

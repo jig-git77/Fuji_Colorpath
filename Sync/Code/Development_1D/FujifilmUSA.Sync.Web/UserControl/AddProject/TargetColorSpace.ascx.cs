@@ -20,7 +20,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private const string _vsSourceProfile = "vsSourceProfile";
+        private const string _vsPrintStandardType = "vsPrintStandardType";
         private PresenterTargetColorspace _presenterTargetColorspace;
         #endregion
         public TargetColorSpace()
@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnProjectDescription.Visible = IsXmfNewProject;
-            if (ViewState[_vsSourceProfile] == null)
+            if (ViewState[_vsPrintStandardType] == null)
             {
                 BindProfileSource();
                 LoadProjectInfoFromSession();
@@ -53,21 +53,32 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
+            SessionManager.Instance.CurrentProject.PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+            {
+                PrintStandardTypeID = Convert.ToInt16(cmbPrintStandardType.SelectedValue),
+                PrintStandard = cmbPrintStandardType.SelectedItem.Text,
+                SourceProfile = new SourceProfile()
+                {
+                    SourceProfileId = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.SourceProfileId,
+                    ProfileName = lblSourceProfileName.Text
+                }
+            };
             SessionManager.Instance.CurrentProject.SourceProfile = new SourceProfile
             {
-                SourceProfileId = Convert.ToInt16(cmbSourceProfile.SelectedValue),
-                ProfileName = cmbSourceProfile.SelectedItem.Text,
+                SourceProfileId = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.SourceProfileId,
+                ProfileName = lblSourceProfileName.Text
             };
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
 
-        protected void cmbSourceProfile_SelectedIndexChanged(object sender, EventArgs e)
+        protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ViewState[_vsSourceProfile] != null)
+            if (ViewState[_vsPrintStandardType] != null)
             {
-                txtProfileDescription.Text = ((List<SourceProfile>)ViewState[_vsSourceProfile]).Single(x => x.SourceProfileId.ToString() == cmbSourceProfile.SelectedValue).ProfileDesc;
+                txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
+                lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
             }
         }
         #endregion
@@ -75,33 +86,43 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Method
         private void LoadProjectInfoFromSession()
         {
-            if (SessionManager.Instance.CurrentProject.SourceProfile != null)
+            if (SessionManager.Instance.CurrentProject.PrintStandardType != null)
             {
-                cmbSourceProfile.SelectedValue = SessionManager.Instance.CurrentProject.SourceProfile.SourceProfileId.ToString();
-                cmbSourceProfile_SelectedIndexChanged(null, null);
+                cmbPrintStandardType.SelectedValue = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID.ToString();
+                cmbPrintStandardType_SelectedIndexChanged(null, null);
                 //cmbSourceProfile.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
             }
         }
         private void BindProfileSource()
         {
-            if (ViewState[_vsSourceProfile] != null) return;
+            if (ViewState[_vsPrintStandardType] != null) return;
 
-            _presenterTargetColorspace.GetSourceProfile();
+            _presenterTargetColorspace.GetPrintStandardTypeList();
             if (!IsErrorOccured)
             {
-                cmbSourceProfile.DataValueField = "SourceProfileID";
-                cmbSourceProfile.DataTextField = "ProfileName";
-                ViewState[_vsSourceProfile] = SourceProfile;
-                cmbSourceProfile.DataSource = (List<SourceProfile>)ViewState[_vsSourceProfile];
-                cmbSourceProfile.DataBind();
-                cmbSourceProfile_SelectedIndexChanged(null, null);
+                cmbPrintStandardType.DataValueField = "PrintStandardTypeID";
+                cmbPrintStandardType.DataTextField = "PrintStandard";
+                ViewState[_vsPrintStandardType] = PrintStandardTypeList;
+                cmbPrintStandardType.DataSource = (List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType];
+                cmbPrintStandardType.DataBind();
+                cmbPrintStandardType_SelectedIndexChanged(null, null);
             }
         }
 
         #endregion
 
         #region IViewTargetColorspace Members
-        public List<SourceProfile> SourceProfile { get; set; }
+        public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
+        public bool IsSync1DType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D);
+            }
+        }
         #endregion
+
+
+
     }
 }

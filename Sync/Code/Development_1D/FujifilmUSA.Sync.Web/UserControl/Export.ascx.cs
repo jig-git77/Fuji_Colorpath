@@ -49,7 +49,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-            _presenterExport.CreateOptimizeRun();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterExport.Create1DOptimizeRun();
+            else
+                _presenterExport.CreateOptimizeRun();
             if (!IsErrorOccured)
             {
                 _presenterExport.GetProjectDetail();

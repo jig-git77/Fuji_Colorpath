@@ -185,6 +185,7 @@
 </telerik:RadWindowManager>
 <asp:HiddenField ID="hdReferenceChartDisplayType" runat="server" />
 <asp:HiddenField ID="hdIsVerification" runat="server" />
+<asp:HiddenField ID="hdLicenseType" runat="server" />
 <asp:HiddenField ID="hdOptimizeRunId" runat="server" />
 <asp:HiddenField ID="hdProjectId" runat="server" />
 <asp:HiddenField ID="hdReferenceChartTypeId" runat="server" />
@@ -350,6 +351,17 @@
                     Customer: jQuery('input[id*="txtCustomer"]').val()
                 };
             }
+            else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
+            {
+                saveMeasurementUrl="Services/PluginDataService.svc/Save1DMeasurement";
+                obj = {
+                    MeasurementName: MsmtName,
+                    MeasurementDate: MeasurementDateTime,
+                    OptimizeRunId: OptimizeRunId,
+                    ReferenceChartTypeId: ReferenceChartTypeId,
+                    MeasurementPatches: MeasuredPatches
+                };
+            }
             else
             {
                 saveMeasurementUrl="Services/PluginDataService.svc/SaveMeasurement";
@@ -400,6 +412,10 @@
         if(jQuery("input[id$=hdIsVerification]").val() == "true")
         {
             getMeasurementUrl = "Services/PluginDataService.svc/GetVMeasurementsByProjectId/" + ProjectId;
+        }
+        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
+        {
+            getMeasurementUrl = "Services/PluginDataService.svc/Get1DMeasurementsByOptimizeId/" + OptimizeRunId;
         }
         else
         {
@@ -477,6 +493,10 @@
         if(jQuery("input[id$=hdIsVerification]").val() == "true")
         {
             deleteMeasurementUrl = "Services/PluginDataService.svc/DeleteVMeasurement/" + measurementId;
+        }
+        else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
+        {
+            deleteMeasurementUrl = "Services/PluginDataService.svc/Delete1DMeasurement/" + measurementId;
         }
         else
         {

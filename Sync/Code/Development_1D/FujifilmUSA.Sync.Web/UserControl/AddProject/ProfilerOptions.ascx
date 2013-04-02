@@ -25,6 +25,11 @@
     textarea {
         resize: none;
     }
+    
+    .textwidth50
+    {
+        width: 50px;
+    }
 </style>
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
@@ -46,6 +51,10 @@
         //        var $panel = $("div[id*='panelAdvancedOptions']");
         //        $panel.slideToggle(0);
         $("div[id*='accordion']").click();
+
+        $('input[id*="txtTVI"]').each(function () {
+            $(this).numeric({ allow: '.' });
+        });
     });
 </script>
 <div class="head">
@@ -78,7 +87,7 @@
 </div>
 <div class="listDevice" style="margin-left: 10px;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
-    <table cellpadding="0" cellspacing="10" border="0" width="97%">
+    <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbOptionPreset" runat="server">
         <tr id="trListHeader" runat="server">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
@@ -453,6 +462,223 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
+                                                        </div>
+                                                        <div class="clear">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="section_small_bottom">
+                                                    &nbsp;</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </div>
+                    </div>
+                    <div class="tab_bottom">
+                        &nbsp;</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="10" border="0" width="97%" id="tbMetricPreset" runat="server">
+        <tr id="tr1" runat="server">
+            <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                    <div class="section_top">
+                        &nbsp;</div>
+                    <div class="section_middle">
+                        <div class="combopart">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left;">
+                                        <span><asp:Localize runat="server" Text="Metric Presets" 
+                                            ID="locMetricPresets"></asp:Localize></span>
+                                    </div>
+                                    <div style="float: right">                
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="pnlAddProjectDescriptionMetricPreset" Style="padding: 5px" runat="server" 
+                                BorderStyle="None">
+                                <table>
+                                    <tr>
+                                        <td style="width: 100px">
+                                            <span><asp:Localize runat="server" Text="Selected Presets:" 
+                                                ID="locMSelectedPresets"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 450px">
+                                            <asp:DropDownList ID="ddlMetricPresets" runat="server" CssClass="select" AutoPostBack="True" 
+                                                OnSelectedIndexChanged="ddlMetricPresets_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" colspan="2">
+                                            <span><asp:Localize runat="server" Text="Preset Description:" 
+                                                ID="locMPresetDescription"></asp:Localize></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:TextBox ID="txtMPresetDescription" runat="server" Width="120%" Height="100px"
+                                                TextMode="MultiLine" Enabled="False" ReadOnly="True" 
+                                                Text="This preset is best used for analog devices ……" ></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <div class="clear">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section_bottom">
+                        &nbsp;</div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                    <div class="section_top">
+                        &nbsp;</div>
+                    <div class="section_middle">
+                        <div class="combopart">
+                            <div id="dvaccordionMetric" class="header collapsibleContainerTitle">
+                                <div class="content">
+                                    <div class="text">
+                                        <div style="float: left">
+                                        </div>
+                                        <div style="float: left;">
+                                            <div id="dvimgHeader" class="expanded">
+                                                &nbsp;</div>
+                                            <label class="collapsibleContainerTitle">
+                                                <asp:Localize runat="server" Text="Advanced Options" 
+                                                ID="locAdvancedOptionsMetric"></asp:Localize></label>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <asp:Panel ID="panelAdvancedOptionsMetricPresets" Style="padding: 1px" runat="server" BorderStyle="None"
+                                Width="100%" Enabled="false">
+                                <table cellpadding="0" cellspacing="10" border="0">
+                                    <tr>
+                                        <td valign="top" style="width: 320px; padding-right: 0px;">                                            
+                                            <div style="display: block;">
+                                                <div class="section_small_top">
+                                                    &nbsp;</div>
+                                                <div class="section_small_middle" style="height: 306px">
+                                                    <div class="combopart">
+                                                        <div class="header">
+                                                            <div class="content">
+                                                                <div class="text" style="float: left">
+                                                                    <label><asp:Localize runat="server" Text="Tolerances" 
+                                                                        ID="locTolerances"></asp:Localize></label>
+                                                                </div>
+                                                                <div style="float: right">
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="dvTolerances" style="padding-left: 10px">
+                                                            <asp:ListView ID="lvTolerances" runat="server" ItemPlaceholderID="phItemTolerances">
+                                                                <LayoutTemplate>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+	                                                                    <tr>
+                                                                            <td></td>
+                                                                            <td></td>                                                                            
+                                                                        </tr>
+                                                                        <asp:PlaceHolder ID="phItemTolerances" runat="server"></asp:PlaceHolder>
+                                                                    </table>                                                                    
+                                                                </LayoutTemplate>
+                                                                <ItemTemplate>
+                                                                        <tr>
+		                                                                    <td style="width: 160px;">
+			                                                                    <asp:Label runat="server" Text='<%# Eval("MetricSumName") %>' ID="lblToleranceName"></asp:Label>
+		                                                                    </td>
+		                                                                    <td class="style4">
+			                                                                    <asp:Label runat="server" Text='<%# Eval("TargetValue") %>' ID="lblToleranceValue"></asp:Label>
+		                                                                    </td>		                                                                    
+	                                                                    </tr>
+                                                                </ItemTemplate>
+                                                            </asp:ListView>
+                                                            <br />
+                                                            <asp:CheckBox ID="chkWeightedTolerances" runat="server" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances"></asp:Label>
+                                                        </div>
+                                                        <div class="clear">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="section_small_bottom">
+                                                    &nbsp;</div>
+                                            </div>
+                                        </td>
+                                        <td valign="top" style="width: 320px;">
+                                            <div style="display: block;">
+                                                <div class="section_small_top">
+                                                    &nbsp;</div>
+                                                <div class="section_small_middle" style="height: 400px;">
+                                                    <div class="combopart">
+                                                        <div class="header">
+                                                            <div class="content">
+                                                                <div class="text" style="float: left">
+                                                                    <label><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets"></asp:Localize>
+                                                                        </label>
+                                                                </div>
+                                                                <div style="float: right">
+                                                                </div>
+                                                                <div class="clear">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="dvTVITargets" style="padding-left: 10px">
+                                                           <table cellspacing="0" cellpadding="0" border="0" width="90%">
+                                                                <tr>
+                                                                    <td>
+                                                                        <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="Cyan"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span><b><asp:Localize ID="locTVIMagenta" runat="server" Text="Magenta"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span><b><asp:Localize ID="locTVIYellow" runat="server" Text="Yellow"></asp:Localize></b></span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="Black"></asp:Localize></b></span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="lblTVI25" runat="server" Text="1/4 Tone"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="lblTVI50" runat="server" Text="Mid Tone"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><asp:Label ID="lblTVI75" runat="server" Text="3/4 Tone"></asp:Label></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                </tr>                                                                
+                                                           </table>
                                                         </div>
                                                         <div class="clear">
                                                         </div>

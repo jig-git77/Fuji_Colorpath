@@ -249,7 +249,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.None:
                             break;
                         case ELicenseType.Sync1D:
-
+                            operationImageURL = @"../Images/Sync1D.png";
                             break;
                         case ELicenseType.DLP:
                             operationImageURL = @"../Images/DLP.png";
@@ -275,7 +275,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.None:
                             break;
                         case ELicenseType.Sync1D:
-
+                            operationImageURL = @"../Images/Sync1D_Certified.png";
                             break;
                         case ELicenseType.DLP:
                             operationImageURL = @"../Images/DLP_Certified.png";

@@ -63,6 +63,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
 
         }
+
+        public bool Delete1DMeasurement(int measurementId)
+        {
+            return true;
+        }
+
+        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime)
+        {
+
+        }
         #endregion
 
         #region ITaskBase Members

@@ -5,6 +5,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewTargetColorspace : IViewBase
     {
-        List<SourceProfile> SourceProfile { get; set; }
+        List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
+        bool IsSync1DType { get; }
     }
 }

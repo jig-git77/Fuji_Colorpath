@@ -28,5 +28,13 @@ namespace FujifilmUSA.Sync.Entity
                 
         public ValidationStatus ValidationStatus { get; set; }
         public ELicenseType LicenseType { get; set; }
+
+        public bool IsWeightedTolerances { get; set; }
+        public List<CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
+        public int MetricTargetPresetId { get; set; }
+        public short ProjectTypeId { get; set; }
+        public CPSync1D.PrintStandardType PrintStandardType { get; set; }
+
+        public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
     }
 }

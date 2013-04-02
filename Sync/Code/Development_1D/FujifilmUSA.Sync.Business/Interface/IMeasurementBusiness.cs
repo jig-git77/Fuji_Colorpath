@@ -39,5 +39,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false);       
         //List<AnalyzeChart_G7> GetBlackNPDChart(int MeasurementId, bool IsVerification = false);
         //List<AnalyzeChart_G7> GetGrayNPDChart(int MeasurementId, bool IsVerification = false);
+
+        int Save1DMeasurement(Measurement measurement);
+        List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
     }
 }

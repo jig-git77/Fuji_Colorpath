@@ -69,5 +69,15 @@ namespace FujifilmUSA.Sync.Presenter
                 }
             }
         }
+
+        public void Create1DOptimizeRun()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+            optimizeRun.Create1DOptimizeRun(
+                _viewClosePrintCondition.ProjectId,
+                Convert.ToInt32(EOptimizeRunStatus.Open),
+                DateTime.Now);
+        }
     }
 }

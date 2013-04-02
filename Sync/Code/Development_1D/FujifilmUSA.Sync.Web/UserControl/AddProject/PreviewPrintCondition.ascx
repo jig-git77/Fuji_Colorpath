@@ -157,6 +157,18 @@
                                     <tr>
                                         <td class="breakWord90">
                                             <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Target Print Condition" ID="locTargetPrintCondition"></asp:Localize></span>
+                                        </td>
+                                        <td style="width: 10px;">
+                                            <span style="font-weight: bold;">:</span>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblTargetPrintCondition" runat="server" CssClass="breakWord100"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="breakWord90">
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
                                                 Text="Source Profile" ID="locSourceProfile" 
                                                 meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
                                         </td>
@@ -317,7 +329,7 @@
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">
-                        <div class="combopart">
+                        <div class="combopart" id="dvOptionPreset" runat="server">
                             <div class="header">
                                 <div class="content">
                                     <div class="text" style="float: left">
@@ -356,6 +368,49 @@
                                         <td style="padding-left: 20px;">
                                             <asp:Label ID="lblPresetDescription" runat="server" 
                                                 meta:resourcekey="lblPresetDescriptionResource1"></asp:Label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="clear">
+                            </div>
+                        </div>
+                        <div class="combopart" id="dvMetricPreset" runat="server">
+                            <div class="header">
+                                <div class="content">
+                                    <div class="text" style="float: left">
+                                        <label><asp:Localize runat="server" Text="Metric Presets" ID="locMetricPresets"></asp:Localize></label>
+                                    </div>
+                                    <div style="float: right">
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="Div3" style="padding-left: 10px">
+                                <table>
+                                    <tr style="line-height: 16px;">
+                                        <td>
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Selected Presets:" ID="locMSelectedPresets" 
+                                                meta:resourcekey="locSelectedPresetsResource1"></asp:Localize> </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 20px;">
+                                            <asp:Label ID="lblMSelectedPresets" runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="line-height: 16px;">
+                                            <span style="font-weight: bold;"><asp:Localize runat="server" 
+                                                Text="Preset Description:" ID="locMPresetDescription" 
+                                                meta:resourcekey="locPresetDescResource1"></asp:Localize> </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 20px;">
+                                            <asp:Label ID="lblMPresetDescription" runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>

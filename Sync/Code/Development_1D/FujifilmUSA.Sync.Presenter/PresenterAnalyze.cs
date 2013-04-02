@@ -108,6 +108,6 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.GrayLSummary = measurementBusiness.GetGrayLSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);      
             //_viewAnalyze.BlackNPDChart = measurementBusiness.GetBlackNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
             //_viewAnalyze.GrayNPDChart = measurementBusiness.GetGrayNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-        } 
+        }        
     }
 }

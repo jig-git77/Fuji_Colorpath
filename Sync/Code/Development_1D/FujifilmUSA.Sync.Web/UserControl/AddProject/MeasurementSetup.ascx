@@ -3,6 +3,19 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+    <style type="text/css">
+    .textwidth50
+    {
+        width: 50px;
+    }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[id*="txtPatch"]').each(function () {
+                $(this).numeric({ allow: '.', negative: true });
+            });
+        });
+    </script>
 <div class="head">
     <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
             Text="New Print Condition - Measurement Setup" ID="locNewPrintCondition" 
@@ -158,7 +171,7 @@
                                         <td valign="top">
                                           
                                         </td>
-                                        <td valign="top" style="width:45%" >
+                                        <td valign="top" style="width:45%" id="tdOptimizationChartCaption" runat="server" >
                                               <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                     </tr>
@@ -182,7 +195,7 @@
                                             </div>
                                                <asp:Image ID="imgChart" runat="server" meta:resourcekey="imgChartResource1" Width="150px" Visible="true" />                           
                                         </td>
-                                         <td valign="top" style="padding: 5px 0px 5px 0px;"  style="width:45%" >
+                                         <td valign="top" style="padding: 5px 0px 5px 0px; width:45%" id="tdOptimizationChartCombo" runat="server" >
                                               <div style="float: left;">
                                                 <asp:DropDownList ID="cmbOptimizationChart" runat="server" Width="200px" CssClass="select" AutoPostBack="true"
                                                     OnSelectedIndexChanged="cmbOptimizationChart_SelectedIndexChanged"></asp:DropDownList>
@@ -198,7 +211,7 @@
                                             </div>
                                              <asp:Image ID="imgOptimizationChart" runat="server" Width="150px" />
                                         </td>
-                                    </tr>  
+                                    </tr>                                      
                                 </table>
                             </asp:Panel>
                         </div>
@@ -207,6 +220,50 @@
                         &nbsp;</div>
                 </div>
             </td>
+        </tr>
+        <tr id="trTargetLAB" runat="server">
+           <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;</div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div class="header">
+                                    <div class="content">
+                                        <div class="text" style="float: left;">
+                                            <label><asp:Localize runat="server" Text="Colorimetric Targets" 
+                                                ID="locTargetLAB"></asp:Localize></label>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <asp:Panel ID="panel1" Style="padding: 5px" runat="server"
+                                BorderStyle="None" Enabled="false">
+                                    <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
+                                        <LayoutTemplate>
+                                            <table border="0" cellspacing="2" cellpadding="0">
+                                                <asp:PlaceHolder ID="phItems" runat="server"></asp:PlaceHolder>    
+                                            </table>                                            
+                                        </LayoutTemplate>
+                                        <ItemTemplate>
+                                            <tr>
+                                                <td style="width: 200px;"><asp:Label ID="lblPatch" runat="server" Text='<%# Eval("PatchType.Type") %>'></asp:Label>
+                                                    <asp:HiddenField ID="hdnPatchTypeId" runat="server" Value='<%# Eval("PatchType.PatchTypeId") %>' />
+                                                </td>
+                                                <td><asp:TextBox ID="txtPatchTargetL" runat="server" Text='<%# Eval("TargetL") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetA" runat="server" Text='<%# Eval("TargetA") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetB" runat="server" Text='<%# Eval("TargetB") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:ListView>
+                                </asp:Panel>
+                            </div>
+                    </div>
+                    <div class="section_bottom">
+                        &nbsp;</div>
+                </div>
+           </td> 
         </tr>
     </table>
 </div>

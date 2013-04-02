@@ -133,6 +133,8 @@
     <Content Include="Images\contant_box_haed_bt_right_Rev.png" />
     <Content Include="Images\activity-validation-rules-icon.png" />
     <Content Include="Images\activity-validation-rules.png" />
+    <Content Include="Images\Sync1D.png" />
+    <Content Include="Images\Sync1D_Certified.png" />
     <Content Include="Images\DymoPrintPreviewIcon.png" />
     <Content Include="Images\delete_icon_LeftMenu.png" />
     <Content Include="Images\DLP.png" />
@@ -201,6 +203,7 @@
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
     <Content Include="JS\jquery.tools.min.js" />

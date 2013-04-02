@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FujifilmUSA.Sync.Entity.CPSyncV
 {
+    [Serializable]
     public class MetricTargetPreset
     {
         public int MetricTargetPresetID { get; set; }
@@ -14,5 +15,6 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
         public string MetricTargetPresetDesc { get; set; }
         public string dEMethod { get; set; }
         public bool IsUsed { get; set; }
+        public short ProjectTypeId { get; set; }
     }
 }

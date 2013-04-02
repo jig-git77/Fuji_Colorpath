@@ -15,13 +15,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         #region IOptimizeRunBusiness Members
 
         public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
-        {
+        {    
             Common.ImplementBusinessLogic(
                 () =>
                 DataAccessFactory.
                     Instance.
                     ExecuteProcedure(
-                        "CPSync4D.CreateOptimizeRun",
+                        "[CPSync4D].[CreateOptimizeRun]",
                         new object[]
                             {
                                 projectId,
@@ -32,13 +32,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
-        {
+        {       
             Common.ImplementBusinessLogic(
                 () =>
                 DataAccessFactory.
                     Instance.
                     ExecuteProcedure(
-                        "CPSync4D.DeleteOptimizeRun",
+                       "[CPSync4D].[DeleteOptimizeRun]",
                         new object[]
                             {
                                 OptimizeRunID,
@@ -227,7 +227,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public bool DeleteMeasurement(int measurementId)
-        {
+        {           
             int affectedRow = 0;
             Common.ImplementBusinessLogic(
                 () =>
@@ -235,7 +235,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     affectedRow = DataAccessFactory.
                         Instance.
                         ExecuteProcedure(
-                            "CPSync4D.DeleteMeasurement",
+                            "[CPSync4D].[DeleteMeasurement]",
                             new object[]
                                     {
                                         measurementId
@@ -307,6 +307,41 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return (affectedRow > 0);
         }
 
+        public bool Delete1DMeasurement(int measurementId)
+        {
+            int affectedRow = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    affectedRow = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CPSync].[DeleteMeasurement]",
+                            new object[]
+                                    {
+                                        measurementId
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteMeasurement"));
+            return (affectedRow > 0);
+        }
+
+        public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "[CPSync].[CreateOptimizeRun]",
+                        new object[]
+                            {
+                                projectId,
+                                status,                               
+                                startDateTime
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
+        }
         #endregion
 
         #region ITaskBase Members

@@ -95,7 +95,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblRipSettings.Text = SessionManager.Instance.CurrentProject.PrintCondition.RipSettings;
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
-            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
+            lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
+            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.PrintStandardType.SourceProfile.ProfileName;
 
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
             IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
@@ -105,7 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             V_MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID;
             Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
             V_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
-
+            MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
             _presenterPreviewPrintCondition.GetPreviewPrintCondition();
             if (!IsErrorOccured)
             {
@@ -113,8 +114,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblIlluminant.Text = Data["illuminantId"];
                 lblObserver.Text = Data["observerTypeId"];
                 lblAlignmentChart.Text = Data["referenceChartTypeId"];
-                lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
-                lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+                
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                {
+                    lblMSelectedPresets.Text = Data["metricTargetPresetName"];
+                    lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
+                    dvMetricPreset.Visible = true;
+                    dvOptionPreset.Visible = false;
+                }
+                else
+                {
+                    lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
+                    lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+                    dvMetricPreset.Visible = false;
+                    dvOptionPreset.Visible = true;
+                }
+
                 imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
                 lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
                 if (Opt_ReferenceChartTypeId != 0)
@@ -179,12 +194,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public short? V_MeasurementDeviceId { get; set; }
         public short Opt_ReferenceChartTypeId { get; set; }
         public short V_ReferenceChartTypeId { get; set; }
+        public short MetricTargetPresetId { get; set; }
         #endregion
 
         #region IViewSaveWindow Members
         public byte[] ChartPreview { get; set; }
         public Project Project { get; set; }
         public int ProjectId { get; set; }
-        #endregion
+        #endregion        
     }
 }

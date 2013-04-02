@@ -44,14 +44,22 @@ textarea {
                     <table>
                         <tr>
                             <td style="width: 130px">
+                                <span><asp:Localize runat="server" Text="Target Print Condition:" ID="locTargetPrint"></asp:Localize></span>
+                            </td>
+                            <td style="width: 450px">
+                                <asp:DropDownList ID="cmbPrintStandardType" runat="server" CssClass="select" DataValueField="Key"
+                                    DataTextField="Value" OnSelectedIndexChanged="cmbPrintStandardType_SelectedIndexChanged"
+                                    AutoPostBack="True" meta:resourcekey="cmbSourceProfileResource1">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 130px">
                                 <span><asp:Localize runat="server" Text="Source Profile:" ID="locSourceProfile" 
                                     meta:resourcekey="locSourceProfileResource1"></asp:Localize></span>
                             </td>
                             <td style="width: 450px">
-                                <asp:DropDownList ID="cmbSourceProfile" runat="server" CssClass="select" DataValueField="Key"
-                                    DataTextField="Value" OnSelectedIndexChanged="cmbSourceProfile_SelectedIndexChanged"
-                                    AutoPostBack="True" meta:resourcekey="cmbSourceProfileResource1">
-                                </asp:DropDownList>
+                                <asp:Label ID="lblSourceProfileName" runat="server"></asp:Label>
                             </td>
                         </tr>
                         <tr>

@@ -36,6 +36,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsPostBack)
             {
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
+                hdLicenseType.Value = ((int)SessionManager.Instance.CurrentProject.LicenseType).ToString();
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)

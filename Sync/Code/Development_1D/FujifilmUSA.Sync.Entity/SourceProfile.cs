@@ -13,6 +13,6 @@ namespace FujifilmUSA.Sync.Entity
         public byte[] Profile { get; set; }
         public bool IsUsed { get; set; }
         public Company Company { get; set; }
-        public Region Region { get; set; }
+        public Region Region { get; set; }        
     }
 }

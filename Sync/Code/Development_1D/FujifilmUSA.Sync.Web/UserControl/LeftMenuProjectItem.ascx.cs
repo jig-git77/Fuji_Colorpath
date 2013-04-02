@@ -177,8 +177,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lnkAddRun_Click(object sender, EventArgs e)
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-
-            _presenterLeftMenuProjectItem.CreateOptimizeRun();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterLeftMenuProjectItem.Create1DOptimizeRun();
+            else
+                _presenterLeftMenuProjectItem.CreateOptimizeRun();
             if (!IsErrorOccured)
             {
                 _presenterLeftMenuProjectItem.GetProjectDetail();

@@ -92,7 +92,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 if (!IsErrorOccured)
                 {
-                    _presenterClosePrintCondition.CreateOptimizeRun();
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                        _presenterClosePrintCondition.Create1DOptimizeRun();
+                    else
+                        _presenterClosePrintCondition.CreateOptimizeRun();
                     if (!IsErrorOccured)
                     {
                         _presenterClosePrintCondition.GetProjectDetail();

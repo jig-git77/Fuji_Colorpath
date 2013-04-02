@@ -26,6 +26,13 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.SaveVMeasurement(_viewPluginDataService.Measurement);
         }
 
+        public void Save1DMeasurement()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            measurementBusiness.Save1DMeasurement(_viewPluginDataService.Measurement);
+        }
+
         public void GetReferenceChartData()
         {
             var projectBusiness = Business.BusinessFactory<IProjectBusiness>.CreateObject();
@@ -48,6 +55,13 @@ namespace FujifilmUSA.Sync.Presenter
             _viewPluginDataService.Measurements = measurementBusiness.GetVMeasurementsOnProjectId(_viewPluginDataService.ProjectId);
         }
 
+        public void Get1DMeasurementsOnRunId()
+        {
+            var measurementBusiness = Business.BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            _viewPluginDataService.Measurements = measurementBusiness.Get1DMeasurementsOnRunId(_viewPluginDataService.OptimizeRunId);
+        }
+
         public bool DeleteMeasurement()
         {
             var optimizeRunBusiness = Business.BusinessFactory<IOptimizeRunBusiness>.CreateObject();
@@ -60,6 +74,13 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = Business.BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
             return optimizeRunBusiness.DeleteVMeasurement(_viewPluginDataService.MeasurementId);
+        }
+
+        public bool Delete1DMeasurement()
+        {
+            var optimizeRunBusiness = Business.BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewPluginDataService.ErrorOccured;
+            return optimizeRunBusiness.Delete1DMeasurement(_viewPluginDataService.MeasurementId);
         }
     }
 }

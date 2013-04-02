@@ -7,5 +7,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
     {
         short DeviceFamilyId { get; set; }
         List<DeviceFamilyProfilerOption> ProfileOption { get; set; }
+        int MetricTargetPresetId { get; set; }
+        List<Entity.CPSyncV.MetricSum> MetricSumTargetValues { get; set; }
+        int PrintStandardTypeId { get; set; }
+        List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
     }
 }

@@ -19,5 +19,19 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
             _viewDeviceFamilyProfilerOption.ProfileOption = projectBusiness.GetDeviceFamilyProfilerOptionPreset(_viewDeviceFamilyProfilerOption.DeviceFamilyId);
         }
+
+        public void GetMetricSumTargetValues()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.MetricSumTargetValues = projectBusiness.GetMetricSumTargetValues(_viewDeviceFamilyProfilerOption.MetricTargetPresetId);
+        }
+
+        public void GetPrintStandardTVI()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewDeviceFamilyProfilerOption.ErrorOccured;
+            _viewDeviceFamilyProfilerOption.PrintStandardTVI = projectBusiness.GetPrintStandardTVI(_viewDeviceFamilyProfilerOption.PrintStandardTypeId);
+        }
     }
 }

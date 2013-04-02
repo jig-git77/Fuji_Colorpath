@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
-    public partial class ProfilerOptions : BaseControl, IViewDeviceFamilyProfilerOption
+    public partial class ProfilerOptions : BaseControl, IViewDeviceFamilyProfilerOption, IViewMeasurementSetting
     {
         #region "Declaration"
         public bool IsXmfNewProject
@@ -22,8 +22,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         private const string _vsDeviceFamilyProfilerOption = "vsDeviceFamilyProfilerOption";
+        private const string _vsDeviceFamilyMetricPresetOption = "vsDeviceFamilyMetricPresetOption";
         private const string _vsProfileRendering = "vsProfileRendering";
+        private const string _vsMetricTargetPreset = "vsMetricTargetPreset";
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
+        private PresenterMeasurementSetting _presenterMeasurementSetting;
         #endregion
         public ProfilerOptions()
         {
@@ -33,13 +36,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected override void OnInit(EventArgs e)
         {
             _presenterDeviceFamilyProfilerOption = new PresenterDeviceFamilyProfilerOption(this);
+            _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             lnkbtnTargetColorSpace.Visible = IsXmfNewProject;
-            BindProfileRenderings();
-            BindPresets();
-            LoadProjectInfoFromSession();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                //Sync1D
+                tbOptionPreset.Visible = false;
+                tbMetricPreset.Visible = true;
+                BindMetricPresets();
+                BindPrintStandardTVI();
+            }
+            else
+            {
+                tbOptionPreset.Visible = true;
+                tbMetricPreset.Visible = false;
+                BindProfileRenderings();
+                BindPresets();
+                LoadProjectInfoFromSession();
+            }
         }
         #endregion
 
@@ -81,6 +98,125 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //                              SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
             }
         }
+
+        private void BindMetricPresets()
+        {
+            if (ViewState[_vsMetricTargetPreset] == null)
+            {
+                _presenterMeasurementSetting.GetMetricTargetPreset();
+                if (!IsErrorOccured)
+                {
+                    ddlMetricPresets.DataValueField = "MetricTargetPresetID";
+                    ddlMetricPresets.DataTextField = "MetricTargetPresetName";
+                    ViewState[_vsMetricTargetPreset] = MetricTargetPreset;
+                    ddlMetricPresets.DataSource = MetricTargetPreset;
+                    ddlMetricPresets.DataBind();
+                    ddlMetricPresets_SelectedIndexChanged(null, null);
+                }
+            }
+        }
+        private void BindTolerances()
+        {
+            MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
+            _presenterDeviceFamilyProfilerOption.GetMetricSumTargetValues();
+            if (!IsErrorOccured)
+            {
+                lvTolerances.DataSource = MetricSumTargetValues;
+                lvTolerances.DataBind();
+            }
+        }
+
+        private void BindPrintStandardTVI()
+        {
+            PrintStandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+            _presenterDeviceFamilyProfilerOption.GetPrintStandardTVI();
+            if (!IsErrorOccured)
+            {
+                CPPatchType cpPatchType;
+                foreach (var item in PrintStandardTVI)
+                {
+                    cpPatchType = (CPPatchType)Enum.Parse(typeof(CPPatchType), item.PatchType.Type, true);
+                    switch (cpPatchType)
+                    {
+                        case CPPatchType.Cyan:
+                            txtTVI25Cyan.Text = item.TVI25.ToString();
+                            txtTVI50Cyan.Text = item.TVI50.ToString();
+                            txtTVI75Cyan.Text = item.TVI75.ToString();
+                            break;
+                        case CPPatchType.Magenta:
+                            txtTVI25Magenta.Text = item.TVI25.ToString();
+                            txtTVI50Magenta.Text = item.TVI50.ToString();
+                            txtTVI75Magenta.Text = item.TVI75.ToString();
+                            break;
+                        case CPPatchType.Yellow:
+                            txtTVI25Yellow.Text = item.TVI25.ToString();
+                            txtTVI50Yellow.Text = item.TVI50.ToString();
+                            txtTVI75Yellow.Text = item.TVI75.ToString();
+                            break;
+                        case CPPatchType.Black:
+                            txtTVI25Black.Text = item.TVI25.ToString();
+                            txtTVI50Black.Text = item.TVI50.ToString();
+                            txtTVI75Black.Text = item.TVI75.ToString();
+                            break;
+                        case CPPatchType.Overprint_Red:
+                            break;
+                        case CPPatchType.Overprint_Green:
+                            break;
+                        case CPPatchType.Overprint_Blue:
+                            break;
+                        case CPPatchType.Paper:
+                            break;
+                        case CPPatchType.Triplet_Solid_Gray:
+                            break;
+                        case CPPatchType.Gray_C_M_Y:
+                            break;
+                        case CPPatchType.Other:
+                            break;
+                        case CPPatchType.Cyan_Tint:
+                            break;
+                        case CPPatchType.Magenta_Tint:
+                            break;
+                        case CPPatchType.Yellow_Tint:
+                            break;
+                        case CPPatchType.Black_Tint:
+                            break;
+                        case CPPatchType.Cyan_Quarter_Tone:
+                            break;
+                        case CPPatchType.Cyan_Half_Tone:
+                            break;
+                        case CPPatchType.Cyan_Three_Quarter_Tone:
+                            break;
+                        case CPPatchType.Magenta_Quarter_Tone:
+                            break;
+                        case CPPatchType.Magenta_Half_Tone:
+                            break;
+                        case CPPatchType.Magenta_Three_Quarter_Tone:
+                            break;
+                        case CPPatchType.Yellow_Quarter_Tone:
+                            break;
+                        case CPPatchType.Yellow_Half_Tone:
+                            break;
+                        case CPPatchType.Yellow_Three_Quarter_Tone:
+                            break;
+                        case CPPatchType.Black_Quarter_Tone:
+                            break;
+                        case CPPatchType.Black_Half_Tone:
+                            break;
+                        case CPPatchType.Black_Three_Quarter_Tone:
+                            break;
+                        case CPPatchType.Gray_25:
+                            break;
+                        case CPPatchType.Gray_50:
+                            break;
+                        case CPPatchType.Gray_75:
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Control Events
@@ -235,6 +371,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void ddlMetricPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClearMetricPresetAdvancedOptionsControls();
+            if (ViewState[_vsMetricTargetPreset] != null)
+            {
+                txtMPresetDescription.Text = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(ddlMetricPresets.SelectedValue)).Select(c => c.MetricTargetPresetDesc).FirstOrDefault();
+                BindTolerances();
+            }
+        }
+
         protected void lnkbtnTargetColorSpace_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.TargetColorSpace;
@@ -243,25 +389,94 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lnkbtnProfilerOptions_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
-            SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
-            var familyPreset =
-                ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
-                    x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
-            familyPreset.ProfilerOptionPresets.ForEach(x =>
-                                                       SessionManager.Instance.CurrentProject.ProjectOption.
-                                                           Add(new ProjectOption()
-                                                                   {
-                                                                       ProfileTypeId = x.ProfileTypeId,
-                                                                       ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
-                                                                       ProfilerOptionValue = x.ProfilerOptionValue,
-                                                                   }));
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {                
+                SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
+                SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
+                SessionManager.Instance.CurrentProject.ProjectTypeId = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(ddlMetricPresets.SelectedValue)).Select(c => c.ProjectTypeId).FirstOrDefault();
+                SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
+            }
+            else
+            {
+                SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId = Convert.ToInt32(cmbSelectedPresets.SelectedValue);
+                SessionManager.Instance.CurrentProject.ProjectOption = new List<ProjectOption>();
+                var familyPreset =
+                    ((List<DeviceFamilyProfilerOption>)ViewState[_vsDeviceFamilyProfilerOption]).Single(
+                        x => x.DeviceFamilyProfilerOptionId.ToString() == cmbSelectedPresets.SelectedValue);
+                familyPreset.ProfilerOptionPresets.ForEach(x =>
+                                                           SessionManager.Instance.CurrentProject.ProjectOption.
+                                                               Add(new ProjectOption()
+                                                                       {
+                                                                           ProfileTypeId = x.ProfileTypeId,
+                                                                           ProfilerOptionId = x.ProfilerOption.ProfilerOptionId,
+                                                                           ProfilerOptionValue = x.ProfilerOptionValue,
+                                                                       }));
+            }
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
         #endregion
 
         #region Methods
+
+        private List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVIList()
+        {
+            List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Cyan,
+                    Type = CPPatchType.Cyan.ToString()
+
+                },
+                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim()))
+            });
+
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta,
+                    Type = CPPatchType.Magenta.ToString()
+
+                },
+                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim()))
+            });
+
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow,
+                    Type = CPPatchType.Yellow.ToString()
+
+                },
+                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim()))
+            });
+
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black,
+                    Type = CPPatchType.Black.ToString()
+
+                },
+                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim()))
+            });
+
+            return printStandardTVIList;
+        }
+
         private void ClearAdvancedOptionsControls()
         {
             cmbRendering.SelectedValue = "0";
@@ -296,11 +511,109 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rdsRange.Value = rdsRange.MinimumValue;
             txtRange.Text = string.Empty;
         }
+
+        private void ClearMetricPresetAdvancedOptionsControls()
+        {
+
+        }
         #endregion
 
         #region IViewDeviceFamilyProfilerOption Members
         public short DeviceFamilyId { get; set; }
         public List<DeviceFamilyProfilerOption> ProfileOption { get; set; }
+        public int MetricTargetPresetId { get; set; }
+        public List<Entity.CPSyncV.MetricSum> MetricSumTargetValues { get; set; }
+        public int PrintStandardTypeId { get; set; }
+        public List<Entity.CPSync1D.PrintStandardTVI> PrintStandardTVI { get; set; }
         #endregion
+
+        #region IViewMeasurementSetting Members
+        public List<Illuminant> Illumin
+        {
+            get;
+            set;
+        }
+
+        public List<ObserverType> Observer
+        {
+            get;
+            set;
+        }
+
+        public int DeviceId
+        {
+            get;
+            set;
+        }
+
+        public List<MeasurementDevice> MeasurementDevices
+        {
+            get;
+            set;
+        }
+
+        public int MeasurementDeviceId
+        {
+            get;
+            set;
+        }
+
+        public List<ReferenceChartType> ReferenceChartType
+        {
+            get;
+            set;
+        }
+
+        public short ReferenceChartTypeId
+        {
+            get;
+            set;
+        }
+
+        public byte[] ReferenceChartTypeImage
+        {
+            get;
+            set;
+        }
+
+        public int ProjectId
+        {
+            get;
+            set;
+        }
+
+        public Project Project
+        {
+            get;
+            set;
+        }
+
+        public int ChartDisplayType
+        {
+            get;
+            set;
+        }
+
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset
+        {
+            get;
+            set;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+
+        public int PrintstandardTypeId { get; set; }
+
+        public int MetricTargetPresetID { get; set; }
+
+        public ELicenseType LicenseType
+        {
+            get
+            {
+                return SessionManager.Instance.CurrentProject.LicenseType;
+            }
+        }
+        #endregion
+
     }
 }

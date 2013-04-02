@@ -41,6 +41,15 @@ namespace FujifilmUSA.Sync.Web.Services
             presenter.SaveVMeasurement();
         }
 
+        [WebInvoke(Method = "POST", UriTemplate = "Save1DMeasurement")]
+        [OperationContract]
+        public void Save1DMeasurement(Entity.Measurement measurement)
+        {
+            this.Measurement = measurement;
+            var presenter = new PresenterPluginDataService(this);
+            presenter.Save1DMeasurement();
+        }
+
         [WebGet(UriTemplate = "GetReferenceChart/{projectId}/{referencechartdisplaytype}")]
         [OperationContract]
         public ReferenceChartData GetReferenceChart(string projectId, string referenceChartDisplayType)
@@ -80,6 +89,20 @@ namespace FujifilmUSA.Sync.Web.Services
             return Measurements;
         }
 
+        [WebInvoke(Method = "GET", UriTemplate = "Get1DMeasurementsByOptimizeId/{optimizeRunId}")]
+        [OperationContract]
+        public List<Entity.Measurement> Get1DMeasurementsByOptimizeId(string optimizeRunId)
+        {
+            this.OptimizeRunId = Convert.ToInt32(optimizeRunId);
+            var presenter = new PresenterPluginDataService(this);
+            presenter.Get1DMeasurementsOnRunId();
+            if (Measurements.Count == 0) //------If someone delete all measurements, and still able to go to Analyze page, then set this to false
+            {
+                FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentOptimizeRun.HasMeasurements = false;
+            }
+            return Measurements;
+        }
+
         [WebInvoke(Method = "POST", UriTemplate = "DeleteMeasurement/{measurementId}")]
         [OperationContract]
         public bool DeleteMeasurement(string measurementId)
@@ -96,6 +119,15 @@ namespace FujifilmUSA.Sync.Web.Services
             MeasurementId = Convert.ToInt32(measurementId);
             var presenter = new PresenterPluginDataService(this);
             return presenter.DeleteVMeasurement();
+        }
+
+        [WebInvoke(Method = "POST", UriTemplate = "Delete1DMeasurement/{measurementId}")]
+        [OperationContract]
+        public bool Delete1DMeasurement(string measurementId)
+        {
+            MeasurementId = Convert.ToInt32(measurementId);
+            var presenter = new PresenterPluginDataService(this);
+            return presenter.Delete1DMeasurement();
         }
 
         [WebInvoke(Method = "POST", UriTemplate = "KeepUserAlive/{username}")]

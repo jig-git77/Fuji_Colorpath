@@ -140,6 +140,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public int PrintstandardTypeId { get; set; }
+        public int MetricTargetPresetID { get; set; }
+        public ELicenseType LicenseType { get; set; }
         #endregion
 
         #region IViewBase Members
@@ -152,5 +156,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         }
 
         #endregion        
+    
     }
 }

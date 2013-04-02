@@ -43,5 +43,12 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewExport.ErrorOccured;
             _viewExport.Project = projectBusiness.GetProjectDetail(_viewExport.ProjectId);
         }
+
+        public void Create1DOptimizeRun()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewExport.ErrorOccured;
+            optimizeRunBusiness.Create1DOptimizeRun(_viewExport.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
+        }
     }
 }

@@ -94,6 +94,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindObserverType();
                 ViewState[vsIsPostBack] = true;
                 LoadProjectInfoFromSession();
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                {
+                    trTargetLAB.Visible = false;
+                    tdOptimizationChartCaption.Visible = false;
+                    tdOptimizationChartCombo.Visible = false;
+                }
+                else
+                {
+                    trTargetLAB.Visible = false;
+                    tdOptimizationChartCaption.Visible = true;
+                    tdOptimizationChartCombo.Visible = true;
+                }
             }
         }
         #endregion
@@ -145,7 +157,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     case EOptimizeRunStatus.Closed:
                     case EOptimizeRunStatus.Certify:
                         ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                        _presenterMeasurementSetting.CreateOptimizeRun();
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                            _presenterMeasurementSetting.Create1DOptimizeRun();
+                        else
+                            _presenterMeasurementSetting.CreateOptimizeRun();
                         if (!IsErrorOccured)
                         {
                             _presenterMeasurementSetting.GetProjectDetail();
@@ -183,7 +198,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                 cmbAlignmentChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded =
                 cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
-            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
+                                                cmbAlignmentChart.SelectedItem.Text);
+                SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
+            }
+            else
+                SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
             #endregion
 
             //Set next navigation level as ValidationSetup
@@ -201,6 +224,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             DisplayChartImage();
             SetOptimizationChart();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                BindTargetLAB();
         }
 
         protected void cmbOptimizationChart_SelectedIndexChanged(object sender, EventArgs e)
@@ -210,6 +235,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #endregion
 
         #region Methods
+
+        private List<Entity.CPSync1D.ProjectTargetLAB> GetTargetLAB()
+        {
+            List<Entity.CPSync1D.ProjectTargetLAB> targetLAB = new List<Entity.CPSync1D.ProjectTargetLAB>();
+            Entity.CPSync1D.ProjectTargetLAB itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
+            foreach (ListViewDataItem item in lvTargetLAB.Items)
+            {
+                itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
+                TextBox txtPatchTargetL = item.FindControl("txtPatchTargetL") as TextBox;
+                if (txtPatchTargetL != null)
+                    itemLAB.TargetL = Convert.ToDecimal(txtPatchTargetL.Text);
+
+                TextBox txtPatchTargetA = item.FindControl("txtPatchTargetA") as TextBox;
+                if (txtPatchTargetA != null)
+                    itemLAB.TargetA = Convert.ToDecimal(txtPatchTargetA.Text);
+
+                TextBox txtPatchTargetB = item.FindControl("txtPatchTargetB") as TextBox;
+                if (txtPatchTargetB != null)
+                    itemLAB.TargetB = Convert.ToDecimal(txtPatchTargetB.Text);
+
+                HiddenField hdnPatchTypeId = item.FindControl("hdnPatchTypeId") as HiddenField;
+                if (hdnPatchTypeId != null)
+                    itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value) };
+
+                targetLAB.Add(itemLAB);
+            }
+            return targetLAB;
+        }
 
         private void LoadProjectInfoFromSession()
         {
@@ -372,7 +425,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 //Load selected chart if we are in update mode
                 cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart.Enabled = false;
-            }            
+            }
             DisplayChartImage();
             DisplayOptimizationChartImage();
             SetOptimizationChart();
@@ -411,6 +464,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void BindTargetLAB()
+        {
+            trTargetLAB.Visible = true;
+            this.PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
+            this.MetricTargetPresetID = SessionManager.Instance.CurrentProject.MetricTargetPresetId;
+            this.ReferenceChartTypeId = Convert.ToInt16(AlignmentChartSelectedValue);
+            _presenterMeasurementSetting.GetTargetLABList();
+            lvTargetLAB.DataSource = this.ProjectTargetLABList;
+            lvTargetLAB.DataBind();
+        }
+
         private void BindUVSettings()
         {
             cmbUVSettings.DataValueField = "Key";
@@ -445,6 +509,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public int PrintstandardTypeId { get; set; }
+        public int MetricTargetPresetID { get; set; }
+        public ELicenseType LicenseType { get; set; }
         #endregion
+
+
+
+
+
+
     }
 }

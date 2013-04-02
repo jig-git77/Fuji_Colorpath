@@ -13,11 +13,11 @@ namespace FujifilmUSA.Sync.Presenter
             _viewTargetColorspace = viewTargetColorspace;
         }
 
-        public void GetSourceProfile()
+        public void GetPrintStandardTypeList()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
-            _viewTargetColorspace.SourceProfile = projectBusiness.GetSourceProfileList(_viewTargetColorspace.CurrentUserId);
+            _viewTargetColorspace.PrintStandardTypeList = projectBusiness.GetPrintStandardTypeList(_viewTargetColorspace.CurrentUserId, _viewTargetColorspace.IsSync1DType);
         }
 
     }

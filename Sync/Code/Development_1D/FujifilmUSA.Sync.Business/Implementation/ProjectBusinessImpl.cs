@@ -45,9 +45,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                   SourceProfileId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "SourceProfileID"),
                                                                   ProfileName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProfileName")
                                                               },
+                                          PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                                          {
+                                              PrintStandard = DataReader.ReadString(dsProject.Tables[0].Rows[0], "PrintStandard"),
+                                              PrintStandardTypeID = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "PrintStandardTypeId"),
+                                          },
                                           DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
                                           EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
-                                          LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID")
+                                          LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
+                                          MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -213,6 +219,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                         SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
                                                                         ProfileName = DataReader.ReadString(x, "ProfileName")
                                                                     },
+                                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                                                {
+                                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
+                                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
+                                                },
                                                 CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                                                 PrintCondition =
                                                     new PrintCondition()
@@ -282,9 +293,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return projectOptions;
         }
 
-        public List<SourceProfile> GetSourceProfileList(int currentUserId)
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType)
         {
-            var dstSourceList = new List<SourceProfile>();
+            var dstSourceList = new List<Entity.CPSync1D.PrintStandardType>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -292,17 +303,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "CPSync4D.GetSourceProfileList",
-                                new object[] { currentUserId });
+                                "[CP].[GetPrintStandardTypeList]",
+                                new object[] { currentUserId, isSync1DType });
                     if (dsSourceList != null && dsSourceList.Tables.Count > 0)
                     {
                         dstSourceList = (dsSourceList.Tables[0].AsEnumerable().Select(
-                            source => new SourceProfile()
-                                          {
-                                              SourceProfileId = DataReader.ReadShort(source, "SourceProfileId"),
-                                              ProfileName = DataReader.ReadString(source, "ProfileName"),
-                                              ProfileDesc = DataReader.ReadString(source, "ProfileDesc"),
-                                          })).ToList();
+                            source => new Entity.CPSync1D.PrintStandardType()
+                            {
+                                SourceProfile = new SourceProfile()
+                                {
+                                    SourceProfileId = DataReader.ReadShort(source, "SourceProfileId"),
+                                    ProfileName = DataReader.ReadString(source, "ProfileName"),
+                                    ProfileDesc = DataReader.ReadString(source, "ProfileDesc"),
+                                },
+                                PrintStandard = DataReader.ReadString(source, "PrintStandard"),
+                                PrintStandardTypeID = DataReader.ReadShort(source, "PrintStandardTypeID")
+                            })).ToList();
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileList"));
@@ -456,7 +472,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 Common.ImplementBusinessLogic(
                     () =>
                     {
-                        var projectOptions = new XElement("ProjectOptions",
+                        var projectOptions = new XElement("ProjectOptions", "");
+                        if (project.ProjectOption != null && project.ProjectOption.Count > 0)
+                        {
+                            projectOptions = new XElement("ProjectOptions",
                                                           project.ProjectOption.
                                                               Select(x =>
                                                                      new XElement("ProjectOption",
@@ -464,13 +483,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                   new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
                                                                                   new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
                                                                          )).ToList());
+                        }
+
+                        var projectTargetTVI = new XElement("ProjectTargetTVI", "");
+                        if (project.PrintStandardTVI != null && project.PrintStandardTVI.Count > 0)
+                        {
+                            projectTargetTVI = new XElement("ProjectTargetTVI",
+                                                           project.PrintStandardTVI.
+                                                               Select(x => new XElement("TargetTVI",
+                                                                                   new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                   new XAttribute("TVI25", x.TVI25),
+                                                                                   new XAttribute("TVI50", x.TVI50),
+                                                                                   new XAttribute("TVI75", x.TVI75))).ToList());
+                        }
+
+                        var projectTargetLAB = new XElement("ProjectTargetLAB", "");
+                        if (project.ProjectTargetLAB != null && project.ProjectTargetLAB.Count > 0)
+                        {
+                            projectTargetLAB = new XElement("ProjectTargetLAB", project.ProjectTargetLAB.Select(x => new XElement("TargetLAB",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("TargetL", x.TargetL),
+                                                                                    new XAttribute("TargetA", x.TargetA),
+                                                                                    new XAttribute("TargetB", x.TargetB))).ToList());
+
+                        }
+
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure("CPSync4D.UpdateProject",
                                              new object[]
                                                  {
-                                                     project.ProjectId,
-                                                     project.SourceProfile.SourceProfileId,
+                                                     project.ProjectId,                                                     
+                                                     project.PrintStandardType.PrintStandardTypeID,
                                                      project.ProjectName,
                                                      project.PrintCondition.Media,
                                                      project.PrintCondition.Colorant,
@@ -488,7 +532,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.OptReferenceChartType.Key,
                                                      project.MeasurementSetting.VReferenceChartType.Key,
                                                      project.EnabledValidation,
-                                                     project.MeasurementSetting.MetricTargetPreset.Key
+                                                     project.MeasurementSetting.MetricTargetPreset.Key,
+                                                     projectTargetTVI.ToString(),
+                                                     project.MetricTargetPresetId,
+                                                     projectTargetLAB.ToString(),
+                                                     project.ProjectTypeId
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -502,21 +550,50 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 Common.ImplementBusinessLogic(
                     () =>
                     {
-                        var projectOptions = new XElement("ProjectOptions",
-                                                          project.ProjectOption.
-                                                              Select(x =>
-                                                                     new XElement("ProjectOption",
-                                                                                  new XAttribute("ProfileTypeID", x.ProfileTypeId),
-                                                                                  new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
-                                                                                  new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
-                                                                         )).ToList());
+                        var projectOptions = new XElement("ProjectOptions", "");
+                        if (project.ProjectOption != null && project.ProjectOption.Count > 0)
+                        {
+                            projectOptions = new XElement("ProjectOptions",
+                                                              project.ProjectOption.
+                                                                  Select(x =>
+                                                                         new XElement("ProjectOption",
+                                                                                      new XAttribute("ProfileTypeID", x.ProfileTypeId),
+                                                                                      new XAttribute("ProfilerOptionID", x.ProfilerOptionId),
+                                                                                      new XAttribute("ProfilerOptionValue", x.ProfilerOptionValue)
+                                                                             )).ToList());
+                        }
+
+                        var projectTargetTVI = new XElement("ProjectTargetTVI", "");
+                        if (project.PrintStandardTVI != null && project.PrintStandardTVI.Count > 0)
+                        {
+                            projectTargetTVI = new XElement("ProjectTargetTVI",
+                                                                project.PrintStandardTVI.
+                                                                    Select(x => new XElement("TargetTVI",
+                                                                                        new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                        new XAttribute("TVI25", x.TVI25),
+                                                                                        new XAttribute("TVI50", x.TVI50),
+                                                                                        new XAttribute("TVI75", x.TVI75))).ToList());
+                        }
+
+                        var projectTargetLAB = new XElement("ProjectTargetLAB", "");
+                        if (project.ProjectTargetLAB != null && project.ProjectTargetLAB.Count > 0)
+                        {
+                            projectTargetLAB = new XElement("ProjectTargetLAB", project.ProjectTargetLAB.Select(x => new XElement("TargetLAB",
+                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
+                                                                                    new XAttribute("TargetL", x.TargetL),
+                                                                                    new XAttribute("TargetA", x.TargetA),
+                                                                                    new XAttribute("TargetB", x.TargetB))).ToList());
+
+                        }
+
+
                         DataAccessFactory.
                             Instance.
                             ExecuteProcedure("CPSync4D.CreateProject",
                                              new List<Parameters>()
                                                  {
                                                      new Parameters() {ParameterName = "@CPDeviceID", Type = DbType.Int32, Value = project.DeviceId},
-                                                     new Parameters() {ParameterName = "@SourceProfileID", Type = DbType.Int32, Value = project.SourceProfile.SourceProfileId},
+                                                     new Parameters() {ParameterName = "@PrintStandardTypeID", Type = DbType.Int32, Value = project.PrintStandardType.PrintStandardTypeID},                                                     
                                                      new Parameters() {ParameterName = "@ProjectName", Size = 30, Type = DbType.String, Value = project.ProjectName},
                                                      new Parameters()
                                                          {
@@ -546,7 +623,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@OPTReferenceChartTypeID", Type=DbType.Int16, Value = project.MeasurementSetting.OptReferenceChartType.Key},
                                                      new Parameters() {ParameterName ="@VReferenceChartTypeID", Type=DbType.Int16,Value = project.MeasurementSetting.VReferenceChartType.Key },
                                                      new Parameters(){ ParameterName = "@EnabledValidation", Type=DbType.Boolean,Value=project.EnabledValidation},
-                                                     new Parameters() { ParameterName  = "@MetricTargetPresetID", Type = DbType.Int32, Value = project.MeasurementSetting.MetricTargetPreset.Key}
+                                                     new Parameters() { ParameterName  = "@MetricTargetPresetID", Type = DbType.Int32, Value = project.MeasurementSetting.MetricTargetPreset.Key},
+                                                     new Parameters() { ParameterName  = "@MetricTargetPresetOptionID", Type = DbType.Int16, Value = project.MetricTargetPresetId},
+                                                     new Parameters(){ ParameterName="@ProjectTargetTVI", Value = projectTargetTVI.ToString() },
+                                                     new Parameters() {ParameterName = "@ProjectTargetLAB", Value = projectTargetLAB.ToString() },
+                                                     new Parameters() { ParameterName = "@ProjectTypeId" ,Value = project.ProjectTypeId }
                                                  },
                                              new List<Parameters>()
                                                  {
@@ -807,7 +888,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return presetList;
         }
 
-        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId)
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId)
         {
             var data = new Dictionary<string, string>();
             Common.ImplementBusinessLogic(
@@ -823,7 +904,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                            deviceFamilyProfilerOptionId,
                                                                                            V_measurementDeviceId,
                                                                                            Opt_ReferenceChartTypeId,
-                                                                                           V_ReferenceChartTypeId
+                                                                                           V_ReferenceChartTypeId,
+                                                                                           metricTargetPresetId
                                                                                        });
 
                     if (dsPreviewData.Tables[0].Rows.Count > 0)
@@ -859,18 +941,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         data.Add("v_referenceChartTypeId", dsPreviewData.Tables[7].Rows[0]["ValidationChart"].ToString());
                     }
+                    if (dsPreviewData.Tables[8].Rows.Count > 0)
+                    {
+                        data.Add("metricTargetPresetName", dsPreviewData.Tables[8].Rows[0]["MetricTargetPresetName"].ToString());
+                        data.Add("metricTargetPresetDesc", dsPreviewData.Tables[8].Rows[0]["MetricTargetPresetDesc"].ToString());
+                    }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintConditionPreviewData"));
             return data;
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, ELicenseType licenseType)
         {
             List<Entity.CPSyncV.MetricTargetPreset> metricPresetList = new List<Entity.CPSyncV.MetricTargetPreset>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetMetricTargetPresetList]", new object[] { currentUserId });
+                    string procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
+
+                    if(licenseType == ELicenseType.Sync1D)
+                        procedureName = "[CPSync].[GetMetricTargetPresetList]";
+
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId });
 
                     if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
                     {
@@ -878,7 +970,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         x => new Entity.CPSyncV.MetricTargetPreset()
                         {
                             MetricTargetPresetID = DataReader.ReadInt(x, "MetricTargetPresetID"),
-                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")
+                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
+                            MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
+                            ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId")
                         }).ToList();
                     }
 
@@ -918,6 +1012,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     SourceProfileId = DataReader.ReadShort(x, "SourceProfileId"),
                                     ProfileName = DataReader.ReadString(x, "ProfileName")
                                 },
+                                PrintStandardType = new Entity.CPSync1D.PrintStandardType()
+                                {
+                                    PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
+                                    PrintStandard = DataReader.ReadString(x, "PrintStandard"),
+                                },
                                 CreateDate = DataReader.ReadDate(x, "EndDateTime"),
                                 PrintCondition =
                                     new PrintCondition()
@@ -932,7 +1031,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                DataReader.ReadInt(x, "CurrentDlpNo").ToString("000"))
                                                                : String.Format("{0} DLP{1}.icc",
                                                                DataReader.ReadString(x, "ProjectName"),
-                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00"))
+                                                               DataReader.ReadDate(x, "EndDateTime").Month.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Day.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Hour.ToString("00") + DataReader.ReadDate(x, "EndDateTime").Minute.ToString("00")),
+                                MetricTargetPresetId = DataReader.ReadInt(x, "MetricTargetPresetId")
 
                             }).ToList();
                     }
@@ -989,6 +1089,80 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return returnValue;
         }
 
+        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
+        {
+            List<Entity.CPSyncV.MetricSum> metricSumList = new List<Entity.CPSyncV.MetricSum>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetMetricSumTargetValues]", new object[] { metricTargetPresetId });
+
+                    if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
+                    {
+                        metricSumList = dsMetricTargetPresetList.Tables[0].AsEnumerable().Select(
+                        x => new Entity.CPSyncV.MetricSum()
+                        {
+                            MetricSumId = DataReader.ReadInt(x, "MetricSumId"),
+                            MetricSumName = DataReader.ReadString(x, "MetricSumName"),
+                            TargetValue = DataReader.ReadDecimal(x, "TargetValue")
+                        }).ToList();
+                    }
+
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMetricSumTargetValues"));
+            return metricSumList;
+        }
+
+        public List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId)
+        {
+            List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardTVIList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetPrintStandardTVITargets]", new object[] { printStandardTypeId });
+                    if (dsPrintStandardTVIList != null && dsPrintStandardTVIList.Tables.Count > 0)
+                    {
+                        printStandardTVIList = dsPrintStandardTVIList.Tables[0].AsEnumerable().Select(
+                            x => new Entity.CPSync1D.PrintStandardTVI()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                TVI25 = DataReader.ReadDecimal(x, "TVI25"),
+                                TVI50 = DataReader.ReadDecimal(x, "TVI50"),
+                                TVI75 = DataReader.ReadDecimal(x, "TVI75"),
+                            }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));
+            return printStandardTVIList;
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId)
+        {
+            List<Entity.CPSync1D.ProjectTargetLAB> targetLABList = new List<Entity.CPSync1D.ProjectTargetLAB>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectTargetLABList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetLABTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId, referenceChartId, metricTargetPresetId });
+                    if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
+                    {
+                        targetLABList = dsProjectTargetLABList.Tables[0].AsEnumerable().Select(
+                            x => new Entity.CPSync1D.ProjectTargetLAB()
+                            {
+                                PatchType = new PatchType()
+                                {
+                                    PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                    Type = DataReader.ReadString(x, "PatchType")
+                                },
+                                TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                                TargetA = DataReader.ReadDecimal(x, "TargetA"),
+                                TargetB = DataReader.ReadDecimal(x, "TargetB")
+                            }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTargetLAB"));
+            return targetLABList;
+        }
         #endregion
 
         #region ITaskBase Members

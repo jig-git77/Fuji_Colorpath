@@ -875,6 +875,78 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayLSummary"));
             return G7ChartDetails;
         }
+
+        public int Save1DMeasurement(Measurement measurement)
+        {
+            var outParam = new Parameters() { ParameterName = "@MeasurementID", Type = DbType.Int32 };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var measurementPatches = new XElement("MeasurementPatches",
+                                                          measurement.MeasurementPatches.
+                                                              Select(x =>
+                                                                     new XElement("MeasurementPatch",
+                                                                                  new XAttribute("SampleName", x.SampleName),
+                                                                                  new XAttribute("CIEXYZ_X", x.CiexyzX),
+                                                                                  new XAttribute("CIEXYZ_Y", x.CiexyzY),
+                                                                                  new XAttribute("CIEXYZ_Z", x.CiexyzZ),
+                                                                                  new XAttribute("CIELAB_L", x.CielabL),
+                                                                                  new XAttribute("CIELAB_a", x.CielabA),
+                                                                                  new XAttribute("CIELAB_b", x.CielabB),
+                                                                                  new XAttribute("Density_C", x.Density.Red),
+                                                                                  new XAttribute("Density_M", x.Density.Green),
+                                                                                  new XAttribute("Density_Y", x.Density.Blue),
+                                                                                  new XAttribute("Density_V", x.Density.Visual)
+                                                                         )).ToList());
+
+                    DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure("CPSync.CreateMeasurement",
+                                         new List<Parameters>()
+                                                 {
+                                                     new Parameters() {ParameterName = "@MeasurementName", Size = 50, Type = DbType.String, Value = measurement.MeasurementName},
+                                                     new Parameters() {ParameterName = "@OptimizeRunID", Type = DbType.Int32, Value = measurement.OptimizeRunId},
+                                                     new Parameters() {ParameterName = "@MeasurementDate", Type = DbType.DateTime, Value = measurement.MeasurementDate},
+                                                     new Parameters() {ParameterName = "@ReferenceChartTypeID", Type = DbType.Int16, Value = measurement.ReferenceChartTypeId},
+                                                     new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
+                                                 },
+                                         new List<Parameters>()
+                                                 {
+                                                     outParam
+                                                 });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_SaveMeasurement"));
+            return Convert.ToInt32(outParam.Value);
+        }
+
+        public List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId)
+        {
+            var measurements = new List<Measurement>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                "CPSync.GetMeasurementByOptimizeRunID",
+                                new object[] { optimizeRunId });
+                    measurements = dsMeasurements.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new Measurement()
+                        {
+                            MeasurementId = DataReader.ReadInt(x, "MeasurementID"),
+                            MeasurementName = DataReader.ReadString(x, "MeasurementName"),
+                            MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
+                            UploadDate = DataReader.ReadString(x, "MeasurementDate"),
+                            OptimizeRunId = DataReader.ReadInt(x, "OptimizeRunID"),
+                            IsUsed = DataReader.ReadBoolean(x, "IsUsed")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
+            return measurements;
+        }
         #endregion
 
         #region ITaskBase Members

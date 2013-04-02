@@ -133,6 +133,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         //{
         //    return new List<AnalyzeChart_G7>();
         //}
+
+        public int Save1DMeasurement(Measurement measurement)
+        {
+            return 0;
+        }
+
+        public List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId)
+        {
+            return new List<Measurement>();
+        }
         #endregion
 
         #region ITaskBase Members

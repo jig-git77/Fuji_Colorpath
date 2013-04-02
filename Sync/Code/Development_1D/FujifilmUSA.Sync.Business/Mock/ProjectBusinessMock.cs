@@ -28,10 +28,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new Dictionary<string, string>();
         }
-        
-        public List<SourceProfile> GetSourceProfileList(int currentUserId)
+
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardTypeList(int currentUserId, bool isSync1DType)
         {
-            return new List<SourceProfile>();
+            return new List<Entity.CPSync1D.PrintStandardType>();
         }
 
         public byte[] GetChartPreviewOnReferenceChartTypeId(short referenceChartTypeId, string source)
@@ -99,12 +99,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<ReferenceChartType>();
         }
 
-        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId)
+        public Dictionary<string, string> GetPrintConditionPreviewData(short MeasurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId)
         {
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, ELicenseType licenseType)
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
@@ -122,6 +122,20 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId)
+        {            
+            return new List<Entity.CPSyncV.MetricSum>();
+        }
+
+        public List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId)
+        {
+            return new List<Entity.CPSync1D.PrintStandardTVI>();
+        }
+
+        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId)
+        {
+            return new List<Entity.CPSync1D.ProjectTargetLAB>();
+        }
         #endregion
 
         #region ITaskBase Members
