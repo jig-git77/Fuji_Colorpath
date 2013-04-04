@@ -55,8 +55,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     hdReferenceChartDisplayType.Value = Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString();
                 }
                 hdHasMeasurement.Value = SessionManager.Instance.CurrentOptimizeRun.HasMeasurements.ToString();
-                //----------------"Import Measurements" button only available for "Ink Optimization" Project Type and only for initial 1st run--------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                //----------------"Import Measurements" button only available for "Sync4D" or "Ink Optimization" Project Type and only for initial 1st run--------------//
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP || SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                 {
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {

@@ -304,7 +304,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
                               MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
                               MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
-                              ValidationType = DataReader.ReadInt(x, "ValidationType")
+                              ValidationType = DataReader.ReadInt(x, "ValidationType"),
+                              PrintStandardType = DataReader.ReadString(x, "PrintStandard")
                           }).ToList();
                         VmeasurementSummary[0].ValidationMetrics = dsMeasurements.Tables[1].AsEnumerable().
                            Select(x => new ValidationMetrics()

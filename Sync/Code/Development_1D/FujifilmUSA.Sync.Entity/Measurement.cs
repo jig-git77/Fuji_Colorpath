@@ -21,5 +21,6 @@ namespace FujifilmUSA.Sync.Entity
         public string MeasurementStatus { get; set; }
         public string MetricTargetPresetName { get; set; }
         public int ValidationType { get; set; }
+        public string PrintStandardType { get; set; }
     }
 }

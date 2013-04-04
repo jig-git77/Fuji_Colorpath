@@ -106,7 +106,7 @@
             <asp:TextBox ID="txtPassword" runat="server" CssClass="input" onblur="javascript:blurControl(this,'Password');"
                 onfocus="javascript:focusControl(this,'Password');" Text="Password"
                 TextMode="Password" meta:resourcekey="txtPasswordResource1"></asp:TextBox>
-            <asp:DropDownList ID="ddlLanguages" runat="server" Visible="false"
+            <asp:DropDownList ID="ddlLanguages" runat="server" Visible="true"
                 meta:resourcekey="ddlLanguagesResource1"></asp:DropDownList>
             <asp:CheckBox ID="chkRememberMe" runat="server" CssClass="remember_me" 
                 Text=" Remember me!" meta:resourcekey="chkRememberMeResource1" />
