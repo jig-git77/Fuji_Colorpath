@@ -12,5 +12,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         Project Project { get; set; }
         string ProfileDescription { get; set; }
         EOptimizeRunStatus LastRunStatus { get; set; }
+        byte[] DeviceLinkProfile { get; set; }
     }
 }

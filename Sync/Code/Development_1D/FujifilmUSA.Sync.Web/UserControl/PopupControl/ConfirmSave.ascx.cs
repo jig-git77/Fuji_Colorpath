@@ -25,7 +25,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             get
             {
-                string DLPName = Hidden_ProjectName.Value + " " + GetResourceString(_recDLPText)  + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
+                string DLPName = Hidden_ProjectName.Value + " " + GetResourceString(_recDLPText) + System.DateTime.Now.Month.ToString("00") + System.DateTime.Now.Day.ToString("00") + System.DateTime.Now.Hour.ToString("00") + System.DateTime.Now.Minute.ToString("00") + ".icc";
                 return
                     (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentOptimizeRun != null)
                         ? string.Format(
@@ -101,13 +101,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            _presenterConfirmSave.GetMeasurementsOnRunId();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterConfirmSave.Get1DMeasurementsOnRunId();
+            else
+                _presenterConfirmSave.GetMeasurementsOnRunId();
             if (!IsErrorOccured)
             {
-                EndDate = System.DateTime.Now;
-                ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                {
+                    DeviceLinkProfile = SessionManager.Instance.CurrentOptimizeRun.DeviceLinkProfile;
 
-                _presenterConfirmSave.OptimizeDlp();
+                    if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
+                        _presenterConfirmSave.CreateG7AlignmentCurve();
+                    else//ISO                                                    
+                        _presenterConfirmSave.CreateISOAlignmentCurve();
+                }
+                else
+                {
+
+                    EndDate = System.DateTime.Now;
+                    ProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+
+                    _presenterConfirmSave.OptimizeDlp();
+                }
                 if (!IsErrorOccured)
                 {
                     WebLogActivityManager.LogActivity(LogActivityType.OptimizeDlp, new object[] { ProfileDescription, SessionManager.Instance.CurrentProject.ProjectId },
@@ -167,7 +183,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
         public string ProfileDescription { get; set; }
         public EOptimizeRunStatus LastRunStatus { get; set; }
+        public byte[] DeviceLinkProfile { get; set; }
         #endregion
+
+
+
 
     }
 }

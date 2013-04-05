@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0c4b91d3-52c6-4666-9620-875323aa76c0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://dev.taskero.com/Services/ColorPathSync4D_Demo/Cpsync.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CPSync.xsd" MetadataType="Schema" ID="0ff7f0c7-7eb5-4274-b447-248dd264af41" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?xsd=xsd2" />
+    <MetadataFile FileName="CPSync.wsdl" MetadataType="Wsdl" ID="af580687-466f-4b07-8af8-d893b363661e" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?wsdl" />
+    <MetadataFile FileName="CPSync1.xsd" MetadataType="Schema" ID="dac5ea48-1a88-44b5-96d2-b8b42a8f3863" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?xsd=xsd1" />
+    <MetadataFile FileName="CPSync.disco" MetadataType="Disco" ID="b42a5c09-5b4f-4214-96a2-250e0576b13d" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?disco" />
+    <MetadataFile FileName="CPSync2.xsd" MetadataType="Schema" ID="3b7258eb-344c-4b95-abe3-cf55899c1e58" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?xsd=xsd3" />
+    <MetadataFile FileName="CPSync3.xsd" MetadataType="Schema" ID="102869b6-11b5-4e2f-a34e-fb2ec5f1ca4a" SourceId="1" SourceUrl="http://dev.taskero.com/Services/ColorPathSync4D_Demo/CPSync.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

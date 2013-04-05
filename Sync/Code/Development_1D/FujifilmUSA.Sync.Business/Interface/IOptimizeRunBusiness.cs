@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Entity;
-
+using FujifilmUSA.Sync.Business.Messages;
 namespace FujifilmUSA.Sync.Business.Interface
 {
     public interface IOptimizeRunBusiness : ITaskBase
@@ -19,5 +19,10 @@ namespace FujifilmUSA.Sync.Business.Interface
         void DeleteOptimizeRunDLP(int OptimizeRunID, int ProjectID);
         bool Delete1DMeasurement(int measurementId);
         void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime);
+
+        void CreateG7AlignmentCurve(int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime);
+        void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime);
+        CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId);
+        byte[] Get1DDeviceLinkProfile(int optimizeRunId);
     }
 }

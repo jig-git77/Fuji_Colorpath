@@ -22,6 +22,11 @@ namespace FujifilmUSA.Sync.Common
         private const string _selectedBranch = "SelectedBranch";
         private const string _pageErrorMessage = "PageErrorMessage";
         private const string _projectListSession = "projectListSession";
+        private const string _curveExportView = "CurveExportView";
+        private const string _curveDeltaRefView = "CurveDeltaRefView";
+        private const string _curveDeltaPrevRunView = "CurveDeltaPrevRunView";
+        
+        
         #endregion
 
         #region Singleton
@@ -283,6 +288,54 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_projectListSession] = value;
+            }
+        }
+
+        public List<Entity.CPSync1D.OptimizeRunCurve> CurveExportView
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_curveExportView] != null)
+                {
+                    return (List<Entity.CPSync1D.OptimizeRunCurve>)HttpContext.Current.Session[_curveExportView];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_curveExportView] = value;
+            }
+        }        
+
+        public List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaRefView
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_curveDeltaRefView] != null)
+                {
+                    return (List<Entity.CPSync1D.OptimizeRunCurve>)HttpContext.Current.Session[_curveDeltaRefView];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_curveDeltaRefView] = value;
+            }
+        }
+
+        public List<Entity.CPSync1D.OptimizeRunCurve> CurveDeltaPrevRunView
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_curveDeltaPrevRunView] != null)
+                {
+                    return (List<Entity.CPSync1D.OptimizeRunCurve>)HttpContext.Current.Session[_curveDeltaPrevRunView];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_curveDeltaPrevRunView] = value;
             }
         }
 

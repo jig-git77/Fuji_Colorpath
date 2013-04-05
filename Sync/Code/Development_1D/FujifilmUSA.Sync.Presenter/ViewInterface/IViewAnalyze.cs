@@ -35,5 +35,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         DataTable dtPatchDetails { get; set; }
+
+        bool useDLP { get; set; }
+        byte[] DeviceLinkProfile { get; set; }
     }
 }

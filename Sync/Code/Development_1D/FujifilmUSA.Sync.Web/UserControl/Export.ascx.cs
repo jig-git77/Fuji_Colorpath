@@ -42,7 +42,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                 header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
-                lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);                
+                lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                {
+                    trExportViewForSync1D.Visible = true;
+                    BindCurve();
+                }
+                
             }
         }
 
@@ -68,7 +74,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void lbtnDownloadDLP_Click(object sender, EventArgs e)
         {
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-            _presenterExport.GetDeviceLinkProfile();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterExport.Get1DDeviceLinkProfile();
+            else
+                _presenterExport.GetDeviceLinkProfile();
             string DLPName = SessionManager.Instance.CurrentOptimizeRun.DlpName;
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
@@ -113,6 +122,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private void BindCurve()
+        {            
+            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;            
+            this.CurveTypeId = 5;
+            _presenterExport.GetCurveData();
+            SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
+            SessionManager.Instance.CurveDeltaRefView = this.CurveData.CurveDeltaRefView;
+            SessionManager.Instance.CurveDeltaPrevRunView = this.CurveData.CurveDeltaPrevRunView;
+            rgCurveExportView.Rebind();
+            rgCurveDeltaView.Rebind();            
+        }
+
+        protected void rgCurveExportView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+        {
+            if (SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView != null && SessionManager.Instance.CurveExportView.Count > 0)
+            {
+                rgCurveExportView.DataSource = SessionManager.Instance.CurveExportView;     
+            }
+        }
+
+        protected void rgCurveDeltaView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+        {
+            if (SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView.Count > 0)
+            {
+                rgCurveDeltaView.DataSource = SessionManager.Instance.CurveExportView;
+            }
+        }
+        
         #region IViewExport Members
         public int ProjectId { get; set; }
         public int OptimizeRunId { get; set; }
@@ -121,6 +158,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public byte[] SourceProfile { get; set; }
         public Project Project { get; set; }
         public short ReferenceChartTypeId { get; set; }
-        #endregion
+        public short CurveTypeId { get; set; }        
+        public Business.Messages.CurveDataResponse CurveData { get; set; }
+        #endregion        
+    
+
+        
     }
 }

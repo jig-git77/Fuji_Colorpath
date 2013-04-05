@@ -1,5 +1,5 @@
 ﻿using FujifilmUSA.Sync.Entity;
-
+using System.Collections.Generic;
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
     public interface IViewExport : IViewBase
@@ -11,5 +11,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         byte[] ChartPreview { get; set; }
         byte[] SourceProfile { get; set; }
         Project Project { get; set; }
+        short CurveTypeId { get; set; }
+        FujifilmUSA.Sync.Business.Messages.CurveDataResponse CurveData { get; set; }
     }
 }

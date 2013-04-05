@@ -51,6 +51,14 @@ namespace FujifilmUSA.Sync.Entity
         OptimizeDlp = 4
     }
 
+    public enum EProjectType
+    {
+        G7 = 1,
+        ISO = 2,
+        DeviceLinkProfile = 3,
+        InkOptimization = 4
+    }
+
     public enum EDensityType
     {
         DIN = 1,

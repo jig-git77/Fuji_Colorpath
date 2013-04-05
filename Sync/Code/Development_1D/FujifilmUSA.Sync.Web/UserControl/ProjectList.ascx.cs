@@ -163,7 +163,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
@@ -175,7 +175,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         btnSelect.Attributes.Add("onclick",
                                                  "javascript: return ShowClosePrintConditionWindow('" +
-                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
+                                                 project.ProjectId + "','" + Server.UrlEncode(project.ProjectName) + "','" + (int)project.LicenseType + "','" + Server.UrlEncode(project.CurrentDlpName) + "')");
                     }
                     else
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");

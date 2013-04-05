@@ -42,5 +42,7 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         int Save1DMeasurement(Measurement measurement);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
+        MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds);
+        TargetTVIDataResponse GetTargetTVIData(int projectId);
     }
 }

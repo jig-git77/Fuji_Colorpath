@@ -948,6 +948,93 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementsOnRunId"));
             return measurements;
         }
+
+        public MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds)
+        {
+            var response = new MeasurementDataResponse()
+            {
+                DcsData = new List<double>(),
+                PcsData = new List<double>(),
+                DensityData = new List<double>()
+            };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPcsDcsData = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "CPSync.GetMeasurementData",
+                            new object[]
+                                    {
+                                        String.Join(",", measurementIds)
+                                    });
+                    if (dsPcsDcsData.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dsPcsDcsData.Tables[0].Rows)
+                        {
+                            response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_X"));
+                            response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Y"));
+                            response.PcsData.Add(DataReader.ReadDouble(row, "CIEXYZ_Z"));
+
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_C"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_M"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_Y"));
+                            response.DcsData.Add(DataReader.ReadDouble(row, "CMYK_K"));
+
+                            response.DensityData.Add(DataReader.ReadDouble(row, "Density_C"));
+                            response.DensityData.Add(DataReader.ReadDouble(row, "Density_M"));
+                            response.DensityData.Add(DataReader.ReadDouble(row, "Density_Y"));
+                            response.DensityData.Add(DataReader.ReadDouble(row, "Density_V"));
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetMeasurementData"));
+            return response;
+        }
+
+        public TargetTVIDataResponse GetTargetTVIData(int projectId)
+        {
+            var response = new TargetTVIDataResponse()
+            {
+                TVI25 = "",
+                TVI50 = "",
+                TVI75 = "",
+
+            };
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsTVIData = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CPSync].[GetTVIData]",
+                            new object[]
+                                    {
+                                     projectId
+                                    });
+                    if (dsTVIData.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dsTVIData.Tables[0].Rows)
+                        {
+                            switch (DataReader.ReadInt(row, "TVI"))
+                            {
+                                case 25:
+                                    response.TVI25 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                                case 50:
+                                    response.TVI50 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                                case 75:
+                                    response.TVI75 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                            }                           
+                        }
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
+            return response;
+        }
+
         #endregion
 
         #region ITaskBase Members

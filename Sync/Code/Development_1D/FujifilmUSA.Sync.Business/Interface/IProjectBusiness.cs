@@ -34,5 +34,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId);
+        byte[] Get1DLastOptimizedDlp(int projectId);
     }
 }

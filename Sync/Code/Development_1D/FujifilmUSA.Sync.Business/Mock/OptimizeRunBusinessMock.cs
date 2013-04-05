@@ -2,7 +2,7 @@
 using FujifilmUSA.Sync.Entity;
 using System;
 using System.Collections.Generic;
-
+using FujifilmUSA.Sync.Business.Messages;
 namespace FujifilmUSA.Sync.Business.Mock
 {
     public class OptimizeRunBusinessMock : IOptimizeRunBusiness
@@ -72,6 +72,26 @@ namespace FujifilmUSA.Sync.Business.Mock
         public void Create1DOptimizeRun(int projectId, int status, DateTime startDateTime)
         {
 
+        }
+
+        public void CreateG7AlignmentCurve(int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        {
+
+        }
+
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        {
+
+        }
+
+        public CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId)
+        {
+            return new Messages.CurveDataResponse();
+        }
+
+        public byte[] Get1DDeviceLinkProfile(int optimizeRunId)
+        {
+            return new byte[1];
         }
         #endregion
 

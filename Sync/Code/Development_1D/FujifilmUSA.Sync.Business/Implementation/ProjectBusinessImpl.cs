@@ -53,7 +53,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           DeviceFamilyProfilerOptionId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "BaseDeviceFamilyProfilerOption"),
                                           EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
                                           LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
-                                          MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID")
+                                          MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
+                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -127,7 +128,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                 HasProfile = DataReader.ReadBoolean(x, "HasProfile"),
                                                 ReferenceChartType =
                                                     new KeyValuePair<short, string>(DataReader.ReadShort(x, "ReferenceChartTypeId"),
-                                                                                    DataReader.ReadString(x, "ChartName"))
+                                                                                    DataReader.ReadString(x, "ChartName")),
+                                                DeviceLinkProfile = DataReader.ReadByteArray(x,"DeviceLinkProfile")
                                             }).ToList();
 
                         if (!isVerification)
@@ -1162,6 +1164,29 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetProjectTargetLAB"));
             return targetLABList;
+        }
+
+        public byte[] Get1DLastOptimizedDlp(int projectId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CPSync.GetLastOptimizedDlp",
+                            new object[]
+                                    {
+                                        projectId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Last optimized device link profile not found for projectId: " + projectId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizedDlp"));
+            return data == DBNull.Value ? null : (byte[])data;
         }
         #endregion
 

@@ -79,5 +79,12 @@ namespace FujifilmUSA.Sync.Presenter
                 Convert.ToInt32(EOptimizeRunStatus.Open),
                 DateTime.Now);
         }
+
+        public void Get1DCurrentDeviceLinkProfile()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewClosePrintCondition.ErrorOccured;
+            _viewClosePrintCondition.CurrentDlp = projectBusiness.Get1DLastOptimizedDlp(_viewClosePrintCondition.ProjectId);
+        }
     }
 }

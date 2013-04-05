@@ -7,7 +7,8 @@ using FujifilmUSA.Sync.DataAccess;
 using System.Collections.Generic;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Business.ProfilerService;
-
+using FujifilmUSA.Sync.Business.CPSyncService;
+using FujifilmUSA.Sync.Business.Messages;
 namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class OptimizeRunBusinessImpl : IOptimizeRunBusiness
@@ -15,7 +16,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         #region IOptimizeRunBusiness Members
 
         public void CreateOptimizeRun(int projectId, int status, DateTime startDateTime)
-        {    
+        {
             Common.ImplementBusinessLogic(
                 () =>
                 DataAccessFactory.
@@ -32,7 +33,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
-        {       
+        {
             Common.ImplementBusinessLogic(
                 () =>
                 DataAccessFactory.
@@ -227,7 +228,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public bool DeleteMeasurement(int measurementId)
-        {           
+        {
             int affectedRow = 0;
             Common.ImplementBusinessLogic(
                 () =>
@@ -341,6 +342,214 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 startDateTime
                             }),
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateOptimizeRun"));
+        }
+
+        //to-do set return type
+        public void CreateG7AlignmentCurve(int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
+                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
+
+                    CPSyncClient syncClient = new CPSyncClient();
+                    Curve alignmentCurveRequest = new Curve();
+                    alignmentCurveRequest.arrDCS = new double[measurementDataResponse.DcsData.Count];
+                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrDCS[i] = measurementDataResponse.DcsData[i];
+                    }
+
+                    alignmentCurveRequest.arrPCS = new double[measurementDataResponse.PcsData.Count];
+                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrPCS[i] = measurementDataResponse.PcsData[i];
+                    }
+                    alignmentCurveRequest.arrDensity = new double[measurementDataResponse.DensityData.Count];
+                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrDensity[i] = measurementDataResponse.DensityData[i];
+                    }
+
+                    alignmentCurveRequest.UseDLP = useDLP;
+                    if (useDLP)
+                        alignmentCurveRequest.ICCProfile = dlp;
+
+                    Profile syncClientResponse = new Profile();
+                    syncClientResponse = syncClient.CreateCurve(alignmentCurveRequest);
+
+                    int n = 101;
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        CreateOptimizeRunCurve(optimizeRunId, i, Convert.ToDecimal(syncClientResponse.Cyan[i]),
+                            Convert.ToDecimal(syncClientResponse.Magenta[i]),
+                            Convert.ToDecimal(syncClientResponse.Yellow[i]),
+                            Convert.ToDecimal(syncClientResponse.Key[i]));
+                    }
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
+                                                                            new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
+        }
+
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
+                    MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
+
+                    CPSyncClient syncClient = new CPSyncClient();
+                    Curve alignmentCurveRequest = new Curve();
+                    alignmentCurveRequest.arrDCS = new double[measurementDataResponse.DcsData.Count];
+                    for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrDCS[i] = measurementDataResponse.DcsData[i];
+                    }
+
+                    alignmentCurveRequest.arrPCS = new double[measurementDataResponse.PcsData.Count];
+                    for (int i = 0; i < measurementDataResponse.PcsData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrPCS[i] = measurementDataResponse.PcsData[i];
+                    }
+                    alignmentCurveRequest.arrDensity = new double[measurementDataResponse.DensityData.Count];
+                    for (int i = 0; i < measurementDataResponse.DensityData.Count; i++)
+                    {
+                        alignmentCurveRequest.arrDensity[i] = measurementDataResponse.DensityData[i];
+                    }
+
+                    alignmentCurveRequest.UseDLP = useDLP;
+                    if (useDLP)
+                        alignmentCurveRequest.ICCProfile = dlp;
+
+                    TargetTVIDataResponse targetTVIResponse = measurementBusiness.GetTargetTVIData(projectId);
+                    alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;
+                    alignmentCurveRequest.LinearizationTVI50 = targetTVIResponse.TVI50;
+                    alignmentCurveRequest.LinearizationTVI75 = targetTVIResponse.TVI75;
+
+                    Profile syncClientResponse = new Profile();
+                    syncClientResponse = syncClient.CreateISOCurve(alignmentCurveRequest);
+
+                    int n = 101;
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        CreateOptimizeRunCurve(optimizeRunId, i, Convert.ToDecimal(syncClientResponse.Cyan[i]),
+                            Convert.ToDecimal(syncClientResponse.Magenta[i]),
+                            Convert.ToDecimal(syncClientResponse.Yellow[i]),
+                            Convert.ToDecimal(syncClientResponse.Key[i]));
+                    }
+
+                    DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
+                                                                            new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateISOAlignmentCurve"));
+        }
+
+        public void CreateOptimizeRunCurve(int optimizeRunId, int referenceNo, decimal c, decimal m, decimal y, decimal k)
+        {
+            DataAccessFactory.
+                            Instance.
+                            ExecuteProcedure(
+                                "[CPSync].[CreateOptimizeRunCurve]",
+                                new object[]
+                                    {
+                                        optimizeRunId,
+                                        referenceNo,
+                                        c,
+                                        m,
+                                        y,
+                                        k
+                                    });
+        }
+
+        public CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId)
+        {
+            CurveDataResponse curveDataResponse = new CurveDataResponse();
+            List<Entity.CPSync1D.OptimizeRunCurve> curveExportList = new List<Entity.CPSync1D.OptimizeRunCurve>();
+            List<Entity.CPSync1D.OptimizeRunCurve> curveDeltaRefList = new List<Entity.CPSync1D.OptimizeRunCurve>();
+            List<Entity.CPSync1D.OptimizeRunCurve> curveDeltaPrevRunList = new List<Entity.CPSync1D.OptimizeRunCurve>();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsOptimizeRunCurveList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetCurveData]",
+                                                                            new object[] { optimizeRunId, curveTypeId });
+                    if (dsOptimizeRunCurveList != null && dsOptimizeRunCurveList.Tables.Count > 0)
+                    {
+                        if (dsOptimizeRunCurveList.Tables.Count >= 1 && dsOptimizeRunCurveList.Tables[0].Rows.Count > 0)
+                        {
+                            curveExportList = dsOptimizeRunCurveList.Tables[0].AsEnumerable().
+                                Select(x => new Entity.CPSync1D.OptimizeRunCurve()
+                                {
+                                    ReferenceNo = DataReader.ReadShort(x, "ReferenceNo"),
+                                    CMYK_C = DataReader.ReadDecimal(x, "CMYK_C"),
+                                    CMYK_M = DataReader.ReadDecimal(x, "CMYK_M"),
+                                    CMYK_Y = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                    CMYK_K = DataReader.ReadDecimal(x, "CMYK_K")
+                                }).ToList();
+                        }
+
+                        if (dsOptimizeRunCurveList.Tables.Count >= 2 && dsOptimizeRunCurveList.Tables[1].Rows.Count > 0)
+                        {
+                            curveDeltaRefList = dsOptimizeRunCurveList.Tables[1].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.OptimizeRunCurve()
+                                    {
+                                        ReferenceNo = DataReader.ReadShort(x, "ReferenceNo"),
+                                        CMYK_C = DataReader.ReadDecimal(x, "CMYK_C"),
+                                        CMYK_M = DataReader.ReadDecimal(x, "CMYK_M"),
+                                        CMYK_Y = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                        CMYK_K = DataReader.ReadDecimal(x, "CMYK_K")
+                                    }).ToList();
+                        }
+
+                        if (dsOptimizeRunCurveList.Tables.Count >= 3 && dsOptimizeRunCurveList.Tables[2].Rows.Count > 0)
+                        {
+                            curveDeltaPrevRunList = dsOptimizeRunCurveList.Tables[2].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.OptimizeRunCurve()
+                                    {
+                                        ReferenceNo = DataReader.ReadShort(x, "ReferenceNo"),
+                                        CMYK_C = DataReader.ReadDecimal(x, "CMYK_C"),
+                                        CMYK_M = DataReader.ReadDecimal(x, "CMYK_M"),
+                                        CMYK_Y = DataReader.ReadDecimal(x, "CMYK_Y"),
+                                        CMYK_K = DataReader.ReadDecimal(x, "CMYK_K")
+                                    }).ToList();
+                        }
+                    }
+
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetExportCurveData"));
+
+            curveDataResponse.CurveExportView = curveExportList;
+            curveDataResponse.CurveDeltaRefView = curveDeltaRefList;
+            curveDataResponse.CurveDeltaPrevRunView = curveDeltaPrevRunList;
+            return curveDataResponse;
+        }
+
+        public byte[] Get1DDeviceLinkProfile(int optimizeRunId)
+        {
+            var data = new object();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    data = DataAccessFactory.
+                        Instance.
+                        GetScalar(
+                            "CPSync.GetDeviceLinkProfile",
+                            new object[]
+                                    {
+                                        optimizeRunId
+                                    });
+                    if (data == null || data == DBNull.Value)
+                    {
+                        throw new Exception("Device link profile not found for runId: " + optimizeRunId);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceLinkProfile"));
+            return data == DBNull.Value ? null : (byte[])data;
         }
         #endregion
 

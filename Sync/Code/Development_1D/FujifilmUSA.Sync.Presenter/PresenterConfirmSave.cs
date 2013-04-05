@@ -63,5 +63,41 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
             optimizeRunBusiness.Create1DOptimizeRun(_viewConfirmSave.ProjectId, Convert.ToInt32(EOptimizeRunStatus.Open), DateTime.Now);
         }
+
+        public void Get1DMeasurementsOnRunId()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            _viewConfirmSave.MeasurementIds = measurementBusiness.Get1DMeasurementsOnRunId(_viewConfirmSave.OptimizeRunId).Where(x => x.IsUsed).Select(x => x.MeasurementId).ToList();
+        }
+
+        public void CreateG7AlignmentCurve()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.CreateG7AlignmentCurve(
+                _viewConfirmSave.OptimizeRunId,
+                _viewConfirmSave.MeasurementIds,
+                true,
+                _viewConfirmSave.DeviceLinkProfile,
+                Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+
+        }
+
+        public void CreateISOAlignmentCurve()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.CreateISOAlignmentCurve(
+                _viewConfirmSave.ProjectId,
+                 _viewConfirmSave.OptimizeRunId,
+                _viewConfirmSave.MeasurementIds,
+                true,
+                _viewConfirmSave.DeviceLinkProfile,
+                Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+
+        }
     }
 }

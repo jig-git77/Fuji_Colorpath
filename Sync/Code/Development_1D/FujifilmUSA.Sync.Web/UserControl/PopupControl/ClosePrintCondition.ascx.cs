@@ -92,10 +92,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 if (!IsErrorOccured)
                 {
-                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                        _presenterClosePrintCondition.Create1DOptimizeRun();
-                    else
-                        _presenterClosePrintCondition.CreateOptimizeRun();
+                    if (Request.QueryString["licenseTypeId"] != null)
+                    {
+                        if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
+                            _presenterClosePrintCondition.Create1DOptimizeRun();
+                        else
+                            _presenterClosePrintCondition.CreateOptimizeRun();
+                    }
                     if (!IsErrorOccured)
                     {
                         _presenterClosePrintCondition.GetProjectDetail();
@@ -103,7 +106,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             SessionManager.Instance.CurrentProject = Project;
                             SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;                            
+                            SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
 
                             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "UniqId", "window.parent.location='Measurement.aspx';", true);
                         }
@@ -132,7 +135,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     SessionManager.Instance.CurrentProject = Project;
                     SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
-                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;                    
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Run;
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
@@ -152,7 +155,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
             ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
-            _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
+            if (Request.QueryString["licenseTypeId"] != null)
+            {
+                if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync1D)
+                    _presenterClosePrintCondition.Get1DCurrentDeviceLinkProfile();
+                else
+                    _presenterClosePrintCondition.GetCurrentDeviceLinkProfile();
+
+            }
             if (!IsErrorOccured)
             {
                 //CurrentDlp = null;

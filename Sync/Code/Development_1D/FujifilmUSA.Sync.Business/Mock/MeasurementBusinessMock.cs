@@ -143,6 +143,16 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Measurement>();
         }
+
+        public MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds)
+        {
+            return new MeasurementDataResponse();
+        }
+
+        public TargetTVIDataResponse GetTargetTVIData(int projectId)
+        {
+            return new TargetTVIDataResponse();
+        }
         #endregion
 
         #region ITaskBase Members

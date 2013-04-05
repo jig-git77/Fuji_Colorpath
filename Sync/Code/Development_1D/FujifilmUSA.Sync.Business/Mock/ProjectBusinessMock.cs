@@ -136,6 +136,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<Entity.CPSync1D.ProjectTargetLAB>();
         }
+
+        public byte[] Get1DLastOptimizedDlp(int projectId)
+        {
+            return new byte[1];        
+        }
         #endregion
 
         #region ITaskBase Members

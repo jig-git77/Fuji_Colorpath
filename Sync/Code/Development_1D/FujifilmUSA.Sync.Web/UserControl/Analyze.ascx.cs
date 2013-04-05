@@ -1475,13 +1475,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                _presenterAnalyze.GetMeasurementsOnRunId();
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterAnalyze.Get1DMeasurementsOnRunId();
+                else
+                    _presenterAnalyze.GetMeasurementsOnRunId();
                 if (!IsErrorOccured)
                 {
-                    EndDate = System.DateTime.Now;
-                    DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                    DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                    _presenterAnalyze.CreateDestinationAndDlp();
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    {
+                        //Pass use DLP as false for initial call
+                        useDLP = false;
+                        DeviceLinkProfile = null;
+
+                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)                                                 
+                            _presenterAnalyze.CreateG7AlignmentCurve();                        
+                        else//ISO                                                    
+                            _presenterAnalyze.CreateISOAlignmentCurve();                        
+                    }
+                    else
+                    {
+                        EndDate = System.DateTime.Now;
+                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                        _presenterAnalyze.CreateDestinationAndDlp();
+                    }
                     if (!IsErrorOccured)
                     {
                         WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
@@ -1773,6 +1790,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
-        #endregion
+
+        public bool useDLP { get; set; }
+        public byte[] DeviceLinkProfile { get; set; }
+        #endregion        
     }
 }
