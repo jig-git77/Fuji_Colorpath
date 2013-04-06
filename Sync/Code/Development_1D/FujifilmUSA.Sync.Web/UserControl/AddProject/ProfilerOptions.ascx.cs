@@ -431,8 +431,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 },
                 TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim()))
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI50Cyan.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI75Cyan.Text.Trim()))
             });
 
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
@@ -444,8 +444,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 },
                 TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim()))
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI50Magenta.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI75Magenta.Text.Trim()))
             });
 
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
@@ -457,8 +457,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 },
                 TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim()))
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI50Yellow.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI75Yellow.Text.Trim()))
             });
 
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
@@ -470,8 +470,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 },
                 TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim()))
+                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI50Black.Text.Trim())),
+                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI75Black.Text.Trim()))
             });
 
             return printStandardTVIList;
