@@ -28,5 +28,11 @@ namespace ColorPathSync.ServiceContracts
 
         [OperationContract]
         ExtractProfileValuesResponse ExtractProfileValues(ExtractProfileValuesRequest request);
+
+        [OperationContract]
+        CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request);
+
+        [OperationContract]
+        CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request);
     }
 }

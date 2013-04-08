@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Business\CreateDestinationAndDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateDeviceLinkProfileBusiness.cs" />
+    <Compile Include="Business\CreateG7AlignmentCurveProfileBusiness.cs" />
+    <Compile Include="Business\CreateISOAlignmentCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
     <Compile Include="Business\ExtractProfileValuesBusiness.cs" />
     <Compile Include="Business\OptimizeDeviceLinkProfileBusiness.cs" />
@@ -86,6 +88,10 @@
     <Compile Include="MessageContracts\CreateDestinationAndDeviceLinkProfileResponse.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileRequest.cs" />
     <Compile Include="MessageContracts\CreateDeviceLinkProfileResponse.cs" />
+    <Compile Include="MessageContracts\CreateG7AlignmentCurveRequest.cs" />
+    <Compile Include="MessageContracts\CreateG7AlignmentCurveResponse.cs" />
+    <Compile Include="MessageContracts\CreateISOAlignmentCurveRequest.cs" />
+    <Compile Include="MessageContracts\CreateISOAlignmentCurveResponse.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesRequest.cs" />
     <Compile Include="MessageContracts\ExtractProfileValuesResponse.cs" />
     <Compile Include="MessageContracts\OptimizeDeviceLinkProfileRequest.cs" />

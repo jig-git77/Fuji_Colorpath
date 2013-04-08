@@ -36,5 +36,15 @@ namespace ColorPathSync.ServiceImplementation
         {
             return ProfilerBusiness.CreateDestinationAndDeviceLinkProfile(request);
         }
+
+        public CreateG7AlignmentCurveResponse CreateG7AlignmentCurve(CreateG7AlignmentCurveRequest request)
+        {
+            return ProfilerBusiness.CreateG7AlignmentCurve(request);
+        }
+
+        public CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request)
+        {
+            return ProfilerBusiness.CreateISOAlignmentCurve(request);
+        }
     }
 }
