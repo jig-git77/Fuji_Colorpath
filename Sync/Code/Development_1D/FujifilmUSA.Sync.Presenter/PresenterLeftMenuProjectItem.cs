@@ -30,6 +30,12 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
             optimizeRun.DeleteOptimizeRun(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.ProjectId, _viewLeftMenuProjectItem.MasterRunID, _viewLeftMenuProjectItem.RunStatus);
         }
+        public void Delete1DOptimizeRun()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRun.Delete1DOptimizeRun(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.ProjectId, _viewLeftMenuProjectItem.MasterRunID, _viewLeftMenuProjectItem.RunStatus);
+        }
         public void GetProjectDetail()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
@@ -42,7 +48,12 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
             optimizeRun.DeleteOptimizeRunDLP(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.ProjectId);
         }
-
+        public void Delete1DOptimizeRunDLP()
+        {
+            var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRun.ErrorOccured += _viewLeftMenuProjectItem.ErrorOccured;
+            optimizeRun.Delete1DOptimizeRunDLP(_viewLeftMenuProjectItem.OptimizeRunID, _viewLeftMenuProjectItem.ProjectId);
+        }
         public void Create1DOptimizeRun()
         {
             var optimizeRun = BusinessFactory<IOptimizeRunBusiness>.CreateObject();

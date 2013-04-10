@@ -50,11 +50,25 @@ namespace FujifilmUSA.Sync.Presenter
             optimizeRunBusiness.CertifyOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Certify), DateTime.Now);
         }
 
+        public void Certify1DOptimizeRun()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            optimizeRunBusiness.Certify1DOptimizeRun(_viewConfirmSave.OptimizeRunId, _viewConfirmSave.ProjectId, _viewConfirmSave.MasterRunId, Convert.ToInt32(EOptimizeRunStatus.Certify), DateTime.Now);
+        }
+
         public void GetLastRunStatus()
         {
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
             _viewConfirmSave.LastRunStatus = optimizeRunBusiness.GetLastRunStatus(_viewConfirmSave.OptimizeRunId);
+        }
+
+        public void Get1DLastRunStatus()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
+            _viewConfirmSave.LastRunStatus = optimizeRunBusiness.Get1DLastRunStatus(_viewConfirmSave.OptimizeRunId);
         }
 
         public void Create1DOptimizeRun()
@@ -76,10 +90,10 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewConfirmSave.ErrorOccured;
             optimizeRunBusiness.CreateG7AlignmentCurve(
+                _viewConfirmSave.ProjectId,
                 _viewConfirmSave.OptimizeRunId,
                 _viewConfirmSave.MeasurementIds,
-                true,
-                _viewConfirmSave.DeviceLinkProfile,
+                true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
 
@@ -93,8 +107,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewConfirmSave.ProjectId,
                  _viewConfirmSave.OptimizeRunId,
                 _viewConfirmSave.MeasurementIds,
-                true,
-                _viewConfirmSave.DeviceLinkProfile,
+                true,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
 

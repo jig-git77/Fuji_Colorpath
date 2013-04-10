@@ -85,7 +85,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 2)
                     {
                         OptimizeRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-                        _presenterConfirmSave.GetLastRunStatus();
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                            _presenterConfirmSave.Get1DLastRunStatus();
+                        else
+                            _presenterConfirmSave.GetLastRunStatus();
 
                         if (LastRunStatus == EOptimizeRunStatus.Certify)
                         {
@@ -108,10 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                {                    
-                    int masterRunId = SessionManager.Instance.CurrentOptimizeRun.MasterRunId.HasValue ? SessionManager.Instance.CurrentOptimizeRun.MasterRunId.Value : 0;
-                    DeviceLinkProfile = SessionManager.Instance.CurrentProject.OptimizeRuns.Where(c => c.OptimizeRunId == masterRunId).Select(c=>c.DeviceLinkProfile).FirstOrDefault();
-
+                {
                     if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                         _presenterConfirmSave.CreateG7AlignmentCurve();
                     else//ISO                                                    
@@ -159,8 +159,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             MasterRunId = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
-            _presenterConfirmSave.CertifyOptimizeRun();
-
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                _presenterConfirmSave.Certify1DOptimizeRun();
+            }
+            else
+            {
+                _presenterConfirmSave.CertifyOptimizeRun();
+            }
             if (!IsErrorOccured)
             {
                 SessionManager.Instance.CurrentProject = null;
@@ -184,7 +190,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Entity.Project Project { get; set; }
         public string ProfileDescription { get; set; }
         public EOptimizeRunStatus LastRunStatus { get; set; }
-        public byte[] DeviceLinkProfile { get; set; }
         #endregion
 
 

@@ -201,7 +201,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
             MasterRunID = Convert.ToInt32(SessionManager.Instance.CurrentOptimizeRun.MasterRunId);
             RunStatus = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().Status;
-            _presenterLeftMenuProjectItem.DeleteOptimizeRun();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterLeftMenuProjectItem.Delete1DOptimizeRun();
+            else
+                _presenterLeftMenuProjectItem.DeleteOptimizeRun();
 
             if (!IsErrorOccured)
             {
@@ -239,11 +242,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnDLPDelete_Click(object sender, System.Web.UI.ImageClickEventArgs e)
         {
-            //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//
+            //--------------Delete the current run and move control to analyze page of last optimized run for this project-------------//            
             ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
             OptimizeRunID = SessionManager.Instance.CurrentProject.OptimizeRuns.Last().OptimizeRunId;
-
-            _presenterLeftMenuProjectItem.DeleteOptimizeRunDLP();
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                _presenterLeftMenuProjectItem.Delete1DOptimizeRunDLP();
+            else
+                _presenterLeftMenuProjectItem.DeleteOptimizeRunDLP();
 
             if (!IsErrorOccured)
             {

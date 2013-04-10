@@ -66,6 +66,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRunDLP"));
         }
 
+        public void Delete1DOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                       "[CPSync].[DeleteOptimizeRun]",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                ProjectID,
+                                MasterRunID,
+                                (int)RunStatus
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRun"));
+        }
+
+        public void Delete1DOptimizeRunDLP(int OptimizeRunID, int ProjectID)
+        {
+            Common.ImplementBusinessLogic(
+                () =>
+                DataAccessFactory.
+                    Instance.
+                    ExecuteProcedure(
+                        "[CPSync].[DeleteOptimizeRunDLP]",
+                        new object[]
+                            {
+                                OptimizeRunID,
+                                ProjectID
+                            }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeleteOptimizeRunDLP"));
+        }
+
         public void CreateInitialDestinationAndDeviceLinkProfiles(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
@@ -227,6 +261,24 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
         }
 
+        public void Certify1DOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
+        {
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "[CPSync].[CertifyOptimizeRun]",
+                              new object[]
+                                  {
+                                      optimizeRunId,
+                                      ProjectId,
+                                      MasterRunId,
+                                      status,
+                                      endDateTime
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CloseOptimizeRun"));
+        }
+
         public bool DeleteMeasurement(int measurementId)
         {
             int affectedRow = 0;
@@ -267,6 +319,26 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return optimizeRunId;
         }
 
+        public int Get1DLastOptimizeRunId(int projectId)
+        {
+            int optimizeRunId = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    optimizeRunId =
+                        Convert.ToInt32(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "CPSync.GetLastOptimizeRunId",
+                                    new object[]
+                                            {
+                                                projectId
+                                            }));
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastOptimizeRunId"));
+            return optimizeRunId;
+        }
 
         public EOptimizeRunStatus GetLastRunStatus(int OptimizeRunId)
         {
@@ -280,6 +352,27 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Instance.
                                 GetScalar(
                                     "CPSync4D.GetLastRunStatus",
+                                    new object[]
+                                            {
+                                                OptimizeRunId
+                                            }));
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLastRunStatus"));
+            return (EOptimizeRunStatus)LastRunStatus;
+        }        
+
+        public EOptimizeRunStatus Get1DLastRunStatus(int OptimizeRunId)
+        {
+            int LastRunStatus = 1;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    LastRunStatus =
+                        Convert.ToInt32(
+                            DataAccessFactory.
+                                Instance.
+                                GetScalar(
+                                    "[CPSync].[GetLastRunStatus]",
                                     new object[]
                                             {
                                                 OptimizeRunId
@@ -345,7 +438,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         //to-do set return type
-        public void CreateG7AlignmentCurve(int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        public void CreateG7AlignmentCurve(int projectId,int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -374,7 +467,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
+                    {
+                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
                         alignmentCurveRequest.ICCProfile = dlp;
+                    }
 
                     Profile syncClientResponse = new Profile();
                     syncClientResponse = syncClient.CreateCurve(alignmentCurveRequest);
@@ -394,7 +490,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateG7AlignmentCurve"));
         }
 
-        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
         {
             Common.ImplementBusinessLogic(
                 () =>
@@ -423,7 +519,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     alignmentCurveRequest.UseDLP = useDLP;
                     if (useDLP)
+                    {
+                        var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
                         alignmentCurveRequest.ICCProfile = dlp;
+                    }
 
                     TargetTVIDataResponse targetTVIResponse = measurementBusiness.GetTargetTVIData(projectId);
                     alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;

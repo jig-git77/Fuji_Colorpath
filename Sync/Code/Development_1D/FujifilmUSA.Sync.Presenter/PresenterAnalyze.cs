@@ -122,10 +122,10 @@ namespace FujifilmUSA.Sync.Presenter
             var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
             optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             optimizeRunBusiness.CreateG7AlignmentCurve(
+                _viewAnalyze.ProjectId,
                 _viewAnalyze.OptimizeRunId,
                 _viewAnalyze.MeasurementIds,
-                _viewAnalyze.useDLP,
-                _viewAnalyze.DeviceLinkProfile,
+                _viewAnalyze.useDLP,              
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
 
@@ -139,8 +139,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.ProjectId,
                  _viewAnalyze.OptimizeRunId,
                 _viewAnalyze.MeasurementIds,
-                _viewAnalyze.useDLP,
-                _viewAnalyze.DeviceLinkProfile,
+                _viewAnalyze.useDLP,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
                     DateTime.Now);
 

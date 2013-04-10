@@ -11,7 +11,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<int> MeasurementIds { get; set; }
         Project Project { get; set; }
         string ProfileDescription { get; set; }
-        EOptimizeRunStatus LastRunStatus { get; set; }
-        byte[] DeviceLinkProfile { get; set; }
+        EOptimizeRunStatus LastRunStatus { get; set; }        
     }
 }

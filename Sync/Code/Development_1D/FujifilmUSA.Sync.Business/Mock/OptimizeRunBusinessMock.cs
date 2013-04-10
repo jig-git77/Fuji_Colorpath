@@ -34,6 +34,11 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
+        public void Certify1DOptimizeRun(int optimizeRunId, int ProjectId, int MasterRunId, int status, DateTime endDateTime)
+        { 
+        
+        }
+
         public bool DeleteMeasurement(int measurementId)
         {
             return true;
@@ -44,7 +49,17 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public int Get1DLastOptimizeRunId(int projectId)
+        {
+            return 0;
+        }
+
         public void DeleteOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
+        {
+
+        }
+
+        public void Delete1DOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus)
         {
 
         }
@@ -64,6 +79,11 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
+        public void Delete1DOptimizeRunDLP(int OptimizeRunID, int ProjectID)
+        {
+
+        }
+
         public bool Delete1DMeasurement(int measurementId)
         {
             return true;
@@ -74,12 +94,12 @@ namespace FujifilmUSA.Sync.Business.Mock
 
         }
 
-        public void CreateG7AlignmentCurve(int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        public void CreateG7AlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
         {
 
         }
 
-        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, byte[] dlp, int status, DateTime endDateTime)
+        public void CreateISOAlignmentCurve(int projectId, int optimizeRunId, List<int> measurementIds, bool useDLP, int status, DateTime endDateTime)
         {
 
         }
@@ -92,6 +112,11 @@ namespace FujifilmUSA.Sync.Business.Mock
         public byte[] Get1DDeviceLinkProfile(int optimizeRunId)
         {
             return new byte[1];
+        }
+
+        public EOptimizeRunStatus Get1DLastRunStatus(int OptimizeRunId)
+        {
+            return 0;
         }
         #endregion
 
