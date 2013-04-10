@@ -108,8 +108,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (!IsErrorOccured)
             {
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                {
-                    DeviceLinkProfile = SessionManager.Instance.CurrentOptimizeRun.DeviceLinkProfile;
+                {                    
+                    int masterRunId = SessionManager.Instance.CurrentOptimizeRun.MasterRunId.HasValue ? SessionManager.Instance.CurrentOptimizeRun.MasterRunId.Value : 0;
+                    DeviceLinkProfile = SessionManager.Instance.CurrentProject.OptimizeRuns.Where(c => c.OptimizeRunId == masterRunId).Select(c=>c.DeviceLinkProfile).FirstOrDefault();
 
                     if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
                         _presenterConfirmSave.CreateG7AlignmentCurve();
