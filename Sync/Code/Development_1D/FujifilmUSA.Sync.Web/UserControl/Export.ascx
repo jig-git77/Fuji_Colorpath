@@ -132,7 +132,7 @@
                     </div>
                 </td>
             </tr>
-            <tr id="tr2">
+            <tr id="trAdvancedDownload" runat="server">
                 <td>
                     <div style="display: block;" class="contantbox tabcontant">
                         <div class="section_top">

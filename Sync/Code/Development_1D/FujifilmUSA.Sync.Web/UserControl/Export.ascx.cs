@@ -46,9 +46,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 {
                     trExportViewForSync1D.Visible = true;
+                    trAdvancedDownload.Visible = false;
                     BindCurve();
                 }
-                
+                else
+                {
+                    trAdvancedDownload.Visible = true;
+                }
             }
         }
 
