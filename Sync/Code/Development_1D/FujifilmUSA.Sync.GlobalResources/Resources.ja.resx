@@ -762,4 +762,7 @@
   <data name="ERolePermission_ManageDeviceProfileSettings" xml:space="preserve">
     <value>Manage Device Profiler Settings_ja</value>
   </data>
+  <data name="Login_PasswordSaved" xml:space="preserve">
+    <value>User activated successfully_ja</value>
+  </data>
 </root>

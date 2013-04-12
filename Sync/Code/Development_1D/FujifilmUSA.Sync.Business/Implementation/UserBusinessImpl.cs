@@ -412,6 +412,31 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_SendEmailToUser"));
         }
 
+        public int GetUserType(string loginId)
+        {
+            int userType = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsUser = DataAccessFactory.
+                        Instance.
+                        GetDsResult(
+                            "[CP].[GetUserType]",
+                            new object[]
+                                    {
+                                        loginId
+                                    });
+                    if (dsUser != null && dsUser.Tables.Count > 0 && dsUser.Tables[0].Rows.Count > 0)
+                    {
+                        userType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType");
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetUserType"));
+            return userType;
+
+
+        }
+
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;

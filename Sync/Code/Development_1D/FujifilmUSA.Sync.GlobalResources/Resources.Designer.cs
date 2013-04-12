@@ -1906,6 +1906,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User activated successfully.
+        /// </summary>
+        internal static string Login_PasswordSaved {
+            get {
+                return ResourceManager.GetString("Login_PasswordSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete all information of selected measurement device?.
         /// </summary>
         internal static string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation {
