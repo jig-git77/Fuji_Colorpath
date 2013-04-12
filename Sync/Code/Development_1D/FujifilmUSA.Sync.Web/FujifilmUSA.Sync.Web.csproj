@@ -202,6 +202,7 @@
     <Content Include="Images\Validation_Not_Certified.png" />
     <Content Include="Images\VStatusFailedIcon.png" />
     <Content Include="Images\VStatusSuccessIcon.png" />
+    <Content Include="JQuery\jquery-1.9.1.min.js" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
@@ -2134,7 +2135,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

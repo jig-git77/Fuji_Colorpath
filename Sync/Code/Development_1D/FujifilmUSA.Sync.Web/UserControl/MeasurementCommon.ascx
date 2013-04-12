@@ -13,6 +13,9 @@
 <script src="jQuery/jquery-1.7.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="jQuery/jquery.tmpl.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JQuery/jquery.simplemodal.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
+<script src="jQuery/jquery-1.9.1.min.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
+
 <style type="text/css">
     .my_rectangle
     {
