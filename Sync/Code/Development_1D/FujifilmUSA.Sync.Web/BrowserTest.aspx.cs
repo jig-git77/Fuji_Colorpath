@@ -134,6 +134,7 @@ namespace FujifilmUSA.Sync.Web
             }
            
             table.Rows.Add("Plugin Data Service status:", Hidden_PluginDataService.Value);
+            table.Rows.Add("Printer Plugin:", Hidden_PrinterPlugin.Value);
             return table;
         }
 

@@ -478,7 +478,7 @@
         </tr>
         <tr>
             <td valign="top">
-                <div style="display: block;">
+                <div id="Div_OptChart" runat="server" style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">
@@ -494,7 +494,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <asp:Panel ID="panel2" runat="server" Style="padding-left: 5px" 
+                            <asp:Panel ID="Panel_OptChart" runat="server" Style="padding-left: 5px" 
                                 BorderStyle="None" meta:resourcekey="panelAlignmentChartResource1">
                                 <table width="100%">
                                     <tr>

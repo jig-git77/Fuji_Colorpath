@@ -9,6 +9,9 @@
     <script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="JQuery/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="JQuery/progressbar.js"></script>
+    <script src="JS/DYMO.Label.Framework.latest.js" type="text/javascript"></script>
+    <script src="JS/Printing.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         function Test_ChkBrowser() {
             Test_Browser();
@@ -17,7 +20,8 @@
             Test_HTML5();
             Test_Plugins();
             Plugin_load();
-            Test_PluginDataService();          
+            Test_PluginDataService();
+            PrinterPlugin_Load();        
         }
         function Test_Browser() {
             var navigatorVersion = navigator.appVersion;
@@ -206,6 +210,18 @@
             var e = document.getElementById('<%#Hidden_PluginOS.ClientID%>');
             e.value = OSName;
         }
+
+        function PrinterPlugin_Load() {
+            var g = document.getElementById('<%#Hidden_PrinterPlugin.ClientID%>');
+          
+            if (IsPrinterInstalled()) {
+                g.value = "Active";
+            }
+            else {
+                g.value = "Inactive";
+            }
+        }
+
     </script>
     <style type="text/css">
         body
@@ -300,6 +316,7 @@
                 <input id="Hidden_PluginOS" type="hidden" runat="server" />
                 <input id="Hidden_OtherPlugins" type="hidden" runat="server" />
                 <input id="Hidden_PluginDataService" type="hidden" runat="server" />
+                <input id="Hidden_PrinterPlugin" type="hidden" runat="server" />
             </div>
             <br />
             <div>
