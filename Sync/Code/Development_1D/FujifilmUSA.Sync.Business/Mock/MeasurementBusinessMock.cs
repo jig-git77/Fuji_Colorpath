@@ -26,7 +26,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE)
+        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE, bool IsSync1DType = false)
         {
             return new List<Measurement>();
         }

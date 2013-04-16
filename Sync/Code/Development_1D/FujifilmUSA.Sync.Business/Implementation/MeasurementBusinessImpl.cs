@@ -124,9 +124,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE)
+        public List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE, bool IsSync1DType = false)
         {
             var measurements = new List<Measurement>();
+
+            string storedProc = "[CPSync4D].[GetAnalyzeChartMeasurement]";
+            if (IsSync1DType)
+                storedProc = "[CPSync].[GetAnalyzeChartMeasurement]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -134,7 +139,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         DataAccessFactory.
                             Instance.
                             GetDsResult(
-                                "[CPSync4D].[GetAnalyzeChartMeasurement]",
+                                storedProc,
                                 new object[]
                                         {
                                             optimizeRunId, From_ΔE

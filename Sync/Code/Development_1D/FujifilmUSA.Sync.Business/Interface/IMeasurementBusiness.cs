@@ -11,8 +11,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         int SaveMeasurement(Measurement measurement);
         int SaveVMeasurement(Measurement measurement);
         List<Measurement> GetMeasurementsOnRunId(int optimizeRunId);
-        List<Measurement> GetVMeasurementsOnProjectId(int projectId);        
-        List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE);
+        List<Measurement> GetVMeasurementsOnProjectId(int projectId);
+        List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE, bool IsSync1DType = false);
         List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE);
         int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false);
         List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);

@@ -183,7 +183,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
                     break;
             }
-
+         
             //Decide and set image URL based on conditions
             SetOperationImageURL(btnSelect, project.LicenseType, project.Status);
             SetValidationImageURL(imgbtnVarification, project);

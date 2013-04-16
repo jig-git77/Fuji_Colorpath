@@ -135,6 +135,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (!Page.IsPostBack)
             {
+               
+
                 ViewState["MetricSumID"] = "";
 
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
@@ -147,6 +149,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
+                    SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {
                         header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
@@ -235,8 +238,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = true;
             }
             else
-            {
-                //In case of None (i.e. Optimization)
+            {              
+                //In case of None (i.e. Optimization or Sync1D)
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetAnalyzeChartMeasurement();
             }
@@ -1793,6 +1796,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }
+
+        public bool IsSync1DType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D);
+            }
+        }
+
         #endregion        
     }
 }
