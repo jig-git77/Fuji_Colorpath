@@ -15,7 +15,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetAnalyzeChartMeasurement(int optimizeRunId, string From_ΔE, bool IsSync1DType = false);
         List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE);
         int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false);
-        List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
+        List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
         
         //Now we are returning DataTable instead of List<>()
         //List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);        

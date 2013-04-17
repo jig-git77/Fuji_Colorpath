@@ -245,9 +245,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
+            if(IsSync1DType)
+                storedProc = "CPSync.GetMeasurementDeltasByMeasurementID";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
             var measurements = new List<MeasurementPatch_AvgDelta>();

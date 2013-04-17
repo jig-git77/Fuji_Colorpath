@@ -149,7 +149,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D
+                    SessionManager.Instance.CurrentDlpSubOperation = SessionManager.Instance.CurrentProject.LicenseType; //---Assign DLP or Sync1D project type
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    {
+                        //------If project is Sync1D type, Assign 'E' to radiolist, bydefault (because Sync 1D has only dt_E type)----------------//
+                        rbtnListDeltaE.SelectedValue = "E";
+                        rbtnListDeltaE.Enabled = false;
+                    }
                     if (SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId == SessionManager.Instance.CurrentProject.OptimizeRuns.First().OptimizeRunId)
                     {
                         header.InnerText = GetResourceString(_recnewPrintCondition);//"New Print Condition - Analyze (No DLP)";
@@ -334,7 +340,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                //In case of None (i.e. Optimization)
+                //In case of None (i.e. Optimization or Sync1D project type)
                 ibtnPrintPreview.Visible = false;
                 ibtnPrintLabel.Visible = false;
                 tbValidationSummary.Visible = false;
