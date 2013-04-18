@@ -20,9 +20,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         //Now we are returning DataTable instead of List<>()
         //List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);        
         DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);
-        
-        List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false);
-        List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false);
+
+        List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);

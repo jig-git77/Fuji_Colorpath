@@ -51,12 +51,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new DataTable();
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart>();
         }

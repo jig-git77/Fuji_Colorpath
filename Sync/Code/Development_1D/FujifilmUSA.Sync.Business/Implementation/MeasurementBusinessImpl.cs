@@ -375,10 +375,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
             string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_InkPaper";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
             Common.ImplementBusinessLogic(
@@ -410,10 +412,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return DeltaEPatchDetails;
         }
 
-        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             var PaperPatchDetails = new List<AnalyzeChart>();
             string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_InkPaper";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_InkPaper";
             Common.ImplementBusinessLogic(
