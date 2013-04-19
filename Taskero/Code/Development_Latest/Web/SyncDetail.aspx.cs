@@ -81,6 +81,15 @@ public partial class SyncDetail : PageBase
                     BindCompanyDropDown();
                     ddlBranch.Items.Insert(0, new ListItem("--- Select Branch ---", "0"));
                 }
+                else if (Fuji.Common.Sessions.RoleID == 3)
+                {
+                    TrCompanyBranch.Visible = true; // other user can not be filter 
+                    BindCompanyDropDown();
+
+                    ddlBranch.Items.Insert(0, new ListItem("--- Select Branch ---", "0"));
+                    //=========== Bind Press List ==========//                
+                    //BindSyncPress();
+                }
                 else
                 {
                     TrCompanyBranch.Visible = false; // other user can not be filter 
@@ -115,12 +124,12 @@ public partial class SyncDetail : PageBase
 
                 //set session variable for selected company    
                 Fuji.Common.Sessions.SetSessions("SyncCompanyID", ddlCompany.SelectedValue.Trim());
-
+                BindSyncPress();
             }
             else
             { BindBranchDropDown(0); }
 
-            BindSyncPress();
+           
         }
         catch (Exception Exc)
         { LblError.Text = HandleException(Exc); }
@@ -270,7 +279,7 @@ public partial class SyncDetail : PageBase
             Fuji.Common.Sessions.SetSessions("SyncPressData", null);
 
             //========= If Login user is admin then he/she can filter press data by compnay and branch wise==//
-            if (Fuji.Common.Sessions.RoleID == 1)
+            if (Fuji.Common.Sessions.RoleID == 1 || Fuji.Common.Sessions.RoleID == 3)
             {
                 TrCompanyBranch.Visible = true; // Admin then filter option is visible
                 BindCompanyDropDown();
@@ -2476,13 +2485,17 @@ public partial class SyncDetail : PageBase
                     #region Create file and download txt file for 1%,5% and 10% 
                     System.IO.StreamWriter sw;
                     sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurvesFile.txt");
+                    //const string quote = "\"";
+                    sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
                     sw.WriteLine("BEGIN_DATA_FORMAT");
-                    sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    //sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
                     sw.WriteLine("END_DATA_FORMAT");
+                    sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Rows.Count.ToString());
                     sw.WriteLine("BEGIN_DATA");
                     for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
                     {
-                        sw.WriteLine(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
+                        sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
                     }
                     sw.WriteLine("END_DATA");
                     sw.Close();
@@ -3191,6 +3204,8 @@ public partial class SyncDetail : PageBase
             {
                 if (Fuji.Common.Sessions.RoleID == 1) // If user is admin then he can be allow to do filter press
                     DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID, Convert.ToInt32(Fuji.Common.Sessions.GetSession("SyncCompanyID")), Convert.ToInt32(Fuji.Common.Sessions.GetSession("SyncBranchID")));
+                else if (Fuji.Common.Sessions.RoleID == 3)
+                    DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, 1, Fuji.Common.Sessions.CompanyID, Convert.ToInt32(Fuji.Common.Sessions.GetSession("SyncBranchID")));
                 else
                     DT_SyncPress = ObjSyncPress.uspGetAllSyncPress(Fuji.Common.Sessions.UserID, Fuji.Common.Sessions.RoleID, 0, 0);
                 Fuji.Common.Sessions.SetSessions("SyncPressData", DT_SyncPress);
@@ -3226,7 +3241,23 @@ public partial class SyncDetail : PageBase
 
             //==========  Get Data Table and Fill ==========//        
             DataTable DT_Company = new DataTable();
-            DT_Company = ObjSyncPress.uspGetCompanyListAndBranchList(0);
+            if (Fuji.Common.Sessions.RoleID == 1)
+            {
+                DT_Company = ObjSyncPress.uspGetCompanyListAndBranchList(0);
+            }
+            else if (Fuji.Common.Sessions.RoleID == 3)
+            {
+                DT_Company = ObjSyncPress.uspGetCompanyListAndBranchList(Fuji.Common.Sessions.CompanyID);
+            }
+
+            else
+            {
+                { ddlCompany.DataSource = null; ddlCompany.DataBind(); }
+            }
+
+            //========== Insert Items DropDownList in Company ===========//
+            ddlCompany.Items.Insert(0, new ListItem("--- Select Company ---", "0"));
+
 
             //get distinct rows from datatable or datarow
             //http://blog.wolffmyren.com/2009/02/24/c-corner-how-to-get-distinct-rows-from-a-dataset-or-datatable/         
