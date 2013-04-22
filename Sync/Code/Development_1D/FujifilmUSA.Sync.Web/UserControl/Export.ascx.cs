@@ -244,12 +244,92 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         swK.WriteLine("Version: 2.0");
                         swK.Close();
 
-                        //Fuji.Common.ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_C.oli");
-                        //Fuji.Common.ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_M.oli");
-                        //Fuji.Common.ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Y.oli");
-                        //Fuji.Common.ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_K.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_C.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_M.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Y.oli");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_K.oli");
 
                         Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip");
+                        #endregion
+                    }
+                    else if (DdlCurveType.SelectedValue == "35")  // Harmony (Prinergy)
+                    {
+                        #region Create Zip file and download file for rampage
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+
+                        //cyan
+                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_C.txt");
+
+                        //magenta
+                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_M.txt");
+
+                        //yellow    
+                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Y.txt");
+                        
+                        //black
+                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_K.txt");
+                        
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.00"));
+                            swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.00"));
+                            swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.00"));
+                            swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.00") + "\t" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.00"));
+                        }
+
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
+
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_C.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_M.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Y.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_K.txt");
+
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip", SessionManager.Instance.CurrentUser.UserId + "_Harmony.zip");
+                        #endregion
+                    }
+                    else if (DdlCurveType.SelectedValue == "45")  // nexus
+                    {
+                        #region Create Zip file and download file for nexus
+
+                        ////check if file exists and delete it
+                        //if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip") == true)
+                        //    System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
+
+                        //System.IO.StreamWriter swC;
+                        //System.IO.StreamWriter swM;
+                        //System.IO.StreamWriter swY;
+                        //System.IO.StreamWriter swK;
+                        //swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
+                        //swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
+                        //swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
+                        //swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
+
+
+                        //for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        //{
+                        //    swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"]).ToString("0.0000"));
+                        //    swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"]).ToString("0.0000"));
+                        //    swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"]).ToString("0.0000"));
+                        //    swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"]).ToString("0.0000"));
+                        //}
+
+                        //swC.Close();
+                        //swM.Close();
+                        //swY.Close();
+                        //swK.Close();
+
+                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
+                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
+                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
+                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
+
+                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
                         #endregion
                     }
                 }
