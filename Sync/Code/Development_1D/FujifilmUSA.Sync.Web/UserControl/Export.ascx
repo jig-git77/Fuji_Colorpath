@@ -200,41 +200,89 @@
                                         <div class="tab_top">&nbsp;</div>
                                          <div class="tab_middle">
                                             <div class="combopart">
-                                                <div class="float_l">                                                                                                                 
-                                                   Export View Chart here                                                          
-                                                </div>
-                                                <div class="float_r">                                                   
-                                                    <telerik:RadGrid ID="rgCurveExportView" AllowFilteringByColumn="False" AllowPaging="True"
-                                                        PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
-                                                        OnNeedDataSource="rgCurveExportView_NeedDataSource" Width="100%" CellSpacing="0" GridLines="None"
-                                                        AllowSorting="False">
-                                                        <GroupingSettings CaseSensitive="False" />
-                                                        <HeaderStyle Font-Bold="True" />
-                                                        <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                                                        <MasterTableView>                                                                    
-                                                            <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
-                                                            </RowIndicatorColumn>
-                                                            <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
-                                                            </ExpandCollapseColumn>
-                                                            <Columns>                                                                                                              
-                                                                <telerik:GridBoundColumn DataField="ReferenceNo" HeaderText="Reference %" UniqueName="ReferenceNo"
-                                                                    SortExpression="ReferenceNo">                                                                                        
-                                                                </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" UniqueName="CMYK_C"
-                                                                    SortExpression="CMYK_C">                                                                                        
-                                                                </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="CMYK_M" HeaderText="M" UniqueName="CMYK_M"
-                                                                    SortExpression="CMYK_M">                                                                                       
-                                                                </telerik:GridBoundColumn>
-										                        <telerik:GridBoundColumn DataField="CMYK_Y" HeaderText="Y" UniqueName="CMYK_Y"
-                                                                    SortExpression="CMYK_Y">                                                                                       
-                                                                </telerik:GridBoundColumn>
-										                        <telerik:GridBoundColumn DataField="CMYK_K" HeaderText="K" UniqueName="CMYK_K"
-                                                                    SortExpression="CMYK_K">                                                                                      
-                                                                </telerik:GridBoundColumn>
-                                                            </Columns>                                                                   
-                                                        </MasterTableView>                                
-                                                    </telerik:RadGrid>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                    <tr>
+                                                        <td colspan="2" style="padding: 5px">
+                                                            Curve Type :
+                                                            <asp:DropDownList ID="DdlCurveType" runat="server" Width="120px" CssClass="DROPDOWNLIST"
+                                                                AutoPostBack="True" OnSelectedIndexChanged="DdlCurveType_SelectedIndexChanged">
+                                                                <asp:ListItem Text="1%" Value="1"></asp:ListItem>
+                                                                <asp:ListItem Text="5%" Value="5"></asp:ListItem>
+                                                                <asp:ListItem Text="10%" Value="10"></asp:ListItem>
+                                                                <asp:ListItem Text="Harmony" Value="35"></asp:ListItem>
+                                                                <asp:ListItem Text="Nexus" Value="45"></asp:ListItem>
+                                                                <asp:ListItem Text="Rampage" Value="15"></asp:ListItem>
+                                                                <asp:ListItem Text="XMF" Value="25"></asp:ListItem>
+                                                                <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
+                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>
+                                                                <%--  <asp:ListItem Text="&#916;Ref" Value="65"></asp:ListItem>--%>
+                                                            </asp:DropDownList>
+                                                            &nbsp;&nbsp;
+                                                            <asp:CheckBox ID="Chk_C" runat="server" Text="Cyan" Checked="true" AutoPostBack="True"
+                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                            <asp:CheckBox ID="Chk_M" runat="server" Text="Magenta" Checked="true" AutoPostBack="True"
+                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                            <asp:CheckBox ID="Chk_Y" runat="server" Text="Yellow" Checked="true" AutoPostBack="True"
+                                                                OnCheckedChanged="Chk_CheckedChanged" />&nbsp;
+                                                            <asp:CheckBox ID="Chk_K" runat="server" Text="Black" Checked="true" AutoPostBack="True"
+                                                                OnCheckedChanged="Chk_CheckedChanged" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="border: solid 1px;">
+                                                        <td style="width: 60%">
+                                                         
+                                                      
+                                                         </td>
+                                                         <td style="width: 40%">                                                               
+                                                            <telerik:RadGrid ID="rgCurveExportView" AllowFilteringByColumn="False" AllowPaging="False"
+                                                                    runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                                                                    OnNeedDataSource="rgCurveExportView_NeedDataSource" Width="100%" CellSpacing="0" GridLines="None"
+                                                                    AllowSorting="False">
+                                                                    <GroupingSettings CaseSensitive="False" />
+                                                                    <HeaderStyle Font-Bold="True" HorizontalAlign="Center" />
+                                                                    <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
+                                                                    <ClientSettings>
+                                                                        <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="330" />
+                                                                    </ClientSettings>
+                                                                    <MasterTableView>                                                                    
+                                                                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
+                                                                        </RowIndicatorColumn>
+                                                                        <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
+                                                                        </ExpandCollapseColumn>
+                                                                        <Columns>                                                                                                              
+                                                                            <telerik:GridBoundColumn DataField="ReferenceNo" UniqueName="ReferenceNo" AllowFiltering="false"
+                                                                                Visible="true" HeaderText="Reference%" ItemStyle-Width="35%" HeaderStyle-Width="35%"
+                                                                                ItemStyle-HorizontalAlign="Center">                                                                                     
+                                                                            </telerik:GridBoundColumn>
+                                                                            <telerik:GridBoundColumn DataField="CMYK_C" UniqueName="CMYK_C" AllowFiltering="false"
+                                                                                ItemStyle-BackColor="#E0F3FF" Visible="true" HeaderText="C" ItemStyle-Width="16%"
+                                                                                HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                   
+                                                                            </telerik:GridBoundColumn>
+                                                                            <telerik:GridBoundColumn DataField="CMYK_M" UniqueName="CMYK_M" AllowFiltering="false"
+                                                                                ItemStyle-BackColor="#FFEFF9" Visible="true" HeaderText="M" ItemStyle-Width="16%"
+                                                                                HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                     
+                                                                            </telerik:GridBoundColumn>
+										                                    <telerik:GridBoundColumn DataField="CMYK_Y" UniqueName="CMYK_Y" AllowFiltering="false"
+                                                                                ItemStyle-BackColor="#FFFDEE" Visible="true" HeaderText="Y" ItemStyle-Width="16%"
+                                                                                HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                      
+                                                                            </telerik:GridBoundColumn>
+										                                    <telerik:GridBoundColumn DataField="CMYK_K" UniqueName="CMYK_K" AllowFiltering="false"
+                                                                                ItemStyle-BackColor="#E7EBEE" Visible="true" HeaderText="K" ItemStyle-Width="17%"
+                                                                                HeaderStyle-Width="17%" ItemStyle-HorizontalAlign="Center">                                                                                
+                                                                            </telerik:GridBoundColumn>
+                                                                        </Columns>                                                                   
+                                                                    </MasterTableView>                                
+                                                                </telerik:RadGrid>                                                                     
+                                                         </td>
+                                                     </tr>
+                                                    <tr>
+                                                        <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
+                                                           <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves"
+                                                                                                                OnClick="BtnExportCurvesExportView_Click" />
+                                                         </td>
+                                                    </tr>
+                                                </table>
                                                 </div>
                                                 <div class="clear"></div>                                                  
                                             </div>
@@ -245,42 +293,55 @@
                                         <div class="tab_top">&nbsp;</div>
                                          <div class="tab_middle">
                                             <div class="combopart">
-                                                <div class="float_l">                                                                                                                 
-                                                 Delta View  Chart here                                                          
-                                                </div>
-                                                <div class="float_r">                                                  
-                                                    <telerik:RadGrid ID="rgCurveDeltaView" AllowFilteringByColumn="False" AllowPaging="True"
-                                                        PageSize="5" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+                                                     <tr style="border: solid 1px;">
+                                                        <td style="width: 60%">
+                                                         
+                                                      
+                                                         </td>
+                                                         <td style="width: 40%">                                            
+                                                            <telerik:RadGrid ID="rgCurveDeltaView" AllowFilteringByColumn="False" AllowPaging="False"
+                                                        runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                                                         OnNeedDataSource="rgCurveDeltaView_NeedDataSource" Width="100%" CellSpacing="0" GridLines="None"
                                                         AllowSorting="False">
                                                         <GroupingSettings CaseSensitive="False" />
                                                         <HeaderStyle Font-Bold="True" />
                                                         <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
+                                                        <ClientSettings>
+                                                            <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="330" />
+                                                        </ClientSettings>
                                                         <MasterTableView>                                                                    
                                                             <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" Visible="True">
                                                             </RowIndicatorColumn>
                                                             <ExpandCollapseColumn FilterControlAltText="Filter ExpandColumn column" Visible="True">
                                                             </ExpandCollapseColumn>
                                                             <Columns>                                                                                                              
-                                                                <telerik:GridBoundColumn DataField="ReferenceNo" HeaderText="Reference %" UniqueName="ReferenceNo"
-                                                                    SortExpression="ReferenceNo">                                                                                        
+                                                                <telerik:GridBoundColumn DataField="ReferenceNo" UniqueName="ReferenceNo" AllowFiltering="false"
+                                                                    Visible="true" HeaderText="Reference%" ItemStyle-Width="35%" HeaderStyle-Width="35%"
+                                                                    ItemStyle-HorizontalAlign="Center">                                                                                     
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="CMYK_C" HeaderText="C" UniqueName="CMYK_C"
-                                                                    SortExpression="CMYK_C">                                                                                        
+                                                                <telerik:GridBoundColumn DataField="CMYK_C" UniqueName="CMYK_C" AllowFiltering="false"
+                                                                    ItemStyle-BackColor="#E0F3FF" Visible="true" HeaderText="C" ItemStyle-Width="16%"
+                                                                    HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                   
                                                                 </telerik:GridBoundColumn>
-                                                                <telerik:GridBoundColumn DataField="CMYK_M" HeaderText="M" UniqueName="CMYK_M"
-                                                                    SortExpression="CMYK_M">                                                                                       
+                                                                <telerik:GridBoundColumn DataField="CMYK_M" UniqueName="CMYK_M" AllowFiltering="false"
+                                                                    ItemStyle-BackColor="#FFEFF9" Visible="true" HeaderText="M" ItemStyle-Width="16%"
+                                                                    HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                     
                                                                 </telerik:GridBoundColumn>
-										                        <telerik:GridBoundColumn DataField="CMYK_Y" HeaderText="Y" UniqueName="CMYK_Y"
-                                                                    SortExpression="CMYK_Y">                                                                                       
+										                        <telerik:GridBoundColumn DataField="CMYK_Y" UniqueName="CMYK_Y" AllowFiltering="false"
+                                                                    ItemStyle-BackColor="#FFFDEE" Visible="true" HeaderText="Y" ItemStyle-Width="16%"
+                                                                    HeaderStyle-Width="16%" ItemStyle-HorizontalAlign="Center">                                                                                      
                                                                 </telerik:GridBoundColumn>
-										                        <telerik:GridBoundColumn DataField="CMYK_K" HeaderText="K" UniqueName="CMYK_K"
-                                                                    SortExpression="CMYK_K">                                                                                      
+										                        <telerik:GridBoundColumn DataField="CMYK_K" UniqueName="CMYK_K" AllowFiltering="false"
+                                                                    ItemStyle-BackColor="#E7EBEE" Visible="true" HeaderText="K" ItemStyle-Width="17%"
+                                                                    HeaderStyle-Width="17%" ItemStyle-HorizontalAlign="Center">                                                                                
                                                                 </telerik:GridBoundColumn>
                                                             </Columns>                                                                   
                                                         </MasterTableView>                                
                                                     </telerik:RadGrid>
-                                                </div>
+                                                         </td>
+                                                     </tr>
+                                                  </table>
                                                 <div class="clear"></div>                                                  
                                             </div>
                                             </div>

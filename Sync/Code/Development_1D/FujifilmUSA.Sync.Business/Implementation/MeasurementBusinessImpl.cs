@@ -330,10 +330,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return VmeasurementSummary;
         }
 
-        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false)
+        public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetPatchDetailsByMeasurementID";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVPatchDetailsByMeasurementID";
             DataTable dtPatchDetails = new DataTable();
@@ -347,29 +349,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 storedProc,
                                 new object[] { MeasurementId });
                     if (dsMeasurements.Tables.Count > 0)
-                        dtPatchDetails = dsMeasurements.Tables[0];
-                    //PatchDetails = dsMeasurements.
-                    //    Tables[0].
-                    //    AsEnumerable().
-                    //    Select(x => new MeasurementPatchDetails()
-                    //    {
-                    //        SampleId = DataReader.ReadInt(x, "SampleID"),
-                    //        HtmlColor = DataReader.ReadString(x, "HTMLColor"),
-                    //        CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
-                    //        CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
-                    //        CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
-                    //        CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                    //        TargetL = DataReader.ReadDecimal(x, "TargetL"),
-                    //        Targeta = DataReader.ReadDecimal(x, "Targeta"),
-                    //        Targetb = DataReader.ReadDecimal(x, "Targetb"),
-                    //        CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
-                    //        CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
-                    //        CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
-                    //        ΔE = DataReader.ReadDecimal(x, "ΔE"),
-                    //        ΔE94 = DataReader.ReadDecimal(x, "ΔE94"),
-                    //        ΔE2000 = DataReader.ReadDecimal(x, "ΔE2000")
-                    //    }).ToList();
-
+                        dtPatchDetails = dsMeasurements.Tables[0];    
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPatchDetailsofMeasurement"));
             return dtPatchDetails;

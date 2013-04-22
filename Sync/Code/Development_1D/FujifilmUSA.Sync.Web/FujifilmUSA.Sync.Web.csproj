@@ -1497,6 +1497,7 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="tempImages\" />
+    <Folder Include="UploadFiles\CurvesFile\" />
     <Folder Include="UploadFiles\Report_PDF\BrowserTest\" />
     <Folder Include="UploadFiles\temp\" />
   </ItemGroup>
@@ -2135,7 +2136,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

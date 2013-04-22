@@ -55,6 +55,28 @@ namespace FujifilmUSA.Sync.Common
             catch (ThreadAbortException Exc)
             { string str = Exc.Message; }
         }
+
+        public static void DownloadExportFile(string FolderPath, string FileName, string ShowOnDialogName)
+        {
+            try
+            {
+                //========== Download File ==========//
+                System.IO.FileStream fs = System.IO.File.OpenRead(FolderPath + FileName);
+                byte[] data = new byte[fs.Length];
+                fs.Read(data, 0, (int)fs.Length);
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.ClearHeaders();
+
+                System.Web.HttpContext.Current.Response.AddHeader("Content-Type", "application/*");
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + ShowOnDialogName);
+                System.Web.HttpContext.Current.Response.BinaryWrite(data);
+                fs.Close();
+                System.Web.HttpContext.Current.Response.End();               
+            }
+            catch (Exception Exc)
+            { string str = Exc.Message; }
+        }
+
         private static string ReturnExtension(string fileExtension)
         {
             switch (fileExtension)

@@ -70,6 +70,7 @@
     <Compile Include="SessionManager.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZipManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
