@@ -56,6 +56,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     trAdvancedDownload.Visible = true;
                 }
+                if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
+                {
+                    rbtnDetlaReflist.Items[1].Enabled = false;
+                }
             }
         }
 
@@ -131,7 +135,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         private void BindCurve(short _CurveTypeID)
         {            
-            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;            
+            this.OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+            if (_CurveTypeID == 100 || _CurveTypeID == 101) //---Set same value for "ColorGate-TVI" and "ColorGate-CGCX" like "5%" for export curve data
+            {
+                _CurveTypeID = 5;
+            }
             this.CurveTypeId = _CurveTypeID;
             _presenterExport.GetCurveData();
             SessionManager.Instance.CurveExportView = this.CurveData.CurveExportView;
@@ -151,9 +159,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void rgCurveDeltaView_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
         {
-            if (SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView.Count > 0)
+            if (rbtnDetlaReflist.SelectedIndex == 0)
             {
-                rgCurveDeltaView.DataSource = SessionManager.Instance.CurveExportView;
+                if (SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView != null && SessionManager.Instance.CurveDeltaRefView.Count > 0)
+                {
+                    rgCurveDeltaView.DataSource = SessionManager.Instance.CurveDeltaRefView;
+                }
+            }
+            else
+            {
+                if (SessionManager.Instance.CurveDeltaPrevRunView != null && SessionManager.Instance.CurveDeltaPrevRunView != null && SessionManager.Instance.CurveDeltaPrevRunView.Count > 0)
+                {
+                    rgCurveDeltaView.DataSource = SessionManager.Instance.CurveDeltaPrevRunView;
+                }
             }
         }
 
@@ -252,9 +270,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip", SessionManager.Instance.CurrentUser.UserId + "_CMYKFile.zip");
                         #endregion
                     }
+                    else if (DdlCurveType.SelectedValue == "25")  // for XMF
+                    {
+                        #region Create file and download txt file for XMF
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.csv");
+                        sw.WriteLine("Cyan;Magenta;Yellow;Black");
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+                            sw.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0000") + ";" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0000"));
+                        }
+                        sw.Close();
+
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.csv", SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.csv");
+                        #endregion
+
+                    }
                     else if (DdlCurveType.SelectedValue == "35")  // Harmony (Prinergy)
                     {
-                        #region Create Zip file and download file for rampage
+                        #region Create Zip file and download file for Harmony
                         System.IO.StreamWriter swC;
                         System.IO.StreamWriter swM;
                         System.IO.StreamWriter swY;
@@ -297,39 +331,160 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         #region Create Zip file and download file for nexus
 
-                        ////check if file exists and delete it
-                        //if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip") == true)
-                        //    System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
+                        //check if file exists and delete it
+                        if (System.IO.File.Exists(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip") == true)
+                            System.IO.File.Delete(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
 
-                        //System.IO.StreamWriter swC;
-                        //System.IO.StreamWriter swM;
-                        //System.IO.StreamWriter swY;
-                        //System.IO.StreamWriter swK;
-                        //swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
-                        //swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
-                        //swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
-                        //swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
+                        System.IO.StreamWriter swC;
+                        System.IO.StreamWriter swM;
+                        System.IO.StreamWriter swY;
+                        System.IO.StreamWriter swK;
+                        swC = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
+                        swM = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
+                        swY = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
+                        swK = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
 
 
-                        //for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
-                        //{
-                        //    swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"]).ToString("0.0000"));
-                        //    swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"]).ToString("0.0000"));
-                        //    swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"]).ToString("0.0000"));
-                        //    swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"]).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"]).ToString("0.0000"));
-                        //}
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+                            swC.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0000"));
+                            swM.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0000"));
+                            swY.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0000"));
+                            swK.WriteLine(Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0000") + "    " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0000"));
+                        }
 
-                        //swC.Close();
-                        //swM.Close();
-                        //swY.Close();
-                        //swK.Close();
+                        swC.Close();
+                        swM.Close();
+                        swY.Close();
+                        swK.Close();
 
-                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
-                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
-                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
-                        //ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Cya.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Mag.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Yel.txt");
+                        ZipManager.AddFileToZip(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_Nexus_Bla.txt");
 
-                        //Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip", SessionManager.Instance.CurrentUser.UserId + "_Nexus.zip");
+                        #endregion
+                    }
+                    else if (DdlCurveType.SelectedValue == "55")  // for sericol UK Caldera
+                    {
+                        #region Create file and download txt file for sericol UK
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.ppc");
+                        sw.WriteLine("Device = CMYK");
+                        sw.WriteLine("Max ink = 400");
+                        sw.WriteLine("Max ink reduction = preserve black");
+
+                        string strCyan = "";
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+
+                            strCyan = strCyan + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_C).ToString("0.0") + ") , ";
+
+                        }
+                        strCyan = strCyan.Remove(strCyan.Length - 3, 3);
+                        sw.WriteLine("Cyan curve = " + strCyan);
+
+                        string strMagenta = "";
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+
+                            strMagenta = strMagenta + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_M).ToString("0.0") + ") , ";
+
+                        }
+                        strMagenta = strMagenta.Remove(strMagenta.Length - 3, 3);
+                        sw.WriteLine("Magenta curve = " + strMagenta);
+
+                        string strYellow = "";
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+
+                            strYellow = strYellow + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_Y).ToString("0.0") + ") , ";
+
+                        }
+                        strYellow = strYellow.Remove(strYellow.Length - 3, 3);
+                        sw.WriteLine("Yellow curve = " + strYellow);
+
+                        string strBlack = "";
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+
+                            strBlack = strBlack + "(" + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].ReferenceNo).ToString("0.0") + " " + Convert.ToDecimal(DT_CPSyncPressRunCurve[i].CMYK_K).ToString("0.0") + ") , ";
+
+                        }
+                        strBlack = strBlack.Remove(strBlack.Length - 3, 3);
+                        sw.WriteLine("Black curve = " + strBlack);
+
+
+                        sw.Close();
+
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.ppc", SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.ppc");
+                        #endregion
+
+                    }                   
+                    else if (DdlCurveType.SelectedValue == "100")  // for ColorGate-TVI
+                    {
+                        #region Create file and download .ctvx file for ColorGate-TVI
+
+                        //-------For curvetype=100-------Make .ctvx XML file for ColorGate-TVI (Dhruti's Code)-------------------//
+
+                        //-----------------Pass few parameters in "" marks to .ctvx xml file------------------//
+                        string str0 = "\"" + "1.0" + "\"";
+                        string str1 = "\"" + "UTF-8" + "\"";
+                        string str2 = "\"" + "urn:schemas-colorgate-com:tonalvalues" + "\"";
+                        string str3 = "\"" + "1" + "\"";
+
+                        //-----------------Make .ctvx xml file------------------//
+                        System.IO.StreamWriter sw3;
+                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.ctvx");
+                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
+                        sw3.WriteLine("<TonalValues xmlns=" + str2 + ">");
+
+                        if (DT_CPSyncPressRunCurve.Count > 19)
+                        {
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_K.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_C.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_M.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[2].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[5].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[10].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[15].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + (Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_Y.ToString()) - Convert.ToDecimal(DT_CPSyncPressRunCurve[18].ReferenceNo.ToString())) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>0</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        }
+                        sw3.WriteLine("</TonalValues>");
+                        sw3.Close();
+
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.ctvx", SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.ctvx");
+
+                        #endregion
+                    }
+                    else if (DdlCurveType.SelectedValue == "101")  // for ColorGate-CGCX
+                    {
+                        #region Create file and download .cgcx file for ColorGate-CGCX
+
+                        //-------For curvetype=101-------Make .cgcx XML file for ColorGate-CGCX (Dhruti's Code)-------------------//
+
+                        //-----------------Pass few parameters in "" marks to .cgcx xml file------------------//
+                        string str0 = "\"" + "1.0" + "\"";
+                        string str1 = "\"" + "UTF-8" + "\"";
+                        string str2 = "\"" + "urn:schemas-colorgate-com:gradation" + "\"";
+                        string str3 = "\"" + "1" + "\"";
+
+                        //-----------------Make .cgcx xml file------------------//
+                        System.IO.StreamWriter sw3;
+                        sw3 = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.cgcx");
+                        sw3.WriteLine("<?xml version=" + str0 + " encoding=" + str1 + "?>");
+                        sw3.WriteLine("<GradationCurves xmlns=" + str2 + ">");
+
+                        if (DT_CPSyncPressRunCurve.Count > 19)
+                        {
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>0</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_K.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>1</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_C.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>2</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_M.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>3</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.1</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[2].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0</X><Y>1.224646799e-017</Y></Token><Token><X>0.2</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.25</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[5].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.15</X><Y>1.224646799e-017</Y></Token><Token><X>0.35</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.5</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[10].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.4</X><Y>1.224646799e-017</Y></Token><Token><X>0.6</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.75</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[15].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.65</X><Y>1.224646799e-017</Y></Token><Token><X>0.85</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>3</Code><Tokens><Token><X>0.9</X><Y>" + Convert.ToDecimal(DT_CPSyncPressRunCurve[18].CMYK_Y.ToString()) / 100 + "</Y></Token><Token><X>0.8</X><Y>1.224646799e-017</Y></Token><Token><X>1</X><Y>-1.224646799e-017</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                            sw3.WriteLine("<ColorTansfer version=" + str3 + "><ChannelID>4</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>5</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>6</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>7</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer><ColorTansfer version=" + str3 + "><ChannelID>8</ChannelID><ColorTansferPoint><Code>1</Code><Tokens><Token><X>0</X><Y>0</Y></Token></Tokens></ColorTansferPoint><ColorTansferPoint><Code>2</Code><Tokens><Token><X>1</X><Y>1</Y></Token></Tokens></ColorTansferPoint></ColorTansfer>");
+                        }
+                        sw3.WriteLine("</GradationCurves>");
+                        sw3.Close();
+
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.cgcx", SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.cgcx");
+
                         #endregion
                     }
                 }
@@ -376,6 +531,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 
             }
         }
+
+        protected void rbtnDetlaReflist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rgCurveDeltaView.Rebind();      
+        }
+
+     
     
 
         

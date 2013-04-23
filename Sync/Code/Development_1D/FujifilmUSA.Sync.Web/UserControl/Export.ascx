@@ -209,14 +209,13 @@
                                                                 <asp:ListItem Text="1%" Value="1"></asp:ListItem>
                                                                 <asp:ListItem Text="5%" Value="5"></asp:ListItem>
                                                                 <asp:ListItem Text="10%" Value="10"></asp:ListItem>
-                                                                <asp:ListItem Text="Harmony" Value="35"></asp:ListItem>
-                                                                <asp:ListItem Text="Nexus" Value="45"></asp:ListItem>
                                                                 <asp:ListItem Text="Rampage" Value="15"></asp:ListItem>
                                                                 <asp:ListItem Text="XMF" Value="25"></asp:ListItem>
+                                                                <asp:ListItem Text="Harmony" Value="35"></asp:ListItem>
+                                                                <asp:ListItem Text="Nexus" Value="45"></asp:ListItem>                                                                
                                                                 <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
                                                                 <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
-                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>
-                                                                <%--  <asp:ListItem Text="&#916;Ref" Value="65"></asp:ListItem>--%>
+                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>                                                              
                                                             </asp:DropDownList>
                                                             &nbsp;&nbsp;
                                                             <asp:CheckBox ID="Chk_C" runat="server" Text="Cyan" Checked="true" AutoPostBack="True"
@@ -278,7 +277,7 @@
                                                      </tr>
                                                     <tr>
                                                         <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
-                                                           <asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves"
+                                                           &nbsp;<asp:Button ID="BtnExportCurvesExportView" runat="server" CssClass="BUTTON" Text="Export Curves"
                                                                                                                 OnClick="BtnExportCurvesExportView_Click" />
                                                          </td>
                                                     </tr>
@@ -294,6 +293,23 @@
                                          <div class="tab_middle">
                                             <div class="combopart">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+                                                     <tr>
+                                                        <td colspan="2">
+                                                          <asp:RadioButtonList ID="rbtnDetlaReflist" runat="server" AutoPostBack="True" 
+                                                                onselectedindexchanged="rbtnDetlaReflist_SelectedIndexChanged" 
+                                                                RepeatDirection="Horizontal">
+                                                            <asp:ListItem Text="&#916;Ref" Value="0" Selected="True"></asp:ListItem>
+                                                            <asp:ListItem Text="&#916;Previous Run" Value="1"></asp:ListItem>
+                                                          </asp:RadioButtonList>
+                                                           <%-- <asp:RadioButton ID="rbtnDetlaRef" runat="server" Text="&#916;Ref" Checked="true"
+                                                                GroupName="DeltaView" AutoPostBack="True" 
+                                                                oncheckedchanged="rbtnDetlaRef_CheckedChanged" />
+                                                            <asp:RadioButton ID="rbtnDeltaPrev" runat="server" Text="&#916;Previous Run" 
+                                                                GroupName="DeltaView" AutoPostBack="True" 
+                                                                oncheckedchanged="rbtnDeltaPrev_CheckedChanged" />--%>
+                                                               
+                                                        </td>
+                                                     </tr>
                                                      <tr style="border: solid 1px;">
                                                         <td style="width: 60%">
                                                          
@@ -336,8 +352,8 @@
                                                                     ItemStyle-BackColor="#E7EBEE" Visible="true" HeaderText="K" ItemStyle-Width="17%"
                                                                     HeaderStyle-Width="17%" ItemStyle-HorizontalAlign="Center">                                                                                
                                                                 </telerik:GridBoundColumn>
-                                                            </Columns>                                                                   
-                                                        </MasterTableView>                                
+                                                            </Columns>                                                 
+                                                        </MasterTableView>                               
                                                     </telerik:RadGrid>
                                                          </td>
                                                      </tr>
