@@ -230,9 +230,43 @@
                                                     </tr>
                                                     <tr style="border: solid 1px;">
                                                         <td style="width: 60%">
-                                                         
-                                                      
+                                                            <asp:Chart ID="CHRT_ExportCurve" runat="server" Width="410px" Height="350px" ImageType="Jpeg"
+                                                                ImageUrl="~/UploadFiles/temp/CHRT_ExportCurve" BackGradientType="Center" Palette="SemiTransparent"
+                                                                BackGradientEndColor="White" BorderLineColor="#808080" BackColor="#EDEDED">
+                                                                <Series>
+                                                                    <asp:Series Name="Series1" IsVisibleInLegend="false" Color="Cyan" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series2" IsVisibleInLegend="false" Color="Magenta" BorderWidth="2"
+                                                                        ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series3" IsVisibleInLegend="false" Color="Yellow" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series4" IsVisibleInLegend="false" Color="Black" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                </Series>
+                                                                <BorderSkin SkinStyle="None"></BorderSkin>
+                                                               
+                                                                <ChartAreas>
+                                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                        <Position Height="99" Width="94" X="0" Y="2" />
+                                                                        <AxisY IsLabelAutoFit="False" Title="" Interval="10" Minimum="0" Maximum="100">
+                                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                        </AxisY>
+                                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Minimum="0" Maximum="100"
+                                                                            Title="">
+                                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                            <LabelStyle Angle="0" />
+                                                                        </AxisX>
+                                                                    </asp:ChartArea>
+                                                                </ChartAreas>
+                                                            </asp:Chart>                                                           
+                                                        
                                                          </td>
+
                                                          <td style="width: 40%">                                                               
                                                             <telerik:RadGrid ID="rgCurveExportView" AllowFilteringByColumn="False" AllowPaging="False"
                                                                     runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
@@ -300,19 +334,45 @@
                                                                 RepeatDirection="Horizontal">
                                                             <asp:ListItem Text="&#916;Ref" Value="0" Selected="True"></asp:ListItem>
                                                             <asp:ListItem Text="&#916;Previous Run" Value="1"></asp:ListItem>
-                                                          </asp:RadioButtonList>
-                                                           <%-- <asp:RadioButton ID="rbtnDetlaRef" runat="server" Text="&#916;Ref" Checked="true"
-                                                                GroupName="DeltaView" AutoPostBack="True" 
-                                                                oncheckedchanged="rbtnDetlaRef_CheckedChanged" />
-                                                            <asp:RadioButton ID="rbtnDeltaPrev" runat="server" Text="&#916;Previous Run" 
-                                                                GroupName="DeltaView" AutoPostBack="True" 
-                                                                oncheckedchanged="rbtnDeltaPrev_CheckedChanged" />--%>
-                                                               
+                                                          </asp:RadioButtonList>                                                           
                                                         </td>
                                                      </tr>
                                                      <tr style="border: solid 1px;">
                                                         <td style="width: 60%">
-                                                         
+
+                                                            <asp:Chart ID="CHRT_ExportCurveDeltaRef" runat="server" Width="410px" Height="350px"
+                                                                ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_ExportCurveDeltaRef" BackGradientType="Center"
+                                                                Palette="SemiTransparent" BackGradientEndColor="White" BorderLineColor="#808080" BackColor="#EDEDED">
+                                                                <Series>
+                                                                    <asp:Series Name="Series1" IsVisibleInLegend="false" Color="Cyan" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series2" IsVisibleInLegend="false" Color="Magenta" BorderWidth="2"
+                                                                        ChartType="Spline" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series3" IsVisibleInLegend="false" Color="Yellow" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series4" IsVisibleInLegend="false" Color="Black" BorderWidth="2" ChartType="Spline"
+                                                                        MarkerBorderColor="64, 64, 64" MarkerStyle="Circle" MarkerSize="2">
+                                                                    </asp:Series>
+                                                                </Series>
+                                                              
+                                                                <ChartAreas>
+                                                                    <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                                        BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                        <Position Height="99" Width="94" X="0" Y="2" />
+                                                                        <AxisY IsLabelAutoFit="False" Title="" Interval="Auto" Minimum="-2" Maximum="2">
+                                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                        </AxisY>
+                                                                        <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Minimum="0" Maximum="100"
+                                                                            Title="">
+                                                                            <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                            <LabelStyle Angle="0" />
+                                                                        </AxisX>
+                                                                    </asp:ChartArea>
+                                                                </ChartAreas>
+                                                            </asp:Chart>
                                                       
                                                          </td>
                                                          <td style="width: 40%">                                            
@@ -357,6 +417,13 @@
                                                     </telerik:RadGrid>
                                                          </td>
                                                      </tr>
+                                                     <tr>
+                                                        <td colspan="2" align="right" style="padding-right: 15px; padding-top: 10px;">
+                                                           
+                                                            <asp:Button ID="BtnExportCurvesDeltaView" runat="server" CssClass="BUTTON" Text="Export Delta"
+                                                                OnClick="BtnExportCurvesDeltaView_Click" />
+                                                        </td>
+                                                    </tr>
                                                   </table>
                                                 <div class="clear"></div>                                                  
                                             </div>

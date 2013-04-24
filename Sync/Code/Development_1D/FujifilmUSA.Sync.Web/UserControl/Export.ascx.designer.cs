@@ -238,6 +238,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox Chk_K;
         
         /// <summary>
+        /// CHRT_ExportCurve control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_ExportCurve;
+        
+        /// <summary>
         /// rgCurveExportView control.
         /// </summary>
         /// <remarks>
@@ -265,6 +274,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.RadioButtonList rbtnDetlaReflist;
         
         /// <summary>
+        /// CHRT_ExportCurveDeltaRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_ExportCurveDeltaRef;
+        
+        /// <summary>
         /// rgCurveDeltaView control.
         /// </summary>
         /// <remarks>
@@ -272,6 +290,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid rgCurveDeltaView;
+        
+        /// <summary>
+        /// BtnExportCurvesDeltaView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnExportCurvesDeltaView;
         
         /// <summary>
         /// hdnExportCurveSelectedTabIndex control.
