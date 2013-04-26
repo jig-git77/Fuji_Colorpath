@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Export.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Export" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
         $("div[id*='divAdvancedDownloadsHeader']").click
@@ -182,10 +185,13 @@
             </tr>
             <tr id="trExportViewForSync1D" runat="server" visible ="false">
                 <td>
+                 <%-- <asp:UpdatePanel ID="UpdPanExportView" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>--%>
                     <div>
                         <table cellpadding="0" cellspacing="0" border="0" width="97%">
                         <tr>
                             <td>
+                               
                                 <section id="tabpart" style="margin-left: 0;">
                                     <section class="inner_tab">
                                         <ul class="tabs">
@@ -199,8 +205,8 @@
                                     <section id="tab1" class="contantbox tabcontant hideclass" >
                                         <div class="tab_top">&nbsp;</div>
                                          <div class="tab_middle">
-                                            <div class="combopart">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <div class="combopart"> 
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                     <tr>
                                                         <td colspan="2" style="padding: 5px">
                                                             Curve Type :
@@ -315,18 +321,20 @@
                                                                                                                 OnClick="BtnExportCurvesExportView_Click" />
                                                          </td>
                                                     </tr>
-                                                </table>
-                                                </div>
-                                                <div class="clear"></div>                                                  
+                                                </table>                                                  
+                                                                                 
                                             </div>
-                                            </div>
-                                            <div class="tab_bottom">&nbsp;</div>
+                                            <div class="clear"></div>                                                  
+                                            </div>                                           
+                                         <div class="tab_bottom">&nbsp;</div>
                                     </section>   
                                     <section id="tab2" class="contantbox tabcontant hideclass" >
                                         <div class="tab_top">&nbsp;</div>
                                          <div class="tab_middle">
                                             <div class="combopart">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+                                               <%--  <asp:UpdatePanel ID="UpdPanDeltaView" runat="server" UpdateMode="Conditional">
+                                                    <ContentTemplate>--%>
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
                                                      <tr>
                                                         <td colspan="2">
                                                           <asp:RadioButtonList ID="rbtnDetlaReflist" runat="server" AutoPostBack="True" 
@@ -425,16 +433,28 @@
                                                         </td>
                                                     </tr>
                                                   </table>
-                                                <div class="clear"></div>                                                  
+                                                <%--   </ContentTemplate>
+                                                    <Triggers>                                                                                              
+                                                        <asp:PostBackTrigger ControlID="BtnExportCurvesDeltaView" />
+                                                    </Triggers>
+                                                </asp:UpdatePanel>--%>
                                             </div>
-                                            </div>
+                                            <div class="clear"></div>                                                  
+                                            </div>                                          
                                             <div class="tab_bottom">&nbsp;</div>
                                     </section>                                                                         
                                 </section>
+                                 
                             </td>
                         </tr>
                         </table>
                     </div>  
+                    <%-- </ContentTemplate>
+                        <Triggers>                                                                                              
+                            <asp:PostBackTrigger ControlID="BtnExportCurvesExportView" />
+                            <asp:PostBackTrigger ControlID="BtnExportCurvesDeltaView" /> 
+                    </Triggers>
+                </asp:UpdatePanel>--%>
                 </td>
             </tr>
         </table>              
