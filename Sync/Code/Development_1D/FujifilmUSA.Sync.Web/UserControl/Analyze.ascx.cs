@@ -397,6 +397,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                 }
             }
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----For Sync1D projects, call TVI tab data
+            {
+                _presenterAnalyze.GetTVIChart();
+                if (!IsErrorOccured)
+                {
+                    FillTVIChart(DTTVIChart);
+                }
+            }
         }
 
         #region Fill InkPaper Tab
@@ -1122,6 +1130,108 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
+        #region FIll TVI Tab
+
+        private void FillTVIChart(List<AnalyzeChart_DotGain> DT)
+        {
+            try
+            {
+                CHRT_SummaryDotgain.Series["Series1"].Points.Clear();
+                CHRT_SummaryDotgain.Series["Series2"].Points.Clear();
+                CHRT_SummaryDotgain.Series["Series3"].Points.Clear();
+                CHRT_SummaryDotgain.Series["Series4"].Points.Clear();
+               
+                if (DT != null && DT.Count > 0)
+                {
+                    int C = 0;
+                    int M = 0;
+                    int Y = 0;
+                    int K = 0;
+
+
+                    for (int i = 0; i < DT.Count; i++)
+                    {
+                        if (Convert.ToInt16(DT[i].CmykC) == 0 && Convert.ToInt16(DT[i].CmykM) == 0 && Convert.ToInt16(DT[i].CmykY) == 0 && Convert.ToInt16(DT[i].CmykK) == 0)
+                        {
+                            AddPointChartWithColor(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
+                            AddPointChartWithColor(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
+                            AddPointChartWithColor(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
+                            AddPointChartWithColor(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
+                            C++; M++; Y++; K++;
+                        }
+                        if (Convert.ToInt16(DT[i].CmykC) != 0)
+                        {
+                            AddPointChartWithColor(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
+                            C++;
+                        }
+                        if (Convert.ToInt16(DT[i].CmykM) != 0)
+                        {
+                            AddPointChartWithColor(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
+                            M++;
+                        }
+                        if (Convert.ToInt16(DT[i].CmykY) != 0)
+                        {
+                            AddPointChartWithColor(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
+                            Y++;
+                        }
+                        if (Convert.ToInt16(DT[i].CmykK) != 0)
+                        {
+                            AddPointChartWithColor(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
+                            K++;
+                        }
+                    }
+                }
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+        //Add Point with color
+        private void AddPointChartWithColor(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName)
+        {
+            try
+            {
+                _objSeries.ChartType = SeriesChartType.Spline;
+                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+                _objSeries.Points[_Index].BorderWidth = 1;
+
+                _objSeriesPoint.ChartType = SeriesChartType.Point;
+                _objSeriesPoint.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+                _objSeriesPoint.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+                _objSeriesPoint.Points[_Index].MarkerStyle = MarkerStyle.Circle;
+                _objSeriesPoint.Points[_Index].MarkerSize = 5;
+                _objSeriesPoint.Points[_Index].BorderWidth = 1;
+                _objSeriesPoint.Points[_Index].MarkerBorderColor = Color.Black;
+
+                if (Utilities.DecimalRound(Convert.ToDouble(_YValue)) > 0)
+                {
+                    #region Add Tooltip HTML
+                    StringBuilder toolTip = new StringBuilder();
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Dot Gain : </td><td>");
+                    toolTip.Append(_YValue);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+
+                    //_objSeries.Points[_Index].ToolTip = "(" + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)).ToString() + "," + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)).ToString() + ")";
+                    _objSeriesPoint.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                }
+                //_objSeries.Points[_Index].ToolTip = "(" + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)).ToString() + "," + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)).ToString() + ")";
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Methods for Patch Details tab
@@ -1548,32 +1658,41 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Now we are using DataTable as DataSource                    
                     rgPatchDetails.DataSource = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
 
-                    #region Make Visible/Invisible columns according to MetricSum selected
+                    //--------------If Sync1D project type, hide Target L, A and B columns--------//
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)
+                    {
+                        rgPatchDetails.MasterTableView.Columns.FindByDataField("TargetL").Visible = false;  //----TargetL
+                        rgPatchDetails.MasterTableView.Columns.FindByDataField("Targeta").Visible = false;  //----Targeta
+                        rgPatchDetails.MasterTableView.Columns.FindByDataField("Targetb").Visible = false;  //----Targetb
+                        rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔE94").Visible = false;  //----ΔE94
+                        rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔE2000").Visible = false;  //----ΔE2000
+                    }
+                    #region Make Visible/Invisible columns according to MetricSum selected in Validation
                     if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //--If validation, visible metricsum columns respectively
                     {
                         if (ViewState["MetricSumID"].ToString() == "5" || ViewState["MetricSumID"].ToString() == "6" || ViewState["MetricSumID"].ToString() == "7")
                         {
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = true;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = true;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
                         else if (ViewState["MetricSumID"].ToString() == "8" || ViewState["MetricSumID"].ToString() == "9")
                         {
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = true;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = true;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
                         else if (ViewState["MetricSumID"].ToString() == "10" || ViewState["MetricSumID"].ToString() == "11" || ViewState["MetricSumID"].ToString() == "12" || ViewState["MetricSumID"].ToString() == "13")
                         {
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = true;  //-----ΔL
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = true;  //-----ΔL
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = false;  //----ΔCh
                         }
                         else
                         {
-                            rgPatchDetails.MasterTableView.Columns[15].Visible = false;  //----ΔH
-                            rgPatchDetails.MasterTableView.Columns[16].Visible = false;  //----ΔCh
-                            rgPatchDetails.MasterTableView.Columns[17].Visible = false;  //----ΔL
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔH").Visible = false;  //----ΔH
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔCh").Visible = false;  //----ΔCh
+                            rgPatchDetails.MasterTableView.Columns.FindByDataField("ΔL").Visible = false;  //----ΔL
                         }
                     }
                     #endregion
@@ -1810,6 +1929,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D);
             }
         }
+
+        public List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
 
         #endregion        
     }

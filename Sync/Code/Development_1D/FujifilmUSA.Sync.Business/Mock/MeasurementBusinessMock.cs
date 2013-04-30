@@ -61,16 +61,16 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<AnalyzeChart>();
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId,bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart_Gray>();
         }
-        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart_Gray>();
         }
 
-        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart_Gray>();
         }
@@ -152,6 +152,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         public TargetTVIDataResponse GetTargetTVIData(int projectId)
         {
             return new TargetTVIDataResponse();
+        }
+        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
         }
         #endregion
 

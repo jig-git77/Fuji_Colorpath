@@ -23,9 +23,9 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart> GetInkPaperChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
-        List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false);
-        List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false);
-        List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false);
+        List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1);
         DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1);
 
@@ -44,5 +44,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
         MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds);
         TargetTVIDataResponse GetTargetTVIData(int projectId);
+
+        List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
     }
 }

@@ -428,10 +428,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return PaperPatchDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_Gray";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
@@ -465,10 +467,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return GamutChartDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetGamutChart2(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var GamutChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_Gray";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
@@ -499,10 +503,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return GamutChartDetails;
         }
 
-        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false)
+        public List<AnalyzeChart_Gray> GetLABChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var LABChartDetails = new List<AnalyzeChart_Gray>();
             string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_Gray";
             if (IsVerification)
                 storedProc = "CPSyncV.GetVChartData_Gray";
             Common.ImplementBusinessLogic(
@@ -1026,6 +1032,38 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return response;
         }
 
+        public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        { 
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync4D.GetChartData_DotGain";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_DotGain";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetChartData_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {                           
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),                           
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            DotGain = DataReader.ReadDecimal(x, "DotGain"),                          
+                            HTMLColor = DataReader.ReadString(x, "HTMLColor")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_TVI"));
+            return TVIChartDetails;
+        }
         #endregion
 
         #region ITaskBase Members

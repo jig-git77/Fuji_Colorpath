@@ -424,4 +424,7 @@
   <data name="validationAnalyzeHeaderText" xml:space="preserve">
     <value>Validation - Analyze</value>
   </data>
+  <data name="locTVIResource1.Text" xml:space="preserve">
+    <value>TVI</value>
+  </data>
 </root>

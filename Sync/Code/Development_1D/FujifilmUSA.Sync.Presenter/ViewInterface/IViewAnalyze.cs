@@ -39,5 +39,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         bool useDLP { get; set; }
         byte[] DeviceLinkProfile { get; set; }
         bool IsSync1DType { get; }
+
+        List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
     }
 }

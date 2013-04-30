@@ -302,11 +302,14 @@
                 <li id="Tab_G7" runat="server"><span><a href="#tab6"><asp:Localize Text="G7" ID="locG7" runat="server" 
                         meta:resourcekey="locG7Resource1"></asp:Localize></a></span></li>                                    
                 <li><span><a href="#tab3"><asp:Localize Text="Gamut" ID="locGray" runat="server" 
-                        meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>                                
+                        meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>  
+                <li><span><a href="#tab7"><asp:Localize Text="Report" ID="locTVI" runat="server" 
+                        meta:resourcekey="locTVIResource1"></asp:Localize></a></span></li>                                
                 <li><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
                         runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>  
                 <li><span><a href="#tab5"><asp:Localize Text="Report" ID="locReport" runat="server" 
                         meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>  
+                
             </ul>
             <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
                 <asp:ImageButton ID="ibtnPrintPreview" runat="server" ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label" OnClientClick="ShowLabelPrintPreview(); return false;"  />
@@ -1422,6 +1425,98 @@
         <div class="tab_bottom">&nbsp;</div>
   </section>
 
+      <div id="Div1" runat="server">
+   <section id="tab7" class="contantbox tabcontant hideclass">
+      <div class="tab_top">&nbsp;</div>
+        <div class="tab_middle">
+           <div class="combopart">
+        <div class="float_l" style="padding-left: 10px;" > 
+          <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+              <ContentTemplate>         
+           
+                    <table cellpadding="0" cellspacing="0" width="650px" >
+                         <tr>
+                            <td valign="top" style="width: 59%">
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                   
+                                    <tr>
+                                        <td valign="top">
+
+                                            <asp:Chart ID="CHRT_SummaryDotgain" runat="server" Width="650px" Height="360px"
+                                            ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryDotgain" BackGradientType="Center"
+                                            BackGradientEndColor="White" BorderLineColor="#808080"
+                                            EnableViewState="false">
+                                            <Series>
+                                                <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Cyan" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series1Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Cyan" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series2" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Magenta" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                 <asp:Series Name="Series2Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Magenta" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series3" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Yellow" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series3Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Yellow" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series4" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                                <asp:Series Name="Series4Point" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                    Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="64, 64, 64"
+                                                    MarkerStyle="Circle" MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                </asp:Series>
+                                            </Series>
+                                            <BorderSkin SkinStyle="None"></BorderSkin>                                            
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                    BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                    <Position Height="99" Width="94" X="0" Y="2" />
+                                                    <AxisY IsLabelAutoFit="False" Title="" Interval="Auto">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                    </AxisY>
+                                                    <AxisX IsLabelAutoFit="False" IsMarginVisible="False" Interval="25" Title="">
+                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                        <LabelStyle Angle="0" />
+                                                    </AxisX>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>                                                          
+                        </tr>
+                    </table>
+                 
+               </ContentTemplate>
+                    <Triggers>
+                        <asp:PostBackTrigger ControlID="chartAnalyze" />   
+                        <asp:PostBackTrigger ControlID="rbtnListDeltaE" />            
+                    </Triggers>  
+           </asp:UpdatePanel>       
+        </div>
+        <div class="clear"></div>
+        </div>                            	
+        </div>
+        <div class="tab_bottom">&nbsp;</div>
+   </section>
+   </div>
+
   <section id="tab4" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1587,6 +1682,31 @@
                                         meta:resourcekey="GridBoundColumnResource14" UniqueName="CielabB">
                                     </telerik:GridBoundColumn>    
                                      
+                                     <telerik:GridBoundColumn DataField="Density_V" HeaderText="Density_V" 
+                                        SortExpression="Density_V" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Density_V column" 
+                                        meta:resourcekey="GridBoundColumnResource18" UniqueName="Density_V">
+                                    </telerik:GridBoundColumn>    
+                                    <telerik:GridBoundColumn DataField="Density_C" HeaderText="Density_C" 
+                                        SortExpression="Density_C" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Density_C column" 
+                                        meta:resourcekey="GridBoundColumnResource19" UniqueName="Density_C">
+                                    </telerik:GridBoundColumn>    
+                                    <telerik:GridBoundColumn DataField="Density_M" HeaderText="Density_M" 
+                                        SortExpression="Density_M" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Density_M column" 
+                                        meta:resourcekey="GridBoundColumnResource20" UniqueName="Density_M">
+                                    </telerik:GridBoundColumn>    
+                                    <telerik:GridBoundColumn DataField="Density_Y" HeaderText="Density_Y" 
+                                        SortExpression="Density_Y" FilterControlWidth="30px" 
+                                        CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
+                                        FilterControlAltText="Filter Density_Y column" 
+                                        meta:resourcekey="GridBoundColumnResource21" UniqueName="Density_Y">
+                                    </telerik:GridBoundColumn>    
+
                                     <telerik:GridBoundColumn DataField="ΔH" HeaderText="ΔH" 
                                         SortExpression="ΔH" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
