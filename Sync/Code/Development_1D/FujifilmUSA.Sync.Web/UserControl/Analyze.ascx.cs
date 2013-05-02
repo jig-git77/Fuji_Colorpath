@@ -397,7 +397,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                 }
             }
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----For Sync1D projects, call TVI tab data
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || (IsVerification == true && ValidationType == 1)) //-----For Sync1D projects or validation with G7 type, call TVI tab data
             {
                 _presenterAnalyze.GetTVIChart();
                 if (!IsErrorOccured)
@@ -1163,7 +1163,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             AddPointChartWithColor(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
                             C++;
-                        }
+                        }                       
                         if (Convert.ToInt16(DT[i].CmykM) != 0)
                         {
                             AddPointChartWithColor(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
