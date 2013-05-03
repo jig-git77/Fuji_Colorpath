@@ -303,7 +303,7 @@
                         meta:resourcekey="locG7Resource1"></asp:Localize></a></span></li>                                    
                 <li><span><a href="#tab3"><asp:Localize Text="Gamut" ID="locGray" runat="server" 
                         meta:resourcekey="locGrayResource1"></asp:Localize></a></span></li>  
-                <li><span><a href="#tab7"><asp:Localize Text="Report" ID="locTVI" runat="server" 
+                <li id="Tab_TVI" runat="server"><span><a href="#tab7"><asp:Localize Text="Report" ID="locTVI" runat="server" 
                         meta:resourcekey="locTVIResource1"></asp:Localize></a></span></li>                                
                 <li><span><a href="#tab4"><asp:Localize Text="Patch Details" ID="locPatchDetails" 
                         runat="server" meta:resourcekey="locPatchDetailsResource1"></asp:Localize></a></span></li>  
@@ -318,7 +318,7 @@
             <div class="clear"></div>
         </section>
 
-
+    <div>
   <section id="tab1" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -474,7 +474,9 @@
     <div class="tab_bottom">
         &nbsp;</div>
     </section>  
+</div>
 
+    <div>
    <section id="tab2" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -645,13 +647,10 @@
                                                                             </asp:ChartArea>
                                                                         </ChartAreas>
                                                                     </asp:Chart>
-
-
                                                                     </td>
                                                             </tr>
                                                         </table>
                                                 </td>
-                                
                                 </tr>
                                    
                             </table>
@@ -670,8 +669,9 @@
         </div>
         <div class="tab_bottom">&nbsp;</div>
   </section>
+  </div>
     
-    <div id="dvTab6" runat="server">
+    <div id="dvTab_G7" runat="server">
    <section id="tab6" class="contantbox tabcontant hideclass">
       <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1073,6 +1073,8 @@
         <div class="tab_bottom">&nbsp;</div>
    </section>
    </div>
+
+    <div>
    <section id="tab3" class="contantbox tabcontant hideclass">
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1424,8 +1426,9 @@
         </div>
         <div class="tab_bottom">&nbsp;</div>
   </section>
+  </div>
 
-      <div id="Div1" runat="server">
+    <div id="dvTab_TVI" runat="server">
    <section id="tab7" class="contantbox tabcontant hideclass">
       <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1443,7 +1446,7 @@
                                         <td valign="top">
 
                                             <asp:Chart ID="CHRT_SummaryDotgain" runat="server" Width="650px" Height="360px"
-                                            ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryDotgain" BackGradientType="Center"
+                                            ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryTVI" BackGradientType="Center"
                                             BackGradientEndColor="White" BorderLineColor="#808080"
                                             EnableViewState="false">
                                             <Series>
@@ -1517,6 +1520,7 @@
    </section>
    </div>
 
+    <div>
   <section id="tab4" class="contantbox tabcontant hideclass" >
         <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1746,7 +1750,9 @@
     <div class="tab_bottom">
         &nbsp;</div>
   </section>
+  </div>
 
+    <div>
   <section id="tab5" class="contantbox tabcontant hideclass">
       <div class="tab_top">&nbsp;</div>
         <div class="tab_middle">
@@ -1781,8 +1787,7 @@
         </div>
         <div class="tab_bottom">&nbsp;</div>
    </section>
-  
-   
+  </div>
    
 
   </section>

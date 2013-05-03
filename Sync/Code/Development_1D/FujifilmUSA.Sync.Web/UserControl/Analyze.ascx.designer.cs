@@ -382,6 +382,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locGray;
         
         /// <summary>
+        /// Tab_TVI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Tab_TVI;
+        
+        /// <summary>
         /// locTVI control.
         /// </summary>
         /// <remarks>
@@ -553,13 +562,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartPaper2;
         
         /// <summary>
-        /// dvTab6 control.
+        /// dvTab_G7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTab6;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTab_G7;
         
         /// <summary>
         /// UpdatePanel7 control.
@@ -724,13 +733,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartB;
         
         /// <summary>
-        /// Div1 control.
+        /// dvTab_TVI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTab_TVI;
         
         /// <summary>
         /// UpdatePanel2 control.
