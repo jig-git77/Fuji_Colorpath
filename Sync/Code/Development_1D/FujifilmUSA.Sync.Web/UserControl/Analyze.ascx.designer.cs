@@ -535,6 +535,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartDeltaE;
         
         /// <summary>
+        /// locDensity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locDensity;
+        
+        /// <summary>
+        /// CHRT_SummaryDensity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart CHRT_SummaryDensity;
+        
+        /// <summary>
         /// locPaper control.
         /// </summary>
         /// <remarks>

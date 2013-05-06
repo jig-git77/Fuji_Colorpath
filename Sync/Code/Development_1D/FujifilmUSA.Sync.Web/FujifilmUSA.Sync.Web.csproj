@@ -133,6 +133,7 @@
     <Content Include="Images\contant_box_haed_bt_right_Rev.png" />
     <Content Include="Images\activity-validation-rules-icon.png" />
     <Content Include="Images\activity-validation-rules.png" />
+    <Content Include="Images\green.png" />
     <Content Include="Images\Sync1D.png" />
     <Content Include="Images\Sync1D_Certified.png" />
     <Content Include="Images\DymoPrintPreviewIcon.png" />
@@ -2136,7 +2137,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -24,5 +24,8 @@ namespace FujifilmUSA.Sync.Entity
         public decimal ΔL { get; set; }
         public decimal Δa { get; set; }
         public decimal Δb { get; set; }
+
+        public decimal Density { get; set; }
+        public decimal DensityLimit { get; set; }
     }
 }

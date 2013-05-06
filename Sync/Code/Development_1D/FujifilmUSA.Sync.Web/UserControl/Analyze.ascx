@@ -543,114 +543,159 @@
                    
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >                                                
-                           
+                                 <tr>
+                                    <td class="green-title">
+                                        &nbsp; <asp:Localize Text="Density" runat="server" ID="locDensity" 
+                                            meta:resourcekey="locDensityResource1"></asp:Localize>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
+                                          
+                                            <tr>
+                                                <td>
+                                                    <asp:Chart ID="CHRT_SummaryDensity" ImageType="Jpeg" runat="server" Width="380px"
+                                                        Height="175px" ImageUrl="~/UploadFiles/temp/CHRT_DensityDeviation" BackGradientType="Center"
+                                                        BackGradientEndColor="#FFFFFF" BorderLineColor="#808080"
+                                                        EnableViewState="false">
+                                                        <Series>
+                                                            <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
+                                                                BorderWidth="0" Color="Transparent" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
+                                                                Label="" IsVisibleInLegend="true">
+                                                            </asp:Series>
+                                                            <asp:Series Name="Series1" BorderColor="100, 0 , 0 , 0" ChartArea="ChartArea1" BorderWidth="1"
+                                                                IsVisibleInLegend="false">
+                                                            </asp:Series>
+                                                            <asp:Series Name="Series2" BorderWidth="0" Color="Transparent"
+                                                                IsVisibleInLegend="false" MarkerImage="~/Images/green.png">
+                                                            </asp:Series>
+                                                        </Series>
+                                                        <BorderSkin SkinStyle="None"></BorderSkin>                                                       
+                                                        <ChartAreas>
+                                                            <asp:ChartArea Name="ChartArea1" BorderColor="26, 59, 105" BackSecondaryColor="White"
+                                                                BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
+                                                                <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0"  IsRightAngleAxes="true" IsClustered="false" WallWidth="0"  LightStyle="Realistic">
+                                                                </Area3DStyle>
+                                                                <Position Height="99" Width="94" X="0" Y="2" />
+                                                                <AxisY Enabled="True">
+                                                                    <MajorGrid LineColor="Beige" />                                                                   
+                                                                </AxisY>
+                                                                <AxisX Enabled="True" Interval="Auto">
+                                                                    <MajorGrid LineColor="Beige" />                                                                   
+                                                                </AxisX>
+                                                            </asp:ChartArea>
+                                                        </ChartAreas>
+                                                    </asp:Chart>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="green-title">
                                         &nbsp; &#916; <asp:Localize Text="Paper L* a* b*" runat="server" ID="locPaper" 
                                             meta:resourcekey="locPaperResource1"></asp:Localize>
                                     </td>
                                 </tr>
-                                <tr>
-                                  
-                                          <td style="width:380px;">
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                    <tr><td></td></tr>
-                                                            <tr>
-                                                                <td align="center" style="background:  url(images/BGISOPaperGraph1_Sync4D.jpg) no-repeat center; width: 276px;
-                                                                                        height: 180px; padding-left: 34px; padding-bottom: 14px;">
+                                <tr>                                  
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr><td></td></tr>
+                                                    <tr>
+                                                        <td align="center" style="background:  url(images/BGISOPaperGraph1_Sync4D.jpg) no-repeat center; width: 276px;
+                                                                                height: 180px; padding-left: 20px; padding-bottom: 14px;">
                                                                                 
-                                                                    <asp:Chart ID="chartPaper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
-                                                                        ImageType="Jpeg"  Width="240px" Height="130px" 
-                                                                        meta:resourcekey="chartPaper1Resource1">
-                                                                        <Legends>
-                                                                            <asp:Legend Name="Default" Enabled="False">
-                                                                            </asp:Legend>
-                                                                        </Legends>
-                                                                        <Series>
-                                                                            <asp:Series Name="Green" ChartType="Polar" 
-                                                                                MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
-                                                                                MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">                                                                                           
-                                                                            </asp:Series>
-                                                                            <asp:Series Name="Paper" ChartType="Polar" MarkerBorderColor="Black" MarkerColor="White"
-                                                                                    MarkerSize="10" MarkerBorderWidth="2"
-                                                                                MarkerStyle="Circle" ShadowOffset="1" ChartArea="Default" Legend="Default">                                                                                             
-                                                                            </asp:Series>
-                                                                        </Series>
-                                                                        <BorderSkin PageColor="AliceBlue" />
-                                                                        <Titles>
-                                                                            <asp:Title Name="Title1">
-                                                                            </asp:Title>
-                                                                        </Titles>
-                                                                        <ChartAreas>
-                                                                            <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
-                                                                                <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
-                                                                                    LineDashStyle="NotSet">
-                                                                                    <MajorGrid Enabled="False" />
-                                                                                    <MajorTickMark Enabled="False" />
-                                                                                    <LabelStyle Enabled="False" />
-                                                                                </AxisY>
-                                                                                <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="20" Minimum="-20" LineDashStyle="NotSet">
-                                                                                    <MajorGrid Enabled="False" />
-                                                                                    <MajorTickMark Enabled="False" />
-                                                                                    <LabelStyle Enabled="False" />
-                                                                                </AxisX>
-                                                                            </asp:ChartArea>
-                                                                        </ChartAreas>
-                                                                    </asp:Chart>
+                                                            <asp:Chart ID="chartPaper1" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph1_Sync4D.jpg"
+                                                                ImageType="Jpeg"  Width="240px" Height="130px" 
+                                                                meta:resourcekey="chartPaper1Resource1">
+                                                                <Legends>
+                                                                    <asp:Legend Name="Default" Enabled="False">
+                                                                    </asp:Legend>
+                                                                </Legends>
+                                                                <Series>
+                                                                    <asp:Series Name="Green" ChartType="Polar" 
+                                                                        MarkerSize="10" MarkerBorderWidth="2" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                        MarkerColor="Green" ShadowOffset="1" ChartArea="Default" Legend="Default">                                                                                           
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Paper" ChartType="Polar" MarkerBorderColor="Black" MarkerColor="White"
+                                                                            MarkerSize="10" MarkerBorderWidth="2"
+                                                                        MarkerStyle="Circle" ShadowOffset="1" ChartArea="Default" Legend="Default">                                                                                             
+                                                                    </asp:Series>
+                                                                </Series>
+                                                                <BorderSkin PageColor="AliceBlue" />
+                                                                <Titles>
+                                                                    <asp:Title Name="Title1">
+                                                                    </asp:Title>
+                                                                </Titles>
+                                                                <ChartAreas>
+                                                                    <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
+                                                                        <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
+                                                                            LineDashStyle="NotSet">
+                                                                            <MajorGrid Enabled="False" />
+                                                                            <MajorTickMark Enabled="False" />
+                                                                            <LabelStyle Enabled="False" />
+                                                                        </AxisY>
+                                                                        <AxisX IsMarginVisible="False" TitleAlignment="Near" Maximum="20" Minimum="-20" LineDashStyle="NotSet">
+                                                                            <MajorGrid Enabled="False" />
+                                                                            <MajorTickMark Enabled="False" />
+                                                                            <LabelStyle Enabled="False" />
+                                                                        </AxisX>
+                                                                    </asp:ChartArea>
+                                                                </ChartAreas>
+                                                            </asp:Chart>
 
-                                                                </td>
-                                                            </tr>
-                                                        
-                                                            <tr>
-                                                                <td align="center" style="background: url(images/BGISOPaperGraph2_Sync4D.jpg) no-repeat center; width: 104px;
-                                                                                        height: 169px; padding-left: 28px; padding-bottom: 12px;" >
+                                                        </td>
+                                                   
+                                                        <td align="center" style="background: url(images/BGISOPaperGraph2_Sync4D.jpg) no-repeat center; width: 104px;
+                                                                                height: 169px; padding-left: 22px; padding-bottom: 12px;" >
 
 
-                                                                        <asp:Chart ID="chartPaper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
-                                                                        ImageType="Jpeg" Width="69px" Height="130px" 
-                                                                            meta:resourcekey="chartPaper2Resource1">
-                                                                        <Legends>
-                                                                            <asp:Legend Name="Default" Enabled="False">
-                                                                            </asp:Legend>
-                                                                        </Legends>
-                                                                        <Series>
-                                                                            <asp:Series Name="Series1" BorderColor="100, 0, 0, 0" ChartArea="Default"
-                                                                                IsVisibleInLegend="False" Legend="Default">                                                                                               
-                                                                            </asp:Series>
-                                                                            <asp:Series Name="Series2" Color="Green" ChartArea="Default" BorderWidth="2" 
-                                                                                IsVisibleInLegend="False" Legend="Default">
-                                                                            </asp:Series>
-                                                                        </Series>
-                                                                        <BorderSkin PageColor="AliceBlue" />
-                                                                        <Titles>
-                                                                            <asp:Title Name="Title1">
-                                                                            </asp:Title>
-                                                                        </Titles>
-                                                                        <ChartAreas>
-                                                                            <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
-                                                                                <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
-                                                                                    LineDashStyle="NotSet">
-                                                                                    <MajorGrid Enabled="False" />
-                                                                                    <MajorTickMark Enabled="False" />
-                                                                                    <LabelStyle Enabled="False" />
-                                                                                </AxisY>
-                                                                                <AxisX TitleAlignment="Near" LineDashStyle="NotSet">
-                                                                                    <MajorGrid Enabled="False" />
-                                                                                    <MajorTickMark Enabled="False" />
-                                                                                    <LabelStyle Enabled="False" />
-                                                                                </AxisX>
-                                                                                <AxisX2 Minimum="0" Maximum="1" LineDashStyle="NotSet">
-                                                                                    <MajorGrid Enabled="False" />
-                                                                                    <MajorTickMark Enabled="False" />
-                                                                                    <LabelStyle Enabled="False" />
-                                                                                </AxisX2>
-                                                                            </asp:ChartArea>
-                                                                        </ChartAreas>
-                                                                    </asp:Chart>
-                                                                    </td>
-                                                            </tr>
-                                                        </table>
-                                                </td>
+                                                                <asp:Chart ID="chartPaper2" runat="server" BackImageMode="Scaled" BackImage="~/Images/ISOPaperGraph2_Sync4D.jpg"
+                                                                ImageType="Jpeg" Width="69px" Height="130px" 
+                                                                    meta:resourcekey="chartPaper2Resource1">
+                                                                <Legends>
+                                                                    <asp:Legend Name="Default" Enabled="False">
+                                                                    </asp:Legend>
+                                                                </Legends>
+                                                                <Series>
+                                                                    <asp:Series Name="Series1" BorderColor="100, 0, 0, 0" ChartArea="Default"
+                                                                        IsVisibleInLegend="False" Legend="Default">                                                                                               
+                                                                    </asp:Series>
+                                                                    <asp:Series Name="Series2" Color="Green" ChartArea="Default" BorderWidth="2" 
+                                                                        IsVisibleInLegend="False" Legend="Default">
+                                                                    </asp:Series>
+                                                                </Series>
+                                                                <BorderSkin PageColor="AliceBlue" />
+                                                                <Titles>
+                                                                    <asp:Title Name="Title1">
+                                                                    </asp:Title>
+                                                                </Titles>
+                                                                <ChartAreas>
+                                                                    <asp:ChartArea BackColor="Transparent" BorderColor="" Name="Default">
+                                                                        <AxisY LineColor="120, 0, 0, 0" TitleAlignment="Near" Maximum="10" Minimum="-10"
+                                                                            LineDashStyle="NotSet">
+                                                                            <MajorGrid Enabled="False" />
+                                                                            <MajorTickMark Enabled="False" />
+                                                                            <LabelStyle Enabled="False" />
+                                                                        </AxisY>
+                                                                        <AxisX TitleAlignment="Near" LineDashStyle="NotSet">
+                                                                            <MajorGrid Enabled="False" />
+                                                                            <MajorTickMark Enabled="False" />
+                                                                            <LabelStyle Enabled="False" />
+                                                                        </AxisX>
+                                                                        <AxisX2 Minimum="0" Maximum="1" LineDashStyle="NotSet">
+                                                                            <MajorGrid Enabled="False" />
+                                                                            <MajorTickMark Enabled="False" />
+                                                                            <LabelStyle Enabled="False" />
+                                                                        </AxisX2>
+                                                                    </asp:ChartArea>
+                                                                </ChartAreas>
+                                                            </asp:Chart>
+                                                            </td>
+                                                    </tr>
+                                                </table>
+                                        </td>
                                 </tr>
                                    
                             </table>

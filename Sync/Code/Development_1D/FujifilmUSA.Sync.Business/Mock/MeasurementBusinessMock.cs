@@ -61,6 +61,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<AnalyzeChart>();
         }
 
+        public List<AnalyzeChart> GetDensityChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart>();
+        }
+
         public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart_Gray>();

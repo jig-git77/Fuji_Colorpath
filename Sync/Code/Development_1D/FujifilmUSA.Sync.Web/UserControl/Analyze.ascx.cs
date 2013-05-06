@@ -392,7 +392,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterAnalyze.GetInkPaperChart();
             if (!IsErrorOccured)
             {
-                FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
+                FillInkPaperChart(DTDeltaEPrimaryPatches, DTPaperPatches, DTDensity); //---Fill out Ink Paper Tab with 3 charts depending on selected Measurement ID-----//
             }
 
             _presenterAnalyze.GetGrayChart();
@@ -420,12 +420,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         #region Fill InkPaper Tab
-        private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper)
+        private void FillInkPaperChart(List<AnalyzeChart> DTDeltaEPrimaryPatches, List<AnalyzeChart> Paper, List<AnalyzeChart> DTDensity)
         {
             if (DTDeltaEPrimaryPatches != null)
                 FillDeltaEPrimaryPatchesChart(DTDeltaEPrimaryPatches);
             if (Paper != null)
                 FillPaperChart(Paper);
+            if (DTDensity != null)
+                FillDensityChart(DTDensity);
         }
 
         #region Fill Delta E Primary Patches Chart
@@ -670,6 +672,113 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 #endregion
             }
         }
+        #endregion
+
+        #region Fill Density Chart
+
+        private void FillDensityChart(List<AnalyzeChart> DT)
+        {
+            if (DT != null && DT.Count > 0)
+            {
+                Double CValue = 0;
+
+                //========== Clear Points and Show Chart ==========//
+                CHRT_SummaryDensity.Visible = true;
+                CHRT_SummaryDensity.Series[0].Points.Clear();
+                CHRT_SummaryDensity.Series[1].Points.Clear();
+                CHRT_SummaryDensity.Series[2].Points.Clear();
+
+                #region //========== Declarations ==========//
+                // === Series0 to display Thresold value === //
+                Series objSeries0 = (Series)CHRT_SummaryDensity.Series[0];
+                objSeries0.XValueType = ChartValueType.String;
+                objSeries0.YValueType = ChartValueType.String;
+                objSeries0.IsVisibleInLegend = false;
+                objSeries0.ChartType = SeriesChartType.Column;
+                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
+                objSeries0.CustomProperties = "LabelStyle=Top,DrawingStyle=Cylinder";
+
+                // === Series1 to display Actual value === //
+                Series objSeries1 = (Series)CHRT_SummaryDensity.Series[1];
+                objSeries1.XValueType = ChartValueType.String;
+                objSeries1.YValueType = ChartValueType.String;
+                objSeries1.IsVisibleInLegend = false;
+                objSeries1.ChartType = SeriesChartType.Column;
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
+
+                // === Series2 to display red marker on Thresold value === //
+                Series objSeries2 = (Series)CHRT_SummaryDensity.Series[2];
+                objSeries2.XValueType = ChartValueType.String;
+                objSeries2.YValueType = ChartValueType.String;
+                objSeries2.IsVisibleInLegend = false;
+                objSeries2.ChartType = SeriesChartType.Column;
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
+             
+                #endregion
+
+                if (DT != null && DT.Count > 0)
+                {
+                    for (int i = 0; i < DT.Count; i++)
+                    {
+                        CValue = Utilities.DecimalRound(Convert.ToDouble(DT[i].Density));
+                        if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Cyan).ToString())
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "C", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Cyan", true);
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Magenta).ToString())
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "M", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Magenta", true);
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Yellow).ToString())
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "Y", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Yellow", true);
+                        else if (DT[i].PatchTypeId.ToString() == Convert.ToInt16(CPPatchType.Black).ToString())
+                            AddDensityPoint(i, objSeries0, objSeries1, objSeries2, "K", CValue.ToString(), DT[i].HtmlColor.ToString(), DT[i].Density.ToString(), DT[i].DensityLimit.ToString(), "Black", true);
+                    }
+
+                }
+                else
+                {
+                    CHRT_SummaryDensity.ChartAreas["Default"].AxisY.Minimum = -10;
+                    CHRT_SummaryDensity.ChartAreas["Default"].AxisY.Maximum = 10;
+
+                    AddDensityPoint(0, objSeries0, objSeries1, objSeries2, "C", "0", "#E9E9E9", "0", "0", "", false);
+                    AddDensityPoint(1, objSeries0, objSeries1, objSeries2, "M", "0", "#E9E9E9", "0", "0", "", false);
+                    AddDensityPoint(2, objSeries0, objSeries1, objSeries2, "Y", "0", "#E9E9E9", "0", "0", "", false);
+                    AddDensityPoint(3, objSeries0, objSeries1, objSeries2, "K", "0", "#E9E9E9", "0", "0", "", false);
+                }
+
+            }
+        }
+
+        private void AddDensityPoint(int Index, Series objSeries0, Series objSeries1, Series objSeries2, string _XValue, string _YValue, string HTMLColor, string _Actual, string _Target, string ColorName, bool isTooltip)
+        {
+            try
+            {
+                objSeries0.Points.AddXY(_XValue, _Target);
+                objSeries1.Points.AddXY(_XValue, _YValue);
+                StringBuilder toolTip = new StringBuilder();
+                if (isTooltip)
+                {
+                    #region Add Tooltip HTML
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual</td><td>");
+                    toolTip.Append(Utilities.DecimalRound(Convert.ToDouble(_Actual)).ToString());
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target</td><td>");
+                    toolTip.Append(_Target);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+                }
+                objSeries1.Points[Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                objSeries2.Points.AddXY(_XValue, _Target);
+                objSeries1.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(HTMLColor);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -1903,6 +2012,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
 
         public List<AnalyzeChart> DTPaperPatches { get; set; }
+
+        public List<AnalyzeChart> DTDensity { get; set; }
 
         public List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }
         public List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }

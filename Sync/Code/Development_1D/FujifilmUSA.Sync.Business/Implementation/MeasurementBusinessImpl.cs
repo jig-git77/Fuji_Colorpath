@@ -421,11 +421,42 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Targetb = DataReader.ReadDecimal(x, "Targetb"),
                             ΔL = DataReader.ReadDecimal(x, "ΔL"),
                             Δa = DataReader.ReadDecimal(x, "Δa"),
-                            Δb = DataReader.ReadDecimal(x, "Δb")
+                            Δb = DataReader.ReadDecimal(x, "Δb")                      
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_PaperLAB"));
             return PaperPatchDetails;
+        }
+
+        public List<AnalyzeChart> GetDensityChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var DensityPatchDetails = new List<AnalyzeChart>();
+            string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_InkPaper";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_InkPaper";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                               storedProc,
+                                new object[] { MeasurementId, From_ΔE });
+                    DensityPatchDetails = dsMeasurements.Tables[2].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                            Density = DataReader.ReadDecimal(x, "Density"),
+                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit")         
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_Density"));
+            return DensityPatchDetails;
         }
 
         public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)

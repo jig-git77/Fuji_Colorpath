@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         string From_ΔE { get; set; }
         List<Entity.AnalyzeChart> DTDeltaEPrimaryPatches { get; set; }
         List<Entity.AnalyzeChart> DTPaperPatches { get; set; }
+        List<Entity.AnalyzeChart> DTDensity { get; set; }
         List<Entity.AnalyzeChart_Gray> DTLABChart { get; set; }
         List<Entity.AnalyzeChart_Gray> DTGaumatChart1 { get; set; }
         List<Entity.AnalyzeChart_Gray> DTGaumatChart2 { get; set; }
