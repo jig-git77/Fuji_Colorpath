@@ -54,7 +54,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
                                           LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
                                           MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
-                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId")
+                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
+                                          Sync1DProjectType = (ESync1DProjectType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ValidationType"),
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -974,7 +975,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             MetricTargetPresetID = DataReader.ReadInt(x, "MetricTargetPresetID"),
                             MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
                             MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
-                            ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId")
+                            ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
+                            ValidationType = DataReader.ReadInt(x, "ValidationType")
                         }).ToList();
                     }
 

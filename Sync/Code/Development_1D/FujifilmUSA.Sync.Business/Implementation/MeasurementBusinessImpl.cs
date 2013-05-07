@@ -245,11 +245,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         }
 
-        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        public List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false)
         {
-            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";
-            if(IsSync1DType)
-                storedProc = "CPSync.GetMeasurementDeltasByMeasurementID";
+            string storedProc = "CPSync4D.GetMeasurementDeltasByMeasurementID";          
             if (IsVerification)
                 storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
             var measurements = new List<MeasurementPatch_AvgDelta>();
@@ -284,11 +282,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false)
+        public List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             var VmeasurementSummary = new List<Measurement>();
-            string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";
-          
+            string storedProc = "CPSyncV.GetVMeasurementDeltasByMeasurementID";           
+            if (IsSync1DType)
+                storedProc = "CPSync.GetMeasurementDeltasByMeasurementID";           
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -707,7 +707,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {

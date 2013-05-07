@@ -213,7 +213,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = false;
                     Div_Opt_Header.Visible = true;
-                    dvTab_G7.Visible = Tab_G7.Visible = false;
+                    if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7)  //G7 type
+                    {
+                        dvTab_G7.Visible = Tab_G7.Visible = true;
+                    }
+                    else
+                    {
+                        dvTab_G7.Visible = Tab_G7.Visible = false;
+                    }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
                     Div_MetricSumFilter.Visible = false;             
                 }
@@ -312,7 +319,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             From_ΔE = rbtnListDeltaE.SelectedValue;
 
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            if ((SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) || (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)) //---Validation mode or Sync1D project type
             {
                 //This will be called when Verification process is going on
                 _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
@@ -327,36 +334,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
 
-                    PreparePrintLabelXML(MeasurementSummary[0]);
-
                     if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
                     {
                         FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
                     }
-                }
 
-                //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "";
-                if (ValidationType == 1)  //G7 type
-                {
-                    dvTab_G7.Visible = Tab_G7.Visible = true;
-                    path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)  //----Only display print label feature in validation mode
+                    {
+                        ibtnPrintPreview.Visible = false;
+                        ibtnPrintLabel.Visible = false;
+                    }
+                    else
+                    {
+                        PreparePrintLabelXML(MeasurementSummary[0]);
+                    }
                 }
-                else
-                {
-                    dvTab_G7.Visible = Tab_G7.Visible = false;
-                    path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
-                }
-                iframeGeneratePDFReport.Attributes.Add("src", path);
-                iframeGeneratePDFReport.Style.Add("display", "");
             }
             else
             {
-                //In case of None (i.e. Optimization or Sync1D project type)
+                //In case of None (i.e. Optimization (Sync4D) project type)
                 ibtnPrintPreview.Visible = false;
                 ibtnPrintLabel.Visible = false;
                 tbValidationSummary.Visible = false;
-                dvTab_G7.Visible = Tab_G7.Visible = false;
+
                 MeasurementsDelta = new List<Entity.MeasurementPatch_AvgDelta>();
                 _presenterAnalyze.GetAvgDeltaMeasurement_Optimization();
                 if (!IsErrorOccured)
@@ -365,12 +365,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     grdMeasurement.DataSource = MeasurementsDelta;
                     grdMeasurement.DataBind();
                 }
-
-                //-----------Assign Report iFrame to load report in "Report" tab----------------------//
-                string path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
-                iframeGeneratePDFReport.Attributes.Add("src", path);
-                iframeGeneratePDFReport.Style.Add("display", "");
             }
+
+            //-----------Assign Report iFrame to load report in "Report" tab----------------------//
+            string path = "";
+            if (ValidationType == 1 || SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7)  //G7 type
+            {
+                dvTab_G7.Visible = Tab_G7.Visible = true;
+                path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+            }
+            else
+            {
+                dvTab_G7.Visible = Tab_G7.Visible = false;
+                path = "ReportSingleMeasurement.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
+            }
+            iframeGeneratePDFReport.Attributes.Add("src", path);
+            iframeGeneratePDFReport.Style.Add("display", "");
         }
 
         #endregion
@@ -401,7 +411,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
 
-            if (IsVerification == true && ValidationType == 1)  //-------------Only call G7 & TVI tab data if it is G7 Validation type
+            if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7 || (IsVerification == true && ValidationType == 1))  //-------------Only call G7 tab data if it is G7 Validation type
             {
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)
@@ -689,30 +699,23 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryDensity.Series[2].Points.Clear();
 
                 #region //========== Declarations ==========//
-                // === Series0 to display Thresold value === //
+                // === Series0 to display Thresold value === //    
                 Series objSeries0 = (Series)CHRT_SummaryDensity.Series[0];
                 objSeries0.XValueType = ChartValueType.String;
-                objSeries0.YValueType = ChartValueType.String;
-                objSeries0.IsVisibleInLegend = false;
-                objSeries0.ChartType = SeriesChartType.Column;
-                objSeries0.BackGradientStyle = GradientStyle.DiagonalRight;
-                objSeries0.CustomProperties = "LabelStyle=Top,DrawingStyle=Cylinder";
+                objSeries0.YValueType = ChartValueType.String;               
+                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)CHRT_SummaryDensity.Series[1];
                 objSeries1.XValueType = ChartValueType.String;
-                objSeries1.YValueType = ChartValueType.String;
-                objSeries1.IsVisibleInLegend = false;
-                objSeries1.ChartType = SeriesChartType.Column;
-                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
+                objSeries1.YValueType = ChartValueType.String;               
+                objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series2 to display red marker on Thresold value === //
                 Series objSeries2 = (Series)CHRT_SummaryDensity.Series[2];
                 objSeries2.XValueType = ChartValueType.String;
                 objSeries2.YValueType = ChartValueType.String;
-                objSeries2.IsVisibleInLegend = false;
-                objSeries2.ChartType = SeriesChartType.Column;
-                objSeries0.CustomProperties = "DrawingStyle=Cylinder";
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";               
              
                 #endregion
 
@@ -1257,11 +1260,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
-                CHRT_SummaryDotgain.Series["Series1"].Points.Clear();
-                CHRT_SummaryDotgain.Series["Series2"].Points.Clear();
-                CHRT_SummaryDotgain.Series["Series3"].Points.Clear();
-                CHRT_SummaryDotgain.Series["Series4"].Points.Clear();
-               
+                //========== Clear Points and Show Chart ==========//
+                CHRT_SummaryDotgain.Series[0].Points.Clear();
+                CHRT_SummaryDotgain.Series[1].Points.Clear();
+                CHRT_SummaryDotgain.Series[2].Points.Clear();
+                CHRT_SummaryDotgain.Series[3].Points.Clear();
+                CHRT_SummaryDotgain.Series[4].Points.Clear();
+                CHRT_SummaryDotgain.Series[5].Points.Clear();
+                CHRT_SummaryDotgain.Series[6].Points.Clear();
+                CHRT_SummaryDotgain.Series[7].Points.Clear();              
+
+                #region " === Fill Series === "
                 if (DT != null && DT.Count > 0)
                 {
                     int C = 0;
@@ -1302,6 +1311,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         }
                     }
                 }
+                #endregion
             }
             catch (Exception Exc)
             {
@@ -1340,10 +1350,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     toolTip.Append("</table>");
                     #endregion
 
-                    //_objSeries.Points[_Index].ToolTip = "(" + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)).ToString() + "," + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)).ToString() + ")";
                     _objSeriesPoint.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
                 }
-                //_objSeries.Points[_Index].ToolTip = "(" + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_XValue)).ToString() + "," + Fuji.Common.CommonFunctions.DecimalRound(Convert.ToDouble(_YValue)).ToString() + ")";
             }
             catch (Exception Ex)
             {
@@ -1624,6 +1632,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
+        #region Print Label Method
         private void PreparePrintLabelXML(Entity.Measurement measurmentSummary)
         {
             //Open label template from XML(.label) file            
@@ -1670,6 +1679,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string base64String = System.Convert.ToBase64String(binaryData, 0, binaryData.Length);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ImageString", " function GetStatusIconImageString() { return '" + base64String + "' ;};", true);
         }
+        #endregion
 
         #endregion
 

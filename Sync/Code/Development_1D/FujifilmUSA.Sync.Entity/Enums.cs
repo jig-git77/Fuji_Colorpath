@@ -423,4 +423,11 @@ namespace FujifilmUSA.Sync.Entity
         LastFailed = 5 //Validation_Last_Failed
 
     }
+
+    public enum ESync1DProjectType
+    {
+        None = -1,
+        ISO = 0,
+        G7 = 1
+    }
 }

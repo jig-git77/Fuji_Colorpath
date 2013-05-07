@@ -562,22 +562,21 @@
                                                         <Series>
                                                             <asp:Series Name="Series0" BackGradientStyle="DiagonalRight" BorderColor="26, 59, 105"
                                                                 BorderWidth="0" Color="Transparent" ShadowOffset="70" Font="Microsoft Sans Serif, 7pt, style=Underline"
-                                                                Label="" IsVisibleInLegend="true">
+                                                                Label="" IsVisibleInLegend="true" ChartType="Column">
                                                             </asp:Series>
                                                             <asp:Series Name="Series1" BorderColor="100, 0 , 0 , 0" ChartArea="ChartArea1" BorderWidth="1"
-                                                                IsVisibleInLegend="false">
+                                                                IsVisibleInLegend="false" ChartType="Column">
                                                             </asp:Series>
                                                             <asp:Series Name="Series2" BorderWidth="0" Color="Transparent"
                                                                 IsVisibleInLegend="false" MarkerImage="~/Images/green.png">
-                                                            </asp:Series>
+                                                            </asp:Series>                                                             
                                                         </Series>
                                                         <BorderSkin SkinStyle="None"></BorderSkin>                                                       
                                                         <ChartAreas>
                                                             <asp:ChartArea Name="ChartArea1" BorderColor="26, 59, 105" BackSecondaryColor="White"
                                                                 BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                                                 <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0"  IsRightAngleAxes="true" IsClustered="false" WallWidth="0"  LightStyle="Realistic">
-                                                                </Area3DStyle>
-                                                                <Position Height="99" Width="94" X="0" Y="2" />
+                                                                </Area3DStyle>                                                           
                                                                 <AxisY Enabled="True">
                                                                     <MajorGrid LineColor="Beige" />                                                                   
                                                                 </AxisY>

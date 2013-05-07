@@ -16,5 +16,6 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
         public string dEMethod { get; set; }
         public bool IsUsed { get; set; }
         public short ProjectTypeId { get; set; }
+        public int ValidationType { get; set; }
     }
 }
