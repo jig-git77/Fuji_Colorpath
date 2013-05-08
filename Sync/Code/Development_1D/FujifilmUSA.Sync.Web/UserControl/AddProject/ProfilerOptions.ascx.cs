@@ -47,14 +47,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 tbOptionPreset.Visible = false;
                 tbMetricPreset.Visible = true;
                 BindMetricPresets();
-                BindPrintStandardTVI();
+                BindPrintStandardTVI();              
             }
             else
             {
                 tbOptionPreset.Visible = true;
                 tbMetricPreset.Visible = false;
                 BindProfileRenderings();
-                BindPresets();
+                BindPresets();              
+            }
+            if (Page.IsPostBack == false)
+            {
+                //---Only load project details from session when page is loaded first time---//
                 LoadProjectInfoFromSession();
             }
         }
@@ -90,15 +94,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         private void LoadProjectInfoFromSession()
         {
-            if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
-                cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
-                cmbSelectedPresets_SelectedIndexChanged(null, null);
-                //cmbSelectedPresets.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null &&
-                //                              SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+                //Sync1D
+                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MetricTargetPresetId != 0)
+                {
+                    ddlMetricPresets.SelectedValue = SessionManager.Instance.CurrentProject.MetricTargetPresetId.ToString();
+                    ddlMetricPresets_SelectedIndexChanged(null, null);
+                }
+            }
+            else
+            {
+                if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId != 0)
+                {
+                    cmbSelectedPresets.SelectedValue = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId.ToString();
+                    cmbSelectedPresets_SelectedIndexChanged(null, null);
+                }
             }
         }
-
+      
         private void BindMetricPresets()
         {
             if (ViewState[_vsMetricTargetPreset] == null)
