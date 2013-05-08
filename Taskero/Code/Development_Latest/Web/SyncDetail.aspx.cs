@@ -126,8 +126,8 @@ public partial class SyncDetail : PageBase
                 Fuji.Common.Sessions.SetSessions("SyncCompanyID", ddlCompany.SelectedValue.Trim());
                 BindSyncPress();
             }
-            else
-            { BindBranchDropDown(0); }
+            //else
+            //{ BindBranchDropDown(0); }
 
            
         }
@@ -2493,9 +2493,20 @@ public partial class SyncDetail : PageBase
                     sw.WriteLine("END_DATA_FORMAT");
                     sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Rows.Count.ToString());
                     sw.WriteLine("BEGIN_DATA");
+                    //for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
+                    //{
+                    //    sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
+                    //}
+                    //sw.WriteLine("END_DATA");
+                    //sw.Close();
+
+                    // sw.WriteLine("BEGIN_DATA_FORMAT");
+                    //sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    //sw.WriteLine("END_DATA_FORMAT");
+                    //sw.WriteLine("BEGIN_DATA");
                     for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
                     {
-                        sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
+                        sw.WriteLine(DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
                     }
                     sw.WriteLine("END_DATA");
                     sw.Close();
@@ -2798,6 +2809,30 @@ public partial class SyncDetail : PageBase
 
                     Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurveDelta.cgcx", Sessions.UserID + "_CurveDelta.cgcx");
 
+                    #endregion
+                }
+                else if (DdlCurveType.SelectedValue == "102")  // for Onyx G7 Import
+                {
+                    #region Create file and download txt file for weighted highlight shadowand then 5% increment
+                    System.IO.StreamWriter sw;
+                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + Sessions.UserID + "_CurvesFile.txt");
+                    //const string quote = "\"";
+                    sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
+                    sw.WriteLine("BEGIN_DATA_FORMAT");
+                    //sw.WriteLine("Reference\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                    sw.WriteLine("END_DATA_FORMAT");
+                    sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Rows.Count.ToString());
+                    sw.WriteLine("BEGIN_DATA");
+                    for (int i = 0; i < DT_CPSyncPressRunCurve.Rows.Count; i++)
+                    {
+                        sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve.Rows[i]["ReferenceNo"].ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_C"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_M"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_Y"].ToString() + "\t" + DT_CPSyncPressRunCurve.Rows[i]["CMYK_K"].ToString());
+                    }
+                    sw.WriteLine("END_DATA");
+                    sw.Close();
+
+
+                    Fuji.Common.CommonFunctions.DownlaodFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), Sessions.UserID + "_CurvesFile.txt", Sessions.UserID + "_CurvesFile.txt");
                     #endregion
                 }
             }

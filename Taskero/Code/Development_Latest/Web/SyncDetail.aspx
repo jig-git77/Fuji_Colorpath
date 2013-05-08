@@ -2613,6 +2613,7 @@
                                                                                                                 <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
                                                                                                                 <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>
+                                                                                                                <asp:ListItem Text="Onyx G7 Import" Value="102"></asp:ListItem>
                                                                                                                 <%--  <asp:ListItem Text="&#916;Ref" Value="65"></asp:ListItem>--%>
                                                                                                             </asp:DropDownList>
                                                                                                             &nbsp;&nbsp;
