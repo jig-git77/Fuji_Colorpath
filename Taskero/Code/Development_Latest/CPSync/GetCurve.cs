@@ -23,7 +23,7 @@ namespace CPSync
         {
             this._PressRunID = PressRunID;
             this._MeasurementID = MeasurementIDs;
-       }
+        }
 
         private int _ProjectID = 0;
         public int ProjectID
@@ -59,11 +59,11 @@ namespace CPSync
 
         //Use stored DLP For Iteration
         private bool _UseDLP = true;
-     
+
         private ArrayList PCSData = new ArrayList();
         private ArrayList DCSData = new ArrayList();
         private ArrayList DensityData = new ArrayList();
-       
+
 
         //array of doubles to hold PCS and DSC data
         private double[] arrPCS = new double[] { };
@@ -93,7 +93,7 @@ namespace CPSync
         {
             get { return _LinearizationTVI75; }
             set { _LinearizationTVI75 = value; }
-        } 
+        }
 
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace CPSync
                 return "Create Curve Error - No PressRun ID Passed";
             }
 
-  
+
             try
             {
 
@@ -125,7 +125,7 @@ namespace CPSync
 
                 this._MasterPressRunID = GetMasterPressRun();
 
-                            
+
                 CPSyncClient objSync = new CPSyncClient();
                 Profile objProfile = new Profile();
                 Curve objCurve = new Curve();
@@ -134,11 +134,11 @@ namespace CPSync
                 objCurve.arrDensity = this.arrDensity;
 
 
-                if (MasterPressRunID != 0 && this._UseDLP == true  )
+                if (MasterPressRunID != 0 && this._UseDLP == true)
                 {
                     byte[] profData = null;
                     profData = LoadProfileFromDB();
-                        
+
                     objCurve.UseDLP = this._UseDLP;
                     objCurve.ICCProfile = profData;
                 }
@@ -150,8 +150,8 @@ namespace CPSync
                 double[] m = new double[n];
                 double[] y = new double[n];
                 double[] k = new double[n];
-                    
-                    
+
+
                 for (int i = 0; i < n; i++)
                 {
 
@@ -171,19 +171,19 @@ namespace CPSync
                 SaveProfile(objProfile.ICCProfile);
 
                 return "OK";
-          
+
 
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }
-           
+
 
         }
 
 
-   
+
         /// <summary>
         /// Save Curve based on the given PCS and DSC data
         /// </summary>
@@ -203,7 +203,7 @@ namespace CPSync
             try
             {
 
-                Load_PCS_DCS_Data();                     
+                Load_PCS_DCS_Data();
 
 
                 if (arrDensity.Length <= 0)
@@ -233,7 +233,7 @@ namespace CPSync
 
                     objCurve.UseDLP = this._UseDLP;
                     objCurve.ICCProfile = profData;
-                 }
+                }
 
                 objProfile = objSync.CreateISOCurve(objCurve);
 
@@ -263,7 +263,7 @@ namespace CPSync
                 SaveProfile(objProfile.ICCProfile);
                 return "OK";
 
-             
+
             }
             catch (Exception ex)
             {
@@ -271,11 +271,11 @@ namespace CPSync
             }
             finally
             {
-                
+
             }
 
         }
-      
+
 
         /// <summary>
         /// Delete Existing Curve Data
@@ -340,7 +340,7 @@ namespace CPSync
                         DensityData.Add(Convert.ToDouble(objDR["Density_M"]));
                         DensityData.Add(Convert.ToDouble(objDR["Density_Y"]));
                         DensityData.Add(Convert.ToDouble(objDR["Density_V"]));
-                            
+
                     }
 
                 }
@@ -384,16 +384,16 @@ namespace CPSync
                     while (objDR.Read())
                     {
 
-                    
-                         switch (Convert.ToInt16(objDR["TVI"]))
-                         {
-                         case 25:
+
+                        switch (Convert.ToInt16(objDR["TVI"]))
+                        {
+                            case 25:
                                 this._LinearizationTVI25 = objDR["TVITarget"].ToString();
                                 break;
-                         case 50:  
+                            case 50:
                                 this._LinearizationTVI50 = objDR["TVITarget"].ToString();
                                 break;
-                         case 75:
+                            case 75:
                                 this._LinearizationTVI75 = objDR["TVITarget"].ToString();
                                 break;
                         }
@@ -401,7 +401,7 @@ namespace CPSync
 
                 }
 
-               
+
             }
             catch (SqlException ex)
             {
@@ -599,7 +599,7 @@ namespace CPSync
 
                 (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
 
-                            }
+            }
             catch (SqlException ex)
             {
                 throw new Exception(ex.ToString());
@@ -637,7 +637,7 @@ namespace CPSync
                         }
 
                     }
-                    
+
                 }
                 return MastPressRunID;
 
@@ -664,7 +664,7 @@ namespace CPSync
 
             try
             {
-                
+
                 //iterate through the collection and load PDC and DSC Data
                 foreach (MeasuredPatch objPatch in objMeasurement.MeasuredPatches)
                 {
@@ -681,32 +681,37 @@ namespace CPSync
                 arrPCS = (double[])PCSData.ToArray(typeof(double));
                 arrDCS = (double[])DCSData.ToArray(typeof(double));
 
-                
+
 
                 if (arrPCS.Length <= 0)
                 {
-                   throw new Exception("PCS data not loaded");
+                    throw new Exception("PCS data not loaded");
                 }
 
                 double[] GrayBalance = null;
-      
-                if (objMeasurement.MeasurementTypeID ==1)
+
+                if (objMeasurement.MeasurementTypeID == 1)
                 {
                     GrayBalance = new double[25] { 0, 1.96, 3.92, 5.88, 7.84, 10.2, 14.9, 20, 25.1, 30.2, 34.9, 40, 45.1, 49.8, 54.9, 60, 65.1, 69.8, 74.9, 80, 85.1, 89.8, 94.9, 98.04, 100 };
-                  
-                } 
-                else if (objMeasurement.MeasurementTypeID ==2)
+
+                }
+                else if (objMeasurement.MeasurementTypeID == 2)
                 {
-                    GrayBalance = new double[16] { 0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90,95, 100 };
-                   
+                    GrayBalance = new double[16] { 0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 95, 100 };
+
                 }
                 else if (objMeasurement.MeasurementTypeID == 3)
                 {
-                    GrayBalance = new double[5] { 0,25,50,75, 100 };
+                    GrayBalance = new double[5] { 0, 25, 50, 75, 100 };
                 }
                 else if (objMeasurement.MeasurementTypeID == 4)
                 {
                     GrayBalance = new double[5] { 0, 23, 45, 73, 100 };
+                }
+                else if (objMeasurement.MeasurementTypeID == 9)
+                {
+                    GrayBalance = new double[25] { 0, 1.96, 3.92, 5.88, 7.84, 10.2, 14.9, 20, 25.1, 30.2, 34.9, 40, 45.1, 49.8, 54.9, 60, 65.1, 69.8, 74.9, 80, 85.1, 89.8, 94.9, 98.04, 100 };
+
                 }
 
                 CPSyncClient objSync = new CPSyncClient();
@@ -716,10 +721,10 @@ namespace CPSync
                 objCurve.arrPCS = this.arrPCS;
                 objCurve.GrayBalance = GrayBalance;
 
-                objProfile = objSync.GetG7NPDC(objCurve);      
+                objProfile = objSync.GetG7NPDC(objCurve);
 
                 int n = GrayBalance.Length;
-              
+
 
                 //iterate thorugh the array 
                 for (int j = 0; j < n; j++)
@@ -731,9 +736,9 @@ namespace CPSync
 
                     //SAVE G7 Data
                     SaveG7NPDC(objMeasurement.MeasurementID, Convert.ToDecimal(GrayBalance[j]), GrayNPD, BlackNPD, Gray_L);
-                     
+
                 }
-                     
+
             }
             catch (Exception ex)
             {
@@ -741,12 +746,12 @@ namespace CPSync
             }
             finally
             {
-              
+
             }
 
         }
 
-        
+
         /// <summary>
         /// Save G7 NPDC Data
         /// </summary>
@@ -763,10 +768,10 @@ namespace CPSync
                 objCmd.Parameters.AddWithValue("@GrayNPD", Convert.ToDecimal(GrayNPD));
                 objCmd.Parameters.AddWithValue("@BlackNPD", Convert.ToDecimal(BlackNPD));
                 objCmd.Parameters.AddWithValue("@TargetGray_L", Convert.ToDecimal(Gray_L));
-                objCmd.Parameters.AddWithValue("@CMYK_C",CMYK_C);
-              
+                objCmd.Parameters.AddWithValue("@CMYK_C", CMYK_C);
+
                 (new Fuji.DataAccess.Database()).ExecuteNonQuery(objCmd);
-                
+
             }
             catch (SqlException ex)
             {
@@ -778,6 +783,6 @@ namespace CPSync
             }
 
         }
- 
+
     }
 }

@@ -82,7 +82,7 @@ namespace CPSync
         public string ParseMeasurment(int PressRunID, string strFileContent, string filename, DateTime LocalDate)
         {
 
-
+            bool bOriginatorOnyx = false;
             //http://www.codeproject.com/KB/database/DataSetFrmDelimTxt.aspx
             try
             {
@@ -92,7 +92,18 @@ namespace CPSync
                     strFileContent = strFileContent.Replace("SAMPLE_NAME", "SAMPLE_NAMExx");
                     strFileContent = strFileContent.Replace("SAMPLE_ID", "SAMPLE_NAME");
                     strFileContent = strFileContent.Replace("SampleID", "SAMPLE_NAME");
+
                 }
+
+                if (strFileContent.Contains("Onyx Graphics, Inc.") == true)
+                {
+                    bOriginatorOnyx = true;
+                    strFileContent = strFileContent.Replace("SAMPLE_ID", "SAMPLE_NAME");
+                    strFileContent = strFileContent.Replace(" ", "\t");
+
+
+                }
+
 
                 //Returns and newlines 
                 Rows = strFileContent.Split(SplitLineAt, StringSplitOptions.RemoveEmptyEntries);
@@ -109,12 +120,15 @@ namespace CPSync
 
                 bool bOriginatorFuji = false;
 
+
+
                 //Iterate through the rows and find out the start and end position of the patch data
                 for (int iCount = 0; iCount <= Rows.Length - 1; iCount++)
                 {
 
                     if (Rows[iCount].Replace("\t", string.Empty).Contains("FujiFilm Colorpath Sync 1D"))
                         bOriginatorFuji = true;
+
 
                     if (string.Compare(Rows[iCount].Replace("\t", string.Empty), "BEGIN_DATA", false) == 0)
                     {
@@ -134,7 +148,9 @@ namespace CPSync
                 //validate file by counting pathces and verifying position of the paper patch
                 if ((objDS.Tables["SpectralData"].Rows.Count == 300) || (objDS.Tables["SpectralData"].Rows.Count == 150) || (objDS.Tables["SpectralData"].Rows.Count == 40) || (objDS.Tables["SpectralData"].Rows.Count == 24))
                 {
-                    if (objDS.Tables["SpectralData"].Rows.Count == 300)
+
+
+                    if (objDS.Tables["SpectralData"].Rows.Count == 300 && (bOriginatorOnyx) == false)
                     {
 
                         objMeasurement.MeasurementTypeID = (int)(Measurement.ChartType.p2pChart);  // measured chart is a p2p chart
@@ -164,6 +180,36 @@ namespace CPSync
                             //return enumsUploadFileStatus.InvalidFile;
                         }
 
+                    }
+
+                    else if (objDS.Tables["SpectralData"].Rows.Count == 300 && (bOriginatorOnyx) == true)
+                    {
+                        objMeasurement.MeasurementTypeID = (int)(Measurement.ChartType.p2pOnyx);  // measured chart is a p2p chart
+
+
+                        ////check patch E1 is a paper patch
+
+                        DataColumn[] dcol = new DataColumn[1];
+                        dcol[0] = objDS.Tables["SpectralData"].Columns["SAMPLE_NAME"];
+
+                        objDS.Tables["SpectralData"].PrimaryKey = dcol;
+
+                        DataRow drow = null;
+                        drow = objDS.Tables["SpectralData"].Rows.Find("76");
+                        if (drow != null)
+                        {
+                            if (Convert.ToDecimal(drow["CMYK_C"]) != 0.0M & Convert.ToDecimal(drow["CMYK_M"]) != 0.0M & Convert.ToDecimal(drow["CMYK_Y"]) != 0.0M & Convert.ToDecimal(drow["CMYK_K"]) != 0.0M)
+                            {
+
+                                return "patch 76 (p2p chart) is not a paper patch";
+                                //return enumsUploadFileStatus.InvalidFile;
+                            }
+                        }
+                        else
+                        {
+                            return "invalid file. missing sample name in the file";
+                            //return enumsUploadFileStatus.InvalidFile;
+                        }
                     }
                     else if (objDS.Tables["SpectralData"].Rows.Count == 150)
                     {
