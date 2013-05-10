@@ -1995,6 +1995,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.Rebind();
         }
 
+        protected void Chk_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //if (Fuji.Common.Sessions.GetSession("SpreadChartData") != null && Fuji.Common.Sessions.GetSession("SpreadSplineRangeChartData") != null && Fuji.Common.Sessions.GetSession("MaxSpreadChartData") != null)
+                //{
+                //    DataTable DTSpread = (DataTable)Fuji.Common.Sessions.GetSession("SpreadChartData");
+                //    DataTable DTSpreadSplineRange = (DataTable)Fuji.Common.Sessions.GetSession("SpreadSplineRangeChartData");
+                //    DataTable DTMaxSpreadChartData = (DataTable)Fuji.Common.Sessions.GetSession("MaxSpreadChartData");
+                //    //FillSpreadChart(DTSpread, DTSpreadSplineRange, DTMaxSpreadChartData);
+                //}
+            }
+            catch (Exception Exc)
+            {
+                // LblError.Text = Exc.Message;
+            }
+        }
+
         #endregion
 
         #region IViewAnalyze Members

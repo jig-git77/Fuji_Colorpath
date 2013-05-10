@@ -606,6 +606,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        public bool IsSync1DType
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D);
+            }
+        }
+
         public DataSet DSReport_G7_Vali { get; set; }
         public int ValidationType { get; set; }
 

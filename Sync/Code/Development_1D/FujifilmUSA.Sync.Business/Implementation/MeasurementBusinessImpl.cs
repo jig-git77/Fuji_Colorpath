@@ -575,10 +575,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return LABChartDetails;
         }
 
-        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1)
+        public DataSet GetReportDataOnMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleMeasurement";
+            if (IsSync1DType)
+                storedProc = "Report.GetSingleMeasurement";
             if (IsVerification)
                 storedProc = "Report.GetSingleVMeasurement";
             Common.ImplementBusinessLogic(
@@ -607,7 +609,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurements;
         }
 
-        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1)
+        public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleVMeasurement";          

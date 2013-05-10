@@ -14,5 +14,6 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         DataSet DSReport { get; set; }
         DataSet DSReport_G7_Vali { get; set; }
         int ValidationType { get; set; }
+        bool IsSync1DType { get; }
     }
 }
