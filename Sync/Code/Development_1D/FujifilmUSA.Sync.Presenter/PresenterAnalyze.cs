@@ -152,5 +152,14 @@ namespace FujifilmUSA.Sync.Presenter
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
             _viewAnalyze.DTTVIChart = measurementBusiness.GetTVIChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
+        public void GetISOTVIChart()
+        {
+            var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
+            measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            _viewAnalyze.DTISOTVIChart = measurementBusiness.GetISOTVIChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTSpreadChartData = measurementBusiness.GetSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTSpreadSplineRangeChartData = measurementBusiness.GetSpreadSplineRangeChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTMaxSpreadChartData = measurementBusiness.GetMaxSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+        }
     }
 }

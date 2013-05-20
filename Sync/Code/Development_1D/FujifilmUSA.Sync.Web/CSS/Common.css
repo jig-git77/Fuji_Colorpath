@@ -2237,3 +2237,9 @@ label
 .DROPDOWNLIST1{ background:url(../images/login-input-bg.gif) no-repeat left top; border:1px solid #d0d0d0; color:#444; height:17px;font-size:10px }
 .DROPDOWNLIST11{ background:url(../images/login-input-bg.gif) no-repeat left top; border:1px solid #d0d0d0; color:#444; }
 .DROPDOWNLIST2, .DROPDOWNLIST2 INPUT{BORDER: 1PX SOLID #808080; COLOR: #000; FONT-FAMILY: VERDANA,ARIAL,HELVETICA,TAHOMA; FONT-SIZE: 10PX}
+
+.TDBOX{border:1px solid #B4b4b4;}
+.TABLEBOX{border:1px solid Gray;}
+.TRTABLEBOX{background-color:Gray; font-size:11px; font-weight:bold; color:White;}
+.TDTABLEBOXLEFT{padding-left:4px}
+.TDTABLEBOX{padding-top:3px; padding-bottom:3px;}

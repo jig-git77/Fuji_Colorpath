@@ -1604,21 +1604,17 @@
                                                         <BorderSkin SkinStyle="None"></BorderSkin>
                                                                                    
                                                         <Series>
-                                                            <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
-                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                           <asp:Series Name="Series0" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                BorderWidth="2">
                                                             </asp:Series>
                                                             <asp:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                 BorderColor="220, 65, 140, 140" Color="80, 65, 140, 140" YValueType="Double">
-                                                            </asp:Series>
-                                                            <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
-                                                                BorderWidth="2" Name="Series1">
-                                                            </asp:Series>
-                                                            <asp:Series MarkerSize="5" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Gray" ChartType="Point" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                Name="Series2">
-                                                            </asp:Series>
+                                                            </asp:Series>                                                            
+                                                             <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
+                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                            </asp:Series>                                                         
                                                         </Series>
                                                         <ChartAreas>
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
@@ -1657,21 +1653,17 @@
                                                         <BorderSkin SkinStyle="None"></BorderSkin>
                                                                                    
                                                         <Series>
-                                                            <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
-                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                            </asp:Series>
+                                                            <asp:Series Name="Series0" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                BorderWidth="2">
+                                                            </asp:Series>                                                           
                                                             <asp:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                 BorderColor="220, 65, 140, 140" Color="80, 65, 140, 140" YValueType="Double">
                                                             </asp:Series>
-                                                            <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
-                                                                BorderWidth="2" Name="Series1">
-                                                            </asp:Series>
-                                                            <asp:Series MarkerSize="5" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Gray" ChartType="Point" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                Name="Series2">
-                                                            </asp:Series>
+                                                            <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
+                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                            </asp:Series>                                                         
                                                         </Series>
                                                         <ChartAreas>
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
@@ -1712,21 +1704,17 @@
                                                         <BorderSkin SkinStyle="None"></BorderSkin>
                                                                                     
                                                         <Series>
-                                                            <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
-                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                            </asp:Series>
+                                                            <asp:Series Name="Series0" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                BorderWidth="2">
+                                                            </asp:Series>                                                           
                                                             <asp:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                 BorderColor="220, 65, 140, 140" Color="80, 65, 140, 140" YValueType="Double">
                                                             </asp:Series>
-                                                            <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
-                                                                BorderWidth="2" Name="Series1">
-                                                            </asp:Series>
-                                                            <asp:Series MarkerSize="5" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Gray" ChartType="Point" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                Name="Series2">
-                                                            </asp:Series>
+                                                            <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
+                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                            </asp:Series>                                                          
                                                         </Series>
                                                         <ChartAreas>
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
@@ -1764,22 +1752,18 @@
                                                         </Legends>
                                                         <BorderSkin SkinStyle="None"></BorderSkin>
                                                                                    
-                                                        <Series>
-                                                            <asp:Series Name="Series0" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
-                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
-                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
-                                                            </asp:Series>
+                                                         <Series>
+                                                            <asp:Series Name="Series0" MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
+                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
+                                                                BorderWidth="2">
+                                                            </asp:Series>                                                           
                                                             <asp:Series YValuesPerPoint="2" XValueType="Double" Name="SeriesTop" ChartType="SplineRange"
                                                                 BorderColor="220, 65, 140, 140" Color="80, 65, 140, 140" YValueType="Double">
                                                             </asp:Series>
-                                                            <asp:Series MarkerSize="12" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Green" ChartType="Spline" MarkerBorderColor="Green" MarkerStyle="Circle"
-                                                                BorderWidth="2" Name="Series1">
-                                                            </asp:Series>
-                                                            <asp:Series MarkerSize="5" BackSecondaryColor="162, 164, 255" IsVisibleInLegend="false"
-                                                                Color="Gray" ChartType="Point" MarkerBorderColor="64, 64, 64" MarkerStyle="Circle"
-                                                                Name="Series2">
-                                                            </asp:Series>
+                                                            <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"
+                                                                Color="Black" BorderWidth="2" ChartType="Spline" MarkerBorderColor="Black" MarkerStyle="Circle"
+                                                                MarkerSize="15" BackSecondaryColor="162, 164, 255">
+                                                            </asp:Series>                                                           
                                                         </Series>
                                                         <ChartAreas>
                                                             <asp:ChartArea Name="Default" BorderColor="26, 59, 105" BackSecondaryColor="White"
@@ -1821,7 +1805,7 @@
                                             <td>
                                                 <asp:Chart ID="CHRT_SummaryISODotgain" runat="server" Width="650px" Height="310px"
                                                     ImageType="Jpeg" ImageUrl="~/UploadFiles/temp/CHRT_SummaryISODotgain" BackGradientStyle="Center"
-                                                    BackSecondaryColor="White" BorderLineColor="#808080"
+                                                    BackSecondaryColor="#EDEDED" BorderLineColor="#808080"
                                                     EnableViewState="false">
                                                     <Series>
                                                         <asp:Series Name="Series1" IsValueShownAsLabel="false" LabelFormat="0" IsVisibleInLegend="false"

@@ -47,5 +47,9 @@ namespace FujifilmUSA.Sync.Business.Interface
         TargetTVIDataResponse GetTargetTVIData(int projectId);
 
         List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
+        List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
     }
 }

@@ -1030,10 +1030,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
         {
             var response = new TargetTVIDataResponse()
             {
-                TVI25 = "",
-                TVI50 = "",
-                TVI75 = "",
-
+                TVI = "",
+                Threshold = "",    
             };
             Common.ImplementBusinessLogic(
                 () =>
@@ -1050,18 +1048,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         foreach (DataRow row in dsTVIData.Tables[0].Rows)
                         {
-                            switch (DataReader.ReadInt(row, "TVI"))
-                            {
-                                case 25:
-                                    response.TVI25 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                                case 50:
-                                    response.TVI50 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                                case 75:
-                                    response.TVI75 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                            }                           
+                            response.TVI = DataReader.ReadString(row, "TVITarget");
+                            response.Threshold = DataReader.ReadString(row, "ThresholdTarget");
                         }
                     }
                 },
@@ -1070,13 +1058,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         }
 
         public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
-        { 
+        {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
-            string storedProc = "CPSync4D.GetChartData_DotGain";
-            if (IsSync1DType)
-                storedProc = "CPSync.GetChartData_DotGain";
+            string storedProc = "CPSync.GetChartData_DotGain";   //----G7 Sync1D type
             if (IsVerification)
-                storedProc = "CPSyncV.GetChartData_DotGain";
+                storedProc = "CPSyncV.GetVChartData_DotGain";
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1089,18 +1075,139 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     TVIChartDetails = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart_DotGain()
-                        {                           
+                        {
                             CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
                             CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
-                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),                           
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
                             CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
-                            DotGain = DataReader.ReadDecimal(x, "DotGain"),                          
-                            HTMLColor = DataReader.ReadString(x, "HTMLColor")
+                            DotGain = DataReader.ReadDecimal(x, "DotGain"),
+                            HtmlColor = DataReader.ReadString(x, "HTMLColor")
                         }).ToList();
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_TVI"));
             return TVIChartDetails;
         }
+
+        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            DotGain = DataReader.ReadDecimal(x, "DotGain"),
+                            HtmlColor = DataReader.ReadString(x, "HTMLColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                            TargetDotGain = DataReader.ReadDecimal(x, "TargetDotGain"),
+                            Threshold = DataReader.ReadDecimal(x, "Threshold")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI"));
+            return TVIChartDetails;
+        }
+       
+        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                       DataAccessFactory.
+                           Instance.
+                           GetDsResult(
+                               storedProc,
+                               new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[1].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            DotGain = DataReader.ReadDecimal(x, "DotGain"),
+                            HtmlColor = DataReader.ReadString(x, "HTMLColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                            DotGainSpreadTh = DataReader.ReadDecimal(x, "DotGainSpreadTh")                           
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI1"));
+            return TVIChartDetails;
+        }
+        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[2].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {
+                            TVI = DataReader.ReadDecimal(x, "TVI"),
+                            UpperLimit = DataReader.ReadDecimal(x, "UpperLimit"),
+                            LowerLimit = DataReader.ReadDecimal(x, "LowerLimit")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI2"));
+            return TVIChartDetails;
+        }
+        public List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var TVIChartDetails = new List<AnalyzeChart_DotGain>();
+            string storedProc = "CPSync.GetChartData_ISO_DotGain";  //----ISO Sync1D type  
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_ISO_DotGain";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    TVIChartDetails = dsMeasurements.Tables[3].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_DotGain()
+                        {
+                            TonePct = DataReader.ReadDecimal(x, "TonePct"),
+                            MaxSpread = DataReader.ReadDecimal(x, "MaxSpread")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI3"));
+            return TVIChartDetails;
+        }
+
         #endregion
 
         #region ITaskBase Members

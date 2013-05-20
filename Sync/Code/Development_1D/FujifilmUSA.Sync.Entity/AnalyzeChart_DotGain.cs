@@ -7,13 +7,14 @@ namespace FujifilmUSA.Sync.Entity
 {
     public class AnalyzeChart_DotGain : AnalyzeChart_Gray
     {
-        //public decimal CmykC { get; set; }
-        //public decimal CmykM { get; set; }
-        //public decimal CmykY { get; set; }
-        //public decimal CmykK { get; set; }
-        //public string PatchType { get; set; }
-
-        public decimal DotGain { get; set; }
-        public string HTMLColor { get; set; }
+        public decimal DotGain { get; set; }    
+        public decimal TargetDotGain { get; set; }
+        public decimal Threshold { get; set; }
+        public decimal DotGainSpreadTh { get; set; }
+        public decimal TVI { get; set; }
+        public decimal UpperLimit { get; set; }
+        public decimal LowerLimit { get; set; }
+        public decimal TonePct { get; set; }
+        public decimal MaxSpread { get; set; }
     }
 }

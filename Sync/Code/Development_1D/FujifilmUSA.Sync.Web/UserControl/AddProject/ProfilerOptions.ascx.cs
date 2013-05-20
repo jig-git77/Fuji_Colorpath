@@ -146,84 +146,60 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterDeviceFamilyProfilerOption.GetPrintStandardTVI();
             if (!IsErrorOccured)
             {
-                CPPatchType cpPatchType;
+                //CPPatchType cpPatchType;
                 foreach (var item in PrintStandardTVI)
                 {
-                    cpPatchType = (CPPatchType)Enum.Parse(typeof(CPPatchType), item.PatchType.Type, true);
-                    switch (cpPatchType)
-                    {
-                        case CPPatchType.Cyan:
-                            txtTVI25Cyan.Text = item.TVI25.ToString();
-                            txtTVI50Cyan.Text = item.TVI50.ToString();
-                            txtTVI75Cyan.Text = item.TVI75.ToString();
+                    //cpPatchType = (CPPatchType)Enum.Parse(typeof(CPPatchType), item.PatchType.Type, true);
+                    switch (item.PatchType.Type.ToString())
+                    {                       
+                        case "Cyan Quarter Tone":
+                            txtTVI25Cyan.Text = item.TVI.ToString();
+                            txtThresh25Cyan.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Magenta:
-                            txtTVI25Magenta.Text = item.TVI25.ToString();
-                            txtTVI50Magenta.Text = item.TVI50.ToString();
-                            txtTVI75Magenta.Text = item.TVI75.ToString();
+                        case "Cyan Half Tone":
+                            txtTVI50Cyan.Text = item.TVI.ToString();
+                            txtThresh50Cyan.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Yellow:
-                            txtTVI25Yellow.Text = item.TVI25.ToString();
-                            txtTVI50Yellow.Text = item.TVI50.ToString();
-                            txtTVI75Yellow.Text = item.TVI75.ToString();
+                        case "Cyan Three Quarter Tone":
+                            txtTVI75Cyan.Text = item.TVI.ToString();
+                            txtThresh75Cyan.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Black:
-                            txtTVI25Black.Text = item.TVI25.ToString();
-                            txtTVI50Black.Text = item.TVI50.ToString();
-                            txtTVI75Black.Text = item.TVI75.ToString();
+                        case "Magenta Quarter Tone":
+                            txtTVI25Magenta.Text = item.TVI.ToString();
+                            txtThresh25Magenta.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Overprint_Red:
+                        case "Magenta Half Tone":
+                            txtTVI50Magenta.Text = item.TVI.ToString();
+                            txtThresh50Magenta.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Overprint_Green:
+                        case "Magenta Three Quarter Tone":
+                            txtTVI75Magenta.Text = item.TVI.ToString();
+                            txtThresh75Magenta.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Overprint_Blue:
+                        case "Yellow Quarter Tone":
+                            txtTVI25Yellow.Text = item.TVI.ToString();
+                            txtThresh25Yellow.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Paper:
+                        case "Yellow Half Tone":
+                            txtTVI50Yellow.Text = item.TVI.ToString();
+                            txtThresh50Yellow.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Triplet_Solid_Gray:
+                        case "Yellow Three Quarter Tone":
+                            txtTVI75Yellow.Text = item.TVI.ToString();
+                            txtThresh75Yellow.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Gray_C_M_Y:
+                        case "Black Quarter Tone":
+                            txtTVI25Black.Text = item.TVI.ToString();
+                            txtThresh25Black.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Other:
+                        case "Black Half Tone":
+                            txtTVI50Black.Text = item.TVI.ToString();
+                            txtThresh50Black.Text = item.Threshold.ToString();
                             break;
-                        case CPPatchType.Cyan_Tint:
-                            break;
-                        case CPPatchType.Magenta_Tint:
-                            break;
-                        case CPPatchType.Yellow_Tint:
-                            break;
-                        case CPPatchType.Black_Tint:
-                            break;
-                        case CPPatchType.Cyan_Quarter_Tone:
-                            break;
-                        case CPPatchType.Cyan_Half_Tone:
-                            break;
-                        case CPPatchType.Cyan_Three_Quarter_Tone:
-                            break;
-                        case CPPatchType.Magenta_Quarter_Tone:
-                            break;
-                        case CPPatchType.Magenta_Half_Tone:
-                            break;
-                        case CPPatchType.Magenta_Three_Quarter_Tone:
-                            break;
-                        case CPPatchType.Yellow_Quarter_Tone:
-                            break;
-                        case CPPatchType.Yellow_Half_Tone:
-                            break;
-                        case CPPatchType.Yellow_Three_Quarter_Tone:
-                            break;
-                        case CPPatchType.Black_Quarter_Tone:
-                            break;
-                        case CPPatchType.Black_Half_Tone:
-                            break;
-                        case CPPatchType.Black_Three_Quarter_Tone:
-                            break;
-                        case CPPatchType.Gray_25:
-                            break;
-                        case CPPatchType.Gray_50:
-                            break;
-                        case CPPatchType.Gray_75:
-                            break;
+                        case "Black Three Quarter Tone":
+                            txtTVI75Black.Text = item.TVI.ToString();
+                            txtThresh75Black.Text = item.Threshold.ToString();
+                            break;                      
                         default:
                             break;
                     }
@@ -437,58 +413,135 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVIList()
         {
             List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
+            
+            //---Cyan Color
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
                 {
-                    PatchTypeId = (int)CPPatchType.Cyan,
-                    Type = CPPatchType.Cyan.ToString()
-
+                    PatchTypeId = (int)CPPatchType.Cyan_Quarter_Tone,
+                    Type = CPPatchType.Cyan_Quarter_Tone.ToString()
                 },
-                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI50Cyan.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI75Cyan.Text.Trim()))
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Cyan.Text.Trim()) ? "0" : txtThresh25Cyan.Text.Trim()))              
             });
-
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
                 {
-                    PatchTypeId = (int)CPPatchType.Magenta,
-                    Type = CPPatchType.Magenta.ToString()
-
+                    PatchTypeId = (int)CPPatchType.Cyan_Half_Tone,
+                    Type = CPPatchType.Cyan_Half_Tone.ToString()
                 },
-                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI50Magenta.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI75Magenta.Text.Trim()))
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI50Cyan.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Cyan.Text.Trim()) ? "0" : txtThresh50Cyan.Text.Trim()))         
             });
-
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
                 {
-                    PatchTypeId = (int)CPPatchType.Yellow,
-                    Type = CPPatchType.Yellow.ToString()
-
+                    PatchTypeId = (int)CPPatchType.Cyan_Three_Quarter_Tone,
+                    Type = CPPatchType.Cyan_Three_Quarter_Tone.ToString()
                 },
-                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI50Yellow.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI75Yellow.Text.Trim()))
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI75Cyan.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Cyan.Text.Trim()) ? "0" : txtThresh75Cyan.Text.Trim()))            
             });
 
+            //-----Magenta Color
             printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
             {
                 PatchType = new PatchType()
                 {
-                    PatchTypeId = (int)CPPatchType.Black,
-                    Type = CPPatchType.Black.ToString()
-
+                    PatchTypeId = (int)CPPatchType.Magenta_Quarter_Tone,
+                    Type = CPPatchType.Magenta_Quarter_Tone.ToString()
                 },
-                TVI25 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
-                TVI50 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI50Black.Text.Trim())),
-                TVI75 = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI75Black.Text.Trim()))
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Magenta.Text.Trim()) ? "0" : txtThresh25Magenta.Text.Trim()))            
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta_Half_Tone,
+                    Type = CPPatchType.Magenta_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI50Magenta.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Magenta.Text.Trim()) ? "0" : txtThresh50Magenta.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Magenta_Three_Quarter_Tone,
+                    Type = CPPatchType.Magenta_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI75Magenta.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Magenta.Text.Trim()) ? "0" : txtThresh75Magenta.Text.Trim()))
             });
 
+            //----Yellow Color
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Quarter_Tone,
+                    Type = CPPatchType.Yellow_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Yellow.Text.Trim()) ? "0" : txtThresh25Yellow.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Half_Tone,
+                    Type = CPPatchType.Yellow_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI50Yellow.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Yellow.Text.Trim()) ? "0" : txtThresh50Yellow.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Yellow_Three_Quarter_Tone,
+                    Type = CPPatchType.Yellow_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI75Yellow.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Yellow.Text.Trim()) ? "0" : txtThresh75Yellow.Text.Trim()))
+            });
+
+            //-----Black Color
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Quarter_Tone,
+                    Type = CPPatchType.Black_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Black.Text.Trim()) ? "0" : txtThresh25Black.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Half_Tone,
+                    Type = CPPatchType.Black_Half_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI50Black.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Black.Text.Trim()) ? "0" : txtThresh50Black.Text.Trim()))
+            });
+            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            {
+                PatchType = new PatchType()
+                {
+                    PatchTypeId = (int)CPPatchType.Black_Three_Quarter_Tone,
+                    Type = CPPatchType.Black_Three_Quarter_Tone.ToString()
+                },
+                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI75Black.Text.Trim())),
+                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Black.Text.Trim()) ? "0" : txtThresh75Black.Text.Trim()))
+            });
+          
             return printStandardTVIList;
         }
 

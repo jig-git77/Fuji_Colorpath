@@ -525,9 +525,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     }
 
                     TargetTVIDataResponse targetTVIResponse = measurementBusiness.GetTargetTVIData(projectId);
-                    alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;
-                    alignmentCurveRequest.LinearizationTVI50 = targetTVIResponse.TVI50;
-                    alignmentCurveRequest.LinearizationTVI75 = targetTVIResponse.TVI75;
+                    alignmentCurveRequest.LinearizationTVI = targetTVIResponse.TVI;
+                    alignmentCurveRequest.LinearizationThreshold = targetTVIResponse.Threshold;      
 
                     Profile syncClientResponse = new Profile();
                     syncClientResponse = syncClient.CreateISOCurve(alignmentCurveRequest);

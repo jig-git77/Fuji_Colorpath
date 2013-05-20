@@ -419,13 +419,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                 }
             }
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || (IsVerification == true && ValidationType == 1)) //-----For Sync1D projects or validation with G7 type, call TVI tab data
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
-                _presenterAnalyze.GetTVIChart();
-                if (!IsErrorOccured)
-                {
-                    FillTVIChart(DTTVIChart);
+                if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.ISO)  //ISO type
+                {                   
+                    _presenterAnalyze.GetISOTVIChart();
+                    if (!IsErrorOccured)
+                    {
+                        FillISOTVIChart(DTISOTVIChart);
+                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);                       
+                    }
+                    UpdatePanel_TVI_ISO.Visible = true;
+                    UpdatePanel_TVI_G7.Visible = false;
                 }
+                else  //G7 type
+                {
+                    _presenterAnalyze.GetTVIChart();
+                    if (!IsErrorOccured)
+                    {
+                        FillTVIChart(DTTVIChart);
+                    }
+                    UpdatePanel_TVI_ISO.Visible = false;
+                    UpdatePanel_TVI_G7.Visible = true;
+                }
+
             }
         }
 
@@ -1318,6 +1335,295 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Exc;
             }
         }
+
+        private void FillISOTVIChart(List<AnalyzeChart_DotGain> DT1)
+        {
+            try
+            {               
+                double ThresholdValue = 0;
+                double ThresholdTop = 0;
+                double ThresholdBottom = 0;
+                if (DT1 != null && DT1.Count > 0)
+                {
+                    #region //========== Clear Points of all 4 charts==========//
+                    CHRT_DotgainISOCyan.Series["Series0"].Points.Clear();
+                    CHRT_DotgainISOCyan.Series["Series1"].Points.Clear();            
+                    CHRT_DotgainISOCyan.Series["SeriesTop"].Points.Clear();
+
+                    CHRT_DotgainISOMeganta.Series["Series0"].Points.Clear();
+                    CHRT_DotgainISOMeganta.Series["Series1"].Points.Clear();
+                    CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.Clear();
+
+                    CHRT_DotgainISOYellow.Series["Series0"].Points.Clear();
+                    CHRT_DotgainISOYellow.Series["Series1"].Points.Clear();
+                    CHRT_DotgainISOYellow.Series["SeriesTop"].Points.Clear();
+
+                    CHRT_DotgainISOBlack.Series["Series0"].Points.Clear();
+                    CHRT_DotgainISOBlack.Series["Series1"].Points.Clear();
+                    CHRT_DotgainISOBlack.Series["SeriesTop"].Points.Clear();
+                    #endregion
+                    
+                    string _TitleValue = string.Empty;
+
+                    #region Cyan
+                    //Filter DT1 = "(PatchTypeID in (1,8,16,17,18))";
+                    List<AnalyzeChart_DotGain> ListCyan = new List<AnalyzeChart_DotGain>();
+                    ListCyan = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Three_Quarter_Tone))).OrderBy(item => item.CmykC).ToList();
+
+                    if (ListCyan.Count > 0)
+                    {
+                        for (int i = 0; i < ListCyan.Count; i++)
+                        {
+                            //---Target
+                            AddTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series0"], ListCyan[i].CmykC.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), false);
+                            //--Actual                          
+                            AddTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series1"], ListCyan[i].CmykC.ToString(), ListCyan[i].DotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), true);
+
+                            if (Convert.ToInt16(ListCyan[i].Threshold) == 0)
+                                ThresholdValue = 0;
+                            else
+                                ThresholdValue = Convert.ToDouble(ListCyan[i].Threshold);
+
+                            ThresholdTop = Convert.ToDouble(ListCyan[i].TargetDotGain) + ThresholdValue;
+                            ThresholdBottom = Convert.ToDouble(ListCyan[i].TargetDotGain) - ThresholdValue;
+
+                            CHRT_DotgainISOCyan.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListCyan[i].CmykC.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                        }
+                    }
+                    #endregion
+
+                    #region Magenta
+                    ThresholdValue = 0;
+                    ThresholdTop = 0;
+                    ThresholdBottom = 0;
+                 
+                    //Filter DT1 = "(PatchTypeID in (2,8,19,20,21))";
+                    List<AnalyzeChart_DotGain> ListMagenta = new List<AnalyzeChart_DotGain>();
+                    ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
+
+                    if (ListMagenta.Count > 0)
+                    {
+                        for (int i = 0; i < ListMagenta.Count; i++)
+                        {
+                            //---Target
+                            AddTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series0"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), false);
+                            //---Actual
+                            AddTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series1"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].DotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), true);
+
+                            if (Convert.ToInt16(ListMagenta[i].Threshold) == 0)
+                                ThresholdValue = 0;
+                            else
+                                ThresholdValue = Convert.ToDouble(ListMagenta[i].Threshold);
+
+                            ThresholdTop = Convert.ToDouble(ListMagenta[i].TargetDotGain) + ThresholdValue;
+                            ThresholdBottom = Convert.ToDouble(ListMagenta[i].TargetDotGain) - ThresholdValue;
+
+                            CHRT_DotgainISOMeganta.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListMagenta[i].CmykM.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                        }
+                    }
+                    #endregion
+
+                    #region Yellow
+                    ThresholdValue = 0;
+                    ThresholdTop = 0;
+                    ThresholdBottom = 0;
+                 
+                    //Filter DT1 = "(PatchTypeID in (3,8,22,23,24))";
+                    List<AnalyzeChart_DotGain> ListYellow = new List<AnalyzeChart_DotGain>();
+                    ListYellow = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Three_Quarter_Tone))).OrderBy(item => item.CmykY).ToList();
+                    
+                    if (ListYellow.Count > 0)
+                    {
+                        for (int i = 0; i < ListYellow.Count; i++)
+                        {
+                            //----Target
+                            AddTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series0"], ListYellow[i].CmykY.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), false);
+                            //---Actual                         
+                            AddTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series1"], ListYellow[i].CmykY.ToString(), ListYellow[i].DotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), true);
+
+                            if (Convert.ToInt16(ListYellow[i].Threshold) == 0)
+                                ThresholdValue = 0;
+                            else
+                                ThresholdValue = Convert.ToDouble(ListYellow[i].Threshold);
+
+                            ThresholdTop = Convert.ToDouble(ListYellow[i].TargetDotGain) + ThresholdValue;
+                            ThresholdBottom = Convert.ToDouble(ListYellow[i].TargetDotGain) - ThresholdValue;
+
+                            CHRT_DotgainISOYellow.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListYellow[i].CmykY.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                        }
+                    }
+                    #endregion
+
+                    #region Black
+                    ThresholdValue = 0;
+                    ThresholdTop = 0;
+                    ThresholdBottom = 0;
+                 
+                    //Filter DT1 = "(PatchTypeID in (4,8,25,26,27))";
+                    List<AnalyzeChart_DotGain> ListBlack = new List<AnalyzeChart_DotGain>();
+                    ListBlack = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Black) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone))).OrderBy(item => item.CmykK).ToList();
+
+                    if (ListBlack.Count > 0)
+                    {
+                        for (int i = 0; i < ListBlack.Count; i++)
+                        {
+                            //---Target
+                            AddTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series0"], ListBlack[i].CmykK.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), false);
+                            //---Actual
+                            AddTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series1"], ListBlack[i].CmykK.ToString(), ListBlack[i].DotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), true);
+
+                            if (Convert.ToInt16(ListBlack[i].Threshold) == 0)
+                                ThresholdValue = 0;
+                            else
+                                ThresholdValue = Convert.ToDouble(ListBlack[i].Threshold);
+
+                            ThresholdTop = Convert.ToDouble(ListBlack[i].TargetDotGain) + ThresholdValue;
+                            ThresholdBottom = Convert.ToDouble(ListBlack[i].TargetDotGain) - ThresholdValue;
+
+                            CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
+                        }
+                    }
+                    #endregion                  
+                }
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+
+        private void FillSpreadChart(List<AnalyzeChart_DotGain> DTSpread, List<AnalyzeChart_DotGain> DTSpreadSplineRange, List<AnalyzeChart_DotGain> DTMaxSpreasTable)
+        {
+            try
+            {              
+                #region //========== Clear Points==========//
+                CHRT_SummaryISODotgain.Series["Series1"].Points.Clear();
+                CHRT_SummaryISODotgain.Series["Series2"].Points.Clear();
+                CHRT_SummaryISODotgain.Series["Series3"].Points.Clear();
+
+                CHRT_SummaryISODotgain.Series["Series1Point"].Points.Clear();
+                CHRT_SummaryISODotgain.Series["Series2Point"].Points.Clear();
+                CHRT_SummaryISODotgain.Series["Series3Point"].Points.Clear();
+                #endregion
+
+                #region Dotgain Spread Chart
+                if (DTSpread != null && DTSpread.Count > 0)
+                {
+                    int C = 0;
+                    int M = 0;
+                    int Y = 0;
+                    Int16 CyanValue = 0;
+                    Int16 MagentaValue = 0;
+                    Int16 YellowValue = 0;
+                    Int16 DiffrentOne = 0;
+                    Int16 DiffrentTwo = 0;
+                    String DiffrentTitleOne = string.Empty;
+                    String DiffrentTitleTwo = string.Empty;
+                    AnalyzeChart_DotGain FilterSpread = new AnalyzeChart_DotGain();
+
+                    for (int i = 0; i < DTSpread.Count; i++)
+                    {
+                        if (Convert.ToInt16(DTSpread[i].CmykC) == 0 && Convert.ToInt16(DTSpread[i].CmykM) == 0 && Convert.ToInt16(DTSpread[i].CmykY) == 0)
+                        {
+                            if (ChkC.Checked)
+                                AddPointChartWithColor(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                            if (ChkM.Checked)
+                                AddPointChartWithColor(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                            if (ChkY.Checked)
+                                AddPointChartWithColor(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                            C++; M++; Y++;
+
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykC) != 0 && ChkC.Checked)
+                        {
+                            FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykC);
+                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
+
+                            FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykC);                        
+                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+
+                            DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
+                            DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
+
+                            DiffrentTitleOne = "C - M";
+                            DiffrentTitleTwo = "C - Y";
+
+                            AddPointChartWithColor(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            C++;
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkM.Checked)
+                        {
+                            FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykM);
+                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+
+                            FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykM);
+                            YellowValue = Convert.ToInt16(FilterSpread.DotGain);
+                   
+                            DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
+                            DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
+
+                            DiffrentTitleOne = "M - C";
+                            DiffrentTitleTwo = "M - Y";
+
+                            AddPointChartWithColor(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            M++;
+                        }
+                        if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkY.Checked)
+                        {
+                            FilterSpread = DTSpread.Find(item => item.CmykC == DTSpread[i].CmykY);
+                            CyanValue = Convert.ToInt16(FilterSpread.DotGain);
+
+                            FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykY);
+                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain); 
+
+                            DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
+                            DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
+
+                            DiffrentTitleOne = "Y - C";
+                            DiffrentTitleTwo = "Y - M";
+
+                            AddPointChartWithColor(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            Y++;
+                        }
+                    }
+                }
+                #endregion
+
+                #region Spread Spline Range (green boundries)
+                if (DTSpreadSplineRange != null && DTSpreadSplineRange.Count > 0)
+                {                   
+                    CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                    for (int i = 0; i < DTSpreadSplineRange.Count; i++)
+                    {
+                        CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].TVI.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].UpperLimit.ToString())), Utilities.DecimalRound(Convert.ToDouble(DTSpreadSplineRange[i].LowerLimit.ToString())));
+
+                    }
+                    CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(100), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
+                }
+                #endregion
+
+                #region Max Spread Table
+                if (DTMaxSpreasTable != null && DTMaxSpreasTable.Count > 0)
+                {
+                    for (int i = 0; i < DTMaxSpreasTable.Count; i++)
+                    {
+                        if (DTMaxSpreasTable[i].TonePct.ToString() == "25")
+                            lblMaxSpread25.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
+                        else if (DTMaxSpreasTable[i].TonePct.ToString() == "50")
+                            lblMaxSpread50.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
+                        else if (DTMaxSpreasTable[i].TonePct.ToString() == "75")
+                            lblMaxSpread75.Text = DTMaxSpreasTable[i].MaxSpread.ToString();
+                    }
+                }
+                #endregion
+            }
+            catch (Exception Exc)
+            {
+                throw Exc;
+            }
+        }
+    
+
         //Add Point with color
         private void AddPointChartWithColor(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName)
         {
@@ -1358,6 +1664,110 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Ex;
             }
         }
+
+        private void AddPointChartWithColor(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, string _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
+        {
+            try
+            {
+                _objSeries.ChartType = SeriesChartType.Spline;
+                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+                //_objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.None;
+
+                _objSeriesPoint.ChartType = SeriesChartType.Point;
+                _objSeriesPoint.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+                _objSeriesPoint.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
+                _objSeriesPoint.Points[_Index].MarkerStyle = MarkerStyle.Circle;
+                _objSeriesPoint.Points[_Index].MarkerSize = 5;
+                _objSeriesPoint.Points[_Index].BorderWidth = 1;
+                _objSeriesPoint.Points[_Index].MarkerBorderColor = Color.Black;
+
+
+                if (Utilities.DecimalRound(Convert.ToDouble(_YValue)) > 0)
+                {
+                    #region Add Tooltip HTML
+                    StringBuilder toolTip = new StringBuilder();
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _XValue + "% Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual TVI:</td><td>");
+                    toolTip.Append(_YValue);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Spread Threshold:</td><td>");
+                    toolTip.Append(_TVISpreadTh);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>" + DiffrentTitleOne + ":</td><td>");
+                    toolTip.Append(DiffrentOne);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>" + DiffrentTitleTwo + ":</td><td>");
+                    toolTip.Append(DiffrentTwo);
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+
+                    _objSeriesPoint.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }
+
+        private void AddTVIPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string _Target, string _Threshold, short _PatchTypeId, string HTMLColor, string ColorName, bool isTooltip)
+        {
+            try
+            {
+                _objSeries.Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(_XValue)), Utilities.DecimalRound(Convert.ToDouble(_YValue)));
+
+                _objSeries.ChartType = SeriesChartType.Spline;
+                _objSeries.Points[_Index].MarkerColor = System.Drawing.Color.Green;
+                _objSeries.Points[_Index].MarkerStyle = MarkerStyle.Circle;
+                _objSeries.Points[_Index].MarkerSize = 8;
+
+                _objSeries.Points[_Index].BorderWidth = 1;
+
+                if (isTooltip && Utilities.DecimalRound(Convert.ToDouble(_YValue)) > 0)
+                {
+                    _objSeries.Points[_Index].MarkerColor = System.Drawing.ColorTranslator.FromHtml(HTMLColor); //--Target Values Plotting with its original patch color
+
+                    #region ToolTio Title
+                    string _TitleValue = "";
+                    if ((_PatchTypeId == Convert.ToInt32(CPPatchType.Cyan_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Magenta_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Yellow_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone)))
+                        _TitleValue = "25%";
+                    else if ((_PatchTypeId == Convert.ToInt32(CPPatchType.Cyan_Half_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Magenta_Half_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Yellow_Half_Tone)) || (_PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone)))
+                        _TitleValue = "50%";
+                    else if ((_PatchTypeId == Convert.ToInt32(CPPatchType.Cyan_Three_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Magenta_Three_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt32(CPPatchType.Yellow_Three_Quarter_Tone)) || (_PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone)))
+                        _TitleValue = "75%";
+                    #endregion
+
+                    #region Add Tooltip HTML
+                    StringBuilder toolTip = new StringBuilder();
+                    toolTip.Append("<table>");
+                    toolTip.Append("<tr><td><b>" + ColorName + " " + _TitleValue + " Patch Metrics</b></td></tr>");
+                    toolTip.Append("<tr><td><table>");
+                    toolTip.Append("<tr><td>Actual TVI</td><td>");
+                    toolTip.Append(_YValue + "%");
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>Target TVI</td><td>");
+                    toolTip.Append(_Target + "%");
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("<tr><td>TVI Threshold</td><td>");
+                    toolTip.Append(_Threshold + "%");
+                    toolTip.Append("</td></tr>");
+                    toolTip.Append("</table></td></tr>");
+                    toolTip.Append("</table>");
+                    #endregion
+
+                    _objSeries.Points[_Index].MapAreaAttributes = "onmouseover=\"DisplayTooltip('" + toolTip.ToString() + "');\" onmouseout=\"DisplayTooltip('');\"";
+                }
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+        }             
 
         #endregion
 
@@ -1997,20 +2407,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Chk_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                //if (Fuji.Common.Sessions.GetSession("SpreadChartData") != null && Fuji.Common.Sessions.GetSession("SpreadSplineRangeChartData") != null && Fuji.Common.Sessions.GetSession("MaxSpreadChartData") != null)
-                //{
-                //    DataTable DTSpread = (DataTable)Fuji.Common.Sessions.GetSession("SpreadChartData");
-                //    DataTable DTSpreadSplineRange = (DataTable)Fuji.Common.Sessions.GetSession("SpreadSplineRangeChartData");
-                //    DataTable DTMaxSpreadChartData = (DataTable)Fuji.Common.Sessions.GetSession("MaxSpreadChartData");
-                //    //FillSpreadChart(DTSpread, DTSpreadSplineRange, DTMaxSpreadChartData);
-                //}
-            }
-            catch (Exception Exc)
-            {
-                // LblError.Text = Exc.Message;
-            }
+            //----Call Javascript function to hide TVI charts row and only show Spread Chart row------------//
+            ScriptManager.RegisterStartupScript(Page, typeof(Page), Guid.NewGuid().ToString(), "funSpreadVisiblity();", true);
         }
 
         #endregion
@@ -2082,6 +2480,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         public List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTISOTVIChart { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
+        public List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
 
         #endregion        
     }

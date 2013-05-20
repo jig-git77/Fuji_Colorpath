@@ -39,8 +39,13 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         bool useDLP { get; set; }
         byte[] DeviceLinkProfile { get; set; }
-        bool IsSync1DType { get; }
+        bool IsSync1DType { get; }     
 
         List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
+
+        List<Entity.AnalyzeChart_DotGain> DTISOTVIChart { get; set; }
+        List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
+        List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
+        List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
     }
 }

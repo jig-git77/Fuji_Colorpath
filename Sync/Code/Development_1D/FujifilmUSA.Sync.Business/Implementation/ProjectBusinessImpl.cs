@@ -495,9 +495,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                            project.PrintStandardTVI.
                                                                Select(x => new XElement("TargetTVI",
                                                                                    new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
-                                                                                   new XAttribute("TVI25", x.TVI25),
-                                                                                   new XAttribute("TVI50", x.TVI50),
-                                                                                   new XAttribute("TVI75", x.TVI75))).ToList());
+                                                                                   new XAttribute("TVI", x.TVI),                                                                                
+                                                                                   new XAttribute("Threshold", x.Threshold))).ToList());
                         }
 
                         var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -573,9 +572,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                 project.PrintStandardTVI.
                                                                     Select(x => new XElement("TargetTVI",
                                                                                         new XAttribute("PatchTypeID", x.PatchType.PatchTypeId),
-                                                                                        new XAttribute("TVI25", x.TVI25),
-                                                                                        new XAttribute("TVI50", x.TVI50),
-                                                                                        new XAttribute("TVI75", x.TVI75))).ToList());
+                                                                                        new XAttribute("TVI", x.TVI),                                                                          
+                                                                                        new XAttribute("Threshold", x.Threshold))).ToList());
                         }
 
                         var projectTargetLAB = new XElement("ProjectTargetLAB", "");
@@ -1133,9 +1131,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
                                     Type = DataReader.ReadString(x, "PatchType")
                                 },
-                                TVI25 = DataReader.ReadDecimal(x, "TVI25"),
-                                TVI50 = DataReader.ReadDecimal(x, "TVI50"),
-                                TVI75 = DataReader.ReadDecimal(x, "TVI75"),
+                                TVI = DataReader.ReadDecimal(x, "TVI"),
+                                Threshold = DataReader.ReadDecimal(x, "Threshold")                              
                             }).ToList();
                     }
                 }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardTVI"));

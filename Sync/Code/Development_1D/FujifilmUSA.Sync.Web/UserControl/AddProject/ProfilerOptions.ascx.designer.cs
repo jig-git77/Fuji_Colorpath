@@ -778,6 +778,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtTVI25Black;
         
         /// <summary>
+        /// txtThresh25Cyan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh25Cyan;
+        
+        /// <summary>
+        /// txtThresh25Magenta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh25Magenta;
+        
+        /// <summary>
+        /// txtThresh25Yellow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh25Yellow;
+        
+        /// <summary>
+        /// txtThresh25Black control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh25Black;
+        
+        /// <summary>
         /// lblTVI50 control.
         /// </summary>
         /// <remarks>
@@ -823,6 +859,42 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.TextBox txtTVI50Black;
         
         /// <summary>
+        /// txtThresh50Cyan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh50Cyan;
+        
+        /// <summary>
+        /// txtThresh50Magenta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh50Magenta;
+        
+        /// <summary>
+        /// txtThresh50Yellow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh50Yellow;
+        
+        /// <summary>
+        /// txtThresh50Black control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh50Black;
+        
+        /// <summary>
         /// lblTVI75 control.
         /// </summary>
         /// <remarks>
@@ -866,5 +938,41 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTVI75Black;
+        
+        /// <summary>
+        /// txtThresh75Cyan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh75Cyan;
+        
+        /// <summary>
+        /// txtThresh75Magenta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh75Magenta;
+        
+        /// <summary>
+        /// txtThresh75Yellow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh75Yellow;
+        
+        /// <summary>
+        /// txtThresh75Black control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtThresh75Black;
     }
 }

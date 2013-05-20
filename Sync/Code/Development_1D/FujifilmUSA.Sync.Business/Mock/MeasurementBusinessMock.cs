@@ -162,6 +162,22 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new List<AnalyzeChart_DotGain>();
         }
+        public List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
+        }
+        public List<AnalyzeChart_DotGain> GetSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
+        }
+        public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
+        }
+        public List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            return new List<AnalyzeChart_DotGain>();
+        }
         #endregion
 
         #region ITaskBase Members

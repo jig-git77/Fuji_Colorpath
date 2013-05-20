@@ -26,9 +26,13 @@
         resize: none;
     }
     
-    .textwidth50
+    .textwidth35
     {
-        width: 50px;
+        width: 35px;
+    }
+    .textwidth20
+    {
+        width: 20px;
     }
 </style>
 <script language="javascript" type="text/javascript">
@@ -641,43 +645,71 @@
                                                         <div id="dvTVITargets" style="padding-left: 10px">
                                                            <table cellspacing="0" cellpadding="0" border="0" width="90%">
                                                                 <tr>
-                                                                    <td>
+                                                                    <td align="center">
                                                                         <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch"></asp:Localize></b></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="Cyan"></asp:Localize></b></span>
+                                                                     <td align="center">
+                                                                        <span><b><asp:Localize ID="locTVICyan" runat="server" Text="C"></asp:Localize></b></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><b><asp:Localize ID="locTVIMagenta" runat="server" Text="Magenta"></asp:Localize></b></span>
+                                                                     <td align="center">
+                                                                        <span><b><asp:Localize ID="locTVIMagenta" runat="server" Text="M"></asp:Localize></b></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><b><asp:Localize ID="locTVIYellow" runat="server" Text="Yellow"></asp:Localize></b></span>
+                                                                     <td align="center">
+                                                                        <span><b><asp:Localize ID="locTVIYellow" runat="server" Text="Y"></asp:Localize></b></span>
                                                                     </td>
-                                                                    <td>
-                                                                        <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="Black"></asp:Localize></b></span>
+                                                                     <td align="center">
+                                                                        <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K"></asp:Localize></b></span>
+                                                                    </td>
+
+                                                                      <td align="center">
+                                                                        <span><b>ΔC</b></span>
+                                                                    </td>
+                                                                     <td align="center">
+                                                                        <span><b>ΔM</b></span>
+                                                                    </td>
+                                                                     <td align="center">
+                                                                        <span><b>ΔY</b></span>
+                                                                    </td>
+                                                                      <td align="center">
+                                                                        <span><b>ΔK</b></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI25" runat="server" Text="1/4 Tone"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtTVI25Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI25Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI25Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI25Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Cyan" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Magenta" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI25Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+
+                                                                    <td><asp:TextBox ID="txtThresh25Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI50" runat="server" Text="Mid Tone"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtTVI50Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI50Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI50Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI50Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Cyan" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Magenta" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI50Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+
+                                                                    <td><asp:TextBox ID="txtThresh50Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI75" runat="server" Text="3/4 Tone"></asp:Label></td>
-                                                                    <td><asp:TextBox ID="txtTVI75Cyan" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI75Magenta" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI75Yellow" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtTVI75Black" runat="server" CssClass="textwidth50" MaxLength="5"></asp:TextBox></td>
-                                                                </tr>                                                                
+                                                                    <td><asp:TextBox ID="txtTVI75Cyan" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Magenta" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtTVI75Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
+
+                                                                    <td><asp:TextBox ID="txtThresh75Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                </tr>                                                              
                                                            </table>
                                                         </div>
                                                         <div class="clear">

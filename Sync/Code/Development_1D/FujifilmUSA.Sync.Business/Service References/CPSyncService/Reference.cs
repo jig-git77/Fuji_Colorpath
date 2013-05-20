@@ -29,13 +29,10 @@ namespace FujifilmUSA.Sync.Business.CPSyncService {
         private byte[] ICCProfileField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI25Field;
+        private string LinearizationTVIField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI50Field;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LinearizationTVI75Field;
+        private string LinearizationThresholdField;   
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool UseDLPField;
@@ -84,45 +81,81 @@ namespace FujifilmUSA.Sync.Business.CPSyncService {
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI25 {
-            get {
-                return this.LinearizationTVI25Field;
+        public string LinearizationTVI
+        {
+            get
+            {
+                return this.LinearizationTVIField;
             }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI25Field, value) != true)) {
-                    this.LinearizationTVI25Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI25");
+            set
+            {
+                if ((object.ReferenceEquals(this.LinearizationTVIField, value) != true))
+                {
+                    this.LinearizationTVIField = value;
+                    this.RaisePropertyChanged("LinearizationTVI");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI50 {
-            get {
-                return this.LinearizationTVI50Field;
+        public string LinearizationThreshold
+        {
+            get
+            {
+                return this.LinearizationThresholdField;
             }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI50Field, value) != true)) {
-                    this.LinearizationTVI50Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI50");
+            set
+            {
+                if ((object.ReferenceEquals(this.LinearizationThresholdField, value) != true))
+                {
+                    this.LinearizationThresholdField = value;
+                    this.RaisePropertyChanged("LinearizationThreshold");
                 }
             }
         }
+
+
+
+        //[System.Runtime.Serialization.DataMemberAttribute()]
+        //public string LinearizationTVI25 {
+        //    get {
+        //        return this.LinearizationTVI25Field;
+        //    }
+        //    set {
+        //        if ((object.ReferenceEquals(this.LinearizationTVI25Field, value) != true)) {
+        //            this.LinearizationTVI25Field = value;
+        //            this.RaisePropertyChanged("LinearizationTVI25");
+        //        }
+        //    }
+        //}
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LinearizationTVI75 {
-            get {
-                return this.LinearizationTVI75Field;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LinearizationTVI75Field, value) != true)) {
-                    this.LinearizationTVI75Field = value;
-                    this.RaisePropertyChanged("LinearizationTVI75");
-                }
-            }
-        }
+        //[System.Runtime.Serialization.DataMemberAttribute()]
+        //public string LinearizationTVI50 {
+        //    get {
+        //        return this.LinearizationTVI50Field;
+        //    }
+        //    set {
+        //        if ((object.ReferenceEquals(this.LinearizationTVI50Field, value) != true)) {
+        //            this.LinearizationTVI50Field = value;
+        //            this.RaisePropertyChanged("LinearizationTVI50");
+        //        }
+        //    }
+        //}
+        
+        //[System.Runtime.Serialization.DataMemberAttribute()]
+        //public string LinearizationTVI75 {
+        //    get {
+        //        return this.LinearizationTVI75Field;
+        //    }
+        //    set {
+        //        if ((object.ReferenceEquals(this.LinearizationTVI75Field, value) != true)) {
+        //            this.LinearizationTVI75Field = value;
+        //            this.RaisePropertyChanged("LinearizationTVI75");
+        //        }
+        //    }
+        //}
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool UseDLP {
