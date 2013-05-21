@@ -47,6 +47,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";
                 }
+                else if (IsSync1DType)
+                {
+                    btn_GeneratePDF.ImageUrl = "../Images/Sync1D Report_preview.jpg";
+                }
             }
         }
         #endregion
@@ -80,9 +84,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             objReportPDF.DS_Common = Ds;
             objReportPDF.From_ΔE = txt_dTE.Text;
             objReportPDF.DLPName = txt_DLPName.Text;
+
             if (IsVerification)
             {
                 objReportPDF.ReportName = "Validation Report";                
+            }
+            else if (IsSync1DType)
+            {
+                objReportPDF.ReportName = "Alignment Curves Report";
             }
             else
             {

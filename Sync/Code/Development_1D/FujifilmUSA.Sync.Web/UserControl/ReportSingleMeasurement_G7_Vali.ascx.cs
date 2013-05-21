@@ -43,8 +43,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack == false)
             {
                 //-----Set G7 Validation Report Preview image------//
-
                 btn_GeneratePDF.ImageUrl = "../Images/Validation Report_G7_preview.jpg";
+
+                if (IsSync1DType) //----Set Report Preview image for Sync 1D G7 Project Types
+                {
+                    btn_GeneratePDF.ImageUrl = "../Images/Sync1D Report_preview.jpg";
+                }
             }
         }
         #endregion
@@ -87,10 +91,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (ValidationType == 1)
             {
-                objReportPDF.ReportName = "G7 Validation Report";
-                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7_Vali;
+                objReportPDF.ReportName = "G7 Validation Report";               
+            }
+            if (IsSync1DType)
+            {
+                objReportPDF.ReportName = "G7 Alignment Curves Report";                 
             }
 
+            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_G7_Vali;
             objReportPDF.MakePDF();
 
             // === After generate and save PDF file, Download it at a time === //

@@ -580,14 +580,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
             var measurements = new DataSet();
             string storedProc = "Report.GetSingleMeasurement";
             if (IsSync1DType)
-                storedProc = "Report.GetSingleMeasurement";
+                storedProc = "Report.GetSingle1DMeasurement";
             if (IsVerification)
                 storedProc = "Report.GetSingleVMeasurement";
             Common.ImplementBusinessLogic(
                 () =>
                 {
                     var dsMeasurements = new DataSet();
-                    if (!IsVerification)
+                    if (!IsVerification && !IsSync1DType)
                     {
                         dsMeasurements = DataAccessFactory.
                              Instance.
@@ -612,8 +612,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public DataSet GetReportDataOnMeasurement_G7_Vali(int MeasurementId, string From_ΔE, bool IsVerification = false, int ValidationType = -1, bool IsSync1DType = false)
         {
             var measurements = new DataSet();
-            string storedProc = "Report.GetSingleVMeasurement";          
-        
+            string storedProc = "Report.GetSingleVMeasurement";
+            if (IsSync1DType)
+                storedProc = "Report.GetSingle1DMeasurement";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -751,7 +753,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+        
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -780,7 +785,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -818,7 +826,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetBlackLSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -847,7 +858,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -885,7 +899,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false)
         {
             var G7ChartDetails = new List<AnalyzeChart_G7>();
-            string storedProc = "CPSyncV.GetVChartData_G7";
+            string storedProc = "[CPSync].[GetChartData_G7]";
+            if (IsVerification)
+                storedProc = "[CPSyncV].[GetVChartData_G7]";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {

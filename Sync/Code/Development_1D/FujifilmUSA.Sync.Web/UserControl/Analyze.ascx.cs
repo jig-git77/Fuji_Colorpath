@@ -197,13 +197,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Div_Validation_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type
                     {
-                        dvTab_G7.Visible = Tab_G7.Visible = true;
-                        dvTab_TVI.Visible = Tab_TVI.Visible = true;
+                        dvTab_G7.Visible = Tab_G7.Visible = true;                        
                     }
                     else
                     {
-                        dvTab_G7.Visible = Tab_G7.Visible = false;
-                        dvTab_TVI.Visible = Tab_TVI.Visible = false;
+                        dvTab_G7.Visible = Tab_G7.Visible = false;                        
                     }
                 }
                 else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
@@ -372,6 +370,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (ValidationType == 1 || SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7)  //G7 type
             {
                 dvTab_G7.Visible = Tab_G7.Visible = true;
+                ValidationType = 1;
                 path = "ReportSingleMeasurement_G7_Vali.aspx?MeasurementID=" + MeasurementId + "&From_ΔE=" + rbtnListDeltaE.SelectedValue + "&DLPName=" + DLPName + "&Vali_Type=" + ValidationType;
             }
             else
@@ -422,7 +421,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
                 if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.ISO)  //ISO type
-                {                   
+                {
+                    Tab_TVI.Visible = dvTab_TVI.Visible = true;
                     _presenterAnalyze.GetISOTVIChart();
                     if (!IsErrorOccured)
                     {
@@ -434,6 +434,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else  //G7 type
                 {
+                    Tab_TVI.Visible = dvTab_TVI.Visible = false;
                     _presenterAnalyze.GetTVIChart();
                     if (!IsErrorOccured)
                     {
@@ -1277,6 +1278,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             try
             {
+                #region " === Clear Points === "
                 //========== Clear Points and Show Chart ==========//
                 CHRT_SummaryDotgain.Series[0].Points.Clear();
                 CHRT_SummaryDotgain.Series[1].Points.Clear();
@@ -1285,7 +1287,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryDotgain.Series[4].Points.Clear();
                 CHRT_SummaryDotgain.Series[5].Points.Clear();
                 CHRT_SummaryDotgain.Series[6].Points.Clear();
-                CHRT_SummaryDotgain.Series[7].Points.Clear();              
+                CHRT_SummaryDotgain.Series[7].Points.Clear();
+                #endregion
 
                 #region " === Fill Series === "
                 if (DT != null && DT.Count > 0)
@@ -1300,30 +1303,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     {
                         if (Convert.ToInt16(DT[i].CmykC) == 0 && Convert.ToInt16(DT[i].CmykM) == 0 && Convert.ToInt16(DT[i].CmykY) == 0 && Convert.ToInt16(DT[i].CmykK) == 0)
                         {
-                            AddPointChartWithColor(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
-                            AddPointChartWithColor(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
-                            AddPointChartWithColor(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
-                            AddPointChartWithColor(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
+                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
+                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
+                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
+                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
                             C++; M++; Y++; K++;
                         }
                         if (Convert.ToInt16(DT[i].CmykC) != 0)
                         {
-                            AddPointChartWithColor(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
+                            AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
                             C++;
                         }                       
                         if (Convert.ToInt16(DT[i].CmykM) != 0)
                         {
-                            AddPointChartWithColor(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
+                            AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
                             M++;
                         }
                         if (Convert.ToInt16(DT[i].CmykY) != 0)
                         {
-                            AddPointChartWithColor(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
+                            AddG7TVIPointChart(Y, CHRT_SummaryDotgain.Series["Series3"], CHRT_SummaryDotgain.Series["Series3Point"], Convert.ToInt64(DT[i].CmykY).ToString(), DT[i].DotGain.ToString(), Color.Yellow.Name.ToString());
                             Y++;
                         }
                         if (Convert.ToInt16(DT[i].CmykK) != 0)
                         {
-                            AddPointChartWithColor(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
+                            AddG7TVIPointChart(K, CHRT_SummaryDotgain.Series["Series4"], CHRT_SummaryDotgain.Series["Series4Point"], Convert.ToInt64(DT[i].CmykK).ToString(), DT[i].DotGain.ToString(), Color.Black.Name.ToString());
                             K++;
                         }
                     }
@@ -1375,9 +1378,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListCyan.Count; i++)
                         {
                             //---Target
-                            AddTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series0"], ListCyan[i].CmykC.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series0"], ListCyan[i].CmykC.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), false);
                             //--Actual                          
-                            AddTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series1"], ListCyan[i].CmykC.ToString(), ListCyan[i].DotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOCyan.Series["Series1"], ListCyan[i].CmykC.ToString(), ListCyan[i].DotGain.ToString(), ListCyan[i].TargetDotGain.ToString(), ListCyan[i].Threshold.ToString(), ListCyan[i].PatchTypeId, ListCyan[i].HtmlColor.ToString(), Color.Cyan.Name.ToString(), true);
 
                             if (Convert.ToInt16(ListCyan[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1406,9 +1409,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListMagenta.Count; i++)
                         {
                             //---Target
-                            AddTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series0"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series0"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), false);
                             //---Actual
-                            AddTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series1"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].DotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOMeganta.Series["Series1"], ListMagenta[i].CmykM.ToString(), ListMagenta[i].DotGain.ToString(), ListMagenta[i].TargetDotGain.ToString(), ListMagenta[i].Threshold.ToString(), ListMagenta[i].PatchTypeId, ListMagenta[i].HtmlColor.ToString(), Color.Magenta.Name.ToString(), true);
 
                             if (Convert.ToInt16(ListMagenta[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1437,9 +1440,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListYellow.Count; i++)
                         {
                             //----Target
-                            AddTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series0"], ListYellow[i].CmykY.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series0"], ListYellow[i].CmykY.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), false);
                             //---Actual                         
-                            AddTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series1"], ListYellow[i].CmykY.ToString(), ListYellow[i].DotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOYellow.Series["Series1"], ListYellow[i].CmykY.ToString(), ListYellow[i].DotGain.ToString(), ListYellow[i].TargetDotGain.ToString(), ListYellow[i].Threshold.ToString(), ListYellow[i].PatchTypeId, ListYellow[i].HtmlColor.ToString(), Color.Yellow.Name.ToString(), true);
 
                             if (Convert.ToInt16(ListYellow[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1468,9 +1471,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         for (int i = 0; i < ListBlack.Count; i++)
                         {
                             //---Target
-                            AddTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series0"], ListBlack[i].CmykK.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), false);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series0"], ListBlack[i].CmykK.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), false);
                             //---Actual
-                            AddTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series1"], ListBlack[i].CmykK.ToString(), ListBlack[i].DotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), true);
+                            AddISOTVIPointChart(i, CHRT_DotgainISOBlack.Series["Series1"], ListBlack[i].CmykK.ToString(), ListBlack[i].DotGain.ToString(), ListBlack[i].TargetDotGain.ToString(), ListBlack[i].Threshold.ToString(), ListBlack[i].PatchTypeId, ListBlack[i].HtmlColor.ToString(), Color.Black.Name.ToString(), true);
 
                             if (Convert.ToInt16(ListBlack[i].Threshold) == 0)
                                 ThresholdValue = 0;
@@ -1504,6 +1507,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 CHRT_SummaryISODotgain.Series["Series1Point"].Points.Clear();
                 CHRT_SummaryISODotgain.Series["Series2Point"].Points.Clear();
                 CHRT_SummaryISODotgain.Series["Series3Point"].Points.Clear();
+                CHRT_SummaryISODotgain.Series["SeriesTop"].Points.Clear();
                 #endregion
 
                 #region Dotgain Spread Chart
@@ -1526,11 +1530,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         if (Convert.ToInt16(DTSpread[i].CmykC) == 0 && Convert.ToInt16(DTSpread[i].CmykM) == 0 && Convert.ToInt16(DTSpread[i].CmykY) == 0)
                         {
                             if (ChkC.Checked)
-                                AddPointChartWithColor(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                                AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
                             if (ChkM.Checked)
-                                AddPointChartWithColor(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                                AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
                             if (ChkY.Checked)
-                                AddPointChartWithColor(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
+                                AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), "", "", "", "");
                             C++; M++; Y++;
 
                         }
@@ -1548,7 +1552,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "C - M";
                             DiffrentTitleTwo = "C - Y";
 
-                            AddPointChartWithColor(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(C, CHRT_SummaryISODotgain.Series["Series1"], CHRT_SummaryISODotgain.Series["Series1Point"], Convert.ToInt64(DTSpread[i].CmykC).ToString(), DTSpread[i].DotGain.ToString(), Color.Cyan.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             C++;
                         }
                         if (Convert.ToInt16(DTSpread[i].CmykM) != 0 && ChkM.Checked)
@@ -1565,7 +1569,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "M - C";
                             DiffrentTitleTwo = "M - Y";
 
-                            AddPointChartWithColor(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(M, CHRT_SummaryISODotgain.Series["Series2"], CHRT_SummaryISODotgain.Series["Series2Point"], Convert.ToInt64(DTSpread[i].CmykM).ToString(), DTSpread[i].DotGain.ToString(), Color.Magenta.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             M++;
                         }
                         if (Convert.ToInt16(DTSpread[i].CmykY) != 0 && ChkY.Checked)
@@ -1582,7 +1586,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             DiffrentTitleOne = "Y - C";
                             DiffrentTitleTwo = "Y - M";
 
-                            AddPointChartWithColor(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
+                            AddTVISpreadPointChart(Y, CHRT_SummaryISODotgain.Series["Series3"], CHRT_SummaryISODotgain.Series["Series3Point"], Convert.ToInt64(DTSpread[i].CmykY).ToString(), DTSpread[i].DotGain.ToString(), Color.Yellow.Name.ToString(), DTSpread[i].DotGainSpreadTh.ToString(), DiffrentTitleOne, DiffrentTitleTwo, Math.Abs(DiffrentOne).ToString(), Math.Abs(DiffrentTwo).ToString());
                             Y++;
                         }
                     }
@@ -1625,7 +1629,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
     
 
         //Add Point with color
-        private void AddPointChartWithColor(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName)
+        private void AddG7TVIPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName)
         {
             try
             {
@@ -1665,7 +1669,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void AddPointChartWithColor(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, string _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
+        private void AddTVISpreadPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName, string _TVISpreadTh, string DiffrentTitleOne, string DiffrentTitleTwo, string DiffrentOne, string DiffrentTwo)
         {
             try
             {
@@ -1715,7 +1719,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
-        private void AddTVIPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string _Target, string _Threshold, short _PatchTypeId, string HTMLColor, string ColorName, bool isTooltip)
+        private void AddISOTVIPointChart(int _Index, Series _objSeries, string _XValue, string _YValue, string _Target, string _Threshold, short _PatchTypeId, string HTMLColor, string ColorName, bool isTooltip)
         {
             try
             {

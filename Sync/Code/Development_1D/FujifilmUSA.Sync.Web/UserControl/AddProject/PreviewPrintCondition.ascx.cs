@@ -96,7 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblNotes.Text = SessionManager.Instance.CurrentProject.PrintCondition.Notes;
             lblTechnicianName.Text = SessionManager.Instance.CurrentProject.PrintCondition.TechnicianName;
             lblTargetPrintCondition.Text = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandard;
-            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.PrintStandardType.SourceProfile.ProfileName;
+            lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
 
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
             IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
