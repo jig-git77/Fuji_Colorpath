@@ -88,7 +88,7 @@
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr valign="top">
+                <tr>
                     <td style="width: 22%;" align="right">
                         <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                     </td>
@@ -99,18 +99,32 @@
                         <asp:Label ID="lblNotes" runat="server" Text="Notes"></asp:Label>:&nbsp;
                     </td>
                     <td rowspan="2" ID="tdNotes" runat="server" visible="false">
-                        <asp:TextBox ID="txtNotes" runat="server" Width="170px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
+                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
                     </td>
                 </tr>
-                <tr valign="top" ID="trCustomer" runat="server" visible="false">
+                <tr ID="trCustomer" runat="server" visible="false">
                     <td align="right">            
                         <asp:Label ID="lblCustomer" runat="server" Text="Customer"></asp:Label>:&nbsp;
                     </td>
                     <td>
-                        <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="100"></asp:TextBox>
+                        <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>                   
                 </tr>
-            </table>                       
+                <tr id="trValidationDetails" runat="server" visible="false">
+                    <td align="right">
+                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                    </td>
+                    <td align="right">
+                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"></asp:Label>:&nbsp;
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                    </td>
+                </tr>
+            </table>                               
         </div>
         <div class="float_r">
             <span>
@@ -347,7 +361,9 @@
                     ReferenceChartTypeId: ReferenceChartTypeId,
                     MeasurementPatches: MeasuredPatches,
                     Notes: jQuery('textarea[id*="txtNotes"]').val(),
-                    Customer: jQuery('input[id*="txtCustomer"]').val()
+                    Customer: jQuery('input[id*="txtCustomer"]').val(),
+                    PageOrSurface: jQuery('input[id*="txtPageOrSurface"]').val(),
+                    JDFJobId: jQuery('input[id*="txtJDFJobId"]').val(),
                 };
             }
             else

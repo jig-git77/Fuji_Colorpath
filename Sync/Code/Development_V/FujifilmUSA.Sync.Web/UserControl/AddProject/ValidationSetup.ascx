@@ -15,6 +15,12 @@
 <asp:Localize runat="server" Text="Review Selections" ID="locReviewSelection" 
         meta:resourcekey="locReviewSelectionResource1"></asp:Localize>
 </span></asp:LinkButton>    
+    <asp:LinkButton ID="btnValidationMeasure" runat="server" ValidationGroup="vgValidationSetup" CssClass="button" OnClick="lnkbtnMeasure_Click">
+        <span>
+        <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/analyze.png"/>
+            <asp:Localize runat="server" ID="locMeasure" Text="Measure"></asp:Localize>
+        </span>
+    </asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">

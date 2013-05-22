@@ -130,7 +130,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {         
             lbtnMeasurement.Visible = IsXMFUser;
 
             if (!Page.IsPostBack)
@@ -213,6 +213,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindMesurementChart();
             }
+            if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                lbtnSubmit.Visible = true;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
+
+            
         }
 
         #endregion
@@ -305,6 +315,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                     rgValidationSummaryMetrics.DataBind();
+
+                    ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
 
                     PreparePrintLabelXML(MeasurementSummary[0]);
 
@@ -1400,6 +1412,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
             labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
+            labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
+            labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
             System.Text.StringBuilder metricName = new StringBuilder();
             System.Text.StringBuilder metricTol = new StringBuilder();
             System.Text.StringBuilder metricActual = new StringBuilder();
@@ -1435,6 +1449,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Properties
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+
+        public string ValidationMeasurementStatus
+        {
+            get
+            {
+                if (ViewState["MeasurementStatus"] != null)
+                    return ViewState["MeasurementStatus"].ToString();
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                ViewState["MeasurementStatus"] = value;
+            }
+        }
         #endregion
 
         #region Control Events
@@ -1719,6 +1748,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.Rebind();
         }
 
+        protected void lbtnSubmit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, ValidationMeasurementStatus, Guid.NewGuid()));
+
+        }
         #endregion
 
         #region IViewAnalyze Members

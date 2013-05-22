@@ -30,6 +30,23 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsXmfUser)
+            {
+                trListHeader.Visible = false;
+                if (SessionManager.Instance.CurrentValidationRequest != null)
+                {
+                    lnkbtnValidationSetup.Visible = false;
+                    btnValidationMeasure.Visible = true;
+                }
+                else
+                    btnValidationMeasure.Visible = false;
+            }
+            else
+            {
+                trListHeader.Visible = true;
+                btnValidationMeasure.Visible = false;
+            }
+
             if (ViewState[vsIsPostBack] == null)
             {
                 BindMeasurementDevice();
@@ -46,7 +63,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 }
 
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)   //-----------If we are in Validation mode, we can't disable validation-----------//
-                {                   
+                {
                     rbtnEnableValidation.Items[1].Enabled = false;
                 }
             }
@@ -64,6 +81,28 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             //Load save control
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+        }
+
+        protected void lnkbtnMeasure_Click(object sender, EventArgs e)
+        {
+            //Save modified validation setup details here
+            SessionManager.Instance.CurrentProject.EnabledValidation = true;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID = (short)MeasurementDeviceSelectedValue;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset = new KeyValuePair<int, string>(Convert.ToInt32(cmbMetricTargetPreset.SelectedItem.Value), cmbMetricTargetPreset.SelectedItem.Text);
+            this.Project = SessionManager.Instance.CurrentProject;
+            _presenterMeasurementSetting.SaveProject();
+
+            if (!IsErrorOccured)
+            {
+                //Set validation as sub operation type
+                SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
+                _presenterMeasurementSetting.GetProjectDetailWithVerification();
+                SessionManager.Instance.CurrentProject = Project;
+
+                //Redirect to measurement page
+                Response.Redirect(string.Format("COMeasurement.aspx?id={0}&projectid={1}", Guid.NewGuid(), SessionManager.Instance.CurrentProject != null ? SessionManager.Instance.CurrentProject.ProjectId : 0));
+            }
         }
 
         protected void cmbMeasurementDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,11 +123,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MeasurementSetting != null)
             {
-                EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
+                if (IsXmfUser)
+                    EnableValidationValue = true;
+                else
+                    EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
+
+
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.HasValue && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value > 0)
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value.ToString();
                 else
-                    cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();                                
+                    cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
@@ -188,7 +232,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         private bool EnableValidationValue
         {
             get
-            {    
+            {
                 if (rbtnEnableValidation.SelectedIndex == 0)
                     return true;
                 else if (rbtnEnableValidation.SelectedIndex == 1)
@@ -200,14 +244,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             {
                 if (value)
                 {
-                    rbtnEnableValidation.SelectedIndex = 0;                   
+                    rbtnEnableValidation.SelectedIndex = 0;
                     //------If validation, then check for required fields-----//
                     rfvValidationChart.ValidationGroup = "vgValidationSetup";
                     rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
                 }
                 else
                 {
-                    rbtnEnableValidation.SelectedIndex = 1;                   
+                    rbtnEnableValidation.SelectedIndex = 1;
                     //------If no validation, then don't check for required fields-----//
                     rfvValidationChart.ValidationGroup = "a";
                     rfvMetricTargetPreset.ValidationGroup = "a";
@@ -216,6 +260,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         }
         #endregion
 
+        #region Properties
+        public bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
+        #endregion
 
         #region IViewMeasurementSetting members
         public List<Entity.Illuminant> Illumin { get; set; }
@@ -241,8 +294,8 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int ChartDisplayType { get; set; }
 
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
-        
-        #endregion       
+
+        #endregion
 
         protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
         {

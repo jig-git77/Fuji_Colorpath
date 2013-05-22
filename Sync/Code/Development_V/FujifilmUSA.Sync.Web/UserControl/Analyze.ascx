@@ -9,7 +9,7 @@
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
 
-    function InitializeRequest(sender, args) {
+    function InitializeRequest(sender, args) {        
         //  alert(jQuery("input[id$=hdHasMeasurement]").val());
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
@@ -17,13 +17,18 @@
                 var updateProgress = $get('<%= UpdateProgressClientID %>');
                 var postBackElement = args.get_postBackElement();
                 if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>' || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
-                    if ($get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next" || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
+                    if (($('#<%= lbtnDownloadAndSaveDLP.ClientID %>').length > 0 && $get('<%= lbtnDownloadAndSaveDLP.ClientID %>').text == "Next") || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
                         updateProgress.control._associatedUpdatePanelId = null;
                         $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
+                    
                     else {
                         updateProgress.control._associatedUpdatePanelId = 'dummyId';
                     }
+                }
+                else if (postBackElement.id == '<%= lbtnSubmit.ClientID %>') {
+                    updateProgress.control._associatedUpdatePanelId = null;
+                    $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                 }
                 else {
                     if (postBackElement.id == '<%= lbtnMeasurementVerification.ClientID %>') {
@@ -144,6 +149,11 @@
                     <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
                         <span>
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false" OnClick="lbtnSubmit_Click">
+                        <span>
+                            <asp:Localize runat="server" Text="Submit" ID="locSubmit"></asp:Localize>
                         </span>
                     </asp:LinkButton>
                 </div>
@@ -427,6 +437,8 @@
                                         <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
                                         <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                        
                                         <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="PageOrSurface" HeaderText="Page/Surface:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
+                                        <asp:BoundField DataField="JDFJobId" HeaderText="JDF Job ID:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
                                         <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
                                     </Fields>
                                 </asp:DetailsView>

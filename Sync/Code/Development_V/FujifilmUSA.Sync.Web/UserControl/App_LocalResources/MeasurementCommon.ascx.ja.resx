@@ -198,4 +198,10 @@
   <data name="locImportMeaResource1.Text" xml:space="preserve">
     <value>Import Measurements</value>
   </data>
+  <data name="JobNameCaption" xml:space="preserve">
+    <value>Job Name_ja</value>
+  </data>
+  <data name="MeasurementNameCaption" xml:space="preserve">
+    <value>Measurement Name_ja</value>
+  </data>
 </root>

@@ -59,16 +59,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         header.InnerText = string.Format(GetResourceString(_recmeasureText), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Measure - {0}
                     }
                 }
-                if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+                if (IsXMFUser)
                 {
-                    ScriptManager.RegisterStartupScript(
-                        this.Page,
-                        this.Page.GetType(),
-                        "messaging",
-                        string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
-                                      Convert.ToInt32(Request.QueryString["projectid"]),
-                                      SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
-                        true);
+                    if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                        btnValidationSetup.Visible = true;
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+                    {
+                        ScriptManager.RegisterStartupScript(
+                            this.Page,
+                            this.Page.GetType(),
+                            "messaging",
+                            string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
+                                          Convert.ToInt32(Request.QueryString["projectid"]),
+                                          SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
+                            true);
+                    }
                 }
             }
         }
@@ -86,6 +92,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     : "Analyze.aspx");
         }
 
+        protected void btnValidationSetup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COValidationSetup.aspx?id={0}", Guid.NewGuid()));
+        }
         #endregion
 
     }

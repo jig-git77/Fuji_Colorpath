@@ -301,6 +301,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                               MeasurementDate = DataReader.ReadDate(x, "MeasurementDate"),
                               Customer = DataReader.ReadString(x, "Customer"),
                               Notes = DataReader.ReadString(x, "Notes"),
+                              PageOrSurface = DataReader.ReadString(x, "PageOrSurface"),
+                              JDFJobId = DataReader.ReadString(x, "JDFJobId"),
                               dEMethod = DataReader.ReadString(x, "dEMethod"),
                               MeasurementStatus = DataReader.ReadString(x, "MeasurementStatus"),
                               MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
@@ -666,6 +668,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                  new Parameters() {ParameterName = "@MeasurementPatches", Value = measurementPatches.ToString()},
                                                  new Parameters() {ParameterName = "@Notes", Type = DbType.String, Value = measurement.Notes},
                                                  new Parameters() {ParameterName = "@Customer", Type = DbType.String, Value = measurement.Customer},
+                                                 new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Value = measurement.PageOrSurface},
+                                                 new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Value = measurement.JDFJobId},
                                              },
                                          new List<Parameters>()
                                              {

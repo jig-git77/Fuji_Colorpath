@@ -201,4 +201,10 @@
   <data name="dsa" xml:space="preserve">
     <value>fdsf</value>
   </data>
+  <data name="JobNameCaption" xml:space="preserve">
+    <value>Job Name</value>
+  </data>
+  <data name="MeasurementNameCaption" xml:space="preserve">
+    <value>Measurement Name</value>
+  </data>
 </root>

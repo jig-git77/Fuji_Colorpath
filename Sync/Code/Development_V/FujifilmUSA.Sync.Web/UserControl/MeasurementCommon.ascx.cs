@@ -23,6 +23,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             tdNotes.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             tdNotesCaption.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
             trCustomer.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            trValidationDetails.Visible = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                lblMeasurementName.Text = GetLocalResourceObject("JobNameCaption").ToString();
+            else
+                lblMeasurementName.Text = GetLocalResourceObject("MeasurementNameCaption").ToString();
         }
         #endregion
 
@@ -35,6 +40,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
+                if (IsXmfUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                {
+                    FillValidationDetailsFromXMF();
+                }
                 hdIsVerification.Value = (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation).ToString().ToLower();
                 hdProjectId.Value = SessionManager.Instance.CurrentProject.ProjectId.ToString();
                 hdOptimizeRunId.Value = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId.ToString();
@@ -65,5 +74,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             SetVerificationControlVisibility();
         }
+
+        private void FillValidationDetailsFromXMF()
+        {
+            if (SessionManager.Instance.CurrentValidationRequest != null)
+            {
+                txtMeasurementName.Text = SessionManager.Instance.CurrentValidationRequest.JobName;
+                txtMeasurementName.Enabled = false;
+                txtJDFJobId.Text = SessionManager.Instance.CurrentValidationRequest.JDFJobId;
+                txtJDFJobId.Enabled = false;
+                txtPageOrSurface.Text = SessionManager.Instance.CurrentValidationRequest.PageOrSurface;
+                txtPageOrSurface.Enabled = false;
+                txtCustomer.Text = SessionManager.Instance.CurrentValidationRequest.Customer;
+                txtCustomer.Enabled = false;
+            }
+        }
+
+        #region Properties
+        public bool IsXmfUser
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser));
+            }
+        }
+        #endregion
     }
 }

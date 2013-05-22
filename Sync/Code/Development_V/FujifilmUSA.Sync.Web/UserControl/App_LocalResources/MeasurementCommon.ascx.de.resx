@@ -195,4 +195,10 @@
   <data name="ImportMeasurementsButton" xml:space="preserve">
     <value>Import Measurements_de</value>
   </data>
+  <data name="JobNameCaption" xml:space="preserve">
+    <value>Job Name_de</value>
+  </data>
+  <data name="MeasurementNameCaption" xml:space="preserve">
+    <value>Measurement Name_de</value>
+  </data>
 </root>

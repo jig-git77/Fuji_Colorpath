@@ -31,5 +31,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID);
         List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID);
         int ImportMeasurements(int MeasurementID, int OptimizeRunID);
+        Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl);
+        Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId);
     }
 }

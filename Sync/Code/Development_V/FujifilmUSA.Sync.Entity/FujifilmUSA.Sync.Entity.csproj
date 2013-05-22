@@ -53,6 +53,8 @@
     <Compile Include="AnalyzeChart_G7.cs" />
     <Compile Include="AnalyzeChart_Gray.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="COErrorMessage.cs" />
+    <Compile Include="CPSyncV\TempValidationInfo.cs" />
     <Compile Include="Density.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />

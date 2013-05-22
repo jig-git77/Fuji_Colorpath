@@ -768,4 +768,13 @@
   <data name="Login_PasswordSaved" xml:space="preserve">
     <value>User activated successfully</value>
   </data>
+  <data name="JobName_LengthError" xml:space="preserve">
+    <value>Please enter Job Name that is at least 4 characters long.</value>
+  </data>
+  <data name="Validation_ProjectClosedError" xml:space="preserve">
+    <value>Current project is Closed, so validation cannot be performed</value>
+  </data>
+  <data name="Validation_ProjectOpenError" xml:space="preserve">
+    <value>Current project is Open, so validation cannot be performed</value>
+  </data>
 </root>

@@ -84,6 +84,7 @@
     <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
     <Content Include="COAnalyze.aspx" />
+    <Content Include="COErrorMessage.aspx" />
     <Content Include="COMeasurement.aspx" />
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
@@ -96,6 +97,8 @@
     <Content Include="AddLicenseManagement.aspx" />
     <Content Include="COProjectMaxLimit.aspx" />
     <Content Include="COTransferSiteControl.aspx" />
+    <Content Include="COValidationCallback.aspx" />
+    <Content Include="COValidationSetup.aspx" />
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
     <Content Include="DownloadSoftwares.aspx" />
@@ -262,8 +265,10 @@
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
     <Content Include="UserControl\CODisplaybar.ascx" />
+    <Content Include="UserControl\COErrorMessage.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
     <Content Include="UserControl\COTransferSiteControl.ascx" />
+    <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
@@ -606,6 +611,13 @@
     <Compile Include="COAnalyze.aspx.designer.cs">
       <DependentUpon>COAnalyze.aspx</DependentUpon>
     </Compile>
+    <Compile Include="COErrorMessage.aspx.cs">
+      <DependentUpon>COErrorMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COErrorMessage.aspx.designer.cs">
+      <DependentUpon>COErrorMessage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ColorOrganizer\ColorOrganizerRequestProcessor.cs" />
     <Compile Include="COMaster.Master.cs">
       <DependentUpon>COMaster.Master</DependentUpon>
@@ -700,6 +712,20 @@
     </Compile>
     <Compile Include="COTransferSiteControl.aspx.designer.cs">
       <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COValidationCallback.aspx.cs">
+      <DependentUpon>COValidationCallback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COValidationCallback.aspx.designer.cs">
+      <DependentUpon>COValidationCallback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COValidationSetup.aspx.cs">
+      <DependentUpon>COValidationSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COValidationSetup.aspx.designer.cs">
+      <DependentUpon>COValidationSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="COViewOpenProject.aspx.cs">
       <DependentUpon>COViewOpenProject.aspx</DependentUpon>
@@ -932,6 +958,13 @@
     <Compile Include="UserControl\CODisplaybar.ascx.designer.cs">
       <DependentUpon>CODisplaybar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\COErrorMessage.ascx.cs">
+      <DependentUpon>COErrorMessage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COErrorMessage.ascx.designer.cs">
+      <DependentUpon>COErrorMessage.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\COProjectMaxLimit.ascx.cs">
       <DependentUpon>COProjectMaxLimit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -945,6 +978,13 @@
     </Compile>
     <Compile Include="UserControl\COTransferSiteControl.ascx.designer.cs">
       <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\COValidationCallback.ascx.cs">
+      <DependentUpon>COValidationCallback.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COValidationCallback.ascx.designer.cs">
+      <DependentUpon>COValidationCallback.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\COViewOpenProject.ascx.cs">
       <DependentUpon>COViewOpenProject.ascx</DependentUpon>
@@ -2123,7 +2163,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56067</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FujifilmUSA.Sync.Web</IISUrl>
+          <IISUrl>http://localhost/FujifilmUSA.Sync.Web_V</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

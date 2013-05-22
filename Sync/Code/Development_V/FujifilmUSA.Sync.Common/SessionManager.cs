@@ -22,6 +22,8 @@ namespace FujifilmUSA.Sync.Common
         private const string _selectedBranch = "SelectedBranch";
         private const string _pageErrorMessage = "PageErrorMessage";
         private const string _projectListSession = "projectListSession";
+        private const string _validationRequest = "ValidationRequest";
+        private const string _coErrorMessage = "COErrorMessage";
         #endregion
 
         #region Singleton
@@ -206,6 +208,22 @@ namespace FujifilmUSA.Sync.Common
             }
         }
 
+        public Entity.CPSyncV.TempValidationInfo CurrentValidationRequest
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_validationRequest] != null)
+                {
+                    return (Entity.CPSyncV.TempValidationInfo)HttpContext.Current.Session[_validationRequest];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_validationRequest] = value;
+            }
+        }
+
         public string CurrentLanguage
         {
             get
@@ -283,6 +301,22 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_projectListSession] = value;
+            }
+        }
+
+        public COErrorMessage COErrorMessage
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_coErrorMessage] != null)
+                {
+                    return HttpContext.Current.Session[_coErrorMessage] as COErrorMessage;
+                }
+                return new COErrorMessage();
+            }
+            set
+            {
+                HttpContext.Current.Session[_coErrorMessage] = value;
             }
         }
 

@@ -22,7 +22,7 @@
     <div class="head">
         <h1 id="header" runat="server"><asp:Localize runat="server" Text="Measurement" 
                 ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
-        <div class="Information_divAnalyze">
+        <div class="Information_divAnalyze">                        
             <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
                 OnClientClick="return AllowToAnalyze();">
                 <span>
@@ -31,6 +31,11 @@
                     
                     <asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
                                 meta:resourcekey="locAnalyzeResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnValidationSetup" runat="server" CssClass="buttonNormal" OnClick="btnValidationSetup_Click" Visible="false">
+                <span>
+                    <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"></asp:Localize>
                 </span>
             </asp:LinkButton>
         </div>

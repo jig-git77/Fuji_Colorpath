@@ -30,7 +30,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="773" Width="788.402770996094" Height="193.225051879883" />
+		<Bounds X="307" Y="653" Width="788.402770996094" Height="193.225051879883" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -56,7 +56,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1296" Width="761.800903320313" Height="187.199996948242" />
+		<Bounds X="307" Y="1146" Width="761.800903320313" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -82,7 +82,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1555.2" Width="786.753540039063" Height="187.199996948242" />
+		<Bounds X="307" Y="1390.19995117188" Width="786.753540039063" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -108,7 +108,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1814.4" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="1634.40002441406" Width="790.592407226563" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -134,7 +134,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="2073.6" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="1863.60009765625" Width="790.592407226563" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -160,7 +160,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="2332.8" Width="778.293823242188" Height="180" />
+		<Bounds X="3488.84552276756" Y="650.24070678277" Width="570.426576081046" Height="180" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -186,7 +186,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="650.732543945313" Y="777.599975585938" Width="2721.60009765625" Height="191.589324951172" />
+		<Bounds X="650.732543945313" Y="657.599975585938" Width="2721.60009765625" Height="191.589324951172" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -212,7 +212,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="802.875671386719" Y="1296" Width="2577.60009765625" Height="187.199996948242" />
+		<Bounds X="802.875671386719" Y="1146" Width="2577.60009765625" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -238,7 +238,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1008" Y="1555.2" Width="2361.60009765625" Height="187.199996948242" />
+		<Bounds X="1008" Y="1390.19995117188" Width="2361.60009765625" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -264,7 +264,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1121.35485839844" Y="1814.4" Width="2246.39990234375" Height="187.199996948242" />
+		<Bounds X="1121.35485839844" Y="1634.40002441406" Width="2246.39990234375" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -290,7 +290,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1059.41931152344" Y="2073.6" Width="2318.39990234375" Height="187.199996948242" />
+		<Bounds X="1059.41931152344" Y="1863.60009765625" Width="2318.39990234375" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -316,7 +316,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="951.032287597656" Y="2332.8" Width="2404.80004882812" Height="184.052124023438" />
+		<Bounds X="4132.87781036522" Y="650.24070678277" Width="1108.11741938297" Height="184.052124023438" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -368,7 +368,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3484.80004882813" Y="780" Width="1160.04052734375" Height="1797.36962890625" />
+		<Bounds X="3484.80004882813" Y="1065" Width="1160.04052734375" Height="1524.38382522077" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -394,7 +394,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="576.824645996094" Width="331.200012207031" Height="150" />
+		<Bounds X="4780.7998046875" Y="861.824645996094" Width="331.200012207031" Height="147.298580368548" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -420,7 +420,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="575.04638671875" Width="331.200012207031" Height="165" />
+		<Bounds X="5184" Y="860.04638671875" Width="331.200012207031" Height="147.298580368548" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -446,7 +446,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="788.770385742188" Width="337.736328125" Height="1786.44812011719" />
+		<Bounds X="4780.7998046875" Y="1073.77038574219" Width="337.736328125" Height="1513.46231643171" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -472,7 +472,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="785.220458984375" Width="331.200012207031" Height="1793.55725097656" />
+		<Bounds X="5184" Y="1070.22045898438" Width="331.200012207031" Height="1520.57144729108" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -516,7 +516,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1036.8" Width="754.976257324219" Height="187.199996948242" />
+		<Bounds X="307" Y="886.800048828125" Width="754.976257324219" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -542,7 +542,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="843.7822265625" Y="1036.8" Width="2534.39990234375" Height="187.199996948242" />
+		<Bounds X="843.7822265625" Y="886.800048828125" Width="2534.39990234375" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -577,5 +577,109 @@
 			<FillColor Alpha="0" Red="255" Green="255" Blue="255" />
 		</ShapeObject>
 		<Bounds X="3412.80004882813" Y="650.503723144531" Width="15" Height="1828.42919921875" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>JobCaption_1_1_1_1__1</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>None</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>Page/Surface:</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="307" Y="2107.80004882813" Width="935.260681152344" Height="180" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>TEXT_1_1_1_1__1</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>[PageOrSurface]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="1312.73852539063" Y="2107.80004882813" Width="2043.09387207031" Height="184.052124023438" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>JobCaption_1_1_1_1___1</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>None</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>JDF Job ID:</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="307" Y="2377.80004882813" Width="778.293823242188" Height="180" />
+	</ObjectInfo>
+	<ObjectInfo>
+		<TextObject>
+			<Name>TEXT_1_1_1_1___1</Name>
+			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
+			<LinkedObjectName></LinkedObjectName>
+			<Rotation>Rotation0</Rotation>
+			<IsMirrored>False</IsMirrored>
+			<IsVariable>False</IsVariable>
+			<HorizontalAlignment>Left</HorizontalAlignment>
+			<VerticalAlignment>Top</VerticalAlignment>
+			<TextFitMode>ShrinkToFit</TextFitMode>
+			<UseFullFontHeight>True</UseFullFontHeight>
+			<Verticalized>False</Verticalized>
+			<StyledText>
+				<Element>
+					<String>[JDFJobId]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
+			</StyledText>
+		</TextObject>
+		<Bounds X="1162.59631347656" Y="2377.80004882813" Width="2193.23608398438" Height="184.052124023438" />
 	</ObjectInfo>
 </DieCutLabel>
