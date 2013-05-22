@@ -133,6 +133,11 @@
                             <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
+                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false" OnClick="lbtnSubmit_Click">
+                        <span>
+                            <asp:Localize runat="server" Text="Submit" ID="locSubmit"></asp:Localize>
+                        </span>
+                    </asp:LinkButton>
                     &nbsp;
                     <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
                         <span>
@@ -150,12 +155,7 @@
                         <span>
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
                         </span>
-                    </asp:LinkButton>
-                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false" OnClick="lbtnSubmit_Click">
-                        <span>
-                            <asp:Localize runat="server" Text="Submit" ID="locSubmit"></asp:Localize>
-                        </span>
-                    </asp:LinkButton>
+                    </asp:LinkButton>                    
                 </div>
             </div>
             <div class="listDevice" style="margin-left: 10px;">

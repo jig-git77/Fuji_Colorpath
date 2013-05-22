@@ -217,8 +217,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lbtnSubmit.Visible = true;
                 lbtnOptimize.Visible = false;
-                lbtnMeasurementVerification.Visible = false;
-                lbtnMeasurement.Visible = false;
+                lbtnMeasurementVerification.Visible = false;                
                 lbtnDownloadAndSaveDLP.Visible = false;
             }
 
