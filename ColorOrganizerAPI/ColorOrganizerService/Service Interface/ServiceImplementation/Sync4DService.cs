@@ -50,6 +50,11 @@ namespace FujifilmUSA.ColorOrganizerService.ServiceImplementation
             return Sync4DBusiness.GetReferenceChartData(request);
         }
 
+        public StoreTempValidationInformationResponse StoreTempValidationInformation(StoreTempValidationInformationRequest request)
+        {
+            return Sync4DBusiness.StoreTempValidationInformation(request);
+        }
+
         #endregion
     }
 }

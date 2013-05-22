@@ -99,6 +99,7 @@
     <Compile Include="Sync4D\CheckUserCredentialsBusiness.cs" />
     <Compile Include="Sync4D\GetReferenceChartDataBusiness.cs" />
     <Compile Include="Sync4D\StoreTempProjectInformationBusiness.cs" />
+    <Compile Include="Sync4D\StoreTempValidationInformationBusiness.cs" />
     <Compile Include="Sync4D\Sync4DBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
