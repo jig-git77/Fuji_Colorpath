@@ -27,6 +27,17 @@ namespace ColorOrganizerDemoLib.ViewModels
             LastAnalyzeButtonCommand = new DelegateCommand();
             LastAnalyzeButtonCommand.Executed += (sender, e) => RedirectToLastAnalyse();
 
+            ValidationMeasureCommand = new DelegateCommand();
+            ValidationMeasureCommand.Executed += (sender, e) => RedirectToValidation();
+
+        }
+
+        private void RedirectToValidation()
+        {
+            //Store temporary validation information here
+            //Redirect to website page
+            if (!IsNewIccProfile)
+                InsertValidationInformationAndRedirect();
         }
 
         private void RedirectToLastAnalyse()
@@ -44,6 +55,58 @@ namespace ColorOrganizerDemoLib.ViewModels
             PassToParent(EControl.WebHost);
         }
 
+        private void InsertValidationInformationAndRedirect()
+        {
+            var client = new Sync4DServiceContractClient("BasicHttpBinding_ISync4DServiceContract");
+            client.StoreTempValidationInformationCompleted += delegate(object sender, StoreTempValidationInformationCompletedEventArgs e)
+            {
+                if (e.Error == null)
+                {
+                    if (e.Result != null)
+                    {
+                        Common.ValidationInfoId = e.Result.ValidationInfoId;
+
+                        this.Parent.WebHost.RedirectUrl =
+                           String.Format(
+                               "{0}/COProcessRequest.ashx?action={1}&uid={2}&pwd={3}&validationinfoid={4}&deviceid={5}",
+                               Common.FujiWebSite,
+                               "validation",
+                               Common.UserName,
+                               Common.GetEncryptPassword(),
+                               Common.ValidationInfoId,
+                                this.Parent.SelectDevice.SelectedDevice.DeviceId);
+
+                        PassToParent(EControl.WebHost);
+                    }
+                }
+                else
+                {
+                    //e.Error
+                }
+            };
+
+            var domainUrl = string.Empty;
+            if (System.Windows.Browser.HtmlPage.Document != null)
+            {
+                var urlParts = System.Windows.Browser.HtmlPage.Document.DocumentUri.AbsoluteUri.Split('/');
+                domainUrl = string.Join("/", urlParts, 0, urlParts.Length - 1);
+            }
+
+            client.StoreTempValidationInformationAsync(new StoreTempValidationInformationRequest()
+            {
+                SecurityToken = Common.SecurityToken,
+                UserName = Common.UserName,
+                UserPassword = Common.GetEncryptPassword(),
+                JobName = JobName,
+                Customer = Customer,
+                JDFJobId = JDFJobId,
+                PageOrSurface = PageOrSurface,
+                ProjectId = this.Parent.StartIccProfile.SelectedIccProfile.ProjectId,
+                SilverlightPostUrl = domainUrl
+            });
+        }
+
+        public DelegateCommand ValidationMeasureCommand { get; set; }
         public DelegateCommand LastAnalyzeButtonCommand { get; set; }
 
         public bool IsNextButtonEnable
@@ -102,6 +165,62 @@ namespace ColorOrganizerDemoLib.ViewModels
             {
                 _isNewIccProfile = value;
                 RaisePropertyChanged("IsNewIccProfile");
+            }
+        }
+
+        private string _jobName;
+        public string JobName
+        {
+            get
+            {
+                return _jobName;
+            }
+            set
+            {
+                _jobName = value;
+                RaisePropertyChanged("JobName");
+            }
+        }
+
+        private string _customer;
+        public string Customer
+        {
+            get
+            {
+                return _customer;
+            }
+            set
+            {
+                _customer = value;
+                RaisePropertyChanged("Customer");
+            }
+        }
+
+        private string _pageOrSurface;
+        public string PageOrSurface
+        {
+            get
+            {
+                return _pageOrSurface;
+            }
+            set
+            {
+                _pageOrSurface = value;
+                RaisePropertyChanged("PageOrSurface");
+            }
+        }
+
+        private string _jdfJobId;
+        public string JDFJobId
+        {
+            get
+            {
+                return _jdfJobId;
+            }
+            set
+            {
+                _jdfJobId = value;
+                RaisePropertyChanged("JDFJobId");
             }
         }
     }

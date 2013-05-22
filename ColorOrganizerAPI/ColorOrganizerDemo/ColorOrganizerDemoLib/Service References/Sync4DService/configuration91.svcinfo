@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ado5FHIEwbqxS+Jn/YBGy/FFMIA=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3nXGV28ycXZYYd6CV9d6p1tm3qo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ISync4DServiceContract">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_ISync4DServiceContract" contract="Sync4DService.ISync4DServiceContract" bindingType="basicHttpBinding" address="http://pc116/ColorOrganizerService/Sync4D.svc" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract">
+    <endpoint name="BasicHttpBinding_ISync4DServiceContract" contract="Sync4DService.ISync4DServiceContract" bindingType="basicHttpBinding" address="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://pc116/ColorOrganizerService/Sync4D.svc</serializedValue>
+          <serializedValue>http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

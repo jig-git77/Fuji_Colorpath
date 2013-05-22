@@ -23,16 +23,16 @@
     <MetadataSource Address="http://localhost/ColorOrganizerService/sync4d.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Sync4D8.xsd" MetadataType="Schema" ID="499f51cc-efb6-451e-9544-67e5a7b829fa" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
-    <MetadataFile FileName="Sync4DService1.wsdl" MetadataType="Wsdl" ID="5f1f8ccc-6370-4531-b3cb-153167c055ac" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?wsdl" />
-    <MetadataFile FileName="Sync4D81.xsd" MetadataType="Schema" ID="73305801-792f-4ebe-81a0-9e045b78e2d9" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
-    <MetadataFile FileName="Sync4D82.xsd" MetadataType="Schema" ID="9f086573-c414-4b42-abb7-f2829ec5167d" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
-    <MetadataFile FileName="Sync4D83.xsd" MetadataType="Schema" ID="c8cd9b76-388b-4e13-8ff0-165fd2a728de" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd7" />
-    <MetadataFile FileName="Sync4D84.xsd" MetadataType="Schema" ID="38d3e6af-408d-450c-904e-811714121e53" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
-    <MetadataFile FileName="Sync4D85.xsd" MetadataType="Schema" ID="f62da5d0-d714-4e5a-adda-efa45f8c8898" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
-    <MetadataFile FileName="Sync4D86.xsd" MetadataType="Schema" ID="14af50b2-1d12-44f1-a8ad-9b37e23d22ca" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
-    <MetadataFile FileName="Sync4D1.disco" MetadataType="Disco" ID="dcdb7145-8034-4d7a-89b7-1a3bd7d8bd8c" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?disco" />
-    <MetadataFile FileName="Sync4D87.xsd" MetadataType="Schema" ID="a12ab161-3af8-4c4d-83e4-cd8668812154" SourceId="1" SourceUrl="http://pc116/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4D.xsd" MetadataType="Schema" ID="d811d4f5-8c30-4144-ae1d-13e479980ba3" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd5" />
+    <MetadataFile FileName="Sync4D1.xsd" MetadataType="Schema" ID="dedd4fe7-35bc-4bb0-a506-fdcd0f2dd5eb" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd0" />
+    <MetadataFile FileName="Sync4D2.xsd" MetadataType="Schema" ID="75076c2f-8952-46b2-a4e9-c18ed821c01a" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd6" />
+    <MetadataFile FileName="Sync4D3.xsd" MetadataType="Schema" ID="6e00a0aa-0433-4a80-b2e4-282ca742ffed" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd3" />
+    <MetadataFile FileName="Sync4D4.xsd" MetadataType="Schema" ID="3d3e1576-47a4-402c-b536-8eb6150f73c8" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd1" />
+    <MetadataFile FileName="Sync4D5.xsd" MetadataType="Schema" ID="437f33c8-8817-4fb3-a0cb-b8fa0b1c435a" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd2" />
+    <MetadataFile FileName="Sync4D6.xsd" MetadataType="Schema" ID="cec149c3-6ba8-4ae2-ad48-8e38df6093d5" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd7" />
+    <MetadataFile FileName="Sync4D.disco" MetadataType="Disco" ID="a1d0d17a-0afe-40c3-b891-3c6bb1fce3e9" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?disco" />
+    <MetadataFile FileName="Sync4D7.xsd" MetadataType="Schema" ID="de59a9e4-2326-45f7-ae96-1cdce2551d56" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?xsd=xsd4" />
+    <MetadataFile FileName="Sync4DService.wsdl" MetadataType="Wsdl" ID="c3d188ae-f7ce-4aed-a881-6dcbd265c3f2" SourceId="1" SourceUrl="http://pc115.solutions.com/ColorOrganizerService/Sync4D.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -86,7 +86,7 @@
             <param name="windowless" value="true" />
             <param name="autoUpgrade" value="true" />
             <param name="onLoad" value="pluginLoaded" />
-            <param name="initParams" value="FujiUSAWebSource=http://localhost/FujifilmUSA.Sync.Web" />
+            <param name="initParams" value="FujiUSAWebSource=http://localhost/FujifilmUSA.Sync.Web_V" />
             <%--<param name="initParams" value="FujiUSAWebSource=http://dev.taskero.com/ColorPathDev" />--%>
             <%--<param name="initParams" value="FujiUSAWebSource=http://www.softwebdemo.com/softweb/FujiSync4D" />--%>
             <a href="http://go.microsoft.com/fwlink/?LinkID=149156&v=5.0.61118.0" style="text-decoration: none">
