@@ -27,6 +27,9 @@ namespace ColorOrganizerDemoLib.ViewModels
             LastAnalyzeButtonCommand = new DelegateCommand();
             LastAnalyzeButtonCommand.Executed += (sender, e) => RedirectToLastAnalyse();
 
+            LastValidationAnalyzeButtonCommand = new DelegateCommand();
+            LastValidationAnalyzeButtonCommand.Executed += (sender, e) => RedirectToLastValidationAnalyse();
+
             ValidationMeasureCommand = new DelegateCommand();
             ValidationMeasureCommand.Executed += (sender, e) => RedirectToValidation();
 
@@ -54,6 +57,22 @@ namespace ColorOrganizerDemoLib.ViewModels
 
             PassToParent(EControl.WebHost);
         }
+
+        private void RedirectToLastValidationAnalyse()
+        {
+            this.Parent.WebHost.RedirectUrl =
+                            String.Format(
+                                "{0}/COProcessRequest.ashx?action={1}&uid={2}&pwd={3}&projectid={4}&deviceid={5}",
+                                Common.FujiWebSite,
+                                "viewLastValidationAnalyze",
+                                Common.UserName,
+                                Common.GetEncryptPassword(),
+                                this.Parent.StartIccProfile.SelectedIccProfile.ProjectId,
+                                this.Parent.SelectDevice.SelectedDevice.DeviceId);
+
+            PassToParent(EControl.WebHost);
+        }
+        
 
         private void InsertValidationInformationAndRedirect()
         {
@@ -108,6 +127,7 @@ namespace ColorOrganizerDemoLib.ViewModels
 
         public DelegateCommand ValidationMeasureCommand { get; set; }
         public DelegateCommand LastAnalyzeButtonCommand { get; set; }
+        public DelegateCommand LastValidationAnalyzeButtonCommand { get; set; }
 
         public bool IsNextButtonEnable
         {
