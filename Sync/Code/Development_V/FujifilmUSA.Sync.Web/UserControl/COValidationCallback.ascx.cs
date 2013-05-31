@@ -24,7 +24,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             this.Page,
                             this.Page.GetType(),
                             "messaging",
-                            string.Format("window.parent.postMessage('Action: Validation. ProjectId:{0}. Result:{1}','{2}');",
+                            string.Format("window.parent.postMessage('Action:Validation. ProjectId:{0}. Result:{1}.','{2}');",
                                           !string.IsNullOrEmpty(Request.QueryString["projectid"])
                                           ? Convert.ToInt32(Request.QueryString["projectid"])
                                           : 0,
