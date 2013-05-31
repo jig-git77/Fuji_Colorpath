@@ -777,4 +777,7 @@
   <data name="Validation_ProjectOpenError" xml:space="preserve">
     <value>Current project is Open, so validation cannot be performed</value>
   </data>
+  <data name="Validation_NoMeasurements" xml:space="preserve">
+    <value>Current project has no Validation, so can not show Analyse page</value>
+  </data>
 </root>

@@ -215,7 +215,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
-                lbtnSubmit.Visible = true;
+                if (SessionManager.Instance.CurrentValidationRequest != null)
+                {
+                    lbtnSubmit.Visible = true;
+                }
+                else
+                {
+                    lbtnSubmit.Visible = false;
+                    lbtnMeasurement.Visible = false;
+                }
                 lbtnOptimize.Visible = false;
                 lbtnMeasurementVerification.Visible = false;                
                 lbtnDownloadAndSaveDLP.Visible = false;

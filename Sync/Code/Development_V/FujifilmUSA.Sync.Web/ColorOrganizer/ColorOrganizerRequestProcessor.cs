@@ -19,7 +19,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
             Add = 1,
             Edit = 2,
             ViewLastAnalyze = 3,
-            Validation = 4
+            ViewLastValidationAnalyze = 4,
+            Validation = 5
         }
 
         #region Variable Declarations
@@ -29,6 +30,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
         private const string _qsactionValueAdd = "add";
         private const string _qsactionValueEdit = "edit";
         private const string _qsactionValueView = "viewLastAnalyze";
+        private const string _qsactionValueValidationView = "viewLastValidationAnalyze";
         private const string _qsUserNameKey = "uid";
         private const string _qsPasswordKey = "pwd";
         private const string _qsDeviceIdKey = "deviceid";
@@ -37,7 +39,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
         private const string _qsChartIdKey = "chartid";
         private const string _qsValidation = "validation";
         private const string _qsValidationInfoId = "validationinfoid";
-        private bool IsErrorOccured { get; set; }        
+        private bool IsErrorOccured { get; set; }
         #endregion
 
         #region Ctor
@@ -50,7 +52,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
 
         #region Public Methods
         public bool ProcessRequest()
-        {            
+        {
             if (HttpContext.Current.Request.QueryString[_qsActionKey] == null)
                 return false;
 
@@ -61,26 +63,33 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 !HttpContext.Current.Request.QueryString[_qsActionKey].
                      Equals(_qsactionValueView, StringComparison.CurrentCultureIgnoreCase) &&
                 !HttpContext.Current.Request.QueryString[_qsActionKey].
+                     Equals(_qsactionValueValidationView, StringComparison.CurrentCultureIgnoreCase) &&
+                !HttpContext.Current.Request.QueryString[_qsActionKey].
                      Equals(_qsValidation, StringComparison.CurrentCultureIgnoreCase))
                 return false;
 
             if (HttpContext.Current.Request.QueryString[_qsActionKey].
-                     Equals(_qsactionValueAdd, StringComparison.CurrentCultureIgnoreCase))
+                Equals(_qsactionValueAdd, StringComparison.CurrentCultureIgnoreCase))
             {
                 return ProcessAddRequest();
             }
             else if (HttpContext.Current.Request.QueryString[_qsActionKey].
-                     Equals(_qsactionValueEdit, StringComparison.CurrentCultureIgnoreCase))
+                Equals(_qsactionValueEdit, StringComparison.CurrentCultureIgnoreCase))
             {
                 return ProcessEditRequest();
             }
             else if (HttpContext.Current.Request.QueryString[_qsActionKey].
-                     Equals(_qsactionValueView, StringComparison.CurrentCultureIgnoreCase))
+                Equals(_qsactionValueView, StringComparison.CurrentCultureIgnoreCase))
             {
                 return ProcessViewLastAnalyzeRequest();
             }
             else if (HttpContext.Current.Request.QueryString[_qsActionKey].
-                     Equals(_qsValidation, StringComparison.CurrentCultureIgnoreCase))
+            Equals(_qsactionValueValidationView, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return ProcessViewLastValidationAnalyzeRequest();
+            }
+            else if (HttpContext.Current.Request.QueryString[_qsActionKey].
+                Equals(_qsValidation, StringComparison.CurrentCultureIgnoreCase))
             {
                 return ProcessValidationRequest();
             }
@@ -89,6 +98,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                 return false;
             }
         }
+
         #endregion
 
         #region Private Methods
@@ -166,6 +176,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                             break;
                         case Action.ViewLastAnalyze:
                             break;
+                        case Action.ViewLastValidationAnalyze:
+                            break;
                         case Action.Validation:
                             if (string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsValidationInfoId]))
                                 return false;
@@ -179,7 +191,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                                 errorMessage.Header = "";
                                 errorMessage.Message = FujifilmUSA.Sync.GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("JobName_LengthError");
                                 SessionManager.Instance.COErrorMessage = errorMessage;
-                                HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));                                
+                                HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
                             }
 
                             SessionManager.Instance.CurrentValidationRequest = TempValidationInfo;
@@ -188,8 +200,8 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                             break;
                     }
                     //Return true if no error
-                    if (!IsErrorOccured)                                            
-                        return true;                     
+                    if (!IsErrorOccured)
+                        return true;
                 }
             }
             return false;
@@ -317,8 +329,62 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
             return false;
         }
 
+        private bool ProcessViewLastValidationAnalyzeRequest()
+        {
+            if (CommonProcess())
+            {
+                #region Setting Existing Project Information
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.QueryString[_qsProjectIdKey]))
+                {
+                    ProjectId = Convert.ToInt32(HttpContext.Current.Request.QueryString[_qsProjectIdKey]);
+                    _presenterColorOrganizerRequestProcessor.GetProjectDetailWithVerification();
+
+                    //SessionManager.Instance.CurrentOptimizeRun.HasMeasurements
+                    if (Project.Status != EOptimizeRunStatus.Open && Project.Status != EOptimizeRunStatus.Closed)
+                    {
+                        SessionManager.Instance.CurrentProject = Project;
+                        SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                        //Set validation as sub operation type
+                        SessionManager.Instance.CurrentDlpSubOperation = ELicenseType.Validation;
+                        if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                        {
+                            //Redirect to analyse page
+                            HttpContext.Current.Response.Redirect(string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid()));
+                        }
+                        else
+                        {
+                            Entity.COErrorMessage errorMessage = new Entity.COErrorMessage();
+                            errorMessage.Header = "";
+                            errorMessage.Message = GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("Validation_NoMeasurements");
+                            SessionManager.Instance.COErrorMessage = errorMessage;
+                            HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
+                        }
+                    }
+                    else if (Project.Status == EOptimizeRunStatus.Open)
+                    {
+                        Entity.COErrorMessage errorMessage = new Entity.COErrorMessage();
+                        errorMessage.Header = "";
+                        errorMessage.Message = GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("Validation_ProjectOpenError");
+                        SessionManager.Instance.COErrorMessage = errorMessage;
+                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
+                    }
+                    else if (Project.Status == EOptimizeRunStatus.Closed)
+                    {
+                        Entity.COErrorMessage errorMessage = new Entity.COErrorMessage();
+                        errorMessage.Header = "";
+                        errorMessage.Message = GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("Validation_ProjectClosedError");
+                        SessionManager.Instance.COErrorMessage = errorMessage;
+                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
+                    }
+                    
+                }
+                #endregion
+            }
+            return false;
+        }
+
         private bool ProcessValidationRequest()
-        {                        
+        {
             if (CommonProcess())
             {
                 #region Setting Existing Project Information
@@ -327,7 +393,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                     ProjectId = SessionManager.Instance.CurrentValidationRequest.ProjectId;
                     _presenterColorOrganizerRequestProcessor.GetProjectDetail();
                     if (Project.Status != EOptimizeRunStatus.Open && Project.Status != EOptimizeRunStatus.Closed)
-                    {                        
+                    {
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                         //Set validation as sub operation type
@@ -336,27 +402,27 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                         //Redirect to measurment page
                         HttpContext.Current.Response.Redirect(string.Format("COMeasurement.aspx?id={0}&projectid={1}", Guid.NewGuid(), SessionManager.Instance.CurrentProject.ProjectId));
                     }
-                    else if(Project.Status == EOptimizeRunStatus.Open)
+                    else if (Project.Status == EOptimizeRunStatus.Open)
                     {
                         Entity.COErrorMessage errorMessage = new Entity.COErrorMessage();
                         errorMessage.Header = "";
                         errorMessage.Message = GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("Validation_ProjectOpenError");
-                        SessionManager.Instance.COErrorMessage = errorMessage;                        
-                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));                        
+                        SessionManager.Instance.COErrorMessage = errorMessage;
+                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
                     }
                     else if (Project.Status == EOptimizeRunStatus.Closed)
                     {
                         Entity.COErrorMessage errorMessage = new Entity.COErrorMessage();
                         errorMessage.Header = "";
                         errorMessage.Message = GlobalResources.GlobalResourceManager.Instance.GetGlobalResourceString("Validation_ProjectClosedError");
-                        SessionManager.Instance.COErrorMessage = errorMessage;                        
-                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));                        
+                        SessionManager.Instance.COErrorMessage = errorMessage;
+                        HttpContext.Current.Response.Redirect(string.Format("COErrorMessage.aspx?id={0}", Guid.NewGuid()));
                     }
                 }
                 #endregion
             }
             return false;
-        }        
+        }
         #endregion
 
         #region IViewColorOrganizerRequestProcessor Members
