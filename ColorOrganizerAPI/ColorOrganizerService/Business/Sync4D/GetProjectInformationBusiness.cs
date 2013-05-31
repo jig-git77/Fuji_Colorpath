@@ -45,6 +45,7 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                 response.ProjectInformation.RipSettings = projectInfo.PrintCondition.RipSettings;
                                                 response.ProjectInformation.DeviceId = projectInfo.DeviceId;
                                                 response.ProjectInformation.ChartId = projectInfo.MeasurementSetting.ReferenceChartType.Key;
+                                                response.ProjectInformation.ValidationChartId = projectInfo.MeasurementSetting.VReferenceChartType.Key;
                                                 response.ProjectInformation.Status = (ProjectStatus)Enum.Parse(typeof(ProjectStatus), projectInfo.Status.ToString());
                                                // response.ProjectInformation.Status = (((ProjectStatus)Enum.Parse(typeof(ProjectStatus), projectInfo.Status.ToString()) == ProjectStatus.Closed && !projectInfo.OptimizeRuns.Last().HasProfile) ? ProjectStatus.Certify : (ProjectStatus)Enum.Parse(typeof(ProjectStatus), projectInfo.Status.ToString()));
                                                 response.ProjectInformation.SourceProfileId = projectInfo.SourceProfile.SourceProfileId;

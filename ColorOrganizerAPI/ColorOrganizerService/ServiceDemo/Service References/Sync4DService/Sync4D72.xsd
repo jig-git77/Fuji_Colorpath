@@ -66,6 +66,7 @@
       <xs:element minOccurs="0" name="SourceProfileId" type="xs:int" />
       <xs:element minOccurs="0" name="SourceProfileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="tns:ProjectStatus" />
+      <xs:element minOccurs="0" name="ValidationChartId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ProjectInformation" nillable="true" type="tns:ProjectInformation" />

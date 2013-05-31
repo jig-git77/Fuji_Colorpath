@@ -178,6 +178,7 @@ namespace ServiceDemo.Sync4DService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProfileRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempProjectInformationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.CheckUserCredentialsRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempValidationInformationRequest))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetDeviceListRequest))]
     public partial class BaseRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -510,6 +511,126 @@ namespace ServiceDemo.Sync4DService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoreTempValidationInformationRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    [System.SerializableAttribute()]
+    public partial class StoreTempValidationInformationRequest : ServiceDemo.Sync4DService.BaseRequest {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CustomerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string JDFJobIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string JobNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PageOrSurfaceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProjectIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SilverlightPostUrlField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid TempValidationIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Customer {
+            get {
+                return this.CustomerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomerField, value) != true)) {
+                    this.CustomerField = value;
+                    this.RaisePropertyChanged("Customer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string JDFJobId {
+            get {
+                return this.JDFJobIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JDFJobIdField, value) != true)) {
+                    this.JDFJobIdField = value;
+                    this.RaisePropertyChanged("JDFJobId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string JobName {
+            get {
+                return this.JobNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JobNameField, value) != true)) {
+                    this.JobNameField = value;
+                    this.RaisePropertyChanged("JobName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PageOrSurface {
+            get {
+                return this.PageOrSurfaceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PageOrSurfaceField, value) != true)) {
+                    this.PageOrSurfaceField = value;
+                    this.RaisePropertyChanged("PageOrSurface");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProjectId {
+            get {
+                return this.ProjectIdField;
+            }
+            set {
+                if ((this.ProjectIdField.Equals(value) != true)) {
+                    this.ProjectIdField = value;
+                    this.RaisePropertyChanged("ProjectId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SilverlightPostUrl {
+            get {
+                return this.SilverlightPostUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SilverlightPostUrlField, value) != true)) {
+                    this.SilverlightPostUrlField = value;
+                    this.RaisePropertyChanged("SilverlightPostUrl");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid TempValidationId {
+            get {
+                return this.TempValidationIdField;
+            }
+            set {
+                if ((this.TempValidationIdField.Equals(value) != true)) {
+                    this.TempValidationIdField = value;
+                    this.RaisePropertyChanged("TempValidationId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GetDeviceListRequest", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
         "Contracts")]
     [System.SerializableAttribute()]
@@ -547,6 +668,7 @@ namespace ServiceDemo.Sync4DService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetProfileResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempProjectInformationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.CheckUserCredentialsResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.StoreTempValidationInformationResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceDemo.Sync4DService.GetDeviceListResponse))]
     public partial class BaseResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -821,6 +943,30 @@ namespace ServiceDemo.Sync4DService {
                 if ((this.IsValidField.Equals(value) != true)) {
                     this.IsValidField = value;
                     this.RaisePropertyChanged("IsValid");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoreTempValidationInformationResponse", Namespace="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.Message" +
+        "Contracts")]
+    [System.SerializableAttribute()]
+    public partial class StoreTempValidationInformationResponse : ServiceDemo.Sync4DService.BaseResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid ValidationInfoIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid ValidationInfoId {
+            get {
+                return this.ValidationInfoIdField;
+            }
+            set {
+                if ((this.ValidationInfoIdField.Equals(value) != true)) {
+                    this.ValidationInfoIdField = value;
+                    this.RaisePropertyChanged("ValidationInfoId");
                 }
             }
         }
@@ -1263,6 +1409,9 @@ namespace ServiceDemo.Sync4DService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceDemo.Sync4DService.ProjectStatus StatusField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ValidationChartIdField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1429,6 +1578,19 @@ namespace ServiceDemo.Sync4DService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ValidationChartId {
+            get {
+                return this.ValidationChartIdField;
+            }
+            set {
+                if ((this.ValidationChartIdField.Equals(value) != true)) {
+                    this.ValidationChartIdField = value;
+                    this.RaisePropertyChanged("ValidationChartId");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -1536,6 +1698,11 @@ namespace ServiceDemo.Sync4DService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentials", ReplyAction="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/CheckUserCredentialsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
         ServiceDemo.Sync4DService.CheckUserCredentialsResponse CheckUserCredentials(ServiceDemo.Sync4DService.CheckUserCredentialsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformation", ReplyAction="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ServiceDemo.Sync4DService.ServiceFault), Action="http://tempuri.org/ISync4DServiceContract/StoreTempValidationInformationServiceFa" +
+            "ultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/Service.Common.FaultContracts")]
+        ServiceDemo.Sync4DService.StoreTempValidationInformationResponse StoreTempValidationInformation(ServiceDemo.Sync4DService.StoreTempValidationInformationRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1595,6 +1762,10 @@ namespace ServiceDemo.Sync4DService {
         
         public ServiceDemo.Sync4DService.CheckUserCredentialsResponse CheckUserCredentials(ServiceDemo.Sync4DService.CheckUserCredentialsRequest request) {
             return base.Channel.CheckUserCredentials(request);
+        }
+        
+        public ServiceDemo.Sync4DService.StoreTempValidationInformationResponse StoreTempValidationInformation(ServiceDemo.Sync4DService.StoreTempValidationInformationRequest request) {
+            return base.Channel.StoreTempValidationInformation(request);
         }
     }
 }

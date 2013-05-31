@@ -147,4 +147,30 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="CheckUserCredentialsResponse" nillable="true" type="tns:CheckUserCredentialsResponse" />
+  <xs:complexType name="StoreTempValidationInformationRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q21="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q21:BaseRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Customer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="JDFJobId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="JobName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PageOrSurface" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ProjectId" type="xs:int" />
+          <xs:element minOccurs="0" name="SilverlightPostUrl" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TempValidationId" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StoreTempValidationInformationRequest" nillable="true" type="tns:StoreTempValidationInformationRequest" />
+  <xs:complexType name="StoreTempValidationInformationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q22="http://schemas.datacontract.org/2004/07/Service.Common.MessageContracts" base="q22:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ValidationInfoId" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StoreTempValidationInformationResponse" nillable="true" type="tns:StoreTempValidationInformationResponse" />
 </xs:schema>

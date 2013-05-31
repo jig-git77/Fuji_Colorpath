@@ -34,6 +34,9 @@ namespace FujifilmUSA.ColorOrganizerService.DataContracts
         public int ChartId { get; set; }
 
         [DataMember]
+        public int ValidationChartId { get; set; }
+
+        [DataMember]
         public ProjectStatus Status { get; set; }
 
         [DataMember]

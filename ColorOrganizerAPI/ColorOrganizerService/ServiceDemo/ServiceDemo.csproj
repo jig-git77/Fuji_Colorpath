@@ -145,6 +145,9 @@
     <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.StoreTempProjectInformationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\Sync4DService\ServiceDemo.Sync4DService.StoreTempValidationInformationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\Sync4DService\Sync4D7.xsd">
       <SubType>Designer</SubType>
     </None>

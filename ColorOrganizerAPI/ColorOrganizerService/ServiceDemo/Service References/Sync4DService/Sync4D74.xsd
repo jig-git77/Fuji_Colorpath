@@ -111,4 +111,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="StoreTempValidationInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="request" nillable="true" type="q15:StoreTempValidationInformationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StoreTempValidationInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/FujifilmUSA.ColorOrganizerService.MessageContracts" minOccurs="0" name="StoreTempValidationInformationResult" nillable="true" type="q16:StoreTempValidationInformationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
