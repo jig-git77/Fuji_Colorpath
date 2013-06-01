@@ -134,6 +134,7 @@
         </div>
         <div class="float_l">
             <input type="button" id="btnMeasureAndUploadChart" value='<%= GetResourceString("measureUpload") %>' />
+            <input type="hidden" id="hdMeasureAndUploadChart" value="measurechart" />
         </div>
         <div class="float_r">
             <input type="button" id="btnCancelMeasurement" value='<%= GetResourceString("cancelMeasurement") %>' />
@@ -248,6 +249,7 @@
     var refreshTry = 0;
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
+        jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
@@ -266,6 +268,7 @@
     }
     
     function GetRefChartData() {
+        jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
@@ -282,7 +285,7 @@
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') 
+            if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') 
             {              
                 ControlDisability(1,true,1,true,1,false);
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
@@ -301,7 +304,7 @@
                 
                 scan(g_ScannerList, 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
-            else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
+            else if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'uploadmeasurement') {
                 upload();
             }
         });
@@ -406,6 +409,7 @@
      
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+            jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         }
     }
 

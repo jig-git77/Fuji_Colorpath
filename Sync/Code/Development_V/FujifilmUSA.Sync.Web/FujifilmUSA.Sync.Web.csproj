@@ -205,7 +205,10 @@
     <Content Include="Images\VStatusSuccessIcon.png" />
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\progressbar.js" />
+    <Content Include="JS\GlobalResource.ja-JP.js" />
+    <Content Include="JS\GlobalResource.de-DE.js" />
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
+    <Content Include="JS\GlobalResource.en-US.js" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="Permission.aspx" />
@@ -2171,7 +2174,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

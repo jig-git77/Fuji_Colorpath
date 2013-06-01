@@ -46,10 +46,10 @@ PrintLabel = function (previewLabel) {
                 if (printerName != "")
                     label.print(printerName); //This will print the label
                 else
-                    alert("No label writer printers available/installed.");
+                    alert(locNoPrintInstalled);
             }
             catch (e) {
-                alert("Error while printing label. Please try again.");
+                alert(locErrorWhilePrintingLabel);
             }
         }
     }

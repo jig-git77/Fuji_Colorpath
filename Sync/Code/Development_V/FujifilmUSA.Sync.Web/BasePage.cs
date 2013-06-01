@@ -16,6 +16,7 @@ namespace FujifilmUSA.Sync.Web
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
+                Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".js"));
             }
 
             base.InitializeCulture();

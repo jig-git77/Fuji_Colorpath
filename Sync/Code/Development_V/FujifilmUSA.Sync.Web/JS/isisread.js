@@ -3,13 +3,13 @@
 // the language of the query.
 function presentChartDialogiSis(scanner, chart, query) {
     if (query["Request"] == "READACKNOWLEDGED") {
-        query["Prompt"] = "Chart read in progress";
+        query["Prompt"] = locChartReadProgress;
     } else {
-        query["Prompt"] = "Please place the chart in the scanner and click in this window.";
+        query["Prompt"] = locPlaceChartScannerClickWindow;
         g_SavedQuery = query;
     }
     jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
+    jQuery("[id*='lblMessage']").html(locStatusText + " " + query["Prompt"]);
 }
 
 
@@ -53,7 +53,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         // This type of query means we finish up with an error, so just present the
         // error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
-            MeasurementDialog(mychart["Result"], "Error");
+            MeasurementDialog(mychart["Result"], locErrorText);
         }
         if (typeof final == "string") {
             eval(final);
@@ -75,7 +75,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         }
         refreshCanvas();
         jQuery("[id*='lblMessage']").css('color', 'Black');
-        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");   
+        jQuery("[id*='lblMessage']").html(locClickMeasureButton);   
         ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled.
         return;
     }
@@ -109,7 +109,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
         //}
         
         jQuery("[id*='lblMessage']").css('color', 'Black');
-        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+        jQuery("[id*='lblMessage']").html(locClickMeasureButton);
         return;
     }
     //
@@ -123,7 +123,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var expected = mychart["NumberOfRows"] * width;
 
     if (results.length != expected) {
-        MeasurementDialog("Failed to read expected number of samples(" + expected + " != " + results.length + ")", "Error");
+        MeasurementDialog(locFailedReadExpectedSamplesError + "(" + expected + " != " + results.length + ")", locErrorText);
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {
@@ -138,8 +138,8 @@ function presentScanDoneiSis(scanner, mychart, final) {
     // Lets draw our sampled colors over the top of the displayed
     // image.
 
-    prog["Prompt"] = "Reading progress " + samples + " samples";
-    jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
+    prog["Prompt"] = locReadingProgress1 + " " + samples + " " + locReadingProgress2;
+    jQuery("[id*='lblMessage']").html(locStatusText + " " + prog["Prompt"]);
 
     for (ind = 0; ind < samples; ind++) {
         //---------------Code to paint last row on canvas-------------------//
@@ -183,9 +183,10 @@ function presentScanDoneiSis(scanner, mychart, final) {
     //
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
-    jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
-    ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled now.   
-    jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');   
+    jQuery("[id*='lblMessage']").html(locMeasurmentComplete);
+    ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled now.       
+    jQuery("[id*='btnMeasureAndUploadChart']").val(locUploadMeasurementText);
+    jQuery("[id*='hdMeasureAndUploadChart']").val('uploadmeasurement');   
 
     // We have to make one more call to the library.  The 
     // calibrate itself ran in a non-browser thread.  We need
@@ -252,8 +253,8 @@ function presentProgressiSis(scanner, mychart) {
 function DrawChart(result, cellSize, columnCount, startpoint, endpoint, samples, camefrom) {
 
     if (camefrom != "Preview") {
-        prog["Prompt"] = "Reading progress " + samples + " samples";
-        jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
+        prog["Prompt"] = locReadingProgress1 + " " + samples + " " + locReadingProgress2;
+        jQuery("[id*='lblMessage']").html(locStatusText + " " + prog["Prompt"]);
     }
 
     //-------------Create Instance of Canvas---------------//
