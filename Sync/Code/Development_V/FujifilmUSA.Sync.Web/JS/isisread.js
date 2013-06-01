@@ -123,7 +123,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
     var expected = mychart["NumberOfRows"] * width;
 
     if (results.length != expected) {
-        MeasurementDialog(locFailedReadExpectedSamplesError + "(" + expected + " != " + results.length + ")", locErrorText);
+        MeasurementDialog(locFailedReadExpectedSamplesError1 + expected + locFailedReadExpectedSamplesError2 + results.length + locFailedReadExpectedSamplesError3, locErrorText);
         if (typeof final == "string") {
             eval(final);
         } else if (typeof final == "object") {

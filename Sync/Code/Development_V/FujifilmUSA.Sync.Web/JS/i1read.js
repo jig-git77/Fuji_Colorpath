@@ -342,12 +342,12 @@ function presentScanDonei1(scanner, mychart, final) {
     //
     var results = mychart["Result"];
     var idx = mychart["NumberOfRows"];
-
+    
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
         if (results.length != mychart["NumberOfColumns"]) {
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
-            alert(locFailedReadExpectedSamples1 + results.length + " " + locFailedReadExpectedSamples2 + " " + mychart["NumberOfColumns"]);
+            alert(locFailedReadExpectedSamples1 + results.length + " " + locFailedReadExpectedSamples2 + " " + mychart["NumberOfColumns"] + " " + locFailedReadExpectedSamples3);
             // MeasurementDialog("Failed to read expected number of samples" + results.length + " vs " + mychart["NumberOfColumns"], "Error");
 
             if (typeof final == "string") {

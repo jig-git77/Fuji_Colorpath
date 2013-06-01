@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,149 +59,140 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="calibrateButton" xml:space="preserve">
-    <value>Calibrate_ja</value>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="calibrateButton" xml:space="preserve">
+    <value>キャリブレーション</value>
   </data>
-  <data name="cancelMeasurement" xml:space="preserve">
-    <value>Cancel Measurement_ja</value>
+	<data name="cancelMeasurement" xml:space="preserve">
+    <value>測色中止</value>
   </data>
-  <data name="deleteButton" xml:space="preserve">
-    <value>Delete_ja</value>
+	<data name="deleteButton" xml:space="preserve">
+    <value>削除</value>
   </data>
-  <data name="deleteMeasurementTooltip" xml:space="preserve">
-    <value>Delete Measurement_ja</value>
+	<data name="deleteMeasurementTooltip" xml:space="preserve">
+    <value>測色結果削除</value>
   </data>
-  <data name="errorCause" xml:space="preserve">
-    <value>Error Cause:_ja</value>
+	<data name="errorCause" xml:space="preserve">
+    <value>エラー原因：</value>
   </data>
-  <data name="errorDetail" xml:space="preserve">
-    <value>Error Detail:_ja</value>
+	<data name="errorDetail" xml:space="preserve">
+    <value>エラー詳細：</value>
   </data>
-  <data name="errorText" xml:space="preserve">
-    <value>Error_ja</value>
+	<data name="errorText" xml:space="preserve">
+    <value>エラー</value>
   </data>
-  <data name="lblMeasurementNameResource1.Text" xml:space="preserve">
-    <value>Measurement Name_ja</value>
+	<data name="lblMeasurementNameResource1.Text" xml:space="preserve">
+    <value>測色名</value>
   </data>
-  <data name="lblMeasurementNameResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="limitReachText" xml:space="preserve">
+    <value>上限に達しました</value>
   </data>
-  <data name="limitReachText" xml:space="preserve">
-    <value>Limit Reach_ja</value>
+	<data name="locColorBarResource1.Text" xml:space="preserve">
+    <value>チャートプレビュー</value>
   </data>
-  <data name="locColorBarResource1.Text" xml:space="preserve">
-    <value>Colorbar_ja</value>
+	<data name="locRecentUploadResource1.Text" xml:space="preserve">
+    <value>最近のアップロード</value>
   </data>
-  <data name="locRecentUploadResource1.Text" xml:space="preserve">
-    <value>Recent Upload_ja</value>
+	<data name="locUploadingMeasurementResource1.Text" xml:space="preserve">
+    <value>測色結果のアップロード中</value>
   </data>
-  <data name="locUploadingMeasurementResource1.Text" xml:space="preserve">
-    <value>Uploading Measurement..._ja</value>
+	<data name="measureChart" xml:space="preserve">
+    <value>チャート測色</value>
   </data>
-  <data name="measureChart" xml:space="preserve">
-    <value>Measure Chart_ja</value>
+	<data name="measurementNameLengthMsg" xml:space="preserve">
+    <value>少なくとも4文字の測色名を入力してください</value>
   </data>
-  <data name="measurementNameLengthMsg" xml:space="preserve">
-    <value>Please enter measurement name that is at least 4 characters long._ja</value>
+	<data name="measurementUploadedSuccess" xml:space="preserve">
+    <value>測色結果のアップロードが成功しました。</value>
   </data>
-  <data name="measurementUploadedSuccess" xml:space="preserve">
-    <value>Measurement uploaded successfully._ja</value>
+	<data name="measureUpload" xml:space="preserve">
+    <value>測色・アップロード</value>
   </data>
-  <data name="measureUpload" xml:space="preserve">
-    <value>Measure / Upload_ja</value>
+	<data name="measurementName" xml:space="preserve">
+    <value>測色名</value>
   </data>
-  <data name="measurementName" xml:space="preserve">
-    <value>Measurement Name_ja</value>
+	<data name="noRecordsAvailable" xml:space="preserve">
+    <value>登録データがありません</value>
   </data>
-  <data name="noRecordsAvailable" xml:space="preserve">
-    <value>No records available_ja</value>
+	<data name="runLimitReached" xml:space="preserve">
+    <value>一回の試行で可能な最大の測色結果数に達しました。</value>
   </data>
-  <data name="runLimitReached" xml:space="preserve">
-    <value>You reach your limit of adding measurements in one Optimization Run_ja</value>
+	<data name="statusText" xml:space="preserve">
+    <value>ステータス：</value>
   </data>
-  <data name="statusText" xml:space="preserve">
-    <value>Status :_ja</value>
+	<data name="uploadDateTime" xml:space="preserve">
+    <value>アップロード日時</value>
   </data>
-  <data name="txtMeasurementNameResource1.Text" xml:space="preserve">
-    <value />
+	<data name="uploadMeasurement" xml:space="preserve">
+    <value>アップロード管理</value>
   </data>
-  <data name="txtMeasurementNameResource1.ToolTip" xml:space="preserve">
-    <value />
+	<data name="ImportMeasurementsButton" xml:space="preserve">
+    <value>測色結果のインポート</value>
   </data>
-  <data name="uploadDateTime" xml:space="preserve">
-    <value>Upload Date Time_ja</value>
+	<data name="locImportMeaResource1.Text" xml:space="preserve">
+    <value>測色結果のインポート</value>
   </data>
-  <data name="uploadMeasurement" xml:space="preserve">
-    <value>Upload Measurement_ja</value>
+	<data name="JobNameCaption" xml:space="preserve">
+    <value>ジョブ名</value>
   </data>
-  <data name="ImportMeasurementsButton" xml:space="preserve">
-    <value>Import Measurements_ja</value>
-  </data>
-  <data name="locImportMeaResource1.Text" xml:space="preserve">
-    <value>Import Measurements</value>
-  </data>
-  <data name="JobNameCaption" xml:space="preserve">
-    <value>Job Name_ja</value>
-  </data>
-  <data name="MeasurementNameCaption" xml:space="preserve">
-    <value>Measurement Name_ja</value>
+	<data name="MeasurementNameCaption" xml:space="preserve">
+    <value>測色名</value>
   </data>
 </root>

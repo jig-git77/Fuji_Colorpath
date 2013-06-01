@@ -109,18 +109,18 @@
 <div class="contant_middle">
     <div class="head">
         <div>
-            <table>
+            <table width="100%">
                 <tr>
                     <td style="width: 80%">
                         <h1><asp:Localize ID="locDeviceList" runat="server" Text="Device List" 
                                 meta:resourcekey="locDeviceListResource1"></asp:Localize></h1>
                     </td>
-                    <td style="width: 200px">
+                    <td>
                         <asp:LinkButton ID="lbtnReport" runat="server"><h1><asp:Localize ID="locReport" 
                                 runat="server" Text="Report" meta:resourcekey="locReportResource1"></asp:Localize>
                             </h1></asp:LinkButton>
                     </td>
-                    <td style="width: 50px">
+                    <td>
                         <asp:LinkButton ID="LinkButton1" runat="server"><h1><asp:Localize ID="locHelp" 
                                 runat="server" Text="Help" meta:resourcekey="locHelpResource1"></asp:Localize>
                             </h1></asp:LinkButton>

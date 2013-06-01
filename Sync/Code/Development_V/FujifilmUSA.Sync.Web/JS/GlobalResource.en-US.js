@@ -37,6 +37,7 @@ var locMovei1VisorLowerLeftCorner = "Please move the i1 visor to the lower left 
 var locMovei1VisorLowerRightCorner = "Please move the i1 visor to the lower right corner of the chart and press press the i1 trigger.";
 var locFailedReadExpectedSamples1 = "Failed to read expected number of samples"; //"Failed to read expected number of samples {0} vs {1}";
 var locFailedReadExpectedSamples2 = "vs";
+var locFailedReadExpectedSamples3 = "";
 var locCannotReadCurrentColumn = "ERROR: Cannot determine current read column";
 var locMeasurmentComplete = "Status : Measurement Complete.";
 var locUploadMeasurementText = "Upload Measurement";
@@ -46,7 +47,9 @@ var locReadingProgress2 = "samples";
 //isisread.js
 var locChartReadProgress = "Chart read in progress";
 var locPlaceChartScannerClickWindow = "Please place the chart in the scanner and click in this window.";
-var locFailedReadExpectedSamplesError = "Failed to read expected number of samples";  //"Failed to read expected number of samples({0} != {1})";
+var locFailedReadExpectedSamplesError1 = "Failed to read expected number of samples(";  //"Failed to read expected number of samples({0} != {1})";
+var locFailedReadExpectedSamplesError2 = " != 0";  //"Failed to read expected number of samples({0} != {1})";
+var locFailedReadExpectedSamplesError3 = ")";  //"Failed to read expected number of samples({0} != {1})";
 
 //Printing.js
 var locNoPrintInstalled = "No label writer printers available/installed.";

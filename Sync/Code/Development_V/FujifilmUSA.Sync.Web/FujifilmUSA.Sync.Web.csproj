@@ -267,6 +267,9 @@
     <Content Include="UserControl\AddLicenseManagement.ascx" />
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\CODisplaybar.ascx" />
     <Content Include="UserControl\COErrorMessage.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
@@ -1885,9 +1888,6 @@
     <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.de.resx">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.resx">
@@ -2174,7 +2174,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
