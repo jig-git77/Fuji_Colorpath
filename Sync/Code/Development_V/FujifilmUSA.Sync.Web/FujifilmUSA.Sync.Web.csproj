@@ -81,6 +81,8 @@
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
     <Content Include="ApplicationError.aspx" />
+    <Content Include="App_Browsers\firefox.browser" />
+    <Content Include="App_Browsers\ie.browser" />
     <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
     <Content Include="COAnalyze.aspx" />
