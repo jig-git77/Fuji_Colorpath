@@ -43,13 +43,16 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.ChartName,
                                                                                     referenceChartType.NumOfRows,
                                                                                     referenceChartType.NumOfCols,
-                                                                                    referenceChartType.InstrumentTypeId,
-                                                                                    referenceChartType.ProjectTypeId,
+                                                                                    referenceChartType.InstrumentTypeId,                                                                                  
                                                                                     referenceChartType.ChartPreview,
                                                                                     referenceChartType.OriginalChart,
-                                                                                    referenceChartType.IsUsed,
-                                                                                    referenceChartType.ChartDisplayType,
-                                                                                    referenceChartData.ToString()
+                                                                                    referenceChartType.IsUsed,                                               
+                                                                                    referenceChartData.ToString(),
+                                                                                    referenceChartType.IsSync1D_ISO,
+                                                                                    referenceChartType.IsSync1D_G7,
+                                                                                    referenceChartType.Validation_1D,
+                                                                                    referenceChartType.IsSync4D,
+                                                                                    referenceChartType.Validation_4D                                                                                    
                                                                                 });
                     if (returnValue == -1)
                     {
@@ -167,16 +170,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 {
                                     InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
                                     InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                },
-                                ProjectType = new ProjectType()
-                                {
-                                    ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
-                                    ProjectTypeName = DataReader.ReadString(x, "ProjectType")
-                                },
-                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType"),
+                                },                               
+                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),                              
                                 ChartPreview = DataReader.ReadByteArray(x, "ChartPreview"),
-                                OriginalChart = DataReader.ReadByteArray(x, "OriginalChart")
+                                OriginalChart = DataReader.ReadByteArray(x, "OriginalChart"),
+                                IsSync1D_ISO = DataReader.ReadShort(x, "IsSync1D_ISO"),
+                                IsSync1D_G7 = DataReader.ReadShort(x, "IsSync1D_G7"),
+                                Validation_1D = DataReader.ReadShort(x, "Validation_1D"),
+                                IsSync4D = DataReader.ReadShort(x, "IsSync4D"),
+                                Validation_4D = DataReader.ReadShort(x, "Validation_4D")  
 
                             }).ToList();
                     }
@@ -201,12 +203,15 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.ChartName,
                                         referenceChartType.NumOfRows,
                                         referenceChartType.NumOfCols,                                       
-                                        referenceChartType.InstrumentTypeId,
-                                        referenceChartType.ProjectTypeId,
-                                        referenceChartType.IsUsed,
-                                        referenceChartType.ChartDisplayType,
+                                        referenceChartType.InstrumentTypeId,                                       
+                                        referenceChartType.IsUsed,                                      
                                         referenceChartType.ChartPreview,
-                                        referenceChartType.OriginalChart
+                                        referenceChartType.OriginalChart,
+                                        referenceChartType.IsSync1D_ISO,
+                                        referenceChartType.IsSync1D_G7,
+                                        referenceChartType.Validation_1D,
+                                        referenceChartType.IsSync4D,
+                                        referenceChartType.Validation_4D     
                                     });
                     if (returnValue == -1)
                     {
@@ -242,14 +247,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                      {
                                                                          InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
                                                                          InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                                                     },
-                                                ProjectType = new ProjectType()
-                                                                  {
-                                                                      ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
-                                                                      ProjectTypeName = DataReader.ReadString(x, "ProjectType")
-                                                                  },
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
-                                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType")
+                                                                     },                                               
+                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")                                               
                                             }).ToList();
                     }
                 },

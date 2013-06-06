@@ -6,6 +6,7 @@ using System.IO;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 {
@@ -140,10 +141,18 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
-        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
-        public int PrintstandardTypeId { get; set; }
-        public int MetricTargetPresetID { get; set; }
+      
         public ELicenseType LicenseType { get; set; }
+        public int ProjectTypeID
+        {
+            get
+            {
+                return SessionManager.Instance.CurrentProject.ProjectTypeId;
+            }
+        }
+
+        public int MetricTargetPresetID { get; set; }
+
         #endregion
 
         #region IViewBase Members

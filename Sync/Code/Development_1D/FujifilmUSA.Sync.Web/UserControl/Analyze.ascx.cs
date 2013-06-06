@@ -211,7 +211,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = false;
                     trRBtnListDeltaE.Visible = false;
                     Div_Opt_Header.Visible = true;
-                    if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7)  //G7 type
+                    if (ValidationType == 1)  //G7 type
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = true;
                     }
@@ -367,7 +367,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //-----------Assign Report iFrame to load report in "Report" tab----------------------//
             string path = "";
-            if (ValidationType == 1 || SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7)  //G7 type
+            if (ValidationType == 1)  //G7 type
             {
                 dvTab_G7.Visible = Tab_G7.Visible = true;
                 ValidationType = 1;
@@ -410,7 +410,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
 
-            if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.G7 || (IsVerification == true && ValidationType == 1))  //-------------Only call G7 tab data if it is G7 Validation type
+            if (ValidationType == 1)  //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
             {
                 _presenterAnalyze.GetG7Chart();
                 if (!IsErrorOccured)
@@ -420,9 +420,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
             {
-                if (SessionManager.Instance.CurrentProject.Sync1DProjectType == ESync1DProjectType.ISO)  //ISO type
+                Tab_TVI.Visible = dvTab_TVI.Visible = true;
+                if (ValidationType == 2)  //ISO type
                 {
-                    Tab_TVI.Visible = dvTab_TVI.Visible = true;
                     _presenterAnalyze.GetISOTVIChart();
                     if (!IsErrorOccured)
                     {
@@ -434,7 +434,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else  //G7 type
                 {
-                    Tab_TVI.Visible = dvTab_TVI.Visible = false;
                     _presenterAnalyze.GetTVIChart();
                     if (!IsErrorOccured)
                     {

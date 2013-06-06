@@ -13,14 +13,12 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         List<ReferenceChartType> ReferenceChartType { get; set; }
         short ReferenceChartTypeId { get; set; }
         byte[] ReferenceChartTypeImage { get; set; }
-
         int ProjectId { get; set; }
         Project Project { get; set; }
         int ChartDisplayType { get; set; }
         List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
-        List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
-        int PrintstandardTypeId { get; set; }
         int MetricTargetPresetID { get; set; }
         ELicenseType LicenseType { get; }
+        int ProjectTypeID { get; }       
     }
 }

@@ -5,6 +5,7 @@ using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Presenter;
+using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -40,6 +41,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindProfileSource();
                 LoadProjectInfoFromSession();
+                if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync1D)
+                {
+                    trTargetLAB.Visible = false;
+                    trProjectType.Visible = false;
+                }
             }
         }
         #endregion
@@ -69,8 +75,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ProfileName = lblSourceProfileName.Text
             };
 
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
+                SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);               
+            }
+
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
+
+           
         }
 
         protected void cmbPrintStandardType_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,6 +94,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtProfileDescription.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileDesc;
                 lblSourceProfileName.Text = ((List<Entity.CPSync1D.PrintStandardType>)ViewState[_vsPrintStandardType]).Single(x => x.PrintStandardTypeID.ToString() == cmbPrintStandardType.SelectedValue).SourceProfile.ProfileName;
             }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                 cmbProjectType_SelectedIndexChanged(null, null);
+        }
+
+        protected void cmbProjectType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                BindTargetLAB();
         }
         #endregion
 
@@ -90,9 +112,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 cmbPrintStandardType.SelectedValue = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID.ToString();
                 cmbPrintStandardType_SelectedIndexChanged(null, null);
-                //cmbSourceProfile.Enabled = !(SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.Count > 0);
+            }
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
             }
         }
+
         private void BindProfileSource()
         {
             if (ViewState[_vsPrintStandardType] != null) return;
@@ -109,10 +135,51 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private List<Entity.CPSync1D.ProjectTargetLAB> GetTargetLAB()
+        {
+            List<Entity.CPSync1D.ProjectTargetLAB> targetLAB = new List<Entity.CPSync1D.ProjectTargetLAB>();
+            Entity.CPSync1D.ProjectTargetLAB itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
+            foreach (ListViewDataItem item in lvTargetLAB.Items)
+            {
+                itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
+                TextBox txtPatchTargetL = item.FindControl("txtPatchTargetL") as TextBox;
+                if (txtPatchTargetL != null)
+                    itemLAB.TargetL = Convert.ToDecimal(txtPatchTargetL.Text);
+
+                TextBox txtPatchTargetA = item.FindControl("txtPatchTargetA") as TextBox;
+                if (txtPatchTargetA != null)
+                    itemLAB.TargetA = Convert.ToDecimal(txtPatchTargetA.Text);
+
+                TextBox txtPatchTargetB = item.FindControl("txtPatchTargetB") as TextBox;
+                if (txtPatchTargetB != null)
+                    itemLAB.TargetB = Convert.ToDecimal(txtPatchTargetB.Text);
+
+                HiddenField hdnPatchTypeId = item.FindControl("hdnPatchTypeId") as HiddenField;
+                if (hdnPatchTypeId != null)
+                    itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value) };
+
+                targetLAB.Add(itemLAB);
+            }
+            return targetLAB;
+        }
+
+        private void BindTargetLAB()
+        {
+            trTargetLAB.Visible = true;
+            this.PrintstandardTypeId = Convert.ToInt16(cmbPrintStandardType.SelectedValue);
+            this.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+            _presenterTargetColorspace.GetTargetLABList();
+            lvTargetLAB.DataSource = this.ProjectTargetLABList;
+            lvTargetLAB.DataBind();
+        }
+
         #endregion
 
         #region IViewTargetColorspace Members
         public List<Entity.CPSync1D.PrintStandardType> PrintStandardTypeList { get; set; }
+        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
+        public int PrintstandardTypeId { get; set; }
+        public int ProjectTypeId { get; set; }
         public bool IsSync1DType
         {
             get
@@ -121,8 +188,5 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
         #endregion
-
-
-
     }
 }

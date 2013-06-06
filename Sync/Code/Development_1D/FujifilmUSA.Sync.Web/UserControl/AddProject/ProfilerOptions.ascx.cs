@@ -28,6 +28,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterDeviceFamilyProfilerOption _presenterDeviceFamilyProfilerOption;
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         #endregion
+
         public ProfilerOptions()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
@@ -114,7 +115,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
       
         private void BindMetricPresets()
-        {
+        {           
             if (ViewState[_vsMetricTargetPreset] == null)
             {
                 _presenterMeasurementSetting.GetMetricTargetPreset();
@@ -383,8 +384,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {                
                 SessionManager.Instance.CurrentProject.IsWeightedTolerances = chkWeightedTolerances.Checked;
                 SessionManager.Instance.CurrentProject.MetricTargetPresetId = Convert.ToInt32(ddlMetricPresets.SelectedValue);
-                SessionManager.Instance.CurrentProject.ProjectTypeId = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(ddlMetricPresets.SelectedValue)).Select(c => c.ProjectTypeId).FirstOrDefault();
-                SessionManager.Instance.CurrentProject.Sync1DProjectType = (ESync1DProjectType)((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(ddlMetricPresets.SelectedValue)).Select(c => c.ValidationType).FirstOrDefault();
                 SessionManager.Instance.CurrentProject.PrintStandardTVI = GetPrintStandardTVIList();
             }
             else
@@ -681,6 +680,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 return SessionManager.Instance.CurrentProject.LicenseType;
             }
         }
+        public int ProjectTypeID
+        {
+            get
+            {
+                return SessionManager.Instance.CurrentProject.ProjectTypeId;
+            }
+        }
+        public bool IsVerification
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation);
+            }
+        }
+
         #endregion
 
     }

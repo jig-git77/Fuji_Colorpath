@@ -32,7 +32,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             if (ViewState[vsIsPostBack] == null)
             {
-                BindMeasurementDevice();
                 BindMetricTargetPreset();
                 LoadProjectInfoFromSession();
                 ViewState[vsIsPostBack] = true;
@@ -73,9 +72,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         protected void cmbValidationChart_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayValidationChartImage();
+            DisplayValidationChartImage();            
         }
 
+        protected void cmbMetricTargetPreset_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (short.Parse(cmbMetricTargetPreset.SelectedValue) > 0)
+                BindMeasurementDevice(); //---Display Metric Target Presets based on selected Validation Chart
+        }
 
         #endregion
 
@@ -129,6 +133,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         {
             MeasurementDeviceId = MeasurementDeviceSelectedValue;
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ValidationChart);
+            MetricTargetPresetID = Convert.ToInt32(cmbMetricTargetPreset.SelectedValue);
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -138,19 +143,22 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbValidationChart.DataSource = ReferenceChartType;
                 cmbValidationChart.DataBind();
                 cmbValidationChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbValidationChart_SelectedIndexChanged(null, null);
             }
         }
 
         private void BindMetricTargetPreset()
         {
-            _presenterMeasurementSetting.GetMetricTargetPreset();
+            if (cmbMetricTargetPreset.DataSource != null) return;
+
+            _presenterMeasurementSetting.GetMetricTargetPreset_Verification();
             if (!IsErrorOccured)
             {
                 cmbMetricTargetPreset.DataValueField = "MetricTargetPresetID";
                 cmbMetricTargetPreset.DataTextField = "MetricTargetPresetName";
                 cmbMetricTargetPreset.DataSource = MetricTargetPreset;
                 cmbMetricTargetPreset.DataBind();
-                cmbMetricTargetPreset.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbMetricTargetPreset_SelectedIndexChanged(null, null);
             }
         }
 
@@ -216,6 +224,25 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         }
         #endregion
 
+        protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbtnEnableValidation.SelectedIndex == 0)
+            {
+                //------If validation, then check for required fields-----//
+                rfvValidationChart.ValidationGroup = "vgValidationSetup";
+                rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
+            }
+            else
+            {
+                //------If no validation, then don't check for required fields-----//
+                rfvValidationChart.ValidationGroup = "a";
+                rfvMetricTargetPreset.ValidationGroup = "a";
+
+                cmbValidationChart.SelectedIndex = 0;
+                cmbMetricTargetPreset.SelectedIndex = 0;
+            }
+        }
+
 
         #region IViewMeasurementSetting members
         public List<Entity.Illuminant> Illumin { get; set; }
@@ -241,13 +268,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public int ChartDisplayType { get; set; }
 
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
-
-        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
-
-        public int PrintstandardTypeId { get; set; }
-
-        public int MetricTargetPresetID { get; set; }
-
+      
         public ELicenseType LicenseType
         {
             get
@@ -255,28 +276,16 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 return SessionManager.Instance.CurrentProject.LicenseType;
             }
         }
-        #endregion       
-
-        protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
+        public int ProjectTypeID
         {
-            if (rbtnEnableValidation.SelectedIndex == 0)
+            get
             {
-                //------If validation, then check for required fields-----//
-                rfvValidationChart.ValidationGroup = "vgValidationSetup";
-                rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
-            }
-            else
-            {
-                //------If no validation, then don't check for required fields-----//
-                rfvValidationChart.ValidationGroup = "a";
-                rfvMetricTargetPreset.ValidationGroup = "a";
-
-                cmbValidationChart.SelectedIndex = 0;
-                cmbMetricTargetPreset.SelectedIndex = 0;
+                return SessionManager.Instance.CurrentProject.ProjectTypeId;
             }
         }
+        public int MetricTargetPresetID { get; set; }
+        #endregion             
 
-
-        
+       
     }
 }

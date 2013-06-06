@@ -19,6 +19,11 @@ namespace FujifilmUSA.Sync.Presenter
             projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
             _viewTargetColorspace.PrintStandardTypeList = projectBusiness.GetPrintStandardTypeList(_viewTargetColorspace.CurrentUserId, _viewTargetColorspace.IsSync1DType);
         }
-
+        public void GetTargetLABList()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewTargetColorspace.ErrorOccured;
+            _viewTargetColorspace.ProjectTargetLABList = projectBusiness.GetProjectTargetLAB(_viewTargetColorspace.PrintstandardTypeId, _viewTargetColorspace.ProjectTypeId);
+        }
     }
 }

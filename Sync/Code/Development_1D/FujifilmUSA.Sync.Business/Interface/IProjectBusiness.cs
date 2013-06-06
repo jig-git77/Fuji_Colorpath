@@ -17,7 +17,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Illuminant> GetIlluminantList();
         List<ObserverType> GetObserverTypeList();
         List<MeasurementDevice> GetMeasurementDeviceList(int deviceId);
-        List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType);
+        List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0);
         Dictionary<string, string> GetPrintConditionPreviewData(short measurementDeviceId, short illuminantId, short observerTypeId, short referenceChartTypeId, int deviceFamilyProfilerOptionId, short V_measurementDeviceId, short Opt_ReferenceChartTypeId, short V_ReferenceChartTypeId, short metricTargetPresetId);
         byte[] GetChartPreviewOnReferenceChartTypeId(short referenceChartTypeId, string source);
         byte[] GetSourceProfile(int projectId);
@@ -27,13 +27,13 @@ namespace FujifilmUSA.Sync.Business.Interface
         ReferenceChartData GetReferenceChartData(int projectId, EReferenceChartDisType referenceChartDisType);
         Guid StoreTempararyProjectInformation(string projectName, string media, string colorant, string ripSettings, int measurementDeviceTypeId, int chartId, int projectId, Guid tempProjectId, string silverlightPostUrl);
         TempProjectInfo GetTempProjectInfo(Guid tempProjectId);
-        List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, ELicenseType licenseType);
+        List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false);
         List<Project> GetProjectsForImportMeasurement(int deviceId, int LicenseTypeID, int CurrentProjectID);
         List<int> GetMeasurementIDsbyProjectID(int deviceId, int LicenseTypeID, int CurrentProjectID);
         int ImportMeasurements(int MeasurementID, int OptimizeRunID);
         List<Entity.CPSyncV.MetricSum> GetMetricSumTargetValues(int metricTargetPresetId);
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
-        List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId);
+        List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId);
         byte[] Get1DLastOptimizedDlp(int projectId);
     }
 }

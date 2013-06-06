@@ -93,20 +93,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindIlluminant();
                 BindObserverType();
                 ViewState[vsIsPostBack] = true;
-                LoadProjectInfoFromSession();
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                {
-                    trTargetLAB.Visible = false;
-                    tdOptimizationChartCaption.Visible = false;
-                    tdOptimizationChartCombo.Visible = false;
-                }
-                else
-                {
-                    trTargetLAB.Visible = false;
-                    tdOptimizationChartCaption.Visible = true;
-                    tdOptimizationChartCombo.Visible = true;
-                }
-            }
+                LoadProjectInfoFromSession();               
+            }           
         }
         #endregion
 
@@ -202,8 +190,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
-                                                cmbAlignmentChart.SelectedItem.Text);
-                SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
+                                                cmbAlignmentChart.SelectedItem.Text);               
             }
             else
                 SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
@@ -223,9 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void cmbAlignmentChart_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisplayChartImage();
-            SetOptimizationChart();
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                BindTargetLAB();
+            SetOptimizationChart();           
         }
 
         protected void cmbOptimizationChart_SelectedIndexChanged(object sender, EventArgs e)
@@ -234,35 +219,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Methods
-
-        private List<Entity.CPSync1D.ProjectTargetLAB> GetTargetLAB()
-        {
-            List<Entity.CPSync1D.ProjectTargetLAB> targetLAB = new List<Entity.CPSync1D.ProjectTargetLAB>();
-            Entity.CPSync1D.ProjectTargetLAB itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
-            foreach (ListViewDataItem item in lvTargetLAB.Items)
-            {
-                itemLAB = new Entity.CPSync1D.ProjectTargetLAB();
-                TextBox txtPatchTargetL = item.FindControl("txtPatchTargetL") as TextBox;
-                if (txtPatchTargetL != null)
-                    itemLAB.TargetL = Convert.ToDecimal(txtPatchTargetL.Text);
-
-                TextBox txtPatchTargetA = item.FindControl("txtPatchTargetA") as TextBox;
-                if (txtPatchTargetA != null)
-                    itemLAB.TargetA = Convert.ToDecimal(txtPatchTargetA.Text);
-
-                TextBox txtPatchTargetB = item.FindControl("txtPatchTargetB") as TextBox;
-                if (txtPatchTargetB != null)
-                    itemLAB.TargetB = Convert.ToDecimal(txtPatchTargetB.Text);
-
-                HiddenField hdnPatchTypeId = item.FindControl("hdnPatchTypeId") as HiddenField;
-                if (hdnPatchTypeId != null)
-                    itemLAB.PatchType = new PatchType() { PatchTypeId = Convert.ToInt16(hdnPatchTypeId.Value) };
-
-                targetLAB.Add(itemLAB);
-            }
-            return targetLAB;
-        }
+        #region Methods        
 
         private void LoadProjectInfoFromSession()
         {
@@ -345,6 +302,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindOptimizationChart()
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);
+           // MetricTargetPresetID = 0;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -363,6 +321,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindBaseDLPChart()
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);
+           // MetricTargetPresetID = 0;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -378,40 +337,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindAlignmentChart()
         {
             if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue)) return;
-            MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
-
-            #region Code not used now as it converted into smaller functions -> BindBaseDLPChart() and BindOptimizationChart()
-            //ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);                     //------------If we are in initial project setup-------------//
-            //if (SessionManager.Instance.CurrentProject != null)
-            //{
-            //    if (SessionManager.Instance.CurrentProject.OptimizeRuns != null && SessionManager.Instance.CurrentProject.OptimizeRuns.First().HasProfile)
-            //    {
-            //        ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);              //---------------If we are in optimization run--------------//
-            //    }
-            //    else
-            //    {
-            //        ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);                  //------------If we are in initial project setup-------------//
-            //    }
-            //}
-
-            //ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);     //--------By default, just till fix silverlight issue
-
-            //_presenterMeasurementSetting.GetReferenceChartType();
-            //if (!IsErrorOccured)
-            //{
-            //    cmbAlignmentChart.DataValueField = "ReferenceChartTypeID";
-            //    cmbAlignmentChart.DataTextField = "ChartName";
-            //    cmbAlignmentChart.DataSource = ReferenceChartType;
-            //    cmbAlignmentChart.DataBind();
-            //    cmbAlignmentChart.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));//-- Select --
-
-            //    cmbOptimizationChart.DataValueField = "ReferenceChartTypeID";
-            //    cmbOptimizationChart.DataTextField = "ChartName";
-            //    cmbOptimizationChart.DataSource = ReferenceChartType;
-            //    cmbOptimizationChart.DataBind();
-            //    cmbOptimizationChart.Items.Insert(0, new ListItem(GetResourceString(_recSelectText), "0"));
-            //} 
-            #endregion
+            MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);          
 
             BindBaseDLPChart();
             BindOptimizationChart();
@@ -462,18 +388,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 imgOptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(OptimizationChartSelectedValue);
             }
-        }
-
-        private void BindTargetLAB()
-        {
-            trTargetLAB.Visible = true;
-            this.PrintstandardTypeId = SessionManager.Instance.CurrentProject.PrintStandardType.PrintStandardTypeID;
-            this.MetricTargetPresetID = SessionManager.Instance.CurrentProject.MetricTargetPresetId;
-            this.ReferenceChartTypeId = Convert.ToInt16(AlignmentChartSelectedValue);
-            _presenterMeasurementSetting.GetTargetLABList();
-            lvTargetLAB.DataSource = this.ProjectTargetLABList;
-            lvTargetLAB.DataBind();
-        }
+        }      
 
         private void BindUVSettings()
         {
@@ -508,17 +423,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public int ChartDisplayType { get; set; }
-        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
-        public List<Entity.CPSync1D.ProjectTargetLAB> ProjectTargetLABList { get; set; }
-        public int PrintstandardTypeId { get; set; }
-        public int MetricTargetPresetID { get; set; }
+        public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }     
         public ELicenseType LicenseType { get; set; }
+
+        public int ProjectTypeID
+        {
+            get
+            {               
+                return SessionManager.Instance.CurrentProject.ProjectTypeId;
+            }
+        }
+        public int MetricTargetPresetID { get; set; }
         #endregion
-
-
-
-
-
-
+        
     }
 }

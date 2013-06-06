@@ -35,8 +35,6 @@ namespace FujifilmUSA.Sync.Entity
         public short ProjectTypeId { get; set; }
         public CPSync1D.PrintStandardType PrintStandardType { get; set; }
 
-        public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
-
-        public ESync1DProjectType Sync1DProjectType { get; set; }
+        public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }       
     }
 }

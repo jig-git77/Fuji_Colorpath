@@ -94,7 +94,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementDevice>();
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int MeasurementDeviceID, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0)
         {
             return new List<ReferenceChartType>();
         }
@@ -104,7 +104,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new Dictionary<string, string>();
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, ELicenseType licenseType)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVarification = false)
         {
             return new List<Entity.CPSyncV.MetricTargetPreset>();
         }
@@ -132,7 +132,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Entity.CPSync1D.PrintStandardTVI>();
         }
 
-        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId)
+        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)
         {
             return new List<Entity.CPSync1D.ProjectTargetLAB>();
         }

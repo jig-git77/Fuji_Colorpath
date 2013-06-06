@@ -180,22 +180,7 @@
                             </ItemTemplate>
                              <HeaderStyle Width="90px" />
                              <ItemStyle Width="90px" Wrap="True" />
-                        </telerik:GridTemplateColumn>
-                         <telerik:GridTemplateColumn 
-                            UniqueName="ProjectTypeName" HeaderText="Project Type" 
-                            DataField="ProjectType.ProjectTypeName" 
-                            SortExpression="ProjectType.ProjectTypeName" FilterControlWidth="70px" 
-                            AutoPostBackOnFilter="True" CurrentFilterFunction="Contains" 
-                            FilterControlAltText="Filter ProjectTypeName column" 
-                            meta:resourcekey="GridTemplateColumnResource6">
-                            <ItemTemplate>
-                                    <asp:Label ID="lblProjectTypeName" runat="server" 
-                                        Text='<%# Eval("ProjectType.ProjectTypeName") %>' 
-                                        meta:resourcekey="lblProjectTypeNameResource1" />
-                            </ItemTemplate>
-                             <HeaderStyle Width="70px" />
-                             <ItemStyle Width="70px" Wrap="True" />
-                        </telerik:GridTemplateColumn>                     
+                        </telerik:GridTemplateColumn>                         
                         <telerik:GridTemplateColumn 
                                 UniqueName="IsActive" AllowFiltering="False" HeaderText="IsActive?" DataField="IsActive"
                                 FilterControlWidth="40px" 

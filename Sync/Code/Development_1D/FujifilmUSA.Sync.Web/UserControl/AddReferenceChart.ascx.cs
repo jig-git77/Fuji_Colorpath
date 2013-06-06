@@ -48,11 +48,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
             if (!IsPostBack)
-            {
-                BindProjectTypeList();
+            {               
                 BindInstrumentTypeList();
-                BindRefChartDisplayType();
-
+               
                 if (Request.QueryString["RefChartId"] != null)
                 {
                     lblHeader.Text = GetResourceString(_recEditRefChart);//"Edit Reference Chart";
@@ -71,10 +69,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.ChartName = txtChartName.Text.Trim();
             ReferenceChartType.NumOfRows = Convert.ToInt32(txtNumOfRows.Text);
             ReferenceChartType.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
-            ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);
-            ReferenceChartType.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+            ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);       
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
-            ReferenceChartType.ChartDisplayType = Convert.ToInt32(cmbChartDisplayType.SelectedItem.Value);
+          
+            if (chklist_ProjectType.Items[0].Selected == true)           
+                ReferenceChartType.IsSync1D_ISO = short.Parse(cmbSync1D_ISO.SelectedValue);
+            if (chklist_ProjectType.Items[1].Selected == true)
+                ReferenceChartType.IsSync1D_G7 = short.Parse(cmbSync1D_G7.SelectedValue);
+            if (chklist_ProjectType.Items[2].Selected == true)
+                ReferenceChartType.IsSync4D = short.Parse(cmbSync4D.SelectedValue);
+            if (chklist_Validation.Items[0].Selected==true)
+                ReferenceChartType.Validation_1D = short.Parse(cmbValidation_1D.SelectedValue);
+            if (chklist_Validation.Items[1].Selected == true)
+                ReferenceChartType.Validation_4D = short.Parse(cmbValidation_4D.SelectedValue);
 
             if ((fucUploadChartPreview.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_ChartPreview.Value) > 0) && (fucUploadOriginalChart.UploadedFiles.Count > 0 || Convert.ToInt32(Hidden_OriginalChart.Value) > 0))
             {
@@ -276,26 +283,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #endregion
 
-        #region Methods
-
-        private void BindRefChartDisplayType()
-        {
-            cmbChartDisplayType.Items.Clear();         
-            cmbChartDisplayType.Items.Insert(0, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.ProfileChart), Convert.ToInt32(EReferenceChartDisType.ProfileChart).ToString()));
-            cmbChartDisplayType.Items.Insert(1, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.OptimizationChart), Convert.ToInt32(EReferenceChartDisType.OptimizationChart).ToString()));
-            cmbChartDisplayType.Items.Insert(2, new ListItem(Common.Utilities.GetEnumDescriptionAttributeValue(EReferenceChartDisType.ValidationChart), Convert.ToInt32(EReferenceChartDisType.ValidationChart).ToString()));
-        }
-
-        private void BindProjectTypeList()
-        {
-            _presenterAddReferenceChart.GetProjectTypeList();
-            if (!IsErrorOccured)
-            {
-                cmbProjectType.DataSource = ProjectTypeList;
-                cmbProjectType.DataBind();
-                cmbProjectType.Items.Insert(0, new ListItem(GetResourceString(_recSelectProjectType), ""));//-- Select Project Type --
-            }
-        }
+        #region Methods     
 
         private void BindInstrumentTypeList()
         {
@@ -319,10 +307,34 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtChartName.Text = ReferenceChartType.ChartName.ToString();
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
                 txtNumOfCols.Text = ReferenceChartType.NumOfCols.ToString();
-                cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
-                cmbProjectType.SelectedValue = Convert.ToString(ReferenceChartType.ProjectType.ProjectTypeId);
+                cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);             
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
-                cmbChartDisplayType.SelectedValue = ReferenceChartType.ChartDisplayType.ToString();
+
+                if (ReferenceChartType.IsSync1D_ISO >= 1)
+                {
+                    chklist_ProjectType.Items[0].Selected = true;
+                    cmbSync1D_ISO.SelectedValue = ReferenceChartType.IsSync1D_ISO.ToString();
+                }
+                if (ReferenceChartType.IsSync1D_G7 >= 1)
+                {
+                    chklist_ProjectType.Items[1].Selected = true;
+                    cmbSync1D_G7.SelectedValue = ReferenceChartType.IsSync1D_G7.ToString();
+                }
+                if (ReferenceChartType.IsSync4D >= 1)
+                {
+                    chklist_ProjectType.Items[2].Selected = true;
+                    cmbSync4D.SelectedValue = ReferenceChartType.IsSync4D.ToString();
+                }
+                if (ReferenceChartType.Validation_1D >= 1)
+                {
+                    chklist_Validation.Items[0].Selected = true;
+                    cmbValidation_1D.SelectedValue = ReferenceChartType.Validation_1D.ToString();
+                }
+                if (ReferenceChartType.Validation_4D >= 1)
+                {
+                    chklist_Validation.Items[1].Selected = true;
+                    cmbValidation_4D.SelectedValue = ReferenceChartType.Validation_4D.ToString();
+                }
 
                 if (ReferenceChartType.ChartPreview != null)
                 {

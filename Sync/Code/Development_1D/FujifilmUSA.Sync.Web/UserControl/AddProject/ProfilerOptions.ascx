@@ -30,9 +30,9 @@
     {
         width: 35px;
     }
-    .textwidth20
+    .textwidth30
     {
-        width: 20px;
+        width: 30px;
     }
 </style>
 <script language="javascript" type="text/javascript">
@@ -573,25 +573,11 @@
                                 Width="100%" Enabled="false">
                                 <table cellpadding="0" cellspacing="10" border="0">
                                     <tr>
-                                        <td valign="top" style="width: 320px; padding-right: 0px;">                                            
-                                            <div style="display: block;">
-                                                <div class="section_small_top">
-                                                    &nbsp;</div>
-                                                <div class="section_small_middle" style="height: 306px">
-                                                    <div class="combopart">
-                                                        <div class="header">
-                                                            <div class="content">
-                                                                <div class="text" style="float: left">
-                                                                    <label><asp:Localize runat="server" Text="Tolerances" 
-                                                                        ID="locTolerances"></asp:Localize></label>
-                                                                </div>
-                                                                <div style="float: right">
-                                                                </div>
-                                                                <div class="clear">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="dvTolerances" style="padding-left: 10px">
+                                        <td valign="top" style="width: 250px; padding-right: 0px; border:1px Solid Gray;">  
+                                                        <div id="dvTolerances" style="padding-left:5px;">
+                                                             <label><b><asp:Localize runat="server" Text="Tolerances" 
+                                                                        ID="locTolerances"></asp:Localize></b></label>
+                                                            <br />
                                                             <asp:ListView ID="lvTolerances" runat="server" ItemPlaceholderID="phItemTolerances">
                                                                 <LayoutTemplate>
                                                                     <table border="0" cellpadding="0" cellspacing="0">
@@ -616,36 +602,23 @@
                                                             <br />
                                                             <asp:CheckBox ID="chkWeightedTolerances" runat="server" />&nbsp;<asp:Label ID="lblWeightedTolerances" runat="server" Text="Use Weighted Tolerances"></asp:Label>
                                                         </div>
-                                                        <div class="clear">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="section_small_bottom">
-                                                    &nbsp;</div>
-                                            </div>
                                         </td>
-                                        <td valign="top" style="width: 320px;">
-                                            <div style="display: block;">
-                                                <div class="section_small_top">
-                                                    &nbsp;</div>
-                                                <div class="section_small_middle" style="height: 400px;">
-                                                    <div class="combopart">
-                                                        <div class="header">
-                                                            <div class="content">
-                                                                <div class="text" style="float: left">
-                                                                    <label><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets"></asp:Localize>
-                                                                        </label>
-                                                                </div>
-                                                                <div style="float: right">
-                                                                </div>
-                                                                <div class="clear">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                        <td valign="top" style="width: 390px; border:1px Solid Gray;">
+                                          
+                                                               
                                                         <div id="dvTVITargets" style="padding-left: 10px">
-                                                           <table cellspacing="0" cellpadding="0" border="0" width="90%">
-                                                                <tr>
-                                                                    <td align="center">
+                                                            <label><b><asp:Localize runat="server" Text="TVI Targets" ID="locTVITargets"></asp:Localize></b>
+                                                            </label>
+                                                            <br />
+                                                           <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                                <tr style="line-height:15px;">
+                                                                    <td></td>
+                                                                    <td colspan="4" align="center"><b>Targets</b></td>
+                                                                    <td style="width:5px;"></td>
+                                                                    <td colspan="4" align="center"><b>Thresholds</b></td>
+                                                                </tr>
+                                                                <tr style="line-height:15px;">
+                                                                    <td align="left">
                                                                         <span><b><asp:Localize ID="locTVIPatch" runat="server" Text="Patch"></asp:Localize></b></span>
                                                                     </td>
                                                                      <td align="center">
@@ -660,8 +633,8 @@
                                                                      <td align="center">
                                                                         <span><b><asp:Localize ID="locTVIBlack" runat="server" Text="K"></asp:Localize></b></span>
                                                                     </td>
-
-                                                                      <td align="center">
+                                                                    <td></td>
+                                                                    <td align="center">
                                                                         <span><b>ΔC</b></span>
                                                                     </td>
                                                                      <td align="center">
@@ -681,10 +654,11 @@
                                                                     <td><asp:TextBox ID="txtTVI25Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI25Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
 
-                                                                    <td><asp:TextBox ID="txtThresh25Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh25Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh25Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh25Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Cyan" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Magenta" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Yellow" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh25Black" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI50" runat="server" Text="Mid Tone"></asp:Label></td>
@@ -693,10 +667,11 @@
                                                                     <td><asp:TextBox ID="txtTVI50Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI50Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
 
-                                                                    <td><asp:TextBox ID="txtThresh50Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh50Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh50Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh50Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Cyan" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Magenta" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Yellow" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh50Black" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><asp:Label ID="lblTVI75" runat="server" Text="3/4 Tone"></asp:Label></td>
@@ -705,20 +680,15 @@
                                                                     <td><asp:TextBox ID="txtTVI75Yellow" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
                                                                     <td><asp:TextBox ID="txtTVI75Black" runat="server" CssClass="textwidth35" MaxLength="5"></asp:TextBox></td>
 
-                                                                    <td><asp:TextBox ID="txtThresh75Cyan" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh75Magenta" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh75Yellow" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
-                                                                    <td><asp:TextBox ID="txtThresh75Black" runat="server" CssClass="textwidth20" MaxLength="2"></asp:TextBox></td>
+                                                                    <td></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Cyan" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Magenta" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Yellow" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
+                                                                    <td><asp:TextBox ID="txtThresh75Black" runat="server" CssClass="textwidth30" MaxLength="5"></asp:TextBox></td>
                                                                 </tr>                                                              
                                                            </table>
                                                         </div>
-                                                        <div class="clear">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="section_small_bottom">
-                                                    &nbsp;</div>
-                                            </div>
+                                                       
                                         </td>
                                     </tr>
                                 </table>

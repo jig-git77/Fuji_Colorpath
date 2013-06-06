@@ -274,15 +274,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize txtAlignmentChart;
         
         /// <summary>
-        /// tdOptimizationChartCaption control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdOptimizationChartCaption;
-        
-        /// <summary>
         /// locOptimizationChart control.
         /// </summary>
         /// <remarks>
@@ -328,15 +319,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Image imgChart;
         
         /// <summary>
-        /// tdOptimizationChartCombo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdOptimizationChartCombo;
-        
-        /// <summary>
         /// cmbOptimizationChart control.
         /// </summary>
         /// <remarks>
@@ -371,41 +353,5 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgOptimizationChart;
-        
-        /// <summary>
-        /// trTargetLAB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableRow trTargetLAB;
-        
-        /// <summary>
-        /// locTargetLAB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locTargetLAB;
-        
-        /// <summary>
-        /// panel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel1;
-        
-        /// <summary>
-        /// lvTargetLAB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvTargetLAB;
     }
 }

@@ -40,42 +40,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.AdminStatusbar fujiStatusbar;
         
         /// <summary>
-        /// locProjectType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locProjectType;
-        
-        /// <summary>
-        /// cmbProjectType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbProjectType;
-        
-        /// <summary>
-        /// rfvProjectType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvProjectType;
-        
-        /// <summary>
-        /// rfvcProjectTypeContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcProjectTypeContainer;
-        
-        /// <summary>
         /// locChartName control.
         /// </summary>
         /// <remarks>
@@ -229,22 +193,76 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcInstrumentTypeContainer;
         
         /// <summary>
-        /// locChartType control.
+        /// Localize3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locChartType;
+        protected global::System.Web.UI.WebControls.Localize Localize3;
         
         /// <summary>
-        /// cmbChartDisplayType control.
+        /// chklist_ProjectType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbChartDisplayType;
+        protected global::System.Web.UI.WebControls.CheckBoxList chklist_ProjectType;
+        
+        /// <summary>
+        /// cmbSync1D_ISO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync1D_ISO;
+        
+        /// <summary>
+        /// cmbSync1D_G7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync1D_G7;
+        
+        /// <summary>
+        /// cmbSync4D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbSync4D;
+        
+        /// <summary>
+        /// chklist_Validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chklist_Validation;
+        
+        /// <summary>
+        /// cmbValidation_1D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbValidation_1D;
+        
+        /// <summary>
+        /// cmbValidation_4D control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbValidation_4D;
         
         /// <summary>
         /// locUploadChartPreview control.

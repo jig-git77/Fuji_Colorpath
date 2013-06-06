@@ -5,7 +5,12 @@
 textarea {
     resize: none;
 }
+ .textwidth50
+    {
+        width: 50px;
+    }
 </style>
+
 <div class="head">
     <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
             Text="New Print Condition - Target Colorspace" ID="locTargetColorspace" 
@@ -61,7 +66,7 @@ textarea {
                             <td style="width: 450px">
                                 <asp:Label ID="lblSourceProfileName" runat="server"></asp:Label>
                             </td>
-                        </tr>
+                        </tr>                       
                         <tr>
                             <td valign="top" colspan="2">
                                 <span><asp:Localize runat="server" Text="Profile Description:" 
@@ -75,9 +80,74 @@ textarea {
                                     meta:resourcekey="txtProfileDescriptionResource1"></asp:TextBox>
                             </td>
                         </tr>
+                         <tr id="trProjectType" runat="server">
+                            <td style="width: 130px">
+                                <span><asp:Localize runat="server" Text="Project Type:" ID="locProjectType" 
+                                    meta:resourcekey="locProjectTypeResource1"></asp:Localize></span></td>
+                            <td style="width: 450px">
+                                <asp:DropDownList ID="cmbProjectType" runat="server" onselectedindexchanged="cmbProjectType_SelectedIndexChanged" AutoPostBack="true">
+                                    <asp:ListItem Text="G7" Value="1" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="ISO" Value="2"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
                     </table>
                 </asp:Panel>
             </td>
+        </tr>
+         <tr id="trTargetLAB" runat="server">
+           <td>
+                <div style="display: block;" class="contantbox tabcontant">
+                        <div class="section_top">
+                            &nbsp;</div>
+                        <div class="section_middle">
+                            <div class="combopart">
+                                <div class="header">
+                                    <div class="content">
+                                        <div class="text" style="float: left;">
+                                            <label><asp:Localize runat="server" Text="Color Metric" 
+                                                ID="locTargetLAB"></asp:Localize></label>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                                <asp:Panel ID="panel1" Style="padding: 5px" runat="server"
+                                BorderStyle="None" Enabled="false">
+                                    <asp:ListView ID="lvTargetLAB" runat="server" ItemPlaceholderID="phItems">
+                                        <LayoutTemplate>
+                                            <table border="0" cellspacing="2" cellpadding="0" width="50%">
+                                                  <tr align="center" style="line-height:15px;">
+                                                    <td></td>
+                                                    <td colspan="3"><b>Targets</b></td>
+                                                  </tr>
+                                                <tr align="center" style="line-height:15px;">
+                                                <td align="left"><b>Patch</b></td>
+                                                <td><b>L*</b></td>
+                                                <td><b>a*</b></td>
+                                                <td><b>b*</b></td>
+                                            </tr>
+                                                <asp:PlaceHolder ID="phItems" runat="server"></asp:PlaceHolder>    
+                                            </table>                                            
+                                        </LayoutTemplate>
+                                        <ItemTemplate>                                            
+                                            <tr>
+                                                <td style="width: 150px;"><asp:Label ID="lblPatch" runat="server" Text='<%# Eval("PatchType.Type") %>'></asp:Label>
+                                                    <asp:HiddenField ID="hdnPatchTypeId" runat="server" Value='<%# Eval("PatchType.PatchTypeId") %>' />
+                                                </td>
+                                                <td><asp:TextBox ID="txtPatchTargetL" runat="server" Text='<%# Eval("TargetL") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetA" runat="server" Text='<%# Eval("TargetA") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                                <td><asp:TextBox ID="txtPatchTargetB" runat="server" Text='<%# Eval("TargetB") %>' CssClass="textwidth50"></asp:TextBox></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:ListView>
+                                </asp:Panel>
+                            </div>
+                    </div>
+                    <div class="section_bottom">
+                        &nbsp;</div>
+                </div>
+           </td> 
         </tr>
     </table>
 </div>

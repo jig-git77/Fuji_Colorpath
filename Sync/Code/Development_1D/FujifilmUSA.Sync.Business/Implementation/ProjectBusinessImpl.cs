@@ -54,8 +54,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                           EnabledValidation = DataReader.ReadBoolean(dsProject.Tables[0].Rows[0], "EnabledValidation"),
                                           LicenseType = (ELicenseType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "LicenseTypeID"),
                                           MetricTargetPresetId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "MetricTargetPresetID"),
-                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId"),
-                                          Sync1DProjectType = (ESync1DProjectType)DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ValidationType"),
+                                          ProjectTypeId = DataReader.ReadShort(dsProject.Tables[0].Rows[0], "ProjectTypeId")
                                       };
                         if (dsProject.Tables[1].Rows.Count > 0)
                         {
@@ -183,6 +182,40 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 project.OptimizeRuns.Count() == 1
                                     ? ECurrentProjectStatus.New
                                     : ECurrentProjectStatus.Run;
+                        }
+                        if (project.LicenseType == ELicenseType.Sync1D)
+                        {
+                            //----Select ProjectTargetLAB-----------//
+                            if (dsProject.Tables[7].Rows.Count > 0)
+                            {
+                                project.ProjectTargetLAB = dsProject.Tables[7].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.ProjectTargetLAB()
+                                    {                                      
+                                        PatchType = new PatchType()
+                                        {
+                                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                            Type = DataReader.ReadString(x, "PatchType")
+                                        },
+                                        TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                                        TargetA = DataReader.ReadDecimal(x, "TargetA"),
+                                        TargetB = DataReader.ReadDecimal(x, "TargetB")
+                                    }).ToList();
+                            }
+                            //----Select ProjectTargetTVI-----------//
+                            if (dsProject.Tables[8].Rows.Count > 0)
+                            {
+                                project.PrintStandardTVI = dsProject.Tables[8].AsEnumerable().
+                                    Select(x => new Entity.CPSync1D.PrintStandardTVI()
+                                    {
+                                        PatchType = new PatchType()
+                                        {
+                                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeID"),
+                                            Type = DataReader.ReadString(x, "PatchType")
+                                        },
+                                        TVI = DataReader.ReadDecimal(x, "TVI"),
+                                        Threshold = DataReader.ReadDecimal(x, "Threshold")
+                                    }).ToList();
+                            }
                         }
                     }
                 },
@@ -867,13 +900,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return measurementDevice;
         }
 
-        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType)
+        public List<ReferenceChartType> GetReferenceChartTypeList(int measurementDeviceId, int ChartDisplayType, int ProjectTypeId, int MetricTargetPresetID = 0)
         {
             var presetList = new List<ReferenceChartType>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType });
+                    var dsPresetList = DataAccessFactory.Instance.GetDsResult("CP.GetReferenceChartTypeList", new object[] { measurementDeviceId, ChartDisplayType, ProjectTypeId, MetricTargetPresetID });
                     if (dsPresetList != null && dsPresetList.Tables.Count > 0)
                     {
                         presetList = dsPresetList.Tables[0].AsEnumerable().Select(
@@ -952,18 +985,18 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return data;
         }
 
-        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, ELicenseType licenseType)
+        public List<Entity.CPSyncV.MetricTargetPreset> GetMetricTargetPresetList(int currentUserId, int ProjectTypeId, bool isVerification = false)
         {
             List<Entity.CPSyncV.MetricTargetPreset> metricPresetList = new List<Entity.CPSyncV.MetricTargetPreset>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    string procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
+                    string procedureName = "[CPSync].[GetMetricTargetPresetList]";
 
-                    if(licenseType == ELicenseType.Sync1D)
-                        procedureName = "[CPSync].[GetMetricTargetPresetList]";
+                    if(isVerification)
+                        procedureName = "[CPSyncV].[GetMetricTargetPresetList]";
 
-                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId });
+                    var dsMetricTargetPresetList = DataAccessFactory.Instance.GetDsResult(procedureName, new object[] { currentUserId, ProjectTypeId });
 
                     if (dsMetricTargetPresetList != null && dsMetricTargetPresetList.Tables.Count > 0)
                     {
@@ -971,10 +1004,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         x => new Entity.CPSyncV.MetricTargetPreset()
                         {
                             MetricTargetPresetID = DataReader.ReadInt(x, "MetricTargetPresetID"),
-                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
-                            MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc"),
-                            ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
-                            ValidationType = DataReader.ReadInt(x, "ValidationType")
+                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")                           
                         }).ToList();
                     }
 
@@ -1139,13 +1169,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return printStandardTVIList;
         }
 
-        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, short referenceChartId, int metricTargetPresetId)
+        public List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId)
         {
             List<Entity.CPSync1D.ProjectTargetLAB> targetLABList = new List<Entity.CPSync1D.ProjectTargetLAB>();
             Common.ImplementBusinessLogic(
                 () =>
                 {
-                    var dsProjectTargetLABList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetLABTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId, referenceChartId, metricTargetPresetId });
+                    var dsProjectTargetLABList = DataAccessFactory.Instance.GetDsResult("[CPSync].[GetLABTargetsByPrintStandardTypeID]", new object[] { printStandardTypeId, ProjectTypeId });
                     if (dsProjectTargetLABList != null && dsProjectTargetLABList.Tables.Count > 0)
                     {
                         targetLABList = dsProjectTargetLABList.Tables[0].AsEnumerable().Select(

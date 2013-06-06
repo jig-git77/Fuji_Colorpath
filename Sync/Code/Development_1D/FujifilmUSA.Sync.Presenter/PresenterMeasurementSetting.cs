@@ -40,14 +40,21 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.ReferenceChartType = projectBusiness.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceId, _viewMeasurementSetting.ChartDisplayType);
+            _viewMeasurementSetting.ReferenceChartType = projectBusiness.GetReferenceChartTypeList(_viewMeasurementSetting.MeasurementDeviceId, _viewMeasurementSetting.ChartDisplayType, _viewMeasurementSetting.ProjectTypeID, _viewMeasurementSetting.MetricTargetPresetID);
         }
 
         public void GetMetricTargetPreset()
         {
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.LicenseType);
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID);
+        }
+
+        public void GetMetricTargetPreset_Verification()
+        {
+            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
+            _viewMeasurementSetting.MetricTargetPreset = projectBusiness.GetMetricTargetPresetList(_viewMeasurementSetting.CurrentUserId, _viewMeasurementSetting.ProjectTypeID, true);
         }
 
         public void GetReferenceChartTypeImage()
@@ -104,14 +111,7 @@ namespace FujifilmUSA.Sync.Presenter
             var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
             projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
             _viewMeasurementSetting.ProjectId = projectBusiness.SaveProject(_viewMeasurementSetting.Project);
-        }
-
-        public void GetTargetLABList()
-        {
-            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-            projectBusiness.ErrorOccured += _viewMeasurementSetting.ErrorOccured;
-            _viewMeasurementSetting.ProjectTargetLABList = projectBusiness.GetProjectTargetLAB(_viewMeasurementSetting.PrintstandardTypeId, _viewMeasurementSetting.ReferenceChartTypeId, _viewMeasurementSetting.MetricTargetPresetID);
-        }
+        }    
 
         public void Create1DOptimizeRun()
         {

@@ -121,6 +121,51 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Label lbl_Valimsg;
         
         /// <summary>
+        /// panel_Metrictarget control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_Metrictarget;
+        
+        /// <summary>
+        /// locValidationMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locValidationMetric;
+        
+        /// <summary>
+        /// cmbMetricTargetPreset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cmbMetricTargetPreset;
+        
+        /// <summary>
+        /// rfvMetricTargetPreset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMetricTargetPreset;
+        
+        /// <summary>
+        /// vccmbMetricTargetPreset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer vccmbMetricTargetPreset;
+        
+        /// <summary>
         /// locValidationChart control.
         /// </summary>
         /// <remarks>
@@ -218,59 +263,5 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcValidationChartContainer;
-        
-        /// <summary>
-        /// locValidationMetrics control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locValidationMetrics;
-        
-        /// <summary>
-        /// panel_Metrictarget control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel_Metrictarget;
-        
-        /// <summary>
-        /// locValidationMetric control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locValidationMetric;
-        
-        /// <summary>
-        /// cmbMetricTargetPreset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbMetricTargetPreset;
-        
-        /// <summary>
-        /// rfvMetricTargetPreset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMetricTargetPreset;
-        
-        /// <summary>
-        /// vccmbMetricTargetPreset control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer vccmbMetricTargetPreset;
     }
 }

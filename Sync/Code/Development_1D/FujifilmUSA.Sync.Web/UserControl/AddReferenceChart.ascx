@@ -36,35 +36,7 @@
                     </legend>
                     <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                         Visible="False" />
-                    <table width="98%">
-                        <tr>
-                            <td align="right" style="width:350px;">
-                                <span style="font-weight: bold;"><asp:Localize Text="Project Type" 
-                                    runat="server" ID="locProjectType" meta:resourcekey="locProjectTypeResource1"></asp:Localize><span style="color: Red;">*</span>
-                                </span>
-                            </td>
-                            <td style="width:15px;">
-                                <b>&nbsp;: &nbsp;</b>
-                            </td>
-                            <td style="width:100px;">
-                                <div style="float: left;">
-                                    <asp:DropDownList ID="cmbProjectType" runat="server" Width="400px" CssClass="select"
-                                        DataValueField="Key" DataTextField="Value" 
-                                        meta:resourcekey="cmbProjectTypeResource1">
-                                    </asp:DropDownList>
-                                </div>
-                                <div style="float: left">
-                                    <asp:RequiredFieldValidator ID="rfvProjectType" runat="server" Display="Dynamic"
-                                        ControlToValidate="cmbProjectType" ForeColor="Red" 
-                                        ValidationGroup="vgAddRefChart">
-                                        <ucValidationContainer:ValidationContainer ID="rfvcProjectTypeContainer" runat="server"
-                                            ValidationMsg="Please select project type." Size="200" />
-                                    </asp:RequiredFieldValidator>
-                                </div>
-                                <div class="clear">
-                                </div>
-                            </td>
-                        </tr>
+                    <table width="98%">                       
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize Text="Chart Name" runat="server" 
@@ -173,29 +145,77 @@
                                 <div class="clear">
                                 </div>
                             </td>
-                        </tr>
+                        </tr>   
+                        
                          <tr>
                             <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize runat="server" Text="Chart Type" 
-                                    ID="locChartType" meta:resourcekey="locChartTypeResource1"></asp:Localize><span style="color: Red;">*</span>
+                                <span style="font-weight: bold;"><asp:Localize Text="Project Type" 
+                                    runat="server" ID="Localize3" 
+                                    meta:resourcekey="locProjectResource1"></asp:Localize>
                                 </span>
                             </td>
                             <td>
                                 <b>&nbsp;: &nbsp;</b>
                             </td>
                             <td align="left">
-                                <div style="float: left;">
-                                    <asp:DropDownList ID="cmbChartDisplayType" runat="server" Width="400px" 
-                                        CssClass="select" meta:resourcekey="cmbChartDisplayTypeResource1">                                                                   
-                                    </asp:DropDownList>
-                                </div>
-                                <div style="float: left">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td>
+                                             <div style="float: left;">                                   
+                                                <asp:CheckBoxList ID="chklist_ProjectType" runat="server" 
+                                                     CssClass="checkListBox">
+                                                    <asp:ListItem Value="0">Sync1D_ISO: </asp:ListItem>
+                                                    <asp:ListItem Value="1">Sync1D_G7: </asp:ListItem>
+                                                    <asp:ListItem Value="2">Sync4D: </asp:ListItem>                                       
+                                                </asp:CheckBoxList>                                   
+                                            </div>
+                                            <div style="float: left;">  
+                                                <asp:DropDownList ID="cmbSync1D_ISO" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <br />
+                                                <asp:DropDownList ID="cmbSync1D_G7" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <br />
+                                                <asp:DropDownList ID="cmbSync4D" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">Profile Chart</asp:ListItem>
+                                                    <asp:ListItem Value="2">Optimization Chart</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>                              
+                                           
+                                        </td>
+                                        <td valign="top">
+                                            <div style="float: left;">  
+                                                <asp:CheckBoxList ID="chklist_Validation" runat="server" 
+                                                     CssClass="checkListBox">
+                                                    <asp:ListItem Value="0">Validation 1D: </asp:ListItem>
+                                                    <asp:ListItem Value="1">Validation 4D: </asp:ListItem>                                                                                    
+                                                </asp:CheckBoxList>   
+                                            </div>
+                                            <div style="float: left;">  
+                                                  <asp:DropDownList ID="cmbValidation_1D" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
+                                                    <asp:ListItem Value="2">ISO</asp:ListItem>
+                                                </asp:DropDownList>
+                                                <br />
+                                                <asp:DropDownList ID="cmbValidation_4D" runat="server">
+                                                    <asp:ListItem Selected="True" Value="1">G7</asp:ListItem>
+                                                    <asp:ListItem Value="2">ISO</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </td>
+                                       
+                                    </tr>
                                     
-                                </div>
-                                <div class="clear">
-                                </div>
+                                </table>
+                               
                             </td>
-                        </tr>
+                        </tr>       
+                           
+                       
                         <tr>
                             <td align="right">
                                 <span style="font-weight: bold;"><asp:Localize runat="server" 
@@ -294,7 +314,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <telerik:RadGrid ID="rgChartData" AllowFilteringByColumn="True"
                                     AllowSorting="True" AllowPaging="True" runat="server" AutoGenerateColumns="False"
                                     EnableLinqExpressions="False" Width="99%" HeaderStyle-Font-Bold="true" 

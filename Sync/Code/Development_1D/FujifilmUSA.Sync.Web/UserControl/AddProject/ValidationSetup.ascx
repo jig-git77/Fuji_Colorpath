@@ -44,7 +44,7 @@
                                 BorderStyle="None">
                                 <table>
                                     <tr>
-                                        <td style="width: 160px">
+                                        <td style="width: 160px; padding-left:5px;">
                                             <span><asp:Localize Text="Enable Validation:" runat="server" 
                                                 ID="locEnableValidation"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
@@ -68,6 +68,36 @@
                                             <div class="clear">
                                             </div>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                             <asp:Panel ID="panel_Metrictarget"  runat="server" BorderStyle="None">
+                                                <table cellpadding="0" cellspacing="0" width="100%" style="padding: 10px 5px 10px 5px;">
+                                                    <tr style="height: 44px;">
+                                                        <td valign="top" style="width: 160px;">
+                                                            <span><asp:Localize Text="Validation Metric:" runat="server" 
+                                                                ID="locValidationMetric"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                                        </td>
+                                                        <td valign="top">
+                                                            <div style="float: left;">
+                                                            <asp:DropDownList ID="cmbMetricTargetPreset" runat="server" Width="200px" 
+                                                                    CssClass="select" AutoPostBack="True" 
+                                                                    onselectedindexchanged="cmbMetricTargetPreset_SelectedIndexChanged"></asp:DropDownList>
+                                                            </div>
+                                                            <div style="float: left;">
+                                                                <asp:RequiredFieldValidator ID="rfvMetricTargetPreset" runat="server" Display="Dynamic"
+                                                                    ControlToValidate="cmbMetricTargetPreset" ForeColor="Red" InitialValue="0" 
+                                                                    ValidationGroup="vgValidationSetup"><ucValidationContainer:ValidationContainer ID="vccmbMetricTargetPreset" runat="server"
+                                                                        ValidationMsg="Please select Validation metric." Size="200" />
+                                                                </asp:RequiredFieldValidator>
+                                                            </div>
+                                                            <div class="clear">
+                                                            </div>
+                                                        </td>                                       
+                                                    </tr>                                    
+                                                </table>
+                                                </asp:Panel>
+                                        </td>                                       
                                     </tr>
                                 </table>
                             </asp:Panel>   
@@ -153,55 +183,6 @@
                         &nbsp;</div>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <div style="display: block;" class="contantbox tabcontant">
-                        <div class="section_top">
-                            &nbsp;</div>
-                        <div class="section_middle">
-                            <div class="combopart">
-                                <div class="header">
-                                    <div class="content">
-                                        <div class="text" style="float: left;">
-                                            <label><asp:Localize runat="server" Text="Validation Metrics" 
-                                            ID="locValidationMetrics"></asp:Localize></label>
-                                        </div>
-                                        <div class="clear">
-                                        </div>
-                                    </div>
-                                </div>
-                                <asp:Panel ID="panel_Metrictarget" Style="margin-left: 5px; margin-right: 5px;"
-                                runat="server" BorderStyle="None">
-                                <table cellpadding="0" cellspacing="0" width="100%" style="padding: 10px 5px 10px 5px;">
-                                    <tr style="height: 44px;">
-                                        <td valign="top" style="width: 160px;">
-                                            <span><asp:Localize Text="Validation Metric:" runat="server" 
-                                                ID="locValidationMetric"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
-                                        </td>
-                                        <td valign="top">
-                                            <div style="float: left;">
-                                            <asp:DropDownList ID="cmbMetricTargetPreset" runat="server" Width="200px" CssClass="select"></asp:DropDownList>
-                                            </div>
-                                            <div style="float: left;">
-                                                <asp:RequiredFieldValidator ID="rfvMetricTargetPreset" runat="server" Display="Dynamic"
-                                                    ControlToValidate="cmbMetricTargetPreset" ForeColor="Red" InitialValue="0" 
-                                                    ValidationGroup="vgValidationSetup"><ucValidationContainer:ValidationContainer ID="vccmbMetricTargetPreset" runat="server"
-                                                        ValidationMsg="Please select Validation metric." Size="200" />
-                                                </asp:RequiredFieldValidator>
-                                            </div>
-                                            <div class="clear">
-                                            </div>
-                                        </td>                                       
-                                    </tr>                                    
-                                </table>
-                               </asp:Panel>
-                            </div>
-                        </div>
-                        <div class="section_bottom">
-                        &nbsp;</div>
-                </div>
-            </td>
-        </tr>
+        </tr>      
     </table>
 </div>

@@ -114,7 +114,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lblIlluminant.Text = Data["illuminantId"];
                 lblObserver.Text = Data["observerTypeId"];
                 lblAlignmentChart.Text = Data["referenceChartTypeId"];
-                
+
                 if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                 {
                     lblMSelectedPresets.Text = Data["metricTargetPresetName"];
@@ -150,16 +150,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                     : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
 
             lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
-           
+
             if (SessionManager.Instance.CurrentProject.EnabledValidation) //-------If project has Validation enabled, only then display Validation panel.
             {
                 Table_Validation.Visible = true;
                 Div_ValidationChart.Visible = true;
                 lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
-            }
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //------If project is Sync1D type, not to display Optimization chart panel.
-            {
-                Div_OptChart.Visible = false;
             }
         }
 
