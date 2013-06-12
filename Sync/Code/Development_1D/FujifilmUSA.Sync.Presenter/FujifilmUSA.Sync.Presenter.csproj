@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="PresenterLicenseManagement.cs" />
     <Compile Include="PresenterDeviceManagement.cs" />
+    <Compile Include="PresenterMetricTargetPresetManagement.cs" />
     <Compile Include="PresenterProfileManagement.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +96,7 @@
     <Compile Include="PresenterTargetColorspace.cs" />
     <Compile Include="PresenterWebLogActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewInterface\IViewAddMetricTargetPreset.cs" />
     <Compile Include="ViewInterface\IViewBrowserTest.cs" />
     <Compile Include="ViewInterface\IViewActivityPrintCondition.cs" />
     <Compile Include="ViewInterface\IViewActivityValidationRule.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="ViewInterface\IViewAddDeviceManagement.cs" />
     <Compile Include="ViewInterface\IViewDeviceManagement.cs" />
     <Compile Include="ViewInterface\IViewAddUserManagement.cs" />
+    <Compile Include="ViewInterface\IViewMetricTargetPresetManagement.cs" />
     <Compile Include="ViewInterface\IViewProfileManagement.cs" />
     <Compile Include="ViewInterface\IViewReferenceChartManagement.cs" />
     <Compile Include="ViewInterface\IViewReportSingleMeasurement.cs" />

@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MetricTargetPreset already exists with same name..
+        /// </summary>
+        internal static string Duplicate_InsertMetricTargetPreset {
+            get {
+                return ResourceManager.GetString("Duplicate_InsertMetricTargetPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source profile already exists with same name..
         /// </summary>
         internal static string Duplicate_InsertSourceProfile {
@@ -219,6 +228,15 @@ namespace Resources {
         internal static string Duplicate_UpdateLicense {
             get {
                 return ResourceManager.GetString("Duplicate_UpdateLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MetricTargetPreset already exists with same name..
+        /// </summary>
+        internal static string Duplicate_UpdateMetricTargetPreset {
+            get {
+                return ResourceManager.GetString("Duplicate_UpdateMetricTargetPreset", resourceCulture);
             }
         }
         
@@ -363,6 +381,15 @@ namespace Resources {
         internal static string Error_DeleteMeasurementDevice {
             get {
                 return ResourceManager.GetString("Error_DeleteMeasurementDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while deleting MetricTargetPreset. Please contact your administrator..
+        /// </summary>
+        internal static string Error_DeleteMetricTargetPreset {
+            get {
+                return ResourceManager.GetString("Error_DeleteMetricTargetPreset", resourceCulture);
             }
         }
         
@@ -1087,6 +1114,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting MetricTargetPreset. Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertMetricTargetPreset {
+            get {
+                return ResourceManager.GetString("Error_InsertMetricTargetPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while inserting device family Profiler Option Presets.Please contact your administrator..
         /// </summary>
         internal static string Error_InsertProfilerOptionPreset {
@@ -1303,6 +1339,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while updating MetricTargetPreset. Please contact your administrator..
+        /// </summary>
+        internal static string Error_UpdateMetricTargetPreset {
+            get {
+                return ResourceManager.GetString("Error_UpdateMetricTargetPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while updating user information.Please contact your administrator..
         /// </summary>
         internal static string Error_UpdatePassword {
@@ -1398,6 +1443,15 @@ namespace Resources {
         internal static string MeasurementDeviceList_DeleteMeasurementDevice_Confirmation {
             get {
                 return ResourceManager.GetString("MeasurementDeviceList_DeleteMeasurementDevice_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected metric target preset?.
+        /// </summary>
+        internal static string MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation {
+            get {
+                return ResourceManager.GetString("MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation", resourceCulture);
             }
         }
         

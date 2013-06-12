@@ -12,7 +12,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class BranchBusinessImpl : IBranchBusiness
     {
-        #region  IcompanyBusiness Members
+        #region  IBranchBusiness Members
 
         public int InsertBranch(Branch branch)
         {

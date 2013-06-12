@@ -9,13 +9,17 @@ namespace FujifilmUSA.Sync.Entity.CPSyncV
     public class MetricTargetPreset
     {
         public int MetricTargetPresetID { get; set; }
-        public byte? RegionID { get; set; }
-        public int? CompanyID { get; set; }
+        public Region Region { get; set; }
+        public Company Company { get; set; }
+        public short? RegionId { get; set; }
+        public int? CompanyId { get; set; }
         public string MetricTargetPresetName { get; set; }
         public string MetricTargetPresetDesc { get; set; }
-        public string dEMethod { get; set; }
-        public bool IsUsed { get; set; }
-        public short ProjectTypeId { get; set; }
+        public string dEMethod { get; set; }       
         public int ValidationType { get; set; }
+        public bool IsSync1D { get; set; }
+        public bool Validation_1D { get; set; }
+        public bool Validation_4D { get; set; }
+        public bool IsUsed { get; set; }       
     }
 }

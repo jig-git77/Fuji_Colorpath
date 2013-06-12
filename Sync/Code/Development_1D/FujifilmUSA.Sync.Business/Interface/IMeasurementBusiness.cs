@@ -16,9 +16,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetAnalyzeChartVMeasurement(int projectId, string From_ΔE);
         int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false);
         List<MeasurementPatch_AvgDelta> GetAvgDeltaMeasurement(int MeasurementId, string From_ΔE, bool IsVerification = false);
-        
-        //Now we are returning DataTable instead of List<>()
-        //List<MeasurementPatchDetails> GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false);        
+            
         DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
 
         List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
@@ -38,9 +36,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<AnalyzeChart_G7> GetBlackLSummary(int MeasurementId, bool IsVerification = false);       
         List<AnalyzeChart_G7> GetGrayLChart(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_G7> GetGrayLSummary(int MeasurementId, bool IsVerification = false);       
-        //List<AnalyzeChart_G7> GetBlackNPDChart(int MeasurementId, bool IsVerification = false);
-        //List<AnalyzeChart_G7> GetGrayNPDChart(int MeasurementId, bool IsVerification = false);
-
+    
         int Save1DMeasurement(Measurement measurement);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
         MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds);

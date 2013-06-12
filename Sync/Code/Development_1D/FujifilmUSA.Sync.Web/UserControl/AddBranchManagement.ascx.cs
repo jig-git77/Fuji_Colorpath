@@ -18,6 +18,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recAddBranch = "addBranchText";
         private const string _recEditBranch = "editBranchText";
         private const string _recSelectRegionText = "selectRegionText";
+        private const string _recSelectCompanyText = "selectCompanyText";
         #endregion
 
         #region Declaration
@@ -80,7 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbCompanyName.DataValueField = "Key";
                 cmbCompanyName.DataSource = Companies;
                 cmbCompanyName.DataBind();
-                cmbCompanyName.Items.Insert(0, new ListItem(GetResourceString(_recSelectRegionText), string.Empty));
+                cmbCompanyName.Items.Insert(0, new ListItem(GetResourceString(_recSelectCompanyText), string.Empty));
             }
         }
         private void SaveBranch()

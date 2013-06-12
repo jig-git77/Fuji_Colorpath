@@ -227,7 +227,22 @@
                         </div>
                         <asp:Localize Text="Application Configuration" runat="server" ID="locApplicationConfiguration"></asp:Localize>
                     </asp:LinkButton>                
-                </div>                 
+                </div>     
+                 <div id="div1" runat ="server" align="center" valign="bottom" style="float:left;">
+                    <img alt="" src="Images/admin-icon-divider.png" />
+                </div> 
+                 <div id="divMetricTargetPreset" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                    <asp:LinkButton ID="lnkbtnMetricTargetPreset" runat="server" 
+                         ToolTip="Metric Target Preset" 
+                         PostBackUrl="~/MetricTargetPresetManagement.aspx" 
+                         onclick="lnkbtnMetricTargetPreset_Click">
+                        <div>
+                            <asp:Image ID="Image7" runat="server" AlternateText="Metric Target Preset" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Metric Target Preset" />
+                        </div>
+                        <asp:Localize Text="Metric Target Preset" runat="server" ID="Localize1"></asp:Localize>
+                    </asp:LinkButton>                
+                </div>               
+                
                 </td>
                 </tr>            
         </table>

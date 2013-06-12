@@ -92,5 +92,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("DownloadSoftwares.aspx");
         }
+        protected void lnkbtnMetricTargetPreset_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
+        }
     }
 }

@@ -540,7 +540,6 @@
   <data name="Error_InsertProfilerOptionPreset" xml:space="preserve">
     <value>Error occured while inserting device family Profiler Option Presets.Please contact your administrator.</value>
   </data>
-
   <data name="Error_GetChartData_G7_GrayF" xml:space="preserve">
     <value>Error occured while displaying G7 Gray ΔCh chart. Please contact your administrator.</value>
   </data>
@@ -559,7 +558,6 @@
   <data name="Error_GetChartData_G7_GrayLSummary" xml:space="preserve">
     <value>Error occured while displaying G7 Gray ΔL Summary. Please contact your administrator.</value>
   </data>
-
   <data name="Error_GetChartData_InkPaper_EPrimaryPatches" xml:space="preserve">
     <value>Error occured while displaying Ink Paper ΔE Primary Patches chart. Please contact your administrator.</value>
   </data>
@@ -575,5 +573,22 @@
   <data name="Error_GetChartData_LABChart" xml:space="preserve">
     <value>Error occured while displaying Gamut LAB charts. Please contact your administrator.</value>
   </data>
-  
+  <data name="Duplicate_InsertMetricTargetPreset" xml:space="preserve">
+    <value>MetricTargetPreset already exists with same name.</value>
+  </data>
+  <data name="Duplicate_UpdateMetricTargetPreset" xml:space="preserve">
+    <value>MetricTargetPreset already exists with same name.</value>
+  </data>
+  <data name="Error_DeleteMetricTargetPreset" xml:space="preserve">
+    <value>Error occured while deleting MetricTargetPreset. Please contact your administrator.</value>
+  </data>
+  <data name="Error_InsertMetricTargetPreset" xml:space="preserve">
+    <value>Error occured while inserting MetricTargetPreset. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateMetricTargetPreset" xml:space="preserve">
+    <value>Error occured while updating MetricTargetPreset. Please contact your administrator.</value>
+  </data>
+  <data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected metric target preset?</value>
+  </data>
 </root>

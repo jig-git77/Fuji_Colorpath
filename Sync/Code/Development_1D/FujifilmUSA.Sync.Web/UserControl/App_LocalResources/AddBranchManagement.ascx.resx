@@ -156,4 +156,7 @@
   <data name="selectRegionText" xml:space="preserve">
     <value>-- Select Region --</value>
   </data>
+  <data name="selectCompanyText" xml:space="preserve">
+    <value>-- Select Company --</value>
+  </data>
 </root>
