@@ -92,7 +92,7 @@
     &nbsp;</div>
 <div class="admin_middle">
     <div class="head">
-        <h1><asp:Localize runat="server" ID="locMetricTargetPresetMgmt" Text="MetricTargetPreset Management" 
+        <h1><asp:Localize runat="server" ID="locMetricTargetPresetMgmt" Text="Metric Target Preset Management" 
                 meta:resourcekey="locMetricTargetPresetMgmtResource1"></asp:Localize></h1>
         <asp:LinkButton ID="likAdd" runat="server" class="button" 
             OnClick="likAdd_Click" meta:resourcekey="likAddResource1">
@@ -100,7 +100,7 @@
                 <asp:Image ID="imgAdd" runat="server" 
             ImageUrl="../Images/new_project_icon.png" meta:resourcekey="imgAddResource1" />
                 
-<asp:Localize runat="server" Text="Add MetricTargetPreset" ID="locAddMetricTargetPreset" 
+<asp:Localize runat="server" Text="Add Metric Target Preset" ID="locAddMetricTargetPreset" 
             meta:resourcekey="locAddMetricTargetPresetResource1"></asp:Localize>
 </span>
         </asp:LinkButton>
@@ -121,7 +121,7 @@
                     <GroupingSettings CaseSensitive="False" />
                     <HeaderStyle Font-Bold="True" />
                     <PagerStyle Position="Top" AlwaysVisible="True" Font-Size="Small" />
-                    <MasterTableView DataKeyNames="MetricTargetPresetID,CompanyID,MetricTargetPresetName,IsUsed">
+                    <MasterTableView DataKeyNames="MetricTargetPresetID,Company.CompanyID,MetricTargetPresetName,IsUsed">
                         <CommandItemSettings ExportToPdfText="Export to PDF" />
                         <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column" 
                             Visible="True">

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="addMetricTargetPresetText" xml:space="preserve">
+    <value>Add Metric Target Preset</value>
+  </data>
+  <data name="editMetricTargetPresetText" xml:space="preserve">
+    <value>Edit Metric Target Preset</value>
+  </data>
+  <data name="lblHeaderResource1.Text" xml:space="preserve">
+    <value>Add Metric Target Preset</value>
+  </data>
   <data name="selectCompanyText" xml:space="preserve">
     <value>-- Select Company --</value>
   </data>

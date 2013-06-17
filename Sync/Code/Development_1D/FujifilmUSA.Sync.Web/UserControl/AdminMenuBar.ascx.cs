@@ -100,6 +100,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("ApplicationConfiguration.aspx");
         }
+
+        protected void lbtnMetricTargetPreset_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
+        }
+        
         #endregion
+               
     }
 }

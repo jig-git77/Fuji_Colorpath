@@ -18,8 +18,8 @@
                     <center>
                         <fieldset style="width: 60%;">
                             <legend>
-                                <asp:Label ID="lblHeader" runat="server" Text="Add Metric Target Preset" 
-                                    meta:resourcekey="lblHeaderResource1"></asp:Label>
+                                <asp:Label ID="lblHeader" runat="server" Text="Add Metric Target Preset"  meta:resourcekey="lblHeaderResource1">
+                                  </asp:Label>
                             </legend>
                             <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                                 Visible="False" />
