@@ -9,6 +9,9 @@ using FujifilmUSA.Sync.Common;
 using FujifilmUSA.Sync.Business.ProfilerService;
 using FujifilmUSA.Sync.Business.CPSyncService;
 using FujifilmUSA.Sync.Business.Messages;
+using System.Xml.Linq;
+using FujifilmUSA.Sync.Business.CustomExceptions;
+
 namespace FujifilmUSA.Sync.Business.Implementation
 {
     public class OptimizeRunBusinessImpl : IOptimizeRunBusiness
@@ -477,13 +480,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     int n = 101;
 
+                    List<Entity.CPSync1D.OptimizeRunCurve> OptimizeRunCurveList = new List<Entity.CPSync1D.OptimizeRunCurve>();                 
+
                     for (int i = 0; i < n; i++)
                     {
-                        CreateOptimizeRunCurve(optimizeRunId, i, Convert.ToDecimal(syncClientResponse.Cyan[i]),
-                            Convert.ToDecimal(syncClientResponse.Magenta[i]),
-                            Convert.ToDecimal(syncClientResponse.Yellow[i]),
-                            Convert.ToDecimal(syncClientResponse.Key[i]));
+                        Entity.CPSync1D.OptimizeRunCurve OptimizeRunCurveItem = new Entity.CPSync1D.OptimizeRunCurve();
+                        OptimizeRunCurveItem.OptimizeRunID = optimizeRunId;
+                        OptimizeRunCurveItem.ReferenceNo = Convert.ToInt16(i);
+                        OptimizeRunCurveItem.CMYK_C = Convert.ToDecimal(syncClientResponse.Cyan[i]);
+                        OptimizeRunCurveItem.CMYK_M = Convert.ToDecimal(syncClientResponse.Magenta[i]);
+                        OptimizeRunCurveItem.CMYK_Y = Convert.ToDecimal(syncClientResponse.Yellow[i]);
+                        OptimizeRunCurveItem.CMYK_K = Convert.ToDecimal(syncClientResponse.Key[i]);
+                        OptimizeRunCurveList.Add(OptimizeRunCurveItem);
                     }
+
+                    CreateOptimizeRunCurve(optimizeRunId, OptimizeRunCurveList);                    
+               
                     DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
                                                                             new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
                 },
@@ -533,14 +545,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                     int n = 101;
 
+                    List<Entity.CPSync1D.OptimizeRunCurve> OptimizeRunCurveList = new List<Entity.CPSync1D.OptimizeRunCurve>();
+
                     for (int i = 0; i < n; i++)
                     {
-                        CreateOptimizeRunCurve(optimizeRunId, i, Convert.ToDecimal(syncClientResponse.Cyan[i]),
-                            Convert.ToDecimal(syncClientResponse.Magenta[i]),
-                            Convert.ToDecimal(syncClientResponse.Yellow[i]),
-                            Convert.ToDecimal(syncClientResponse.Key[i]));
+                        Entity.CPSync1D.OptimizeRunCurve OptimizeRunCurveItem = new Entity.CPSync1D.OptimizeRunCurve();
+                        OptimizeRunCurveItem.OptimizeRunID = optimizeRunId;
+                        OptimizeRunCurveItem.ReferenceNo = Convert.ToInt16(i);
+                        OptimizeRunCurveItem.CMYK_C = Convert.ToDecimal(syncClientResponse.Cyan[i]);
+                        OptimizeRunCurveItem.CMYK_M = Convert.ToDecimal(syncClientResponse.Magenta[i]);
+                        OptimizeRunCurveItem.CMYK_Y = Convert.ToDecimal(syncClientResponse.Yellow[i]);
+                        OptimizeRunCurveItem.CMYK_K = Convert.ToDecimal(syncClientResponse.Key[i]);
+                        OptimizeRunCurveList.Add(OptimizeRunCurveItem);
                     }
 
+                    CreateOptimizeRunCurve(optimizeRunId, OptimizeRunCurveList);
+                    
                     DataAccessFactory.Instance.ExecuteProcedure("CPSync.UpdateOptimizeDlp",
                                                                             new object[] { optimizeRunId, syncClientResponse.ICCProfile, status, endDateTime });
 
@@ -548,22 +568,30 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateISOAlignmentCurve"));
         }
 
-        public void CreateOptimizeRunCurve(int optimizeRunId, int referenceNo, decimal c, decimal m, decimal y, decimal k)
+        public void CreateOptimizeRunCurve(int optimizeRunId, List<Entity.CPSync1D.OptimizeRunCurve> OptimizeRunCurveList)
         {
+            var OptimizeRunCurveData = new XElement("OptimizeRunCurveData",
+                                                       OptimizeRunCurveList.
+                                                           Select(x =>
+                                                                  new XElement("OptimizeRunCurve",
+                                                                               new XAttribute("OptimizeRunID", x.OptimizeRunID),
+                                                                               new XAttribute("ReferenceNo", x.ReferenceNo),
+                                                                               new XAttribute("CMYK_C", x.CMYK_C),
+                                                                               new XAttribute("CMYK_M", x.CMYK_M),
+                                                                               new XAttribute("CMYK_Y", x.CMYK_Y),
+                                                                               new XAttribute("CMYK_K", x.CMYK_K)
+                                                                      )).ToList());
+
             DataAccessFactory.
                             Instance.
                             ExecuteProcedure(
                                 "[CPSync].[CreateOptimizeRunCurve]",
                                 new object[]
                                     {
-                                        optimizeRunId,
-                                        referenceNo,
-                                        c,
-                                        m,
-                                        y,
-                                        k
+                                       optimizeRunId,
+                                       OptimizeRunCurveData.ToString()
                                     });
-        }
+        }      
 
         public CurveDataResponse GetCurveData(int optimizeRunId, short curveTypeId)
         {

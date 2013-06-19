@@ -616,24 +616,6 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::Telerik.Web.UI.RadGrid RG_ΔChSummary;
         
         /// <summary>
-        /// Chart_BlackL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_BlackL;
-        
-        /// <summary>
-        /// RG_ΔLBlackSummary control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid RG_ΔLBlackSummary;
-        
-        /// <summary>
         /// Chart_GrayL control.
         /// </summary>
         /// <remarks>
@@ -650,6 +632,24 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid RG_ΔLGraySummary;
+        
+        /// <summary>
+        /// Chart_BlackL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart_BlackL;
+        
+        /// <summary>
+        /// RG_ΔLBlackSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadGrid RG_ΔLBlackSummary;
         
         /// <summary>
         /// UpdatePanel4 control.
