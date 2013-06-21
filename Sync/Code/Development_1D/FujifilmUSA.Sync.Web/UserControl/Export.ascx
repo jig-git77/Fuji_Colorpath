@@ -221,7 +221,8 @@
                                                                 <asp:ListItem Text="Nexus" Value="45"></asp:ListItem>                                                                
                                                                 <asp:ListItem Text="Caldera" Value="55"></asp:ListItem>
                                                                 <asp:ListItem Text="ColorGate-TVI" Value="100"></asp:ListItem>
-                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>                                                              
+                                                                <asp:ListItem Text="ColorGate-CGCX" Value="101"></asp:ListItem>   
+                                                                <asp:ListItem Text="Onyx G7 Import" Value="102"></asp:ListItem>                                                           
                                                             </asp:DropDownList>
                                                             &nbsp;&nbsp;
                                                             <asp:CheckBox ID="Chk_C" runat="server" Text="Cyan" Checked="true" AutoPostBack="True"

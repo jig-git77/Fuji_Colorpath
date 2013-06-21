@@ -140,6 +140,9 @@
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
+                                </asp:Series> 
+                                <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
+                                                           IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
                                 </asp:Series>    
                             </Series>
                             <ChartAreas>
@@ -195,7 +198,7 @@
                                     BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                     <Position Height="99" Width="94" X="0" Y="2" />
                                     <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                        Minimum="0" Maximum="10">
+                                        Minimum="0" Maximum="6">
                                         <MajorGrid LineColor="Gray"></MajorGrid>
                                         <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                     </AxisY>
@@ -242,7 +245,7 @@
                                     BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                     <Position Height="99" Width="94" X="0" Y="2" />
                                     <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                        Minimum="0" Maximum="10">
+                                        Minimum="0" Maximum="6">
                                         <MajorGrid LineColor="Gray"></MajorGrid>
                                         <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                     </AxisY>
@@ -289,7 +292,7 @@
                                     BackColor="Gray" BackGradientStyle="TopBottom" BorderDashStyle="Solid" ShadowOffset="1">
                                     <Position Height="99" Width="94" X="0" Y="2" />
                                     <AxisY IsLabelAutoFit="False" Title="" TitleFont="Verdana, 8pt, style=Bold" Interval="2"
-                                        Minimum="0" Maximum="10">
+                                        Minimum="0" Maximum="6">
                                         <MajorGrid LineColor="Gray"></MajorGrid>
                                         <LabelStyle Angle="0" Font="Verdana, 6pt" />
                                     </AxisY>

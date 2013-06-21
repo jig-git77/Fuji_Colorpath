@@ -142,6 +142,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 _CurveTypeID = 5;
             }
+            if (_CurveTypeID == 102) //---Set same value for "Onyx G7 Import" like "Nexus" for export curve data
+            {
+                _CurveTypeID = 45;
+            }
             this.CurveTypeId = _CurveTypeID;
             _presenterExport.GetCurveData();
             if (!IsErrorOccured)
@@ -590,6 +594,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                         Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.cgcx", SessionManager.Instance.CurrentUser.UserId + "_CurveDelta.cgcx");
 
+                        #endregion
+                    }
+                    else if (DdlCurveType.SelectedValue == "102")  // for Onyx G7 Import
+                    {
+                        #region Create file and download txt file for weighted highlight shadow and then 5% increment
+                        System.IO.StreamWriter sw;
+                        sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/") + SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.txt");
+                        sw.WriteLine("\"Fujifilm Colorpath Sync 1D\"");
+                        sw.WriteLine("BEGIN_DATA_FORMAT");
+                        sw.WriteLine("SampleID\tSampleName\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K");
+                        sw.WriteLine("END_DATA_FORMAT");
+                        sw.WriteLine("NUMBER_OF_SETS\t" + DT_CPSyncPressRunCurve.Count.ToString());
+                        sw.WriteLine("BEGIN_DATA");
+                        for (int i = 0; i < DT_CPSyncPressRunCurve.Count; i++)
+                        {
+                            sw.WriteLine("A" + i.ToString() + "\t\"" + DT_CPSyncPressRunCurve[i].ReferenceNo.ToString() + ".00" + "\"\t" + DT_CPSyncPressRunCurve[i].CMYK_C.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_M.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_Y.ToString() + "\t" + DT_CPSyncPressRunCurve[i].CMYK_K.ToString());
+                        }
+                        sw.WriteLine("END_DATA");
+                        sw.Close();
+                        
+                        Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/CurvesFile/"), SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.txt", SessionManager.Instance.CurrentUser.UserId + "_CurvesFile.txt");
                         #endregion
                     }
                 }

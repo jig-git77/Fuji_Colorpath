@@ -476,6 +476,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartResultSummary_DeltaEValue.Visible = true;
                 ChartResultSummary_DeltaEValue.Series[0].Points.Clear();
                 ChartResultSummary_DeltaEValue.Series[1].Points.Clear();
+                ChartResultSummary_DeltaEValue.Series[2].Points.Clear();
 
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value === //
@@ -490,7 +491,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries1.XValueType = ChartValueType.Int32;
                 objSeries1.YValueType = ChartValueType.String;           
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-              
+
+                // === Series2 to display red marker on Thresold value === //
+                Series objSeries2 = (Series)ChartResultSummary_DeltaEValue.Series[2];
+                objSeries2.XValueType = ChartValueType.Int32;
+                objSeries2.YValueType = ChartValueType.String;
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -526,11 +532,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         DtELimit = levels.Max() + 2;
                         DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, DT.Rows[i], i, DtELimit);
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, DT.Rows[i], i, DtELimit);
                     }
                     else
                     {
-                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, null, i, DtELimit);
+                        BindDeltaEValueACTTHValue(objSeries0, objSeries1, objSeries2, null, i, DtELimit);
                     }
                 }
 
@@ -543,17 +549,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             
         }
 
-        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, DataRow DR, int Index, decimal DtELimit)
+        private void BindDeltaEValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, DataRow DR, int Index, decimal DtELimit)
         {
             
                 string strHTMLColor = "";
-                Double Y1, Y2;
-                Y1 = Y2 = 0;
+                Double Y1, Y2, Y3;
+                Y1 = Y2 = Y3 = 0;
 
                 if (DR != null)
                 {
                     Y1 = (Convert.ToString(DtELimit) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DtELimit)));
                     Y2 = (Convert.ToString(DR["ΔE"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔE"].ToString())));
+                    Y3 = (Convert.ToString(DR["ΔELimit"]) == "" ? 0 : Utilities.DecimalRound(Convert.ToDouble(DR["ΔELimit"].ToString())));
                     strHTMLColor = Convert.ToString(DR["HTMLColor"].ToString());
                 }
 
@@ -561,12 +568,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (Y2 == 0)
                     Y1 = Y2;
 
-
                 Series SeriesActual = objSeries1;
                 objSeries0.Points.AddXY((Double)0, Y1);
                 objSeries0.Points[Index]["PointWidth"] = "0.8";
                 objSeries1.Points.AddXY((Double)0, Y2);
                 objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
+
+                if (IsSync1DType || IsVerification) //-----For Sync1D projects or validation projects
+                {
+                    objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+                }
 
                 SeriesActual.Points[Index].Color = System.Drawing.ColorTranslator.FromHtml(strHTMLColor);
                 SeriesActual.Points[Index]["PointWidth"] = "0.8";

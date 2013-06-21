@@ -597,7 +597,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             Series SeriesActual = objSeries1;
             objSeries1.Points.AddXY((Double)0, Y2);
 
-            // objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
+            {
+                objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+            }
 
             #region Add Tooltip HTML
             StringBuilder toolTip = new StringBuilder();
@@ -616,6 +619,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             toolTip.Append("</td></tr>");
             toolTip.Append("<tr><td>" + GetResourceString(_recDeltaE) + "</td><td>"); //ΔE Value
             toolTip.Append(DR[Index].ΔE.ToString());
+
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
+            {
+                toolTip.Append(" (Thr." + DR[Index].ΔELimit.ToString() + ")");
+            }
             toolTip.Append("</td></tr>");
             toolTip.Append("</table></td></tr>");
             toolTip.Append("</table>");
