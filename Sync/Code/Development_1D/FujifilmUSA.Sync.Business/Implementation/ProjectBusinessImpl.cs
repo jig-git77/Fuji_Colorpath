@@ -186,9 +186,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         if (project.LicenseType == ELicenseType.Sync1D)
                         {
                             //----Select ProjectTargetLAB-----------//
-                            if (dsProject.Tables[7].Rows.Count > 0)
+                            if (dsProject.Tables[5].Rows.Count > 0)
                             {
-                                project.ProjectTargetLAB = dsProject.Tables[7].AsEnumerable().
+                                project.ProjectTargetLAB = dsProject.Tables[5].AsEnumerable().
                                     Select(x => new Entity.CPSync1D.ProjectTargetLAB()
                                     {                                      
                                         PatchType = new PatchType()
@@ -202,9 +202,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     }).ToList();
                             }
                             //----Select ProjectTargetTVI-----------//
-                            if (dsProject.Tables[8].Rows.Count > 0)
+                            if (dsProject.Tables[6].Rows.Count > 0)
                             {
-                                project.PrintStandardTVI = dsProject.Tables[8].AsEnumerable().
+                                project.PrintStandardTVI = dsProject.Tables[6].AsEnumerable().
                                     Select(x => new Entity.CPSync1D.PrintStandardTVI()
                                     {
                                         PatchType = new PatchType()
