@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class COProjectMaxLimit : System.Web.UI.Page
+    public partial class COProjectMaxLimit : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

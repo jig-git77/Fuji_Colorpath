@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class COAnalyze : System.Web.UI.Page
+    public partial class COAnalyze : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

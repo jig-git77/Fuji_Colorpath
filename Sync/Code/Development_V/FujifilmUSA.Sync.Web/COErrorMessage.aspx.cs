@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace FujifilmUSA.Sync.Web
 {
-    public partial class COErrorMessage : System.Web.UI.Page
+    public partial class COErrorMessage : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
