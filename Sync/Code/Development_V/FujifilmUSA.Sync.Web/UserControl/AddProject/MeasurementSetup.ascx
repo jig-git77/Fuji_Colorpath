@@ -14,7 +14,7 @@
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/new_project_icon.png" 
         meta:resourcekey="Image1Resource1" />
             
-<asp:Localize runat="server" Text="Validation Setup" ID="locValidationSetup"></asp:Localize>
+<asp:Localize runat="server" Text="Validation Setup" ID="locValidationSetup" meta:resourcekey="locValidationSetupResource1"></asp:Localize>
 </span></asp:LinkButton>
     <asp:LinkButton ID="lbtnMeasure" runat="server" CssClass="button" 
         OnClick="lbtnMeasure_Click">
@@ -111,7 +111,7 @@
                                     </tr>
                                     <tr id="trUVSettings" runat="server">
                                         <td runat="server">
-                                            <span><asp:Localize runat="server" Text="UV Settings:" ID="locUVSettings"></asp:Localize></span>
+                                            <span><asp:Localize runat="server" Text="UV Settings:" ID="locUVSettings" meta:resourcekey="locUVSettingsResource1"></asp:Localize></span>
                                         </td>
                                         <td runat="server">
                                             <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" CssClass="select">

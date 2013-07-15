@@ -11,6 +11,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class MeasurementSetup : BaseControl, IViewMeasurementSetting
     {
+
+        #region Private Variables - Globalization
+        private const string _recrfvcMeasurementDeviceContainer = "rfvcMeasurementDeviceContainer";
+        private const string _recrfvcAlignmentChartContainer = "rfvcAlignmentChartContainer";
+        private const string _recrfvcOptimizationChartContainer = "rfvcOptimizationChartContainer";
+        #endregion
+
         #region "Declaration"
         public bool IsXmfNewProject
         {
@@ -95,6 +102,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ViewState[vsIsPostBack] = true;
                 LoadProjectInfoFromSession();
             }
+
+            //Set localized text
+            rfvcMeasurementDeviceContainer.ValidationMsg = GetResourceString(_recrfvcMeasurementDeviceContainer);
+            rfvcAlignmentChartContainer.ValidationMsg = GetResourceString(_recrfvcAlignmentChartContainer);
+            rfvcOptimizationChartContainer.ValidationMsg = GetResourceString(_recrfvcOptimizationChartContainer);
         }
         #endregion
 

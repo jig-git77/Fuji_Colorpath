@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccessDenied.aspx" />
     <Content Include="ActivityValidationRules.aspx" />
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
@@ -256,6 +257,7 @@
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_G7_Vali.htm" />
     <Content Include="Templates\style.css" />
+    <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
@@ -512,6 +514,13 @@
     <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.designer.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ActivityValidationRules.aspx.cs">
       <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -864,6 +873,13 @@
     </Compile>
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AccessDenied.ascx.cs">
+      <DependentUpon>AccessDenied.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AccessDenied.ascx.designer.cs">
+      <DependentUpon>AccessDenied.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
@@ -1597,13 +1613,17 @@
     <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.de.resx" />
@@ -1615,7 +1635,9 @@
     <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.resx" />
@@ -1631,7 +1653,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.resx">
@@ -1640,7 +1664,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.resx">
@@ -1660,14 +1686,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Footer.ascx.resx" />
@@ -1769,7 +1799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Permission.ascx.resx" />
@@ -1987,18 +2019,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\PopupClosePrintCondition.aspx.resx">
@@ -2132,7 +2170,9 @@
     <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.de.resx">
@@ -2149,7 +2189,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -2157,6 +2199,76 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\CertifiedLabel.label" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.ja.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -2176,7 +2288,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

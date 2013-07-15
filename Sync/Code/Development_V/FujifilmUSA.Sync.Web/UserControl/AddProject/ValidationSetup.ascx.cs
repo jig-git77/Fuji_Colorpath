@@ -18,6 +18,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
         }
 
+        #region Private Variables - Globalization
+        private const string _recnoValidationLicense = "noValidationLicense";
+        private const string _recselectText = "selectText";
+        private const string _recrfvcMeasurementDeviceContainer = "rfvcMeasurementDeviceContainer";
+        private const string _recrfvcValidationChartContainer = "rfvcValidationChartContainer";
+        private const string _recvccmbMetricTargetPreset = "vccmbMetricTargetPreset";        
+        #endregion
+
         #region Declaration
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
@@ -59,7 +67,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     rbtnEnableValidation.Enabled = false;
                     panelValidationChart.Enabled = false;
                     panel_Metrictarget.Enabled = false;
-                    lbl_Valimsg.Text = "You are not currently licensed for Validation";
+                    lbl_Valimsg.Text = GetResourceString(_recnoValidationLicense) ;//"You are not currently licensed for Validation"
                 }
 
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)   //-----------If we are in Validation mode, we can't disable validation-----------//
@@ -67,6 +75,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     rbtnEnableValidation.Items[1].Enabled = false;
                 }
             }
+            
+            //Set localized text
+            rfvcMeasurementDeviceContainer.ValidationMsg = GetResourceString(_recrfvcMeasurementDeviceContainer);
+            rfvcValidationChartContainer.ValidationMsg = GetResourceString(_recrfvcValidationChartContainer);
+            vccmbMetricTargetPreset.ValidationMsg = GetResourceString(_recvccmbMetricTargetPreset);
         }
         #endregion
 
@@ -181,7 +194,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbValidationChart.DataTextField = "ChartName";
                 cmbValidationChart.DataSource = ReferenceChartType;
                 cmbValidationChart.DataBind();
-                cmbValidationChart.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbValidationChart.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
             }
         }
 
@@ -194,7 +207,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMetricTargetPreset.DataTextField = "MetricTargetPresetName";
                 cmbMetricTargetPreset.DataSource = MetricTargetPreset;
                 cmbMetricTargetPreset.DataBind();
-                cmbMetricTargetPreset.Items.Insert(0, new ListItem("-- Select --", "0"));
+                cmbMetricTargetPreset.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
             }
         }
 

@@ -7,6 +7,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectDescription : BaseControl
     {
+
+        #region Private Variables - Globalization
+        private const string _recrfvcLicenseType = "rfvcLicenseType";
+        private const string _recrfvcMediaContainer = "rfvcMediaContainer";
+        private const string _recrfvColorantContainer = "rfvColorantContainer";
+        private const string _recrfvRipSettingsContainer = "rfvRipSettingsContainer";
+        private const string _recoperationSelectText = "operationSelectText";
+        #endregion
+
         public ProjectDescription()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
@@ -27,6 +36,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtColorant.Enabled = false;
                 txtRipSetting.Enabled = false;
             }
+
+            //Set localized text
+            rfvRipSettingsContainer.ValidationMsg = GetResourceString(_recrfvRipSettingsContainer);
+            rfvColorantContainer.ValidationMsg = GetResourceString(_recrfvColorantContainer);
+            rfvcMediaContainer.ValidationMsg = GetResourceString(_recrfvcMediaContainer);
+            rfvcLicenseType.ValidationMsg = GetResourceString(_recrfvcLicenseType);
         }
         #endregion
 
@@ -45,7 +60,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ddlLicenseType.Items.Add(new System.Web.UI.WebControls.ListItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = Convert.ToString((int)item.Key) });
                 }
 
-                ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = "-- Please select operation --", Value = "-1" });
+                ddlLicenseType.Items.Insert(0, new System.Web.UI.WebControls.ListItem() { Text = GetResourceString(_recoperationSelectText), Value = "-1" });
                 ddlLicenseType.SelectedIndex = 0;
             }
 

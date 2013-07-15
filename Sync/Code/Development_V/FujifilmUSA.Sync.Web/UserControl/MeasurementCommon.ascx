@@ -96,7 +96,7 @@
                         <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1"></asp:TextBox>        
                     </td>                    
                     <td rowspan="2" ID="tdNotesCaption" runat="server" visible="false" align="right">
-                        <asp:Label ID="lblNotes" runat="server" Text="Notes"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;
                     </td>
                     <td rowspan="2" ID="tdNotes" runat="server" visible="false">
                         <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
@@ -104,7 +104,7 @@
                 </tr>
                 <tr ID="trCustomer" runat="server" visible="false">
                     <td align="right">            
-                        <asp:Label ID="lblCustomer" runat="server" Text="Customer"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblCustomer" runat="server" Text="Customer" meta:resourcekey="lblCustomerResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
                         <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
@@ -112,13 +112,13 @@
                 </tr>
                 <tr id="trValidationDetails" runat="server" visible="false">
                     <td align="right">
-                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"  meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
                     </td>
                     <td style="height: 27px;">
                         <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
                     </td>
                     <td align="right">
-                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"  meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
                         <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
@@ -166,7 +166,7 @@
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
               <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
-                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />             
+                <input type="button" id="btnImportMeasurements"  value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript:return ShowImportWindow();" />             
             </div>
         </div>
         <div class="color_pallate_middle">

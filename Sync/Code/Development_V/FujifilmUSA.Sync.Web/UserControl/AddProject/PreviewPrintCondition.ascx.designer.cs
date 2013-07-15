@@ -346,6 +346,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblVali_MeaDevice;
         
         /// <summary>
+        /// locValidationMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locValidationMetric;
+        
+        /// <summary>
         /// lblVali_Metric control.
         /// </summary>
         /// <remarks>

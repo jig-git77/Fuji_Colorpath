@@ -58,7 +58,7 @@ textarea {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span><asp:Localize runat="server" ID="locOperationType" Text="Operation:"></asp:Localize><span style="color: Red;">*</span></span>
+                                        <span><asp:Localize runat="server" ID="locOperationType" Text="Operation:" meta:resourcekey="locOperationTypeResource1"></asp:Localize><span style="color: Red;">*</span></span>
                                     </td>
                                     <td>
                                         <div style="float: left;">

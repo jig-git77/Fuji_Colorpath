@@ -144,6 +144,9 @@
   <data name="locNotesResource1.Text" xml:space="preserve">
     <value>Notes:</value>
   </data>
+  <data name="locOperationTypeResource1.Text" xml:space="preserve">
+    <value>Operation:</value>
+  </data>
   <data name="locPressResource1.Text" xml:space="preserve">
     <value>Press:</value>
   </data>
@@ -156,11 +159,23 @@
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Technician Name:</value>
   </data>
+  <data name="operationSelectText" xml:space="preserve">
+    <value>-- Please select operation --</value>
+  </data>
   <data name="panelAddProjectDescriptionResource1.GroupingText" xml:space="preserve">
     <value />
   </data>
   <data name="panelAddProjectDescriptionResource1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="rfvcLicenseType" xml:space="preserve">
+    <value>Please select operation.</value>
+  </data>
+  <data name="rfvcMediaContainer" xml:space="preserve">
+    <value>Please provide media name.</value>
+  </data>
+  <data name="rfvColorantContainer" xml:space="preserve">
+    <value>Please provide colorant name.</value>
   </data>
   <data name="rfvColorantResource1.ErrorMessage" xml:space="preserve">
     <value />
@@ -188,6 +203,9 @@
   </data>
   <data name="rfvRipSettingResource1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="rfvRipSettingsContainer" xml:space="preserve">
+    <value>Please provide rip settings.</value>
   </data>
   <data name="txtColorantResource1.Text" xml:space="preserve">
     <value />

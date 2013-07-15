@@ -135,25 +135,25 @@
                     </asp:LinkButton>
                     <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false" OnClick="lbtnSubmit_Click">
                         <span>
-                            <asp:Localize runat="server" Text="Submit" ID="locSubmit"></asp:Localize>
+                            <asp:Localize runat="server" Text="Submit" ID="locSubmit" meta:resourcekey="locSubmitResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
                     &nbsp;
                     <asp:LinkButton ID="lbtnMeasurement" runat="server" CssClass="buttonLeft" OnClick="lbtnMeasurement_Click">
                         <span>
-                            <asp:Localize runat="server" Text="Measurement" ID="locMeasurement"></asp:Localize>
+                            <asp:Localize runat="server" Text="Measurement" ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
                     <asp:LinkButton ID="lbtnMeasurementVerification" runat="server" CssClass="button"
                         OnClick="lbtnMeasurementVerification_Click">
                         <span>
                             <asp:Image ID="imgAnalyze" runat="server" ImageUrl="../Images/analyze.png" />
-                            <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification"></asp:Localize>
+                            <asp:Localize runat="server" Text="Measure" ID="locMeasurementVerification" meta:resourcekey="locMeasurementVerificationResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
                     <asp:LinkButton ID="lbtnOptimize" CssClass="buttonNormal" runat="server" Visible="false">
                         <span>
-                            <asp:Localize runat="server" Text="Optimize" ID="locOptimize"></asp:Localize>
+                            <asp:Localize runat="server" Text="Optimize" ID="locOptimize" meta:resourcekey="locOptimizeResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>                    
                 </div>
@@ -185,16 +185,27 @@
                                     <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server" ></asp:Label>
                                 </div>
                                 <div id="Div_Validation_Header" runat="server" visible="false">                                   
-                                     Record(s)&nbsp;<asp:Literal ID="LTRL_StartRecord" runat="server">0</asp:Literal>&nbsp;to&nbsp;<asp:Literal ID="LTRL_EndRecord" runat="server">0</asp:Literal>&nbsp;of&nbsp;<asp:Literal ID="LTRL_TotalRec" runat="server">0</asp:Literal>&nbsp;|&nbsp;<asp:ImageButton ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton 
-                                    ID="IBTN_PreviousPage" runat="server" 
-                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click" 
-                                    style="height: 13px" />&nbsp;<asp:ImageButton ID="IBTN_NextPage" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" OnClick="IBTN_NextPage_Click" />&nbsp;<asp:ImageButton ID="IBTN_LastPage" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif" OnClick="IBTN_LastPage_Click" />&nbsp;|&nbsp;Records&nbsp;<asp:DropDownList ID="DDL_PageSize" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_PageSize_SelectedIndexChanged">
+                                    <asp:HiddenField ID="hdnTotalRecord" runat="server" Value="0" />
+                                     <asp:Literal ID="ltrlRecordsSummary" runat="server" 
+                                        Text="Record(s) {start} to {end} of {total}"                                         ></asp:Literal>&nbsp;|&nbsp;<asp:ImageButton 
+                                        ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" 
+                                        OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton 
+                                        ID="IBTN_PreviousPage" runat="server" 
+                                        ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click" 
+                                        style="height: 13px" />&nbsp;<asp:ImageButton 
+                                        ID="IBTN_NextPage" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" 
+                                        OnClick="IBTN_NextPage_Click" />&nbsp;<asp:ImageButton 
+                                        ID="IBTN_LastPage" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif" 
+                                        OnClick="IBTN_LastPage_Click" />&nbsp;|&nbsp;<asp:Localize 
+                                        runat="server" ID="locRecords" Text="Records" 
+                                        meta:resourcekey="locRecordsResource1"></asp:Localize>&nbsp;<asp:DropDownList ID="DDL_PageSize" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_PageSize_SelectedIndexChanged">
                                         <asp:ListItem Value="5" Selected="True">5</asp:ListItem>
                                         <asp:ListItem Value="10">10</asp:ListItem>
                                         <asp:ListItem Value="25">25</asp:ListItem>
                                         <asp:ListItem Value="50">50</asp:ListItem>
                                         <asp:ListItem Value="100">100</asp:ListItem>                                       
-                                    </asp:DropDownList>&nbsp;|&nbsp;Go to page&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" Width="45px" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
+                                    </asp:DropDownList>&nbsp;|&nbsp;<asp:Localize Text="Go to page" runat="server" ID="locGoToPage" 
+                                        meta:resourcekey="locGoToPageResource1"></asp:Localize>&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" Width="45px" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
                                 </div>
                             </div>
                             <div class="section_middle">
@@ -319,8 +330,14 @@
                         meta:resourcekey="locReportResource1"></asp:Localize></a></span></li>  
             </ul>
             <div style="float: right; padding-right: 3px; height: 26px; padding-top: 2px;">
-                <asp:ImageButton ID="ibtnPrintPreview" runat="server" ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label" OnClientClick="ShowLabelPrintPreview(); return false;"  />
-                <asp:ImageButton ID="ibtnPrintLabel" runat="server" ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label" OnClientClick="PrintLabel(false); return false;"  />
+                <asp:ImageButton ID="ibtnPrintPreview" runat="server" 
+                    ImageUrl="../Images/DymoPrintPreviewIcon.png" ToolTip="Preview label" 
+                    OnClientClick="ShowLabelPrintPreview(); return false;" 
+                    meta:resourcekey="ibtnPrintPreviewResource1"  />
+                <asp:ImageButton ID="ibtnPrintLabel" runat="server" 
+                    ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label" 
+                    OnClientClick="PrintLabel(false); return false;" 
+                    meta:resourcekey="ibtnPrintLabelResource1"  />
             </div>                
             <div class="clear"></div>
         </section>
@@ -350,65 +367,98 @@
                                             </EmptyDataTemplate>
                                             <ItemTemplate>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px; width:200px;">Measurement Name: </td>                                               
+                                                    <td style="font-size:13px; width:200px;"><asp:Localize ID="locMeasurementName" runat="server" meta:resourcekey="locMeasurementNameResource1" Text="Measurement Name:"></asp:Localize> </td>                                               
                                                     <td>
-                                                        <asp:Label ID="lblMeasurementName" runat="server" Text='<%#Eval("MeasurementName") %>'></asp:Label>
+                                                        <asp:Label ID="lblMeasurementName" runat="server" 
+                                                            Text='<%# Eval("MeasurementName") %>' 
+                                                            ></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">Upload Date: </td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Upload Date:" ID="locUploadDate" runat="server" meta:resourcekey="locUploadDateResource1"></asp:Localize> </td>                                  
                                                     <td>
-                                                        <asp:Label ID="lblMeasurementDate" runat="server" Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>'></asp:Label>
+                                                        <asp:Label ID="lblMeasurementDate" runat="server" 
+                                                            Text='<%# string.Format("{0:d}",Eval("MeasurementDate")) %>' 
+                                                           ></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">Average Δ<asp:Label ID="lblAvgΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Average Δ" ID="locAverageDelta" runat="server" meta:resourcekey="locAverageDeltaResource1"></asp:Localize> 
+                                                        <asp:Label ID="lblAvgΔE" runat="server"></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="lblRAvg_ΔE" runat="server" Text='<%#Eval("Avg_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="lblRAvg_ΔE" runat="server" Text='<%# Eval("Avg_ΔE") %>' 
+                                                           ></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum Δ<asp:Label ID="lblMaxΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Maximum Δ" ID="locMaximumDelta" 
+                                                            runat="server" meta:resourcekey="locMaximumDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblMaxΔE" runat="server"></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="lblRMax_ΔE" runat="server" Text='<%#Eval("Max_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="lblRMax_ΔE" runat="server" Text='<%# Eval("Max_ΔE") %>' 
+                                                           ></asp:Label>
                                                     </td>
                                                 </tr>    
                                                 
                                                   <tr class="Gray">   
-                                                    <td style="font-size:13px;">Maximum Primary Δ<asp:Label ID="lblPriΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Maximum Primary Δ" runat="server" 
+                                                            ID="locMaxPrimaryDelta" meta:resourcekey="locMaxPrimaryDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblPriΔE" runat="server"></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("Pri_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="Label5" runat="server" Text='<%# Eval("Pri_ΔE") %>' 
+                                                           ></asp:Label>
                                                     </td>
                                                 </tr>    
                                                   <tr class="White">   
-                                                    <td style="font-size:13px;">Maximum Primary ΔH:</td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Maximum Primary ΔH:" 
+                                                            ID="locMaxPrimaryDeltaH" runat="server" meta:resourcekey="locMaxPrimaryDeltaHResource1"
+                                                            ></asp:Localize></td>                                  
                                                     <td>
-                                                        <asp:Label ID="Label7" runat="server" Text='<%#Eval("Pri_ΔH") %>'></asp:Label>
+                                                        <asp:Label ID="Label7" runat="server" Text='<%# Eval("Pri_ΔH") %>' 
+                                                           ></asp:Label>
                                                     </td>
                                                 </tr>    
                                                   <tr class="Gray">   
-                                                    <td style="font-size:13px;">Gray Average Δ<asp:Label ID="lblGrayΔE" runat="server" Text=""></asp:Label></td>                                  
+                                                    <td style="font-size:13px;"><asp:Localize Text="Gray Average Δ" 
+                                                            ID="locGrayAvgDelta" runat="server" meta:resourcekey="locGrayAvgDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblGrayΔE" runat="server" ></asp:Label></td>                                  
                                                     <td>
-                                                        <asp:Label ID="Label9" runat="server" Text='<%#Eval("Gray_ΔE") %>'></asp:Label>
+                                                        <asp:Label ID="Label9" runat="server" Text='<%# Eval("Gray_ΔE") %>' 
+                                                            ></asp:Label>
                                                     </td>
                                                 </tr>    
                                                                                         
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">10th Percentile Δ<asp:Label ID="lblPercΔE10" runat="server" Text=""></asp:Label> </td>                                                                                     
+                                                    <td style="font-size:13px;"><asp:Localize Text="10th Percentile Δ" 
+                                                            ID="loc10PercentileDelta" runat="server" 
+                                                            meta:resourcekey="loc10PercentileDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblPercΔE10" runat="server" 
+                                                           ></asp:Label> </td>                                                                                     
                                                     <td>
-                                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("PercΔE_10") %>'></asp:Label>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("PercΔE_10") %>' 
+                                                            ></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="Gray">   
-                                                    <td style="font-size:13px;">90th Percentile Δ<asp:Label ID="lblPercΔE90" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;"><asp:Localize Text="90th Percentile Δ" 
+                                                            ID="loc90PercentileDelta" runat="server" 
+                                                            meta:resourcekey="loc90PercentileDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblPercΔE90" runat="server" 
+                                                            ></asp:Label> </td>                                                                                    
                                                     <td>
-                                                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("PercΔE_90") %>'></asp:Label>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("PercΔE_90") %>' 
+                                                            ></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr class="White">   
-                                                    <td style="font-size:13px;">95th Percentile Δ<asp:Label ID="lblPercΔE95" runat="server" Text=""></asp:Label> </td>                                                                                    
+                                                    <td style="font-size:13px;"><asp:Localize Text="95th Percentile Δ" 
+                                                            ID="loc95PercentileDelta" runat="server" 
+                                                            meta:resourcekey="loc95PercentileDeltaResource1"></asp:Localize>
+                                                        <asp:Label ID="lblPercΔE95" runat="server" 
+                                                            ></asp:Label> </td>                                                                                    
                                                     <td>
-                                                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("PercΔE_95") %>'></asp:Label>
+                                                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("PercΔE_95") %>' 
+                                                            ></asp:Label>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
@@ -420,52 +470,105 @@
                   <table id="tbValidationSummary" runat="server" cellpadding="0" cellspacing="0" width="650px">
                         <tr>
                             <td valign="top" style="width:63%; border:1px Solid Gray;">
-                                <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" AutoGenerateRows="false" GridLines="None" CssClass="Validation_Summary" >
+                                <asp:DetailsView ID="dvValidationSummary" runat="server" Width="100%" 
+                                    AutoGenerateRows="False" GridLines="None" CssClass="Validation_Summary" 
+                                    meta:resourcekey="dvValidationSummaryResource1" >
                                     <Fields>
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
-                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>
-                                        <asp:TemplateField HeaderText="Status:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt">
+                                        <asp:BoundField DataField="MeasurementName" HeaderText="Job:" 
+                                            HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" 
+                                            ItemStyle-CssClass="Summary_Right" meta:resourcekey="BoundFieldResource1">
+                                        </asp:BoundField>
+                                        <asp:TemplateField HeaderText="Status:" HeaderStyle-CssClass="Summary_Left_Alt" 
+                                            ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="TemplateFieldResource1">
                                             <ItemTemplate>
                                                 <div class='<%# ((string)Eval("MeasurementStatus") == "OK") ? "Validation_Status_Green" : "Validation_Status_Red" %>'>
-                                                    <asp:Label runat="server" ID="lblStatus" Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
+                                                    <asp:Label runat="server" ID="lblStatus" 
+                                                        Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
                                             </ItemTemplate>
+
+
                                         </asp:TemplateField>   
-                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/> 
-                                        <asp:BoundField DataField="PrintStandardType" HeaderText="Print Standard:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>                                                                   
-                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
-                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                        
-                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="PageOrSurface" HeaderText="Page/Surface:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="JDFJobId" HeaderText="JDF Job ID:" HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt"/>
-                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right"/>                                       
+                                        <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" 
+                                            HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
+                                            meta:resourcekey="BoundFieldResource2"> 
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="PrintStandardType" HeaderText="Print Standard:" 
+                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="BoundFieldResource3">                                                                   
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  
+                                            HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
+                                            meta:resourcekey="BoundFieldResource4">                                       
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  
+                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="BoundFieldResource5">
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Customer" HeaderText="Customer:" 
+                                            HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
+                                            meta:resourcekey="BoundFieldResource6">                                        
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" 
+                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="BoundFieldResource7">
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="PageOrSurface" HeaderText="Page/Surface:" 
+                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="BoundFieldResource8">
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="JDFJobId" HeaderText="JDF Job ID:" 
+                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            meta:resourcekey="BoundFieldResource9">
+
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Notes" HeaderText="Notes:"  
+                                            HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
+                                            meta:resourcekey="BoundFieldResource10">                                       
+
+                                        </asp:BoundField>
                                     </Fields>
                                 </asp:DetailsView>
                             </td>
                             <td style="width:2%;"></td>
                             <td valign="top" style="width:35%; ">                              
-                                <telerik:RadGrid ID="rgValidationSummaryMetrics" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                    OnItemDataBound="rgValidationSummaryMetrics_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                <telerik:RadGrid ID="rgValidationSummaryMetrics" runat="server" 
+                                    AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                    OnItemDataBound="rgValidationSummaryMetrics_ItemDataBound" CellSpacing="0" 
+                                    GridLines="None" meta:resourcekey="rgValidationSummaryMetricsResource1">   
                                         <HeaderStyle Font-Bold="True" />  
                                         <ItemStyle BackColor="#F2F2F2" />
                                         <AlternatingItemStyle BackColor="#FFFFFF" />                    
                                             <MasterTableView DataKeyNames="MetricMeasuredID">  
+
                                                 <Columns>
                                                     <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
-                                                        UniqueName="MetricSumName">
+                                                        UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource18">
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tol" 
-                                                        UniqueName="TargetValue">
+                                                        UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource19">
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
-                                                        UniqueName="MeasuredValue">
+                                                        UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource20">
                                                     </telerik:GridBoundColumn>     
                                                     <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                        UniqueName="IsNotOK" Visible="false">
+                                                        UniqueName="IsNotOK" Visible="false" 
+                                                        meta:resourcekey="GridBoundColumnResource21">
                                                     </telerik:GridBoundColumn>                                               
                                                 </Columns>                        
+
+
                                             </MasterTableView>                        
+
                                 </telerik:RadGrid>                                
                             </td>
                         </tr>
@@ -497,7 +600,8 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" >
                                 <tr>
                                     <td colspan="2" class="green-title">
-                                        &nbsp; &Delta;<asp:Label ID="lblEPryPatches" runat="server" Text=""></asp:Label>
+                                        &nbsp; &Delta;<asp:Label ID="lblEPryPatches" runat="server" 
+                                            ></asp:Label>
                                         <asp:Localize Text=" Primary Patches" runat="server"
                                             meta:resourcekey="LocalizeResource1" ></asp:Localize>
                                     </td>
@@ -510,14 +614,15 @@
                                                 </td>
                                             </tr>
                                             <asp:Literal ID="LitDeltaEPatches" runat="server" 
-                                                meta:resourcekey="LitDeltaEPatchesResource1"></asp:Literal>
+                                                ></asp:Literal>
                                         </table>
                                     </td>
                                     <td style="width: 60%; " id="TDEPrimary" runat="server">
                                         <asp:Chart ID="chartDeltaE" runat="server" Width="210px" Height="362px" 
                                             BackColor="Transparent" meta:resourcekey="chartDeltaEResource1">                  
                                                             <Series>
-                                                                <asp:Series Name="Series0"  Color="#D4E8FA" ChartArea="ChartArea1" ChartType="Bar">                                              
+                                                                <asp:Series Name="Series0"  Color="212, 232, 250" ChartArea="ChartArea1" 
+                                                                    ChartType="Bar">                                              
                                                                 </asp:Series>
                                                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                                                             IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
@@ -528,10 +633,10 @@
                                                             </Series>
                                                             <ChartAreas>
                                                                 <asp:ChartArea Name="ChartArea1" BackColor="Transparent">
-                                                                      <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" IsRightAngleAxes="true" IsClustered="false" >
+                                                                      <Area3DStyle  Enable3D="True" Inclination="0" Rotation="0" >
                                                                       </Area3DStyle>
                                           
-                                                                    <AxisX  Enabled="True"  IsReversed="True" IsLabelAutoFit="True" >
+                                                                    <AxisX  Enabled="True"  IsReversed="True" >
                                                                         <MajorGrid Enabled="False" LineColor="Beige" />
                                                                         <MajorTickMark Enabled="False" />
                                                                         <LabelStyle Font="Verdana, 7pt" />
@@ -695,7 +800,8 @@
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                     <tr>
                                         <td class="green-title">
-                                            &nbsp; Gray Balance ΔCh
+                                            &nbsp; <asp:Localize Text="Gray Balance ΔCh" runat="server" 
+                                                ID="locGrayBalanceDeltaCH" meta:resourcekey="locGrayBalanceDeltaCHResource1"></asp:Localize>
                                         </td>
                                     </tr>
                                     <tr>
@@ -750,32 +856,39 @@
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                     <tr>
                                         <td class="green-title">
-                                            &nbsp; Gray  ΔCh Summary
+                                            &nbsp; <asp:Localize Text="Gray  ΔCh Summary" runat="server" 
+                                                ID="locGrayDeltaCHSummary" meta:resourcekey="locGrayDeltaCHSummaryResource1"></asp:Localize>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td valign="top" style="padding: 2px">
-                                            <telerik:RadGrid ID="RG_ΔChSummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                                OnItemDataBound="RG_ΔChSummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                            <telerik:RadGrid ID="RG_ΔChSummary" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔChSummary_ItemDataBound" CellSpacing="0" 
+                                                GridLines="None" meta:resourcekey="RG_ΔChSummaryResource1">   
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
                                                         <MasterTableView DataKeyNames="MetricMeasuredID">  
+
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
-                                                                    UniqueName="MetricSumName">
+                                                                    UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource22">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
-                                                                    UniqueName="TargetValue">
+                                                                    UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource23">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
-                                                                    UniqueName="MeasuredValue">
+                                                                    UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource24">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    meta:resourcekey="GridBoundColumnResource25">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
+
                                                         </MasterTableView>                        
+
+
                                             </telerik:RadGrid>
                                         </td>
                                     </tr>
@@ -790,7 +903,8 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                 <tr>
                                     <td class="green-title">
-                                        &nbsp; Black ΔL
+                                        &nbsp; <asp:Localize Text="Black ΔL" runat="server" ID="locBlackDeltaL" 
+                                            meta:resourcekey="locBlackDeltaLResource1"></asp:Localize>
                                     </td>
                                 </tr>
                                 <tr>
@@ -845,32 +959,41 @@
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                     <tr>
                                         <td class="green-title">
-                                            &nbsp; Black  ΔL Summary
+                                            &nbsp; <asp:Localize Text="Black  ΔL Summary" runat="server" 
+                                                ID="locBlackDeltaLSummary" meta:resourcekey="locBlackDeltaLSummaryResource1"></asp:Localize>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td valign="top" style="padding: 2px">
-                                            <telerik:RadGrid ID="RG_ΔLBlackSummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                                OnItemDataBound="RG_ΔLBlackSummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                            <telerik:RadGrid ID="RG_ΔLBlackSummary" runat="server" 
+                                                AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔLBlackSummary_ItemDataBound" CellSpacing="0" 
+                                                GridLines="None" meta:resourcekey="RG_ΔLBlackSummaryResource1">   
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
                                                         <MasterTableView DataKeyNames="MetricMeasuredID">  
+
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
-                                                                    UniqueName="MetricSumName">
+                                                                    UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource26">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
-                                                                    UniqueName="TargetValue">
+                                                                    UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource27">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
-                                                                    UniqueName="MeasuredValue">
+                                                                    UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource28">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    meta:resourcekey="GridBoundColumnResource29">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
+
+
                                                         </MasterTableView>                        
+
+<FilterMenu EnableImageSprites="False"></FilterMenu>
                                             </telerik:RadGrid>
                                         </td>
                                     </tr>
@@ -885,7 +1008,8 @@
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                 <tr>
                                     <td class="green-title">
-                                        &nbsp; Gray ΔL
+                                        &nbsp; <asp:Localize runat="server" Text="Gray ΔL" ID="locGrayDeltaL" 
+                                            meta:resourcekey="locGrayDeltaLResource1"></asp:Localize>
                                     </td>
                                 </tr>
                                 <tr>
@@ -940,32 +1064,41 @@
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%" class="CHARTTABLE">
                                     <tr>
                                         <td class="green-title">
-                                            &nbsp; Gray  ΔL Summary
+                                            &nbsp; <asp:Localize runat="server" Text="Gray  ΔL Summary" 
+                                                ID="locGrayDeltaLSummary" meta:resourcekey="locGrayDeltaLSummaryResource1"></asp:Localize>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td valign="top" style="padding: 2px">
-                                            <telerik:RadGrid ID="RG_ΔLGraySummary" runat="server" AutoGenerateColumns="false" EnableLinqExpressions="False"                     
-                                                OnItemDataBound="RG_ΔLGraySummary_ItemDataBound" CellSpacing="0" GridLines="None">   
+                                            <telerik:RadGrid ID="RG_ΔLGraySummary" runat="server" 
+                                                AutoGenerateColumns="False" EnableLinqExpressions="False"                     
+                                                OnItemDataBound="RG_ΔLGraySummary_ItemDataBound" CellSpacing="0" 
+                                                GridLines="None" meta:resourcekey="RG_ΔLGraySummaryResource1">   
                                                     <HeaderStyle Font-Bold="True" />  
                                                     <ItemStyle BackColor="#F2F2F2" />
                                                     <AlternatingItemStyle BackColor="#FFFFFF" />                    
                                                         <MasterTableView DataKeyNames="MetricMeasuredID">  
+
                                                             <Columns>
                                                                 <telerik:GridBoundColumn DataField="Metric" HeaderText="Metric" 
-                                                                    UniqueName="MetricSumName">
+                                                                    UniqueName="MetricSumName" meta:resourcekey="GridBoundColumnResource30">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Tolerance" HeaderText="Tolerance" 
-                                                                    UniqueName="TargetValue">
+                                                                    UniqueName="TargetValue" meta:resourcekey="GridBoundColumnResource31">
                                                                 </telerik:GridBoundColumn>
                                                                 <telerik:GridBoundColumn DataField="Actual" HeaderText="Actual" 
-                                                                    UniqueName="MeasuredValue">
+                                                                    UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource32">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    meta:resourcekey="GridBoundColumnResource33">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
+
+
                                                         </MasterTableView>                        
+
+
                                             </telerik:RadGrid>
                                         </td>
                                     </tr>
@@ -1106,7 +1239,8 @@
                                                     <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">                                                     
                                                         <tr runat="server">
                                                             <td class="green-title" runat="server">
-                                                                <asp:Localize ID="locComparison" runat="server" Text="a* - b* Comparison"></asp:Localize>
+                                                                <asp:Localize ID="locComparison" runat="server" Text="a* - b* Comparison" 
+                                                                    meta:resourcekey="locComparisonResource1"></asp:Localize>
                                                             </td>
                                                         </tr>
                                                       
@@ -1183,7 +1317,8 @@
                                                         </tr>
                                                         <tr runat="server">
                                                             <td class="green-title" runat="server">
-                                                                <asp:Localize runat="server" Text="L* Comparison" ID="locLComparison"></asp:Localize>
+                                                                <asp:Localize runat="server" Text="L* Comparison" ID="locLComparison" 
+                                                                    meta:resourcekey="locLComparisonResource1"></asp:Localize>
                                                             </td>
                                                         </tr>
                                                         <tr runat="server">
@@ -1447,7 +1582,8 @@
                <tr>
                 <td>
                     <div id="Div_MetricSumFilter" runat="server">
-                         Filter by Metric Sum: &nbsp;
+                        <asp:Localize Text="Filter by Metric Sum:" runat="server" 
+                            ID="locFilterMetricSum" meta:resourcekey="locFilterMetricSumResource1"></asp:Localize> &nbsp;
                          <telerik:RadComboBox ID="rcmbMetricSumlist" AppendDataBoundItems="True" runat="server"                                               
                                       Width="150px" DropDownWidth="150px" AutoPostBack="true" OnSelectedIndexChanged ="rcmbMetricSumlist_SelectedIndexChanged">
                          </telerik:RadComboBox> 
@@ -1466,11 +1602,12 @@
                <tr>
                 <td colspan="2">                
                     <telerik:RadGrid ID="rgPatchDetails"  AllowSorting="True" Width="650px" 
-                    AllowPaging="True" PageSize="10" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
+                    AllowPaging="True" runat="server" AutoGenerateColumns="False" EnableLinqExpressions="False"
                        AllowFilteringByColumn="True" 
                     OnNeedDataSource="rgPatchDetails_NeedDataSource" 
                         OnItemDataBound="rgPatchDetails_ItemDataBound" OnItemCommand="rgPatchDetails_ItemCommand"
-                    OnSortCommand="rgPatchDetails_SortCommand" CellSpacing="0" GridLines="None" >
+                    OnSortCommand="rgPatchDetails_SortCommand" CellSpacing="0" GridLines="None" 
+                        meta:resourcekey="rgPatchDetailsResource1" >
                     <GroupingSettings CaseSensitive="False" />
                          <ClientSettings>
                             <Scrolling AllowScroll="True" UseStaticHeaders="True" FrozenColumnsCount="6">
@@ -1494,11 +1631,12 @@
                                          <FilterTemplate>
                                             <center>
                                             <asp:LinkButton ID="lbtnClearFillter" runat="server" ToolTip="Clear Fillter"  
-                                                    CommandName="Fillter">
+                                                    CommandName="Fillter" meta:resourcekey="lbtnClearFillterResource2">
                                                             <span>
                                                                 <asp:Image ID="imgClearFillter" runat="server" 
                                                     AlternateText="Clear Fillter" ImageUrl="../Images/clear-fillter.png" 
                                                     meta:resourcekey="imgClearFillterResource1" />
+
 
                                                             </span>
                                             </asp:LinkButton>
@@ -1618,7 +1756,12 @@
                                         meta:resourcekey="GridBoundColumnResource17" UniqueName="ΔL" Visible="false">
                                     </telerik:GridBoundColumn>           
                                 </Columns>                        
+
+
+
                             </MasterTableView>                        
+
+
                 </telerik:RadGrid>                             
                  </td>
                 </tr>
@@ -1651,9 +1794,9 @@
                         <tr >
                             <td>
                                 <table id="TblGeneratePDFReport" runat="server" border="0" width="100%" style="height: 100%;"
-                                        cellpadding="0" cellspacing="0" class="TABLE1"  visible="true">
-                                    <tr>
-                                        <td valign="top">
+                                        cellpadding="0" cellspacing="0" class="TABLE1">
+                                    <tr runat="server">
+                                        <td valign="top" runat="server">
                                          <iframe id="iframeGeneratePDFReport" runat="server" name="iframeGeneratePDFReport" style="height: 350px;
                                                 width: 100%; display: none" frameborder="0" scrolling="no"></iframe>                                           
                                         </td>
@@ -1708,7 +1851,10 @@
 
 
 
-<asp:Literal ID="LTRL_PageSize" runat="server" Visible="false">5</asp:Literal>
-<asp:Literal ID="LTRL_CurrentPage" runat="server" Visible="false">-1</asp:Literal>
-<asp:Literal ID="LTRL_StartIndex" runat="server" Visible="false">0</asp:Literal>
+<asp:Literal ID="LTRL_PageSize" runat="server" Visible="False" 
+    meta:resourcekey="LTRL_PageSizeResource1" Text="5"></asp:Literal>
+<asp:Literal ID="LTRL_CurrentPage" runat="server" Visible="False" 
+    meta:resourcekey="LTRL_CurrentPageResource1" Text="-1"></asp:Literal>
+<asp:Literal ID="LTRL_StartIndex" runat="server" Visible="False" 
+    meta:resourcekey="LTRL_StartIndexResource1" Text="0"></asp:Literal>
 

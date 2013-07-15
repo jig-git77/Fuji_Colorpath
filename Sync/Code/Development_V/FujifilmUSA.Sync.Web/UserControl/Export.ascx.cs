@@ -37,7 +37,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
+
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;

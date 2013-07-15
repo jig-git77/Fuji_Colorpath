@@ -22,15 +22,22 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Job:</String>
+					<String>locJob </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
+				<Element>
+					<String>[Job]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="653" Width="788.402770996094" Height="193.225051879883" />
+		<Bounds X="307" Y="653" Width="3047.3603515625" Height="193.225051879883" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -48,15 +55,22 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Metric:</String>
+					<String>locMetric </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
+				<Element>
+					<String>[Metric]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1146" Width="761.800903320313" Height="187.199996948242" />
+		<Bounds X="307" Y="1146" Width="3027.5830078125" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -74,15 +88,22 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Standard:</String>
+					<String>locStandard </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
+				<Element>
+					<String>[PrintStandard]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1390.19995117188" Width="786.753540039063" Height="187.199996948242" />
+		<Bounds X="307" Y="1390.19995117188" Width="3052.53564453125" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -100,15 +121,22 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Timestamp:</String>
+					<String>locTimestamp </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
+				<Element>
+					<String>[Timestamp]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1634.40002441406" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="1634.40002441406" Width="3042.72534179688" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -126,15 +154,22 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Customer:</String>
+					<String>locCustomer </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
+				<Element>
+					<String>[Customer]</String>
+					<Attributes>
+						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
+						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
+					</Attributes>
+				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1863.60009765625" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="1863.60009765625" Width="3049.55004882813" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -152,161 +187,12 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>dE Type:</String>
+					<String>locdEType </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="3488.84552276756" Y="650.24070678277" Width="570.426576081046" Height="180" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
-				<Element>
-					<String>[Job]</String>
-					<Attributes>
-						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-					</Attributes>
-				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="650.732543945313" Y="657.599975585938" Width="2721.60009765625" Height="191.589324951172" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
-				<Element>
-					<String>[Metric]</String>
-					<Attributes>
-						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-					</Attributes>
-				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="802.875671386719" Y="1146" Width="2577.60009765625" Height="187.199996948242" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
-				<Element>
-					<String>[PrintStandard]</String>
-					<Attributes>
-						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-					</Attributes>
-				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="1008" Y="1390.19995117188" Width="2361.60009765625" Height="187.199996948242" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1_1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
-				<Element>
-					<String>[Timestamp]</String>
-					<Attributes>
-						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-					</Attributes>
-				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="1121.35485839844" Y="1634.40002441406" Width="2246.39990234375" Height="187.199996948242" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1_1_1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
-				<Element>
-					<String>[Customer]</String>
-					<Attributes>
-						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
-						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-					</Attributes>
-				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="1059.41931152344" Y="1863.60009765625" Width="2318.39990234375" Height="187.199996948242" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1_1_1_1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
 				<Element>
 					<String>[dEType]</String>
 					<Attributes>
@@ -316,7 +202,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4132.87781036522" Y="650.24070678277" Width="1108.11741938297" Height="184.052124023438" />
+		<Bounds X="3488.84545898438" Y="650.24072265625" Width="1914.88171386719" Height="180" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -334,7 +220,7 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Signature____________________________ Date_________________</String>
+					<String>locSignature____________________________ locDate_________________</String>
 					<Attributes>
 						<Font Family="Arial" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -368,7 +254,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3484.80004882813" Y="1065" Width="1160.04052734375" Height="1524.38382522077" />
+		<Bounds X="3484.80004882813" Y="1065" Width="1160.04052734375" Height="1524.3837890625" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -386,7 +272,7 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Tol.</String>
+					<String>locTol</String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -394,7 +280,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="861.824645996094" Width="331.200012207031" Height="147.298580368548" />
+		<Bounds X="4780.7998046875" Y="861.824645996094" Width="331.200012207031" Height="147.298583984375" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -412,7 +298,7 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Act.</String>
+					<String>locAct</String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -420,7 +306,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="860.04638671875" Width="331.200012207031" Height="147.298580368548" />
+		<Bounds X="5184" Y="860.04638671875" Width="331.200012207031" Height="147.298583984375" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -446,7 +332,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="1073.77038574219" Width="337.736328125" Height="1513.46231643171" />
+		<Bounds X="4780.7998046875" Y="1073.77038574219" Width="337.736328125" Height="1513.46228027344" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -472,7 +358,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="1070.22045898438" Width="331.200012207031" Height="1520.57144729108" />
+		<Bounds X="5184" Y="1070.22045898438" Width="331.200012207031" Height="1520.57141113281" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -508,31 +394,12 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Device:</String>
+					<String>locDevice </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="307" Y="886.800048828125" Width="754.976257324219" Height="187.199996948242" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT__1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
 				<Element>
 					<String>[Device]</String>
 					<Attributes>
@@ -542,7 +409,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="843.7822265625" Y="886.800048828125" Width="2534.39990234375" Height="187.199996948242" />
+		<Bounds X="307" Y="886.800048828125" Width="3041.232421875" Height="187.199996948242" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -594,31 +461,12 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Page/Surface:</String>
+					<String>locPageOrSurface </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="307" Y="2107.80004882813" Width="935.260681152344" Height="180" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1_1_1__1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
 				<Element>
 					<String>[PageOrSurface]</String>
 					<Attributes>
@@ -628,7 +476,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1312.73852539063" Y="2107.80004882813" Width="2043.09387207031" Height="184.052124023438" />
+		<Bounds X="307" Y="2107.80004882813" Width="3037.25146484375" Height="180" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -646,31 +494,12 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>JDF Job ID:</String>
+					<String>locJDFJobID </String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
 					</Attributes>
 				</Element>
-			</StyledText>
-		</TextObject>
-		<Bounds X="307" Y="2377.80004882813" Width="778.293823242188" Height="180" />
-	</ObjectInfo>
-	<ObjectInfo>
-		<TextObject>
-			<Name>TEXT_1_1_1_1___1</Name>
-			<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
-			<BackColor Alpha="0" Red="255" Green="255" Blue="255" />
-			<LinkedObjectName></LinkedObjectName>
-			<Rotation>Rotation0</Rotation>
-			<IsMirrored>False</IsMirrored>
-			<IsVariable>False</IsVariable>
-			<HorizontalAlignment>Left</HorizontalAlignment>
-			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
-			<UseFullFontHeight>True</UseFullFontHeight>
-			<Verticalized>False</Verticalized>
-			<StyledText>
 				<Element>
 					<String>[JDFJobId]</String>
 					<Attributes>
@@ -680,6 +509,6 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1162.59631347656" Y="2377.80004882813" Width="2193.23608398438" Height="184.052124023438" />
+		<Bounds X="307" Y="2377.80004882813" Width="3044.07592773438" Height="180" />
 	</ObjectInfo>
 </DieCutLabel>

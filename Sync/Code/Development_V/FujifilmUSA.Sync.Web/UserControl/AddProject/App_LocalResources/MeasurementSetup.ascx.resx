@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,60 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cmbAlignmentChartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmbIlluminantResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmbMeasurementDeviceResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cmbObserverResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Image1Resource1.AlternateText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Image1Resource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Image2Resource1.AlternateText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Image2Resource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="imgAddResource1.AlternateText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="imgAddResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="imgChartResource1.AlternateText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="imgChartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnMeasureResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnMeasureResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnMeasurementSetupResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnMeasurementSetupResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnProfilerOptionsResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnProfilerOptionsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="locAlignmentChartResource1.Text" xml:space="preserve">
     <value>Alignment Charts</value>
   </data>
@@ -195,40 +141,28 @@
   <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>Spectrophotometer Options</value>
   </data>
-  <data name="panelAlignmentChartResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panelAlignmentChartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panelSpectrophotometerOptionsResource1.GroupingText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panelSpectrophotometerOptionsResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvAlignmentChartResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvAlignmentChartResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvAlignmentChartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMeasurementDeviceResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMeasurementDeviceResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMeasurementDeviceResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="txtAlignmentChartResource1.Text" xml:space="preserve">
     <value>Base DLP Chart:</value>
   </data>
   <data name="selectText" xml:space="preserve">
     <value>-- Select --</value>
+  </data>
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
+    <value>Validation Setup</value>
+  </data>
+  <data name="rfvcAlignmentChartContainer" xml:space="preserve">
+    <value>Please select Base DLP chart.</value>
+  </data>
+  <data name="rfvcMeasurementDeviceContainer" xml:space="preserve">
+    <value>Please select measurement device.</value>
+  </data>
+  <data name="rfvcOptimizationChartContainer" xml:space="preserve">
+    <value>Please select Optimization chart.</value>
+  </data>
+  <data name="locOptimizationChart.Text" xml:space="preserve">
+    <value>Optimization Chart:</value>
+  </data>
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
+    <value>UV Settings:</value>
   </data>
 </root>

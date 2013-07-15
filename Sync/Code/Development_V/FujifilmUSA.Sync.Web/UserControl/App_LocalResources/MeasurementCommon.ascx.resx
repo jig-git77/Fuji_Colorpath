@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -141,9 +141,6 @@
   <data name="lblMeasurementNameResource1.Text" xml:space="preserve">
     <value>Measurement Name</value>
   </data>
-  <data name="lblMeasurementNameResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="limitReachText" xml:space="preserve">
     <value>Limit Reach</value>
   </data>
@@ -180,12 +177,6 @@
   <data name="statusText" xml:space="preserve">
     <value>Status :</value>
   </data>
-  <data name="txtMeasurementNameResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtMeasurementNameResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="uploadDateTime" xml:space="preserve">
     <value>Upload Date Time</value>
   </data>
@@ -206,5 +197,20 @@
   </data>
   <data name="MeasurementNameCaption" xml:space="preserve">
     <value>Measurement Name</value>
+  </data>
+  <data name="btnImportMeasurements" xml:space="preserve">
+    <value>Import Measurements</value>
+  </data>
+  <data name="lblCustomerResource1.Text" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="lblJDFJobIdResource1.Text" xml:space="preserve">
+    <value>JDF Job ID</value>
+  </data>
+  <data name="lblNotesResource1.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="lblPageOrSurfaceResource1.Text" xml:space="preserve">
+    <value>Page/Surface</value>
   </data>
 </root>

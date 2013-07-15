@@ -287,7 +287,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span style="font-weight: bold;">Validation Metric</span>
+                                                        <span style="font-weight: bold;"><asp:Localize ID="locValidationMetric" runat="server" meta:resourcekey="locValidationMetricResource1" Text="Validation Metric"></asp:Localize></span>
                                                     </td>
                                                     <td style="width: 10px;">
                                                          <span style="font-weight: bold;">:</span>

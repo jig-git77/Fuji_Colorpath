@@ -12,6 +12,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class ProjectList : BaseControl, IViewProjectList
     {
+        #region Localization variables
+        private const string _recallText = "allText";
+        private const string _recvalidationStatusNotCertified = "validationStatusNotCertified";
+        private const string _recvalidationStatusDisabled = "validationStatusDisabled";
+        private const string _recvalidationStatusLastOK = "validationStatusLastOK";
+        private const string _recvalidationStatusLastFailed = "validationStatusLastFailed"; 
+        #endregion
+
         #region Variable Declaration
         private PresenterProjectList _presenterProjectList;
         public string ProjectListDeleteProjectConfirmation
@@ -61,6 +69,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (e.Item.ItemType == GridItemType.FilteringItem)
             {
+
                 RadComboBox rcmbLicenseType = e.Item.FindControl("rcmbLicenseType") as RadComboBox;
                 if (rcmbLicenseType != null)
                 {
@@ -71,9 +80,22 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             rcmbLicenseType.Items.Add(new RadComboBoxItem() { Text = Common.Utilities.GetEnumDescriptionAttributeValue(item.Key), Value = item.Key.ToString() });
                         }
 
-                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = "ALL", Value = "" });
+                        rcmbLicenseType.Items.Insert(0, new RadComboBoxItem() { Text = GetResourceString(_recallText), Value = "" });
                         rcmbLicenseType.SelectedIndex = 0;
                     }
+                }
+
+                RadComboBox rcmbValidationStatus = e.Item.FindControl("rcmbValidationStatus") as RadComboBox;
+                if (rcmbValidationStatus != null)
+                {
+                    rcmbValidationStatus.Items.Clear();
+                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusNotCertified), Value = "NotCertified" });
+                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusDisabled), Value = "Disabled" });
+                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusLastOK), Value = "LastOK" });
+                    rcmbValidationStatus.Items.Add(new RadComboBoxItem() { Text = GetResourceString(_recvalidationStatusLastFailed), Value = "LastFailed" });
+
+                    rcmbValidationStatus.Items.Insert(0, new RadComboBoxItem() { Text = GetResourceString(_recallText), Value = "" });
+                    rcmbValidationStatus.SelectedIndex = 0;
                 }
             }
         }

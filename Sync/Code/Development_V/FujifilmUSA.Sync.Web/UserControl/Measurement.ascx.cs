@@ -11,6 +11,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Private Variables - Globalization
         private const string _recnewPrintConditionText = "newPrintConditionText";
         private const string _recmeasureText = "measureText";
+        private const string _recValidationMeasure = "validationMeasureText";
+
         #endregion
 
         #region Declaration
@@ -40,13 +42,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {                        
+
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
-                    header.InnerText = "Validation - Measure";
+                    header.InnerText = GetResourceString(_recValidationMeasure); //"Validation - Measure";
                 }
                 else
                 {

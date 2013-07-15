@@ -13,7 +13,10 @@
 </script>   
 <div>
     <div style="text-align: right; margin-bottom: 5px; width: 382px;">
-        <asp:ImageButton ID="ibtnPrintLabel" runat="server" ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label" OnClientClick="PrintLabel(); return false;"  />
+        <asp:ImageButton ID="ibtnPrintLabel" runat="server" 
+            ImageUrl="../Images/DymoPrintIcon.png" ToolTip="Print label" 
+            OnClientClick="PrintLabel(); return false;" 
+            meta:resourcekey="ibtnPrintLabelResource1"  />
     </div>
     <asp:Image runat="server" ID="imgPreview" />
 </div>   

@@ -57,6 +57,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recPatchMetrics = "patchMetricsText";
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         private const string _recValidationAnalyzeHeaderText = "validationAnalyzeHeaderText";
+        private const string _reclocOptimizeResource1 = "locOptimizeResource1.Text";
+
+        //Label localization variables
+        private const string _reclocLabelJob = "locLabelJob";
+        private const string _reclocLabelDevice = "locLabelDevice";
+        private const string _reclocLabelMetric = "locLabelMetric";
+        private const string _reclocLabelStandard = "locLabelStandard";
+        private const string _reclocLabelTimestamp = "locLabelTimestamp";
+        private const string _reclocLabelCustomer = "locLabelCustomer";
+        private const string _reclocLabelPageOrSurface = "locLabelPageOrSurface";
+        private const string _reclocLabelJDFJobID = "locLabelJDFJobID";
+        private const string _reclocLabeldEType = "locLabeldEType";
+        private const string _reclocLabelTol = "locLabelTol";
+        private const string _reclocLabelAct = "locLabelAct";
+        private const string _reclocLabelSignature = "locLabelSignature";
+        private const string _reclocLabelDate = "locLabelDate";        
+
+
         public DateTime EndDate;
         public decimal DtELimit = 0;
         public string DLPName = "";
@@ -130,7 +148,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {         
+        {
+            
             lbtnMeasurement.Visible = IsXMFUser;
 
             if (!Page.IsPostBack)
@@ -182,7 +201,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = true;
                     //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
                     //So its a kind of bug fix.
-                    lbtnOptimize.Text = "<span>Optimize</span>";
+                    lbtnOptimize.Text = "<span>" + GetResourceString(_reclocOptimizeResource1) + "</span>";
                     lbtnOptimize.Attributes.Add("onclick",
                                                      "javascript: return ShowClosePrintConditionWindow('" +
                                                      SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
@@ -227,9 +246,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnOptimize.Visible = false;
                 lbtnMeasurementVerification.Visible = false;                
                 lbtnDownloadAndSaveDLP.Visible = false;
-            }
-
-            
+            }            
         }
 
         #endregion
@@ -1246,7 +1263,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             LTRL_PageSize.Text = DDL_PageSize.SelectedValue;
 
             int _PageSize = Convert.ToInt32(LTRL_PageSize.Text);
-            int _PageCount = Convert.ToInt32(LTRL_TotalRec.Text) / _PageSize; if ((Convert.ToInt32(LTRL_TotalRec.Text) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+            //Modified for localization
+            //int _PageCount = Convert.ToInt32(LTRL_TotalRec.Text) / _PageSize; if ((Convert.ToInt32(LTRL_TotalRec.Text) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+            int _PageCount = Convert.ToInt32(hdnTotalRecord.Value) / _PageSize; if ((Convert.ToInt32(hdnTotalRecord.Value) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
 
             //========== Filling the DropDown ==========//
             DDL_GoToPage.Items.Clear();
@@ -1306,7 +1325,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack == false)
             {
                 FillDDLGoToPage(_PageCount);
-                LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+                //Modified for localization
+                //LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+                ltrlRecordsSummary.Text = GetResourceString("ltrlRecordsSummaryResource1.Text");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{start}", "0");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{end}", "0");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{total}", MeasurementList.Count.ToString());
+                hdnTotalRecord.Value = MeasurementList.Count.ToString();
             }
 
             #region Settings for Paging
@@ -1363,9 +1388,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //========== Set Values Back To Label ==========//
             LTRL_StartIndex.Text = _StartIndex.ToString();
             LTRL_CurrentPage.Text = _CurrentPageIndex.ToString();
-            LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
-            LTRL_EndRecord.Text = _EndIndex.ToString();
-            LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+            
+            //Modified for localization
+            //LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
+            //LTRL_EndRecord.Text = _EndIndex.ToString();
+            //LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+            ltrlRecordsSummary.Text = GetResourceString("ltrlRecordsSummaryResource1.Text");
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{start}", Convert.ToString(_StartIndex + 1));
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{end}", _EndIndex.ToString());
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{total}", MeasurementList.Count.ToString());
+            hdnTotalRecord.Value = MeasurementList.Count.ToString();
 
             #endregion
 
@@ -1411,6 +1443,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string labelXML = streamReader.ReadToEnd();
             streamReader.Close();
             //string labelXML = "XML";
+            //Set the localization values for label caption to placeholder
+            labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
+            labelXML = labelXML.Replace("locDevice", GetResourceString(_reclocLabelDevice));
+            labelXML = labelXML.Replace("locMetric", GetResourceString(_reclocLabelMetric));
+            labelXML = labelXML.Replace("locStandard", GetResourceString(_reclocLabelStandard));
+            labelXML = labelXML.Replace("locTimestamp", GetResourceString(_reclocLabelTimestamp));
+            labelXML = labelXML.Replace("locCustomer", GetResourceString(_reclocLabelCustomer));
+            labelXML = labelXML.Replace("locPageOrSurface", GetResourceString(_reclocLabelPageOrSurface));
+            labelXML = labelXML.Replace("locJDFJobID", GetResourceString(_reclocLabelJDFJobID));
+            labelXML = labelXML.Replace("locdEType", GetResourceString(_reclocLabeldEType));
+            labelXML = labelXML.Replace("locTol", GetResourceString(_reclocLabelTol));
+            labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
+            labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
+            labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
+            
             //Set the values to Placeholder
             labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
             labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);

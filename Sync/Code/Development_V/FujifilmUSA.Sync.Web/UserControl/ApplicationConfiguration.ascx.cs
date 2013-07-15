@@ -14,8 +14,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
     public partial class ApplicationConfiguration : BaseControl, IViewApplicationConfiguration
     {
         private PresenterApplicationConfiguration _presenterApplicationConfiguration;
+
+        #region Private Variables - Globalization
+        private const string _recConfigValueSaveSuccess = "configValueSaveSuccess";
+
+        #endregion
+
         public ApplicationConfiguration()
-        {
+        {            
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
         }
         #region Events
@@ -71,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 if (!IsErrorOccured)
                 {
                     //Display success message
-                    fujiStatusbar.DisplayMessage("Configuration values updated successfully", true);
+                    fujiStatusbar.DisplayMessage(GetResourceString(_recConfigValueSaveSuccess), true);
                     //Refresh grid
                     FillData();
                 }                
