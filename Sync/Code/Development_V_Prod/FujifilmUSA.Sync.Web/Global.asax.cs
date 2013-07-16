@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.SessionState;
+using FujifilmUSA.Sync.Presenter.ViewInterface;
+using FujifilmUSA.Sync.Presenter;
+using System.Threading;
+
+namespace FujifilmUSA.Sync.Web
+{
+    public class Global : System.Web.HttpApplication
+    {
+        protected void Application_Start(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+            var ex = Server.GetLastError();
+            if (ex is ThreadAbortException)
+                return;
+
+            var presenterGlobal = new PresenterGlobal();
+            presenterGlobal.LogApplicationError(ex.GetBaseException());
+            Response.RedirectPermanent("ApplicationError.aspx");
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void Application_End(object sender, EventArgs e)
+        {
+
+        }
+
+        public Exception ApplicationException { get; set; }
+        
+    }
+}
