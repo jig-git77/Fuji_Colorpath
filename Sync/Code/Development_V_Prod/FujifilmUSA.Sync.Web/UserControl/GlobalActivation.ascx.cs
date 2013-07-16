@@ -124,44 +124,37 @@ namespace FujifilmUSA.Sync.Web.UserControl
             var result = _presenterGlobalActivation.UpdateUserAuthenticationInformation();
             if (result > 0)
             {
-                _presenterGlobalActivation.GetUserType();
-                if (User.UserType == (int)UserType.XmfColorOrganizerUser)
+                _presenterGlobalActivation.UserLogin();
+                if (!IsErrorOccured)
                 {
-                    fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_PasswordSaved"), true);
-                    tbPasswordForm.Visible = false;
-                }
-                else
-                {
-                    _presenterGlobalActivation.UserLogin();
-                    if (!IsErrorOccured)
+                    if (User.LoginId != null)
                     {
-                        if (User.LoginId != null)
-                        {
-                            SessionManager.Instance.CurrentUser = User;
+                        SessionManager.Instance.CurrentUser = User;
 
-                            if (SessionManager.Instance.CurrentUser.HasProjectPermission())
-                            {
-                                FormsAuthentication.RedirectFromLoginPage(User.LoginId, false);
-                                Response.Redirect("Index.aspx");
-                            }
-                            else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
-                            {
-                                FormsAuthentication.RedirectFromLoginPage(User.LoginId, false);
-                                Response.Redirect("Settings.aspx");
-                            }
-                            else
-                            {
-                                fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
-                            }
+                        if (SessionManager.Instance.CurrentUser.HasProjectPermission())
+                        {
+                            FormsAuthentication.RedirectFromLoginPage(User.LoginId, false);
+                            Response.Redirect("Index.aspx");
+                        }
+                        else if (SessionManager.Instance.CurrentUser.HasAdminPermission())
+                        {
+                            FormsAuthentication.RedirectFromLoginPage(User.LoginId, false);
+                            Response.Redirect("Settings.aspx");
+
                         }
                         else
                         {
-                            fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
+                            fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Error_NoPermission"), false);
                         }
+                    }
+                    else
+                    {
+                        fujiStatusbar.DisplayMessage(ResourceManager.GetResourceMessage("Login_InvalidLogin"), false);
                     }
                 }
             }
         }
+
 
         #endregion
 

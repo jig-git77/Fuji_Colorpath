@@ -19,6 +19,6 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdatePassword(int loginId, string password);
         int UpdateSecurityInformation(int loginId, int securityQuestionId, string securityAnswer);
         void SendEmailToUser(User user, UserAuthenticationUpdateType updateType);
-        int GetUserType(string loginId);
+       
     }
 }

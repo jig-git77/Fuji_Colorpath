@@ -43,11 +43,6 @@ namespace FujifilmUSA.Sync.Presenter
             _viewGlobalActivation.User = userBusiness.UserLogin(_viewGlobalActivation.User.LoginId, _viewGlobalActivation.User.LoginPass, UserType.WebSiteUser);
         }
 
-        public void GetUserType()
-        {
-            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
-            userBusiness.ErrorOccured += _viewGlobalActivation.ErrorOccured;
-            _viewGlobalActivation.User.UserType = userBusiness.GetUserType(_viewGlobalActivation.User.LoginId);
-        }
+       
     }
 }

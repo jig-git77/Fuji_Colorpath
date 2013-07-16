@@ -56,7 +56,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1296" Width="761.800903320313" Height="187.199996948242" />
+		<Bounds X="307" Y="1268" Width="761.800903320313" Height="158.104263305664" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -74,7 +74,7 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Standard:</String>
+					<String>ID:</String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -82,7 +82,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1555.2" Width="786.753540039063" Height="187.199996948242" />
+		<Bounds X="307" Y="1553" Width="786.753540039063" Height="153.981033325195" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -108,7 +108,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1814.4" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="1793" Width="790.592407226563" Height="177.156387329102" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -134,7 +134,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="2073.6" Width="790.592407226563" Height="187.199996948242" />
+		<Bounds X="307" Y="2048" Width="790.592407226563" Height="163.507095336914" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -160,7 +160,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="2332.8" Width="778.293823242188" Height="180" />
+		<Bounds X="307" Y="2288" Width="778.293823242188" Height="180" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -173,7 +173,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -186,7 +186,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="650.732543945313" Y="777.599975585938" Width="2721.60009765625" Height="191.589324951172" />
+		<Bounds X="650.732516381047" Y="777.6" Width="2509.99929120464" Height="191.589324951172" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -199,7 +199,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -212,7 +212,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="802.875671386719" Y="1296" Width="2577.60009765625" Height="187.199996948242" />
+		<Bounds X="802.875677293348" Y="1260" Width="2318.22580645161" Height="171.753555297852" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -225,12 +225,12 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>[PrintStandard]</String>
+					<String>[ID]</String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="False" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -238,7 +238,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1008" Y="1555.2" Width="2361.60009765625" Height="187.199996948242" />
+		<Bounds X="548.451612903226" Y="1555.2" Width="2395.64516129032" Height="166.27961730957" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -251,7 +251,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -264,7 +264,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1121.35485839844" Y="1814.4" Width="2246.39990234375" Height="187.199996948242" />
+		<Bounds X="1121.35483870968" Y="1800" Width="1861.45161290322" Height="156.753555297852" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -277,7 +277,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -290,7 +290,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="1059.41931152344" Y="2073.6" Width="2318.39990234375" Height="187.199996948242" />
+		<Bounds X="1059.41935483871" Y="2047.74193548387" Width="2086.45161290323" Height="177.227478027344" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -303,7 +303,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -316,7 +316,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="951.032287597656" Y="2332.8" Width="2404.80004882812" Height="184.052124023438" />
+		<Bounds X="951.032258064517" Y="2289.6" Width="2040" Height="184.052124023438" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -368,7 +368,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="3484.80004882813" Y="780" Width="1160.04052734375" Height="1797.36962890625" />
+		<Bounds X="3263.38709677419" Y="780" Width="1160.04051946825" Height="1797.36962890625" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -394,7 +394,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="576.824645996094" Width="331.200012207031" Height="150" />
+		<Bounds X="4531.54309475806" Y="576.824645996094" Width="301.2498031124" Height="150" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -412,7 +412,7 @@
 			<Verticalized>False</Verticalized>
 			<StyledText>
 				<Element>
-					<String>Act.</String>
+					<String>Actual</String>
 					<Attributes>
 						<Font Family="Arial" Size="7" Bold="True" Italic="False" Underline="False" Strikeout="False" />
 						<ForeColor Alpha="255" Red="0" Green="0" Blue="0" />
@@ -420,7 +420,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="575.04638671875" Width="331.200012207031" Height="165" />
+		<Bounds X="4978.31787109375" Y="575.04638671875" Width="480" Height="165" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -446,7 +446,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="4780.7998046875" Y="788.770385742188" Width="337.736328125" Height="1786.44812011719" />
+		<Bounds X="4514.35756363407" Y="788.770385742188" Width="337.736331078313" Height="1786.44812011719" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -472,7 +472,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="5184" Y="785.220458984375" Width="331.200012207031" Height="1793.55725097656" />
+		<Bounds X="4965.05810546875" Y="785.220458984375" Width="616.113525390625" Height="1793.55725097656" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -490,7 +490,7 @@
 			<HorizontalAlignment>Center</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
 		</ImageObject>
-		<Bounds X="5040" Y="115.199996948242" Width="488.516143798828" Height="349.161285400391" />
+		<Bounds X="4916.49777910786" Y="57.9999999999999" Width="488.51612903226" Height="349.16129032258" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -516,7 +516,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="307" Y="1036.8" Width="754.976257324219" Height="187.199996948242" />
+		<Bounds X="307" Y="1013" Width="754.976257324219" Height="150" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<TextObject>
@@ -529,7 +529,7 @@
 			<IsVariable>False</IsVariable>
 			<HorizontalAlignment>Left</HorizontalAlignment>
 			<VerticalAlignment>Top</VerticalAlignment>
-			<TextFitMode>ShrinkToFit</TextFitMode>
+			<TextFitMode>None</TextFitMode>
 			<UseFullFontHeight>True</UseFullFontHeight>
 			<Verticalized>False</Verticalized>
 			<StyledText>
@@ -542,7 +542,7 @@
 				</Element>
 			</StyledText>
 		</TextObject>
-		<Bounds X="843.7822265625" Y="1036.8" Width="2534.39990234375" Height="187.199996948242" />
+		<Bounds X="843.782246251261" Y="1005.07788873488" Width="2310.48387096774" Height="171.753555297852" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ImageObject>
@@ -560,7 +560,7 @@
 			<HorizontalAlignment>Center</HorizontalAlignment>
 			<VerticalAlignment>Center</VerticalAlignment>
 		</ImageObject>
-		<Bounds X="307" Y="133.548385620117" Width="2413.80004882813" Height="426" />
+		<Bounds X="307" Y="133.548387096774" Width="2413.80004882813" Height="426" />
 	</ObjectInfo>
 	<ObjectInfo>
 		<ShapeObject>
@@ -576,6 +576,6 @@
 			<LineAlignment>Center</LineAlignment>
 			<FillColor Alpha="0" Red="255" Green="255" Blue="255" />
 		</ShapeObject>
-		<Bounds X="3412.80004882813" Y="650.503723144531" Width="15" Height="1828.42919921875" />
+		<Bounds X="3197.90322580645" Y="650.503736926665" Width="15" Height="1828.42919134325" />
 	</ObjectInfo>
 </DieCutLabel>

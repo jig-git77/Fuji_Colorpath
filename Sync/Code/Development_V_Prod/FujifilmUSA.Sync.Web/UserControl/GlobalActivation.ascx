@@ -126,7 +126,7 @@
                 </legend>
                 <ucAdminStatusbar:AdminStatusbar ID="fujiStatusbar" runat="server" 
                     Visible="False" />
-                 <table runat="server" id="tbPasswordForm">
+                 <table runat="server" >
                     <tr>
                         <td>
                             <span><asp:Localize runat="server" Text="First Name" ID="locFirstName" 

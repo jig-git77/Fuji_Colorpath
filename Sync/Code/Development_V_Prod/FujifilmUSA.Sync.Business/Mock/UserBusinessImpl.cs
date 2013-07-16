@@ -60,11 +60,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             //Do Nothing...
         }
 
-        public int GetUserType(string loginId)
-        {
-            return 0;
-        }
-
+       
         #endregion
 
         #region ITaskBase Members
