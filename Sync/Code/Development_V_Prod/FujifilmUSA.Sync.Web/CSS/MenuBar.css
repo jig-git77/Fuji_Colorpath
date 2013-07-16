@@ -1,0 +1,98 @@
+﻿ /* dock - top */
+    .dock
+    {
+        position: relative;
+        height: 30px;
+        text-align: center;
+        left: -10px;
+    }
+    .dock-container
+    {
+        position: absolute;
+        padding-left: 20px;
+    }
+    a.dock-item
+    {
+        display: block;
+        width: 40px;
+        color: #000;
+        position: absolute;
+        top: 0px;
+        text-align: center;
+        text-decoration: none;
+        font: bold 12px Arial, Helvetica, sans-serif;
+    }
+    .dock-item img
+    {
+        border: none;
+        width: 100%;
+    }
+    .dock-item span
+    {
+        display: none;
+        
+    }
+    
+    /* dock2 - bottom */
+    #dock2
+    {
+        width: 100%;
+        bottom: 0px;
+        position: absolute;
+        left: -10px;
+    }
+    .dock-container2
+    {
+        position: absolute;
+        padding-left: 20px;
+    }
+    a.dock-item2
+    {
+        display: block;
+        font: bold 12px Arial, Helvetica, sans-serif;
+        width: 40px;
+        color: #000;
+        bottom: 0px;
+        position: absolute;
+        text-align: center;
+        text-decoration: none;
+    }
+    .dock-item2 span
+    {
+        display: none;
+        padding-left: 10px;
+    }
+    .dock-item2 img
+    {
+        border: none;
+        margin: 5px 10px 0px;
+        width: 100%;
+    }
+    .overlapobject
+    {
+        position:relative;
+        z-index:1;
+    }
+    .overlapobject span
+    {
+        position:relative;
+        border-radius: 3px 3px 3px 3px;
+        z-index:1;
+        background-color: #EEEEEE;
+        font-weight: bold;
+        text-align:center;
+        padding: 3px 3px 3px 3px;
+        min-width: 90px;
+        top: 3px;
+        margin-left: -24px;
+        opacity: 0.9;
+        mozopacity: 0.9;
+        
+    }
+    .overlapobject img
+    {
+        position:relative;
+        z-index:1;
+    }
+
+

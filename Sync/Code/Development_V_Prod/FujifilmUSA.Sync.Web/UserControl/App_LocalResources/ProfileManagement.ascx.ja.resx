@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cmbSecurityQuestionResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvConfirmPasswordResource1.ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvConfirmPasswordResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvConfirmPasswordResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvPassWordResource1.ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvPassWordResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cvPassWordResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label1Resource1.Text" xml:space="preserve">
+    <value>Change Security Information_ja</value>
+  </data>
+  <data name="Label1Resource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblHeaderResource1.Text" xml:space="preserve">
+    <value>Change Password_ja</value>
+  </data>
+  <data name="lblHeaderResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblUserNameResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblUserNameResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnCancelPasswordResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnCancelPasswordResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnCancelSecurityResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnCancelSecurityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnSavePasswordResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnSavePasswordResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnSaveSecurityResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbtnSaveSecurityResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="locCancelPwdResource1.Text" xml:space="preserve">
+    <value>Cancel_ja</value>
+  </data>
+  <data name="locCancelSecurityQuestionResource1.Text" xml:space="preserve">
+    <value>Cancel_ja</value>
+  </data>
+  <data name="locConfirmPasswordRequiredResource1.Text" xml:space="preserve">
+    <value>Please provide confirm password._ja</value>
+  </data>
+  <data name="locConfirmPasswordResource1.Text" xml:space="preserve">
+    <value>Confirm Password_ja</value>
+  </data>
+  <data name="locMySettingsResource1.Text" xml:space="preserve">
+    <value>My Settings_ja</value>
+  </data>
+  <data name="locNewPasswordResource1.Text" xml:space="preserve">
+    <value>New Password_ja</value>
+  </data>
+  <data name="locPasswordRequiredResource1.Text" xml:space="preserve">
+    <value>Please provide password._ja</value>
+  </data>
+  <data name="locSavePwdResource1.Text" xml:space="preserve">
+    <value>Save_ja</value>
+  </data>
+  <data name="locSaveSecurityQuestionResource1.Text" xml:space="preserve">
+    <value>Save_ja</value>
+  </data>
+  <data name="locSecurityAnswerResource1.Text" xml:space="preserve">
+    <value>Security Answer_ja</value>
+  </data>
+  <data name="locSecurityQuestionResource1.Text" xml:space="preserve">
+    <value>Security Question_ja</value>
+  </data>
+  <data name="locUsernameResource1.Text" xml:space="preserve">
+    <value>User Name_ja</value>
+  </data>
+  <data name="rfvSecurityAnswerResource1.ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rfvSecurityAnswerResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rfvSecurityAnswerResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rfvSecurityQuestionResource1.ErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rfvSecurityQuestionResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rfvSecurityQuestionResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtConfirmPassResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtConfirmPassResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtNewPasswordResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtNewPasswordResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtSecurityAnswerResource1.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtSecurityAnswerResource1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="passwordSavedSuccess" xml:space="preserve">
+    <value>Password saved successfully!_ja</value>
+  </data>
+  <data name="securityInfoSavedSuccess" xml:space="preserve">
+    <value>Security information saved successfully!_ja</value>
+  </data>
+  <data name="selectText" xml:space="preserve">
+    <value>--Select--_ja</value>
+  </data>
+  <data name="confirmPasswordLengthText" xml:space="preserve">
+    <value>Must be 4 char in confirm password_ja</value>
+  </data>
+  <data name="passwordAverage" xml:space="preserve">
+    <value>Average_ja</value>
+  </data>
+  <data name="passwordExcellent" xml:space="preserve">
+    <value>Excellent_ja</value>
+  </data>
+  <data name="passwordLengthText" xml:space="preserve">
+    <value>Must be 4 char in password_ja</value>
+  </data>
+  <data name="passwordNotMatchText" xml:space="preserve">
+    <value>Password and comfirm password are not same._ja</value>
+  </data>
+  <data name="passwordStrong" xml:space="preserve">
+    <value>Strong_ja</value>
+  </data>
+  <data name="passwordVeryPoor" xml:space="preserve">
+    <value>Very Poor_ja</value>
+  </data>
+  <data name="passwordWeak" xml:space="preserve">
+    <value>Weak_ja</value>
+  </data>
+  <data name="spacesNotAllowedText" xml:space="preserve">
+    <value>Spaces are not allowed._ja</value>
+  </data>
+</root>

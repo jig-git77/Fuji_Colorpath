@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PopUpMaster.master.cs" Inherits="FujifilmUSA.Sync.Web.PopUpMaster" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Fujifilm Color Path</title>
+    <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
+    <script src="JS/html5.js?version=4" type="text/javascript"></script>
+    <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
