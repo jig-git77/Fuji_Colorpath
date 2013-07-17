@@ -68,16 +68,19 @@ font-family:Verdana, Tahoma; font-size:11px; font-weight:bold; color:#fff; curso
  
 /***** Start CSS For Single Measurement Report ****/
  
-.header-bg { margin:0; padding:0;}
+.header-bg {margin:0; padding:0; background:url(../Images/header-middle-bg.gif) repeat-x left top;}
+.Summarychart_header_bg {width: 263px; height: 245px; padding-top: 17px; padding-left: 12px; border: 2px solid #ccc; background:url(../Images/abChartBackGround.gif);}
+.summary-bg { margin:0; padding:0; height:22px; background:url(../Images/summary-title-bg.gif) repeat-x left top;}
+
 .header-title { margin:0; padding:0 0 0 10px; vertical-align:top; font-size:20px; color:#FFF; width:300px; line-height:43px; height:53px; display:block;}
 
-.passed-title-bg { margin:0; padding:0;  width:392px; height:30px;}
+.passed-title-bg { margin:0; padding:0;  width:392px; height:30px; background:url(../Images/passed-title-bg.gif) repeat-x left top;}
 .passed-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#2e3c2e; }
 
-.warning-title-bg { margin:0; padding:0; width:392px; height:30px;}
+.warning-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(../Images/warning-title-bg.gif) repeat-x left top;}
 .warning-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#5f602b; }
 
-.failed-title-bg { margin:0; padding:0; width:392px; height:30px;}
+.failed-title-bg { margin:0; padding:0; width:392px; height:30px; background:url(../Images/failed-title-bg.gif) repeat-x left top;}
 .failed-title-text { margin:0; padding:2px 0 0 0; font-size:18px; color:#7f1f1f; }
 
 .row-1 { margin:0; padding:0; background-color:#ececec;  }

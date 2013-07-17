@@ -2602,6 +2602,7 @@ namespace Fuji.Common
                 str = str.Replace("###PatchReport###", strBuild.ToString());
             }
             #endregion
+
             #region Assign Server
             str = str.Replace("##IMAGES##", strServer);
             #endregion
@@ -2975,11 +2976,11 @@ namespace Fuji.Common
                 DT = DS_Common.Tables[0];
 
                 if (Convert.ToInt16(DT.Rows[0]["Status"]) == 0)
-                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='failed-title-bg' style='background: url(##URLIMAGES##failed-title-bg.gif) repeat-x left top;'><tr><td width='47'><img src='##IMAGES##failed-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='failed-title-text'>Failed</td></tr></table>"; // "<img src=\"##IMAGES##ProofFailed.gif\" width='20px' height='20px' >" + "&nbspFailed";
+                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='failed-title-bg' ><tr><td width='47'><img src='##IMAGES##failed-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='failed-title-text'>Failed</td></tr></table>"; // "<img src=\"##IMAGES##ProofFailed.gif\" width='20px' height='20px' >" + "&nbspFailed";
                 else if (Convert.ToInt16(DT.Rows[0]["Status"]) == 1)
-                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='warning-title-bg' style='background: url(##URLIMAGES##warning-title-bg.gif) repeat-x left top;'><tr><td width='47'><img src='##IMAGES##warning-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='warning-title-text'>Caution</td></tr></table>"; // "<img src=\"##IMAGES##ProofWarning.gif\" width='20px' height='20px' >" + "&nbspCaution";
+                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='warning-title-bg' ><tr><td width='47'><img src='##IMAGES##warning-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='warning-title-text'>Caution</td></tr></table>"; // "<img src=\"##IMAGES##ProofWarning.gif\" width='20px' height='20px' >" + "&nbspCaution";
                 else if (Convert.ToInt16(DT.Rows[0]["Status"]) == 2)
-                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='passed-title-bg' style='background: url(##URLIMAGES##passed-title-bg.gif) repeat-x left top;'><tr><td width='40'><img src='##IMAGES##passed-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='passed-title-text'>Passed</td></tr></table>"; // "<img src=\"##IMAGES##Proofok.gif\" width='20px' height='20px' >" + "&nbspPassed";
+                    strJobStatus = "<table border='0' align='left' cellpadding='0' cellspacing='0' class='passed-title-bg' ><img src='##IMAGES##passed-icon.gif' style='margin: 7px 0 0 5px;' /></td><td class='passed-title-text'>Passed</td></tr></table>"; // "<img src=\"##IMAGES##Proofok.gif\" width='20px' height='20px' >" + "&nbspPassed";
 
                 SBStr.Replace("###JobStatus###", strJobStatus);
 
@@ -3282,11 +3283,11 @@ namespace Fuji.Common
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
                 SBStr.Replace("###DBP###", "2px");
-                SBStr.Replace("###GrayLDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray L* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_L.Jpeg") + "' height='110px' width='658px' alt='Gray L* Deviation' id='img2' /></td></tr></table>");
-                SBStr.Replace("###GrayADeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray a* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_A.Jpeg") + "' height='110px' width='658px' alt='Gray a* Deviation' id='img5' /></td></tr></table>");
-                SBStr.Replace("###GrayBDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray b* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_B.Jpeg") + "' height='110px' width='658px' alt='Gray b* Deviation' id='img6' /></td></tr></table>");
+                SBStr.Replace("###GrayLDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray L* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_L.Jpeg") + "' height='110px' width='658px' alt='Gray L* Deviation' id='img2' /></td></tr></table>");
+                SBStr.Replace("###GrayADeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray a* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_A.Jpeg") + "' height='110px' width='658px' alt='Gray a* Deviation' id='img5' /></td></tr></table>");
+                SBStr.Replace("###GrayBDeviation_GraphImage###", "<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray b* Deviation Graph</span></td></tr><tr><td ><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page2_GrayDeviation_B.Jpeg") + "' height='110px' width='658px' alt='Gray b* Deviation' id='img6' /></td></tr></table>");
 
-                SBstrGrayLABValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray Patch Values</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
+                SBstrGrayLABValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'><tr><td><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Gray Patch Values</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
 
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
@@ -3406,7 +3407,7 @@ namespace Fuji.Common
 
 
                 SBStr.Replace("###DotgainActual_GraphImage###", System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_CHRT_DotgainActual.Jpeg"));
-                SBstrDotGainValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0' style='border: SOLID 2PX #000'><tr><td align='center'><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Patch DG Data</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
+                SBstrDotGainValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0' style='border: SOLID 2PX #000'><tr><td align='center'><table width='660' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' ><img src='##IMAGES##summary-icon.png' width='12' height='11' style='margin: 2px 0 0 5px;' /><span class='summary-title1'>Patch DG Data</span></td></tr></table></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table></td></tr></table>");
 
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
@@ -3516,7 +3517,7 @@ namespace Fuji.Common
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
 
-                SBStr.Replace("###DotgainDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><span class='summary-title1'>Dotgain Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DotgainDeviation.Jpeg") + "' height='330px' width='220px' alt='Dotgain Deviation' id='img11' /></td></tr></table></td>");
+                SBStr.Replace("###DotgainDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Dotgain Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DotgainDeviation.Jpeg") + "' height='330px' width='220px' alt='Dotgain Deviation' id='img11' /></td></tr></table></td>");
 
                 SBstrDotgainDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
@@ -3562,7 +3563,7 @@ namespace Fuji.Common
             SBstrDenActual.Append("<tr class='row-1'><td class='row-content1' style='padding-left:2px'>Act</td>");
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
-                SBStr.Replace("###DensityDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><span class='summary-title1'>Density Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DensityDeviation.Jpeg") + "' height='330px' width='220px' alt='Density Deviation' id='img13' /></td></tr></table></td>");
+                SBStr.Replace("###DensityDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Density Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_DensityDeviation.Jpeg") + "' height='330px' width='220px' alt='Density Deviation' id='img13' /></td></tr></table></td>");
                 SBstrDensityDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
@@ -3609,7 +3610,7 @@ namespace Fuji.Common
             SBstrPrintActual.Append("<tr class='row-1'><td class='row-content1' style='padding-left:2px'>Act</td>");
             if (DT != null && DT.Rows.Count > 0 && DT.Rows[0][0].ToString() != "NO DATA")
             {
-                SBStr.Replace("###PrintContrastDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' style='background: url(##URLIMAGES##summary-title-bg.gif) repeat-x left top;'><span class='summary-title1'>Print Contrast Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_PrintContrastDeviation.Jpeg") + "' height='330px' width='220px' alt='Print Contrast Deviation' id='img15' /></td></tr></table></td>");
+                SBStr.Replace("###PrintContrastDeviation_GraphImage###", "<td><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td class='summary-bg' align='center' ><span class='summary-title1'>Print Contrast Deviation</span></td></tr><tr><td><img src='" + System.Web.HttpContext.Current.Server.MapPath("UploadFiles/temp/" + Sessions.UserID + "_SingleMeasurement_Page3_PrintContrastDeviation.Jpeg") + "' height='330px' width='220px' alt='Print Contrast Deviation' id='img15' /></td></tr></table></td>");
                 SBstrPrintConDeviationValue.Append("<table cellpadding='0' cellspacing='0' width='100%' border='0'>###VALUE###</table>");
                 for (int i = 0; i < DT.Rows.Count; i++)
                 {
@@ -3658,7 +3659,7 @@ namespace Fuji.Common
                 SBstrTablePageHeader.Append("<table style='width: 660px' align='center' cellpadding='0' cellspacing='0' border='0'>");
                 SBstrTablePageHeader.Append("<tr>");
                 SBstrTablePageHeader.Append("<td width='9'><img src='##IMAGES##header-left-img.gif' /></td>");
-                SBstrTablePageHeader.Append("<td class='header-bg' style='background: url(##URLIMAGES##header-middle-bg.gif) repeat-x left top;'>");
+                SBstrTablePageHeader.Append("<td class='header-bg' >");
                 SBstrTablePageHeader.Append("<table width='642' border='0' cellspacing='0' cellpadding='0'>");
                 SBstrTablePageHeader.Append("<tr>");
                 SBstrTablePageHeader.Append("<td class='header-title'>Measurement Report</td>");
@@ -3738,8 +3739,6 @@ namespace Fuji.Common
             #endregion
 
             #region Assign Server
-            //SBStr.Replace("##URLIMAGES##", System.Web.HttpContext.Current.Request.Url.ToString().Substring(0, System.Web.HttpContext.Current.Request.Url.ToString().LastIndexOf('/')) + "/Images/");
-            SBStr.Replace("##URLIMAGES##", WebSettings.ImageURL + "Images/");
             SBStr.Replace("##IMAGES##", strServer);
             #endregion
 
