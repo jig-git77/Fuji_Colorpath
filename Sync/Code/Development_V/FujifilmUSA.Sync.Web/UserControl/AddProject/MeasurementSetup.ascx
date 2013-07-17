@@ -159,7 +159,7 @@
                                           
                                         </td>
                                         <td valign="top" style="width:45%" >
-                                              <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
+                                              <span><asp:Localize Text="Optimization Chart:" runat="server" ID="locOptimizationChart" meta:resourcekey="locOptimizationChartResource1"></asp:Localize><span style="color: Red;">&nbsp*</span> </span>
                                         </td>
                                     </tr>
                                     <tr>

@@ -159,7 +159,7 @@
   <data name="rfvcOptimizationChartContainer" xml:space="preserve">
     <value>DLP調製用チャートを選択してください。</value>
   </data>
-  <data name="locOptimizationChart.Text" xml:space="preserve">
+  <data name="locOptimizationChartResource1.Text" xml:space="preserve">
     <value>DLP調整チャート：</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">

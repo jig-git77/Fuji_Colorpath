@@ -159,7 +159,7 @@
   <data name="rfvcOptimizationChartContainer" xml:space="preserve">
     <value>Please select Optimization chart._de</value>
   </data>
-  <data name="locOptimizationChart.Text" xml:space="preserve">
+  <data name="locOptimizationChartResource1.Text" xml:space="preserve">
     <value>Optimization Chart:_De</value>
   </data>
   <data name="locUVSettingsResource1.Text" xml:space="preserve">
