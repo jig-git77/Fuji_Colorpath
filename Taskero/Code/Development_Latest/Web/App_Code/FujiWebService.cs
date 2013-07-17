@@ -34,7 +34,7 @@ public class FujiWebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public XmlDocument GetSyncMeasurement(Int16 PressRunID)
+    public XmlDocument GetSyncMeasurement(Int32 PressRunID)
     {
         try
         {
@@ -55,7 +55,7 @@ public class FujiWebService : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public XmlDocument DeleteSyncMeasurement(Int16 PressRunID, String SerialNo, String FileName, Int16 MeasurementID)
+    public XmlDocument DeleteSyncMeasurement(Int32 PressRunID, String SerialNo, String FileName, Int32 MeasurementID)
     {
         try
         {
