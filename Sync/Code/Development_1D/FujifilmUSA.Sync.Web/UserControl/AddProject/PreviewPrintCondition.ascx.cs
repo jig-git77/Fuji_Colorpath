@@ -143,11 +143,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Image_ValiChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key) + "&Preview=1";
                 }
             }
-            trUVSettings.Visible = lblMeasurementDevice.Text.Contains(
-             Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis));
-            lblUVSettings.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
-                                    ? Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UV)
-                                    : Utilities.GetEnumDescriptionAttributeValue(EUVIncludedMode.UVCut);
+            trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
+                                        || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                        || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2)));
+            lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
+       
 
             lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
 

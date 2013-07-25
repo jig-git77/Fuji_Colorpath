@@ -11,7 +11,7 @@ function presentCalibrateDialog(scanner, myQuery) {
     myQuery["Prompt"] = myQuery[myQuery["Request"]];
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
-    ControlDisability(0, false, 1, true, 0, false); //------Make Measure button disable during Calbration
+    ControlDisability(0, false, 1, true, 0, false, 0, false); //------Make Measure button disable during Calbration
 }
 //
 // The "Done" callback functions take three args.  The scanner, the message
@@ -38,14 +38,15 @@ function presentCalibrateDone(scanner, msg, final) {
         if (!(msg == "OK" || msg == "CANCELLED")) {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : " + msg);
-            ControlDisability(1, false, 0, false, 0, false); //------Make Calibrate button enabled on error
+            ControlDisability(1, false, 0, false, 0, false, 0, false); //------Make Calibrate button enabled on error
         }
         else {
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Calibration Successful, Click on 'Measure Chart' button.");
-            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');          
-            jQuery("[id*='btnCancelMeasurement']").css('display', '');      
-            ControlDisability(1, false, 1, false, 0, false); //------Make Measure button disable after hitting Measure Chart button & Make Calibrate button enabled on error
+            jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
+            jQuery("[id*='btnCancelMeasurement']").css('display', '');
+            jQuery("[id*='btnRewindMeasurement']").css('display', '');
+            ControlDisability(1, false, 1, false, 0, false, 0, false); //------Make Measure button & Calibrate button enabled after calibration done
         }
     }
 }
@@ -53,6 +54,7 @@ function presentCalibrateDone(scanner, msg, final) {
 //  a callback to present instructions to the user, and a callback
 // to notify the user that the calibration is done.
 function calibrateDevice(scanner) {
+
     var myQuery = new Object();
     myQuery["CALIBRATEINSTRUCTIONS"] = "Please place i1Pro in the calibration cradle and press the i1 trigger.";
     myQuery["CALIBRATEACKNOWLEDGED"] = "Calibration In Progress.";
@@ -88,16 +90,20 @@ function presentStripDialogi1(scanner, chart, query) {
         g_SavedQuery = query;
         getChartLocation(scanner);
     } else {
-        
-        query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + ".press and hold the trigger while sliding the scanner across the strip.";
+        if (query["Request"] == "READFORWARDINSTRUCTIONS") {
+            query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + " press and hold the button while sliding the scanner across the strip.";
+        } else if (query["Request"] == "READREVERSEINSTRUCTIONS") {
+            query["Prompt"] = "Please scan strip " + chart["CurrentStrip"] + " again in reverse by pressing and hold the button while sliding the scanner across the strip.";
+        } else {
+            query["Prompt"] = "Please place the scanner over the strip " + chart["CurrentStrip"] + " press and hold the button while sliding the scanner across the strip.";
+        }
         g_SavedQuery = query;
     }
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : " + query["Prompt"]);
-
-
 }
+
 
 // This function provides an interface to fetch three corners of a chart from an iO device
 // and update the chart definition so alignment of the chart isn't important.
@@ -136,12 +142,7 @@ function presentGetPosDialog(scanner, myQuery) {
     // if (myQuery["Request"] == "GETPOSACKNOWLEDGED") {
     // RemoveModalWindow();
     // }
-    myQuery["Prompt"] = myQuery[myQuery["Request"]];
-    // presentQuery(myQuery);
-    // myQuery["Prompt"] = myQuery[myQuery["Request"]];
-    //  jQuery("[id*='lblMessage']").css('color', 'Black');
-    //jQuery("[id*='lblMessage']").html("Status : " + myQuery["Prompt"]);
-
+    myQuery["Prompt"] = myQuery[myQuery["Request"]]; 
     OnQuery(myQuery);
 }
 function OnQuery(question) {
@@ -166,9 +167,7 @@ function OnQuery(question) {
         // myQuery["Prompt"] = myQuery[myQuery["Request"]];
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : " + newHTML);
-
     }
-
 }
 
 function presentGetPosDone(scanner, query, final) {
@@ -188,41 +187,14 @@ function presentGetPosDone(scanner, query, final) {
         // for CANCELLED, you might just want to do nothing.
 
         if (query != "OK" || query == "CANCELLED") {
-            // alert("query:" + query);
-            //if (g_SavedQuery != null) {
-            // g_SavedQuery["Result"] = "CANCEL";
-            // Notify the user that we are done
-            // plugin().queryDone(g_SavedQuery);
-            //}
+              
             jQuery("[id*='lblMessage']").css('color', 'Black');
             jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
-            refreshCanvas()
-
-        }
-
-        // if (typeof final == "string") {
-        // eval(final);
-        // } else if (typeof final == "object") {
-        //    final();
-        //}
-        //if (MeasuredPatches.length > 0) MeasuredPatches.length = 0;
-        // delete (g_Chart["Result"]);
-        // delete mychart["Result"];
+            refreshCanvas();
+        }    
         return;
-
-        //if ((query != "OK" || query == "CANCELLED")) {
-        // They hit cancel so clear the primary thread too.
-        //alert("
-        //if (g_SavedQuery != null) {
-        // g_SavedQuery["Result"] = "CANCEL";
-        // Notify the user that we are done
-        //plugin().queryDone(g_SavedQuery);
-        //return;
-        //}
-
-        //alert(msg);
-        // }
     }
+
     // Save this position and move to the next corner
     if (typeof g_Chart["UpperLeft"] == "undefined") {
         g_Chart["UpperLeft"] = query["Result"];
@@ -284,9 +256,7 @@ var y1 = 0;
 // must be retriveved before the final call.
 //
 function presentScanDonei1(scanner, mychart, final) {
-    /* chirag put logic to return if lengh of measurepatch = total patches so far*/
-    //if (mychart["Size"] == MeasuredPatches.length) return;
-
+   
     // Before we finalize the request, get all the values from
     // the strip read and present them to the user.
     // This is a syncronous operation since the data is 
@@ -297,7 +267,7 @@ function presentScanDonei1(scanner, mychart, final) {
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the
         // error
-        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {
+        if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED" || backup1 == 1)) {
             //--------Play "Error - Not Matched" sound--------//
             playSound('Download/Error.wav');
             alert(mychart["Result"]);
@@ -315,6 +285,27 @@ function presentScanDonei1(scanner, mychart, final) {
                 var query = new Object();
                 query["Success"] = "Samples Complete";
                 query["Fail"] = "Failed to read samples";
+                
+                //----Start:-------Code when "Rewind" button click---------------//
+                if (backup1 == 1) {
+
+                    var nCols = mychart["NumberOfColumns"];
+                    drawCells = drawCells - nCols; //-------Here remove the last rows's total number of columns from drawcells on canvas, because we are rewinding---------//
+
+                    next = next - 1; //------Make next 1 minus, because we are backing up one row--------//                 
+                    backup1 = 0;     //-----Reset backup1 value to 0 again for normal operation----------//
+                              
+                    y1 = (next * (parseInt(area["H"]) + parseInt(distance["R"]))) + (parseInt(area["H"])); //-------With this new next value again calculate y1 for transfering it to back row and print on canvas-----//
+                
+                    g_Chart["Result"].splice((-1 * nCols), nCols); //Remove columns from back of array (so minus value) of 25th position upto 25 columns (eg., if we have 25 column chart)
+
+                    mychart["CurrentStrip"] = mychart["RowNames"][next]; //---Set this previous row to current row-----------//
+
+                    if (typeof mychart["RefBase"] != "undefined") {                      
+                        mychart["ReferencePatch"] = mychart["RefBase"].slice(next * mychart["NumberOfColumns"], (next + 1) * mychart["NumberOfColumns"]); //----Code for flipping out the patch row during reading if needed----//
+                    }
+                }
+                //-----End:----"Rewind" button code------------------------------//
 
                 var result = plugin().read(scanner, mychart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
                 if (result != "OK") {
@@ -323,10 +314,9 @@ function presentScanDonei1(scanner, mychart, final) {
                 }
             }
 
-
         }
         else {
-           //g_Chart["Result"] = null;
+            g_Chart["Result"] = null;
             delete g_Chart["Result"];
             mychart["Result"] = null;
             row = 1;
@@ -336,12 +326,11 @@ function presentScanDonei1(scanner, mychart, final) {
         }
         return;
     }
-  
+
     //
     // Now let the user know how things ended up.
     //
     var results = mychart["Result"];
-    var idx = mychart["NumberOfRows"];
 
     if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) {
         if (results.length != mychart["NumberOfColumns"]) {
@@ -416,7 +405,8 @@ function presentScanDonei1(scanner, mychart, final) {
     }
 
     // Check to see if this was the last strip to be read.
-    var next = -1;
+    next = -1; //------Reassign next's value to -1---------//
+
     if (idx < (mychart["NumberOfRows"] - 1)) {
         next = idx + 1;
     }
@@ -458,11 +448,10 @@ function presentScanDonei1(scanner, mychart, final) {
     col = results.length;
     for (j = 0; j < col; j++) {
         if (noOfCells > drawCells) {
-
-
+        
             var xx1 = startPosition + x1;
             var yy1 = startPosition + y1;
-
+            
             x1 = x1 + parseInt(area["W"]) + parseInt(distance["C"]);
 
             var canvas = document.getElementById("Canvas");
@@ -478,8 +467,12 @@ function presentScanDonei1(scanner, mychart, final) {
         }
     }
 
-    y1 = y1 + (parseInt(area["H"])) + parseInt(distance["R"]);
+    y1 = (next * (parseInt(area["H"]) + parseInt(distance["R"]))) + (parseInt(area["H"]));
 
+    if (idx == 0) {
+        ControlDisability(1, true, 1, true, 1, false, 1, false); //--------------------After 1st row is measured, enabled "Rewind" button-----------//
+    }
+  
     //
     // Now ask for the next strip, if we were not at the end
     //
@@ -506,7 +499,7 @@ function presentScanDonei1(scanner, mychart, final) {
 
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
-        ControlDisability(1, true, 1, false, 1, true); //------Make Calibrate button disable, Cancel button disabled and Measure button enabled now.
+        ControlDisability(1, true, 1, false, 1, true, 1, true); //------Make Calibrate button disable, Cancel button disabled and Measure button enabled now.
         jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');
         drawCells = 0;
         area = new Object();

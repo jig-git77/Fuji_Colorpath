@@ -125,6 +125,9 @@
         <div class="float_r">
             <input type="button" id="btnCancelMeasurement" value='<%= GetResourceString("cancelMeasurement") %>' />
         </div>
+        <div class="float_r">
+            <input type="button" id="btnRewindMeasurement" value="Rewind" />
+        </div>
         <div class="clear">
         </div>
     </div>
@@ -239,6 +242,8 @@
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
+        jQuery("[id*='btnRewindMeasurement']").css('display', 'none');
+      
         if(load('<%= ApplicationConfiguration.Instance.FujiFilmPluginVersion %>'))   //first you have to load the plugin
         {
             //Proceed further
@@ -260,30 +265,30 @@
         GetReferenceChart(jQuery("[id*='hdProjectId']").val(), jQuery("input[id$=hdReferenceChartDisplayType]").val());
     }
     jQuery(document).ready(function () {   
-
-        ControlDisability(1,false,0,false,1,true);
-
-        jQuery("[id*='btnCalibrate']").click(function () {
-     
-            ControlDisability(1,true,0,false,0,false);
-            calibrateDevice(g_ScannerList);            
+        
+        ControlDisability(1,false,1,false,1,true,1,true);
+   
+        jQuery("[id*='btnCalibrate']").click(function () {    
+       
+            ControlDisability(1,true,0,false,0,false,0,false);              
+            calibrateDevice(g_ScannerList);     
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
             if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') 
             {              
-                ControlDisability(1,true,1,true,1,false);
+                ControlDisability(1,true,1,true,1,false,1,true);
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
                 if (jQuery.trim(MeasurementName).length < 4) 
                 {
                     MeasurementDialog('<%= GetResourceString("measurementNameLengthMsg") %>', '<%= GetResourceString("errorText") %>');
-                    ControlDisability(0,false,1,false,1,true);
+                    ControlDisability(0,false,1,false,1,true,1,true);
                     return false;
                 }
                 if(('<%= (FujifilmUSA.Sync.Common.SessionManager.Instance.CurrentDlpSubOperation != FujifilmUSA.Sync.Entity.ELicenseType.Validation).ToString().ToLower() %>' == 'true') && (jQuery("input[id*='hdMeasurementLimit']").val() >= <%= ApplicationConfiguration.Instance.MeasurementsLimit %>))
                 {
                     MeasurementDialog('<%= GetResourceString("runLimitReached") %>', '<%= GetResourceString("limitReachText") %>');
-                    ControlDisability(1,false,1,false,1,true);
+                    ControlDisability(1,false,1,false,1,true,1,true);
                     return false;
                 }
                 
@@ -297,7 +302,13 @@
                           
             jQuery("[id*='lblMessage']").html("Status : Cancelling...");
             OnCancel();       
-            ControlDisability(1,false,1,false,1,true);
+            ControlDisability(1,false,1,false,1,true,1,true);
+        });
+        jQuery("[id*='btnRewindMeasurement']").click(function () {  
+                          
+            jQuery("[id*='lblMessage']").html("Status : Rewinding...");
+            OnRewind();       
+            ControlDisability(1,false,1,true,1,false,1,false);
         });
         bindMeasurementData();
         ControlVisibility();
@@ -391,7 +402,7 @@
                         bindMeasurementData();
                         StopProgressBrowserWindow();
                         jQuery("[id*='lblMessage']").html('<%= GetResourceString("statusText") %>' + " " + '<%= GetResourceString("measurementUploadedSuccess") %>');                       
-                        ControlDisability(1,false,0,false,1,true);
+                        ControlDisability(1,false,0,false,1,true,1,true);
                     },
                 error:
                     function (XMLHttpRequest, textStatus, errorThrown) {
@@ -527,7 +538,7 @@
     }
 
 
-    function ControlDisability(btnCalibrate, CalibrateFlag, btnMeasure, MeasureFlag, btnCancel, CancelFlag) {
+    function ControlDisability(btnCalibrate, CalibrateFlag, btnMeasure, MeasureFlag, btnCancel, CancelFlag, btnRewind, RewindFlag) {
         if(btnCalibrate == 1)
         {
             if(CalibrateFlag == true)
@@ -559,6 +570,17 @@
             else
             {
                 jQuery("[id*='btnCancelMeasurement']").removeAttr('disabled', '');
+            }
+        }
+        if(btnRewind == 1)
+        {
+            if(RewindFlag == true)
+            {
+                jQuery("[id*='btnRewindMeasurement']").attr('disabled', '');                
+            }
+            else
+            {
+                jQuery("[id*='btnRewindMeasurement']").removeAttr('disabled', '');            
             }
         }
     }    

@@ -88,8 +88,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (ViewState[vsIsPostBack] == null)
             {
-                BindUVSettings();
-                BindMeasurementDevice();
+                BindMeasurementDevice();           
+                BindMeasurementCount(false);
                 BindIlluminant();
                 BindObserverType();
                 ViewState[vsIsPostBack] = true;
@@ -111,9 +111,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ReferenceChartType =
                         new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
                                                         cmbAlignmentChart.SelectedItem.Text),
-                    UvIncluded =
-                        cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false,
-                    OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)
+                    OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)                
 
                 };
 
@@ -184,8 +182,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType =
                 new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
                                                 cmbAlignmentChart.SelectedItem.Text);
-            SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded =
-                cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode = short.Parse(cmbUVSettings.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount = short.Parse(cmbMeasurementCount.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode = (trReadMode.Visible == true ? cmbReadMode.SelectedValue : null);
 
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
@@ -217,6 +216,30 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             DisplayOptimizationChartImage();
         }
+
+        protected void cmbReadMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
+                                                || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point")
+            {
+                BindMeasurementCount(true);
+            }
+            else
+            {
+                BindMeasurementCount(false);
+            }
+            trMeasCount.Visible = ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
+                                                || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point");
+        }
+
+        protected void cmbUVSettings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
+                                                || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2))
+            {
+                BindReadMode();
+            }
+        }
         #endregion
 
         #region Methods        
@@ -228,15 +251,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbIlluminant.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant.ToString();
                 cmbObserver.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType.ToString();
                 cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
-                cmbUVSettings.SelectedValue =
-                    SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded
-                        ? Convert.ToInt32(EUVIncludedMode.UV).ToString()
-                        : Convert.ToInt32(EUVIncludedMode.UVCut).ToString();
+               
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
                 cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
                 cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart_SelectedIndexChanged(null, null);
+                             
+                cmbUVSettings.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();             
+                BindReadMode();
+                if (SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode != null)
+                {
+                    cmbReadMode.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReadMode.ToString();
+                }
+                cmbMeasurementCount.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementCount.ToString();
             }
         }
 
@@ -302,7 +330,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void BindOptimizationChart()
         {
             ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.OptimizationChart);
-           // MetricTargetPresetID = 0;
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -320,8 +347,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         /// </summary>
         private void BindBaseDLPChart()
         {
-            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);
-           // MetricTargetPresetID = 0;
+            ChartDisplayType = Convert.ToInt32(EReferenceChartDisType.ProfileChart);          
             _presenterMeasurementSetting.GetReferenceChartType();
 
             if (!IsErrorOccured)
@@ -388,13 +414,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 imgOptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(OptimizationChartSelectedValue);
             }
-        }      
+        }
 
         private void BindUVSettings()
         {
             cmbUVSettings.DataValueField = "Key";
             cmbUVSettings.DataTextField = "Value";
-            cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>();
+            cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>();          
+        
+            if (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] ==
+                                    (EInstrumentType.i1Sis))
+            {
+                cmbUVSettings.DataSource = Common.Utilities.GetEnumDescriptionAttributeDropdown<EUVIncludedMode>().Where(p => p.Value != "M1").ToDictionary(p => p.Key, p => p.Value);
+            }
             cmbUVSettings.DataBind();
         }
 
@@ -403,10 +435,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue) || MeasurementDevicesView == null)
             {
                 trUVSettings.Visible = false;
+                trReadMode.Visible = false;
+                trMeasCount.Visible = false;
                 return;
             }
-            trUVSettings.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] ==
-                                    EInstrumentType.i1Sis);
+            trUVSettings.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Sis) 
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1Pro2) 
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2));
+            trReadMode.Visible = (MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)                               
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2));
+            
+            trMeasCount.Visible = ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
+                                    || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point");
+            BindUVSettings();           
+        }
+
+        private void BindMeasurementCount(bool IsPro2Type)
+        {
+            cmbMeasurementCount.Items.Clear();
+            if (IsPro2Type)
+            {
+                //----1 to 5 for Patch reading for i1-Pro2 instrument type
+                cmbMeasurementCount.Items.Add(new ListItem("1", "1"));
+                cmbMeasurementCount.Items.Add(new ListItem("2", "2"));
+                cmbMeasurementCount.Items.Add(new ListItem("3", "3"));
+                cmbMeasurementCount.Items.Add(new ListItem("4", "4"));
+                cmbMeasurementCount.Items.Add(new ListItem("5", "5"));
+            }
+            else
+                //-----0 for Strip reading for all other instruments type
+                cmbMeasurementCount.Items.Add(new ListItem("0", "0"));
+        }
+
+        private void BindReadMode()
+        {
+            if (cmbUVSettings.SelectedValue == "1" || cmbUVSettings.SelectedValue == "2") //----If M1 or M2
+            {
+                cmbReadMode.Items.Clear();
+                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
+            }
+            else
+            {
+                cmbReadMode.Items.Clear();
+                cmbReadMode.Items.Add(new ListItem("Strip", "Strip"));
+                cmbReadMode.Items.Add(new ListItem("Point", "Point"));
+            }
+            cmbReadMode_SelectedIndexChanged(null, null);
         }
 
         #endregion
@@ -435,6 +509,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         public int MetricTargetPresetID { get; set; }
         #endregion
-        
+                      
     }
 }

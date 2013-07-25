@@ -549,6 +549,15 @@
   <data name="EInstrumentType_i1Sis" xml:space="preserve">
     <value>i1-Sis</value>
   </data>
+  <data name="EInstrumentType_i1IO" xml:space="preserve">
+    <value>i1-IO</value>
+  </data>
+  <data name="EInstrumentType_i1Pro2" xml:space="preserve">
+    <value>i1-Pro2</value>
+  </data>
+  <data name="EInstrumentType_i1IOPro2" xml:space="preserve">
+    <value>i1-IO-Pro2</value>
+  </data>
   <data name="EProfileRendering_eCLAbsLightenerCompensationRI" xml:space="preserve">
     <value>AbsLightenerCompensation</value>
   </data>
@@ -639,12 +648,17 @@
   <data name="ERolePermission_ModifyProject" xml:space="preserve">
     <value>Modify Project</value>
   </data>
-  <data name="EUVIncludedMode_UV" xml:space="preserve">
-    <value>UV Included</value>
-  </data>
+  
   <data name="EUVIncludedMode_UVCut" xml:space="preserve">
-    <value>UV Cut</value>
+    <value>M0</value>
   </data>
+  <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
+    <value>M1</value>
+  </data>
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
+    <value>M2</value>
+  </data>
+  
   <data name="CertificationStatusText" xml:space="preserve">
     <value>Certification</value>
   </data>

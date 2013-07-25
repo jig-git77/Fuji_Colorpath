@@ -139,11 +139,15 @@ namespace FujifilmUSA.Sync.Common
                 theCount++;
 
                 //========== Read Template ==========//
-                if (ReportType == 16) //----For G7 Validation Report
+                if (ReportType == 16) //----For G7 Opti / Validation Report + 4D G7 validation report
                 {
-                    FileName = "Templates/PrepressSingleMeasurement_G7_Vali.htm";
+                    FileName = "Templates/PrepressSingleMeasurement_G7.htm";
                 }
-                else
+                else if (ReportType == 17) //----For ISO Opti / Validation Report + 4D ISO validation report
+                {
+                    FileName = "Templates/PrepressSingleMeasurement_ISO.htm";
+                }
+                else  //-----For 4D Optimization report
                 {
                     FileName = "Templates/PrepressSingleMeasurement.htm";
                 }
@@ -259,8 +263,8 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###Location###", Location.Trim() == "" ? "&nbsp;" : Location.Trim());
                 SBStr.Replace("###DeltaEFormula###", Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["DeltaEFormula"]).Trim());
 
-                //--------For G7 Validation Report
-                if (ReportType == 16)
+                //--------For G7 / ISO Reports
+                if (ReportType == 16 || ReportType == 17)
                 {
                     SBStr.Replace("###JobStatus###", Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() == "" ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>" : (Convert.ToString(DT.Rows[0]["JobStatus"]).Contains("OK")) ? "<td class='row-title'>Meas. Status:</td><td class='row-content'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>" : "<td class='row-title'  style='color:Red;'>Meas. Status:</td><td class='row-content'  style='color:Red;'>" + Convert.ToString(DT.Rows[0]["JobStatus"]).Trim() + "</td>");
                     SBStr.Replace("###MetricPreset###", Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim() == "" ? "&nbsp;" : Convert.ToString(DT.Rows[0]["MetricTargetPresetName"]).Trim());
@@ -280,8 +284,8 @@ namespace FujifilmUSA.Sync.Common
                 SBStr.Replace("###Location###", "&nbsp;");
                 SBStr.Replace("###DeltaEFormula###", "&nbsp;");
 
-                //--------For G7 Validation Report
-                if (ReportType == 16)
+                 //--------For G7 / ISO Reports
+                if (ReportType == 16 || ReportType == 17)
                 {
                     SBStr.Replace("###JobStatus###", "<td class='row-title'>Meas. Status:</td><td class='row-content'>&nbsp;</td>");
                     SBStr.Replace("###MetricPreset###", "&nbsp;");
@@ -304,7 +308,8 @@ namespace FujifilmUSA.Sync.Common
             {
                 string strStatusImg = "";
 
-                if (ReportType == 16)   //--------For G7 Validation Report
+                //--------For G7 / ISO Reports
+                if (ReportType == 16 || ReportType == 17)
                 {
                     for (int i = 0; i < DT.Rows.Count; i++)
                     {
@@ -479,7 +484,8 @@ namespace FujifilmUSA.Sync.Common
                     SBstrDeltaEValue.Append("<tr style='height: 20px'>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='center' style='width: 25px; padding-right: 5px' class='BottomBorder'>" + strStatusImg + "</td>");
                     SBstrDeltaEValue.Append("<td valign='middle' align='left' class='BottomBorder' style='width: 160px;'>" + Convert.ToString(DT.Rows[i]["PatchType"]) + "</td>");
-                    if (IsValidation)  //--------For G7 / All Validation Report, put Tolerance
+                    //--------For G7 / ISO Reports put Tolerance
+                    if (ReportType == 16 || ReportType == 17) 
                     {
                         SBstrDeltaEValue.Append("<td valign='middle' align='center' class='BottomBorder'>" + Common.Utilities.DecimalToString(Convert.ToString(DT.Rows[i]["ΔELimit"])) + "&nbsp;</td>");
                     }

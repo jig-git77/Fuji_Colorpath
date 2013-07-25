@@ -75,16 +75,16 @@ function presentScanDoneiSis(scanner, mychart, final) {
         }
         refreshCanvas();
         jQuery("[id*='lblMessage']").css('color', 'Black');
-        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");   
-        ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled.
+        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+        ControlDisability(0, false, 1, false, 1, true, 1, true); //------Make Cancel button disabled & Measure button enabled.
         return;
     }
 
     if (typeof mychart["Result"] == "string") {
         // This type of query means we finish up with an error, so just present the error
         if (!(mychart["Result"] == "OK" || mychart["Result"] == "CANCELLED")) {          
-            refreshCanvas();   
-            ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled.
+            refreshCanvas();
+            ControlDisability(0, false, 1, false, 1, true, 1, true); //------Make Cancel button disabled & Measure button enabled.
         }
         if (typeof final == "string") {
             eval(final);
@@ -184,7 +184,7 @@ function presentScanDoneiSis(scanner, mychart, final) {
 
     jQuery("[id*='lblMessage']").css('color', 'Black');
     jQuery("[id*='lblMessage']").html("Status : Measurement Complete.");
-    ControlDisability(0, false, 1, false, 1, true); //------Make Cancel button disabled & Measure button enabled now.   
+    ControlDisability(0, false, 1, false, 1, true, 1, true); //------Make Cancel button disabled & Measure button enabled now.   
     jQuery("[id*='btnMeasureAndUploadChart']").val('Upload Measurement');   
 
     // We have to make one more call to the library.  The 

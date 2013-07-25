@@ -618,12 +618,17 @@
   <data name="Error_UserLogin" xml:space="preserve">
     <value>Error occured while validating username/password._de</value>
   </data>
-  <data name="EUVIncludedMode_UV" xml:space="preserve">
-    <value>UV Included_de</value>
-  </data>
+
   <data name="EUVIncludedMode_UVCut" xml:space="preserve">
-    <value>UV Cut_de</value>
+    <value>M0_de</value>
   </data>
+  <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
+    <value>M1_de</value>
+  </data>
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
+    <value>M2_de</value>
+  </data>
+  
   <data name="Fields_Marked_With_Are_Required" xml:space="preserve">
     <value>&lt;span&gt;Fields marked with (&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;) are Required_de&lt;/span&gt;_de</value>
   </data>

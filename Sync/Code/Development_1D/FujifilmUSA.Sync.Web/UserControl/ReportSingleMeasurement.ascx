@@ -102,7 +102,10 @@
                                 </asp:Series>
                                 <asp:Series Name="Series1" BorderWidth="0" BorderColor="Gray" Color="Gray" 
                                                             IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar">
-                                </asp:Series>    
+                                </asp:Series>   
+                                <asp:Series Name="Series2" BorderWidth="0"  Color="Transparent" 
+                                                            IsVisibleInLegend="False" ChartArea="ChartArea1" ChartType="Bar" MarkerImage="~/Images/Chart-Red-Image-Vertical.png">
+                                </asp:Series> 
                             </Series>
                             <ChartAreas>
                                 <asp:ChartArea Name="ChartArea1" BackColor="White" >

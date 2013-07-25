@@ -42,14 +42,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (Page.IsPostBack == false)
             {
-                //-----Set Validation Report Preview image------//
+                btn_GeneratePDF.ImageUrl = "../Images/Sync DLP Report_preview.jpg";         //For Sync 4D Projects             
                 if (IsVerification)
                 {
-                    btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";
+                    btn_GeneratePDF.ImageUrl = "../Images/Validation Report_preview.jpg";   //For Sync1D and Sync4D Validation Projects
                 }
                 else if (IsSync1DType)
                 {
-                    btn_GeneratePDF.ImageUrl = "../Images/Sync1D Report_preview.jpg";
+                    btn_GeneratePDF.ImageUrl = "../Images/Sync1D Report_preview.jpg";       //For Sync1D Projects
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             // === Set all parameters to generate pdf file === //              
 
             Common.ReportPDF objReportPDF = new Common.ReportPDF();
-            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement;
+            objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement_ISO;
             objReportPDF.PDFPath = Server.MapPath("UploadFiles/Report_PDF/");
             objReportPDF.PDF_NAME = SessionManager.Instance.CurrentUser.UserId + "_ReportSingleMeasurement.PDF";
             objReportPDF.DS_Common = Ds;
@@ -96,6 +96,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             else
             {
                 objReportPDF.ReportName = "DLP Optimization Report";
+                objReportPDF.ReportType = (int)enumReportType.ReportSingleMeasurement; //Only in 4D Optimization part
             }
             objReportPDF.MakePDF();
 
@@ -342,6 +343,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ChartResultSummary_Delta.Visible = true;
                 ChartResultSummary_Delta.Series[0].Points.Clear();
                 ChartResultSummary_Delta.Series[1].Points.Clear();
+                ChartResultSummary_Delta.Series[2].Points.Clear();
 
                 #region //========== Declarations ==========//
                 // === Series0 to display Thresold value === //
@@ -355,7 +357,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries1.XValueType = ChartValueType.Int32;
                 objSeries1.YValueType = ChartValueType.String;             
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
-               
+
+                // === Series2 to display red marker on Thresold value === //
+                Series objSeries2 = (Series)ChartResultSummary_Delta.Series[2];
+                objSeries2.XValueType = ChartValueType.Int32;
+                objSeries2.YValueType = ChartValueType.String;
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";           
+                            
                 #endregion
 
                 #region //========== ChartArea Settings ==========//
@@ -385,62 +393,87 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Limit with red marker === //
                 if (DT != null && DT.Rows.Count > 0)
                 {
-                    List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔE"].ToString()));
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔH"].ToString()));
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["GrayΔE"].ToString()));
-                    levels.Add(Convert.ToDecimal(DT.Rows[0]["NinetyFiveΔE"].ToString()));
-                    DtELimit = levels.Max() + 2;
-                    DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+                    if (!IsVerification && !IsSync1DType) //--For Sync4D Optimization only
+                    {
+                        #region //-----for Sync4D
+                        List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["Avg_ΔE"].ToString()));
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["Max_ΔE"].ToString()));
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔE"].ToString()));
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["PriΔH"].ToString()));
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["GrayΔE"].ToString()));
+                        levels.Add(Convert.ToDecimal(DT.Rows[0]["NinetyFiveΔE"].ToString()));
+                        DtELimit = levels.Max() + 2;
+                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
 
-                    //---------Normal Binding Graph-------//
-                    if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 0);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0);
+                        //---------Normal Binding Graph-------//
+                        if (Convert.IsDBNull(DT.Rows[0]["Avg_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 0);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Avg_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 0);
 
-                    if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 1);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 1);
+                        if (Convert.IsDBNull(DT.Rows[0]["Max_ΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 1);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["Max_ΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 1);
 
-                    if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 2);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 2);
+                        if (Convert.IsDBNull(DT.Rows[0]["PriΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 2);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 2);
 
-                    if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 3);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 3);
+                        if (Convert.IsDBNull(DT.Rows[0]["PriΔH"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 3);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["PriΔH"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 3);
 
-                    if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 4);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 4);
+                        if (Convert.IsDBNull(DT.Rows[0]["GrayΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 4);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["GrayΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 0, 4);
 
-                    if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, 0, 0, 5);
-                    else
-                        BindDeltaValueACTTHValue(objSeries0, objSeries1, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), 5);
+                        if (Convert.IsDBNull(DT.Rows[0]["NinetyFiveΔE"]) || Convert.IsDBNull(DT.Rows[0]["ΔELimit"]))
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, 0, 0, 0, 5);
+                        else
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[0]["NinetyFiveΔE"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)),0, 5);
 
-                    // === Save Chart Image after generating image with proper data === //
-                    string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
-                    ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
+                        // === Save Chart Image after generating image with proper data === //
+                        string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
+                        ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
+                        #endregion
+                    }
+                    else   //---For Sync 1D ISO or 4D ISO validation
+                    {
+                        List<decimal> levels = new List<decimal>();  //-----------Get ΔElimit by getting maxΔE / maxΔE2000 plus add 2 more points
+                        for (int i = 0; i < DT.Rows.Count; i++)
+                        {
+                            levels.Add(Convert.ToDecimal(DT.Rows[i]["MeasuredValue"].ToString()));
+                        }
+                        DtELimit = levels.Max() + 2;
+                        DtELimit = (DtELimit > 4 ? DtELimit : DtELimit + 1);
+
+                        //---------Normal Binding Graph-------//
+                        for (int i = 0; i < DT.Rows.Count; i++)
+                        {
+                            BindDeltaValueACTTHValue(objSeries0, objSeries1, objSeries2, Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["MeasuredValue"].ToString())), Utilities.DecimalRound(Convert.ToDouble(DtELimit)), Utilities.DecimalRound(Convert.ToDouble(DT.Rows[i]["TargetValue"].ToString())), 0);
+                        }
+
+                        // === Save Chart Image after generating image with proper data === //
+                        string FileName = "UploadFiles/temp/" + SessionManager.Instance.CurrentUser.UserId + "_" + Path.GetFileName(ChartResultSummary_Delta.ImageLocation) + "." + ChartResultSummary_Delta.ImageType;
+                        ChartResultSummary_Delta.SaveImage(Server.MapPath(FileName));
+                    }
                 }
                 #endregion
           
         }
-        private void BindDeltaValueACTTHValue(Series objSeries0, Series objSeries1, double ACT, double TH, int Index)
-        {            
+        private void BindDeltaValueACTTHValue(Series objSeries0, Series objSeries1, Series objSeries2, double ACT, double TH, double Tol, int Index)
+        {
+            Double Y1, Y2, Y3;
+            Y1 = Y2 = Y3 = 0;
 
-                Double Y1, Y2;
-                Y1 = Y2 = 0;
-
-                Y1 = (Convert.ToString(TH) == "" ? 0 : Convert.ToDouble(TH.ToString()));
-                Y2 = (Convert.ToString(ACT) == "" ? 0 : Convert.ToDouble(ACT.ToString()));
+            Y1 = (Convert.ToString(TH) == "" ? 0 : Convert.ToDouble(TH.ToString()));
+            Y2 = (Convert.ToString(ACT) == "" ? 0 : Convert.ToDouble(ACT.ToString()));
+            Y3 = (Convert.ToString(Tol) == "" ? 0 : Convert.ToDouble(Tol.ToString()));
 
                 // === When Actual value is not available then no series will display and no marker will display
                 if (Y2 == 0)
@@ -453,6 +486,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 objSeries1.Points.AddXY((Double)0, Y2);
 
                 objSeries0.Points[Index].BackGradientStyle = GradientStyle.DiagonalRight;
+                if (IsSync1DType || IsVerification) //-----For Sync1D projects or validation projects (1D / 4D)
+                {
+                    objSeries2.Points.AddXY((Double)0, Y3); //------Red marker image plot for Tolerance
+                }
 
                 SeriesActual.Points[Index]["PointWidth"] = "0.8";
 

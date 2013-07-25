@@ -136,6 +136,7 @@
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\green.png" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
+    <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D.png" />
     <Content Include="Images\Sync1D_Certified.png" />
     <Content Include="Images\DymoPrintPreviewIcon.png" />
@@ -254,7 +255,8 @@
     <Content Include="JS\MenuBar.js" />
     <Content Include="SourceProfileManagement.aspx" />
     <Content Include="Templates\PrepressSingleMeasurement.htm" />
-    <Content Include="Templates\PrepressSingleMeasurement_G7_Vali.htm" />
+    <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
+    <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\style.css" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
@@ -2021,11 +2023,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Measurement.ascx.resx" />
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\Measurement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\Measurement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="UserControl\App_LocalResources\Measurement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddUserManagement.ascx.resx" />
@@ -2179,7 +2187,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

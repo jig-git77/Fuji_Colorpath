@@ -74,10 +74,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 new MeasurementSetting()
                                     {
                                         ObserverType = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ObserverType"),
-                                        Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),
-                                        UvIncluded = DataReader.ReadBoolean(dsProject.Tables[2].Rows[0], "UVIncluded"),
+                                        Illuminant = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "Illuminant"),  
+                                        UVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "UVMode"),
+                                        MeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementCount"),
+                                        ReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "ReadMode"),
                                         MeasurementDeviceId =
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "MeasurementDeviceID"),
+                                        InstrumentTypeId =
+                                            DataReader.ReadShort(dsProject.Tables[2].Rows[0], "InstrumentTypeID"),
                                         ReferenceChartType = new KeyValuePair<short, string>(
                                             DataReader.ReadShort(dsProject.Tables[2].Rows[0], "ReferenceChartTypeID"),
                                             DataReader.ReadString(dsProject.Tables[2].Rows[0], "ChartName")),
@@ -558,7 +562,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.Notes,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
-                                                     project.MeasurementSetting.UvIncluded,
+                                                     project.MeasurementSetting.UVMode,
+                                                     project.MeasurementSetting.MeasurementCount,
+                                                     project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
                                                      project.MeasurementSetting.ReferenceChartType.Key,
                                                      project.DeviceFamilyProfilerOptionId,
@@ -643,7 +649,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() {ParameterName = "@Notes", Size = 500, Type = DbType.String, Value = project.PrintCondition.Notes},
                                                      new Parameters() {ParameterName = "@ObserverType", Type = DbType.Int16, Value = project.MeasurementSetting.ObserverType},
                                                      new Parameters() {ParameterName = "@Illuminant", Type = DbType.Int16, Value = project.MeasurementSetting.Illuminant},
-                                                     new Parameters() {ParameterName = "@UVIncluded", Type = DbType.Boolean, Value = project.MeasurementSetting.UvIncluded},
+                                                     new Parameters() {ParameterName = "@UVMode", Type = DbType.Int16, Value = project.MeasurementSetting.UVMode},
+                                                     new Parameters() {ParameterName = "@MeasurementCount", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementCount},
+                                                     new Parameters() {ParameterName = "@ReadMode", Type = DbType.String, Value = project.MeasurementSetting.ReadMode},
+
                                                      new Parameters()
                                                          {ParameterName = "@MeasurementDeviceID", Type = DbType.Int16, Value = project.MeasurementSetting.MeasurementDeviceId},
                                                      new Parameters()
@@ -698,23 +707,22 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         chartData.MeasureDeviceSrNo = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "MeasureDeviceSrNo");
                         chartData.ActivationKey =
                             Utilities.GetMd5Hash(DateTime.Now.Year.ToString() + DateTime.Now.DayOfYear.ToString() + "+yg92s+" + chartData.MeasureDeviceSrNo);
-                        var uvIncluded = DataReader.ReadBoolean(dsReferenceChart.Tables[0].Rows[0], "UVIncluded");
+                        var UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode");
+                       
                         chartData.DeviceSetting = new MeasurementDevice
                                                       {
                                                           SerialNumber = chartData.MeasureDeviceSrNo,
                                                           MeasurementSettings = new MeasurementSetting()
                                                                                     {
                                                                                         IlluminantName =
-                                                                                            DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0],
-                                                                                                                  "IlluminantType"),
+                                                                                            DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "IlluminantType"),
                                                                                         ObserverTypeName =
                                                                                             Utilities.GetValueFromDescription<EObserverType>(
-                                                                                                DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0],
-                                                                                                                      "ObserverType")),
-                                                                                        UvIncludedName =
-                                                                                            uvIncluded
-                                                                                                ? EUVIncludedMode.UV.ToString()
-                                                                                                : EUVIncludedMode.UVCut.ToString(),
+                                                                                                DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
+                                                                                        UvIncludedName = ((UVMode == 2) ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString()),
+                                                                                        UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode"),
+                                                                                        ReadMode = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ReadMode"),
+                                                                                        MeasurementCount = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "MeasurementCount"),
                                                                                         DensityType = EDensityType.ANSIT.ToString()
                                                                                     }
                                                       };

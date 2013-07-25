@@ -9,7 +9,6 @@ namespace FujifilmUSA.Sync.Entity
         public string ObserverTypeName { get; set; }
         public short Illuminant { get; set; }
         public string IlluminantName { get; set; }
-        public bool UvIncluded { get; set; }
         public string UvIncludedName { get; set; }
         public string DensityType { get; set; }
         public short? MeasurementDeviceId { get; set; }
@@ -18,6 +17,10 @@ namespace FujifilmUSA.Sync.Entity
         public KeyValuePair<short, string> OptReferenceChartType { get; set; }
         public KeyValuePair<short, string> VReferenceChartType { get; set; }
         public KeyValuePair<int, string> MetricTargetPreset { get; set; }
-        public string dEMethod { get; set; }       
+        public string dEMethod { get; set; }
+        public short UVMode { get; set; }
+        public short MeasurementCount { get; set; }
+        public string ReadMode { get; set; }
+        public short? InstrumentTypeId { get; set; }
     }
 }

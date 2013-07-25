@@ -317,8 +317,32 @@ namespace FujifilmUSA.Sync.Common
             return string.Empty;
         }
 
+        //public static string GetDescriptionFromValue<T>(int value)
+        //{
+        //    var type = typeof(T);
+        //    foreach (var field in type.GetFields())
+        //    {
+        //        var attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+        //        if (attribute != null)
+        //        {
+        //            if (attribute.v == description)
+        //                return field.GetValue(null).ToString();
+        //        }
+        //        else
+        //        {
+        //            if (field.Name == description)
+        //                return field.GetValue(null).ToString();
+        //        }
+        //    }
+        //    return string.Empty;
+        //}
 
         public static Dictionary<int, string> GetEnumDescriptionAttributeDropdown<T>()
+        {
+            return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description));
+        }
+
+        public static Dictionary<int, string> GetEnumDescriptionAttributeDropdown1<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<int>().ToDictionary(value => value, value => GlobalResourceManager.Instance.GetGlobalResourceString(((DescriptionAttribute)Attribute.GetCustomAttribute(typeof(T).GetField(Enum.GetName(typeof(T), value)), typeof(DescriptionAttribute))).Description));
         }

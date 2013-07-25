@@ -123,11 +123,40 @@
                                         </td>
                                     </tr>
                                     <tr id="trUVSettings" runat="server">
-                                        <td runat="server">
+                                        <td >
                                             <span><asp:Localize runat="server" Text="UV Settings:" ID="locUVSettings"></asp:Localize></span>
                                         </td>
+                                        <td >
+                                            <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" 
+                                                CssClass="select" AutoPostBack="true" 
+                                                onselectedindexchanged="cmbUVSettings_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                     <tr id="trReadMode" runat="server">
+                                        <td >
+                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="Localize2"></asp:Localize></span>
+                                        </td>
+                                        <td >
+                                            <asp:DropDownList ID="cmbReadMode" runat="server" Width="200px" 
+                                                CssClass="select" AutoPostBack="true" 
+                                                onselectedindexchanged="cmbReadMode_SelectedIndexChanged">
+                                                <asp:ListItem Text="Strip" Value="Strip" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="Point" Value="Point"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                     <tr id="trMeasCount" runat="server">
                                         <td runat="server">
-                                            <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" CssClass="select">
+                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="Localize1"></asp:Localize></span>
+                                        </td>
+                                        <td runat="server">
+                                            <asp:DropDownList ID="cmbMeasurementCount" runat="server" Width="200px" CssClass="select">                                           
+                                             <asp:ListItem Text="1" Value="1" Selected="True"></asp:ListItem>
+                                              <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                               <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                                 <asp:ListItem Text="5" Value="5"></asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
                                     </tr>

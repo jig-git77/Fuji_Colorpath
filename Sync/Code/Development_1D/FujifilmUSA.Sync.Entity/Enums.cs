@@ -71,10 +71,12 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EUVIncludedMode
     {
-        [Description("EUVIncludedMode_UVCut")]//UV Cut
+        [Description("EUVIncludedMode_UVCut")]//M0
         UVCut = 0,
-        [Description("EUVIncludedMode_UV")]//UV Included
-        UV = 1
+        [Description("EUVIncludedMode_PlusUV")]//M1
+        UVPlus = 1,
+        [Description("EUVIncludedMode_UV")]//M2
+        UV = 2
     }
 
     public enum EObserverType
@@ -175,7 +177,16 @@ namespace FujifilmUSA.Sync.Entity
         i1Pro = 1,
 
         [Description("EInstrumentType_i1Sis")]//i1-Sis
-        i1Sis = 2
+        i1Sis = 2,
+
+        [Description("EInstrumentType_i1IO")]//i1-IO
+        i1IO = 3,
+
+        [Description("EInstrumentType_i1Pro2")]//i1-Pro2
+        i1Pro2 = 4,
+
+        [Description("EInstrumentType_i1IOPro2")]//i1-IO-Pro2
+        i1IOPro2 = 5
     }
 
     public enum EProfilerOption
@@ -382,22 +393,23 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum enumReportType
     {
-        BranchSummaryReport = 1,
-        DeviceReport = 2,
-        ShiftVariabilityReport = 3,
-        DeviceVariabilityReport = 4,
-        ColorDetailReport = 5,
-        PatchDetailReport = 6,
-        ProductivityReport = 7,
-        ReportPerformanceSummary = 8,
-        ReportTargetMeasurement = 9,
-        ReportJobRunCertificationProcess = 10,
-        ReportJobRunCertificationNonProcess = 11,
-        ReportPressMakeReady = 12,
+        //BranchSummaryReport = 1,
+        //DeviceReport = 2,
+        //ShiftVariabilityReport = 3,
+        //DeviceVariabilityReport = 4,
+        //ColorDetailReport = 5,
+        //PatchDetailReport = 6,
+        //ProductivityReport = 7,
+        //ReportPerformanceSummary = 8,
+        //ReportTargetMeasurement = 9,
+        //ReportJobRunCertificationProcess = 10,
+        //ReportJobRunCertificationNonProcess = 11,
+        //ReportPressMakeReady = 12,
         ReportSingleMeasurement = 13,
-        CPSPrintStandardsReport = 14,
-        CPSPrintStandardsReportISO = 15,
-        ReportSingleMeasurement_G7_Vali = 16
+        //CPSPrintStandardsReport = 14,
+        //CPSPrintStandardsReportISO = 15,
+        ReportSingleMeasurement_G7 = 16,
+        ReportSingleMeasurement_ISO = 17
     }
 
     public enum ValidationRuleType

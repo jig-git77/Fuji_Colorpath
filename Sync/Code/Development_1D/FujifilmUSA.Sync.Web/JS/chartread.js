@@ -57,6 +57,10 @@ var g_ScannerList = new Object();
 var g_Chart = new Object();
 g_Chart["Result"] = new Array();
 
+
+var next = 0;
+var backup1 = 0;
+
 MeasuredPatches = [];
 /*
 //constructor for CIELAB object
@@ -177,7 +181,6 @@ function presentScannerList(ScannerList) {
 
 
     for (var i = 0; i < ScannerList.length; i++) {
-
         if (ScannerList[i]["State"] == "Deleted" || ScannerList[i]["Serial"] != g_Chart["MeasurementDeviceSerial"]) {
 
             jQuery("[id*='btnCalibrate']").css('display', 'none');
@@ -191,6 +194,7 @@ function presentScannerList(ScannerList) {
             jQuery("[id*='btnCalibrate']").css('display', 'none');
             jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
             jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
+            jQuery("[id*='btnRewindMeasurement']").css('display', 'none');
 
         }
         else {
@@ -206,8 +210,10 @@ function presentScannerList(ScannerList) {
                 jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
                 jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
                 jQuery("[id*='btnCancelMeasurement']").css('display', '');
-                ControlDisability(0, false, 1, false, 0, false); //------Make Measure button enabled.
-              
+                if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) { //--------------Only display "Rewind" button in "i1-Pro" mode-----------//
+                    jQuery("[id*='btnRewindMeasurement']").css('display', '');
+                }              
+                ControlDisability(0, false, 1, false, 0, false, 0, false); //------Make Measure button enabled.
                 return;
             }
         }
@@ -470,24 +476,35 @@ function upload() {
 }
 
 function OnCancel() {
-
-    //g_Question = question;
-
-   
-    g_SavedQuery["Result"] = 'CANCEL';
-     //g_Question["Result"] = 'CANCEL';
+    g_SavedQuery["Result"] = 'CANCEL'; 
     var cancelstat = plugin().queryDone(g_SavedQuery);
-   // alert (cancelstat);
-    
+     
     if (cancelstat == "Unhandled") {
         // If unhandled clean up this stuff here...
         jQuery("[id*='lblMessage']").css('color', 'Black');
         jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
        // delete mychart["Result"];
     }
-
 }
 
+function OnRewind() {
+
+    if (next > 0) { //---------Call "Rewind" functionality if we are in a middle of the measurement and want to do rewind-------------//
+        g_SavedQuery["Result"] = 'REWIND';
+        backup1 = 1;
+      
+        var cancelstat = plugin().queryDone(g_SavedQuery);
+
+        var query = new Object();
+        query["Success"] = "Samples Complete";
+        query["Fail"] = "Failed to read samples";
+        query["Backup"] = "Backup";      
+    }
+    else { //----------If we are in rewinding mode at row 1 and someone click "Rewind" button again and again, then stick with the row 1 re-measure mode, because row 1 is the last row to measure------//
+        jQuery("[id*='lblMessage']").css('color', 'Black');
+        jQuery("[id*='lblMessage']").html("Status : Please place the scanner over the strip row 1 press and hold the button while sliding the scanner across the strip.");
+    }
+}
 
 // From here on down is the modal window code.
 //var _rulesAdded = false;
