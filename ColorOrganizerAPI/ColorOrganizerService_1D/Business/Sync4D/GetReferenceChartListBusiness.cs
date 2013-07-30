@@ -47,20 +47,20 @@ namespace FujifilmUSA.ColorOrganizerService.Business
                                                                                         NumOfCols = x.NumOfCols,
                                                                                         NumOfRows = x.NumOfRows,
                                                                                         TotalPatches = x.TotalPatches,
-                                                                                        ProjectType = new ProjectType()
-                                                                                                          {
-                                                                                                              ProjectTypeId = x.ProjectType.ProjectTypeId,
-                                                                                                              ProjectTypeName = x.ProjectType.ProjectTypeName
-                                                                                                          },
+                                                                                        //ProjectType = new ProjectType()
+                                                                                        //                  {
+                                                                                        //                      ProjectTypeId = x.ProjectType.ProjectTypeId,
+                                                                                        //                      ProjectTypeName = x.ProjectType.ProjectTypeName
+                                                                                        //                  },
                                                                                         MeasurementDevice =
                                                                                             (EMeasurementDevice)
                                                                                             Enum.Parse(typeof (EMeasurementDevice),
-                                                                                                       x.InstrumentType.InstrumentTypeId.ToString()),
-                                                                                        ChartType = (x.ChartDisplayType > 0)
-                                                                                                        ? (EReferenceChartType)
-                                                                                                          Enum.Parse(typeof (EReferenceChartType),
-                                                                                                                     x.ChartDisplayType.ToString())
-                                                                                                        : EReferenceChartType.None,
+                                                                                                       x.InstrumentType.InstrumentTypeId.ToString())//,
+                                                                                        //ChartType = (x.ChartDisplayType > 0)
+                                                                                        //                ? (EReferenceChartType)
+                                                                                        //                  Enum.Parse(typeof (EReferenceChartType),
+                                                                                        //                             x.ChartDisplayType.ToString())
+                                                                                        //                : EReferenceChartType.None,
                                                                                     }));
                                                 response.Count = response.ReferenceChartList.Count;
                                                 response.Message = Common.GetSuccessMessage();

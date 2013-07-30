@@ -21,27 +21,27 @@ namespace FujifilmUSA.ColorOrganizerService.Business
 
             request.IsAuthenticationRequired = true;
 
-            ExceptionHandling.LogMethod(request,
-                                        () =>
-                                        {
-                                            var userBusiness = new UserBusiness();
-                                            userBusiness.UserLogin(request.UserName, request.UserPassword);
+            //ExceptionHandling.LogMethod(request,
+            //                            () =>
+            //                            {
+            //                                var userBusiness = new UserBusiness();
+            //                                userBusiness.UserLogin(request.UserName, request.UserPassword);
 
-                                            var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
-                                           projectBusiness.ErrorOccured += ErrorOccured;
-                                           response.ValidationInfoId = projectBusiness.StoreTemporaryValidationInformation(
-                                               request.JobName,
-                                                request.Customer,
-                                                request.PageOrSurface,
-                                                request.JDFJobId,                                                
-                                                request.ProjectId,
-                                                request.TempValidationId,
-                                                request.SilverlightPostUrl);
+            //                                var projectBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+            //                               projectBusiness.ErrorOccured += ErrorOccured;
+            //                               response.ValidationInfoId = projectBusiness.StoreTemporaryValidationInformation(
+            //                                   request.JobName,
+            //                                    request.Customer,
+            //                                    request.PageOrSurface,
+            //                                    request.JDFJobId,                                                
+            //                                    request.ProjectId,
+            //                                    request.TempValidationId,
+            //                                    request.SilverlightPostUrl);
 
-                                            response.Count = 1;
-                                            response.Message = Common.GetSuccessMessage();
-                                        }, "Store Temp Validation Information");
-            response.CalculateAndLogRequestTime("StoreTempValidationInformation");
+            //                                response.Count = 1;
+            //                                response.Message = Common.GetSuccessMessage();
+            //                            }, "Store Temp Validation Information");
+            //response.CalculateAndLogRequestTime("StoreTempValidationInformation");
 
             return response;
         }

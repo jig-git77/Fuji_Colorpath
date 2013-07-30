@@ -39,21 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FujifilmUSA.Sync.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Business.dll</HintPath>
+    <Reference Include="FujifilmUSA.Sync.Business">
+      <HintPath>..\..\..\Reference_1D\FujifilmUSA.Sync.Business.dll</HintPath>
     </Reference>
-    <Reference Include="FujifilmUSA.Sync.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Common.dll</HintPath>
+    <Reference Include="FujifilmUSA.Sync.Common">
+      <HintPath>..\..\..\Reference_1D\FujifilmUSA.Sync.Common.dll</HintPath>
     </Reference>
-    <Reference Include="FujifilmUSA.Sync.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.DataAccess.dll</HintPath>
+    <Reference Include="FujifilmUSA.Sync.DataAccess">
+      <HintPath>..\..\..\Reference_1D\FujifilmUSA.Sync.DataAccess.dll</HintPath>
     </Reference>
-    <Reference Include="FujifilmUSA.Sync.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Reference\FujifilmUSA.Sync.Entity.dll</HintPath>
+    <Reference Include="FujifilmUSA.Sync.Entity">
+      <HintPath>..\..\..\Reference_1D\FujifilmUSA.Sync.Entity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Http">
       <HintPath>..\..\..\Reference\Microsoft.Http.dll</HintPath>
