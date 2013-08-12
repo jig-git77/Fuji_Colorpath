@@ -229,6 +229,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Label lblSourceProfile;
         
         /// <summary>
+        /// Div_Spectrophotometer_Options control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Spectrophotometer_Options;
+        
+        /// <summary>
         /// locSpectrophotometer control.
         /// </summary>
         /// <remarks>
@@ -479,6 +488,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMPresetDescription;
+        
+        /// <summary>
+        /// Div_Alignment_Chart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div_Alignment_Chart;
         
         /// <summary>
         /// locAlignmentChart1 control.

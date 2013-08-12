@@ -184,13 +184,16 @@
     <value>i1-Sis_de</value>
   </data>
   <data name="ELicenseType_DLP" xml:space="preserve">
-    <value>DLP Optimization_de_de</value>
+    <value>DLP Optimization_de</value>
   </data>
   <data name="ELicenseType_IccProfiling" xml:space="preserve">
-    <value>ICC Profiling_de_de</value>
+    <value>ICC Profiling_de</value>
   </data>
   <data name="ELicenseType_InkOptimization" xml:space="preserve">
-    <value>Ink Optimization_de_de</value>
+    <value>Ink Optimization_de</value>
+  </data>
+  <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
+    <value>Ink Optimization Source_de</value>
   </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALID_De_de</value>

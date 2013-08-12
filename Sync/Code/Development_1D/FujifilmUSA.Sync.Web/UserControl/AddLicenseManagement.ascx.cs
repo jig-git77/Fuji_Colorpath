@@ -64,7 +64,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
-            chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);           
+            chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
+            chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);  
         }
         private void Bindcompany()
         {
@@ -111,7 +112,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -133,7 +134,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (chkDlp.Checked)
                 License.LicenseType.Add(ELicenseType.DLP);
             if (chkInk.Checked)
-                License.LicenseType.Add(ELicenseType.InkOptimization);           
+                License.LicenseType.Add(ELicenseType.InkOptimization);
+            if (chkInk_Source.Checked)
+                License.LicenseType.Add(ELicenseType.InkOptimizationSource);
 
             if (LId == 0) // Add New company
             {
@@ -170,7 +173,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                             break;
                                                         case ELicenseType.InkOptimization:
                                                             chkInk.Checked = true;
-                                                            break;                                                       
+                                                            break;         
+                                                        case ELicenseType.InkOptimizationSource:
+                                                            chkInk_Source.Checked = true;
+                                                            break;
                                                     }
                                                 });
                 txtLicenseDescription.Text = License.LicenseDesc;

@@ -332,10 +332,13 @@ namespace FujifilmUSA.Sync.Entity
         DLP = 2,
         [Description("ELicenseType_InkOptimization")]//Ink Optimization
         InkOptimization = 3,
+        [Description("ELicenseType_InkOptimization_Source")]//Ink Optimization Source
+        InkOptimizationSource = 4,
         [Description("ELicenseType_Validation")]//Color Validation
-        Validation = 4,
+        Validation = 5,
         [Description("ELicenseType_IccProfiling")]//ICC Profiling
-        IccProfiling = 5
+        IccProfiling = 6
+       
     }
 
     public enum UserType

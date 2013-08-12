@@ -12,6 +12,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterSaveWindow _presenterSaveWindow;
         private const string _recDownloadChartNotAvailable = "downloadChartNotAvailable";
         private const string _recSaveAs = "saveAs";
+        private const string _recSaveProjInkOptSource = "SavePrintCondition";
 
         public SaveWindow()
         {
@@ -28,6 +29,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             if (!IsPostBack)
             {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type, then don't display Download Chart option (since there is no charts in this type of project).
+                {
+                    Tr_DownloadChart.Visible = false;
+                    Page.Title = GetResourceString(_recSaveProjInkOptSource);
+                }
                 if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentProject.ProjectName))
                 {
                     txtProjectName.Text = SessionManager.Instance.CurrentProject.ProjectName;
@@ -43,34 +49,52 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.ProjectName = txtProjectName.Text;
             SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
-            _presenterSaveWindow.SaveProject();
-            if (!IsErrorOccured)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If  "Ink Optimization Source" project type
             {
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
-                {
-                    _presenterSaveWindow.GetProjectDetailWithVerification();
-                }
-                else
+                _presenterSaveWindow.SaveProject_InkOptSource(); //---Call save project function, w/o any ref charts details
+                if (!IsErrorOccured)
                 {
                     _presenterSaveWindow.GetProjectDetail();
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+                    Utilities.PopupWindowsRedirect(this, "InkOptSourceMiddle.aspx");
                 }
-                WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
-                SessionManager.Instance.CurrentProject = Project;
-                SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
-                if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+               
+            }
+            else //-----------For all other project types
+            {
+                _presenterSaveWindow.SaveProject();
+
+                if (!IsErrorOccured)
                 {
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
-                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
-                }
-                else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
-                {
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
-                    Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
-                }
-                else
-                {
-                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
-                    Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    {
+                        _presenterSaveWindow.GetProjectDetailWithVerification();
+                    }
+                    else
+                    {
+                        _presenterSaveWindow.GetProjectDetail();
+                    }
+                    WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
+                    if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                        Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                    }
+                    else if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
+                        Utilities.PopupWindowsRedirect(this, "Analyze.aspx");
+                    }
+                    else
+                    {
+                        SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
+                        Utilities.PopupWindowsRedirect(this, "Measurement.aspx");
+                    }
                 }
             }
         }

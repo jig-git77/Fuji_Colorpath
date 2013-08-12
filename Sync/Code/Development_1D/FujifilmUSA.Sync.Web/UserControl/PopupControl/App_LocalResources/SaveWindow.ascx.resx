@@ -177,4 +177,7 @@
   <data name="saveAs" xml:space="preserve">
     <value>Save As</value>
   </data>
+  <data name="SavePrintCondition" xml:space="preserve">
+    <value>Save Print Condition</value>
+  </data>
 </root>

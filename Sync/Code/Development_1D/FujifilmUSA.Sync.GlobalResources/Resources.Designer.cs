@@ -367,6 +367,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ink Optimization Source.
+        /// </summary>
+        internal static string ELicenseType_InkOptimization_Source {
+            get {
+                return ResourceManager.GetString("ELicenseType_InkOptimization_Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INVALID.
         /// </summary>
         internal static string ELicenseType_None {

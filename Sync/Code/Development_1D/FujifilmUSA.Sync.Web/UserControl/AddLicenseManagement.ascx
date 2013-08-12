@@ -127,7 +127,9 @@
                                         <asp:CheckBox runat="server" ID="chkDlp" CssClass="checkListBox" 
                                             meta:resourcekey="chkDlpResource1"/>
                                         <asp:CheckBox runat="server" ID="chkInk" CssClass="checkListBox" 
-                                            meta:resourcekey="chkInkResource1"/>                                       
+                                            meta:resourcekey="chkInkResource1"/>    
+                                        <asp:CheckBox runat="server" ID="chkInk_Source" CssClass="checkListBox"/>
+                                                                       
                                     </div>
                                     <div style="float: left">
                                     </div>

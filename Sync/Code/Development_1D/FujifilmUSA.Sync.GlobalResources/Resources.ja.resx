@@ -186,6 +186,9 @@
   <data name="ELicenseType_InkOptimization" xml:space="preserve">
     <value>Ink Optimization_ja</value>
   </data>
+  <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
+    <value>Ink Optimization Source_ja</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALID_ja</value>
   </data>

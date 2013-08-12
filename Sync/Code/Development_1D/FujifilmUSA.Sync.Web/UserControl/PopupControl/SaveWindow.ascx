@@ -87,7 +87,7 @@
                 </div>
             </td>
         </tr>
-        <tr>
+        <tr id="Tr_DownloadChart" runat="server">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
                     <div class="section_top">

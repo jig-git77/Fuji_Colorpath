@@ -402,7 +402,29 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                                            ProfilerOptionValue = x.ProfilerOptionValue,
                                                                        }));
             }
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
+            {
+              //----Pass dummy data-----//
+                SessionManager.Instance.CurrentProject.MeasurementSetting =
+                       new MeasurementSetting()
+                       {
+                           Illuminant = 1,
+                           ObserverType = 1,
+                           MeasurementDeviceId = null,
+                           ReferenceChartType = new KeyValuePair<short, string>(0, " "),
+                           OptReferenceChartType = new KeyValuePair<short, string>(0, " "),
+                           UVMode = 0,
+                           MeasurementCount = 0,
+                           ReadMode = null
+                       };
+
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
+            }
+            else
+            {
+                SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            }
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
         #endregion

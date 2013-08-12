@@ -193,7 +193,7 @@
             <td style="width: 0px">
             </td>
             <td valign="top" style="width: 320px">
-                <div style="display: block;">
+                <div id="Div_Spectrophotometer_Options" runat="server" style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">
@@ -426,7 +426,7 @@
             <td style="width: 0px">
             </td>
             <td valign="top">
-                <div style="display: block;">
+                <div id="Div_Alignment_Chart" runat="server" style="display: block;">
                     <div class="section_small_top">
                         &nbsp;</div>
                     <div class="section_small_middle">

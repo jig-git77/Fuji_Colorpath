@@ -99,63 +99,90 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lblSourceProfile.Text = SessionManager.Instance.CurrentProject.SourceProfile.ProfileName;
 
             DeviceFamilyProfilerOptionId = SessionManager.Instance.CurrentProject.DeviceFamilyProfilerOptionId;
-            IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
-            ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
-            ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
-            MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
-            V_MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID;
-            Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
-            V_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
-            MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
-            _presenterPreviewPrintCondition.GetPreviewPrintCondition();
-            if (!IsErrorOccured)
-            {
-                lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
-                lblIlluminant.Text = Data["illuminantId"];
-                lblObserver.Text = Data["observerTypeId"];
-                lblAlignmentChart.Text = Data["referenceChartTypeId"];
 
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measurement and Validation setup pages.
+            {
+                IlluminantId = ObserverTypeId = ReferenceChartTypeId = Opt_ReferenceChartTypeId = V_ReferenceChartTypeId = MetricTargetPresetId = 0;
+                MeasurementDeviceId = V_MeasurementDeviceId  = 0;
+            }
+            else
+            {
+                IlluminantId = SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant;
+                ObserverTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType;
+                ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key;
+                MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId;
+                V_MeasurementDeviceId = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID;
+                Opt_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key;
+                V_ReferenceChartTypeId = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key;
+                MetricTargetPresetId = Convert.ToInt16(SessionManager.Instance.CurrentProject.MetricTargetPresetId);
+            }
+            _presenterPreviewPrintCondition.GetPreviewPrintCondition();
+
+            if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.InkOptimizationSource) //---If not "Ink Optimization Source" project type, then display all tabs.
+            {
+                if (!IsErrorOccured)
                 {
-                    lblMSelectedPresets.Text = Data["metricTargetPresetName"];
-                    lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
-                    dvMetricPreset.Visible = true;
-                    dvOptionPreset.Visible = false;
+                    lblMeasurementDevice.Text = Data["MeasurementDeviceId"];
+                    lblIlluminant.Text = Data["illuminantId"];
+                    lblObserver.Text = Data["observerTypeId"];
+                    lblAlignmentChart.Text = Data["referenceChartTypeId"];
+
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    {
+                        lblMSelectedPresets.Text = Data["metricTargetPresetName"];
+                        lblMPresetDescription.Text = Data["metricTargetPresetDesc"];
+                        dvMetricPreset.Visible = true;
+                        dvOptionPreset.Visible = false;
+                    }
+                    else
+                    {
+                        lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
+                        lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
+                        dvMetricPreset.Visible = false;
+                        dvOptionPreset.Visible = true;
+                    }
+
+                    imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
+                    lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
+                    if (Opt_ReferenceChartTypeId != 0)
+                    {
+                        lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
+                        Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
+                    }
+                    if (V_ReferenceChartTypeId != 0)
+                    {
+                        lblValiChart.Text = Data["v_referenceChartTypeId"];
+                        Image_ValiChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key) + "&Preview=1";
+                    }
                 }
-                else
+                trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
+                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
+                                            || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2)));
+                lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
+
+
+                lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
+
+                if (SessionManager.Instance.CurrentProject.EnabledValidation) //-------If project has Validation enabled, only then display Validation panel.
+                {
+                    Table_Validation.Visible = true;
+                    Div_ValidationChart.Visible = true;
+                    lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
+                }
+            }
+            else        //---If "Ink Optimization Source" project type, then only display "Description" and "Option Presets" tabs.
+            {
+                if (!IsErrorOccured)
                 {
                     lblSelectedPresets.Text = Data["deviceFamilyProfilerOptionId"];
                     lblPresetDescription.Text = Data["deviceFamilyProfilerOptionDesc"];
-                    dvMetricPreset.Visible = false;
-                    dvOptionPreset.Visible = true;
                 }
-
-                imgChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(ReferenceChartTypeId) + "&Preview=1";
-                lblVali_MeaDevice.Text = Data["V_MeasurementDeviceId"];
-                if (Opt_ReferenceChartTypeId != 0)
-                {
-                    lblOptimizationChart.Text = Data["opt_referenceChartTypeId"];
-                    Image_OptimizationChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key) + "&Preview=1";
-                }
-                if (V_ReferenceChartTypeId != 0)
-                {
-                    lblValiChart.Text = Data["v_referenceChartTypeId"];
-                    Image_ValiChart.ImageUrl = "ShowImage.aspx?id=" + Convert.ToString(SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key) + "&Preview=1";
-                }
-            }
-            trUVSettings.Visible = (lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Sis))
-                                        || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1Pro2))
-                                        || lblMeasurementDevice.Text.Contains(Common.Utilities.GetEnumDescriptionAttributeValue(EInstrumentType.i1IOPro2)));
-            lblUVSettings.Text = Enum.GetName(typeof(EUVIncludedMode), SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode);
-       
-
-            lblEnableValidation.Text = SessionManager.Instance.CurrentProject.EnabledValidation.ToString();
-
-            if (SessionManager.Instance.CurrentProject.EnabledValidation) //-------If project has Validation enabled, only then display Validation panel.
-            {
-                Table_Validation.Visible = true;
-                Div_ValidationChart.Visible = true;
-                lblVali_Metric.Text = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Value;
+                dvMetricPreset.Visible = false;
+                dvOptionPreset.Visible = true;
+                Div_Spectrophotometer_Options.Visible = false;
+                Div_Alignment_Chart.Visible = false;
+                Div_OptChart.Visible = false;
+                Div_ValidationChart.Visible = false;
             }
         }
 

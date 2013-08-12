@@ -186,6 +186,9 @@
   <data name="ELicenseType_InkOptimization" xml:space="preserve">
     <value>Ink Optimization</value>
   </data>
+  <data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
+    <value>Ink Optimization Source</value>
+  </data>
   <data name="ELicenseType_None" xml:space="preserve">
     <value>INVALID</value>
   </data>
