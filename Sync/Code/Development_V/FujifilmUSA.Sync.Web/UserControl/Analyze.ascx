@@ -488,53 +488,51 @@
                                                         Text='<%# Eval("MeasurementStatus") %>'></asp:Label>
                                                 </div>
                                             </ItemTemplate>
-
-
-                                        </asp:TemplateField>   
+                                        </asp:TemplateField> 
+                                          
                                         <asp:BoundField DataField="MetricTargetPresetName" HeaderText="Metric Preset:" 
                                             HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
                                             meta:resourcekey="BoundFieldResource2"> 
-
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="PrintStandardType" HeaderText="Print Standard:" 
                                             HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
-                                            meta:resourcekey="BoundFieldResource3">                                                                   
-
+                                            meta:resourcekey="BoundFieldResource3">   
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="MeasurementID" HeaderText="Measurement ID:"  
                                             HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
-                                            meta:resourcekey="BoundFieldResource4">                                       
-
+                                            meta:resourcekey="BoundFieldResource4">   
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="MeasurementDate" HeaderText="Timestamp:"  
                                             HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
                                             meta:resourcekey="BoundFieldResource5">
-
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="Customer" HeaderText="Customer:" 
                                             HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
-                                            meta:resourcekey="BoundFieldResource6">                                        
-
+                                            meta:resourcekey="BoundFieldResource6">   
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="dEMethod" HeaderText="ΔE Type:" 
                                             HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
                                             meta:resourcekey="BoundFieldResource7">
-
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="PageOrSurface" HeaderText="Page/Surface:" 
-                                            HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
+                                            HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
                                             meta:resourcekey="BoundFieldResource8">
-
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="JDFJobId" HeaderText="JDF Job ID:" 
                                             HeaderStyle-CssClass="Summary_Left_Alt" ItemStyle-CssClass="Summary_Right_Alt" 
                                             meta:resourcekey="BoundFieldResource9">
-
                                         </asp:BoundField>
+
                                         <asp:BoundField DataField="Notes" HeaderText="Notes:"  
                                             HeaderStyle-CssClass="Summary_Left" ItemStyle-CssClass="Summary_Right" 
-                                            meta:resourcekey="BoundFieldResource10">                                       
-
+                                            meta:resourcekey="BoundFieldResource10">  
                                         </asp:BoundField>
                                     </Fields>
                                 </asp:DetailsView>
