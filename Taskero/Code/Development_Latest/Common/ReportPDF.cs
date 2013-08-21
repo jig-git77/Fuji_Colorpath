@@ -4106,16 +4106,18 @@ namespace Fuji.Common
             currentTable = DS_Common.Tables[0];
             if (currentTable != null && currentTable.Rows.Count > 0)
             {
+                SBStr.Replace("###ProjectName###", Convert.ToString(currentTable.Rows[0]["ProjectName"]));
                 SBStr.Replace("###PressName###", Convert.ToString(currentTable.Rows[0]["PressName"]));
                 SBStr.Replace("###BranchName###", Convert.ToString(currentTable.Rows[0]["BranchName"]));
-                SBStr.Replace("###BranchLocation###", Convert.ToString(currentTable.Rows[0]["BranchLocation"]));
+                SBStr.Replace("###CompanyName###", Convert.ToString(currentTable.Rows[0]["CompanyName"]));
                 SBStr.Replace("##RunNo##", Convert.ToString(currentTable.Rows[0]["RunCount"]));
             }
             else
             {
+                SBStr.Replace("###ProjectName###", "&nbsp;");
                 SBStr.Replace("###PressName###", "&nbsp;");
                 SBStr.Replace("###BranchName###", "&nbsp;");
-                SBStr.Replace("###BranchLocation###", "&nbsp;");
+                SBStr.Replace("###CompanyName###", "&nbsp;");
             }
             #endregion
 
@@ -5096,7 +5098,7 @@ namespace Fuji.Common
                 SBStr.Replace("###ProjectName###", Convert.ToString(currentTable.Rows[0]["ProjectName"]));
                 SBStr.Replace("###PressName###", Convert.ToString(currentTable.Rows[0]["PressName"]));
                 SBStr.Replace("###BranchName###", Convert.ToString(currentTable.Rows[0]["BranchName"]));
-                SBStr.Replace("###BranchLocation###", Convert.ToString(currentTable.Rows[0]["BranchLocation"]));
+                SBStr.Replace("###CompanyName###", Convert.ToString(currentTable.Rows[0]["CompanyName"]));
                 SBStr.Replace("##RunNo##", Convert.ToString(currentTable.Rows[0]["RunCount"]));
                 objOutputType = (Enums.OutputType)Enum.Parse(typeof(Enums.OutputType), Convert.ToString(currentTable.Rows[0]["OutputTypeID"]));
 
@@ -5169,7 +5171,7 @@ namespace Fuji.Common
                 SBStr.Replace("###ProjectName###", "&nbsp;");
                 SBStr.Replace("###PressName###", "&nbsp;");
                 SBStr.Replace("###BranchName###", "&nbsp;");
-                SBStr.Replace("###BranchLocation###", "&nbsp;");
+                SBStr.Replace("###CompanyName###", "&nbsp;");
             }
             #endregion
 

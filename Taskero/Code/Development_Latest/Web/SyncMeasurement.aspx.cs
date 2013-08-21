@@ -52,7 +52,7 @@ public partial class SyncMeasurement : System.Web.UI.Page
             if (e.CommandName == "Delete")
             {
                 CPSyncMeasurementData ObjSyncMeasurement = new CPSyncMeasurementData();
-                ObjSyncMeasurement.MeasurementID = Convert.ToInt16(e.Item.Cells[2].Text); 
+                ObjSyncMeasurement.MeasurementID = Convert.ToInt32(e.Item.Cells[2].Text); 
                 ObjSyncMeasurement.uspDeleteMeasurement();
                 BindSyncMeasurementData();
                 
