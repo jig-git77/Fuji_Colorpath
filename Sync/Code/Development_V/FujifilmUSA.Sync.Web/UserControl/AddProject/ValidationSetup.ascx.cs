@@ -103,6 +103,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID = (short)MeasurementDeviceSelectedValue;
             SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset = new KeyValuePair<int, string>(Convert.ToInt32(cmbMetricTargetPreset.SelectedItem.Value), cmbMetricTargetPreset.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;    
             this.Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
