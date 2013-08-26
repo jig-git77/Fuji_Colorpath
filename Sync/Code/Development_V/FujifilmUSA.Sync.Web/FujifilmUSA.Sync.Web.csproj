@@ -69,7 +69,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Solution References\Telerik.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Web.UI.Skins">
+    <Reference Include="Telerik.Web.UI.Skins, Version=2011.3.1305.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Solution References\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -2288,7 +2289,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
