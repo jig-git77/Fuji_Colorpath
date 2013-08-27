@@ -80,6 +80,11 @@
                                         meta:resourcekey="locViewLastAnalysisResource1"></asp:Localize>
 </span>
                                     </asp:LinkButton>
+                                    <asp:LinkButton ID="lbtnViewDetail" runat="server" CssClass="gray_bt" Visible="false" onclick="lbtnViewDetail_Click" >
+                                      
+                                         <span><asp:Localize runat="server" Text="View Details"></asp:Localize>
+                                        </span>
+                                    </asp:LinkButton>
                                 </div>
                                 <div class="buttonleft">
                                     <asp:LinkButton ID="lbtnClose" runat="server" OnClientClick="javascript: CloseClosePrintConditionWindow(); return false;"

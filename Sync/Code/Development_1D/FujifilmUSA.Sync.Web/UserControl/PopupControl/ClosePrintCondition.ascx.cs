@@ -47,10 +47,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblClosePrintConditionMessage.Text = string.Format(GetResourceString(_recprintOptionsText), Request.QueryString["ProjectName"]);
 
-                //----------------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
-                if (CurrentLicenseType == ELicenseType.InkOptimization)
+                if (CurrentLicenseType == ELicenseType.InkOptimization) //-------If LicenseTypeID = 3 (Ink Optimization), then they can not create optimize runs, they has to close after 1st run--------------------//
                 {
                     lbtnReOptimize.Visible = false;
+                }
+                else if (CurrentLicenseType == ELicenseType.InkOptimizationSource) //-------If LicenseTypeID = 4 (Ink Optimization Source), then they can not create optimize runs, they has to close after 1st run--------------------//
+                {
+                    lbtnReOptimize.Visible = false;
+                    lbtnViewLastAnalysis.Visible = false;
+                    lbtnViewDetail.Visible = true;
                 }
             }
         }
@@ -146,6 +151,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
 
         }
+
+        protected void lbtnViewDetail_Click(object sender, EventArgs e)
+        {
+            if (Request.QueryString["ProjectId"] != null)
+            {
+                ProjectId = Convert.ToInt32(Request.QueryString["ProjectId"]);
+                _presenterClosePrintCondition.GetProjectDetail();
+                if (!IsErrorOccured)
+                {
+                    SessionManager.Instance.CurrentProject = Project;
+                    SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
+                    SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
+                   
+                    SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
+                    Utilities.PopupWindowsRedirect(this, "Export.aspx");
+                }
+            }
+        }
+
         protected void lbtnDownloadCurrentDLP_Click(object sender, EventArgs e)
         {
             string DLPName = "Profile.icc";
@@ -189,5 +213,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public string DeviceName { get; set; }
 
         #endregion
+
+      
     }
 }

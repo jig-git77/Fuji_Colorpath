@@ -23,12 +23,20 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private PresenterAnalyze _presenterAnalyze;
         public DateTime EndDate;
         private const string _recDLPText = "dlpText";
-        private const string _recDLPMsgText = "dlpMsgText";
+        private const string _recDLPMsgText = "dlpMsgText";            
 
-         protected override void OnInit(EventArgs e)
+        public string CreateDLPUpdateProgressClientID
+        {
+            get { return updateProgress.ClientID; }
+        }
+        public string UpdateProgressClientID
+        {
+            get { return ((UpdateProgress)Page.Master.FindControl("UpdateProgress")).ClientID; }
+        }
+      
+        protected override void OnInit(EventArgs e)
         {
             _presenterAnalyze = new PresenterAnalyze(this);
-            //_presenterGlobal = new PresenterGlobal();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,7 +55,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 EndDate = System.DateTime.Now;
                 DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                 DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                _presenterAnalyze.CreateDestinationAndDlp();
+                _presenterAnalyze.CreateDlp();
 
                 if (!IsErrorOccured)
                 {

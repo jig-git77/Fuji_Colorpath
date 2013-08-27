@@ -104,6 +104,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 IlluminantId = ObserverTypeId = ReferenceChartTypeId = Opt_ReferenceChartTypeId = V_ReferenceChartTypeId = MetricTargetPresetId = 0;
                 MeasurementDeviceId = V_MeasurementDeviceId  = 0;
+                if (SessionManager.Instance.CurrentOptimizeRun != null && SessionManager.Instance.CurrentOptimizeRun.HasProfile)
+                {
+                    lnkbtnSavePrintCondition.Visible = false;
+                }
             }
             else
             {

@@ -161,5 +161,20 @@ namespace FujifilmUSA.Sync.Presenter
             _viewAnalyze.DTSpreadSplineRangeChartData = measurementBusiness.GetSpreadSplineRangeChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
             _viewAnalyze.DTMaxSpreadChartData = measurementBusiness.GetMaxSpreadChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
+
+        public void CreateDlp()
+        {
+            var optimizeRunBusiness = BusinessFactory<IOptimizeRunBusiness>.CreateObject();
+            optimizeRunBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
+            optimizeRunBusiness.
+                CreateDeviceLinkProfile(
+                    _viewAnalyze.ProjectId,
+                    _viewAnalyze.OptimizeRunId,
+                    _viewAnalyze.MeasurementIds,
+                    _viewAnalyze.DestinationProfileDescription,
+                    _viewAnalyze.DlpDescription,
+                    Convert.ToInt32(EOptimizeRunStatus.Closed),
+                    DateTime.Now);
+        }
     }
 }

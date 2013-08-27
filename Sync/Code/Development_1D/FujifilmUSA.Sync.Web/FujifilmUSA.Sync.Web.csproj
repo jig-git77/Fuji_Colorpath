@@ -134,6 +134,7 @@
     <Content Include="Images\activity-validation-rules-icon.png" />
     <Content Include="Images\activity-validation-rules.png" />
     <Content Include="Images\green.png" />
+    <Content Include="Images\InkOptimizeSource.png" />
     <Content Include="Images\Sync1D Report_preview.jpg" />
     <Content Include="Images\Sync1D Report_preview_G7.jpg" />
     <Content Include="Images\Sync1D.png" />
@@ -2211,7 +2212,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
+      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -677,6 +677,57 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetDeviceLinkProfile"));
             return data == DBNull.Value ? null : (byte[])data;
         }
+
+        public void CreateDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime)
+        {
+            //----This code is for Source to Source DLP generation-----------//
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var sourceProfile =
+                        BusinessFactory<IProjectBusiness>.
+                            CreateObject().
+                            GetSourceProfile(projectId);                  
+
+                    var request = new CreateDeviceLinkProfileRequest()
+                    {
+                        SourceProfile = new IccProfile() { ProfileData = sourceProfile },                       
+                        DlpOptions = new List<Parameter>()
+                    };
+              
+                    var profilerOptionBusiness = BusinessFactory<IProjectBusiness>.CreateObject();
+                 
+                    var dlpOptions = profilerOptionBusiness.GetProjectOption(projectId, EProfileType.DeviceLinkProfile);
+                    foreach (KeyValuePair<string, string> option in dlpOptions)
+                    {
+                        request.DlpOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+                    request.DlpOptions.Add(new Parameter() { Name = Common.ProfileDescriptionKey, Value = dlpDescription });
+                  
+                    using (var client = new ProfilerClient())
+                    {
+                        var response = client.CreateDeviceLinkProfile(request);
+                        if (response.DeviceLinkProfile.ProfileData == null)
+                        {
+                            throw new Exception("Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
+                        }
+                        DataAccessFactory.
+                           Instance.
+                           ExecuteProcedure(
+                               "CPSync4D.UpdateInitialDlp",
+                               new object[]
+                                    {
+                                        optimizeRunId,                                       
+                                        response.DeviceLinkProfile.ProfileData,
+                                        status,
+                                        endDateTime
+                                    });
+                    }
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_CreateInitialDestinationAndDeviceLinkProfiles"));
+        }
+
         #endregion
 
         #region ITaskBase Members

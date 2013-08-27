@@ -28,5 +28,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         EOptimizeRunStatus Get1DLastRunStatus(int OptimizeRunId);
         void Delete1DOptimizeRun(int OptimizeRunID, int ProjectID, int MasterRunID, EOptimizeRunStatus RunStatus);
         void Delete1DOptimizeRunDLP(int OptimizeRunID, int ProjectID);
+
+        void CreateDeviceLinkProfile(int projectId, int optimizeRunId, List<int> measurementIds, string destinationDescription, string dlpDescription, int status, DateTime endDateTime);
     }
 }

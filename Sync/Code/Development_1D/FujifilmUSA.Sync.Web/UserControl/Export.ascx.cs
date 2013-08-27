@@ -48,7 +48,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Download;
                 header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc");
                 lbtnMeasure.Visible = (SessionManager.Instance.CurrentProject.CurrentDisplayStatus != ECurrentProjectStatus.Edit);
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //----Sync1D Case
                 {
                     trExportViewForSync1D.Visible = true;
                     trAdvancedDownload.Visible = false;
@@ -56,7 +56,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 else
                 {
-                    trAdvancedDownload.Visible = true;
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then skip Measure button and Advanced Download button (since we don't have desctination profile in this case).
+                    {
+                        trAdvancedDownload.Visible = false;
+                        lbtnMeasure.Visible = false;
+                        Div_Chart.Visible = false;
+                    }
+                    else  //----Sync4D or Ink Optimization case
+                    {
+                        trAdvancedDownload.Visible = true;
+                    }
                 }
                 if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                 {

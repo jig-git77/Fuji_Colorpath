@@ -159,6 +159,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Service References\CPSyncService\CPSync.wsdl" />
     <None Include="Service References\CPSyncService\CPSync.xsd">
       <SubType>Designer</SubType>
@@ -179,6 +180,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateDeviceLinkProfileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateG7AlignmentCurveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateISOAlignmentCurveResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ProfilerService\FujifilmUSA.Sync.Business.ProfilerService.CreateSourceProfileResponse.datasource">
@@ -224,9 +231,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ProfilerService\Profiler.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\CPSyncService\CPSync.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -240,6 +244,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ProfilerService\Profiler.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

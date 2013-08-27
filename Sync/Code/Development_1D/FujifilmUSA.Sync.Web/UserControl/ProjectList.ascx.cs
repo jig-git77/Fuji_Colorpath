@@ -257,6 +257,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         case ELicenseType.InkOptimization:
                             operationImageURL = @"../Images/InkOptimize.png";
                             break;
+                        case ELicenseType.InkOptimizationSource:
+                            operationImageURL = @"../Images/InkOptimizeSource.png";
+                            break;
                         case ELicenseType.Validation:
 
                             break;

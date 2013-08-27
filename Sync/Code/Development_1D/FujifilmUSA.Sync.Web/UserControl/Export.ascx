@@ -106,6 +106,7 @@
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
+                                            <div id="Div_Chart" runat="server">
                                             <tr>
                                                 <td>
                                                     <span><asp:Localize Text="Download Chart and Print through DLP Workflow :" 
@@ -123,6 +124,7 @@
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
+                                            </div>
                                         </tbody>
                                     </table>
                                 </div>
