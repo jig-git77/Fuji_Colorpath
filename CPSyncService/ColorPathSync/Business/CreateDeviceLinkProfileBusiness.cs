@@ -1,6 +1,9 @@
 ﻿using System;
-using ColorPathSync.DataContracts;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using ColorPathSync.MessageContracts;
+using ColorPathSync.DataContracts;
 
 namespace ColorPathSync.Business
 {
@@ -8,6 +11,7 @@ namespace ColorPathSync.Business
     {
         public static CreateDeviceLinkProfileResponse CreateDeviceLinkProfile(CreateDeviceLinkProfileRequest request)
         {
+            //----Use this fuction for Source to Source DLP creation-----//
             var response = new CreateDeviceLinkProfileResponse()
             {
                 DeviceLinkProfile = new IccProfile()
@@ -17,33 +21,23 @@ namespace ColorPathSync.Business
                 response.Message = "Please provide source profile";
                 response.Severity = MessageSeverity.Error;
                 return response;
-            }
-
-            if (request.DestinationProfile == null || request.DestinationProfile.ProfileData == null)
-            {
-                response.Message = "Please provide destination profile";
-                response.Severity = MessageSeverity.Error;
-                return response;
-            }
+            }                     
 
             TYPE_p_void profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
             TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
-            TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
-            TYPE_p_void destProf = CrossXColor.CLNewICCProfileRef();
+            TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();         
 
             try
             {
                 var err = CrossXColor.CLNoErr;
-                request.Options.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                request.DlpOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                 err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                 err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
-
-                Curve.CopyProfileInMemory(request.SourceProfile.ProfileData, ref srcProf);
-                Curve.CopyProfileInMemory(request.DestinationProfile.ProfileData, ref destProf);
+               
+                Curve.CopyProfileInMemory(request.SourceProfile.ProfileData, ref srcProf);           
 
                 err = CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
-                //err = CrossXColor.CLSetProfilerOption(profiler, "SrcProfile", "C:\\Data\\Projects\\Fujifilm\\CPSyncService\\ColorPathSyncTest\\DataFiles\\gracol2006_320_gcrV4Z2.icc");
-                err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", destProf);
+                err = CrossXColor.CLSetOptionProfile(profiler, "DstProfile", srcProf);
 
                 // calc profile in memory
                 err = CrossXColor.CLCalcProfile(profiler, prof);
@@ -66,7 +60,6 @@ namespace ColorPathSync.Business
                 CrossXColor.CLFreeCLProfilerRef(profiler);
                 CrossXColor.CLFreeICCProfileRef(prof);
                 CrossXColor.CLFreeICCProfileRef(srcProf);
-                CrossXColor.CLFreeICCProfileRef(destProf);
             }
             return response;
         }
