@@ -167,12 +167,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
             DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
             _presenterMeasurementSetting.GetMeasurementDevice();
-            if (SessionManager.Instance.CurrentColorOrgRequest != null)
-            {
-                MeasurementDevices = MeasurementDevices.
-                    Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).
-                    ToList();
-            }
+            //if (SessionManager.Instance.CurrentColorOrgRequest != null)
+            //{
+            //    MeasurementDevices = MeasurementDevices.
+            //        Where(x => x.InstrumentTypeId == SessionManager.Instance.CurrentColorOrgRequest.MeasurementDeviceTypeId).
+            //        ToList();
+            //}
             if (!IsErrorOccured)
             {
                 cmbMeasurementDevice.DataValueField = "MeasurementDeviceId";
