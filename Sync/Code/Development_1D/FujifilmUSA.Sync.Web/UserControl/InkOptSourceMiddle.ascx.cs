@@ -41,7 +41,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           //----Code to generate DLP just after hitting Save button, w/o clicking on "Create DLP" button on this page-----//
+            //if (!Page.IsPostBack)
+            //{
+            //    lbtnDownloadAndSaveDLP_Click(sender, e);
+            //}
         }
 
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
@@ -54,7 +58,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 EndDate = System.DateTime.Now;
                 DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
                 _presenterAnalyze.CreateDlp();
 
                 if (!IsErrorOccured)

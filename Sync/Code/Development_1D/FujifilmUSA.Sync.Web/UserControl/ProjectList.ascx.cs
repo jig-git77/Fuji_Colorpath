@@ -181,14 +181,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         btnSelect.Attributes.Add("onclick", "javascript: return false;");
 
                     imgStatus.ImageUrl = ResolveUrl("../Images/Project_Certify.png");
-                    break;
+                    break;                   
             }
          
             //Decide and set image URL based on conditions
             SetOperationImageURL(btnSelect, project.LicenseType, project.Status);
             SetValidationImageURL(imgbtnVarification, project);
 
-            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject))
+            if (!SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.CreateDeleteProject) || project.LicenseType == ELicenseType.InkOptimizationSource) //-------------No Delete project permission for Ink Optimization SOurce project type----//
             {
                 var imgDelete = e.Item.FindControl("imgbtnDelete") as ImageButton;
                 if (imgDelete != null)

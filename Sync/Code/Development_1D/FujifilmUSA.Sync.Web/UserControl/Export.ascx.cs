@@ -61,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         trAdvancedDownload.Visible = false;
                         lbtnMeasure.Visible = false;
                         Div_Chart.Visible = false;
+                        header.InnerText = string.Format(GetResourceString(_recDownload), SessionManager.Instance.CurrentProject.ProjectName + ".icc");
                     }
                     else  //----Sync4D or Ink Optimization case
                     {
@@ -104,6 +105,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentOptimizeRun.EndDateTime.HasValue)
             {
                 DLPName = SessionManager.Instance.CurrentProject.ProjectName + " "+ GetResourceString(_recDLP) + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Month.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Day.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Hour.ToString("00") + SessionManager.Instance.CurrentOptimizeRun.EndDateTime.Value.Minute.ToString("00") + ".icc";
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimizationSource) //---If "Ink Optimization Source" project type, then only Project name as DLP name.
+                {
+                    DLPName = SessionManager.Instance.CurrentProject.ProjectName + ".icc";
+                }
             }
             if (!IsErrorOccured)
             {

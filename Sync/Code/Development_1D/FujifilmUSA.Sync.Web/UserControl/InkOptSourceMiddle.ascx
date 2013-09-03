@@ -23,12 +23,6 @@
          }
      }
 </script>
-<script type="text/javascript" language="javascript">
-
-    function ChooseRadWindow() {
-        return true;
-    }
-</script>
 
 <div class="contant_top">
     &nbsp;</div>
@@ -39,8 +33,7 @@
                     <h1 id="header" runat="server">
                     </h1>
                     <div class="Information_divAnalyze">
-                        <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click"
-                            OnClientClick="return ChooseRadWindow();">
+                        <asp:LinkButton ID="lbtnDownloadAndSaveDLP" runat="server" CssClass="button" OnClick="lbtnDownloadAndSaveDLP_Click">                           
                             <span>
                                 <asp:Image ID="Image2" runat="server" ImageUrl="../Images/export.png" meta:resourcekey="Image2Resource1" />
                                 <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
