@@ -35,6 +35,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         project = new Project()
                                       {
                                           ProjectId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "ProjectID"),
+                                          DeviceId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CPDeviceID"),
                                           ProjectName = DataReader.ReadString(dsProject.Tables[0].Rows[0], "ProjectName"),
                                           CreateDate = DataReader.ReadDate(dsProject.Tables[0].Rows[0], "CreateDate"),
                                           CurrDlpId = DataReader.ReadInt(dsProject.Tables[0].Rows[0], "CurrDLPID"),
