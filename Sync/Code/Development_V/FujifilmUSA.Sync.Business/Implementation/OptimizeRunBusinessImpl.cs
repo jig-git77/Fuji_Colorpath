@@ -88,6 +88,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         BusinessFactory<IMeasurementBusiness>.
                             CreateObject().
                             GetMeasurementData(measurementIds);
+                   
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
 
@@ -118,7 +119,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         if (response.DeviceLinkProfile.ProfileData == null || response.DestinationProfile.ProfileData == null)
                         {
                             //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - Destination and device link profile not generated."), null, false);
-                            throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId);
+                            throw new Exception("Destination and Device link profile has not been generated successfully from service for runId: " + optimizeRunId + " Error: " + response.Message);
                         }
                         //LogManager.WriteLog(new Exception("Create DLP Logging - OptimizeRunBusinessImpl - CreateInitialDestinationAndDeviceLinkProfiles - CPSync4D.UpdateInitialDestinationAndDlp call invoked."), null, false);
                         DataAccessFactory.
@@ -199,7 +200,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         var response = client.OptimizeDeviceLinkProfile(request);
                         if (response.OptimizedProfile.ProfileData == null)
                         {
-                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId);
+                            throw new Exception("Optimized device link profile has not been generated successfully from service for runId:" + optimizeRunId + " Error: " + response.Message);
                         }
                         DataAccessFactory.Instance.ExecuteProcedure("CPSync4D.UpdateOptimizeDlp",
                                                                     new object[] { optimizeRunId, response.OptimizedProfile.ProfileData, status, endDateTime });

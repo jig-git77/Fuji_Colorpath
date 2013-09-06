@@ -29,6 +29,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #region Declaration
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
+
+        public bool IsXmfNewProject
+        {
+            get
+            {
+                return (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser) &&
+                        SessionManager.Instance.CurrentProject.ProjectId == 0);
+            }
+        }
         #endregion
 
         #region Page events
@@ -37,9 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
         }
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {           
             if (IsXmfUser)
             {
+                lnkbtnMeasurementSetup.Visible = true;
                 trListHeader.Visible = false;
                 if (SessionManager.Instance.CurrentValidationRequest != null)
                 {
@@ -329,5 +339,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMetricTargetPreset.SelectedIndex = 0;
             }
         }
+
+        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
+
+       
     }
 }

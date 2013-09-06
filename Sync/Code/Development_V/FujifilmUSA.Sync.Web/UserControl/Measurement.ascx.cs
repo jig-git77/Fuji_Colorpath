@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 if (IsXMFUser)
                 {
-                    if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    //if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                         btnValidationSetup.Visible = true;
 
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)

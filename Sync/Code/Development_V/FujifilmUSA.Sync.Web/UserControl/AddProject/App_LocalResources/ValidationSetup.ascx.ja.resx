@@ -168,4 +168,7 @@
   <data name="vccmbMetricTargetPreset" xml:space="preserve">
     <value>色差評価判定基準を選択してください。</value>
   </data>
+  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+    <value>測色設定</value>
+  </data>
 </root>

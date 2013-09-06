@@ -28,6 +28,16 @@
 
         </span>
     </asp:LinkButton>
+     <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" 
+        CssClass="buttonLeft" onclick="lnkbtnMeasurementSetup_Click" >
+       
+        <span>
+            <asp:Image ID="Image2" runat="server" 
+        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
+            
+<asp:Localize runat="server" Text="Measurement Setup" ID="locMeasurementSetup" 
+        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+</span></asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
