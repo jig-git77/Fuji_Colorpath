@@ -22,22 +22,21 @@
         <span>
         <asp:Image ID="imgAdd" runat="server" ImageUrl="~/Images/analyze.png" />
             
-<asp:Localize runat="server" ID="locMeasure" Text="Measure" 
-        meta:resourcekey="locMeasureResource1"></asp:Localize>
-        
-
+        <asp:Localize runat="server" ID="locMeasure" Text="Measure" 
+                meta:resourcekey="locMeasureResource1"></asp:Localize>  
         </span>
     </asp:LinkButton>
+
      <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" 
-        CssClass="buttonLeft" onclick="lnkbtnMeasurementSetup_Click" >
-       
+        CssClass="buttonLeft" onclick="lnkbtnMeasurementSetup_Click" Visible="false" >       
         <span>
             <asp:Image ID="Image2" runat="server" 
-        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
+                ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
             
-<asp:Localize runat="server" Text="Measurement Setup" ID="locMeasurementSetup" 
-        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
-</span></asp:LinkButton>
+                <asp:Localize runat="server" Text="Measurement Setup" ID="locMeasurementSetup" 
+                        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+        </span>
+    </asp:LinkButton>
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">

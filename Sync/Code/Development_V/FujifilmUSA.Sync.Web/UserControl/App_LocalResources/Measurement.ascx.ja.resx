@@ -132,6 +132,12 @@
   <data name="locMeasurementResource1.Text" xml:space="preserve">
     <value>測色</value>
   </data>
+  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+    <value>測色設定</value>
+  </data>
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
+    <value>色差評価設定</value>
+  </data>
   <data name="measureText" xml:space="preserve">
     <value>測色 - {0}</value>
   </data>

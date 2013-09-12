@@ -38,9 +38,17 @@
                 <span>
                     <asp:Image ID="Image2" runat="server" 
                         ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
-                    <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"></asp:Localize>
+                    <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"  meta:resourcekey="locValidationSetupResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>                  
+            </asp:LinkButton>    
+             <asp:LinkButton ID="btnMeasurementSetup" runat="server" CssClass="buttonLeft" 
+                Visible="false" onclick="btnMeasurementSetup_Click">
+                <span>
+                    <asp:Image ID="Image1" runat="server" 
+                        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
+                    <asp:Localize runat="server" Text="Measurement Setup" id="locMeasurementSetup"  meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>                
         </div>
     </div>
     <div class="mesurementStatusbar info_form">

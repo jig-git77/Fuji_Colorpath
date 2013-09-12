@@ -64,9 +64,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 if (IsXMFUser)
                 {
-                    //if(SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
-                        btnValidationSetup.Visible = true;
-
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    {
+                        btnValidationSetup.Visible = true; //---If Validation mode, visible Validation Setup button
+                    }
+                    else
+                    {
+                        btnMeasurementSetup.Visible = true; //---Otherwise, visible Measurement Setup button
+                    }
                     if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
                     {
                         ScriptManager.RegisterStartupScript(
@@ -99,7 +104,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.Redirect(string.Format("COValidationSetup.aspx?id={0}", Guid.NewGuid()));
         }
-        #endregion
+
+        protected void btnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COMeasurementSetup.aspx?id={0}", Guid.NewGuid()));
+        }
+
+        #endregion      
 
     }
 }

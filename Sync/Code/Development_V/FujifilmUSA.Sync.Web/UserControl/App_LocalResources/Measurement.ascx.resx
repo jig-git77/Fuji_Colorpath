@@ -129,6 +129,12 @@
   <data name="locMeasurementResource1.Text" xml:space="preserve">
     <value>Measurement</value>
   </data>
+  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+    <value>Measurement Setup</value>
+  </data>
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
+    <value>Validation Setup</value>
+  </data>
   <data name="measureText" xml:space="preserve">
     <value>Measure - {0}</value>
   </data>

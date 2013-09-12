@@ -90,6 +90,7 @@
     <Content Include="COAnalyze.aspx" />
     <Content Include="COErrorMessage.aspx" />
     <Content Include="COMeasurement.aspx" />
+    <Content Include="COMeasurementSetup.aspx" />
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
     <Content Include="BranchManagement.aspx" />
@@ -650,6 +651,13 @@
     </Compile>
     <Compile Include="COMeasurement.aspx.designer.cs">
       <DependentUpon>COMeasurement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COMeasurementSetup.aspx.cs">
+      <DependentUpon>COMeasurementSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COMeasurementSetup.aspx.designer.cs">
+      <DependentUpon>COMeasurementSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="CompanyManagement.aspx.cs">
       <DependentUpon>CompanyManagement.aspx</DependentUpon>
@@ -2289,7 +2297,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

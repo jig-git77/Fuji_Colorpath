@@ -51,6 +51,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             {
                 lnkbtnMeasurementSetup.Visible = true;
                 trListHeader.Visible = false;
+              
                 if (SessionManager.Instance.CurrentValidationRequest != null)
                 {
                     lnkbtnValidationSetup.Visible = false;
@@ -101,7 +102,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(ValidationChartSelectedValue), cmbValidationChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset = new KeyValuePair<int, string>(Convert.ToInt32(cmbMetricTargetPreset.SelectedItem.Value), cmbMetricTargetPreset.SelectedItem.Text);
 
-            //Load save control
+            //Load save control         
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Save;
             ((ProjectSettingsContainer)Parent.Parent).LoadProjectSettingControls();
         }
@@ -129,6 +130,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
         }
 
+        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
+        }
+
         protected void cmbMeasurementDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindValidationChart();
@@ -137,6 +144,25 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         protected void cmbValidationChart_SelectedIndexChanged(object sender, EventArgs e)
         {
             DisplayValidationChartImage();
+        }
+
+        protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbtnEnableValidation.SelectedIndex == 0)
+            {
+                //------If validation, then check for required fields-----//
+                rfvValidationChart.ValidationGroup = "vgValidationSetup";
+                rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
+            }
+            else
+            {
+                //------If no validation, then don't check for required fields-----//
+                rfvValidationChart.ValidationGroup = "a";
+                rfvMetricTargetPreset.ValidationGroup = "a";
+
+                cmbValidationChart.SelectedIndex = 0;
+                cmbMetricTargetPreset.SelectedIndex = 0;
+            }
         }
 
 
@@ -241,6 +267,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 return 0;
             }
         }
+
         private void DisplayValidationChartImage()
         {
             if (ValidationChartSelectedValue <= 0)
@@ -320,32 +347,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         public List<Entity.CPSyncV.MetricTargetPreset> MetricTargetPreset { get; set; }
 
         #endregion
-
-        protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (rbtnEnableValidation.SelectedIndex == 0)
-            {
-                //------If validation, then check for required fields-----//
-                rfvValidationChart.ValidationGroup = "vgValidationSetup";
-                rfvMetricTargetPreset.ValidationGroup = "vgValidationSetup";
-            }
-            else
-            {
-                //------If no validation, then don't check for required fields-----//
-                rfvValidationChart.ValidationGroup = "a";
-                rfvMetricTargetPreset.ValidationGroup = "a";
-
-                cmbValidationChart.SelectedIndex = 0;
-                cmbMetricTargetPreset.SelectedIndex = 0;
-            }
-        }
-
-        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
-        {
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
-            Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
-        }
-
-       
+             
     }
 }
