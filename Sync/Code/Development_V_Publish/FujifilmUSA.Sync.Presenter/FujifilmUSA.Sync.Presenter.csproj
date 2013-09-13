@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05EC147C-DCDC-4470-A7FD-7579E28735EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FujifilmUSA.Sync.Presenter</RootNamespace>
+    <AssemblyName>FujifilmUSA.Sync.Presenter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PresenterBrowserTest.cs" />
+    <Compile Include="PresenterActivityPrintCondition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterActivityValidationRule.cs" />
+    <Compile Include="PresenterAddReferenceChart.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterApplicationConfiguration.cs" />
+    <Compile Include="PresenterClosePrintCondition.cs" />
+    <Compile Include="PresenterColorOrganizerRequestProcessor.cs" />
+    <Compile Include="PresenterCOTransferSiteControl.cs" />
+    <Compile Include="PresenterDeviceProfilerSettings.cs" />
+    <Compile Include="PresenterForgotPassword.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterGlobal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterGlobalActivation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterImportMeasurements.cs" />
+    <Compile Include="PresenterLeftMenuProjectItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterLicenseManagement.cs" />
+    <Compile Include="PresenterDeviceManagement.cs" />
+    <Compile Include="PresenterProfileManagement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PresenterReportSingleMeasurement.cs" />
+    <Compile Include="PresenterUserManagement.cs" />
+    <Compile Include="PresenterBranchManagement.cs" />
+    <Compile Include="PresenterAnalyze.cs" />
+    <Compile Include="PresenterCompanyManagement.cs" />
+    <Compile Include="PresenterConfirmSave.cs" />
+    <Compile Include="PresenterDeviceFamilyProfilerOption.cs" />
+    <Compile Include="PresenterExport.cs" />
+    <Compile Include="PresenterLogin.cs" />
+    <Compile Include="PresenterMeasurementSetting.cs" />
+    <Compile Include="PresenterOpenPrintCondition.cs" />
+    <Compile Include="PresenterPluginDataService.cs" />
+    <Compile Include="PresenterPreviewPrintCondition.cs" />
+    <Compile Include="PresenterProjectList.cs" />
+    <Compile Include="PresenterDevice.cs" />
+    <Compile Include="PresenterSaveWindow.cs" />
+    <Compile Include="PresenterTargetColorspace.cs" />
+    <Compile Include="PresenterWebLogActivity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewInterface\IViewBrowserTest.cs" />
+    <Compile Include="ViewInterface\IViewActivityPrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewActivityValidationRule.cs" />
+    <Compile Include="ViewInterface\IViewAddLicenseTypeManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddLicenseManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddReferenceChart.cs" />
+    <Compile Include="ViewInterface\IViewApplicationConfiguration.cs" />
+    <Compile Include="ViewInterface\IViewClosePrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewColorOrganizerRequestProcessor.cs" />
+    <Compile Include="ViewInterface\IViewCOTransferSiteControl.cs" />
+    <Compile Include="ViewInterface\IViewDeviceProfilerSettings.cs" />
+    <Compile Include="ViewInterface\IViewForgotPassword.cs" />
+    <Compile Include="ViewInterface\IViewGlobalActivation.cs" />
+    <Compile Include="ViewInterface\IViewImportMeasurements.cs" />
+    <Compile Include="ViewInterface\IViewLeftMenuProjectItem.cs" />
+    <Compile Include="ViewInterface\IViewLicenseManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddDeviceFamilyManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddDeviceManagement.cs" />
+    <Compile Include="ViewInterface\IViewDeviceManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddUserManagement.cs" />
+    <Compile Include="ViewInterface\IViewProfileManagement.cs" />
+    <Compile Include="ViewInterface\IViewReferenceChartManagement.cs" />
+    <Compile Include="ViewInterface\IViewReportSingleMeasurement.cs" />
+    <Compile Include="ViewInterface\IViewSourceProfile.cs" />
+    <Compile Include="ViewInterface\IViewUserManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddBranchManagement.cs" />
+    <Compile Include="ViewInterface\IViewBranchManagement.cs" />
+    <Compile Include="ViewInterface\IViewAddCompanyManagement.cs" />
+    <Compile Include="ViewInterface\IViewAnalyze.cs" />
+    <Compile Include="ViewInterface\IViewCompanyManagement.cs" />
+    <Compile Include="ViewInterface\IViewConfirmSave.cs" />
+    <Compile Include="ViewInterface\IViewDeviceFamilyProfilerOption.cs" />
+    <Compile Include="ViewInterface\IViewExport.cs" />
+    <Compile Include="ViewInterface\IViewLogin.cs" />
+    <Compile Include="ViewInterface\IViewMeasurementSetting.cs" />
+    <Compile Include="ViewInterface\IViewOpenPrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewPluginDataService.cs" />
+    <Compile Include="ViewInterface\IViewPreviewPrintCondition.cs" />
+    <Compile Include="ViewInterface\IViewProjectList.cs" />
+    <Compile Include="ViewInterface\IViewDevice.cs" />
+    <Compile Include="ViewInterface\IViewSaveWindow.cs" />
+    <Compile Include="ViewInterface\IViewTargetColorspace.cs" />
+    <Compile Include="PresenterSourceProfile.cs" />
+    <Compile Include="ViewInterface\IViewWebLogActivity.cs" />
+    <Compile Include="ViewInterface\ViewBase\IViewBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Business\FujifilmUSA.Sync.Business.csproj">
+      <Project>{71A9790F-C074-413D-8E34-4C7321BD06E9}</Project>
+      <Name>FujifilmUSA.Sync.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FujifilmUSA.Sync.Entity\FujifilmUSA.Sync.Entity.csproj">
+      <Project>{050CFE70-AFF6-4D52-93E6-2C804CF143D7}</Project>
+      <Name>FujifilmUSA.Sync.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
