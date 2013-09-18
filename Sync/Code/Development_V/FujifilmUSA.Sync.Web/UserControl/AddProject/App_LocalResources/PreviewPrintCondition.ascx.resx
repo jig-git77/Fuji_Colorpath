@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,137 +59,137 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="DescriptionResource1.Text" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DescriptionResource1.Text" xml:space="preserve">
     <value>Description</value>
   </data>
-	<data name="locAlignmentChart1Resource1.Text" xml:space="preserve">
+  <data name="locAlignmentChart1Resource1.Text" xml:space="preserve">
     <value>Alignment Chart</value>
   </data>
-	<data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
+  <data name="locAlignmentChart2Resource1.Text" xml:space="preserve">
     <value>Base DLP Chart</value>
   </data>
-	<data name="locColorantResource1.Text" xml:space="preserve">
+  <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Colorant</value>
   </data>
-	<data name="locIlluminantResource1.Text" xml:space="preserve">
+  <data name="locIlluminantResource1.Text" xml:space="preserve">
     <value>Illuminant</value>
   </data>
-	<data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
+  <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>Measurement Device</value>
   </data>
-	<data name="locMeasurementSetupResource1.Text" xml:space="preserve">
-    <value>Measurement Setup</value>
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
+    <value>Validation Setup</value>
   </data>
-	<data name="locMediaResource1.Text" xml:space="preserve">
+  <data name="locMediaResource1.Text" xml:space="preserve">
     <value>Media</value>
   </data>
-	<data name="locNewPrintConditionResource1.Text" xml:space="preserve">
+  <data name="locNewPrintConditionResource1.Text" xml:space="preserve">
     <value>New Print Condition - Review Selections</value>
   </data>
-	<data name="locNotesResource1.Text" xml:space="preserve">
+  <data name="locNotesResource1.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-	<data name="locObserverResource1.Text" xml:space="preserve">
+  <data name="locObserverResource1.Text" xml:space="preserve">
     <value>Observer</value>
   </data>
-	<data name="locOptionPresetsResource1.Text" xml:space="preserve">
+  <data name="locOptionPresetsResource1.Text" xml:space="preserve">
     <value>Option Presets</value>
   </data>
-	<data name="locPresetDescResource1.Text" xml:space="preserve">
+  <data name="locPresetDescResource1.Text" xml:space="preserve">
     <value>Preset Description:</value>
   </data>
-	<data name="locRipSettingsResource1.Text" xml:space="preserve">
+  <data name="locRipSettingsResource1.Text" xml:space="preserve">
     <value>Rip Settings</value>
   </data>
-	<data name="locSaveResource1.Text" xml:space="preserve">
+  <data name="locSaveResource1.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-	<data name="locSelectedPresetsResource1.Text" xml:space="preserve">
+  <data name="locSelectedPresetsResource1.Text" xml:space="preserve">
     <value>Selected Presets:</value>
   </data>
-	<data name="locSourceProfileResource1.Text" xml:space="preserve">
+  <data name="locSourceProfileResource1.Text" xml:space="preserve">
     <value>Source Profile</value>
   </data>
-	<data name="locSpectrophotometerResource1.Text" xml:space="preserve">
+  <data name="locSpectrophotometerResource1.Text" xml:space="preserve">
     <value>Spectrophotometer Options</value>
   </data>
-	<data name="locTechnicianNameResource1.Text" xml:space="preserve">
+  <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Technician Name</value>
   </data>
-	<data name="locUVSettingsResource1.Text" xml:space="preserve">
+  <data name="locUVSettingsResource1.Text" xml:space="preserve">
     <value>UV Settings</value>
   </data>
-	<data name="locEnable_ValiResource1.Text" xml:space="preserve">
+  <data name="locEnable_ValiResource1.Text" xml:space="preserve">
     <value>Enable Validation</value>
   </data>
-	<data name="locVali_MeaDeviceResource1.Text" xml:space="preserve">
+  <data name="locVali_MeaDeviceResource1.Text" xml:space="preserve">
     <value>Validation Device</value>
   </data>
-	<data name="locOptimizationChart2Resource1.Text" xml:space="preserve">
+  <data name="locOptimizationChart2Resource1.Text" xml:space="preserve">
     <value>Optimization Chart</value>
   </data>
-	<data name="locValiChart2Resource1.Text" xml:space="preserve">
+  <data name="locValiChart2Resource1.Text" xml:space="preserve">
     <value>Validation Chart</value>
   </data>
-	<data name="locValidationMetricResource1.Text" xml:space="preserve">
+  <data name="locValidationMetricResource1.Text" xml:space="preserve">
     <value>Validation Metric</value>
   </data>
 </root>

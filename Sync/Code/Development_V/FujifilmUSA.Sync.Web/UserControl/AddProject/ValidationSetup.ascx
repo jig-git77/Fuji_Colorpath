@@ -28,7 +28,7 @@
     </asp:LinkButton>
 
      <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" 
-        CssClass="buttonLeft" onclick="lnkbtnMeasurementSetup_Click" Visible="false" >       
+        CssClass="buttonLeft" onclick="lnkbtnMeasurementSetup_Click"  >       
         <span>
             <asp:Image ID="Image2" runat="server" 
                 ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
@@ -45,6 +45,11 @@
 <div class="listDevice" style="margin-left: 10px;">
     <ucStatusbar:Statusbar ID="fujiStatusbar" runat="server" Visible="False" />
     <table cellpadding="0" cellspacing="10" border="0" width="97%">
+        <tr>
+            <td>
+                <asp:Label ID="lbl_Valimsg" runat="server" Text=""  ForeColor="Red"></asp:Label>
+            </td>
+        </tr>
         <tr id="trListHeader" runat="server">
             <td>
                 <div style="display: block;" class="contantbox tabcontant">
@@ -85,10 +90,7 @@
                                                             <asp:ListItem Text="No" Value="No" meta:resourcekey="ListItemResource2"></asp:ListItem>
                                                         </asp:RadioButtonList>
                                                     </td>
-                                                    <td>
-                                                         <asp:Label ID="lbl_Valimsg" runat="server" 
-                                                             meta:resourcekey="lbl_ValimsgResource1"></asp:Label>
-                                                    </td>
+                                                   
                                                 </tr>
                                               </table> 
                                             </div>                                            

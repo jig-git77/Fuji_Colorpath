@@ -46,10 +46,10 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
         }
         protected void Page_Load(object sender, EventArgs e)
-        {           
+        {
+            lnkbtnMeasurementSetup.Visible = IsXmfUser;
             if (IsXmfUser)
-            {
-                lnkbtnMeasurementSetup.Visible = true;
+            {                
                 trListHeader.Visible = false;
               
                 if (SessionManager.Instance.CurrentValidationRequest != null)
@@ -170,11 +170,20 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         #region Methods
         private void LoadProjectInfoFromSession()
-        {
+        {           
             if (SessionManager.Instance.CurrentProject != null && SessionManager.Instance.CurrentProject.MeasurementSetting != null)
             {
                 if (IsXmfUser)
-                    EnableValidationValue = true;
+                {
+                    if (!SessionManager.Instance.CurrentDevice.IsValidation) //---If this device doesn't have permission for Validation------//
+                    {
+                        EnableValidationValue = false;
+                    }
+                    else
+                    {
+                        EnableValidationValue = true;
+                    }
+                }
                 else
                     EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
 
@@ -186,11 +195,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key > 0)
+                {
                     cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VReferenceChartType.Key.ToString();
-                else
-                    cmbValidationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
-                cmbValidationChart_SelectedIndexChanged(null, null);
-
+                    cmbValidationChart_SelectedIndexChanged(null, null);
+                }
+               
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)
                     cmbMetricTargetPreset.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key.ToString();
             }

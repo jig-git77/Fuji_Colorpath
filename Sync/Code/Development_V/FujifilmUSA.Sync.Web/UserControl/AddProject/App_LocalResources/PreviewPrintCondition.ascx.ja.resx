@@ -135,7 +135,7 @@
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
     <value>測色機</value>
   </data>
-  <data name="locMeasurementSetupResource1.Text" xml:space="preserve">
+  <data name="locValidationSetupResource1.Text" xml:space="preserve">
     <value>測色設定</value>
   </data>
   <data name="locMediaResource1.Text" xml:space="preserve">
