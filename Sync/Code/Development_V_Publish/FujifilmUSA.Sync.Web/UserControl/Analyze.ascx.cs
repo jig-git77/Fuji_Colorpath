@@ -245,8 +245,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 lbtnOptimize.Visible = false;
                 lbtnMeasurementVerification.Visible = false;                
-                lbtnDownloadAndSaveDLP.Visible = false;
-            }            
+                lbtnDownloadAndSaveDLP.Visible = false;                
+            }
+
+            if (IsXMFUser && Request.QueryString["viewonly"] != null && Convert.ToBoolean(Request.QueryString["viewonly"]) == true)
+            {
+                lbtnSubmit.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;                
+            }
         }
 
         #endregion

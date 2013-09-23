@@ -46,10 +46,9 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             _presenterMeasurementSetting = new PresenterMeasurementSetting(this);
         }
         protected void Page_Load(object sender, EventArgs e)
-        {           
+        {            
             if (IsXmfUser)
-            {
-                lnkbtnMeasurementSetup.Visible = true;
+            {                
                 trListHeader.Visible = false;
               
                 if (SessionManager.Instance.CurrentValidationRequest != null)
@@ -62,6 +61,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
             else
             {
+                lnkbtnMeasurementSetup.Visible = false;
                 trListHeader.Visible = true;
                 btnValidationMeasure.Visible = false;
             }
