@@ -120,7 +120,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue), cmbAlignmentChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded = cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
             SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
-            
+
             Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
@@ -226,7 +226,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ? Convert.ToInt32(EUVIncludedMode.UV).ToString()
                         : Convert.ToInt32(EUVIncludedMode.UVCut).ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                cmbAlignmentChart.SelectedIndex = cmbAlignmentChart.Items.IndexOf(cmbAlignmentChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString()));
+                if (cmbAlignmentChart.SelectedIndex == 0 && cmbAlignmentChart.Items.Count > 0)
+                    cmbAlignmentChart.SelectedIndex = 1;                
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
                 cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
                 cmbOptimizationChart_SelectedIndexChanged(null, null);
@@ -368,8 +370,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentColorOrgRequest != null)
             {
-                //Load selected chart if we are in update mode
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                //Load selected chart if we are in update mode                
+                cmbAlignmentChart.SelectedIndex = cmbAlignmentChart.Items.IndexOf(cmbAlignmentChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString()));
+                if (cmbAlignmentChart.SelectedIndex == 0 && cmbAlignmentChart.Items.Count > 0)
+                    cmbAlignmentChart.SelectedIndex = 1;
                 cmbAlignmentChart.Enabled = false;
 
                 //Load selected chart if we are in update mode
