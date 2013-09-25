@@ -129,6 +129,13 @@
           ID="Localize1"></asp:Localize> 
             </span>
       </asp:LinkButton> 
+      <asp:LinkButton ID="lbtnPrintStandardType" runat="server" 
+          CssClass="dock-item overlapobject" onclick="lbtnPrintStandardType_Click" >
+            <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Print Standard Type" />
+            <span> <asp:Localize Text="Print Standard Type" runat="server" 
+          ID="Localize2"></asp:Localize> 
+            </span>
+      </asp:LinkButton>
   </div> 
 </div>
 </div>

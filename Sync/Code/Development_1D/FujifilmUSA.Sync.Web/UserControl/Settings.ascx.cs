@@ -96,5 +96,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
         }
+
+        protected void lnkbtnPrintStandardType_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
+        }
     }
 }

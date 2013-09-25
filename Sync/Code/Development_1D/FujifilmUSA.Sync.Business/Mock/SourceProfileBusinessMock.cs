@@ -37,6 +37,31 @@ namespace FujifilmUSA.Sync.Business.Mock
              return null;
          }
 
+
+         public int InsertPrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType)
+         {
+             return 0;
+         }
+
+         public int UpdatePrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType)
+         {
+             return 0;
+         }
+
+         public bool DeletePrintStandardType(int printStandardTypeId)
+         {
+             return true;
+         }
+
+         public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardType(int printStandardTypeId, int currentUserId)
+         {
+             return new List<Entity.CPSync1D.PrintStandardType>();
+         }
+
+         public Dictionary<int, string> GetSourceProfileList(int currentUserId)
+         {
+             return new Dictionary<int, string>();
+         }
         #endregion
 
         #region ITaskBase Members

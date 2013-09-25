@@ -12,5 +12,11 @@ namespace FujifilmUSA.Sync.Business.Interface
         bool DeleteSourceProfile(int sourceProfileId);
         List<SourceProfile> GetSourceProfile(int sourceProfileId,int currentUserId);
         byte[] GetIccProfileBySourceProfile(int sourceProfileId);
+
+        int InsertPrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType);
+        int UpdatePrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType);
+        bool DeletePrintStandardType(int printStandardTypeId);
+        List<Entity.CPSync1D.PrintStandardType> GetPrintStandardType(int printStandardTypeId, int currentUserId);
+        Dictionary<int, string> GetSourceProfileList(int currentUserId);
     }
 }

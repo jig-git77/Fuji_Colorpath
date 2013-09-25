@@ -466,7 +466,7 @@
                                                         UniqueName="MeasuredValue">
                                                     </telerik:GridBoundColumn>     
                                                     <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                        UniqueName="IsNotOK" Visible="false">
+                                                        UniqueName="IsNotOK" Display="false">
                                                     </telerik:GridBoundColumn>                                               
                                                 </Columns>                        
                                             </MasterTableView>                        
@@ -820,7 +820,7 @@
                                                                     UniqueName="MeasuredValue">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Display="false">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
                                                         </MasterTableView>                        
@@ -915,7 +915,7 @@
                                                                     UniqueName="MeasuredValue">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Display="false">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
                                                         </MasterTableView>                        
@@ -1010,7 +1010,7 @@
                                                                     UniqueName="MeasuredValue">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false">
+                                                                    UniqueName="IsNotOK" Display="false">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
                                                         </MasterTableView>                        

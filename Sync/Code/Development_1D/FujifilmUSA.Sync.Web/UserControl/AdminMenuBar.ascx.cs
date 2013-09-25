@@ -31,6 +31,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lbtnActivityValidationRules.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageActivityValidationRules);
                 lbtnProfilerSettings.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageDeviceProfileSettings);
                 lbtnApplicationConfiguration.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageApplicationConfiguration);
+                lbtnMetricTargetPreset.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
+                lbtnPrintStandardType.Visible = SessionManager.Instance.CurrentUser.HasPermission(ERolePermission.ManageSourceProfile);
             }
         }
         #endregion
@@ -105,8 +107,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         {
             Response.RedirectPermanent("MetricTargetPresetManagement.aspx");
         }
-        
-        #endregion
+
+        protected void lbtnPrintStandardType_Click(object sender, EventArgs e)
+        {
+            Response.RedirectPermanent("PrintStandardTypeManagement.aspx");
+        }
+
+        #endregion  
                
     }
 }

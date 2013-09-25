@@ -196,6 +196,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PrintStandardType already exists with same name..
+        /// </summary>
+        internal static string Duplicate_InsertPrintStandardType {
+            get {
+                return ResourceManager.GetString("Duplicate_InsertPrintStandardType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reference chart already exists with same name..
         /// </summary>
         internal static string Duplicate_InsertReferenceChart {
@@ -264,6 +273,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Duplicate_UpdateMetricTargetPreset {
             get {
                 return ResourceManager.GetString("Duplicate_UpdateMetricTargetPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PrintStandardType already exists with same name..
+        /// </summary>
+        internal static string Duplicate_UpdatePrintStandardType {
+            get {
+                return ResourceManager.GetString("Duplicate_UpdatePrintStandardType", resourceCulture);
             }
         }
         
@@ -849,6 +867,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string Error_DeleteOptimizeRunDLP {
             get {
                 return ResourceManager.GetString("Error_DeleteOptimizeRunDLP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured while deleting printstandardtype.Please contact your administrator..
+        /// </summary>
+        internal static string Error_DeletePrintStandardType {
+            get {
+                return ResourceManager.GetString("Error_DeletePrintStandardType", resourceCulture);
             }
         }
         
@@ -1564,6 +1591,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while inserting printstandardtype.Please contact your administrator..
+        /// </summary>
+        internal static string Error_InsertPrintStandardType {
+            get {
+                return ResourceManager.GetString("Error_InsertPrintStandardType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while inserting device family Profiler Option Presets.Please contact your administrator..
         /// </summary>
         internal static string Error_InsertProfilerOptionPreset {
@@ -1816,6 +1852,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured while updating printstandardtype.Please contact your administrator..
+        /// </summary>
+        internal static string Error_UpdatePrintStandardType {
+            get {
+                return ResourceManager.GetString("Error_UpdatePrintStandardType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured while updating reference chart. Please contact your administrator..
         /// </summary>
         internal static string Error_UpdateReferenceChart {
@@ -2037,6 +2082,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string OpenStatusText {
             get {
                 return ResourceManager.GetString("OpenStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete selected Print Standard Type?.
+        /// </summary>
+        internal static string PrintStandardTypeManagement_DeletePrintStandardType_Confirmation {
+            get {
+                return ResourceManager.GetString("PrintStandardTypeManagement_DeletePrintStandardType_Confirmation", resourceCulture);
             }
         }
         

@@ -242,7 +242,20 @@
                         <asp:Localize Text="Metric Target Preset" runat="server" ID="Localize1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>               
-                
+                <div id="div2" runat ="server" align="center" valign="bottom" style="float:left;">
+                    <img alt="" src="Images/admin-icon-divider.png" />
+                </div> 
+                 <div id="div3" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                    <asp:LinkButton ID="lnkbtnPrintStandardType" runat="server" 
+                         ToolTip="Print Standard Type" 
+                         PostBackUrl="~/PrintStandardTypeManagement.aspx" 
+                         onclick="lnkbtnPrintStandardType_Click">
+                        <div>
+                            <asp:Image ID="Image8" runat="server" AlternateText="Print Standard Type" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Print Standard Type" />
+                        </div>
+                        <asp:Localize Text="Print Standard Type" runat="server" ID="Localize2"></asp:Localize>
+                    </asp:LinkButton>                
+                </div>               
                 </td>
                 </tr>            
         </table>

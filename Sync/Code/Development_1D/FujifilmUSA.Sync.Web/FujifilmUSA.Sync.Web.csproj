@@ -77,6 +77,7 @@
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
     <Content Include="AddMetricTargetPreset.aspx" />
+    <Content Include="AddPrintStandardType.aspx" />
     <Content Include="AddReferenceChart.aspx" />
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
@@ -220,6 +221,7 @@
     <Content Include="PopupImportMeasurements.aspx" />
     <Content Include="PopupOpenForgotPassword.aspx" />
     <Content Include="PrintPreview.aspx" />
+    <Content Include="PrintStandardTypeManagement.aspx" />
     <Content Include="ProfileManagement.aspx" />
     <Content Include="ProjectMaxLimit.aspx" />
     <Content Include="ReferenceChartManagement.aspx" />
@@ -262,6 +264,7 @@
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
+    <Content Include="UserControl\AddPrintStandardType.ascx" />
     <Content Include="UserControl\AddProject\ValidationSetup.ascx" />
     <Content Include="UserControl\AddReferenceChart.ascx" />
     <Content Include="UserControl\AddSourceProfile.ascx" />
@@ -285,6 +288,7 @@
     <Content Include="UserControl\PopupControl\ForgotPassword.ascx" />
     <Content Include="UserControl\PopupControl\ImportMeasurements.ascx" />
     <Content Include="UserControl\PrintPreview.ascx" />
+    <Content Include="UserControl\PrintStandardTypeManagement.ascx" />
     <Content Include="UserControl\ProfileManagement.ascx" />
     <Content Include="UserControl\ProjectMaxLimit.ascx" />
     <Content Include="UserControl\ReferenceChartManagement.ascx" />
@@ -540,6 +544,13 @@
     </Compile>
     <Compile Include="AddMetricTargetPreset.aspx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddPrintStandardType.aspx.cs">
+      <DependentUpon>AddPrintStandardType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddPrintStandardType.aspx.designer.cs">
+      <DependentUpon>AddPrintStandardType.aspx</DependentUpon>
     </Compile>
     <Compile Include="AddReferenceChart.aspx.cs">
       <DependentUpon>AddReferenceChart.aspx</DependentUpon>
@@ -803,6 +814,13 @@
     <Compile Include="PrintPreview.aspx.designer.cs">
       <DependentUpon>PrintPreview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PrintStandardTypeManagement.aspx.cs">
+      <DependentUpon>PrintStandardTypeManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintStandardTypeManagement.aspx.designer.cs">
+      <DependentUpon>PrintStandardTypeManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProfileManagement.aspx.cs">
       <DependentUpon>ProfileManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -886,6 +904,13 @@
     </Compile>
     <Compile Include="UserControl\AddMetricTargetPreset.ascx.designer.cs">
       <DependentUpon>AddMetricTargetPreset.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AddPrintStandardType.ascx.cs">
+      <DependentUpon>AddPrintStandardType.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AddPrintStandardType.ascx.designer.cs">
+      <DependentUpon>AddPrintStandardType.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\AddProject\ValidationSetup.ascx.cs">
       <DependentUpon>ValidationSetup.ascx</DependentUpon>
@@ -1050,6 +1075,13 @@
     </Compile>
     <Compile Include="UserControl\PrintPreview.ascx.designer.cs">
       <DependentUpon>PrintPreview.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PrintStandardTypeManagement.ascx.cs">
+      <DependentUpon>PrintStandardTypeManagement.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\PrintStandardTypeManagement.ascx.designer.cs">
+      <DependentUpon>PrintStandardTypeManagement.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ProfileManagement.ascx.cs">
       <DependentUpon>ProfileManagement.ascx</DependentUpon>
@@ -2193,6 +2225,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\InkOptSourceMiddle.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPrintStandardType.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPrintStandardType.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\AddPrintStandardType.ascx.ja.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

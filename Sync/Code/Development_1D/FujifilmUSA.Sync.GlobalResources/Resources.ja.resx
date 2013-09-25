@@ -153,6 +153,9 @@
   <data name="Duplicate_InsertSourceProfile" xml:space="preserve">
     <value>Source profile already exists with same name._ja</value>
   </data>
+  <data name="Duplicate_InsertPrintStandardType" xml:space="preserve">
+    <value>PrintStandardType already exists with same name._ja</value>
+  </data>
   <data name="Duplicate_InsertUser" xml:space="preserve">
     <value>User already exists with same email / username._ja</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="Duplicate_UpdateSourceProfile" xml:space="preserve">
     <value>Source profile already exists with same name._ja</value>
+  </data>
+  <data name="Duplicate_UpdatePrintStandardType" xml:space="preserve">
+    <value>PrintStandardType already exists with same name._ja</value>
   </data>
   <data name="Duplicate_UpdateUser" xml:space="preserve">
     <value>User already exists with same email / username._ja</value>
@@ -248,6 +254,9 @@
   </data>
   <data name="Error_DeleteSourceProfile" xml:space="preserve">
     <value>Error occured while deleting source profile.Please contact your administrator._ja</value>
+  </data>
+  <data name="Error_DeletePrintStandardType" xml:space="preserve">
+    <value>Error occured while deleting printstandardtype.Please contact your administrator._ja</value>
   </data>
   <data name="Error_DeleteUser" xml:space="preserve">
     <value>Error occured while deleting user information.Please contact your administrator._ja</value>
@@ -537,6 +546,9 @@
   <data name="Error_InsertSourceProfile" xml:space="preserve">
     <value>Error occured while inserting source profile.Please contact your administrator._ja</value>
   </data>
+  <data name="Error_InsertPrintStandardType" xml:space="preserve">
+    <value>Error occured while inserting printstandardtype.Please contact your administrator._ja</value>
+  </data>
   <data name="Error_InsertUser" xml:space="preserve">
     <value>Error occured while inserting user information.Please contact your administrator._ja</value>
   </data>
@@ -612,6 +624,9 @@
   <data name="Error_UpdateSourceProfile" xml:space="preserve">
     <value>Error occured while updating source profile.Please contact your administrator._ja</value>
   </data>
+  <data name="Error_UpdatePrintStandardType" xml:space="preserve">
+    <value>Error occured while updating printstandardtype.Please contact your administrator._ja</value>
+  </data>
   <data name="Error_UpdateUser" xml:space="preserve">
     <value>Error occured while updating user information.Please contact your administrator._ja</value>
   </data>
@@ -649,6 +664,9 @@
   </data>
   <data name="SourceProfileManagement_DeleteSourceProfile_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected source profile?_ja</value>
+  </data>
+  <data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
+    <value>Are you sure you want to delete selected Print Standard Type?_ja</value>
   </data>
   <data name="UserManagement_DeleteUser_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected user?_ja</value>

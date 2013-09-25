@@ -149,6 +149,116 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return iccProfile;
         }
 
+        
+        public int InsertPrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[InsertPrintStandardType]",
+                            new object[]
+                                    {
+                                        printStandardType.PrintStandard,
+                                        printStandardType.IsSync1DType,
+                                        printStandardType.SourceProfile.SourceProfileId                                       
+                                    });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_InsertPrintStandardType" };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_InsertPrintStandardType"));
+            return returnValue;
+        }
+
+        public int UpdatePrintStandardType(Entity.CPSync1D.PrintStandardType printStandardType)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdatePrintStandardType]",
+                            new object[]
+                                    {
+                                        printStandardType.PrintStandardTypeID,
+                                        printStandardType.PrintStandard,
+                                        printStandardType.IsSync1DType,
+                                        printStandardType.SourceProfile.SourceProfileId                                     
+                                    });
+                    if (returnValue == -1)
+                    {
+                        throw new DuplicateException() { UserFriendlyMessage = "Duplicate_UpdatePrintStandardType" };
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdatePrintStandardType"));
+            return returnValue;
+        }
+
+        public bool DeletePrintStandardType(int printStandardTypeId)
+        {
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure(
+                              "[CP].[DeletePrintStandardType]",
+                              new object[]
+                                  {
+                                      printStandardTypeId
+                                  }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_DeletePrintStandardType"));
+            return true;
+        }
+
+        public List<Entity.CPSync1D.PrintStandardType> GetPrintStandardType(int printStandardTypeId, int currentUserId)
+        {
+            var printStandardTypes = new List<Entity.CPSync1D.PrintStandardType>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsPrintStandardType = DataAccessFactory.Instance.GetDsResult("[CP].[GetPrintStandardType]", new object[] { printStandardTypeId, currentUserId });
+                    if (dsPrintStandardType != null && dsPrintStandardType.Tables.Count > 0 && dsPrintStandardType.Tables[0].Rows.Count > 0)
+                    {
+                        printStandardTypes = dsPrintStandardType.Tables[0].AsEnumerable().
+                            Select(x => new Entity.CPSync1D.PrintStandardType()
+                            {
+                                PrintStandardTypeID = DataReader.ReadShort(x, "PrintStandardTypeID"),
+                                PrintStandard = DataReader.ReadString(x, "PrintStandard"),
+                                IsSync1DType = DataReader.ReadBoolean(x, "IsSync1DType"),
+                                SourceProfile = new SourceProfile() { SourceProfileId = DataReader.ReadShort(x, "SourceProfileID"), ProfileName = DataReader.ReadString(x, "ProfileName") }                               
+                            }).ToList();
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetPrintStandardType"));
+            return printStandardTypes;
+        }
+
+        public Dictionary<int, string> GetSourceProfileList(int currentUserId)
+        {
+            var dstSourceProfileList = new Dictionary<int, string>();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsSourceProfile = DataAccessFactory.Instance.GetDsResult("[CP].[GetSourceProfile]", new object[] { 0, currentUserId });
+                    if (dsSourceProfile != null && dsSourceProfile.Tables.Count > 0)
+                    {
+                        dstSourceProfileList = (dsSourceProfile.Tables[0].AsEnumerable().Select(
+                            region => new
+                            {
+                                Value = DataReader.ReadInt(region, "SourceProfileId"),
+                                Text = DataReader.ReadString(region, "ProfileName")
+                            })).ToDictionary(region => region.Value, region => region.Text);
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetSourceProfileList"));
+            return dstSourceProfileList;
+        }
 
         #endregion
 
