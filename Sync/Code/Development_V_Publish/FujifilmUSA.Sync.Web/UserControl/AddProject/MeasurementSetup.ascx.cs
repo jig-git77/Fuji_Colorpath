@@ -226,11 +226,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         ? Convert.ToInt32(EUVIncludedMode.UV).ToString()
                         : Convert.ToInt32(EUVIncludedMode.UVCut).ToString();
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
+
                 cmbAlignmentChart.SelectedIndex = cmbAlignmentChart.Items.IndexOf(cmbAlignmentChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString()));
                 if (cmbAlignmentChart.SelectedIndex == 0 && cmbAlignmentChart.Items.Count > 0)
                     cmbAlignmentChart.SelectedIndex = 1;                
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
+
+                cmbOptimizationChart.SelectedIndex = cmbOptimizationChart.Items.IndexOf(cmbOptimizationChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString()));
+                if (cmbOptimizationChart.SelectedIndex == 0 && cmbOptimizationChart.Items.Count > 0)
+                    cmbOptimizationChart.SelectedIndex = 1;                
                 cmbOptimizationChart_SelectedIndexChanged(null, null);
             }
         }
