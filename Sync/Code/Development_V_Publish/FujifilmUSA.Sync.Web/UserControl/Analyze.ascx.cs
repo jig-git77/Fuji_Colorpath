@@ -288,36 +288,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 List<Entity.Measurement> MeasurementList = new List<Entity.Measurement>();
                 MeasurementList = Measurements;
 
-                if (IsValidation)  //This will be called when Verification process is going on
+                if (MeasurementList != null && MeasurementList.Count > 0)
                 {
-                    MeasurementList = AlignPaging(Measurements);
-                    //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
-                    int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
-                    if (index < 0)
+                    if (IsValidation)  //This will be called when Verification process is going on
                     {
-                        // element not exists, update to last record's measurementID
-                        hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        MeasurementList = AlignPaging(Measurements);
+                        //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
+                        int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
+                        if (index < 0)
+                        {
+                            // element not exists, update to last record's measurementID
+                            hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        }
                     }
+
+                    var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
+                    {
+                        CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
+                    };
+                    manager.BindChart();
+
+                    lblMeasurementName.Text = manager.MeasurementName;
+
+                    hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
+                    {
+                        From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
+                        chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
+                    }
+                    //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+                    BindAvgDelta();
+                    FillAllTabsData(); 
                 }
-
-                var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
-                {
-                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
-                };
-                manager.BindChart();
-
-                lblMeasurementName.Text = manager.MeasurementName;
-
-                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
-
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
-                {
-                    From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
-                    chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
-                }
-                //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-                BindAvgDelta();
-                FillAllTabsData();
             }
         }
         #endregion
