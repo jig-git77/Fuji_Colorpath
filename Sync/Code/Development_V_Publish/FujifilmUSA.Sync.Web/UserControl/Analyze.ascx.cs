@@ -343,22 +343,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
                 if (!IsErrorOccured)
                 {
-                    tbOptSummary.Visible = false;
-                    ValidationType = MeasurementSummary[0].ValidationType;
-
-                    dvValidationSummary.DataSource = MeasurementSummary;
-                    dvValidationSummary.DataBind();
-
-                    rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
-                    rgValidationSummaryMetrics.DataBind();
-
-                    ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
-
-                    PreparePrintLabelXML(MeasurementSummary[0]);
-
-                    if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                    if (MeasurementSummary != null && MeasurementSummary.Count > 0)
                     {
-                        FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                        tbOptSummary.Visible = false;
+                        ValidationType = MeasurementSummary[0].ValidationType;
+
+                        dvValidationSummary.DataSource = MeasurementSummary;
+                        dvValidationSummary.DataBind();
+
+                        rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
+                        rgValidationSummaryMetrics.DataBind();
+
+                        ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
+
+                        PreparePrintLabelXML(MeasurementSummary[0]);
+
+                        if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                        {
+                            FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                        }
                     }
                 }
 
