@@ -271,15 +271,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 List<Entity.Measurement> MeasurementList = new List<Entity.Measurement>();
                 MeasurementList = Measurements;
 
-                if (IsValidation)  //This will be called when Verification process is going on
+                if (MeasurementList != null && MeasurementList.Count > 0)
                 {
-                    MeasurementList = AlignPaging(Measurements);
-                    //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
-                    int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
-                    if (index < 0)
+                    if (IsValidation)  //This will be called when Verification process is going on
                     {
-                        // element not exists, update to last record's measurementID
-                        hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        MeasurementList = AlignPaging(Measurements);
+                        //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
+                        int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
+                        if (index < 0)
+                        {
+                            // element not exists, update to last record's measurementID
+                            hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        }
                     }
                 }
 
@@ -323,28 +326,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
                 if (!IsErrorOccured)
                 {
-                    tbOptSummary.Visible = false;
-                    ValidationType = MeasurementSummary[0].ValidationType;
-
-                    dvValidationSummary.DataSource = MeasurementSummary;
-                    dvValidationSummary.DataBind();
-
-                    rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
-                    rgValidationSummaryMetrics.DataBind();
-
-                    if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                    if (MeasurementSummary != null && MeasurementSummary.Count > 0)
                     {
-                        FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
-                    }
+                        tbOptSummary.Visible = false;
+                        ValidationType = MeasurementSummary[0].ValidationType;
 
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)  //----Only display print label feature in validation mode
-                    {
-                        ibtnPrintPreview.Visible = false;
-                        ibtnPrintLabel.Visible = false;
-                    }
-                    else
-                    {
-                        PreparePrintLabelXML(MeasurementSummary[0]);
+                        dvValidationSummary.DataSource = MeasurementSummary;
+                        dvValidationSummary.DataBind();
+
+                        rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
+                        rgValidationSummaryMetrics.DataBind();
+
+                        if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                        {
+                            FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                        }
+
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)  //----Only display print label feature in validation mode
+                        {
+                            ibtnPrintPreview.Visible = false;
+                            ibtnPrintLabel.Visible = false;
+                        }
+                        else
+                        {
+                            PreparePrintLabelXML(MeasurementSummary[0]);
+                        }
                     }
                 }
             }
