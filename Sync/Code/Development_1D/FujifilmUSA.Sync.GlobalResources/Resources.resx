@@ -666,14 +666,14 @@
   <data name="ERolePermission_ModifyProject" xml:space="preserve">
     <value>Modify Project</value>
   </data>
-  
-  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
+
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
     <value>M0</value>
-  </data>
+  </data> 
   <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
     <value>M1</value>
   </data>
-  <data name="EUVIncludedMode_UV" xml:space="preserve">
+  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
     <value>M2</value>
   </data>
   

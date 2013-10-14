@@ -637,13 +637,13 @@
     <value>Error occured while validating username/password._de</value>
   </data>
 
-  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
     <value>M0_de</value>
-  </data>
+  </data>  
   <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
     <value>M1_de</value>
   </data>
-  <data name="EUVIncludedMode_UV" xml:space="preserve">
+  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
     <value>M2_de</value>
   </data>
   

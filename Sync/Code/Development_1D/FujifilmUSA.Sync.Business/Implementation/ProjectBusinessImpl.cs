@@ -720,7 +720,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                         ObserverTypeName =
                                                                                             Utilities.GetValueFromDescription<EObserverType>(
                                                                                                 DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ObserverType")),
-                                                                                        UvIncludedName = ((UVMode == 2) ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString()),
+                                                                                        UvIncludedName = ((UVMode == 0) ? EUVIncludedMode.UV.ToString() : EUVIncludedMode.UVCut.ToString()),
                                                                                         UVMode = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "UVMode"),
                                                                                         ReadMode = DataReader.ReadString(dsReferenceChart.Tables[0].Rows[0], "ReadMode"),
                                                                                         MeasurementCount = DataReader.ReadShort(dsReferenceChart.Tables[0].Rows[0], "MeasurementCount"),

@@ -71,12 +71,12 @@ namespace FujifilmUSA.Sync.Entity
 
     public enum EUVIncludedMode
     {
-        [Description("EUVIncludedMode_UVCut")]//M0
-        UVCut = 0,
+        [Description("EUVIncludedMode_UV")]//M0
+        UV = 0,
         [Description("EUVIncludedMode_PlusUV")]//M1
-        UVPlus = 1,
-        [Description("EUVIncludedMode_UV")]//M2
-        UV = 2
+        UVPlus = 1,       
+        [Description("EUVIncludedMode_UVCut")]//M2
+        UVCut = 2      
     }
 
     public enum EObserverType

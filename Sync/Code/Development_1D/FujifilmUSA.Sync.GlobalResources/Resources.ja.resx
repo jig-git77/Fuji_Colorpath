@@ -637,16 +637,16 @@
     <value>Error occured while validating username/password._ja</value>
   </data>
 
-  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
+  <data name="EUVIncludedMode_UV" xml:space="preserve">
     <value>M0_ja</value>
-  </data>
+  </data>  
   <data name="EUVIncludedMode_PlusUV" xml:space="preserve">
     <value>M1_ja</value>
   </data>
-  <data name="EUVIncludedMode_UV" xml:space="preserve">
+  <data name="EUVIncludedMode_UVCut" xml:space="preserve">
     <value>M2_ja</value>
   </data>
-  
+
   <data name="Fields_Marked_With_Are_Required" xml:space="preserve">
     <value>&lt;span&gt;Fields marked with (&lt;span style=\"color: Red;\"&gt;*&lt;/span&gt;) are Required_ja&lt;/span&gt;_ja</value>
   </data>

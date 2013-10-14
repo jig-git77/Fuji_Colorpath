@@ -1924,7 +1924,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M2.
+        ///   Looks up a localized string similar to M0.
         /// </summary>
         internal static string EUVIncludedMode_UV {
             get {
@@ -1933,7 +1933,7 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M0.
+        ///   Looks up a localized string similar to M2.
         /// </summary>
         internal static string EUVIncludedMode_UVCut {
             get {
