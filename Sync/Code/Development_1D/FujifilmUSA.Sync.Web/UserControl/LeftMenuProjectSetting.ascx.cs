@@ -80,7 +80,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     break;
                 case ECurrentProjectStatus.Edit:
                     //If verification, then don't enable Measurementsetup, analyze and download links...
-                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.None)
+                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation)
                     {
                         if (SessionManager.Instance.CurrentProject.MeasurementSetting != null && SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key > 0)
                         {

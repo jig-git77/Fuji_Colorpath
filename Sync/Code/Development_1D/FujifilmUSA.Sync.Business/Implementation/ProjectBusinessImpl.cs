@@ -564,7 +564,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
                                                      project.MeasurementSetting.UVMode,
-                                                     project.MeasurementSetting.MeasurementCount,
+                                                     (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
                                                      project.MeasurementSetting.ReferenceChartType.Key,
