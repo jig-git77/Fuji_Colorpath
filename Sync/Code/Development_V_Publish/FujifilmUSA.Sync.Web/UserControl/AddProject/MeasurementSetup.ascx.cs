@@ -381,7 +381,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbAlignmentChart.Enabled = false;
 
                 //Load selected chart if we are in update mode
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
+                cmbOptimizationChart.SelectedIndex = cmbOptimizationChart.Items.IndexOf(cmbOptimizationChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString()));
+                if (cmbOptimizationChart.SelectedIndex == 0 && cmbOptimizationChart.Items.Count > 0)
+                    cmbOptimizationChart.SelectedIndex = 1;
                 cmbOptimizationChart.Enabled = false;
             }
             DisplayChartImage();
