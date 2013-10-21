@@ -1065,9 +1065,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         foreach (DataRow row in dsTVIData.Tables[0].Rows)
                         {
-                            response.TVI = DataReader.ReadString(row, "TVITarget");
-                            response.Threshold = DataReader.ReadString(row, "ThresholdTarget");
+                            response.TVI += string.Concat(" ",DataReader.ReadString(row, "TVITarget"));
+                            response.Threshold += string.Concat(" ", DataReader.ReadString(row, "ThresholdTarget"));
                         }
+                        response.TVI = response.TVI.Remove(0, 1);
+                        response.Threshold = response.Threshold.Remove(0, 1);
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
