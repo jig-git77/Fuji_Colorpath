@@ -1046,10 +1046,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public TargetTVIDataResponse GetTargetTVIData(int projectId)
         {
             var response = new TargetTVIDataResponse()
-            {
-                TVI = "",
-                Threshold = "",    
-            };
+                               {
+                                   TVI25 = string.Empty,
+                                   TVI50 = string.Empty,
+                                   TVI75 = string.Empty
+                               };
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1065,11 +1066,19 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     {
                         foreach (DataRow row in dsTVIData.Tables[0].Rows)
                         {
-                            response.TVI += string.Concat(" ",DataReader.ReadString(row, "TVITarget"));
-                            response.Threshold += string.Concat(" ", DataReader.ReadString(row, "ThresholdTarget"));
+                            switch (DataReader.ReadInt(row, "TVI"))
+                            {
+                                case 25:
+                                    response.TVI25 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                                case 50:
+                                    response.TVI50 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                                case 75:
+                                    response.TVI75 = DataReader.ReadString(row, "TVITarget");
+                                    break;
+                            }     
                         }
-                        response.TVI = response.TVI.Remove(0, 1);
-                        response.Threshold = response.Threshold.Remove(0, 1);
                     }
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
