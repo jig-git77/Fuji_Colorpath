@@ -37,5 +37,19 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
             userBusiness.UpdateSecurityInformation(_viewProfileManagement.LoginId, _viewProfileManagement.SecurityQuestionId, _viewProfileManagement.SecurityAnswer);
         }
+
+        public void UpdateLanguage()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
+            userBusiness.UpdateLanguage(_viewProfileManagement.LoginId, _viewProfileManagement.LanguageCultureCode);
+        }
+
+        public void GetLanguages()
+        {
+            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
+            userBusiness.ErrorOccured += _viewProfileManagement.ErrorOccured;
+            _viewProfileManagement.LanguageList = userBusiness.GetLanguages();
+        }
     }
 }

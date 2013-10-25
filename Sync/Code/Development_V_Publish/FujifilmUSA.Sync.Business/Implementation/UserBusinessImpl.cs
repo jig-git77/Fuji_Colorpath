@@ -46,7 +46,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                        SecurityQuestionId = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "SecurityQuestionID"),
                                        SecurityAnswer = DataReader.ReadString(dsUser.Tables[0].Rows[0], "SecurityAnswer"),
                                        IsActivated = DataReader.ReadBoolean(dsUser.Tables[0].Rows[0], "IsActivated"),
-                                       UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType")
+                                       UserType = DataReader.ReadInt(dsUser.Tables[0].Rows[0], "UserType"),
+                                       LanguageCultureCode = DataReader.ReadString(dsUser.Tables[0].Rows[0], "LanguageCultureCode"),
                                    };
                         user.Role.RolePermissions = dsUser.Tables[1].AsEnumerable().
                             Select(x => new RolePermission()
@@ -121,6 +122,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                            SecurityAnswer = DataReader.ReadString(x, "SecurityAnswer"),
                                            IsActivated = DataReader.ReadBoolean(x, "IsActivated"),
                                            UserType = DataReader.ReadInt(x, "UserType"),
+                                           LanguageCultureCode = DataReader.ReadString(x,"LanguageCultureCode"),
                                            Region = new Region()
                                                         {
                                                             RegionId = DataReader.ReadByte(x, "CompanyRegionId"),
@@ -195,6 +197,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.AuthenticationKey
                                         , user.IsActivated
                                         , user.UserType
+                                        , user.LanguageCultureCode
                                     });
                     if (returnValue == -1)
                     {
@@ -235,6 +238,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         , user.UserCompany.CompanyId
                                         , branchIds
                                         , user.UserType
+                                        , user.LanguageCultureCode
                                     });
                     if (returnValue == -1)
                     {
@@ -436,10 +440,57 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return userType;
         }
 
+        public List<Language> GetLanguages()
+        {
+            List<Language> languageList = new List<Language>();
+
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsLanguage = DataAccessFactory.Instance.GetDsResult("[dbo].[GetLanguages]");
+                    if (dsLanguage != null && dsLanguage.Tables[0].Rows.Count > 0)
+                    {
+
+                        languageList = dsLanguage.
+                        Tables[0].
+                        AsEnumerable().
+                        Select(x => new Entity.Language()
+                        {
+                            LanguageId = DataReader.ReadInt(x, "LanguageId"),
+                            EnglishName = DataReader.ReadString(x, "EnglishName"),
+                            DisplayText = DataReader.ReadString(x, "DisplayText"),
+                            CultureCode = DataReader.ReadString(x, "CultureCode"),
+                            IsDefault = DataReader.ReadBoolean(x, "IsDefault"),
+                            IsDeleted = DataReader.ReadBoolean(x, "IsDeleted")
+                        }).ToList();
+                    }
+                }, new BusinessHandlerRequest(this, ErrorOccured, "Error_GetLanguages"));
+            return languageList;
+        }
+
+        public int UpdateLanguage(int loginId, string languageCultureCode)
+        {
+            int returnValue = 0;
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    returnValue = DataAccessFactory.
+                        Instance.
+                        ExecuteProcedure(
+                            "[CP].[UpdateLanguage]",
+                            new object[]
+                                    {
+                                        loginId, languageCultureCode
+                                    });
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_UpdateLanguage"));
+            return returnValue;
+        }
+
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;
 
-        #endregion
+        #endregion        
     }
 }
