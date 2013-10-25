@@ -81,6 +81,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterProfileManagement.UpdateLanguage();
             if (!IsErrorOccured)
             {
+                SessionManager.Instance.CurrentUser.LanguageCultureCode = LanguageCultureCode;
                 WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
                 fujiStatusbar.DisplayMessage(GetResourceString(_recChangeLanguageSuccess), false);
             }
