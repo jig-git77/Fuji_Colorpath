@@ -222,23 +222,7 @@ namespace FujifilmUSA.Sync.Common
             {
                 HttpContext.Current.Session[_validationRequest] = value;
             }
-        }
-
-        public string CurrentLanguage
-        {
-            get
-            {
-                if (HttpContext.Current.Session[_currentLanguage] != null)
-                {
-                    return (string)HttpContext.Current.Session[_currentLanguage];
-                }
-                return null;
-            }
-            set
-            {
-                HttpContext.Current.Session[_currentLanguage] = value;
-            }
-        }
+        }        
 
         public int SelectedCompany
         {
