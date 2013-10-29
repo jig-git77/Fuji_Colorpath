@@ -20,5 +20,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         int UpdateSecurityInformation(int loginId, int securityQuestionId, string securityAnswer);
         void SendEmailToUser(User user, UserAuthenticationUpdateType updateType);
         int GetUserType(string loginId);
+        List<Language> GetLanguages();
+        int UpdateLanguage(int loginId, string languageCultureCode);
     }
 }

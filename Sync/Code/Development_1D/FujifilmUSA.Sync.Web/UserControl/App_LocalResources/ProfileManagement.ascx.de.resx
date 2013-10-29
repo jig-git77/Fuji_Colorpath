@@ -288,4 +288,16 @@
   <data name="spacesNotAllowedText" xml:space="preserve">
     <value>Spaces are not allowed._de</value>
   </data>
+  <data name="changeLanguageSuccess" xml:space="preserve">
+    <value>Language saved successfully!_de</value>
+  </data>
+  <data name="lblChangeLanguageResource1.Text" xml:space="preserve">
+    <value>Change Language_de</value>
+  </data>
+  <data name="locLanguageResource1.Text" xml:space="preserve">
+    <value>Language_de</value>
+  </data>
+  <data name="selectLanguageText" xml:space="preserve">
+    <value>Please select language._de</value>
+  </data>
 </root>

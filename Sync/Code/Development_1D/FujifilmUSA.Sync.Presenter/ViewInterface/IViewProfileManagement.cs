@@ -12,5 +12,7 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
         int SecurityQuestionId { get; set; }
         string SecurityAnswer { get; set; }
         Dictionary<int, string> SecurityQuestions { get; set; }
+        string LanguageCultureCode { get; set; }
+        List<Entity.Language> LanguageList { get; set; }
     }
 }

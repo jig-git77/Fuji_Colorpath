@@ -16,8 +16,7 @@ namespace FujifilmUSA.Sync.Common
         private const string _dlpSubOperation = "DLPSubOperation";
         private const string _branchNameSession = "BranchNameSession";
         private const string _projLimitSession = "ProjectLimitSession";
-        private const string _colorOrgRequest = "ColorOrgRequest";
-        private const string _currentLanguage = "CurrentLanguage";
+        private const string _colorOrgRequest = "ColorOrgRequest";        
         private const string _selectedCompany = "SelectedCompany";
         private const string _selectedBranch = "SelectedBranch";
         private const string _pageErrorMessage = "PageErrorMessage";
@@ -209,23 +208,7 @@ namespace FujifilmUSA.Sync.Common
             {
                 HttpContext.Current.Session[_colorOrgRequest] = value;
             }
-        }
-
-        public string CurrentLanguage
-        {
-            get
-            {
-                if (HttpContext.Current.Session[_currentLanguage] != null)
-                {
-                    return (string)HttpContext.Current.Session[_currentLanguage];
-                }
-                return null;
-            }
-            set
-            {
-                HttpContext.Current.Session[_currentLanguage] = value;
-            }
-        }
+        }        
 
         public int SelectedCompany
         {

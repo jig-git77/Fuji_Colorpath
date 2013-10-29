@@ -14,6 +14,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recPasswordSavedSuccess = "passwordSavedSuccess";
         private const string _recSecurityInfoSavedSuccess = "securityInfoSavedSuccess";
         private const string _recSelect = "selectText";
+        private const string _recChangeLanguageSuccess = "changeLanguageSuccess";
         #endregion
 
         #region Variable Declarations
@@ -41,6 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblUserName.Text = SessionManager.Instance.CurrentUser.LoginId;
                 GetSecurityQuestions();
+                GetLanguageList();
             }
         }
         #endregion
@@ -72,6 +74,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        protected void lbtnChangeLanguage_Click(object sender, EventArgs e)
+        {
+            LoginId = SessionManager.Instance.CurrentUser.UserId;
+            LanguageCultureCode = ddlLanguages.SelectedValue;
+            _presenterProfileManagement.UpdateLanguage();
+            if (!IsErrorOccured)
+            {
+                SessionManager.Instance.CurrentUser.LanguageCultureCode = LanguageCultureCode;
+                WebLogActivityManager.LogActivity(LogActivityType.ChangeProfile, null, Request.UserHostAddress);
+                fujiStatusbar.DisplayMessage(GetResourceString(_recChangeLanguageSuccess), false);
+                Response.Redirect("~/ProfileManagement.aspx");
+            }
+        }  
         #endregion
 
         #region Methods
@@ -87,6 +102,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtSecurityAnswer.Text = SessionManager.Instance.CurrentUser.SecurityAnswer.ToString();
             }
         }
+
+        private void GetLanguageList()
+        {
+            LanguageList = new List<Language>();
+            _presenterProfileManagement.GetLanguages();
+            if (!IsErrorOccured)
+            {
+                ddlLanguages.DataSource = LanguageList;
+                ddlLanguages.DataTextField = "EnglishName";
+                ddlLanguages.DataValueField = "CultureCode";
+                ddlLanguages.DataBind();
+                ddlLanguages.Items.Insert(0, new ListItem(GetResourceString(_recSelect), string.Empty));
+                if (!string.IsNullOrEmpty(SessionManager.Instance.CurrentUser.LanguageCultureCode))
+                    ddlLanguages.SelectedIndex = ddlLanguages.Items.IndexOf(ddlLanguages.Items.FindByValue(SessionManager.Instance.CurrentUser.LanguageCultureCode));
+                else
+                    ddlLanguages.SelectedIndex = 0;
+            }
+        }
         #endregion
 
         public int LoginId { get; set; }
@@ -94,5 +127,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public int SecurityQuestionId { get; set; }
         public string SecurityAnswer { get; set; }
         public Dictionary<int, string> SecurityQuestions { get; set; }
+        public string LanguageCultureCode { get; set; }
+        public List<Language> LanguageList { get; set; }
     }
 }

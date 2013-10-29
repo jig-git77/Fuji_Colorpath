@@ -824,4 +824,10 @@
   <data name="PrintStandardTypeManagement_DeletePrintStandardType_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected Print Standard Type?</value>
   </data>
+  <data name="Error_GetLanguages" xml:space="preserve">
+    <value>Error occured while retrieving languages. Please contact your administrator.</value>
+  </data>
+  <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator.</value>
+  </data>
 </root>

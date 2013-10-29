@@ -65,6 +65,10 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
+        public List<Language> GetLanguages()
+        {
+            return new List<Language>();
+        }
         #endregion
 
         #region ITaskBase Members
@@ -72,5 +76,10 @@ namespace FujifilmUSA.Sync.Business.Mock
         public event ErrorHandler ErrorOccured;
 
         #endregion
+
+        public int UpdateLanguage(int loginId, string languageCultureCode)
+        {
+            return 0;
+        }
     }
 }

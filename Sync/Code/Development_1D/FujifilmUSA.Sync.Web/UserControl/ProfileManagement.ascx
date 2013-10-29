@@ -123,6 +123,66 @@
                             Visible="False" />
                         <fieldset style="width: 50%;">
                             <legend>
+                                <asp:Label ID="lblChangeLanguage" runat="server" Text="Change Language" meta:resourcekey="lblChangeLanguageResource1" ></asp:Label>
+                            </legend>
+                            <table>                               
+                                <tr>
+                                    <td align="right">
+                                        <span style="font-weight: bold;"><asp:Localize Text="Language" 
+                                            runat="server" ID="locLanguage" meta:resourcekey="locLanguageResource1"></asp:Localize><span style="color: Red;">*</span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <b>&nbsp;:&nbsp;</b>
+                                    </td>
+                                    <td align="left">
+                                        <div style="float: left;">
+                                            <asp:DropDownList ID="ddlLanguages" runat="server" CssClass="select"></asp:DropDownList>
+                                        </div>
+                                        <div style="float: left">
+                                            <asp:RequiredFieldValidator ID="rfvLanguage" runat="server" Display="Dynamic"
+                                                ControlToValidate="ddlLanguages" ForeColor="Red" 
+                                                ValidationGroup="vgChangeLanguage">
+                                                <ucValidationContainer:ValidationContainer ID="rfvucChangeLanguage" runat="server"
+                                                    ValidationMsg="Please select language." Size="200" />
+                                            </asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td align="left">
+                                        <div class="text">
+                                            <div style="padding-left: 3px;">
+                                                <asp:LinkButton ID="lbtnSaveLanguage" runat="server" CssClass="gray_bt" ValidationGroup="vgChangeLanguage"
+                                                    OnClick="lbtnChangeLanguage_Click">
+                                                    <span> <asp:Localize Text="Save" runat="server" ID="locSaveLanguage" 
+                                                    meta:resourcekey="locSavePwdResource1"></asp:Localize> 
+ </span>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="lbtnCancelLanguage" runat="server" CssClass="gray_bt" 
+                                                    PostBackUrl="~/Settings.aspx">
+                                                    <span> <asp:Localize Text="Cancel" runat="server" ID="locCancelLanguage" 
+                                                    meta:resourcekey="locCancelPwdResource1"></asp:Localize> 
+ </span>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <div class="clear">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <br />
+                        <br />
+                        <fieldset style="width: 50%;">
+                            <legend>
                                 <asp:Label ID="lblHeader" runat="server" Text="Change Password" 
                                     meta:resourcekey="lblHeaderResource1"></asp:Label>
                             </legend>

@@ -812,4 +812,10 @@
   <data name="MetricTargetPresetManagement_DeleteMetricTargetPreset_Confirmation" xml:space="preserve">
     <value>Are you sure you want to delete selected metric target preset?_de</value>
   </data>
+  <data name="Error_GetLanguages" xml:space="preserve">
+    <value>Error occured while retrieving languages. Please contact your administrator._de</value>
+  </data>
+  <data name="Error_UpdateLanguage" xml:space="preserve">
+    <value>Error occured while updating user information.Please contact your administrator._de</value>
+  </data>
 </root>

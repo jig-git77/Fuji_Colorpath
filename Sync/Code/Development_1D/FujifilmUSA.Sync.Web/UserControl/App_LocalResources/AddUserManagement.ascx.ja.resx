@@ -348,4 +348,7 @@
   <data name="locUserTypeResource1.Text" xml:space="preserve">
     <value>User Type_ja</value>
   </data>
+  <data name="locUserLanguageResource1.Text" xml:space="preserve">
+    <value>User Language_ja</value>
+  </data>
 </root>

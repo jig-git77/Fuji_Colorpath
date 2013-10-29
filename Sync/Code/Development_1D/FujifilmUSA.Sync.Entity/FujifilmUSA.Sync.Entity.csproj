@@ -61,6 +61,7 @@
     <Compile Include="Density.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="LogActivity.cs" />
     <Compile Include="MeasurementPatchDetails.cs">
       <SubType>Code</SubType>
