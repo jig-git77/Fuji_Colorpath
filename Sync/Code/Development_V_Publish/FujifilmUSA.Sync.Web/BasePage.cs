@@ -12,10 +12,10 @@ namespace FujifilmUSA.Sync.Web
         #region Page Events
         protected override void InitializeCulture()
         {
-            if (SessionManager.Instance.CurrentUser != null && !string.IsNullOrEmpty(SessionManager.Instance.CurrentUser.LanguageCultureCode))
+            if (SessionManager.Instance.CurrentLanguage != null)
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentUser.LanguageCultureCode);
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SessionManager.Instance.CurrentLanguage);
                 Page.ClientScript.RegisterClientScriptInclude("JSGlobalResource", ResolveUrl("JS/GlobalResource." + System.Threading.Thread.CurrentThread.CurrentUICulture.ToString() + ".js"));
             }
             else //Load default English (en-US) .js file

@@ -88,12 +88,5 @@ namespace FujifilmUSA.Sync.Presenter
             userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
             userBusiness.SendEmailToUser(_viewAddUserManagement.UserInformation, _viewAddUserManagement.UpdateType);
         }
-
-        public void GetLanguages()
-        {
-            var userBusiness = BusinessFactory<IUserBusiness>.CreateObject();
-            userBusiness.ErrorOccured += _viewAddUserManagement.ErrorOccured;
-            _viewAddUserManagement.LanguageList = userBusiness.GetLanguages();
-        }
     }
 }

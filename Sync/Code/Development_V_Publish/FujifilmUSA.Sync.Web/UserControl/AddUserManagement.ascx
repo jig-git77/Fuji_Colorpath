@@ -424,26 +424,6 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr runat="server" id="tr_Language">
-                                                            <td id="td_Language" style="width: 140px;" runat="server">
-                                                                <span style="font-weight: bold;"><asp:Localize runat="server" Text="User Language" ID="locUserLanguage"  meta:resourcekey="locUserLanguageResource1"></asp:Localize><span style="color: Red;">*</span>
-                                                                </span>
-                                                            </td>
-                                                            <td id="Td2" runat="server">
-                                                                <b>&nbsp;:&nbsp;</b>
-                                                            </td>
-                                                            <td id="Td3" runat="server">
-                                                                <div style="float: left;">
-                                                                    <asp:DropDownList ID="ddlLanguages" runat="server" Width="270px" CssClass="select" >                                                                        
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                                <div style="float: left">
-                                                                  
-                                                                </div>
-                                                                <div class="clear">
-                                                                </div>
-                                                            </td>
-                                                        </tr>
                                                     </table>
                                                 </fieldset>
                                             </center>

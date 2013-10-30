@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,194 +59,191 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="activateUserAgainText" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="activateUserAgainText" xml:space="preserve">
     <value>ユーザの再度有効化</value>
   </data>
-  <data name="averageText" xml:space="preserve">
+	<data name="averageText" xml:space="preserve">
     <value>平均</value>
   </data>
-  <data name="confirmPasswordLengthText" xml:space="preserve">
+	<data name="confirmPasswordLengthText" xml:space="preserve">
     <value>パスワード確認は4文字が必要です。</value>
   </data>
-  <data name="editUserText" xml:space="preserve">
+	<data name="editUserText" xml:space="preserve">
     <value>ユーザ編集</value>
   </data>
-  <data name="emailSentText" xml:space="preserve">
+	<data name="emailSentText" xml:space="preserve">
     <value>Eメールが送信されました</value>
   </data>
-  <data name="excellentText" xml:space="preserve">
+	<data name="excellentText" xml:space="preserve">
     <value>Excellent</value>
   </data>
-  <data name="lblHeaderResource1.Text" xml:space="preserve">
+	<data name="lblHeaderResource1.Text" xml:space="preserve">
     <value>パスワード変更</value>
   </data>
-  <data name="ListItemResource1.Text" xml:space="preserve">
+	<data name="ListItemResource1.Text" xml:space="preserve">
     <value>Idealliance Digital Chart</value>
   </data>
-  <data name="ListItemResource2.Text" xml:space="preserve">
+	<data name="ListItemResource2.Text" xml:space="preserve">
     <value>XMFユーザ</value>
   </data>
-  <data name="locAccessTypeResource1.Text" xml:space="preserve">
+	<data name="locAccessTypeResource1.Text" xml:space="preserve">
     <value>アクセスタイプ</value>
   </data>
-  <data name="locCancelResource1.Text" xml:space="preserve">
+	<data name="locCancelResource1.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="locEmailResource1.Text" xml:space="preserve">
+	<data name="locEmailResource1.Text" xml:space="preserve">
     <value>Eメール</value>
   </data>
-  <data name="locFirstNameResource1.Text" xml:space="preserve">
+	<data name="locFirstNameResource1.Text" xml:space="preserve">
     <value>名</value>
   </data>
-  <data name="locIsActiveResource1.Text" xml:space="preserve">
+	<data name="locIsActiveResource1.Text" xml:space="preserve">
     <value>有効</value>
   </data>
-  <data name="locLastNameResource1.Text" xml:space="preserve">
+	<data name="locLastNameResource1.Text" xml:space="preserve">
     <value>姓</value>
   </data>
-  <data name="locPersonalInfoResource1.Text" xml:space="preserve">
+	<data name="locPersonalInfoResource1.Text" xml:space="preserve">
     <value>個人情報</value>
   </data>
-  <data name="locRoleResource1.Text" xml:space="preserve">
+	<data name="locRoleResource1.Text" xml:space="preserve">
     <value>役割</value>
   </data>
-  <data name="locSaveResource1.Text" xml:space="preserve">
+	<data name="locSaveResource1.Text" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="locUserMgmtResource1.Text" xml:space="preserve">
+	<data name="locUserMgmtResource1.Text" xml:space="preserve">
     <value>ユーザ管理</value>
   </data>
-  <data name="locUsernameResource1.Text" xml:space="preserve">
+	<data name="locUsernameResource1.Text" xml:space="preserve">
     <value>ユーザ名</value>
   </data>
-  <data name="passwordLengthText" xml:space="preserve">
+	<data name="passwordLengthText" xml:space="preserve">
     <value>パスワードは4文字が必要です。</value>
   </data>
-  <data name="passwordsAreDifferent" xml:space="preserve">
+	<data name="passwordsAreDifferent" xml:space="preserve">
     <value>パスワードとパスワード確認が一致しません。</value>
   </data>
-  <data name="provideBranchText" xml:space="preserve">
+	<data name="provideBranchText" xml:space="preserve">
     <value>支社を選択してください。</value>
   </data>
-  <data name="provideCompanyText" xml:space="preserve">
+	<data name="provideCompanyText" xml:space="preserve">
     <value>企業を選択してください。</value>
   </data>
-  <data name="provideEmailText" xml:space="preserve">
+	<data name="provideEmailText" xml:space="preserve">
     <value>Eメールアドレスを入力してください。</value>
   </data>
-  <data name="provideFirstNameText" xml:space="preserve">
+	<data name="provideFirstNameText" xml:space="preserve">
     <value>名を入力してください。</value>
   </data>
-  <data name="provideLastNameText" xml:space="preserve">
+	<data name="provideLastNameText" xml:space="preserve">
     <value>姓を入力してください。</value>
   </data>
-  <data name="provideProperEmailText" xml:space="preserve">
+	<data name="provideProperEmailText" xml:space="preserve">
     <value>正しいEメールアドレスを入力してください。</value>
   </data>
-  <data name="provideRegionText" xml:space="preserve">
+	<data name="provideRegionText" xml:space="preserve">
     <value>地域を選択してください。</value>
   </data>
-  <data name="provideRoleText" xml:space="preserve">
+	<data name="provideRoleText" xml:space="preserve">
     <value>役割を選択してください。</value>
   </data>
-  <data name="provideUsernameText" xml:space="preserve">
+	<data name="provideUsernameText" xml:space="preserve">
     <value>ユーザ名を入力してください。</value>
   </data>
-  <data name="resetPasswordText" xml:space="preserve">
+	<data name="resetPasswordText" xml:space="preserve">
     <value>パスワードのリセット</value>
   </data>
-  <data name="selectCompanyText" xml:space="preserve">
+	<data name="selectCompanyText" xml:space="preserve">
     <value>―企業を選択してください―</value>
   </data>
-  <data name="selectRegionText" xml:space="preserve">
+	<data name="selectRegionText" xml:space="preserve">
     <value>―地域を選択してください―</value>
   </data>
-  <data name="selectRoleText" xml:space="preserve">
+	<data name="selectRoleText" xml:space="preserve">
     <value>―役割を選択してください―</value>
   </data>
-  <data name="spacesNotAllowed" xml:space="preserve">
+	<data name="spacesNotAllowed" xml:space="preserve">
     <value>スペースを入力しないでください。</value>
   </data>
-  <data name="strongText" xml:space="preserve">
+	<data name="strongText" xml:space="preserve">
     <value>高</value>
   </data>
-  <data name="veryPoorText" xml:space="preserve">
+	<data name="veryPoorText" xml:space="preserve">
     <value>低</value>
   </data>
-  <data name="weakText" xml:space="preserve">
+	<data name="weakText" xml:space="preserve">
     <value>中低</value>
   </data>
-  <data name="locBranchNameResource1.Text" xml:space="preserve">
+	<data name="locBranchNameResource1.Text" xml:space="preserve">
     <value>支社名</value>
   </data>
-  <data name="locCompanyNameResource1.Text" xml:space="preserve">
+	<data name="locCompanyNameResource1.Text" xml:space="preserve">
     <value>企業名</value>
   </data>
-  <data name="locRegionResource1.Text" xml:space="preserve">
+	<data name="locRegionResource1.Text" xml:space="preserve">
     <value>地域</value>
   </data>
-  <data name="locUserTypeResource1.Text" xml:space="preserve">
+	<data name="locUserTypeResource1.Text" xml:space="preserve">
     <value>ユーザタイプ</value>
-  </data>
-  <data name="locUserLanguageResource1.Text" xml:space="preserve">
-    <value>User Language_ja</value>
   </data>
 </root>

@@ -59,7 +59,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 lblHeader.Text = GetResourceString(_recAddUser); //"Add User";
                 BindRole();
-                BindLanguages();
                 if (Request.QueryString["UserId"] != null)
                 {
                     lblHeader.Text = GetResourceString(_recEditUser); //"Edit User";
@@ -174,8 +173,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                       UserCompany = new UserCompany(),
                                       UserBranches = new List<UserBranch>(),
                                       RegionId = 0,
-                                      UserType = Convert.ToInt16(cmbUserType.SelectedItem.Value),
-                                      LanguageCultureCode = ddlLanguages.SelectedValue
+                                      UserType = Convert.ToInt16(cmbUserType.SelectedItem.Value)
                                   };
 
             #region Set Role related information to user object
@@ -245,8 +243,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 lnkPasswordReset.Text = UserInformation.IsActivated ? GetResourceString(_recResetPassword) : GetResourceString(_recActivateUserAgain);
                 lnkPasswordReset.Attributes.Add("authKey", UserInformation.AuthenticationKey.ToString());
                 cmbUserType.SelectedValue = UserInformation.UserType.ToString();
-                if (!string.IsNullOrEmpty(UserInformation.LanguageCultureCode))
-                    ddlLanguages.SelectedIndex = ddlLanguages.Items.IndexOf(ddlLanguages.Items.FindByValue(UserInformation.LanguageCultureCode));
+                
                 ManageRoleBaseUI();
 
                 var role = (ERole)Enum.Parse(typeof(ERole), cmbRole.SelectedItem.Text.Replace(" ", "").Trim());
@@ -337,24 +334,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
             }
         }
-        private void BindLanguages()
-        {
-            LanguageList = new List<Language>();
-            _presenterUserManagement.GetLanguages();
-            if (!IsErrorOccured)
-            {
-                ddlLanguages.DataSource = LanguageList;
-                ddlLanguages.DataTextField = "EnglishName";
-                ddlLanguages.DataValueField = "CultureCode";
-                ddlLanguages.DataBind();
-
-                string defaultCultureCode = LanguageList.Where(d => d.IsDefault).Select(d => d.CultureCode).FirstOrDefault();
-                if (!string.IsNullOrEmpty(defaultCultureCode))
-                    ddlLanguages.SelectedIndex = ddlLanguages.Items.IndexOf(ddlLanguages.Items.FindByValue(defaultCultureCode));
-                else
-                    ddlLanguages.SelectedIndex = 0;
-            }
-        }
         #endregion
 
         #region Control Events
@@ -404,7 +383,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Dictionary<int, string> UserRoleList { get; set; }
         public int RegionId { get; set; }
         public UserAuthenticationUpdateType UpdateType { get; set; }
-        public List<Language> LanguageList { get; set; }
         #endregion
     }
 }

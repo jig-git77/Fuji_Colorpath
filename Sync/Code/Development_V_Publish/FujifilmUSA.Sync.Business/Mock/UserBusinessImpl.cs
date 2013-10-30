@@ -65,22 +65,12 @@ namespace FujifilmUSA.Sync.Business.Mock
             return 0;
         }
 
-        public List<Language> GetLanguages()
-        {
-            return new List<Language>();
-        }
         #endregion
 
         #region ITaskBase Members
 
         public event ErrorHandler ErrorOccured;
 
-        #endregion        
-    
-
-        public int UpdateLanguage(int loginId, string languageCultureCode)
-        {
-            return 0;
-        }
+        #endregion
     }
 }
