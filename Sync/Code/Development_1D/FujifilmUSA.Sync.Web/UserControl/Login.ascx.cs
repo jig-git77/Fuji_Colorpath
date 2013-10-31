@@ -42,13 +42,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     txtUserName.Text = Request.Cookies["SyncFujiLogin"].Value;
                     txtPassword.Attributes.Add("value", Request.Cookies["SyncFujiPass"].Value);
 
-                }
-
-                //Bind language combo
-                ddlLanguages.DataSource = Languages;
-                ddlLanguages.DataTextField = "Key";
-                ddlLanguages.DataValueField = "Value";
-                ddlLanguages.DataBind();
+                }                
             }
         }
         protected void bntLogin_Click(object sender, EventArgs e)
@@ -71,16 +65,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         Response.SetCookie(objCookie);
 
                         objCookie = new HttpCookie("SyncFujiPass") { Value = Password, Expires = System.DateTime.Now.AddDays(20) };
-                        Response.SetCookie(objCookie);
-
-                        objCookie = new HttpCookie("SyncFujiSelectedLanguage") { Value = ddlLanguages.SelectedValue, Expires = System.DateTime.Now.AddDays(20) };
-                        Response.SetCookie(objCookie);
+                        Response.SetCookie(objCookie);                        
                     }
                     else
                     {
                         Response.Cookies["SyncFujiLogin"].Value = "";
-                        Response.Cookies["SyncFujiPass"].Value = "";
-                        Response.Cookies["SyncFujiSelectedLanguage"].Value = "";
+                        Response.Cookies["SyncFujiPass"].Value = "";                        
                     }
 
                     if (SessionManager.Instance.CurrentUser.HasProjectPermission())
