@@ -125,6 +125,29 @@
     }
 </script>
 
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function () {
+        $("div[id*='accordion']").click
+        (      
+                function () {
+                    var $panel = $("div[id*='panelabGamutComparison']");               
+                    var $img = $("div[id*='imgHeader']");                  
+                    $panel.slideToggle(500);                   
+                    if ($img.hasClass('expanded')) {
+                        $img.addClass('collapsed').removeClass('expanded');
+                    }
+                    else {
+                        $img.addClass('expanded').removeClass('collapsed');
+                    }
+                    return false;
+                }
+        );
+       
+        $("div[id*='accordion']").click();     
+        
+    });
+</script>
+
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -1156,7 +1179,7 @@
                                                     <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0" width="100%" class="SYNCTABLE">                                                     
                                                         <tr runat="server">
                                                             <td class="green-title" runat="server">
-                                                                <asp:Localize ID="locComparison" runat="server" Text="a* - b* Comparison"></asp:Localize>
+                                                                <asp:Localize ID="locComparison" runat="server" Text="a* - b* Spider Plot"></asp:Localize>
                                                             </td>
                                                         </tr>
                                                       
@@ -1231,6 +1254,78 @@
 
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td >
+                                                                <div style=" padding-left:-5px;" >
+                                                                    <div id="accordion" class="header collapsibleContainerTitle">
+                                                                        <div>
+                                                                            <div class="green-title">
+                                                                                <div style="float: left">
+                                                                                </div>
+                                                                                <div style="float: left;" >
+                                                                                    <div id="imgHeader" class="expanded">
+                                                                                        &nbsp;</div>
+                                                                                    <asp:Localize ID="Localize2" runat="server" Text="a* - b* Gamut Comparison"></asp:Localize>
+                                                                                </div>
+                                                                                <div class="clear">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                     <asp:Panel ID="panelabGamutComparison" runat="server" BorderStyle="None"
+                                                                        Width="100%" meta:resourcekey="panelabGamutComparisonResource1">                                                                        
+                                                                            <asp:chart ID="chartABComparison_1" runat="server"  Width="280px" Height="250px" BackGradientType="Center" 
+                                                                                    BackGradientEndColor="White" BorderLineColor="#808080"  EnableViewState="false">
+                                                                                        <Legends>
+                                                                                                <asp:Legend Name="Default" Enabled="False">
+                                                                                            </asp:Legend>
+                                                                                        </Legends>
+                                                                                        <Series>
+                                                                                            <asp:Series Name="Series0" ChartType="Polar" 
+                                                                                                MarkerSize="10" MarkerStyle="Circle" MarkerColor="Green" Color="Green" ShadowOffset="1">
+                                                                                            </asp:Series>
+                                                                                            <asp:Series Name="Series1" ChartType="Polar" 
+                                                                                                MarkerSize="10" MarkerStyle="Circle" MarkerColor="Green" MarkerBorderColor="Black"
+                                                                                                MarkerBorderWidth="1" Color="Green" ShadowOffset="1">
+                                                                                            </asp:Series>
+                                                                                            <asp:Series Name="Series2" ChartType="FastPoint" 
+                                                                                                MarkerSize="10" MarkerStyle="Circle" MarkerColor="Green" Color="Red" ShadowOffset="1">
+                                                                                            </asp:Series>
+                                                                                            <asp:Series Name="Series3" ChartType="FastPoint" 
+                                                                                                MarkerSize="10" MarkerStyle="Circle" MarkerBorderColor="Black" ShadowOffset="1">
+                                                                                            </asp:Series>
+                                                                                            <asp:Series Name="Series4" ChartType="FastPoint" 
+                                                                                                MarkerSize="4" MarkerStyle="Circle" MarkerBorderColor="Black" ShadowOffset="1">
+                                                                                            </asp:Series>
+                                                                                        </Series>
+                                                                                        <BorderSkin PageColor="AliceBlue" />
+                                                                                            <Titles>
+                                                                                            <asp:Title ForeColor="Black" Text="a*">
+                                                                                                <Position X="15" Y="42" />
+                                                                                            </asp:Title>
+                                                                                            <asp:Title ForeColor="Black" Text="b*">
+                                                                                                <Position X="57" Y="87" />
+                                                                                            </asp:Title>
+                                                                                        </Titles>
+                                                                                            <ChartAreas>
+                                                                                            <asp:ChartArea  BackSecondaryColor="#FACECF" BackColor="#B3DEC3" BackGradientStyle="LeftRight" BorderColor="26, 59, 105" BorderDashStyle="Solid" Name="Default"  ShadowOffset="1">
+                                                                                                <Position Height="99" Width="100" X="0" Y="0" />
+                                                                                                <AxisY LineColor="120, 0, 0, 0"  Maximum="100" Minimum="-100" Interval="20"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False"
+                                                                                                    LineDashStyle="NotSet">                                                                           
+                                                                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                        <LabelStyle Font="Verdana, 6pt" />
+                                                                                                </AxisY>
+                                                                                                <AxisX LineColor="120, 0, 0, 0" Maximum="100" Minimum="-100" Interval="20" LineDashStyle="NotSet"  IsMarginVisible="False" TitleAlignment="Near" IsLabelAutoFit="False">                                                                             
+                                                                                                        <MajorGrid LineColor="Gray"></MajorGrid>
+                                                                                                        <LabelStyle Font="Verdana, 6pt" />
+                                                                                                </AxisX>
+                                                                                            </asp:ChartArea>
+                                                                                        </ChartAreas>
+                                                                                    </asp:chart>                                                                              
+                                                                    </asp:Panel>
+                                                                    </div>
+                                                            </td>
+                                                        </tr>                                                      
                                                         <tr runat="server">
                                                             <td class="green-title" runat="server">
                                                                 <asp:Localize runat="server" Text="L* Comparison" ID="locLComparison"></asp:Localize>
@@ -1930,7 +2025,8 @@
                     </div>
                 </td>
                 <td align="right">
-                    
+                     <asp:Button ID="btnCGATSExport" CssClass="button" Width="150px" Text="Export to CGATS" 
+                        runat="server" onclick="btnCGATSExport_Click" meta:resourcekey="btnCGATSExportResource1"></asp:Button> 
                     <asp:Button ID="btnExcelExport" CssClass="button" Width="150px" 
                         Text="Export to Excel" runat="server" onclick="btnExcelExport_Click" Visible="False" 
                         meta:resourcekey="btnExcelExportResource1"></asp:Button>                   
@@ -2126,6 +2222,7 @@
             </table>             
          </ContentTemplate> 
          <Triggers>
+                <asp:PostBackTrigger ControlID="btnCGATSExport" />         
                 <asp:PostBackTrigger ControlID="btnExcelExport" />               
                 <asp:PostBackTrigger ControlID="btnCSVExport" />   
                 <asp:PostBackTrigger ControlID="rcmbMetricSumlist" />                                

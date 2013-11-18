@@ -697,6 +697,33 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.DataVisualization.Charting.Chart chartABComparison;
         
         /// <summary>
+        /// Localize2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize Localize2;
+        
+        /// <summary>
+        /// panelabGamutComparison control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelabGamutComparison;
+        
+        /// <summary>
+        /// chartABComparison_1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart chartABComparison_1;
+        
+        /// <summary>
         /// locLComparison control.
         /// </summary>
         /// <remarks>
@@ -938,6 +965,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox rcmbMetricSumlist;
+        
+        /// <summary>
+        /// btnCGATSExport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCGATSExport;
         
         /// <summary>
         /// btnExcelExport control.

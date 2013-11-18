@@ -134,7 +134,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             lbtnMeasurement.Visible = IsXMFUser;
 
             if (!Page.IsPostBack)
-            {              
+            {
 
                 ViewState["MetricSumID"] = "";
 
@@ -197,11 +197,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     Div_Validation_Header.Visible = true;
                     if (ValidationType == 1)  //G7 type
                     {
-                        dvTab_G7.Visible = Tab_G7.Visible = true;                        
+                        dvTab_G7.Visible = Tab_G7.Visible = true;
                     }
                     else
                     {
-                        dvTab_G7.Visible = Tab_G7.Visible = false;                        
+                        dvTab_G7.Visible = Tab_G7.Visible = false;
                     }
                 }
                 else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
@@ -220,7 +220,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
-                    Div_MetricSumFilter.Visible = false;             
+                    Div_MetricSumFilter.Visible = false;
                 }
                 else   //-----DLP Optimization
                 {
@@ -233,7 +233,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     dvTab_G7.Visible = Tab_G7.Visible = false;
                     dvTab_TVI.Visible = Tab_TVI.Visible = false;
                     Div_MetricSumFilter.Visible = false;
-                }              
+                }
             }
             else
             {
@@ -261,7 +261,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 IsValidation = true;
             }
             else
-            {              
+            {
                 //In case of None (i.e. Optimization or Sync1D)
                 OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                 _presenterAnalyze.GetAnalyzeChartMeasurement();
@@ -433,7 +433,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (!IsErrorOccured)
                     {
                         FillISOTVIChart(DTISOTVIChart);
-                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);                       
+                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
                     }
                     UpdatePanel_TVI_ISO.Visible = true;
                     UpdatePanel_TVI_G7.Visible = false;
@@ -733,21 +733,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 // === Series0 to display Thresold value === //    
                 Series objSeries0 = (Series)CHRT_SummaryDensity.Series[0];
                 objSeries0.XValueType = ChartValueType.String;
-                objSeries0.YValueType = ChartValueType.String;               
+                objSeries0.YValueType = ChartValueType.String;
                 objSeries0.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series1 to display Actual value === //
                 Series objSeries1 = (Series)CHRT_SummaryDensity.Series[1];
                 objSeries1.XValueType = ChartValueType.String;
-                objSeries1.YValueType = ChartValueType.String;               
+                objSeries1.YValueType = ChartValueType.String;
                 objSeries1.CustomProperties = "DrawingStyle=Cylinder";
 
                 // === Series2 to display red marker on Thresold value === //
                 Series objSeries2 = (Series)CHRT_SummaryDensity.Series[2];
                 objSeries2.XValueType = ChartValueType.String;
                 objSeries2.YValueType = ChartValueType.String;
-                objSeries2.CustomProperties = "DrawingStyle=Cylinder";               
-             
+                objSeries2.CustomProperties = "DrawingStyle=Cylinder";
+
                 #endregion
 
                 if (DT != null && DT.Count > 0)
@@ -824,6 +824,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillGrayLABCharts(DTLABChart);
             if (DTGaumatChart1 != null && DTGaumatChart1.Count > 0 && DTGaumatChart2 != null && DTGaumatChart2.Count > 0)
                 FillGaumatChart(DTGaumatChart1, DTGaumatChart2);
+
         }
 
         #region Fill Gaumat Chart
@@ -841,6 +842,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chartABComparison.Series["Green"].Points.Clear();
             chartABComparison.Series["Blue"].Points.Clear();
             chartABComparison.Series["Paper"].Points.Clear();
+            #endregion
+
+            #region Clear chartABComparison _1's Points
+            chartABComparison_1.Series["Series0"].Points.Clear();
+            chartABComparison_1.Series["Series1"].Points.Clear();
+            chartABComparison_1.Series["Series2"].Points.Clear();
+            chartABComparison_1.Series["Series3"].Points.Clear();
+            chartABComparison_1.Series["Series4"].Points.Clear();
+
             #endregion
 
             if (DTTarget.Contains(DTTarget.Find(item => item.PatchType == CPPatchType.Paper.ToString())))
@@ -872,6 +882,161 @@ namespace FujifilmUSA.Sync.Web.UserControl
             BindLABComparision("Blue", DTTarget, 0, 0, 6, false, true);
             BindLABComparision("Paper", DTTarget, 0, 0, 6, false, true);
             #endregion
+
+            BindLABComparison_1(DTTarget);
+        }
+
+        private void BindLABComparison_1(List<AnalyzeChart_Gray> DT)
+        {
+            List<AnalyzeChart_Gray> ListFilter_1 = new List<AnalyzeChart_Gray>();
+
+            if (DT != null)
+            {
+                #region Measurement LAB Value
+                if (DT.Count > 0)
+                {
+                    int i = 0;
+
+                    #region Cyan
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == CPPatchType.Cyan.ToString());
+
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 0;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Cyan;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Green
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == "Green");
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 1;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Green;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Yellow
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == CPPatchType.Yellow.ToString());
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 2;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Yellow;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Red
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == "Red");
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 3;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Red;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Magenta
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == CPPatchType.Magenta.ToString());
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 4;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Magenta;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Blue
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == "Blue");
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 5;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Blue;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Other
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == CPPatchType.Cyan.ToString());
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 6;
+                        chartABComparison_1.Series[0].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[0].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[0].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[1].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[1].ChartType = SeriesChartType.Line;
+                        chartABComparison_1.Series[1].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[1].Points[i].MarkerColor = Color.Cyan;
+                        chartABComparison_1.Series[1].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+
+                    #region Middle Point
+                    ListFilter_1 = DT.FindAll(item => item.PatchType == "Paper");
+                    if (ListFilter_1.Count > 0)
+                    {
+                        i = 0;
+                        chartABComparison_1.Series[2].Points.AddXY(Convert.ToDouble(ListFilter_1[0].Targeta), Convert.ToDouble(ListFilter_1[0].Targetb));
+                        chartABComparison_1.Series[2].ChartType = SeriesChartType.Point;
+                        chartABComparison_1.Series[2].Points[i].BorderWidth = 1;
+
+                        chartABComparison_1.Series[3].Points.AddXY(Convert.ToDouble(ListFilter_1[0].CielabA), Convert.ToDouble(ListFilter_1[0].CielabB));
+                        chartABComparison_1.Series[3].ChartType = SeriesChartType.Point;
+                        chartABComparison_1.Series[3].Points[i].Color = System.Drawing.ColorTranslator.FromHtml("#000000");
+                        chartABComparison_1.Series[3].Points[i].MarkerColor = Color.White;
+                        chartABComparison_1.Series[3].Points[i].BorderWidth = 1;
+                    }
+                    #endregion
+                }
+                #endregion
+
+            }
         }
 
         private void BindLABComparision(string ColorName, List<AnalyzeChart_Gray> DT, Double Papera, Double Paperb, int MarkerSize, bool isTarget, bool isActual)
@@ -883,6 +1048,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             for (int i = 0; i < ListFilter.Count; i = i + 1)
             {
+                int pointCount;
+
                 #region Bind AB Comparison
                 if (i == 0 && !isTarget && !isActual)
                 {
@@ -890,7 +1057,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     chartABComparison.Series[ColorName].Points.AddXY(Papera, Paperb);
                 }
 
-                int pointCount = ((isTarget) ? chartABComparison.Series["Targets"].Points.Count : chartABComparison.Series[ColorName].Points.Count);
+                pointCount = ((isTarget) ? chartABComparison.Series["Targets"].Points.Count : chartABComparison.Series[ColorName].Points.Count);
 
                 if (isTarget || isActual)
                 {
@@ -1102,6 +1269,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _objSeries.Points[_Index].BorderWidth = 1;
             _objSeries.Points[_Index].MarkerBorderColor = System.Drawing.ColorTranslator.FromHtml(ColorName);
         }
+
         #endregion
 
         #endregion
@@ -1326,7 +1494,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         {
                             AddG7TVIPointChart(C, CHRT_SummaryDotgain.Series["Series1"], CHRT_SummaryDotgain.Series["Series1Point"], Convert.ToInt64(DT[i].CmykC).ToString(), DT[i].DotGain.ToString(), Color.Cyan.Name.ToString());
                             C++;
-                        }                       
+                        }
                         if (Convert.ToInt16(DT[i].CmykM) != 0)
                         {
                             AddG7TVIPointChart(M, CHRT_SummaryDotgain.Series["Series2"], CHRT_SummaryDotgain.Series["Series2Point"], Convert.ToInt64(DT[i].CmykM).ToString(), DT[i].DotGain.ToString(), Color.Magenta.Name.ToString());
@@ -1355,7 +1523,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void FillISOTVIChart(List<AnalyzeChart_DotGain> DT1)
         {
             try
-            {               
+            {
                 double ThresholdValue = 0;
                 double ThresholdTop = 0;
                 double ThresholdBottom = 0;
@@ -1363,7 +1531,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     #region //========== Clear Points of all 4 charts==========//
                     CHRT_DotgainISOCyan.Series["Series0"].Points.Clear();
-                    CHRT_DotgainISOCyan.Series["Series1"].Points.Clear();            
+                    CHRT_DotgainISOCyan.Series["Series1"].Points.Clear();
                     CHRT_DotgainISOCyan.Series["SeriesTop"].Points.Clear();
 
                     CHRT_DotgainISOMeganta.Series["Series0"].Points.Clear();
@@ -1378,7 +1546,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     CHRT_DotgainISOBlack.Series["Series1"].Points.Clear();
                     CHRT_DotgainISOBlack.Series["SeriesTop"].Points.Clear();
                     #endregion
-                    
+
                     string _TitleValue = string.Empty;
 
                     #region Cyan
@@ -1412,7 +1580,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ThresholdValue = 0;
                     ThresholdTop = 0;
                     ThresholdBottom = 0;
-                 
+
                     //Filter DT1 = "(PatchTypeID in (2,8,19,20,21))";
                     List<AnalyzeChart_DotGain> ListMagenta = new List<AnalyzeChart_DotGain>();
                     ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
@@ -1443,11 +1611,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ThresholdValue = 0;
                     ThresholdTop = 0;
                     ThresholdBottom = 0;
-                 
+
                     //Filter DT1 = "(PatchTypeID in (3,8,22,23,24))";
                     List<AnalyzeChart_DotGain> ListYellow = new List<AnalyzeChart_DotGain>();
                     ListYellow = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Three_Quarter_Tone))).OrderBy(item => item.CmykY).ToList();
-                    
+
                     if (ListYellow.Count > 0)
                     {
                         for (int i = 0; i < ListYellow.Count; i++)
@@ -1474,7 +1642,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     ThresholdValue = 0;
                     ThresholdTop = 0;
                     ThresholdBottom = 0;
-                 
+
                     //Filter DT1 = "(PatchTypeID in (4,8,25,26,27))";
                     List<AnalyzeChart_DotGain> ListBlack = new List<AnalyzeChart_DotGain>();
                     ListBlack = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Black) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone))).OrderBy(item => item.CmykK).ToList();
@@ -1499,7 +1667,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CHRT_DotgainISOBlack.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(Convert.ToDouble(ListBlack[i].CmykK.ToString())), Utilities.DecimalRound(ThresholdTop), Utilities.DecimalRound(ThresholdBottom));
                         }
                     }
-                    #endregion                  
+                    #endregion
                 }
             }
             catch (Exception Exc)
@@ -1511,7 +1679,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private void FillSpreadChart(List<AnalyzeChart_DotGain> DTSpread, List<AnalyzeChart_DotGain> DTSpreadSplineRange, List<AnalyzeChart_DotGain> DTMaxSpreasTable)
         {
             try
-            {              
+            {
                 #region //========== Clear Points==========//
                 CHRT_SummaryISODotgain.Series["Series1"].Points.Clear();
                 CHRT_SummaryISODotgain.Series["Series2"].Points.Clear();
@@ -1556,7 +1724,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykC);
                             MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
 
-                            FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykC);                        
+                            FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykC);
                             YellowValue = Convert.ToInt16(FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
@@ -1575,7 +1743,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                             FilterSpread = DTSpread.Find(item => item.CmykY == DTSpread[i].CmykM);
                             YellowValue = Convert.ToInt16(FilterSpread.DotGain);
-                   
+
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - YellowValue);
 
@@ -1591,7 +1759,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             CyanValue = Convert.ToInt16(FilterSpread.DotGain);
 
                             FilterSpread = DTSpread.Find(item => item.CmykM == DTSpread[i].CmykY);
-                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain); 
+                            MagentaValue = Convert.ToInt16(FilterSpread.DotGain);
 
                             DiffrentOne = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - CyanValue);
                             DiffrentTwo = Convert.ToInt16(Convert.ToInt16(DTSpread[i].DotGain) - MagentaValue);
@@ -1608,7 +1776,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                 #region Spread Spline Range (green boundries)
                 if (DTSpreadSplineRange != null && DTSpreadSplineRange.Count > 0)
-                {                   
+                {
                     CHRT_SummaryISODotgain.Series["SeriesTop"].Points.AddXY(Utilities.DecimalRound(0), Utilities.DecimalRound(0), Utilities.DecimalRound(0));
                     for (int i = 0; i < DTSpreadSplineRange.Count; i++)
                     {
@@ -1639,7 +1807,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 throw Exc;
             }
         }
-    
+
 
         //Add Point with color
         private void AddG7TVIPointChart(int _Index, Series _objSeries, Series _objSeriesPoint, string _XValue, string _YValue, string ColorName)
@@ -1784,7 +1952,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 throw Ex;
             }
-        }             
+        }
 
         #endregion
 
@@ -2164,10 +2332,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         useDLP = false;
                         DeviceLinkProfile = null;
 
-                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)                                                 
-                            _presenterAnalyze.CreateG7AlignmentCurve();                        
+                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
+                            _presenterAnalyze.CreateG7AlignmentCurve();
                         else//ISO                                                    
-                            _presenterAnalyze.CreateISOAlignmentCurve();                        
+                            _presenterAnalyze.CreateISOAlignmentCurve();
                     }
                     else
                     {
@@ -2409,6 +2577,76 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.MasterTableView.ExportToCSV();
         }
 
+        protected void btnCGATSExport_Click(object sender, EventArgs e)
+        {
+            MeasurementId = 0;
+            if (hdMeasurement.Value != "")
+            {
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
+
+                //Now we are using DataTable to get data of RadGrid      
+                dtPatchDetails = new DataTable();
+                dtFilteredPatchDetails = new DataTable();
+
+                _presenterAnalyze.GetPatchDetailsofMeasurement();
+                if (!IsErrorOccured)
+                {
+                    //Now we are using DataTable as DataSource                    
+                    dtFilteredPatchDetails = FilteredPatchDetailsTable(ViewState["MetricSumID"].ToString(), dtPatchDetails);
+
+                    #region Generate CGATS .txt file
+                    System.IO.StreamWriter sw;
+                    sw = System.IO.File.CreateText(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/") + MeasurementId.ToString() + "_MeasurementFile.txt");
+                    sw.WriteLine(@"ORIGINATOR	""FujiFilm Colorpath Sync""");
+                    sw.WriteLine(@"MEASUREMENT_SOURCE	""WhiteBase=Absolute  Filter=No""");
+                    sw.WriteLine(@"ILLUMINATION_NAME	""D50""");
+                    sw.WriteLine(@"OBSERVER_ANGLE	""2""");
+                    sw.WriteLine(@"KEYWORD	""SampleID""");
+                    sw.WriteLine(@"KEYWORD	""SAMPLE_NAME""");
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)   //--------------If Sync1D project type--------//
+                    {
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "13");
+                    }
+                    else
+                    {
+                        sw.WriteLine("NUMBER_OF_FIELDS" + "\t" + "18");
+                    }
+                    sw.WriteLine("BEGIN_DATA_FORMAT");
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)   //--------------If Sync1D project type, hide ΔE94, ΔE2000, Target L, A and B columns--------//
+                    {
+                        sw.WriteLine("SampleID\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tΔE\tActual L*\tActual a*\tActual b*\tDensity_V\tDensity_C\tDensity_M\tDensity_Y");
+                    }
+                    else
+                    {
+                        sw.WriteLine("SampleID\tCMYK_C\tCMYK_M\tCMYK_Y\tCMYK_K\tΔE\tΔE94\tΔE2000\tTarget L*\tActual L*\tTarget a*\tActual a*\tTarget b*\tActual b*\tDensity_V\tDensity_C\tDensity_M\tDensity_Y");
+                    }
+                    sw.WriteLine("END_DATA_FORMAT");
+                    sw.WriteLine("NUMBER_OF_SETS" + "\t" + dtFilteredPatchDetails.Rows.Count.ToString());
+                    sw.WriteLine("BEGIN_DATA");
+
+                    for (int i = 0; i < dtFilteredPatchDetails.Rows.Count; i++)
+                    {
+                        if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)  //--------------If Sync1D project type, hide ΔE94, ΔE2000, Target L, A and B columns--------//
+                        {
+                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString());
+                        }
+                        else
+                        {
+                            sw.WriteLine(dtFilteredPatchDetails.Rows[i]["SampleID"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_Y"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CMYK_K"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE94"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["ΔE2000"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["TargetL"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_L"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targeta"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_A"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Targetb"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["CIELAB_B"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_V"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_C"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_M"].ToString() + "\t" + dtFilteredPatchDetails.Rows[i]["Density_Y"].ToString());
+                        }
+                    }
+
+                    sw.WriteLine("END_DATA");
+                    sw.Close();
+
+                    Utilities.DownloadExportFile(System.Web.HttpContext.Current.Server.MapPath("UploadFiles/"), MeasurementId.ToString() + "_MeasurementFile.txt", MeasurementId.ToString() + "_MeasurementFile.txt");
+                    #endregion
+                }
+            }
+        }
+
         protected void lbtnMeasurement_Click(object sender, EventArgs e)
         {
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
@@ -2484,6 +2722,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_G7> GrayNPDChart { get; set; }
 
         public DataTable dtPatchDetails { get; set; }
+        public DataTable dtFilteredPatchDetails { get; set; }
 
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }
@@ -2502,6 +2741,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
 
-        #endregion        
+        #endregion
+
+        
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMaster.Master" AutoEventWireup="true"
-    CodeBehind="AddReferenceChart.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AddReferenceChart" %>
+    CodeBehind="AddReferenceChart.aspx.cs" Inherits="FujifilmUSA.Sync.Web.AddReferenceChart" ValidateRequest="false" %>
 
 <%@ Register Src="~/UserControl/AddReferenceChart.ascx" TagName="AddReferenceChart"
     TagPrefix="uc" %>

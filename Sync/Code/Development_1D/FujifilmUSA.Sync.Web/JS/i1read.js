@@ -390,7 +390,10 @@ function presentScanDonei1(scanner, mychart, final) {
         var LABResults = results[ind]["CIELab"];
         var XYZResults = results[ind]["CIEXYZ"];
         var DensityResults = results[ind]["Density"];
-        var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
+
+        // var _Density = new Density(DensityResults[0].toFixed(5), DensityResults[1].toFixed(5), DensityResults[2].toFixed(5), DensityResults[3].toFixed(5));
+        var _Density = new Density(ClipDecimal(DensityResults[0]), ClipDecimal(DensityResults[1]), ClipDecimal(DensityResults[2]), ClipDecimal(DensityResults[3]));
+
         mpatch = new Patch();
         mpatch.CiexyzX = XYZResults["X"].toFixed(2);
         mpatch.CiexyzY = XYZResults["Y"].toFixed(2);
@@ -533,4 +536,16 @@ function presentProgressi1(scanner, mychart) {
     jQuery("[id*='lblMessage']").html("Status : " + prog["Prompt"]);
 
     return "OK";
+}
+
+function ClipDecimal(number) {
+
+    var num;
+    if (number > 0) {
+        num = Math.floor(number * 100000) / 100000;
+    }
+    else {
+        num = 0
+    }
+    return num;
 }
