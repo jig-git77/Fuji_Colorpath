@@ -55,6 +55,21 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
         protected void lbtnImport_Click(object sender, EventArgs e)
         {
             Measurements = new List<int>();
+
+            int parentProjectMeasurementCount = 0;
+            #region Check for current project existing measurement
+            DeviceId = SessionManager.Instance.CurrentDevice.DeviceId;
+            ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+            LicenseTypeID = (int)SessionManager.Instance.CurrentProject.LicenseType;
+            _presenterImportMeasurements.GetMeasurementIDsbyProjectID();
+            if (!IsErrorOccured)
+            {
+                parentProjectMeasurementCount = Measurements.Count;
+            }
+
+            #endregion
+
+            Measurements = new List<int>();
         
             //---------------Get ProjectID from selected checkbox-----------------//
             foreach (GridDataItem grdItem in rgProjectList.Items)
@@ -74,6 +89,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl
 
             if (!IsErrorOccured)
             {
+                if (parentProjectMeasurementCount + Measurements.Count > Business.ApplicationConfiguration.Instance.MeasurementsLimit)
+                {
+                    fujiStatusbar.DisplayMessage("Measurements cannot be imported as total allowed measurement limit exceeded.", false);
+                    return;
+                }
+
                 //-------------Import all Measurements one by one using above Measurement IDs list----------------//
                 for (int i = 0; i < Measurements.Count; i++)
                 {
