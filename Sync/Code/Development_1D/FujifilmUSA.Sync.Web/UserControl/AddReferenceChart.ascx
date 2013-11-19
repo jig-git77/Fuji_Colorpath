@@ -14,6 +14,14 @@
             line-height: 15px;
      }  
 </style>
+
+<script type="text/javascript">
+    function popupShowXMF() {
+        alert('<ChartSetting xmlns="ChartSetting"><ChartSizeX>132.6</ChartSizeX><ChartSizeY>132.6</ChartSizeY><ChartType>Native</ChartType><BarSizeX>90</BarSizeX><BarSizeY>6</BarSizeY><DistToBar>34.8</DistToBar><DistToFirstLineY>17.5</DistToFirstLineY><MarkerDistance>120</MarkerDistance><DistToFirstField>18.5</DistToFirstField><PatchSizeX>7.5</PatchSizeX><PatchSizeY>9</PatchSizeY><FirstSample></FirstSample><ReadDirection></ReadDirection><ReadMode></ReadMode><Pages>0</Pages><RowsPerPage>0</RowsPerPage></ChartSetting>')
+    }
+
+</script>
+
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -322,6 +330,9 @@
                             </td>
                             <td align="left">
                                 <asp:TextBox ID="txtChartSetting" runat="server" TextMode="MultiLine" Width="500px" Height="200px" style="resize: none;"></asp:TextBox>
+                                        <a href="#" onmouseover="popupShowXMF()" onmouseout="">
+                                            Show Sample!
+                                        </a>
                             </td>
                         </tr>
                         <tr>

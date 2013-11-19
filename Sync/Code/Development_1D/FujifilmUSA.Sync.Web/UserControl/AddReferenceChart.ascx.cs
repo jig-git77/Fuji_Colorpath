@@ -65,12 +65,19 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtChartSetting.Text) && !IsChartSettingXMLValid(txtChartSetting.Text))
+            if (Convert.ToInt16(cmbInstrumentType.SelectedValue) == (int)EInstrumentType.i1IO || Convert.ToInt16(cmbInstrumentType.SelectedValue) == (int)EInstrumentType.i1IOPro2 || Convert.ToInt16(cmbInstrumentType.SelectedValue) == (int)EInstrumentType.i1Sis)
             {
-                fujiStatusbar.DisplayMessage("Invalid ChartSetting XML.", false);                
-                return; 
+                if (string.IsNullOrEmpty(txtChartSetting.Text))
+                {
+                    fujiStatusbar.DisplayMessage("Please add ChartSetting XML.", false);
+                    return;
+                }
+                else if (!string.IsNullOrEmpty(txtChartSetting.Text) && !IsChartSettingXMLValid(txtChartSetting.Text))
+                {
+                    fujiStatusbar.DisplayMessage("Invalid ChartSetting XML.", false);
+                    return;
+                }
             }
-
             ReferenceChartType = new ReferenceChartType();
             ReferenceChartType.ReferenceChartTypeId = (short)Convert.ToInt32(hdnRefChartID.Value);
             ReferenceChartType.ChartName = txtChartName.Text.Trim();
@@ -327,7 +334,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
                 txtNumOfCols.Text = ReferenceChartType.NumOfCols.ToString();
                 cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
-                if (ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IO || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1Sis)
+                if (ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IO || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IOPro2 || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1Sis)
                 {
                     trChartSetting.Visible = true;
                     txtChartSetting.Text = ReferenceChartType.ChartSetting;

@@ -2057,8 +2057,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.ExportSettings.ExportOnlyData = true;
             rgPatchDetails.ExportSettings.IgnorePaging = true;
             rgPatchDetails.ExportSettings.OpenInNewWindow = true;
-
+        
             rgPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
+             MeasurementId = 0;
+             if (hdMeasurement.Value != "")
+             {
+                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from top analyze page trendline chart
+             }
+            //-----Give name to RadGrid Exported file according to selected measurement-------//
+             rgPatchDetails.ExportSettings.FileName = MeasurementId.ToString() + "_MeasurementFile";
         }
 
         #endregion
@@ -2573,7 +2580,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnCSVExport_Click(object sender, EventArgs e)
         {
-            ConfigureExport();
+            ConfigureExport();         
             rgPatchDetails.MasterTableView.ExportToCSV();
         }
 
