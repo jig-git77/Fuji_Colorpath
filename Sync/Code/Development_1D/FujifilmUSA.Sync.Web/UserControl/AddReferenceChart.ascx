@@ -14,7 +14,6 @@
             line-height: 15px;
      }  
 </style>
-
 <div class="admin_top">
     &nbsp;</div>
 <div class="admin_middle" style="line-height: 34px;">
@@ -129,7 +128,7 @@
                             </td>
                             <td align="left">
                                 <div style="float: left;">
-                                    <asp:DropDownList ID="cmbInstrumentType" runat="server" Width="400px" CssClass="select"
+                                    <asp:DropDownList ID="cmbInstrumentType" runat="server" Width="400px" CssClass="select" OnSelectedIndexChanged="cmbInstrumentType_SelectedIndexChanged" AutoPostBack="true"
                                         DataValueField="Key" DataTextField="Value" 
                                         meta:resourcekey="cmbInstrumentTypeResource1">
                                     </asp:DropDownList>
@@ -311,6 +310,18 @@
                                 </div>
                                 <div class="clear">
                                 </div>
+                            </td>
+                        </tr>
+                        <tr id="trChartSetting" runat="server" visible="false">
+                            <td align="right">
+                                <span style="font-weight: bold;"><asp:Localize Text="Chart Setting" runat="server" 
+                                    id="locChartSetting"></asp:Localize></span>
+                            </td>
+                            <td>
+                                <b>&nbsp;:&nbsp;</b>
+                            </td>
+                            <td align="left">
+                                <asp:TextBox ID="txtChartSetting" runat="server" TextMode="MultiLine" Width="500px" Height="200px" style="resize: none;"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>

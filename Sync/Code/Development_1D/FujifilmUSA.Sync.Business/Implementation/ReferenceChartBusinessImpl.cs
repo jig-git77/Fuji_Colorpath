@@ -52,7 +52,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.IsSync1D_G7,
                                                                                     referenceChartType.Validation_1D,
                                                                                     referenceChartType.IsSync4D,
-                                                                                    referenceChartType.Validation_4D                                                                                    
+                                                                                    referenceChartType.Validation_4D ,
+                                                                                    referenceChartType.ChartSetting
                                                                                 });
                     if (returnValue == -1)
                     {
@@ -178,7 +179,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 IsSync1D_G7 = DataReader.ReadShort(x, "IsSync1D_G7"),
                                 Validation_1D = DataReader.ReadShort(x, "Validation_1D"),
                                 IsSync4D = DataReader.ReadShort(x, "IsSync4D"),
-                                Validation_4D = DataReader.ReadShort(x, "Validation_4D")  
+                                Validation_4D = DataReader.ReadShort(x, "Validation_4D"),
+                                ChartSetting = DataReader.ReadString(x, "ChartSetting")
 
                             }).ToList();
                     }
@@ -211,7 +213,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.IsSync1D_G7,
                                         referenceChartType.Validation_1D,
                                         referenceChartType.IsSync4D,
-                                        referenceChartType.Validation_4D     
+                                        referenceChartType.Validation_4D,
+                                        referenceChartType.ChartSetting
                                     });
                     if (returnValue == -1)
                     {

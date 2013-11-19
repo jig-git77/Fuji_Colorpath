@@ -8,6 +8,7 @@ using System.IO;
 using FujifilmUSA.Sync.Presenter.ViewInterface;
 using FujifilmUSA.Sync.Entity;
 using FujifilmUSA.Sync.Presenter;
+using System.Xml.Linq;
 
 namespace FujifilmUSA.Sync.Web.UserControl
 {
@@ -40,13 +41,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
         #region Page Events
         protected override void OnInit(EventArgs e)
-        {
+        {            
             _presenterAddReferenceChart = new PresenterAddReferenceChart(this);
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);
+        {            
+            fujiStatusbar.DisplayMessage(Common.Utilities.Fields_Marked_With_Are_Required, true);            
             if (!IsPostBack)
             {               
                 BindInstrumentTypeList();
@@ -64,6 +65,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Control Events
         protected void lbtnSave_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(txtChartSetting.Text) && !IsChartSettingXMLValid(txtChartSetting.Text))
+            {
+                fujiStatusbar.DisplayMessage("Invalid ChartSetting XML.", false);                
+                return; 
+            }
+
             ReferenceChartType = new ReferenceChartType();
             ReferenceChartType.ReferenceChartTypeId = (short)Convert.ToInt32(hdnRefChartID.Value);
             ReferenceChartType.ChartName = txtChartName.Text.Trim();
@@ -71,7 +78,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType.NumOfCols = Convert.ToInt32(txtNumOfCols.Text);
             ReferenceChartType.InstrumentTypeId = Convert.ToInt16(cmbInstrumentType.SelectedValue);       
             ReferenceChartType.IsUsed = chkIsUsed.Checked;
-          
+            ReferenceChartType.ChartSetting = string.IsNullOrEmpty(txtChartSetting.Text) ? null : txtChartSetting.Text;
             if (chklist_ProjectType.Items[0].Selected == true)           
                 ReferenceChartType.IsSync1D_ISO = short.Parse(cmbSync1D_ISO.SelectedValue);
             if (chklist_ProjectType.Items[1].Selected == true)
@@ -281,6 +288,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 rgChartData.DataSource = ViewState[vsChartData];
             }
         }
+
+        protected void cmbInstrumentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbInstrumentType.SelectedValue == ((int)EInstrumentType.i1IO).ToString() || cmbInstrumentType.SelectedValue == ((int)EInstrumentType.i1Sis).ToString())
+            {
+                trChartSetting.Visible = true;
+            }
+            else
+            {
+                trChartSetting.Visible = false;
+            }
+        }
         #endregion
 
         #region Methods     
@@ -301,13 +320,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ReferenceChartType = new ReferenceChartType { ReferenceChartTypeId = (short)RefChartId };
             _presenterAddReferenceChart.GetReferenceChartDetails();
             if (!IsErrorOccured)
-            {
+            {                                
                 Tr_UploadData.Visible = false;
                 hdnRefChartID.Value = Convert.ToString(RefChartId);
                 txtChartName.Text = ReferenceChartType.ChartName.ToString();
                 txtNumOfRows.Text = ReferenceChartType.NumOfRows.ToString();
                 txtNumOfCols.Text = ReferenceChartType.NumOfCols.ToString();
-                cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);             
+                cmbInstrumentType.SelectedValue = Convert.ToString(ReferenceChartType.InstrumentType.InstrumentTypeId);
+                if (ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1IO || ReferenceChartType.InstrumentType.InstrumentTypeId == (int)EInstrumentType.i1Sis)
+                {
+                    trChartSetting.Visible = true;
+                    txtChartSetting.Text = ReferenceChartType.ChartSetting;
+                }
                 chkIsUsed.Checked = (ReferenceChartType.IsUsed == true ? true : false);
 
                 if (ReferenceChartType.IsSync1D_ISO >= 1)
@@ -348,6 +372,18 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
         }
 
+        private bool IsChartSettingXMLValid(string xmlString)
+        {
+            try
+            {
+                XDocument doc = XDocument.Parse(xmlString);                
+            }
+            catch (Exception ex)
+            {                 
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         #region IViewAddReferenceChart Members
