@@ -314,7 +314,7 @@
                         </tr>
                         <tr id="trChartSetting" runat="server" visible="false">
                             <td align="right">
-                                <span style="font-weight: bold;"><asp:Localize Text="Chart Setting" runat="server" 
+                                <span style="font-weight: bold;"><asp:Localize Text="Chart Setting XML" runat="server" 
                                     id="locChartSetting"></asp:Localize></span>
                             </td>
                             <td>
