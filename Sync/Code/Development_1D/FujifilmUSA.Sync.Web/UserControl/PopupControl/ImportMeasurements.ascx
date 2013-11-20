@@ -54,7 +54,7 @@
     function CloseImportWindow() {
         var oWindow = GetMeasurementRadWindow();
         GetMeasurementRadWindow().close();
-        top.location.href = top.location.href;
+        top.location.href = top.location.href.replace("#","");
     }
 
 </script>
