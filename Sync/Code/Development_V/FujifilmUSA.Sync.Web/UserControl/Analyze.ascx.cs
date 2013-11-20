@@ -245,8 +245,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 lbtnOptimize.Visible = false;
                 lbtnMeasurementVerification.Visible = false;                
-                lbtnDownloadAndSaveDLP.Visible = false;
-            }            
+                lbtnDownloadAndSaveDLP.Visible = false;                
+            }
+
+            if (IsXMFUser && Request.QueryString["viewonly"] != null && Convert.ToBoolean(Request.QueryString["viewonly"]) == true)
+            {
+                lbtnSubmit.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;                
+            }
         }
 
         #endregion
@@ -279,36 +288,39 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 List<Entity.Measurement> MeasurementList = new List<Entity.Measurement>();
                 MeasurementList = Measurements;
 
-                if (IsValidation)  //This will be called when Verification process is going on
+                if (MeasurementList != null && MeasurementList.Count > 0)
                 {
-                    MeasurementList = AlignPaging(Measurements);
-                    //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
-                    int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
-                    if (index < 0)
+                    if (IsValidation)  //This will be called when Verification process is going on
                     {
-                        // element not exists, update to last record's measurementID
-                        hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        MeasurementList = AlignPaging(Measurements);
+                        //-----Update hdMeasurement value to last measurementID of list, if it is a part of validation and paging
+                        int index = MeasurementList.FindIndex(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value));
+                        if (index < 0)
+                        {
+                            // element not exists, update to last record's measurementID
+                            hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
+                        }
                     }
+
+                    var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
+                    {
+                        CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
+                    };
+                    manager.BindChart();
+
+                    lblMeasurementName.Text = manager.MeasurementName;
+
+                    hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
+                    {
+                        From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
+                        chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
+                    }
+                    //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+                    BindAvgDelta();
+                    FillAllTabsData(); 
                 }
-
-                var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
-                {
-                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
-                };
-                manager.BindChart();
-
-                lblMeasurementName.Text = manager.MeasurementName;
-
-                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
-
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
-                {
-                    From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
-                    chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
-                }
-                //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-                BindAvgDelta();
-                FillAllTabsData();
             }
         }
         #endregion
@@ -331,22 +343,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 _presenterAnalyze.GetAvgDeltaMeasurement_Validation();
                 if (!IsErrorOccured)
                 {
-                    tbOptSummary.Visible = false;
-                    ValidationType = MeasurementSummary[0].ValidationType;
-
-                    dvValidationSummary.DataSource = MeasurementSummary;
-                    dvValidationSummary.DataBind();
-
-                    rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
-                    rgValidationSummaryMetrics.DataBind();
-
-                    ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
-
-                    PreparePrintLabelXML(MeasurementSummary[0]);
-
-                    if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                    if (MeasurementSummary != null && MeasurementSummary.Count > 0)
                     {
-                        FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                        tbOptSummary.Visible = false;
+                        ValidationType = MeasurementSummary[0].ValidationType;
+
+                        dvValidationSummary.DataSource = MeasurementSummary;
+                        dvValidationSummary.DataBind();
+
+                        rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
+                        rgValidationSummaryMetrics.DataBind();
+
+                        ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
+
+                        PreparePrintLabelXML(MeasurementSummary[0]);
+
+                        if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                        {
+                            FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
+                        }
                     }
                 }
 

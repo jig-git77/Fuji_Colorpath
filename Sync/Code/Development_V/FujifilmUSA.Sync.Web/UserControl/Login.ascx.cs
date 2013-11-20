@@ -64,7 +64,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     SessionManager.Instance.CurrentUser = CurrentUser;
 
                     WebLogActivityManager.LogActivity(LogActivityType.LoggedIn, null, Request.UserHostAddress);
-
+                    
                     SessionManager.Instance.CurrentLanguage = ddlLanguages.SelectedValue;
                     if (chkRememberMe.Checked == true)
                     {

@@ -321,7 +321,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                         SessionManager.Instance.CurrentProject = Project;
                         SessionManager.Instance.CurrentOptimizeRun = Project.OptimizeRuns.Last();
                         //Redirect to COAnalyze page
-                        HttpContext.Current.Response.Redirect("COAnalyze.aspx");
+                        HttpContext.Current.Response.Redirect("COAnalyze.aspx?viewonly=true");
                     }
                 }
                 #endregion
@@ -349,7 +349,7 @@ namespace FujifilmUSA.Sync.Web.ColorOrganizer
                         if (SessionManager.Instance.CurrentOptimizeRun.HasMeasurements)
                         {
                             //Redirect to analyse page
-                            HttpContext.Current.Response.Redirect(string.Format("COAnalyze.aspx?id={0}", Guid.NewGuid()));
+                            HttpContext.Current.Response.Redirect(string.Format("COAnalyze.aspx?id={0}&viewonly=true", Guid.NewGuid()));
                         }
                         else
                         {

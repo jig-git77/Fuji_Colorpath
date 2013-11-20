@@ -62,6 +62,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
             else
             {
+                lnkbtnMeasurementSetup.Visible = false;
                 trListHeader.Visible = true;
                 btnValidationMeasure.Visible = false;
             }
