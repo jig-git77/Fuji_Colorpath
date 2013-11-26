@@ -7,8 +7,10 @@
                     <img alt="" src="Images/logo_Fujifilm.png" />
                 </td>
                 <td align="center">
-                    <b> <asp:Localize Text="© <%= DateTime.Now.Year %> FUJIFILM North America Corporation - Graphic Systems Division" 
-                            runat="server" ID="locFooter" meta:resourcekey="locFooterResource1"></asp:Localize> </b>
+                     <b> © <%= DateTime.Now.Year %> <asp:Localize Text="FUJIFILM North America Corporation - Graphics Division | " 
+                            runat="server" ID="locFooter" meta:resourcekey="locFooterResource1"></asp:Localize> 
+                         <a href="Terms/ColorPath Sync TC 2013.pdf"   title="Terms of Use" target="_blank">Terms and Conditions</a>
+                    </b>
                 </td>
                 <td align="right" style="width:20%;">
                      <img alt="" src="Images/logo_bottom.png" />

@@ -67,7 +67,7 @@
 
     </script>
 
-<%-- Code to block "Back -Forward" button to work on any brower, to limit the chances of breaking of software --%>
+<%-- Code to block "Back -Forward" button to work on any browser, to limit the chances of breaking of software --%>
 <%--<SCRIPT type="text/javascript">
     window.history.forward();
     function noBack() { window.history.forward(); }      

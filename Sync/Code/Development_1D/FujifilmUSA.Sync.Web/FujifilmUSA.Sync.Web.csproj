@@ -2213,6 +2213,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Templates\CertifiedLabel.label" />
+    <None Include="Terms\ColorPath Sync TC 2013.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMetricTargetPreset.ascx.resx" />
@@ -2253,7 +2254,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="False" UseJQuerySupport="False" />
+      <UserProperties UseJQuerySupport="False" UseAjaxifiedTemplates="False" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
