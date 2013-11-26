@@ -53,7 +53,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                                     referenceChartType.Validation_1D,
                                                                                     referenceChartType.IsSync4D,
                                                                                     referenceChartType.Validation_4D ,
-                                                                                    referenceChartType.ChartSetting
+                                                                                    referenceChartType.ChartSettingXML
                                                                                 });
                     if (returnValue == -1)
                     {
@@ -180,7 +180,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 Validation_1D = DataReader.ReadShort(x, "Validation_1D"),
                                 IsSync4D = DataReader.ReadShort(x, "IsSync4D"),
                                 Validation_4D = DataReader.ReadShort(x, "Validation_4D"),
-                                ChartSetting = DataReader.ReadString(x, "ChartSetting")
+                                ChartSettingXML = DataReader.ReadString(x, "ChartSetting")
 
                             }).ToList();
                     }
@@ -214,7 +214,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         referenceChartType.Validation_1D,
                                         referenceChartType.IsSync4D,
                                         referenceChartType.Validation_4D,
-                                        referenceChartType.ChartSetting
+                                        referenceChartType.ChartSettingXML
                                     });
                     if (returnValue == -1)
                     {
