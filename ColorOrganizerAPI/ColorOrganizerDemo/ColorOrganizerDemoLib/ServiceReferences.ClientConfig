@@ -9,7 +9,7 @@
       </basicHttpBinding>
     </bindings>
     <client>
-      <endpoint address="http://pc116/ColorOrganizerService/Sync4D.svc"
+      <endpoint address="http://PC115/ColorOrganizerService/Sync4D.svc"
         binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ISync4DServiceContract"
         contract="Sync4DService.ISync4DServiceContract" name="BasicHttpBinding_ISync4DServiceContract" />
     </client>
