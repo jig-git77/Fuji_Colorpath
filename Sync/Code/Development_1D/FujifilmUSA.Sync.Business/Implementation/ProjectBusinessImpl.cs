@@ -817,6 +817,35 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return tempProjectId;
         }
 
+        public Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl)
+        {
+            var outParam = new Parameters() { ParameterName = "@TempValidationInfoId", Size = 16, Type = DbType.Guid };
+            Common.ImplementBusinessLogic(
+                () => DataAccessFactory.
+                          Instance.
+                          ExecuteProcedure("[CPSyncV].[GetTempValidationInfoGuid]",
+                                           new List<Parameters>()
+                                               {
+                                                   new Parameters() {ParameterName = "@JobName", Type = DbType.String, Size = 50, Value = jobName},
+                                                   new Parameters() {ParameterName = "@Customer", Type = DbType.String, Size = 50, Value = customer},
+                                                   new Parameters() {ParameterName = "@PageOrSurface", Type = DbType.String, Size = 50, Value = pageOrSurface},
+                                                   new Parameters() {ParameterName = "@JDFJobId", Type = DbType.String, Size = 50, Value = jdfJobId},                                                   
+                                                   new Parameters() {ParameterName = "@ProjectId", Type = DbType.Int32, Size = 4, Value = projectId},
+                                                   new Parameters() {ParameterName = "@SilverlightPostUrl", Type = DbType.String, Size = 200, Value = silverlightPostUrl},
+                                                   new Parameters() {ParameterName = "@TempValidationInfoIdIN", Type = DbType.Guid, Size = 16, Value = tempValidationInfoId},
+                                               },
+                                           new List<Parameters>()
+                                               {
+                                                   outParam
+                                               }),
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_StoreTemporaryValidationInformation"));
+            if (outParam.Value != null)
+            {
+                tempValidationInfoId = Guid.Parse(outParam.Value.ToString());
+            }
+            return tempValidationInfoId;
+        }
+
         public TempProjectInfo GetTempProjectInfo(Guid tempProjectId)
         {
             var projectInfo = new TempProjectInfo();
@@ -839,6 +868,28 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTempProjectInfo"));
             return projectInfo;
+        }
+
+        public Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId)
+        {
+            var validationInfo = new Entity.CPSyncV.TempValidationInfo();
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsProjectInfo = DataAccessFactory.Instance.GetDsResult("[CPSyncV].[GetTempValidationInfo]", new object[] { tempValidationId });
+                    if (dsProjectInfo.Tables[0].Rows.Count > 0)
+                    {
+                        validationInfo.TempValidationId = tempValidationId;
+                        validationInfo.JobName = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "JobName");
+                        validationInfo.Customer = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "Customer");
+                        validationInfo.PageOrSurface = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "PageOrSurface");
+                        validationInfo.JDFJobId = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "JDFJobId");                        
+                        validationInfo.ProjectId = DataReader.ReadInt(dsProjectInfo.Tables[0].Rows[0], "ProjectId");
+                        validationInfo.SilverlightPostUrl = DataReader.ReadString(dsProjectInfo.Tables[0].Rows[0], "SilverlightPostUrl");
+                    }
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTempValidationInfo"));
+            return validationInfo;
         }
 
         public List<Illuminant> GetIlluminantList()

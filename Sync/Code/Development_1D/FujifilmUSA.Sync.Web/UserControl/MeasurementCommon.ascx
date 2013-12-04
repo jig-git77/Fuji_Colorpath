@@ -89,7 +89,7 @@
     <div class="info_form">
         <div class="float_l InformationtxtDivWidth">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr valign="top">
+                <tr>
                     <td style="width: 22%;" align="right">
                         <asp:Label ID="lblMeasurementName" runat="server" Text="Measurement Name" meta:resourcekey="lblMeasurementNameResource1"></asp:Label>:&nbsp;
                     </td>
@@ -97,21 +97,35 @@
                         <asp:TextBox ID="txtMeasurementName" runat="server" Width="178px" Height="19px" meta:resourcekey="txtMeasurementNameResource1"></asp:TextBox>        
                     </td>                    
                     <td rowspan="2" ID="tdNotesCaption" runat="server" visible="false" align="right">
-                        <asp:Label ID="lblNotes" runat="server" Text="Notes"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblNotes" runat="server" Text="Notes" meta:resourcekey="lblNotesResource1"></asp:Label>:&nbsp;
                     </td>
                     <td rowspan="2" ID="tdNotes" runat="server" visible="false">
-                        <asp:TextBox ID="txtNotes" runat="server" Width="170px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
+                        <asp:TextBox ID="txtNotes" runat="server" Width="178px" Height="50px" TextMode="MultiLine" style="resize: none;" MaxLength="1000"></asp:TextBox>
                     </td>
                 </tr>
-                <tr valign="top" ID="trCustomer" runat="server" visible="false">
+                <tr ID="trCustomer" runat="server" visible="false">
                     <td align="right">            
-                        <asp:Label ID="lblCustomer" runat="server" Text="Customer"></asp:Label>:&nbsp;
+                        <asp:Label ID="lblCustomer" runat="server" Text="Customer" meta:resourcekey="lblCustomerResource1"></asp:Label>:&nbsp;
                     </td>
                     <td>
-                        <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="100"></asp:TextBox>
+                        <asp:TextBox ID="txtCustomer" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>
                     </td>                   
                 </tr>
-            </table>                       
+                <tr id="trValidationDetails" runat="server" visible="false">
+                    <td align="right">
+                        <asp:Label ID="lblPageOrSurface" runat="server" Text="Page/Surface"  meta:resourcekey="lblPageOrSurfaceResource1"></asp:Label>:&nbsp;
+                    </td>
+                    <td style="height: 27px;">
+                        <asp:TextBox ID="txtPageOrSurface" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                    </td>
+                    <td align="right">
+                        <asp:Label ID="lblJDFJobId" runat="server" Text="JDF Job ID"  meta:resourcekey="lblJDFJobIdResource1"></asp:Label>:&nbsp;
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtJDFJobId" runat="server" Width="178px" Height="19px" MaxLength="50"></asp:TextBox>        
+                    </td>
+                </tr>
+            </table>                               
         </div>
         <div class="float_r">
             <span>
@@ -121,6 +135,7 @@
         </div>
         <div class="float_l">
             <input type="button" id="btnMeasureAndUploadChart" value='<%= GetResourceString("measureUpload") %>' />
+            <input type="hidden" id="hdMeasureAndUploadChart" value="measurechart" />
         </div>
         <div class="float_r">
             <input type="button" id="btnCancelMeasurement" value='<%= GetResourceString("cancelMeasurement") %>' />
@@ -155,7 +170,7 @@
         <div class="color_pallate_head">
             <asp:Localize runat="server" Text="Recent Upload" ID="locRecentUpload" meta:resourcekey="locRecentUploadResource1"></asp:Localize>
               <div id="Div_ImportMeasurements" style="float:right; padding-right:10px;">
-                <input type="button" id="btnImportMeasurements"  value="Import Measurements" onclick="javascript:return ShowImportWindow();" />             
+                <input type="button" id="btnImportMeasurements"  value='<%= GetResourceString("btnImportMeasurements") %>' onclick="javascript:return ShowImportWindow();" />             
             </div>
         </div>
         <div class="color_pallate_middle">
@@ -239,13 +254,14 @@
     var refreshTry = 0;
     function ControlVisibility() {
         jQuery("[id*='btnCalibrate']").css('display', 'none');
+        jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
         jQuery("[id*='btnCancelMeasurement']").css('display', 'none');
         jQuery("[id*='btnRewindMeasurement']").css('display', 'none');
       
         if(load('<%= ApplicationConfiguration.Instance.FujiFilmPluginVersion %>'))   //first you have to load the plugin
-        {
+        {        
             //Proceed further
             ListDevices();
             GetRefChartData();      
@@ -259,6 +275,7 @@
     }
     
     function GetRefChartData() {
+        jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
         var ReferenceChartTypeId = '';
         var SerialNo;
@@ -275,7 +292,7 @@
             return false;
         });
         jQuery("[id*='btnMeasureAndUploadChart']").click(function () {
-            if (jQuery("[id*='btnMeasureAndUploadChart']").val() == '<%= GetResourceString("measureChart") %>') 
+            if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'measurechart') 
             {              
                 ControlDisability(1,true,1,true,1,false,1,true);
                 var MeasurementName = jQuery("[id*='txtMeasurementName']").val();
@@ -294,7 +311,7 @@
                 
                 scan(g_ScannerList, 'Density,CIELab,CIEXYZ,sRGB', g_Chart);
             }
-            else if (jQuery("[id*='btnMeasureAndUploadChart']").val() == 'Upload Measurement') {
+            else if (jQuery("[id*='hdMeasureAndUploadChart']").val() == 'uploadmeasurement') {
                 upload();
             }
         });
@@ -360,7 +377,9 @@
                     ReferenceChartTypeId: ReferenceChartTypeId,
                     MeasurementPatches: MeasuredPatches,
                     Notes: jQuery('textarea[id*="txtNotes"]').val(),
-                    Customer: jQuery('input[id*="txtCustomer"]').val()
+                    Customer: jQuery('input[id*="txtCustomer"]').val(),
+                    PageOrSurface: jQuery('input[id*="txtPageOrSurface"]').val(),
+                    JDFJobId: jQuery('input[id*="txtJDFJobId"]').val(),
                 };
             }
             else if(jQuery("input[id$=hdLicenseType]").val()  == '<%= (int)FujifilmUSA.Sync.Entity.ELicenseType.Sync1D %>')
@@ -414,6 +433,7 @@
      
             refreshCanvas();
             jQuery("[id*='btnMeasureAndUploadChart']").val('<%= GetResourceString("measureChart") %>');
+            jQuery("[id*='hdMeasureAndUploadChart']").val('measurechart');
         }
     }
 

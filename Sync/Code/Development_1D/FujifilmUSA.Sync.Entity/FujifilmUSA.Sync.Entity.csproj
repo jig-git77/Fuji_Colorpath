@@ -58,6 +58,8 @@
     <Compile Include="CPSync1D\ProjectTargetLAB.cs" />
     <Compile Include="CPSyncV\MetricSum.cs" />
     <Compile Include="CPSync1D\PrintStandardTVI.cs" />
+    <Compile Include="COErrorMessage.cs" />
+    <Compile Include="CPSyncV\TempValidationInfo.cs" />
     <Compile Include="Density.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorArgs.cs" />

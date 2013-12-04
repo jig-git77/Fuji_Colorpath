@@ -22,6 +22,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
         
         /// <summary>
+        /// locSelectProjectToImport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locSelectProjectToImport;
+        
+        /// <summary>
         /// testPanel control.
         /// </summary>
         /// <remarks>
@@ -67,12 +76,12 @@ namespace FujifilmUSA.Sync.Web.UserControl.PopupControl {
         protected global::System.Web.UI.WebControls.LinkButton lbtnImport;
         
         /// <summary>
-        /// Localize2 control.
+        /// locImport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize Localize2;
+        protected global::System.Web.UI.WebControls.Localize locImport;
     }
 }

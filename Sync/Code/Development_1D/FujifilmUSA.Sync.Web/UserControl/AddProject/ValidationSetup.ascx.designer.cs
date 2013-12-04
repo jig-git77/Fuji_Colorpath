@@ -58,6 +58,60 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Localize locReviewSelection;
         
         /// <summary>
+        /// btnValidationMeasure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnValidationMeasure;
+        
+        /// <summary>
+        /// imgAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgAdd;
+        
+        /// <summary>
+        /// locMeasure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasure;
+        
+        /// <summary>
+        /// lnkbtnMeasurementSetup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnMeasurementSetup;
+        
+        /// <summary>
+        /// Image2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image2;
+        
+        /// <summary>
+        /// locMeasurementSetup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locMeasurementSetup;
+        
+        /// <summary>
         /// fujiStatusbar control.
         /// </summary>
         /// <remarks>
@@ -65,6 +119,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.Statusbar fujiStatusbar;
+        
+        /// <summary>
+        /// lbl_Valimsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Valimsg;
         
         /// <summary>
         /// trListHeader control.
@@ -94,6 +157,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::System.Web.UI.WebControls.Panel panelValidationOptions;
         
         /// <summary>
+        /// trEnableValidationOption control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trEnableValidationOption;
+        
+        /// <summary>
         /// locEnableValidation control.
         /// </summary>
         /// <remarks>
@@ -110,15 +182,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rbtnEnableValidation;
-        
-        /// <summary>
-        /// lbl_Valimsg control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Valimsg;
         
         /// <summary>
         /// panel_Metrictarget control.

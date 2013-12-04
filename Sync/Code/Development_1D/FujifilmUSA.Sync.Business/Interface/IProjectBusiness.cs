@@ -35,5 +35,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVI(int printStandardTypeId);
         List<Entity.CPSync1D.ProjectTargetLAB> GetProjectTargetLAB(int printStandardTypeId, int ProjectTypeId);
         byte[] Get1DLastOptimizedDlp(int projectId);
+        Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl);
+        Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId);
     }
 }

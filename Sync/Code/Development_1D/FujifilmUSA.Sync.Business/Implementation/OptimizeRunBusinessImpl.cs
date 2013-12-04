@@ -126,6 +126,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         BusinessFactory<IMeasurementBusiness>.
                             CreateObject().
                             GetMeasurementData(measurementIds);
+                   
                     request.PcsData = measurementDataResponse.PcsData;
                     request.DcsData = measurementDataResponse.DcsData;
 

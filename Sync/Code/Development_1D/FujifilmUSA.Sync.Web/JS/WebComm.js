@@ -4,6 +4,7 @@
 };
 //here we are adding dummy querystring in URL as IE do not invoke service each and every time rather it takes from cache
 function GetReferenceChart(ProjectID, ReferenceChartDisplayTypeId) {
+   // debugger;
     jQuery.ajax({
         type: "GET",
         contentType: "application/json; charset=utf-8",

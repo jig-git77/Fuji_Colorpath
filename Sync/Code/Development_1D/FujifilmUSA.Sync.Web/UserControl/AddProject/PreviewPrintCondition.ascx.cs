@@ -44,14 +44,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {           
-            lnkbtnMeasurementSetup.Visible = IsXmfNewProject;
+        {
+            btnValidationSetup.Visible = IsXmfNewProject;           
             LoadRecord();
         }
-
-        protected void lnkbtnMeasurementSetup_Click(object sender, EventArgs e)
+               
+        protected void btnValidationSetup_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.MeasurementSetup;
+            SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ValidationSetup;
             Response.Redirect(string.Format("~/COAddProject.aspx?id={0}", Guid.NewGuid()));
         }
 

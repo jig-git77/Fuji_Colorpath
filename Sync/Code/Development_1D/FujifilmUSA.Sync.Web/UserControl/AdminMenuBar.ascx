@@ -105,21 +105,21 @@
           CssClass="dock-item overlapobject" onclick="lbtnActivityValidationRules_Click">
             <img src="Images/activity-validation-rules.png" style="position:relative;z-index:1; " alt="Activity Validation Rules" />
             <span> <asp:Localize Text="Activity Validation Rules" runat="server" 
-          ID="locActivityValidationRules"></asp:Localize> 
+          ID="locActivityValidationRules" meta:resourcekey="locActivityValidationRulesResource1"></asp:Localize> 
         </span>
       </asp:LinkButton>      
        <asp:LinkButton ID="lbtnProfilerSettings" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnProfilerSettings_Click">
             <img src="Images/Profiler-Settings-management.jpg" style="position:relative;z-index:1; " alt="Device Family Profiler Settings" />
             <span> <asp:Localize Text="Device Family Profiler Settings" runat="server" 
-          ID="locProfilerSettings"></asp:Localize> 
+          ID="locProfilerSettings" meta:resourcekey="locProfilerSettingsResource1"></asp:Localize> 
             </span>
       </asp:LinkButton>   
        <asp:LinkButton ID="lbtnApplicationConfiguration" runat="server" 
           CssClass="dock-item overlapobject" onclick="lbtnApplicationConfiguration_Click">
             <img src="Images/application-configuration.png" style="position:relative;z-index:1; " alt="Application Configuration" />
             <span> <asp:Localize Text="Application Configuration" runat="server" 
-          ID="locApplicationConfiguration"></asp:Localize> 
+          ID="locApplicationConfiguration" meta:resourcekey="locApplicationConfigurationResource1"></asp:Localize> 
             </span>
       </asp:LinkButton>  
        <asp:LinkButton ID="lbtnMetricTargetPreset" runat="server" 

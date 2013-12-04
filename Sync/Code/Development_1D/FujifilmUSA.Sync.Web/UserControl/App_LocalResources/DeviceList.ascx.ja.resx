@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,33 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Device Name_ja</value>
+    <value>ユーザ名</value>
   </data>
   <data name="Label1Resource1.Text" xml:space="preserve">
-    <value>Company_ja</value>
+    <value>企業</value>
   </data>
   <data name="Label2Resource1.Text" xml:space="preserve">
-    <value>Branch_ja</value>
+    <value>支社</value>
   </data>
   <data name="locDeviceListResource1.Text" xml:space="preserve">
-    <value>Device List_ja</value>
+    <value>デバイス一覧</value>
   </data>
   <data name="locHelpResource1.Text" xml:space="preserve">
-    <value>Help_ja</value>
+    <value>ヘルプ</value>
   </data>
   <data name="locReportResource1.Text" xml:space="preserve">
-    <value>Report_ja</value>
+    <value>レポート</value>
   </data>
   <data name="locSelectPressResource1.Text" xml:space="preserve">
-    <value>Select Press_ja</value>
+    <value>プレス機選択</value>
   </data>
   <data name="branchAndCompanyRequired" xml:space="preserve">
-    <value>Please select company and branch from above selection list._ja</value>
+    <value>企業と支社を上記リストから選択してください。</value>
   </data>
   <data name="noRecordsToDisplayText" xml:space="preserve">
-    <value>No records to display._ja</value>
+    <value>表示項目がありません。</value>
   </data>
   <data name="selectText" xml:space="preserve">
-    <value>-- Select --_ja</value>
+    <value>―選択してください―</value>
   </data>
 </root>

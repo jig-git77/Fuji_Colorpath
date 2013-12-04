@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -197,5 +197,26 @@
   </data>
   <data name="RadComboBoxItemResource4.Text" xml:space="preserve">
     <value>Certify_de</value>
+  </data>
+  <data name="allText" xml:space="preserve">
+    <value>ALL_de</value>
+  </data>
+  <data name="validationStatusDisabled" xml:space="preserve">
+    <value>Disabled_De</value>
+  </data>
+  <data name="validationStatusLastFailed" xml:space="preserve">
+    <value>Last Failed_De</value>
+  </data>
+  <data name="validationStatusLastOK" xml:space="preserve">
+    <value>Last OK_de</value>
+  </data>
+  <data name="validationStatusNotCertified" xml:space="preserve">
+    <value>Not Certified_de</value>
+  </data>
+  <data name="GridTemplateColumnResource0.HeaderText" xml:space="preserve">
+    <value>Type_de</value>
+  </data>
+  <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
+    <value>Validation_de</value>
   </data>
 </root>

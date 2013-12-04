@@ -125,15 +125,15 @@ function addEvent(obj, name, func) {
 
 
 function load(pluginVersion) {
-    jQuery("[id*='lblPluginMessage']").html("Error in plugin.");
+    jQuery("[id*='lblPluginMessage']").html(locErrorPlugin);
     addEvent(plugin(), 'fire', function (x) {
-        alert('onfired() from load(): ' + x)
+        alert(locAlertOnFiredLoad + " " + x);
     });
     console.log("Loading plugin version " + plugin().plugin_version);
 
     if (plugin().plugin_version == undefined) { //---If plugin has some issues or not been installed yet, let give option to install them first
         jQuery("[id*='lblMessage']").css('color', 'Black');
-        jQuery("[id*='lblMessage']").html("Status : The Fujifilm CM plugin is not installed.");
+        jQuery("[id*='lblMessage']").html(locFujiCMPluginNotInstalled);
         return false;
     }   
    
@@ -143,18 +143,18 @@ function load(pluginVersion) {
     } else {
         plugin().setDebug("/tmp/FujiCM.log");
     }
-    var newHTML = 'Fuji Color Manager Plugin Version ' + plugin().plugin_version;
+    var newHTML = locFujiCMPluginVersion + ' ' + plugin().plugin_version;
     jQuery("[id*='lblPluginMessage']").html(newHTML);
     //document.getElementById('ImgLoad').src = "Images/Green-Lamp.gif";
     SDKVerHTML = plugin().sdk_version;
     if (plugin().plugin_version < pluginVersion) {
         if (plugin().plugin_version == undefined) {
             jQuery("[id*='lblMessage']").css('color', 'Black');
-            jQuery("[id*='lblMessage']").html("Status : The Fujifilm CM plugin is not installed.");
+            jQuery("[id*='lblMessage']").html(locFujiCMPluginNotInstalled);
         }
         else {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : Your plugin is outdated. Please install newer version.");
+            jQuery("[id*='lblMessage']").html(locFujiCMPluginIsOutdated);
         }
         return false;
     }
@@ -186,10 +186,10 @@ function presentScannerList(ScannerList) {
             jQuery("[id*='btnCalibrate']").css('display', 'none');
             jQuery("[id*='lblMessage']").css('color', 'Red');
             if (ScannerList[i]["State"] == "Deleted") {
-                jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+                jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
             }
             else {
-                jQuery("[id*='lblMessage']").html("Status : Device Serial: " + g_Chart["MeasurementDeviceSerial"] + " not found.");
+                jQuery("[id*='lblMessage']").html(locDeviceSerialNotFound1 + " " + g_Chart["MeasurementDeviceSerial"] + " " + locDeviceSerialNotFound2);
             }
             jQuery("[id*='btnCalibrate']").css('display', 'none');
             jQuery("[id*='btnMeasureAndUploadChart']").css('display', 'none');
@@ -201,13 +201,13 @@ function presentScannerList(ScannerList) {
             g_ScannerList = ScannerList[i];
             if (g_ScannerList["Requirements"].indexOf("RequiresCalibration") >= 0) {
                 jQuery("[id*='lblMessage']").css('color', 'Black');
-                jQuery("[id*='lblMessage']").html("Status : Please calibrate.");
+                jQuery("[id*='lblMessage']").html(locPleaseCalibrate);
                 jQuery("[id*='btnCalibrate']").css('display', '');
                 return;
             }
             else {
                 jQuery("[id*='lblMessage']").css('color', 'Black');
-                jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+                jQuery("[id*='lblMessage']").html(locClickMeasureButton);
                 jQuery("[id*='btnMeasureAndUploadChart']").css('display', '');
                 jQuery("[id*='btnCancelMeasurement']").css('display', '');
                 if (!(scanner["Type"] == "iO" || scanner["Type"] == "iSis")) { //--------------Only display "Rewind" button in "i1-Pro" mode-----------//
@@ -231,7 +231,7 @@ function ListDevices() {
 function ListDevicesNow() {
     result = plugin().requestScannerList(presentScannerList);
     if (result != 'OK') {
-        MeasurementDialog("Failed to request scanner list: " + result, "Error");
+        MeasurementDialog(locNoScannerList + " " + result, locErrorText);
     }
 }
 
@@ -269,8 +269,8 @@ function scan(scanner, colorspace, chart) {
     // Create a global variable for the result multi-strip chart
     // Each row we get, we place in the gChart Results element.
     var query = new Object();
-    query["Success"] = "Samples Complete";
-    query["Fail"] = "Failed to read samples";
+    query["Success"] = locSamplesCompleteText;
+    query["Fail"] = locReadSampleFailedText;
 
     // Turn on automatic direction handling.  Options are tag[:value]
     // separated by semicolons, just like a CSS
@@ -347,11 +347,11 @@ function scan(scanner, colorspace, chart) {
         }
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : This is not valid licensed measurement device.");
+            jQuery("[id*='lblMessage']").html(locInvalidMeasurementDevice);
         }
         else if (result != "OK") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+            jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
         }
     }
     else {
@@ -364,12 +364,12 @@ function scan(scanner, colorspace, chart) {
         var result = plugin().read(scanner, localchart, query, presentStripDialogi1, presentProgressi1, presentScanDonei1);
         if (result == "ERROR: Activation Error") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : This is not valid licensed measurement device.");
+            jQuery("[id*='lblMessage']").html(locInvalidMeasurementDevice);
             return;
         }
         else if (result != "OK") {
             jQuery("[id*='lblMessage']").css('color', 'Red');
-            jQuery("[id*='lblMessage']").html("Status : Scanning Device has been unplugged.");
+            jQuery("[id*='lblMessage']").html(locScanningDeviceUnplugged);
             return;
         }
         // Display the original chart from the reference values.
@@ -482,7 +482,7 @@ function OnCancel() {
     if (cancelstat == "Unhandled") {
         // If unhandled clean up this stuff here...
         jQuery("[id*='lblMessage']").css('color', 'Black');
-        jQuery("[id*='lblMessage']").html("Status : Click on 'Measure Chart' button.");
+        jQuery("[id*='lblMessage']").html(locClickMeasureButton);
        // delete mychart["Result"];
     }
 }

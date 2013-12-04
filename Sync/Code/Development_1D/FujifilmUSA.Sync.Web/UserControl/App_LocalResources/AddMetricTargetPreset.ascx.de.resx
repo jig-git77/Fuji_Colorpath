@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,19 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="addMetricTargetPresetText" xml:space="preserve">
+		<value>Add Metric Target Preset_de</value>
+	</data>
+	<data name="editMetricTargetPresetText" xml:space="preserve">
+		<value>Edit Metric Target Preset_de</value>
+	</data>
+	<data name="lblHeaderResource1.Text" xml:space="preserve">
+		<value>Add Metric Target Preset_de</value>
+	</data>
+	<data name="selectCompanyText" xml:space="preserve">
+		<value>-- Select Company --_de</value>
+	</data>
+	<data name="selectRegionText" xml:space="preserve">
+		<value>-- Select Region --_de</value>
+	</data>
 </root>

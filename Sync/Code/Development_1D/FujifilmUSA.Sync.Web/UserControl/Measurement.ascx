@@ -22,7 +22,8 @@
     <div class="head">
         <h1 id="header" runat="server"><asp:Localize runat="server" Text="Measurement" 
                 ID="locMeasurement" meta:resourcekey="locMeasurementResource1"></asp:Localize></h1>
-        <div class="Information_divAnalyze">
+        <div class="Information_divAnalyze"> 
+                        
             <asp:LinkButton ID="btnAnalyze" runat="server" CssClass="button" OnClick="btnAnalyze_Click"
                 OnClientClick="return AllowToAnalyze();">
                 <span>
@@ -32,7 +33,22 @@
                     <asp:Localize runat="server" Text="Analyze" ID="locAnalyze" 
                                 meta:resourcekey="locAnalyzeResource1"></asp:Localize>
                 </span>
-            </asp:LinkButton>
+            </asp:LinkButton>    
+             <asp:LinkButton ID="btnValidationSetup" runat="server" CssClass="buttonLeft" OnClick="btnValidationSetup_Click" Visible="false">
+                <span>
+                    <asp:Image ID="Image2" runat="server" 
+                        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
+                    <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"  meta:resourcekey="locValidationSetupResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>    
+             <asp:LinkButton ID="btnMeasurementSetup" runat="server" CssClass="buttonLeft" 
+                Visible="false" onclick="btnMeasurementSetup_Click">
+                <span>
+                    <asp:Image ID="Image1" runat="server" 
+                        ImageUrl="~/Images/new_project_icon.png" meta:resourcekey="Image2Resource1" />
+                    <asp:Localize runat="server" Text="Measurement Setup" id="locMeasurementSetup"  meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>                
         </div>
     </div>
     <div class="mesurementStatusbar info_form">

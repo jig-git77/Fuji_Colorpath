@@ -161,7 +161,7 @@
                                     </ExpandCollapseColumn>
                                     <Columns>
                                         <telerik:GridTemplateColumn DataField="LicenseType" AllowFiltering="True" UniqueName="LicenseType" FilterControlAltText="Filter Select column" HeaderText="Type"
-                                            ItemStyle-Width="30px">
+                                            ItemStyle-Width="30px"  meta:resourcekey="GridTemplateColumnResource0">
                                             <ItemTemplate>
                                                <asp:ImageButton ID="imgbtnSelect" runat="server" ToolTip="Optimization" AlternateText="Select"
                                                     ImageUrl="../Images/OptimizationBlue.png" CommandArgument='<%# DataBinder.Eval(Container.DataItem,"ProjectId") %>'
@@ -193,19 +193,7 @@
                                             <FilterTemplate>
                                                 <telerik:RadComboBox ID="rcmbValidationStatus" AppendDataBoundItems="True" runat="server"
                                                 SelectedValue='<%# ((GridItem)Container).OwnerTableView.GetColumn("ValidationStatus").CurrentFilterValue %>'
-                                                    OnClientSelectedIndexChanged="ValidationStatusIndexChanged" Width="40px" DropDownWidth="120px">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem Text="ALL" runat="server"
-                                                            Owner="" Selected="True" />
-                                                        <telerik:RadComboBoxItem Text="Not Certified" Value="NotCertified" runat="server"
-                                                            Owner="" />
-                                                        <telerik:RadComboBoxItem Text="Disabled" Value="Disabled" runat="server"
-                                                            Owner="" />                                                        
-                                                        <telerik:RadComboBoxItem Text="Last OK" Value="LastOK" runat="server"
-                                                            Owner="" />
-                                                        <telerik:RadComboBoxItem Text="Last Failed" Value="LastFailed" runat="server"
-                                                            Owner="" />
-                                                    </Items>
+                                                    OnClientSelectedIndexChanged="ValidationStatusIndexChanged" Width="40px" DropDownWidth="120px">                                                    
                                                 </telerik:RadComboBox>
                                                 <telerik:RadScriptBlock ID="radscriptValidationStatus" runat="server">
                                                     <script type="text/javascript">

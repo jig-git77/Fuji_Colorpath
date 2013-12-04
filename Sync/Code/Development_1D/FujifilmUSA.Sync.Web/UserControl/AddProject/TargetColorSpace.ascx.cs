@@ -78,7 +78,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 SessionManager.Instance.CurrentProject.ProjectTargetLAB = GetTargetLAB();
-                SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);               
+                SessionManager.Instance.CurrentProject.ProjectTypeId = Convert.ToInt16(cmbProjectType.SelectedValue);
+            }
+            else
+            { 
+                if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.DLP)
+                    SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.DeviceLinkProfile;
+                else if(SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                    SessionManager.Instance.CurrentProject.ProjectTypeId = (short)Entity.EProjectType.InkOptimization;
             }
 
             SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.ProfilerOption;

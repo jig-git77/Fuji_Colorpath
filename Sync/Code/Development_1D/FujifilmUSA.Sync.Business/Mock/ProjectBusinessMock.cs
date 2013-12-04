@@ -141,6 +141,15 @@ namespace FujifilmUSA.Sync.Business.Mock
         {
             return new byte[1];        
         }
+        public Guid StoreTemporaryValidationInformation(string jobName, string customer, string pageOrSurface, string jdfJobId, int projectId, Guid tempValidationInfoId, string silverlightPostUrl)
+        {
+            return new Guid();
+        }
+
+        public Entity.CPSyncV.TempValidationInfo GetTempValidationInfo(Guid tempValidationId)
+        {
+            return new Entity.CPSyncV.TempValidationInfo();
+        }
         #endregion
 
         #region ITaskBase Members

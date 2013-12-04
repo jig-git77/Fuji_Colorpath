@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,97 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbtDownloadResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtDownloadResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnBranchResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnBranchResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnCompanyResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnCompanyResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnDeviceResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnDeviceResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnMeasurementDeviceResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnMeasurementDeviceResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnRefChartResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnRefChartResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnSourceProfileResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnSourceProfileResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnUserResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtnUserResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtProfileMgmtResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lbtProfileMgmtResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="locBranchResource1.Text" xml:space="preserve">
-    <value>Branch_ja</value>
+    <value>支社</value>
   </data>
   <data name="locCompanyResource1.Text" xml:space="preserve">
-    <value>Company_ja</value>
+    <value>企業</value>
   </data>
   <data name="locDeviceResource1.Text" xml:space="preserve">
-    <value>Device_ja</value>
+    <value>デバイス</value>
   </data>
   <data name="locDownloadResource1.Text" xml:space="preserve">
-    <value>Download_ja</value>
+    <value>ダウンロード</value>
   </data>
   <data name="locLicenseResource1.Text" xml:space="preserve">
-    <value>License_ja</value>
+    <value>ライセンス</value>
   </data>
   <data name="locMeasurementDeviceResource1.Text" xml:space="preserve">
-    <value>Measurement Device_ja</value>
+    <value>測色機</value>
   </data>
   <data name="locMySettingsResource1.Text" xml:space="preserve">
-    <value>My Settings_ja</value>
+    <value>個人設定</value>
   </data>
   <data name="locReferenceChartResource1.Text" xml:space="preserve">
-    <value>Reference Chart_ja</value>
+    <value>リファレンスチャート</value>
   </data>
   <data name="locSourceProfileResource1.Text" xml:space="preserve">
-    <value>Source Profile_ja</value>
+    <value>ターゲットプロファイル：</value>
   </data>
   <data name="locUserResource1.Text" xml:space="preserve">
-    <value>User_ja</value>
-  </data>
-  <data name="ltnLicenseResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ltnLicenseResource1.ToolTip" xml:space="preserve">
-    <value />
+    <value>ユーザ</value>
   </data>
   <data name="locProfilerSettingsResource1.Text" xml:space="preserve">
-    <value>Device Family Profiler Settings_ja</value>
+    <value>機種プロファイラ―設定</value>
+  </data>
+  <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
+    <value>Activity Validation Rules</value>
+  </data>
+  <data name="locApplicationConfigurationResource1.Text" xml:space="preserve">
+    <value>Application Configuration</value>
   </data>
 </root>

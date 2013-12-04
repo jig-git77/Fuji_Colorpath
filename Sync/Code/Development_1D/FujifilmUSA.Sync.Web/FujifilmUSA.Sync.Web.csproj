@@ -68,11 +68,13 @@
     <Reference Include="Telerik.Web.UI">
       <HintPath>..\..\Solution References\Telerik.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Web.UI.Skins">
+    <Reference Include="Telerik.Web.UI.Skins, Version=2011.3.1305.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Solution References\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccessDenied.aspx" />
     <Content Include="ActivityValidationRules.aspx" />
     <Content Include="AddDeviceProfilerSettings.aspx" />
     <Content Include="AddMeasurementDevice.aspx" />
@@ -82,10 +84,14 @@
     <Content Include="AddSourceProfile.aspx" />
     <Content Include="ApplicationConfiguration.aspx" />
     <Content Include="ApplicationError.aspx" />
+    <Content Include="App_Browsers\firefox.browser" />
+    <Content Include="App_Browsers\ie.browser" />
     <Content Include="BrowserTest.aspx" />
     <Content Include="COAddProject.aspx" />
     <Content Include="COAnalyze.aspx" />
+    <Content Include="COErrorMessage.aspx" />
     <Content Include="COMeasurement.aspx" />
+    <Content Include="COMeasurementSetup.aspx" />
     <Content Include="CompanyManagement.aspx" />
     <Content Include="AddCompanyManagement.aspx" />
     <Content Include="BranchManagement.aspx" />
@@ -97,6 +103,8 @@
     <Content Include="AddLicenseManagement.aspx" />
     <Content Include="COProjectMaxLimit.aspx" />
     <Content Include="COTransferSiteControl.aspx" />
+    <Content Include="COValidationCallback.aspx" />
+    <Content Include="COValidationSetup.aspx" />
     <Content Include="COViewOpenProject.aspx" />
     <Content Include="CSS\jquery-ui-1.8.16.custom.css" />
     <Content Include="DownloadSoftwares.aspx" />
@@ -212,7 +220,10 @@
     <Content Include="JQuery\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="JQuery\numeric.js" />
     <Content Include="JQuery\progressbar.js" />
+    <Content Include="JS\GlobalResource.ja-JP.js" />
+    <Content Include="JS\GlobalResource.de-DE.js" />
     <Content Include="JS\DYMO.Label.Framework.latest.js" />
+    <Content Include="JS\GlobalResource.en-US.js" />
     <Content Include="JS\jquery.tools.min.js" />
     <Content Include="JS\Printing.js" />
     <Content Include="MetricTargetPresetManagement.aspx" />
@@ -261,6 +272,7 @@
     <Content Include="Templates\PrepressSingleMeasurement_G7.htm" />
     <Content Include="Templates\PrepressSingleMeasurement_ISO.htm" />
     <Content Include="Templates\style.css" />
+    <Content Include="UserControl\AccessDenied.ascx" />
     <Content Include="UserControl\ActivityValidationRules.ascx" />
     <Content Include="UserControl\AddDeviceProfilerSettings.ascx" />
     <Content Include="UserControl\AddMetricTargetPreset.ascx" />
@@ -276,9 +288,14 @@
     <Content Include="UserControl\AddLicenseManagement.ascx" />
     <Content Include="UserControl\ApplicationConfiguration.ascx" />
     <Content Include="UserControl\ApplicationError.ascx" />
+    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\CODisplaybar.ascx" />
+    <Content Include="UserControl\COErrorMessage.ascx" />
     <Content Include="UserControl\COProjectMaxLimit.ascx" />
     <Content Include="UserControl\COTransferSiteControl.ascx" />
+    <Content Include="UserControl\COValidationCallback.ascx" />
     <Content Include="UserControl\COViewOpenProject.ascx" />
     <Content Include="UserControl\DownloadSoftwares.ascx" />
     <Content Include="UserControl\GlobalActivation.ascx" />
@@ -517,6 +534,13 @@
     <Content Include="_app_offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessDenied.aspx.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.designer.cs">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ActivityValidationRules.aspx.cs">
       <DependentUpon>ActivityValidationRules.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -638,6 +662,13 @@
     <Compile Include="COAnalyze.aspx.designer.cs">
       <DependentUpon>COAnalyze.aspx</DependentUpon>
     </Compile>
+    <Compile Include="COErrorMessage.aspx.cs">
+      <DependentUpon>COErrorMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COErrorMessage.aspx.designer.cs">
+      <DependentUpon>COErrorMessage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ColorOrganizer\ColorOrganizerRequestProcessor.cs" />
     <Compile Include="COMaster.Master.cs">
       <DependentUpon>COMaster.Master</DependentUpon>
@@ -652,6 +683,13 @@
     </Compile>
     <Compile Include="COMeasurement.aspx.designer.cs">
       <DependentUpon>COMeasurement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COMeasurementSetup.aspx.cs">
+      <DependentUpon>COMeasurementSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COMeasurementSetup.aspx.designer.cs">
+      <DependentUpon>COMeasurementSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="CompanyManagement.aspx.cs">
       <DependentUpon>CompanyManagement.aspx</DependentUpon>
@@ -732,6 +770,20 @@
     </Compile>
     <Compile Include="COTransferSiteControl.aspx.designer.cs">
       <DependentUpon>COTransferSiteControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COValidationCallback.aspx.cs">
+      <DependentUpon>COValidationCallback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COValidationCallback.aspx.designer.cs">
+      <DependentUpon>COValidationCallback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="COValidationSetup.aspx.cs">
+      <DependentUpon>COValidationSetup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COValidationSetup.aspx.designer.cs">
+      <DependentUpon>COValidationSetup.aspx</DependentUpon>
     </Compile>
     <Compile Include="COViewOpenProject.aspx.cs">
       <DependentUpon>COViewOpenProject.aspx</DependentUpon>
@@ -884,6 +936,13 @@
     <Compile Include="SourceProfileManagement.aspx.designer.cs">
       <DependentUpon>SourceProfileManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\AccessDenied.ascx.cs">
+      <DependentUpon>AccessDenied.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\AccessDenied.ascx.designer.cs">
+      <DependentUpon>AccessDenied.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\ActivityValidationRules.ascx.cs">
       <DependentUpon>ActivityValidationRules.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -999,6 +1058,13 @@
     <Compile Include="UserControl\CODisplaybar.ascx.designer.cs">
       <DependentUpon>CODisplaybar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\COErrorMessage.ascx.cs">
+      <DependentUpon>COErrorMessage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COErrorMessage.ascx.designer.cs">
+      <DependentUpon>COErrorMessage.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\COProjectMaxLimit.ascx.cs">
       <DependentUpon>COProjectMaxLimit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1012,6 +1078,13 @@
     </Compile>
     <Compile Include="UserControl\COTransferSiteControl.ascx.designer.cs">
       <DependentUpon>COTransferSiteControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\COValidationCallback.ascx.cs">
+      <DependentUpon>COValidationCallback.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\COValidationCallback.ascx.designer.cs">
+      <DependentUpon>COValidationCallback.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\COViewOpenProject.ascx.cs">
       <DependentUpon>COViewOpenProject.ascx</DependentUpon>
@@ -1638,13 +1711,17 @@
     <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\CreateDLP.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddBranchManagement.ascx.de.resx" />
@@ -1656,7 +1733,9 @@
     <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddCompanyManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceFamily.ascx.resx" />
@@ -1672,7 +1751,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.resx">
@@ -1681,7 +1762,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AdminMenuBar.ascx.resx">
@@ -1701,14 +1784,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddLicenseType.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddMeasurementDevice.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Footer.ascx.resx" />
@@ -1810,7 +1897,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ProfileManagement.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\Permission.ascx.resx" />
@@ -1931,9 +2020,6 @@
     <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.de.resx">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="UserControl\App_LocalResources\DownloadSoftwares.ascx.ja.resx">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddReferenceChart.ascx.resx">
@@ -2031,11 +2117,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\ForgotPassword.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.de.resx" />
-    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx" />
+    <Content Include="UserControl\PopupControl\App_LocalResources\OpenPrintCondition.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\SaveWindow.ascx.resx">
@@ -2188,7 +2278,9 @@
     <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.de.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\ActivityValidationRules.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\PopupControl\App_LocalResources\DownloadSoftware.ascx.de.resx">
@@ -2205,7 +2297,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.de.resx" />
-    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx" />
+    <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UserControl\App_LocalResources\AddDeviceProfilerSettings.ascx.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -2235,6 +2329,76 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl\App_LocalResources\AddPrintStandardType.ascx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\ApplicationConfiguration.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\AddProject\App_LocalResources\ValidationSetup.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.de.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\PopupControl\App_LocalResources\ImportMeasurements.ascx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PopupImportMeasurements.aspx.ja.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\PrintPreview.aspx.ja.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.de.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserControl\App_LocalResources\PrintPreview.ascx.ja.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

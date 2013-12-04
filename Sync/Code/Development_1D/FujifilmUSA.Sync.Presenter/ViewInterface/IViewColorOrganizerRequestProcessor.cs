@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FujifilmUSA.Sync.Entity;
+using FujifilmUSA.Sync.Entity.CPSyncV;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -23,5 +24,8 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         int ProjectId { get; set; }
         Project Project { get; set; }
+
+        Guid TempValidationInfoId { get; set; }
+        TempValidationInfo TempValidationInfo { get; set; }
     }
 }

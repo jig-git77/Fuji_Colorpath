@@ -44,22 +44,20 @@
         OnClientClick="javascript:return ShowConfirmSaveWindow();">
         <span>
             <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/save_icon.png" 
-        meta:resourcekey="Image1Resource1" />
-            
-<asp:Localize runat="server" Text="Save" ID="locSave" 
-        meta:resourcekey="locSaveResource1"></asp:Localize>
-            
-
-            </span></asp:LinkButton>
-    <asp:LinkButton ID="lnkbtnMeasurementSetup" runat="server" 
-        CssClass="buttonLeft" OnClick="lnkbtnMeasurementSetup_Click">
-        <span>
-            <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Search.png" 
-        meta:resourcekey="Image2Resource1" />
-            
-<asp:Localize Text="Measurement Setup" runat="server" ID="locMeasurementSetup" 
-        meta:resourcekey="locMeasurementSetupResource1"></asp:Localize>
-</span></asp:LinkButton>
+        meta:resourcekey="Image1Resource1" />            
+                <asp:Localize runat="server" Text="Save" ID="locSave" 
+                        meta:resourcekey="locSaveResource1"></asp:Localize>
+                </span>
+            </asp:LinkButton>
+   
+    <asp:LinkButton ID="btnValidationSetup" runat="server" CssClass="buttonLeft" OnClick="btnValidationSetup_Click" Visible="false">
+    <span>
+        <asp:Image ID="Image3" runat="server" 
+            ImageUrl="~/Images/new_project_icon.png" 
+                    meta:resourcekey="Image2Resource1" />
+        <asp:Localize runat="server" Text="Validation Setup" id="locValidationSetup"  meta:resourcekey="locValidationSetupResource1"></asp:Localize>
+    </span>
+</asp:LinkButton>    
 </div>
 <div class="formDeviceNoLine" style="display: none;">
     <div class="clear">
@@ -299,7 +297,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <span style="font-weight: bold;">Validation Metric</span>
+                                                        <span style="font-weight: bold;"><asp:Localize ID="locValidationMetric" runat="server" meta:resourcekey="locValidationMetricResource1" Text="Validation Metric"></asp:Localize></span>
                                                     </td>
                                                     <td style="width: 10px;">
                                                          <span style="font-weight: bold;">:</span>

@@ -9,6 +9,7 @@ namespace FujifilmUSA.Sync.Entity
         public string ObserverTypeName { get; set; }
         public short Illuminant { get; set; }
         public string IlluminantName { get; set; }
+        public bool UvIncluded { get; set; }
         public string UvIncludedName { get; set; }
         public string DensityType { get; set; }
         public short? MeasurementDeviceId { get; set; }

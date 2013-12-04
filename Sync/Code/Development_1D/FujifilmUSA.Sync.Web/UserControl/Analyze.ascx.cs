@@ -57,6 +57,24 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private const string _recPatchMetrics = "patchMetricsText";
         private const string _recgbPatchMetrics = "gbPatchMetricsText";
         private const string _recValidationAnalyzeHeaderText = "validationAnalyzeHeaderText";
+        private const string _reclocOptimizeResource1 = "locOptimizeResource1.Text";
+
+        //Label localization variables
+        private const string _reclocLabelJob = "locLabelJob";
+        private const string _reclocLabelDevice = "locLabelDevice";
+        private const string _reclocLabelMetric = "locLabelMetric";
+        private const string _reclocLabelStandard = "locLabelStandard";
+        private const string _reclocLabelTimestamp = "locLabelTimestamp";
+        private const string _reclocLabelCustomer = "locLabelCustomer";
+        private const string _reclocLabelPageOrSurface = "locLabelPageOrSurface";
+        private const string _reclocLabelJDFJobID = "locLabelJDFJobID";
+        private const string _reclocLabeldEType = "locLabeldEType";
+        private const string _reclocLabelTol = "locLabelTol";
+        private const string _reclocLabelAct = "locLabelAct";
+        private const string _reclocLabelSignature = "locLabelSignature";
+        private const string _reclocLabelDate = "locLabelDate";
+
+
         public DateTime EndDate;
         public decimal DtELimit = 0;
         public string DLPName = "";
@@ -121,6 +139,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public Analyze()
         {
             this.Load += (sender, e) => this.ExceptionHandling(Page_Load, sender, e);
+            this.PreRender += (sender, e) => this.ExceptionHandling(Page_PreRender, sender, e);
         }
         #region Page Method
         protected override void OnInit(EventArgs e)
@@ -180,7 +199,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
 
                 //We need to hide the button if we are verification mode
-                //Else upper code will execute business logic
+                //Else upper code will execute business logic                
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
                     //Verification mode
@@ -189,7 +208,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnOptimize.Visible = true;
                     //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
                     //So its a kind of bug fix.
-                    lbtnOptimize.Text = "<span>Optimize</span>";
+                    lbtnOptimize.Text = "<span>" + GetResourceString(_reclocOptimizeResource1) + "</span>";
                     lbtnOptimize.Attributes.Add("onclick",
                                                      "javascript: return ShowClosePrintConditionWindow('" +
                                                      SessionManager.Instance.CurrentProject.ProjectId + "','" + Server.UrlEncode(SessionManager.Instance.CurrentProject.ProjectName) + "','" + Server.UrlEncode(this.CurrentDLPName) + "')");
@@ -202,9 +221,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     else
                     {
                         dvTab_G7.Visible = Tab_G7.Visible = false;
-                    }
+                    }                    
                 }
-                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D
+                else if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D) //-----Sync1D --//This will be executed for Sync1D only --softweb
                 {
                     //Hide Verification button
                     lbtnMeasurementVerification.Visible = false;
@@ -239,8 +258,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
             {
                 BindMesurementChart();
             }
+            if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+            {
+                if (SessionManager.Instance.CurrentValidationRequest != null)
+                {
+                    lbtnSubmit.Visible = true;
+                }
+                else
+                {
+                    lbtnSubmit.Visible = false;
+                    lbtnMeasurement.Visible = false;
+                }
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
+
+            if (IsXMFUser && Request.QueryString["viewonly"] != null && Convert.ToBoolean(Request.QueryString["viewonly"]) == true)
+            {
+                lbtnSubmit.Visible = false;
+                lbtnMeasurement.Visible = false;
+                lbtnOptimize.Visible = false;
+                lbtnMeasurementVerification.Visible = false;
+                lbtnDownloadAndSaveDLP.Visible = false;
+            }
         }
 
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (dvValidationSummary.Rows.Count > 0)
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("locMeasurementNameResource1.Text");
+                else
+                    dvValidationSummary.Rows[0].Cells[0].Text = GetResourceString("BoundFieldResource1.HeaderText"); 
+            }
+        }
         #endregion
 
         #region Methods
@@ -284,26 +337,26 @@ namespace FujifilmUSA.Sync.Web.UserControl
                             hdMeasurement.Value = MeasurementList.Last().MeasurementId.ToString();
                         }
                     }
+
+                    var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
+                    {
+                        CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
+                    };
+                    manager.BindChart();
+
+                    lblMeasurementName.Text = manager.MeasurementName;
+
+                    hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
+
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
+                    {
+                        From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
+                        chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
+                    }
+                    //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
+                    BindAvgDelta();
+                    FillAllTabsData();
                 }
-
-                var manager = new AnalyzeChartManager(chartAnalyze, MeasurementList, IsValidation)
-                {
-                    CurrentMeasurementID = Convert.ToInt32(hdMeasurement.Value)
-                };
-                manager.BindChart();
-
-                lblMeasurementName.Text = manager.MeasurementName;
-
-                hdMeasurement.Value = manager.CurrentMeasurementID.ToString();
-
-                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)      //---Validation
-                {
-                    From_ΔE = rbtnListDeltaE.SelectedValue = MeasurementList.Find(item => item.MeasurementId == Convert.ToInt32(hdMeasurement.Value)).dEMethod.Substring(1);
-                    chartAnalyze.ChartAreas["ChartArea1"].AxisY.Title = "Δ" + From_ΔE;
-                }
-                //----------Bind Patch Details Gridview depending on selected measurement from Analyze Chart on "Patch Details" Tab-------//
-                BindAvgDelta();
-                FillAllTabsData();
             }
         }
         #endregion
@@ -334,13 +387,25 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvValidationSummary.DataSource = MeasurementSummary;
                         dvValidationSummary.DataBind();
 
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                        {
+                            dvValidationSummary.Fields[8].Visible = false; //Page or Surface
+                            dvValidationSummary.Fields[9].Visible = false; //JDF Job Id
+
+                            dvValidationSummary.Fields[6].Visible = false; //Customer
+                            dvValidationSummary.Fields[10].Visible = false; //Notes
+
+                            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                            {
+                                dvValidationSummary.Fields[6].Visible = true; //Customer
+                                dvValidationSummary.Fields[10].Visible = true; //Notes
+                            }
+                        }
+
                         rgValidationSummaryMetrics.DataSource = MeasurementSummary[0].ValidationMetrics;
                         rgValidationSummaryMetrics.DataBind();
 
-                        if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
-                        {
-                            FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
-                        }
+                        ValidationMeasurementStatus = MeasurementSummary[0].MeasurementStatus;
 
                         if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D)  //----Only display print label feature in validation mode
                         {
@@ -350,6 +415,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         else
                         {
                             PreparePrintLabelXML(MeasurementSummary[0]);
+                        }
+                        if (Page.IsPostBack == false)   //-------Fill MetricSumList when 1st time page load only
+                        {
+                            FillMetricSumList(MeasurementSummary[0].ValidationMetrics);
                         }
                     }
                 }
@@ -373,7 +442,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             //-----------Assign Report iFrame to load report in "Report" tab----------------------//
             string path = "";
-            if (ValidationType == 1)  //G7 type
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D && ValidationType == 1)  //G7 type
             {
                 dvTab_G7.Visible = Tab_G7.Visible = true;
                 ValidationType = 1;
@@ -416,39 +485,42 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillGrayCharts(DTLABChart, DTGaumatChart1, DTGaumatChart2);
             }
 
-            if (ValidationType == 1)  //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D) //This will be executed for Sync1D only --softweb
             {
-                _presenterAnalyze.GetG7Chart();
-                if (!IsErrorOccured)
+                if (ValidationType == 1)  //-------------Only call G7 tab data if it is G7 type of Validation / Sync 1D / Sync 4D Project
                 {
-                    FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
-                }
-            }
-            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
-            {
-                Tab_TVI.Visible = dvTab_TVI.Visible = true;
-                if (ValidationType == 2)  //ISO type
-                {
-                    _presenterAnalyze.GetISOTVIChart();
+                    _presenterAnalyze.GetG7Chart();
                     if (!IsErrorOccured)
                     {
-                        FillISOTVIChart(DTISOTVIChart);
-                        FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
+                        FillG7Chart(GrayFChart, GrayFSummary, BlackLChart, BlackLSummary, GrayLChart, GrayLSummary);
                     }
-                    UpdatePanel_TVI_ISO.Visible = true;
-                    UpdatePanel_TVI_G7.Visible = false;
                 }
-                else  //G7 type
+                if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Sync1D || SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation) //-----For Sync1D projects or validation projects
                 {
-                    _presenterAnalyze.GetTVIChart();
-                    if (!IsErrorOccured)
+                    Tab_TVI.Visible = dvTab_TVI.Visible = true;
+                    if (ValidationType == 2)  //ISO type
                     {
-                        FillTVIChart(DTTVIChart);
+                        _presenterAnalyze.GetISOTVIChart();
+                        if (!IsErrorOccured)
+                        {
+                            FillISOTVIChart(DTISOTVIChart);
+                            FillSpreadChart(DTSpreadChartData, DTSpreadSplineRangeChartData, DTMaxSpreadChartData);
+                        }
+                        UpdatePanel_TVI_ISO.Visible = true;
+                        UpdatePanel_TVI_G7.Visible = false;
                     }
-                    UpdatePanel_TVI_ISO.Visible = false;
-                    UpdatePanel_TVI_G7.Visible = true;
-                }
+                    else  //G7 type
+                    {
+                        _presenterAnalyze.GetTVIChart();
+                        if (!IsErrorOccured)
+                        {
+                            FillTVIChart(DTTVIChart);
+                        }
+                        UpdatePanel_TVI_ISO.Visible = false;
+                        UpdatePanel_TVI_G7.Visible = true;
+                    }
 
+                }
             }
         }
 
@@ -2057,15 +2129,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
             rgPatchDetails.ExportSettings.ExportOnlyData = true;
             rgPatchDetails.ExportSettings.IgnorePaging = true;
             rgPatchDetails.ExportSettings.OpenInNewWindow = true;
-        
+
             rgPatchDetails.MasterTableView.Columns.FindByUniqueName("HtmlColor").Visible = false;
-             MeasurementId = 0;
-             if (hdMeasurement.Value != "")
-             {
-                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from top analyze page trendline chart
-             }
+            MeasurementId = 0;
+            if (hdMeasurement.Value != "")
+            {
+                MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from top analyze page trendline chart
+            }
             //-----Give name to RadGrid Exported file according to selected measurement-------//
-             rgPatchDetails.ExportSettings.FileName = MeasurementId.ToString() + "_MeasurementFile";
+            rgPatchDetails.ExportSettings.FileName = MeasurementId.ToString() + "_MeasurementFile";
         }
 
         #endregion
@@ -2077,7 +2149,9 @@ namespace FujifilmUSA.Sync.Web.UserControl
             LTRL_PageSize.Text = DDL_PageSize.SelectedValue;
 
             int _PageSize = Convert.ToInt32(LTRL_PageSize.Text);
-            int _PageCount = Convert.ToInt32(LTRL_TotalRec.Text) / _PageSize; if ((Convert.ToInt32(LTRL_TotalRec.Text) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+            //Modified for localization
+            //int _PageCount = Convert.ToInt32(LTRL_TotalRec.Text) / _PageSize; if ((Convert.ToInt32(LTRL_TotalRec.Text) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
+            int _PageCount = Convert.ToInt32(hdnTotalRecord.Value) / _PageSize; if ((Convert.ToInt32(hdnTotalRecord.Value) % _PageSize) > 0) { _PageCount = _PageCount + 1; }
 
             //========== Filling the DropDown ==========//
             DDL_GoToPage.Items.Clear();
@@ -2137,7 +2211,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (Page.IsPostBack == false)
             {
                 FillDDLGoToPage(_PageCount);
-                LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+                //Modified for localization
+                //LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+                ltrlRecordsSummary.Text = GetResourceString("ltrlRecordsSummaryResource1.Text");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{start}", "0");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{end}", "0");
+                ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{total}", MeasurementList.Count.ToString());
+                hdnTotalRecord.Value = MeasurementList.Count.ToString();
             }
 
             #region Settings for Paging
@@ -2194,9 +2274,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             //========== Set Values Back To Label ==========//
             LTRL_StartIndex.Text = _StartIndex.ToString();
             LTRL_CurrentPage.Text = _CurrentPageIndex.ToString();
-            LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
-            LTRL_EndRecord.Text = _EndIndex.ToString();
-            LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+
+            //Modified for localization
+            //LTRL_StartRecord.Text = Convert.ToString(_StartIndex + 1);
+            //LTRL_EndRecord.Text = _EndIndex.ToString();
+            //LTRL_TotalRec.Text = MeasurementList.Count.ToString();
+            ltrlRecordsSummary.Text = GetResourceString("ltrlRecordsSummaryResource1.Text");
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{start}", Convert.ToString(_StartIndex + 1));
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{end}", _EndIndex.ToString());
+            ltrlRecordsSummary.Text = ltrlRecordsSummary.Text.Replace("{total}", MeasurementList.Count.ToString());
+            hdnTotalRecord.Value = MeasurementList.Count.ToString();
 
             #endregion
 
@@ -2243,6 +2330,31 @@ namespace FujifilmUSA.Sync.Web.UserControl
             string labelXML = streamReader.ReadToEnd();
             streamReader.Close();
             //string labelXML = "XML";
+            //Set the localization values for label caption to placeholder
+            labelXML = labelXML.Replace("locDevice", GetResourceString(_reclocLabelDevice));
+            labelXML = labelXML.Replace("locMetric", GetResourceString(_reclocLabelMetric));
+            labelXML = labelXML.Replace("locStandard", GetResourceString(_reclocLabelStandard));
+            labelXML = labelXML.Replace("locTimestamp", GetResourceString(_reclocLabelTimestamp));
+            labelXML = labelXML.Replace("locCustomer", GetResourceString(_reclocLabelCustomer));
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+            {
+                labelXML = labelXML.Replace("locPageOrSurface", "");
+                labelXML = labelXML.Replace("locJDFJobID", "");
+                labelXML = labelXML.Replace("locJob", GetResourceString("locMeasurementNameResource1.Text"));
+            }
+            else
+            {
+                labelXML = labelXML.Replace("locPageOrSurface", GetResourceString(_reclocLabelPageOrSurface));
+                labelXML = labelXML.Replace("locJDFJobID", GetResourceString(_reclocLabelJDFJobID));
+                labelXML = labelXML.Replace("locJob", GetResourceString(_reclocLabelJob));
+            }
+
+            labelXML = labelXML.Replace("locdEType", GetResourceString(_reclocLabeldEType));
+            labelXML = labelXML.Replace("locTol", GetResourceString(_reclocLabelTol));
+            labelXML = labelXML.Replace("locAct", GetResourceString(_reclocLabelAct));
+            labelXML = labelXML.Replace("locSignature", GetResourceString(_reclocLabelSignature));
+            labelXML = labelXML.Replace("locDate", GetResourceString(_reclocLabelDate));
+
             //Set the values to Placeholder
             labelXML = labelXML.Replace("[Job]", measurmentSummary.MeasurementName);
             labelXML = labelXML.Replace("[Device]", SessionManager.Instance.CurrentDevice.DeviceName);
@@ -2251,6 +2363,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             labelXML = labelXML.Replace("[Timestamp]", measurmentSummary.MeasurementDate.ToString("g"));
             labelXML = labelXML.Replace("[Customer]", measurmentSummary.Customer);
             labelXML = labelXML.Replace("[dEType]", measurmentSummary.dEMethod);
+            labelXML = labelXML.Replace("[PageOrSurface]", measurmentSummary.PageOrSurface);
+            labelXML = labelXML.Replace("[JDFJobId]", measurmentSummary.JDFJobId);
             System.Text.StringBuilder metricName = new StringBuilder();
             System.Text.StringBuilder metricTol = new StringBuilder();
             System.Text.StringBuilder metricActual = new StringBuilder();
@@ -2287,6 +2401,21 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region Properties
         public int JsRandomNumber { get { return new Random().Next(1, 100); } }
+
+        public string ValidationMeasurementStatus
+        {
+            get
+            {
+                if (ViewState["MeasurementStatus"] != null)
+                    return ViewState["MeasurementStatus"].ToString();
+                else
+                    return string.Empty;
+            }
+            set
+            {
+                ViewState["MeasurementStatus"] = value;
+            }
+        }
         #endregion
 
         #region Control Events
@@ -2580,7 +2709,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void btnCSVExport_Click(object sender, EventArgs e)
         {
-            ConfigureExport();         
+            ConfigureExport();
             rgPatchDetails.MasterTableView.ExportToCSV();
         }
 
@@ -2673,6 +2802,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
             ScriptManager.RegisterStartupScript(Page, typeof(Page), Guid.NewGuid().ToString(), "funSpreadVisiblity();", true);
         }
 
+        protected void lbtnSubmit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COValidationCallback.aspx?projectid={0}&result={1}&id={2}", SessionManager.Instance.CurrentProject.ProjectId, ValidationMeasurementStatus, Guid.NewGuid()));
+
+        }
         #endregion
 
         #region IViewAnalyze Members
@@ -2750,6 +2884,6 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #endregion
 
-        
+
     }
 }

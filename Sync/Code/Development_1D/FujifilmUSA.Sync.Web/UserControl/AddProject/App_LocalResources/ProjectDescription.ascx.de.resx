@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="imgAddResource1.AlternateText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="imgAddResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnPrintDescriptionResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lnkbtnPrintDescriptionResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="locColorantResource1.Text" xml:space="preserve">
     <value>Colorant:_de</value>
   </data>
@@ -144,6 +132,9 @@
   <data name="locNotesResource1.Text" xml:space="preserve">
     <value>Notes:_de</value>
   </data>
+  <data name="locOperationTypeResource1.Text" xml:space="preserve">
+    <value>Operation:_de</value>
+  </data>
   <data name="locPressResource1.Text" xml:space="preserve">
     <value>Press:_de</value>
   </data>
@@ -156,79 +147,19 @@
   <data name="locTechnicianNameResource1.Text" xml:space="preserve">
     <value>Technician Name:_de</value>
   </data>
-  <data name="panelAddProjectDescriptionResource1.GroupingText" xml:space="preserve">
-    <value />
+  <data name="operationSelectText" xml:space="preserve">
+    <value>-- Please select operation --_de</value>
   </data>
-  <data name="panelAddProjectDescriptionResource1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rfvcLicenseType" xml:space="preserve">
+    <value>Please select operation._de</value>
   </data>
-  <data name="rfvColorantResource1.ErrorMessage" xml:space="preserve">
-    <value />
+  <data name="rfvcMediaContainer" xml:space="preserve">
+    <value>Please provide media name._de</value>
   </data>
-  <data name="rfvColorantResource1.Text" xml:space="preserve">
-    <value />
+  <data name="rfvColorantContainer" xml:space="preserve">
+    <value>Please provide colorant name._de</value>
   </data>
-  <data name="rfvColorantResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMediaResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMediaResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvMediaResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvRipSettingResource1.ErrorMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvRipSettingResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rfvRipSettingResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtColorantResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtColorantResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtDeviceFamilyResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtDeviceFamilyResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtMediaResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtMediaResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtNotesResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtNotesResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtPressResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtPressResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtRipSettingResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtRipSettingResource1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtTechnicianNameResource1.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="txtTechnicianNameResource1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="rfvRipSettingsContainer" xml:space="preserve">
+    <value>Please provide rip settings._de</value>
   </data>
 </root>

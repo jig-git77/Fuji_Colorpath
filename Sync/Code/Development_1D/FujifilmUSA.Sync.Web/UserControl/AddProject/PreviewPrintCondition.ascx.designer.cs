@@ -58,31 +58,31 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locSave;
         
         /// <summary>
-        /// lnkbtnMeasurementSetup control.
+        /// btnValidationSetup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkbtnMeasurementSetup;
+        protected global::System.Web.UI.WebControls.LinkButton btnValidationSetup;
         
         /// <summary>
-        /// Image2 control.
+        /// Image3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
-        /// locMeasurementSetup control.
+        /// locValidationSetup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Localize locMeasurementSetup;
+        protected global::System.Web.UI.WebControls.Localize locValidationSetup;
         
         /// <summary>
         /// fujiStatusbar control.
@@ -371,6 +371,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblVali_MeaDevice;
+        
+        /// <summary>
+        /// locValidationMetric control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Localize locValidationMetric;
         
         /// <summary>
         /// lblVali_Metric control.

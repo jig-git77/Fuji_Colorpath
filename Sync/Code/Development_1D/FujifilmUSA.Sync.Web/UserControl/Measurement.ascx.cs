@@ -11,6 +11,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         #region Private Variables - Globalization
         private const string _recnewPrintConditionText = "newPrintConditionText";
         private const string _recmeasureText = "measureText";
+        private const string _recValidationMeasure = "validationMeasureText";
+
         #endregion
 
         #region Declaration
@@ -40,13 +42,14 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         #region "Page Events"
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {                        
+
             if (!IsPostBack)
             {
                 SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Measure;
                 if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
                 {
-                    header.InnerText = "Validation - Measure";
+                    header.InnerText = GetResourceString(_recValidationMeasure); //"Validation - Measure";
                 }
                 else
                 {
@@ -59,16 +62,27 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         header.InnerText = string.Format(GetResourceString(_recmeasureText), SessionManager.Instance.CurrentOptimizeRun.LastDlpName);//Measure - {0}
                     }
                 }
-                if (IsXMFUser && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+                if (IsXMFUser)
                 {
-                    ScriptManager.RegisterStartupScript(
-                        this.Page,
-                        this.Page.GetType(),
-                        "messaging",
-                        string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
-                                      Convert.ToInt32(Request.QueryString["projectid"]),
-                                      SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
-                        true);
+                    if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
+                    {
+                        btnValidationSetup.Visible = true; //---If Validation mode, visible Validation Setup button
+                    }
+                    else
+                    {
+                        btnMeasurementSetup.Visible = true; //---Otherwise, visible Measurement Setup button
+                    }
+                    if (SessionManager.Instance.CurrentDlpSubOperation != ELicenseType.Validation && !string.IsNullOrEmpty(Request.QueryString["projectid"]) && Convert.ToInt32(Request.QueryString["projectid"]) > 0)
+                    {
+                        ScriptManager.RegisterStartupScript(
+                            this.Page,
+                            this.Page.GetType(),
+                            "messaging",
+                            string.Format("window.parent.postMessage('Action: Project Created. ProjectId:{0}','{1}');",
+                                          Convert.ToInt32(Request.QueryString["projectid"]),
+                                          SessionManager.Instance.CurrentColorOrgRequest.SilverlightPostUrl),
+                            true);
+                    }
                 }
             }
         }
@@ -86,7 +100,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     : "Analyze.aspx");
         }
 
-        #endregion
+        protected void btnValidationSetup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COValidationSetup.aspx?id={0}", Guid.NewGuid()));
+        }
+
+        protected void btnMeasurementSetup_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(string.Format("COMeasurementSetup.aspx?id={0}", Guid.NewGuid()));
+        }
+
+        #endregion      
 
     }
 }

@@ -1951,6 +1951,15 @@ namespace FujifilmUSA.Sync.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter Job Name that is at least 4 characters long..
+        /// </summary>
+        internal static string JobName_LengthError {
+            get {
+                return ResourceManager.GetString("JobName_LengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete selected license? It will delete all your related devices, measurement devices and projects. Do you really want to delete everything?.
         /// </summary>
         internal static string LicenseManagement_DeleteLicense_Confirmation {
@@ -2118,6 +2127,33 @@ namespace FujifilmUSA.Sync.GlobalResources {
         internal static string UserManagement_DeleteUser_Confirmation {
             get {
                 return ResourceManager.GetString("UserManagement_DeleteUser_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current project has no Validation, so can not show Analyse page.
+        /// </summary>
+        internal static string Validation_NoMeasurements {
+            get {
+                return ResourceManager.GetString("Validation_NoMeasurements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current project is Closed, so validation cannot be performed.
+        /// </summary>
+        internal static string Validation_ProjectClosedError {
+            get {
+                return ResourceManager.GetString("Validation_ProjectClosedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current project is Open, so validation cannot be performed.
+        /// </summary>
+        internal static string Validation_ProjectOpenError {
+            get {
+                return ResourceManager.GetString("Validation_ProjectOpenError", resourceCulture);
             }
         }
         

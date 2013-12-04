@@ -9,7 +9,7 @@
                     count++;
             });
             if (count <= 0) {
-                if (confirm("Are you sure you want to delete all activity validation rules?"))
+                if (confirm('<%= GetResourceString("confirmSaveMessage") %>'))
                     return true;
                 else
                     return false;

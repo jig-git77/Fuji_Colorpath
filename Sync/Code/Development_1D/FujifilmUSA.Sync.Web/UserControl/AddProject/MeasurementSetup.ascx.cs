@@ -11,6 +11,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 {
     public partial class MeasurementSetup : BaseControl, IViewMeasurementSetting
     {
+
+        #region Private Variables - Globalization
+        private const string _recrfvcMeasurementDeviceContainer = "rfvcMeasurementDeviceContainer";
+        private const string _recrfvcAlignmentChartContainer = "rfvcAlignmentChartContainer";
+        private const string _recrfvcOptimizationChartContainer = "rfvcOptimizationChartContainer";
+        #endregion
+
         #region "Declaration"
         public bool IsXmfNewProject
         {
@@ -93,8 +100,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 BindIlluminant();
                 BindObserverType();
                 ViewState[vsIsPostBack] = true;
-                LoadProjectInfoFromSession();               
-            }           
+                LoadProjectInfoFromSession();
+            }
+
+            //Set localized text
+            rfvcMeasurementDeviceContainer.ValidationMsg = GetResourceString(_recrfvcMeasurementDeviceContainer);
+            rfvcAlignmentChartContainer.ValidationMsg = GetResourceString(_recrfvcAlignmentChartContainer);
+            rfvcOptimizationChartContainer.ValidationMsg = GetResourceString(_recrfvcOptimizationChartContainer);
         }
         #endregion
 
@@ -102,20 +114,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnMeasure_Click(object sender, EventArgs e)
         {
-            SessionManager.Instance.CurrentProject.MeasurementSetting =
-                new MeasurementSetting()
-                {
-                    Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue),
-                    ObserverType = Convert.ToInt16(cmbObserver.SelectedValue),
-                    MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue),
-                    ReferenceChartType =
-                        new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue),
-                                                        cmbAlignmentChart.SelectedItem.Text),
-                    OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text)                
-
-                };
-
-            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.Illuminant = Convert.ToInt16(cmbIlluminant.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ObserverType = Convert.ToInt16(cmbObserver.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId = Convert.ToInt16(cmbMeasurementDevice.SelectedValue);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue), cmbAlignmentChart.SelectedItem.Text);
+            SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded = cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
+            SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
+SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
@@ -253,9 +258,15 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MeasurementDeviceId.ToString();
                
                 cmbMeasurementDevice_SelectedIndexChanged(null, null);
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+
+                cmbAlignmentChart.SelectedIndex = cmbAlignmentChart.Items.IndexOf(cmbAlignmentChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString()));
+                if (cmbAlignmentChart.SelectedIndex == 0 && cmbAlignmentChart.Items.Count > 0)
+                    cmbAlignmentChart.SelectedIndex = 1;                
                 cmbAlignmentChart_SelectedIndexChanged(null, null);
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
+
+                cmbOptimizationChart.SelectedIndex = cmbOptimizationChart.Items.IndexOf(cmbOptimizationChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString()));
+                if (cmbOptimizationChart.SelectedIndex == 0 && cmbOptimizationChart.Items.Count > 0)
+                    cmbOptimizationChart.SelectedIndex = 1;                
                 cmbOptimizationChart_SelectedIndexChanged(null, null);
                              
                 cmbUVSettings.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.UVMode.ToString();             
@@ -370,12 +381,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
             if (SessionManager.Instance.CurrentColorOrgRequest != null)
             {
-                //Load selected chart if we are in update mode
-                cmbAlignmentChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString();
+                //Load selected chart if we are in update mode                
+                cmbAlignmentChart.SelectedIndex = cmbAlignmentChart.Items.IndexOf(cmbAlignmentChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType.Key.ToString()));
+                if (cmbAlignmentChart.SelectedIndex == 0 && cmbAlignmentChart.Items.Count > 0)
+                    cmbAlignmentChart.SelectedIndex = 1;
                 cmbAlignmentChart.Enabled = false;
 
                 //Load selected chart if we are in update mode
-                cmbOptimizationChart.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString();
+                cmbOptimizationChart.SelectedIndex = cmbOptimizationChart.Items.IndexOf(cmbOptimizationChart.Items.FindByValue(SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType.Key.ToString()));
+                if (cmbOptimizationChart.SelectedIndex == 0 && cmbOptimizationChart.Items.Count > 0)
+                    cmbOptimizationChart.SelectedIndex = 1;
                 cmbOptimizationChart.Enabled = false;
             }
             DisplayChartImage();

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using FujifilmUSA.Sync.Web.ColorOrganizer;
+using System.Web.Security;
+using FujifilmUSA.Sync.Common;
 
 namespace FujifilmUSA.Sync.Web
 {
@@ -15,8 +17,8 @@ namespace FujifilmUSA.Sync.Web
         {
             if (HttpContext.Current != null)
             {
-                var processor = new ColorOrganizerRequestProcessor();
-                if(!processor.ProcessRequest())
+                var processor = new ColorOrganizerRequestProcessor();                
+                if (!processor.ProcessRequest())
                 {
                     context.Response.ContentType = "text/plain";
                     context.Response.Write("Bad Request!Please contact your administrator.");

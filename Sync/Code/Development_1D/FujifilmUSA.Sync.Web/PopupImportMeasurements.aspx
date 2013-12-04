@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Import Measurements" Language="C#" MasterPageFile="~/PopUpMaster.Master" AutoEventWireup="true" CodeBehind="PopupImportMeasurements.aspx.cs" Inherits="FujifilmUSA.Sync.Web.PopupImportMeasurements" %>
+﻿<%@ Page Title="Import Measurements" Language="C#" MasterPageFile="~/PopUpMaster.Master" AutoEventWireup="true" CodeBehind="PopupImportMeasurements.aspx.cs" Inherits="FujifilmUSA.Sync.Web.PopupImportMeasurements" culture="auto" meta:resourcekey="PageResource1" uiculture="auto" %>
 
 <%@ Register Src="~/UserControl/PopupControl/ImportMeasurements.ascx" 
     TagName="ImportWindow" TagPrefix="uc" %>

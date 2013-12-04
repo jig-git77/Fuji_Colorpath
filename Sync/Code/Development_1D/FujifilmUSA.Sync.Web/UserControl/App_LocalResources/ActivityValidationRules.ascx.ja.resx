@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,28 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="confirmSaveMessage" xml:space="preserve">
+    <value>Are you sure you want to delete all activity validation rules?</value>
+  </data>
   <data name="GridTemplateColumnResource1.HeaderText" xml:space="preserve">
-    <value>Is Rule ON?_ja</value>
+    <value>ユーザ名</value>
   </data>
   <data name="GridTemplateColumnResource2.HeaderText" xml:space="preserve">
-    <value>Name_ja</value>
+    <value>名</value>
   </data>
   <data name="GridTemplateColumnResource3.HeaderText" xml:space="preserve">
-    <value>Description_ja</value>
+    <value>姓</value>
   </data>
   <data name="locActivityResource1.Text" xml:space="preserve">
-    <value>Activity_ja</value>
+    <value>アクティビティ</value>
   </data>
   <data name="locActivityValidationRulesResource1.Text" xml:space="preserve">
-    <value>Activity Validation Rules_ja</value>
+    <value>アクティビティ検証ルール</value>
   </data>
   <data name="locSaveRulesResource1.Text" xml:space="preserve">
-    <value>Save Rules_ja</value>
+    <value>ルール保存</value>
   </data>
   <data name="ruleSelectionRequiredMsg" xml:space="preserve">
-    <value>Please select at-least one rule._ja</value>
+    <value>少なくとも１つのルールを選択してください。</value>
   </data>
   <data name="ruleUpdateSuccessMsg" xml:space="preserve">
-    <value>Activity validation rule updated successfully._ja</value>
+    <value>アクティビティ検証ルールのアップロードに成功しました。</value>
   </data>
 </root>

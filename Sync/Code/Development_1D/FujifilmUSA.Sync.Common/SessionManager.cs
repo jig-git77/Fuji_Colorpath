@@ -26,6 +26,8 @@ namespace FujifilmUSA.Sync.Common
         private const string _curveDeltaPrevRunView = "CurveDeltaPrevRunView";
         
         
+        private const string _validationRequest = "ValidationRequest";
+        private const string _coErrorMessage = "COErrorMessage";
         #endregion
 
         #region Singleton
@@ -208,7 +210,25 @@ namespace FujifilmUSA.Sync.Common
             {
                 HttpContext.Current.Session[_colorOrgRequest] = value;
             }
-        }        
+        }
+
+        public Entity.CPSyncV.TempValidationInfo CurrentValidationRequest
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_validationRequest] != null)
+                {
+                    return (Entity.CPSyncV.TempValidationInfo)HttpContext.Current.Session[_validationRequest];
+                }
+                return null;
+            }
+            set
+            {
+                HttpContext.Current.Session[_validationRequest] = value;
+            }
+        }
+
+        
 
         public int SelectedCompany
         {
@@ -319,6 +339,22 @@ namespace FujifilmUSA.Sync.Common
             set
             {
                 HttpContext.Current.Session[_curveDeltaPrevRunView] = value;
+            }
+        }
+
+        public COErrorMessage COErrorMessage
+        {
+            get
+            {
+                if (HttpContext.Current.Session[_coErrorMessage] != null)
+                {
+                    return HttpContext.Current.Session[_coErrorMessage] as COErrorMessage;
+                }
+                return new COErrorMessage();
+            }
+            set
+            {
+                HttpContext.Current.Session[_coErrorMessage] = value;
             }
         }
 

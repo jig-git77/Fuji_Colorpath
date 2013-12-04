@@ -25,7 +25,7 @@
             <tr align="center">
                 <td  align="center" >
                     <div id="tdcompany" runat ="server"  align="center" style="width:150px;float:left;">
-                        <asp:LinkButton ID="lbtnCompanyManagement" runat="server" ToolTip="Company Management"
+                        <asp:LinkButton ID="lbtnCompanyManagement" runat="server"
                             PostBackUrl="~/CompanyManagement.aspx" 
                             onclick="lbtnCompanyManagement_Click">
                             <div>
@@ -40,7 +40,7 @@
                         <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                     <div id="tdBranch" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
-                        <asp:LinkButton ID="lbtnBranchManagement" runat="server" ToolTip="Branch Management"
+                        <asp:LinkButton ID="lbtnBranchManagement" runat="server"
                             PostBackUrl="~/BranchManagement.aspx" onclick="lbtnBranchManagement_Click">
                             <div>
                                 <asp:Image ID="Image2" runat="server" AlternateText="Branch Management" ImageUrl="~/Images/branch-manage-icon.png"
@@ -56,7 +56,7 @@
                 </div>
                     <div id="tdUser" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
                         <asp:LinkButton ID="lbtnUserManagement" runat="server" 
-                            ToolTip="User Management" PostBackUrl="~/UserManagement.aspx" 
+                            PostBackUrl="~/UserManagement.aspx" 
                             onclick="lbtnUserManagement_Click">
                             <div>
                                 <asp:Image ID="Image3" runat="server" AlternateText="User Management" ImageUrl="~/Images/user-manage-icon.png"
@@ -70,7 +70,7 @@
                         <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                  <div id="tdProfileManagement" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                       <asp:LinkButton ID="lnkProfileMgmt" runat="server" ToolTip="My Settings"
+                       <asp:LinkButton ID="lnkProfileMgmt" runat="server"
                         PostBackUrl="~/ProfileManagement.aspx" onclick="lnkProfileMgmt_Click">                      
                         <div>
                             <asp:Image ID="Image4" runat="server" AlternateText="My Settings"
@@ -87,7 +87,7 @@
                 </div>
                 <div id="tdLicense" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
                     <asp:LinkButton ID="lbtnLicenseManagement" runat="server" 
-                        ToolTip="License Management" onclick="lbtnLicenseManagement_Click">
+                        onclick="lbtnLicenseManagement_Click">
                         <div>
                             <asp:Image ID="imgLicenseManagement" runat="server" AlternateText="License Management"
                                 ImageUrl="~/Images/dongle-manage.png" ToolTip="License Management" 
@@ -106,7 +106,7 @@
             <tr align="center">
                 <td align="center" >
                 <div id="tdDevice" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
-                    <asp:LinkButton ID="lbtnDeviceManagement" runat="server" ToolTip="Device Management"
+                    <asp:LinkButton ID="lbtnDeviceManagement" runat="server" 
                         PostBackUrl="~/DeviceManagement.aspx" onclick="lbtnDeviceManagement_Click">
                         <div>
                             <asp:Image ID="imgDeviceManagement" runat="server" AlternateText="Device Management"
@@ -123,7 +123,7 @@
                
                
                 <div id="tdMeasurementDevice" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                    <asp:LinkButton ID="lnkMeasurementDevice" runat="server" ToolTip="Measurement Device"
+                    <asp:LinkButton ID="lnkMeasurementDevice" runat="server" 
                         PostBackUrl="~/MeasurementDeviceList.aspx" 
                         onclick="lnkMeasurementDevice_Click">
                         <div>
@@ -140,7 +140,7 @@
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                  <div id="tdDownload" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                       <asp:LinkButton ID="lnkDownload" runat="server" ToolTip="Download"
+                       <asp:LinkButton ID="lnkDownload" runat="server"  
                         PostBackUrl="~/DownloadSoftwares.aspx" onclick="lnkDownload_Click">                      
                         <div>
                             <asp:Image ID="Image5" runat="server" AlternateText="Download"
@@ -156,7 +156,7 @@
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                   <div id="tdReferenceChart" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                    <asp:LinkButton ID="lnkRefChart" runat="server" ToolTip="Reference Chart"
+                    <asp:LinkButton ID="lnkRefChart" runat="server"
                         PostBackUrl="~/ReferenceChartManagement.aspx" onclick="lnkRefChart_Click">
                        
                         <div>
@@ -173,7 +173,7 @@
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>
                <div id="tdSourceProfile" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
-                        <asp:LinkButton ID="lbtnSourceProfile" runat="server" ToolTip="Soruce Profile" 
+                        <asp:LinkButton ID="lbtnSourceProfile" runat="server"
                             PostBackUrl="~/SourceProfileManagement.aspx" 
                             onclick="lbtnSourceProfile_Click">
                             <div>
@@ -193,20 +193,20 @@
             <tr align="center">
                 <td align="center" >
                 <div id="dvActivityValidationRules" runat ="server" align="center" valign="bottom" style="width:150px;float:left;">
-                    <asp:LinkButton ID="lnkBtnActivityValidationRules" runat="server" ToolTip="Activity Validation Rules"
+                    <asp:LinkButton ID="lnkBtnActivityValidationRules" runat="server"
                         PostBackUrl="~/ActivityValidationRules.aspx">
                         <div>
-                            <asp:Image ID="Image6" runat="server" AlternateText="Activity Validation Rules"
-                                ImageUrl="~/Images/activity-validation-rules-icon.png" ToolTip="Activity Validation Rules" />
+                            <asp:Image ID="imgActivityValidationRules" runat="server" AlternateText="Activity Validation Rules"
+                                ImageUrl="~/Images/activity-validation-rules-icon.png" ToolTip="Activity Validation Rules" meta:resourcekey="imgActivityValidationRulesResource1" />
                         </div>
-                        <asp:Localize Text="Activity Validation Rules" runat="server" ID="locActivityValidationRules"></asp:Localize>
+                        <asp:Localize Text="Activity Validation Rules" runat="server" ID="locActivityValidationRules" meta:resourcekey="locActivityValidationRulesResource1"></asp:Localize>
                     </asp:LinkButton>
                 </div>                               
                 <div id="divProfilerSettingSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div>                             
                   <div id="dvProfilerSettings" runat ="server" align="center" valign="bottom" style="width:150px;float:left;" >
-                     <asp:LinkButton ID="lnkProfilerSettings" runat="server" ToolTip="Device Family Profiler Settings"
+                     <asp:LinkButton ID="lnkProfilerSettings" runat="server" 
                         PostBackUrl="~/AddDeviceProfilerSettings.aspx" Text="Device Family Profiler Settings" >                                   
                          <div>
                             <asp:Image ID="Image_ProfilerSettings" runat="server" AlternateText="Device Family Profiler Settings"
@@ -221,11 +221,11 @@
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div> 
                 <div id="dvApplicationConfiguration" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
-                    <asp:LinkButton ID="lnkbtnApplicationConfiguration" runat="server" ToolTip="Application Configuration" PostBackUrl="~/ApplicationConfiguration.aspx">
+                    <asp:LinkButton ID="lnkbtnApplicationConfiguration" runat="server" PostBackUrl="~/ApplicationConfiguration.aspx">
                         <div>
-                            <asp:Image ID="imgApplicationConfig" runat="server" AlternateText="Application Configuration" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Application Configuration" />
+                            <asp:Image ID="imgApplicationConfig" runat="server" AlternateText="Application Configuration" ImageUrl="~/Images/application-configuration-icon.png" ToolTip="Application Configuration" meta:resourcekey="imgApplicationConfigResource1" />
                         </div>
-                        <asp:Localize Text="Application Configuration" runat="server" ID="locApplicationConfiguration"></asp:Localize>
+                        <asp:Localize Text="Application Configuration" runat="server" ID="locApplicationConfiguration" meta:resourcekey="locApplicationConfigurationResource1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>     
                  <div id="div1" runat ="server" align="center" valign="bottom" style="float:left;">
@@ -257,7 +257,7 @@
                     </asp:LinkButton>                
                 </div>               
                 </td>
-                </tr>            
+                </tr>                   
         </table>
 
 
