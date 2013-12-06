@@ -20,5 +20,8 @@ namespace FujifilmUSA.Sync.Entity
         public short? Validation_4D { get; set; }      
         public bool? IsUsed { get; set; }
         public string ChartSettingXML { get; set; }
+
+        public ProjectType ProjectType { get; set; }
+        public int ChartDisplayType { get; set; }
     }
 }

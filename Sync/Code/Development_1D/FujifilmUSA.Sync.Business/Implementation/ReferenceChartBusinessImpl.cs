@@ -250,8 +250,14 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                                      {
                                                                          InstrumentTypeId = DataReader.ReadShort(x, "InstrumentTypeID"),
                                                                          InstrumentName = DataReader.ReadString(x, "InstrumentName")
-                                                                     },                                               
-                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed")                                               
+                                                                     },
+                                                ProjectType = new ProjectType()
+                                                                  {
+                                                                      ProjectTypeId = DataReader.ReadShort(x, "ProjectTypeId"),
+                                                                      ProjectTypeName = DataReader.ReadString(x, "ProjectType")
+                                                                  },
+                                                IsUsed = DataReader.ReadBoolean(x, "IsUsed"),
+                                                ChartDisplayType = DataReader.ReadInt(x, "ChartDisplayType")
                                             }).ToList();
                     }
                 },
