@@ -579,4 +579,16 @@
   <data name="ListItemResource1.Text" xml:space="preserve">
     <value>Idealliance Digital Chart</value>
   </data>
+  <data name="GridBoundColumnResource34.HeaderText" xml:space="preserve">
+    <value>Density_V</value>
+  </data>
+  <data name="GridBoundColumnResource35.HeaderText" xml:space="preserve">
+    <value>Density_C</value>
+  </data>
+  <data name="GridBoundColumnResource36.HeaderText" xml:space="preserve">
+    <value>Density_M</value>
+  </data>
+  <data name="GridBoundColumnResource37.HeaderText" xml:space="preserve">
+    <value>Density_Y</value>
+  </data>
 </root>

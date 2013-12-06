@@ -190,7 +190,7 @@
     <value />
   </data>
   <data name="rfvSourceProfileResource1.ErrorMessage" xml:space="preserve">
-    <value />
+    <value>Please provide source profile name.</value>
   </data>
   <data name="rfvSourceProfileResource1.Text" xml:space="preserve">
     <value />

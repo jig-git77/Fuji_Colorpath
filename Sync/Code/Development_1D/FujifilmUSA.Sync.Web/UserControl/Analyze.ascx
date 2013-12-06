@@ -514,7 +514,7 @@
                                     meta:resourcekey="dvValidationSummaryResource1" >
                                     <Fields>
                                        <%--<asp:ImageField dataimageurlfield="MeasurementStatus" dataimageurlformatstring="~/Images/{0}.png" headertext="Measurement Status:" ItemStyle-BackColor="#F2F2F2" HeaderStyle-BackColor="#F2F2F2"></asp:ImageField>                                      --%>
-                                        <asp:BoundField DataField="MeasurementName"
+                                        <asp:BoundField DataField="MeasurementName" HeaderText="Measurement Name:"
                                             HeaderStyle-Width="150px" HeaderStyle-CssClass="Summary_Left" 
                                             ItemStyle-CssClass="Summary_Right">                                            
                                         </asp:BoundField>
@@ -2323,25 +2323,25 @@
                                         SortExpression="Density_V" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter Density_V column" 
-                                        meta:resourcekey="GridBoundColumnResource18" UniqueName="Density_V">
+                                        meta:resourcekey="GridBoundColumnResource34" UniqueName="Density_V">
                                     </telerik:GridBoundColumn>    
                                     <telerik:GridBoundColumn DataField="Density_C" HeaderText="Density_C" 
                                         SortExpression="Density_C" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter Density_C column" 
-                                        meta:resourcekey="GridBoundColumnResource19" UniqueName="Density_C">
+                                        meta:resourcekey="GridBoundColumnResource35" UniqueName="Density_C">
                                     </telerik:GridBoundColumn>    
                                     <telerik:GridBoundColumn DataField="Density_M" HeaderText="Density_M" 
                                         SortExpression="Density_M" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter Density_M column" 
-                                        meta:resourcekey="GridBoundColumnResource20" UniqueName="Density_M">
+                                        meta:resourcekey="GridBoundColumnResource36" UniqueName="Density_M">
                                     </telerik:GridBoundColumn>    
                                     <telerik:GridBoundColumn DataField="Density_Y" HeaderText="Density_Y" 
                                         SortExpression="Density_Y" FilterControlWidth="30px" 
                                         CurrentFilterFunction="GreaterThanOrEqualTo" AutoPostBackOnFilter="True" 
                                         FilterControlAltText="Filter Density_Y column" 
-                                        meta:resourcekey="GridBoundColumnResource21" UniqueName="Density_Y">
+                                        meta:resourcekey="GridBoundColumnResource37" UniqueName="Density_Y">
                                     </telerik:GridBoundColumn>    
 
                                     <telerik:GridBoundColumn DataField="ΔH" HeaderText="ΔH" 

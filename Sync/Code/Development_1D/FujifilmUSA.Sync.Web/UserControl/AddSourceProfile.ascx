@@ -102,7 +102,7 @@
                                             ControlToValidate="txtSourceProfile" ForeColor="Red" 
                                             ValidationGroup="vgSourceProfile" meta:resourcekey="rfvSourceProfileResource1"><ucValidationContainer:ValidationContainer ID="rfvSourceProfileContainer" runat="server"
                                                 ValidationMsg="Please provide source profile name." Size="200" />
-</asp:RequiredFieldValidator>
+                                        </asp:RequiredFieldValidator>
                                     </div>
                                     <div class="clear">
                                     </div>

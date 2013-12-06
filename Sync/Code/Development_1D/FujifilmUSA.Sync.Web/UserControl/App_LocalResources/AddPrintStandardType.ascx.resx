@@ -132,6 +132,12 @@
   <data name="plzSelectSourceProfile" xml:space="preserve">
     <value>Please select Source Profile.</value>
   </data>
+  <data name="rfvPrintStandardTypeResource1.ErrorMessage" xml:space="preserve">
+    <value>Please provide PrintStandard name.</value>
+  </data>
+  <data name="rfvSourceProfileResource1.ErrorMessage" xml:space="preserve">
+    <value>Please select SourceProfile.</value>
+  </data>
   <data name="selectSourceProfileText" xml:space="preserve">
     <value>--Select Source Profile--</value>
   </data>
