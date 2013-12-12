@@ -187,7 +187,46 @@
                                                 meta:resourcekey="imgValidationChartResource1" />
                                        </td>
                                     </tr>
-                                    <tr>
+                                   
+                                     <tr id="trUVSettings" runat="server">
+                                        <td >
+                                            <span><asp:Localize runat="server" Text="UV Settings:" ID="locUVSettings" meta:resourcekey="locUVSettingsResource1"></asp:Localize></span>
+                                        </td>
+                                        <td >
+                                            <asp:DropDownList ID="cmbUVSettings" runat="server" Width="200px" 
+                                                CssClass="select" AutoPostBack="true" 
+                                                onselectedindexchanged="cmbUVSettings_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                     <tr id="trReadMode" runat="server">
+                                        <td >
+                                            <span><asp:Localize runat="server" Text="Read Mode:" ID="Localize2"></asp:Localize></span>
+                                        </td>
+                                        <td >
+                                            <asp:DropDownList ID="cmbReadMode" runat="server" Width="200px" 
+                                                CssClass="select" AutoPostBack="true" 
+                                                onselectedindexchanged="cmbReadMode_SelectedIndexChanged">
+                                                <asp:ListItem Text="Strip" Value="Strip" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="Point" Value="Point"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                     <tr id="trMeasCount" runat="server">
+                                        <td id="Td1" runat="server">
+                                            <span><asp:Localize runat="server" Text="Measurement Count:" ID="Localize1"></asp:Localize></span>
+                                        </td>
+                                        <td id="Td2" runat="server">
+                                            <asp:DropDownList ID="cmbMeasurementCount" runat="server" Width="200px" CssClass="select">                                           
+                                             <asp:ListItem Text="1" Value="1" Selected="True"></asp:ListItem>
+                                              <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                               <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                                 <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                     <tr>
                                         <td valign="top" style="width: 160px;">
                                             <span>
                                             <asp:Localize Text="Validation Chart:" runat="server" 

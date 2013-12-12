@@ -23,5 +23,9 @@ namespace FujifilmUSA.Sync.Entity
         public short MeasurementCount { get; set; }
         public string ReadMode { get; set; }
         public short? InstrumentTypeId { get; set; }
+
+        public short VUVMode { get; set; }
+        public short VMeasurementCount { get; set; }
+        public string VReadMode { get; set; }
     }
 }

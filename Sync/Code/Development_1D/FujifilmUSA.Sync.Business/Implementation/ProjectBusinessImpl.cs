@@ -96,7 +96,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                         MetricTargetPreset = new KeyValuePair<int, string>(
                                                 DataReader.ReadInt(dsProject.Tables[2].Rows[0], "MetricTargetPresetID"),
                                                 DataReader.ReadString(dsProject.Tables[2].Rows[0], "MetricTargetPresetName")),
-                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod")
+                                        dEMethod = DataReader.ReadString(dsProject.Tables[2].Rows[0], "dEMethod"),
+
+                                        VUVMode = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VUVMode"),
+                                        VMeasurementCount = DataReader.ReadShort(dsProject.Tables[2].Rows[0], "VMeasurementCount"),
+                                        VReadMode = DataReader.ReadString(dsProject.Tables[2].Rows[0], "VReadMode")
                                     };
                         }
                         if (dsProject.Tables[3].Rows.Count > 0)
@@ -578,7 +582,10 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      projectTargetTVI.ToString(),
                                                      project.MetricTargetPresetId,
                                                      projectTargetLAB.ToString(),
-                                                     project.ProjectTypeId
+                                                     project.ProjectTypeId,
+                                                     project.MeasurementSetting.VUVMode,
+                                                     (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
+                                                     project.MeasurementSetting.VReadMode
                                                  });
                         savedProjectId = project.ProjectId;
                     },
@@ -671,7 +678,12 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      new Parameters() { ParameterName  = "@MetricTargetPresetOptionID", Type = DbType.Int16, Value = project.MetricTargetPresetId},
                                                      new Parameters(){ ParameterName="@ProjectTargetTVI", Value = projectTargetTVI.ToString() },
                                                      new Parameters() {ParameterName = "@ProjectTargetLAB", Value = projectTargetLAB.ToString() },
-                                                     new Parameters() { ParameterName = "@ProjectTypeId" ,Value = project.ProjectTypeId }
+                                                     new Parameters() { ParameterName = "@ProjectTypeId" ,Value = project.ProjectTypeId },
+
+                                                     new Parameters() {ParameterName = "@VUVMode", Type = DbType.Int16, Value = project.MeasurementSetting.VUVMode},
+                                                     new Parameters() {ParameterName = "@VMeasurementCount", Type = DbType.Int16, Value = project.MeasurementSetting.VMeasurementCount},
+                                                     new Parameters() {ParameterName = "@VReadMode", Type = DbType.String, Value = project.MeasurementSetting.VReadMode}
+
                                                  },
                                              new List<Parameters>()
                                                  {
