@@ -4459,7 +4459,8 @@ public partial class SyncDetail : PageBase
             _objSeries.Type = SeriesChartType.Spline;  // Set series type 
             _objSeries.Points.AddXY(_XValue, _YValue); // Add XY point 
             _objSeries.Color = System.Drawing.ColorTranslator.FromHtml(_strHTMLColor); // Set HTML color to series         
-            _objSeries.Points[_Index].ToolTip = (_Tooltip.Contains("_") ? _Tooltip.Substring(0, _Tooltip.LastIndexOf('_')) : _Tooltip); //Set Tooltip for perticuler point.
+           // _objSeries.Points[_Index].ToolTip = (_Tooltip.Contains("_") ? _Tooltip.Substring(0, _Tooltip.LastIndexOf('_')) : _Tooltip); //Set Tooltip for particuler point.
+            _objSeries.Points[_Index].ToolTip = _Tooltip; //Set Tooltip.
             //====== Call javascript function for change current selected point and rebind chart ==================//
             _objSeries.Points[_Index].MapAreaAttributes = "OnClick=\"javascript:SetCurrentMeasurement( '" + _MeasurementID + "');\"";
 
