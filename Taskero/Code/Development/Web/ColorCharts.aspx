@@ -28,6 +28,8 @@
                         </b>
                     </td>
                 </tr>
+                <tr>
+                    <td>
                 <table>
                     <td>
                         <table style="width: 100%;" cellspacing="5" border="0" cellpadding="0">
@@ -448,6 +450,8 @@
                         </table>
                     </td>
                 </table>
+                    </td>
+                </tr>
             </table>
             <asp:Literal ID="LTRL_KEY" runat="server" Visible="false"></asp:Literal>
             <asp:Literal ID="LTRL_CPPatchDataLabID" runat="server" Visible="false">0</asp:Literal>
