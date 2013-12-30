@@ -42,10 +42,11 @@ function SetChartResult(objChart) {
         g_Chart["DeviceSettings"]["Colorimetric.Illumination"] = objChart.DeviceSetting.MeasurementSettings.IlluminantName;
         g_Chart["DeviceSettings"]["Colorimetric.DensityStandard"] = objChart.DeviceSetting.MeasurementSettings.DensityType;
         g_Chart["DeviceSettings"]["Colorimetric.Observer"] = objChart.DeviceSetting.MeasurementSettings.ObserverTypeName;
-
+       
         if (objChart.DeviceSetting.MeasurementSettings.UVMode == -1) {      //----------If NULL then pass UVCut bydefault
             objChart.DeviceSetting.MeasurementSettings.UVMode = 2;
         }
+    
         var UVMode = "M" + objChart.DeviceSetting.MeasurementSettings.UVMode;
         var InstrumentTypeID = objChart.InstrumentTypeId;
 

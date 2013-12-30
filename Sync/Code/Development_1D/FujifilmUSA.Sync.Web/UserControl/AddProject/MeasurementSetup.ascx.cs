@@ -120,7 +120,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             SessionManager.Instance.CurrentProject.MeasurementSetting.ReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(AlignmentChartSelectedValue), cmbAlignmentChart.SelectedItem.Text);
             SessionManager.Instance.CurrentProject.MeasurementSetting.UvIncluded = cmbUVSettings.SelectedValue == Convert.ToInt32(EUVIncludedMode.UV).ToString() ? true : false;
             SessionManager.Instance.CurrentProject.MeasurementSetting.OptReferenceChartType = new KeyValuePair<short, string>(Convert.ToInt16(OptimizationChartSelectedValue), cmbOptimizationChart.SelectedItem.Text);
-SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
+            SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
             Project = SessionManager.Instance.CurrentProject;
             _presenterMeasurementSetting.SaveProject();
 
@@ -374,8 +374,11 @@ SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
         private void BindAlignmentChart()
         {
             if (string.IsNullOrEmpty(cmbMeasurementDevice.SelectedValue)) return;
-            MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);          
-
+            MeasurementDeviceId = Convert.ToInt32(cmbMeasurementDevice.SelectedValue);
+            if (SessionManager.Instance.CurrentProject != null && (ProjectTypeID == Convert.ToInt32(EProjectType.G7) || ProjectTypeID == Convert.ToInt32(EProjectType.ISO)))   //----Pass MetricTargetPresetId to get list of suitable reference charts
+            {
+                MetricTargetPresetID = SessionManager.Instance.CurrentProject.MetricTargetPresetId;
+            }
             BindBaseDLPChart();
             BindOptimizationChart();
 
@@ -522,6 +525,7 @@ SessionManager.Instance.CurrentProject.CreateDate = DateTime.Now;
                 return SessionManager.Instance.CurrentProject.ProjectTypeId;
             }
         }
+       
         public int MetricTargetPresetID { get; set; }
         #endregion
                       

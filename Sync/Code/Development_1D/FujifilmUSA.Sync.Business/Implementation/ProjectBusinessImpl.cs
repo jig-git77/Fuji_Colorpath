@@ -1076,7 +1076,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         x => new Entity.CPSyncV.MetricTargetPreset()
                         {
                             MetricTargetPresetID = DataReader.ReadInt(x, "MetricTargetPresetID"),
-                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName")                           
+                            MetricTargetPresetName = DataReader.ReadString(x, "MetricTargetPresetName"),
+                            MetricTargetPresetDesc = DataReader.ReadString(x, "MetricTargetPresetDesc")
                         }).ToList();
                     }
 
