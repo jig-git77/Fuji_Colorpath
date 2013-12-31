@@ -11,7 +11,13 @@
     <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
     <script src="JQuery/jquery-1.7.1.min.js" type="text/javascript"></script>
 </head>
-<body>
+<script type="text/javascript">
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
+        </script>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>

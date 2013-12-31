@@ -31,7 +31,12 @@
             mozopacity: .4;
         }
     </style>
+    
     <script type="text/javascript" language="javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
         $(document).ready(function () {
 
             equal_height();
@@ -43,7 +48,7 @@
             if (window.addEventListener)
                 document.addEventListener('DOMMouseScroll', equal_height, false);
 
-            //for IE/OPERA etc
+            //for IE/OPERA etc            
             document.onmousewheel = equal_height;
 
             MakeUserAliveRequest();
@@ -61,24 +66,8 @@
         }
 
         function equal_height() {
-            $("div[id*='LeftMenu2']").height($('#contant').height() - 18);
+            $("div[id*='LeftMenu2']").height($('#contant').height() - 18);            
         }
-
-        function changeHashOnLoad() {
-            window.location.href += "#";
-            setTimeout("changeHashAgain()", "50");
-        }
-
-        function changeHashAgain() {
-            window.location.href += "1";
-        }
-
-        var storedHash = window.location.hash;
-        window.setInterval(function () {
-            if (window.location.hash != storedHash) {
-                window.location.hash = storedHash;
-            }
-        }, 50);
     </script>
 
 <%-- Code to block "Back -Forward" button to work on any browser, to limit the chances of breaking of software --%>
@@ -88,7 +77,7 @@
 </SCRIPT>--%>
 
 </head>
-<body onload="changeHashOnLoad(); ">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>

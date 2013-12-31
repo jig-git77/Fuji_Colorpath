@@ -13,9 +13,23 @@
     <link href="CSS/Common.css?version=4" rel="stylesheet" type="text/css" />
     <script src="JS/html5.js?version=4" type="text/javascript"></script>
     <script src="JQuery/jquery-1.7.1.min.js?version=4" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+        </script>
     <script type="text/javascript" language="javascript">
+    
         $(document).ready(function () {
             MakeUserAliveRequest();
+            if (typeof (opera) != 'undefined') { // only do for Opera        
+                if (window.name != "") { // will be '' if page not prev loaded            
+                    window.name = ""; // reset to prevent infinite loop
+                    window.location.reload(true);
+                }
+                window.name = new Date().getTime();
+            }
         });
 
         function KeepUserAlive(userId) {                 
@@ -27,28 +41,12 @@
                 success: function (response) { },
                 error: function (XMLHttpRequest, textStatus, errorThrown) { }
             });
-        }
-
-        function changeHashOnLoad() {
-            window.location.href += "#";
-            setTimeout("changeHashAgain()", "50");
-        }
-
-        function changeHashAgain() {
-            window.location.href += "1";
-        }
-
-        var storedHash = window.location.hash;
-        window.setInterval(function () {
-            if (window.location.hash != storedHash) {
-                window.location.hash = storedHash;
-            }
-        }, 50);
+        }        
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body onload="changeHashOnLoad();">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
