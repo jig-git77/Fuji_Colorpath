@@ -29,6 +29,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
         #region Declaration
         private PresenterMeasurementSetting _presenterMeasurementSetting;
         private const string vsIsPostBack = "_IsPostBack";
+        private const string _vsMetricTargetPreset = "vsMetricTargetPreset";
 
         public bool IsXmfNewProject
         {
@@ -76,7 +77,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 BindMeasurementDevice();
                 SetUVSettings();
 
-                LoadProjectInfoFromSession();
+                LoadProjectInfoFromSession();               
                 ViewState[vsIsPostBack] = true;
 
                 if (!SessionManager.Instance.CurrentDevice.IsValidation) //---If this device doesn't have permission for Validation, disable radiobuttonlist------//
@@ -158,8 +159,11 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
 
         protected void cmbMetricTargetPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (short.Parse(cmbMetricTargetPreset.SelectedValue) > 0)
+            if (ViewState[_vsMetricTargetPreset] != null)
+            {
+                txtMTPDesc.Text = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(cmbMetricTargetPreset.SelectedValue)).Select(c => c.MetricTargetPresetDesc).FirstOrDefault();               
                 BindMeasurementDevice(); //---Display Metric Target Presets based on selected Validation Chart
+            }
         }
         protected void rbtnEnableValidation_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -226,7 +230,13 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                     EnableValidationValue = SessionManager.Instance.CurrentProject.EnabledValidation;
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key > 0)
+                {
                     cmbMetricTargetPreset.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.MetricTargetPreset.Key.ToString();
+                    if (ViewState[_vsMetricTargetPreset] != null)   //-----Put the Validation Metric Target Preset Description based on selected MTP---//
+                    {
+                        txtMTPDesc.Text = ((List<Entity.CPSyncV.MetricTargetPreset>)ViewState[_vsMetricTargetPreset]).Where(c => c.MetricTargetPresetID == Convert.ToInt32(cmbMetricTargetPreset.SelectedValue)).Select(c => c.MetricTargetPresetDesc).FirstOrDefault();
+                    }
+                }
 
                 if (SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.HasValue && SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value > 0)
                     cmbMeasurementDevice.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementDeviceID.Value.ToString();
@@ -246,7 +256,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
                 {
                     cmbReadMode.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VReadMode.ToString();
                 }
+
+                //----Assign Read Mode selection box again to fill out Measurement Count box if "Point" is selected-----//
+                cmbReadMode_SelectedIndexChanged(null, null);
                 cmbMeasurementCount.SelectedValue = SessionManager.Instance.CurrentProject.MeasurementSetting.VMeasurementCount.ToString();
+
+                trMeasCount.Visible = ((MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IO)
+                      || MeasurementDevicesView[Convert.ToInt32(cmbMeasurementDevice.SelectedValue)] == (EInstrumentType.i1IOPro2)) && cmbReadMode.SelectedValue == "Point");
+
             }
 
         }
@@ -306,6 +323,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             {
                 cmbMetricTargetPreset.DataValueField = "MetricTargetPresetID";
                 cmbMetricTargetPreset.DataTextField = "MetricTargetPresetName";
+                ViewState[_vsMetricTargetPreset] = MetricTargetPreset;
                 cmbMetricTargetPreset.DataSource = MetricTargetPreset;
                 cmbMetricTargetPreset.DataBind();
                 cmbMetricTargetPreset.Items.Insert(0, new ListItem(GetResourceString(_recselectText), "0"));
@@ -423,7 +441,7 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject
             }
             else
                 //-----0 for Strip reading for all other instruments type
-                cmbMeasurementCount.Items.Add(new ListItem("0", "0"));
+                cmbMeasurementCount.Items.Add(new ListItem("0", "0"));          
         }
 
         private void BindReadMode()

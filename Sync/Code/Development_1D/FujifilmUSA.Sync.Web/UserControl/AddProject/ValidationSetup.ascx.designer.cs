@@ -229,6 +229,15 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer vccmbMetricTargetPreset;
         
         /// <summary>
+        /// txtMTPDesc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMTPDesc;
+        
+        /// <summary>
         /// locValidationChart control.
         /// </summary>
         /// <remarks>
@@ -281,15 +290,6 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcMeasurementDeviceContainer;
-        
-        /// <summary>
-        /// imgValidationChart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgValidationChart;
         
         /// <summary>
         /// trUVSettings control.
@@ -425,5 +425,14 @@ namespace FujifilmUSA.Sync.Web.UserControl.AddProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::FujifilmUSA.Sync.Web.UserControl.ValidationContainer rfvcValidationChartContainer;
+        
+        /// <summary>
+        /// imgValidationChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgValidationChart;
     }
 }

@@ -2,6 +2,13 @@
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="ucStatusbar" %>
 <%@ Register Src="~/UserControl/ValidationContainer.ascx" TagName="ValidationContainer"
     TagPrefix="ucValidationContainer" %>
+
+<style type="text/css">
+textarea {
+    resize: none;
+}
+</style>
+
 <div class="head">
     <h1 id="hTitle" runat="server"><asp:Localize runat="server" 
             Text="New Print Condition - Validation Setup" 
@@ -95,7 +102,7 @@
                                             </div>                                            
                                             <div class="clear">
                                             </div>
-                                        </td>
+                                        </td>                                      
                                     </tr>                                    
                                     <tr>
                                         <td colspan="2">
@@ -121,7 +128,13 @@
                                                             </div>
                                                             <div class="clear">
                                                             </div>
-                                                        </td>                                       
+                                                        </td> 
+                                                        <td valign="top" >
+                                                             &nbsp;&nbsp;&nbsp;&nbsp; Description: 
+                                                        </td>  
+                                                        <td valign="top" align="right" style="width:200px;">                                                           
+                                                            <asp:TextBox ID="txtMTPDesc" runat="server" Text="" TextMode="MultiLine" Enabled="false"  Width="190px" ></asp:TextBox>
+                                                        </td>                                    
                                                     </tr>                                    
                                                 </table>
                                                 </asp:Panel>
@@ -181,11 +194,7 @@
                                             </div>
                                             <div class="clear">
                                             </div>
-                                        </td>
-                                        <td valign="middle" align="right" rowspan="2">
-                                            <asp:Image ID="imgValidationChart" runat="server" Width="150px" 
-                                                meta:resourcekey="imgValidationChartResource1" />
-                                       </td>
+                                        </td>                                       
                                     </tr>
                                    
                                      <tr id="trUVSettings" runat="server">
@@ -250,10 +259,17 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                             <asp:Image ID="imgValidationChart" runat="server" Width="150px" 
+                                                meta:resourcekey="imgValidationChartResource1" />
+                                        </td>
+                                        <td></td>
+                                    </tr>
                                 </table>
                                </asp:Panel>
                             </div>
-                        </div>
+                        </div>                       
                         <div class="section_bottom">
                         &nbsp;</div>
                 </div>

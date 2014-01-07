@@ -567,7 +567,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.PrintCondition.Notes,
                                                      project.MeasurementSetting.ObserverType,
                                                      project.MeasurementSetting.Illuminant,
-                                                     project.MeasurementSetting.UVMode,
+                                                     (project.MeasurementSetting.UVMode == -1 ? 2 : project.MeasurementSetting.UVMode),  //---For older project who doen't have UVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
                                                      (project.MeasurementSetting.MeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.ReadMode,
                                                      project.MeasurementSetting.MeasurementDeviceId,
@@ -583,8 +583,8 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                                      project.MetricTargetPresetId,
                                                      projectTargetLAB.ToString(),
                                                      project.ProjectTypeId,
-                                                     project.MeasurementSetting.VUVMode,
-                                                     (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.MeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
+                                                     (project.MeasurementSetting.VUVMode == -1 ? 2 : project.MeasurementSetting.VUVMode),  //---For older project who doen't have VUVMode, so by default it will pass -1 because of NULL, so in that case make it 2 "UVCut"
+                                                     (project.MeasurementSetting.VMeasurementCount == -1 ? 0 : project.MeasurementSetting.VMeasurementCount), //---For older project who doen't have MeasurementCount, so by default it will pass -1 because of NULL, so in that case make it 0
                                                      project.MeasurementSetting.VReadMode
                                                  });
                         savedProjectId = project.ProjectId;
