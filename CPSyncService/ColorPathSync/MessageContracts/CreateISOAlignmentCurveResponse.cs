@@ -10,6 +10,16 @@ namespace ColorPathSync.MessageContracts
     [DataContract]
     public class CreateISOAlignmentCurveResponse : BaseResponse
     {
+
+        public CreateISOAlignmentCurveResponse()
+        {
+            Cyan = new double[101];
+            Magenta = new double[101];
+            Yellow = new double[101];
+            Key = new double[101];
+            DeviceLinkProfile = new IccProfile();
+        }
+
         [DataMember]
         public IccProfile DeviceLinkProfile { get; set; }
         [DataMember]

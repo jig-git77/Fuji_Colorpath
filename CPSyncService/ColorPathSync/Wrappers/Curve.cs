@@ -129,7 +129,7 @@ public class Curve
         {
 
             Profile objProfile = new Profile();
-            
+
 
             int err = CrossXColor.CLNoErr;
             TYPE_p_void profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
@@ -140,7 +140,7 @@ public class Curve
 
             try
             {
-              
+
                 CLVectorDataSet DCSDataSet = new CLVectorDataSet();
                 CLVectorDataSet PCSDataSet = new CLVectorDataSet();
 
@@ -153,7 +153,7 @@ public class Curve
                     return objProfile;
                 }
 
-               
+
                 if (this._ICCProfile == null || this._UseDLP == false)
                 {
 
@@ -204,17 +204,17 @@ public class Curve
                         k[i] = output[3];
                     }
 
-                   byte[] profData = GetDLP(ref prof);
-                   
-                   for (int i = 0; i < n; i++)
-                   {
+                    byte[] profData = GetDLP(ref prof);
+
+                    for (int i = 0; i < n; i++)
+                    {
                         objProfile.Cyan[i] = c[i];
                         objProfile.Magenta[i] = m[i];
                         objProfile.Yellow[i] = y[i];
                         objProfile.Key[i] = k[i];
-                   } 
-                   objProfile.ICCProfile = profData;
-                   return objProfile;
+                    }
+                    objProfile.ICCProfile = profData;
+                    return objProfile;
 
                 }
                 else
@@ -277,7 +277,7 @@ public class Curve
                         y[i] = output[2];
                         k[i] = output[3];
                     }
-   
+
 
                     byte[] profData1 = GetDLP(ref prof);
 
@@ -311,7 +311,197 @@ public class Curve
         }
 
 
-   
+        public Profile CreateISOCurve()
+        {
+
+            Profile objProfile = new Profile();
+
+
+            int err = CrossXColor.CLNoErr;
+            TYPE_p_void profiler = CrossXColor.CLNewCLProfilerRef(); // this object referece to CroxColor Profiler object
+            TYPE_p_void prof = CrossXColor.CLNewICCProfileRef();  // this object  references an ICC profile to access its data.
+            TYPE_p_void srcProf = CrossXColor.CLNewICCProfileRef();
+            TYPE_p_void trafo = null;
+            int[] renderingIntents = new int[] { CrossXColor.icPerceptual };
+
+            try
+            {
+
+                CLVectorDataSet DCSDataSet = new CLVectorDataSet();
+                CLVectorDataSet PCSDataSet = new CLVectorDataSet();
+
+                CrossXColor.CLInitVectorDataSet(DCSDataSet, CrossXColor.icSigCmykData, arrDCS, arrDCS.Length);
+                CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigDensityData, arrDensity, arrDensity.Length);
+
+
+                if (arrDensity.Length <= 0)
+                {
+                    objProfile.ErrorMsg = "Create Curve Error - No Density data loaded";
+                    return objProfile;
+                }
+
+
+                if (this._ICCProfile == null || this._UseDLP == false)
+                {
+
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI25", LinearizationTVI25);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI", LinearizationTVI50);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI75", LinearizationTVI75);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+
+                    CrossXColor.CLSetProfilerData(profiler, arrDCS.Length / 4, DCSDataSet, PCSDataSet);
+
+                    // calc profile in memory
+                    err = CrossXColor.CLCalcProfile(profiler, prof);
+                    if (err != 0)
+                    {
+                        throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
+                    }
+
+                    // Use memory profile for calculation
+                    // pulls the profile into a "trafo" or transformation
+                    TYPE_p_void[] profiles = new TYPE_p_void[1] { prof };
+                    trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
+                    if (trafo == null)
+                    {
+                        throw new Exception("CLConcatICCProfileRefs Error");
+                    }
+
+                    int n = 101;
+                    double[] c = new double[n];
+                    double[] m = new double[n];
+                    double[] y = new double[n];
+                    double[] k = new double[n];
+                    double[] input = new double[4];
+                    double[] output = new double[4];
+                    for (int i = 0; i < n; i++)
+                    {
+                        input[0] = input[1] = input[2] = input[3] = (double)i;
+
+                        // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
+                        err = CrossXColor.CLDoTrafo(trafo, input, output);
+                        if (err != 0)
+                        {
+                            throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
+                        }
+
+                        c[i] = output[0];
+                        m[i] = output[1];
+                        y[i] = output[2];
+                        k[i] = output[3];
+                    }
+
+                    byte[] profData = GetDLP(ref prof);
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        objProfile.Cyan[i] = c[i];
+                        objProfile.Magenta[i] = m[i];
+                        objProfile.Yellow[i] = y[i];
+                        objProfile.Key[i] = k[i];
+                    }
+                    objProfile.ICCProfile = profData;
+                    return objProfile;
+
+                }
+                else
+                {
+
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI25", LinearizationTVI25);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI", LinearizationTVI50);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI75", LinearizationTVI75);
+                    err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+
+
+                    //Declare a byte array to load profile from the database 
+                    byte[] profData = null;
+                    profData = this._ICCProfile;
+
+                    //copy byte array into unmangaed buffer (in memory profile)
+                    CopyProfileInMemory(profData, ref srcProf);
+
+                    //Set the source profile 
+                    CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
+
+                    CrossXColor.CLSetProfilerData(profiler, arrDCS.Length / 4, DCSDataSet, PCSDataSet);
+
+                    // calc profile in memory
+                    err = CrossXColor.CLCalcProfile(profiler, prof);
+                    if (err != 0)
+                    {
+                        throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
+                    }
+
+                    // Use memory profile for calculation
+                    // pulls the profile into a "trafo" or transformation
+                    TYPE_p_void[] profiles = new TYPE_p_void[1] { prof };
+                    trafo = CrossXColor.CLConcatICCProfileRefs(1, profiles, renderingIntents);
+                    if (trafo == null)
+                    {
+                        throw new Exception("CLConcatICCProfileRefs Error");
+                    }
+
+                    int n = 101;
+                    double[] c = new double[n];
+                    double[] m = new double[n];
+                    double[] y = new double[n];
+                    double[] k = new double[n];
+                    double[] input = new double[4];
+                    double[] output = new double[4];
+                    for (int i = 0; i < n; i++)
+                    {
+                        input[0] = input[1] = input[2] = input[3] = (double)i;
+
+                        // Extract the desired datapoints from the Trafo, with the desired "IN" values this returns desired "OUT"
+                        err = CrossXColor.CLDoTrafo(trafo, input, output);
+                        if (err != 0)
+                        {
+                            throw new Exception(Enum.GetName(typeof(CrossXColor.CLErrorType), err));
+                        }
+
+                        c[i] = output[0];
+                        m[i] = output[1];
+                        y[i] = output[2];
+                        k[i] = output[3];
+                    }
+
+
+                    byte[] profData1 = GetDLP(ref prof);
+
+                    for (int i = 0; i < n; i++)
+                    {
+                        objProfile.Cyan[i] = c[i];
+                        objProfile.Magenta[i] = m[i];
+                        objProfile.Yellow[i] = y[i];
+                        objProfile.Key[i] = k[i];
+                    }
+                    objProfile.ICCProfile = profData1;
+                    return objProfile;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+            finally
+            {
+                //clear the unmanaged memory
+
+                CrossXColor.CLFreeCLProfilerRef(profiler);
+                CrossXColor.CLFreeICCProfileRef(prof);
+                CrossXColor.CLFreeCLTrafoRef(trafo);
+                CrossXColor.CLFreeICCProfileRef(srcProf);
+            }
+
+        }
       
 
         //Convert in memory profile (unmanged C++ memory buffer) to a managed (.net) byte array

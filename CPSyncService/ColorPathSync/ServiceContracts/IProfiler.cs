@@ -34,5 +34,12 @@ namespace ColorPathSync.ServiceContracts
 
         [OperationContract]
         CreateISOAlignmentCurveResponse CreateISOAlignmentCurve(CreateISOAlignmentCurveRequest request);
+
+        [OperationContract]
+        Profile CreateCurve(Curve objSync);
+
+        [OperationContract]
+        Profile CreateISOCurve(Curve objSync);
+
     }
 }

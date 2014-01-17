@@ -46,5 +46,17 @@ namespace ColorPathSync.ServiceImplementation
         {
             return ProfilerBusiness.CreateISOAlignmentCurve(request);
         }
+
+        //Implementation for the ISO and G7 for Alignment Curve
+        public Profile CreateCurve(Curve request)
+        {
+            return CreateCurveProfileBusiness.CreateCurve(request);
+        }
+
+        public Profile CreateISOCurve(Curve request)
+        {
+            return CreateISOCurveProfileBusiness.CreateISOCurve(request);
+        }
+        
     }
 }

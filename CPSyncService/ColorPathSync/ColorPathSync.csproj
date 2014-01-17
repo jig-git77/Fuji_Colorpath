@@ -71,10 +71,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\CreateCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateDestinationAndDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateDeviceLinkProfileBusiness.cs" />
     <Compile Include="Business\CreateG7AlignmentCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateISOAlignmentCurveProfileBusiness.cs" />
+    <Compile Include="Business\CreateISOCurveProfileBusiness.cs" />
     <Compile Include="Business\CreateSourceProfileBusiness.cs" />
     <Compile Include="Business\ExtractProfileValuesBusiness.cs" />
     <Compile Include="Business\OptimizeDeviceLinkProfileBusiness.cs" />
