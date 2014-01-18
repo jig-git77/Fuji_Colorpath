@@ -37,7 +37,9 @@ namespace ColorPathSync.Business
 
                 if (request.DeviceLinkProfile == null || request.UseDLP == false)
                 {
-                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                    //request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 
@@ -180,7 +182,6 @@ namespace ColorPathSync.Business
             finally
             {
                 //clear the unmanaged memory
-
                 CrossXColor.CLFreeCLProfilerRef(profiler);
                 CrossXColor.CLFreeICCProfileRef(prof);
                 CrossXColor.CLFreeCLTrafoRef(trafo);
