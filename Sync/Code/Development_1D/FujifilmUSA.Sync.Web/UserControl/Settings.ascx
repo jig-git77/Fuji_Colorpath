@@ -228,7 +228,7 @@
                         <asp:Localize Text="Application Configuration" runat="server" ID="locApplicationConfiguration" meta:resourcekey="locApplicationConfigurationResource1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>     
-                 <div id="div1" runat ="server" align="center" valign="bottom" style="float:left;">
+                 <div id="divMetricTargetPresetSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div> 
                  <div id="divMetricTargetPreset" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
@@ -242,10 +242,10 @@
                         <asp:Localize Text="Metric Target Preset" runat="server" ID="Localize1"></asp:Localize>
                     </asp:LinkButton>                
                 </div>               
-                <div id="div2" runat ="server" align="center" valign="bottom" style="float:left;">
+                <div id="divPrintStandardTypeSeparator" runat ="server" align="center" valign="bottom" style="float:left;">
                     <img alt="" src="Images/admin-icon-divider.png" />
                 </div> 
-                 <div id="div3" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
+                 <div id="divPrintStandardType" runat="server" align="center" valign="bottom" style="width: 150px; float: left">
                     <asp:LinkButton ID="lnkbtnPrintStandardType" runat="server" 
                          ToolTip="Print Standard Type" 
                          PostBackUrl="~/PrintStandardTypeManagement.aspx" 

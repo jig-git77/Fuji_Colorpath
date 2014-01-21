@@ -115,6 +115,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 {
                     cmbCompanyName.SelectedValue = MetricTargetPreset.Company.CompanyId.ToString();
                 }
+                cmbEType.SelectedValue = MetricTargetPreset.dEMethod;
+                cmbValidationType.SelectedValue = MetricTargetPreset.ValidationType.ToString();
                 chklist_PresetType.Items[0].Selected = MetricTargetPreset.IsSync1D;
                 chklist_PresetType.Items[1].Selected = MetricTargetPreset.Validation_1D;
                 chklist_PresetType.Items[2].Selected = MetricTargetPreset.Validation_4D;

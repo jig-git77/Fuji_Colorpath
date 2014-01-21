@@ -598,7 +598,7 @@
                                                         UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource20">
                                                     </telerik:GridBoundColumn>     
                                                     <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                        UniqueName="IsNotOK" Visible="false" 
+                                                        UniqueName="IsNotOK" Display="false"
                                                         meta:resourcekey="GridBoundColumnResource21">
                                                     </telerik:GridBoundColumn>                                               
                                                 </Columns>                        
@@ -962,7 +962,7 @@
                                                                     UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource24">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    UniqueName="IsNotOK" Display="false"
                                                                     meta:resourcekey="GridBoundColumnResource25">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
@@ -1066,7 +1066,7 @@
                                                                     UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource28">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    UniqueName="IsNotOK" Display="false"
                                                                     meta:resourcekey="GridBoundColumnResource29">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        
@@ -1171,7 +1171,7 @@
                                                                     UniqueName="MeasuredValue" meta:resourcekey="GridBoundColumnResource32">
                                                                 </telerik:GridBoundColumn>     
                                                                 <telerik:GridBoundColumn DataField="IsNotOK" HeaderText="Is Not OK" 
-                                                                    UniqueName="IsNotOK" Visible="false" 
+                                                                    UniqueName="IsNotOK" Display="false"
                                                                     meta:resourcekey="GridBoundColumnResource33">
                                                                 </telerik:GridBoundColumn>                                               
                                                             </Columns>                        

@@ -580,13 +580,13 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize locApplicationConfiguration;
         
         /// <summary>
-        /// div1 control.
+        /// divMetricTargetPresetSeparator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMetricTargetPresetSeparator;
         
         /// <summary>
         /// divMetricTargetPreset control.
@@ -625,22 +625,22 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.Localize Localize1;
         
         /// <summary>
-        /// div2 control.
+        /// divPrintStandardTypeSeparator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPrintStandardTypeSeparator;
         
         /// <summary>
-        /// div3 control.
+        /// divPrintStandardType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div3;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPrintStandardType;
         
         /// <summary>
         /// lnkbtnPrintStandardType control.
