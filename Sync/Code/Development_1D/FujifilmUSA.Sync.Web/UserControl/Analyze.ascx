@@ -693,7 +693,8 @@
                         </td>
                    
                         <td style="width: 50%;" valign="top" class="CHARTTABLE">
-                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >                                                
+                         <%-- <div id="Div_Density" runat="server" visible="false">--%>
+                            <table id="Table_Density" runat="server" visible="false" border="0" cellpadding="0" cellspacing="0" width="100%" >                                                
                                  <tr>
                                     <td class="green-title">
                                         &nbsp; <asp:Localize Text="Density" runat="server" ID="locDensity" 
@@ -742,6 +743,10 @@
                                         </table>
                                     </td>
                                 </tr>
+                            </table>
+                         <%-- </div>--%>
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" >    
+
                                 <tr>
                                     <td class="green-title">
                                         &nbsp; &#916; <asp:Localize Text="Paper L* a* b*" runat="server" ID="locPaper" 

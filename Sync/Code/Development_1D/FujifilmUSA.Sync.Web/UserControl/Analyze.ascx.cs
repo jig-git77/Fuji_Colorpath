@@ -238,6 +238,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                         dvTab_G7.Visible = Tab_G7.Visible = false;
                     }
                     dvTab_TVI.Visible = Tab_TVI.Visible = true;
+                    if (ValidationType == 0)   //Default View type, Hide TVI tab
+                    {
+                        dvTab_TVI.Visible = Tab_TVI.Visible = false;
+                    }                  
                     Div_MetricSumFilter.Visible = false;
                 }
                 else   //-----DLP Optimization
@@ -507,7 +511,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     UpdatePanel_TVI_ISO.Visible = true;
                     UpdatePanel_TVI_G7.Visible = false;
                 }
-                else  //G7 type
+                else if (ValidationType == 1)  //G7 type
                 {
                     _presenterAnalyze.GetTVIChart();
                     if (!IsErrorOccured)
@@ -516,6 +520,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     UpdatePanel_TVI_ISO.Visible = false;
                     UpdatePanel_TVI_G7.Visible = true;
+                }
+                else    //Default display view type
+                {
+                    Tab_TVI.Visible = dvTab_TVI.Visible = false;
                 }
 
             }
@@ -528,8 +536,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 FillDeltaEPrimaryPatchesChart(DTDeltaEPrimaryPatches);
             if (Paper != null)
                 FillPaperChart(Paper);
-            if (DTDensity != null)
-                FillDensityChart(DTDensity);
+            if (SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.DLP || ValidationType == 0)  //If Default view in Validation of Sync4D or Normal Sync4D optimization mode, don't display Density chart
+            {        
+                Table_Density.Visible = false;
+            }
+            else
+            {              
+                Table_Density.Visible = true;
+                if (DTDensity != null)
+                    FillDensityChart(DTDensity);
+            }
         }
 
         #region Fill Delta E Primary Patches Chart

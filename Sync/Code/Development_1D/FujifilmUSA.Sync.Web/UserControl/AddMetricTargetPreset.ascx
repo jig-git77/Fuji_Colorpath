@@ -148,7 +148,8 @@
                                     <td align="left">
                                         <div style="float: left;">
                                             <asp:DropDownList ID="cmbValidationType" runat="server">
-                                                <asp:ListItem Selected="True" Value="1" Text="G7"></asp:ListItem>
+                                                <asp:ListItem Selected="True" Value="0" Text="Default">Default</asp:ListItem>
+                                                <asp:ListItem Value="1" Text="G7">G7</asp:ListItem>
                                                 <asp:ListItem Value="2" Text="ISO">ISO</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>

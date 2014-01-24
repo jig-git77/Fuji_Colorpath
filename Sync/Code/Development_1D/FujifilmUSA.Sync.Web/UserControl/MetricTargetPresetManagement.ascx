@@ -201,7 +201,7 @@
                                 meta:resourcekey="GridTemplateColumnResource5">
                                 <ItemTemplate>
                                     <asp:Label ID="lblValidationType" runat="server" 
-                                        Text='<%# Convert.ToInt16(Eval("ValidationType")) == 1? "G7" : "ISO" %>'  meta:resourcekey="lblValidationTypeResource1" />
+                                        Text='<%# Convert.ToInt16(Eval("ValidationType")) == 1? "G7" : Convert.ToInt16(Eval("ValidationType")) == 2? "ISO" : "Default" %>'  meta:resourcekey="lblValidationTypeResource1" />
                                 </ItemTemplate>
                                  <HeaderStyle Width="40px" />
                                  <ItemStyle CssClass="breakWord40" Width="40px" Wrap="True" />
