@@ -195,6 +195,9 @@
 	<data name="ELicenseType_InkOptimization_Source" xml:space="preserve">
     <value>Ink Optimization Source_ja</value>
   </data>
+  <data name="ELicenseType_Sync4DCertification" xml:space="preserve">
+    <value>Sync4D Certification_ja</value>
+  </data>
 	<data name="ELicenseType_None" xml:space="preserve">
     <value>無効</value>
   </data>

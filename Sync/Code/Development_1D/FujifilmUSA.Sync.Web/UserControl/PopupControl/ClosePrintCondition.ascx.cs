@@ -57,6 +57,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     lbtnViewLastAnalysis.Visible = false;
                     lbtnViewDetail.Visible = true;
                 }
+                else if (CurrentLicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project, then they can not create optimize runs or Download DLP since there is no DLP
+                {
+                    lbtnReOptimize.Visible = false;               
+                    lbtnDownloadCurrentDLP.Visible = false;
+                }
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)

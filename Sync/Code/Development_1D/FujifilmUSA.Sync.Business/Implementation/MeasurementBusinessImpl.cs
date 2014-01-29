@@ -334,7 +334,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
         public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
-            var PatchDetails = new List<MeasurementPatchDetails>();
+           // var PatchDetails = new List<MeasurementPatchDetails>();
             string storedProc = "CPSync4D.GetPatchDetailsByMeasurementID";
             if (IsSync1DType)
                 storedProc = "CPSync.GetPatchDetailsByMeasurementID";

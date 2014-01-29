@@ -69,8 +69,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 }
                 hdOptRunLimit.Value = TotalOptRuns.ToString();
 
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project, then only Certify option available----//
+                {
+                    lbtnOptimize.Visible = false;
+                    Tr_Optimize.Visible = false;
+                }
                 //----------------If CurrentOperation = 3 (Ink Optimization), then they can not create optimize runs, they has to close run at 1st run--------------------//
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
+                else if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.InkOptimization)
                 {
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 2)
                     {

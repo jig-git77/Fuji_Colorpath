@@ -160,7 +160,7 @@
                                     &nbsp;:&nbsp;
                                 </td>
                                 <td>
-                                    <div style="line-height: 30px; overflow-y: scroll; height: 130px; border-width: 1px;
+                                    <div style="line-height: 30px; overflow-y: scroll; height: 165px; border-width: 1px;
                                                                     border-style: solid; width: 240px">
                                     <table width="100%">
                                         <tr>
@@ -228,8 +228,26 @@
                                                         meta:resourcekey="txtInkOptResource1"></asp:TextBox>
                                                 </div>
                                                 <div style="float: left">
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Display="Dynamic" ControlToValidate="txtInkOptSource"
+                                                    <asp:RequiredFieldValidator ID="rfvInkOptSource" runat="server" Display="Dynamic" ControlToValidate="txtInkOptSource"
                                                         ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer2" runat="server"
+                                                            ValidationMsg="Please provide no.of projects." />
+                                                    </asp:RequiredFieldValidator>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                 <span>
+                                                    <%=ELicenseSync4DCertificationText%> &nbsp;</span></td>
+                                            <td>
+                                                <div style="float: left;">
+                                                    <asp:TextBox ID="txt4DCertify" runat="server" Height="19px" Width="50px" MaxLength="4"
+                                                        onkeypress="return CheckNumeric(event)" 
+                                                        meta:resourcekey="txt4DCertifyResource1"></asp:TextBox>
+                                                </div>
+                                                <div style="float: left">
+                                                    <asp:RequiredFieldValidator ID="rfv4DCertify" runat="server" Display="Dynamic" ControlToValidate="txt4DCertify"
+                                                        ForeColor="Red" ValidationGroup="vgAddDevice"><ucValidationContainer:ValidationContainer ID="ValidationContainer4" runat="server"
                                                             ValidationMsg="Please provide no.of projects." />
                                                     </asp:RequiredFieldValidator>
                                                 </div>

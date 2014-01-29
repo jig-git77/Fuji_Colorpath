@@ -89,7 +89,17 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool IsNewDlp
         {
-            get { return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1; }
+            get
+            {
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project
+                {
+                    return false;
+                }
+                else
+                {
+                    return SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1;
+                }
+            }
         }
 
         public bool IsDlpCreated
@@ -204,7 +214,10 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //Verification mode
                     lbtnDownloadAndSaveDLP.Visible = false;
                     lbtnMeasurementVerification.Visible = true;
-                    lbtnOptimize.Visible = true;
+                    if (SessionManager.Instance.CurrentProject.LicenseType != ELicenseType.Sync4DCertification) //---If not Sync 4D Certification type of project, then only display Optimize button
+                    {
+                        lbtnOptimize.Visible = true;
+                    }
                     //Here we are assigning TEXT because when partial postback takes place the text of the linkbutton is removed as we adding attributes onClick
                     //So its a kind of bug fix.
                     lbtnOptimize.Text = "<span>" + GetResourceString(_reclocOptimizeResource1) + "</span>";
@@ -2463,57 +2476,64 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
-            if (!IsNewDlp && IsDlpCreated)
+            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project ==> direct done certification
             {
-                Response.Redirect("Export.aspx");
+                
             }
-            else
+            else   //-----------For all other types of projects
             {
-                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
-                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    _presenterAnalyze.Get1DMeasurementsOnRunId();
-                else
-                    _presenterAnalyze.GetMeasurementsOnRunId();
-                if (!IsErrorOccured)
+                if (!IsNewDlp && IsDlpCreated)
                 {
+                    Response.Redirect("Export.aspx");
+                }
+                else
+                {
+                    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                    OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                    {
-                        //Pass use DLP as false for initial call
-                        useDLP = false;
-                        DeviceLinkProfile = null;
-
-                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
-                            _presenterAnalyze.CreateG7AlignmentCurve();
-                        else//ISO                                                    
-                            _presenterAnalyze.CreateISOAlignmentCurve();
-                    }
+                        _presenterAnalyze.Get1DMeasurementsOnRunId();
                     else
-                    {
-                        EndDate = System.DateTime.Now;
-                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                        _presenterAnalyze.CreateDestinationAndDlp();
-                    }
+                        _presenterAnalyze.GetMeasurementsOnRunId();
                     if (!IsErrorOccured)
                     {
-                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                      Request.UserHostAddress);
-                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
-                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
-                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
                         {
-                            Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                            //Pass use DLP as false for initial call
+                            useDLP = false;
+                            DeviceLinkProfile = null;
+
+                            if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
+                                _presenterAnalyze.CreateG7AlignmentCurve();
+                            else//ISO                                                    
+                                _presenterAnalyze.CreateISOAlignmentCurve();
                         }
                         else
                         {
-                            Response.Redirect("Export.aspx");
+                            EndDate = System.DateTime.Now;
+                            DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                            DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                            _presenterAnalyze.CreateDestinationAndDlp();
                         }
-                    }
-                    else
-                    {
-                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                      Request.UserHostAddress);
+                        if (!IsErrorOccured)
+                        {
+                            WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                          Request.UserHostAddress);
+                            SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
+                            SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+                            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
+                            {
+                                Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
+                            }
+                            else
+                            {
+                                Response.Redirect("Export.aspx");
+                            }
+                        }
+                        else
+                        {
+                            WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                          Request.UserHostAddress);
+                        }
                     }
                 }
             }

@@ -65,7 +65,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
             chkSync1D.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync1D);
             chkDlp.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.DLP);
             chkInk.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimization);
-            chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);  
+            chkInk_Source.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.InkOptimizationSource);
+            chkSync4D_Certification.Text = Common.Utilities.GetEnumDescriptionAttributeValue(ELicenseType.Sync4DCertification); 
         }
         private void Bindcompany()
         {
@@ -112,7 +113,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectBranch), false);
                 return;
             }
-            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked)
+            if (!chkSync1D.Checked && !chkDlp.Checked && !chkInk.Checked && !chkInk_Source.Checked && !chkSync4D_Certification.Checked)
             {
                 fujiStatusbar.DisplayMessage(GetResourceString(_recPlzSelectLicenseType), false);//Please select any one license type.
                 return;
@@ -137,6 +138,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 License.LicenseType.Add(ELicenseType.InkOptimization);
             if (chkInk_Source.Checked)
                 License.LicenseType.Add(ELicenseType.InkOptimizationSource);
+            if (chkSync4D_Certification.Checked)
+                License.LicenseType.Add(ELicenseType.Sync4DCertification);
 
             if (LId == 0) // Add New company
             {
@@ -173,9 +176,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                             break;
                                                         case ELicenseType.InkOptimization:
                                                             chkInk.Checked = true;
-                                                            break;         
+                                                            break;
                                                         case ELicenseType.InkOptimizationSource:
                                                             chkInk_Source.Checked = true;
+                                                            break;
+                                                        case ELicenseType.Sync4DCertification:
+                                                            chkSync4D_Certification.Checked = true;
                                                             break;
                                                     }
                                                 });

@@ -193,6 +193,15 @@ namespace FujifilmUSA.Sync.Web.UserControl {
         protected global::System.Web.UI.WebControls.CheckBox chkInk_Source;
         
         /// <summary>
+        /// chkSync4D_Certification control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSync4D_Certification;
+        
+        /// <summary>
         /// locActivationDate control.
         /// </summary>
         /// <remarks>
