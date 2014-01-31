@@ -149,6 +149,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     if (SessionManager.Instance.CurrentProject.OptimizeRuns.Count == 1)
                     {
                         SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.New;
+
+                        if (Request.QueryString["licenseTypeId"] != null)  //----Sync4D Certification Project type
+                        {
+                             if ((ELicenseType)Convert.ToInt16(Request.QueryString["licenseTypeId"]) == ELicenseType.Sync4DCertification)
+                                 SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
+                        }
                     }
                     SessionManager.Instance.CurrentNavigation = ELeftMenuItemLevel.Analyze;
                     Utilities.PopupWindowsRedirect(this, "Analyze.aspx");

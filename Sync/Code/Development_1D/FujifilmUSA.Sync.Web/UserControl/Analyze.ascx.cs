@@ -2479,64 +2479,57 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         protected void lbtnDownloadAndSaveDLP_Click(object sender, EventArgs e)
         {
-            if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //---If Sync 4D Certification type of project ==> direct done certification
+            if (!IsNewDlp && IsDlpCreated)
             {
-                
+                Response.Redirect("Export.aspx");
             }
-            else   //-----------For all other types of projects
+            else
             {
-                if (!IsNewDlp && IsDlpCreated)
-                {
-                    Response.Redirect("Export.aspx");
-                }
+                ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
+                OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                    _presenterAnalyze.Get1DMeasurementsOnRunId();
                 else
+                    _presenterAnalyze.GetMeasurementsOnRunId();
+                if (!IsErrorOccured)
                 {
-                    ProjectId = SessionManager.Instance.CurrentProject.ProjectId;
-                    OptimizeRunId = SessionManager.Instance.CurrentOptimizeRun.OptimizeRunId;
                     if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
-                        _presenterAnalyze.Get1DMeasurementsOnRunId();
+                    {
+                        //Pass use DLP as false for initial call
+                        useDLP = false;
+                        DeviceLinkProfile = null;
+
+                        if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
+                            _presenterAnalyze.CreateG7AlignmentCurve();
+                        else//ISO                                                    
+                            _presenterAnalyze.CreateISOAlignmentCurve();
+                    }
                     else
-                        _presenterAnalyze.GetMeasurementsOnRunId();
+                    {
+                        EndDate = System.DateTime.Now;
+                        DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
+                        DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
+                        _presenterAnalyze.CreateDestinationAndDlp();
+                    }
                     if (!IsErrorOccured)
                     {
-                        if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
+                        SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+                        if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                         {
-                            //Pass use DLP as false for initial call
-                            useDLP = false;
-                            DeviceLinkProfile = null;
-
-                            if (SessionManager.Instance.CurrentProject.ProjectTypeId == (short)EProjectType.G7)
-                                _presenterAnalyze.CreateG7AlignmentCurve();
-                            else//ISO                                                    
-                                _presenterAnalyze.CreateISOAlignmentCurve();
+                            Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
                         }
                         else
                         {
-                            EndDate = System.DateTime.Now;
-                            DestinationProfileDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName);
-                            DlpDescription = string.Format("{0}.icc", SessionManager.Instance.CurrentProject.ProjectName + " " + GetResourceString(_recDLPText) + EndDate.Month.ToString("00") + EndDate.Day.ToString("00") + EndDate.Hour.ToString("00") + EndDate.Minute.ToString("00"));
-                            _presenterAnalyze.CreateDestinationAndDlp();
+                            Response.Redirect("Export.aspx");
                         }
-                        if (!IsErrorOccured)
-                        {
-                            WebLogActivityManager.LogActivity(LogActivityType.CreateDlp, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                          Request.UserHostAddress);
-                            SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
-                            SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
-                            if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
-                            {
-                                Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
-                            }
-                            else
-                            {
-                                Response.Redirect("Export.aspx");
-                            }
-                        }
-                        else
-                        {
-                            WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
-                                                          Request.UserHostAddress);
-                        }
+                    }
+                    else
+                    {
+                        WebLogActivityManager.LogActivity(LogActivityType.CreateDlpError, new object[] { SessionManager.Instance.CurrentProject.ProjectId },
+                                                      Request.UserHostAddress);
                     }
                 }
             }

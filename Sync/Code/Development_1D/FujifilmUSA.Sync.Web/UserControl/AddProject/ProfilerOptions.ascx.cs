@@ -55,7 +55,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                 tbOptionPreset.Visible = true;
                 tbMetricPreset.Visible = false;
                 BindProfileRenderings();
-                BindPresets();              
+                BindPresets();
+
+                if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification) //-----If Sync4D Certification Type, disable Preset Selection box
+                {
+                    cmbSelectedPresets.Enabled = false;
+                }
             }
             if (Page.IsPostBack == false)
             {
