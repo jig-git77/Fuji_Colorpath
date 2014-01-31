@@ -241,4 +241,7 @@ class CrossXColorPINVOKE {
 
   [DllImport("CrossXColorWrap", EntryPoint="CSharp_CLFreeCLTrafoRef")]
   public static extern void CLFreeCLTrafoRef(HandleRef jarg1);
+  
+  [DllImport("CrossXColorWrap", EntryPoint = "CSharp_CLCrossXColorSetOption")]
+  public static extern int CLCrossXColorSetOption(string jarg1, string jarg2);
 }

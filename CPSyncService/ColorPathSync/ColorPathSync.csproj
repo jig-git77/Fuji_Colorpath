@@ -83,6 +83,7 @@
     <Compile Include="DataContracts\IccProfile.cs" />
     <Compile Include="DataContracts\MessageSeverity.cs" />
     <Compile Include="DataContracts\Parameter.cs" />
+    <Compile Include="DataContracts\PCSDataType.cs" />
     <Compile Include="DataContracts\ProfileExtractType.cs" />
     <Compile Include="ICPSync.cs" />
     <Compile Include="MessageContracts\BaseResponse.cs" />

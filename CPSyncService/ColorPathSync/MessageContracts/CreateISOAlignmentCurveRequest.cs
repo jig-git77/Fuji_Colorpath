@@ -25,8 +25,14 @@ namespace ColorPathSync.MessageContracts
         [DataMember]
         public string LinearizationTVI50 { get; set; }
         [DataMember]
-        public string LinearizationTVI75 { get; set; }
+        public string LinearizationTVI75 { get; set; }        
         [DataMember]
         public List<Parameter> ProfileOptions { get; set; }
+        [DataMember]
+        public List<Parameter> LinearizationTVI { get; set; }
+        [DataMember]
+        public PCSDataType PCSDataType { get; set; }
+        [DataMember]
+        public DensityType DensityType { get; set; }
     }
 }

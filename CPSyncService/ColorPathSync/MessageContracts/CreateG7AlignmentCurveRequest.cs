@@ -22,5 +22,7 @@ namespace ColorPathSync.MessageContracts
         public IccProfile DeviceLinkProfile { get; set; }
         [DataMember]
         public List<Parameter> ProfileOptions { get; set; }
+        [DataMember]
+        public PCSDataType PCSDataType { get; set; }
     }
 }

@@ -19,16 +19,29 @@ namespace ColorPathSync.Business
             TYPE_p_void trafo = null;
             int[] renderingIntents = new int[] { CrossXColor.icPerceptual };
 
-
             try
             {
 
                 CLVectorDataSet DCSDataSet = new CLVectorDataSet();
                 CLVectorDataSet PCSDataSet = new CLVectorDataSet();
-
-                CrossXColor.CLInitVectorDataSet(DCSDataSet, CrossXColor.icSigCmykData, request.DCSData, request.DCSData.Length);
-                CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
-
+                CrossXColor.CLInitVectorDataSet(DCSDataSet, CrossXColor.icSigCmykData, request.DCSData, request.DCSData.Length);                
+                switch (request.PCSDataType)
+                {
+                    case DataContracts.PCSDataType.XYZ:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.LAB:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigLabData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.Density:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigDensityData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.Remission:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
+                        break;
+                    
+                }
+                
                 if (request.DensityData.Length <= 0)
                 {
                     response.Message = "Create Curve Error - No Density data loaded";
@@ -38,17 +51,26 @@ namespace ColorPathSync.Business
 
                 if (request.DeviceLinkProfile == null || request.UseDLP == false)
                 {
-                    //to-do get from db table
-                    //request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI25", request.LinearizationTVI25);
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI", request.LinearizationTVI50);
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI75", request.LinearizationTVI75);
+
+                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                    
+                    // each param contains TVI25,TVI50,TVI75 Values
+                    request.LinearizationTVI.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 
                     CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
+
+                    //Default value will be "Staus-E"
+                    switch (request.DensityType)
+                    {
+                        case DataContracts.DensityType.Status_E:
+                            err = CrossXColor.CLCrossXColorSetOption("DensityMode", "Status-E");
+                            break;
+                        case DataContracts.DensityType.Status_T:
+                            err = CrossXColor.CLCrossXColorSetOption("DensityMode", "Status-T");
+                            break;
+                    }
 
                     // calc profile in memory
                     err = CrossXColor.CLCalcProfile(profiler, prof);
@@ -105,12 +127,10 @@ namespace ColorPathSync.Business
                 }
                 else
                 {
-                    //request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI25", request.LinearizationTVI25);
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI", request.LinearizationTVI50);
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationTVI75", request.LinearizationTVI75);                    
+                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                    // each param contains TVI25,TVI50,TVI75 Values
+                    request.LinearizationTVI.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
+                    
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 
@@ -126,6 +146,17 @@ namespace ColorPathSync.Business
                     CrossXColor.CLSetOptionProfile(profiler, "SrcProfile", srcProf);
 
                     CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
+                    
+                    //Default value will be "Staus-E"
+                    switch (request.DensityType)
+                    {
+                        case DataContracts.DensityType.Status_E:
+                            err = CrossXColor.CLCrossXColorSetOption("DensityMode", "status-E");
+                            break;
+                        case DataContracts.DensityType.Status_T:
+                            err = CrossXColor.CLCrossXColorSetOption("DensityMode", "Status-T");
+                            break;
+                    }
 
                     // calc profile in memory
                     err = CrossXColor.CLCalcProfile(profiler, prof);

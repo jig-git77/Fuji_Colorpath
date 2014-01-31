@@ -24,10 +24,20 @@ namespace ColorPathSync.Business
 
                 CLVectorDataSet DCSDataSet = new CLVectorDataSet();
                 CLVectorDataSet PCSDataSet = new CLVectorDataSet();
-
                 CrossXColor.CLInitVectorDataSet(DCSDataSet, CrossXColor.icSigCmykData, request.DCSData, request.DCSData.Length);
-                CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
-
+                switch (request.PCSDataType)
+                {
+                    case DataContracts.PCSDataType.XYZ:                        
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigXYZData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.LAB:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigLabData, request.PCSData, request.PCSData.Length);
+                        break;
+                    case DataContracts.PCSDataType.Remission:
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
+                        break;
+                }
+                
                 if (request.PCSData.Length <= 0)
                 {
                     response.Message = "Create Curve Error - No PCS data loaded";
@@ -37,9 +47,7 @@ namespace ColorPathSync.Business
 
                 if (request.DeviceLinkProfile == null || request.UseDLP == false)
                 {
-                    //request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 
@@ -101,8 +109,8 @@ namespace ColorPathSync.Business
                 else
                 {
 
-                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
-                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "G7");
+                    request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
+                    
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
 

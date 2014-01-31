@@ -22,6 +22,7 @@ public class CrossXColor {
     public const int icSigCmykData = 0x434D594B;
     public const int icSigCmyData = 0x434D5920;
     public const int icSigDensityData = 0x44454E53;
+    public const int clRemission = 0x7265666C;
 
     public const int clDensityCMYK = 0x44454E53;
 
@@ -236,6 +237,12 @@ public class CrossXColor {
 
   public static void CLFreeCLTrafoRef(TYPE_p_void tRef) {
       CrossXColorPINVOKE.CLFreeCLTrafoRef(TYPE_p_void.getCPtr(tRef));
+  }
+
+  public static int CLCrossXColorSetOption(string OptionName, string OptionValue)
+  {
+      int ret = CrossXColorPINVOKE.CLCrossXColorSetOption(OptionName, OptionValue);
+      return ret;
   }
 
 }
