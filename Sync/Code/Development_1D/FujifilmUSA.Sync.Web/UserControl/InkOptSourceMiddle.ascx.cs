@@ -155,7 +155,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         public List<Entity.AnalyzeChart_DotGain> DTSpreadChartData { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTSpreadSplineRangeChartData { get; set; }
         public List<Entity.AnalyzeChart_DotGain> DTMaxSpreadChartData { get; set; }
-
+        public PCSDataTypes PCSDataTypes { get; set; }
+        public DensityTypes DensityType { get; set; }
         #endregion        
     }
 }
