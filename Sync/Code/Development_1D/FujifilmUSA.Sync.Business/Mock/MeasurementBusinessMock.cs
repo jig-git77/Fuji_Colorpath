@@ -46,9 +46,20 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<MeasurementPatch_AvgDelta>();
         }
 
+
         public DataTable GetPatchDetailsofMeasurement(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new DataTable();
+        }
+
+        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            throw new NotImplementedException();
         }
 
         public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)

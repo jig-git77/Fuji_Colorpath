@@ -357,9 +357,11 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return dtPatchDetails;
         }
 
-        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        #region Get common chart data
+        public List<AnalyzeChart>[] GetChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             var DeltaEPatchDetails = new List<AnalyzeChart>();
+            var ChartDetailArray = new List<AnalyzeChart>[3];
             string storedProc = "CPSync4D.GetChartData_InkPaper";
             if (IsSync1DType)
                 storedProc = "CPSync.GetChartData_InkPaper";
@@ -374,7 +376,9 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             GetDsResult(
                                 storedProc,
                                 new object[] { MeasurementId, From_ΔE });
-                    DeltaEPatchDetails = dsMeasurements.Tables[0].
+
+                    //DeltaEPatchDetails
+                    ChartDetailArray[0] = dsMeasurements.Tables[0].
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
                         {
@@ -389,6 +393,73 @@ namespace FujifilmUSA.Sync.Business.Implementation
                             Targeta = DataReader.ReadDecimal(x, "Targeta"),
                             Targetb = DataReader.ReadDecimal(x, "Targetb")
                         }).ToList();
+
+                    //PaperPatchDetails
+                    ChartDetailArray[1] = dsMeasurements.Tables[1].
+                        AsEnumerable().
+                       Select(x => new AnalyzeChart()
+                       {
+                           CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                           CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                           CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                           TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                           Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                           Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                           ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                           Δa = DataReader.ReadDecimal(x, "Δa"),
+                           Δb = DataReader.ReadDecimal(x, "Δb")
+                       }).ToList();
+
+                    //DensityPatchDetails
+                    ChartDetailArray[1] = dsMeasurements.Tables[2].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                            Density = DataReader.ReadDecimal(x, "Density"),
+                            DensityLimit = DataReader.ReadDecimal(x, "DensityLimit")
+                        }).ToList();
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_EPrimaryPatches"));
+            return ChartDetailArray;
+        } 
+        #endregion
+
+        public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var DeltaEPatchDetails = new List<AnalyzeChart>();
+            
+            string storedProc = "CPSync4D.GetChartData_InkPaper";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_InkPaper";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_InkPaper";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId, From_ΔE });
+                                       
+                    DeltaEPatchDetails = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchTypeId = DataReader.ReadShort(x, "PatchTypeId"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE"),
+                            ΔELimit = DataReader.ReadDecimal(x, "ΔELimit"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb")
+                        }).ToList();                                       
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_EPrimaryPatches"));
             return DeltaEPatchDetails;
@@ -460,6 +531,88 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_InkPaper_Density"));
             return DensityPatchDetails;
         }
+
+        #region Get common Gamut chart data
+        public List<AnalyzeChart_Gray>[] GetGamutChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
+        {
+            var GamutChartDetails = new List<AnalyzeChart_Gray>();
+            var GamutChartData = new List<AnalyzeChart_Gray>[3];
+            string storedProc = "CPSync4D.GetChartData_Gray";
+            if (IsSync1DType)
+                storedProc = "CPSync.GetChartData_Gray";
+            if (IsVerification)
+                storedProc = "CPSyncV.GetVChartData_Gray";
+            Common.ImplementBusinessLogic(
+                () =>
+                {
+                    var dsMeasurements =
+                        DataAccessFactory.
+                            Instance.
+                            GetDsResult(
+                                storedProc,
+                                new object[] { MeasurementId });
+                    //GamutChartDetails Char 1
+                    GamutChartData[0] = dsMeasurements.Tables[0].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_Gray()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchType = DataReader.ReadString(x, "PatchType"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                            Δa = DataReader.ReadDecimal(x, "Δa"),
+                            Δb = DataReader.ReadDecimal(x, "Δb"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE")
+                        }).ToList();
+
+                    //GamutChartDetails Char 2
+                    GamutChartData[1] = dsMeasurements.Tables[1].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_Gray()
+                        {
+                            HtmlColor = DataReader.ReadString(x, "HtmlColor"),
+                            PatchType = DataReader.ReadString(x, "PatchType"),
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b")
+                        }).ToList();
+
+                    //Lab chart details
+                    GamutChartData[2] = dsMeasurements.Tables[2].
+                         AsEnumerable().
+                        Select(x => new AnalyzeChart_Gray()
+                        {
+                            CmykC = DataReader.ReadDecimal(x, "CMYK_C"),
+                            CmykM = DataReader.ReadDecimal(x, "CMYK_M"),
+                            CmykY = DataReader.ReadDecimal(x, "CMYK_Y"),
+                            CmykK = DataReader.ReadDecimal(x, "CMYK_K"),
+                            CielabL = DataReader.ReadDecimal(x, "CIELAB_L"),
+                            CielabA = DataReader.ReadDecimal(x, "CIELAB_a"),
+                            CielabB = DataReader.ReadDecimal(x, "CIELAB_b"),
+                            TargetL = DataReader.ReadDecimal(x, "TargetL"),
+                            Targeta = DataReader.ReadDecimal(x, "Targeta"),
+                            Targetb = DataReader.ReadDecimal(x, "Targetb"),
+                            ΔL = DataReader.ReadDecimal(x, "ΔL"),
+                            Δa = DataReader.ReadDecimal(x, "Δa"),
+                            Δb = DataReader.ReadDecimal(x, "Δb"),
+                            ΔE = DataReader.ReadDecimal(x, "ΔE")
+                        }).ToList();
+
+
+                },
+                new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_GrayGamut1"));
+            return GamutChartData;
+        } 
+        #endregion
 
         public List<AnalyzeChart_Gray> GetGamutChart1(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
