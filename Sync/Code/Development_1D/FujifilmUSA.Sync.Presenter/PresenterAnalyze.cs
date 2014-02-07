@@ -136,8 +136,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,              
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now,
-                    _viewAnalyze.PCSDataTypes);
+                    DateTime.Now);
 
         }
 
@@ -151,10 +150,7 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now,
-                    _viewAnalyze.PCSDataTypes,
-                    _viewAnalyze.DensityType
-                    );
+                    DateTime.Now);
 
         }
 
