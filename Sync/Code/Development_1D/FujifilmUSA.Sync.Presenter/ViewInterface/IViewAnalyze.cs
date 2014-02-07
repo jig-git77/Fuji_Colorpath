@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using FujifilmUSA.Sync.Entity;
 
 namespace FujifilmUSA.Sync.Presenter.ViewInterface
 {
@@ -39,7 +40,9 @@ namespace FujifilmUSA.Sync.Presenter.ViewInterface
 
         bool useDLP { get; set; }
         byte[] DeviceLinkProfile { get; set; }
-        bool IsSync1DType { get; }     
+        bool IsSync1DType { get; }
+        PCSDataTypes PCSDataTypes { get; set; }
+        DensityTypes DensityType { get; set; }
 
         List<Entity.AnalyzeChart_DotGain> DTTVIChart { get; set; }
 

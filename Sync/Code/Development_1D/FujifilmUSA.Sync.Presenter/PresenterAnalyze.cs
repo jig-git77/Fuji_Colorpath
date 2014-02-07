@@ -83,18 +83,26 @@ namespace FujifilmUSA.Sync.Presenter
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            _viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            _viewAnalyze.DTDensity = measurementBusiness.GetDensityChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            var charData = measurementBusiness.GetChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTDeltaEPrimaryPatches = charData[0];
+            _viewAnalyze.DTPaperPatches = charData[1];
+            _viewAnalyze.DTDensity = charData[2];
+            //_viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            //_viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            //_viewAnalyze.DTDensity = measurementBusiness.GetDensityChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
 
         public void GetGrayChart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            _viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            _viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            var GaumatChartData = measurementBusiness.GetGamutChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTGaumatChart1 = GaumatChartData[0];
+            _viewAnalyze.DTGaumatChart2 = GaumatChartData[1];
+            _viewAnalyze.DTLABChart = GaumatChartData[2]; 
+            //_viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            //_viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            //_viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
         }
 
         public void GetG7Chart()
@@ -128,7 +136,8 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,              
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now);
+                    DateTime.Now,
+                    _viewAnalyze.PCSDataTypes);
 
         }
 
@@ -142,7 +151,10 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now);
+                    DateTime.Now,
+                    _viewAnalyze.PCSDataTypes,
+                    _viewAnalyze.DensityType
+                    );
 
         }
 
