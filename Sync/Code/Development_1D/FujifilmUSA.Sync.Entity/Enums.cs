@@ -438,5 +438,20 @@ namespace FujifilmUSA.Sync.Entity
         [Description("ValidationStatus_LastFailed")]
         LastFailed = 5 //Validation_Last_Failed
 
-    }   
+    }
+
+    public enum PCSDataTypes
+    {
+        XYZ,
+        Remission,        
+        LAB,
+        Density
+    }
+
+    public enum DensityTypes
+    {
+        Status_E,
+        Status_T
+    }
+
 }

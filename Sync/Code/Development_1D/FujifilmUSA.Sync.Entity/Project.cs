@@ -35,6 +35,10 @@ namespace FujifilmUSA.Sync.Entity
         public short ProjectTypeId { get; set; }
         public CPSync1D.PrintStandardType PrintStandardType { get; set; }
 
-        public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }       
+        public List<CPSync1D.ProjectTargetLAB> ProjectTargetLAB { get; set; }
+
+        public DensityTypes DensityType { get; set; }
+        public PCSDataTypes PCSDataTypes { get; set; }
+
     }
 }
