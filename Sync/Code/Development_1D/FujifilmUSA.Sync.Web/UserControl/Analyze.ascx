@@ -1,19 +1,20 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="Analyze.ascx.cs" Inherits="FujifilmUSA.Sync.Web.UserControl.Analyze" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="AjaxToolkit" %>
 <%@ Register Src="~/UserControl/Statusbar.ascx" TagName="Statusbar" TagPrefix="uc" %>
-<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP" TagPrefix="uc" %>
+<%@ Register Src="~/UserControl/PopupControl/CreateDLP.ascx" TagName="CreateDLP"
+    TagPrefix="uc" %>
 <script src="JS/DYMO.Label.Framework.latest.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
 <script src="JS/Printing.js?version=<%=JsRandomNumber %>" type="text/javascript"></script>
- <script type="text/javascript">
+<script type="text/javascript">
     var previewImageCodedString = '';
     var prm = Sys.WebForms.PageRequestManager.getInstance();
     prm.add_initializeRequest(InitializeRequest);
 
-    function InitializeRequest(sender, args) {        
+    function InitializeRequest(sender, args) {
         //  alert(jQuery("input[id$=hdHasMeasurement]").val());
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
-
+                console.log(jQuery("input[id$=hdHasMeasurement]").val());
                 var updateProgress = $get('<%= UpdateProgressClientID %>');
                 var postBackElement = args.get_postBackElement();
                 if (postBackElement.id == '<%= lbtnDownloadAndSaveDLP.ClientID %>' || postBackElement.id == '<%= lbtnMeasurement.ClientID %>') {
@@ -21,7 +22,7 @@
                         updateProgress.control._associatedUpdatePanelId = null;
                         $get('<%= CreateDLPUpdateProgressClientID %>').control._associatedUpdatePanelId = 'dummyId';
                     }
-                    
+
                     else {
                         updateProgress.control._associatedUpdatePanelId = 'dummyId';
                     }
@@ -36,7 +37,7 @@
                     }
                     else {
                         updateProgress.control._associatedUpdatePanelId = null;
-                    }                    
+                    }
                 }
             }
             else
@@ -53,7 +54,7 @@
             return false;
     }
 
-    function ShowClosePrintConditionWindow(projectId, projectName,licenseTypeId,  DlpName) {
+    function ShowClosePrintConditionWindow(projectId, projectName, licenseTypeId, DlpName) {
         var oWindow;
         oWindow = window.radopen("PopupClosePrintCondition.aspx?projectId=" + projectId + "&projectName=" + projectName + "&licenseTypeId=" + licenseTypeId + "&DlpName=" + DlpName + "&ToSubOperation=0", "ClosePrintConditionWindow");
         oWindow.show();
@@ -91,12 +92,12 @@
 <script type="text/javascript" language="javascript">
 
     //According to new or old Project open rad window
-    function ChooseRadWindow() {       
-   
+    function ChooseRadWindow() {
+
         if (jQuery("input[id$=hdHasMeasurement]").length > 0) {
 
             if (jQuery("input[id$=hdHasMeasurement]").val() == 'True' || jQuery("input[id$=hdHasMeasurement]").val() == 'true') {  //-------------If there are measurements under this opt. run, then only able to create DLP
-                       
+
                 if ("<%= IsNewDlp %>" == "True") {
                     return true;
                 }
@@ -117,7 +118,7 @@
     }
 </script>
 <script src="JS/ChartTooltip.js" type="text/javascript"></script>
- <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
     function funTVIVisiblity() {
         document.getElementById("trTVI").style.display = "";
         document.getElementById("trSpread").style.display = "none";
@@ -129,15 +130,14 @@
 
     }
 </script>
-
 <script language="javascript" type="text/javascript">
     jQuery(document).ready(function () {
         $("div[id*='accordion']").click
-        (      
+        (
                 function () {
-                    var $panel = $("div[id*='panelabGamutComparison']");               
-                    var $img = $("div[id*='imgHeader']");                  
-                    $panel.slideToggle(500);                   
+                    var $panel = $("div[id*='panelabGamutComparison']");
+                    var $img = $("div[id*='imgHeader']");
+                    $panel.slideToggle(500);
                     if ($img.hasClass('expanded')) {
                         $img.addClass('collapsed').removeClass('expanded');
                     }
@@ -147,12 +147,11 @@
                     return false;
                 }
         );
-       
-        $("div[id*='accordion']").click();     
-        
-    });
-</script>
 
+        $("div[id*='accordion']").click();        
+    });
+    
+</script>
 <div class="contant_top">
     &nbsp;</div>
 <div class="contant_middle">
@@ -169,7 +168,8 @@
                             <asp:Localize runat="server" Text="Create DLP" ID="locCreateDLP" meta:resourcekey="locCreateDLPResource1"></asp:Localize>
                         </span>
                     </asp:LinkButton>
-                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false" OnClick="lbtnSubmit_Click">
+                    <asp:LinkButton ID="lbtnSubmit" CssClass="buttonNormal" runat="server" Visible="false"
+                        OnClick="lbtnSubmit_Click">
                         <span>
                             <asp:Localize runat="server" Text="Submit" ID="locSubmit" meta:resourcekey="locSubmitResource1"></asp:Localize>
                         </span>
@@ -191,7 +191,7 @@
                         <span>
                             <asp:Localize runat="server" Text="Optimize" ID="locOptimize" meta:resourcekey="locOptimizeResource1"></asp:Localize>
                         </span>
-                    </asp:LinkButton>                    
+                    </asp:LinkButton>
                 </div>
             </div>
             <div class="listDevice" style="margin-left: 10px;">
@@ -199,133 +199,134 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-   <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+    <%-- <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>--%>
-            <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
-                <tr id="trRBtnListDeltaE" runat="server">
-                    <td align="center">
-                        <asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal" AutoPostBack="true"
-                            OnSelectedIndexChanged="rbtnListDeltaE_SelectedIndexChanged" CssClass="RadioList">
-                            <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
-                            <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
-                        </asp:RadioButtonList>
-                    </td>
-                </tr>
-                <tr id="trListHeader" runat="server">
-                    <td runat="server">
-                        <div style="display: block;" class="contantbox tabcontant1">
-                            <div class="Analyze_head">
-                                <div id="Div_Opt_Header" runat="server" visible="false" class="Analyze_head_text" style="font-weight: bold; font-size: 14px; float: left; ">
-                                    <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
-                                        meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
-                                    <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server" ></asp:Label>
-                                </div>
-                                <div id="Div_Validation_Header" runat="server" visible="false">                                   
-                                    <asp:HiddenField ID="hdnTotalRecord" runat="server" Value="0" />
-                                     <asp:Literal ID="ltrlRecordsSummary" runat="server" 
-                                        Text="Record(s) {start} to {end} of {total}"                                         ></asp:Literal>&nbsp;|&nbsp;<asp:ImageButton 
-                                        ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif" 
-                                        OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton 
-                                        ID="IBTN_PreviousPage" runat="server" 
-                                        ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click" 
-                                        style="height: 13px" />&nbsp;<asp:ImageButton 
-                                        ID="IBTN_NextPage" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif" 
-                                        OnClick="IBTN_NextPage_Click" />&nbsp;<asp:ImageButton 
-                                        ID="IBTN_LastPage" runat="server" ImageUrl="~/Images/Nav_LastPage_off.gif" 
-                                        OnClick="IBTN_LastPage_Click" />&nbsp;|&nbsp;<asp:Localize 
-                                        runat="server" ID="locRecords" Text="Records" 
-                                        meta:resourcekey="locRecordsResource1"></asp:Localize>&nbsp;<asp:DropDownList ID="DDL_PageSize" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true" OnSelectedIndexChanged="DDL_PageSize_SelectedIndexChanged">
-                                        <asp:ListItem Value="5" Selected="True">5</asp:ListItem>
-                                        <asp:ListItem Value="10">10</asp:ListItem>
-                                        <asp:ListItem Value="25">25</asp:ListItem>
-                                        <asp:ListItem Value="50">50</asp:ListItem>
-                                        <asp:ListItem Value="100">100</asp:ListItem>                                       
-                                    </asp:DropDownList>&nbsp;|&nbsp;<asp:Localize Text="Go to page" runat="server" ID="locGoToPage" 
-                                        meta:resourcekey="locGoToPageResource1"></asp:Localize>&nbsp;<asp:DropDownList ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" Width="45px" AutoPostBack="true" OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged"></asp:DropDownList>&nbsp;
-                                </div>
-                            </div>
-                            <div class="section_middle">
-                                <center>
-                                    <script type="text/javascript" language="javascript">
-                                        function ClickOnPoint(MeasurementID) {
-                                            var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                            hdCheckBoxChange.value = "0";
-                                            var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
-                                            obj1.value = MeasurementID;
-                                            document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                        }
-                                        function ClickOnCheckBox(MeasurementID, checkedValue, checkCount) {
-                                            if (checkCount <= 1 && checkedValue == "False") {
-                                                alert('<%= GetResourceString("selectMeasurementMsg") %>');
-                                                return false;
-                                            }
-                                            else {
-                                                var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
-                                                hdCheckBoxChange.value = "1";
-                                                var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
-                                                obj1.value = MeasurementID;
-                                                var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
-                                                chekcBox.checked = checkedValue == "True" ? true : false;
-                                                document.getElementById("<%= hdChartButton.ClientID %>").click();
-                                            }
-                                        } 
-                                    </script>
-                                  
-                                        <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
-                                        BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
-                                        BorderlineColor="176, 176, 176" BorderlineDashStyle="Solid">
-                                        <Series>
-                                            <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                            <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
-                                                BorderWidth="2">
-                                            </asp:Series>
-                                        </Series>
-                                        <ChartAreas>
-                                            <asp:ChartArea Name="ChartArea1" BackColor="Transparent" BackSecondaryColor="White"
-                                                ShadowColor="Transparent">
-                                                <Position Height="99" Width="99" Auto="False" />
-                                                <AxisY TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
-                                                    <MajorGrid LineColor="216, 216, 216" />
-                                                </AxisY>
-                                                <AxisX Interval="1" TitleFont="Verdana, 5pt" IsLabelAutoFit="False">
-                                                    <MajorGrid LineColor="216, 216, 216" />
-                                                </AxisX>
-                                            </asp:ChartArea>
-                                        </ChartAreas>
-                                    </asp:Chart>
-                                  
-                                    <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
-                                    <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
-                                        Style="display: none;" />
-                                    <asp:CheckBox ID="hdChartCheckBox" runat="server" Style="display: none;" />
-                                    <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
-                                </center>
-                            </div>
+    <table cellpadding="0" cellspacing="10" border="0" width="97%" style="margin-left: 10px;">
+        <tr id="trRBtnListDeltaE" runat="server">
+            <td align="center">
+                <asp:RadioButtonList ID="rbtnListDeltaE" runat="server" RepeatDirection="Horizontal"
+                    AutoPostBack="true" OnSelectedIndexChanged="rbtnListDeltaE_SelectedIndexChanged"
+                    CssClass="RadioList">
+                    <asp:ListItem Text="ΔE2000" Value="E2000" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="ΔE" Value="E"></asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+        <tr id="trListHeader" runat="server">
+            <td runat="server">
+                <div style="display: block;" class="contantbox tabcontant1">
+                    <div class="Analyze_head">
+                        <div id="Div_Opt_Header" runat="server" visible="false" class="Analyze_head_text"
+                            style="font-weight: bold; font-size: 14px; float: left;">
+                            <asp:Localize runat="server" Text="Analyze Measurement :" ID="locAnaluzeMeasurement"
+                                meta:resourcekey="locAnaluzeMeasurementResource1"></asp:Localize>
+                            <asp:Label ID="lblMeasurementName" Style="font-size: 12px !important;" runat="server"></asp:Label>
                         </div>
-                    </td>
-                </tr>
-            </table>
-       <%-- </ContentTemplate>
+                        <div id="Div_Validation_Header" runat="server" visible="false">
+                            <asp:HiddenField ID="hdnTotalRecord" runat="server" Value="0" />
+                            <asp:Literal ID="ltrlRecordsSummary" runat="server" Text="Record(s) {start} to {end} of {total}"></asp:Literal>&nbsp;|&nbsp;<asp:ImageButton
+                                ID="IBTN_FirstPage" runat="server" ImageUrl="~/Images/Nav_FirstPage_off.gif"
+                                OnClick="IBTN_FirstPage_Click" />&nbsp;<asp:ImageButton ID="IBTN_PreviousPage" runat="server"
+                                    ImageUrl="~/Images/Nav_PreviousPage_off.gif" OnClick="IBTN_PreviousPage_Click"
+                                    Style="height: 13px" />&nbsp;<asp:ImageButton ID="IBTN_NextPage" runat="server" ImageUrl="~/Images/Nav_NextPage_off.gif"
+                                        OnClick="IBTN_NextPage_Click" />&nbsp;<asp:ImageButton ID="IBTN_LastPage" runat="server"
+                                            ImageUrl="~/Images/Nav_LastPage_off.gif" OnClick="IBTN_LastPage_Click" />&nbsp;|&nbsp;<asp:Localize
+                                                runat="server" ID="locRecords" Text="Records" meta:resourcekey="locRecordsResource1"></asp:Localize>&nbsp;<asp:DropDownList
+                                                    ID="DDL_PageSize" runat="server" CssClass="DROPDOWNLIST2" AutoPostBack="true"
+                                                    OnSelectedIndexChanged="DDL_PageSize_SelectedIndexChanged">
+                                                    <asp:ListItem Value="5" Selected="True">5</asp:ListItem>
+                                                    <asp:ListItem Value="10">10</asp:ListItem>
+                                                    <asp:ListItem Value="25">25</asp:ListItem>
+                                                    <asp:ListItem Value="50">50</asp:ListItem>
+                                                    <asp:ListItem Value="100">100</asp:ListItem>
+                                                </asp:DropDownList>
+                            &nbsp;|&nbsp;<asp:Localize Text="Go to page" runat="server" ID="locGoToPage" meta:resourcekey="locGoToPageResource1"></asp:Localize>&nbsp;<asp:DropDownList
+                                ID="DDL_GoToPage" runat="server" CssClass="DROPDOWNLIST2" Width="45px" AutoPostBack="true"
+                                OnSelectedIndexChanged="DDL_GoToPage_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="section_middle">
+                        <center>
+                            <script type="text/javascript" language="javascript">
+                                function ClickOnPoint(MeasurementID) {
+                                    var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                    hdCheckBoxChange.value = "0";
+                                    var obj1 = document.getElementById("<%= hdMeasurement.ClientID %>");
+                                    obj1.value = MeasurementID;
+                                    document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                }
+                                function ClickOnCheckBox(MeasurementID, checkedValue, checkCount) {
+                                    if (checkCount <= 1 && checkedValue == "False") {
+                                        alert('<%= GetResourceString("selectMeasurementMsg") %>');
+                                        return false;
+                                    }
+                                    else {
+                                        var hdCheckBoxChange = document.getElementById("<%= hdCheckBoxChange.ClientID  %>");
+                                        hdCheckBoxChange.value = "1";
+                                        var obj1 = document.getElementById("<%= hdMeasurement.ClientID  %>");
+                                        obj1.value = MeasurementID;
+                                        var chekcBox = document.getElementById("<%= hdChartCheckBox.ClientID %>");
+                                        chekcBox.checked = checkedValue == "True" ? true : false;
+                                        document.getElementById("<%= hdChartButton.ClientID %>").click();
+                                    }
+                                } 
+                            </script>
+                            <asp:Chart ID="chartAnalyze" runat="server" Width="680px" Height="160px" BackColor="240, 240, 240"
+                                BackGradientStyle="HorizontalCenter" BackSecondaryColor="Silver" Palette="SemiTransparent"
+                                BorderlineColor="176, 176, 176" BorderlineDashStyle="Solid">
+                                <Series>
+                                    <asp:Series Name="Series0" ChartType="Spline" Color="Transparent" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series1" ChartType="Spline" Color="Green" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series2" ChartType="Spline" Color="Red" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series3" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series4" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series5" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series6" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                    <asp:Series Name="Series7" ChartType="Spline" Color="Blue" ChartArea="ChartArea1"
+                                        BorderWidth="2">
+                                    </asp:Series>
+                                </Series>
+                                <ChartAreas>
+                                    <asp:ChartArea Name="ChartArea1" BackColor="Transparent" BackSecondaryColor="White"
+                                        ShadowColor="Transparent">
+                                        <Position Height="99" Width="99" Auto="False" />
+                                        <AxisY TitleFont="Verdana, 8pt" IsLabelAutoFit="False">
+                                            <MajorGrid LineColor="216, 216, 216" />
+                                        </AxisY>
+                                        <AxisX Interval="1" TitleFont="Verdana, 5pt" IsLabelAutoFit="False">
+                                            <MajorGrid LineColor="216, 216, 216" />
+                                        </AxisX>
+                                    </asp:ChartArea>
+                                </ChartAreas>
+                            </asp:Chart>
+                            <asp:HiddenField ID="hdMeasurement" runat="server" Value="0" />
+                            <asp:Button ID="hdChartButton" runat="server" Text="Button" OnClick="hdChartButton_Click"
+                                Style="display: none;" />
+                            <asp:CheckBox ID="hdChartCheckBox" runat="server" Style="display: none;" />
+                            <asp:HiddenField ID="hdCheckBoxChange" runat="server" Value="0" />
+                        </center>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <%-- </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="rbtnListDeltaE" />
         </Triggers>
@@ -345,11 +346,13 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
+
     <div class="listDevice" style="margin-left: 10px;">
-        <table cellpadding="0" cellspacing="10" border="0" width="97%">
-            <tr>
-                <td>
-                    <section id="tabpart" style="margin-left: 0;">
+        <div id="divToRender" runat="server">
+            <table cellpadding="0" cellspacing="10" border="0" width="97%">
+                <tr>
+                    <td>
+                        <section id="tabpart" style="margin-left: 0;">
         <section class="inner_tab">
             <ul class="tabs">
                 <li><span><a href="#tab1"><asp:Localize Text="Summary" ID="locSummary" 
@@ -2435,9 +2438,10 @@
    
 
   </section>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div class="clear">
     </div>
@@ -2462,13 +2466,9 @@
 <div class="FadingTooltip" id="FADINGTOOLTIP" style="z-index: 999; visibility: hidden;
     position: absolute">
 </div>
-
-
-
-<asp:Literal ID="LTRL_PageSize" runat="server" Visible="False" 
-    meta:resourcekey="LTRL_PageSizeResource1" Text="5"></asp:Literal>
-<asp:Literal ID="LTRL_CurrentPage" runat="server" Visible="False" 
-    meta:resourcekey="LTRL_CurrentPageResource1" Text="-1"></asp:Literal>
-<asp:Literal ID="LTRL_StartIndex" runat="server" Visible="False" 
-    meta:resourcekey="LTRL_StartIndexResource1" Text="0"></asp:Literal>
-
+<asp:Literal ID="LTRL_PageSize" runat="server" Visible="False" meta:resourcekey="LTRL_PageSizeResource1"
+    Text="5"></asp:Literal>
+<asp:Literal ID="LTRL_CurrentPage" runat="server" Visible="False" meta:resourcekey="LTRL_CurrentPageResource1"
+    Text="-1"></asp:Literal>
+<asp:Literal ID="LTRL_StartIndex" runat="server" Visible="False" meta:resourcekey="LTRL_StartIndexResource1"
+    Text="0"></asp:Literal>

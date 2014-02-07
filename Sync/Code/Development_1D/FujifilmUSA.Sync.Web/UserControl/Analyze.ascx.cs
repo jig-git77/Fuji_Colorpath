@@ -157,10 +157,16 @@ namespace FujifilmUSA.Sync.Web.UserControl
             _presenterGlobal = new PresenterGlobal();
         }
 
+        void Page_LoadComplete(object sender, EventArgs e)
+        {
+            //BindMesurementChart();
+            //rgPatchDetails.Rebind();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             lbtnMeasurement.Visible = IsXMFUser;
-
+            //Page.LoadComplete += new EventHandler(Page_LoadComplete);
             if (!Page.IsPostBack)
             {
 
@@ -204,7 +210,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     //------------If this run is closed /certify run, then invisible download(Next) button, because there is no DLP available to download for this run-----//
                     lbtnDownloadAndSaveDLP.Visible = false;
                 }
-                BindMesurementChart();
+                BindMesurementChart();                
                 ((Label)updateProgress.FindControl("ucCreateDLP").FindControl("lblMessage")).Text = DLPMessage;
 
                 //We need to hide the button if we are verification mode
@@ -275,7 +281,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             }
             else
             {
-                BindMesurementChart();
+                BindMesurementChart();                
             }
             if (IsXMFUser && SessionManager.Instance.CurrentDlpSubOperation == ELicenseType.Validation)
             {
@@ -2517,6 +2523,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
                                                       Request.UserHostAddress);
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].EndDateTime = EndDate;
                         SessionManager.Instance.CurrentProject.OptimizeRuns[0].HasProfile = true;
+                        PCSDataTypes = SessionManager.Instance.CurrentProject.PCSDataTypes;
+                        DensityType = SessionManager.Instance.CurrentProject.DensityType;
                         if (SessionManager.Instance.CurrentUser.UserType == Convert.ToInt32(UserType.XmfColorOrganizerUser))
                         {
                             Response.Redirect(string.Format("COTransferSiteControl.aspx?projectid={0}&id={1}", SessionManager.Instance.CurrentProject.ProjectId, Guid.NewGuid()));
@@ -2538,7 +2546,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
         protected void rgPatchDetails_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             MeasurementId = 0;
-            if (hdMeasurement.Value != "")
+            
+            if (hdMeasurement.Value != "" && hdMeasurement.Value != "0")
             {
                 MeasurementId = Convert.ToInt32(hdMeasurement.Value);  //----Pass selected measurement id from analyze chart above                   
 
@@ -2590,7 +2599,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     #endregion
                 }
-            }
+            } 
         }
 
         protected void rgPatchDetails_ItemDataBound(object sender, GridItemEventArgs e)
@@ -2899,7 +2908,8 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
         public bool useDLP { get; set; }
         public byte[] DeviceLinkProfile { get; set; }
-
+        public PCSDataTypes PCSDataTypes { get; set; }
+        public DensityTypes DensityType { get; set; }
         public bool IsSync1DType
         {
             get
