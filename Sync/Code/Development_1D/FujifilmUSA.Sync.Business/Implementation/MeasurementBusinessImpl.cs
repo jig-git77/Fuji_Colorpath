@@ -411,7 +411,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                        }).ToList();
 
                     //DensityPatchDetails
-                    ChartDetailArray[1] = dsMeasurements.Tables[2].
+                    ChartDetailArray[2] = dsMeasurements.Tables[2].
                          AsEnumerable().
                         Select(x => new AnalyzeChart()
                         {
@@ -1339,6 +1339,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI1"));
             return TVIChartDetails;
         }
+
         public List<AnalyzeChart_DotGain> GetSpreadSplineRangeChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
@@ -1366,6 +1367,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_ISO_TVI2"));
             return TVIChartDetails;
         }
+
         public List<AnalyzeChart_DotGain> GetMaxSpreadChartData(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             var TVIChartDetails = new List<AnalyzeChart_DotGain>();
