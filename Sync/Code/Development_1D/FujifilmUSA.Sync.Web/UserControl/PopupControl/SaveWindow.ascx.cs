@@ -79,6 +79,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     }
                     WebLogActivityManager.LogActivity(LogActivityType.CreateProject, new object[] { Project.ProjectId, Project.ProjectName }, Request.UserHostAddress);
                     SessionManager.Instance.CurrentProject = Project;
+                    //02/11/2014_Softweb Start: Disable links if project is already certified 
+                    if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync4DCertification && SessionManager.Instance.CurrentProject.Status == EOptimizeRunStatus.Certify)
+                    {
+                        SessionManager.Instance.CurrentProject.CurrentDisplayStatus = ECurrentProjectStatus.Edit;
+                    }
+                    //02/11/2014_Softweb End
                     SessionManager.Instance.CurrentOptimizeRun = SessionManager.Instance.CurrentProject.OptimizeRuns.Last();
                     if (SessionManager.Instance.CurrentOptimizeRun.HasProfile)
                     {
