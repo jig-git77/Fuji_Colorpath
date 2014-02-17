@@ -86,10 +86,7 @@ namespace FujifilmUSA.Sync.Presenter
             var charData = measurementBusiness.GetChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
             _viewAnalyze.DTDeltaEPrimaryPatches = charData[0];
             _viewAnalyze.DTPaperPatches = charData[1];
-            _viewAnalyze.DTDensity = charData[2];
-            //_viewAnalyze.DTDeltaEPrimaryPatches = measurementBusiness.GetDeltaEPatchChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            //_viewAnalyze.DTPaperPatches = measurementBusiness.GetInkPaperChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            //_viewAnalyze.DTDensity = measurementBusiness.GetDensityChartData(_viewAnalyze.MeasurementId, _viewAnalyze.From_ΔE, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTDensity = charData[2];            
         }
 
         public void GetGrayChart()
@@ -99,22 +96,28 @@ namespace FujifilmUSA.Sync.Presenter
             var GaumatChartData = measurementBusiness.GetGamutChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
             _viewAnalyze.DTGaumatChart1 = GaumatChartData[0];
             _viewAnalyze.DTGaumatChart2 = GaumatChartData[1];
-            _viewAnalyze.DTLABChart = GaumatChartData[2]; 
-            //_viewAnalyze.DTGaumatChart1 = measurementBusiness.GetGamutChart1(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            //_viewAnalyze.DTGaumatChart2 = measurementBusiness.GetGamutChart2(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
-            //_viewAnalyze.DTLABChart = measurementBusiness.GetLABChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification, _viewAnalyze.IsSync1DType);
+            _viewAnalyze.DTLABChart = GaumatChartData[2];             
         }
 
         public void GetG7Chart()
         {
             var measurementBusiness = BusinessFactory<IMeasurementBusiness>.CreateObject();
             measurementBusiness.ErrorOccured += _viewAnalyze.ErrorOccured;
-            _viewAnalyze.GrayFChart = measurementBusiness.GetGrayFChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.GrayFSummary = measurementBusiness.GetGrayFSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.BlackLChart = measurementBusiness.GetBlackLChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.BlackLSummary = measurementBusiness.GetBlackLSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.GrayLChart = measurementBusiness.GetGrayLChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
-            _viewAnalyze.GrayLSummary = measurementBusiness.GetGrayLSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            var G7ChardData = measurementBusiness.GetG7ChartData(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.GrayFChart = G7ChardData[0];
+            //_viewAnalyze.GrayFChart = measurementBusiness.GetGrayFChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.GrayFSummary = G7ChardData[1];
+            //_viewAnalyze.GrayFSummary = measurementBusiness.GetGrayFSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.BlackLChart = G7ChardData[2];
+            //_viewAnalyze.BlackLChart = measurementBusiness.GetBlackLChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.BlackLSummary = G7ChardData[3];
+            //_viewAnalyze.BlackLSummary = measurementBusiness.GetBlackLSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.GrayLChart = G7ChardData[4];
+            //_viewAnalyze.GrayLChart = measurementBusiness.GetGrayLChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            _viewAnalyze.GrayLSummary = G7ChardData[5];
+            //_viewAnalyze.GrayLSummary = measurementBusiness.GetGrayLSummary(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
+            
+            
             //_viewAnalyze.BlackNPDChart = measurementBusiness.GetBlackNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
             //_viewAnalyze.GrayNPDChart = measurementBusiness.GetGrayNPDChart(_viewAnalyze.MeasurementId, _viewAnalyze.IsVerification);
         }
@@ -150,7 +153,8 @@ namespace FujifilmUSA.Sync.Presenter
                 _viewAnalyze.MeasurementIds,
                 _viewAnalyze.useDLP,                
                 Convert.ToInt32(EOptimizeRunStatus.Closed),
-                    DateTime.Now);
+                    DateTime.Now
+                    );
 
         }
 
