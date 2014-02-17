@@ -62,6 +62,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             throw new NotImplementedException();
         }
 
+        public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<AnalyzeChart> GetDeltaEPatchChartData(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart>();

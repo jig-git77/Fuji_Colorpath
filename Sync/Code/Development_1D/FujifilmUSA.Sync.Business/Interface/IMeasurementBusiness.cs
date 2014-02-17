@@ -33,6 +33,8 @@ namespace FujifilmUSA.Sync.Business.Interface
 
         List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
 
+        List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false);
+        
         List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false);       
         List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false);
