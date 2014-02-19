@@ -48,7 +48,10 @@ namespace FujifilmUSA.Sync.Business.CPSyncService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double[] arrPCSField;
-        
+
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> OptionsField;
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -175,7 +178,24 @@ namespace FujifilmUSA.Sync.Business.CPSyncService {
                 }
             }
         }
-        
+
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<FujifilmUSA.Sync.Business.ProfilerService.Parameter> ProfileOptions
+        {
+            get
+            {
+                return this.OptionsField;
+            }
+            set
+            {
+                if ((object.ReferenceEquals(this.OptionsField, value) != true))
+                {
+                    this.OptionsField = value;
+                    this.RaisePropertyChanged("ProfileOptions");
+                }
+            }
+        }
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {

@@ -118,7 +118,57 @@ namespace FujifilmUSA.Sync.Entity
         Black_Three_Quarter_Tone = 27,
         Gray_25 = 28,
         Gray_50 = 29,
-        Gray_75 = 30
+        Gray_75 = 30,
+
+        //Newly added PatchTypes into CP.PatchType_Sync1D table
+        Cyan_10 = 112,      
+        Cyan_20 = 113,
+        Cyan_25 = 114,
+        Cyan_30 = 115,       
+        Cyan_40 = 116,       
+        Cyan_50 = 117,       
+        Cyan_60 = 118,       
+        Cyan_70 = 119,
+        Cyan_75 = 120,
+        Cyan_80 = 121,       
+        Cyan_90 = 122,
+        
+        Magenta_10 = 123,
+        Magenta_20 = 124,
+        Magenta_25 = 125,
+        Magenta_30 = 126,
+        Magenta_40 = 127,
+        Magenta_50 = 128,
+        Magenta_60 = 129,
+        Magenta_70 = 130,
+        Magenta_75 = 131,
+        Magenta_80 = 132,
+        Magenta_90 = 133,
+        
+        Yellow_10 = 134,
+        Yellow_20 = 135,
+        Yellow_25 = 136,
+        Yellow_30 = 137,
+        Yellow_40 = 138,
+        Yellow_50 = 139,
+        Yellow_60 = 140,
+        Yellow_70 = 141,
+        Yellow_75 = 142,
+        Yellow_80 = 143,
+        Yellow_90 = 144,
+        
+        Black_10 = 145,
+        Black_20 = 146,
+        Black_25 = 147,
+        Black_30 = 148,
+        Black_40 = 149,
+        Black_50 = 150,
+        Black_60 = 151,
+        Black_70 = 152,
+        Black_75 = 153,
+        Black_80 = 154,
+        Black_90 = 155
+       
     }
     public enum ERole
     {

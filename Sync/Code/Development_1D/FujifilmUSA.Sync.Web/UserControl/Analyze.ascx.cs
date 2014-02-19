@@ -1659,7 +1659,11 @@ namespace FujifilmUSA.Sync.Web.UserControl
                     #region Cyan
                     //Filter DT1 = "(PatchTypeID in (1,8,16,17,18))";
                     List<AnalyzeChart_DotGain> ListCyan = new List<AnalyzeChart_DotGain>();
-                    ListCyan = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Three_Quarter_Tone))).OrderBy(item => item.CmykC).ToList();
+                    ListCyan = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_Three_Quarter_Tone)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_25) 
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_40)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_50)
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_60)    || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_70)  || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_75) 
+                                              || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Cyan_90) )).OrderBy(item => item.CmykC).ToList();
 
                     if (ListCyan.Count > 0)
                     {
@@ -1690,7 +1694,12 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     //Filter DT1 = "(PatchTypeID in (2,8,19,20,21))";
                     List<AnalyzeChart_DotGain> ListMagenta = new List<AnalyzeChart_DotGain>();
-                    ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
+                   // ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone))).OrderBy(item => item.CmykM).ToList();
+                    ListMagenta = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_Three_Quarter_Tone)
+                                               || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_25)
+                                               || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_50)
+                                               || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_60) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_70) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_75)
+                                               || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Magenta_90))).OrderBy(item => item.CmykM).ToList();
 
                     if (ListMagenta.Count > 0)
                     {
@@ -1721,7 +1730,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     //Filter DT1 = "(PatchTypeID in (3,8,22,23,24))";
                     List<AnalyzeChart_DotGain> ListYellow = new List<AnalyzeChart_DotGain>();
-                    ListYellow = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Three_Quarter_Tone))).OrderBy(item => item.CmykY).ToList();
+                    //ListYellow = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Three_Quarter_Tone))).OrderBy(item => item.CmykY).ToList();
+                    ListYellow = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_Three_Quarter_Tone)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_25)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_50)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_60) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_70) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_75)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Yellow_90))).OrderBy(item => item.CmykY).ToList();
+
 
                     if (ListYellow.Count > 0)
                     {
@@ -1752,7 +1767,13 @@ namespace FujifilmUSA.Sync.Web.UserControl
 
                     //Filter DT1 = "(PatchTypeID in (4,8,25,26,27))";
                     List<AnalyzeChart_DotGain> ListBlack = new List<AnalyzeChart_DotGain>();
-                    ListBlack = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Black) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone))).OrderBy(item => item.CmykK).ToList();
+                    //ListBlack = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Black) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone))).OrderBy(item => item.CmykK).ToList();
+                    ListBlack = DT1.Where(x => (x.PatchTypeId == Convert.ToInt16(CPPatchType.Black) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Paper) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Quarter_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Half_Tone) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_Three_Quarter_Tone)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_10) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_20) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_25)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_30) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_40) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_50)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_60) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_70) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_75)
+                                                || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_80) || x.PatchTypeId == Convert.ToInt16(CPPatchType.Black_90))).OrderBy(item => item.CmykK).ToList();
+
 
                     if (ListBlack.Count > 0)
                     {

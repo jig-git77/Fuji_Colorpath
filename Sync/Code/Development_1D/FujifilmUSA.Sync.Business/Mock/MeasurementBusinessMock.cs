@@ -170,10 +170,11 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new MeasurementDataResponse();
         }
 
-        public TargetTVIDataResponse GetTargetTVIData(int projectId)
+        public Dictionary<string, string> GetTargetTVIData(int projectId)
         {
-            return new TargetTVIDataResponse();
+            return new Dictionary<string, string>();
         }
+
         public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)
         {
             return new List<AnalyzeChart_DotGain>();

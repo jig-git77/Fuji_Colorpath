@@ -34,7 +34,7 @@ namespace FujifilmUSA.Sync.Business.Interface
         List<Measurement> GetVMeasurementSummary(int MeasurementId, string From_ΔE, bool IsVerification = false, bool IsSync1DType = false);
 
         List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false);
-        
+
         List<AnalyzeChart_G7> GetGrayFChart(int MeasurementId, bool IsVerification = false);
         List<AnalyzeChart_G7> GetGrayFSummary(int MeasurementId, bool IsVerification = false);       
         List<AnalyzeChart_G7> GetBlackLChart(int MeasurementId, bool IsVerification = false);
@@ -45,7 +45,8 @@ namespace FujifilmUSA.Sync.Business.Interface
         int Save1DMeasurement(Measurement measurement);
         List<Measurement> Get1DMeasurementsOnRunId(int optimizeRunId);
         MeasurementDataResponse Get1DMeasurementData(List<int> measurementIds);
-        TargetTVIDataResponse GetTargetTVIData(int projectId);
+      
+        Dictionary<string, string> GetTargetTVIData(int projectId);
 
         List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);
         List<AnalyzeChart_DotGain> GetISOTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false);

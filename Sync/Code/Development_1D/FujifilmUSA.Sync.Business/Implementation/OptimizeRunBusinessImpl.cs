@@ -511,8 +511,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
                     MeasurementBusinessImpl measurementBusiness = new MeasurementBusinessImpl();
                     MeasurementDataResponse measurementDataResponse = measurementBusiness.Get1DMeasurementData(measurementIds);
 
-                    CPSyncClient syncClient = new CPSyncClient();
-                    Curve alignmentCurveRequest = new Curve();
+                    CPSyncClient syncClient = new CPSyncClient();                
+
+                    var alignmentCurveRequest = new Curve()
+                    {                                  
+                        ProfileOptions = new List<Parameter>()
+                    };
+
                     alignmentCurveRequest.arrDCS = new double[measurementDataResponse.DcsData.Count];
                     for (int i = 0; i < measurementDataResponse.DcsData.Count; i++)
                     {
@@ -536,12 +541,20 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         var dlp = BusinessFactory<IProjectBusiness>.CreateObject().Get1DLastOptimizedDlp(projectId);
                         alignmentCurveRequest.ICCProfile = dlp;
                     }
+                
+                    //---Pass TVI values into Profiler Options, so now we don't need to pass Linearization TVIs----//
+                    var options = BusinessFactory<IMeasurementBusiness>.CreateObject().GetTargetTVIData(projectId);                       
 
-                    TargetTVIDataResponse targetTVIResponse = measurementBusiness.GetTargetTVIData(projectId);
-                    alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;
-                    alignmentCurveRequest.LinearizationTVI50 = targetTVIResponse.TVI50;
-                    alignmentCurveRequest.LinearizationTVI75 = targetTVIResponse.TVI75;
-
+                    foreach (KeyValuePair<string, string> option in options)
+                    {
+                        alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
+                    }
+                   
+                    //alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;
+                    //alignmentCurveRequest.LinearizationTVI50 = targetTVIResponse.TVI50;
+                    //alignmentCurveRequest.LinearizationTVI75 = targetTVIResponse.TVI75;
+                    
+                 
                     Profile syncClientResponse = new Profile();
                     syncClientResponse = syncClient.CreateISOCurve(alignmentCurveRequest);
 

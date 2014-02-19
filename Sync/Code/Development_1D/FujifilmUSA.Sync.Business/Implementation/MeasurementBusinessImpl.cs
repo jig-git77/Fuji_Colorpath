@@ -868,7 +868,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
         public List<AnalyzeChart_G7>[] GetG7ChartData(int MeasurementId, bool IsVerification = false)
         {
             var G7ChardDAta = new List<AnalyzeChart_G7>[6];
-            
+
             string storedProc = "[CPSync].[GetChartData_G7]";
             if (IsVerification)
                 storedProc = "[CPSyncV].[GetVChartData_G7]";
@@ -905,7 +905,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                 ΔLimit = DataReader.ReadDecimal(x, "ΔLimit")
                             }).ToList();
                     },
-                    new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayF")); 
+                    new BusinessHandlerRequest(this, ErrorOccured, "Error_GetChartData_G7_GrayF"));
             #endregion
 
             #region Get Data logic for GrayFSummary
@@ -1390,14 +1390,13 @@ namespace FujifilmUSA.Sync.Business.Implementation
             return response;
         }
 
-        public TargetTVIDataResponse GetTargetTVIData(int projectId)
+        public Dictionary<string, string> GetTargetTVIData(int projectId)
         {
-            var response = new TargetTVIDataResponse()
-                               {
-                                   TVI25 = string.Empty,
-                                   TVI50 = string.Empty,
-                                   TVI75 = string.Empty
-                               };
+            var TVIOptionsList = new Dictionary<string, string>();
+           
+            string AnswerTVI_CMY = "";
+            string AnswerTVI_K = "";
+
             Common.ImplementBusinessLogic(
                 () =>
                 {
@@ -1409,27 +1408,41 @@ namespace FujifilmUSA.Sync.Business.Implementation
                                     {
                                      projectId
                                     });
+                    //----Table 0 : Pass CMY TVI values as key value pair
                     if (dsTVIData.Tables[0].Rows.Count > 0)
                     {
                         foreach (DataRow row in dsTVIData.Tables[0].Rows)
                         {
-                            switch (DataReader.ReadInt(row, "TVI"))
+                            AnswerTVI_CMY += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget");
+
+                            if (DataReader.ReadInt(row, "TVI") != 100)
                             {
-                                case 25:
-                                    response.TVI25 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                                case 50:
-                                    response.TVI50 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                                case 75:
-                                    response.TVI75 = DataReader.ReadString(row, "TVITarget");
-                                    break;
-                            }     
+                                AnswerTVI_CMY += ",";
+                            }
                         }
                     }
+                   
+                    //----Table 1 : Pass K TVI values as key value pair
+                    if (dsTVIData.Tables[1].Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dsTVIData.Tables[1].Rows)
+                        {
+                            AnswerTVI_K += DataReader.ReadInt(row, "TVI") + " " + DataReader.ReadString(row, "TVITarget");
+
+                            if (DataReader.ReadInt(row, "TVI") != 100)
+                            {
+                                AnswerTVI_K += ",";
+                            }
+                        }
+                    }
+                   
+                    TVIOptionsList.Add("LinearizationTVIChannel0", AnswerTVI_CMY);
+                    TVIOptionsList.Add("LinearizationTVIChannel1", AnswerTVI_CMY);
+                    TVIOptionsList.Add("LinearizationTVIChannel2", AnswerTVI_CMY);
+                    TVIOptionsList.Add("LinearizationTVIChannel3", AnswerTVI_K);                   
                 },
                 new BusinessHandlerRequest(this, ErrorOccured, "Error_GetTVIData"));
-            return response;
+            return TVIOptionsList;
         }
 
         public List<AnalyzeChart_DotGain> GetTVIChart(int MeasurementId, bool IsVerification = false, bool IsSync1DType = false)

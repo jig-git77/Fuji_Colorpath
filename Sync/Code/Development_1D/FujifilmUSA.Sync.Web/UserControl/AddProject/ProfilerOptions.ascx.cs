@@ -439,135 +439,142 @@ namespace FujifilmUSA.Sync.Web.UserControl
         private List<Entity.CPSync1D.PrintStandardTVI> GetPrintStandardTVIList()
         {
             List<Entity.CPSync1D.PrintStandardTVI> printStandardTVIList = new List<Entity.CPSync1D.PrintStandardTVI>();
-            
-            //---Cyan Color
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Cyan_Quarter_Tone,
-                    Type = CPPatchType.Cyan_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Cyan.Text.Trim()) ? "0" : txtThresh25Cyan.Text.Trim()))              
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Cyan_Half_Tone,
-                    Type = CPPatchType.Cyan_Half_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI50Cyan.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Cyan.Text.Trim()) ? "0" : txtThresh50Cyan.Text.Trim()))         
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Cyan_Three_Quarter_Tone,
-                    Type = CPPatchType.Cyan_Three_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI75Cyan.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Cyan.Text.Trim()) ? "0" : txtThresh75Cyan.Text.Trim()))            
-            });
 
-            //-----Magenta Color
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Magenta_Quarter_Tone,
-                    Type = CPPatchType.Magenta_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Magenta.Text.Trim()) ? "0" : txtThresh25Magenta.Text.Trim()))            
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Magenta_Half_Tone,
-                    Type = CPPatchType.Magenta_Half_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI50Magenta.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Magenta.Text.Trim()) ? "0" : txtThresh50Magenta.Text.Trim()))
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Magenta_Three_Quarter_Tone,
-                    Type = CPPatchType.Magenta_Three_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI75Magenta.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Magenta.Text.Trim()) ? "0" : txtThresh75Magenta.Text.Trim()))
-            });
+            #region old code for collecting new TVIs
+            ////---Cyan Color
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Cyan_Quarter_Tone,
+            //        Type = CPPatchType.Cyan_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Cyan.Text.Trim()) ? "0" : txtTVI25Cyan.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Cyan.Text.Trim()) ? "0" : txtThresh25Cyan.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Cyan_Half_Tone,
+            //        Type = CPPatchType.Cyan_Half_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Cyan.Text.Trim()) ? "0" : txtTVI50Cyan.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Cyan.Text.Trim()) ? "0" : txtThresh50Cyan.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Cyan_Three_Quarter_Tone,
+            //        Type = CPPatchType.Cyan_Three_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Cyan.Text.Trim()) ? "0" : txtTVI75Cyan.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Cyan.Text.Trim()) ? "0" : txtThresh75Cyan.Text.Trim()))
+            //});
 
-            //----Yellow Color
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Yellow_Quarter_Tone,
-                    Type = CPPatchType.Yellow_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Yellow.Text.Trim()) ? "0" : txtThresh25Yellow.Text.Trim()))
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Yellow_Half_Tone,
-                    Type = CPPatchType.Yellow_Half_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI50Yellow.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Yellow.Text.Trim()) ? "0" : txtThresh50Yellow.Text.Trim()))
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Yellow_Three_Quarter_Tone,
-                    Type = CPPatchType.Yellow_Three_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI75Yellow.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Yellow.Text.Trim()) ? "0" : txtThresh75Yellow.Text.Trim()))
-            });
+            ////-----Magenta Color
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Magenta_Quarter_Tone,
+            //        Type = CPPatchType.Magenta_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Magenta.Text.Trim()) ? "0" : txtTVI25Magenta.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Magenta.Text.Trim()) ? "0" : txtThresh25Magenta.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Magenta_Half_Tone,
+            //        Type = CPPatchType.Magenta_Half_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Magenta.Text.Trim()) ? "0" : txtTVI50Magenta.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Magenta.Text.Trim()) ? "0" : txtThresh50Magenta.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Magenta_Three_Quarter_Tone,
+            //        Type = CPPatchType.Magenta_Three_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Magenta.Text.Trim()) ? "0" : txtTVI75Magenta.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Magenta.Text.Trim()) ? "0" : txtThresh75Magenta.Text.Trim()))
+            //});
 
-            //-----Black Color
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            ////----Yellow Color
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Yellow_Quarter_Tone,
+            //        Type = CPPatchType.Yellow_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Yellow.Text.Trim()) ? "0" : txtTVI25Yellow.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Yellow.Text.Trim()) ? "0" : txtThresh25Yellow.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Yellow_Half_Tone,
+            //        Type = CPPatchType.Yellow_Half_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Yellow.Text.Trim()) ? "0" : txtTVI50Yellow.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Yellow.Text.Trim()) ? "0" : txtThresh50Yellow.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Yellow_Three_Quarter_Tone,
+            //        Type = CPPatchType.Yellow_Three_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Yellow.Text.Trim()) ? "0" : txtTVI75Yellow.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Yellow.Text.Trim()) ? "0" : txtThresh75Yellow.Text.Trim()))
+            //});
+
+            ////-----Black Color
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Black_Quarter_Tone,
+            //        Type = CPPatchType.Black_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Black.Text.Trim()) ? "0" : txtThresh25Black.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Black_Half_Tone,
+            //        Type = CPPatchType.Black_Half_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI50Black.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Black.Text.Trim()) ? "0" : txtThresh50Black.Text.Trim()))
+            //});
+            //printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
+            //{
+            //    PatchType = new PatchType()
+            //    {
+            //        PatchTypeId = (int)CPPatchType.Black_Three_Quarter_Tone,
+            //        Type = CPPatchType.Black_Three_Quarter_Tone.ToString()
+            //    },
+            //    TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI75Black.Text.Trim())),
+            //    Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Black.Text.Trim()) ? "0" : txtThresh75Black.Text.Trim()))
+            //});
+            #endregion
+
+            if (PrintStandardTVI.Count > 0)
             {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Black_Quarter_Tone,
-                    Type = CPPatchType.Black_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI25Black.Text.Trim()) ? "0" : txtTVI25Black.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh25Black.Text.Trim()) ? "0" : txtThresh25Black.Text.Trim()))
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Black_Half_Tone,
-                    Type = CPPatchType.Black_Half_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI50Black.Text.Trim()) ? "0" : txtTVI50Black.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh50Black.Text.Trim()) ? "0" : txtThresh50Black.Text.Trim()))
-            });
-            printStandardTVIList.Add(new Entity.CPSync1D.PrintStandardTVI()
-            {
-                PatchType = new PatchType()
-                {
-                    PatchTypeId = (int)CPPatchType.Black_Three_Quarter_Tone,
-                    Type = CPPatchType.Black_Three_Quarter_Tone.ToString()
-                },
-                TVI = Convert.ToDecimal((string.IsNullOrEmpty(txtTVI75Black.Text.Trim()) ? "0" : txtTVI75Black.Text.Trim())),
-                Threshold = Convert.ToDecimal((string.IsNullOrEmpty(txtThresh75Black.Text.Trim()) ? "0" : txtThresh75Black.Text.Trim()))
-            });
-          
+                printStandardTVIList = PrintStandardTVI.ToList();
+            }
+
             return printStandardTVIList;
         }
 
