@@ -36,7 +36,7 @@ namespace FujifilmUSA.Sync.Business.Mock
             return new List<Measurement>();
         }
 
-        public int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false)
+        public int UpdateMeasurementByAnalyzeChart(Measurement measurement, bool IsVerification = false, bool IsSync1DType = false)
         {
             return 0;
         }

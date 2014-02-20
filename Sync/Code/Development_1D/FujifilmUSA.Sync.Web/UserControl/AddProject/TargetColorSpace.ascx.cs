@@ -123,6 +123,7 @@ namespace FujifilmUSA.Sync.Web.UserControl
             if (SessionManager.Instance.CurrentProject.LicenseType == ELicenseType.Sync1D)
             {
                 cmbProjectType.SelectedValue = SessionManager.Instance.CurrentProject.ProjectTypeId.ToString();
+                cmbProjectType_SelectedIndexChanged(null, null);
             }
         }
 
