@@ -34,7 +34,7 @@ namespace ColorPathSync.Business
                         CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigLabData, request.PCSData, request.PCSData.Length);
                         break;
                     case DataContracts.PCSDataType.Density:
-                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.icSigDensityData, request.PCSData, request.PCSData.Length);
+                        CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clDensityCMYK, request.PCSData, request.PCSData.Length);
                         break;
                     case DataContracts.PCSDataType.Remission:
                         CrossXColor.CLInitVectorDataSet(PCSDataSet, CrossXColor.clRemission, request.PCSData, request.PCSData.Length);
@@ -54,12 +54,12 @@ namespace ColorPathSync.Business
 
                     request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
                     
-                    // each param contains TVI25,TVI50,TVI75 Values
-                   // request.LinearizationTVI.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
+                  
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
                     err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
                     err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
+
 
                     CrossXColor.CLSetProfilerData(profiler, request.DCSData.Length / 4, DCSDataSet, PCSDataSet);
 
@@ -130,11 +130,12 @@ namespace ColorPathSync.Business
                 else
                 {
                     request.ProfileOptions.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));
-                    // each param contains TVI25,TVI50,TVI75 Values
-                    //request.LinearizationTVI.ForEach((param) => err = CrossXColor.CLSetProfilerOption(profiler, param.Name, param.Value));                    
-                    
+                
+
                     err = CrossXColor.CLSetProfilerOption(profiler, "Creator", "Fuji");
                     err = CrossXColor.CLSetProfilerOption(profiler, "Copyright", "Copyright Fujifilm Graphic Systems USA");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "ProfileType", "LinearizationDeviceLink");
+                    err = CrossXColor.CLSetProfilerOption(profiler, "LinearizationType", "Density");
 
 
                     //Declare a byte array to load profile from the database 
