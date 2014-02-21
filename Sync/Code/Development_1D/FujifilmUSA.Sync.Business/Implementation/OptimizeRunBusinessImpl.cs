@@ -550,9 +550,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
                         alignmentCurveRequest.ProfileOptions.Add(new Parameter() { Name = option.Key, Value = option.Value });
                     }
                    
-                    //alignmentCurveRequest.LinearizationTVI25 = targetTVIResponse.TVI25;
-                    //alignmentCurveRequest.LinearizationTVI50 = targetTVIResponse.TVI50;
-                    //alignmentCurveRequest.LinearizationTVI75 = targetTVIResponse.TVI75;
+
                     
                  
                     Profile syncClientResponse = new Profile();

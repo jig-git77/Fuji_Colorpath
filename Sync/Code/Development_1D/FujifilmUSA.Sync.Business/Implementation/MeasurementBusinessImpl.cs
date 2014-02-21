@@ -1419,7 +1419,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                             if (DataReader.ReadInt(row, "TVI") != 100)
                             {
-                                AnswerTVI_CMY += ",";
+                                AnswerTVI_CMY += " ";
                             }
                         }
                     }
@@ -1433,7 +1433,7 @@ namespace FujifilmUSA.Sync.Business.Implementation
 
                             if (DataReader.ReadInt(row, "TVI") != 100)
                             {
-                                AnswerTVI_K += ",";
+                                AnswerTVI_K += " ";
                             }
                         }
                     }
